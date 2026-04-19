@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import {
-  CONSULTATION_INTAKE_SECTIONS,
-  buildConsultationIntakeDefaults,
-} from '../../utils/consultationIntakeSchema';
+import { CONSULTATION_INTAKE_SECTIONS } from '../../utils/consultationIntakeSchema';
+import IntakeInterpretationSection from './sections/discovery/IntakeInterpretationSection';
+import PreConsultPrepSection from './sections/discovery/PreConsultPrepSection';
+import ConsultationWorkspaceSection from './sections/discovery/ConsultationWorkspaceSection';
 import './IntakeDirectionSection.css';
 
 const REVIEW_STATE_OPTIONS = [
@@ -160,7 +160,190 @@ const emptyTruthRow = () => ({
   checked: false,
 });
 
+const prettifyOpenItem = (value = '') =>
+  String(value || '')
+    .replace(/\bstill needs clearer definition\.?$/i, '')
+    .replace(/\bstill needs consult validation\.?$/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const normalizeBridgeList = (value) => {
+  if (Array.isArray(value)) {
+    return value.map((item) => cleanText(item)).filter(Boolean);
+  }
+
+  if (typeof value === 'string' && cleanText(value)) {
+    return [cleanText(value)];
+  }
+
+  return [];
+};
+
+const getBridgeTruth = (summaryStructured = {}, truthKey) => {
+  return summaryStructured?.truths?.[truthKey] || null;
+};
+
+const getTruthQuestionsFromBridge = (summaryStructured = {}, truthKey) => {
+  const truth = getBridgeTruth(summaryStructured, truthKey);
+  if (!truth) return [];
+
+  const directQuestions = normalizeBridgeList(truth.followupQuestions);
+  if (directQuestions.length) return directQuestions;
+
+  const criticalUnknowns = normalizeBridgeList(truth.criticalUnknowns);
+  return criticalUnknowns
+    .map((item) => {
+      const cleaned = prettifyOpenItem(item);
+      return cleaned ? `Clarify: ${cleaned}` : '';
+    })
+    .filter(Boolean);
+};
+
+const getTruthKnownSignalsFromBridge = (summaryStructured = {}, truthKey) => {
+  const truth = getBridgeTruth(summaryStructured, truthKey);
+  if (!truth) return [];
+  return normalizeBridgeList(truth.signalsWeHave);
+};
+
+const getTruthAvoidListFromBridge = (summaryStructured = {}, truthKey) => {
+  const truth = getBridgeTruth(summaryStructured, truthKey);
+  if (!truth) return [];
+  return normalizeBridgeList(truth.assumptionsToAvoid);
+};
+
+const buildFallbackCallQuestions = (truthKey, truth) => {
+  const openItems = truth?.clarifyItems || [];
+  const verifyItems = truth?.verifyItems || [];
+  const sourceItems = [...openItems, ...verifyItems];
+
+  const fieldQuestionMap = {
+    purpose: {
+      playerProfile:
+        'How would you best describe yourself as a player right now?',
+      primaryGoal:
+        'What are you really hoping this drum becomes for you?',
+      environments:
+        'Where does this drum most need to succeed: live, studio, home, or a mix?',
+      guidancePreference:
+        'How much craftsman guidance do you want from me during the build?',
+    },
+    feel: {
+      feelPriorities:
+        'What matters most under the stick when this drum feels right?',
+      snareLoveMost:
+        'What do you love most when a snare feels right to you?',
+      snareFrustrations:
+        'What tends to frustrate you most in the drums you play now?',
+      dynamicFeel:
+        'How important are low-volume sensitivity and ghost notes to you?',
+    },
+    voice: {
+      genres:
+        'What musical settings should this drum feel most at home in?',
+      tonalGoals:
+        'Should this drum lean more dry, open, warm, crisp, fat, or articulate?',
+      responsePriorities:
+        'What response matters most: brush sensitivity, backbeat weight, ghost notes, or tuning range?',
+      sizeDirection:
+        'Are you leaning 13", 14", or still open on size?',
+    },
+    legacy: {
+      visualDirection:
+        'What should this drum feel like visually when you first see it?',
+      hardwareFinishPreference:
+        'Are you truly leaning chrome, black nickel, or brass / gold?',
+      storyImportance:
+        'How personal or legacy-driven do you want this build to feel?',
+      favoritePartOfPlaying:
+        'What part of playing drums feels most like you?',
+      influenceReferences:
+        'Are there artists, records, drums, or visual references that still feel important here?',
+      finalNotes:
+        'Is there anything you want me to understand before I start shaping the build?',
+    },
+  };
+
+  const mappedQuestions = sourceItems
+    .map((item) => fieldQuestionMap?.[truthKey]?.[item.fieldId] || '')
+    .filter(Boolean);
+
+  return [...new Set(mappedQuestions)];
+};
+
+const buildConsultationChecklist = ({ summaryStructured, truthBoards }) => {
+  return TRUTH_GROUPS.map((truthGroup) => {
+    const truthBoard = truthBoards.find((item) => item.key === truthGroup.key);
+
+    const knownFromBridge = getTruthKnownSignalsFromBridge(
+      summaryStructured,
+      truthGroup.key
+    );
+
+    const questionsFromBridge = getTruthQuestionsFromBridge(
+      summaryStructured,
+      truthGroup.key
+    );
+
+    const avoidFromBridge = getTruthAvoidListFromBridge(
+      summaryStructured,
+      truthGroup.key
+    );
+
+    const fallbackKnown = (truthBoard?.items || [])
+      .filter((item) => !isEmptyish(item.finalValue))
+      .map((item) => `${item.label}: ${getDisplayValue(item.finalValue)}`);
+
+    const knownItems = knownFromBridge.length
+      ? knownFromBridge
+      : fallbackKnown;
+
+    const questionItems = questionsFromBridge.length
+      ? questionsFromBridge
+      : buildFallbackCallQuestions(truthGroup.key, truthBoard);
+
+    const avoidItems = avoidFromBridge.length
+      ? avoidFromBridge
+      : (truthBoard?.clarifyItems || [])
+          .map((item) => {
+            const value = prettifyOpenItem(item.label || '');
+            return value
+              ? `Do not assume ${value.toLowerCase()} is settled yet.`
+              : '';
+          })
+          .filter(Boolean);
+
+    return {
+      ...truthGroup,
+      knownItems: knownItems.filter(Boolean),
+      questionItems: questionItems.filter(Boolean),
+      avoidItems: avoidItems.filter(Boolean),
+    };
+  });
+};
+
+const MODE_CONFIG = {
+  intakeDetails: {
+    kicker: 'Intake & Direction',
+    title: 'Intake Details & Interpretation',
+    subtitle:
+      'Review what the questionnaire is already telling us, what is still missing, and whether discovery is ready to move forward.',
+  },
+  preconsultPrep: {
+    kicker: 'Intake & Direction',
+    title: 'Pre-Consult Analysis',
+    subtitle:
+      'Carry forward the strongest truths, define the best call path, and avoid forcing assumptions before the consultation.',
+  },
+  consultationTool: {
+    kicker: 'Intake & Direction',
+    title: 'Consultation Workspace',
+    subtitle:
+      'Capture the real conversation, review truth-by-truth movement, and save the consultation record cleanly.',
+  },
+};
+
 const IntakeDirectionSection = ({
+  mode = 'intakeDetails',
   storyEngineData,
   setStoryEngineData,
   deriveCustomerName,
@@ -182,13 +365,30 @@ const IntakeDirectionSection = ({
     'Artist';
 
   const discoveryWorkspace = storyEngineData?.discoveryWorkspace || {};
+  const discoveryBridge = projectData?.discoveryBridge || {};
+
   const intakeState = discoveryWorkspace?.intake || {};
   const consultState = discoveryWorkspace?.consult || {};
   const summaryState = discoveryWorkspace?.summary || {};
 
+  const fallbackSummaryStructured =
+    summaryState?.structured ||
+    (Object.keys(discoveryBridge || {}).length ? discoveryBridge : null);
+
+  const fallbackSummaryText =
+    summaryState?.editableText ||
+    discoveryBridge?.rawResponseText ||
+    discoveryBridge?.overview ||
+    '';
+
+  const fallbackSummaryGenerated =
+    !!summaryState?.generated ||
+    !!fallbackSummaryText ||
+    !!Object.keys(discoveryBridge || {}).length;
+
   const intakeLocked = !!intakeState?.completed;
   const consultLocked = !!consultState?.completed;
-  const summaryGenerated = !!summaryState?.generated;
+  const summaryGenerated = fallbackSummaryGenerated;
 
   const [intakeOpen, setIntakeOpen] = useState(true);
   const [consultOpen, setConsultOpen] = useState(true);
@@ -305,7 +505,31 @@ const IntakeDirectionSection = ({
         ...(discoveryWorkspace?.consult || {}),
         completed: true,
         completedAt: new Date().toISOString(),
-        truthRows: discoveryWorkspace?.consult?.truthRows || {},
+        truthRows:
+          discoveryWorkspace?.consult?.truthRows ||
+          discoveryWorkspace?.consult?.rows ||
+          {},
+        rows:
+          discoveryWorkspace?.consult?.rows ||
+          discoveryWorkspace?.consult?.truthRows ||
+          {},
+      },
+      summary: {
+        ...(discoveryWorkspace?.summary || {}),
+        generated:
+          !!discoveryWorkspace?.summary?.generated ||
+          !!fallbackSummaryGenerated,
+        generatedAt:
+          discoveryWorkspace?.summary?.generatedAt ||
+          discoveryBridge?.generatedAt ||
+          new Date().toISOString(),
+        editableText:
+          discoveryWorkspace?.summary?.editableText || fallbackSummaryText || '',
+        structured:
+          discoveryWorkspace?.summary?.structured ||
+          fallbackSummaryStructured ||
+          generatedIntelliSummary ||
+          null,
       },
     };
 
@@ -335,18 +559,31 @@ const IntakeDirectionSection = ({
     }
   };
 
-  const questionnaireDefaults = useMemo(
-    () => buildConsultationIntakeDefaults(),
-    []
-  );
-
   const questionnaireReceived =
     !!cleanText(storyEngineData?.questionnaireRaw) ||
     Object.keys(questionnaireMapped || {}).length > 0;
 
   const questionnaireStatus = questionnaireReceived ? 'Received' : 'Incomplete';
-  const intakeStatusLabel = intakeLocked ? 'Reviewed' : 'Active';
-  const consultStatusLabel = consultLocked ? 'Completed' : 'Active';
+
+  const projectConsultationIntake = projectData?.consultationIntake || {};
+
+  const getQuestionnaireValueForField = (fieldId) => {
+    for (const section of CONSULTATION_INTAKE_SECTIONS) {
+      const sectionValues = projectConsultationIntake?.[section.id];
+      if (
+        sectionValues &&
+        Object.prototype.hasOwnProperty.call(sectionValues, fieldId)
+      ) {
+        return sectionValues[fieldId];
+      }
+    }
+
+    if (Object.prototype.hasOwnProperty.call(questionnaireMapped, fieldId)) {
+      return questionnaireMapped[fieldId];
+    }
+
+    return '';
+  };
 
   const truthBoards = useMemo(() => {
     const truthRows = consultState?.truthRows || {};
@@ -354,24 +591,15 @@ const IntakeDirectionSection = ({
     return TRUTH_GROUPS.map((truth) => {
       const items = truth.consultFields.map((fieldId) => {
         const fieldMeta = QUESTIONNAIRE_FIELD_INDEX[fieldId];
-        const sectionDefaults = Object.values(questionnaireDefaults).find(
-          (sectionObj) =>
-            sectionObj && Object.prototype.hasOwnProperty.call(sectionObj, fieldId)
-        );
-
-        const questionnaireValue =
-          Object.entries(questionnaireDefaults).reduce((found, [sectionKey]) => {
-            if (found !== undefined) return found;
-            return questionnaireMapped?.[fieldId];
-          }, undefined) || questionnaireMapped?.[fieldId];
-
+        const questionnaireValue = getQuestionnaireValueForField(fieldId);
         const consultValue = consultationMapped?.[fieldId];
-
         const truthSavedRow =
           truthRows?.[truth.key]?.[fieldId] || emptyTruthRow();
 
         const finalValue =
-          consultValue !== undefined && consultValue !== null && cleanText(consultValue)
+          consultValue !== undefined &&
+          consultValue !== null &&
+          cleanText(consultValue)
             ? consultValue
             : questionnaireValue;
 
@@ -416,7 +644,42 @@ const IntakeDirectionSection = ({
         clarifyItems,
       };
     });
-  }, [consultState?.truthRows, consultationMapped, questionnaireDefaults, questionnaireMapped]);
+  }, [
+    consultState?.truthRows,
+    consultationMapped,
+    questionnaireMapped,
+    projectConsultationIntake,
+  ]);
+
+  const intakeInterpretationRows = useMemo(() => {
+    return truthBoards.map((truth) => {
+      const tellingItems = truth.items
+        .filter((item) => !isEmptyish(item.finalValue))
+        .map((item) => getDisplayValue(item.finalValue));
+
+      const notTellingItems = [
+        ...truth.clarifyItems.map(
+          (item) => `${item.label} still needs clearer definition.`
+        ),
+        ...truth.verifyItems
+          .filter((item) => isEmptyish(item.finalValue))
+          .map((item) => `${item.label} still needs consult validation.`),
+      ];
+
+      return {
+        key: truth.key,
+        title: truth.title,
+        badge: truth.badge,
+        summary: truth.summary,
+        tellingItems: tellingItems.length
+          ? tellingItems
+          : ['Nothing meaningful is clearly defined here yet.'],
+        notTellingItems: notTellingItems.length
+          ? notTellingItems
+          : ['Nothing major missing here.'],
+      };
+    });
+  }, [truthBoards]);
 
   const generatedIntelliSummary = useMemo(() => {
     const allItems = truthBoards.flatMap((truth) =>
@@ -427,7 +690,10 @@ const IntakeDirectionSection = ({
     );
 
     const trustedSignals = allItems
-      .filter((item) => item.reviewState === 'confirmed' && !isEmptyish(item.finalValue))
+      .filter(
+        (item) =>
+          item.reviewState === 'confirmed' && !isEmptyish(item.finalValue)
+      )
       .map((item) => ({
         label: `${item.truth} · ${item.label}`,
         value: getDisplayValue(item.finalValue),
@@ -518,7 +784,8 @@ const IntakeDirectionSection = ({
   }, [truthBoards]);
 
   useEffect(() => {
-    if (!intakeLocked || !consultLocked || summaryGenerated) return;
+    if (summaryGenerated) return;
+    if (!intakeLocked || !consultLocked) return;
 
     updateDiscoveryWorkspace((current) => ({
       ...current,
@@ -533,592 +800,306 @@ const IntakeDirectionSection = ({
   }, [consultLocked, generatedIntelliSummary, intakeLocked, summaryGenerated]);
 
   const summaryText =
-    summaryState?.editableText || generatedIntelliSummary.overview || '';
+    fallbackSummaryText || generatedIntelliSummary.overview || '';
 
-  const callRhythmSections = [
-    {
-      key: 'agenda',
-      title: 'Call agenda',
-      bullets: [
-        'Welcome and set the tone',
-        'Briefly frame the four truths: Voice, Feel, Purpose, and Legacy',
-        'Confirm what already feels strong from intake',
-        'Clarify anything that still feels soft, unclear, or emotionally important',
-        'Talk about the artist behind the drum — not just the spec direction',
-        'Wrap with what feels locked, what stays open, and what happens next',
-      ],
-    },
-    {
-      key: 'opening',
-      title: 'Opening script',
-      script:
-        'Thanks again for taking the time to do this. My goal today is not to force decisions too quickly. I just want to understand what already feels true, where we still need to listen more carefully, and how this drum can become something genuinely meaningful for you.',
-    },
-    {
-      key: 'truths',
-      title: 'How I frame the build',
-      script:
-        'Every SoundLegend build begins with four truths: Voice, Feel, Purpose, and Legacy. The goal is not to rush through them — it is to understand how they come together so the drum feels honest, personal, and lasting.',
-    },
+  const summaryStructured =
+    fallbackSummaryStructured || generatedIntelliSummary;
+
+  const consultationChecklist = useMemo(() => {
+    return buildConsultationChecklist({
+      summaryStructured,
+      truthBoards,
+    });
+  }, [summaryStructured, truthBoards]);
+
+  const discoveryProgressPercent = (() => {
+    let score = 0;
+    if (questionnaireReceived) score += 25;
+    if (intakeLocked) score += 25;
+    if (consultLocked) score += 25;
+    if (summaryGenerated) score += 25;
+    return score;
+  })();
+
+  const discoveryConfidenceLabel =
+    discoveryProgressPercent >= 85
+      ? 'High'
+      : discoveryProgressPercent >= 55
+        ? 'Medium'
+        : 'Early';
+
+  const buildScopeMissingDetails = (() => {
+    const fromBridge = TRUTH_GROUPS.flatMap((truth) => {
+      const truthNode = summaryStructured?.truths?.[truth.key] || {};
+      return normalizeBridgeList(truthNode.criticalUnknowns || []);
+    });
+
+    const normalized = fromBridge
+      .map((item) => prettifyOpenItem(item))
+      .filter(Boolean);
+
+    const mapped = normalized.map((item) => {
+      const lower = item.toLowerCase();
+
+      if (
+        lower.includes('shell construction') ||
+        lower.includes('feuzon') ||
+        lower.includes('hybrid') ||
+        lower.includes('stave') ||
+        lower.includes('ply')
+      ) {
+        return 'Shell construction';
+      }
+
+      if (
+        lower.includes('wood') ||
+        lower.includes('species') ||
+        lower.includes('veneer')
+      ) {
+        return 'Wood species / veneer direction';
+      }
+
+      if (
+        lower.includes('finish') ||
+        lower.includes('natural') ||
+        lower.includes('gloss') ||
+        lower.includes('satin') ||
+        lower.includes('stained')
+      ) {
+        return 'Finish system';
+      }
+
+      if (lower.includes('bearing edge') || lower.includes('snare bed')) {
+        return 'Bearing edge / snare bed direction';
+      }
+
+      if (
+        lower.includes('hoop') ||
+        lower.includes('head pairing') ||
+        lower.includes('head')
+      ) {
+        return 'Hoop and head pairing';
+      }
+
+      if (
+        lower.includes('tuning') ||
+        lower.includes('projection') ||
+        lower.includes('voice') ||
+        lower.includes('response')
+      ) {
+        return 'Voicing / tuning approach';
+      }
+
+      if (
+        lower.includes('hardware') ||
+        lower.includes('badge') ||
+        lower.includes('markings')
+      ) {
+        return 'Hardware package / visual appointments';
+      }
+
+      if (
+        lower.includes('size') ||
+        lower.includes('diameter') ||
+        lower.includes('depth') ||
+        lower.includes('13') ||
+        lower.includes('14')
+      ) {
+        return 'Shell size / geometry';
+      }
+
+      return item;
+    });
+
+    const unique = [...new Set(mapped)];
+
+    if (unique.length) return unique;
+
+    return [
+      'Shell construction',
+      'Wood species / veneer direction',
+      'Finish system',
+      'Voicing / tuning approach',
+      'Bearing edge / snare bed direction',
+      'Hoop and head pairing',
+      'Hardware package / visual appointments',
+    ];
+  })();
+
+  const discoveryKnownLines = truthBoards.flatMap((truth) =>
+    truth.items
+      .filter((item) => !isEmptyish(item.finalValue))
+      .map(
+        (item) =>
+          `${truth.title}: ${item.label}: ${getDisplayValue(item.finalValue)}`
+      )
+  );
+
+  const discoveryBlockers = (() => {
+    const blockers = [];
+
+    if (!questionnaireReceived) {
+      blockers.push('Questionnaire intake has not been received yet.');
+    }
+
+    if (!intakeLocked) {
+      blockers.push('Intake review has not been formally marked complete yet.');
+    }
+
+    if (!consultLocked) {
+      blockers.push('Consultation still needs to happen or be completed.');
+    }
+
+    if (!cleanText(storyEngineData?.consultationTranscript)) {
+      blockers.push('No consultation transcript has been added yet.');
+    }
+
+    if (!cleanText(storyEngineData?.adminNotes)) {
+      blockers.push('No craftsman notes have been captured yet.');
+    }
+
+    return blockers;
+  })();
+
+  const builderPrepIntro = (() => {
+    if (!questionnaireReceived) {
+      return 'No intake has been received yet, so discovery still needs its starting point.';
+    }
+
+    if (!discoveryKnownLines.length) {
+      return 'The intake is in, but it is still too soft to confidently guide the build without a stronger consultation.';
+    }
+
+    return `What feels usable now: ${discoveryKnownLines.slice(0, 3).join('; ')}`;
+  })();
+
+  const builderPrepBuildScope = (() => {
+    if (!buildScopeMissingDetails.length) {
+      return 'No major build-scope gaps are showing right now.';
+    }
+
+    return `Missing build details before build scope can be defined: ${buildScopeMissingDetails.join(
+      '; '
+    )}`;
+  })();
+
+  const consultFlowBullets = [
+    'Start with what already feels true from the intake.',
+    'Move one truth at a time: Purpose, Feel, Voice, then Legacy.',
+    'Ask the clearest open questions first.',
+    'Only confirm what actually sounds real in conversation.',
+    'Leave weak decisions open instead of forcing them.',
   ];
+
+  const consultPrepBoards = consultationChecklist.map((truth) => ({
+    ...truth,
+    whatNotToAssume: truth.avoidItems?.length
+      ? truth.avoidItems
+      : ['No major assumption warnings here.'],
+  }));
+
+  const topClarifyItems = truthBoards
+    .flatMap((truth) =>
+      truth.items
+        .filter((item) => item.reviewState === 'clarify')
+        .map((item) => `${truth.title} · ${item.label}`)
+    )
+    .slice(0, 3);
+
+  const topVerifyItems = truthBoards
+    .flatMap((truth) =>
+      truth.items
+        .filter((item) => item.reviewState === 'verify')
+        .map((item) => `${truth.title} · ${item.label}`)
+    )
+    .slice(0, 4);
+
+  const consultationLockedInCount = truthBoards.reduce(
+    (total, truth) => total + truth.confirmedItems.length,
+    0
+  );
+
+  const consultationOpenCount = truthBoards.reduce(
+    (total, truth) => total + truth.clarifyItems.length,
+    0
+  );
+
+  const consultationVerifyCount = truthBoards.reduce(
+    (total, truth) => total + truth.verifyItems.length,
+    0
+  );
+
+  const modeConfig = MODE_CONFIG[mode] || MODE_CONFIG.intakeDetails;
 
   return (
     <div className="idv-shell">
       <div className="idv-header">
         <div>
-          <div className="idv-kicker">Intake & Direction</div>
-          <h3 className="idv-title">Discovery Workspace</h3>
-          <p className="idv-subtitle">
-            Every SoundLegend build begins with four truths: Voice, Feel,
-            Purpose, and Legacy. This workspace helps turn the intake and the
-            consultation into something more useful than scattered notes.
-          </p>
+          <div className="idv-kicker">{modeConfig.kicker}</div>
+          <h3 className="idv-title">{modeConfig.title}</h3>
+          <p className="idv-subtitle">{modeConfig.subtitle}</p>
         </div>
       </div>
 
-      <div className="idv-timeline">
-        <div className="idv-timeline-chip">
-          <span className="idv-timeline-label">Questionnaire</span>
-          <span
-            className={`idv-status-pill ${
-              questionnaireReceived ? 'is-good' : 'is-soft'
-            }`}
-          >
-            {questionnaireStatus}
-          </span>
-        </div>
+      {mode === 'intakeDetails' ? (
+        <IntakeInterpretationSection
+          intakeOpen={intakeOpen}
+          setIntakeOpen={setIntakeOpen}
+          intakeLocked={intakeLocked}
+          questionnaireStatus={questionnaireStatus}
+          intakeInterpretationRows={intakeInterpretationRows}
+          handleMarkIntakeComplete={handleMarkIntakeComplete}
+          questionnaireReceived={questionnaireReceived}
+          discoveryProgressPercent={discoveryProgressPercent}
+          discoveryConfidenceLabel={discoveryConfidenceLabel}
+          builderPrepIntro={builderPrepIntro}
+          builderPrepBuildScope={builderPrepBuildScope}
+          summaryText={summaryText}
+          updateSummaryMeta={updateSummaryMeta}
+          discoveryBlockers={discoveryBlockers}
+          topClarifyItems={topClarifyItems}
+          topVerifyItems={topVerifyItems}
+        />
+      ) : null}
 
-        <div className="idv-timeline-chip">
-          <span className="idv-timeline-label">Intake Review</span>
-          <span
-            className={`idv-status-pill ${
-              intakeLocked ? 'is-good' : 'is-soft'
-            }`}
-          >
-            {intakeStatusLabel}
-          </span>
-        </div>
+      {mode === 'preconsultPrep' ? (
+        <PreConsultPrepSection
+          summaryOpen={summaryOpen}
+          setSummaryOpen={setSummaryOpen}
+          summaryGenerated={summaryGenerated}
+          consultPrepBoards={consultPrepBoards}
+          consultFlowBullets={consultFlowBullets}
+          builderPrepBuildScope={builderPrepBuildScope}
+          topClarifyItems={topClarifyItems}
+          topVerifyItems={topVerifyItems}
+        />
+      ) : null}
 
-        <div className="idv-timeline-chip">
-          <span className="idv-timeline-label">Consultation</span>
-          <span
-            className={`idv-status-pill ${
-              consultLocked ? 'is-good' : 'is-soft'
-            }`}
-          >
-            {consultStatusLabel}
-          </span>
-        </div>
-
-        <div className="idv-timeline-chip">
-          <span className="idv-timeline-label">IntelliSummary</span>
-          <span
-            className={`idv-status-pill ${
-              summaryGenerated ? 'is-good' : 'is-soft'
-            }`}
-          >
-            {summaryGenerated ? 'Generated' : 'Waiting'}
-          </span>
-        </div>
-      </div>
-
-      {summaryGenerated && (
-        <section className="idv-summary-hero">
-          <button
-            type="button"
-            className="idv-section-toggle"
-            onClick={() => setSummaryOpen((prev) => !prev)}
-          >
-            <div className="idv-section-toggle-copy">
-              <span className="idv-section-kicker">
-                Discovery IntelliSummary
-              </span>
-              <h4>Reviewed intake + consult handoff</h4>
-              <p>
-                This becomes the useful discovery handoff into the next stage of
-                the Ober build process.
-              </p>
-            </div>
-            <div className="idv-section-toggle-right">
-              <span className="idv-status-pill is-good">Generated</span>
-              <span className="idv-toggle-icon">{summaryOpen ? '−' : '+'}</span>
-            </div>
-          </button>
-
-          {summaryOpen && (
-            <div className="idv-section-body">
-              <div className="idv-card">
-                <div className="idv-card-head">
-                  <span className="idv-card-kicker">Editable Summary</span>
-                  <h5>Builder-facing discovery handoff</h5>
-                </div>
-
-                <textarea
-                  className="idv-textarea idv-summary-textarea"
-                  rows={5}
-                  value={summaryText}
-                  onChange={(e) =>
-                    updateSummaryMeta({
-                      editableText: e.target.value,
-                    })
-                  }
-                  placeholder="The discovery handoff summary will appear here once questionnaire review and consultation are both completed."
-                />
-              </div>
-
-              <div className="idv-grid-2">
-                <div className="idv-card">
-                  <div className="idv-card-head">
-                    <span className="idv-card-kicker">Trusted Signals</span>
-                    <h5>Safe to carry forward</h5>
-                  </div>
-
-                  {generatedIntelliSummary.trustedSignals.length ? (
-                    <div className="idv-list-stack">
-                      {generatedIntelliSummary.trustedSignals.map((item) => (
-                        <div key={item.label} className="idv-info-row">
-                          <div className="idv-info-row-top">
-                            <strong>{item.label}</strong>
-                            <span className="idv-confidence-pill is-high">
-                              HIGH
-                            </span>
-                          </div>
-                          <div className="idv-info-row-value">{item.value}</div>
-                          <p>{item.rationale}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="idv-empty">
-                      No strong reviewed signals yet.
-                    </div>
-                  )}
-                </div>
-
-                <div className="idv-card">
-                  <div className="idv-card-head">
-                    <span className="idv-card-kicker">Still Open</span>
-                    <h5>Areas still needing care</h5>
-                  </div>
-
-                  {generatedIntelliSummary.stillOpen.length ? (
-                    <ul className="idv-list">
-                      {generatedIntelliSummary.stillOpen.map((item) => (
-                        <li key={item.label}>
-                          <strong>{item.label}:</strong> {item.note}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="idv-empty">
-                      No major open areas detected.
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="idv-card">
-                <div className="idv-card-head">
-                  <span className="idv-card-kicker">
-                    Confidence By Category
-                  </span>
-                  <h5>Why the summary trusts what it trusts</h5>
-                </div>
-
-                <div className="idv-confidence-table">
-                  {generatedIntelliSummary.confidenceRows.map((row) => (
-                    <div key={row.label} className="idv-confidence-row">
-                      <div className="idv-confidence-main">
-                        <strong>{row.label}</strong>
-                        <div className="idv-confidence-value">
-                          {getDisplayValue(row.value)}
-                        </div>
-                      </div>
-                      <div className="idv-confidence-side">
-                        <span
-                          className={`idv-confidence-pill is-${
-                            row.confidence || 'unknown'
-                          }`}
-                        >
-                          {(row.confidence || 'unknown').toUpperCase()}
-                        </span>
-                        <p>{row.rationale}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </section>
-      )}
-
-      <section className="idv-section">
-        <button
-          type="button"
-          className="idv-section-toggle"
-          onClick={() => setIntakeOpen((prev) => !prev)}
-        >
-          <div className="idv-section-toggle-copy">
-            <span className="idv-section-kicker">Section 1</span>
-            <h4>Questionnaire Intake</h4>
-            <p>
-              Review the questionnaire through the lens of the four truths so
-              the call begins with something more intentional than scattered
-              preferences.
-            </p>
-          </div>
-          <div className="idv-section-toggle-right">
-            <span
-              className={`idv-status-pill ${
-                intakeLocked ? 'is-good' : 'is-soft'
-              }`}
-            >
-              {intakeLocked ? 'Reviewed' : questionnaireStatus}
-            </span>
-            <span className="idv-toggle-icon">{intakeOpen ? '−' : '+'}</span>
-          </div>
-        </button>
-
-        {intakeOpen && (
-          <div className="idv-section-body">
-            <div className="idv-card">
-              <div className="idv-card-head">
-                <span className="idv-card-kicker">Four Truths Snapshot</span>
-                <h5>How the intake is beginning to speak</h5>
-              </div>
-
-              <div className="idv-truth-board">
-                {truthBoards.map((truth) => (
-                  <div key={truth.key} className="idv-truth-card">
-                    <div className="idv-truth-top">
-                      <span className="idv-truth-badge">{truth.badge}</span>
-                      <div>
-                        <strong>{truth.title}</strong>
-                        <p>{truth.summary}</p>
-                      </div>
-                    </div>
-
-                    <div className="idv-truth-stats">
-                      <span className="idv-status-pill is-good">
-                        Locked: {truth.confirmedItems.length}
-                      </span>
-                      <span className="idv-status-pill is-medium">
-                        Verify: {truth.verifyItems.length}
-                      </span>
-                      <span className="idv-status-pill is-soft">
-                        Open: {truth.clarifyItems.length}
-                      </span>
-                    </div>
-
-                    <ul className="idv-list">
-                      {truth.items.slice(0, 3).map((item) => (
-                        <li key={item.fieldId}>
-                          <strong>{item.label}:</strong>{' '}
-                          {getDisplayValue(item.finalValue)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              <div className="idv-action-row idv-action-row--end">
-                <button
-                  type="button"
-                  className="idv-btn idv-btn-primary"
-                  onClick={handleMarkIntakeComplete}
-                  disabled={intakeLocked || !questionnaireReceived}
-                >
-                  {intakeLocked
-                    ? 'Questionnaire Intake Locked'
-                    : 'Mark Intake Reviewed'}
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
-
-      <section className="idv-section">
-        <button
-          type="button"
-          className="idv-section-toggle"
-          onClick={() => setConsultOpen((prev) => !prev)}
-        >
-          <div className="idv-section-toggle-copy">
-            <span className="idv-section-kicker">Section 2</span>
-            <h4>Consultation Validation</h4>
-            <p>
-              Use the consultation to confirm, clarify, and emotionally deepen
-              what the questionnaire surfaced.
-            </p>
-          </div>
-          <div className="idv-section-toggle-right">
-            <span
-              className={`idv-status-pill ${
-                consultLocked ? 'is-good' : 'is-soft'
-              }`}
-            >
-              {consultLocked ? 'Completed' : 'Active'}
-            </span>
-            <span className="idv-toggle-icon">{consultOpen ? '−' : '+'}</span>
-          </div>
-        </button>
-
-        {consultOpen && (
-          <div className="idv-section-body">
-            <div className="idv-card idv-card-full">
-              <div className="idv-card-head">
-                <span className="idv-card-kicker">Call Rhythm</span>
-                <h5>Cheat sheet for how the conversation should feel</h5>
-              </div>
-
-              <div className="idv-call-rhythm-stack">
-                {callRhythmSections.map((section) => (
-                  <div key={section.key} className="idv-call-rhythm-card">
-                    <div className="idv-call-rhythm-title">{section.title}</div>
-
-                    {section.script ? (
-                      <p className="idv-call-rhythm-script">{section.script}</p>
-                    ) : null}
-
-                    {section.bullets?.length ? (
-                      <ul className="idv-list">
-                        {section.bullets.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="idv-card idv-card-full">
-              <div className="idv-card-head">
-                <span className="idv-card-kicker">Four Truths Checklist</span>
-                <h5>Confirm the build through Voice, Feel, Purpose, and Legacy</h5>
-              </div>
-
-              <div className="idv-truth-checklist-grid">
-                {truthBoards.map((truth) => (
-                  <div key={truth.key} className="idv-truth-checklist-card">
-                    <div className="idv-truth-checklist-head">
-                      <div className="idv-truth-top">
-                        <span className="idv-truth-badge">{truth.badge}</span>
-                        <div>
-                          <strong>{truth.title}</strong>
-                          <p>{truth.summary}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="idv-truth-checklist-items">
-                      {truth.items.map((item) => (
-                        <div key={item.fieldId} className="idv-truth-item-card">
-                          <div className="idv-truth-item-top">
-                            <strong>{item.label}</strong>
-                            <span
-                              className={`idv-status-pill ${getReviewStatePillClass(
-                                item.reviewState
-                              )}`}
-                            >
-                              {item.reviewState === 'confirmed'
-                                ? 'Locked In'
-                                : item.reviewState === 'verify'
-                                  ? 'Needs Confirming'
-                                  : 'Open Question'}
-                            </span>
-                          </div>
-
-                          <div className="idv-truth-item-value">
-                            {getDisplayValue(item.finalValue)}
-                          </div>
-
-                          <div className="idv-field" style={{ marginTop: 10 }}>
-                            <label className="idv-field-label">Move Item</label>
-                            <select
-                              value={item.reviewState}
-                              onChange={(e) =>
-                                updateTruthRow(truth.key, item.fieldId, {
-                                  reviewState: e.target.value,
-                                  checked: e.target.value === 'confirmed',
-                                })
-                              }
-                              disabled={consultLocked}
-                            >
-                              {REVIEW_STATE_OPTIONS.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                  {option.label}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-
-                          <div className="idv-field" style={{ marginTop: 10 }}>
-                            <label className="idv-field-label">Notes</label>
-                            <textarea
-                              className="idv-textarea"
-                              rows={3}
-                              value={item.notes}
-                              onChange={(e) =>
-                                updateTruthRow(truth.key, item.fieldId, {
-                                  notes: e.target.value,
-                                })
-                              }
-                              disabled={consultLocked}
-                              placeholder={`Any notes about how ${truth.title.toLowerCase()} is becoming clearer here...`}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="idv-card idv-card-full">
-              <div className="idv-card-head">
-                <span className="idv-card-kicker">Actions</span>
-                <h5>Consult processing</h5>
-              </div>
-
-              <div className="idv-action-stack">
-                <button
-                  type="button"
-                  className="idv-btn idv-btn-secondary"
-                  onClick={handleGenerateConsultationSummary}
-                  disabled={
-                    consultLocked ||
-                    storyEngineRunning ||
-                    isNormalizingTranscript ||
-                    !cleanText(storyEngineData?.consultationTranscript)
-                  }
-                >
-                  {isNormalizingTranscript
-                    ? 'Processing…'
-                    : 'Format + Summarize Call'}
-                </button>
-
-                <button
-                  type="button"
-                  className="idv-btn idv-btn-primary"
-                  onClick={handleMarkConsultComplete}
-                  disabled={consultLocked}
-                >
-                  {consultLocked
-                    ? 'Consultation Locked'
-                    : 'Mark Consultation Complete'}
-                </button>
-              </div>
-
-              <div className="idv-meta-row" style={{ marginTop: 14 }}>
-                <div className="idv-meta-chip">
-                  <span className="idv-meta-label">Transcript</span>
-                  <strong>
-                    {cleanText(storyEngineData?.consultationTranscript)
-                      ? 'Added'
-                      : 'Missing'}
-                  </strong>
-                </div>
-
-                <div className="idv-meta-chip">
-                  <span className="idv-meta-label">Internal Notes</span>
-                  <strong>
-                    {cleanText(storyEngineData?.adminNotes)
-                      ? 'Added'
-                      : 'Missing'}
-                  </strong>
-                </div>
-
-                <div className="idv-meta-chip">
-                  <span className="idv-meta-label">Completed At</span>
-                  <strong>{safeDateLabel(consultState?.completedAt)}</strong>
-                </div>
-              </div>
-            </div>
-
-            <div className="idv-grid-2">
-              <div className="idv-card">
-                <div className="idv-card-head">
-                  <span className="idv-card-kicker">Call Capture</span>
-                  <h5>Paste consultation transcript</h5>
-                </div>
-
-                <textarea
-                  className="idv-textarea idv-textarea-tall"
-                  rows={14}
-                  value={storyEngineData?.consultationTranscript || ''}
-                  onChange={(e) => {
-                    if (consultLocked) return;
-                    setStoryEngineData((prev) => ({
-                      ...prev,
-                      consultationTranscript: e.target.value,
-                    }));
-                  }}
-                  disabled={consultLocked}
-                  placeholder="Paste the consultation transcript here..."
-                />
-              </div>
-
-              <div className="idv-card">
-                <div className="idv-card-head">
-                  <span className="idv-card-kicker">Craftsman Notes</span>
-                  <h5>Internal-only observations</h5>
-                </div>
-
-                <textarea
-                  className="idv-textarea idv-textarea-tall"
-                  rows={14}
-                  value={storyEngineData?.adminNotes || ''}
-                  onChange={(e) => {
-                    if (consultLocked) return;
-                    setStoryEngineData((prev) => ({
-                      ...prev,
-                      adminNotes: e.target.value,
-                    }));
-                  }}
-                  disabled={consultLocked}
-                  placeholder="Builder observations, emotional cues, contradictions, meaningful notes, and things worth protecting..."
-                />
-              </div>
-            </div>
-
-            {!!smartTranscriptTurns.length && (
-              <div className="idv-card">
-                <div className="idv-card-head">
-                  <span className="idv-card-kicker">
-                    Formatted Conversation
-                  </span>
-                  <h5>Transcript preview</h5>
-                </div>
-
-                <div className="idv-thread">
-                  {smartTranscriptTurns.map((turn, idx) => (
-                    <div
-                      key={turn?.id || `turn-${idx}`}
-                      className={`idv-thread-row ${
-                        turn?.speaker === 'Ober Artisan'
-                          ? 'is-builder'
-                          : 'is-artist'
-                      }`}
-                    >
-                      <div className="idv-thread-speaker">
-                        {turn?.speaker || 'Artist'}
-                      </div>
-                      <div className="idv-thread-bubble">
-                        {turn?.text || ''}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </section>
+      {mode === 'consultationTool' ? (
+        <ConsultationWorkspaceSection
+          consultOpen={consultOpen}
+          setConsultOpen={setConsultOpen}
+          consultLocked={consultLocked}
+          truthBoards={truthBoards}
+          updateTruthRow={updateTruthRow}
+          getReviewStatePillClass={getReviewStatePillClass}
+          REVIEW_STATE_OPTIONS={REVIEW_STATE_OPTIONS}
+          getDisplayValue={getDisplayValue}
+          handleGenerateConsultationSummary={handleGenerateConsultationSummary}
+          storyEngineRunning={storyEngineRunning}
+          isNormalizingTranscript={isNormalizingTranscript}
+          handleMarkConsultComplete={handleMarkConsultComplete}
+          storyEngineData={storyEngineData}
+          setStoryEngineData={setStoryEngineData}
+          safeDateLabel={safeDateLabel}
+          consultState={consultState}
+          cleanText={cleanText}
+          smartTranscriptTurns={smartTranscriptTurns}
+          consultationLockedInCount={consultationLockedInCount}
+          consultationOpenCount={consultationOpenCount}
+          consultationVerifyCount={consultationVerifyCount}
+        />
+      ) : null}
     </div>
   );
 };

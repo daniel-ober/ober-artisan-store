@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 const BUILD_DIRECTION_SUMMARY = [
   {
@@ -89,6 +89,9 @@ const StoryStudioSection = ({
   toggleChapterSectionLock,
   craftsmanMasterTool = {},
 }) => {
+  const [showAllOutstanding, setShowAllOutstanding] = useState(false);
+  const [showChapters, setShowChapters] = useState(false);
+
   const buildSpec = storyEngineData?.engineRecord?.buildSpec || {};
   const craftsmanDecisions = craftsmanMasterTool?.decisions || {};
   const adminPrompts =
@@ -120,14 +123,14 @@ const StoryStudioSection = ({
       } else if (hasCraftsmanValue && hasBuildSpecValue) {
         if (normalize(craftsmanValue) === normalize(buildSpecValue)) {
           syncState = 'confirmed';
-          syncLabel = 'Confirmed for Story';
+          syncLabel = 'Confirmed';
         } else {
           syncState = 'mismatch';
           syncLabel = 'Mismatch';
         }
       } else if (hasCraftsmanValue && !hasBuildSpecValue) {
         syncState = 'provisional';
-        syncLabel = 'From Craftsman only';
+        syncLabel = 'Craftsman only';
       } else if (!hasCraftsmanValue && hasBuildSpecValue) {
         syncState = 'story_only';
         syncLabel = 'Story only';
@@ -136,13 +139,13 @@ const StoryStudioSection = ({
       let actionText = 'Add direction';
 
       if (syncState === 'confirmed') {
-        actionText = 'No action needed';
+        actionText = 'Ready';
       } else if (syncState === 'provisional') {
-        actionText = 'Confirm in Story';
+        actionText = 'Carry into Story';
       } else if (syncState === 'mismatch') {
         actionText = 'Reconcile values';
       } else if (syncState === 'needs_review') {
-        actionText = 'Review downstream change';
+        actionText = 'Review change';
       } else if (syncState === 'story_only') {
         actionText = 'Verify against Craftsman';
       }
@@ -203,12 +206,16 @@ const StoryStudioSection = ({
     const transcriptMissing = actionableGroups.needsNow.find(
       (item) => item.id === 'consultation-transcript'
     );
-    if (transcriptMissing) return 'Add consultation transcript';
+    if (transcriptMissing) {
+      return 'Transcript missing — story cannot verify the player’s actual language yet.';
+    }
 
     const summaryMissing = actionableGroups.needsNow.find(
       (item) => item.id === 'consultation-summary'
     );
-    if (summaryMissing) return 'Add consultation summary';
+    if (summaryMissing) {
+      return 'Consult summary missing — story has no builder-facing call takeaway yet.';
+    }
 
     const firstDirectionBlocker = directionSummary.find(
       (item) =>
@@ -219,14 +226,14 @@ const StoryStudioSection = ({
     );
 
     if (firstDirectionBlocker) {
-      return `${firstDirectionBlocker.label}: ${firstDirectionBlocker.actionText}`;
+      return `${firstDirectionBlocker.label} is still unresolved for story drafting.`;
     }
 
     if (adminPrompts.length) {
-      return `Resolve ${prettifyFieldKey(adminPrompts[0]?.fieldKey)}`;
+      return `Resolve ${prettifyFieldKey(adminPrompts[0]?.fieldKey)} before trusting chapter copy.`;
     }
 
-    return 'Run Story Engine and review chapters';
+    return 'Story is ready for chapter review.';
   }, [actionableGroups, directionSummary, adminPrompts]);
 
   const chapters = storyEngineData?.engineRecord?.chapters || {};
@@ -244,6 +251,16 @@ const StoryStudioSection = ({
     return !unresolvedDirection && actionableGroups.needsNow.length === 0;
   }, [directionSummary, actionableGroups]);
 
+  const topOutstanding = actionableGroups.needsNow.slice(0, 4);
+  const remainingOutstanding = actionableGroups.needsNow.slice(4);
+
+  const readinessTone =
+    storyStudioSummaryStats.readiness === 'ready'
+      ? 'ready'
+      : storyStudioSummaryStats.readiness === 'review_before_draft'
+        ? 'review'
+        : 'blocked';
+
   return (
     <div className="mpm-surface mpm-overview-scope">
       <div className="mpm-tab-shell">
@@ -252,8 +269,8 @@ const StoryStudioSection = ({
             <div className="mpm-tab-kicker">Story Studio</div>
             <h3 className="mpm-tab-title">Story engine + chapter output</h3>
             <p className="mpm-tab-subtitle">
-              Use this page to see what is missing, what direction is only
-              provisional, and what is actually ready for story drafting.
+              Check whether story is actually ready, see what is still blocking it,
+              and only then move into chapter review.
             </p>
           </div>
 
@@ -310,14 +327,18 @@ const StoryStudioSection = ({
 
         <section className="mpm-story-panel">
           <div className="mpm-story-panel-header">
-            <h3>What to do now</h3>
+            <h3>Story readiness</h3>
             <p>
-              This is the shortest path to getting Story Studio into a usable,
-              trustworthy state.
+              One place to see whether story can actually be trusted yet.
             </p>
           </div>
 
           <div className="mpm-story-status-grid">
+            <div className="mpm-story-status-card">
+              <span className="mpm-story-status-kicker">Status</span>
+              <strong>{storyStudioSummaryStats.readiness}</strong>
+            </div>
+
             <div className="mpm-story-status-card">
               <span className="mpm-story-status-kicker">Next best action</span>
               <strong>{nextBestAction}</strong>
@@ -332,21 +353,42 @@ const StoryStudioSection = ({
               <span className="mpm-story-status-kicker">Review soon</span>
               <strong>{actionableGroups.reviewSoon.length}</strong>
             </div>
-
-            <div className="mpm-story-status-card">
-              <span className="mpm-story-status-kicker">Later</span>
-              <strong>{actionableGroups.later.length}</strong>
-            </div>
           </div>
+
+          {!canComfortablyReviewChapters ? (
+            <div
+              className="mpm-story-review-list"
+              style={{ marginTop: 18, marginBottom: 0 }}
+            >
+              <div className="mpm-story-review-title">
+                Story is still provisional
+              </div>
+              <p style={{ margin: 0 }}>
+                Chapter copy should not be treated as trustworthy yet. Resolve the
+                core blockers first, then rerun story.
+              </p>
+            </div>
+          ) : (
+            <div
+              className="mpm-story-review-list"
+              style={{ marginTop: 18, marginBottom: 0 }}
+            >
+              <div className="mpm-story-review-title">
+                Story is clear enough to review
+              </div>
+              <p style={{ margin: 0 }}>
+                Core discovery and direction look stable enough for chapter review.
+              </p>
+            </div>
+          )}
         </section>
 
         <section className="mpm-story-panel">
           <div className="mpm-story-panel-header">
-            <h3>Current direction</h3>
+            <h3>Direction sync</h3>
             <p>
-              This compares Craftsman decisions against Story build-spec values
-              so you can see what is merely selected versus what Story can
-              actually trust.
+              These are the build-direction items story needs in order to stop
+              sounding generic.
             </p>
           </div>
 
@@ -384,17 +426,6 @@ const StoryStudioSection = ({
                   <div className="mpm-story-preview-text">{item.actionText}</div>
                 </div>
 
-                {item.recommendedValue && item.recommendedValue !== 'Open' ? (
-                  <div className="mpm-story-preview-block">
-                    <div className="mpm-story-preview-label">
-                      Top recommendation
-                    </div>
-                    <div className="mpm-story-preview-text">
-                      {item.recommendedValue}
-                    </div>
-                  </div>
-                ) : null}
-
                 {item.staleReason ? (
                   <div className="mpm-story-preview-block">
                     <div className="mpm-story-preview-label">Review note</div>
@@ -415,17 +446,16 @@ const StoryStudioSection = ({
                 What still needs action
               </h4>
               <p className="mpm-story-studio-section-subtitle">
-                Grouped by urgency so you can tell what matters now versus what
-                can wait.
+                Show the few highest-value blockers first.
               </p>
             </div>
           </div>
 
-          {actionableGroups.needsNow.length ? (
+          {topOutstanding.length ? (
             <div className="mpm-story-review-list" style={{ marginBottom: 18 }}>
-              <div className="mpm-story-review-title">Needs now</div>
+              <div className="mpm-story-review-title">Top blockers</div>
               <div className="mpm-story-studio-outstanding-list">
-                {actionableGroups.needsNow.map((item) => (
+                {topOutstanding.map((item) => (
                   <div
                     key={item.id}
                     className={`mpm-story-studio-outstanding-item mpm-story-studio-outstanding-item-${item.type}`}
@@ -453,170 +483,117 @@ const StoryStudioSection = ({
                   </div>
                 ))}
               </div>
+            </div>
+          ) : (
+            <div className="mpm-story-studio-outstanding-empty">
+              No top blockers right now.
+            </div>
+          )}
+
+          {remainingOutstanding.length ? (
+            <div className="mpm-history-collapsible">
+              <button
+                type="button"
+                className="mpm-story-review-title"
+                style={{
+                  width: '100%',
+                  textAlign: 'left',
+                  background: 'transparent',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                }}
+                onClick={() => setShowAllOutstanding((prev) => !prev)}
+              >
+                {showAllOutstanding ? 'Hide full blocker list' : 'Show full blocker list'}
+              </button>
+
+              {showAllOutstanding ? (
+                <div className="mpm-story-studio-outstanding-list" style={{ marginTop: 14 }}>
+                  {remainingOutstanding.map((item) => (
+                    <div
+                      key={item.id}
+                      className={`mpm-story-studio-outstanding-item mpm-story-studio-outstanding-item-${item.type}`}
+                    >
+                      <div className="mpm-story-studio-outstanding-main">
+                        <span className="mpm-story-studio-outstanding-dot" />
+                        <span className="mpm-story-studio-outstanding-text">
+                          {item.label}
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="mpm-story-studio-info-btn"
+                        onClick={() =>
+                          setOutstandingHelpItem((prev) =>
+                            prev?.id === item.id ? null : item
+                          )
+                        }
+                        aria-label={`How to resolve ${item.label}`}
+                        title="How to resolve"
+                      >
+                        ?
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ) : null}
 
           {actionableGroups.reviewSoon.length ? (
-            <div className="mpm-story-review-list" style={{ marginBottom: 18 }}>
+            <div className="mpm-story-review-list" style={{ marginTop: 18 }}>
               <div className="mpm-story-review-title">Review soon</div>
-              <div className="mpm-story-studio-outstanding-list">
-                {actionableGroups.reviewSoon.map((item) => (
-                  <div
-                    key={item.id}
-                    className={`mpm-story-studio-outstanding-item mpm-story-studio-outstanding-item-${item.type}`}
-                  >
-                    <div className="mpm-story-studio-outstanding-main">
-                      <span className="mpm-story-studio-outstanding-dot" />
-                      <span className="mpm-story-studio-outstanding-text">
-                        {item.label}
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      className="mpm-story-studio-info-btn"
-                      onClick={() =>
-                        setOutstandingHelpItem((prev) =>
-                          prev?.id === item.id ? null : item
-                        )
-                      }
-                      aria-label={`How to resolve ${item.label}`}
-                      title="How to resolve"
-                    >
-                      ?
-                    </button>
-                  </div>
+              <ul style={{ margin: 0 }}>
+                {actionableGroups.reviewSoon.slice(0, 4).map((item) => (
+                  <li key={item.id}>{item.label}</li>
                 ))}
-              </div>
-            </div>
-          ) : null}
-
-          {actionableGroups.later.length ? (
-            <div className="mpm-story-review-list">
-              <div className="mpm-story-review-title">Later / optional</div>
-              <div className="mpm-story-studio-outstanding-list">
-                {actionableGroups.later.map((item) => (
-                  <div
-                    key={item.id}
-                    className={`mpm-story-studio-outstanding-item mpm-story-studio-outstanding-item-${item.type}`}
-                  >
-                    <div className="mpm-story-studio-outstanding-main">
-                      <span className="mpm-story-studio-outstanding-dot" />
-                      <span className="mpm-story-studio-outstanding-text">
-                        {item.label}
-                      </span>
-                    </div>
-
-                    <button
-                      type="button"
-                      className="mpm-story-studio-info-btn"
-                      onClick={() =>
-                        setOutstandingHelpItem((prev) =>
-                          prev?.id === item.id ? null : item
-                        )
-                      }
-                      aria-label={`How to resolve ${item.label}`}
-                      title="How to resolve"
-                    >
-                      ?
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          {!storyStudioOutstandingItems.length ? (
-            <div className="mpm-story-studio-outstanding-empty">
-              All core intake + story inputs are in place.
+              </ul>
             </div>
           ) : null}
         </section>
 
-        <div className="mpm-story-layout">
-          <section className="mpm-story-panel">
-            <div className="mpm-story-panel-header">
-              <h3>Can story be trusted yet?</h3>
-              <p>
-                Review readiness and any remaining unresolved prompts before you
-                spend time polishing chapter output.
-              </p>
-            </div>
+        <section className="mpm-story-panel mpm-story-panel-wide">
+          <div className="mpm-story-panel-header">
+            <h3>Chapter review</h3>
+            <p>
+              Keep this collapsed until the groundwork is stronger.
+            </p>
+          </div>
 
-            <div className="mpm-story-status-grid">
-              <div className="mpm-story-status-card">
-                <span className="mpm-story-status-kicker">Draft readiness</span>
-                <strong>
-                  {storyEngineData?.engineRecord?.engineMeta?.draftReadiness ||
-                    'not_ready'}
-                </strong>
-              </div>
+          <button
+            type="button"
+            className="mpm-bulk-btn"
+            onClick={() => setShowChapters((prev) => !prev)}
+            style={{ marginBottom: 18 }}
+          >
+            {showChapters ? 'Hide Chapters' : 'Show Chapters'}
+          </button>
 
-              <div className="mpm-story-status-card">
-                <span className="mpm-story-status-kicker">
-                  Overall confidence
-                </span>
-                <strong>
-                  {Math.round(
-                    (storyEngineData?.engineRecord?.engineMeta
-                      ?.overallConfidence || 0) * 100
-                  )}
-                  %
-                </strong>
-              </div>
-            </div>
-
-            {adminPrompts.length ? (
-              <div className="mpm-story-review-list">
-                <div className="mpm-story-review-title">Unresolved prompts</div>
-                <ul>
-                  {adminPrompts.map((item, idx) => (
-                    <li key={`${item.fieldKey}-${idx}`}>
-                      <strong>{prettifyFieldKey(item.fieldKey)}</strong>: {item.reason}{' '}
-                      — {item.suggestion}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </section>
-
-          {!!chapterEntries.length ? (
-            <section className="mpm-story-panel mpm-story-panel-wide">
-              <div className="mpm-story-panel-header">
-                <h3>Story Studio Chapters</h3>
-                <p>
-                  Review chapter output, regenerate sections, and lock approved
-                  sections once the direction is stable enough to trust.
-                </p>
-              </div>
-
+          {showChapters ? (
+            <>
               {!canComfortablyReviewChapters ? (
                 <div className="mpm-story-review-list" style={{ marginBottom: 18 }}>
                   <div className="mpm-story-review-title">
                     Chapter review is still provisional
                   </div>
                   <p style={{ margin: 0 }}>
-                    You can still inspect drafts, but chapter copy should not be
-                    treated as final until the core direction above is confirmed
-                    for Story.
+                    You can inspect drafts, but chapter copy should not be treated
+                    as final until the core direction is confirmed.
                   </p>
                 </div>
               ) : null}
 
               <div className="mpm-story-preview-list">
                 {chapterEntries.map(([chapterKey, chapterValue]) => (
-                  <article
-                    key={chapterKey}
-                    className="mpm-story-preview-card"
-                  >
+                  <article key={chapterKey} className="mpm-story-preview-card">
                     <div className="mpm-story-preview-head">
                       <h4>{chapterValue?.label || chapterKey}</h4>
                       <div className="mpm-story-preview-meta">
                         <span>
                           Confidence:{' '}
-                          {Math.round((chapterValue?.confidenceScore || 0) * 100)}
-                          %
+                          {Math.round((chapterValue?.confidenceScore || 0) * 100)}%
                         </span>
                         <span>
                           Flags: {(chapterValue?.flags || []).join(', ') || '—'}
@@ -752,9 +729,13 @@ const StoryStudioSection = ({
                   </article>
                 ))}
               </div>
-            </section>
-          ) : null}
-        </div>
+            </>
+          ) : (
+            <div className="mpm-story-studio-outstanding-empty">
+              Chapters are hidden until you are ready to review them.
+            </div>
+          )}
+        </section>
       </div>
     </div>
   );

@@ -1,289 +1,603 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import './ArtisanDrums.css';
-import { DarkModeContext } from '../context/DarkModeContext';
-import { analytics, logEvent } from '../firebaseConfig';
+import React, { useMemo, useState, useCallback } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
-const DRUM_SERIES = [
+import './ArtisanDrums.css';
+
+const ASSET_BASE = `${process.env.PUBLIC_URL}/ober-artisan-showroom/color`;
+
+export const DRUM_SERIES = [
   {
     id: 'heritage',
+
     name: 'HERITAGE',
+
     logo: '/resized-logos/heritage-white.png',
-    overlay: '/artisanseries-bottom-layers/top-layer-left-drum-highlighted.png',
+
     quote:
-      '“The drum that started it all—classic craftsmanship, timeless sound.”',
-    startingPrice: 'Heritage builds starting at $850',
+      'The drum that started it all — classic craftsmanship, timeless sound.',
+
+    shortLabel: 'Heritage',
+
+    bullets: [
+      'Northern Red Oak shell',
+
+      'Stave-built for pure resonance',
+
+      '45° / roundover bearing edges',
+
+      'Hand-scorched for visual depth and warmth',
+
+      'Builds starting at $850',
+    ],
+
     description:
-      'The HERITAGE Series honors the roots of handcrafted snare drums—where tradition, tone, and touch converge. Built from Northern Red Oak with time-honored stave techniques, each drum is torch-tuned to unlock warmth and character. The scorched finish adds sonic depth and visual texture. With crisp attack, focused mids, and a balanced low end, HERITAGE delivers timeless tone for drummers seeking legacy in every stroke.',
-    specs: [],
-    images: ['/artisan-shop/heritage-left.png'],
-    audioSamples: [],
+      'HERITAGE is the line that grounds the Ober Artisan identity. It is rooted in traditional stave construction, tactile warmth, and a voice that feels seasoned, organic, and familiar without ever feeling ordinary.',
+
+    voiceSummary:
+      'A rooted, warm, seasoned response with a more classic and grounded feel under the stick.',
+
+    toneProfile: [
+      { label: 'Warmth', value: 90 },
+
+      { label: 'Dryness', value: 72 },
+
+      { label: 'Projection', value: 68 },
+
+      { label: 'Complexity', value: 64 },
+
+      { label: 'Versatility', value: 74 },
+    ],
+
+    href: '/artisan-shop/heritage',
+
+    cta: 'Explore Heritage',
+
+    activeLayer: `${ASSET_BASE}/drums-only-heritage.png`,
   },
-  {
-    id: 'soundlegend',
-    name: 'SOUNDLEGEND',
-    logo: '/resized-logos/soundlegend-white.png',
-    overlay:
-      '/artisanseries-bottom-layers/top-layer-middle-drum-highlighted.png',
-    quote: '“Every drum tells a story—let’s craft yours together.”',
-    startingPrice: 'Builds starting at $1200',
-    description:
-      'The SoundLegend Series is more than just a drum—it’s an experience. Designed for drummers who want to collaborate directly with a master artisan, this fully custom shop offering gives you the freedom to explore new sonic possibilities. Through a hands-on process that includes one-on-one consultation, high-resolution concept renders, and live build updates, you’ll watch your dream snare drum take shape before your eyes.',
-    specs: [],
-    images: ['/artisan-shop/soundlegend-left.png'],
-    audioSamples: [],
-  },
+
   {
     id: 'feuzon',
-    name: 'FEUZØN Hybrid',
+
+    name: 'FEUZØN',
+
     logo: '/resized-logos/feuzon-white.png',
-    overlay:
-      '/artisanseries-bottom-layers/top-layer-right-drum-highlighted.png',
-    quote: '“Blending tradition and innovation into one harmonious voice.”',
-    startingPrice: 'FEUZØN builds starting at $1050',
+
+    quote: 'Blending tradition and innovation into one harmonious voice.',
+
+    shortLabel: 'Feuzøn',
+
+    bullets: [
+      'Hybrid shell architecture: stave + steam-bent',
+
+      '150+ unique build variations',
+
+      '45° / roundover bearing edges',
+
+      'Torch-tuned for balance, depth, and clarity',
+
+      'Builds starting at $1050',
+    ],
+
     description:
-      'The FEUZØN Series is a revolutionary hybrid snare drum that fuses the precision of stave construction with the controlled resonance of a steam bent outer shell. This innovative design enhances warmth, articulation, and dynamic response, offering a snare drum unlike any other. Each drum is torch-tuned to refine its sonic character, bringing out the rich harmonics and bold presence that drummers crave.',
-    specs: [],
-    images: ['/artisan-shop/feuzon-right.png'],
-    audioSamples: [],
+      'FEUZØN is where the Ober language becomes more modern and more expansive. Its hybrid shell architecture opens up greater tonal range, stronger articulation, and a more exploratory response under the stick.',
+
+    voiceSummary:
+      'A broader and more exploratory voice — stronger articulation, wider tonal spread, and more modern lift.',
+
+    toneProfile: [
+      { label: 'Warmth', value: 78 },
+
+      { label: 'Dryness', value: 58 },
+
+      { label: 'Projection', value: 86 },
+
+      { label: 'Complexity', value: 88 },
+
+      { label: 'Versatility', value: 90 },
+    ],
+
+    href: '/artisan-shop/feuzon',
+
+    cta: 'Explore FEUZØN',
+
+    activeLayer: `${ASSET_BASE}/drums-only-feuzon.png`,
+  },
+
+  {
+    id: 'soundlegend',
+
+    name: 'SOUNDLEGEND',
+
+    logo: '/resized-logos/soundlegend-white.png',
+
+    quote: 'Every drum tells a story — let’s craft yours together.',
+
+    shortLabel: 'SoundLegend',
+
+    bullets: [
+      'Our most in-depth custom series',
+
+      'Guided 1-on-1 discovery with Dan Ober',
+
+      'High-resolution concept mockups',
+
+      'Portal access and story tracking',
+
+      'Builds starting at $1499',
+    ],
+
+    description:
+      'SOUNDLEGEND is the fullest expression of the Ober process. It combines consultation, concept refinement, voicing intent, visual storytelling, and premium build execution into one deeply personal custom experience.',
+
+    voiceSummary:
+      'This is not a fixed sound. It is a rough directional sketch of what a SOUNDLEGEND build could lean toward when the process is pushed to its fullest level of customization.',
+
+    toneProfile: [
+      { label: 'Warmth', value: 84 },
+
+      { label: 'Dryness', value: 76 },
+
+      { label: 'Projection', value: 92 },
+
+      { label: 'Complexity', value: 96 },
+
+      { label: 'Versatility', value: 98 },
+    ],
+
+    href: '/artisan-shop/soundlegend',
+
+    cta: 'Explore SoundLegend',
+
+    activeLayer: `${ASSET_BASE}/drums-only-soundlegend.png`,
   },
 ];
 
-const ArtisanDrums = ({ showAll = false }) => {
-  const { isDarkMode } = useContext(DarkModeContext);
-  const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(1);
-  const [hoverIndex, setHoverIndex] = useState(null);
-  const [isFading, setIsFading] = useState(false);
-  const [isOverlayFading, setIsOverlayFading] = useState(false);
-  const [previousOverlay, setPreviousOverlay] = useState(null);
-  const [overlayImage, setOverlayImage] = useState(DRUM_SERIES[1].overlay);
-  const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [zoomed, setZoomed] = useState(false);
-  const [isStuck, setIsStuck] = useState(true);
+const COLLECTION_TABS = [
+  { id: 'overview', label: 'Overview' },
 
-  const hoverTimeoutRef = useRef(null);
-  const footerRef = useRef(null);
+  { id: 'heritage', label: 'Heritage' },
 
-  const active = DRUM_SERIES[activeIndex];
+  { id: 'feuzon', label: 'Feuzøn' },
 
-  const startFade = (newOverlay) => {
-    setPreviousOverlay(overlayImage);
-    setOverlayImage(newOverlay);
-    setIsOverlayFading(true);
-    setIsFading(true);
-    setTimeout(() => {
-      setIsOverlayFading(false);
-      setIsFading(false);
-    }, 600);
-  };
+  { id: 'soundlegend', label: 'SoundLegend' },
 
-  useEffect(() => {
-    const galleryObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            galleryObserver.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -20% 0px', threshold: 0.2 }
-    );
+  { id: 'compare', label: 'Compare' },
 
-    const images = document.querySelectorAll('.gallery-strip img');
-    images.forEach((img) => galleryObserver.observe(img));
-    return () => galleryObserver.disconnect();
-  }, [activeIndex]);
+  { id: 'legacyprint', label: 'LegacyPrint™' },
+];
 
-  const handleHover = (index) => {
-    if (index === activeIndex) return;
+const COMPARE_ROWS = [
+  {
+    label: 'Build philosophy',
 
-    const hoveredSeries = DRUM_SERIES[index].name;
-    if (analytics) {
-      logEvent(analytics, 'view_drum_series', { series: hoveredSeries });
-    }
+    helper: 'Overall character',
 
-    startFade(DRUM_SERIES[index].overlay);
-    setHoverIndex(index);
-    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-    hoverTimeoutRef.current = setTimeout(() => {
-      setActiveIndex(index);
-      setHoverIndex(null);
-    }, 0);
-  };
+    heritage: 'Rooted, classic, timeless',
 
-  const clearHover = () => {
-    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-    setHoverIndex(null);
-  };
+    feuzon: 'Experimental, hybrid, modern',
 
-  const handleDrumSwitch = (index) => {
-    if (index === activeIndex) return;
+    soundlegend: 'Fully tailored to artist and story',
+  },
 
-    const clickedSeries = DRUM_SERIES[index].name;
-    if (analytics) {
-      logEvent(analytics, 'click_drum_series', { series: clickedSeries });
-    }
+  {
+    label: 'Construction approach',
 
-    setActiveIndex(index);
-    setHoverIndex(null);
-    setPreviousOverlay(null);
-    setOverlayImage(DRUM_SERIES[index].overlay);
-    setIsOverlayFading(false);
-    setIsFading(false);
-  };
+    helper: 'Structural direction',
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsStuck(!entry.isIntersecting);
-      },
-      { threshold: 0.01 }
-    );
+    heritage: 'Traditional stave shell',
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
+    feuzon: 'Stave + steam-bent hybrid',
 
-    return () => observer.disconnect();
-  }, []);
+    soundlegend: 'Chosen per artist goals',
+  },
 
+  {
+    label: 'Who it is for',
+
+    helper: 'Natural fit',
+
+    heritage: 'Players wanting legacy warmth',
+
+    feuzon: 'Players wanting expanded range',
+
+    soundlegend: 'Players wanting a one-of-one build',
+  },
+
+  {
+    label: 'Voicing behavior',
+
+    helper: 'Tonal tendency',
+
+    heritage: 'Grounded, warm, seasoned',
+
+    feuzon: 'Broader, sharper, more expansive',
+
+    soundlegend: 'Most flexible and artist-shaped',
+  },
+
+  {
+    label: 'LegacyPrint™ usage',
+
+    helper: 'How discovery is applied',
+
+    heritage: 'Used to preserve the line’s core voice',
+
+    feuzon: 'Used to compare tonal range and spread',
+
+    soundlegend: 'Used most deeply during planning and voicing',
+  },
+];
+
+const clampIndex = (value) =>
+  Math.max(0, Math.min(value, DRUM_SERIES.length - 1));
+
+const getSeriesIndexById = (id) => {
+  const index = DRUM_SERIES.findIndex((series) => series.id === id);
+
+  return index >= 0 ? index : 0;
+};
+
+const ToneBars = ({ profile }) => {
   return (
-    <div className="artisanseries-container">
-      <div
-        className={`logo-single-wrapper sticky-logo-wrapper fade-transition ${
-          isFading ? 'fade-out' : ''
-        }`}
-      >
-        <img
-          src={active.logo}
-          alt={active.name}
-          className="artisanseries-header-image"
-        />
-      </div>
+    <div className="oad-tone-bars" aria-label="Voice profile">
+      {profile.map((item) => (
+        <div key={item.label} className="oad-tone-row">
+          <div className="oad-tone-meta">
+            <span className="oad-tone-label">{item.label}</span>
 
-      {/* Top Text Section */}
-      <div
-        className={`drum-display fade-transition ${isFading ? 'fade-out' : ''}`}
-      >
-        <div className="text-layer">
-          <p className="description">
-            <strong>{active.quote}</strong>
-          </p>
-          <p className="description">{active.description}</p>
+            <span className="oad-tone-value">{item.value}</span>
+          </div>
+
+          <div className="oad-tone-track">
+            <div
+              className="oad-tone-fill"
+              style={{ width: `${item.value}%` }}
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const SeriesFeature = ({ series, onNavigate, onCompare }) => {
+  return (
+    <div className="oad-feature">
+      <div className="oad-feature-main">
+        <img
+          src={series.logo}
+          alt={`${series.name} logo`}
+          className="oad-feature-logo"
+          loading="eager"
+          decoding="async"
+        />
+
+        <p className="oad-feature-quote">{series.quote}</p>
+
+        <p className="oad-feature-copy">{series.description}</p>
+
+        <div className="oad-feature-points">
+          {series.bullets.map((bullet) => (
+            <div key={bullet} className="oad-feature-point">
+              {bullet}
+            </div>
+          ))}
+        </div>
+
+        <div className="oad-feature-actions">
           <button
-            className="preorder-card-preorder-button"
-            onClick={() => {
-              if (active.id === 'soundlegend') {
-                navigate('/artisan-shop/soundlegend');
-              } else {
-                navigate(`/artisan-shop/${active.id}`);
-              }
-            }}
+            type="button"
+            className="oad-primary-btn"
+            onClick={() => onNavigate(series.href)}
           >
-            {active.id === 'soundlegend'
-              ? 'Request Your FREE 1-on-1 Consultation'
-              : `Order Your ${active.name} Today`}
+            {series.cta}
+          </button>
+
+          <button
+            type="button"
+            className="oad-secondary-btn"
+            onClick={onCompare}
+          >
+            Study the differences
           </button>
         </div>
-        {/* Instruction under image */}
-        <p className="drum-hover-instruction">
-          Click or hover on a drum to explore each series.
+      </div>
+
+      <div className="oad-feature-side">
+        <span className="oad-side-kicker">Voice profile</span>
+
+        <h3>{series.shortLabel} at a glance</h3>
+
+        <p className="oad-side-copy">{series.voiceSummary}</p>
+
+        <ToneBars profile={series.toneProfile} />
+      </div>
+    </div>
+  );
+};
+
+const LegacyPrintView = ({ onShowSoundLegend, onCompare }) => {
+  return (
+    <div className="oad-legacy">
+      <div className="oad-legacy-head">
+        <span className="oad-side-kicker">
+          Ober LegacyPrint™ Voicing Engine
+        </span>
+
+        <h2>Listening made more measurable.</h2>
+
+        <p>
+          LegacyPrint™ helps translate broad tonal language into clearer voicing
+          direction. It does not replace ears, judgment, or craftsmanship — it
+          gives the conversation more shape.
         </p>
       </div>
 
-      {/* Drum Images + Hover Zones */}
-      <div className="drum-layers-block">
-        <div className={`drum-layers ${isStuck ? 'stuck' : ''}`}>
-          <img
-            src="/artisanseries-bottom-layers/base-layer-bottom.png"
-            className="layer"
-            alt="Drum Base Layer Bottom"
-          />
-          <img
-            src="/artisanseries-bottom-layers/base-layer-front.png"
-            className="layer"
-            alt="Drum Base Layer Front"
-          />
-          <img
-            src="/artisanseries-bottom-layers/top-layer-alldrums-color.png"
-            className="layer overlay-image grayscale"
-            alt="All Drums Grayscale Overlay"
-          />
-          <img
-            src={overlayImage}
-            className="layer overlay-image"
-            style={{ zIndex: 4 }}
-            alt="Highlighted Drum Overlay"
-          />
-          <div className="drum-click-zones">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className={`zone zone-${i}`}
-                onMouseEnter={() => handleHover(i)}
-                onMouseLeave={clearHover}
-                onClick={() => handleDrumSwitch(i)}
+      <div className="oad-legacy-columns">
+        <article className="oad-legacy-column">
+          <h3>HERITAGE</h3>
+
+          <p>
+            Used to preserve the line’s warm, grounded tonal identity and keep
+            builds aligned to the classic Ober voice.
+          </p>
+        </article>
+
+        <article className="oad-legacy-column">
+          <h3>FEUZØN</h3>
+
+          <p>
+            Used to compare broader sound areas, helping map where the hybrid
+            architecture can push projection, complexity, and articulation.
+          </p>
+        </article>
+
+        <article className="oad-legacy-column">
+          <h3>SOUNDLEGEND</h3>
+
+          <p>
+            Used most deeply during discovery, planning, and voicing — where the
+            tonal direction becomes more personal, more intentional, and more
+            artist-shaped.
+          </p>
+        </article>
+      </div>
+
+      <div className="oad-feature-actions oad-feature-actions-legacy">
+        <button
+          type="button"
+          className="oad-primary-btn"
+          onClick={onShowSoundLegend}
+        >
+          See SoundLegend
+        </button>
+
+        <button type="button" className="oad-secondary-btn" onClick={onCompare}>
+          Compare the lines
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const CompareView = () => {
+  return (
+    <div className="oad-compare">
+      <div className="oad-compare-head">
+        <span className="oad-side-kicker">Compare</span>
+
+        <h2>How the lines differ</h2>
+
+        <p>
+          Not better or worse — just different centers of gravity. Each line
+          carries its own feel, construction logic, and range of customization.
+        </p>
+      </div>
+
+      <div className="oad-compare-table-wrap">
+        <div className="oad-compare-table oad-compare-table-head">
+          <div className="oad-compare-head-spacer" />
+
+          <div className="oad-compare-head-cell">Heritage</div>
+
+          <div className="oad-compare-head-cell">Feuzøn</div>
+
+          <div className="oad-compare-head-cell">SoundLegend</div>
+        </div>
+
+        <div className="oad-compare-table">
+          {COMPARE_ROWS.map((row) => (
+            <div key={row.label} className="oad-compare-row">
+              <div className="oad-compare-row-label">
+                <span className="oad-compare-row-title">{row.label}</span>
+
+                <span className="oad-compare-row-helper">{row.helper}</span>
+              </div>
+
+              <div className="oad-compare-cell">
+                <p>{row.heritage}</p>
+              </div>
+
+              <div className="oad-compare-cell">
+                <p>{row.feuzon}</p>
+              </div>
+
+              <div className="oad-compare-cell">
+                <p>{row.soundlegend}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ArtisanDrums = () => {
+  const navigate = useNavigate();
+
+  const [activeTab, setActiveTab] = useState('overview');
+
+  const [activeIndex, setActiveIndex] = useState(2);
+
+  const activeSeries = useMemo(() => {
+    if (
+      activeTab === 'overview' ||
+      activeTab === 'compare' ||
+      activeTab === 'legacyprint'
+    ) {
+      return DRUM_SERIES[activeIndex];
+    }
+
+    return DRUM_SERIES[getSeriesIndexById(activeTab)];
+  }, [activeIndex, activeTab]);
+
+  const backgroundOnly = `${ASSET_BASE}/background-only.png`;
+
+  const drumsFaded = `${ASSET_BASE}/drums-only-faded.png`;
+
+  const drumsBright = `${ASSET_BASE}/drums-only-bright.png`;
+
+  const isOverview = activeTab === 'overview';
+
+  const isCompare = activeTab === 'compare';
+
+  const isLegacyPrint = activeTab === 'legacyprint';
+
+  const isSeriesDetail =
+    activeTab === 'heritage' ||
+    activeTab === 'feuzon' ||
+    activeTab === 'soundlegend';
+
+  const handleNavigate = useCallback(
+    (href) => {
+      navigate(href);
+    },
+
+    [navigate]
+  );
+
+  const handleActivateSeries = useCallback((index) => {
+    setActiveIndex(clampIndex(index));
+  }, []);
+
+  const handleTabChange = useCallback((tabId) => {
+    setActiveTab(tabId);
+
+    if (tabId === 'heritage' || tabId === 'feuzon' || tabId === 'soundlegend') {
+      setActiveIndex(getSeriesIndexById(tabId));
+    }
+  }, []);
+
+  return (
+    <section className="oad-collection" aria-label="Our Collection">
+      <div
+        className="oad-collection-bg"
+        aria-hidden="true"
+        style={{ backgroundImage: `url("${backgroundOnly}")` }}
+      />
+
+      <div
+        className={`oad-collection-drums-base ${isCompare ? 'is-bright' : ''}`}
+        aria-hidden="true"
+        style={{
+          backgroundImage: `url("${isCompare ? drumsBright : drumsFaded}")`,
+        }}
+      />
+
+      {!isCompare && !isLegacyPrint && (
+        <div
+          className="oad-collection-drums-active"
+          aria-hidden="true"
+          style={{ backgroundImage: `url("${activeSeries.activeLayer}")` }}
+        />
+      )}
+
+      <div className="oad-collection-vignette" aria-hidden="true" />
+
+      <div className="oad-collection-shell">
+        <header className="oad-collection-header">
+          <span className="oad-kicker">Our Collection</span>
+
+          <h1 className="oad-title">
+            Three lines.
+            <br />
+            One philosophy.
+          </h1>
+
+          <p className="oad-lead">
+            Explore how HERITAGE, FEUZØN, and SOUNDLEGEND each express a
+            different side of the Ober Artisan voice — from rooted warmth, to
+            hybrid range, to fully tailored custom storytelling.
+          </p>
+        </header>
+
+        <nav className="oad-tabs" aria-label="Collection navigation">
+          {COLLECTION_TABS.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              className={`oad-tab ${activeTab === tab.id ? 'is-active' : ''}`}
+              onClick={() => handleTabChange(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </nav>
+
+        <div className="oad-stage-wrap">
+          <div
+            className={`oad-stage-zones ${
+              isOverview || isSeriesDetail ? '' : 'is-disabled'
+            }`}
+            aria-label="Select a drum series"
+          >
+            {DRUM_SERIES.map((series, index) => (
+              <button
+                key={series.id}
+                type="button"
+                className={`oad-stage-zone oad-stage-zone-${series.id} ${
+                  activeSeries.id === series.id ? 'is-active' : ''
+                }`}
+                aria-label={`Show ${series.name}`}
+                onMouseEnter={() => handleActivateSeries(index)}
+                onFocus={() => handleActivateSeries(index)}
+                onClick={() => handleActivateSeries(index)}
               />
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Footer intersection tracking */}
-      <div ref={footerRef} className="footer-trigger-marker" />
-
-      {/* Lightbox for zoom view */}
-      {lightboxIndex !== null && (
-        <div
-          className={`lightbox ${zoomed ? 'zoomed' : ''}`}
-          onClick={() => setLightboxIndex(null)}
-        >
-          <button
-            className="lightbox-close"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex(null);
-            }}
-          >
-            ×
-          </button>
-          <button
-            className="lightbox-arrow left"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((prev) =>
-                prev === 0 ? active.images.length - 1 : prev - 1
-              );
-            }}
-          >
-            ‹
-          </button>
-          <div
-            className="lightbox-image-container"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={active.images[lightboxIndex]}
-              alt={`Zoom ${lightboxIndex + 1}`}
-              onClick={() => setZoomed((z) => !z)}
+        <div className="oad-panel">
+          {isOverview && (
+            <SeriesFeature
+              series={activeSeries}
+              onNavigate={handleNavigate}
+              onCompare={() => handleTabChange('compare')}
             />
-          </div>
-          <button
-            className="lightbox-arrow right"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((prev) =>
-                prev === active.images.length - 1 ? 0 : prev + 1
-              );
-            }}
-          >
-            ›
-          </button>
+          )}
+
+          {isSeriesDetail && (
+            <SeriesFeature
+              series={activeSeries}
+              onNavigate={handleNavigate}
+              onCompare={() => handleTabChange('compare')}
+            />
+          )}
+
+          {isCompare && <CompareView />}
+
+          {isLegacyPrint && (
+            <LegacyPrintView
+              onShowSoundLegend={() => handleTabChange('soundlegend')}
+              onCompare={() => handleTabChange('compare')}
+            />
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 };
 

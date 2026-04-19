@@ -406,28 +406,28 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Protect the player’s stated requirement first',
         confidence: includesFastLowVolume ? 94 : 86,
         why: [
-          'The intake already names a clear response target.',
-          'That gives the tool a stable anchor before it starts making shell and material choices.',
-          'This is the safest default path when one real performance need is already visible.',
+          'The clearest real requirement should lead the rest of the build logic.',
+          'This keeps later shell and material decisions anchored.',
         ],
         evidence: [
           includesFastLowVolume
             ? 'responsePriorities: Fast response at low volume'
             : 'A concrete response priority is starting to emerge',
           `primaryGoal: ${safeText(primaryGoal)}`,
-          `playerProfile / useCase: ${safeText(playerProfile)} / ${safeText(primaryUseCase)}`,
+          `playerProfile / useCase: ${safeText(playerProfile)} / ${safeText(
+            primaryUseCase
+          )}`,
         ],
         uncertainty: [
-          'A later consultation could still elevate a different priority above the current one.',
+          'A later consultation could still elevate a different priority.',
         ],
       },
       {
-        value:
-          'Keep multiple paths open until consultation pressure-tests them',
+        value: 'Keep multiple paths open until consultation pressure-tests them',
         confidence: 78,
         why: [
-          'This is useful when the intake is real but still incomplete.',
-          'It prevents the tool from pretending the direction is more settled than it is.',
+          'Useful when intake is real but still incomplete.',
+          'Prevents pretending the direction is more settled than it is.',
         ],
         evidence: [
           tonalGoals.length
@@ -435,57 +435,47 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
             : 'No fully locked tonal language yet',
           `buildClarity: ${safeText(snapshot.buildClarity, 'Not stated')}`,
         ],
-        uncertainty: [
-          'Too much openness can make the next decisions feel vague if a strong requirement already exists.',
-        ],
+        uncertainty: ['Can feel too vague if a strong requirement already exists.'],
       },
       {
         value: 'Use a studio-first logic path',
         confidence: includesRecording ? 81 : 63,
         why: [
-          'Recording context can legitimately shape the build logic early.',
-          'This path works best when articulation, controllability, and mic behavior matter most.',
+          'Recording context can shape build logic early.',
+          'Useful when articulation and controllability matter most.',
         ],
         evidence: [
           includesRecording
-            ? 'playerProfile / primaryUseCase points toward recording or studio use'
+            ? 'playerProfile / primaryUseCase points toward studio use'
             : 'Studio signal exists but is not dominant yet',
-          `playSettings: ${safeText(snapshot.playSettings.join(', '))}`,
+          `playSettings: ${safeText(snapshot.playSettings.join(', '), '—')}`,
         ],
-        uncertainty: [
-          'This can over-bias the tool if the drum is really meant to be broader than studio-first.',
-        ],
+        uncertainty: ['Can over-bias the build if it needs to stay broader.'],
       },
       {
         value: 'Use a size-led logic path',
         confidence: sizeIs12 ? 72 : 56,
         why: [
-          'This path treats shell size as the strongest early organizing rule.',
-          'It can be useful when size is already a true lock and many later choices need to follow it.',
+          'Useful if shell size is already the strongest signal.',
+          'Helps later choices follow a clear physical constraint.',
         ],
         evidence: [
           `preferredSizeDirection: ${safeText(sizeDirection, 'Not stated')}`,
-          sizeIs12
-            ? 'A 12" direction is already on the board'
-            : 'No hard size lock yet',
+          sizeIs12 ? 'A 12" direction is already on the board' : 'No hard size lock yet',
         ],
-        uncertainty: [
-          'This is weaker if the size direction is still only a lean rather than a commitment.',
-        ],
+        uncertainty: ['Weaker if size is only a lean, not a commitment.'],
       },
       {
         value: 'Use a custom / hybrid logic path',
         confidence: 51,
         why: [
-          'This leaves room for the builder to use a more bespoke reasoning chain.',
-          'It makes sense when the intake does not fit one clean decision lens.',
+          'Leaves room for a more bespoke reasoning chain.',
+          'Useful when the intake does not fit one clean decision lens.',
         ],
         evidence: [
-          'Some projects need the builder to blend requirement, feel, and visual logic rather than follow one lane.',
+          'Some projects need the builder to blend requirement, feel, and visual logic.',
         ],
-        uncertainty: [
-          'A custom path only helps if the builder explicitly explains why it is the right lens.',
-        ],
+        uncertainty: ['Only helps if the builder can clearly explain the path.'],
       },
     ],
     protectFirst: [
@@ -493,53 +483,42 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Fast low-volume response',
         confidence: includesFastLowVolume && logicIsRequirementFirst ? 94 : 91,
         why: [
-          'This is the clearest direct performance requirement stated so far.',
-          'It should guide construction and size decisions before visual choices.',
-          'It fits the studio + home-use signal especially well.',
+          'This is the clearest direct performance requirement so far.',
+          'It should guide construction and size before visual choices.',
         ],
         evidence: [
           'responsePriorities: Fast response at low volume',
-          `playerProfile / primaryUseCase: ${safeText(playerProfile)} / ${safeText(primaryUseCase)}`,
-          sizeIs12 ? 'preferredSizeDirection: 12"' : 'No strong size lock yet',
+          `playerProfile / primaryUseCase: ${safeText(playerProfile)} / ${safeText(
+            primaryUseCase
+          )}`,
         ],
-        uncertainty: [
-          'No tonal adjectives are firm yet.',
-          'Build clarity suggests guidance is still needed.',
-        ],
+        uncertainty: ['Tonal adjectives are still not fully firm yet.'],
       },
       {
         value: 'Studio-friendly articulation',
         confidence: includesRecording || logicIsStudioFirst ? 84 : 82,
         why: [
-          'Recording use is a strong signal.',
-          'A studio-first lens can help narrow size, construction, and wood logically.',
-          'This remains very compatible with a main-snare goal.',
+          'Recording use is a real signal.',
+          'Can narrow shell, size, and wood in a practical way.',
         ],
         evidence: [
           `playerProfile: ${safeText(playerProfile)}`,
-          includesRecording
-            ? 'Primary use points toward studio'
-            : 'Studio signal is moderate',
-          'A signature main snare still needs broad usefulness',
+          includesRecording ? 'Primary use points toward studio' : 'Studio signal is moderate',
         ],
-        uncertainty: [
-          'This is slightly more inferred than the low-volume response goal.',
-        ],
+        uncertainty: ['Slightly more inferred than the low-volume goal.'],
       },
       {
         value: 'Compact 12" versatility',
         confidence: logicIsSizeLed ? 79 : 74,
         why: [
           'A 12" direction is already present.',
-          'If real, it meaningfully changes shell and tuning decisions.',
+          'If real, it changes shell and tuning decisions meaningfully.',
         ],
         evidence: [
           `preferredSizeDirection: ${safeText(sizeDirection, 'Not stated')}`,
           `primaryGoal: ${safeText(primaryGoal)}`,
         ],
-        uncertainty: [
-          'This should not lead unless the 12" direction is truly firm.',
-        ],
+        uncertainty: ['Should not lead unless 12" is truly firm.'],
       },
     ],
     sizeDirectionConfidence: [
@@ -547,46 +526,40 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: '12" is a real lean, not a hard lock yet',
         confidence: logicIsConsultationFirst ? 92 : 89,
         why: [
-          'The questionnaire gives a size direction, but build clarity still asks for guidance.',
-          'That usually means respect the signal without overcommitting too early.',
+          'The intake gives a size direction, but the player still wants guidance.',
+          'Respect the signal without overcommitting too early.',
         ],
         evidence: [
           `preferredSizeDirection: ${safeText(sizeDirection, 'Not stated')}`,
-          'buildClarity: I have a rough idea, but want guidance',
+          'buildClarity: wants guidance',
         ],
-        uncertainty: [
-          'A consultation could still move this toward 13" or 14".',
-        ],
+        uncertainty: ['Consultation could still shift toward 13" or 14".'],
       },
       {
         value: 'Treat 12" as the working direction',
         confidence: logicIsSizeLed ? 84 : 79,
         why: [
           'It is the only explicit size currently stated.',
-          'The tool needs a working size assumption to score later decisions.',
+          'The tool needs a working assumption for later decisions.',
         ],
         evidence: [
           'Only current size signal is 12"',
           'Fast-response goal fits smaller shells',
         ],
-        uncertainty: [
-          'This may be too aggressive without consultation follow-up.',
-        ],
+        uncertainty: ['May be too aggressive without call confirmation.'],
       },
       {
         value: 'Keep size open until consultation',
         confidence: logicIsConsultationFirst ? 74 : 68,
         why: [
           'The player asked for guidance.',
-          'Main-snare usage can sometimes widen the ideal size range.',
+          'Main-snare usage can widen the ideal size range.',
         ],
         evidence: [
           'No tonal goal is firmly named yet',
           `Primary goal: ${safeText(primaryGoal)}`,
         ],
-        uncertainty: [
-          'This delays useful narrowing if the 12" signal is genuine.',
-        ],
+        uncertainty: ['Delays narrowing if the 12" signal is genuine.'],
       },
     ],
     shellConstruction: [
@@ -594,8 +567,8 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Stave',
         confidence: includesFastLowVolume && sizeIs12 ? 88 : 81,
         why: [
-          'It is the cleanest default direction when the player wants a personal main instrument with strong response.',
-          'It keeps the build custom without forcing hybrid complexity too early.',
+          'Strong default when the player wants a personal main instrument with response.',
+          'Keeps the build custom without forcing hybrid complexity too early.',
         ],
         evidence: [
           includesFastLowVolume
@@ -608,15 +581,13 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
                 'Open'
               )}`,
         ],
-        uncertainty: [
-          'Still worth revisiting if the consultation points toward a more blended feel.',
-        ],
+        uncertainty: ['Worth revisiting if the consultation points elsewhere.'],
       },
       {
         value: 'Keep construction open between stave and hybrid',
         confidence: logicIsConsultationFirst ? 82 : 77,
         why: [
-          'That preserves flexibility while discovery is still light.',
+          'Preserves flexibility while discovery is still light.',
           'Useful when no tonal goal is firmly locked yet.',
         ],
         evidence: [
@@ -625,22 +596,20 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
             ? `Tonal goals are still broad: ${tonalGoals.join(', ')}`
             : 'No firm tonal language yet',
         ],
-        uncertainty: ['This is safe, but less decisive.'],
+        uncertainty: ['Safe, but less decisive.'],
       },
       {
         value: 'Feuzon / hybrid direction',
         confidence: 63,
         why: [
-          'Could become interesting if the player wants nuance across studio and live use.',
+          'Could become interesting if the player wants nuance across uses.',
           'May support a more layered response profile.',
         ],
         evidence: [
-          includesRecording
-            ? 'Recording use could justify nuance'
-            : 'Recording case is moderate',
+          includesRecording ? 'Recording use could justify nuance' : 'Recording case is moderate',
           `Genres: ${safeText(snapshot.genres.join(', '), 'Not enough yet')}`,
         ],
-        uncertainty: ['There is not enough evidence yet to lead with hybrid.'],
+        uncertainty: ['Not enough evidence yet for hybrid to lead.'],
       },
     ],
     primaryWood: [
@@ -648,21 +617,19 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Maple',
         confidence: 87,
         why: [
-          'It is the strongest general-purpose starting point for a responsive main snare.',
-          'It gives the widest safe range while other decisions are still forming.',
+          'Strong general-purpose starting point for a responsive main snare.',
+          'Gives the widest safe range while other decisions are still forming.',
         ],
         evidence: [
           'Main-snare role favors versatility',
           includesRecording
             ? 'Recording use rewards a balanced baseline'
-            : 'Use case still broad',
+            : 'Use case is still broad',
           includesFastLowVolume
             ? 'Fast-response goal can still be built around maple'
             : 'Response target remains open enough',
         ],
-        uncertainty: [
-          'Consultation may reveal a stronger artistic reason for another species.',
-        ],
+        uncertainty: ['Consultation may reveal a stronger reason for another species.'],
       },
       {
         value: 'Birch',
@@ -672,23 +639,17 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
           'Works if the project truly leans compact and direct.',
         ],
         evidence: [
-          includesRecording
-            ? 'Studio / recording signal is strong'
-            : 'Studio use is not fully locked',
-          sizeIs12
-            ? '12" lean can support a tighter voice'
-            : 'Size direction is still somewhat open',
+          includesRecording ? 'Studio / recording signal is strong' : 'Studio use is not fully locked',
+          sizeIs12 ? '12" lean can support a tighter voice' : 'Size direction is still somewhat open',
         ],
-        uncertainty: [
-          'May narrow the personality too early for a signature main snare.',
-        ],
+        uncertainty: ['May narrow the personality too early for a signature main snare.'],
       },
       {
         value: 'Walnut',
         confidence: 64,
         why: [
-          'Worth keeping in play if consultation reveals a fuller, weightier note is desired.',
-          'Could become stronger if low-volume response needs more body than snap.',
+          'Worth keeping in play if the player wants more body than snap.',
+          'Could become stronger with fuller tonal feedback.',
         ],
         evidence: [
           `Primary goal: ${safeText(primaryGoal)}`,
@@ -696,9 +657,7 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
             ? `Pain points noted: ${safeText(snapshot.currentPainPoints)}`
             : 'No pain-point detail yet',
         ],
-        uncertainty: [
-          'Current evidence is not strong enough for walnut to lead.',
-        ],
+        uncertainty: ['Current evidence is not strong enough for walnut to lead.'],
       },
     ],
     hardwareFinishCommitment: [
@@ -707,41 +666,35 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         confidence: brassPreferred ? 90 : 70,
         why: [
           'It is the only explicit hardware preference currently present.',
-          'Until a visual direction says otherwise, it should lead the board.',
+          'Until visual direction says otherwise, it should lead the board.',
         ],
         evidence: [
           `hardwareFinishPreference: ${safeText(hardwareFinish, 'Not stated')}`,
         ],
-        uncertainty: [
-          'Visual direction is still open, so this should stay confirmable later.',
-        ],
+        uncertainty: ['Visual direction is still open, so this should stay confirmable later.'],
       },
       {
         value: 'Treat brass / gold as a lean, not a lock',
         confidence: 83,
         why: [
-          'This is the safer path while finish and shell visuals remain undefined.',
-          'It respects the preference without overfreezing the look.',
+          'Safer while finish and shell visuals remain undefined.',
+          'Respects the preference without overfreezing the look.',
         ],
         evidence: [
           `hardwareFinishPreference: ${safeText(hardwareFinish, 'Not stated')}`,
           'visual direction remains unclear',
         ],
-        uncertainty: [
-          'This may feel too cautious if the player is already very sure visually.',
-        ],
+        uncertainty: ['May feel too cautious if the player is already visually sure.'],
       },
       {
         value: 'Keep hardware fully open',
         confidence: 58,
         why: [
           'Only useful if the consultation materially changes the visual story.',
-          'Prevents forcing hardware into an as-yet-undefined finish direction.',
+          'Prevents forcing hardware into an undefined finish direction.',
         ],
         evidence: ['Build still lacks visual specifics'],
-        uncertainty: [
-          'Current questionnaire does provide a real hardware preference, so this is weaker.',
-        ],
+        uncertainty: ['Current questionnaire does provide a real hardware preference.'],
       },
     ],
     finishDirection: [
@@ -749,23 +702,21 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Keep finish direction open and understated',
         confidence: 88,
         why: [
-          'The player explicitly said they are not sure visually.',
-          'The best move is to avoid premature finish commitments.',
+          'The player is still visually unsure.',
+          'Best move is to avoid premature finish commitments.',
         ],
         evidence: [
           'visualDirection: I’m not sure',
           'Build clarity: wants guidance',
         ],
-        uncertainty: [
-          'Later consultation may quickly narrow this once images or references appear.',
-        ],
+        uncertainty: ['Could narrow quickly once references show up.'],
       },
       {
         value: 'Natural / clear-led finish family',
         confidence: 72,
         why: [
-          'This is the safest broad recommendation before strong visual references exist.',
-          'It keeps wood and hardware decisions compatible.',
+          'Safest broad recommendation before strong visual references exist.',
+          'Keeps wood and hardware decisions compatible.',
         ],
         evidence: [
           brassPreferred
@@ -779,16 +730,14 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Custom visual direction after consultation',
         confidence: 69,
         why: [
-          'The player may simply need guided examples before choosing.',
-          'This respects the lack of current visual certainty.',
+          'The player may need guided examples before choosing.',
+          'Respects the lack of current visual certainty.',
         ],
         evidence: [
           'visualDirection currently open',
           'Questionnaire requests guidance',
         ],
-        uncertainty: [
-          'Useful as a process note, but not a concrete finish answer yet.',
-        ],
+        uncertainty: ['Useful as process language, not yet a concrete finish answer.'],
       },
     ],
     hoopTypeDirection: [
@@ -796,49 +745,39 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Die-cast hoops',
         confidence: includesFastLowVolume ? 88 : 79,
         why: [
-          'Die-cast hoops support a more controlled, focused, quick-response feel.',
-          'That lines up well with the stated low-volume response target.',
-          'It gives the build a more disciplined and articulate playing behavior.',
+          'Supports a more controlled, focused, quick-response feel.',
+          'Fits the stated low-volume response target well.',
         ],
         evidence: [
           includesFastLowVolume
             ? 'responsePriorities: Fast response at low volume'
             : 'Response lane still leans controlled',
           `preferredSizeDirection: ${safeText(sizeDirection, 'Not stated')}`,
-          `primaryGoal: ${safeText(primaryGoal)}`,
         ],
-        uncertainty: [
-          'Worth revisiting only if the player later wants a more open, relaxed feel.',
-        ],
+        uncertainty: ['Revisit only if the player later wants a more open feel.'],
       },
       {
         value: 'Triple-flanged hoops',
         confidence: 67,
         why: [
-          'Triple-flanged hoops keep the build more open and less controlled.',
-          'They are still plausible if the player wants more give and openness.',
+          'Keeps the build more open and less controlled.',
+          'Still plausible if the player wants more give and openness.',
         ],
         evidence: [
           'Visual and feel preferences are still not fully locked',
-          `finishDirection: ${safeText(
-            decisions?.finishDirection?.value || ''
-          )}`,
+          `finishDirection: ${safeText(decisions?.finishDirection?.value || '')}`,
         ],
-        uncertainty: [
-          'This currently looks weaker than die-cast for the stated response target.',
-        ],
+        uncertainty: ['Currently looks weaker than die-cast for the stated target.'],
       },
       {
         value: 'Keep hoop type open until final voice lock-in',
         confidence: 61,
         why: [
-          'This is the cautious option if you do not want to overcommit too early.',
-          'It keeps the final feel decision open a little longer.',
+          'Cautious option if you do not want to overcommit too early.',
+          'Keeps final feel open a little longer.',
         ],
         evidence: ['Some surrounding build variables are still settling'],
-        uncertainty: [
-          'This is less helpful if the tool is supposed to drive the build direction forward now.',
-        ],
+        uncertainty: ['Less helpful if the tool should drive direction forward now.'],
       },
     ],
     bearingEdgeDirection: [
@@ -846,8 +785,8 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Sensitive / balanced edge direction',
         confidence: 84,
         why: [
-          'That best matches quick response at lower volume without overcommitting to extreme dryness.',
-          'It keeps the build versatile for a main snare role.',
+          'Best matches quick response at lower volume without overcommitting to dryness.',
+          'Keeps the build versatile for a main-snare role.',
         ],
         evidence: [
           includesFastLowVolume
@@ -855,26 +794,20 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
             : 'Response target still leans quick',
           `Primary goal: ${safeText(primaryGoal)}`,
         ],
-        uncertainty: [
-          'Final edge call should wait for shell and tuning decisions.',
-        ],
+        uncertainty: ['Final edge call should still wait for shell and tuning decisions.'],
       },
       {
         value: 'Slightly sharper articulation-led edge',
         confidence: 71,
         why: [
-          'This becomes stronger if the studio articulation lane wins.',
+          'Becomes stronger if the studio articulation lane wins.',
           'Helps keep the note clear at lower playing levels.',
         ],
         evidence: [
-          includesRecording
-            ? 'Recording profile present'
-            : 'Studio signal is moderate',
+          includesRecording ? 'Recording profile present' : 'Studio signal is moderate',
           'Compact size direction may favor crispness',
         ],
-        uncertainty: [
-          'Could push too far if the player ultimately wants more body.',
-        ],
+        uncertainty: ['Could push too far if the player wants more body.'],
       },
       {
         value: 'Keep edge family open for now',
@@ -883,10 +816,8 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
           'Reasonable if shell construction and wood are not resolved yet.',
           'Prevents fake precision too early.',
         ],
-        evidence: ['Several build variables still open'],
-        uncertainty: [
-          'Less helpful if the tool is trying to narrow direction step by step.',
-        ],
+        evidence: ['Several build variables are still open'],
+        uncertainty: ['Less helpful if the tool is meant to narrow direction now.'],
       },
     ],
     tuningApproach: [
@@ -894,8 +825,8 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: 'Favor responsive medium-to-high behavior',
         confidence: 82,
         why: [
-          'This best matches fast low-volume response and compact-size lean.',
-          'It keeps articulation active without forcing a thin voice.',
+          'Matches fast low-volume response and compact-size lean.',
+          'Keeps articulation active without forcing a thin voice.',
         ],
         evidence: [
           includesFastLowVolume
@@ -905,21 +836,17 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
             ? '12" direction supports this tuning behavior'
             : 'Smaller / tighter direction still possible',
         ],
-        uncertainty: [
-          'Should still be validated against the player’s actual backbeat needs.',
-        ],
+        uncertainty: ['Should still be validated against the player’s backbeat needs.'],
       },
       {
         value: 'Favor broad studio-friendly flexibility',
         confidence: 77,
         why: [
-          'Good if this really becomes a main studio snare rather than a niche voice.',
+          'Good if this becomes a main studio snare rather than a niche voice.',
           'Leaves more room for consultation nuance.',
         ],
         evidence: [
-          includesRecording
-            ? 'Recording player profile present'
-            : 'Studio signal moderate',
+          includesRecording ? 'Recording player profile present' : 'Studio signal moderate',
           `Primary goal: ${safeText(primaryGoal)}`,
         ],
         uncertainty: ['Less pointed than the fast-response path.'],
@@ -932,9 +859,7 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
           'Prevents premature assumptions.',
         ],
         evidence: ['No direct tonal adjectives beyond response priority'],
-        uncertainty: [
-          'Too passive unless the next conversation is happening very soon.',
-        ],
+        uncertainty: ['Too passive unless the next call is happening soon.'],
       },
     ],
     lugCountDirection: [
@@ -942,24 +867,22 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: '8-lug direction',
         confidence: sizeIs12 ? 86 : 71,
         why: [
-          'This is the strongest default for a 12" main-snare path.',
-          'It supports a responsive, practical, non-overbuilt feel.',
+          'Strong default for a 12" main-snare path.',
+          'Supports a responsive, practical, non-overbuilt feel.',
         ],
         evidence: [
-          sizeIs12
-            ? '12" direction currently leads'
-            : 'Compact direction still plausible',
+          sizeIs12 ? '12" direction currently leads' : 'Compact direction still plausible',
           includesFastLowVolume
             ? 'Fast-response goal favors a responsive setup'
             : 'Response goal remains moderately quick',
         ],
-        uncertainty: ['Should be revisited if the shell size changes.'],
+        uncertainty: ['Should be revisited if shell size changes.'],
       },
       {
         value: 'Keep lug count tied to final size',
         confidence: 78,
         why: [
-          'This is the safest disciplined approach if size is not truly locked.',
+          'Safest disciplined approach if size is not truly locked.',
           'Prevents pretending the answer is final too soon.',
         ],
         evidence: ['Size direction still may need confirmation'],
@@ -969,13 +892,11 @@ const buildRecommendationsForStep = (stepId, snapshot, decisions = {}) => {
         value: '6-lug direction',
         confidence: 55,
         why: [
-          'Could become interesting if the build moves more character-driven and less utility-driven.',
+          'Could become interesting if the build moves more character-driven.',
           'May fit a lighter-feeling compact instrument.',
         ],
         evidence: ['Compact size signal exists'],
-        uncertainty: [
-          'Not enough evidence yet for this to lead a main-snare project.',
-        ],
+        uncertainty: ['Not enough evidence yet for this to lead a main-snare project.'],
       },
     ],
   };
@@ -1024,26 +945,24 @@ const getCraftsmanResumeState = ({ decisions = {}, storyEngineData = {} }) => {
     getBuildSpecValue(storyEngineData, 'tuningApproach') ||
     getCraftsmanValue(decisions, 'tuningApproach');
 
-  const hoopType = getBuildSpecValue(storyEngineData, 'hoopType');
-  const snareBed = getBuildSpecValue(storyEngineData, 'snareBed');
+  const hoopTypeDirection =
+    getBuildSpecValue(storyEngineData, 'hoopType') ||
+    getCraftsmanValue(decisions, 'hoopTypeDirection');
+
   const transcriptAdded = !!String(
     storyEngineData?.consultationTranscript || ''
   ).trim();
 
-const hoopTypeDirection =
-  getBuildSpecValue(storyEngineData, 'hoopType') ||
-  getCraftsmanValue(decisions, 'hoopTypeDirection');
-
-const confirmedNow = [
-  decisionPathLogic && `Decision Path Logic: ${decisionPathLogic}`,
-  shellConstruction && `Shell Construction: ${shellConstruction}`,
-  primaryWood && `Primary Wood: ${primaryWood}`,
-  finishSystem && `Finish System: ${finishSystem}`,
-  hoopTypeDirection && `Hoop Type: ${hoopTypeDirection}`,
-  bearingEdge && `Bearing Edge: ${bearingEdge}`,
-  lugCount && `Lug Count: ${lugCount}`,
-  tuningApproach && `Tuning Approach: ${tuningApproach}`,
-].filter(Boolean);
+  const confirmedNow = [
+    decisionPathLogic && `Decision Path Logic: ${decisionPathLogic}`,
+    shellConstruction && `Shell Construction: ${shellConstruction}`,
+    primaryWood && `Primary Wood: ${primaryWood}`,
+    finishSystem && `Finish System: ${finishSystem}`,
+    hoopTypeDirection && `Hoop Type: ${hoopTypeDirection}`,
+    bearingEdge && `Bearing Edge: ${bearingEdge}`,
+    lugCount && `Lug Count: ${lugCount}`,
+    tuningApproach && `Tuning Approach: ${tuningApproach}`,
+  ].filter(Boolean);
 
   const stillOpen = [
     !decisionPathLogic && 'Choose decision path logic',
@@ -1056,34 +975,9 @@ const confirmedNow = [
     !lugCount && 'Confirm lug count',
   ].filter(Boolean);
 
-  let nextAction = 'Craftsman direction is complete';
-  let nextLocation = 'Build Workflow';
-
-  if (!decisionPathLogic) {
-    nextAction = 'Choose the decision path logic first';
-    nextLocation = 'Craftsman Master Tool';
-  } else if (!transcriptAdded) {
-    nextAction = 'Add the consultation transcript';
-    nextLocation = 'Intake & Direction';
-  } else if (!hoopTypeDirection) {
-    nextAction = 'Confirm hoop type';
-    nextLocation = 'Craftsman Master Tool';
-  } else if (stillOpen.length) {
-    nextAction = stillOpen[0];
-    nextLocation =
-      stillOpen[0] === 'Add consultation transcript'
-        ? 'Intake & Direction'
-        : 'Craftsman Master Tool';
-  } else {
-    nextAction = 'Craftsman direction is complete';
-    nextLocation = 'Build Workflow';
-  }
-
   return {
     confirmedNow,
     stillOpen,
-    nextAction,
-    nextLocation,
     readyToUnlock: stillOpen.length === 0,
   };
 };
@@ -1124,6 +1018,7 @@ const CraftsmanMasterToolSection = ({
   const [showResumeSection, setShowResumeSection] = useState(true);
   const [showDecisionState, setShowDecisionState] = useState(false);
   const [showDecisionHistory, setShowDecisionHistory] = useState(false);
+  const [expandedRecommendation, setExpandedRecommendation] = useState(0);
 
   useEffect(() => {
     setToolData(persistedToolData);
@@ -1242,6 +1137,7 @@ const CraftsmanMasterToolSection = ({
     const savedValue = String(decisions?.[activeStep.id]?.value || '').trim();
 
     setDraftSelection(savedValue || recommendedDefault);
+    setExpandedRecommendation(0);
   }, [activeStep.id, decisions, isComplete, recommendations]);
 
   const currentOptions = useMemo(() => {
@@ -1255,7 +1151,7 @@ const CraftsmanMasterToolSection = ({
         'Use a custom / hybrid logic path',
         'Custom',
       ],
-      protectFirst: ['Main-snare authority', 'Keep open', 'Custom'],
+      protectFirst: ['Fast low-volume response', 'Studio-friendly articulation', 'Compact 12" versatility', 'Custom'],
       sizeDirectionConfidence: [
         '12" is a real lean, not a hard lock yet',
         'Treat 12" as the working direction',
@@ -1268,16 +1164,7 @@ const CraftsmanMasterToolSection = ({
         'Feuzon / hybrid direction',
         'Custom',
       ],
-      primaryWood: [
-        'Maple',
-        'Birch',
-        'Walnut',
-        'Cherry',
-        'Mahogany',
-        'Bubinga',
-        'Keep open',
-        'Custom',
-      ],
+      primaryWood: ['Maple', 'Birch', 'Walnut', 'Cherry', 'Mahogany', 'Bubinga', 'Keep open', 'Custom'],
       hardwareFinishCommitment: [
         'Keep brass / gold as the current lead',
         'Treat brass / gold as a lean, not a lock',
@@ -1462,8 +1349,6 @@ const CraftsmanMasterToolSection = ({
         ? 'A different path was chosen for this project.'
         : 'Followed the strongest available recommendation.');
 
-    const enrichedChangedBecause = storyReason;
-
     const nextHistory = [
       {
         id: `${activeStep.id}-${Date.now()}`,
@@ -1482,7 +1367,7 @@ const CraftsmanMasterToolSection = ({
         why: selectedWhy,
         evidence: selectedEvidence,
         uncertainty: safeArray(selectedRecommendation?.uncertainty),
-        changedBecause: enrichedChangedBecause,
+        changedBecause: storyReason,
       },
       ...safeArray(toolData?.history),
     ];
@@ -1538,279 +1423,8 @@ const CraftsmanMasterToolSection = ({
     });
   }, [decisions, storyEngineData]);
 
-const renderResumeContent = () => {
-  if (!isComplete) {
-    return (
-      <>
-        <div className="cmt-current-head">
-          <div>
-            <p className="cmt-question-subtitle">
-              This is the next decision that still needs to be confirmed before
-              the build direction is fully stable.
-            </p>
-          </div>
-
-          <div className="cmt-progress-stack">
-            <div className="cmt-progress-pill">
-              {trackedCount}/{totalCount} decisions tracked
-            </div>
-
-            {staleDecisionCount > 0 ? (
-              <div className="cmt-stale-pill">
-                {staleDecisionCount} downstream review
-                {staleDecisionCount === 1 ? '' : 's'} needed
-              </div>
-            ) : null}
-          </div>
-        </div>
-
-        <div className="cmt-complete-state">
-          <div className="cmt-complete-badge">In Progress</div>
-          <div className="cmt-complete-copy">
-            Last tracked decision:{' '}
-            <strong>
-              {safeText(
-                lastTrackedDecision?.answer || lastTrackedDecision?.newValue,
-                '—'
-              )}
-            </strong>
-          </div>
-        </div>
-
-        <div className="cmt-resume-grid">
-          <div className="cmt-resume-card cmt-resume-card-next">
-            <div className="cmt-resume-title">Do this now</div>
-            <div className="cmt-resume-next-action">
-              {activeStep.question}
-            </div>
-            <div className="cmt-resume-next-location">
-              After this: <strong>{activeStep.nextLabel}</strong>
-            </div>
-          </div>
-
-          <div className="cmt-resume-card">
-            <div className="cmt-resume-title">Why this is next</div>
-            <div className="cmt-resume-empty">{activeStep.subtitle}</div>
-          </div>
-
-          <div className="cmt-resume-card">
-            <div className="cmt-resume-title">Still blocking unlock</div>
-            {resumeState.stillOpen.length ? (
-              <ul className="cmt-resume-list">
-                {resumeState.stillOpen.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            ) : (
-              <div className="cmt-resume-empty">
-                No blockers remain. Build workflow can be unlocked.
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="cmt-recommendation-layer">
-          <div className="cmt-recommendation-title-row">
-            <span className="cmt-section-kicker">Recommendation Layer</span>
-            <div className="cmt-recommendation-title">
-              Top recommendations and why
-            </div>
-          </div>
-
-          <div className="cmt-recommendation-list">
-            {recommendations.map((item, index) => (
-              <div
-                key={`${activeStep.id}-${item.value}`}
-                className={`cmt-recommendation-card ${
-                  index === 0 ? 'is-top' : ''
-                } ${draftSelection === item.value ? 'is-selected' : ''}`}
-                onClick={() => setDraftSelection(item.value)}
-              >
-                <div className="cmt-recommendation-top">
-                  <span className="cmt-recommendation-rank">
-                    {index === 0
-                      ? 'Top recommendation'
-                      : `Also plausible #${index + 1}`}
-                  </span>
-                  <span className="cmt-recommendation-confidence">
-                    {item.confidence}%
-                  </span>
-                </div>
-
-                <div className="cmt-recommendation-label">{item.value}</div>
-
-                <div className="cmt-recommendation-block">
-                  <div className="cmt-recommendation-block-label">Why</div>
-                  <ul>
-                    {item.why.map((line, idx) => (
-                      <li key={`why-${idx}`}>{line}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="cmt-recommendation-block">
-                  <div className="cmt-recommendation-block-label">
-                    Evidence
-                  </div>
-                  <ul>
-                    {item.evidence.map((line, idx) => (
-                      <li key={`evidence-${idx}`}>{line}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="cmt-recommendation-block">
-                  <div className="cmt-recommendation-block-label">
-                    Uncertainty
-                  </div>
-                  <ul>
-                    {item.uncertainty.map((line, idx) => (
-                      <li key={`uncertainty-${idx}`}>{line}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="cmt-selection-layer">
-          <div className="cmt-recommendation-title-row">
-            <span className="cmt-section-kicker">Your Selection</span>
-          </div>
-
-          <div className="cmt-option-grid">
-            {currentOptions.map((option) => {
-              const active = draftSelection === option;
-              return (
-                <button
-                  key={option}
-                  type="button"
-                  className={`cmt-option-btn ${active ? 'active' : ''}`}
-                  onClick={() => setDraftSelection(option)}
-                >
-                  {option}
-                </button>
-              );
-            })}
-          </div>
-
-          {draftSelection === 'Custom' ? (
-            <div className="cmt-custom-wrap">
-              <input
-                type="text"
-                className="cmt-custom-input"
-                placeholder="Enter a custom decision..."
-                value={toolData?.customDraft || ''}
-                onChange={(e) =>
-                  setToolData((prev) => ({
-                    ...prev,
-                    customDraft: e.target.value,
-                  }))
-                }
-              />
-            </div>
-          ) : null}
-
-          <div className="cmt-save-row">
-            <button
-              type="button"
-              className="cmt-save-decision-btn"
-              onClick={handleSaveDecision}
-              disabled={
-                !String(
-                  draftSelection === 'Custom'
-                    ? toolData?.customDraft || ''
-                    : draftSelection || ''
-                ).trim()
-              }
-            >
-              Save this decision
-            </button>
-
-            <div className="cmt-next-text">
-              After this, the next thing to figure out is{' '}
-              <strong>{activeStep.nextLabel}</strong>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <>
-      <div className="cmt-current-head">
-        <div>
-          <p className="cmt-question-subtitle">
-            All Craftsman Master Tool decisions are now tracked. This section
-            reflects the confirmed build-direction choices from this tool only.
-          </p>
-        </div>
-
-        <div className="cmt-progress-stack">
-          <div className="cmt-progress-pill">
-            {trackedCount}/{totalCount} decisions tracked
-          </div>
-
-          {staleDecisionCount > 0 ? (
-            <div className="cmt-stale-pill">
-              {staleDecisionCount} downstream review
-              {staleDecisionCount === 1 ? '' : 's'} needed
-            </div>
-          ) : null}
-        </div>
-      </div>
-
-      <div className="cmt-complete-state">
-        <div className="cmt-complete-badge">Complete</div>
-        <div className="cmt-complete-copy">
-          Last tracked decision:{' '}
-          <strong>
-            {safeText(
-              lastTrackedDecision?.answer || lastTrackedDecision?.newValue
-            )}
-          </strong>
-        </div>
-      </div>
-
-      <div className="cmt-resume-grid">
-        <div className="cmt-resume-card">
-          <div className="cmt-resume-title">Confirmed now</div>
-          {resumeState.confirmedNow.length ? (
-            <ul className="cmt-resume-list">
-              {resumeState.confirmedNow.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          ) : (
-            <div className="cmt-resume-empty">
-              No confirmed build direction yet.
-            </div>
-          )}
-        </div>
-
-        <div className="cmt-resume-card">
-          <div className="cmt-resume-title">Craftsman status</div>
-          <div className="cmt-resume-empty">
-            Craftsman decision flow is complete. No further decisions are needed
-            in this tool.
-          </div>
-        </div>
-
-        <div className="cmt-resume-card cmt-resume-card-next">
-          <div className="cmt-resume-title">Next step</div>
-          <div className="cmt-resume-next-action">
-            Move into Build Workflow
-          </div>
-          <div className="cmt-resume-next-location">
-            Go to: <strong>Build Workflow</strong>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+  const topThreeRecommendations = recommendations.slice(0, 3);
+  const otherRecommendations = recommendations.slice(3);
 
   return (
     <div className="cmt-shell">
@@ -1819,14 +1433,13 @@ const renderResumeContent = () => {
           <div className="cmt-kicker">Craftsman Master Tool</div>
           <h3 className="cmt-title">This is where we are. This is next.</h3>
           <p className="cmt-subtitle">
-            Use this as the step-by-step decision layer. One clear choice at a
-            time, with recommendation logic, override tracking, and downstream
-            review status carried with the build direction.
+            Make one build-direction choice at a time. This tool should tell you
+            what to decide now, what is still blocking unlock, and what needs a
+            review later.
           </p>
           <div className="cmt-helper-banner">
-            When the project feels unclear, come back here first. This tool
-            should help you decide what is real, what is still open, and what
-            needs review before the build can move forward.
+            Come here when discovery still feels soft and the build needs a
+            clearer next decision.
           </div>
         </div>
       </div>
@@ -1851,7 +1464,333 @@ const renderResumeContent = () => {
         </button>
 
         {showResumeSection ? (
-          <div className="cmt-section-body">{renderResumeContent()}</div>
+          <div className="cmt-section-body">
+            {!isComplete ? (
+              <>
+                <div className="cmt-current-head">
+                  <div>
+                    <p className="cmt-question-subtitle">
+                      This is the next build-direction decision that still needs
+                      to be confirmed.
+                    </p>
+                  </div>
+
+                  <div className="cmt-progress-stack">
+                    <div className="cmt-progress-pill">
+                      {trackedCount}/{totalCount} decisions tracked
+                    </div>
+
+                    {staleDecisionCount > 0 ? (
+                      <div className="cmt-stale-pill">
+                        {staleDecisionCount} downstream review
+                        {staleDecisionCount === 1 ? '' : 's'} needed
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="cmt-complete-state">
+                  <div className="cmt-complete-badge">In Progress</div>
+                  <div className="cmt-complete-copy">
+                    Last tracked decision:{' '}
+                    <strong>
+                      {safeText(
+                        lastTrackedDecision?.answer || lastTrackedDecision?.newValue,
+                        '—'
+                      )}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="cmt-resume-grid">
+                  <div className="cmt-resume-card cmt-resume-card-next">
+                    <div className="cmt-resume-title">Do this now</div>
+                    <div className="cmt-resume-next-action">
+                      {activeStep.question}
+                    </div>
+                    <div className="cmt-resume-next-location">
+                      After this: <strong>{activeStep.nextLabel}</strong>
+                    </div>
+                  </div>
+
+                  <div className="cmt-resume-card">
+                    <div className="cmt-resume-title">Why this is next</div>
+                    <div className="cmt-resume-empty">{activeStep.subtitle}</div>
+                  </div>
+
+                  <div className="cmt-resume-card">
+                    <div className="cmt-resume-title">Still blocking unlock</div>
+                    {resumeState.stillOpen.length ? (
+                      <ul className="cmt-resume-list">
+                        {resumeState.stillOpen.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="cmt-resume-empty">
+                        No blockers remain. Build workflow can be unlocked.
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="cmt-recommendation-layer">
+                  <div className="cmt-recommendation-title-row">
+                    <span className="cmt-section-kicker">Recommendation Layer</span>
+                    <div className="cmt-recommendation-title">
+                      Best next choices
+                    </div>
+                  </div>
+
+                  <div className="cmt-recommendation-list">
+                    {topThreeRecommendations.map((item, index) => (
+                      <div
+                        key={`${activeStep.id}-${item.value}`}
+                        className={`cmt-recommendation-card ${
+                          index === 0 ? 'is-top' : ''
+                        } ${draftSelection === item.value ? 'is-selected' : ''}`}
+                      >
+                        <div
+                          className="cmt-recommendation-top"
+                          onClick={() =>
+                            setExpandedRecommendation((prev) =>
+                              prev === index ? -1 : index
+                            )
+                          }
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setExpandedRecommendation((prev) =>
+                                prev === index ? -1 : index
+                              );
+                            }
+                          }}
+                        >
+                          <span className="cmt-recommendation-rank">
+                            {index === 0 ? 'Top recommendation' : `Alternative #${index + 1}`}
+                          </span>
+                          <span className="cmt-recommendation-confidence">
+                            {item.confidence}%
+                          </span>
+                        </div>
+
+                        <div className="cmt-recommendation-label">{item.value}</div>
+
+                        <div className="cmt-recommendation-mini">
+                          <strong>Why:</strong>{' '}
+                          {item.why?.[0] || 'No reasoning captured.'}
+                        </div>
+
+                        {expandedRecommendation === index ? (
+                          <>
+                            <div className="cmt-recommendation-block">
+                              <div className="cmt-recommendation-block-label">
+                                Evidence
+                              </div>
+                              <ul>
+                                {safeArray(item.evidence).map((line, idx) => (
+                                  <li key={`evidence-${idx}`}>{line}</li>
+                                ))}
+                              </ul>
+                            </div>
+
+                            <div className="cmt-recommendation-block">
+                              <div className="cmt-recommendation-block-label">
+                                Uncertainty
+                              </div>
+                              <ul>
+                                {safeArray(item.uncertainty).map((line, idx) => (
+                                  <li key={`uncertainty-${idx}`}>{line}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          </>
+                        ) : null}
+
+                        <button
+                          type="button"
+                          className="cmt-option-btn"
+                          onClick={() => setDraftSelection(item.value)}
+                        >
+                          Select
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  {otherRecommendations.length ? (
+                    <div className="cmt-history-collapsible" style={{ marginTop: 16 }}>
+                      <button
+                        type="button"
+                        className="cmt-history-toggle"
+                        onClick={() =>
+                          setExpandedRecommendation((prev) =>
+                            prev === 999 ? -1 : 999
+                          )
+                        }
+                      >
+                        <span>More plausible options</span>
+                        <span>{expandedRecommendation === 999 ? '−' : '+'}</span>
+                      </button>
+
+                      {expandedRecommendation === 999 ? (
+                        <div className="cmt-state-list">
+                          {otherRecommendations.map((item, idx) => (
+                            <div
+                              key={`${activeStep.id}-${item.value}-more`}
+                              className="cmt-state-item"
+                            >
+                              <div className="cmt-state-main">
+                                <div className="cmt-state-question">{item.value}</div>
+                                <div className="cmt-state-value">
+                                  {item.confidence}% confidence
+                                </div>
+                              </div>
+                              <div className="cmt-state-badges">
+                                <button
+                                  type="button"
+                                  className="cmt-option-btn"
+                                  onClick={() => setDraftSelection(item.value)}
+                                >
+                                  Select
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div className="cmt-selection-layer">
+                  <div className="cmt-recommendation-title-row">
+                    <span className="cmt-section-kicker">Your Selection</span>
+                  </div>
+
+                  <div className="cmt-option-grid">
+                    {currentOptions.map((option) => {
+                      const active = draftSelection === option;
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          className={`cmt-option-btn ${active ? 'active' : ''}`}
+                          onClick={() => setDraftSelection(option)}
+                        >
+                          {option}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {draftSelection === 'Custom' ? (
+                    <div className="cmt-custom-wrap">
+                      <input
+                        type="text"
+                        className="cmt-custom-input"
+                        placeholder="Enter a custom decision..."
+                        value={toolData?.customDraft || ''}
+                        onChange={(e) =>
+                          setToolData((prev) => ({
+                            ...prev,
+                            customDraft: e.target.value,
+                          }))
+                        }
+                      />
+                    </div>
+                  ) : null}
+
+                  <div className="cmt-save-row">
+                    <button
+                      type="button"
+                      className="cmt-save-decision-btn"
+                      onClick={handleSaveDecision}
+                      disabled={
+                        !String(
+                          draftSelection === 'Custom'
+                            ? toolData?.customDraft || ''
+                            : draftSelection || ''
+                        ).trim()
+                      }
+                    >
+                      Save this decision
+                    </button>
+
+                    <div className="cmt-next-text">
+                      After this, the next thing to figure out is{' '}
+                      <strong>{activeStep.nextLabel}</strong>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="cmt-current-head">
+                  <div>
+                    <p className="cmt-question-subtitle">
+                      All Craftsman Master Tool decisions are now tracked.
+                    </p>
+                  </div>
+
+                  <div className="cmt-progress-stack">
+                    <div className="cmt-progress-pill">
+                      {trackedCount}/{totalCount} decisions tracked
+                    </div>
+                  </div>
+                </div>
+
+                <div className="cmt-complete-state">
+                  <div className="cmt-complete-badge">Complete</div>
+                  <div className="cmt-complete-copy">
+                    Last tracked decision:{' '}
+                    <strong>
+                      {safeText(
+                        lastTrackedDecision?.answer || lastTrackedDecision?.newValue
+                      )}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="cmt-resume-grid">
+                  <div className="cmt-resume-card">
+                    <div className="cmt-resume-title">Confirmed now</div>
+                    {resumeState.confirmedNow.length ? (
+                      <ul className="cmt-resume-list">
+                        {resumeState.confirmedNow.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="cmt-resume-empty">
+                        No confirmed build direction yet.
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="cmt-resume-card">
+                    <div className="cmt-resume-title">Craftsman status</div>
+                    <div className="cmt-resume-empty">
+                      Craftsman decision flow is complete. No further decisions
+                      are needed in this tool.
+                    </div>
+                  </div>
+
+                  <div className="cmt-resume-card cmt-resume-card-next">
+                    <div className="cmt-resume-title">Next step</div>
+                    <div className="cmt-resume-next-action">
+                      Move into Build Workflow
+                    </div>
+                    <div className="cmt-resume-next-location">
+                      Go to: <strong>Build Workflow</strong>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         ) : null}
       </section>
 
@@ -1963,16 +1902,13 @@ const renderResumeContent = () => {
               {showDecisionHistory ? (
                 !decisionHistory.length ? (
                   <div className="cmt-history-empty">
-                    No decisions saved yet. Start with the current question
-                    above.
+                    No decisions saved yet. Start with the current question above.
                   </div>
                 ) : (
                   <div className="cmt-history-list cmt-history-list-bottom">
                     {decisionHistory.map((entry) => (
                       <div
-                        key={
-                          entry.id || `${entry.questionKey}-${entry.savedAt}`
-                        }
+                        key={entry.id || `${entry.questionKey}-${entry.savedAt}`}
                         className="cmt-history-item"
                       >
                         <div className="cmt-history-main">
@@ -2020,31 +1956,11 @@ const renderResumeContent = () => {
                               {entry.changedBecause ||
                                 getDecisionHistoryReasonText(entry)}
                             </div>
-
-                            {Array.isArray(entry.evidence) &&
-                            entry.evidence.length ? (
-                              <div className="cmt-history-evidence">
-                                <span className="cmt-history-why-label">
-                                  Evidence used
-                                </span>
-                                <ul className="cmt-history-evidence-list">
-                                  {entry.evidence
-                                    .slice(0, 2)
-                                    .map((item, idx) => (
-                                      <li key={`${entry.id}-evidence-${idx}`}>
-                                        {item}
-                                      </li>
-                                    ))}
-                                </ul>
-                              </div>
-                            ) : null}
                           </div>
                         </div>
 
                         <div className="cmt-history-meta">
-                          <span>
-                            {safeText(entry.phaseLabel, 'Unknown phase')}
-                          </span>
+                          <span>{safeText(entry.phaseLabel, 'Unknown phase')}</span>
                           <span>
                             {entry.changedAt || entry.savedAt
                               ? new Date(
