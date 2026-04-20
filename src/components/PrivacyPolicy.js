@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+
 import './PrivacyPolicy.css';
 
 const PrivacyPolicy = forwardRef((props, ref) => {
@@ -18,6 +19,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>1. Introduction</h2>
+
       <p>
         Welcome to Ober Artisan Drums. We are committed to protecting your
         privacy and handling your personal information responsibly. This Privacy
@@ -28,6 +30,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>2. Information We Collect</h2>
+
       <p>
         <strong>Personal Information:</strong> Your name, email, phone number,
         shipping address, billing address, and other information you choose to
@@ -66,10 +69,11 @@ const PrivacyPolicy = forwardRef((props, ref) => {
         <br />
         <br />
         <strong>Tool and Build Input Data:</strong> If you use configuration,
-        voicing, recommendation, or build-exploration tools on our site, we may
-        collect or log the build inputs, option selections, outputs, and
-        interaction events needed to operate, improve, secure, or troubleshoot
-        those tools.
+        voicing, recommendation, comparison, LegacyPrint™, or build-exploration
+        tools on our site, we may collect or log the build inputs, option
+        selections, generated outputs, comparative profile views, recommendation
+        results, and interaction events needed to operate, improve, secure,
+        personalize, or troubleshoot those tools.
         <br />
         <br />
         <strong>Consultation Notes and Transcription Data:</strong> If you
@@ -80,20 +84,51 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>3. How We Use Your Information</h2>
+
       <ul>
         <li>To process and fulfill orders via Stripe and related providers</li>
-        <li>To communicate with you regarding inquiries, submissions, purchases, or services</li>
-        <li>To operate customer accounts, project portals, and gated features</li>
-        <li>To review, moderate, publish, or manage Legacy Vault submissions</li>
-        <li>To generate, display, or improve interactive tool outputs and recommendations</li>
-        <li>To document consultations, intake details, customer preferences, and project-related notes</li>
+
+        <li>
+          To communicate with you regarding inquiries, submissions, purchases,
+          or services
+        </li>
+
+        <li>
+          To operate customer accounts, project portals, and gated features
+        </li>
+
+        <li>
+          To review, moderate, publish, or manage Legacy Vault submissions
+        </li>
+
+        <li>
+          To generate, display, or improve interactive tool outputs, comparative
+          profiles, and recommendations
+        </li>
+
+        <li>
+          To document consultations, intake details, customer preferences, and
+          project-related notes
+        </li>
+
         <li>To send updates or marketing communications if you opt in</li>
-        <li>To optimize user experience and improve our products and services</li>
-        <li>To maintain site security and detect, prevent, or investigate fraud or misuse</li>
-        <li>To comply with legal, tax, operational, or recordkeeping obligations</li>
+
+        <li>
+          To optimize user experience and improve our products and services
+        </li>
+
+        <li>
+          To maintain site security and detect, prevent, or investigate fraud or
+          misuse
+        </li>
+
+        <li>
+          To comply with legal, tax, operational, or recordkeeping obligations
+        </li>
       </ul>
 
       <h2>4. Sharing Your Information</h2>
+
       <p>
         We do not sell or rent your personal data. We may share your data with:
         <br />
@@ -115,6 +150,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>5. Payment Processing</h2>
+
       <p>
         We use Stripe to process payments. Stripe uses encryption and follows
         PCI-DSS compliance standards to safeguard payment data. Learn more at{' '}
@@ -129,6 +165,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>5A. Klarna Payments</h2>
+
       <p>
         We offer certain “buy now, pay later” options through Klarna via Stripe.
         If you choose Klarna at checkout, Klarna will collect and process
@@ -145,6 +182,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
         </a>{' '}
         and related legal terms.
       </p>
+
       <p>
         Klarna may contact you directly about your payments and may report
         payment behavior as permitted by law. For more information, please see{' '}
@@ -159,6 +197,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>6. reCAPTCHA &amp; Bot Protection</h2>
+
       <p>
         This site may use Google reCAPTCHA or similar anti-abuse protections to
         prevent spam, fraud, and misuse. Use of such tools is subject to
@@ -182,6 +221,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>7. Legacy Vault / Public Submission Features</h2>
+
       <p>
         If you submit content to Legacy Vault or related storytelling, archive,
         owner-page, or NFC-linked experiences, we may collect the content,
@@ -190,6 +230,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
         approved content may be visible to others and may be indexed, shared, or
         accessed by third parties beyond our control.
       </p>
+
       <p>
         You should avoid submitting private, confidential, or sensitive
         information that you do not want displayed, stored, or reviewed in
@@ -197,6 +238,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>8. Your Rights</h2>
+
       <p>
         You may request access to, correction of, or deletion of your personal
         information by contacting us. Depending on the nature of your request,
@@ -206,6 +248,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>9. Data Security</h2>
+
       <p>
         We implement reasonable administrative, technical, and operational
         safeguards to protect your data, but no method of transmission or
@@ -215,6 +258,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>10. External Links</h2>
+
       <p>
         We may link to third-party services such as Stripe, Klarna, LinkedIn,
         Meta properties, Spotify, Apple Music, YouTube, or other outside
@@ -224,6 +268,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>11. Changes to This Policy</h2>
+
       <p>
         We may update this policy periodically. The most current version will
         always appear here, and your continued use of our site implies
@@ -231,6 +276,7 @@ const PrivacyPolicy = forwardRef((props, ref) => {
       </p>
 
       <h2>12. Contact Us</h2>
+
       <p>
         If you have any questions, concerns, or requests, please contact us at{' '}
         <strong>support@oberartisandrums.com</strong>.
@@ -240,4 +286,5 @@ const PrivacyPolicy = forwardRef((props, ref) => {
 });
 
 PrivacyPolicy.displayName = 'PrivacyPolicy';
+
 export default PrivacyPolicy;
