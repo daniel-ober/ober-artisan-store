@@ -1,131 +1,465 @@
 .preorder-card {
   display: flex;
+
   flex-direction: column;
-  justify-content: space-between; /* 💡 push content to top and bottom */
-  align-items: center;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+
+  align-items: stretch;
+
+  justify-content: space-between;
+
   width: 100%;
+
   max-width: 400px;
-  min-height: 100%; /* ⚠️ allow full-height within row */
+
+  min-height: 100%;
+
+  background: #efefef;
+
+  border-radius: 14px;
+
   overflow: hidden;
-  transition: transform 0.2s ease;
+
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .preorder-card:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
+
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.22);
 }
 
-/* Image Container */
+/* ==========================================================================
+
+   IMAGE
+
+   ========================================================================== */
+
 .preorder-image-container {
   width: 100%;
-  height: 240px;
+
+  height: 230px;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
+
   overflow: hidden;
-  background-color: #f5f5f5;
+
+  background: #dcdcdc;
+
+  cursor: pointer;
 }
 
 .preorder-image {
   width: 100%;
+
   height: 100%;
+
   object-fit: cover;
-}
 
-/* Artisan Series Logo */
-.preorder-header-logo {
-  height: 75px;
-  max-height: 75px;
-  width: auto;
-  max-width: 180px;
-  object-fit: contain;
   display: block;
-  margin: 10px auto 0px auto; /* ⬅️ top: 15px, bottom: 5px (reduced from 30px / 10px) */
 }
 
-/* Product Info */
+/* ==========================================================================
+
+   BRAND BLOCK
+
+   ========================================================================== */
+
+.preorder-brand-block {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 104px;
+
+  padding: 14px 18px 10px;
+
+  background: #efefef;
+
+  text-align: center;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.preorder-brand-block--toast {
+  min-height: 104px;
+}
+
+.preorder-header-logo {
+  height: 46px;
+
+  max-height: 46px;
+
+  width: auto;
+
+  max-width: 188px;
+
+  object-fit: contain;
+
+  display: block;
+
+  margin: 0 auto 7px;
+}
+
+.preorder-toast-title {
+  margin: 0 0 8px;
+
+  color: #1f1f1f;
+
+  font-size: 1.35rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.03em;
+
+  line-height: 1.05;
+}
+
+.preorder-subheader {
+  margin: 0;
+
+  color: rgba(200, 155, 98, 0.96);
+
+  font-size: 0.74rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  line-height: 1.35;
+
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+
+   INFO
+
+   ========================================================================== */
+
 .preorder-info {
   display: flex;
+
   flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1; /* 💡 takes remaining space */
-  padding: 0px 21px 15px 21px;
+
+  flex: 1 1 auto;
+
+  padding: 18px 20px 18px;
+
+  background: #efefef;
 }
 
-.preorder-title {
-  font-size: 20px;
-  font-weight: bold;
-  /* margin-bottom: 8px; */
-  text-align: center;
-  color: #222 !important;
+.preorder-short-description {
+  margin: 0 0 14px;
+
+  color: #1f1f1f;
+
+  font-size: 0.97rem;
+
+  font-weight: 600;
+
+  line-height: 1.55;
+
+  text-align: left;
 }
 
-.preorder-description {
-  font-size: 14px;
-  text-align: justify;
-  color: #222;
-  letter-spacing: 0.5px;
-  margin: 0 0 27px 0; /* 🔧 Remove top margin (was 14px) */
+.preorder-bullet-list {
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+
+  flex: 1 1 auto;
 }
 
-.card-preorder-price {
-  font-size: 16px;
-  font-weight: bold;
-  color: #444;
+.preorder-bullet-item {
+  position: relative;
+
+  padding-left: 16px;
+
+  margin-bottom: 10px;
+
+  color: #4c4c4c;
+
+  font-size: 0.94rem;
+
+  line-height: 1.55;
+
+  text-align: left;
 }
 
-.delivery-time {
-  font-size: 14px;
-  color: #666;
+.preorder-bullet-item::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0.62em;
+
+  left: 0;
+
+  width: 6px;
+
+  height: 6px;
+
+  border-radius: 999px;
+
+  background: #c89b62;
+
+  transform: translateY(-50%);
 }
 
-/* Buttons */
-.preorder-button-container {
+.preorder-bullet-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+
+   BOTTOM / BUTTON
+
+   ========================================================================== */
+
+.preorder-card-bottom {
   margin-top: auto;
-  /* padding-top: 15px; */
+
+  padding-top: 18px;
+}
+
+.preorder-button-container {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  width: 100%;
 }
 
 .preorder-card-preorder-button {
-  background-color: #b65454;
-  color: white;;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  width: auto;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 5px;
-}
-
-.preorder-card-view-details-button {
-  background: #222;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
   width: 100%;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 4px;
+
+  min-height: 44px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #232323;
+
+  color: #fff;
+
+  padding: 0 18px;
+
+  font-size: 0.94rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.16s ease,
+    filter 0.16s ease,
+    background 0.16s ease;
 }
 
-.preorder-card-preorder-button:hover,
-.preorder-card-view-details-button:hover {
-  background-color: #9e4545;
+.preorder-card-preorder-button:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.06);
+
+  background: #171717;
 }
 
 .preorder-card-out-of-stock-button {
-  background: #888;
-  color: white;
+  width: 82%;
+
+  min-height: 44px;
+
   border: none;
-  padding: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 5px;
+
+  border-radius: 9px;
+
+  background: #8a8a8a;
+
+  color: #fff;
+
+  padding: 0 18px;
+
+  font-size: 0.94rem;
+
+  font-weight: 700;
+
   cursor: not-allowed;
-  width: 100%;
-  opacity: 0.7;
+
+  opacity: 0.75;
+}
+
+/* ==========================================================================
+
+   RESPONSIVE
+
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .preorder-image-container {
+    height: 220px;
+  }
+
+  .preorder-brand-block,
+  .preorder-brand-block--toast {
+    min-height: 100px;
+
+    padding: 13px 16px 10px;
+  }
+
+  .preorder-header-logo {
+    height: 44px;
+
+    max-height: 44px;
+
+    max-width: 180px;
+  }
+
+  .preorder-info {
+    padding: 17px 18px 17px;
+  }
+
+  .preorder-short-description {
+    font-size: 0.95rem;
+  }
+
+  .preorder-bullet-item {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .preorder-card {
+    border-radius: 14px;
+  }
+
+  .preorder-image-container {
+    height: 210px;
+  }
+
+  .preorder-brand-block,
+  .preorder-brand-block--toast {
+    min-height: 96px;
+
+    padding: 13px 14px 10px;
+  }
+
+  .preorder-header-logo {
+    height: 42px;
+
+    max-height: 42px;
+
+    max-width: 172px;
+
+    margin-bottom: 6px;
+  }
+
+  .preorder-toast-title {
+    font-size: 1.18rem;
+  }
+
+  .preorder-subheader {
+    font-size: 0.68rem;
+
+    letter-spacing: 0.15em;
+  }
+
+  .preorder-info {
+    padding: 16px 16px 16px;
+  }
+
+  .preorder-short-description {
+    margin-bottom: 12px;
+
+    font-size: 0.93rem;
+
+    line-height: 1.5;
+  }
+
+  .preorder-bullet-item {
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+
+    margin-bottom: 9px;
+  }
+
+  .preorder-card-bottom {
+    padding-top: 16px;
+  }
+
+  .preorder-card-preorder-button,
+  .preorder-card-out-of-stock-button {
+    width: 100%;
+
+    min-height: 42px;
+
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .preorder-image-container {
+    height: 190px;
+  }
+
+  .preorder-brand-block,
+  .preorder-brand-block--toast {
+    min-height: 90px;
+
+    padding: 12px 12px 10px;
+  }
+
+  .preorder-header-logo {
+    height: 38px;
+
+    max-height: 38px;
+
+    max-width: 160px;
+  }
+
+  .preorder-toast-title {
+    font-size: 1.05rem;
+  }
+
+  .preorder-subheader {
+    font-size: 0.64rem;
+
+    letter-spacing: 0.14em;
+  }
+
+  .preorder-info {
+    padding: 14px 14px 15px;
+  }
+
+  .preorder-short-description {
+    font-size: 0.9rem;
+  }
+
+  .preorder-bullet-item {
+    font-size: 0.88rem;
+
+    padding-left: 14px;
+  }
+
+  .preorder-card-preorder-button,
+  .preorder-card-out-of-stock-button {
+    width: 86%;
+  }
 }

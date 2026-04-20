@@ -1,29 +1,43 @@
 import React, { useEffect, useState } from 'react';
+
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
+
 import { db } from '../firebaseConfig';
+
 import { useAuth } from '../context/AuthContext';
+
 import ArtisanShopCard from './ArtisanShopCard';
+
 import './ArtisanShop.css';
 
 const ArtisanShop = () => {
-  const { isAdmin } = useAuth();               // ✅ admin gate
+  const { isAdmin } = useAuth();
+
   const [items, setItems] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       try {
         const snap = await getDocs(collection(db, 'products'));
+
         let rows = snap.docs
-          .map(d => ({ id: d.id, ...d.data() }))
-          .filter(item => !item.status || ['available', 'preorder'].includes(item.status));
+
+          .map((d) => ({ id: d.id, ...d.data() }))
+
+          .filter(
+            (item) =>
+              !item.status || ['available', 'preorder'].includes(item.status)
+          );
 
         rows.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
 
-        // keep Founder’s Toast last (same as before)
-        const ft = rows.find(r => r.id === 'founders-toast');
+        const ft = rows.find((r) => r.id === 'founders-toast');
+
         if (ft) {
-          rows = rows.filter(r => r.id !== 'founders-toast');
+          rows = rows.filter((r) => r.id !== 'founders-toast');
+
           rows.push(ft);
         }
 
@@ -36,62 +50,97 @@ const ArtisanShop = () => {
     })();
   }, []);
 
-  // ===== reorder (admin) =====
   const moveItem = async (index, dir) => {
     const next = index + dir;
+
     if (next < 0 || next >= items.length) return;
 
     const updated = [...items];
+
     [updated[index], updated[next]] = [updated[next], updated[index]];
 
-    // re-index
-    updated.forEach((it, i) => { it.displayOrder = i; });
+    updated.forEach((it, i) => {
+      it.displayOrder = i;
+    });
 
     setItems(updated);
 
     try {
       await Promise.all(
-        updated.map(it => updateDoc(doc(db, 'products', it.id), { displayOrder: it.displayOrder }))
+        updated.map((it) =>
+          updateDoc(doc(db, 'products', it.id), {
+            displayOrder: it.displayOrder,
+          })
+        )
       );
     } catch (e) {
       console.error('❌ Error updating order:', e);
     }
   };
 
-  if (loading) return <div className="loading">Loading Artisan Shop...</div>;
+  if (loading) {
+    return (
+      <div className="artisan-shop-page">
+        <div className="artisan-shop-overlay" />
+
+        <div className="artisan-shop-shell">
+          <div className="artisan-shop-loading">Loading Artisan Shop...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="pre-order-page">
-      <h1 className="pre-order-page-header">Explore the Artisan Shop</h1>
-      <p className="subtitle">
-        Order your handcrafted drum or specialty item — limited availability.
-      </p>
+    <div className="artisan-shop-page">
+      <div className="artisan-shop-overlay" />
 
-      {/* Admin view: same grid, with floating arrows above each card */}
-      <div className="pre-order-items">
-        {items.map((item, i) => (
-          <div key={item.id} className="admin-card-wrap">
-            {isAdmin && (
-              <div className="sort-controls">
-                <button
-                  className="sort-btn"
-                  aria-label="Move left"
-                  onClick={() => moveItem(i, -1)}
-                >
-                  ←
-                </button>
-                <button
-                  className="sort-btn"
-                  aria-label="Move right"
-                  onClick={() => moveItem(i, +1)}
-                >
-                  →
-                </button>
-              </div>
-            )}
-            <ArtisanShopCard product={item} />
+      <div className="artisan-shop-shell">
+        <section className="artisan-shop-intro">
+          <p className="artisan-shop-kicker">Artisan Shop</p>
+
+          <h1 className="artisan-shop-title">From the Ober Workshop</h1>
+
+          <p className="artisan-shop-subtitle">
+            Drums and small-batch specialty items, built and offered in limited
+            runs.
+          </p>
+        </section>
+
+        {isAdmin && (
+          <div className="artisan-shop-admin-note">
+            Admin mode enabled — use the arrows to reorder products.
           </div>
-        ))}
+        )}
+
+        <section className="artisan-shop-grid">
+          {items.map((item, i) => (
+            <div key={item.id} className="artisan-shop-card-wrap">
+              {isAdmin && (
+                <div className="artisan-shop-sort-controls">
+                  <button
+                    className="artisan-shop-sort-btn"
+                    aria-label="Move item left"
+                    onClick={() => moveItem(i, -1)}
+                    disabled={i === 0}
+                  >
+                    ←
+                  </button>
+
+                  <button
+                    className="artisan-shop-sort-btn"
+                    aria-label="Move item right"
+                    onClick={() => moveItem(i, 1)}
+                    disabled={i === items.length - 1}
+                  >
+                    →
+                  </button>
+                </div>
+              )}
+
+              <ArtisanShopCard product={item} />
+            </div>
+          ))}
+        </section>
       </div>
     </div>
   );
