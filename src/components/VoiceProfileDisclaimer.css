@@ -1,0 +1,33 @@
+.oad-vp-disclaimer {
+
+  margin: 18px 2px 0;
+
+  padding-top: 8px;
+
+  font-size: 0.74rem;
+
+  line-height: 1.5;
+
+  color: rgba(255, 255, 255, 0.5);
+
+  letter-spacing: 0.01em;
+
+}
+
+@media (max-width: 820px) {
+
+  .oad-vp-disclaimer {
+
+    margin-top: 16px;
+
+    padding-top: 6px;
+
+    font-size: 0.7rem;
+
+    line-height: 1.45;
+
+    color: rgba(255, 255, 255, 0.46);
+
+  }
+
+}

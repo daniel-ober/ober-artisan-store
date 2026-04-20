@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import './ArtisanDrums.css';
 
+import VoiceProfileDisclaimer from './VoiceProfileDisclaimer';
+
 const ASSET_BASE = `${process.env.PUBLIC_URL}/ober-artisan-showroom/color`;
 
 export const DRUM_SERIES = [
-
   {
-
     id: 'heritage',
 
     name: 'HERITAGE',
@@ -17,13 +17,11 @@ export const DRUM_SERIES = [
     logo: '/resized-logos/heritage-white.png',
 
     quote:
-
       'The drum that started it all — classic craftsmanship, timeless sound.',
 
     shortLabel: 'Heritage',
 
     bullets: [
-
       'Traditional stave shell construction',
 
       'Northern Red Oak shell',
@@ -35,19 +33,15 @@ export const DRUM_SERIES = [
       'Hand-scorched finish for depth and character',
 
       'Builds starting at $850',
-
     ],
 
     description:
-
       'HERITAGE is the line that grounds the Ober Artisan identity. It is rooted in traditional stave construction, tactile warmth, and a voice that feels seasoned, organic, and familiar without ever feeling ordinary.',
 
     voiceSummary:
-
       'A rooted, warm, seasoned response shaped around classic feel, grounded articulation, and a familiar voice that stays organic and controlled under the stick.',
 
     toneProfile: [
-
       { label: 'Warmth', value: 90 },
 
       { label: 'Dryness', value: 72 },
@@ -57,7 +51,6 @@ export const DRUM_SERIES = [
       { label: 'Complexity', value: 64 },
 
       { label: 'Versatility', value: 74 },
-
     ],
 
     href: '/artisan-shop/heritage',
@@ -65,11 +58,9 @@ export const DRUM_SERIES = [
     cta: 'Explore Heritage',
 
     activeLayer: `${ASSET_BASE}/drums-only-heritage.png`,
-
   },
 
   {
-
     id: 'feuzon',
 
     name: 'FEUZØN',
@@ -81,7 +72,6 @@ export const DRUM_SERIES = [
     shortLabel: 'Feuzøn',
 
     bullets: [
-
       'Hybrid shell architecture: stave + steam-bent',
 
       '150+ unique build variations',
@@ -93,19 +83,15 @@ export const DRUM_SERIES = [
       '45° / roundover bearing edges',
 
       'Builds starting at $1050',
-
     ],
 
     description:
-
       'FEUZØN is where the Ober language becomes more modern and more expansive. Its hybrid shell architecture opens up greater tonal range, stronger articulation, and a more exploratory response under the stick.',
 
     voiceSummary:
-
       'A broader, more exploratory response shaped around stronger articulation, wider tonal spread, and a more modern lift that opens the voice up under the stick.',
 
     toneProfile: [
-
       { label: 'Warmth', value: 78 },
 
       { label: 'Dryness', value: 58 },
@@ -115,7 +101,6 @@ export const DRUM_SERIES = [
       { label: 'Complexity', value: 88 },
 
       { label: 'Versatility', value: 90 },
-
     ],
 
     href: '/artisan-shop/feuzon',
@@ -123,11 +108,9 @@ export const DRUM_SERIES = [
     cta: 'Explore FEUZØN',
 
     activeLayer: `${ASSET_BASE}/drums-only-feuzon.png`,
-
   },
 
   {
-
     id: 'soundlegend',
 
     name: 'SOUNDLEGEND',
@@ -139,7 +122,6 @@ export const DRUM_SERIES = [
     shortLabel: 'SoundLegend',
 
     bullets: [
-
       'Our most in-depth custom series',
 
       'Guided 1-on-1 discovery with Dan Ober',
@@ -151,19 +133,15 @@ export const DRUM_SERIES = [
       'Portal access and story tracking',
 
       'Builds starting at $1499',
-
     ],
 
     description:
-
       'SOUNDLEGEND is the fullest expression of the Ober process. It combines consultation, concept refinement, voicing intent, visual storytelling, and premium build execution into one deeply personal custom experience.',
 
     voiceSummary:
-
       'A highly tailored response shaped around the artist, where warmth, projection, complexity, and feel can all be pushed further through a more personalized build process.',
 
     toneProfile: [
-
       { label: 'Warmth', value: 84 },
 
       { label: 'Dryness', value: 76 },
@@ -173,7 +151,6 @@ export const DRUM_SERIES = [
       { label: 'Complexity', value: 96 },
 
       { label: 'Versatility', value: 98 },
-
     ],
 
     href: '/artisan-shop/soundlegend',
@@ -181,9 +158,7 @@ export const DRUM_SERIES = [
     cta: 'Explore SoundLegend',
 
     activeLayer: `${ASSET_BASE}/drums-only-soundlegend.png`,
-
   },
-
 ];
 
 const PRIMARY_TABS = [
@@ -317,6 +292,8 @@ const SeriesFeature = ({ series, onNavigate, onCompare }) => (
       <p className="oad-side-copy">{series.voiceSummary}</p>
 
       <ToneBars profile={series.toneProfile} />
+
+      <VoiceProfileDisclaimer />
     </div>
 
     <div className="oad-feature-actions">
@@ -328,8 +305,8 @@ const SeriesFeature = ({ series, onNavigate, onCompare }) => (
         {series.cta}
       </button>
 
-      <button type="button" className="oad-secondary-btn" onClick={onCompare}>
-        Study the differences
+      <button type="button" className="oad-text-link" onClick={onCompare}>
+        Compare the lines
       </button>
     </div>
   </div>
@@ -409,31 +386,101 @@ const CompareView = () => (
       </p>
     </div>
 
-    <div className="oad-compare-table">
+    <div className="oad-compare-desktop">
+      <div className="oad-compare-series-header">
+        <div className="oad-compare-series-header-spacer" />
+
+        <div className="oad-compare-series-header-cell">
+          <img
+            src="/resized-logos/heritage-white.png"
+            alt="Heritage"
+            className="oad-compare-series-logo"
+          />
+        </div>
+
+        <div className="oad-compare-series-header-cell">
+          <img
+            src="/resized-logos/feuzon-white.png"
+            alt="Feuzøn"
+            className="oad-compare-series-logo"
+          />
+        </div>
+
+        <div className="oad-compare-series-header-cell">
+          <img
+            src="/resized-logos/soundlegend-white.png"
+            alt="SoundLegend"
+            className="oad-compare-series-logo"
+          />
+        </div>
+      </div>
+
+      <div className="oad-compare-stack">
+        {COMPARE_ROWS.map((row) => (
+          <div key={row.label} className="oad-compare-row-card">
+            <div className="oad-compare-topic">
+              <span className="oad-compare-topic-title">{row.label}</span>
+
+              <p>{row.helper}</p>
+            </div>
+
+            <div className="oad-compare-series-grid">
+              <article className="oad-compare-series-card">
+                <p>{row.heritage}</p>
+              </article>
+
+              <article className="oad-compare-series-card">
+                <p>{row.feuzon}</p>
+              </article>
+
+              <article className="oad-compare-series-card">
+                <p>{row.soundlegend}</p>
+              </article>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div className="oad-compare-mobile">
       {COMPARE_ROWS.map((row) => (
-        <div key={row.label} className="oad-compare-band">
-          <div className="oad-compare-label">
-            <span className="oad-compare-label-title">{row.label}</span>
+        <div key={row.label} className="oad-compare-mobile-card">
+          <div className="oad-compare-mobile-topic">
+            <span className="oad-compare-topic-title">{row.label}</span>
 
             <p>{row.helper}</p>
           </div>
 
-          <div className="oad-compare-value">
-            <span className="oad-compare-series">HERITAGE</span>
+          <div className="oad-compare-mobile-series-list">
+            <div className="oad-compare-mobile-series-item">
+              <img
+                src="/resized-logos/heritage-white.png"
+                alt="Heritage"
+                className="oad-compare-mobile-logo"
+              />
 
-            <p>{row.heritage}</p>
-          </div>
+              <p>{row.heritage}</p>
+            </div>
 
-          <div className="oad-compare-value">
-            <span className="oad-compare-series">FEUZØN</span>
+            <div className="oad-compare-mobile-series-item">
+              <img
+                src="/resized-logos/feuzon-white.png"
+                alt="Feuzøn"
+                className="oad-compare-mobile-logo"
+              />
 
-            <p>{row.feuzon}</p>
-          </div>
+              <p>{row.feuzon}</p>
+            </div>
 
-          <div className="oad-compare-value">
-            <span className="oad-compare-series">SOUNDLEGEND</span>
+            <div className="oad-compare-mobile-series-item">
+              <img
+                src="/resized-logos/soundlegend-white.png"
+                alt="SoundLegend"
+                className="oad-compare-mobile-logo"
+              />
 
-            <p>{row.soundlegend}</p>
+              <p>{row.soundlegend}</p>
+            </div>
           </div>
         </div>
       ))}
@@ -561,7 +608,7 @@ const ArtisanDrums = () => {
           </p>
         </header>
 
-        <nav className="oad-tabs" aria-label="Collection navigation">
+        {/* <nav className="oad-tabs" aria-label="Collection navigation">
           {PRIMARY_TABS.map((tab) => (
             <button
               key={tab.id}
@@ -572,9 +619,9 @@ const ArtisanDrums = () => {
               {tab.label}
             </button>
           ))}
-        </nav>
+        </nav> */}
 
-        {primaryTab === 'collection' && (
+        {/* {primaryTab === 'collection' && (
           <nav className="oad-series-tabs" aria-label="Series selection">
             {DRUM_SERIES.map((series) => (
               <button
@@ -591,7 +638,7 @@ const ArtisanDrums = () => {
               </button>
             ))}
           </nav>
-        )}
+        )} */}
 
         <StageImage
           primaryTab={primaryTab}

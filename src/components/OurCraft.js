@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback, useState, useMemo } from 'react';
 
 import './OurCraft.css';
 
@@ -24,9 +24,9 @@ import {
 
   Hammer,
 
-  ChevronLeft,
+  ChevronUp,
 
-  ChevronRight,
+  ChevronDown,
 
 } from 'lucide-react';
 
@@ -57,6 +57,42 @@ function usePrefersReducedMotion() {
   }, []);
 
   return prefersReducedMotion;
+
+}
+
+function useIsCompactOurCraft() {
+
+  const [isCompact, setIsCompact] = useState(
+
+    typeof window !== 'undefined' ? window.innerWidth <= 560 : false
+
+  );
+
+  useEffect(() => {
+
+    const handleResize = () => {
+
+      setIsCompact(window.innerWidth <= 560);
+
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    window.addEventListener('orientationchange', handleResize);
+
+    return () => {
+
+      window.removeEventListener('resize', handleResize);
+
+      window.removeEventListener('orientationchange', handleResize);
+
+    };
+
+  }, []);
+
+  return isCompact;
 
 }
 
@@ -280,41 +316,19 @@ const discoverySteps = [
 
 ];
 
-const discoveryUses = [
+const discoveryCollectionNote =
 
-  {
-
-    title: 'For Heritage',
-
-    text: 'LegacyPrint™ helps preserve the line’s rooted warmth and tonal identity with more consistency and intention.',
-
-  },
-
-  {
-
-    title: 'For Feuzøn',
-
-    text: 'LegacyPrint™ helps compare broader sound areas — projection, articulation, complexity, and tonal spread.',
-
-  },
-
-  {
-
-    title: 'For SoundLegend',
-
-    text: 'LegacyPrint™ is used most fully here, helping shape the deepest level of build planning, tonal direction, and personal voicing.',
-
-  },
-
-];
+  'Across Heritage, Feuzøn, and SoundLegend, LegacyPrint™ helps bring more structure to voicing decisions and keep each build aligned to the player’s goals.';
 
 const OurCraft = () => {
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const railRef = useRef(null);
+  const isCompact = useIsCompactOurCraft();
 
   const slideRefs = useRef([]);
+
+  const rafRef = useRef(null);
 
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -322,7 +336,139 @@ const OurCraft = () => {
 
     document.body.classList.add('our-craft-page');
 
-    return () => document.body.classList.remove('our-craft-page');
+    return () => {
+
+      document.body.classList.remove('our-craft-page');
+
+      document.documentElement.style.removeProperty('--oc-vh');
+
+      document.documentElement.style.removeProperty('--oc-nav-offset');
+
+      document.documentElement.style.removeProperty('--oc-section-height');
+
+      if (rafRef.current) {
+
+        cancelAnimationFrame(rafRef.current);
+
+      }
+
+    };
+
+  }, []);
+
+  useEffect(() => {
+
+    const measureLayout = () => {
+
+      const root = document.documentElement;
+
+      root.style.setProperty('--oc-vh', `${window.innerHeight}px`);
+
+      const candidates = Array.from(
+
+        document.querySelectorAll(
+
+          'header, nav, .navbar, .nav-bar, .site-nav, .main-nav'
+
+        )
+
+      );
+
+      let navOffset = 0;
+
+      candidates.forEach((el) => {
+
+        const styles = window.getComputedStyle(el);
+
+        const rect = el.getBoundingClientRect();
+
+        const isPinned =
+
+          styles.position === 'fixed' || styles.position === 'sticky';
+
+        const touchesTop = rect.top <= 2 && rect.bottom > 0;
+
+        if (isPinned && touchesTop) {
+
+          navOffset = Math.max(navOffset, rect.height);
+
+        }
+
+      });
+
+      const sectionHeight = Math.max(window.innerHeight - navOffset, 0);
+
+      root.style.setProperty('--oc-nav-offset', `${Math.round(navOffset)}px`);
+
+      root.style.setProperty(
+
+        '--oc-section-height',
+
+        `${Math.round(sectionHeight)}px`
+
+      );
+
+    };
+
+    measureLayout();
+
+    const handleResize = () => {
+
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+
+      rafRef.current = requestAnimationFrame(measureLayout);
+
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    window.addEventListener('orientationchange', handleResize);
+
+    return () => {
+
+      window.removeEventListener('resize', handleResize);
+
+      window.removeEventListener('orientationchange', handleResize);
+
+    };
+
+  }, []);
+
+  useEffect(() => {
+
+    const sections = slideRefs.current.filter(Boolean);
+
+    if (!sections.length) return undefined;
+
+    const observer = new IntersectionObserver(
+
+      (entries) => {
+
+        const visible = entries
+
+          .filter((entry) => entry.isIntersecting)
+
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visible) return;
+
+        const index = sections.findIndex((section) => section === visible.target);
+
+        if (index >= 0) setActiveSlide(index);
+
+      },
+
+      {
+
+        threshold: [0.55, 0.7, 0.85],
+
+      }
+
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
 
   }, []);
 
@@ -330,7 +476,9 @@ const OurCraft = () => {
 
     (index) => {
 
-      const target = slideRefs.current[index];
+      const safeIndex = Math.max(0, Math.min(index, storySlides.length - 1));
+
+      const target = slideRefs.current[safeIndex];
 
       if (!target) return;
 
@@ -338,13 +486,9 @@ const OurCraft = () => {
 
         behavior: prefersReducedMotion ? 'auto' : 'smooth',
 
-        inline: 'start',
-
-        block: 'nearest',
+        block: 'start',
 
       });
-
-      setActiveSlide(index);
 
     },
 
@@ -354,115 +498,83 @@ const OurCraft = () => {
 
   const goPrev = useCallback(() => {
 
-    scrollToSlide(Math.max(activeSlide - 1, 0));
+    scrollToSlide(activeSlide - 1);
 
   }, [activeSlide, scrollToSlide]);
 
   const goNext = useCallback(() => {
 
-    scrollToSlide(Math.min(activeSlide + 1, storySlides.length - 1));
+    scrollToSlide(activeSlide + 1);
 
   }, [activeSlide, scrollToSlide]);
 
-  useEffect(() => {
+  const compactPrinciples = useMemo(
 
-    const rail = railRef.current;
+    () => (isCompact ? principles.slice(0, 4) : principles),
 
-    if (!rail) return undefined;
+    [isCompact]
 
-    const handleScroll = () => {
+  );
 
-      const width = rail.clientWidth || 1;
+  const compactDiscoverySteps = useMemo(
 
-      const index = Math.round(rail.scrollLeft / width);
+    () => (isCompact ? discoverySteps.slice(0, 3) : discoverySteps),
 
-      setActiveSlide(Math.max(0, Math.min(index, storySlides.length - 1)));
+    [isCompact]
 
-    };
+  );
 
-    rail.addEventListener('scroll', handleScroll, { passive: true });
+  const getBodyCopy = useCallback(
 
-    handleScroll();
+    (slide) => {
 
-    return () => rail.removeEventListener('scroll', handleScroll);
+      if (!isCompact) return slide.body;
 
-  }, []);
+      if (slide.type === 'craft') {
 
-  const renderSupplement = useCallback((slide) => {
+        return [slide.body[0]];
 
-    if (slide.type === 'philosophy') {
+      }
 
-      return (
+      if (slide.type === 'philosophy') {
 
-        <div
+        return slide.body;
 
-          className="oc-story-grid oc-story-grid-philosophy"
+      }
 
-          role="list"
+      if (slide.type === 'discovery') {
 
-          aria-label="Philosophy highlights"
+        return [slide.body[0]];
 
-        >
+      }
 
-          {principles.map((item) => {
+      return slide.body;
 
-            const Icon = item.icon;
+    },
 
-            return (
+    [isCompact]
 
-              <article
+  );
 
-                key={item.label}
+  const renderSupplement = useCallback(
 
-                className="oc-story-mini-card"
+    (slide) => {
 
-                role="listitem"
+      if (slide.type === 'philosophy') {
 
-              >
-
-                <div className="oc-story-mini-top">
-
-                  <span className="oc-story-mini-icon">
-
-                    <Icon size={15} aria-hidden />
-
-                  </span>
-
-                  <h3>{item.label}</h3>
-
-                </div>
-
-                <p>{item.description}</p>
-
-              </article>
-
-            );
-
-          })}
-
-        </div>
-
-      );
-
-    }
-
-    if (slide.type === 'discovery') {
-
-      return (
-
-        <div className="oc-discovery-stack">
+        return (
 
           <div
 
-            className="oc-story-grid oc-story-grid-discovery"
+            className="oc-story-grid oc-story-grid-philosophy"
 
             role="list"
 
-            aria-label="Discovery steps"
+            aria-label="Philosophy highlights"
 
           >
 
-            {discoverySteps.map((item) => {
+            {compactPrinciples.map((item) => {
 
               const Icon = item.icon;
 
@@ -470,7 +582,7 @@ const OurCraft = () => {
 
                 <article
 
-                  key={item.title}
+                  key={item.label}
 
                   className="oc-story-mini-card"
 
@@ -486,11 +598,11 @@ const OurCraft = () => {
 
                     </span>
 
-                    <h3>{item.title}</h3>
+                    <h3>{item.label}</h3>
 
                   </div>
 
-                  <p>{item.text}</p>
+                  <p>{item.description}</p>
 
                 </article>
 
@@ -500,47 +612,89 @@ const OurCraft = () => {
 
           </div>
 
-          <div
+        );
 
-            className="oc-discovery-usage-grid"
+      }
 
-            role="list"
+      if (slide.type === 'discovery') {
 
-            aria-label="LegacyPrint uses"
+        return (
 
-          >
+          <div className="oc-discovery-stack">
 
-            {discoveryUses.map((item) => (
+            <div
 
-              <article
+              className="oc-story-grid oc-story-grid-discovery"
 
-                key={item.title}
+              role="list"
 
-                className="oc-discovery-usage-card"
+              aria-label="Discovery steps"
 
-                role="listitem"
+            >
 
-              >
+              {compactDiscoverySteps.map((item) => {
 
-                <span className="oc-discovery-usage-kicker">{item.title}</span>
+                const Icon = item.icon;
 
-                <p>{item.text}</p>
+                return (
 
-              </article>
+                  <article
 
-            ))}
+                    key={item.title}
+
+                    className="oc-story-mini-card"
+
+                    role="listitem"
+
+                  >
+
+                    <div className="oc-story-mini-top">
+
+                      <span className="oc-story-mini-icon">
+
+                        <Icon size={15} aria-hidden />
+
+                      </span>
+
+                      <h3>{item.title}</h3>
+
+                    </div>
+
+                    <p>{item.text}</p>
+
+                  </article>
+
+                );
+
+              })}
+
+            </div>
+
+            <div className="oc-discovery-summary-card">
+
+              <span className="oc-discovery-summary-kicker">
+
+                Across the collection
+
+              </span>
+
+              <p>{discoveryCollectionNote}</p>
+
+            </div>
 
           </div>
 
-        </div>
+        );
 
-      );
+      }
 
-    }
+      return null;
 
-    return null;
+    },
 
-  }, []);
+    [compactDiscoverySteps, compactPrinciples]
+
+  );
 
   return (
 
@@ -550,131 +704,127 @@ const OurCraft = () => {
 
         <section className="oc-story-shell" aria-label="Our Craft story panels">
 
-          <div className="oc-story-rail" ref={railRef}>
+          {storySlides.map((slide, index) => (
 
-            {storySlides.map((slide, index) => (
+            <section
 
-              <section
+              key={slide.key}
 
-                key={slide.key}
+              ref={(el) => {
 
-                ref={(el) => {
+                slideRefs.current[index] = el;
 
-                  slideRefs.current[index] = el;
+              }}
 
-                }}
+              className={`oc-story-slide oc-story-slide-${slide.type}`}
 
-                className="oc-story-slide"
+              aria-label={slide.kicker}
 
-                aria-label={slide.kicker}
+            >
 
-              >
+              <div
 
-                <div
+                className="oc-story-media"
 
-                  className="oc-story-media"
+                aria-hidden="true"
 
-                  aria-hidden="true"
+                style={{ backgroundImage: `url("${slide.mediaUrl}")` }}
 
-                  style={{ backgroundImage: `url("${slide.mediaUrl}")` }}
+              />
 
-                />
+              <div className="oc-story-overlay" />
 
-                <div className="oc-story-overlay" />
+              <div className="oc-wrap oc-story-wrap">
 
-                <div className="oc-wrap oc-story-wrap">
+                <div className="oc-story-inner">
 
-                  <div className="oc-story-inner">
+                  <div className="oc-story-copy">
 
-                    <div className="oc-story-copy">
+                    <span className="oc-kicker">{slide.kicker}</span>
 
-                      <span className="oc-kicker">{slide.kicker}</span>
+                    <h1 className="oc-story-title">{slide.title}</h1>
 
-                      <h1 className="oc-story-title">{slide.title}</h1>
+                    {getBodyCopy(slide).map((paragraph) => (
 
-                      {slide.body.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
 
-                        <p key={paragraph}>{paragraph}</p>
-
-                      ))}
-
-                    </div>
-
-                    {renderSupplement(slide)}
+                    ))}
 
                   </div>
 
+                  {renderSupplement(slide)}
+
                 </div>
-
-              </section>
-
-            ))}
-
-          </div>
-
-          <div className="oc-story-ui">
-
-            <div className="oc-story-arrow-row">
-
-              <button
-
-                type="button"
-
-                className="oc-story-arrow"
-
-                onClick={goPrev}
-
-                disabled={activeSlide === 0}
-
-                aria-label="Previous panel"
-
-              >
-
-                <ChevronLeft size={18} />
-
-              </button>
-
-              <div className="oc-story-dots" aria-label="Story slide navigation">
-
-                {storySlides.map((slide, index) => (
-
-                  <button
-
-                    key={slide.key}
-
-                    type="button"
-
-                    className={`oc-story-dot ${activeSlide === index ? 'is-active' : ''}`}
-
-                    onClick={() => scrollToSlide(index)}
-
-                    aria-label={`Go to ${slide.kicker}`}
-
-                  />
-
-                ))}
 
               </div>
 
-              <button
+            </section>
 
-                type="button"
+          ))}
 
-                className="oc-story-arrow"
+          <div className="oc-story-ui">
 
-                onClick={goNext}
+            <button
 
-                disabled={activeSlide === storySlides.length - 1}
+              type="button"
 
-                aria-label="Next panel"
+              className="oc-story-arrow"
 
-              >
+              onClick={goPrev}
 
-                <ChevronRight size={18} />
+              disabled={activeSlide === 0}
 
-              </button>
+              aria-label="Previous section"
+
+            >
+
+              <ChevronUp size={18} />
+
+            </button>
+
+            <div className="oc-story-dots" aria-label="Story slide navigation">
+
+              {storySlides.map((slide, index) => (
+
+                <button
+
+                  key={slide.key}
+
+                  type="button"
+
+                  className={`oc-story-dot ${
+
+                    activeSlide === index ? 'is-active' : ''
+
+                  }`}
+
+                  onClick={() => scrollToSlide(index)}
+
+                  aria-label={`Go to ${slide.kicker}`}
+
+                />
+
+              ))}
 
             </div>
+
+            <button
+
+              type="button"
+
+              className="oc-story-arrow"
+
+              onClick={goNext}
+
+              disabled={activeSlide === storySlides.length - 1}
+
+              aria-label="Next section"
+
+            >
+
+              <ChevronDown size={18} />
+
+            </button>
 
           </div>
 
