@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react';
+
 import './TermsOfService.css';
 
 const TermsOfService = forwardRef((props, ref) => {
@@ -17,6 +18,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>1. Agreement to Terms</h2>
+
       <p>
         By accessing or using the Ober Artisan Drums website or services, you
         agree to these Terms and our Privacy Policy. If you do not agree, you
@@ -27,6 +29,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>2. Permitted Use</h2>
+
       <p>
         You agree to use our website for lawful purposes only and in ways that
         do not violate the rights of others, interfere with our operations, or
@@ -34,6 +37,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>3. Account Registration</h2>
+
       <p>
         Certain features may require account registration. You are responsible
         for safeguarding your account credentials and for all actions taken
@@ -42,6 +46,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>4. Orders and Product Information</h2>
+
       <p>
         We strive for accuracy in product listings, descriptions, images,
         pricing, estimated timelines, and availability, but do not guarantee
@@ -52,6 +57,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>5. Payments</h2>
+
       <p>
         Payments are securely processed via Stripe or other authorized gateways.
         By ordering, you authorize us to charge your selected payment method for
@@ -60,6 +66,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>5A. Klarna “Buy Now, Pay Later” Options</h2>
+
       <p>
         We offer Klarna through Stripe. When you select Klarna, your payment
         contract is with Klarna, and additional Klarna terms apply at checkout.
@@ -69,6 +76,7 @@ const TermsOfService = forwardRef((props, ref) => {
         Taxes and shipping are excluded from estimated monthly payment examples
         shown at checkout.
       </p>
+
       <p>
         Klarna authorizations must be captured when we ship your order. By
         default, if an order is not shipped or captured within approximately 28
@@ -80,17 +88,20 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>6. Shipping and Delivery</h2>
+
       <p>
         Orders are typically fulfilled and shipped promptly, but we cannot
         guarantee delivery times. Shipping costs and timelines may vary by
         location.
       </p>
+
       <p>
         <strong>Free shipping eligibility:</strong> Free shipping promotions are
         valid only within the contiguous United States (the “lower 48” states).
         Orders shipped to Alaska, Hawaii, or U.S. territories do not qualify for
         free shipping and may require additional shipping charges.
       </p>
+
       <p>
         <strong>How shipping fees are handled:</strong> Standard shipping fees
         are shown at checkout for most orders. For Alaska, Hawaii, or U.S.
@@ -101,6 +112,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>7. Returns and Refunds</h2>
+
       <p>
         Our refund and return policy is available on our site. By placing an
         order, you acknowledge and agree to those terms, including all
@@ -109,6 +121,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>8. Intellectual Property</h2>
+
       <p>
         All site content—including text, graphics, logos, product names,
         trademarks, media, visual design, page layouts, software behavior,
@@ -120,16 +133,20 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>8A. LegacyPrint™ / Proprietary Tools</h2>
+
       <p>
         LegacyPrint™, the Ober LegacyPrint™ Voicing Engine, and related
-        terminology, outputs, summaries, scoring logic, recommendations,
-        voicing-language, visualizations, and heuristics are proprietary to
-        Ober Artisan Drums. Any frequency views, tonal estimates, axis scoring,
-        or recommendation outputs provided by these tools are for internal brand
-        interpretation, educational purposes, and customer experience only. They
-        are not laboratory measurements, scientific guarantees, or licensed
-        engineering data.
+        terminology, outputs, summaries, scores, comparative visualizations,
+        recommendation logic, voicing-language, visualizations, and heuristics
+        are proprietary to Ober Artisan Drums. Any frequency views, tonal
+        estimates, axis scoring, comparative profiles, recommendation outputs,
+        or related presentation formats provided by these tools are for internal
+        brand interpretation, educational purposes, comparative illustration,
+        and customer experience only. They are not laboratory measurements,
+        scientific guarantees, certified engineering data, or binding product
+        specifications.
       </p>
+
       <p>
         You may not copy, scrape, train on, repackage, resell, publish, clone,
         reverse engineer, or create derivative commercial tools from these
@@ -137,7 +154,37 @@ const TermsOfService = forwardRef((props, ref) => {
         Artisan Drums.
       </p>
 
+      <h2>8A(1). Voice Profiles, Comparative Scores, and Visualizations</h2>
+
+      <p>
+        Any voice-profile graphics, tonal tendency summaries, comparative bars,
+        comparative scores, descriptive labels, recommendation summaries, or
+        similar visualizations presented on this site are intended solely as
+        illustrative and comparative tools used to communicate the general
+        design character, response tendencies, and voicing direction of an Ober
+        Artisan Drums series, concept, or customer experience.
+      </p>
+
+      <p>
+        These profiles are not laboratory measurements, certified test results,
+        engineering specifications, warranties, or guarantees of the sound,
+        response, projection, complexity, dryness, warmth, versatility, or any
+        other performance characteristic of an individual drum. Actual results
+        may vary based on shell dimensions, wood selection, shell architecture,
+        bearing edges, finish, hardware, drumheads, tuning, setup, playing
+        environment, recording conditions, and player technique.
+      </p>
+
+      <p>
+        By using this site, you acknowledge that such profiles and related
+        summaries are provided for informational, educational, branding, and
+        customer-experience purposes only, and should not be interpreted as a
+        promise or binding representation of the performance of any specific
+        instrument.
+      </p>
+
       <h2>8B. Legacy Vault Content</h2>
+
       <p>
         Legacy Vault and related storytelling, archive, owner-profile, NFC, or
         memory-based features may allow users to submit text, photos, links,
@@ -147,6 +194,7 @@ const TermsOfService = forwardRef((props, ref) => {
         reproduce, display, format, moderate, and publish that content in
         connection with operating, promoting, and improving these services.
       </p>
+
       <p>
         You are solely responsible for the content you submit and represent that
         you have the rights needed to submit it. We reserve the right, but not
@@ -157,35 +205,47 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>8C. Merchandise, Conditioning Wax, and Product Use</h2>
+
       <p>
         Merchandise, care items, conditioning products, and accessory products—
-        including Founder&apos;s Toast conditioning wax or similar branded goods—
-        are provided subject to normal variation in appearance, scent, texture,
-        packaging, and performance. Product descriptions are offered in good
-        faith, but individual materials, finishes, woods, climates, and user
-        application methods may affect results.
+        including Founder&apos;s Toast conditioning wax or similar branded
+        goods— are provided subject to normal variation in appearance, scent,
+        texture, packaging, and performance. Product descriptions are offered in
+        good faith, but individual materials, finishes, woods, climates, and
+        user application methods may affect results.
       </p>
+
       <p>
         You are responsible for following any provided product instructions,
         testing products appropriately before full use, and using reasonable
-        care when applying any conditioning, finishing, polishing, or maintenance
-        product to drums, wood surfaces, hardware, fabrics, or other materials.
-        Except where prohibited by law, Ober Artisan Drums is not responsible
-        for damage resulting from misuse, over-application, incompatibility with
-        a surface or finish, improper storage, allergic sensitivity, or failure
-        to follow product guidance.
+        care when applying any conditioning, finishing, polishing, or
+        maintenance product to drums, wood surfaces, hardware, fabrics, or other
+        materials. Except where prohibited by law, Ober Artisan Drums is not
+        responsible for damage resulting from misuse, over-application,
+        incompatibility with a surface or finish, improper storage, allergic
+        sensitivity, or failure to follow product guidance.
       </p>
 
       <h2>9. Prohibited Conduct</h2>
+
       <ul>
         <li>Submit fraudulent, misleading, or unauthorized information</li>
+
         <li>Attempt to access restricted areas, accounts, or data</li>
+
         <li>Probe, scan, scrape, crawl, or test site vulnerabilities</li>
-        <li>Copy, automate against, or extract proprietary tool logic or outputs</li>
+
+        <li>
+          Copy, automate against, or extract proprietary tool logic or outputs
+        </li>
+
         <li>Upload unlawful, infringing, defamatory, or harmful content</li>
+
         <li>Use the site for unlawful purposes</li>
+
         <li>Disrupt, overload, or degrade website functionality</li>
       </ul>
+
       <p>
         We reserve the right to restrict access, block IPs, suspend accounts,
         remove content, refuse orders, or take legal action in response to any
@@ -193,20 +253,24 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>10. Limitation of Liability</h2>
+
       <p>
         Use of this site is at your own risk. To the fullest extent permitted by
         law, we are not liable for indirect, incidental, consequential, special,
         or punitive damages, or for service interruptions, lost profits, lost
-        data, content removal, third-party breaches, or reliance on informational
-        or recommendation-based site features.
+        data, content removal, third-party breaches, or reliance on
+        informational or recommendation-based site features.
       </p>
+
       <p>
         This includes, without limitation, reliance on the Ober LegacyPrint™
-        Voicing Engine, recommendation panels, tonal estimates, archive features,
-        or user-submitted storytelling content.
+        Voicing Engine, recommendation panels, tonal estimates, comparative
+        scores, voice profiles, archive features, or user-submitted storytelling
+        content.
       </p>
 
       <h2>11. Governing Law</h2>
+
       <p>
         These Terms are governed by the laws of the State of Tennessee, USA. All
         disputes shall be resolved exclusively in courts located in Tennessee,
@@ -214,6 +278,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>12. Modifications to Terms</h2>
+
       <p>
         We may update these Terms periodically. The most current version will
         always appear here, and your continued use of the site implies agreement
@@ -221,6 +286,7 @@ const TermsOfService = forwardRef((props, ref) => {
       </p>
 
       <h2>13. Contact Us</h2>
+
       <p>
         If you have any questions, concerns, or requests, please contact us at{' '}
         <strong>support@oberartisandrums.com</strong>.
@@ -230,4 +296,5 @@ const TermsOfService = forwardRef((props, ref) => {
 });
 
 TermsOfService.displayName = 'TermsOfService';
+
 export default TermsOfService;
