@@ -22,6 +22,12 @@
 
   --oc-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
 
+  --oc-vh: 100svh;
+
+  --oc-nav-offset: 0px;
+
+  --oc-section-height: 100svh;
+
 }
 
 html,
@@ -43,6 +49,10 @@ body {
 body.our-craft-page {
 
   background: #000;
+
+  scroll-snap-type: y mandatory;
+
+  scroll-padding-top: 0;
 
 }
 
@@ -102,95 +112,9 @@ body.our-craft-page {
 
 }
 
-.oc-next-link {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 10px;
-
-  margin: 0 auto;
-
-  padding: 0;
-
-  border: none;
-
-  background: transparent;
-
-  color: var(--oc-gold);
-
-  font-size: 1rem;
-
-  font-weight: 800;
-
-  letter-spacing: 0.01em;
-
-  cursor: pointer;
-
-  text-align: center;
-
-  text-decoration: none;
-
-  transition:
-
-    transform 0.18s ease,
-
-    opacity 0.18s ease,
-
-    color 0.18s ease;
-
-}
-
-.oc-next-link:hover {
-
-  transform: translateY(2px);
-
-  color: #e4c893;
-
-}
-
-.oc-next-link-arrow {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 1.1rem;
-
-  animation: ocFloatArrow 1.7s ease-in-out infinite;
-
-}
-
-@keyframes ocFloatArrow {
-
-  0%,
-
-  100% {
-
-    transform: translateY(0);
-
-    opacity: 0.92;
-
-  }
-
-  50% {
-
-    transform: translateY(5px);
-
-    opacity: 1;
-
-  }
-
-}
-
 /* -------------------------------------------------------------------------- */
 
-/* Story rail */
+/* Vertical story sections */
 
 /* -------------------------------------------------------------------------- */
 
@@ -202,57 +126,29 @@ body.our-craft-page {
 
 }
 
-.oc-story-rail {
-
-  display: grid;
-
-  grid-auto-flow: column;
-
-  grid-auto-columns: 100%;
-
-  overflow-x: auto;
-
-  overflow-y: hidden;
-
-  scroll-snap-type: x mandatory;
-
-  scrollbar-width: none;
-
-  -ms-overflow-style: none;
-
-}
-
-.oc-story-rail::-webkit-scrollbar {
-
-  display: none;
-
-}
-
 .oc-story-slide {
 
   position: relative;
 
-  min-height: 100svh;
+  min-height: var(--oc-section-height);
+
+  height: var(--oc-section-height);
 
   display: flex;
 
-  align-items: center;
+  align-items: stretch;
 
   justify-content: center;
 
   scroll-snap-align: start;
 
+  scroll-snap-stop: always;
+
+  scroll-margin-top: 0;
+
   overflow: hidden;
 
-}
-
-@supports (height: 100dvh) {
-
-  .oc-story-slide {
-
-    min-height: 100dvh;
-
-  }
+  isolation: isolate;
 
 }
 
@@ -268,7 +164,9 @@ body.our-craft-page {
 
   background-repeat: no-repeat;
 
-  transform: scale(1.02);
+  transform: scale(1.03);
+
+  filter: brightness(0.4) saturate(0.78);
 
 }
 
@@ -284,13 +182,15 @@ body.our-craft-page {
 
       180deg,
 
-      rgba(0, 0, 0, 0.48) 0%,
+      rgba(0, 0, 0, 0.78) 0%,
 
-      rgba(0, 0, 0, 0.58) 34%,
+      rgba(0, 0, 0, 0.74) 20%,
 
-      rgba(0, 0, 0, 0.68) 70%,
+      rgba(0, 0, 0, 0.8) 52%,
 
-      rgba(0, 0, 0, 0.8) 100%
+      rgba(0, 0, 0, 0.88) 78%,
+
+      rgba(0, 0, 0, 0.94) 100%
 
     ),
 
@@ -298,9 +198,9 @@ body.our-craft-page {
 
       circle at center,
 
-      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.03) 0%,
 
-      rgba(255, 255, 255, 0) 58%
+      rgba(255, 255, 255, 0) 56%
 
     );
 
@@ -320,13 +220,23 @@ body.our-craft-page {
 
   width: 100%;
 
-  padding: 78px 0 118px;
+  min-height: var(--oc-section-height);
+
+  height: 100%;
+
+  padding: 20px 0 22px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
 
 }
 
 .oc-story-inner {
 
   width: min(1040px, 100%);
+
+  max-height: 100%;
 
   display: flex;
 
@@ -336,9 +246,11 @@ body.our-craft-page {
 
   justify-content: center;
 
-  gap: 24px;
+  gap: 18px;
 
   margin: 0 auto;
+
+  overflow: hidden;
 
 }
 
@@ -370,11 +282,11 @@ body.our-craft-page {
 
   width: min(760px, 100%);
 
-  margin: 0 auto 14px;
+  margin: 0 auto 12px;
 
-  font-size: 1.03rem;
+  font-size: 0.98rem;
 
-  line-height: 1.72;
+  line-height: 1.6;
 
   color: var(--oc-text-soft);
 
@@ -492,21 +404,11 @@ body.our-craft-page {
 
 }
 
-.oc-discovery-usage-grid {
+.oc-discovery-summary-card {
 
-  width: min(980px, 100%);
-
-  display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 14px;
+  width: min(760px, 100%);
 
   margin: 0 auto;
-
-}
-
-.oc-discovery-usage-card {
 
   padding: 18px 18px 16px;
 
@@ -520,9 +422,11 @@ body.our-craft-page {
 
   box-shadow: var(--oc-shadow);
 
+  text-align: center;
+
 }
 
-.oc-discovery-usage-kicker {
+.oc-discovery-summary-kicker {
 
   display: inline-block;
 
@@ -540,31 +444,35 @@ body.our-craft-page {
 
 }
 
-.oc-discovery-usage-card p {
+.oc-discovery-summary-card p {
 
   margin: 0;
 
-  font-size: 0.9rem;
+  font-size: 0.92rem;
 
-  line-height: 1.56;
+  line-height: 1.58;
 
   color: var(--oc-text-soft);
 
 }
 
+/* -------------------------------------------------------------------------- */
+
+/* UI */
+
+/* -------------------------------------------------------------------------- */
+
 .oc-story-ui {
 
-  position: absolute;
+  position: fixed;
 
-  left: 50%;
+  right: 18px;
 
-  bottom: 18px;
+  top: 50%;
 
-  transform: translateX(-50%);
+  transform: translateY(-50%);
 
-  z-index: 5;
-
-  width: min(860px, calc(100% - 28px));
+  z-index: 50;
 
   display: flex;
 
@@ -572,27 +480,9 @@ body.our-craft-page {
 
   align-items: center;
 
-  gap: 10px;
+  gap: 12px;
 
-}
-
-.oc-story-arrow-row {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 16px;
-
-  padding: 9px 13px;
-
-  border-radius: 999px;
-
-  background: rgba(8, 8, 8, 0.74);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  backdrop-filter: blur(8px);
+  pointer-events: auto;
 
 }
 
@@ -604,15 +494,17 @@ body.our-craft-page {
 
   justify-content: center;
 
-  width: 40px;
+  width: 42px;
 
-  height: 40px;
+  height: 42px;
 
   border: 1px solid rgba(255, 255, 255, 0.1);
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(8, 8, 8, 0.72);
+
+  backdrop-filter: blur(8px);
 
   color: #fff;
 
@@ -632,7 +524,7 @@ body.our-craft-page {
 
 .oc-story-arrow:hover:not(:disabled) {
 
-  transform: translateY(-1px);
+  transform: scale(1.03);
 
   background: rgba(255, 255, 255, 0.07);
 
@@ -652,23 +544,35 @@ body.our-craft-page {
 
   display: flex;
 
+  flex-direction: column;
+
   align-items: center;
 
   gap: 10px;
+
+  padding: 10px 8px;
+
+  border-radius: 999px;
+
+  background: rgba(8, 8, 8, 0.68);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(8px);
 
 }
 
 .oc-story-dot {
 
-  width: 10px;
+  width: 9px;
 
-  height: 10px;
+  height: 9px;
 
   border: none;
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.26);
 
   cursor: pointer;
 
@@ -708,12 +612,6 @@ body.our-craft-page {
 
   }
 
-  .oc-discovery-usage-grid {
-
-    grid-template-columns: 1fr;
-
-  }
-
 }
 
 @media (max-width: 780px) {
@@ -726,7 +624,7 @@ body.our-craft-page {
 
   .oc-story-wrap {
 
-    padding: 58px 0 96px;
+    padding: 16px 0 18px;
 
   }
 
@@ -734,15 +632,15 @@ body.our-craft-page {
 
     width: min(100%, 430px);
 
-    gap: 12px;
+    gap: 10px;
 
   }
 
   .oc-story-title {
 
-    font-size: clamp(2.15rem, 9vw, 3.35rem);
+    font-size: clamp(2rem, 8.2vw, 3rem);
 
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 
   }
 
@@ -754,11 +652,11 @@ body.our-craft-page {
 
   .oc-story-copy p {
 
-    font-size: 0.9rem;
+    font-size: 0.84rem;
 
-    line-height: 1.48;
+    line-height: 1.38;
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
     max-width: 100%;
 
@@ -768,7 +666,7 @@ body.our-craft-page {
 
     width: 100%;
 
-    gap: 10px;
+    gap: 8px;
 
   }
 
@@ -782,7 +680,7 @@ body.our-craft-page {
 
   .oc-story-mini-card {
 
-    padding: 12px 12px 10px;
+    padding: 10px 10px 9px;
 
     border-radius: 14px;
 
@@ -792,137 +690,15 @@ body.our-craft-page {
 
     gap: 8px;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 
   }
 
   .oc-story-mini-icon {
 
-    width: 24px;
+    width: 22px;
 
-    height: 24px;
-
-  }
-
-  .oc-story-mini-card h3 {
-
-    font-size: 0.88rem;
-
-  }
-
-  .oc-story-mini-card p {
-
-    font-size: 0.79rem;
-
-    line-height: 1.42;
-
-  }
-
-  .oc-story-ui {
-
-    bottom: 10px;
-
-    width: calc(100% - 20px);
-
-    gap: 8px;
-
-  }
-
-  .oc-story-arrow-row {
-
-    gap: 10px;
-
-    padding: 7px 10px;
-
-  }
-
-  .oc-story-arrow {
-
-    width: 34px;
-
-    height: 34px;
-
-  }
-
-  .oc-story-dot {
-
-    width: 8px;
-
-    height: 8px;
-
-  }
-
-  .oc-discovery-usage-card {
-
-    padding: 14px 14px 13px;
-
-    border-radius: 14px;
-
-  }
-
-  .oc-discovery-usage-card p {
-
-    font-size: 0.78rem;
-
-    line-height: 1.38;
-
-  }
-
-}
-
-@media (max-width: 560px) {
-
-  .oc-kicker {
-
-    margin-bottom: 10px;
-
-    font-size: 0.62rem;
-
-  }
-
-  .oc-story-wrap {
-
-    padding-top: 50px;
-
-    padding-bottom: 88px;
-
-  }
-
-  .oc-story-inner {
-
-    width: min(100%, 360px);
-
-    gap: 10px;
-
-  }
-
-  .oc-story-title {
-
-    font-size: clamp(1.95rem, 8.6vw, 2.85rem);
-
-    line-height: 0.95;
-
-  }
-
-  .oc-story-copy p {
-
-    font-size: 0.84rem;
-
-    line-height: 1.42;
-
-    margin-bottom: 8px;
-
-  }
-
-  .oc-story-grid {
-
-    gap: 8px;
-
-  }
-
-  .oc-story-mini-card {
-
-    padding: 10px 10px 9px;
+    height: 22px;
 
   }
 
@@ -934,15 +710,151 @@ body.our-craft-page {
 
   .oc-story-mini-card p {
 
-    font-size: 0.74rem;
+    font-size: 0.72rem;
 
-    line-height: 1.36;
+    line-height: 1.3;
 
   }
 
-  .oc-story-arrow-row {
+  .oc-discovery-summary-card {
 
-    padding: 6px 9px;
+    padding: 12px 12px 11px;
+
+    border-radius: 14px;
+
+  }
+
+  .oc-discovery-summary-card p {
+
+    font-size: 0.76rem;
+
+    line-height: 1.34;
+
+  }
+
+  .oc-story-ui {
+
+    right: 10px;
+
+    gap: 8px;
+
+  }
+
+  .oc-story-arrow {
+
+    width: 36px;
+
+    height: 36px;
+
+  }
+
+  .oc-story-dots {
+
+    gap: 8px;
+
+    padding: 8px 7px;
+
+  }
+
+  .oc-story-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+  }
+
+}
+
+@media (max-width: 560px) {
+
+  .oc-kicker {
+
+    margin-bottom: 6px;
+
+    font-size: 0.58rem;
+
+  }
+
+  .oc-story-wrap {
+
+    padding-top: 12px;
+
+    padding-bottom: 14px;
+
+  }
+
+  .oc-story-inner {
+
+    width: min(100%, 360px);
+
+    gap: 8px;
+
+  }
+
+  .oc-story-title {
+
+    font-size: clamp(1.62rem, 7vw, 2.15rem);
+
+    line-height: 0.95;
+
+    margin-bottom: 8px;
+
+  }
+
+  .oc-story-copy p {
+
+    font-size: 0.74rem;
+
+    line-height: 1.24;
+
+    margin-bottom: 6px;
+
+  }
+
+  .oc-story-grid {
+
+    gap: 7px;
+
+  }
+
+  .oc-story-mini-card {
+
+    padding: 8px 8px 7px;
+
+  }
+
+  .oc-story-mini-card h3 {
+
+    font-size: 0.75rem;
+
+  }
+
+  .oc-story-mini-card p {
+
+    font-size: 0.67rem;
+
+    line-height: 1.22;
+
+  }
+
+  .oc-discovery-summary-kicker {
+
+    font-size: 0.58rem;
+
+  }
+
+  .oc-discovery-summary-card p {
+
+    font-size: 0.7rem;
+
+    line-height: 1.24;
+
+  }
+
+  .oc-story-ui {
+
+    right: 8px;
 
   }
 
@@ -954,21 +866,53 @@ body.our-craft-page {
 
   }
 
-  .oc-discovery-usage-kicker {
-
-    font-size: 0.64rem;
-
-  }
-
 }
 
 @media (max-width: 430px) {
+
+  .oc-story-wrap {
+
+    padding-top: 10px;
+
+    padding-bottom: 12px;
+
+  }
+
+  .oc-story-title {
+
+    font-size: clamp(1.5rem, 6.5vw, 1.95rem);
+
+  }
+
+  .oc-story-copy p {
+
+    font-size: 0.7rem;
+
+    line-height: 1.18;
+
+  }
 
   .oc-story-grid-philosophy,
 
   .oc-story-grid-discovery {
 
     grid-template-columns: 1fr;
+
+  }
+
+  .oc-story-ui {
+
+    right: 6px;
+
+  }
+
+  .oc-story-slide-philosophy .oc-story-inner,
+
+  .oc-story-slide-discovery .oc-story-inner {
+
+    justify-content: flex-start;
+
+    padding-top: 6px;
 
   }
 
