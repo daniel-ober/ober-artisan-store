@@ -1793,73 +1793,47 @@ const FeuzonProductDetail = () => {
               </div>
             </div>
 
-<div className="feuzon-overview-card">
+            <div className="feuzon-overview-card">
+              <p className="feuzon-story-lede">
+                FEUZØN is built for players who want the immediacy and focus of
+                a modern drum, but with more depth, complexity, and character
+                beneath the stick.
+              </p>
 
-  <p className="feuzon-story-lede">
+              <div className="feuzon-overview-copy">
+                <p className="feuzon-story-copy">
+                  By pairing a steam-bent outer shell with a voiced stave
+                  interior, FEUZØN creates a distinctive response that feels
+                  articulate up front, full through the body, and alive across a
+                  wide tuning range.
+                </p>
 
-    FEUZØN is built for players who want the immediacy and focus of a
+                <p className="feuzon-story-copy">
+                  It sits confidently between precision and personality —
+                  controlled when needed, expressive when pushed, and visually
+                  striking from every angle.
+                </p>
+              </div>
 
-    modern drum, but with more depth, complexity, and character beneath
+              <div className="feuzon-overview-divider" />
 
-    the stick.
+              <h3 className="feuzon-overview-highlights-title">
+                Key Build Highlights
+              </h3>
 
-  </p>
+              <ul className="feuzon-overview-highlights">
+                {feuzonHighlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
 
-  <div className="feuzon-overview-copy">
-
-    <p className="feuzon-story-copy">
-
-      By pairing a steam-bent outer shell with a voiced stave interior,
-
-      FEUZØN creates a distinctive response that feels articulate up
-
-      front, full through the body, and alive across a wide tuning range.
-
-    </p>
-
-    <p className="feuzon-story-copy">
-
-      It sits confidently between precision and personality — controlled
-
-      when needed, expressive when pushed, and visually striking from
-
-      every angle.
-
-    </p>
-
-  </div>
-
-  <div className="feuzon-overview-divider" />
-
-  <h3 className="feuzon-overview-highlights-title">
-
-    Key Build Highlights
-
-  </h3>
-
-  <ul className="feuzon-overview-highlights">
-
-    {feuzonHighlights.map((item) => (
-
-      <li key={item}>{item}</li>
-
-    ))}
-
-  </ul>
-
-  <p className="order-to-build-disclaimer feuzon-overview-disclaimer">
-
-    *Each Ober Artisan drum is built to order. The instrument you
-
-    receive will closely reflect the design shown, but wood figure,
-
-    stain absorption, scorch response, and exact visual character will
-
-    vary based on your final configuration.
-
-  </p>
-
-</div>
+              <p className="order-to-build-disclaimer feuzon-overview-disclaimer">
+                *Each Ober Artisan drum is built to order. The instrument you
+                receive will closely reflect the design shown, but wood figure,
+                stain absorption, scorch response, and exact visual character
+                will vary based on your final configuration.
+              </p>
+            </div>
           </div>
 
           <aside className="feuzon-builder-card">
