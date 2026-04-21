@@ -177,16 +177,34 @@ const shellOptions = {
 };
 
 const hardwareOptions = [
-  { label: 'Chrome', value: 'Chrome' },
+  {
+    label: 'Chrome',
 
-  { label: 'Black Nickel (+$50)', value: 'Black Nickel' },
+    value: 'Chrome',
 
-  { label: 'Brass / Gold (+$150)', value: 'Brass/Gold' },
+    description: 'Classic and clean.',
+  },
+
+  {
+    label: 'Black Nickel',
+
+    value: 'Black Nickel',
+
+    description: 'Cooler and darker visual lean.',
+  },
+
+  {
+    label: 'Brass / Gold',
+
+    value: 'Brass/Gold',
+
+    description: 'Richer, warmer premium statement.',
+  },
 ];
 
 const hoopOptions = [
   {
-    label: 'Die-Cast (Recommended)',
+    label: 'Die-Cast',
 
     value: 'Die-Cast',
 
@@ -194,7 +212,7 @@ const hoopOptions = [
   },
 
   {
-    label: 'Triple Flange (-$100)',
+    label: 'Triple Flange',
 
     value: 'Triple Flange',
 
@@ -274,6 +292,15 @@ const finishSystemOptions = [
 
     helperText:
       'Lets the exterior wood and natural scorch speak most directly with a polished gloss finish.',
+  },
+
+  {
+    label: 'Natural Satin',
+
+    value: 'Natural Satin',
+
+    helperText:
+      'Keeps the shell natural, but with a softer sheen and more understated finish.',
   },
 
   {
@@ -604,42 +631,115 @@ const normalizeDepthValue = (value) => {
   return num.toFixed(1);
 };
 
+const getReadableDelta = (delta) => {
+  if (delta === 0) return '';
+
+  if (delta > 0) return `+$${delta}`;
+
+  return `-$${Math.abs(delta)}`;
+};
+
+const getDeltaClassName = (delta, isSelected = false) => {
+  if (isSelected) return 'is-selected';
+
+  if (delta > 0) return 'is-positive';
+
+  if (delta < 0) return 'is-negative';
+
+  return '';
+};
+
+const computeFeuzonPrice = ({ size, depth, hardwareColor, hoopType }) => {
+  let price = basePrices[String(size)] || 0;
+
+  price += depthPrices[String(size)]?.[normalizeDepthValue(depth)] || 0;
+
+  price += hardwareUpchargeMap[hardwareColor] || 0;
+
+  price += hoopUpchargeMap[hoopType] || 0;
+
+  return price;
+};
+
+const getStaveCountLabel = (option = '') => {
+  const match = String(option).match(/^(\d+)/);
+
+  return match ? `${match[1]} staves` : option;
+};
+
+const getStaveThicknessLabel = (option = '') => {
+  const parts = String(option).split(' - ');
+
+  return parts[1] || '';
+};
+
 const buildFeuzonCartId = ({
   stripePriceId,
+
   size,
+
   depth,
+
   lugs,
+
   staveQuantity,
+
   outerShell,
+
   innerStave,
+
   hardwareColor,
+
   hoopType,
+
   snareBed,
+
   bearingEdge,
+
   finishSystem,
+
   stainStyle,
+
   scorchStyle,
+
   stainColor,
 }) =>
   [
     'feuzon',
+
     stripePriceId || 'fallback',
+
     size,
+
     depth,
+
     lugs,
+
     staveQuantity,
+
     outerShell,
+
     innerStave,
+
     hardwareColor,
+
     hoopType,
+
     snareBed,
+
     bearingEdge,
+
     finishSystem,
+
     stainStyle,
+
     scorchStyle,
+
     stainColor,
   ]
+
     .map((part) => String(part || '').replace(/\s+/g, '-'))
+
     .join('-');
 
 const getBearingEdgeMeta = (value) =>
@@ -1063,8 +1163,9 @@ const buildFeuzonVoiceRead = ({
 
   if (summaryMatch?.recordingMic) recordingMic = summaryMatch.recordingMic;
 
-  if (summaryMatch?.playingSituation)
+  if (summaryMatch?.playingSituation) {
     playingSituation = summaryMatch.playingSituation;
+  }
 
   if (Array.isArray(summaryMatch?.secondaryGenres)) {
     secondaryGenres = summaryMatch.secondaryGenres;
@@ -1073,7 +1174,11 @@ const buildFeuzonVoiceRead = ({
   const finishRead =
     finishSystem === 'Natural Gloss'
       ? 'Natural gloss'
-      : `${stainColor || 'Stained'} ${stainStyle === 'faded-stained' ? 'faded' : 'full'} ${finishSystem === 'Stained Satin' ? 'satin' : 'gloss'}`;
+      : finishSystem === 'Natural Satin'
+        ? 'Natural satin'
+        : `${stainColor || 'Stained'} ${
+            stainStyle === 'faded-stained' ? 'faded' : 'full'
+          } ${finishSystem === 'Stained Satin' ? 'satin' : 'gloss'}`;
 
   return {
     highlightedCharacteristics,
@@ -1090,7 +1195,11 @@ const buildFeuzonVoiceRead = ({
 
     profile,
 
-    specRead: `${size}" x ${depth}" • ${lugs} lugs • ${staveOption} • ${outerShell} / ${innerStave} • ${hardwareColor} • ${hoopType} • ${snareBed} snare bed • ${scorchStyle === 'scorched' ? 'Natural scorched' : 'Non-scorched'} exterior • ${finishRead} • Trick GS007 • ${bearingEdgeSpecMap[bearingEdge] || bearingEdge} • PureSound wires chosen by craftsman • Remo Controlled Sound Coated batter • Remo Ambassador Snare Side`,
+    specRead: `${size}" x ${depth}" • ${lugs} lugs • ${staveOption} • ${outerShell} / ${innerStave} • ${hardwareColor} • ${hoopType} • ${snareBed} snare bed • ${
+      scorchStyle === 'scorched' ? 'Natural scorched' : 'Non-scorched'
+    } exterior • ${finishRead} • Trick GS007 • ${
+      bearingEdgeSpecMap[bearingEdge] || bearingEdge
+    } • PureSound wires chosen by craftsman • Remo Controlled Sound Coated batter • Remo Ambassador Snare Side`,
   };
 };
 
@@ -1157,7 +1266,7 @@ const FeuzonProductDetail = () => {
 
   const [chartView, setChartView] = useState('spider');
 
-  const [openBuilderSection, setOpenBuilderSection] = useState('construction');
+  const [openBuilderSection, setOpenBuilderSection] = useState('foundation');
 
   const stainColorOptions = useMemo(
     () => stainColorOptionsByWood[outerShell] || [],
@@ -1166,7 +1275,7 @@ const FeuzonProductDetail = () => {
   );
 
   useEffect(() => {
-    if (finishSystem === 'Natural Gloss') {
+    if (finishSystem === 'Natural Gloss' || finishSystem === 'Natural Satin') {
       return;
     }
 
@@ -1182,7 +1291,7 @@ const FeuzonProductDetail = () => {
 
     if (!shellGroup) return null;
 
-    if (finishSystem === 'Natural Gloss') {
+    if (finishSystem === 'Natural Gloss' || finishSystem === 'Natural Satin') {
       return shellGroup.Natural?.[scorchStyle] || null;
     }
 
@@ -1205,12 +1314,6 @@ const FeuzonProductDetail = () => {
   );
 
   const selectedHoopMeta = useMemo(() => getHoopMeta(hoopType), [hoopType]);
-
-  const selectedFinishSystemMeta = useMemo(
-    () => getFinishSystemMeta(finishSystem),
-
-    [finishSystem]
-  );
 
   const shellComboNarrative = useMemo(
     () => getShellComboNarrative(outerShell, innerStave),
@@ -1240,20 +1343,63 @@ const FeuzonProductDetail = () => {
     'Trick GS007 throw-off and craftsman-selected PureSound wires.',
   ];
 
-  const resolvedStainStyle =
-    finishSystem === 'Natural Gloss' ? 'natural' : stainStyle;
+  const isNaturalFinish =
+    finishSystem === 'Natural Gloss' || finishSystem === 'Natural Satin';
 
-  const resolvedStainColor =
-    finishSystem === 'Natural Gloss' ? 'none' : stainColor;
+  const resolvedStainStyle = isNaturalFinish ? 'natural' : stainStyle;
 
-  const constructionSummary = `${size}" x ${depth}" • ${outerShell} / ${innerStave} • ${staveOption}`;
+  const resolvedStainColor = isNaturalFinish ? 'none' : stainColor;
 
-  const finishSummary =
-    finishSystem === 'Natural Gloss'
-      ? `${finishSystem} • ${scorchStyle === 'scorched' ? 'Natural Scorched' : 'Non-Scorched'}`
-      : `${finishSystem} • ${stainStyle === 'faded-stained' ? 'Faded' : 'Full'} • ${stainColor}`;
+  const foundationSummary = `${size}" x ${depth}" • ${lugs} lugs • ${staveOption}`;
 
-  const hardwareSummary = `${hardwareColor} • ${hoopType} • ${bearingEdge} • ${snareBed}`;
+  const shellSummary = `${outerShell} / ${innerStave}`;
+
+  const finishSummary = isNaturalFinish
+    ? `${scorchStyle === 'scorched' ? 'Natural Scorched' : 'Non-Scorched'} • ${
+        finishSystem === 'Natural Satin' ? 'Natural Satin' : 'Natural Gloss'
+      }`
+    : `${scorchStyle === 'scorched' ? 'Natural Scorched' : 'Non-Scorched'} • ${
+        stainColorOptions.find((item) => item.value === stainColor)?.label ||
+        stainColor
+      } • ${stainStyle === 'faded-stained' ? 'Faded' : 'Full'} • ${
+        finishSystem === 'Stained Satin' ? 'Satin' : 'Gloss'
+      }`;
+
+  const responseSummary = `${bearingEdge} • ${snareBed}`;
+
+  const hardwareSummary = `${hoopType} • ${hardwareColor}`;
+
+  const currentBuildPrice = useMemo(() => {
+    return computeFeuzonPrice({
+      size,
+
+      depth,
+
+      hardwareColor,
+
+      hoopType,
+    });
+  }, [size, depth, hardwareColor, hoopType]);
+
+  const getOptionDeltaMeta = (nextSelections) => {
+    const nextPrice = computeFeuzonPrice({
+      size: nextSelections.size ?? size,
+
+      depth: nextSelections.depth ?? depth,
+
+      hardwareColor: nextSelections.hardwareColor ?? hardwareColor,
+
+      hoopType: nextSelections.hoopType ?? hoopType,
+    });
+
+    const delta = nextPrice - currentBuildPrice;
+
+    return {
+      text: getReadableDelta(delta),
+
+      className: getDeltaClassName(delta),
+    };
+  };
 
   const currentCartId = useMemo(
     () =>
@@ -1477,9 +1623,7 @@ const FeuzonProductDetail = () => {
     const normalizeKey = (key) =>
       String(key || '')
         .toLowerCase()
-
         .replace(/\s+/g, ' ')
-
         .trim();
 
     const availableKeys = Object.keys(feuzonSummaries || {}).filter(
@@ -1598,38 +1742,54 @@ const FeuzonProductDetail = () => {
     }
   }, [cart, currentCartId]);
 
-  const handleSizeChange = (e) => {
-    const newSize = e.target.value;
+  const handleSizeSelect = (newSize) => {
+    if (newSize === size) return;
 
-    setSize(newSize);
-
-    setDepth(Object.keys(depthPrices[newSize])[0]);
+    const nextDepth = Object.keys(depthPrices[newSize])[0];
 
     const nextLugs = lugOptions[newSize][0];
 
-    setLugs(nextLugs);
-
     const nextStaves = staveMapping[newSize]?.[Number(nextLugs)] || [];
+
+    setSize(newSize);
+
+    setDepth(nextDepth);
+
+    setLugs(nextLugs);
 
     setStaveOption(nextStaves[0] || '');
   };
 
-  const handleDepthChange = (e) => {
-    setDepth(e.target.value);
+  const handleDepthSelect = (newDepth) => {
+    setDepth(newDepth);
   };
 
-  const handleLugChange = (e) => {
-    const newLug = e.target.value;
+  const handleOuterShellSelect = (newOuterShell) => {
+    if (newOuterShell === outerShell) return;
 
-    setLugs(newLug);
+    const nextInnerOptions = shellOptions[newOuterShell] || [];
+
+    setOuterShell(newOuterShell);
+
+    setInnerStave(nextInnerOptions[0] || '');
+  };
+
+  const handleInnerStaveSelect = (newInnerStave) => {
+    setInnerStave(newInnerStave);
+  };
+
+  const handleLugSelect = (newLug) => {
+    if (newLug === lugs) return;
 
     const nextStaves = staveMapping[size]?.[Number(newLug)] || [];
 
+    setLugs(newLug);
+
     setStaveOption(nextStaves[0] || '');
   };
 
-  const handleStaveChange = (e) => {
-    setStaveOption(e.target.value);
+  const handleStaveSelect = (newStaveOption) => {
+    setStaveOption(newStaveOption);
   };
 
   const handleAddToCart = async () => {
@@ -1843,9 +2003,9 @@ const FeuzonProductDetail = () => {
               <h2>Configure FEUZØN</h2>
 
               <p>
-                Build your FEUZØN in three guided steps: select your
-                construction, choose your finish, then refine hardware and
-                response.
+                Build your FEUZØN in five guided steps: shape your foundation,
+                build your hybrid shell, choose your finish, dial in the
+                response, then refine your hardware.
               </p>
             </div>
 
@@ -1853,12 +2013,12 @@ const FeuzonProductDetail = () => {
               <div className="feuzon-builder-section">
                 <button
                   type="button"
-                  className={`feuzon-builder-section-toggle ${openBuilderSection === 'construction' ? 'is-open' : ''}`}
+                  className={`feuzon-builder-section-toggle ${
+                    openBuilderSection === 'foundation' ? 'is-open' : ''
+                  }`}
                   onClick={() =>
                     setOpenBuilderSection(
-                      openBuilderSection === 'construction'
-                        ? ''
-                        : 'construction'
+                      openBuilderSection === 'foundation' ? '' : 'foundation'
                     )
                   }
                 >
@@ -1866,105 +2026,260 @@ const FeuzonProductDetail = () => {
                     <span className="feuzon-builder-section-step">1</span>
 
                     <div>
-                      <h3>Select your construction</h3>
+                      <h3>Shape Your Foundation</h3>
 
-                      <p>{constructionSummary}</p>
+                      <p>{foundationSummary}</p>
                     </div>
                   </div>
 
                   <span className="feuzon-builder-section-chevron">
-                    {openBuilderSection === 'construction' ? '−' : '+'}
+                    {openBuilderSection === 'foundation' ? '−' : '+'}
                   </span>
                 </button>
 
-                {openBuilderSection === 'construction' && (
+                {openBuilderSection === 'foundation' && (
                   <div className="feuzon-builder-section-body">
-                    <label htmlFor="size">Snare Size (Diameter)</label>
+                    <label>Diameter</label>
 
-                    <select id="size" value={size} onChange={handleSizeChange}>
-                      {Object.keys(basePrices).map((sizeOption) => (
-                        <option key={sizeOption} value={sizeOption}>
-                          {sizeOption}" - Base Price: ${basePrices[sizeOption]}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="feuzon-option-grid feuzon-option-grid-compact">
+                      {Object.keys(basePrices).map((sizeOption) => {
+                        const isSelected = size === sizeOption;
 
-                    <label htmlFor="depth">Depth</label>
+                        const deltaMeta = getOptionDeltaMeta({
+                          size: sizeOption,
+                        });
 
-                    <select
-                      id="depth"
-                      value={depth}
-                      onChange={handleDepthChange}
-                    >
-                      {Object.keys(depthPrices[size]).map((depthOption) => (
-                        <option key={depthOption} value={depthOption}>
-                          {depthOption}"{' '}
-                          {depthPrices[size][depthOption] > 0
-                            ? `+ $${depthPrices[size][depthOption]}`
-                            : ''}
-                        </option>
-                      ))}
-                    </select>
+                        return (
+                          <button
+                            key={sizeOption}
+                            type="button"
+                            className={`feuzon-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleSizeSelect(sizeOption)}
+                          >
+                            <span className="feuzon-option-title">
+                              {sizeOption}"
+                            </span>
 
-                    <label htmlFor="outerShell">
-                      Exterior Shell (Steam Bent)
-                    </label>
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`feuzon-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                    <select
-                      id="outerShell"
-                      value={outerShell}
-                      onChange={(e) => setOuterShell(e.target.value)}
-                    >
-                      {Object.keys(shellOptions).map((shell) => (
-                        <option key={shell} value={shell}>
-                          {shell}
-                        </option>
-                      ))}
-                    </select>
+                    <label>Depth</label>
 
-                    <label htmlFor="innerStave">Interior Shell (Stave)</label>
+                    <div className="feuzon-option-grid feuzon-option-grid-compact">
+                      {Object.keys(depthPrices[size]).map((depthOption) => {
+                        const isSelected = depth === depthOption;
 
-                    <select
-                      id="innerStave"
-                      value={innerStave}
-                      onChange={(e) => setInnerStave(e.target.value)}
-                    >
-                      {(shellOptions[outerShell] || []).map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+                        const deltaMeta = getOptionDeltaMeta({
+                          depth: depthOption,
+                        });
+
+                        return (
+                          <button
+                            key={depthOption}
+                            type="button"
+                            className={`feuzon-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleDepthSelect(depthOption)}
+                          >
+                            <span className="feuzon-option-title">
+                              {depthOption}"
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`feuzon-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Lug Quantity</label>
+
+                    <div className="feuzon-option-grid feuzon-option-grid-compact">
+                      {(lugOptions[size] || []).map((lugOption) => {
+                        const isSelected = lugs === lugOption;
+
+                        return (
+                          <button
+                            key={lugOption}
+                            type="button"
+                            className={`feuzon-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleLugSelect(lugOption)}
+                          >
+                            <span className="feuzon-option-title">
+                              {lugOption} Lugs
+                            </span>
+
+                            {isSelected && (
+                              <span className="feuzon-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Stave Quantity &amp; Shell Thickness</label>
+
+                    <div className="feuzon-option-grid">
+                      {staveQuantities.map((option) => {
+                        const isSelected = staveOption === option;
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleStaveSelect(option)}
+                          >
+                            <span className="feuzon-option-title">
+                              {getStaveCountLabel(option)}
+                            </span>
+
+                            <span className="feuzon-option-subtitle">
+                              {getStaveThicknessLabel(option)}
+                            </span>
+
+                            {isSelected && (
+                              <span className="feuzon-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="feuzon-builder-next-row">
+                      <button
+                        type="button"
+                        className="feuzon-builder-next-button"
+                        onClick={() => setOpenBuilderSection('shell')}
+                      >
+                        Continue to Shell
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div className="feuzon-builder-section">
+                <button
+                  type="button"
+                  className={`feuzon-builder-section-toggle ${
+                    openBuilderSection === 'shell' ? 'is-open' : ''
+                  }`}
+                  onClick={() =>
+                    setOpenBuilderSection(
+                      openBuilderSection === 'shell' ? '' : 'shell'
+                    )
+                  }
+                >
+                  <div className="feuzon-builder-section-heading">
+                    <span className="feuzon-builder-section-step">2</span>
+
+                    <div>
+                      <h3>Build Your Hybrid Shell</h3>
+
+                      <p>{shellSummary}</p>
+                    </div>
+                  </div>
+
+                  <span className="feuzon-builder-section-chevron">
+                    {openBuilderSection === 'shell' ? '−' : '+'}
+                  </span>
+                </button>
+
+                {openBuilderSection === 'shell' && (
+                  <div className="feuzon-builder-section-body">
+                    <label>Exterior Shell (Steam Bent)</label>
+
+                    <div className="feuzon-option-grid">
+                      {Object.keys(shellOptions).map((shell) => {
+                        const isSelected = outerShell === shell;
+
+                        return (
+                          <button
+                            key={shell}
+                            type="button"
+                            className={`feuzon-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleOuterShellSelect(shell)}
+                          >
+                            <span className="feuzon-option-title">{shell}</span>
+
+                            {isSelected && (
+                              <span className="feuzon-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Paired Interior Stave Shell</label>
+
+                    <div className="feuzon-option-grid">
+                      {(shellOptions[outerShell] || []).map((option) => {
+                        const isSelected = innerStave === option;
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleInnerStaveSelect(option)}
+                          >
+                            <span className="feuzon-option-title">
+                              {option}
+                            </span>
+
+                            {isSelected && (
+                              <span className="feuzon-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     <p className="feuzon-select-helper">
                       {shellComboNarrative}
                     </p>
-
-                    <label htmlFor="lugs">Lug Quantity</label>
-
-                    <select id="lugs" value={lugs} onChange={handleLugChange}>
-                      {(lugOptions[size] || []).map((lugOption) => (
-                        <option key={lugOption} value={lugOption}>
-                          {lugOption} Lugs
-                        </option>
-                      ))}
-                    </select>
-
-                    <label htmlFor="staves">
-                      Stave Quantity &amp; Shell Thickness
-                    </label>
-
-                    <select
-                      id="staves"
-                      value={staveOption}
-                      onChange={handleStaveChange}
-                    >
-                      {staveQuantities.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
 
                     <div className="feuzon-builder-next-row">
                       <button
@@ -1982,7 +2297,9 @@ const FeuzonProductDetail = () => {
               <div className="feuzon-builder-section">
                 <button
                   type="button"
-                  className={`feuzon-builder-section-toggle ${openBuilderSection === 'finish' ? 'is-open' : ''}`}
+                  className={`feuzon-builder-section-toggle ${
+                    openBuilderSection === 'finish' ? 'is-open' : ''
+                  }`}
                   onClick={() =>
                     setOpenBuilderSection(
                       openBuilderSection === 'finish' ? '' : 'finish'
@@ -1990,10 +2307,10 @@ const FeuzonProductDetail = () => {
                   }
                 >
                   <div className="feuzon-builder-section-heading">
-                    <span className="feuzon-builder-section-step">2</span>
+                    <span className="feuzon-builder-section-step">3</span>
 
                     <div>
-                      <h3>Choose your finish</h3>
+                      <h3>Choose Your Finish</h3>
 
                       <p>{finishSummary}</p>
                     </div>
@@ -2005,92 +2322,622 @@ const FeuzonProductDetail = () => {
                 </button>
 
                 {openBuilderSection === 'finish' && (
-                  <div className="feuzon-builder-section-body">
-                    <label htmlFor="finishSystem">Finish System</label>
 
-                    <select
-                      id="finishSystem"
-                      value={finishSystem}
-                      onChange={(e) => setFinishSystem(e.target.value)}
-                    >
-                      {finishSystemOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                  <div className="feuzon-builder-section-body">
+
+                    <label>Exterior Scorch</label>
+
+                    <div className="feuzon-option-grid">
+
+                      {scorchOptions.map((option) => {
+
+                        const isSelected = scorchStyle === option.value;
+
+                        return (
+
+                          <button
+
+                            key={option.value}
+
+                            type="button"
+
+                            className={`feuzon-option-tile ${
+
+                              isSelected ? 'is-selected' : ''
+
+                            }`}
+
+                            onClick={() => setScorchStyle(option.value)}
+
+                          >
+
+                            <span className="feuzon-option-title">
+
+                              {option.label}
+
+                            </span>
+
+                            {isSelected && (
+
+                              <span className="feuzon-option-meta is-selected">
+
+                                Selected
+
+                              </span>
+
+                            )}
+
+                          </button>
+
+                        );
+
+                      })}
+
+                    </div>
 
                     <p className="feuzon-select-helper">
-                      {selectedFinishSystemMeta.helperText}
+
+                      Choose whether the exterior stays cleaner and more
+
+                      restrained or leans further into FEUZØN’s scorched visual
+
+                      character.
+
                     </p>
 
-                    {finishSystem !== 'Natural Gloss' && (
+                    <label>Finish Direction</label>
+
+                    <div className="feuzon-option-grid">
+
+                      <button
+
+                        type="button"
+
+                        className={`feuzon-option-tile feuzon-option-tile-detail ${
+
+                          isNaturalFinish ? 'is-selected' : ''
+
+                        }`}
+
+                        onClick={() => setFinishSystem('Natural Gloss')}
+
+                      >
+
+                        <span className="feuzon-option-title">Natural</span>
+
+                        <span className="feuzon-option-subtitle">
+
+                          Keep the shell closer to its raw wood and torch
+
+                          character.
+
+                        </span>
+
+                        {isNaturalFinish && (
+
+                          <span className="feuzon-option-meta is-selected">
+
+                            Selected
+
+                          </span>
+
+                        )}
+
+                      </button>
+
+                      <button
+
+                        type="button"
+
+                        className={`feuzon-option-tile feuzon-option-tile-detail ${
+
+                          !isNaturalFinish ? 'is-selected' : ''
+
+                        }`}
+
+                        onClick={() => setFinishSystem('Stained Gloss')}
+
+                      >
+
+                        <span className="feuzon-option-title">Stained</span>
+
+                        <span className="feuzon-option-subtitle">
+
+                          Add a richer stained finish with more visual
+
+                          direction.
+
+                        </span>
+
+                        {!isNaturalFinish && (
+
+                          <span className="feuzon-option-meta is-selected">
+
+                            Selected
+
+                          </span>
+
+                        )}
+
+                      </button>
+
+                    </div>
+
+                    {!isNaturalFinish && (
+
                       <>
-                        <label htmlFor="stainStyle">Stain Style</label>
 
-                        <select
-                          id="stainStyle"
-                          value={stainStyle}
-                          onChange={(e) => setStainStyle(e.target.value)}
-                        >
-                          {stainStyleOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
+                        <label>Stain Color</label>
 
-                        <label htmlFor="stainColor">Stain Color</label>
+                        <div className="feuzon-finish-swatch-grid">
 
-                        <select
-                          id="stainColor"
-                          value={stainColor}
-                          onChange={(e) => setStainColor(e.target.value)}
-                        >
-                          {stainColorOptions.map((option) => (
-                            <option key={option.value} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
+                          {stainColorOptions.map((option) => {
+
+                            const preview =
+
+                              FEUZON_SWATCHES?.[outerShell]?.['full-stained']?.[
+
+                                option.value
+
+                              ]?.[scorchStyle] || null;
+
+                            const isSelected = stainColor === option.value;
+
+                            return (
+
+                              <button
+
+                                key={option.value}
+
+                                type="button"
+
+                                className={`feuzon-finish-swatch-button ${
+
+                                  isSelected ? 'is-selected' : ''
+
+                                }`}
+
+                                onClick={() => setStainColor(option.value)}
+
+                              >
+
+                                <span className="feuzon-finish-swatch-image">
+
+                                  {preview ? (
+
+                                    <img src={preview} alt={option.label} />
+
+                                  ) : null}
+
+                                </span>
+
+                                <span className="feuzon-finish-swatch-overlay" />
+
+                                <span className="feuzon-finish-swatch-content">
+
+                                  <span className="feuzon-finish-swatch-title">
+
+                                    {option.label}
+
+                                  </span>
+
+                                  {isSelected && (
+
+                                    <span className="feuzon-finish-swatch-meta">
+
+                                      Selected
+
+                                    </span>
+
+                                  )}
+
+                                </span>
+
+                              </button>
+
+                            );
+
+                          })}
+
+                        </div>
+
+                        <label>Stain Style</label>
+
+                        <div className="feuzon-finish-swatch-grid">
+
+                          {stainStyleOptions.map((option) => {
+
+                            const preview =
+
+                              FEUZON_SWATCHES?.[outerShell]?.[option.value]?.[
+
+                                stainColor
+
+                              ]?.[scorchStyle] || null;
+
+                            const isSelected = stainStyle === option.value;
+
+                            return (
+
+                              <button
+
+                                key={option.value}
+
+                                type="button"
+
+                                className={`feuzon-finish-swatch-button ${
+
+                                  isSelected ? 'is-selected' : ''
+
+                                }`}
+
+                                onClick={() => setStainStyle(option.value)}
+
+                              >
+
+                                <span className="feuzon-finish-swatch-image">
+
+                                  {preview ? (
+
+                                    <img src={preview} alt={option.label} />
+
+                                  ) : null}
+
+                                </span>
+
+                                <span className="feuzon-finish-swatch-overlay" />
+
+                                <span className="feuzon-finish-swatch-content">
+
+                                  <span className="feuzon-finish-swatch-title">
+
+                                    {option.label}
+
+                                  </span>
+
+                                  {isSelected && (
+
+                                    <span className="feuzon-finish-swatch-meta">
+
+                                      Selected
+
+                                    </span>
+
+                                  )}
+
+                                </span>
+
+                              </button>
+
+                            );
+
+                          })}
+
+                        </div>
+
                       </>
+
                     )}
 
-                    <label htmlFor="scorchStyle">Exterior Scorch</label>
+                    <label>Final Finish</label>
 
-                    <select
-                      id="scorchStyle"
-                      value={scorchStyle}
-                      onChange={(e) => setScorchStyle(e.target.value)}
-                    >
-                      {scorchOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="feuzon-option-grid">
 
-                    <p className="feuzon-select-helper">
-                      Choose whether the exterior stays cleaner and more
-                      restrained or leans further into FEUZØN’s scorched visual
-                      character.
-                    </p>
+                      {isNaturalFinish
+
+                        ? [
+
+                            {
+
+                              label: 'Natural Gloss',
+
+                              value: 'Natural Gloss',
+
+                              helperText:
+
+                                'More polished, reflective, and vivid while staying natural.',
+
+                            },
+
+                            {
+
+                              label: 'Natural Satin',
+
+                              value: 'Natural Satin',
+
+                              helperText:
+
+                                'Softer sheen with a more organic, understated natural look.',
+
+                            },
+
+                          ].map((option) => {
+
+                            const isSelected = finishSystem === option.value;
+
+                            return (
+
+                              <button
+
+                                key={option.value}
+
+                                type="button"
+
+                                className={`feuzon-option-tile feuzon-option-tile-detail ${
+
+                                  isSelected ? 'is-selected' : ''
+
+                                }`}
+
+                                onClick={() => setFinishSystem(option.value)}
+
+                              >
+
+                                <span className="feuzon-option-title">
+
+                                  {option.label}
+
+                                </span>
+
+                                <span className="feuzon-option-subtitle">
+
+                                  {option.helperText}
+
+                                </span>
+
+                                {isSelected && (
+
+                                  <span className="feuzon-option-meta is-selected">
+
+                                    Selected
+
+                                  </span>
+
+                                )}
+
+                              </button>
+
+                            );
+
+                          })
+
+                        : [
+
+                            {
+
+                              label: 'Gloss',
+
+                              value: 'Stained Gloss',
+
+                              helperText:
+
+                                'Richer depth, more pop, and stronger reflectivity.',
+
+                            },
+
+                            {
+
+                              label: 'Satin',
+
+                              value: 'Stained Satin',
+
+                              helperText:
+
+                                'Softer sheen with a moodier, more understated look.',
+
+                            },
+
+                          ].map((option) => {
+
+                            const isSelected = finishSystem === option.value;
+
+                            return (
+
+                              <button
+
+                                key={option.value}
+
+                                type="button"
+
+                                className={`feuzon-option-tile feuzon-option-tile-detail ${
+
+                                  isSelected ? 'is-selected' : ''
+
+                                }`}
+
+                                onClick={() => setFinishSystem(option.value)}
+
+                              >
+
+                                <span className="feuzon-option-title">
+
+                                  {option.label}
+
+                                </span>
+
+                                <span className="feuzon-option-subtitle">
+
+                                  {option.helperText}
+
+                                </span>
+
+                                {isSelected && (
+
+                                  <span className="feuzon-option-meta is-selected">
+
+                                    Selected
+
+                                  </span>
+
+                                )}
+
+                              </button>
+
+                            );
+
+                          })}
+
+                    </div>
 
                     {swatchPreviewImage && (
-                      <div className="feuzon-swatch-preview">
-                        <img
-                          src={swatchPreviewImage}
-                          alt="Selected FEUZØN finish swatch"
-                        />
+
+                      <div className="feuzon-swatch-preview-wrap">
+
+                        <div className="feuzon-swatch-preview">
+
+                          <img
+
+                            src={swatchPreviewImage}
+
+                            alt="Selected FEUZØN finish swatch"
+
+                          />
+
+                        </div>
+
+                        <p className="feuzon-swatch-disclaimer">
+
+                          This preview is a general finish reference. Final
+
+                          appearance may vary based on wood figure, stain
+
+                          absorption, scorch response, lighting, and the unique
+
+                          character of each shell. We’ll aim to get your drum as
+
+                          close as possible to the selected preview.
+
+                        </p>
+
                       </div>
+
                     )}
 
-                    <p className="feuzon-swatch-disclaimer">
-                      This preview is a general finish reference. Final
-                      appearance may vary based on wood figure, stain
-                      absorption, scorch response, lighting, and the unique
-                      character of each shell. We’ll aim to get your drum as
-                      close as possible to the selected preview.
+                    <div className="feuzon-builder-next-row">
+
+                      <button
+
+                        type="button"
+
+                        className="feuzon-builder-next-button"
+
+                        onClick={() => setOpenBuilderSection('response')}
+
+                      >
+
+                        Continue to Response
+
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                )}
+              </div>
+
+              <div className="feuzon-builder-section">
+                <button
+                  type="button"
+                  className={`feuzon-builder-section-toggle ${
+                    openBuilderSection === 'response' ? 'is-open' : ''
+                  }`}
+                  onClick={() =>
+                    setOpenBuilderSection(
+                      openBuilderSection === 'response' ? '' : 'response'
+                    )
+                  }
+                >
+                  <div className="feuzon-builder-section-heading">
+                    <span className="feuzon-builder-section-step">4</span>
+
+                    <div>
+                      <h3>Dial In the Response</h3>
+
+                      <p>{responseSummary}</p>
+                    </div>
+                  </div>
+
+                  <span className="feuzon-builder-section-chevron">
+                    {openBuilderSection === 'response' ? '−' : '+'}
+                  </span>
+                </button>
+
+                {openBuilderSection === 'response' && (
+                  <div className="feuzon-builder-section-body">
+                    <label>Bearing Edge</label>
+
+                    <div className="feuzon-option-grid">
+                      {bearingEdgeOptions.map((option) => {
+                        const isSelected = bearingEdge === option.value;
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setBearingEdge(option.value)}
+                          >
+                            <span className="feuzon-option-title">
+                              {option.label}
+                            </span>
+
+                            <span className="feuzon-option-subtitle">
+                              {option.spec}
+                            </span>
+
+                            {isSelected && (
+                              <span className="feuzon-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <p className="feuzon-select-helper">
+                      <strong>{selectedBearingEdgeMeta.spec}</strong> —{' '}
+                      {selectedBearingEdgeMeta.helperText}
+                    </p>
+
+                    <label>Snare Bed Depth</label>
+
+                    <div className="feuzon-option-grid">
+                      {snareBedOptions.map((option) => {
+                        const isSelected = snareBed === option.value;
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setSnareBed(option.value)}
+                          >
+                            <span className="feuzon-option-title">
+                              {option.label}
+                            </span>
+
+                            <span className="feuzon-option-subtitle">
+                              {option.helperText}
+                            </span>
+
+                            {isSelected && (
+                              <span className="feuzon-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <p className="feuzon-select-helper">
+                      {selectedSnareBedMeta.helperText}
                     </p>
 
                     <div className="feuzon-builder-next-row">
@@ -2109,7 +2956,9 @@ const FeuzonProductDetail = () => {
               <div className="feuzon-builder-section">
                 <button
                   type="button"
-                  className={`feuzon-builder-section-toggle ${openBuilderSection === 'hardware' ? 'is-open' : ''}`}
+                  className={`feuzon-builder-section-toggle ${
+                    openBuilderSection === 'hardware' ? 'is-open' : ''
+                  }`}
                   onClick={() =>
                     setOpenBuilderSection(
                       openBuilderSection === 'hardware' ? '' : 'hardware'
@@ -2117,10 +2966,10 @@ const FeuzonProductDetail = () => {
                   }
                 >
                   <div className="feuzon-builder-section-heading">
-                    <span className="feuzon-builder-section-step">3</span>
+                    <span className="feuzon-builder-section-step">5</span>
 
                     <div>
-                      <h3>Choose your hardware & response</h3>
+                      <h3>Refine Your Hardware</h3>
 
                       <p>{hardwareSummary}</p>
                     </div>
@@ -2133,74 +2982,91 @@ const FeuzonProductDetail = () => {
 
                 {openBuilderSection === 'hardware' && (
                   <div className="feuzon-builder-section-body">
-                    <label htmlFor="hardwareColor">Hardware Finish</label>
+                    <label>Hoop Type</label>
 
-                    <select
-                      id="hardwareColor"
-                      value={hardwareColor}
-                      onChange={(e) => setHardwareColor(e.target.value)}
-                    >
-                      {hardwareOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="feuzon-option-grid">
+                      {hoopOptions.map((option) => {
+                        const isSelected = hoopType === option.value;
 
-                    <label htmlFor="hoopType">Hoop Type</label>
+                        const deltaMeta = getOptionDeltaMeta({
+                          hoopType: option.value,
+                        });
 
-                    <select
-                      id="hoopType"
-                      value={hoopType}
-                      onChange={(e) => setHoopType(e.target.value)}
-                    >
-                      {hoopOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setHoopType(option.value)}
+                          >
+                            <span className="feuzon-option-title">
+                              {option.label}
+                            </span>
 
-                    <p className="feuzon-select-helper">
-                      {selectedHoopMeta.helperText}
-                    </p>
+                            <span className="feuzon-option-subtitle">
+                              {option.helperText}
+                            </span>
 
-                    <label htmlFor="bearingEdge">Bearing Edge</label>
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`feuzon-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                    <select
-                      id="bearingEdge"
-                      value={bearingEdge}
-                      onChange={(e) => setBearingEdge(e.target.value)}
-                    >
-                      {bearingEdgeOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                    <label>Hardware Finish</label>
 
-                    <p className="feuzon-select-helper">
-                      <strong>{selectedBearingEdgeMeta.spec}</strong> —{' '}
-                      {selectedBearingEdgeMeta.helperText}
-                    </p>
+                    <div className="feuzon-option-grid">
+                      {hardwareOptions.map((option) => {
+                        const isSelected = hardwareColor === option.value;
 
-                    <label htmlFor="snareBed">Snare Bed Depth</label>
+                        const deltaMeta = getOptionDeltaMeta({
+                          hardwareColor: option.value,
+                        });
 
-                    <select
-                      id="snareBed"
-                      value={snareBed}
-                      onChange={(e) => setSnareBed(e.target.value)}
-                    >
-                      {snareBedOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setHardwareColor(option.value)}
+                          >
+                            <span className="feuzon-option-title">
+                              {option.label}
+                            </span>
 
-                    <p className="feuzon-select-helper">
-                      {selectedSnareBedMeta.helperText}
-                    </p>
+                            <span className="feuzon-option-subtitle">
+                              {option.description}
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`feuzon-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     <p className="feuzon-select-helper">
                       PureSound wires are selected by the craftsman to best fit

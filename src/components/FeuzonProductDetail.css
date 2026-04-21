@@ -605,87 +605,7 @@
   color: #fff;
 }
 
-.feuzon-swatch-grid {
-  display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(84px, 84px));
-
-  gap: 12px;
-
-  margin-top: 12px;
-}
-
-.feuzon-swatch-tile {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  gap: 6px;
-
-  cursor: pointer;
-
-  background: transparent;
-
-  border: 0;
-
-  padding: 0;
-}
-
-.feuzon-swatch-chip {
-  width: 84px;
-
-  height: 84px;
-
-  border-radius: 12px;
-
-  overflow: hidden;
-
-  border: none;
-
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
-
-  background: transparent;
-
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
-}
-
-.feuzon-swatch-chip img {
-  width: 100%;
-
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  object-position: center 38%;
-
-  transform: scale(1.4);
-}
-
-.feuzon-swatch-tile:hover .feuzon-swatch-chip,
-.feuzon-swatch-tile.is-active .feuzon-swatch-chip {
-  transform: translateY(-1px);
-
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
-}
-
-.feuzon-swatch-label {
-  font-size: 0.78rem;
-
-  line-height: 1.15;
-
-  text-align: center;
-
-  color: rgba(255, 255, 255, 0.82);
-
-  max-width: 84px;
-}
+/* builder section shells */
 
 .feuzon-builder-sections {
   display: flex;
@@ -870,26 +790,32 @@
   font-weight: 800;
 
   cursor: pointer;
+
+  transition: background 0.18s ease;
 }
 
 .feuzon-builder-next-button:hover {
   background: rgba(141, 162, 255, 0.24);
 }
 
+.feuzon-swatch-preview-wrap {
+  margin: 10px 0 16px;
+}
+
 .feuzon-swatch-preview {
-  width: 124px;
+  width: 100%;
 
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 2.8 / 1;
 
-  margin: 12px 0 16px;
+  margin: 0;
 
-  border-radius: 18px;
+  border-radius: 16px;
 
   overflow: hidden;
 
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
-  background: transparent;
+  background: rgba(8, 10, 16, 0.88);
 
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
 
@@ -899,27 +825,349 @@
 .feuzon-swatch-preview img {
   width: 100%;
 
-  height: 100%;
+  height: 120%;
 
   display: block;
 
   object-fit: cover;
 
-  object-position: center 10%;
+  object-position: center 0%;
 
-  transform: scale(1.8);
+  transform: scale(1.2);
 }
 
 .feuzon-swatch-disclaimer {
-  margin: -4px 0 16px;
+  margin: 12px 0 0;
 
-  max-width: 440px;
+  max-width: 100%;
 
   color: var(--feuzon-muted-soft);
 
   font-size: 0.8rem;
 
   line-height: 1.5;
+}
+
+.feuzon-option-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-bottom: 12px;
+}
+
+.feuzon-option-grid-compact {
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+}
+
+.feuzon-option-grid-finish-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.feuzon-option-tile {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  width: 100%;
+
+  min-height: 88px;
+
+  padding: 10px 9px;
+
+  border-radius: 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: linear-gradient(
+    180deg,
+    rgba(9, 11, 18, 0.96),
+    rgba(5, 7, 14, 0.98)
+  );
+
+  color: #fff;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.feuzon-option-tile:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(141, 162, 255, 0.34);
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.feuzon-option-tile.is-selected {
+  border: 1px solid rgba(141, 162, 255, 0.95);
+
+  background:
+    radial-gradient(
+      circle at top center,
+
+      rgba(141, 162, 255, 0.2),
+      transparent 68%
+    ),
+    linear-gradient(180deg, rgba(20, 24, 39, 0.98), rgba(12, 15, 27, 0.98));
+
+  box-shadow:
+    0 0 0 1px rgba(141, 162, 255, 0.22),
+    0 10px 22px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.feuzon-option-tile-detail {
+  min-height: 96px;
+}
+
+.feuzon-option-title {
+  font-size: 0.9rem;
+
+  font-weight: 800;
+
+  line-height: 1.1;
+
+  color: #fff;
+
+  text-align: center;
+}
+
+.feuzon-option-tile.is-selected .feuzon-option-title {
+  color: #f3f6ff;
+}
+
+.feuzon-option-subtitle {
+  font-size: 0.7rem;
+
+  line-height: 1.18;
+
+  color: var(--feuzon-muted);
+
+  text-align: center;
+
+  max-width: 100%;
+}
+
+.feuzon-option-tile.is-selected .feuzon-option-subtitle {
+  color: rgba(228, 234, 255, 0.84);
+}
+
+.feuzon-option-meta {
+  margin-top: 4px;
+
+  font-size: 0.68rem;
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  letter-spacing: 0.035em;
+
+  text-transform: uppercase;
+
+  text-align: center;
+
+  opacity: 0.98;
+}
+
+.feuzon-option-meta.is-positive {
+  color: #9fd7ff;
+
+  font-style: italic;
+}
+
+.feuzon-option-meta.is-negative {
+  color: #d6b277;
+}
+
+.feuzon-option-meta.is-selected {
+  color: #c8d4ff;
+}
+
+.feuzon-option-tile:not(.is-selected) .feuzon-option-meta {
+  color: rgba(141, 162, 255, 0.92);
+}
+
+.feuzon-option-tile.is-selected .feuzon-option-meta {
+  color: #c8d4ff;
+}
+
+.feuzon-finish-swatch-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 14px;
+
+}
+
+.feuzon-finish-swatch-button {
+
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 118px;
+
+  padding: 0;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(9, 11, 18, 0.96);
+
+  cursor: pointer;
+
+  transition:
+
+    transform 0.18s ease,
+
+    border-color 0.18s ease,
+
+    box-shadow 0.18s ease;
+
+}
+
+.feuzon-finish-swatch-button:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(141, 162, 255, 0.34);
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.feuzon-finish-swatch-button.is-selected {
+  border: 1px solid rgba(141, 162, 255, 0.95);
+
+  box-shadow:
+    0 0 0 1px rgba(141, 162, 255, 0.22),
+    0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.feuzon-finish-swatch-image {
+  position: absolute;
+
+  inset: 0;
+}
+
+.feuzon-finish-swatch-image img {
+
+  width: 100%;
+
+  height: 120%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center 14%;
+
+  transform: scale(1.2);
+
+}
+
+.feuzon-finish-swatch-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    180deg,
+    rgba(4, 6, 12, 0.04) 0%,
+
+    rgba(4, 6, 12, 0.18) 35%,
+
+    rgba(4, 6, 12, 0.74) 100%
+  );
+}
+
+.feuzon-finish-swatch-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 118px;
+
+  padding: 12px 10px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 4px;
+
+  text-align: center;
+
+}
+
+.feuzon-finish-swatch-title {
+  font-size: 0.82rem;
+
+  line-height: 1.08;
+
+  font-weight: 800;
+
+  color: #fff;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+.feuzon-finish-swatch-meta {
+  font-size: 0.63rem;
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  letter-spacing: 0.035em;
+
+  text-transform: uppercase;
+
+  color: #c8d4ff;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+.feuzon-finish-swatch-button:not(.is-selected)
+  .feuzon-finish-swatch-meta.is-positive {
+  color: #9fd7ff;
+
+  font-style: italic;
+}
+
+.feuzon-finish-swatch-button:not(.is-selected)
+  .feuzon-finish-swatch-meta.is-negative {
+  color: #f0d29a;
+}
+
+.feuzon-finish-swatch-button.is-selected .feuzon-finish-swatch-meta {
+  color: #dbe4ff;
 }
 
 @media (max-width: 1180px) {
@@ -982,44 +1230,6 @@
 }
 
 @media (max-width: 640px) {
-  .feuzon-swatch-grid {
-    grid-template-columns: repeat(auto-fit, minmax(64px, 64px));
-
-    gap: 10px;
-  }
-
-  .feuzon-swatch-preview {
-    width: 74px;
-
-    height: 74px;
-
-    border-radius: 10px;
-
-    border: none;
-
-    background: transparent;
-  }
-
-  .feuzon-swatch-preview img {
-    object-position: center 8%;
-
-    transform: scale(1.75);
-  }
-
-  .feuzon-swatch-chip {
-    width: 64px;
-
-    height: 64px;
-
-    border-radius: 10px;
-  }
-
-  .feuzon-swatch-label {
-    max-width: 64px;
-
-    font-size: 0.7rem;
-  }
-
   .artisan-cart-hover-options {
     position: static;
 
@@ -1159,6 +1369,81 @@
   .feuzon-axis-chip strong {
     font-size: 0.92rem;
   }
+
+  .feuzon-option-grid,
+  .feuzon-option-grid-compact,
+  .feuzon-option-grid-finish-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .feuzon-finish-swatch-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .feuzon-option-tile,
+  .feuzon-option-tile-detail {
+    min-height: 78px;
+
+    padding: 8px 7px;
+
+    border-radius: 11px;
+
+    gap: 4px;
+  }
+
+  .feuzon-option-title {
+    font-size: 0.82rem;
+
+    line-height: 1.08;
+  }
+
+  .feuzon-option-subtitle {
+    font-size: 0.65rem;
+
+    line-height: 1.14;
+  }
+
+  .feuzon-option-meta {
+    margin-top: 6px;
+
+    font-size: 0.58rem;
+
+    line-height: 1.05;
+
+    letter-spacing: 0.025em;
+  }
+
+.feuzon-finish-swatch-button,
+
+.feuzon-finish-swatch-content {
+
+  min-height: 92px;
+
+}
+
+  .feuzon-finish-swatch-title {
+    font-size: 0.7rem;
+  }
+
+  .feuzon-finish-swatch-meta {
+    font-size: 0.56rem;
+  }
+
+  .feuzon-swatch-preview {
+    aspect-ratio: 2.4 / 1;
+
+    border-radius: 12px;
+  }
+
+  .feuzon-swatch-preview img {
+    object-position: center 26%;
+
+    transform: scale(1.14);
+  }
 }
 
 @media (max-width: 420px) {
@@ -1199,5 +1484,76 @@
 
   .feuzon-axis-summary {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .feuzon-option-grid,
+  .feuzon-option-grid-compact,
+  .feuzon-option-grid-finish-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 6px;
+  }
+
+  .feuzon-finish-swatch-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 6px;
+  }
+
+  .feuzon-option-tile,
+  .feuzon-option-tile-detail {
+    min-height: 74px;
+
+    padding: 7px 6px;
+
+    border-radius: 10px;
+
+    gap: 3px;
+  }
+
+  .feuzon-option-title {
+    font-size: 0.78rem;
+  }
+
+  .feuzon-option-subtitle {
+    font-size: 0.62rem;
+
+    line-height: 1.08;
+  }
+
+  .feuzon-option-meta {
+    margin-top: 5px;
+
+    font-size: 0.52rem;
+
+    letter-spacing: 0.02em;
+  }
+
+.feuzon-finish-swatch-button,
+
+.feuzon-finish-swatch-content {
+
+  min-height: 84px;
+
+}
+
+  .feuzon-finish-swatch-title {
+    font-size: 0.64rem;
+  }
+
+  .feuzon-finish-swatch-meta {
+    font-size: 0.5rem;
+  }
+
+  .feuzon-swatch-preview {
+    aspect-ratio: 2.2 / 1;
+
+    border-radius: 10px;
+  }
+
+  .feuzon-swatch-preview img {
+    object-position: center 24%;
+
+    transform: scale(1.2);
   }
 }
