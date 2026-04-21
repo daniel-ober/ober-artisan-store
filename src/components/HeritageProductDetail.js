@@ -72,6 +72,206 @@ const HERITAGE_FINISH_SWATCHES = {
 
   Blackened: '/swatches/heritage/blackened.png',
 };
+
+const basePrices = { 12: 850, 13: 950, 14: 1050 };
+
+const reRingCost = 150;
+
+const depthPrices = {
+  12: {
+    '5.0': 0,
+
+    5.5: 50,
+
+    '6.0': 100,
+
+    6.5: 150,
+
+    '7.0': 200,
+
+    7.5: 250,
+
+    '8.0': 300,
+  },
+
+  13: {
+    '5.0': 0,
+
+    5.5: 50,
+
+    '6.0': 100,
+
+    6.5: 150,
+
+    '7.0': 200,
+
+    7.5: 250,
+
+    '8.0': 300,
+  },
+
+  14: {
+    '5.0': 0,
+
+    5.5: 50,
+
+    '6.0': 100,
+
+    6.5: 150,
+
+    '7.0': 200,
+
+    7.5: 250,
+
+    '8.0': 300,
+  },
+};
+
+const staveOptions = {
+  12: { 6: ['12 - 8mm'], 8: ['16 - 10mm'] },
+
+  13: { 8: ['16 - 10mm'] },
+
+  14: {
+    8: ['16 - 10mm'],
+
+    10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'],
+  },
+};
+
+const lugOptions = {
+  12: ['6', '8'],
+
+  13: ['8'],
+
+  14: ['8', '10'],
+};
+
+const hardwareOptions = [
+  {
+    label: 'Chrome',
+
+    value: 'Chrome',
+
+    upcharge: 0,
+
+    description: 'Classic and clean.',
+  },
+
+  {
+    label: 'Black Nickel',
+
+    value: 'Black Nickel',
+
+    upcharge: 50,
+
+    description: 'Slightly darker, more modern feel.',
+  },
+
+  {
+    label: 'Brass / Gold',
+
+    value: 'Brass/Gold',
+
+    upcharge: 150,
+
+    description: 'Richer, warmer visual statement.',
+  },
+];
+
+const hoopOptions = [
+  {
+    label: 'Triple Flange',
+
+    value: 'Triple Flange',
+
+    upcharge: 0,
+
+    description: 'More open and classic.',
+  },
+
+  {
+    label: 'Die-Cast',
+
+    value: 'Die-Cast',
+
+    upcharge: 100,
+
+    description: 'Tighter response and more focus.',
+  },
+];
+
+const scorchOptions = ['Light Torch', 'Medium Torch', 'Blackened'];
+
+const hardwareUpchargeMap = {
+  Chrome: 0,
+
+  'Black Nickel': 50,
+
+  'Brass/Gold': 150,
+};
+
+const hoopUpchargeMap = {
+  'Triple Flange': 0,
+
+  'Die-Cast': 100,
+};
+
+const hasReRingFromStaveOption = (option = '') =>
+  String(option).includes('Re-Rings') || String(option).includes('+ $150');
+
+const getStaveCountLabel = (option = '') => {
+  const match = String(option).match(/^(\d+)/);
+
+  return match ? `${match[1]} staves` : option;
+};
+
+const getStaveThicknessLabel = (option = '') => {
+  const cleaned = String(option).replace(' + $150 (Re-Rings Required)', '');
+
+  const parts = cleaned.split(' - ');
+
+  return parts[1] || '';
+};
+
+const getReadableDelta = (delta) => {
+  if (delta === 0) return '';
+
+  if (delta > 0) return `+$${delta}`;
+
+  return `-$${Math.abs(delta)}`;
+};
+
+const normalizeDepthKey = (value) => {
+  const n = Number(value);
+
+  return Number.isFinite(n) ? n.toFixed(1) : String(value);
+};
+
+const computeHeritagePrice = ({
+  size,
+
+  depth,
+
+  staveOption,
+
+  hardwareColor,
+
+  hoopType,
+}) => {
+  let price = basePrices[size] || 0;
+
+  price += depthPrices[size]?.[normalizeDepthKey(depth)] || 0;
+
+  if (hasReRingFromStaveOption(staveOption)) price += reRingCost;
+
+  price += hardwareUpchargeMap[hardwareColor] || 0;
+
+  price += hoopUpchargeMap[hoopType] || 0;
+
+  return price;
+};
+
 const HeritageProductDetail = () => {
   const navigate = useNavigate();
 
@@ -107,110 +307,6 @@ const HeritageProductDetail = () => {
 
   const [openBuilderSection, setOpenBuilderSection] = useState('construction');
 
-  const basePrices = { 12: 850, 13: 950, 14: 1050 };
-
-  const reRingCost = 150;
-
-  const depthPrices = {
-    12: {
-      '5.0': 0,
-
-      5.5: 50,
-
-      '6.0': 100,
-
-      6.5: 150,
-
-      '7.0': 200,
-
-      7.5: 250,
-
-      '8.0': 300,
-    },
-
-    13: {
-      '5.0': 0,
-
-      5.5: 50,
-
-      '6.0': 100,
-
-      6.5: 150,
-
-      '7.0': 200,
-
-      7.5: 250,
-
-      '8.0': 300,
-    },
-
-    14: {
-      '5.0': 0,
-
-      5.5: 50,
-
-      '6.0': 100,
-
-      6.5: 150,
-
-      '7.0': 200,
-
-      7.5: 250,
-
-      '8.0': 300,
-    },
-  };
-
-  const staveOptions = {
-    12: { 6: ['12 - 8mm'], 8: ['16 - 10mm'] },
-
-    13: { 8: ['16 - 10mm'] },
-
-    14: {
-      8: ['16 - 10mm'],
-
-      10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'],
-    },
-  };
-
-  const lugOptions = {
-    12: ['6', '8'],
-
-    13: ['8'],
-
-    14: ['8', '10'],
-  };
-
-  const hardwareOptions = [
-    { label: 'Chrome', value: 'Chrome', upcharge: 0 },
-
-    { label: 'Black Nickel (+$50)', value: 'Black Nickel', upcharge: 50 },
-
-    { label: 'Brass / Gold (+$150)', value: 'Brass/Gold', upcharge: 150 },
-  ];
-
-  const hoopOptions = [
-    { label: 'Triple Flange', value: 'Triple Flange', upcharge: 0 },
-
-    { label: 'Die-Cast (+$100)', value: 'Die-Cast', upcharge: 100 },
-  ];
-
-  const scorchOptions = ['Light Torch', 'Medium Torch', 'Blackened'];
-
-  const hardwareUpchargeMap = {
-    Chrome: 0,
-
-    'Black Nickel': 50,
-
-    'Brass/Gold': 150,
-  };
-
-  const hoopUpchargeMap = {
-    'Triple Flange': 0,
-
-    'Die-Cast': 100,
-  };
-
   const productImage = useMemo(() => {
     return product?.images?.[0] || '/resized-logos/heritage-placeholder.png';
   }, [product]);
@@ -219,29 +315,27 @@ const HeritageProductDetail = () => {
     return HERITAGE_FINISH_SWATCHES[scorchDepth] || null;
   }, [scorchDepth]);
 
-const heritageHighlights = [
+  const heritageHighlights = [
+    'Northern Red Oak stave shell construction.',
 
-  'Northern Red Oak stave shell construction.',
+    'Grounded, warm, seasoned Ober voice.',
 
-  'Grounded, warm, seasoned Ober voice.',
+    '45° inner edge with softened outer roundover.',
 
-  '45° inner edge with softened outer roundover.',
+    '12", 13", and 14" build sizes.',
 
-  '12", 13", and 14" build sizes.',
+    '36 core Heritage voicing paths.',
 
-  '36 core Heritage voicing paths.',
+    'Triple flange or die-cast response.',
 
-  'Triple flange or die-cast response.',
+    'Chrome, Black Nickel, or Brass / Gold hardware.',
 
-  'Chrome, Black Nickel, or Brass / Gold hardware.',
+    'Controlled torching shapes visual character and resonance.',
 
-  'Controlled torching shapes visual character and resonance.',
+    'Craftsman-selected PureSound snare wires.',
 
-  'Craftsman-selected PureSound snare wires.',
-
-  'Estimated delivery: 6–8 weeks.',
-
-];
+    'Estimated delivery: 6–8 weeks.',
+  ];
 
   const generateCartItemId = (option) => {
     const normalizedStave = String(option.staveQuantity).trim();
@@ -289,9 +383,7 @@ const heritageHighlights = [
 
     const numericDepth = Number(currentDepth || 5);
 
-    const hasReRing =
-      currentStaveOption.includes('Re-Rings') ||
-      currentStaveOption.includes('+ $150');
+    const hasReRing = hasReRingFromStaveOption(currentStaveOption);
 
     let profile = {
       attack: 7.6,
@@ -566,6 +658,52 @@ const heritageHighlights = [
     }, {});
   }, [selectedDrumSummary]);
 
+  const currentBuildPrice = useMemo(() => {
+    return computeHeritagePrice({
+      size,
+
+      depth,
+
+      staveOption,
+
+      hardwareColor,
+
+      hoopType,
+    });
+  }, [size, depth, staveOption, hardwareColor, hoopType]);
+
+  const getOptionDeltaMeta = (nextSelections) => {
+    const nextPrice = computeHeritagePrice({
+      size: nextSelections.size ?? size,
+
+      depth: nextSelections.depth ?? depth,
+
+      staveOption: nextSelections.staveOption ?? staveOption,
+
+      hardwareColor: nextSelections.hardwareColor ?? hardwareColor,
+
+      hoopType: nextSelections.hoopType ?? hoopType,
+    });
+
+    const delta = nextPrice - currentBuildPrice;
+
+    return {
+      text: getReadableDelta(delta),
+
+      className: getDeltaClassName(delta),
+    };
+  };
+
+  const getDeltaClassName = (delta, isSelected = false) => {
+    if (isSelected) return 'is-selected';
+
+    if (delta > 0) return 'is-positive';
+
+    if (delta < 0) return 'is-negative';
+
+    return '';
+  };
+
   useEffect(() => {
     const fetchProductStatus = async () => {
       setIsLoading(true);
@@ -591,20 +729,7 @@ const heritageHighlights = [
   }, []);
 
   useEffect(() => {
-    let newPrice = basePrices[size];
-
-    newPrice += depthPrices[size][depth];
-
-    const hasReRingOption =
-      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
-
-    if (hasReRingOption) newPrice += reRingCost;
-
-    newPrice += hardwareUpchargeMap[hardwareColor] || 0;
-
-    newPrice += hoopUpchargeMap[hoopType] || 0;
-
-    setTotalPrice(newPrice);
+    setTotalPrice(currentBuildPrice);
 
     const staveParts = staveOption.split(' - ');
 
@@ -613,9 +738,7 @@ const heritageHighlights = [
 
     const lugCount = `${lugs} Lugs`;
 
-    const generatedKey = `${size}" - Base Price: $${
-      basePrices[size]
-    }-${depth}"-${lugCount}-${staveThickness}`;
+    const generatedKey = `${size}" - Base Price: $${basePrices[size]}-${depth}"-${lugCount}-${staveThickness}`;
 
     const heritageSummaryMatch = heritageSummaries[generatedKey] || null;
 
@@ -638,11 +761,19 @@ const heritageHighlights = [
         heritageSummaryMatch,
       })
     );
-  }, [size, depth, lugs, staveOption, hardwareColor, hoopType, scorchDepth]);
+  }, [
+    size,
+    depth,
+    lugs,
+    staveOption,
+    hardwareColor,
+    hoopType,
+    scorchDepth,
+    currentBuildPrice,
+  ]);
 
   useEffect(() => {
-    const hasReRing =
-      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+    const hasReRing = hasReRingFromStaveOption(staveOption);
 
     const normalizedStave = staveOption.split(' - ')[0].trim();
 
@@ -702,19 +833,12 @@ const heritageHighlights = [
     }
   }, [
     cart,
-
     size,
-
     depth,
-
     staveOption,
-
     lugs,
-
     hardwareColor,
-
     hoopType,
-
     scorchDepth,
   ]);
 
@@ -737,8 +861,7 @@ const heritageHighlights = [
       return;
     }
 
-    const hasReRing =
-      staveOption.includes('Re-Rings') || staveOption.includes('+ $150');
+    const hasReRing = hasReRingFromStaveOption(staveOption);
 
     const matchedPricingOption = heritageSummaries.pricingOptions.find(
       (option) =>
@@ -858,40 +981,46 @@ const heritageHighlights = [
     }
   };
 
-  const handleSizeChange = (e) => {
-    const newSize = e.target.value;
+  const handleSizeSelect = (newSize) => {
+    if (newSize === size) return;
+
+    const nextDepth = Object.keys(depthPrices[newSize])[0];
+
+    const nextLugs = lugOptions[newSize][0];
+
+    const nextStaves = staveOptions[newSize]?.[nextLugs] || [];
+
+    const nextStaveOption =
+      nextStaves.find((s) => !s.includes('Re-Rings')) || nextStaves[0] || '';
 
     setSize(newSize);
 
-    setDepth(Object.keys(depthPrices[newSize])[0]);
+    setDepth(nextDepth);
 
-    setLugs(lugOptions[newSize][0]);
+    setLugs(nextLugs);
 
-    const staveList = staveOptions[newSize]?.[lugOptions[newSize][0]] || [];
-
-    setStaveOption(
-      staveList.find((s) => !s.includes('Re-Rings')) || staveList[0] || ''
-    );
+    setStaveOption(nextStaveOption);
   };
 
-  const handleDepthChange = (e) => {
-    setDepth(e.target.value);
+  const handleDepthSelect = (newDepth) => {
+    setDepth(newDepth);
   };
 
-  const handleLugChange = (e) => {
-    const newLug = e.target.value;
+  const handleLugSelect = (newLug) => {
+    if (newLug === lugs) return;
+
+    const nextStaves = staveOptions[size]?.[newLug] || [];
+
+    const nextStaveOption =
+      nextStaves.find((s) => !s.includes('Re-Rings')) || nextStaves[0] || '';
 
     setLugs(newLug);
 
-    const staveList = staveOptions[size]?.[newLug] || [];
-
-    setStaveOption(
-      staveList.find((s) => !s.includes('Re-Rings')) || staveList[0] || ''
-    );
+    setStaveOption(nextStaveOption);
   };
 
-  const handleStaveChange = (e) => {
-    setStaveOption(e.target.value);
+  const handleStaveSelect = (option) => {
+    setStaveOption(option);
   };
 
   return (
@@ -912,15 +1041,7 @@ const heritageHighlights = [
             </div>
 
             <div className="heritage-overview-card">
-              <div className="heritage-overview-mark">
-                {/* <img
-                  src="/resized-logos/heritage-white.png"
-                  alt="Heritage"
-                  className="heritage-overview-logo"
-                /> */}
-              </div>
-
-              {/* <h1 className="heritage-story-title">Tradition, reimagined.</h1> */}
+              <div className="heritage-overview-mark" />
 
               <p className="heritage-story-lede">
                 The Heritage line carries the most rooted side of the Ober voice
@@ -962,9 +1083,8 @@ const heritageHighlights = [
               <h2>Configure Heritage</h2>
 
               <p>
-                Build your Heritage in three guided steps: select your
-                construction, choose your finish, then refine hardware and
-                response.
+                Build your Heritage in three guided steps: shape your
+                foundation, choose your finish, then refine your hardware.
               </p>
             </div>
 
@@ -987,7 +1107,7 @@ const heritageHighlights = [
                     <span className="heritage-builder-section-step">1</span>
 
                     <div>
-                      <h3>Select your construction</h3>
+                      <h3>Shape Your Foundation</h3>
 
                       <p>{constructionSummary}</p>
                     </div>
@@ -1000,58 +1120,159 @@ const heritageHighlights = [
 
                 {openBuilderSection === 'construction' && (
                   <div className="heritage-builder-section-body">
-                    <label htmlFor="size">Snare Size (Diameter)</label>
+                    <label>Snare Size (Diameter)</label>
 
-                    <select id="size" value={size} onChange={handleSizeChange}>
-                      {Object.keys(basePrices).map((sizeOption) => (
-                        <option key={sizeOption} value={sizeOption}>
-                          {sizeOption}" - Base Price: ${basePrices[sizeOption]}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {Object.keys(basePrices).map((sizeOption) => {
+                        const isSelected = size === sizeOption;
 
-                    <label htmlFor="depth">Depth</label>
+                        const deltaMeta = getOptionDeltaMeta({
+                          size: sizeOption,
+                        });
 
-                    <select
-                      id="depth"
-                      value={depth}
-                      onChange={handleDepthChange}
-                    >
-                      {Object.keys(depthPrices[size]).map((depthOption) => (
-                        <option key={depthOption} value={depthOption}>
-                          {depthOption}"{' '}
-                          {depthPrices[size][depthOption] > 0
-                            ? `+ $${depthPrices[size][depthOption]}`
-                            : ''}
-                        </option>
-                      ))}
-                    </select>
+                        return (
+                          <button
+                            key={sizeOption}
+                            type="button"
+                            className={`heritage-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleSizeSelect(sizeOption)}
+                          >
+                            <span className="heritage-option-title">
+                              {sizeOption}"
+                            </span>
 
-                    <label htmlFor="lugs">Lug Quantity</label>
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                    <select id="lugs" value={lugs} onChange={handleLugChange}>
-                      {lugOptions[size].map((lugOption) => (
-                        <option key={lugOption} value={lugOption}>
-                          {lugOption} Lugs
-                        </option>
-                      ))}
-                    </select>
+                    <label>Depth</label>
 
-                    <label htmlFor="staves">
-                      Stave Quantity &amp; Shell Thickness
-                    </label>
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {Object.keys(depthPrices[size]).map((depthOption) => {
+                        const isSelected = depth === depthOption;
 
-                    <select
-                      id="staves"
-                      value={staveOption}
-                      onChange={handleStaveChange}
-                    >
-                      {(staveOptions[size]?.[lugs] || []).map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+                        const deltaMeta = getOptionDeltaMeta({
+                          depth: depthOption,
+                        });
+
+                        return (
+                          <button
+                            key={depthOption}
+                            type="button"
+                            className={`heritage-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleDepthSelect(depthOption)}
+                          >
+                            <span className="heritage-option-title">
+                              {depthOption}"
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Lug Quantity</label>
+
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {lugOptions[size].map((lugOption) => {
+                        const isSelected = lugs === lugOption;
+
+                        return (
+                          <button
+                            key={lugOption}
+                            type="button"
+                            className={`heritage-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleLugSelect(lugOption)}
+                          >
+                            <span className="heritage-option-title">
+                              {lugOption} Lugs
+                            </span>
+
+                            {isSelected && (
+                              <span className="heritage-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Stave Quantity &amp; Shell Thickness</label>
+
+                    <div className="heritage-option-grid">
+                      {(staveOptions[size]?.[lugs] || []).map((option) => {
+                        const isSelected = staveOption === option;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          staveOption: option,
+                        });
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleStaveSelect(option)}
+                          >
+                            <span className="heritage-option-title">
+                              {getStaveCountLabel(option)}
+                            </span>
+
+                            <span className="heritage-option-subtitle">
+                              {getStaveThicknessLabel(option)}
+
+                              {hasReRingFromStaveOption(option)
+                                ? ' • Re-Rings required'
+                                : ''}
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     <div className="heritage-builder-next-row">
                       <button
@@ -1095,19 +1316,44 @@ const heritageHighlights = [
 
                 {openBuilderSection === 'finish' && (
                   <div className="heritage-builder-section-body">
-                    <label htmlFor="scorchDepth">Finish Scorch Depth</label>
+                    <label>Finish Scorch Depth</label>
 
-                    <select
-                      id="scorchDepth"
-                      value={scorchDepth}
-                      onChange={(e) => setScorchDepth(e.target.value)}
-                    >
-                      {scorchOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="heritage-finish-swatch-grid">
+                      {scorchOptions.map((option) => {
+                        const isSelected = scorchDepth === option;
+
+                        const swatchSrc = HERITAGE_FINISH_SWATCHES[option];
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`heritage-finish-swatch-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setScorchDepth(option)}
+                          >
+                            <span className="heritage-finish-swatch-image-wrap">
+                              <img
+                                src={swatchSrc}
+                                alt={`${option} Heritage finish swatch`}
+                                className="heritage-finish-swatch-image"
+                              />
+                            </span>
+
+                            <span className="heritage-finish-swatch-label">
+                              {option}
+                            </span>
+
+                            {isSelected && (
+                              <span className="heritage-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     <p className="heritage-select-helper">
                       Heritage uses a standard snare bed and a fixed 45° inner
@@ -1115,24 +1361,12 @@ const heritageHighlights = [
                       line grounded, consistent, and unmistakably classic.
                     </p>
 
-                    {heritageSwatchPreviewImage && (
-                      <div className="heritage-swatch-preview-wrap">
-                        <div className="heritage-swatch-preview">
-                          <img
-                            src={heritageSwatchPreviewImage}
-                            alt={`${scorchDepth} Heritage finish swatch`}
-                          />
-                        </div>
-
-                        <p className="heritage-swatch-disclaimer">
-                          This swatch is a general visual guide. Final Heritage
-                          finish character can vary based on wood grain, natural
-                          absorption, torch response, and the unique behavior of
-                          each shell. We’ll aim to get the final result as close
-                          as possible to the preview.
-                        </p>
-                      </div>
-                    )}
+                    <p className="heritage-swatch-disclaimer">
+                      Swatches are a general visual guide. Final Heritage finish
+                      character can vary based on wood grain, natural
+                      absorption, torch response, and the unique behavior of
+                      each shell.
+                    </p>
 
                     <div className="heritage-builder-next-row">
                       <button
@@ -1163,7 +1397,7 @@ const heritageHighlights = [
                     <span className="heritage-builder-section-step">3</span>
 
                     <div>
-                      <h3>Choose your hardware</h3>
+                      <h3>Refine Your Hardware</h3>
 
                       <p>{hardwareSummary}</p>
                     </div>
@@ -1176,33 +1410,91 @@ const heritageHighlights = [
 
                 {openBuilderSection === 'hardware' && (
                   <div className="heritage-builder-section-body">
-                    <label htmlFor="hardwareColor">Hardware Finish</label>
+                    <label>Hoop Type</label>
 
-                    <select
-                      id="hardwareColor"
-                      value={hardwareColor}
-                      onChange={(e) => setHardwareColor(e.target.value)}
-                    >
-                      {hardwareOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="heritage-option-grid">
+                      {hoopOptions.map((option) => {
+                        const isSelected = hoopType === option.value;
 
-                    <label htmlFor="hoopType">Hoop Type</label>
+                        const deltaMeta = getOptionDeltaMeta({
+                          hoopType: option.value,
+                        });
 
-                    <select
-                      id="hoopType"
-                      value={hoopType}
-                      onChange={(e) => setHoopType(e.target.value)}
-                    >
-                      {hoopOptions.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setHoopType(option.value)}
+                          >
+                            <span className="heritage-option-title">
+                              {option.label}
+                            </span>
+
+                            <span className="heritage-option-subtitle">
+                              {option.description}
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Hardware Finish</label>
+
+                    <div className="heritage-option-grid">
+                      {hardwareOptions.map((option) => {
+                        const isSelected = hardwareColor === option.value;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          hardwareColor: option.value,
+                        });
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setHardwareColor(option.value)}
+                          >
+                            <span className="heritage-option-title">
+                              {option.label}
+                            </span>
+
+                            <span className="heritage-option-subtitle">
+                              {option.description}
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     <p className="heritage-select-helper">
                       Heritage uses a standard snare bed and a fixed
