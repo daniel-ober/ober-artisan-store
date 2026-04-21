@@ -860,16 +860,10 @@ exports.generateDiscoveryBridge = onCall(
         request.data || {};
 
       if (!projectId || typeof projectId !== 'string') {
-        throw new HttpsError(
-          'invalid-argument',
-          'Missing valid projectId.'
-        );
+        throw new HttpsError('invalid-argument', 'Missing valid projectId.');
       }
 
-      if (
-        !discoveryBridgeInput ||
-        typeof discoveryBridgeInput !== 'object'
-      ) {
+      if (!discoveryBridgeInput || typeof discoveryBridgeInput !== 'object') {
         throw new HttpsError(
           'invalid-argument',
           'Missing valid discoveryBridgeInput.'
@@ -1213,7 +1207,9 @@ function mapSpeakerLabelToRoleForTranscript(label, artistName = '') {
 }
 
 function fallbackTranscriptTurns(rawText = '', artistName = '') {
-  const text = String(rawText || '').replace(/\\r/g, '').trim();
+  const text = String(rawText || '')
+    .replace(/\\r/g, '')
+    .trim();
   if (!text) return [];
 
   const lines = text
@@ -1456,7 +1452,9 @@ function mapSpeakerLabelToRoleForTranscript(label, artistName = '') {
 }
 
 function fallbackTranscriptTurns(rawText = '', artistName = '') {
-  const text = String(rawText || '').replace(/\\r/g, '').trim();
+  const text = String(rawText || '')
+    .replace(/\\r/g, '')
+    .trim();
   if (!text) return [];
 
   const lines = text
@@ -1471,7 +1469,9 @@ function fallbackTranscriptTurns(rawText = '', artistName = '') {
   if (explicitSpeakerLines.length >= 2) {
     return explicitSpeakerLines
       .map((line, idx) => {
-        const match = line.match(/^([A-Za-z][A-Za-z\\s'-]{1,40}):\\s+([\\s\\S]+)$/);
+        const match = line.match(
+          /^([A-Za-z][A-Za-z\\s'-]{1,40}):\\s+([\\s\\S]+)$/
+        );
         const rawSpeaker = match?.[1] || '';
         const content = match?.[2] || line;
 
@@ -2633,239 +2633,693 @@ app.post('/admin/merch/refresh-stock', async (req, res) => {
   }
 });
 
+function toNumberSafe(value, fallback = 0) {
+  const num = Number(value);
+  return Number.isFinite(num) ? num : fallback;
+}
+
+function normalizeDepthValue(value) {
+  const num = Number(value);
+  if (!Number.isFinite(num)) return String(value || '').trim();
+  return num.toFixed(1);
+}
+
+function normalizeHeritageHardwareColor(value = '') {
+
+  const raw = String(value || '').trim();
+
+  if (/brass/i.test(raw) || /gold/i.test(raw)) {
+
+    return 'Brass/Gold';
+
+  }
+
+  if (/black\s*nickel/i.test(raw)) {
+
+    return 'Black Nickel';
+
+  }
+
+  return 'Chrome';
+
+}
+
+function normalizeHeritageHoopType(value = '') {
+
+  const raw = String(value || '').trim();
+
+  if (/die[\s-]*cast/i.test(raw)) {
+
+    return 'Die-Cast';
+
+  }
+
+  return 'Triple Flange';
+
+}
+
+function calculateHeritagePriceFromConfig(product = {}, item = {}) {
+
+  const size = String(item?.size || '').trim();
+
+  const depth = normalizeDepthValue(item?.depth);
+
+  const lugQuantity = toNumberSafe(item?.lugQuantity, 0);
+
+  const staveQuantity = toNumberSafe(item?.staveQuantity, 0);
+
+  const reRing = !!item?.reRing;
+
+  const hardwareColor = normalizeHeritageHardwareColor(item?.hardwareColor);
+
+  const hoopType = normalizeHeritageHoopType(item?.hoopType);
+
+  const basePrices = {
+
+    12: 850,
+
+    13: 950,
+
+    14: 1050,
+
+  };
+
+  const depthPrices = {
+
+    12: {
+
+      '5.0': 0,
+
+      5.5: 50,
+
+      '6.0': 100,
+
+      6.5: 150,
+
+      '7.0': 200,
+
+      7.5: 250,
+
+      '8.0': 300,
+
+    },
+
+    13: {
+
+      '5.0': 0,
+
+      5.5: 50,
+
+      '6.0': 100,
+
+      6.5: 150,
+
+      '7.0': 200,
+
+      7.5: 250,
+
+      '8.0': 300,
+
+    },
+
+    14: {
+
+      '5.0': 0,
+
+      5.5: 50,
+
+      '6.0': 100,
+
+      6.5: 150,
+
+      '7.0': 200,
+
+      7.5: 250,
+
+      '8.0': 300,
+
+    },
+
+  };
+
+  const hardwareUpchargeMap = {
+
+    Chrome: 0,
+
+    'Black Nickel': 50,
+
+    'Brass/Gold': 150,
+
+  };
+
+  const hoopUpchargeMap = {
+
+    'Triple Flange': 0,
+
+    'Die-Cast': 100,
+
+  };
+
+  if (!basePrices[size]) {
+
+    throw new Error(`Invalid Heritage size: ${size}`);
+
+  }
+
+  if (depthPrices[size]?.[depth] == null) {
+
+    throw new Error(`Invalid Heritage depth: ${depth} for size ${size}`);
+
+  }
+
+  const validBaseConfigs = new Set([
+
+    '12|6|12|false',
+
+    '12|8|16|false',
+
+    '13|8|16|false',
+
+    '14|8|16|false',
+
+    '14|10|20|false',
+
+    '14|10|10|true',
+
+  ]);
+
+  const configKey = `${size}|${lugQuantity}|${staveQuantity}|${reRing}`;
+
+  if (!validBaseConfigs.has(configKey)) {
+
+    throw new Error(`Invalid Heritage shell config: ${configKey}`);
+
+  }
+
+  let total =
+
+    basePrices[size] +
+
+    depthPrices[size][depth] +
+
+    hardwareUpchargeMap[hardwareColor] +
+
+    hoopUpchargeMap[hoopType];
+
+  if (reRing) {
+
+    total += 150;
+
+  }
+
+  return total;
+
+}
+
 // ───────────────────────────────────────────────────────────────────────────────
+
 // Existing endpoints
+
 app.post('/createCheckoutSession', async (req, res) => {
+
   try {
+
     const stripeKey = STRIPE_SECRET_KEY.value();
+
     const clientUrlRaw = CLIENT_URL.value();
+
     if (!stripeKey) {
+
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
+
       return res
+
         .status(500)
+
         .json({ error: 'Server misconfiguration (stripe key).' });
+
     }
+
     if (!clientUrlRaw) {
+
       console.error('❌ Missing CLIENT_URL secret');
+
       return res
+
         .status(500)
+
         .json({ error: 'Server misconfiguration (client url).' });
+
     }
 
     const stripe = stripeLib(stripeKey);
+
     const clientUrl = clientUrlRaw.trim().replace(/\/+$/, '');
 
     const {
+
       products,
+
       userId,
+
       customerEmail,
+
       customerPhone,
+
       firstName,
+
       lastName,
+
       promoCode,
+
       shippingAddress,
+
       billingAddress,
+
     } = req.body || {};
 
     if (!Array.isArray(products) || products.length === 0) {
+
       return res.status(400).json({ error: 'Invalid or empty cart.' });
+
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    await db
-      .collection('pending_checkouts')
-      .doc(guestToken)
-      .set({
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-        products,
-        userId: userId || 'guest',
-      });
+
+    await db.collection('pending_checkouts').doc(guestToken).set({
+
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      products,
+
+      userId: userId || 'guest',
+
+    });
 
     const lineItems = [];
+
     for (const p of products) {
+
       const isMerch = p?.category === 'merch';
+
       const cfg = p?.config || {};
-      const unitAmount = Math.round(Number(p?.price || 0) * 100);
-      if (!Number.isFinite(unitAmount) || unitAmount <= 0) {
-        console.error('❌ Bad unit_amount for product:', p);
-        return res.status(400).json({ error: 'Invalid item price.' });
+
+      const a = { ...cfg, ...p };
+
+      let computedUnitPrice = Number(p?.price || 0);
+
+      if (p?.productId === 'heritage') {
+
+        const heritageProductSnap = await db
+
+          .collection('products')
+
+          .doc('heritage')
+
+          .get();
+
+        const heritageProduct = heritageProductSnap.exists
+
+          ? heritageProductSnap.data() || {}
+
+          : {};
+
+        computedUnitPrice = calculateHeritagePriceFromConfig(
+
+          heritageProduct,
+
+          a
+
+        );
+
       }
+
+      const unitAmount = Math.round(Number(computedUnitPrice || 0) * 100);
+
+      if (!Number.isFinite(unitAmount) || unitAmount <= 0) {
+
+        console.error('❌ Bad unit_amount for product:', p);
+
+        return res.status(400).json({ error: 'Invalid item price.' });
+
+      }
+
       const images =
+
         typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
+
           ? [p.image]
+
+          : typeof p?.images?.[0] === 'string' &&
+
+            /^https?:\/\//i.test(p.images[0])
+
+          ? [p.images[0]]
+
           : [];
 
       if (isMerch) {
+
         const color = String(
+
           cfg.colorName || cfg.color || cfg.Colors || ''
+
         ).trim();
-        const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
+
+        const size = String(
+
+          cfg.sizeName || cfg.size || cfg.Sizes || ''
+
+        ).trim();
+
         const vId = String(cfg.variantId || '').trim();
+
         const parts = [];
+
         if (color) parts.push(`Color: ${color}`);
+
         if (size) parts.push(`Size: ${size}`);
+
         const variantSummary = parts.length ? parts.join(' • ') : undefined;
 
         lineItems.push({
+
           price_data: {
+
             currency: 'usd',
+
             unit_amount: unitAmount,
+
             product_data: {
+
               name: p?.name || 'Ober Merch',
+
               ...(images.length ? { images } : {}),
+
               ...(variantSummary ? { description: variantSummary } : {}),
+
               metadata: {
+
                 category: 'merch',
+
                 productId: String(p?.productId || ''),
+
                 variantId: vId,
+
                 sizeName: size,
+
                 colorName: color,
+
               },
+
             },
+
           },
+
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
+
         });
+
       } else {
-        const a = cfg;
+
+        const normalizedHardware = normalizeHeritageHardwareColor(
+
+          a.hardwareColor
+
+        );
+
+        const normalizedHoops = normalizeHeritageHoopType(a.hoopType);
+
         const descParts = [
+
           a.size ? `Size: ${a.size}"` : '',
+
           a.depth ? `Depth: ${a.depth}"` : '',
+
           a.lugQuantity ? `${a.lugQuantity} Lugs` : '',
+
           a.staveQuantity ? `${a.staveQuantity} Staves` : '',
+
           typeof a.reRing !== 'undefined'
+
             ? a.reRing
+
               ? 'Re-Rings'
+
               : 'No Re-Rings'
+
             : '',
-          a.hardwareColor ? `Hardware: ${a.hardwareColor}` : '',
+
+          normalizedHardware ? `Hardware: ${normalizedHardware}` : '',
+
+          normalizedHoops ? `Hoops: ${normalizedHoops}` : '',
+
         ].filter(Boolean);
 
         lineItems.push({
+
           price_data: {
+
             currency: 'usd',
+
             unit_amount: unitAmount,
+
             product_data: {
+
               name: p?.name || 'Ober Artisan Product',
+
               ...(images.length ? { images } : {}),
+
               ...(descParts.length
+
                 ? { description: descParts.join(' • ') }
+
                 : {}),
+
             },
+
           },
+
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
+
         });
+
       }
+
     }
 
     const sessionParams = {
+
       mode: 'payment',
+
       line_items: lineItems,
+
       success_url: `${clientUrl}/checkout-summary?session_id={CHECKOUT_SESSION_ID}&guest_token=${guestToken}`,
+
       cancel_url: `${clientUrl}/cart`,
+
       allow_promotion_codes: true,
+
       metadata: {
+
         userId: userId || 'guest',
+
         guestToken,
+
         customerPhone: customerPhone || '',
+
         customerName: `${firstName || ''} ${lastName || ''}`.trim(),
+
         promoCode: promoCode || '',
+
         shipTo: shippingAddress?.line1 || '',
+
       },
+
       shipping_address_collection: { allowed_countries: ['US'] },
+
     };
 
     if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
+
       sessionParams.customer_email = customerEmail;
+
     }
 
     const subtotalCents = products.reduce((sum, p) => {
+
       const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
-      const priceCents = Math.round(Number(p?.price || 0) * 100);
+
+      const cfg = p?.config || {};
+
+      const a = { ...cfg, ...p };
+
+      let computedUnitPrice = Number(p?.price || 0);
+
+      if (p?.productId === 'heritage') {
+
+        computedUnitPrice = calculateHeritagePriceFromConfig({}, a);
+
+      }
+
+      const priceCents = Math.round(Number(computedUnitPrice || 0) * 100);
+
       return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
+
     }, 0);
 
     const FREE_THRESHOLD = 5000;
+
     const FALLBACK_UNDER50 = 999;
 
     const fallbackUnder50Option = {
+
       shipping_rate_data: {
+
         type: 'fixed_amount',
+
         fixed_amount: { amount: FALLBACK_UNDER50, currency: 'usd' },
+
         display_name: 'Standard',
+
         delivery_estimate: {
+
           minimum: { unit: 'business_day', value: 7 },
+
           maximum: { unit: 'business_day', value: 10 },
+
         },
+
       },
+
     };
 
     if (subtotalCents >= FREE_THRESHOLD) {
+
       sessionParams.shipping_options = [
+
         {
+
           shipping_rate_data: {
+
             type: 'fixed_amount',
+
             fixed_amount: { amount: 0, currency: 'usd' },
+
             display_name: 'Standard',
+
             delivery_estimate: {
+
               minimum: { unit: 'business_day', value: 7 },
+
               maximum: { unit: 'business_day', value: 10 },
+
             },
+
           },
+
         },
+
       ];
+
     } else {
+
       const hasAddress =
+
         !!(shippingAddress && shippingAddress.country) &&
+
         !!(
+
           shippingAddress.postal_code ||
+
           shippingAddress.postalCode ||
+
           shippingAddress.zip
+
         );
 
       if (!hasAddress) {
+
         sessionParams.shipping_options = [fallbackUnder50Option];
+
       } else {
+
         try {
+
           const shopId = PRINTIFY_SHOP_ID.value();
+
           const payload = {
+
             line_items: toPrintifyLineItems(products),
+
             address_to: toPrintifyAddress(
+
               shippingAddress || {},
+
               firstName || 'Customer',
+
               lastName || ''
+
             ),
+
           };
 
           const { data: rates } = await axios.post(
+
             `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
+
             payload,
+
             { headers: pHeaders() }
+
           );
 
           const shipping_options = mapRatesToStripeOptions(rates, 'usd');
+
           sessionParams.shipping_options = shipping_options.length
+
             ? shipping_options
+
             : [fallbackUnder50Option];
+
         } catch (e) {
+
           console.warn(
+
             '⚠️ Printify quote failed; using fallback:',
+
             e?.response?.data || e?.message || e
+
           );
+
           sessionParams.shipping_options = [fallbackUnder50Option];
+
         }
+
       }
+
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams);
+
     return res.status(200).json({ url: session.url });
+
   } catch (err) {
+
     const msg =
+
       err?.raw?.message ||
+
       err?.message ||
+
       'Unknown error creating checkout session';
+
     console.error('❌ Error creating checkout session:', msg, err);
+
     return res.status(500).json({ error: msg });
+
   }
+
 });
 
 app.post('/verifyRecaptcha', async (req, res) => {
