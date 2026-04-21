@@ -665,7 +665,7 @@
 
   object-position: center 38%;
 
-  transform: scale(1.38);
+  transform: scale(1.4);
 }
 
 .feuzon-swatch-tile:hover .feuzon-swatch-chip,
@@ -907,7 +907,7 @@
 
   object-position: center 10%;
 
-  transform: scale(1.75);
+  transform: scale(1.8);
 }
 
 .feuzon-swatch-disclaimer {
@@ -1003,7 +1003,7 @@
   .feuzon-swatch-preview img {
     object-position: center 8%;
 
-    transform: scale(1.64);
+    transform: scale(1.75);
   }
 
   .feuzon-swatch-chip {
