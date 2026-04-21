@@ -277,6 +277,183 @@
   background: #c0392b;
 }
 
+.cart-item-name {
+  margin: 0 0 12px;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  color: var(--text-color, #222);
+}
+
+.cart-sub-description {
+  margin: 0;
+
+  font-size: 0.92rem;
+
+  color: #666;
+
+  line-height: 1.5;
+}
+
+.cart-build-meta {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  align-items: flex-start;
+
+  text-align: left;
+}
+
+.cart-build-meta {
+  gap: 6px;
+}
+
+.cart-build-meta-row {
+  grid-template-columns: 110px minmax(0, 1fr);
+
+  gap: 6px;
+}
+
+.cart-build-meta-label {
+  font-size: 0.74rem;
+}
+
+.cart-build-meta-value {
+  font-size: 0.84rem;
+
+  line-height: 1.18;
+}
+
+.cart-table td:nth-child(3) {
+  min-width: 340px;
+
+  text-align: left;
+}
+
+
+.cart-item-name {
+
+  margin: 0 0 4px;
+
+  font-size: 0.94rem;
+
+  font-weight: 700;
+
+  color: var(--text-color, #222);
+
+  text-align: left;
+
+  line-height: 1.1;
+
+}
+
+.cart-sub-description {
+
+  margin: 0;
+
+  font-size: 0.9rem;
+
+  color: #666;
+
+  line-height: 1.4;
+
+}
+
+.cart-build-meta {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1px;
+
+  align-items: flex-start;
+
+  text-align: left;
+
+  width: 100%;
+
+  margin-top: 2px;
+
+}
+
+.cart-build-meta-row {
+
+  display: grid;
+
+  grid-template-columns: 104px minmax(0, 1fr);
+
+  gap: 4px;
+
+  align-items: start;
+
+  width: 100%;
+
+}
+
+.cart-build-meta-label {
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  color: #444;
+
+  line-height: 1.12;
+
+  letter-spacing: 0;
+
+  white-space: nowrap;
+
+  text-align: left;
+
+}
+
+.cart-build-meta-value {
+
+  font-size: 0.84rem;
+
+  font-weight: 500;
+
+  line-height: 1.12;
+
+  color: #222;
+
+  text-align: left;
+
+  white-space: normal;
+
+}
+
+.cart-table td:nth-child(3) {
+
+  min-width: 380px;
+
+  text-align: left;
+
+  padding-top: 10px;
+
+}
+
+.cart-product-image {
+
+  width: 88px;
+
+  height: 88px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+
+  display: block;
+
+}
+
 /* ========== Responsive ========== */
 
 /* tablets / small laptops */

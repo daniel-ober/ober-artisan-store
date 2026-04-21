@@ -2645,41 +2645,30 @@ function normalizeDepthValue(value) {
 }
 
 function normalizeHeritageHardwareColor(value = '') {
-
   const raw = String(value || '').trim();
 
   if (/brass/i.test(raw) || /gold/i.test(raw)) {
-
     return 'Brass/Gold';
-
   }
 
   if (/black\s*nickel/i.test(raw)) {
-
     return 'Black Nickel';
-
   }
 
   return 'Chrome';
-
 }
 
 function normalizeHeritageHoopType(value = '') {
-
   const raw = String(value || '').trim();
 
   if (/die[\s-]*cast/i.test(raw)) {
-
     return 'Die-Cast';
-
   }
 
   return 'Triple Flange';
-
 }
 
 function calculateHeritagePriceFromConfig(product = {}, item = {}) {
-
   const size = String(item?.size || '').trim();
 
   const depth = normalizeDepthValue(item?.depth);
@@ -2695,19 +2684,15 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
   const hoopType = normalizeHeritageHoopType(item?.hoopType);
 
   const basePrices = {
-
     12: 850,
 
     13: 950,
 
     14: 1050,
-
   };
 
   const depthPrices = {
-
     12: {
-
       '5.0': 0,
 
       5.5: 50,
@@ -2721,11 +2706,9 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
       7.5: 250,
 
       '8.0': 300,
-
     },
 
     13: {
-
       '5.0': 0,
 
       5.5: 50,
@@ -2739,11 +2722,9 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
       7.5: 250,
 
       '8.0': 300,
-
     },
 
     14: {
-
       '5.0': 0,
 
       5.5: 50,
@@ -2757,43 +2738,32 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
       7.5: 250,
 
       '8.0': 300,
-
     },
-
   };
 
   const hardwareUpchargeMap = {
-
     Chrome: 0,
 
     'Black Nickel': 50,
 
     'Brass/Gold': 150,
-
   };
 
   const hoopUpchargeMap = {
-
     'Triple Flange': 0,
 
     'Die-Cast': 100,
-
   };
 
   if (!basePrices[size]) {
-
     throw new Error(`Invalid Heritage size: ${size}`);
-
   }
 
   if (depthPrices[size]?.[depth] == null) {
-
     throw new Error(`Invalid Heritage depth: ${depth} for size ${size}`);
-
   }
 
   const validBaseConfigs = new Set([
-
     '12|6|12|false',
 
     '12|8|16|false',
@@ -2805,35 +2775,25 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
     '14|10|20|false',
 
     '14|10|10|true',
-
   ]);
 
   const configKey = `${size}|${lugQuantity}|${staveQuantity}|${reRing}`;
 
   if (!validBaseConfigs.has(configKey)) {
-
     throw new Error(`Invalid Heritage shell config: ${configKey}`);
-
   }
 
   let total =
-
     basePrices[size] +
-
     depthPrices[size][depth] +
-
     hardwareUpchargeMap[hardwareColor] +
-
     hoopUpchargeMap[hoopType];
 
   if (reRing) {
-
     total += 150;
-
   }
 
   return total;
-
 }
 
 // ───────────────────────────────────────────────────────────────────────────────
@@ -2841,15 +2801,12 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
 // Existing endpoints
 
 app.post('/createCheckoutSession', async (req, res) => {
-
   try {
-
     const stripeKey = STRIPE_SECRET_KEY.value();
 
     const clientUrlRaw = CLIENT_URL.value();
 
     if (!stripeKey) {
-
       console.error('❌ Missing STRIPE_SECRET_KEY secret');
 
       return res
@@ -2857,11 +2814,9 @@ app.post('/createCheckoutSession', async (req, res) => {
         .status(500)
 
         .json({ error: 'Server misconfiguration (stripe key).' });
-
     }
 
     if (!clientUrlRaw) {
-
       console.error('❌ Missing CLIENT_URL secret');
 
       return res
@@ -2869,7 +2824,6 @@ app.post('/createCheckoutSession', async (req, res) => {
         .status(500)
 
         .json({ error: 'Server misconfiguration (client url).' });
-
     }
 
     const stripe = stripeLib(stripeKey);
@@ -2877,7 +2831,6 @@ app.post('/createCheckoutSession', async (req, res) => {
     const clientUrl = clientUrlRaw.trim().replace(/\/+$/, '');
 
     const {
-
       products,
 
       userId,
@@ -2895,31 +2848,28 @@ app.post('/createCheckoutSession', async (req, res) => {
       shippingAddress,
 
       billingAddress,
-
     } = req.body || {};
 
     if (!Array.isArray(products) || products.length === 0) {
-
       return res.status(400).json({ error: 'Invalid or empty cart.' });
-
     }
 
     const guestToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-    await db.collection('pending_checkouts').doc(guestToken).set({
+    await db
+      .collection('pending_checkouts')
+      .doc(guestToken)
+      .set({
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
 
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        products,
 
-      products,
-
-      userId: userId || 'guest',
-
-    });
+        userId: userId || 'guest',
+      });
 
     const lineItems = [];
 
     for (const p of products) {
-
       const isMerch = p?.category === 'merch';
 
       const cfg = p?.config || {};
@@ -2929,7 +2879,6 @@ app.post('/createCheckoutSession', async (req, res) => {
       let computedUnitPrice = Number(p?.price || 0);
 
       if (p?.productId === 'heritage') {
-
         const heritageProductSnap = await db
 
           .collection('products')
@@ -2939,58 +2888,38 @@ app.post('/createCheckoutSession', async (req, res) => {
           .get();
 
         const heritageProduct = heritageProductSnap.exists
-
           ? heritageProductSnap.data() || {}
-
           : {};
 
         computedUnitPrice = calculateHeritagePriceFromConfig(
-
           heritageProduct,
 
           a
-
         );
-
       }
 
       const unitAmount = Math.round(Number(computedUnitPrice || 0) * 100);
 
       if (!Number.isFinite(unitAmount) || unitAmount <= 0) {
-
         console.error('❌ Bad unit_amount for product:', p);
 
         return res.status(400).json({ error: 'Invalid item price.' });
-
       }
 
       const images =
-
         typeof p?.image === 'string' && /^https?:\/\//i.test(p.image)
-
           ? [p.image]
-
           : typeof p?.images?.[0] === 'string' &&
-
-            /^https?:\/\//i.test(p.images[0])
-
-          ? [p.images[0]]
-
-          : [];
+              /^https?:\/\//i.test(p.images[0])
+            ? [p.images[0]]
+            : [];
 
       if (isMerch) {
-
         const color = String(
-
           cfg.colorName || cfg.color || cfg.Colors || ''
-
         ).trim();
 
-        const size = String(
-
-          cfg.sizeName || cfg.size || cfg.Sizes || ''
-
-        ).trim();
+        const size = String(cfg.sizeName || cfg.size || cfg.Sizes || '').trim();
 
         const vId = String(cfg.variantId || '').trim();
 
@@ -3003,15 +2932,12 @@ app.post('/createCheckoutSession', async (req, res) => {
         const variantSummary = parts.length ? parts.join(' • ') : undefined;
 
         lineItems.push({
-
           price_data: {
-
             currency: 'usd',
 
             unit_amount: unitAmount,
 
             product_data: {
-
               name: p?.name || 'Ober Merch',
 
               ...(images.length ? { images } : {}),
@@ -3019,7 +2945,6 @@ app.post('/createCheckoutSession', async (req, res) => {
               ...(variantSummary ? { description: variantSummary } : {}),
 
               metadata: {
-
                 category: 'merch',
 
                 productId: String(p?.productId || ''),
@@ -3029,29 +2954,20 @@ app.post('/createCheckoutSession', async (req, res) => {
                 sizeName: size,
 
                 colorName: color,
-
               },
-
             },
-
           },
 
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
-
         });
-
       } else {
-
         const normalizedHardware = normalizeHeritageHardwareColor(
-
           a.hardwareColor
-
         );
 
         const normalizedHoops = normalizeHeritageHoopType(a.hoopType);
 
         const descParts = [
-
           a.size ? `Size: ${a.size}"` : '',
 
           a.depth ? `Depth: ${a.depth}"` : '',
@@ -3061,55 +2977,83 @@ app.post('/createCheckoutSession', async (req, res) => {
           a.staveQuantity ? `${a.staveQuantity} Staves` : '',
 
           typeof a.reRing !== 'undefined'
-
             ? a.reRing
-
               ? 'Re-Rings'
-
               : 'No Re-Rings'
-
             : '',
 
           normalizedHardware ? `Hardware: ${normalizedHardware}` : '',
 
           normalizedHoops ? `Hoops: ${normalizedHoops}` : '',
 
+          a.shellConstruction || a.construction
+            ? `Shell: ${a.shellConstruction || a.construction}`
+            : '',
+
+          a.bearingEdge ? `Bearing Edge: ${a.bearingEdge}` : '',
+
+          a.snareBedDepth || a.snareBeds
+            ? `Snare Bed: ${a.snareBedDepth || a.snareBeds}`
+            : '',
+
+          a.snareWireModel || a.snareWires
+            ? `Snare Wires: ${a.snareWireModel || a.snareWires}`
+            : '',
+
+          a.scorchDepth || a.finishTorchDepth
+            ? `Torch Depth: ${a.scorchDepth || a.finishTorchDepth}`
+            : '',
+
+          a.finishType || a.finish ? `Finish: ${a.finishType || a.finish}` : '',
+
+          a.finishSheen ? `Sheen: ${a.finishSheen}` : '',
+
+          a.headType ? `Head Type: ${a.headType}` : '',
+
+          a.batterHead ? `Batter: ${a.batterHead}` : '',
+
+          a.resonantHead ? `Resonant: ${a.resonantHead}` : '',
+
+          a.primaryWood ? `Primary Wood: ${a.primaryWood}` : '',
+
+          a.secondaryWood ? `Secondary Wood: ${a.secondaryWood}` : '',
+
+          a.outerShell ? `Outer Shell: ${a.outerShell}` : '',
+
+          a.innerStave ? `Inner Stave: ${a.innerStave}` : '',
+
+          a.innerSpecies ? `Inner Species: ${a.innerSpecies}` : '',
+
+          a.outerSpecies ? `Outer Species: ${a.outerSpecies}` : '',
+
+          a.veneer ? `Veneer: ${a.veneer}` : '',
+
+          a.finishColor ? `Finish Color: ${a.finishColor}` : '',
         ].filter(Boolean);
 
         lineItems.push({
-
           price_data: {
-
             currency: 'usd',
 
             unit_amount: unitAmount,
 
             product_data: {
-
               name: p?.name || 'Ober Artisan Product',
 
               ...(images.length ? { images } : {}),
 
               ...(descParts.length
-
                 ? { description: descParts.join(' • ') }
-
                 : {}),
-
             },
-
           },
 
           quantity: Math.max(1, parseInt(p?.quantity || 1, 10)),
-
         });
-
       }
-
     }
 
     const sessionParams = {
-
       mode: 'payment',
 
       line_items: lineItems,
@@ -3121,7 +3065,6 @@ app.post('/createCheckoutSession', async (req, res) => {
       allow_promotion_codes: true,
 
       metadata: {
-
         userId: userId || 'guest',
 
         guestToken,
@@ -3133,21 +3076,16 @@ app.post('/createCheckoutSession', async (req, res) => {
         promoCode: promoCode || '',
 
         shipTo: shippingAddress?.line1 || '',
-
       },
 
       shipping_address_collection: { allowed_countries: ['US'] },
-
     };
 
     if (customerEmail && /\S+@\S+\.\S+/.test(customerEmail)) {
-
       sessionParams.customer_email = customerEmail;
-
     }
 
     const subtotalCents = products.reduce((sum, p) => {
-
       const qty = Math.max(1, parseInt(p?.quantity || 1, 10));
 
       const cfg = p?.config || {};
@@ -3157,15 +3095,12 @@ app.post('/createCheckoutSession', async (req, res) => {
       let computedUnitPrice = Number(p?.price || 0);
 
       if (p?.productId === 'heritage') {
-
         computedUnitPrice = calculateHeritagePriceFromConfig({}, a);
-
       }
 
       const priceCents = Math.round(Number(computedUnitPrice || 0) * 100);
 
       return sum + (Number.isFinite(priceCents) ? priceCents * qty : 0);
-
     }, 0);
 
     const FREE_THRESHOLD = 5000;
@@ -3173,9 +3108,7 @@ app.post('/createCheckoutSession', async (req, res) => {
     const FALLBACK_UNDER50 = 999;
 
     const fallbackUnder50Option = {
-
       shipping_rate_data: {
-
         type: 'fixed_amount',
 
         fixed_amount: { amount: FALLBACK_UNDER50, currency: 'usd' },
@@ -3183,25 +3116,17 @@ app.post('/createCheckoutSession', async (req, res) => {
         display_name: 'Standard',
 
         delivery_estimate: {
-
           minimum: { unit: 'business_day', value: 7 },
 
           maximum: { unit: 'business_day', value: 10 },
-
         },
-
       },
-
     };
 
     if (subtotalCents >= FREE_THRESHOLD) {
-
       sessionParams.shipping_options = [
-
         {
-
           shipping_rate_data: {
-
             type: 'fixed_amount',
 
             fixed_amount: { amount: 0, currency: 'usd' },
@@ -3209,117 +3134,78 @@ app.post('/createCheckoutSession', async (req, res) => {
             display_name: 'Standard',
 
             delivery_estimate: {
-
               minimum: { unit: 'business_day', value: 7 },
 
               maximum: { unit: 'business_day', value: 10 },
-
             },
-
           },
-
         },
-
       ];
-
     } else {
-
       const hasAddress =
-
         !!(shippingAddress && shippingAddress.country) &&
-
         !!(
-
           shippingAddress.postal_code ||
-
           shippingAddress.postalCode ||
-
           shippingAddress.zip
-
         );
 
       if (!hasAddress) {
-
         sessionParams.shipping_options = [fallbackUnder50Option];
-
       } else {
-
         try {
-
           const shopId = PRINTIFY_SHOP_ID.value();
 
           const payload = {
-
             line_items: toPrintifyLineItems(products),
 
             address_to: toPrintifyAddress(
-
               shippingAddress || {},
 
               firstName || 'Customer',
 
               lastName || ''
-
             ),
-
           };
 
           const { data: rates } = await axios.post(
-
             `https://api.printify.com/v1/shops/${shopId}/orders/shipping.json`,
 
             payload,
 
             { headers: pHeaders() }
-
           );
 
           const shipping_options = mapRatesToStripeOptions(rates, 'usd');
 
           sessionParams.shipping_options = shipping_options.length
-
             ? shipping_options
-
             : [fallbackUnder50Option];
-
         } catch (e) {
-
           console.warn(
-
             '⚠️ Printify quote failed; using fallback:',
 
             e?.response?.data || e?.message || e
-
           );
 
           sessionParams.shipping_options = [fallbackUnder50Option];
-
         }
-
       }
-
     }
 
     const session = await stripe.checkout.sessions.create(sessionParams);
 
     return res.status(200).json({ url: session.url });
-
   } catch (err) {
-
     const msg =
-
       err?.raw?.message ||
-
       err?.message ||
-
       'Unknown error creating checkout session';
 
     console.error('❌ Error creating checkout session:', msg, err);
 
     return res.status(500).json({ error: msg });
-
   }
-
 });
 
 app.post('/verifyRecaptcha', async (req, res) => {
@@ -3657,21 +3543,41 @@ stripeWebhookApp.post('/', async (req, res) => {
           variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
         variant.color =
           variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
-      } else if (matched) {
+        } else if (matched) {
         const cfg = matched.config || {};
         variant = {
           ...variant,
           size: variant.size || cfg.size || '',
           color: variant.color || cfg.hardwareColor || '',
+          depth: cfg.depth || '',
           lugQuantity: cfg.lugQuantity || '',
           staveQuantity: cfg.staveQuantity || '',
-          depth: cfg.depth || '',
           reRing:
             typeof cfg.reRing !== 'undefined'
               ? cfg.reRing
                 ? 'Yes'
                 : 'No'
               : '',
+          hardwareColor: cfg.hardwareColor || '',
+          hoopType: cfg.hoopType || '',
+          shellConstruction: cfg.shellConstruction || cfg.construction || '',
+          bearingEdge: cfg.bearingEdge || '',
+          snareBedDepth: cfg.snareBedDepth || cfg.snareBeds || '',
+          snareWireModel: cfg.snareWireModel || cfg.snareWires || '',
+          scorchDepth: cfg.scorchDepth || cfg.finishTorchDepth || '',
+          finishType: cfg.finishType || cfg.finish || '',
+          finishSheen: cfg.finishSheen || '',
+          headType: cfg.headType || '',
+          batterHead: cfg.batterHead || '',
+          resonantHead: cfg.resonantHead || '',
+          primaryWood: cfg.primaryWood || '',
+          secondaryWood: cfg.secondaryWood || '',
+          outerShell: cfg.outerShell || '',
+          innerStave: cfg.innerStave || '',
+          innerSpecies: cfg.innerSpecies || '',
+          outerSpecies: cfg.outerSpecies || '',
+          veneer: cfg.veneer || '',
+          finishColor: cfg.finishColor || '',
         };
       }
 
