@@ -1,316 +1,1203 @@
-/* 📌 Main Page Container */
-.feuzon-product-image {
-    width: 100%;
+:root {
+  --feuzon-bg: #06070b;
+
+  --feuzon-panel: rgba(19, 21, 28, 0.96);
+
+  --feuzon-panel-2: rgba(14, 15, 20, 0.98);
+
+  --feuzon-border: rgba(141, 162, 255, 0.22);
+
+  --feuzon-border-soft: rgba(255, 255, 255, 0.08);
+
+  --feuzon-text: #f5f3ee;
+
+  --feuzon-muted: rgba(233, 234, 238, 0.74);
+
+  --feuzon-muted-soft: rgba(233, 234, 238, 0.58);
+
+  --feuzon-blue: #8da2ff;
+
+  --feuzon-gold: #d6b277;
+
+  --feuzon-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+
+  --feuzon-radius-xl: 22px;
+
+  --feuzon-radius-lg: 18px;
+
+  --feuzon-radius-md: 14px;
 }
 
 .feuzon-product-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 50px;
-    max-width: 1500px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    background: #121212;
-    color: white;
-}
+  color: var(--feuzon-text);
 
-.order-to-build-disclaimer {
-    font-size: 14px;
-}
+  background:
+    radial-gradient(
+      circle at top center,
 
-/* 🔄 Main Content Layout - Adjusted for Proper Balance */
-.feuzon-product-content {
-    /* display: flex; */
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-    gap: 60px;
-    max-width: 1200px;
-    box-sizing: border-box;
-}
+      rgba(141, 162, 255, 0.1),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at top left,
 
-/* 📌 Left Side: Product Image + Sound Charts */
-.feuzon-product-visuals {
-    flex: 1;
-    max-width: 58%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+      rgba(214, 178, 119, 0.08),
+      transparent 28%
+    ),
+    linear-gradient(180deg, #06070b, #11131a);
 
-/* Product Image */
-.feuzon-product-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
+  min-height: 100dvh;
 
-.feuzon-product-image img:hover {
-    transform: scale(1.02);
+  padding: 44px 20px 72px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
 }
 
 .feuzon-header-image {
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto 2rem;
-  }
+  width: min(88vw, 480px);
 
-/* 📌 Sound Profile Charts */
-.feuzon-sound-charts {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 25px;
+  height: auto;
+
+  display: block;
+
+  margin: 0 auto 22px;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 8px 26px rgba(0, 0, 0, 0.52));
 }
 
-/* 📌 Right Side: Features + Customization */
-.feuzon-product-details {
-    flex: 1;
-    max-width: 42%;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+.feuzon-hero-shell {
+  max-width: 1320px;
+
+  margin: 0 auto;
 }
 
-/* 📌 Customization Panel */
-.feuzon-product-options {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    width: 100%;
-    color: white;
-    box-sizing: border-box;
-    backdrop-filter: blur(8px);
-    margin-top:20px
+.feuzon-layout-top {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+
+  gap: 26px;
+
+  align-items: start;
 }
 
-/* 📌 Section Titles */
-.feuzon-product-options h2 {
-    font-size: 20px;
-    margin-bottom: 14px;
-    color: #e0e0e0;
+.feuzon-left-column {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+
+  min-width: 0;
 }
 
-/* 📌 Labels for Dropdowns */
-.feuzon-product-options label {
-    display: block;
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #ccc;
+.feuzon-product-image-card,
+.feuzon-overview-card,
+.feuzon-read-card,
+.feuzon-chart-card,
+.feuzon-builder-card {
+  border-radius: var(--feuzon-radius-xl);
+
+  background:
+    radial-gradient(
+      circle at top left,
+
+      rgba(141, 162, 255, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at top right,
+
+      rgba(214, 178, 119, 0.06),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(24, 25, 32, 0.96), rgba(14, 15, 20, 0.98));
+
+  border: 1px solid var(--feuzon-border-soft);
+
+  box-shadow: var(--feuzon-shadow);
+
+  overflow: hidden;
 }
 
-/* 📌 Dropdown Styling */
-.feuzon-product-options select {
-    width: 100%;
-    padding: 10px;
-    font-size: 15px;
-    border-radius: 6px;
-    border: 1px solid #666;
-    background: #1a1a1a;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 12px;
+.feuzon-builder-card {
+  padding: 22px 22px 20px;
+
+  overflow: visible;
 }
 
-/* 📌 Total Price Styling */
-.feuzon-product-options .total-price {
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 14px;
-    color: #f0f0f0;
-    text-align: center;
+.feuzon-product-image {
+  width: 100%;
+}
+
+.feuzon-product-image img {
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  aspect-ratio: 16 / 10;
+
+  object-fit: cover;
+}
+
+.feuzon-overview-card,
+.feuzon-read-card,
+.feuzon-chart-card {
+  padding: 24px 22px;
+}
+
+.feuzon-story-kicker,
+.feuzon-builder-kicker,
+.feuzon-summary-kicker {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  font-size: 0.74rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  color: var(--feuzon-blue);
+}
+
+.feuzon-story-title,
+.feuzon-builder-head h2,
+.feuzon-read-card h3,
+.feuzon-chart-card h3 {
+  margin: 0 0 10px;
+
+  font-size: clamp(1.6rem, 2vw, 2.3rem);
+
+  line-height: 1.02;
+
+  font-weight: 800;
+
+  color: #fff;
+
+  letter-spacing: -0.03em;
+}
+
+.feuzon-story-lede {
+  margin: 0 0 12px;
+
+  color: #f4f0e8;
+
+  font-size: 1.02rem;
+
+  line-height: 1.7;
+
+  font-weight: 600;
+}
+
+.feuzon-story-copy,
+.feuzon-builder-head p,
+.feuzon-read-summary {
+  margin: 0;
+
+  color: var(--feuzon-muted);
+
+  line-height: 1.65;
+
+  font-size: 0.98rem;
+}
+
+.feuzon-builder-head {
+  margin-bottom: 18px;
+}
+
+.feuzon-overview-card {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0;
+
+  padding: 24px 22px;
+}
+
+.feuzon-overview-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: 12px;
+}
+
+.feuzon-overview-divider {
+  width: 100%;
+
+  height: 1px;
+
+  margin: 22px 0 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.feuzon-overview-highlights-title {
+  margin: 0 0 12px;
+
+  font-size: 1.2rem;
+
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  color: #fff;
+
+  letter-spacing: -0.02em;
+}
+
+.feuzon-overview-highlights {
+  margin: 0;
+
+  padding-left: 1.1rem;
+}
+
+.feuzon-overview-highlights li {
+  margin: 9px 0;
+
+  color: #ece8df;
+
+  line-height: 1.5;
+}
+
+.feuzon-overview-disclaimer {
+  margin-top: 16px;
+}
+
+.order-to-build-disclaimer {
+  margin: 14px 0 0;
+
+  font-size: 0.88rem;
+
+  line-height: 1.55;
+
+  color: var(--feuzon-muted-soft);
+}
+
+.feuzon-select-helper {
+  margin: 0 0 16px;
+
+  color: var(--feuzon-muted);
+
+  font-size: 0.88rem;
+
+  line-height: 1.55;
+}
+
+.feuzon-purchase-block {
+  position: relative;
+
+  z-index: 30;
+
+  margin-top: 6px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .feuzon-detail-price {
-    font-size: 25px;
-    font-weight: 600;
-    color: #ffde08;
-    text-align: center;
+  margin: 0;
+
+  font-size: 3rem;
+
+  font-weight: 800;
+
+  line-height: 1;
+
+  color: var(--feuzon-gold);
+
+  text-align: center;
 }
 
-/* 📌 Add to Cart / In Cart Button Styles */
-.artisan-add-to-cart-button, .artisan-in-cart-button {
-    background-color: #4135ea;
-    color: rgb(255, 255, 255);
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 20px;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border-radius: 6px;
-    box-sizing: border-box;
-  }
-  
-  .artisan-add-to-cart-button:hover {
-    background-color: rgb(43, 82, 255);
-  }
-  
-/* 🔥 Fixes width issue & prevents overflow */
+.delivery-time {
+  margin: 10px 0 18px;
+
+  text-align: center;
+
+  color: var(--feuzon-muted);
+
+  font-size: 0.96rem;
+}
+
+.artisan-add-to-cart-button,
+.artisan-in-cart-button {
+  width: 100%;
+
+  min-height: 52px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  color: #fff;
+
+  background: linear-gradient(135deg, #5f55e8, #7865f0);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.artisan-add-to-cart-button:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.03);
+}
+
+.artisan-add-to-cart-button:disabled {
+  opacity: 0.72;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+.artisan-in-cart-button {
+  cursor: default;
+}
+
 .artisan-cart-hover-container {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    z-index: 9998; /* Ensures it stacks above other elements */
-  }
-  
-  /* Options container (initially hidden) */
-  .artisan-cart-hover-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0; /* Ensures full width matching the parent */
-    background: #fff;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    display: none;
-    padding: 0;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    border-radius: 6px;
-    box-sizing: border-box;
-    z-index: 9999;
-    overflow: hidden; /* Prevents dropdown overflow */
-  }
-  
-  /* Show options on hover */
-  .artisan-cart-hover-container:hover .artisan-cart-hover-options {
-    display: block;
-    margin-top: -4px; /* Optional: adjust spacing between button and dropdown */
-  }
-  
-  /* Each option in the dropdown */
-  .artisan-cart-hover-options span {
-    display: block;
-    padding: 12px;
-    cursor: pointer;
-    color: #333;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-    width: 100%;
-  }
-  
-  /* Hover effect on options */
-  .artisan-cart-hover-options span:hover {
-    background-color: #f5f5f5;
-  }
-  
-.notify-me-button {
-    background-color: #888;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 12px 20px;
-    border-radius: 8px;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.loading-button {
-    background-color: #ddd;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-/* Grey out locked dropdowns */
-.disabled-dropdown {
-    background-color: #ddd !important;
-    color: #666 !important;
-    cursor: not-allowed;
-  }
-
-  .feuzon-product-detail,
-.feuzon-product-content,
-.feuzon-product-details {
-  overflow: visible !important;
   position: relative;
-  z-index: 1;
+
+  width: 100%;
+
+  z-index: 40;
 }
-  
-  /* Change Selection Button Flicker */
-  @keyframes flicker {
-    0% { background-color: #ffcc00; }
-    50% { background-color: #ffaa00; }
-    100% { background-color: #ffcc00; }
+
+.artisan-cart-hover-options {
+  position: absolute;
+
+  top: calc(100% + 8px);
+
+  left: 0;
+
+  right: 0;
+
+  display: none;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: #fff;
+
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
+
+  z-index: 60;
+}
+
+.artisan-cart-hover-container:hover .artisan-cart-hover-options,
+.artisan-cart-hover-container:focus-within .artisan-cart-hover-options {
+  display: block;
+}
+
+.artisan-cart-hover-options span {
+  display: block;
+
+  padding: 14px 16px;
+
+  color: #222;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.artisan-cart-hover-options span:hover {
+  background: #f3f3f3;
+}
+
+.feuzon-summary-band {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.95fr);
+
+  gap: 20px;
+
+  margin-top: 24px;
+
+  align-items: start;
+}
+
+.feuzon-summary-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 18px;
+}
+
+.feuzon-summary-item {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 16px 14px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  min-width: 0;
+}
+
+.feuzon-summary-item-wide {
+  grid-column: 1 / -1;
+}
+
+.feuzon-summary-label {
+  font-size: 0.76rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  color: var(--feuzon-blue);
+}
+
+.feuzon-summary-value {
+  color: #f5f1e8;
+
+  font-size: 0.97rem;
+
+  line-height: 1.55;
+
+  font-weight: 600;
+
+  word-break: break-word;
+}
+
+.feuzon-chart-head {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  margin-bottom: 16px;
+}
+
+.feuzon-chart-toggle {
+  display: inline-flex;
+
+  gap: 8px;
+}
+
+.feuzon-chart-toggle button {
+  min-height: 42px;
+
+  padding: 0 16px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #d7d8de;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.feuzon-chart-toggle button.is-active {
+  background: #9eb1ff;
+
+  border-color: #9eb1ff;
+
+  color: #131726;
+}
+
+.feuzon-chart-wrap {
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at bottom right,
+
+      rgba(141, 162, 255, 0.16),
+      transparent 28%
+    ),
+    linear-gradient(180deg, rgba(8, 10, 16, 0.98), rgba(5, 6, 10, 1));
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  padding: 14px;
+}
+
+.feuzon-axis-summary {
+  display: grid;
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-top: 14px;
+}
+
+.feuzon-axis-chip {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 10px 8px;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feuzon-axis-chip span {
+  font-size: 0.72rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.56);
+
+  text-align: center;
+}
+
+.feuzon-axis-chip strong {
+  font-size: 1rem;
+
+  color: #fff;
+}
+
+.feuzon-swatch-grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(84px, 84px));
+
+  gap: 12px;
+
+  margin-top: 12px;
+}
+
+.feuzon-swatch-tile {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 6px;
+
+  cursor: pointer;
+
+  background: transparent;
+
+  border: 0;
+
+  padding: 0;
+}
+
+.feuzon-swatch-chip {
+  width: 84px;
+
+  height: 84px;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  border: none;
+
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+
+  background: transparent;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.feuzon-swatch-chip img {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center 38%;
+
+  transform: scale(1.38);
+}
+
+.feuzon-swatch-tile:hover .feuzon-swatch-chip,
+.feuzon-swatch-tile.is-active .feuzon-swatch-chip {
+  transform: translateY(-1px);
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+}
+
+.feuzon-swatch-label {
+  font-size: 0.78rem;
+
+  line-height: 1.15;
+
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  max-width: 84px;
+}
+
+.feuzon-builder-sections {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: 8px;
+}
+
+.feuzon-builder-section {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.025);
+
+  overflow: hidden;
+}
+
+.feuzon-builder-section-toggle {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding: 16px;
+
+  background: transparent;
+
+  border: 0;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+.feuzon-builder-section-heading {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.feuzon-builder-section-step {
+  width: 28px;
+
+  height: 28px;
+
+  border-radius: 999px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: rgba(141, 162, 255, 0.18);
+
+  color: var(--feuzon-blue);
+
+  font-size: 0.82rem;
+
+  font-weight: 800;
+
+  flex-shrink: 0;
+}
+
+.feuzon-builder-section-heading h3 {
+  margin: 0 0 4px;
+
+  font-size: 1rem;
+
+  color: #fff;
+}
+
+.feuzon-builder-section-heading p {
+  margin: 0;
+
+  color: var(--feuzon-muted);
+
+  font-size: 0.82rem;
+
+  line-height: 1.45;
+}
+
+.feuzon-builder-section-chevron {
+  font-size: 1.35rem;
+
+  line-height: 1;
+
+  color: var(--feuzon-muted);
+
+  flex-shrink: 0;
+}
+
+.feuzon-builder-section-body {
+  padding: 0 16px 16px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.feuzon-builder-section-body label {
+  display: block;
+
+  margin: 14px 0 8px;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+
+  color: #f0ece4;
+}
+
+.feuzon-builder-section-body select {
+  width: 100%;
+
+  min-height: 52px;
+
+  margin-bottom: 10px;
+
+  padding: 0 16px;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: rgba(7, 9, 15, 0.96);
+
+  color: #fff;
+
+  font-size: 1rem;
+
+  box-sizing: border-box;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.feuzon-builder-section-body select:focus {
+  border-color: rgba(141, 162, 255, 0.75);
+
+  box-shadow: 0 0 0 4px rgba(141, 162, 255, 0.12);
+}
+
+.feuzon-builder-next-row {
+  margin-top: 8px;
+
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+.feuzon-builder-next-button {
+  min-height: 44px;
+
+  padding: 0 16px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  background: rgba(141, 162, 255, 0.16);
+
+  color: #fff;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.feuzon-builder-next-button:hover {
+  background: rgba(141, 162, 255, 0.24);
+}
+
+.feuzon-swatch-preview {
+  width: 124px;
+
+  aspect-ratio: 1 / 1;
+
+  margin: 12px 0 16px;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  border: none;
+
+  background: transparent;
+
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+
+  flex-shrink: 0;
+}
+
+.feuzon-swatch-preview img {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center 10%;
+
+  transform: scale(1.75);
+}
+
+.feuzon-swatch-disclaimer {
+  margin: -4px 0 16px;
+
+  max-width: 440px;
+
+  color: var(--feuzon-muted-soft);
+
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+}
+
+@media (max-width: 1180px) {
+  .feuzon-layout-top,
+  .feuzon-summary-band {
+    grid-template-columns: 1fr;
   }
-
-/* 📌 Footer Adjustments */
-.footer {
-    z-index: 0;
-    position: relative;
-  }
-
-/* 📌 Responsive Adjustments */
-@media (max-width: 1024px) {
-    .feuzon-product-detail {
-        padding: 21px;
-    }
-
-    .feuzon-product-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 35px;
-    }
-
-    .feuzon-product-visuals {
-        max-width: 100%;
-    }
-
-    .feuzon-product-details {
-        max-width: 100%;
-    }
-
-    .feuzon-sound-charts {
-        gap: 15px;
-    }
-
-    .feuzon-header-image {
-        max-width: 500px;
-      }
 }
 
 @media (max-width: 768px) {
-    .feuzon-product-detail h1 {
-        font-size: 28px;
-    }
+  .feuzon-product-detail {
+    padding: 30px 14px 48px;
+  }
 
-    .feuzon-product-options {
-        padding: 10px;
-    }
+  .feuzon-builder-card,
+  .feuzon-overview-card,
+  .feuzon-read-card,
+  .feuzon-chart-card {
+    padding-left: 16px;
 
-    .feuzon-product-options h2 {
-        font-size: 20px;
-    }
+    padding-right: 16px;
+  }
 
-    .feuzon-product-options select {
-        font-size: 14px;
-        padding: 8px;
-    }
+  .feuzon-summary-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .feuzon-product-options button {
-        font-size: 15px;
-        padding: 12px;
-        margin-bottom: 20px;
-    }
+  .feuzon-summary-item-wide {
+    grid-column: auto;
+  }
 
-    .feuzon-header-image {
-        max-width: 300px;
-        margin-bottom: 15px;
-      }
+  .feuzon-axis-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feuzon-chart-head {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .feuzon-chart-toggle {
+    width: 100%;
+  }
+
+  .feuzon-chart-toggle button {
+    flex: 1;
+  }
+
+  .feuzon-story-title,
+  .feuzon-builder-head h2,
+  .feuzon-read-card h3,
+  .feuzon-chart-card h3 {
+    font-size: 1.8rem;
+  }
+
+  .feuzon-overview-highlights-title {
+    font-size: 1.08rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .feuzon-swatch-grid {
+    grid-template-columns: repeat(auto-fit, minmax(64px, 64px));
+
+    gap: 10px;
+  }
+
+  .feuzon-swatch-preview {
+    width: 74px;
+
+    height: 74px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    background: transparent;
+  }
+
+  .feuzon-swatch-preview img {
+    object-position: center 8%;
+
+    transform: scale(1.64);
+  }
+
+  .feuzon-swatch-chip {
+    width: 64px;
+
+    height: 64px;
+
+    border-radius: 10px;
+  }
+
+  .feuzon-swatch-label {
+    max-width: 64px;
+
+    font-size: 0.7rem;
+  }
+
+  .artisan-cart-hover-options {
+    position: static;
+
+    display: block;
+
+    margin-top: 8px;
+
+    box-shadow: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .artisan-cart-hover-options span {
+    color: #fff;
+  }
+
+  .artisan-cart-hover-options span:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .feuzon-header-image {
+    width: min(88vw, 320px);
+
+    margin-bottom: 16px;
+  }
+
+  .feuzon-overview-card,
+  .feuzon-read-card,
+  .feuzon-chart-card {
+    padding: 18px 16px;
+  }
+
+  .feuzon-builder-card {
+    padding: 18px 16px 16px;
+  }
+
+  .feuzon-story-title,
+  .feuzon-builder-head h2,
+  .feuzon-read-card h3,
+  .feuzon-chart-card h3 {
+    font-size: 1.55rem;
+
+    line-height: 1.02;
+  }
+
+  .feuzon-story-lede,
+  .feuzon-read-summary,
+  .feuzon-story-copy,
+  .feuzon-builder-head p {
+    font-size: 0.94rem;
+
+    line-height: 1.6;
+  }
+
+  .feuzon-overview-highlights li {
+    font-size: 0.92rem;
+
+    line-height: 1.46;
+  }
+
+  .order-to-build-disclaimer,
+  .feuzon-select-helper {
+    font-size: 0.82rem;
+
+    line-height: 1.5;
+  }
+
+  .feuzon-detail-price {
+    font-size: 2.4rem;
+  }
+
+  .delivery-time {
+    font-size: 0.9rem;
+
+    margin: 8px 0 16px;
+  }
+
+  .artisan-add-to-cart-button,
+  .artisan-in-cart-button {
+    min-height: 48px;
+
+    font-size: 0.95rem;
+
+    border-radius: 12px;
+  }
+
+  .feuzon-summary-band {
+    gap: 16px;
+
+    margin-top: 18px;
+  }
+
+  .feuzon-summary-grid {
+    margin-top: 14px;
+
+    gap: 12px;
+  }
+
+  .feuzon-summary-item {
+    padding: 14px 12px;
+
+    border-radius: 14px;
+  }
+
+  .feuzon-summary-label {
+    font-size: 0.72rem;
+  }
+
+  .feuzon-summary-value {
+    font-size: 0.92rem;
+
+    line-height: 1.48;
+  }
+
+  .feuzon-chart-wrap {
+    padding: 10px;
+
+    border-radius: 16px;
+  }
+
+  .feuzon-axis-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .feuzon-axis-chip {
+    padding: 9px 6px;
+  }
+
+  .feuzon-axis-chip span {
+    font-size: 0.66rem;
+  }
+
+  .feuzon-axis-chip strong {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .feuzon-product-detail {
+    padding: 24px 10px 40px;
+  }
+
+  .feuzon-story-title,
+  .feuzon-builder-head h2,
+  .feuzon-read-card h3,
+  .feuzon-chart-card h3 {
+    font-size: 1.42rem;
+  }
+
+  .feuzon-story-kicker,
+  .feuzon-builder-kicker,
+  .feuzon-summary-kicker {
+    font-size: 0.68rem;
+
+    letter-spacing: 0.16em;
+  }
+
+  .feuzon-story-lede,
+  .feuzon-read-summary,
+  .feuzon-story-copy,
+  .feuzon-builder-head p {
+    font-size: 0.9rem;
+  }
+
+  .feuzon-overview-highlights li,
+  .feuzon-summary-value {
+    font-size: 0.9rem;
+  }
+
+  .feuzon-detail-price {
+    font-size: 2.1rem;
+  }
+
+  .feuzon-axis-summary {
+    grid-template-columns: 1fr 1fr;
+  }
 }

@@ -10,6 +10,180 @@ const FREE_THRESHOLD = 50; // $50+
 const SHIPPING_COST = 9.99; // $9.99 flat under threshold
 const formatMoney = (n) => `$${Number(n || 0).toFixed(2)}`;
 
+const formatDisplayValue = (value) => String(value || '').trim();
+
+const getPreviewArtisanSections = (item = {}) => {
+  const config = item?.config || {};
+
+  const productId = String(item?.productId || '').toLowerCase();
+
+  const normalizedSnareBed = formatDisplayValue(
+    config.snareBedDepth || config.snareBeds
+  );
+
+  const normalizedScorch = formatDisplayValue(
+    config.scorchDepth || config.finishTorchDepth
+  );
+
+  if (productId === 'heritage') {
+    return [
+      {
+        label: 'Core Build',
+
+        value: [
+          config.size && config.depth
+            ? `${config.size}" x ${config.depth}"`
+            : '',
+
+          config.lugQuantity ? `${config.lugQuantity} lugs` : '',
+
+          config.staveQuantity ? `${config.staveQuantity} staves` : '',
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+
+      {
+        label: 'Shell Finish',
+
+        value: normalizedScorch || 'Standard Heritage finish',
+      },
+
+      {
+        label: 'Hardware',
+
+        value: [
+          formatDisplayValue(config.hardwareColor),
+
+          formatDisplayValue(config.hoopType),
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+    ];
+  }
+
+  if (productId === 'feuzon') {
+    return [
+      {
+        label: 'Core Build',
+
+        value: [
+          config.size && config.depth
+            ? `${config.size}" x ${config.depth}"`
+            : '',
+
+          config.outerShell && config.innerStave
+            ? `${config.outerShell} / ${config.innerStave}`
+            : '',
+
+          config.staveQuantity ? `${config.staveQuantity} staves` : '',
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+
+      {
+        label: 'Shell Finish',
+
+        value: [
+          formatDisplayValue(config.finishSystem),
+
+          formatDisplayValue(config.stainStyle)
+            .replace('full-stained', 'Full Stain')
+
+            .replace('faded-stained', 'Faded Stain')
+
+            .replace('natural', 'Natural'),
+
+          formatDisplayValue(config.stainColor)
+            .replace(/-/g, ' ')
+
+            .replace(/\b\w/g, (c) => c.toUpperCase()),
+
+          formatDisplayValue(config.scorchStyle)
+            .replace('scorched', 'Natural Scorched')
+
+            .replace('non-scorched', 'Non-Scorched'),
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+
+      {
+        label: 'Hardware',
+
+        value: [
+          formatDisplayValue(config.hardwareColor),
+
+          formatDisplayValue(config.hoopType),
+
+          formatDisplayValue(config.bearingEdge),
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+    ];
+  }
+
+  if (item?.category === 'artisan') {
+    return [
+      {
+        label: 'Core Build',
+
+        value: [
+          config.size && config.depth
+            ? `${config.size}" x ${config.depth}"`
+            : '',
+
+          config.lugQuantity ? `${config.lugQuantity} lugs` : '',
+
+          config.staveQuantity ? `${config.staveQuantity} staves` : '',
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+
+      {
+        label: 'Shell Finish',
+
+        value:
+          normalizedScorch ||
+          formatDisplayValue(config.finishType || config.finish) ||
+          'Custom finish',
+      },
+
+      {
+        label: 'Hardware',
+
+        value: [
+          formatDisplayValue(config.hardwareColor),
+
+          formatDisplayValue(config.hoopType),
+        ]
+
+          .filter(Boolean)
+
+          .join(' • '),
+      },
+    ];
+  }
+
+  return [];
+};
+
 const CartPreview = ({ onClose, closeMenu }) => {
   const { cart, cartId, removeFromCart, updateQuantity } = useCart();
   const [productDataMap, setProductDataMap] = useState({});
@@ -94,29 +268,10 @@ const CartPreview = ({ onClose, closeMenu }) => {
                 productId,
               } = item;
 
-              const configLines = [];
-              if (category === 'artisan') {
-                if (config.size && config.depth)
-                  configLines.push(`${config.size}" x ${config.depth}"`);
-                const line2 = [];
-                if (config.lugQuantity)
-                  line2.push(`${config.lugQuantity} Lugs`);
-                if (config.staveQuantity)
-                  line2.push(`${config.staveQuantity} Staves`);
-                if (typeof config.reRing !== 'undefined')
-                  line2.push(config.reRing ? 'Re-Rings' : 'No Re-Rings');
-                if (productId !== 'founders-toast' && config.hardwareColor)
-                  line2.push(`Hardware: ${config.hardwareColor}`);
-                if (line2.length > 0) configLines.push(line2.join(' • '));
-                if (config.outerShell || config.innerStave) {
-                  configLines.push(
-                    `${config.outerShell || '?'} / ${config.innerStave || '?'}`
-                  );
-                }
-              } else {
-                if (config.Sizes) configLines.push(`Size: ${config.Sizes}`);
-                if (config.Colors) configLines.push(`Color: ${config.Colors}`);
-              }
+              const artisanSections =
+                category === 'artisan' && productId !== 'founders-toast'
+                  ? getPreviewArtisanSections(item)
+                  : [];
 
               let previewImage = fallback;
               if (category === 'artisan') {
@@ -178,13 +333,36 @@ const CartPreview = ({ onClose, closeMenu }) => {
                   />
                   <div className="cart-item-details">
                     <p className="item-name">{name}</p>
-                    <div className="item-config-block">
-                      {configLines.map((line, idx) => (
-                        <p key={idx} className="item-config">
-                          {line}
-                        </p>
-                      ))}
-                    </div>
+
+                    {artisanSections.length > 0 ? (
+                      <div className="preview-build-meta">
+                        {artisanSections.map((section) => (
+                          <div
+                            key={`${id}-${section.label}`}
+                            className="preview-build-meta-row"
+                          >
+                            <span className="preview-build-meta-label">
+                              {section.label}
+                            </span>
+
+                            <span className="preview-build-meta-value">
+                              {section.value}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="item-config-block">
+                        {config.Sizes && (
+                          <p className="item-config">Size: {config.Sizes}</p>
+                        )}
+
+                        {config.Colors && (
+                          <p className="item-config">Color: {config.Colors}</p>
+                        )}
+                      </div>
+                    )}
+
                     <p className="item-price">{formatMoney(price)}</p>
 
                     {productId === 'founders-toast' ||
@@ -196,7 +374,9 @@ const CartPreview = ({ onClose, closeMenu }) => {
                         >
                           -
                         </button>
+
                         <span>{quantity}</span>
+
                         <button
                           onClick={() => handleQuantityChange(id, 1)}
                           disabled={
