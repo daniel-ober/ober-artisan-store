@@ -125,9 +125,11 @@
 }
 
 .feuzon-builder-card {
+
   padding: 22px 22px 20px;
 
   overflow: visible;
+
 }
 
 .feuzon-product-image {
@@ -297,16 +299,22 @@
   line-height: 1.55;
 }
 
+
+
 .feuzon-purchase-block {
+
   position: relative;
 
-  z-index: 30;
+  z-index: 80;
 
   margin-top: 6px;
 
   padding-top: 18px;
 
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  overflow: visible;
+
 }
 
 .feuzon-detail-price {
@@ -377,18 +385,23 @@
   cursor: default;
 }
 
+
+
 .artisan-cart-hover-container {
+
   position: relative;
 
   width: 100%;
 
-  z-index: 40;
+  z-index: 90;
+
 }
 
 .artisan-cart-hover-options {
+
   position: absolute;
 
-  top: calc(100% + 8px);
+  top: 100%;
 
   left: 0;
 
@@ -404,12 +417,36 @@
 
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28);
 
-  z-index: 60;
+  z-index: 120;
+
+}
+
+
+
+.artisan-cart-hover-container::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  top: 100%;
+
+  height: 10px;
+
 }
 
 .artisan-cart-hover-container:hover .artisan-cart-hover-options,
-.artisan-cart-hover-container:focus-within .artisan-cart-hover-options {
+
+.artisan-cart-hover-container:focus-within .artisan-cart-hover-options,
+
+.artisan-cart-hover-options:hover {
+
   display: block;
+
 }
 
 .artisan-cart-hover-options span {
@@ -615,6 +652,8 @@
   gap: 14px;
 
   margin-top: 8px;
+
+  padding-bottom: 8px;
 }
 
 .feuzon-builder-section {
@@ -1010,7 +1049,6 @@
 }
 
 .feuzon-finish-swatch-grid {
-
   display: grid;
 
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1018,11 +1056,9 @@
   gap: 10px;
 
   margin-bottom: 14px;
-
 }
 
 .feuzon-finish-swatch-button {
-
   position: relative;
 
   overflow: hidden;
@@ -1040,13 +1076,9 @@
   cursor: pointer;
 
   transition:
-
     transform 0.18s ease,
-
     border-color 0.18s ease,
-
     box-shadow 0.18s ease;
-
 }
 
 .feuzon-finish-swatch-button:hover {
@@ -1072,7 +1104,6 @@
 }
 
 .feuzon-finish-swatch-image img {
-
   width: 100%;
 
   height: 120%;
@@ -1084,7 +1115,6 @@
   object-position: center 14%;
 
   transform: scale(1.2);
-
 }
 
 .feuzon-finish-swatch-overlay {
@@ -1103,7 +1133,6 @@
 }
 
 .feuzon-finish-swatch-content {
-
   position: relative;
 
   z-index: 2;
@@ -1123,7 +1152,6 @@
   gap: 4px;
 
   text-align: center;
-
 }
 
 .feuzon-finish-swatch-title {
@@ -1170,67 +1198,836 @@
   color: #dbe4ff;
 }
 
+.feuzon-sticky-purchase-shell {
+  position: sticky;
+
+  bottom: 18px;
+
+  z-index: 25;
+
+  margin-top: 14px;
+}
+
+.feuzon-purchase-block {
+  border-radius: 18px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(10, 11, 18, 0.96),
+    rgba(6, 7, 12, 0.98)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+
+  padding: 18px 18px 16px;
+
+  backdrop-filter: blur(10px);
+}
+
+.feuzon-mobile-price-bar {
+  display: none;
+}
+
+.feuzon-mobile-price-bar-inner {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.feuzon-mobile-price-meta {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.feuzon-mobile-price-value {
+  font-size: 1.2rem;
+
+  font-weight: 800;
+
+  color: var(--feuzon-gold);
+
+  line-height: 1;
+}
+
+.feuzon-mobile-price-delivery {
+  margin-top: 4px;
+
+  font-size: 0.78rem;
+
+  color: var(--feuzon-muted);
+}
+
+.feuzon-mobile-price-button {
+  min-width: 132px;
+
+  min-height: 46px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  padding: 0 16px;
+
+  font-size: 0.95rem;
+
+  font-weight: 800;
+
+  color: #fff;
+
+  background: linear-gradient(135deg, #5f55e8, #7865f0);
+}
+
+.feuzon-mobile-price-button.is-in-cart {
+  background: linear-gradient(135deg, #4d9c68, #62b37d);
+}
+
+.feuzon-voice-read-card {
+
+  border-radius: var(--feuzon-radius-xl);
+
+  background:
+
+    radial-gradient(
+
+      circle at top left,
+
+      rgba(141, 162, 255, 0.08),
+
+      transparent 28%
+
+    ),
+
+    radial-gradient(
+
+      circle at top right,
+
+      rgba(214, 178, 119, 0.06),
+
+      transparent 34%
+
+    ),
+
+    linear-gradient(180deg, rgba(24, 25, 32, 0.96), rgba(14, 15, 20, 0.98));
+
+  border: 1px solid var(--feuzon-border-soft);
+
+  box-shadow: var(--feuzon-shadow);
+
+  overflow: hidden;
+
+  padding: 28px 32px;
+
+}
+
+.feuzon-summary-band--voice-read {
+
+  grid-template-columns: 1fr;
+
+}
+
+.feuzon-chart-head--voice-read {
+
+  margin-bottom: 18px;
+
+}
+
+.feuzon-chart-head--voice-read .feuzon-summary-kicker {
+
+  color: #aebcff;
+
+}
+
+.feuzon-chart-head--voice-read h3 {
+
+  margin: 0 0 10px;
+
+  font-size: clamp(2.1rem, 3.4vw, 3.3rem);
+
+  line-height: 0.98;
+
+  font-weight: 800;
+
+  color: #fff;
+
+  letter-spacing: -0.045em;
+
+}
+
+.feuzon-chart-head--voice-read .feuzon-read-summary {
+
+  max-width: 980px;
+
+  font-size: 1.08rem;
+
+  line-height: 1.62;
+
+  color: var(--feuzon-muted);
+
+}
+
+.feuzon-voice-read-split {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 2.15fr) minmax(420px, 2.85fr);
+
+  gap: 20px;
+
+  align-items: start;
+
+  margin-top: 6px;
+
+}
+
+.feuzon-voice-read-chart-column,
+
+.feuzon-voice-read-info-column {
+
+  min-width: 0;
+
+}
+
+.feuzon-voice-read-chart-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+}
+
+.feuzon-voice-read-info-column {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  height: 100%;
+
+}
+
+.feuzon-chart-wrap--voice-read {
+
+  margin-bottom: 0;
+
+  border-radius: 18px;
+
+  padding: 14px;
+
+}
+
+.feuzon-axis-insight-card {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 0;
+
+  padding: 18px 18px 16px;
+
+  border-radius: 18px;
+
+  background:
+
+    radial-gradient(
+
+      circle at top left,
+
+      rgba(141, 162, 255, 0.08),
+
+      transparent 36%
+
+    ),
+
+    linear-gradient(180deg, rgba(10, 12, 18, 0.96), rgba(7, 8, 13, 0.98));
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  transition:
+
+    box-shadow 180ms ease,
+
+    border-color 180ms ease,
+
+    transform 180ms ease;
+
+}
+
+.feuzon-axis-insight-card:hover {
+
+  transform: translateY(-1px);
+
+}
+
+.feuzon-axis-insight-head {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+}
+
+.feuzon-axis-insight-kicker {
+
+  display: inline-block;
+
+  margin-bottom: 6px;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  color: var(--feuzon-blue);
+
+}
+
+.feuzon-axis-insight-head h4 {
+
+  margin: 0;
+
+  font-size: 1.12rem;
+
+  line-height: 1.1;
+
+  color: #fff;
+
+  letter-spacing: -0.02em;
+
+}
+
+.feuzon-axis-insight-score {
+
+  min-width: 56px;
+
+  padding: 8px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(141, 162, 255, 0.14);
+
+  border: 1px solid rgba(141, 162, 255, 0.18);
+
+  text-align: center;
+
+  font-size: 0.94rem;
+
+  font-weight: 800;
+
+  transition:
+
+    box-shadow 180ms ease,
+
+    border-color 180ms ease,
+
+    color 180ms ease;
+
+}
+
+.feuzon-axis-insight-short,
+
+.feuzon-axis-insight-detail {
+
+  margin: 0;
+
+  color: var(--feuzon-muted);
+
+}
+
+.feuzon-axis-insight-short {
+
+  font-size: 0.98rem;
+
+  line-height: 1.5;
+
+  color: #f2eee4;
+
+  font-weight: 650;
+
+}
+
+.feuzon-axis-insight-detail {
+
+  font-size: 0.92rem;
+
+  line-height: 1.62;
+
+}
+
+.feuzon-axis-insight-scale-read {
+
+  margin-top: 6px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+}
+
+.feuzon-axis-insight-scale-label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.62);
+
+}
+
+.feuzon-axis-insight-scale-copy {
+
+  margin: 0 0 8px;
+
+  color: var(--feuzon-muted);
+
+  font-size: 0.88rem;
+
+  line-height: 1.58;
+
+}
+
+.feuzon-axis-insight-scale-copy:last-child {
+
+  margin-bottom: 0;
+
+}
+
+.feuzon-axis-insight-scale-copy strong {
+
+  color: #f4efe6;
+
+}
+
+.feuzon-voice-read-stack {
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 12px;
+
+  flex: 1;
+
+  align-content: start;
+
+}
+
+.feuzon-voice-read-item {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  min-height: 0;
+
+  padding: 14px 14px;
+
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.028);
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+}
+
+.feuzon-voice-read-item--grouped {
+
+  gap: 12px;
+
+}
+
+.feuzon-voice-read-pair-list {
+
+  display: grid;
+
+  gap: 12px;
+
+}
+
+.feuzon-voice-read-pair-row {
+
+  display: grid;
+
+  gap: 5px;
+
+}
+
+.feuzon-voice-read-mini-label {
+
+  display: block;
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.5);
+
+}
+
+.feuzon-source-build-shell {
+
+  margin-top: 0;
+
+}
+
+.feuzon-source-build-toggle {
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding: 14px 15px;
+
+  border-radius: 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  background: rgba(255, 255, 255, 0.028);
+
+  color: #fff;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+
+    border-color 0.18s ease,
+
+    background 0.18s ease,
+
+    transform 0.18s ease;
+
+}
+
+.feuzon-source-build-toggle:hover {
+
+  transform: translateY(-1px);
+
+  border-color: rgba(141, 162, 255, 0.24);
+
+  background: rgba(255, 255, 255, 0.04);
+
+}
+
+.feuzon-source-build-toggle.is-open {
+
+  border-color: rgba(141, 162, 255, 0.34);
+
+  background:
+
+    radial-gradient(
+
+      circle at top left,
+
+      rgba(141, 162, 255, 0.08),
+
+      transparent 34%
+
+    ),
+
+    rgba(255, 255, 255, 0.04);
+
+}
+
+.feuzon-source-build-toggle-main {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+}
+
+.feuzon-source-build-label {
+
+  display: block;
+
+  color: #fff;
+
+  font-size: 0.92rem;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+
+}
+
+.feuzon-source-build-subcopy {
+
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--feuzon-muted);
+
+  font-size: 0.82rem;
+
+  line-height: 1.45;
+
+}
+
+.feuzon-source-build-toggle-state {
+
+  color: rgba(141, 162, 255, 0.95);
+
+  font-size: 0.78rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  flex-shrink: 0;
+
+}
+
+.feuzon-source-build-panel {
+
+  margin-top: 10px;
+
+  padding: 14px 15px;
+
+  border-radius: 14px;
+
+  background: linear-gradient(180deg, rgba(8, 10, 16, 0.96), rgba(5, 6, 10, 1));
+
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+}
+
+.feuzon-source-build-read {
+
+  margin: 0;
+
+  color: #f0ece3;
+
+  font-size: 0.92rem;
+
+  line-height: 1.65;
+
+}
+
 @media (max-width: 1180px) {
+
   .feuzon-layout-top,
+
   .feuzon-summary-band {
+
     grid-template-columns: 1fr;
+
   }
+
+  .feuzon-voice-read-split {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .feuzon-chart-head--voice-read h3 {
+
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+
+  }
+
 }
 
 @media (max-width: 768px) {
+
   .feuzon-product-detail {
+
     padding: 30px 14px 48px;
+
   }
 
   .feuzon-builder-card,
+
   .feuzon-overview-card,
+
   .feuzon-read-card,
-  .feuzon-chart-card {
+
+  .feuzon-chart-card,
+
+  .feuzon-voice-read-card {
+
     padding-left: 16px;
 
     padding-right: 16px;
+
   }
 
   .feuzon-summary-grid {
+
     grid-template-columns: 1fr;
+
   }
 
   .feuzon-summary-item-wide {
+
     grid-column: auto;
+
   }
 
   .feuzon-axis-summary {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
   }
 
   .feuzon-chart-head {
+
     flex-direction: column;
 
     align-items: stretch;
+
   }
 
   .feuzon-chart-toggle {
+
     width: 100%;
+
   }
 
   .feuzon-chart-toggle button {
+
     flex: 1;
+
   }
 
   .feuzon-story-title,
+
   .feuzon-builder-head h2,
+
   .feuzon-read-card h3,
+
   .feuzon-chart-card h3 {
+
     font-size: 1.8rem;
+
+  }
+
+  .feuzon-chart-head--voice-read h3 {
+
+    font-size: 1.8rem;
+
+  }
+
+  .feuzon-chart-head--voice-read .feuzon-read-summary {
+
+    font-size: 1rem;
+
   }
 
   .feuzon-overview-highlights-title {
+
     font-size: 1.08rem;
+
   }
+
+  .feuzon-voice-read-split {
+
+    gap: 14px;
+
+  }
+
+  .feuzon-axis-insight-card {
+
+    padding: 16px 14px 14px;
+
+    border-radius: 16px;
+
+  }
+
+  .feuzon-axis-insight-head {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+  }
+
+  .feuzon-axis-insight-score {
+
+    min-width: 0;
+
+    padding: 7px 10px;
+
+    font-size: 0.9rem;
+
+  }
+
+  .feuzon-axis-insight-short {
+
+    font-size: 0.93rem;
+
+  }
+
+  .feuzon-axis-insight-detail,
+
+  .feuzon-axis-insight-scale-copy,
+
+  .feuzon-source-build-read {
+
+    font-size: 0.88rem;
+
+  }
+
 }
 
 @media (max-width: 640px) {
+
   .artisan-cart-hover-options {
+
     position: static;
 
     display: block;
@@ -1242,150 +2039,215 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
 
     background: rgba(255, 255, 255, 0.06);
+
   }
 
   .artisan-cart-hover-options span {
+
     color: #fff;
+
   }
 
   .artisan-cart-hover-options span:hover {
+
     background: rgba(255, 255, 255, 0.08);
+
   }
 
   .feuzon-header-image {
+
     width: min(88vw, 320px);
 
     margin-bottom: 16px;
+
   }
 
   .feuzon-overview-card,
+
   .feuzon-read-card,
-  .feuzon-chart-card {
+
+  .feuzon-chart-card,
+
+  .feuzon-voice-read-card {
+
     padding: 18px 16px;
+
   }
 
   .feuzon-builder-card {
+
     padding: 18px 16px 16px;
+
   }
 
   .feuzon-story-title,
+
   .feuzon-builder-head h2,
+
   .feuzon-read-card h3,
+
   .feuzon-chart-card h3 {
+
     font-size: 1.55rem;
 
     line-height: 1.02;
+
   }
 
   .feuzon-story-lede,
+
   .feuzon-read-summary,
+
   .feuzon-story-copy,
+
   .feuzon-builder-head p {
+
     font-size: 0.94rem;
 
     line-height: 1.6;
+
   }
 
   .feuzon-overview-highlights li {
+
     font-size: 0.92rem;
 
     line-height: 1.46;
+
   }
 
   .order-to-build-disclaimer,
+
   .feuzon-select-helper {
+
     font-size: 0.82rem;
 
     line-height: 1.5;
+
   }
 
   .feuzon-detail-price {
+
     font-size: 2.4rem;
+
   }
 
   .delivery-time {
+
     font-size: 0.9rem;
 
     margin: 8px 0 16px;
+
   }
 
   .artisan-add-to-cart-button,
+
   .artisan-in-cart-button {
+
     min-height: 48px;
 
     font-size: 0.95rem;
 
     border-radius: 12px;
+
   }
 
   .feuzon-summary-band {
+
     gap: 16px;
 
     margin-top: 18px;
+
   }
 
   .feuzon-summary-grid {
+
     margin-top: 14px;
 
     gap: 12px;
+
   }
 
   .feuzon-summary-item {
+
     padding: 14px 12px;
 
     border-radius: 14px;
+
   }
 
   .feuzon-summary-label {
+
     font-size: 0.72rem;
+
   }
 
   .feuzon-summary-value {
+
     font-size: 0.92rem;
 
     line-height: 1.48;
+
   }
 
   .feuzon-chart-wrap {
+
     padding: 10px;
 
     border-radius: 16px;
+
   }
 
   .feuzon-axis-summary {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 8px;
+
   }
 
   .feuzon-axis-chip {
+
     padding: 9px 6px;
+
   }
 
   .feuzon-axis-chip span {
+
     font-size: 0.66rem;
+
   }
 
   .feuzon-axis-chip strong {
+
     font-size: 0.92rem;
+
   }
 
   .feuzon-option-grid,
+
   .feuzon-option-grid-compact,
+
   .feuzon-option-grid-finish-3 {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 7px;
+
   }
 
   .feuzon-finish-swatch-grid {
+
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
     gap: 7px;
+
   }
 
   .feuzon-option-tile,
+
   .feuzon-option-tile-detail {
+
     min-height: 78px;
 
     padding: 8px 7px;
@@ -1393,21 +2255,27 @@
     border-radius: 11px;
 
     gap: 4px;
+
   }
 
   .feuzon-option-title {
+
     font-size: 0.82rem;
 
     line-height: 1.08;
+
   }
 
   .feuzon-option-subtitle {
+
     font-size: 0.65rem;
 
     line-height: 1.14;
+
   }
 
   .feuzon-option-meta {
+
     margin-top: 6px;
 
     font-size: 0.58rem;
@@ -1415,93 +2283,183 @@
     line-height: 1.05;
 
     letter-spacing: 0.025em;
+
   }
 
-.feuzon-finish-swatch-button,
+  .feuzon-finish-swatch-button,
 
-.feuzon-finish-swatch-content {
+  .feuzon-finish-swatch-content {
 
-  min-height: 92px;
+    min-height: 92px;
 
-}
+  }
 
   .feuzon-finish-swatch-title {
+
     font-size: 0.7rem;
+
   }
 
   .feuzon-finish-swatch-meta {
+
     font-size: 0.56rem;
+
   }
 
   .feuzon-swatch-preview {
+
     aspect-ratio: 2.4 / 1;
 
     border-radius: 12px;
+
   }
 
   .feuzon-swatch-preview img {
+
     object-position: center 26%;
 
     transform: scale(1.14);
+
   }
+
+  .feuzon-voice-read-item {
+
+    padding: 13px 12px;
+
+    border-radius: 13px;
+
+  }
+
+  .feuzon-voice-read-mini-label {
+
+    font-size: 0.66rem;
+
+  }
+
+  .feuzon-source-build-toggle {
+
+    padding: 13px 12px;
+
+    border-radius: 14px;
+
+  }
+
+  .feuzon-source-build-label {
+
+    font-size: 0.88rem;
+
+  }
+
+  .feuzon-source-build-subcopy {
+
+    font-size: 0.78rem;
+
+  }
+
+  .feuzon-source-build-toggle-state {
+
+    font-size: 0.72rem;
+
+  }
+
+  .feuzon-source-build-panel {
+
+    padding: 12px 12px;
+
+    border-radius: 13px;
+
+  }
+
 }
 
 @media (max-width: 420px) {
+
   .feuzon-product-detail {
+
     padding: 24px 10px 40px;
+
   }
 
   .feuzon-story-title,
+
   .feuzon-builder-head h2,
+
   .feuzon-read-card h3,
+
   .feuzon-chart-card h3 {
+
     font-size: 1.42rem;
+
   }
 
   .feuzon-story-kicker,
+
   .feuzon-builder-kicker,
+
   .feuzon-summary-kicker {
+
     font-size: 0.68rem;
 
     letter-spacing: 0.16em;
+
   }
 
   .feuzon-story-lede,
+
   .feuzon-read-summary,
+
   .feuzon-story-copy,
+
   .feuzon-builder-head p {
+
     font-size: 0.9rem;
+
   }
 
   .feuzon-overview-highlights li,
+
   .feuzon-summary-value {
+
     font-size: 0.9rem;
+
   }
 
   .feuzon-detail-price {
+
     font-size: 2.1rem;
+
   }
 
   .feuzon-axis-summary {
+
     grid-template-columns: 1fr 1fr;
+
   }
 
   .feuzon-option-grid,
+
   .feuzon-option-grid-compact,
+
   .feuzon-option-grid-finish-3 {
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 6px;
+
   }
 
   .feuzon-finish-swatch-grid {
+
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
     gap: 6px;
+
   }
 
   .feuzon-option-tile,
+
   .feuzon-option-tile-detail {
+
     min-height: 74px;
 
     padding: 7px 6px;
@@ -1509,51 +2467,67 @@
     border-radius: 10px;
 
     gap: 3px;
+
   }
 
   .feuzon-option-title {
+
     font-size: 0.78rem;
+
   }
 
   .feuzon-option-subtitle {
+
     font-size: 0.62rem;
 
     line-height: 1.08;
+
   }
 
   .feuzon-option-meta {
+
     margin-top: 5px;
 
     font-size: 0.52rem;
 
     letter-spacing: 0.02em;
+
   }
 
-.feuzon-finish-swatch-button,
+  .feuzon-finish-swatch-button,
 
-.feuzon-finish-swatch-content {
+  .feuzon-finish-swatch-content {
 
-  min-height: 84px;
+    min-height: 84px;
 
-}
+  }
 
   .feuzon-finish-swatch-title {
+
     font-size: 0.64rem;
+
   }
 
   .feuzon-finish-swatch-meta {
+
     font-size: 0.5rem;
+
   }
 
   .feuzon-swatch-preview {
+
     aspect-ratio: 2.2 / 1;
 
     border-radius: 10px;
+
   }
 
   .feuzon-swatch-preview img {
+
     object-position: center 24%;
 
     transform: scale(1.2);
+
   }
+
 }

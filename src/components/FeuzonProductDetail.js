@@ -50,6 +50,115 @@ const AXIS_POINT_COLORS = [
   '#9e8bff',
 ];
 
+const AXIS_COLOR_BY_KEY = {
+  attack: '#ff7448',
+
+  sustain: '#4d86ff',
+
+  warmth: '#c1682e',
+
+  projection: '#ffb53a',
+
+  brightness: '#e7d98f',
+
+  sensitivity: '#68d9df',
+
+  control: '#9e8bff',
+};
+
+const AXIS_INSIGHT_COPY = {
+  attack: {
+    short: 'Fast front-end response with strong note definition.',
+
+    detail:
+      'This FEUZØN configuration speaks quickly and feels confident at the front of the note. Accents come forward with more immediacy and definition.',
+
+    scaleLow:
+      'Softer front-end response with less immediate crack. The drum feels rounder and more relaxed at the start of the note.',
+
+    scaleHigh:
+      'Sharper attack with stronger note definition and quicker front-edge response. The drum feels more immediate, modern, and assertive.',
+  },
+
+  sustain: {
+    short: 'Controlled note length with a measured amount of bloom.',
+
+    detail:
+      'This reflects how long the shell wants to hold onto the note. Higher sustain feels broader and more lingering, while lower sustain feels shorter and more contained.',
+
+    scaleLow:
+      'Shorter decay and a quicker note exit. The drum feels tighter, drier, and more contained in the room.',
+
+    scaleHigh:
+      'Longer bloom and more note extension. The shell feels more open, dimensional, and willing to hang in the air.',
+  },
+
+  warmth: {
+    short: 'A fuller, richer body through the center of the voice.',
+
+    detail:
+      'This FEUZØN build leans into tonal weight and low-mid richness. It affects how grounded, seasoned, or broad the shell feels under the stick.',
+
+    scaleLow:
+      'Leaner body and less low-mid weight. The drum feels clearer, cleaner, and slightly more neutral through the middle.',
+
+    scaleHigh:
+      'Richer body and a fuller center to the note. The shell feels deeper, broader, and more substantial.',
+  },
+
+  projection: {
+    short: 'Clear outward push with confident room presence.',
+
+    detail:
+      'Projection reflects how assertively the shell throws the note into the room. It shapes how present the drum feels in live settings and how strongly the note carries.',
+
+    scaleLow:
+      'More intimate and less forceful in the room. The shell stays present, but feels more contained and closer to the player.',
+
+    scaleHigh:
+      'Stronger room presence and more outward push. The note carries farther and feels more commanding in an ensemble.',
+  },
+
+  brightness: {
+    short: 'A measured amount of top-end edge and upper-register cut.',
+
+    detail:
+      'Brightness controls how much sheen, snap, and upper-register edge sit on top of the drum’s core voice. It affects cut, perceived clarity, and tonal bite.',
+
+    scaleLow:
+      'Darker top-end with less snap and less sheen. The shell feels woodier, rounder, and more restrained.',
+
+    scaleHigh:
+      'More top-end edge, snap, and cut. The drum feels more open, articulate, and able to speak through a mix.',
+  },
+
+  sensitivity: {
+    short: 'Responsive to lighter playing and subtle dynamic detail.',
+
+    detail:
+      'Sensitivity reflects how easily the shell and wire response open up under lighter hands. It affects ghost notes, lower-dynamic articulation, and softer touch response.',
+
+    scaleLow:
+      'Needs a little more input to fully wake up. The drum feels firmer and more centered around medium-to-strong playing.',
+
+    scaleHigh:
+      'Opens up more easily at lower dynamics. The shell feels more alive under softer touch, ghost notes, and nuanced phrasing.',
+  },
+
+  control: {
+    short: 'Shaped and contained in a way that feels easy to manage.',
+
+    detail:
+      'Control reflects how organized the note feels. Higher control generally means a more disciplined response, tighter overtone behavior, and easier placement in a mix.',
+
+    scaleLow:
+      'More open and less contained. The note feels broader, freer, and a bit less disciplined.',
+
+    scaleHigh:
+      'Tighter note shape with more organized overtone behavior. The drum feels easier to place, manage, and keep composed.',
+  },
+};
+
 const clampAxis = (value) => {
   const num = Number(value || 0);
 
@@ -1268,6 +1377,14 @@ const FeuzonProductDetail = () => {
 
   const [openBuilderSection, setOpenBuilderSection] = useState('foundation');
 
+  const [activeAxisKey, setActiveAxisKey] = useState('attack');
+
+  const [showSourceBuildRead, setShowSourceBuildRead] = useState(false);
+
+  const handleAxisChange = React.useCallback((nextKey) => {
+    if (nextKey) setActiveAxisKey(nextKey);
+  }, []);
+
   const stainColorOptions = useMemo(
     () => stainColorOptionsByWood[outerShell] || [],
 
@@ -1492,6 +1609,19 @@ const FeuzonProductDetail = () => {
 
     [selectedDrumSummary]
   );
+
+  const activeAxisMeta =
+    AXIS_META.find((axis) => axis.key === activeAxisKey) || AXIS_META[0];
+
+  const activeAxisScore =
+    selectedDrumSummary?.profile?.[activeAxisKey] != null
+      ? Number(selectedDrumSummary.profile[activeAxisKey]).toFixed(1)
+      : '5.0';
+
+  const activeAxisCopy =
+    AXIS_INSIGHT_COPY[activeAxisKey] || AXIS_INSIGHT_COPY.attack;
+
+  const activeAxisColor = AXIS_COLOR_BY_KEY[activeAxisKey] || '#8da2ff';
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -2322,517 +2452,307 @@ const FeuzonProductDetail = () => {
                 </button>
 
                 {openBuilderSection === 'finish' && (
-
                   <div className="feuzon-builder-section-body">
-
                     <label>Exterior Scorch</label>
 
                     <div className="feuzon-option-grid">
-
                       {scorchOptions.map((option) => {
-
                         const isSelected = scorchStyle === option.value;
 
                         return (
-
                           <button
-
                             key={option.value}
-
                             type="button"
-
                             className={`feuzon-option-tile ${
-
                               isSelected ? 'is-selected' : ''
-
                             }`}
-
                             onClick={() => setScorchStyle(option.value)}
-
                           >
-
                             <span className="feuzon-option-title">
-
                               {option.label}
-
                             </span>
 
                             {isSelected && (
-
                               <span className="feuzon-option-meta is-selected">
-
                                 Selected
-
                               </span>
-
                             )}
-
                           </button>
-
                         );
-
                       })}
-
                     </div>
 
                     <p className="feuzon-select-helper">
-
                       Choose whether the exterior stays cleaner and more
-
                       restrained or leans further into FEUZØN’s scorched visual
-
                       character.
-
                     </p>
 
                     <label>Finish Direction</label>
 
                     <div className="feuzon-option-grid">
-
                       <button
-
                         type="button"
-
                         className={`feuzon-option-tile feuzon-option-tile-detail ${
-
                           isNaturalFinish ? 'is-selected' : ''
-
                         }`}
-
                         onClick={() => setFinishSystem('Natural Gloss')}
-
                       >
-
                         <span className="feuzon-option-title">Natural</span>
 
                         <span className="feuzon-option-subtitle">
-
                           Keep the shell closer to its raw wood and torch
-
                           character.
-
                         </span>
 
                         {isNaturalFinish && (
-
                           <span className="feuzon-option-meta is-selected">
-
                             Selected
-
                           </span>
-
                         )}
-
                       </button>
 
                       <button
-
                         type="button"
-
                         className={`feuzon-option-tile feuzon-option-tile-detail ${
-
                           !isNaturalFinish ? 'is-selected' : ''
-
                         }`}
-
                         onClick={() => setFinishSystem('Stained Gloss')}
-
                       >
-
                         <span className="feuzon-option-title">Stained</span>
 
                         <span className="feuzon-option-subtitle">
-
                           Add a richer stained finish with more visual
-
                           direction.
-
                         </span>
 
                         {!isNaturalFinish && (
-
                           <span className="feuzon-option-meta is-selected">
-
                             Selected
-
                           </span>
-
                         )}
-
                       </button>
-
                     </div>
 
                     {!isNaturalFinish && (
-
                       <>
-
                         <label>Stain Color</label>
 
                         <div className="feuzon-finish-swatch-grid">
-
                           {stainColorOptions.map((option) => {
-
                             const preview =
-
                               FEUZON_SWATCHES?.[outerShell]?.['full-stained']?.[
-
                                 option.value
-
                               ]?.[scorchStyle] || null;
 
                             const isSelected = stainColor === option.value;
 
                             return (
-
                               <button
-
                                 key={option.value}
-
                                 type="button"
-
                                 className={`feuzon-finish-swatch-button ${
-
                                   isSelected ? 'is-selected' : ''
-
                                 }`}
-
                                 onClick={() => setStainColor(option.value)}
-
                               >
-
                                 <span className="feuzon-finish-swatch-image">
-
                                   {preview ? (
-
                                     <img src={preview} alt={option.label} />
-
                                   ) : null}
-
                                 </span>
 
                                 <span className="feuzon-finish-swatch-overlay" />
 
                                 <span className="feuzon-finish-swatch-content">
-
                                   <span className="feuzon-finish-swatch-title">
-
                                     {option.label}
-
                                   </span>
 
                                   {isSelected && (
-
                                     <span className="feuzon-finish-swatch-meta">
-
                                       Selected
-
                                     </span>
-
                                   )}
-
                                 </span>
-
                               </button>
-
                             );
-
                           })}
-
                         </div>
 
                         <label>Stain Style</label>
 
                         <div className="feuzon-finish-swatch-grid">
-
                           {stainStyleOptions.map((option) => {
-
                             const preview =
-
                               FEUZON_SWATCHES?.[outerShell]?.[option.value]?.[
-
                                 stainColor
-
                               ]?.[scorchStyle] || null;
 
                             const isSelected = stainStyle === option.value;
 
                             return (
-
                               <button
-
                                 key={option.value}
-
                                 type="button"
-
                                 className={`feuzon-finish-swatch-button ${
-
                                   isSelected ? 'is-selected' : ''
-
                                 }`}
-
                                 onClick={() => setStainStyle(option.value)}
-
                               >
-
                                 <span className="feuzon-finish-swatch-image">
-
                                   {preview ? (
-
                                     <img src={preview} alt={option.label} />
-
                                   ) : null}
-
                                 </span>
 
                                 <span className="feuzon-finish-swatch-overlay" />
 
                                 <span className="feuzon-finish-swatch-content">
-
                                   <span className="feuzon-finish-swatch-title">
-
                                     {option.label}
-
                                   </span>
 
                                   {isSelected && (
-
                                     <span className="feuzon-finish-swatch-meta">
-
                                       Selected
-
                                     </span>
-
                                   )}
-
                                 </span>
-
                               </button>
-
                             );
-
                           })}
-
                         </div>
-
                       </>
-
                     )}
 
                     <label>Final Finish</label>
 
                     <div className="feuzon-option-grid">
-
                       {isNaturalFinish
-
                         ? [
-
                             {
-
                               label: 'Natural Gloss',
 
                               value: 'Natural Gloss',
 
                               helperText:
-
                                 'More polished, reflective, and vivid while staying natural.',
-
                             },
 
                             {
-
                               label: 'Natural Satin',
 
                               value: 'Natural Satin',
 
                               helperText:
-
                                 'Softer sheen with a more organic, understated natural look.',
-
                             },
-
                           ].map((option) => {
-
                             const isSelected = finishSystem === option.value;
 
                             return (
-
                               <button
-
                                 key={option.value}
-
                                 type="button"
-
                                 className={`feuzon-option-tile feuzon-option-tile-detail ${
-
                                   isSelected ? 'is-selected' : ''
-
                                 }`}
-
                                 onClick={() => setFinishSystem(option.value)}
-
                               >
-
                                 <span className="feuzon-option-title">
-
                                   {option.label}
-
                                 </span>
 
                                 <span className="feuzon-option-subtitle">
-
                                   {option.helperText}
-
                                 </span>
 
                                 {isSelected && (
-
                                   <span className="feuzon-option-meta is-selected">
-
                                     Selected
-
                                   </span>
-
                                 )}
-
                               </button>
-
                             );
-
                           })
-
                         : [
-
                             {
-
                               label: 'Gloss',
 
                               value: 'Stained Gloss',
 
                               helperText:
-
                                 'Richer depth, more pop, and stronger reflectivity.',
-
                             },
 
                             {
-
                               label: 'Satin',
 
                               value: 'Stained Satin',
 
                               helperText:
-
                                 'Softer sheen with a moodier, more understated look.',
-
                             },
-
                           ].map((option) => {
-
                             const isSelected = finishSystem === option.value;
 
                             return (
-
                               <button
-
                                 key={option.value}
-
                                 type="button"
-
                                 className={`feuzon-option-tile feuzon-option-tile-detail ${
-
                                   isSelected ? 'is-selected' : ''
-
                                 }`}
-
                                 onClick={() => setFinishSystem(option.value)}
-
                               >
-
                                 <span className="feuzon-option-title">
-
                                   {option.label}
-
                                 </span>
 
                                 <span className="feuzon-option-subtitle">
-
                                   {option.helperText}
-
                                 </span>
 
                                 {isSelected && (
-
                                   <span className="feuzon-option-meta is-selected">
-
                                     Selected
-
                                   </span>
-
                                 )}
-
                               </button>
-
                             );
-
                           })}
-
                     </div>
 
                     {swatchPreviewImage && (
-
                       <div className="feuzon-swatch-preview-wrap">
-
                         <div className="feuzon-swatch-preview">
-
                           <img
-
                             src={swatchPreviewImage}
-
                             alt="Selected FEUZØN finish swatch"
-
                           />
-
                         </div>
 
                         <p className="feuzon-swatch-disclaimer">
-
                           This preview is a general finish reference. Final
-
                           appearance may vary based on wood figure, stain
-
                           absorption, scorch response, lighting, and the unique
-
                           character of each shell. We’ll aim to get your drum as
-
                           close as possible to the selected preview.
-
                         </p>
-
                       </div>
-
                     )}
 
                     <div className="feuzon-builder-next-row">
-
                       <button
-
                         type="button"
-
                         className="feuzon-builder-next-button"
-
                         onClick={() => setOpenBuilderSection('response')}
-
                       >
-
                         Continue to Response
-
                       </button>
-
                     </div>
-
                   </div>
-
                 )}
               </div>
 
@@ -3110,77 +3030,19 @@ const FeuzonProductDetail = () => {
           </aside>
         </div>
 
-        <section className="feuzon-summary-band">
-          <div className="feuzon-read-card">
-            <span className="feuzon-summary-kicker">
-              Ober LegacyPrint™ Voice Read
-            </span>
-
-            <h3>Configuration snapshot</h3>
-
-            <p className="feuzon-read-summary">
-              {selectedDrumSummary?.highlightedCharacteristics}
-            </p>
-
-            <div className="feuzon-summary-grid">
-              <div className="feuzon-summary-item">
-                <span className="feuzon-summary-label">Primary Genre</span>
-
-                <span className="feuzon-summary-value">
-                  {selectedDrumSummary?.primaryGenre}
-                </span>
-              </div>
-
-              <div className="feuzon-summary-item">
-                <span className="feuzon-summary-label">Suggested Mic Lean</span>
-
-                <span className="feuzon-summary-value">
-                  {selectedDrumSummary?.recordingMic}
-                </span>
-              </div>
-
-              <div className="feuzon-summary-item feuzon-summary-item-wide">
-                <span className="feuzon-summary-label">Playing Situation</span>
-
-                <span className="feuzon-summary-value">
-                  {selectedDrumSummary?.playingSituation}
-                </span>
-              </div>
-
-              <div className="feuzon-summary-item feuzon-summary-item-wide">
-                <span className="feuzon-summary-label">Feel / Visual Lean</span>
-
-                <span className="feuzon-summary-value">
-                  {selectedDrumSummary?.feelRead}
-                </span>
-              </div>
-
-              <div className="feuzon-summary-item feuzon-summary-item-wide">
-                <span className="feuzon-summary-label">Secondary Lanes</span>
-
-                <span className="feuzon-summary-value">
-                  {Array.isArray(selectedDrumSummary?.secondaryGenres)
-                    ? selectedDrumSummary.secondaryGenres.join(' • ')
-                    : ''}
-                </span>
-              </div>
-
-              <div className="feuzon-summary-item feuzon-summary-item-wide">
-                <span className="feuzon-summary-label">Build Spec Read</span>
-
-                <span className="feuzon-summary-value">
-                  {selectedDrumSummary?.specRead}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="feuzon-chart-card">
-            <div className="feuzon-chart-head">
+        <section className="feuzon-summary-band feuzon-summary-band--voice-read">
+          <div className="feuzon-voice-read-card">
+            <div className="feuzon-chart-head feuzon-chart-head--voice-read">
               <div>
-                <span className="feuzon-summary-kicker">Profile</span>
+                <span className="feuzon-summary-kicker">
+                  Ober LegacyPrint™ Voice Read
+                </span>
 
-                <h3>Sound behavior</h3>
+                <h3>Configuration snapshot</h3>
+
+                <p className="feuzon-read-summary">
+                  {selectedDrumSummary?.highlightedCharacteristics}
+                </p>
               </div>
 
               <div className="feuzon-chart-toggle">
@@ -3202,30 +3064,255 @@ const FeuzonProductDetail = () => {
               </div>
             </div>
 
-            <div className="feuzon-chart-wrap">
-              {chartView === 'spider' ? (
-                <SpiderChart
-                  data={chartValues}
-                  labels={AXIS_META.map((axis) => axis.label)}
-                  pointColors={AXIS_POINT_COLORS}
-                />
-              ) : (
-                <BarChart data={chartBarData} min={4} />
-              )}
-            </div>
-
-            <div className="feuzon-axis-summary">
-              {AXIS_META.map((axis) => (
-                <div key={axis.key} className="feuzon-axis-chip">
-                  <span>{axis.label}</span>
-
-                  <strong>
-                    {selectedDrumSummary?.profile?.[axis.key] != null
-                      ? Number(selectedDrumSummary.profile[axis.key]).toFixed(1)
-                      : '5.0'}
-                  </strong>
+            <div className="feuzon-voice-read-split">
+              <div className="feuzon-voice-read-chart-column">
+                <div className="feuzon-chart-wrap feuzon-chart-wrap--voice-read">
+                  {chartView === 'spider' ? (
+                    <SpiderChart
+                      data={chartValues}
+                      labels={AXIS_META.map((axis) => axis.label)}
+                      pointColors={AXIS_POINT_COLORS}
+                      activeKey={activeAxisKey}
+                      onAxisChange={handleAxisChange}
+                    />
+                  ) : (
+                    <BarChart
+                      data={chartBarData}
+                      min={4}
+                      activeKey={activeAxisKey}
+                      onAxisChange={handleAxisChange}
+                      activeColor={activeAxisColor}
+                    />
+                  )}
                 </div>
-              ))}
+
+                <div
+                  className="feuzon-axis-insight-card"
+                  style={{
+                    borderColor: `${activeAxisColor}44`,
+
+                    boxShadow: `0 0 0 1px ${activeAxisColor}22, 0 0 28px ${activeAxisColor}18`,
+                  }}
+                >
+                  <div className="feuzon-axis-insight-head">
+                    <div>
+                      <span
+                        className="feuzon-axis-insight-kicker"
+                        style={{ color: activeAxisColor }}
+                      >
+                        Metric Insight
+                      </span>
+
+                      <h4>{activeAxisMeta.label}</h4>
+                    </div>
+
+                    <div
+                      className="feuzon-axis-insight-score"
+                      style={{
+                        color: activeAxisColor,
+
+                        borderColor: `${activeAxisColor}44`,
+
+                        boxShadow: `0 0 18px ${activeAxisColor}16`,
+                      }}
+                    >
+                      {activeAxisScore}
+                    </div>
+                  </div>
+
+                  <p className="feuzon-axis-insight-short">
+                    {activeAxisCopy.short}
+                  </p>
+
+                  <p className="feuzon-axis-insight-detail">
+                    {activeAxisCopy.detail}
+                  </p>
+
+                  <div className="feuzon-axis-insight-scale-read">
+                    <span className="feuzon-axis-insight-scale-label">
+                      How to read this metric
+                    </span>
+
+                    <p className="feuzon-axis-insight-scale-copy">
+                      <strong>Lower / closer to center:</strong>{' '}
+                      {activeAxisCopy.scaleLow}
+                    </p>
+
+                    <p className="feuzon-axis-insight-scale-copy">
+                      <strong>Higher / farther outward:</strong>{' '}
+                      {activeAxisCopy.scaleHigh}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="feuzon-voice-read-info-column">
+                <div className="feuzon-voice-read-stack">
+                  <div className="feuzon-voice-read-item feuzon-voice-read-item--grouped">
+                    <span className="feuzon-summary-label">Musical Fit</span>
+
+                    <div className="feuzon-voice-read-pair-list">
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Primary Genre
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {selectedDrumSummary?.primaryGenre}
+                        </span>
+                      </div>
+
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Secondary Lanes
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {Array.isArray(selectedDrumSummary?.secondaryGenres)
+                            ? selectedDrumSummary.secondaryGenres.join(' • ')
+                            : ''}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="feuzon-voice-read-item feuzon-voice-read-item--grouped">
+                    <span className="feuzon-summary-label">
+                      Studio / Use Case
+                    </span>
+
+                    <div className="feuzon-voice-read-pair-list">
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Craftsman’s Studio Mic Pairing
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {selectedDrumSummary?.recordingMic}
+                        </span>
+                      </div>
+
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Playing Situation
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {selectedDrumSummary?.playingSituation}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="feuzon-voice-read-item">
+                    <span className="feuzon-summary-label">
+                      Feel / Visual Lean
+                    </span>
+
+                    <span className="feuzon-summary-value">
+                      {selectedDrumSummary?.feelRead}
+                    </span>
+                  </div>
+
+                  <div className="feuzon-voice-read-item feuzon-voice-read-item--grouped">
+                    <span className="feuzon-summary-label">
+                      Ober Craftsman’s Picks
+                    </span>
+
+                    <div className="feuzon-voice-read-pair-list">
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Batter Head
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {batterHead}
+                        </span>
+                      </div>
+
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Resonant Head
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {snareSideHead}
+                        </span>
+                      </div>
+
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          PureSound Wires
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          PureSound Custom Pro 20-Strand
+                        </span>
+                      </div>
+
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Throw-Off
+                        </span>
+
+                        <span className="feuzon-summary-value">{throwOff}</span>
+                      </div>
+
+                      <div className="feuzon-voice-read-pair-row">
+                        <span className="feuzon-voice-read-mini-label">
+                          Studio Mic Pairing
+                        </span>
+
+                        <span className="feuzon-summary-value">
+                          {selectedDrumSummary?.recordingMic}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="feuzon-source-build-shell">
+                  <button
+                    type="button"
+                    className={`feuzon-source-build-toggle ${
+                      showSourceBuildRead ? 'is-open' : ''
+                    }`}
+                    onClick={() => setShowSourceBuildRead((prev) => !prev)}
+                  >
+                    <div className="feuzon-source-build-toggle-main">
+                      {/* <span
+                        className="feuzon-source-build-eye"
+                        aria-hidden="true"
+                      >
+                        👁
+                      </span> */}
+
+                      <div>
+                        <span className="feuzon-source-build-label">
+                          Based on Your Selections
+                        </span>
+
+                        <span className="feuzon-source-build-subcopy">
+                          View the build inputs currently shaping this
+                          LegacyPrint™ read.
+                        </span>
+                      </div>
+                    </div>
+
+                    <span className="feuzon-source-build-toggle-state">
+                      {showSourceBuildRead ? 'Hide' : 'View'}
+                    </span>
+                  </button>
+
+                  {showSourceBuildRead && (
+                    <div className="feuzon-source-build-panel">
+                      <p className="feuzon-source-build-read">
+                        {selectedDrumSummary?.specRead}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </section>
