@@ -50,6 +50,131 @@ const AXIS_POINT_COLORS = [
   '#9e8bff',
 ];
 
+const AXIS_COLOR_BY_KEY = {
+  attack: '#ff7448',
+
+  sustain: '#4d86ff',
+
+  warmth: '#c1682e',
+
+  projection: '#ffb53a',
+
+  brightness: '#e7d98f',
+
+  sensitivity: '#68d9df',
+
+  control: '#9e8bff',
+};
+
+const AXIS_INSIGHT_COPY = {
+  attack: {
+    short: 'Fast front-end response with strong note definition.',
+
+    detail:
+      'This configuration speaks quickly and feels confident at the front of the note. Rimshots, accents, and tighter sticking come forward with more immediacy.',
+  },
+
+  sustain: {
+    short: 'Controlled note length with a measured amount of bloom.',
+
+    detail:
+      'This build holds onto the note long enough to feel musical, but not so long that it gets away from you. It shapes a tail that feels usable rather than excessive.',
+  },
+
+  warmth: {
+    short: 'A fuller, richer body through the center of the voice.',
+
+    detail:
+      'This configuration leans into depth and tonal weight. It gives the drum a more grounded center, helping strokes feel rounder and more seasoned.',
+  },
+
+  projection: {
+    short: 'Clear outward push with confident room presence.',
+
+    detail:
+      'This build throws the note forward well and keeps its shape as it leaves the shell. It helps the drum feel present in the room without losing identity.',
+  },
+
+  brightness: {
+    short: 'A measured amount of top-end edge and upper-register cut.',
+
+    detail:
+      'This controls how much sheen and upper snap sit on top of the drum’s core voice. Higher readings feel more open and cutting, while lower readings stay darker and more restrained.',
+  },
+
+  sensitivity: {
+    short: 'Responsive to lighter playing and subtle dynamic detail.',
+
+    detail:
+      'This configuration reacts well to softer hands, lighter ghosting, and nuanced articulation. It rewards a more expressive touch and stays alive under lower playing pressure.',
+  },
+
+  control: {
+    short: 'Shaped and contained in a way that feels easy to manage.',
+
+    detail:
+      'This build keeps the note organized and easier to place. Overtones feel more intentional, the response feels more disciplined, and the drum stays composed under stronger playing.',
+  },
+};
+
+const AXIS_SCALE_READ_COPY = {
+  attack: {
+    lower:
+      'Softer front-end response with a more relaxed note start. Strokes feel less immediate, and the drum may come across as rounder or more laid-back under the stick.',
+
+    higher:
+      'Faster front-end response with stronger note definition. Accents speak more quickly, the attack feels more assertive, and the drum cuts forward with greater immediacy.',
+  },
+
+  sustain: {
+    lower:
+      'Shorter note length with less bloom after the strike. The drum feels drier, more contained, and easier to keep tight in denser playing situations.',
+
+    higher:
+      'Longer note length with more bloom and hang after the strike. The drum feels more open, more resonant, and more likely to let the shell’s voice linger in the room.',
+  },
+
+  warmth: {
+    lower:
+      'Leaner low-mid body and less tonal weight in the center of the note. The drum may feel cleaner or more neutral, but with less of that deep, seasoned fullness.',
+
+    higher:
+      'Richer low-mid body and a fuller center to the note. The drum feels deeper, more grounded, and more substantial in a way that can feel bigger and more mature.',
+  },
+
+  projection: {
+    lower:
+      'Less outward push into the room, with a more contained sense of volume and spread. The drum may feel more intimate, controlled, or studio-friendly at lower projection levels.',
+
+    higher:
+      'Stronger outward push and clearer room presence. The drum carries more confidently, feels bigger in the space, and is more likely to hold its identity at a distance.',
+  },
+
+  brightness: {
+    lower:
+      'Darker top-end with less snap and less upper-register edge riding above the core note. The drum feels smoother, warmer, and more restrained on top.',
+
+    higher:
+      'More upper-register cut, sheen, and snap above the core voice. The drum feels more open, more present, and more likely to cut through with top-end clarity.',
+  },
+
+  sensitivity: {
+    lower:
+      'Less reaction to lighter touch and softer playing detail. The drum may ask for a firmer hand before ghost notes, brushes, or quieter articulation fully come alive.',
+
+    higher:
+      'Greater response to lighter touch, subtle phrasing, and lower playing pressure. The drum feels more alive under the hands and more rewarding in nuanced, dynamic playing.',
+  },
+
+  control: {
+    lower:
+      'A more open and less contained note shape, with more natural spread in the response. The drum may feel freer and more expressive, but less disciplined under heavier playing.',
+
+    higher:
+      'A more shaped, contained, and easier-to-manage note. The response feels more disciplined, overtones feel more intentional, and the drum stays composed more easily.',
+  },
+};
+
 const clampAxis = (value) => {
   const num = Number(value || 0);
 
@@ -307,13 +432,19 @@ const HeritageProductDetail = () => {
 
   const [openBuilderSection, setOpenBuilderSection] = useState('construction');
 
+  const [activeAxisKey, setActiveAxisKey] = useState('attack');
+
+  const [showSourceBuildRead, setShowSourceBuildRead] = useState(false);
+
+  const [headBrand, setHeadBrand] = useState('Remo');
+
+  const handleAxisChange = React.useCallback((nextKey) => {
+    if (nextKey) setActiveAxisKey(nextKey);
+  }, []);
+
   const productImage = useMemo(() => {
     return product?.images?.[0] || '/resized-logos/heritage-placeholder.png';
   }, [product]);
-
-  const heritageSwatchPreviewImage = useMemo(() => {
-    return HERITAGE_FINISH_SWATCHES[scorchDepth] || null;
-  }, [scorchDepth]);
 
   const heritageHighlights = [
     'Northern Red Oak stave shell construction.',
@@ -555,15 +686,16 @@ const HeritageProductDetail = () => {
         'A fuller Heritage configuration with deeper bloom, stronger body, and a broad, grounded voice that feels planted and mature.';
     }
 
-    let primaryGenre = 'Roots / session / soul';
+    let primaryGenre = 'Roots • Session • Soul';
 
-    if (numericDepth <= 5.5) primaryGenre = 'Jazz / funk / session';
+    if (numericDepth <= 5.5) primaryGenre = 'Jazz • Funk • Session';
 
-    if (numericDepth >= 6.5)
-      primaryGenre = 'Americana / rock / singer-songwriter';
+    if (numericDepth >= 6.5) {
+      primaryGenre = 'Americana • Rock • Singer-Songwriter';
+    }
 
     if (numericDepth >= 7 && currentHoopType === 'Die-Cast') {
-      primaryGenre = 'Alternative / rock / cinematic session';
+      primaryGenre = 'Alternative • Rock • Cinematic Session';
     }
 
     let recordingMic = 'Warm, natural overhead or close-mic pairing';
@@ -602,10 +734,10 @@ const HeritageProductDetail = () => {
         'A darker, more dramatic finish direction that leans moodier and more heavily seasoned without losing the line’s classic identity.';
     }
 
-    let secondaryGenres = ['Singer-songwriter', 'Soul', 'Session work'];
+    let secondaryGenres = ['Singer-Songwriter', 'Soul', 'Session Work'];
 
     if (currentHoopType === 'Die-Cast') {
-      secondaryGenres = ['Alternative', 'Pop session', 'Modern roots'];
+      secondaryGenres = ['Alternative', 'Pop Session', 'Modern Roots'];
     }
 
     if (
@@ -671,6 +803,78 @@ const HeritageProductDetail = () => {
       hoopType,
     });
   }, [size, depth, staveOption, hardwareColor, hoopType]);
+
+  const sourceBuildRead = useMemo(() => {
+    const staveRead = `${staveOption}`;
+
+    const hardwareRead =
+      hardwareColor === 'Brass/Gold' ? 'Brass / Gold' : hardwareColor;
+
+    return `${size}" x ${depth}" • ${lugs} lugs • ${staveRead} • Northern Red Oak • ${hardwareRead} • ${hoopType} • ${HERITAGE_STANDARD_SNARE_BED} snare bed • ${scorchDepth} exterior • ${HERITAGE_STANDARD_BEARING_EDGE} • Craftsman-selected PureSound wires`;
+  }, [size, depth, lugs, staveOption, hardwareColor, hoopType, scorchDepth]);
+
+  const craftsmenPicks = useMemo(() => {
+    const picksByBrand = {
+      Remo: {
+        batterHead: 'Remo Controlled Sound Coated',
+
+        resonantHead: 'Remo Ambassador Snare Side',
+
+        snareWires: 'PureSound Custom Pro 20-Strand',
+
+        studioMicPairing: 'Shure SM57 top + KM184 shell-side room support',
+      },
+
+      Evans: {
+        batterHead: 'Evans UV1 Coated',
+
+        resonantHead: 'Evans Snare Side 300',
+
+        snareWires: 'PureSound Custom Pro 20-Strand',
+
+        studioMicPairing:
+          'Shure SM57 top + small diaphragm condenser for articulation',
+      },
+
+      Aquarian: {
+        batterHead: 'Aquarian Texture Coated',
+
+        resonantHead: 'Aquarian Classic Clear Snare Side',
+
+        snareWires: 'PureSound Custom Pro 20-Strand',
+
+        studioMicPairing: 'Dynamic top mic + warm condenser room capture',
+      },
+    };
+
+    return (
+      picksByBrand[headBrand] || {
+        batterHead: 'Remo Controlled Sound Coated',
+
+        resonantHead: 'Remo Ambassador Snare Side',
+
+        snareWires: 'PureSound Custom Pro 20-Strand',
+
+        studioMicPairing: 'Shure SM57 top + KM184 shell-side room support',
+      }
+    );
+  }, [headBrand]);
+
+  const activeAxisMeta =
+    AXIS_META.find((axis) => axis.key === activeAxisKey) || AXIS_META[0];
+
+  const activeAxisScore =
+    selectedDrumSummary?.profile?.[activeAxisKey] != null
+      ? Number(selectedDrumSummary.profile[activeAxisKey]).toFixed(1)
+      : '5.0';
+
+  const activeAxisCopy =
+    AXIS_INSIGHT_COPY[activeAxisKey] || AXIS_INSIGHT_COPY.attack;
+
+  const activeAxisScaleRead =
+    AXIS_SCALE_READ_COPY[activeAxisKey] || AXIS_SCALE_READ_COPY.attack;
+
+  const activeAxisColor = AXIS_COLOR_BY_KEY[activeAxisKey] || '#d6b277';
 
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
@@ -763,12 +967,19 @@ const HeritageProductDetail = () => {
     );
   }, [
     size,
+
     depth,
+
     lugs,
+
     staveOption,
+
     hardwareColor,
+
     hoopType,
+
     scorchDepth,
+
     currentBuildPrice,
   ]);
 
@@ -833,12 +1044,19 @@ const HeritageProductDetail = () => {
     }
   }, [
     cart,
+
     size,
+
     depth,
+
     staveOption,
+
     lugs,
+
     hardwareColor,
+
     hoopType,
+
     scorchDepth,
   ]);
 
@@ -1303,7 +1521,7 @@ const HeritageProductDetail = () => {
                     <span className="heritage-builder-section-step">2</span>
 
                     <div>
-                      <h3>Choose your finish</h3>
+                      <h3>Choose Your Finish</h3>
 
                       <p>{finishSummary}</p>
                     </div>
@@ -1410,14 +1628,14 @@ const HeritageProductDetail = () => {
 
                 {openBuilderSection === 'hardware' && (
                   <div className="heritage-builder-section-body">
-                    <label>Hoop Type</label>
+                    <label>Hardware Finish</label>
 
                     <div className="heritage-option-grid">
-                      {hoopOptions.map((option) => {
-                        const isSelected = hoopType === option.value;
+                      {hardwareOptions.map((option) => {
+                        const isSelected = hardwareColor === option.value;
 
                         const deltaMeta = getOptionDeltaMeta({
-                          hoopType: option.value,
+                          hardwareColor: option.value,
                         });
 
                         return (
@@ -1427,7 +1645,7 @@ const HeritageProductDetail = () => {
                             className={`heritage-option-tile heritage-option-tile-detail ${
                               isSelected ? 'is-selected' : ''
                             }`}
-                            onClick={() => setHoopType(option.value)}
+                            onClick={() => setHardwareColor(option.value)}
                           >
                             <span className="heritage-option-title">
                               {option.label}
@@ -1453,14 +1671,14 @@ const HeritageProductDetail = () => {
                       })}
                     </div>
 
-                    <label>Hardware Finish</label>
+                    <label>Hoop Type</label>
 
                     <div className="heritage-option-grid">
-                      {hardwareOptions.map((option) => {
-                        const isSelected = hardwareColor === option.value;
+                      {hoopOptions.map((option) => {
+                        const isSelected = hoopType === option.value;
 
                         const deltaMeta = getOptionDeltaMeta({
-                          hardwareColor: option.value,
+                          hoopType: option.value,
                         });
 
                         return (
@@ -1470,7 +1688,7 @@ const HeritageProductDetail = () => {
                             className={`heritage-option-tile heritage-option-tile-detail ${
                               isSelected ? 'is-selected' : ''
                             }`}
-                            onClick={() => setHardwareColor(option.value)}
+                            onClick={() => setHoopType(option.value)}
                           >
                             <span className="heritage-option-title">
                               {option.label}
@@ -1544,75 +1762,19 @@ const HeritageProductDetail = () => {
           </aside>
         </div>
 
-        <section className="heritage-summary-band">
-          <div className="heritage-read-card">
-            <span className="heritage-summary-kicker">
-              Ober LegacyPrint™ Voice Read
-            </span>
-
-            <h3>Configuration snapshot</h3>
-
-            <p className="heritage-read-summary">
-              {selectedDrumSummary?.highlightedCharacteristics}
-            </p>
-
-            <div className="heritage-summary-grid">
-              <div className="heritage-summary-item">
-                <span className="heritage-summary-label">Primary Genre</span>
-
-                <span className="heritage-summary-value">
-                  {selectedDrumSummary?.primaryGenre}
-                </span>
-              </div>
-
-              <div className="heritage-summary-item">
-                <span className="heritage-summary-label">
-                  Suggested Mic Lean
-                </span>
-
-                <span className="heritage-summary-value">
-                  {selectedDrumSummary?.recordingMic}
-                </span>
-              </div>
-
-              <div className="heritage-summary-item heritage-summary-item-wide">
-                <span className="heritage-summary-label">
-                  Playing Situation
-                </span>
-
-                <span className="heritage-summary-value">
-                  {selectedDrumSummary?.playingSituation}
-                </span>
-              </div>
-
-              <div className="heritage-summary-item heritage-summary-item-wide">
-                <span className="heritage-summary-label">
-                  Feel / Visual Lean
-                </span>
-
-                <span className="heritage-summary-value">
-                  {selectedDrumSummary?.feelRead}
-                </span>
-              </div>
-
-              <div className="heritage-summary-item heritage-summary-item-wide">
-                <span className="heritage-summary-label">Secondary Lanes</span>
-
-                <span className="heritage-summary-value">
-                  {Array.isArray(selectedDrumSummary?.secondaryGenres)
-                    ? selectedDrumSummary.secondaryGenres.join(' • ')
-                    : ''}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="heritage-chart-card">
-            <div className="heritage-chart-head">
+        <section className="heritage-summary-band heritage-summary-band--voice-read">
+          <div className="heritage-voice-read-card">
+            <div className="heritage-chart-head heritage-chart-head--voice-read">
               <div>
-                <span className="heritage-summary-kicker">Profile</span>
+                <span className="heritage-summary-kicker">
+                  Ober LegacyPrint™ Voice Read
+                </span>
 
-                <h3>Sound behavior</h3>
+                <h3>Configuration snapshot</h3>
+
+                <p className="heritage-read-summary">
+                  {selectedDrumSummary?.highlightedCharacteristics}
+                </p>
               </div>
 
               <div className="heritage-chart-toggle">
@@ -1634,30 +1796,266 @@ const HeritageProductDetail = () => {
               </div>
             </div>
 
-            <div className="heritage-chart-wrap">
-              {chartView === 'spider' ? (
-                <SpiderChart
-                  data={chartValues}
-                  labels={AXIS_META.map((axis) => axis.label)}
-                  pointColors={AXIS_POINT_COLORS}
-                />
-              ) : (
-                <BarChart data={chartBarData} min={4} />
-              )}
-            </div>
-
-            <div className="heritage-axis-summary">
-              {AXIS_META.map((axis) => (
-                <div key={axis.key} className="heritage-axis-chip">
-                  <span>{axis.label}</span>
-
-                  <strong>
-                    {selectedDrumSummary?.profile?.[axis.key] != null
-                      ? Number(selectedDrumSummary.profile[axis.key]).toFixed(1)
-                      : '5.0'}
-                  </strong>
+            <div className="heritage-voice-read-split">
+              <div className="heritage-voice-read-chart-column">
+                <div className="heritage-chart-wrap heritage-chart-wrap--voice-read">
+                  {chartView === 'spider' ? (
+                    <SpiderChart
+                      data={chartValues}
+                      labels={AXIS_META.map((axis) => axis.label)}
+                      pointColors={AXIS_POINT_COLORS}
+                      activeKey={activeAxisKey}
+                      onAxisChange={handleAxisChange}
+                    />
+                  ) : (
+                    <BarChart
+                      data={chartBarData}
+                      min={4}
+                      activeKey={activeAxisKey}
+                      onAxisChange={handleAxisChange}
+                      activeColor={activeAxisColor}
+                    />
+                  )}
                 </div>
-              ))}
+
+                <div
+                  className="heritage-axis-insight-card"
+                  style={{
+                    borderColor: `${activeAxisColor}44`,
+
+                    boxShadow: `0 0 0 1px ${activeAxisColor}22, 0 0 28px ${activeAxisColor}18`,
+                  }}
+                >
+                  <div className="heritage-axis-insight-head">
+                    <div>
+                      <span
+                        className="heritage-axis-insight-kicker"
+                        style={{ color: activeAxisColor }}
+                      >
+                        Metric Insight
+                      </span>
+
+                      <h4>{activeAxisMeta.label}</h4>
+                    </div>
+
+                    <div
+                      className="heritage-axis-insight-score"
+                      style={{
+                        color: activeAxisColor,
+
+                        borderColor: `${activeAxisColor}44`,
+
+                        boxShadow: `0 0 18px ${activeAxisColor}16`,
+                      }}
+                    >
+                      {activeAxisScore}
+                    </div>
+                  </div>
+
+                  <p className="heritage-axis-insight-short">
+                    {activeAxisCopy.short}
+                  </p>
+
+                  <p className="heritage-axis-insight-detail">
+                    {activeAxisCopy.detail}
+                  </p>
+
+                  <div className="heritage-axis-insight-scale-read">
+                    <span className="heritage-axis-insight-scale-label">
+                      How to read this metric
+                    </span>
+
+                    <p className="heritage-axis-insight-scale-copy">
+                      <strong>Lower / closer to center:</strong>{' '}
+                      {activeAxisScaleRead.lower}
+                    </p>
+
+                    <p className="heritage-axis-insight-scale-copy">
+                      <strong>Higher / farther outward:</strong>{' '}
+                      {activeAxisScaleRead.higher}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="heritage-voice-read-info-column">
+                <div className="heritage-voice-read-stack">
+                  <div className="heritage-voice-read-item heritage-voice-read-item--grouped">
+                    <span className="heritage-summary-label">Musical Fit</span>
+
+                    <div className="heritage-voice-read-pair-list">
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Primary Genre
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {selectedDrumSummary?.primaryGenre}
+                        </span>
+                      </div>
+
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Secondary Lanes
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {Array.isArray(selectedDrumSummary?.secondaryGenres)
+                            ? selectedDrumSummary.secondaryGenres.join(' • ')
+                            : ''}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="heritage-voice-read-item heritage-voice-read-item--grouped">
+                    <span className="heritage-summary-label">
+                      Studio / Use Case
+                    </span>
+
+                    <div className="heritage-voice-read-pair-list">
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Craftsman’s Studio Mic Pairing
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {selectedDrumSummary?.recordingMic}
+                        </span>
+                      </div>
+
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Playing Situation
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {selectedDrumSummary?.playingSituation}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="heritage-voice-read-item heritage-voice-read-item--grouped">
+                    <span className="heritage-summary-label">
+                      Feel / Visual Lean
+                    </span>
+
+                    <p className="heritage-source-build-feature-copy">
+                      {selectedDrumSummary?.feelRead}
+                    </p>
+                  </div>
+
+                  <div className="heritage-voice-read-item heritage-voice-read-item--grouped">
+                    <span className="heritage-summary-label">
+                      Ober Craftsman’s Picks
+                    </span>
+
+                    <div
+                      className="heritage-head-brand-toggle"
+                      role="group"
+                      aria-label="Head brand"
+                    >
+                      {['Remo', 'Evans', 'Aquarian'].map((brand) => (
+                        <button
+                          key={brand}
+                          type="button"
+                          className={`heritage-head-brand-button ${
+                            headBrand === brand ? 'is-active' : ''
+                          }`}
+                          onClick={() => setHeadBrand(brand)}
+                        >
+                          {brand}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="heritage-voice-read-pair-list">
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Batter Head
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {craftsmenPicks.batterHead}
+                        </span>
+                      </div>
+
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Resonant Head
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {craftsmenPicks.resonantHead}
+                        </span>
+                      </div>
+
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          PureSound Wires
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {craftsmenPicks.snareWires}
+                        </span>
+                      </div>
+
+                      <div className="heritage-voice-read-pair-row">
+                        <span className="heritage-voice-read-mini-label">
+                          Studio Mic Pairing
+                        </span>
+
+                        <span className="heritage-summary-value">
+                          {craftsmenPicks.studioMicPairing}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="heritage-source-build-shell">
+                  <button
+                    type="button"
+                    className={`heritage-source-build-toggle ${
+                      showSourceBuildRead ? 'is-open' : ''
+                    }`}
+                    onClick={() => setShowSourceBuildRead((prev) => !prev)}
+                  >
+                    <div className="heritage-source-build-toggle-main">
+                      {/* <span
+                        className="heritage-source-build-eye"
+                        aria-hidden="true"
+                      >
+                        👁
+                      </span> */}
+
+                      <div>
+                        <span className="heritage-source-build-label">
+                          Based on Your Selections
+                        </span>
+
+                        <span className="heritage-source-build-subcopy">
+                          View the build inputs currently shaping this
+                          LegacyPrint™ read.
+                        </span>
+                      </div>
+                    </div>
+
+                    <span className="heritage-source-build-toggle-state">
+                      {showSourceBuildRead ? 'Hide' : 'View'}
+                    </span>
+                  </button>
+
+                  {showSourceBuildRead && (
+                    <div className="heritage-source-build-panel">
+                      <p className="heritage-source-build-read">
+                        {sourceBuildRead}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </section>
