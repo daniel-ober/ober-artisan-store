@@ -69,17 +69,19 @@ const BarChart = ({
       className={`bar-chart-card ${compact ? 'bar-chart-card--compact' : ''} bar-chart-card--benchmark-pulse`}
     >
       <div className="bar-chart-benchmark-guide">
-        <span className="bar-chart-benchmark-guide-label bar-chart-benchmark-guide-label--left">
-          Less Than Benchmark
-        </span>
+        {/* <span className="bar-chart-benchmark-guide-label bar-chart-benchmark-guide-label--left">
+          Less
+        </span> */}
 
         <span className="bar-chart-benchmark-guide-label bar-chart-benchmark-guide-label--center">
-          Benchmark Center
-        </span>
 
-        <span className="bar-chart-benchmark-guide-label bar-chart-benchmark-guide-label--right">
-          More Than Benchmark
-        </span>
+  Reference Drum
+
+</span>
+
+        {/* <span className="bar-chart-benchmark-guide-label bar-chart-benchmark-guide-label--right">
+          More
+        </span> */}
       </div>
 
       <div className="bar-chart-list">
