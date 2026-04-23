@@ -4,7 +4,7 @@ import WOODS_CATALOG, {
   getWoodById,
   getWoodByLabel,
   getWoodPhysicalProperty,
-} from '../../data/catalog/woods.catalog';
+} from '../../data/catalog/woods.catalog.js';
 
 /**
  * IMPORTANT
@@ -175,19 +175,33 @@ const OBER_WOOD_OVERRIDES = {
     ],
   },
   oak: {
+
     profile: {
-      attack: 7.9,
-      sustain: 6.4,
-      warmth: 6.3,
-      projection: 8.4,
-      brightness: 6.1,
-      sensitivity: 5.6,
-      control: 7.1,
+
+      attack: 6.8,
+
+      sustain: 6.6,
+
+      warmth: 6.9,
+
+      projection: 6.7,
+
+      brightness: 5.6,
+
+      sensitivity: 6.0,
+
+      control: 6.3,
+
     },
+
     reasons: [
-      'Oak is treated as strong, authoritative, and durable-feeling.',
-      'It tends to fit bolder builds rather than the softest or most delicate ones.',
+
+      'Northern Red Oak in the Heritage context is treated as grounded, seasoned, and body-forward rather than aggressively hard or overly modern.',
+
+      'It should feel strong and rooted, but not automatically force excessive projection, brightness, or attack emphasis.',
+
     ],
+
   },
   ash: {
     profile: {

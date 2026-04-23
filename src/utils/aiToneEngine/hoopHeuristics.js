@@ -73,22 +73,39 @@ export function deriveHoopHeuristicProfile(input) {
     value.includes('diecast')
   ) {
     return buildResult({
+
       id: 'die-cast',
+
       label: 'Die-Cast',
+
       profile: {
-        attack: 8.0,
-        sustain: 6.1,
-        warmth: 5.8,
-        projection: 7.8,
-        brightness: 7.0,
-        sensitivity: 6.0,
-        control: 7.2,
+
+        attack: 7.4,
+
+        sustain: 5.9,
+
+        warmth: 5.7,
+
+        projection: 7.0,
+
+        brightness: 6.4,
+
+        sensitivity: 5.8,
+
+        control: 7.1,
+
       },
+
       confidence01: 0.8,
+
       reasons: [
-        'Die-cast hoops are treated as more focused and controlled, with stronger attack definition.',
-        'They usually support a tighter-feeling response with added rim rigidity and cleaner note shape.',
+
+        'Die-cast hoops are treated as more focused and controlled, with firmer note shape and a slightly tighter front edge.',
+
+        'They should increase discipline and focus without making the drum feel unnaturally modern or over-hyped.',
+
       ],
+
     });
   }
 
@@ -99,22 +116,39 @@ export function deriveHoopHeuristicProfile(input) {
     value.includes('triple')
   ) {
     return buildResult({
+
       id: 'triple-flanged',
+
       label: 'Triple-Flanged',
+
       profile: {
-        attack: 6.8,
-        sustain: 7.3,
-        warmth: 6.9,
-        projection: 6.8,
-        brightness: 6.0,
-        sensitivity: 6.8,
+
+        attack: 6.4,
+
+        sustain: 6.9,
+
+        warmth: 6.6,
+
+        projection: 6.2,
+
+        brightness: 5.6,
+
+        sensitivity: 6.7,
+
         control: 5.8,
+
       },
+
       confidence01: 0.78,
+
       reasons: [
-        'Triple-flanged hoops are treated as a more open and flexible-feeling option than die-cast.',
-        'They generally allow a little more give, openness, and ring while retaining familiar snare behavior.',
+
+        'Triple-flanged hoops are treated as the more open and familiar Heritage baseline.',
+
+        'They allow a little more give and bloom, but should stay fairly centered rather than overly warm, overly soft, or dramatically resonant.',
+
       ],
+
     });
   }
 
