@@ -133,24 +133,43 @@ export function deriveConstructionHeuristicProfile(input) {
   }
 
   if (value.includes('stave')) {
+
     return buildResult({
+
       id: 'stave',
+
       label: 'Stave',
+
       profile: {
-        attack: 7.9,
-        sustain: 6.8,
-        warmth: 6.5,
-        projection: 8.2,
-        brightness: 6.7,
-        sensitivity: 6.1,
-        control: 6.8,
+
+        attack: 7.1,
+
+        sustain: 6.7,
+
+        warmth: 6.6,
+
+        projection: 6.9,
+
+        brightness: 6.0,
+
+        sensitivity: 6.2,
+
+        control: 6.4,
+
       },
+
       confidence01: 0.8,
+
       reasons: [
-        'Stave construction is treated as strong, direct, and projection-forward in the Ober model.',
-        'It generally supports articulate response, structural authority, and a more intentional shell identity.',
+
+        'Stave construction in the Heritage context is treated as solid and articulate, but not exaggeratedly aggressive.',
+
+        'It supports shell identity, note shape, and body without automatically forcing the read too modern, too bright, or too projection-heavy.',
+
       ],
+
     });
+
   }
 
   return buildResult({

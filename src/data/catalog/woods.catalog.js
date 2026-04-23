@@ -7,7 +7,7 @@ import {
   FACT_CONFIDENCE,
   REFERENCE_CATEGORIES,
   SOURCE_TYPES,
-} from '../schemas/referenceCatalogItem.schema';
+} from '../schemas/referenceCatalogItem.schema.js';
 
 const WD = (slug, label) =>
   createEvidenceSource({
