@@ -5,7 +5,6 @@ import Chart from 'chart.js/auto';
 import './SpiderChart.css';
 
 const DEFAULT_POINT_COLORS = [
-
   '#d98952',
 
   '#7fb7f0',
@@ -19,11 +18,9 @@ const DEFAULT_POINT_COLORS = [
   '#7fc7d8',
 
   '#9d86cf',
-
 ];
 
 const AXIS_KEYS = [
-
   'attack',
 
   'sustain',
@@ -37,19 +34,15 @@ const AXIS_KEYS = [
   'sensitivity',
 
   'control',
-
 ];
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
 function hexToRgb(hex) {
-
   const normalized = String(hex || '').replace('#', '');
 
   const full =
-
     normalized.length === 3
-
       ? normalized
 
           .split('')
@@ -57,37 +50,28 @@ function hexToRgb(hex) {
           .map((char) => char + char)
 
           .join('')
-
       : normalized;
 
   const int = Number.parseInt(full, 16);
 
   if (Number.isNaN(int)) {
-
     return { r: 140, g: 190, b: 220 };
-
   }
 
   return {
-
     r: (int >> 16) & 255,
 
     g: (int >> 8) & 255,
 
     b: int & 255,
-
   };
-
 }
 
 function rgbToString({ r, g, b }, alpha = 1) {
-
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-
 }
 
 function mixColor(hexA, hexB, ratio = 0.5, alpha = 1) {
-
   const a = hexToRgb(hexA);
 
   const b = hexToRgb(hexB);
@@ -95,67 +79,55 @@ function mixColor(hexA, hexB, ratio = 0.5, alpha = 1) {
   const t = clamp(ratio, 0, 1);
 
   return rgbToString(
-
     {
-
       r: Math.round(a.r + (b.r - a.r) * t),
 
       g: Math.round(a.g + (b.g - a.g) * t),
 
       b: Math.round(a.b + (b.b - a.b) * t),
-
     },
 
     alpha
-
   );
-
 }
 
 function getWeightedBlendColor(values = [], colors = DEFAULT_POINT_COLORS) {
-
   const safeValues = values.map((value) => clamp(Number(value) || 0, 0, 10));
 
   const total = safeValues.reduce((sum, value) => sum + value, 0) || 1;
 
   const blended = safeValues.reduce(
-
     (acc, value, index) => {
-
       const weight = value / total;
 
       const rgb = hexToRgb(colors[index % colors.length]);
 
       return {
-
         r: acc.r + rgb.r * weight,
 
         g: acc.g + rgb.g * weight,
 
         b: acc.b + rgb.b * weight,
-
       };
-
     },
 
     { r: 0, g: 0, b: 0 }
-
   );
 
   return {
-
     r: Math.round(blended.r),
 
     g: Math.round(blended.g),
 
     b: Math.round(blended.b),
-
   };
-
 }
 
-function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLORS) {
-
+function createInteriorGradient(
+  chart,
+  values = [],
+  colors = DEFAULT_POINT_COLORS
+) {
   const { ctx, chartArea } = chart;
 
   if (!chartArea) return 'rgba(120, 190, 220, 0.12)';
@@ -163,9 +135,8 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
   const blend = getWeightedBlendColor(values, colors);
 
   const avg = values.length
-
-    ? values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length
-
+    ? values.reduce((sum, value) => sum + (Number(value) || 0), 0) /
+      values.length
     : 5;
 
   const intensity = clamp((avg - 4) / 6, 0.12, 1);
@@ -175,12 +146,24 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
   const centerY = (chartArea.top + chartArea.bottom) / 2;
 
   const radius =
+    Math.max(
+      chartArea.right - chartArea.left,
+      chartArea.bottom - chartArea.top
+    ) * 0.58;
 
-    Math.max(chartArea.right - chartArea.left, chartArea.bottom - chartArea.top) *
+  const gradient = ctx.createRadialGradient(
+    centerX,
 
-    0.58;
+    centerY,
 
-  const gradient = ctx.createRadialGradient(centerX, centerY, 12, centerX, centerY, radius);
+    12,
+
+    centerX,
+
+    centerY,
+
+    radius
+  );
 
   gradient.addColorStop(0, rgbToString(blend, 0.3 * intensity + 0.1));
 
@@ -191,17 +174,16 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
   gradient.addColorStop(1, 'rgba(20, 28, 38, 0.02)');
 
   return gradient;
-
 }
 
-function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COLORS) {
-
+function createGradientRadarPlugin(
+  activeKeyRef,
+  pointColors = DEFAULT_POINT_COLORS
+) {
   return {
-
     id: 'legacyprintGradientRadar',
 
     afterDraw(chart) {
-
       const { ctx } = chart;
 
       const scale = chart.scales?.r;
@@ -222,7 +204,19 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
       ctx.save();
 
-      const centerGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 132);
+      const centerGlow = ctx.createRadialGradient(
+        centerX,
+
+        centerY,
+
+        0,
+
+        centerX,
+
+        centerY,
+
+        132
+      );
 
       centerGlow.addColorStop(0, rgbToString(blend, 0.13));
 
@@ -246,18 +240,15 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
       ctx.beginPath();
 
-      ctx.strokeStyle = 'rgba(255, 236, 192, 0.9)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.34)';
 
-      ctx.lineWidth = 1.8;
+      ctx.lineWidth = 1.5;
 
       ctx.setLineDash([7, 7]);
 
-      ctx.shadowBlur = 14;
-
-      ctx.shadowColor = 'rgba(214, 178, 119, 0.18)';
+      ctx.shadowBlur = 0;
 
       points.forEach((point, index) => {
-
         const angle = scale.getIndexAngle(index) - Math.PI / 2;
 
         const x = centerX + Math.cos(angle) * benchmarkRadius;
@@ -265,9 +256,7 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
         const y = centerY + Math.sin(angle) * benchmarkRadius;
 
         if (index === 0) ctx.moveTo(x, y);
-
         else ctx.lineTo(x, y);
-
       });
 
       ctx.closePath();
@@ -287,7 +276,6 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
       ctx.shadowBlur = 16;
 
       for (let i = 0; i < points.length; i += 1) {
-
         const current = points[i];
 
         const next = points[(i + 1) % points.length];
@@ -296,11 +284,22 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
         const nextColor = pointColors[(i + 1) % pointColors.length];
 
-        const gradient = ctx.createLinearGradient(current.x, current.y, next.x, next.y);
+        const gradient = ctx.createLinearGradient(
+          current.x,
+
+          current.y,
+
+          next.x,
+
+          next.y
+        );
 
         gradient.addColorStop(0, mixColor(currentColor, nextColor, 0.04, 0.99));
 
-        gradient.addColorStop(0.5, mixColor(currentColor, nextColor, 0.5, 0.99));
+        gradient.addColorStop(
+          0.5,
+          mixColor(currentColor, nextColor, 0.5, 0.99)
+        );
 
         gradient.addColorStop(1, mixColor(currentColor, nextColor, 0.96, 0.99));
 
@@ -315,7 +314,6 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
         ctx.lineTo(next.x, next.y);
 
         ctx.stroke();
-
       }
 
       ctx.restore();
@@ -323,7 +321,6 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
       ctx.save();
 
       points.forEach((point, index) => {
-
         const color = pointColors[index % pointColors.length];
 
         const glow = hexToRgb(color);
@@ -333,9 +330,7 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
         ctx.beginPath();
 
         ctx.fillStyle = isActive
-
           ? `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.34)`
-
           : `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.19)`;
 
         ctx.arc(point.x, point.y, isActive ? 16 : 11, 0, Math.PI * 2);
@@ -343,7 +338,6 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
         ctx.fill();
 
         if (isActive) {
-
           ctx.beginPath();
 
           ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.36)`;
@@ -353,7 +347,6 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
           ctx.arc(point.x, point.y, 20, 0, Math.PI * 2);
 
           ctx.stroke();
-
         }
 
         ctx.beginPath();
@@ -371,19 +364,14 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
         ctx.arc(point.x, point.y, isActive ? 2.1 : 1.6, 0, Math.PI * 2);
 
         ctx.fill();
-
       });
 
       ctx.restore();
-
     },
-
   };
-
 }
 
 const SpiderChart = ({
-
   data = [],
 
   labels = [],
@@ -397,9 +385,7 @@ const SpiderChart = ({
   onAxisChange,
 
   pulseKey = 0,
-
 }) => {
-
   const canvasRef = useRef(null);
 
   const chartInstanceRef = useRef(null);
@@ -409,25 +395,18 @@ const SpiderChart = ({
   const onAxisChangeRef = useRef(onAxisChange);
 
   useEffect(() => {
-
     activeKeyRef.current = activeKey;
 
     if (chartInstanceRef.current) {
-
       chartInstanceRef.current.render();
-
     }
-
   }, [activeKey]);
 
   useEffect(() => {
-
     onAxisChangeRef.current = onAxisChange;
-
   }, [onAxisChange]);
 
   useEffect(() => {
-
     if (!canvasRef.current) return;
 
     const ctx = canvasRef.current.getContext('2d');
@@ -435,19 +414,15 @@ const SpiderChart = ({
     if (!ctx) return;
 
     if (chartInstanceRef.current) {
-
       chartInstanceRef.current.destroy();
 
       chartInstanceRef.current = null;
-
     }
 
     const plugin = createGradientRadarPlugin(activeKeyRef, pointColors);
 
     const handleAxisInteraction = (event, chart) => {
-
       const points = chart.getElementsAtEventForMode(
-
         event,
 
         'nearest',
@@ -455,33 +430,25 @@ const SpiderChart = ({
         { intersect: true },
 
         true
-
       );
 
       if (points.length && typeof onAxisChangeRef.current === 'function') {
-
         const index = points[0].index;
 
         const nextKey = AXIS_KEYS[index];
 
         if (nextKey) onAxisChangeRef.current(nextKey);
-
       }
-
     };
 
     chartInstanceRef.current = new Chart(ctx, {
-
       type: 'radar',
 
       data: {
-
         labels,
 
         datasets: [
-
           {
-
             label: 'Drum Sound Profile',
 
             data,
@@ -491,11 +458,9 @@ const SpiderChart = ({
             fill: true,
 
             backgroundColor: (context) => {
-
               const chart = context.chart;
 
               return createInteriorGradient(chart, data, pointColors);
-
             },
 
             borderColor: 'rgba(255, 255, 255, 0.10)',
@@ -507,83 +472,55 @@ const SpiderChart = ({
             pointHoverRadius: 0,
 
             pointHitRadius: 20,
-
           },
-
         ],
-
       },
 
       options: {
-
         responsive: true,
 
         maintainAspectRatio: false,
 
         animation: {
-
           duration: 180,
 
           easing: 'easeOutQuart',
-
         },
 
         transitions: {
-
           active: {
-
             animation: {
-
               duration: 140,
-
             },
-
           },
 
           resize: {
-
             animation: {
-
               duration: 0,
-
             },
-
           },
-
         },
 
         layout: {
-
           padding: compact
-
-            ? { top: 10, right: 8, bottom: 12, left: 8 }
-
-            : { top: 18, right: 18, bottom: 20, left: 18 },
-
+            ? { top: 26, right: 8, bottom: 12, left: 8 }
+            : { top: 42, right: 18, bottom: 20, left: 18 },
         },
 
         onHover: (event, _elements, chart) => {
-
           handleAxisInteraction(event, chart);
-
         },
 
         onClick: (event, _elements, chart) => {
-
           handleAxisInteraction(event, chart);
-
         },
 
         plugins: {
-
           legend: {
-
             display: false,
-
           },
 
           tooltip: {
-
             backgroundColor: 'rgba(10, 14, 22, 0.96)',
 
             borderColor: 'rgba(103, 203, 255, 0.3)',
@@ -599,33 +536,22 @@ const SpiderChart = ({
             displayColors: false,
 
             callbacks: {
-
               label: (context) => {
-
                 const rawValue =
-
                   context.dataset?.rawData?.[context.dataIndex] ?? context.raw;
 
                 return `${context.label}: ${Number(rawValue).toFixed(1)}/10`;
-
               },
-
             },
-
           },
-
         },
 
         hover: {
-
           animationDuration: 0,
-
         },
 
         scales: {
-
           r: {
-
             min: 0,
 
             max: 10,
@@ -633,71 +559,51 @@ const SpiderChart = ({
             beginAtZero: true,
 
             ticks: {
-
               display: false,
 
               stepSize: 1,
 
               backdropColor: 'transparent',
-
             },
 
             grid: {
-
               color: 'rgba(255,255,255,0.11)',
-
             },
 
             angleLines: {
-
               color: 'rgba(255,255,255,0.12)',
-
             },
 
             pointLabels: {
-
               color: 'rgba(255,255,255,0.84)',
 
               padding: compact ? 8 : 12,
 
               font: {
-
                 family: 'inherit',
 
                 size: compact ? 10 : 13,
 
                 weight: '600',
-
               },
-
             },
-
           },
-
         },
-
       },
 
       plugins: [plugin],
-
     });
 
     return () => {
-
       if (chartInstanceRef.current) {
-
         chartInstanceRef.current.destroy();
 
         chartInstanceRef.current = null;
-
       }
-
     };
-
   }, [data, labels, compact, pointColors]);
 
   useEffect(() => {
-
     if (!chartInstanceRef.current) return;
 
     chartInstanceRef.current.data.labels = labels;
@@ -707,49 +613,55 @@ const SpiderChart = ({
     chartInstanceRef.current.data.datasets[0].rawData = data;
 
     chartInstanceRef.current.data.datasets[0].backgroundColor = (context) => {
-
       const chart = context.chart;
 
       return createInteriorGradient(chart, data, pointColors);
-
     };
 
-    chartInstanceRef.current.options.scales.r.pointLabels.font.size = compact ? 10 : 13;
+    chartInstanceRef.current.options.scales.r.pointLabels.font.size = compact
+      ? 10
+      : 13;
 
-    chartInstanceRef.current.options.scales.r.pointLabels.padding = compact ? 8 : 12;
+    chartInstanceRef.current.options.scales.r.pointLabels.padding = compact
+      ? 8
+      : 12;
 
     chartInstanceRef.current.update();
-
   }, [data, labels, compact, pointColors]);
 
-  return (
+return (
+
+  <div
+
+    className={`spider-chart-card ${compact ? 'spider-chart-card--compact' : ''} spider-chart-card--benchmark-pulse`}
+
+  >
 
     <div
 
-      key={pulseKey}
-
-      className={`spider-chart-card ${compact ? 'spider-chart-card--compact' : ''} spider-chart-card--benchmark-pulse`}
+      className={`spider-chart-frame ${compact ? 'spider-chart-frame--compact' : ''}`}
 
     >
 
-      <div
+      <div className="spider-chart-reference-key spider-chart-reference-key--inside">
 
-        className={`spider-chart-frame ${compact ? 'spider-chart-frame--compact' : ''}`}
+        <span className="spider-chart-reference-key-line" aria-hidden="true" />
 
-      >
+        <span className="spider-chart-reference-key-text">
 
-        <div className="spider-chart-benchmark-line" />
+          Dotted line = selected reference drum
 
-        <div className="spider-chart-benchmark-core" />
-
-        <canvas ref={canvasRef} />
+        </span>
 
       </div>
 
+      <canvas ref={canvasRef} />
+
     </div>
 
-  );
+  </div>
 
+);
 };
 
 export default SpiderChart;

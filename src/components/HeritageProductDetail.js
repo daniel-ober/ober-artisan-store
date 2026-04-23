@@ -346,7 +346,11 @@ const depthPrices = {
 };
 
 const staveOptions = {
-  12: { 6: ['12 - 8mm'], 8: ['16 - 10mm'] },
+  12: {
+    6: ['12 - 8mm + $150 (Re-Rings Required)'],
+
+    8: ['16 - 10mm'],
+  },
 
   13: { 8: ['16 - 10mm'] },
 
@@ -358,7 +362,7 @@ const staveOptions = {
 };
 
 const lugOptions = {
-  12: ['6', '8'],
+  12: ['8', '6'],
 
   13: ['8'],
 
@@ -495,9 +499,9 @@ const HeritageProductDetail = () => {
 
   const { addToCart, removeFromCart, cart } = useCart();
 
-  const [size, setSize] = useState('14');
+  const [size, setSize] = useState('12');
 
-  const [depth, setDepth] = useState('5.5');
+  const [depth, setDepth] = useState('5.0');
 
   const [lugs, setLugs] = useState('8');
 
@@ -531,6 +535,8 @@ const HeritageProductDetail = () => {
 
   const [headBrand, setHeadBrand] = useState('Remo');
 
+  const [showResetModal, setShowResetModal] = useState(false);
+
   const [benchmarkFamilyId, setBenchmarkFamilyId] = useState(
     DEFAULT_BENCHMARK_FAMILY_ID
   );
@@ -544,6 +550,36 @@ const HeritageProductDetail = () => {
   );
 
   const [benchmarkGlowPulseKey, setBenchmarkGlowPulseKey] = useState(0);
+
+  const confirmStartOverBuild = () => {
+    setSize('12');
+
+    setDepth('5.0');
+
+    setLugs('8');
+
+    setStaveOption('16 - 10mm');
+
+    setHardwareColor('Chrome');
+
+    setHoopType('Triple Flange');
+
+    setScorchDepth('Medium Torch');
+
+    setOpenBuilderSection('construction');
+
+    setShowConfigBreakdown(false);
+
+    setShowResetModal(false);
+  };
+
+  const handleResetBenchmark = () => {
+    setBenchmarkFamilyId(DEFAULT_BENCHMARK_FAMILY_ID);
+
+    setBenchmarkTypeId(DEFAULT_BENCHMARK_TYPE_ID);
+
+    setBenchmarkSizeId(DEFAULT_BENCHMARK_SIZE_ID);
+  };
 
   const handleAxisChange = React.useCallback((nextKey) => {
     if (nextKey) setActiveAxisKey(nextKey);
@@ -1308,7 +1344,11 @@ const HeritageProductDetail = () => {
   const handleSizeSelect = (newSize) => {
     if (newSize === size) return;
 
-    const nextDepth = Object.keys(depthPrices[newSize])[0];
+    const availableDepths = Object.keys(depthPrices[newSize] || {});
+
+    const nextDepth = availableDepths.includes(String(depth))
+      ? String(depth)
+      : availableDepths[0];
 
     const nextLugs = lugOptions[newSize][0];
 
@@ -1357,7 +1397,7 @@ const HeritageProductDetail = () => {
 
       <div className="heritage-hero-shell">
         <section className="heritage-intro-section">
-          <div className="heritage-product-visuals">
+          <div className="heritage-intro-grid">
             <div className="heritage-product-image-card">
               <div className="heritage-product-image">
                 <img src={productImage} alt="HERITAGE Snare Drum" />
@@ -1365,38 +1405,38 @@ const HeritageProductDetail = () => {
             </div>
 
             <div className="heritage-overview-card">
-              <div className="heritage-overview-mark" />
+              <div className="heritage-overview-scroll">
+                <p className="heritage-story-lede">
+                  The Heritage line carries the most rooted side of the Ober
+                  voice — warm, seasoned, tactile, and timeless.
+                </p>
 
-              <p className="heritage-story-lede">
-                The Heritage line carries the most rooted side of the Ober voice
-                — warm, seasoned, tactile, and timeless.
-              </p>
+                <p className="heritage-story-copy">
+                  Built around Northern Red Oak stave construction and shaped
+                  with a classic bearing-edge profile, HERITAGE is designed for
+                  players who want organic feel, grounded body, and a drum that
+                  sounds deeply played-in from the first stroke.
+                </p>
 
-              <p className="heritage-story-copy">
-                Built around Northern Red Oak stave construction and shaped with
-                a classic bearing-edge profile, HERITAGE is designed for players
-                who want organic feel, grounded body, and a drum that sounds
-                deeply played-in from the first stroke.
-              </p>
+                <div className="heritage-overview-divider" />
 
-              <div className="heritage-overview-divider" />
+                <h3 className="heritage-overview-subtitle">
+                  Key Build Highlights
+                </h3>
 
-              <h3 className="heritage-overview-subtitle">
-                Key Build Highlights
-              </h3>
+                <ul className="heritage-overview-list">
+                  {heritageHighlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
 
-              <ul className="heritage-overview-list">
-                {heritageHighlights.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-
-              <p className="order-to-build-disclaimer">
-                *Each Ober Artisan drum is built to order. The instrument you
-                receive will closely reflect the design shown, but natural wood
-                grain, torching, and exact visual character will vary based on
-                your final configuration.
-              </p>
+                <p className="order-to-build-disclaimer">
+                  *Each Ober Artisan drum is built to order. The instrument you
+                  receive will closely reflect the design shown, but natural
+                  wood grain, torching, and exact visual character will vary
+                  based on your final configuration.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -1412,753 +1452,531 @@ const HeritageProductDetail = () => {
               </p>
             </div>
 
-<div className="heritage-builder-sections">
-
-  <div
-
-    className={`heritage-builder-section ${
-
-      openBuilderSection === 'construction' ? 'is-open' : 'is-collapsed'
-
-    }`}
-
-  >
-
-    <button
-
-      type="button"
-
-      className={`heritage-builder-section-toggle ${
-
-        openBuilderSection === 'construction' ? 'is-open' : ''
-
-      }`}
-
-      onClick={() =>
-
-        setOpenBuilderSection(
-
-          openBuilderSection === 'construction' ? '' : 'construction'
-
-        )
-
-      }
-
-    >
-
-      <div className="heritage-builder-section-heading">
-
-        <span className="heritage-builder-section-step">1</span>
-
-        <div className="heritage-builder-section-heading-copy">
-
-          <h3>Shape Your Foundation</h3>
-
-          <p>{constructionSummary}</p>
-
-        </div>
-
-      </div>
-
-      <span className="heritage-builder-section-chevron" aria-hidden="true">
-
-        {openBuilderSection === 'construction' ? '−' : '+'}
-
-      </span>
-
-    </button>
-
-    {openBuilderSection === 'construction' && (
-
-      <div className="heritage-builder-section-body">
-
-        <label>Snare Size (Diameter)</label>
-
-        <div className="heritage-option-grid heritage-option-grid-compact">
-
-          {Object.keys(basePrices).map((sizeOption) => {
-
-            const isSelected = size === sizeOption;
-
-            const deltaMeta = getOptionDeltaMeta({
-
-              size: sizeOption,
-
-            });
-
-            return (
-
-              <button
-
-                key={sizeOption}
-
-                type="button"
-
-                className={`heritage-option-tile ${
-
-                  isSelected ? 'is-selected' : ''
-
+            <div className="heritage-builder-sections">
+              <div
+                className={`heritage-builder-section ${
+                  openBuilderSection === 'construction'
+                    ? 'is-open'
+                    : 'is-collapsed'
                 }`}
-
-                onClick={() => handleSizeSelect(sizeOption)}
-
               >
+                <button
+                  type="button"
+                  className={`heritage-builder-section-toggle ${
+                    openBuilderSection === 'construction' ? 'is-open' : ''
+                  }`}
+                  onClick={() =>
+                    setOpenBuilderSection(
+                      openBuilderSection === 'construction'
+                        ? ''
+                        : 'construction'
+                    )
+                  }
+                >
+                  <div className="heritage-builder-section-heading">
+                    <span className="heritage-builder-section-step">1</span>
 
-                <span className="heritage-option-title">{sizeOption}"</span>
+                    <div className="heritage-builder-section-heading-copy">
+                      <h3>Shape Your Foundation</h3>
 
-                {(isSelected || deltaMeta.text) && (
+                      <p>{constructionSummary}</p>
+                    </div>
+                  </div>
 
                   <span
-
-                    className={`heritage-option-meta ${
-
-                      isSelected ? 'is-selected' : deltaMeta.className
-
-                    }`}
-
+                    className="heritage-builder-section-chevron"
+                    aria-hidden="true"
                   >
-
-                    {isSelected ? 'Selected' : deltaMeta.text}
-
+                    {openBuilderSection === 'construction' ? '−' : '+'}
                   </span>
+                </button>
 
+                {openBuilderSection === 'construction' && (
+                  <div className="heritage-builder-section-body">
+                    <label>Snare Size (Diameter)</label>
+
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {Object.keys(basePrices).map((sizeOption) => {
+                        const isSelected = size === sizeOption;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          size: sizeOption,
+                        });
+
+                        return (
+                          <button
+                            key={sizeOption}
+                            type="button"
+                            className={`heritage-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleSizeSelect(sizeOption)}
+                          >
+                            <span className="heritage-option-title">
+                              {sizeOption}"
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Depth</label>
+
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {Object.keys(depthPrices[size]).map((depthOption) => {
+                        const isSelected = depth === depthOption;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          depth: depthOption,
+                        });
+
+                        return (
+                          <button
+                            key={depthOption}
+                            type="button"
+                            className={`heritage-option-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleDepthSelect(depthOption)}
+                          >
+                            <span className="heritage-option-title">
+                              {depthOption}"
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Lug Quantity</label>
+
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {lugOptions[size].map((lugOption) => {
+                        const isSelected = lugs === lugOption;
+
+                        const requiresReRingsForThisLugChoice =
+                          String(size) === '12' && String(lugOption) === '6';
+
+                        return (
+                          <button
+                            key={lugOption}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleLugSelect(lugOption)}
+                          >
+                            <span className="heritage-option-title">
+                              {lugOption} Lugs
+                            </span>
+
+                            {requiresReRingsForThisLugChoice && (
+                              <span className="heritage-option-subtitle">
+                                Re-rings required
+                              </span>
+                            )}
+
+                            {(isSelected ||
+                              requiresReRingsForThisLugChoice) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected ? 'is-selected' : 'is-positive'
+                                }`}
+                              >
+                                {isSelected
+                                  ? requiresReRingsForThisLugChoice
+                                    ? 'Selected • +$150'
+                                    : 'Selected'
+                                  : '+$150'}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Stave Quantity &amp; Shell Thickness</label>
+
+                    <div className="heritage-option-grid">
+                      {(staveOptions[size]?.[lugs] || []).map((option) => {
+                        const isSelected = staveOption === option;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          staveOption: option,
+                        });
+
+                        const requiresReRings =
+                          hasReRingFromStaveOption(option);
+
+                        const isImplicitReRingPath =
+                          String(size) === '12' &&
+                          String(lugs) === '6' &&
+                          (staveOptions[size]?.[lugs] || []).length === 1;
+
+                        const thicknessLabel = getStaveThicknessLabel(option);
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleStaveSelect(option)}
+                          >
+                            <span className="heritage-option-title">
+                              {getStaveCountLabel(option)}
+                            </span>
+
+                            <span className="heritage-option-subtitle">
+                              {thicknessLabel}
+
+                              {requiresReRings ? ' • Re-Rings required' : ''}
+                            </span>
+
+                            {!isImplicitReRingPath &&
+                              (isSelected || deltaMeta.text) && (
+                                <span
+                                  className={`heritage-option-meta ${
+                                    isSelected
+                                      ? 'is-selected'
+                                      : deltaMeta.className
+                                  }`}
+                                >
+                                  {isSelected ? 'Selected' : deltaMeta.text}
+                                </span>
+                              )}
+
+                            {isImplicitReRingPath && isSelected && (
+                              <span className="heritage-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="heritage-builder-next-row">
+                      <button
+                        type="button"
+                        className="heritage-builder-next-link"
+                        onClick={() => setOpenBuilderSection('finish')}
+                      >
+                        <span className="heritage-builder-next-link-label">
+                          Continue to Finish
+                        </span>
+
+                        <span
+                          className="heritage-builder-next-link-arrow"
+                          aria-hidden="true"
+                        >
+                          ↓
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 )}
+              </div>
 
-              </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <label>Depth</label>
-
-        <div className="heritage-option-grid heritage-option-grid-compact">
-
-          {Object.keys(depthPrices[size]).map((depthOption) => {
-
-            const isSelected = depth === depthOption;
-
-            const deltaMeta = getOptionDeltaMeta({
-
-              depth: depthOption,
-
-            });
-
-            return (
-
-              <button
-
-                key={depthOption}
-
-                type="button"
-
-                className={`heritage-option-tile ${
-
-                  isSelected ? 'is-selected' : ''
-
+              <div
+                className={`heritage-builder-section ${
+                  openBuilderSection === 'finish' ? 'is-open' : 'is-collapsed'
                 }`}
-
-                onClick={() => handleDepthSelect(depthOption)}
-
               >
+                <button
+                  type="button"
+                  className={`heritage-builder-section-toggle ${
+                    openBuilderSection === 'finish' ? 'is-open' : ''
+                  }`}
+                  onClick={() =>
+                    setOpenBuilderSection(
+                      openBuilderSection === 'finish' ? '' : 'finish'
+                    )
+                  }
+                >
+                  <div className="heritage-builder-section-heading">
+                    <span className="heritage-builder-section-step">2</span>
 
-                <span className="heritage-option-title">{depthOption}"</span>
+                    <div className="heritage-builder-section-heading-copy">
+                      <h3>Choose Your Finish</h3>
 
-                {(isSelected || deltaMeta.text) && (
+                      <p>{finishSummary}</p>
+                    </div>
+                  </div>
 
                   <span
-
-                    className={`heritage-option-meta ${
-
-                      isSelected ? 'is-selected' : deltaMeta.className
-
-                    }`}
-
+                    className="heritage-builder-section-chevron"
+                    aria-hidden="true"
                   >
-
-                    {isSelected ? 'Selected' : deltaMeta.text}
-
+                    {openBuilderSection === 'finish' ? '−' : '+'}
                   </span>
+                </button>
 
+                {openBuilderSection === 'finish' && (
+                  <div className="heritage-builder-section-body">
+                    <label>Finish Scorch Depth</label>
+
+                    <div className="heritage-finish-swatch-grid">
+                      {scorchOptions.map((option) => {
+                        const isSelected = scorchDepth === option;
+
+                        const swatchSrc = HERITAGE_FINISH_SWATCHES[option];
+
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            className={`heritage-finish-swatch-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setScorchDepth(option)}
+                          >
+                            <span className="heritage-finish-swatch-image-wrap">
+                              <img
+                                src={swatchSrc}
+                                alt={`${option} Heritage finish swatch`}
+                                className="heritage-finish-swatch-image"
+                              />
+                            </span>
+
+                            <span className="heritage-finish-swatch-label">
+                              {option}
+                            </span>
+
+                            {isSelected && (
+                              <span className="heritage-option-meta is-selected">
+                                Selected
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <p className="heritage-select-helper">
+                      Heritage uses a standard snare bed and a fixed 45° inner
+                      bearing edge with a softened outer roundover to keep the
+                      line grounded, consistent, and unmistakably classic.
+                    </p>
+
+                    <p className="heritage-swatch-disclaimer">
+                      Swatches are a general visual guide. Final Heritage finish
+                      character can vary based on wood grain, natural
+                      absorption, torch response, and the unique behavior of
+                      each shell.
+                    </p>
+
+                    <div className="heritage-builder-next-row">
+                      <button
+                        type="button"
+                        className="heritage-builder-next-link"
+                        onClick={() => setOpenBuilderSection('hardware')}
+                      >
+                        <span className="heritage-builder-next-link-label">
+                          Continue to Hardware
+                        </span>
+
+                        <span
+                          className="heritage-builder-next-link-arrow"
+                          aria-hidden="true"
+                        >
+                          ↓
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 )}
+              </div>
 
-              </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <label>Lug Quantity</label>
-
-        <div className="heritage-option-grid heritage-option-grid-compact">
-
-          {lugOptions[size].map((lugOption) => {
-
-            const isSelected = lugs === lugOption;
-
-            return (
-
-              <button
-
-                key={lugOption}
-
-                type="button"
-
-                className={`heritage-option-tile ${
-
-                  isSelected ? 'is-selected' : ''
-
+              <div
+                className={`heritage-builder-section ${
+                  openBuilderSection === 'hardware' ? 'is-open' : 'is-collapsed'
                 }`}
-
-                onClick={() => handleLugSelect(lugOption)}
-
               >
+                <button
+                  type="button"
+                  className={`heritage-builder-section-toggle ${
+                    openBuilderSection === 'hardware' ? 'is-open' : ''
+                  }`}
+                  onClick={() =>
+                    setOpenBuilderSection(
+                      openBuilderSection === 'hardware' ? '' : 'hardware'
+                    )
+                  }
+                >
+                  <div className="heritage-builder-section-heading">
+                    <span className="heritage-builder-section-step">3</span>
 
-                <span className="heritage-option-title">{lugOption} Lugs</span>
+                    <div className="heritage-builder-section-heading-copy">
+                      <h3>Refine Your Hardware</h3>
 
-                {isSelected && (
-
-                  <span className="heritage-option-meta is-selected">
-
-                    Selected
-
-                  </span>
-
-                )}
-
-              </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <label>Stave Quantity &amp; Shell Thickness</label>
-
-        <div className="heritage-option-grid">
-
-          {(staveOptions[size]?.[lugs] || []).map((option) => {
-
-            const isSelected = staveOption === option;
-
-            const deltaMeta = getOptionDeltaMeta({
-
-              staveOption: option,
-
-            });
-
-            return (
-
-              <button
-
-                key={option}
-
-                type="button"
-
-                className={`heritage-option-tile heritage-option-tile-detail ${
-
-                  isSelected ? 'is-selected' : ''
-
-                }`}
-
-                onClick={() => handleStaveSelect(option)}
-
-              >
-
-                <span className="heritage-option-title">
-
-                  {getStaveCountLabel(option)}
-
-                </span>
-
-                <span className="heritage-option-subtitle">
-
-                  {getStaveThicknessLabel(option)}
-
-                  {hasReRingFromStaveOption(option)
-
-                    ? ' • Re-Rings required'
-
-                    : ''}
-
-                </span>
-
-                {(isSelected || deltaMeta.text) && (
+                      <p>{hardwareSummary}</p>
+                    </div>
+                  </div>
 
                   <span
-
-                    className={`heritage-option-meta ${
-
-                      isSelected ? 'is-selected' : deltaMeta.className
-
-                    }`}
-
+                    className="heritage-builder-section-chevron"
+                    aria-hidden="true"
                   >
-
-                    {isSelected ? 'Selected' : deltaMeta.text}
-
+                    {openBuilderSection === 'hardware' ? '−' : '+'}
                   </span>
+                </button>
 
+                {openBuilderSection === 'hardware' && (
+                  <div className="heritage-builder-section-body">
+                    <label>Hardware Finish</label>
+
+                    <div className="heritage-option-grid">
+                      {hardwareOptions.map((option) => {
+                        const isSelected = hardwareColor === option.value;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          hardwareColor: option.value,
+                        });
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setHardwareColor(option.value)}
+                          >
+                            <span className="heritage-option-title">
+                              {option.label}
+                            </span>
+
+                            <span className="heritage-option-subtitle">
+                              {option.description}
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Hoop Type</label>
+
+                    <div className="heritage-option-grid">
+                      {hoopOptions.map((option) => {
+                        const isSelected = hoopType === option.value;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          hoopType: option.value,
+                        });
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => setHoopType(option.value)}
+                          >
+                            <span className="heritage-option-title">
+                              {option.label}
+                            </span>
+
+                            <span className="heritage-option-subtitle">
+                              {option.description}
+                            </span>
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <p className="heritage-select-helper">
+                      Heritage uses standard snare beds and a fixed
+                      Heritage-standard bearing edge to keep the line grounded,
+                      consistent, and unmistakably classic.
+                    </p>
+
+                    <p className="heritage-select-helper">
+                      PureSound snare wires are selected by the craftsman to fit
+                      the build.
+                    </p>
+
+                    <div className="heritage-builder-next-row heritage-builder-next-row--review">
+                      <button
+                        type="button"
+                        className="heritage-builder-next-link heritage-builder-next-link--review"
+                        onClick={handleReviewBuild}
+                      >
+                        <span className="heritage-builder-next-link-label">
+                          Review Your Build
+                        </span>
+
+                        <span
+                          className="heritage-builder-next-link-arrow"
+                          aria-hidden="true"
+                        >
+                          ↓
+                        </span>
+                      </button>
+                    </div>
+                  </div>
                 )}
+              </div>
+            </div>
 
-              </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <div className="heritage-builder-next-row">
-
-          <button
-
-            type="button"
-
-            className="heritage-builder-next-link"
-
-            onClick={() => setOpenBuilderSection('finish')}
-
-          >
-
-            <span className="heritage-builder-next-link-label">
-
-              Continue to Finish
-
-            </span>
-
-            <span className="heritage-builder-next-link-arrow" aria-hidden="true">
-
-              ↓
-
-            </span>
-
-          </button>
-
-        </div>
-
-      </div>
-
-    )}
-
-  </div>
-
-  <div
-
-    className={`heritage-builder-section ${
-
-      openBuilderSection === 'finish' ? 'is-open' : 'is-collapsed'
-
-    }`}
-
-  >
-
-    <button
-
-      type="button"
-
-      className={`heritage-builder-section-toggle ${
-
-        openBuilderSection === 'finish' ? 'is-open' : ''
-
-      }`}
-
-      onClick={() =>
-
-        setOpenBuilderSection(openBuilderSection === 'finish' ? '' : 'finish')
-
-      }
-
-    >
-
-      <div className="heritage-builder-section-heading">
-
-        <span className="heritage-builder-section-step">2</span>
-
-        <div className="heritage-builder-section-heading-copy">
-
-          <h3>Choose Your Finish</h3>
-
-          <p>{finishSummary}</p>
-
-        </div>
-
-      </div>
-
-      <span className="heritage-builder-section-chevron" aria-hidden="true">
-
-        {openBuilderSection === 'finish' ? '−' : '+'}
-
-      </span>
-
-    </button>
-
-    {openBuilderSection === 'finish' && (
-
-      <div className="heritage-builder-section-body">
-
-        <label>Finish Scorch Depth</label>
-
-        <div className="heritage-finish-swatch-grid">
-
-          {scorchOptions.map((option) => {
-
-            const isSelected = scorchDepth === option;
-
-            const swatchSrc = HERITAGE_FINISH_SWATCHES[option];
-
-            return (
-
+            <div className="heritage-builder-reset-row">
               <button
-
-                key={option}
-
                 type="button"
-
-                className={`heritage-finish-swatch-tile ${
-
-                  isSelected ? 'is-selected' : ''
-
-                }`}
-
-                onClick={() => setScorchDepth(option)}
-
+                className="heritage-builder-reset-button"
+                onClick={() => setShowResetModal(true)}
               >
-
-                <span className="heritage-finish-swatch-image-wrap">
-
-                  <img
-
-                    src={swatchSrc}
-
-                    alt={`${option} Heritage finish swatch`}
-
-                    className="heritage-finish-swatch-image"
-
-                  />
-
-                </span>
-
-                <span className="heritage-finish-swatch-label">{option}</span>
-
-                {isSelected && (
-
-                  <span className="heritage-option-meta is-selected">
-
-                    Selected
-
-                  </span>
-
-                )}
-
+                Start Over
               </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <p className="heritage-select-helper">
-
-          Heritage uses a standard snare bed and a fixed 45° inner bearing edge
-
-          with a softened outer roundover to keep the line grounded,
-
-          consistent, and unmistakably classic.
-
-        </p>
-
-        <p className="heritage-swatch-disclaimer">
-
-          Swatches are a general visual guide. Final Heritage finish character
-
-          can vary based on wood grain, natural absorption, torch response, and
-
-          the unique behavior of each shell.
-
-        </p>
-
-        <div className="heritage-builder-next-row">
-
-          <button
-
-            type="button"
-
-            className="heritage-builder-next-link"
-
-            onClick={() => setOpenBuilderSection('hardware')}
-
-          >
-
-            <span className="heritage-builder-next-link-label">
-
-              Continue to Hardware
-
-            </span>
-
-            <span className="heritage-builder-next-link-arrow" aria-hidden="true">
-
-              ↓
-
-            </span>
-
-          </button>
-
-        </div>
-
-      </div>
-
-    )}
-
-  </div>
-
-  <div
-
-    className={`heritage-builder-section ${
-
-      openBuilderSection === 'hardware' ? 'is-open' : 'is-collapsed'
-
-    }`}
-
-  >
-
-    <button
-
-      type="button"
-
-      className={`heritage-builder-section-toggle ${
-
-        openBuilderSection === 'hardware' ? 'is-open' : ''
-
-      }`}
-
-      onClick={() =>
-
-        setOpenBuilderSection(
-
-          openBuilderSection === 'hardware' ? '' : 'hardware'
-
-        )
-
-      }
-
-    >
-
-      <div className="heritage-builder-section-heading">
-
-        <span className="heritage-builder-section-step">3</span>
-
-        <div className="heritage-builder-section-heading-copy">
-
-          <h3>Refine Your Hardware</h3>
-
-          <p>{hardwareSummary}</p>
-
-        </div>
-
-      </div>
-
-      <span className="heritage-builder-section-chevron" aria-hidden="true">
-
-        {openBuilderSection === 'hardware' ? '−' : '+'}
-
-      </span>
-
-    </button>
-
-    {openBuilderSection === 'hardware' && (
-
-      <div className="heritage-builder-section-body">
-
-        <label>Hardware Finish</label>
-
-        <div className="heritage-option-grid">
-
-          {hardwareOptions.map((option) => {
-
-            const isSelected = hardwareColor === option.value;
-
-            const deltaMeta = getOptionDeltaMeta({
-
-              hardwareColor: option.value,
-
-            });
-
-            return (
-
-              <button
-
-                key={option.value}
-
-                type="button"
-
-                className={`heritage-option-tile heritage-option-tile-detail ${
-
-                  isSelected ? 'is-selected' : ''
-
-                }`}
-
-                onClick={() => setHardwareColor(option.value)}
-
-              >
-
-                <span className="heritage-option-title">{option.label}</span>
-
-                <span className="heritage-option-subtitle">
-
-                  {option.description}
-
-                </span>
-
-                {(isSelected || deltaMeta.text) && (
-
-                  <span
-
-                    className={`heritage-option-meta ${
-
-                      isSelected ? 'is-selected' : deltaMeta.className
-
-                    }`}
-
-                  >
-
-                    {isSelected ? 'Selected' : deltaMeta.text}
-
-                  </span>
-
-                )}
-
-              </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <label>Hoop Type</label>
-
-        <div className="heritage-option-grid">
-
-          {hoopOptions.map((option) => {
-
-            const isSelected = hoopType === option.value;
-
-            const deltaMeta = getOptionDeltaMeta({
-
-              hoopType: option.value,
-
-            });
-
-            return (
-
-              <button
-
-                key={option.value}
-
-                type="button"
-
-                className={`heritage-option-tile heritage-option-tile-detail ${
-
-                  isSelected ? 'is-selected' : ''
-
-                }`}
-
-                onClick={() => setHoopType(option.value)}
-
-              >
-
-                <span className="heritage-option-title">{option.label}</span>
-
-                <span className="heritage-option-subtitle">
-
-                  {option.description}
-
-                </span>
-
-                {(isSelected || deltaMeta.text) && (
-
-                  <span
-
-                    className={`heritage-option-meta ${
-
-                      isSelected ? 'is-selected' : deltaMeta.className
-
-                    }`}
-
-                  >
-
-                    {isSelected ? 'Selected' : deltaMeta.text}
-
-                  </span>
-
-                )}
-
-              </button>
-
-            );
-
-          })}
-
-        </div>
-
-        <p className="heritage-select-helper">
-
-          Heritage uses standard snare beds and a fixed Heritage-standard
-
-          bearing edge to keep the line grounded, consistent, and unmistakably
-
-          classic.
-
-        </p>
-
-        <p className="heritage-select-helper">
-
-          PureSound snare wires are selected by the craftsman to fit the build.
-
-        </p>
-
-        <div className="heritage-builder-next-row heritage-builder-next-row--review">
-
-          <button
-
-            type="button"
-
-            className="heritage-builder-next-link heritage-builder-next-link--review"
-
-            onClick={handleReviewBuild}
-
-          >
-
-            <span className="heritage-builder-next-link-label">
-
-              Review Your Build
-
-            </span>
-
-            <span className="heritage-builder-next-link-arrow" aria-hidden="true">
-
-              ↓
-
-            </span>
-
-          </button>
-
-        </div>
-
-      </div>
-
-    )}
-
-  </div>
-
-</div>
+            </div>
 
             <div className="heritage-config-breakdown-shell">
               <div className="heritage-config-breakdown-header">
@@ -2238,15 +2056,14 @@ const HeritageProductDetail = () => {
                       <strong>{formatCurrency(basePrices[size] || 0)}</strong>
                     </div>
 
-                    <div className="heritage-config-breakdown-line">
-                      <span>Depth: {depth}"</span>
+                    {(depthPrices[size]?.[normalizeDepthKey(depth)] || 0) >
+                      0 && (
+                      <div className="heritage-config-breakdown-line">
+                        <span>Depth: {depth}"</span>
 
-                      <strong>
-                        {depthPrices[size]?.[normalizeDepthKey(depth)]
-                          ? `(+${depthPrices[size][normalizeDepthKey(depth)]})`
-                          : '(Included)'}
-                      </strong>
-                    </div>
+                        <strong>{`(+${depthPrices[size][normalizeDepthKey(depth)]})`}</strong>
+                      </div>
+                    )}
 
                     {hardwareUpchargeMap[hardwareColor] > 0 && (
                       <div className="heritage-config-breakdown-line">
@@ -2425,118 +2242,143 @@ const HeritageProductDetail = () => {
           <section className="heritage-voice-panel heritage-voice-read-card heritage-voice-read-card--reworked">
             <div className="heritage-voice-read-header">
               <span className="heritage-summary-kicker">
-                Ober LegacyPrint™ Voice Read
+                LegacyPrint™ Voice Comparison
               </span>
 
               <p className="heritage-read-summary">
-                LegacyPrint™ compares your current Heritage build against a
-                selected benchmark so you can quickly understand how the voice
-                shifts across the core response metrics.
+                Compare your current Heritage build against a reference drum to
+                see how its response shifts across the core sound metrics.
               </p>
             </div>
 
-            <div
-              className="heritage-benchmark-read heritage-benchmark-read--glow"
-              key={benchmarkGlowPulseKey}
-            >
-              <div className="heritage-benchmark-hero">
-                <div className="heritage-benchmark-hero-image-shell">
-                  <img
-                    src={selectedBenchmarkImagePath}
-                    alt={
-                      selectedBenchmarkType?.typeLabel
-                        ? `${selectedBenchmarkType.typeLabel} benchmark drum`
-                        : 'Benchmark drum'
-                    }
-                    className="heritage-benchmark-hero-image"
-                  />
-                </div>
+            <div className="heritage-chart-reference-shell heritage-chart-reference-shell--top">
+              <div className="heritage-chart-reference-head">
+                <span className="heritage-summary-kicker">Reference Drum</span>
 
-                <div className="heritage-benchmark-hero-copy">
-                  <div className="heritage-benchmark-hero-copy-top">
-                    <h4 className="heritage-benchmark-hero-title">
-                      {selectedBenchmarkType?.typeLabel ||
-                        'Benchmark Reference'}
+                <p className="heritage-chart-reference-subcopy">
+                  Choose the drum you want this build compared against. By
+                  default, this comparison starts from the Heritage standard
+                  reference: 14&quot; × 5.5&quot;, Northern Red Oak stave shell,
+                  16 staves, 8 lugs, Triple Flange hoops, 45° inner edge with
+                  softened outer roundover, and Medium Torch finish.
+                </p>
+              </div>
 
-                      {selectedBenchmarkSize?.label
-                        ? ` • ${selectedBenchmarkSize.label}`
-                        : ''}
-                    </h4>
-
-                    <p className="heritage-benchmark-hero-description">
-                      {selectedBenchmarkType?.shortDescription ||
-                        'Benchmark reference selected for tonal comparison.'}
-                    </p>
+              <div
+                className="heritage-benchmark-read heritage-benchmark-read--glow"
+                key={benchmarkGlowPulseKey}
+              >
+                <div className="heritage-benchmark-hero">
+                  <div className="heritage-benchmark-hero-image-shell">
+                    <img
+                      src={selectedBenchmarkImagePath}
+                      alt={
+                        selectedBenchmarkType?.typeLabel
+                          ? `${selectedBenchmarkType.typeLabel} reference drum`
+                          : 'Selected reference drum'
+                      }
+                      className="heritage-benchmark-hero-image"
+                    />
                   </div>
-                </div>
 
-                <div className="heritage-benchmark-selector-panel">
-                  <div className="heritage-benchmark-selector-stack heritage-benchmark-selector-stack--hero">
-                    <div className="heritage-benchmark-selector-group">
-                      <label className="heritage-benchmark-selector-label">
-                        Benchmark Family
-                      </label>
+                  <div className="heritage-benchmark-hero-copy">
+                    <div className="heritage-benchmark-hero-copy-top">
+                      <h4 className="heritage-benchmark-hero-title">
+                        {selectedBenchmarkType?.typeLabel || 'Reference Drum'}
 
-                      <select
-                        className="heritage-benchmark-selector"
-                        value={selectedBenchmarkFamily?.familyId || ''}
-                        onChange={(e) =>
-                          handleBenchmarkFamilyChange(e.target.value)
-                        }
-                      >
-                        {benchmarkFamilyOptions.map((family) => (
-                          <option key={family.familyId} value={family.familyId}>
-                            {family.familyLabel}
-                          </option>
-                        ))}
-                      </select>
+                        {selectedBenchmarkSize?.label
+                          ? ` • ${selectedBenchmarkSize.label}`
+                          : ''}
+                      </h4>
+
+                      <p className="heritage-benchmark-hero-description">
+                        {selectedBenchmarkType?.shortDescription ||
+                          'Reference drum selected for tonal comparison.'}
+                      </p>
                     </div>
+                  </div>
 
-                    <div className="heritage-benchmark-selector-group">
-                      <label className="heritage-benchmark-selector-label">
-                        Benchmark Type
-                      </label>
+                  <div className="heritage-benchmark-selector-panel">
+                    <div className="heritage-benchmark-selector-stack heritage-benchmark-selector-stack--hero">
+                      <div className="heritage-benchmark-selector-group">
+                        <label className="heritage-benchmark-selector-label">
+                          Reference Family
+                        </label>
 
-                      <select
-                        className="heritage-benchmark-selector"
-                        value={selectedBenchmarkType?.typeId || ''}
-                        onChange={(e) =>
-                          handleBenchmarkTypeChange(e.target.value)
-                        }
-                      >
-                        {(selectedBenchmarkFamily?.benchmarkTypes || []).map(
-                          (type) => (
-                            <option key={type.typeId} value={type.typeId}>
-                              {type.typeLabel}
-                            </option>
-                          )
-                        )}
-                      </select>
-                    </div>
-
-                    <div className="heritage-benchmark-selector-group">
-                      <label className="heritage-benchmark-selector-label">
-                        Benchmark Size
-                      </label>
-
-                      <select
-                        className="heritage-benchmark-selector"
-                        value={selectedBenchmarkSize?.sizeId || ''}
-                        onChange={(e) =>
-                          handleBenchmarkSizeChange(e.target.value)
-                        }
-                      >
-                        {(selectedBenchmarkType?.presetSizeOptions || []).map(
-                          (sizeOption) => (
+                        <select
+                          className="heritage-benchmark-selector"
+                          value={selectedBenchmarkFamily?.familyId || ''}
+                          onChange={(e) =>
+                            handleBenchmarkFamilyChange(e.target.value)
+                          }
+                        >
+                          {benchmarkFamilyOptions.map((family) => (
                             <option
-                              key={sizeOption.sizeId}
-                              value={sizeOption.sizeId}
+                              key={family.familyId}
+                              value={family.familyId}
                             >
-                              {sizeOption.label}
+                              {family.familyLabel}
                             </option>
-                          )
-                        )}
-                      </select>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div className="heritage-benchmark-selector-group">
+                        <label className="heritage-benchmark-selector-label">
+                          Reference Drum
+                        </label>
+
+                        <select
+                          className="heritage-benchmark-selector"
+                          value={selectedBenchmarkType?.typeId || ''}
+                          onChange={(e) =>
+                            handleBenchmarkTypeChange(e.target.value)
+                          }
+                        >
+                          {(selectedBenchmarkFamily?.benchmarkTypes || []).map(
+                            (type) => (
+                              <option key={type.typeId} value={type.typeId}>
+                                {type.typeLabel}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+
+                      <div className="heritage-benchmark-selector-group">
+                        <label className="heritage-benchmark-selector-label">
+                          Reference Size
+                        </label>
+
+                        <select
+                          className="heritage-benchmark-selector"
+                          value={selectedBenchmarkSize?.sizeId || ''}
+                          onChange={(e) =>
+                            handleBenchmarkSizeChange(e.target.value)
+                          }
+                        >
+                          {(selectedBenchmarkType?.presetSizeOptions || []).map(
+                            (sizeOption) => (
+                              <option
+                                key={sizeOption.sizeId}
+                                value={sizeOption.sizeId}
+                              >
+                                {sizeOption.label}
+                              </option>
+                            )
+                          )}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="heritage-benchmark-selector-reset-row">
+                      <button
+                        type="button"
+                        className="heritage-benchmark-reset-button"
+                        onClick={handleResetBenchmark}
+                      >
+                        Reset to Heritage Standard
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -2544,68 +2386,70 @@ const HeritageProductDetail = () => {
             </div>
 
             <div className="heritage-chart-wrap heritage-chart-wrap--voice-read heritage-chart-wrap--benchmark-linked">
-              <div className="heritage-chart-toolbar">
-                <div
-                  className="heritage-chart-view-switch"
-                  role="tablist"
-                  aria-label="Chart view"
-                >
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={chartView === 'spider'}
-                    className={`heritage-chart-icon-toggle ${
-                      chartView === 'spider' ? 'is-active' : ''
-                    }`}
-                    onClick={() => setChartView('spider')}
-                    title="Spider chart"
+              <div className="heritage-chart-top-shell">
+                <div className="heritage-chart-title-shell">
+                  <span className="heritage-chart-eyebrow">
+                    Voice comparison
+                  </span>
+
+                  <h4 className="heritage-chart-title">
+                    Current Build vs Reference Drum
+                  </h4>
+
+                  <p className="heritage-chart-title-subcopy">
+                    Hover or click a metric to explore how this build shifts
+                    against your selected reference drum.
+                  </p>
+
+                  <div
+                    className="heritage-chart-view-switch heritage-chart-view-switch--inline"
+                    role="tablist"
+                    aria-label="Chart view"
                   >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        d="M12 3 18 7 18 17 12 21 6 17 6 7Z"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinejoin="round"
-                      />
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={chartView === 'spider'}
+                      className={`heritage-chart-icon-toggle ${
+                        chartView === 'spider' ? 'is-active' : ''
+                      }`}
+                      onClick={() => setChartView('spider')}
+                      title="Spider chart"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <polygon points="12 3.5 19 8 16.5 17.5 7.5 17.5 5 8 12 3.5" />
 
-                      <path
-                        d="M12 6 15.5 8.2 15.5 15.8 12 18 8.5 15.8 8.5 8.2Z"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                        strokeLinejoin="round"
-                        opacity="0.8"
-                      />
+                        <polygon points="12 7 15.8 9.4 14.5 14.8 9.5 14.8 8.2 9.4 12 7" />
 
-                      <path
-                        d="M12 3V21M6 7 18 17M18 7 6 17"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.2"
-                        opacity="0.75"
-                      />
-                    </svg>
-                  </button>
+                        <line x1="12" y1="3.5" x2="12" y2="20" />
 
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={chartView === 'bars'}
-                    className={`heritage-chart-icon-toggle ${
-                      chartView === 'bars' ? 'is-active' : ''
-                    }`}
-                    onClick={() => setChartView('bars')}
-                    title="Bar chart"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="4" y="12" width="3.5" height="8" rx="1.5" />
+                        <line x1="5" y1="8" x2="19" y2="8" />
 
-                      <rect x="10.25" y="8" width="3.5" height="12" rx="1.5" />
+                        <line x1="7.5" y1="17.5" x2="16.5" y2="17.5" />
+                      </svg>
+                    </button>
 
-                      <rect x="16.5" y="5" width="3.5" height="15" rx="1.5" />
-                    </svg>
-                  </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={chartView === 'bars'}
+                      className={`heritage-chart-icon-toggle ${
+                        chartView === 'bars' ? 'is-active' : ''
+                      }`}
+                      onClick={() => setChartView('bars')}
+                      title="Bar chart"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <line x1="4" y1="20" x2="20" y2="20" />
+
+                        <rect x="5.5" y="11.5" width="3" height="8" rx="1" />
+
+                        <rect x="10.5" y="8.5" width="3" height="11" rx="1" />
+
+                        <rect x="15.5" y="5.5" width="3" height="14" rx="1" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -2683,21 +2527,21 @@ const HeritageProductDetail = () => {
 
                   <div className="heritage-axis-insight-scale-body">
                     <p className="heritage-axis-insight-scale-copy">
-                      <strong>Less than benchmark:</strong> This build leans
-                      lower on {activeAxisMeta.label.toLowerCase()} than the
-                      selected benchmark.
+                      <strong>Less than reference:</strong> This build leans
+                      lower on {activeAxisMeta.label.toLowerCase()} than your
+                      selected reference drum.
                     </p>
 
                     <p className="heritage-axis-insight-scale-copy">
-                      <strong>At benchmark:</strong> This build lands very close
-                      to the selected benchmark on{' '}
+                      <strong>At reference:</strong> This build lands very close
+                      to your selected reference drum on{' '}
                       {activeAxisMeta.label.toLowerCase()}.
                     </p>
 
                     <p className="heritage-axis-insight-scale-copy">
-                      <strong>More than benchmark:</strong> This build leans
-                      higher on {activeAxisMeta.label.toLowerCase()} than the
-                      selected benchmark.
+                      <strong>More than reference:</strong> This build leans
+                      higher on {activeAxisMeta.label.toLowerCase()} than your
+                      selected reference drum.
                     </p>
                   </div>
                 </details>
@@ -2706,6 +2550,54 @@ const HeritageProductDetail = () => {
           </section>
         </section>
       </div>
+
+      {showResetModal && (
+        <div
+          className="heritage-reset-modal-backdrop"
+          onClick={() => setShowResetModal(false)}
+        >
+          <div
+            className="heritage-reset-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="heritage-reset-modal-header">
+              <span className="heritage-reset-modal-kicker">Start Over</span>
+
+              <button
+                type="button"
+                className="heritage-reset-modal-close"
+                onClick={() => setShowResetModal(false)}
+                aria-label="Close start over dialog"
+              >
+                ×
+              </button>
+            </div>
+
+            <p className="heritage-reset-modal-text">
+              Are you sure? This will clear your current build configuration and
+              return the builder to its default starting point.
+            </p>
+
+            <div className="heritage-reset-modal-actions">
+              <button
+                type="button"
+                className="heritage-reset-modal-cancel"
+                onClick={() => setShowResetModal(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                className="heritage-reset-modal-confirm"
+                onClick={confirmStartOverBuild}
+              >
+                Yes, Start Over
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
