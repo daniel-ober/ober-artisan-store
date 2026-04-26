@@ -1,3 +1,4 @@
+
 // feuzon-chart-calibration.mjs
 
 import buildFeuzonVoiceRead from './src/data/legacyPrint/buildFeuzonVoiceRead.js';
@@ -25,6 +26,12 @@ const AXES = [
 const CHART_CENTER = 5;
 
 const CHART_MAX = 10;
+
+const DEFAULT_BENCHMARK_FAMILY_ID = 'ober-custom';
+
+const DEFAULT_BENCHMARK_TYPE_ID = 'feuzon-hybrid-reference';
+
+const DEFAULT_BENCHMARK_SIZE_ID = '14x6_0';
 
 const basePrices = {
 
@@ -156,6 +163,370 @@ const finishTimelineWeeksMap = {
 
 };
 
+const BENCHMARK_AXIS_PROFILE_FALLBACKS = {
+
+  'heritage-oak-reference': {
+
+    attack: 6.75,
+
+    sustain: 6.05,
+
+    warmth: 6.85,
+
+    projection: 6.75,
+
+    brightness: 5.7,
+
+    sensitivity: 6.2,
+
+    control: 6.35,
+
+  },
+
+  'feuzon-hybrid-reference': {
+
+    attack: 7.1,
+
+    sustain: 6.32,
+
+    warmth: 6.34,
+
+    projection: 6.92,
+
+    brightness: 6.19,
+
+    sensitivity: 6.42,
+
+    control: 6.48,
+
+  },
+
+  'maple-ply-reference': {
+
+    attack: 7.05,
+
+    sustain: 5.75,
+
+    warmth: 5.75,
+
+    projection: 6.65,
+
+    brightness: 6.95,
+
+    sensitivity: 6.25,
+
+    control: 6.25,
+
+  },
+
+  'birch-ply-reference': {
+
+    attack: 7.35,
+
+    sustain: 5.55,
+
+    warmth: 5.35,
+
+    projection: 7.25,
+
+    brightness: 7.3,
+
+    sensitivity: 6.1,
+
+    control: 6.45,
+
+  },
+
+  'oak-ply-reference': {
+
+    attack: 7.2,
+
+    sustain: 5.9,
+
+    warmth: 6.1,
+
+    projection: 7.35,
+
+    brightness: 6.6,
+
+    sensitivity: 5.95,
+
+    control: 6.55,
+
+  },
+
+  'walnut-ply-reference': {
+
+    attack: 6.35,
+
+    sustain: 6.15,
+
+    warmth: 7.15,
+
+    projection: 6.15,
+
+    brightness: 5.45,
+
+    sensitivity: 6.25,
+
+    control: 6.25,
+
+  },
+
+  'mahogany-ply-reference': {
+
+    attack: 6.15,
+
+    sustain: 6.3,
+
+    warmth: 7.45,
+
+    projection: 5.95,
+
+    brightness: 5.2,
+
+    sensitivity: 6.35,
+
+    control: 6.1,
+
+  },
+
+  'brass-reference': {
+
+    attack: 7.45,
+
+    sustain: 6.65,
+
+    warmth: 6.05,
+
+    projection: 7.55,
+
+    brightness: 7.25,
+
+    sensitivity: 6.5,
+
+    control: 6.35,
+
+  },
+
+  'steel-reference': {
+
+    attack: 7.85,
+
+    sustain: 6.25,
+
+    warmth: 5.25,
+
+    projection: 7.75,
+
+    brightness: 8.15,
+
+    sensitivity: 6.45,
+
+    control: 6.5,
+
+  },
+
+  'aluminum-reference': {
+
+    attack: 7.3,
+
+    sustain: 5.85,
+
+    warmth: 5.55,
+
+    projection: 6.9,
+
+    brightness: 7.75,
+
+    sensitivity: 6.65,
+
+    control: 6.55,
+
+  },
+
+  'copper-reference': {
+
+    attack: 6.85,
+
+    sustain: 6.4,
+
+    warmth: 6.85,
+
+    projection: 6.85,
+
+    brightness: 6.65,
+
+    sensitivity: 6.45,
+
+    control: 6.25,
+
+  },
+
+  'bronze-reference': {
+
+    attack: 7.05,
+
+    sustain: 6.45,
+
+    warmth: 6.55,
+
+    projection: 7.15,
+
+    brightness: 6.95,
+
+    sensitivity: 6.35,
+
+    control: 6.35,
+
+  },
+
+  'thin-acrylic-reference': {
+
+    attack: 7.75,
+
+    sustain: 6.05,
+
+    warmth: 5.15,
+
+    projection: 7.45,
+
+    brightness: 8.25,
+
+    sensitivity: 6.65,
+
+    control: 6.2,
+
+  },
+
+  'medium-acrylic-reference': {
+
+    attack: 7.45,
+
+    sustain: 6.2,
+
+    warmth: 5.35,
+
+    projection: 7.25,
+
+    brightness: 7.95,
+
+    sensitivity: 6.45,
+
+    control: 6.3,
+
+  },
+
+  'thick-acrylic-reference': {
+
+    attack: 7.25,
+
+    sustain: 6.35,
+
+    warmth: 5.55,
+
+    projection: 7.05,
+
+    brightness: 7.65,
+
+    sensitivity: 6.25,
+
+    control: 6.45,
+
+  },
+
+  'steam-bent-maple-reference': {
+
+    attack: 7,
+
+    sustain: 6.45,
+
+    warmth: 6.25,
+
+    projection: 6.85,
+
+    brightness: 6.7,
+
+    sensitivity: 6.55,
+
+    control: 6.2,
+
+  },
+
+  'steam-bent-mahogany-reference': {
+
+    attack: 6.25,
+
+    sustain: 6.65,
+
+    warmth: 7.35,
+
+    projection: 6.15,
+
+    brightness: 5.35,
+
+    sensitivity: 6.55,
+
+    control: 6.05,
+
+  },
+
+  'solid-maple-reference': {
+
+    attack: 7.15,
+
+    sustain: 6.15,
+
+    warmth: 6.2,
+
+    projection: 7,
+
+    brightness: 6.85,
+
+    sensitivity: 6.2,
+
+    control: 6.55,
+
+  },
+
+  'solid-walnut-reference': {
+
+    attack: 6.45,
+
+    sustain: 6.35,
+
+    warmth: 7.2,
+
+    projection: 6.25,
+
+    brightness: 5.45,
+
+    sensitivity: 6.3,
+
+    control: 6.45,
+
+  },
+
+  'solid-oak-reference': {
+
+    attack: 7.15,
+
+    sustain: 6.1,
+
+    warmth: 6.45,
+
+    projection: 7.25,
+
+    brightness: 6.35,
+
+    sensitivity: 6.05,
+
+    control: 6.65,
+
+  },
+
+};
+
 const FEUZON_STANDARD_INPUT = {
 
   size: 14,
@@ -186,11 +557,11 @@ const FEUZON_STANDARD_INPUT = {
 
   stainColor: 'none',
 
-  benchmarkFamilyId: 'ober-custom',
+  benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
 
-  benchmarkTypeId: 'feuzon-hybrid-reference',
+  benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
 
-  benchmarkSizeId: '14x6_0',
+  benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
 
 };
 
@@ -317,6 +688,96 @@ function getMaxAbsDelta(read) {
 function getInputSummary(input) {
 
   return `${input.size}" x ${input.depth}" • ${input.lugs} lugs • ${input.staveOption} • ${input.outerShell} / ${input.innerStave} • ${input.hoopType} • ${input.hardwareColor} • ${input.bearingEdge} • ${input.snareBed} • ${input.finishSystem} • ${input.scorchStyle}`;
+
+}
+
+function clampChartValue(value) {
+
+  const num = Number(value);
+
+  if (!Number.isFinite(num)) return 5;
+
+  return Math.max(1, Math.min(10, Number(num.toFixed(2))));
+
+}
+
+function buildComponentStyleBenchmarkRelativeRead(read, benchmarkTypeId) {
+
+  const benchmarkProfile = BENCHMARK_AXIS_PROFILE_FALLBACKS[benchmarkTypeId];
+
+  if (!benchmarkProfile) {
+
+    return read;
+
+  }
+
+  const currentAbsoluteProfile =
+
+    read.absoluteProfile || read.currentAbsoluteProfile || {};
+
+  const nextProfile = AXES.reduce((acc, axis) => {
+
+    const currentValue = Number(currentAbsoluteProfile[axis] ?? 5);
+
+    const benchmarkValue = Number(benchmarkProfile[axis] ?? 5);
+
+    const relativeDelta = currentValue - benchmarkValue;
+
+    acc[axis] = clampChartValue(5 + relativeDelta);
+
+    return acc;
+
+  }, {});
+
+  return {
+
+    ...read,
+
+    profile: nextProfile,
+
+    selectedBenchmarkProfile: benchmarkProfile,
+
+    referenceAbsoluteProfile: benchmarkProfile,
+
+  };
+
+}
+
+function runEngine(input) {
+
+  return buildFeuzonVoiceRead(input);
+
+}
+
+function runComponentStyleComparison(input, benchmarkTypeId) {
+
+  const engineInput = {
+
+    ...input,
+
+    benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
+
+    benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
+
+    benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
+
+  };
+
+  const read = buildFeuzonVoiceRead(engineInput);
+
+  if (
+
+    benchmarkTypeId === DEFAULT_BENCHMARK_TYPE_ID ||
+
+    benchmarkTypeId === 'feuzon-hybrid-reference'
+
+  ) {
+
+    return read;
+
+  }
+
+  return buildComponentStyleBenchmarkRelativeRead(read, benchmarkTypeId);
 
 }
 
@@ -460,97 +921,213 @@ function runAssertions(results) {
 
   const brassGold = find('HARDWARE FINISH ONLY — BRASS/GOLD / SHOULD BE CENTERED');
 
-if (standard) {
+  const stainedSatin = find('PRICING — STANDARD + STAINED SATIN');
 
-  assertCase(
+  const stainedGloss = find('PRICING — STANDARD + STAINED GLOSS');
 
-    'FEUZØN Standard price should be $1450',
+  const bigBuild = find('PRICING — 15x8 / BRASS GOLD / STAINED GLOSS');
 
-    computeFeuzonPrice(standard.input) === 1450,
+  const maplePlyReference = find('REFERENCE COMPARE — CURRENT FEUZØN VS MAPLE PLY');
 
-    formatCurrency(computeFeuzonPrice(standard.input))
+  const steelReference = find('REFERENCE COMPARE — CURRENT FEUZØN VS STEEL');
 
-  );
+  const brassReference = find('REFERENCE COMPARE — CURRENT FEUZØN VS BRASS');
 
-  assertCase(
+  const walnutReference = find('REFERENCE COMPARE — CURRENT FEUZØN VS WALNUT PLY');
 
-    'FEUZØN Standard chart should be centered',
+  if (standard) {
 
-    getMaxAbsDelta(standard.read) === 0,
+    assertCase(
 
-    `maxMove ${getMaxAbsDelta(standard.read).toFixed(2)}`
+      'FEUZØN Standard price should be $1450',
 
-  );
+      computeFeuzonPrice(standard.input) === 1450,
+
+      formatCurrency(computeFeuzonPrice(standard.input))
+
+    );
+
+    assertCase(
+
+      'FEUZØN Standard chart should be centered against FEUZØN Standard reference',
+
+      getMaxAbsDelta(standard.read) === 0,
+
+      `maxMove ${getMaxAbsDelta(standard.read).toFixed(2)}`
+
+    );
+
+  }
+
+  if (lowest) {
+
+    assertCase(
+
+      'Lowest Price preset should be $950',
+
+      computeFeuzonPrice(lowest.input) === 950,
+
+      formatCurrency(computeFeuzonPrice(lowest.input))
+
+    );
+
+    assertCase(
+
+      'Lowest Price preset should move away from centered standard reference',
+
+      getMaxAbsDelta(lowest.read) > 0.2,
+
+      `maxMove ${getMaxAbsDelta(lowest.read).toFixed(2)}`
+
+    );
+
+  }
+
+  if (blackNickel) {
+
+    assertCase(
+
+      'Black Nickel should not move chart',
+
+      getMaxAbsDelta(blackNickel.read) === 0,
+
+      `maxMove ${getMaxAbsDelta(blackNickel.read).toFixed(2)}`
+
+    );
+
+    assertCase(
+
+      'Black Nickel should add $50 over FEUZØN Standard',
+
+      computeFeuzonPrice(blackNickel.input) === 1500,
+
+      formatCurrency(computeFeuzonPrice(blackNickel.input))
+
+    );
+
+  }
+
+  if (brassGold) {
+
+    assertCase(
+
+      'Brass/Gold should not move chart',
+
+      getMaxAbsDelta(brassGold.read) === 0,
+
+      `maxMove ${getMaxAbsDelta(brassGold.read).toFixed(2)}`
+
+    );
+
+    assertCase(
+
+      'Brass/Gold should add $150 over FEUZØN Standard',
+
+      computeFeuzonPrice(brassGold.input) === 1600,
+
+      formatCurrency(computeFeuzonPrice(brassGold.input))
+
+    );
+
+  }
+
+  if (stainedSatin) {
+
+    assertCase(
+
+      'Stained Satin should be $1450 from FEUZØN Standard',
+
+      computeFeuzonPrice(stainedSatin.input) === 1450,
+
+      formatCurrency(computeFeuzonPrice(stainedSatin.input))
+
+    );
+
+    assertCase(
+
+      'Stained Satin should show 8–11 weeks',
+
+      getEstimatedDeliveryLabel(stainedSatin.input) === '8–11 weeks',
+
+      getEstimatedDeliveryLabel(stainedSatin.input)
+
+    );
+
+  }
+
+  if (stainedGloss) {
+
+    assertCase(
+
+      'Stained Gloss should be $1550 from FEUZØN Standard',
+
+      computeFeuzonPrice(stainedGloss.input) === 1550,
+
+      formatCurrency(computeFeuzonPrice(stainedGloss.input))
+
+    );
+
+    assertCase(
+
+      'Stained Gloss should show 9–12 weeks',
+
+      getEstimatedDeliveryLabel(stainedGloss.input) === '9–12 weeks',
+
+      getEstimatedDeliveryLabel(stainedGloss.input)
+
+    );
+
+  }
+
+  if (bigBuild) {
+
+    assertCase(
+
+      '15x8 / Brass Gold / Die-Cast / Stained Gloss should be $2000',
+
+      computeFeuzonPrice(bigBuild.input) === 2000,
+
+      formatCurrency(computeFeuzonPrice(bigBuild.input))
+
+    );
+
+  }
+
+  for (const referenceCase of [
+
+    maplePlyReference,
+
+    steelReference,
+
+    brassReference,
+
+    walnutReference,
+
+  ]) {
+
+    if (!referenceCase) continue;
+
+    assertCase(
+
+      `${referenceCase.label} should not flatten to all 5s`,
+
+      getMaxAbsDelta(referenceCase.read) > 0.2,
+
+      `maxMove ${getMaxAbsDelta(referenceCase.read).toFixed(2)}`
+
+    );
+
+  }
 
 }
 
-if (lowest) {
+function runCase(label, input, options = {}) {
 
-  assertCase(
+  const read = options.referenceTypeId
 
-    'Lowest Price preset should be $950',
+    ? runComponentStyleComparison(input, options.referenceTypeId)
 
-    computeFeuzonPrice(lowest.input) === 950,
-
-    formatCurrency(computeFeuzonPrice(lowest.input))
-
-  );
-
-}
-
-if (blackNickel) {
-
-  assertCase(
-
-    'Black Nickel should not move chart',
-
-    getMaxAbsDelta(blackNickel.read) === 0,
-
-    `maxMove ${getMaxAbsDelta(blackNickel.read).toFixed(2)}`
-
-  );
-
-  assertCase(
-
-    'Black Nickel should add $50 over FEUZØN Standard',
-
-    computeFeuzonPrice(blackNickel.input) === 1500,
-
-    formatCurrency(computeFeuzonPrice(blackNickel.input))
-
-  );
-
-}
-
-if (brassGold) {
-
-  assertCase(
-
-    'Brass/Gold should not move chart',
-
-    getMaxAbsDelta(brassGold.read) === 0,
-
-    `maxMove ${getMaxAbsDelta(brassGold.read).toFixed(2)}`
-
-  );
-
-  assertCase(
-
-    'Brass/Gold should add $150 over FEUZØN Standard',
-
-    computeFeuzonPrice(brassGold.input) === 1600,
-
-    formatCurrency(computeFeuzonPrice(brassGold.input))
-
-  );
-
-}
-
-}
-
-function runCase(label, input) {
-
-  const read = buildFeuzonVoiceRead(input);
+    : runEngine(input);
 
   printProfileBlock(label, read, input);
 
@@ -562,13 +1139,19 @@ function runCase(label, input) {
 
     read,
 
+    options,
+
   };
 
 }
 
 function runCases(caseList) {
 
-  const results = caseList.map(({ label, input }) => runCase(label, input));
+  const results = caseList.map(({ label, input, options }) =>
+
+    runCase(label, input, options)
+
+  );
 
   printComparisonTable(results);
 
@@ -578,7 +1161,7 @@ function runCases(caseList) {
 
 }
 
-function standardVariant(label, changes) {
+function standardVariant(label, changes, options = {}) {
 
   return {
 
@@ -592,11 +1175,13 @@ function standardVariant(label, changes) {
 
     },
 
+    options,
+
   };
 
 }
 
-function lowestVariant(label, changes) {
+function lowestVariant(label, changes, options = {}) {
 
   return {
 
@@ -609,6 +1194,8 @@ function lowestVariant(label, changes) {
       ...changes,
 
     },
+
+    options,
 
   };
 
@@ -984,6 +1571,94 @@ const TEST_GROUPS = {
 
   ],
 
+  reference: [
+
+    standardVariant(
+
+      'REFERENCE COMPARE — CURRENT FEUZØN VS MAPLE PLY',
+
+      {},
+
+      { referenceTypeId: 'maple-ply-reference' }
+
+    ),
+
+    standardVariant(
+
+      'REFERENCE COMPARE — CURRENT FEUZØN VS BIRCH PLY',
+
+      {},
+
+      { referenceTypeId: 'birch-ply-reference' }
+
+    ),
+
+    standardVariant(
+
+      'REFERENCE COMPARE — CURRENT FEUZØN VS WALNUT PLY',
+
+      {},
+
+      { referenceTypeId: 'walnut-ply-reference' }
+
+    ),
+
+    standardVariant(
+
+      'REFERENCE COMPARE — CURRENT FEUZØN VS BRASS',
+
+      {},
+
+      { referenceTypeId: 'brass-reference' }
+
+    ),
+
+    standardVariant(
+
+      'REFERENCE COMPARE — CURRENT FEUZØN VS STEEL',
+
+      {},
+
+      { referenceTypeId: 'steel-reference' }
+
+    ),
+
+    standardVariant(
+
+      'REFERENCE COMPARE — CURRENT FEUZØN VS THIN ACRYLIC',
+
+      {},
+
+      { referenceTypeId: 'thin-acrylic-reference' }
+
+    ),
+
+    standardVariant(
+
+      'REFERENCE COMPARE — LOWEST FEUZØN VS STEEL',
+
+      {
+
+        size: 12,
+
+        depth: 5.0,
+
+        lugs: 6,
+
+        staveOption: '12 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        finishSystem: 'Natural Satin',
+
+      },
+
+      { referenceTypeId: 'steel-reference' }
+
+    ),
+
+  ],
+
   compound: [
 
     standardVariant('COMPOUND — 12x5 LOWEST PRICE', {
@@ -1107,3 +1782,4 @@ if (mode === 'all') {
   console.log(['all', ...Object.keys(TEST_GROUPS)].join(', '));
 
 }
+
