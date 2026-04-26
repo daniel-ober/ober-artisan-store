@@ -24,9 +24,9 @@ const getDisplayMetricValue = (rawValue) => {
 
       : absDistance < 1.5
 
-      ? 0.75 * 1.32 + (absDistance - 0.75) * 1.18
+        ? 0.75 * 1.32 + (absDistance - 0.75) * 1.18
 
-      : 0.75 * 1.32 + 0.75 * 1.18 + (absDistance - 1.5) * 1.05;
+        : 0.75 * 1.32 + 0.75 * 1.18 + (absDistance - 1.5) * 1.05;
 
   const nextValue =
 
@@ -152,6 +152,8 @@ switch (mode) {
 
   case 'stave':
 
+    variantInput.lugs = 10;
+
     variantInput.staveOption = '20 - 12mm';
 
     printProfileBlock(
@@ -165,6 +167,8 @@ switch (mode) {
     break;
 
   case 'thickness':
+
+    variantInput.lugs = 10;
 
     variantInput.staveOption = '20 - 12mm';
 
@@ -214,9 +218,9 @@ switch (mode) {
 
   case 'rering':
 
-    variantInput.staveOption = '10 - 7mm + $150 (Re-Rings Required)';
-
     variantInput.lugs = 10;
+
+    variantInput.staveOption = '10 - 7mm + $150 (Re-Rings Required)';
 
     printProfileBlock(
 
@@ -295,6 +299,24 @@ switch (mode) {
     printProfileBlock(
 
       'COMPOUND PROFILE (14x6.5 / 10 lug / 20 stave / 12mm / LIGHT TORCH)',
+
+      buildHeritageVoiceRead(variantInput)
+
+    );
+
+    break;
+
+  case 'compound7':
+
+    variantInput.depth = 7;
+
+    variantInput.lugs = 10;
+
+    variantInput.staveOption = '20 - 12mm';
+
+    printProfileBlock(
+
+      'COMPOUND PROFILE (14x7 / 10 lug / 20 stave / 12mm)',
 
       buildHeritageVoiceRead(variantInput)
 
@@ -436,7 +458,7 @@ switch (mode) {
 
     console.log(
 
-      '\nUse one of: lugs, staves, thickness, depth, hoops, rerings, diameter13, diameter12, compound65, compound8, compound65-light, compound65-blackened, compound8-light, compound8-blackened, finish-light, finish-medium, finish-blackened'
+      '\nUse one of: lugs, staves, thickness, depth, hoops, rerings, diameter13, diameter12, compound65, compound7, compound8, compound65-light, compound65-blackened, compound8-light, compound8-blackened, finish-light, finish-medium, finish-blackened'
 
     );
 

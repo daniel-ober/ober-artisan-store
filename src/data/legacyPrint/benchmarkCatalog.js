@@ -42,7 +42,9 @@ const TYPE_IMAGE_PATHS = {
 
   acrylic: {
 
-    'thin-acrylic-reference': '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
+    'thin-acrylic-reference':
+
+      '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
 
     'medium-acrylic-reference':
 
@@ -72,6 +74,204 @@ const TYPE_IMAGE_PATHS = {
 
 };
 
+const FEUZON_STANDARD_SIZE_OPTION = {
+
+  sizeId: '14x6_0',
+
+  label: '14" x 6.0"',
+
+  imagePath: '/legacyprint-benchmarks/ober-custom/ober-feuzon-maple.png',
+
+  profile: {
+
+    attack: 7.4,
+
+    sustain: 7.0,
+
+    warmth: 6.9,
+
+    projection: 7.5,
+
+    brightness: 6.5,
+
+    sensitivity: 6.8,
+
+    control: 6.8,
+
+  },
+
+};
+
+const FEUZON_SIZE_PROFILE_OVERRIDES = {
+
+  '12x5_0': {
+
+    attack: 7.7,
+
+    sustain: 6.5,
+
+    warmth: 6.3,
+
+    projection: 6.7,
+
+    brightness: 7.1,
+
+    sensitivity: 7.2,
+
+    control: 7.2,
+
+  },
+
+  '13x6_0': {
+
+    attack: 7.5,
+
+    sustain: 6.8,
+
+    warmth: 6.6,
+
+    projection: 7.0,
+
+    brightness: 6.9,
+
+    sensitivity: 7.0,
+
+    control: 7.0,
+
+  },
+
+  '14x6_0': {
+
+    attack: 7.4,
+
+    sustain: 7.0,
+
+    warmth: 6.9,
+
+    projection: 7.5,
+
+    brightness: 6.5,
+
+    sensitivity: 6.8,
+
+    control: 6.8,
+
+  },
+
+  '14x6_5': {
+
+    attack: 7.3,
+
+    sustain: 7.2,
+
+    warmth: 7.1,
+
+    projection: 7.7,
+
+    brightness: 6.4,
+
+    sensitivity: 6.8,
+
+    control: 6.7,
+
+  },
+
+  '14x7_0': {
+
+    attack: 7.1,
+
+    sustain: 7.4,
+
+    warmth: 7.3,
+
+    projection: 7.8,
+
+    brightness: 6.2,
+
+    sensitivity: 6.6,
+
+    control: 6.5,
+
+  },
+
+  '14x8_0': {
+
+    attack: 6.9,
+
+    sustain: 7.7,
+
+    warmth: 7.6,
+
+    projection: 8.0,
+
+    brightness: 6.0,
+
+    sensitivity: 6.4,
+
+    control: 6.3,
+
+  },
+
+};
+
+const normalizeFeuzonSizeOptions = (type, familyId) => {
+
+  const existingSizes = Array.isArray(type.sizes) ? type.sizes : [];
+
+  const hasStandardSize = existingSizes.some(
+
+    (size) => size.sizeId === FEUZON_STANDARD_SIZE_OPTION.sizeId
+
+  );
+
+  const normalizedSizes = hasStandardSize
+
+    ? existingSizes
+
+    : [FEUZON_STANDARD_SIZE_OPTION, ...existingSizes];
+
+  const dedupedSizes = normalizedSizes.reduce((acc, size) => {
+
+    if (!size?.sizeId) return acc;
+
+    if (acc.some((item) => item.sizeId === size.sizeId)) return acc;
+
+    acc.push(size);
+
+    return acc;
+
+  }, []);
+
+  return dedupedSizes.map((size) => ({
+
+    sizeId: size.sizeId,
+
+    label: size.label,
+
+    imagePath:
+
+      size.imagePath ||
+
+      TYPE_IMAGE_PATHS[familyId]?.[type.typeId] ||
+
+      FEUZON_STANDARD_SIZE_OPTION.imagePath,
+
+    profile:
+
+      size.profile ||
+
+      size.voiceProfile ||
+
+      size.scores ||
+
+      FEUZON_SIZE_PROFILE_OVERRIDES[size.sizeId] ||
+
+      null,
+
+  }));
+
+};
+
 export const LEGACYPRINT_BENCHMARK_CATALOG = Object.values(
 
   BENCHMARK_DEFINITIONS
@@ -86,39 +286,63 @@ export const LEGACYPRINT_BENCHMARK_CATALOG = Object.values(
 
   defaultTypeId: family.defaultTypeId,
 
-  benchmarkTypes: Object.values(family.types).map((type) => ({
+  benchmarkTypes: Object.values(family.types).map((type) => {
 
-    typeId: type.typeId,
+    const isFeuzonReference = type.typeId === 'feuzon-hybrid-reference';
 
-    typeLabel: type.typeLabel,
+    const presetSizeOptions = isFeuzonReference
 
-    shortLabel: type.shortLabel,
+      ? normalizeFeuzonSizeOptions(type, family.familyId)
 
-    shortDescription: type.benchmarkNotes,
+      : type.sizes.map((size) => ({
 
-    defaultSizeId: type.defaultSizeId,
+          sizeId: size.sizeId,
 
-    imageBasePath: `/legacyprint-benchmarks/${family.familyId}/${type.typeId}`,
+          label: size.label,
 
-    imagePath:
+          imagePath:
 
-      TYPE_IMAGE_PATHS[family.familyId]?.[type.typeId] ||
+            size.imagePath ||
 
-      '/legacyprint-benchmarks/ply/ply-maple.png',
+            TYPE_IMAGE_PATHS[family.familyId]?.[type.typeId] ||
 
-    presetSizes: type.sizes.map((size) => size.sizeId),
+            '/legacyprint-benchmarks/ply/ply-maple.png',
 
-    presetSizeOptions: type.sizes.map((size) => ({
+          profile: size.profile || size.voiceProfile || size.scores || null,
 
-      sizeId: size.sizeId,
+        }));
 
-      label: size.label,
+    return {
 
-      imagePath: size.imagePath,
+      typeId: type.typeId,
 
-    })),
+      typeLabel: type.typeLabel,
 
-  })),
+      shortLabel: type.shortLabel,
+
+      shortDescription: type.benchmarkNotes,
+
+      defaultSizeId: isFeuzonReference
+
+        ? FEUZON_STANDARD_SIZE_OPTION.sizeId
+
+        : type.defaultSizeId,
+
+      imageBasePath: `/legacyprint-benchmarks/${family.familyId}/${type.typeId}`,
+
+      imagePath:
+
+        TYPE_IMAGE_PATHS[family.familyId]?.[type.typeId] ||
+
+        '/legacyprint-benchmarks/ply/ply-maple.png',
+
+      presetSizes: presetSizeOptions.map((size) => size.sizeId),
+
+      presetSizeOptions,
+
+    };
+
+  }),
 
 }));
 
