@@ -1,7 +1,7 @@
 // src/utils/spider/scoreLegacyTuningProfile.js
 
-import scoreSpiderProfile from './scoreSpiderProfile';
-import buildDrumSpecsFromLegacyForm from './buildDrumSpecsFromLegacyForm';
+import scoreSpiderProfile from './scoreSpiderProfile.js';
+import buildDrumSpecsFromLegacyForm from './buildDrumSpecsFromLegacyForm.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const round2 = (n) => Math.round(n * 100) / 100;

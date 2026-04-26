@@ -1,8 +1,8 @@
 // src/utils/craftsmanEngine/generateCraftsmanSummary.js
 
-import buildDrumSpecsFromLegacyForm from '../spider/buildDrumSpecsFromLegacyForm';
-import scoreSpiderProfile from '../spider/scoreSpiderProfile';
-import scoreLegacyTuningProfile from '../spider/scoreLegacyTuningProfile';
+import buildDrumSpecsFromLegacyForm from '../spider/buildDrumSpecsFromLegacyForm.js';
+import scoreSpiderProfile from '../spider/scoreSpiderProfile.js';
+import scoreLegacyTuningProfile from '../spider/scoreLegacyTuningProfile.js';
 
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 const round2 = (n) => Math.round(n * 100) / 100;

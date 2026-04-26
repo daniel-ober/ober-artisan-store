@@ -16,23 +16,23 @@
 
   width: 100%;
 
-  height: 560px;
+  height: 540px;
 
-  min-height: 560px;
+  min-height: 540px;
 
-  max-height: 560px;
+  max-height: 540px;
 
-  padding: 18px 16px 10px;
+  padding: 20px 18px 12px;
 
-  border-radius: 18px;
+  border-radius: 20px;
 
   background:
 
-    radial-gradient(circle at top left, rgba(82, 132, 255, 0.12), transparent 32%),
+    radial-gradient(circle at top left, rgba(82, 132, 255, 0.1), transparent 32%),
 
-    radial-gradient(circle at bottom right, rgba(88, 211, 255, 0.06), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(214, 178, 119, 0.06), transparent 26%),
 
-    linear-gradient(180deg, rgba(14, 17, 26, 0.97), rgba(9, 10, 16, 0.98));
+    linear-gradient(180deg, rgba(12, 15, 24, 0.98), rgba(8, 10, 16, 0.99));
 
   border: 1px solid rgba(255, 255, 255, 0.06);
 
@@ -46,17 +46,9 @@
 
 }
 
-/* old benchmark artifacts fully disabled */
-
 .spider-chart-frame::before,
 
-.spider-chart-frame::after {
-
-  display: none !important;
-
-  content: none !important;
-
-}
+.spider-chart-frame::after,
 
 .spider-chart-benchmark-line,
 
@@ -64,19 +56,13 @@
 
   display: none !important;
 
+  content: none !important;
+
   opacity: 0 !important;
 
   visibility: hidden !important;
 
   pointer-events: none !important;
-
-}
-
-.spider-chart-card--benchmark-pulse .spider-chart-frame::before,
-
-.spider-chart-card--benchmark-pulse .spider-chart-frame::after {
-
-  animation: none !important;
 
 }
 
@@ -98,19 +84,19 @@
 
 .spider-chart-frame--compact {
 
-  height: 360px;
+  height: 380px;
 
-  min-height: 360px;
+  min-height: 380px;
 
-  max-height: 360px;
+  max-height: 380px;
 
-  padding: 10px 8px 2px;
+  padding: 12px 10px 6px;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
 }
 
-.spider-chart-reference-key {
+.spider-chart-legend {
 
   display: flex;
 
@@ -118,9 +104,9 @@
 
   justify-content: center;
 
-  gap: 10px;
+  gap: 18px;
 
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.72);
 
   font-size: 0.78rem;
 
@@ -128,23 +114,21 @@
 
   font-weight: 600;
 
-  letter-spacing: 0.01em;
-
   text-align: center;
 
 }
 
-.spider-chart-reference-key--inside {
+.spider-chart-legend--inside {
 
   position: absolute;
 
-  top: 14px;
+  top: 12px;
 
   left: 50%;
 
   transform: translateX(-50%);
 
-  z-index: 3;
+  z-index: 4;
 
   width: max-content;
 
@@ -154,21 +138,41 @@
 
 }
 
-.spider-chart-reference-key-line {
+.spider-chart-legend-item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+}
+
+.spider-chart-legend-line {
 
   display: inline-block;
 
-  width: 34px;
+  width: 28px;
 
   height: 0;
-
-  border-top: 2px dashed rgba(255, 255, 255, 0.44);
 
   flex-shrink: 0;
 
 }
 
-.spider-chart-reference-key-text {
+.spider-chart-legend-line--current {
+
+  border-top: 2px solid rgba(214, 178, 119, 0.9);
+
+}
+
+.spider-chart-legend-line--reference {
+
+  border-top: 2px dashed rgba(255, 255, 255, 0.46);
+
+}
+
+.spider-chart-legend-text {
 
   display: inline-block;
 
@@ -176,33 +180,207 @@
 
 }
 
-@keyframes spiderBenchmarkLinePulse {
+.spider-chart-axis-overlay {
 
-  0% {
+  position: absolute;
 
-    opacity: 1;
+  inset: 0;
 
-  }
+  z-index: 3;
 
-  100% {
-
-    opacity: 1;
-
-  }
+  pointer-events: none;
 
 }
 
-@keyframes spiderBenchmarkCorePulse {
+.spider-chart-axis-button {
 
-  0% {
+  position: absolute;
 
-    opacity: 1;
+  width: 28px;
+
+  height: 28px;
+
+  border: 0;
+
+  background: transparent;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  transform: translate(-50%, -50%);
+
+}
+
+.spider-chart-axis-button-icon {
+
+  --axis-color: #d6b277;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--axis-color);
+
+  transition:
+
+    transform 160ms ease,
+
+    filter 160ms ease,
+
+    opacity 160ms ease;
+
+  filter: drop-shadow(
+
+    0 0 10px color-mix(in srgb, var(--axis-color) 34%, transparent)
+
+  );
+
+}
+
+.spider-chart-axis-button.is-active .spider-chart-axis-button-icon {
+
+  transform: scale(1.14);
+
+  filter: drop-shadow(
+
+    0 0 14px color-mix(in srgb, var(--axis-color) 46%, transparent)
+
+  );
+
+}
+
+.spider-chart-axis-button.is-decorative {
+
+  pointer-events: none;
+
+}
+
+.spider-chart-axis-button--attack {
+
+  top: 18%;
+
+  left: 50%;
+
+}
+
+.spider-chart-axis-button--sustain {
+
+  top: 31%;
+
+  left: 76%;
+
+}
+
+.spider-chart-axis-button--warmth {
+
+  top: 72%;
+
+  left: 84%;
+
+}
+
+.spider-chart-axis-button--projection {
+
+  top: 90%;
+
+  left: 64.5%;
+
+}
+
+.spider-chart-axis-button--brightness {
+
+  top: 90%;
+
+  left: 35.5%;
+
+}
+
+.spider-chart-axis-button--sensitivity {
+
+  top: 72%;
+
+  left: 16%;
+
+}
+
+.spider-chart-axis-button--control {
+
+  top: 31%;
+
+  left: 24%;
+
+}
+
+@media (max-width: 900px) {
+
+  .spider-chart-frame {
+
+    height: 460px;
+
+    min-height: 460px;
+
+    max-height: 460px;
 
   }
 
-  100% {
+  .spider-chart-axis-button--attack {
 
-    opacity: 1;
+    top: 19%;
+
+  }
+
+  .spider-chart-axis-button--sustain {
+
+    top: 32.5%;
+
+    left: 75.5%;
+
+  }
+
+  .spider-chart-axis-button--warmth {
+
+    top: 71.5%;
+
+    left: 83%;
+
+  }
+
+  .spider-chart-axis-button--projection {
+
+    top: 88.5%;
+
+    left: 64%;
+
+  }
+
+  .spider-chart-axis-button--brightness {
+
+    top: 88.5%;
+
+    left: 36%;
+
+  }
+
+  .spider-chart-axis-button--sensitivity {
+
+    top: 71.5%;
+
+    left: 17%;
+
+  }
+
+  .spider-chart-axis-button--control {
+
+    top: 32.5%;
+
+    left: 24.5%;
 
   }
 
@@ -212,17 +390,17 @@
 
   .spider-chart-frame {
 
-    height: 420px;
+    height: 360px;
 
-    min-height: 420px;
+    min-height: 360px;
 
-    max-height: 420px;
+    max-height: 360px;
 
-    padding: 12px 8px 4px;
+    padding: 14px 10px 6px;
 
   }
 
-  .spider-chart-reference-key--inside {
+  .spider-chart-legend--inside {
 
     top: 10px;
 
@@ -230,23 +408,95 @@
 
   }
 
-  .spider-chart-reference-key {
+  .spider-chart-legend {
 
-    gap: 8px;
+    gap: 10px;
 
-    font-size: 0.72rem;
+    font-size: 0.68rem;
 
-  }
-
-  .spider-chart-reference-key-line {
-
-    width: 26px;
+    flex-wrap: wrap;
 
   }
 
-  .spider-chart-reference-key-text {
+  .spider-chart-legend-line {
+
+    width: 20px;
+
+  }
+
+  .spider-chart-legend-text {
 
     white-space: normal;
+
+  }
+
+  .spider-chart-axis-button {
+
+    width: 24px;
+
+    height: 24px;
+
+  }
+
+  .spider-chart-axis-button-icon svg {
+
+    width: 16px;
+
+    height: 16px;
+
+  }
+
+  .spider-chart-axis-button--attack {
+
+    top: 19.5%;
+
+  }
+
+  .spider-chart-axis-button--sustain {
+
+    top: 33%;
+
+    left: 75%;
+
+  }
+
+  .spider-chart-axis-button--warmth {
+
+    top: 71%;
+
+    left: 82%;
+
+  }
+
+  .spider-chart-axis-button--projection {
+
+    top: 88%;
+
+    left: 63.5%;
+
+  }
+
+  .spider-chart-axis-button--brightness {
+
+    top: 88%;
+
+    left: 36.5%;
+
+  }
+
+  .spider-chart-axis-button--sensitivity {
+
+    top: 71%;
+
+    left: 18%;
+
+  }
+
+  .spider-chart-axis-button--control {
+
+    top: 33%;
+
+    left: 25%;
 
   }
 

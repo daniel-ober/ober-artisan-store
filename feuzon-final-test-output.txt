@@ -1,0 +1,1105 @@
+(node:68724) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/danober/Code/ober-artisan-store/src/data/legacyPrint/buildFeuzonVoiceRead.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/danober/Code/ober-artisan-store/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+==================================================
+FEUZØN STANDARD / SHOULD BE CENTERED
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+LOWEST PRICE PRESET
+==================================================
+
+=== INPUT ===
+12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Triple Flange • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+Price: $950 • Estimated delivery: 7–10 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.40' │ '+0.40'    │ '8.0%'  │ '7.34'   │ '7.10'    │ '+0.24'       │
+│ 1       │ 'sustain'     │ '5.26' │ '+0.26'    │ '5.2%'  │ '6.48'   │ '6.32'    │ '+0.16'       │
+│ 2       │ 'warmth'      │ '4.36' │ '-0.64'    │ '12.8%' │ '5.95'   │ '6.34'    │ '-0.39'       │
+│ 3       │ 'projection'  │ '3.66' │ '-1.34'    │ '26.8%' │ '6.11'   │ '6.92'    │ '-0.81'       │
+│ 4       │ 'brightness'  │ '5.86' │ '+0.86'    │ '17.2%' │ '6.71'   │ '6.19'    │ '+0.52'       │
+│ 5       │ 'sensitivity' │ '6.16' │ '+1.16'    │ '23.2%' │ '7.12'   │ '6.42'    │ '+0.70'       │
+│ 6       │ 'control'     │ '3.71' │ '-1.29'    │ '25.8%' │ '5.70'   │ '6.48'    │ '-0.78'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center, more top-end edge, and a more open feel compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.21
+
+==================================================
+PRICING — LOWEST PRICE / 12x5 / TRIPLE FLANGE / NATURAL SATIN
+==================================================
+
+=== INPUT ===
+12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Triple Flange • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+Price: $950 • Estimated delivery: 7–10 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.40' │ '+0.40'    │ '8.0%'  │ '7.34'   │ '7.10'    │ '+0.24'       │
+│ 1       │ 'sustain'     │ '5.26' │ '+0.26'    │ '5.2%'  │ '6.48'   │ '6.32'    │ '+0.16'       │
+│ 2       │ 'warmth'      │ '4.36' │ '-0.64'    │ '12.8%' │ '5.95'   │ '6.34'    │ '-0.39'       │
+│ 3       │ 'projection'  │ '3.66' │ '-1.34'    │ '26.8%' │ '6.11'   │ '6.92'    │ '-0.81'       │
+│ 4       │ 'brightness'  │ '5.86' │ '+0.86'    │ '17.2%' │ '6.71'   │ '6.19'    │ '+0.52'       │
+│ 5       │ 'sensitivity' │ '6.16' │ '+1.16'    │ '23.2%' │ '7.12'   │ '6.42'    │ '+0.70'       │
+│ 6       │ 'control'     │ '3.71' │ '-1.29'    │ '25.8%' │ '5.70'   │ '6.48'    │ '-0.78'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center, more top-end edge, and a more open feel compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.21
+
+==================================================
+PRICING — FEUZØN STANDARD / 14x6 / DIE-CAST / NATURAL GLOSS
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+PRICING — STANDARD + BLACK NICKEL
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Black Nickel • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1500 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+PRICING — STANDARD + BRASS/GOLD
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Brass/Gold • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1600 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+PRICING — STANDARD + STAINED SATIN
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Stained Satin • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.98' │ '-0.02'    │ '0.4%' │ '7.09'   │ '7.10'    │ '-0.01'       │
+│ 1       │ 'sustain'     │ '5.02' │ '+0.02'    │ '0.4%' │ '6.33'   │ '6.32'    │ '+0.01'       │
+│ 2       │ 'warmth'      │ '5.10' │ '+0.10'    │ '2.0%' │ '6.40'   │ '6.34'    │ '+0.06'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '4.92' │ '-0.08'    │ '1.6%' │ '6.14'   │ '6.19'    │ '-0.05'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '4.98' │ '-0.02'    │ '0.4%' │ '6.47'   │ '6.48'    │ '-0.01'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A darker, more understated finish direction that leans moodier and more organic.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.79
+
+==================================================
+PRICING — STANDARD + STAINED GLOSS
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Stained Gloss • scorched
+Price: $1550 • Estimated delivery: 9–12 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.07' │ '+0.07'    │ '1.4%' │ '6.96'   │ '6.92'    │ '+0.04'       │
+│ 4       │ 'brightness'  │ '5.10' │ '+0.10'    │ '2.0%' │ '6.25'   │ '6.19'    │ '+0.06'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A richer stained presentation with stronger visual depth and a more polished look.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.89
+
+==================================================
+PRICING — 15x8 / BRASS GOLD / STAINED GLOSS
+==================================================
+
+=== INPUT ===
+15" x 8" • 10 lugs • 20 - 14mm • Maple / Walnut + Birch • Die-Cast • Brass/Gold • Balanced Hybrid Edge • Standard • Stained Gloss • scorched
+Price: $2000 • Estimated delivery: 9–12 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.60' │ '-0.40'    │ '8.0%'  │ '6.86'   │ '7.10'    │ '-0.24'       │
+│ 1       │ 'sustain'     │ '5.48' │ '+0.48'    │ '9.6%'  │ '6.61'   │ '6.32'    │ '+0.29'       │
+│ 2       │ 'warmth'      │ '6.09' │ '+1.09'    │ '21.8%' │ '7.00'   │ '6.34'    │ '+0.66'       │
+│ 3       │ 'projection'  │ '6.32' │ '+1.32'    │ '26.4%' │ '7.72'   │ '6.92'    │ '+0.80'       │
+│ 4       │ 'brightness'  │ '4.29' │ '-0.71'    │ '14.2%' │ '5.76'   │ '6.19'    │ '-0.43'       │
+│ 5       │ 'sensitivity' │ '4.46' │ '-0.54'    │ '10.8%' │ '6.09'   │ '6.42'    │ '-0.33'       │
+│ 6       │ 'control'     │ '5.48' │ '+0.48'    │ '9.6%'  │ '6.77'   │ '6.48'    │ '+0.29'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a fuller center and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A richer stained presentation with stronger visual depth and a more polished look.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 2.41
+
+==================================================
+DIAMETER ONLY — 12"
+==================================================
+
+=== INPUT ===
+12" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1250 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.61' │ '+0.61'    │ '12.2%' │ '7.47'   │ '7.10'    │ '+0.37'       │
+│ 1       │ 'sustain'     │ '4.60' │ '-0.40'    │ '8.0%'  │ '6.08'   │ '6.32'    │ '-0.24'       │
+│ 2       │ 'warmth'      │ '4.36' │ '-0.64'    │ '12.8%' │ '5.95'   │ '6.34'    │ '-0.39'       │
+│ 3       │ 'projection'  │ '4.57' │ '-0.43'    │ '8.6%'  │ '6.66'   │ '6.92'    │ '-0.26'       │
+│ 4       │ 'brightness'  │ '5.58' │ '+0.58'    │ '11.6%' │ '6.54'   │ '6.19'    │ '+0.35'       │
+│ 5       │ 'sensitivity' │ '5.28' │ '+0.28'    │ '5.6%'  │ '6.59'   │ '6.42'    │ '+0.17'       │
+│ 6       │ 'control'     │ '5.18' │ '+0.18'    │ '3.6%'  │ '6.59'   │ '6.48'    │ '+0.11'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.21
+
+==================================================
+DIAMETER ONLY — 13"
+==================================================
+
+=== INPUT ===
+13" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1350 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.30' │ '+0.30'    │ '6.0%' │ '7.28'   │ '7.10'    │ '+0.18'       │
+│ 1       │ 'sustain'     │ '4.82' │ '-0.18'    │ '3.6%' │ '6.21'   │ '6.32'    │ '-0.11'       │
+│ 2       │ 'warmth'      │ '4.69' │ '-0.31'    │ '6.2%' │ '6.15'   │ '6.34'    │ '-0.19'       │
+│ 3       │ 'projection'  │ '4.85' │ '-0.15'    │ '3.0%' │ '6.83'   │ '6.92'    │ '-0.09'       │
+│ 4       │ 'brightness'  │ '5.25' │ '+0.25'    │ '5.0%' │ '6.34'   │ '6.19'    │ '+0.15'       │
+│ 5       │ 'sensitivity' │ '5.12' │ '+0.12'    │ '2.4%' │ '6.49'   │ '6.42'    │ '+0.07'       │
+│ 6       │ 'control'     │ '5.05' │ '+0.05'    │ '1.0%' │ '6.51'   │ '6.48'    │ '+0.03'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.02
+
+==================================================
+DIAMETER ONLY — 15"
+==================================================
+
+=== INPUT ===
+15" x 6" • 10 lugs • 20 - 14mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1550 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.17' │ '+0.17'    │ '3.4%'  │ '7.20'   │ '7.10'    │ '+0.10'       │
+│ 1       │ 'sustain'     │ '4.79' │ '-0.21'    │ '4.2%'  │ '6.19'   │ '6.32'    │ '-0.13'       │
+│ 2       │ 'warmth'      │ '5.28' │ '+0.28'    │ '5.6%'  │ '6.51'   │ '6.34'    │ '+0.17'       │
+│ 3       │ 'projection'  │ '5.91' │ '+0.91'    │ '18.2%' │ '7.47'   │ '6.92'    │ '+0.55'       │
+│ 4       │ 'brightness'  │ '4.69' │ '-0.31'    │ '6.2%'  │ '6.00'   │ '6.19'    │ '-0.19'       │
+│ 5       │ 'sensitivity' │ '4.70' │ '-0.30'    │ '6.0%'  │ '6.24'   │ '6.42'    │ '-0.18'       │
+│ 6       │ 'control'     │ '5.71' │ '+0.71'    │ '14.2%' │ '6.91'   │ '6.48'    │ '+0.43'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward more focus compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.75
+
+==================================================
+DEPTH ONLY — 5.0"
+==================================================
+
+=== INPUT ===
+14" x 5" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1350 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.48' │ '+0.48'    │ '9.6%'  │ '7.39'   │ '7.10'    │ '+0.29'       │
+│ 1       │ 'sustain'     │ '4.46' │ '-0.54'    │ '10.8%' │ '5.99'   │ '6.32'    │ '-0.33'       │
+│ 2       │ 'warmth'      │ '4.47' │ '-0.53'    │ '10.6%' │ '6.02'   │ '6.34'    │ '-0.32'       │
+│ 3       │ 'projection'  │ '4.60' │ '-0.40'    │ '8.0%'  │ '6.68'   │ '6.92'    │ '-0.24'       │
+│ 4       │ 'brightness'  │ '5.41' │ '+0.41'    │ '8.2%'  │ '6.44'   │ '6.19'    │ '+0.25'       │
+│ 5       │ 'sensitivity' │ '5.20' │ '+0.20'    │ '4.0%'  │ '6.54'   │ '6.42'    │ '+0.12'       │
+│ 6       │ 'control'     │ '5.18' │ '+0.18'    │ '3.6%'  │ '6.59'   │ '6.48'    │ '+0.11'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center and a shorter note tail compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A quicker FEUZØN configuration with strong front-end definition, sharper articulation, and a tighter modern crack.
+Voice Range: 3.12
+
+==================================================
+DEPTH ONLY — 5.5"
+==================================================
+
+=== INPUT ===
+14" x 5.5" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1400 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.25' │ '+0.25'    │ '5.0%' │ '7.25'   │ '7.10'    │ '+0.15'       │
+│ 1       │ 'sustain'     │ '4.74' │ '-0.26'    │ '5.2%' │ '6.16'   │ '6.32'    │ '-0.16'       │
+│ 2       │ 'warmth'      │ '4.77' │ '-0.23'    │ '4.6%' │ '6.20'   │ '6.34'    │ '-0.14'       │
+│ 3       │ 'projection'  │ '4.87' │ '-0.13'    │ '2.6%' │ '6.84'   │ '6.92'    │ '-0.08'       │
+│ 4       │ 'brightness'  │ '5.18' │ '+0.18'    │ '3.6%' │ '6.30'   │ '6.19'    │ '+0.11'       │
+│ 5       │ 'sensitivity' │ '5.10' │ '+0.10'    │ '2.0%' │ '6.48'   │ '6.42'    │ '+0.06'       │
+│ 6       │ 'control'     │ '5.02' │ '+0.02'    │ '0.4%' │ '6.49'   │ '6.48'    │ '+0.01'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A quicker FEUZØN configuration with strong front-end definition, sharper articulation, and a tighter modern crack.
+Voice Range: 2.97
+
+==================================================
+DEPTH ONLY — 6.5"
+==================================================
+
+=== INPUT ===
+14" x 6.5" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1500 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.80' │ '-0.20'    │ '4.0%' │ '6.98'   │ '7.10'    │ '-0.12'       │
+│ 1       │ 'sustain'     │ '5.26' │ '+0.26'    │ '5.2%' │ '6.48'   │ '6.32'    │ '+0.16'       │
+│ 2       │ 'warmth'      │ '5.30' │ '+0.30'    │ '6.0%' │ '6.52'   │ '6.34'    │ '+0.18'       │
+│ 3       │ 'projection'  │ '5.16' │ '+0.16'    │ '3.2%' │ '7.02'   │ '6.92'    │ '+0.10'       │
+│ 4       │ 'brightness'  │ '4.82' │ '-0.18'    │ '3.6%' │ '6.08'   │ '6.19'    │ '-0.11'       │
+│ 5       │ 'sensitivity' │ '4.97' │ '-0.03'    │ '0.6%' │ '6.40'   │ '6.42'    │ '-0.02'       │
+│ 6       │ 'control'     │ '4.95' │ '-0.05'    │ '1.0%' │ '6.45'   │ '6.48'    │ '-0.03'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.71
+
+==================================================
+DEPTH ONLY — 7.0"
+==================================================
+
+=== INPUT ===
+14" x 7" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1550 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.55' │ '-0.45'    │ '9.0%'  │ '6.83'   │ '7.10'    │ '-0.27'       │
+│ 1       │ 'sustain'     │ '5.59' │ '+0.59'    │ '11.8%' │ '6.68'   │ '6.32'    │ '+0.36'       │
+│ 2       │ 'warmth'      │ '5.66' │ '+0.66'    │ '13.2%' │ '6.74'   │ '6.34'    │ '+0.40'       │
+│ 3       │ 'projection'  │ '5.43' │ '+0.43'    │ '8.6%'  │ '7.18'   │ '6.92'    │ '+0.26'       │
+│ 4       │ 'brightness'  │ '4.64' │ '-0.36'    │ '7.2%'  │ '5.97'   │ '6.19'    │ '-0.22'       │
+│ 5       │ 'sensitivity' │ '4.82' │ '-0.18'    │ '3.6%'  │ '6.31'   │ '6.42'    │ '-0.11'       │
+│ 6       │ 'control'     │ '4.80' │ '-0.20'    │ '4.0%'  │ '6.36'   │ '6.48'    │ '-0.12'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a fuller center and a longer note tail compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 2.57
+
+==================================================
+DEPTH ONLY — 8.0"
+==================================================
+
+=== INPUT ===
+14" x 8" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1650 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.42' │ '-0.58'    │ '11.6%' │ '6.75'   │ '7.10'    │ '-0.35'       │
+│ 1       │ 'sustain'     │ '5.69' │ '+0.69'    │ '13.8%' │ '6.74'   │ '6.32'    │ '+0.42'       │
+│ 2       │ 'warmth'      │ '5.79' │ '+0.79'    │ '15.8%' │ '6.82'   │ '6.34'    │ '+0.48'       │
+│ 3       │ 'projection'  │ '5.35' │ '+0.35'    │ '7.0%'  │ '7.13'   │ '6.92'    │ '+0.21'       │
+│ 4       │ 'brightness'  │ '4.50' │ '-0.50'    │ '10.0%' │ '5.89'   │ '6.19'    │ '-0.30'       │
+│ 5       │ 'sensitivity' │ '4.74' │ '-0.26'    │ '5.2%'  │ '6.26'   │ '6.42'    │ '-0.16'       │
+│ 6       │ 'control'     │ '4.75' │ '-0.25'    │ '5.0%'  │ '6.33'   │ '6.48'    │ '-0.15'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a fuller center, and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 2.47
+
+==================================================
+LUGS ONLY — 10 LUGS
+==================================================
+
+=== INPUT ===
+14" x 6" • 10 lugs • 20 - 14mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.53' │ '+0.53'    │ '10.6%' │ '7.42'   │ '7.10'    │ '+0.32'       │
+│ 1       │ 'sustain'     │ '4.47' │ '-0.53'    │ '10.6%' │ '6.00'   │ '6.32'    │ '-0.32'       │
+│ 2       │ 'warmth'      │ '4.84' │ '-0.16'    │ '3.2%'  │ '6.24'   │ '6.34'    │ '-0.10'       │
+│ 3       │ 'projection'  │ '5.58' │ '+0.58'    │ '11.6%' │ '7.27'   │ '6.92'    │ '+0.35'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%'  │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '4.79' │ '-0.21'    │ '4.2%'  │ '6.29'   │ '6.42'    │ '-0.13'       │
+│ 6       │ 'control'     │ '5.76' │ '+0.76'    │ '15.2%' │ '6.94'   │ '6.48'    │ '+0.46'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a shorter note tail, and more focus compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.96
+
+==================================================
+LUGS / LIGHTER PATH — 6 LUGS
+==================================================
+
+=== INPUT ===
+12" x 6" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1250 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.51' │ '+0.51'    │ '10.2%' │ '7.41'   │ '7.10'    │ '+0.31'       │
+│ 1       │ 'sustain'     │ '5.05' │ '+0.05'    │ '1.0%'  │ '6.35'   │ '6.32'    │ '+0.03'       │
+│ 2       │ 'warmth'      │ '4.49' │ '-0.51'    │ '10.2%' │ '6.03'   │ '6.34'    │ '-0.31'       │
+│ 3       │ 'projection'  │ '4.31' │ '-0.69'    │ '13.8%' │ '6.50'   │ '6.92'    │ '-0.42'       │
+│ 4       │ 'brightness'  │ '5.69' │ '+0.69'    │ '13.8%' │ '6.61'   │ '6.19'    │ '+0.42'       │
+│ 5       │ 'sensitivity' │ '5.66' │ '+0.66'    │ '13.2%' │ '6.82'   │ '6.42'    │ '+0.40'       │
+│ 6       │ 'control'     │ '4.62' │ '-0.38'    │ '7.6%'  │ '6.25'   │ '6.48'    │ '-0.23'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.18
+
+==================================================
+STAVES ONLY — 12 STAVES / 10MM
+==================================================
+
+=== INPUT ===
+12" x 6" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1250 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.51' │ '+0.51'    │ '10.2%' │ '7.41'   │ '7.10'    │ '+0.31'       │
+│ 1       │ 'sustain'     │ '5.05' │ '+0.05'    │ '1.0%'  │ '6.35'   │ '6.32'    │ '+0.03'       │
+│ 2       │ 'warmth'      │ '4.49' │ '-0.51'    │ '10.2%' │ '6.03'   │ '6.34'    │ '-0.31'       │
+│ 3       │ 'projection'  │ '4.31' │ '-0.69'    │ '13.8%' │ '6.50'   │ '6.92'    │ '-0.42'       │
+│ 4       │ 'brightness'  │ '5.69' │ '+0.69'    │ '13.8%' │ '6.61'   │ '6.19'    │ '+0.42'       │
+│ 5       │ 'sensitivity' │ '5.66' │ '+0.66'    │ '13.2%' │ '6.82'   │ '6.42'    │ '+0.40'       │
+│ 6       │ 'control'     │ '4.62' │ '-0.38'    │ '7.6%'  │ '6.25'   │ '6.48'    │ '-0.23'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.18
+
+==================================================
+STAVES ONLY — 20 STAVES / 14MM
+==================================================
+
+=== INPUT ===
+14" x 6" • 10 lugs • 20 - 14mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.53' │ '+0.53'    │ '10.6%' │ '7.42'   │ '7.10'    │ '+0.32'       │
+│ 1       │ 'sustain'     │ '4.47' │ '-0.53'    │ '10.6%' │ '6.00'   │ '6.32'    │ '-0.32'       │
+│ 2       │ 'warmth'      │ '4.84' │ '-0.16'    │ '3.2%'  │ '6.24'   │ '6.34'    │ '-0.10'       │
+│ 3       │ 'projection'  │ '5.58' │ '+0.58'    │ '11.6%' │ '7.27'   │ '6.92'    │ '+0.35'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%'  │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '4.79' │ '-0.21'    │ '4.2%'  │ '6.29'   │ '6.42'    │ '-0.13'       │
+│ 6       │ 'control'     │ '5.76' │ '+0.76'    │ '15.2%' │ '6.94'   │ '6.48'    │ '+0.46'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a shorter note tail, and more focus compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.96
+
+==================================================
+HOOPS ONLY — TRIPLE FLANGE
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Triple Flange • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1350 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.41' │ '-0.59'    │ '11.8%' │ '6.74'   │ '7.10'    │ '-0.36'       │
+│ 1       │ 'sustain'     │ '5.76' │ '+0.76'    │ '15.2%' │ '6.78'   │ '6.32'    │ '+0.46'       │
+│ 2       │ 'warmth'      │ '5.36' │ '+0.36'    │ '7.2%'  │ '6.56'   │ '6.34'    │ '+0.22'       │
+│ 3       │ 'projection'  │ '4.77' │ '-0.23'    │ '4.6%'  │ '6.78'   │ '6.92'    │ '-0.14'       │
+│ 4       │ 'brightness'  │ '4.77' │ '-0.23'    │ '4.6%'  │ '6.05'   │ '6.19'    │ '-0.14'       │
+│ 5       │ 'sensitivity' │ '5.28' │ '+0.28'    │ '5.6%'  │ '6.59'   │ '6.42'    │ '+0.17'       │
+│ 6       │ 'control'     │ '3.89' │ '-1.11'    │ '22.2%' │ '5.81'   │ '6.48'    │ '-0.67'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a longer note tail, and a more open feel compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.63
+
+==================================================
+LOWEST PRICE WITH DIE-CAST HOOPS
+==================================================
+
+=== INPUT ===
+12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+Price: $1050 • Estimated delivery: 7–10 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.99' │ '+0.99'    │ '19.8%' │ '7.70'   │ '7.10'    │ '+0.60'       │
+│ 1       │ 'sustain'     │ '4.50' │ '-0.50'    │ '10.0%' │ '6.02'   │ '6.32'    │ '-0.30'       │
+│ 2       │ 'warmth'      │ '3.98' │ '-1.02'    │ '20.4%' │ '5.72'   │ '6.34'    │ '-0.62'       │
+│ 3       │ 'projection'  │ '3.89' │ '-1.11'    │ '22.2%' │ '6.25'   │ '6.92'    │ '-0.67'       │
+│ 4       │ 'brightness'  │ '6.09' │ '+1.09'    │ '21.8%' │ '6.85'   │ '6.19'    │ '+0.66'       │
+│ 5       │ 'sensitivity' │ '5.87' │ '+0.87'    │ '17.4%' │ '6.95'   │ '6.42'    │ '+0.53'       │
+│ 6       │ 'control'     │ '4.80' │ '-0.20'    │ '4.0%'  │ '6.36'   │ '6.48'    │ '-0.12'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A quicker FEUZØN configuration with strong front-end definition, sharper articulation, and a tighter modern crack.
+Voice Range: 3.44
+
+==================================================
+EDGE ONLY — WARM HYBRID EDGE
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Warm Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.37' │ '-0.63'    │ '12.6%' │ '6.72'   │ '7.10'    │ '-0.38'       │
+│ 1       │ 'sustain'     │ '5.56' │ '+0.56'    │ '11.2%' │ '6.66'   │ '6.32'    │ '+0.34'       │
+│ 2       │ 'warmth'      │ '5.83' │ '+0.83'    │ '16.6%' │ '6.84'   │ '6.34'    │ '+0.50'       │
+│ 3       │ 'projection'  │ '4.90' │ '-0.10'    │ '2.0%'  │ '6.86'   │ '6.92'    │ '-0.06'       │
+│ 4       │ 'brightness'  │ '4.37' │ '-0.63'    │ '12.6%' │ '5.81'   │ '6.19'    │ '-0.38'       │
+│ 5       │ 'sensitivity' │ '5.23' │ '+0.23'    │ '4.6%'  │ '6.56'   │ '6.42'    │ '+0.14'       │
+│ 6       │ 'control'     │ '4.77' │ '-0.23'    │ '4.6%'  │ '6.34'   │ '6.48'    │ '-0.14'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a fuller center, and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A warmer, more wood-forward FEUZØN direction with a broader and more seasoned feel under the stick.
+Highlighted: A warmer, broader FEUZØN direction with more shell note, softer front-edge feel, and a more seasoned response.
+Voice Range: 2.36
+
+==================================================
+EDGE ONLY — MODERN PRECISION EDGE
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Modern Precision Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.86' │ '+0.86'    │ '17.2%' │ '7.62'   │ '7.10'    │ '+0.52'       │
+│ 1       │ 'sustain'     │ '4.60' │ '-0.40'    │ '8.0%'  │ '6.08'   │ '6.32'    │ '-0.24'       │
+│ 2       │ 'warmth'      │ '4.44' │ '-0.56'    │ '11.2%' │ '6.00'   │ '6.34'    │ '-0.34'       │
+│ 3       │ 'projection'  │ '5.13' │ '+0.13'    │ '2.6%'  │ '7.00'   │ '6.92'    │ '+0.08'       │
+│ 4       │ 'brightness'  │ '5.76' │ '+0.76'    │ '15.2%' │ '6.65'   │ '6.19'    │ '+0.46'       │
+│ 5       │ 'sensitivity' │ '4.87' │ '-0.13'    │ '2.6%'  │ '6.34'   │ '6.42'    │ '-0.08'       │
+│ 6       │ 'control'     │ '5.40' │ '+0.40'    │ '8.0%'  │ '6.72'   │ '6.48'    │ '+0.24'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A tighter, more modern FEUZØN direction with quicker articulation and stronger front-end definition.
+Highlighted: A tighter, faster FEUZØN direction with stronger articulation, brighter cut, and a more modern precision feel.
+Voice Range: 3.31
+
+==================================================
+SNARE BED ONLY — SHALLOW
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Shallow • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.05' │ '+0.05'    │ '1.0%' │ '7.13'   │ '7.10'    │ '+0.03'       │
+│ 1       │ 'sustain'     │ '4.85' │ '-0.15'    │ '3.0%' │ '6.23'   │ '6.32'    │ '-0.09'       │
+│ 2       │ 'warmth'      │ '4.95' │ '-0.05'    │ '1.0%' │ '6.31'   │ '6.34'    │ '-0.03'       │
+│ 3       │ 'projection'  │ '5.02' │ '+0.02'    │ '0.4%' │ '6.93'   │ '6.92'    │ '+0.01'       │
+│ 4       │ 'brightness'  │ '5.05' │ '+0.05'    │ '1.0%' │ '6.22'   │ '6.19'    │ '+0.03'       │
+│ 5       │ 'sensitivity' │ '4.57' │ '-0.43'    │ '8.6%' │ '6.16'   │ '6.42'    │ '-0.26'       │
+│ 6       │ 'control'     │ '5.28' │ '+0.28'    │ '5.6%' │ '6.65'   │ '6.48'    │ '+0.17'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.89
+
+==================================================
+SNARE BED ONLY — DEEP
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Deep • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.95' │ '-0.05'    │ '1.0%'  │ '7.07'   │ '7.10'    │ '-0.03'       │
+│ 1       │ 'sustain'     │ '5.15' │ '+0.15'    │ '3.0%'  │ '6.41'   │ '6.32'    │ '+0.09'       │
+│ 2       │ 'warmth'      │ '5.03' │ '+0.03'    │ '0.6%'  │ '6.36'   │ '6.34'    │ '+0.02'       │
+│ 3       │ 'projection'  │ '4.98' │ '-0.02'    │ '0.4%'  │ '6.91'   │ '6.92'    │ '-0.01'       │
+│ 4       │ 'brightness'  │ '4.95' │ '-0.05'    │ '1.0%'  │ '6.16'   │ '6.19'    │ '-0.03'       │
+│ 5       │ 'sensitivity' │ '5.54' │ '+0.54'    │ '10.8%' │ '6.75'   │ '6.42'    │ '+0.33'       │
+│ 6       │ 'control'     │ '4.80' │ '-0.20'    │ '4.0%'  │ '6.36'   │ '6.48'    │ '-0.12'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A more touch-responsive FEUZØN setup with added snare sensitivity and lively ghost-note behavior without losing center impact.
+Voice Range: 2.82
+
+==================================================
+SHELL ONLY — MAPLE / OAK + CHERRY
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Oak + Cherry • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.15' │ '+0.15'    │ '3.0%' │ '7.19'   │ '7.10'    │ '+0.09'       │
+│ 1       │ 'sustain'     │ '4.83' │ '-0.17'    │ '3.4%' │ '6.22'   │ '6.32'    │ '-0.10'       │
+│ 2       │ 'warmth'      │ '4.95' │ '-0.05'    │ '1.0%' │ '6.31'   │ '6.34'    │ '-0.03'       │
+│ 3       │ 'projection'  │ '4.97' │ '-0.03'    │ '0.6%' │ '6.90'   │ '6.92'    │ '-0.02'       │
+│ 4       │ 'brightness'  │ '4.90' │ '-0.10'    │ '2.0%' │ '6.13'   │ '6.19'    │ '-0.06'       │
+│ 5       │ 'sensitivity' │ '4.92' │ '-0.08'    │ '1.6%' │ '6.37'   │ '6.42'    │ '-0.05'       │
+│ 6       │ 'control'     │ '5.26' │ '+0.26'    │ '5.2%' │ '6.64'   │ '6.48'    │ '+0.16'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.82
+
+==================================================
+SHELL ONLY — MAPLE / MAPLE + BUBINGA
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Maple + Bubinga • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.58' │ '+0.58'    │ '11.6%' │ '7.45'   │ '7.10'    │ '+0.35'       │
+│ 1       │ 'sustain'     │ '5.02' │ '+0.02'    │ '0.4%'  │ '6.33'   │ '6.32'    │ '+0.01'       │
+│ 2       │ 'warmth'      │ '4.69' │ '-0.31'    │ '6.2%'  │ '6.15'   │ '6.34'    │ '-0.19'       │
+│ 3       │ 'projection'  │ '5.61' │ '+0.61'    │ '12.2%' │ '7.29'   │ '6.92'    │ '+0.37'       │
+│ 4       │ 'brightness'  │ '5.05' │ '+0.05'    │ '1.0%'  │ '6.22'   │ '6.19'    │ '+0.03'       │
+│ 5       │ 'sensitivity' │ '4.88' │ '-0.12'    │ '2.4%'  │ '6.35'   │ '6.42'    │ '-0.07'       │
+│ 6       │ 'control'     │ '5.36' │ '+0.36'    │ '7.2%'  │ '6.70'   │ '6.48'    │ '+0.22'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.03
+
+==================================================
+SHELL ONLY — WALNUT / MAHOGANY + CHERRY
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Walnut / Mahogany + Cherry • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.49' │ '-0.51'    │ '10.2%' │ '6.79'   │ '7.10'    │ '-0.31'       │
+│ 1       │ 'sustain'     │ '5.16' │ '+0.16'    │ '3.2%'  │ '6.42'   │ '6.32'    │ '+0.10'       │
+│ 2       │ 'warmth'      │ '5.97' │ '+0.97'    │ '19.4%' │ '6.93'   │ '6.34'    │ '+0.59'       │
+│ 3       │ 'projection'  │ '4.60' │ '-0.40'    │ '8.0%'  │ '6.68'   │ '6.92'    │ '-0.24'       │
+│ 4       │ 'brightness'  │ '4.27' │ '-0.73'    │ '14.6%' │ '5.75'   │ '6.19'    │ '-0.44'       │
+│ 5       │ 'sensitivity' │ '5.25' │ '+0.25'    │ '5.0%'  │ '6.57'   │ '6.42'    │ '+0.15'       │
+│ 6       │ 'control'     │ '4.88' │ '-0.12'    │ '2.4%'  │ '6.41'   │ '6.48'    │ '-0.07'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a fuller center, and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.25
+
+==================================================
+SHELL ONLY — WALNUT / OAK + WENGE
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Walnut / Oak + Wenge • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.98' │ '-0.02'    │ '0.4%'  │ '7.09'   │ '7.10'    │ '-0.01'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%'  │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.51' │ '+0.51'    │ '10.2%' │ '6.65'   │ '6.34'    │ '+0.31'       │
+│ 3       │ 'projection'  │ '5.12' │ '+0.12'    │ '2.4%'  │ '6.99'   │ '6.92'    │ '+0.07'       │
+│ 4       │ 'brightness'  │ '4.59' │ '-0.41'    │ '8.2%'  │ '5.94'   │ '6.19'    │ '-0.25'       │
+│ 5       │ 'sensitivity' │ '4.88' │ '-0.12'    │ '2.4%'  │ '6.35'   │ '6.42'    │ '-0.07'       │
+│ 6       │ 'control'     │ '5.36' │ '+0.36'    │ '7.2%'  │ '6.70'   │ '6.48'    │ '+0.22'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a fuller center compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.56
+
+==================================================
+SHELL ONLY — CHERRY / BIRCH + MAPLE
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Cherry / Birch + Maple • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.48' │ '+0.48'    │ '9.6%'  │ '7.39'   │ '7.10'    │ '+0.29'       │
+│ 1       │ 'sustain'     │ '4.90' │ '-0.10'    │ '2.0%'  │ '6.26'   │ '6.32'    │ '-0.06'       │
+│ 2       │ 'warmth'      │ '4.49' │ '-0.51'    │ '10.2%' │ '6.03'   │ '6.34'    │ '-0.31'       │
+│ 3       │ 'projection'  │ '5.38' │ '+0.38'    │ '7.6%'  │ '7.15'   │ '6.92'    │ '+0.23'       │
+│ 4       │ 'brightness'  │ '5.53' │ '+0.53'    │ '10.6%' │ '6.51'   │ '6.19'    │ '+0.32'       │
+│ 5       │ 'sensitivity' │ '4.92' │ '-0.08'    │ '1.6%'  │ '6.37'   │ '6.42'    │ '-0.05'       │
+│ 6       │ 'control'     │ '5.07' │ '+0.07'    │ '1.4%'  │ '6.52'   │ '6.48'    │ '+0.04'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.24
+
+==================================================
+SHELL ONLY — CHERRY / PADAUK + ASH
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Cherry / Padauk + Ash • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.31' │ '+0.31'    │ '6.2%'  │ '7.29'   │ '7.10'    │ '+0.19'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%'  │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '4.98' │ '-0.02'    │ '0.4%'  │ '6.33'   │ '6.34'    │ '-0.01'       │
+│ 3       │ 'projection'  │ '5.51' │ '+0.51'    │ '10.2%' │ '7.23'   │ '6.92'    │ '+0.31'       │
+│ 4       │ 'brightness'  │ '5.21' │ '+0.21'    │ '4.2%'  │ '6.32'   │ '6.19'    │ '+0.13'       │
+│ 5       │ 'sensitivity' │ '4.88' │ '-0.12'    │ '2.4%'  │ '6.35'   │ '6.42'    │ '-0.07'       │
+│ 6       │ 'control'     │ '5.16' │ '+0.16'    │ '3.2%'  │ '6.58'   │ '6.48'    │ '+0.10'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.99
+
+==================================================
+FINISH ONLY — NON-SCORCHED NATURAL GLOSS
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • non-scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.10' │ '+0.10'    │ '2.0%' │ '6.40'   │ '6.34'    │ '+0.06'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '4.90' │ '-0.10'    │ '2.0%' │ '6.13'   │ '6.19'    │ '-0.06'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.78
+
+==================================================
+FINISH ONLY — NATURAL SATIN
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+Price: $1350 • Estimated delivery: 7–10 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.98' │ '-0.02'    │ '0.4%' │ '7.09'   │ '7.10'    │ '-0.01'       │
+│ 1       │ 'sustain'     │ '5.02' │ '+0.02'    │ '0.4%' │ '6.33'   │ '6.32'    │ '+0.01'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '4.98' │ '-0.02'    │ '0.4%' │ '6.18'   │ '6.19'    │ '-0.01'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '4.98' │ '-0.02'    │ '0.4%' │ '6.47'   │ '6.48'    │ '-0.01'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.84
+
+==================================================
+FINISH ONLY — STAINED GLOSS
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Stained Gloss • scorched
+Price: $1550 • Estimated delivery: 9–12 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.07' │ '+0.07'    │ '1.4%' │ '6.96'   │ '6.92'    │ '+0.04'       │
+│ 4       │ 'brightness'  │ '5.10' │ '+0.10'    │ '2.0%' │ '6.25'   │ '6.19'    │ '+0.06'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A richer stained presentation with stronger visual depth and a more polished look.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.89
+
+==================================================
+FINISH ONLY — STAINED SATIN
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Stained Satin • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.98' │ '-0.02'    │ '0.4%' │ '7.09'   │ '7.10'    │ '-0.01'       │
+│ 1       │ 'sustain'     │ '5.02' │ '+0.02'    │ '0.4%' │ '6.33'   │ '6.32'    │ '+0.01'       │
+│ 2       │ 'warmth'      │ '5.10' │ '+0.10'    │ '2.0%' │ '6.40'   │ '6.34'    │ '+0.06'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '4.92' │ '-0.08'    │ '1.6%' │ '6.14'   │ '6.19'    │ '-0.05'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '4.98' │ '-0.02'    │ '0.4%' │ '6.47'   │ '6.48'    │ '-0.01'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A darker, more understated finish direction that leans moodier and more organic.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.79
+
+==================================================
+HARDWARE FINISH ONLY — BLACK NICKEL / SHOULD BE CENTERED
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Black Nickel • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1500 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+HARDWARE FINISH ONLY — BRASS/GOLD / SHOULD BE CENTERED
+==================================================
+
+=== INPUT ===
+14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Brass/Gold • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1600 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill   │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '0.0%' │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '0.0%' │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '0.0%' │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '0.0%' │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '0.0%' │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+COMPOUND — 12x5 LOWEST PRICE
+==================================================
+
+=== INPUT ===
+12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Triple Flange • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+Price: $950 • Estimated delivery: 7–10 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.40' │ '+0.40'    │ '8.0%'  │ '7.34'   │ '7.10'    │ '+0.24'       │
+│ 1       │ 'sustain'     │ '5.26' │ '+0.26'    │ '5.2%'  │ '6.48'   │ '6.32'    │ '+0.16'       │
+│ 2       │ 'warmth'      │ '4.36' │ '-0.64'    │ '12.8%' │ '5.95'   │ '6.34'    │ '-0.39'       │
+│ 3       │ 'projection'  │ '3.66' │ '-1.34'    │ '26.8%' │ '6.11'   │ '6.92'    │ '-0.81'       │
+│ 4       │ 'brightness'  │ '5.86' │ '+0.86'    │ '17.2%' │ '6.71'   │ '6.19'    │ '+0.52'       │
+│ 5       │ 'sensitivity' │ '6.16' │ '+1.16'    │ '23.2%' │ '7.12'   │ '6.42'    │ '+0.70'       │
+│ 6       │ 'control'     │ '3.71' │ '-1.29'    │ '25.8%' │ '5.70'   │ '6.48'    │ '-0.78'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center, more top-end edge, and a more open feel compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.21
+
+==================================================
+COMPOUND — 12x5 MODERN / DIE-CAST
+==================================================
+
+=== INPUT ===
+12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Die-Cast • Chrome • Modern Precision Edge • Standard • Natural Satin • scorched
+Price: $1050 • Estimated delivery: 7–10 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '6.54' │ '+1.54'    │ '30.8%' │ '8.22'   │ '7.10'    │ '+1.12'       │
+│ 1       │ 'sustain'     │ '4.11' │ '-0.89'    │ '17.8%' │ '5.78'   │ '6.32'    │ '-0.54'       │
+│ 2       │ 'warmth'      │ '3.56' │ '-1.44'    │ '28.8%' │ '5.38'   │ '6.34'    │ '-0.96'       │
+│ 3       │ 'projection'  │ '4.03' │ '-0.97'    │ '19.4%' │ '6.33'   │ '6.92'    │ '-0.59'       │
+│ 4       │ 'brightness'  │ '6.54' │ '+1.54'    │ '30.8%' │ '7.31'   │ '6.19'    │ '+1.12'       │
+│ 5       │ 'sensitivity' │ '5.74' │ '+0.74'    │ '14.8%' │ '6.87'   │ '6.42'    │ '+0.45'       │
+│ 6       │ 'control'     │ '5.20' │ '+0.20'    │ '4.0%'  │ '6.60'   │ '6.48'    │ '+0.12'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A tighter, more modern FEUZØN direction with quicker articulation and stronger front-end definition.
+Highlighted: A quicker FEUZØN configuration with strong front-end definition, sharper articulation, and a tighter modern crack.
+Voice Range: 3.9
+
+==================================================
+COMPOUND — 14x7 WARM / TRIPLE FLANGE
+==================================================
+
+=== INPUT ===
+14" x 7" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Triple Flange • Chrome • Warm Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1450 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '3.53' │ '-1.47'    │ '29.4%' │ '6.09'   │ '7.10'    │ '-1.01'       │
+│ 1       │ 'sustain'     │ '6.56' │ '+1.56'    │ '31.2%' │ '7.47'   │ '6.32'    │ '+1.15'       │
+│ 2       │ 'warmth'      │ '6.55' │ '+1.55'    │ '31.0%' │ '7.47'   │ '6.34'    │ '+1.13'       │
+│ 3       │ 'projection'  │ '5.08' │ '+0.08'    │ '1.6%'  │ '6.97'   │ '6.92'    │ '+0.05'       │
+│ 4       │ 'brightness'  │ '3.76' │ '-1.24'    │ '24.8%' │ '5.44'   │ '6.19'    │ '-0.75'       │
+│ 5       │ 'sensitivity' │ '5.33' │ '+0.33'    │ '6.6%'  │ '6.62'   │ '6.42'    │ '+0.20'       │
+│ 6       │ 'control'     │ '3.59' │ '-1.41'    │ '28.2%' │ '5.56'   │ '6.48'    │ '-0.92'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a fuller center, and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A warmer, more wood-forward FEUZØN direction with a broader and more seasoned feel under the stick.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 1.85
+
+==================================================
+COMPOUND — 14x7 MODERN / DIE-CAST / 10 LUG
+==================================================
+
+=== INPUT ===
+14" x 7" • 10 lugs • 20 - 14mm • Maple / Walnut + Birch • Die-Cast • Chrome • Modern Precision Edge • Standard • Natural Gloss • scorched
+Price: $1550 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.94' │ '+0.94'    │ '18.8%' │ '7.67'   │ '7.10'    │ '+0.57'       │
+│ 1       │ 'sustain'     │ '4.67' │ '-0.33'    │ '6.6%'  │ '6.12'   │ '6.32'    │ '-0.20'       │
+│ 2       │ 'warmth'      │ '4.93' │ '-0.07'    │ '1.4%'  │ '6.30'   │ '6.34'    │ '-0.04'       │
+│ 3       │ 'projection'  │ '6.12' │ '+1.12'    │ '22.4%' │ '7.60'   │ '6.92'    │ '+0.68'       │
+│ 4       │ 'brightness'  │ '5.40' │ '+0.40'    │ '8.0%'  │ '6.43'   │ '6.19'    │ '+0.24'       │
+│ 5       │ 'sensitivity' │ '4.47' │ '-0.53'    │ '10.6%' │ '6.10'   │ '6.42'    │ '-0.32'       │
+│ 6       │ 'control'     │ '5.97' │ '+0.97'    │ '19.4%' │ '7.07'   │ '6.48'    │ '+0.59'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge and more focus compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A tighter, more modern FEUZØN direction with quicker articulation and stronger front-end definition.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 3.14
+
+==================================================
+COMPOUND — 15x8 BIG BODY
+==================================================
+
+=== INPUT ===
+15" x 8" • 10 lugs • 20 - 14mm • Walnut / Mahogany + Cherry • Triple Flange • Chrome • Warm Hybrid Edge • Standard • Natural Gloss • scorched
+Price: $1650 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '3.36' │ '-1.64'    │ '32.8%' │ '5.82'   │ '7.10'    │ '-1.28'       │
+│ 1       │ 'sustain'     │ '6.58' │ '+1.58'    │ '31.6%' │ '7.51'   │ '6.32'    │ '+1.19'       │
+│ 2       │ 'warmth'      │ '6.95' │ '+1.95'    │ '39.0%' │ '8.24'   │ '6.34'    │ '+1.90'       │
+│ 3       │ 'projection'  │ '5.53' │ '+0.53'    │ '10.6%' │ '7.24'   │ '6.92'    │ '+0.32'       │
+│ 4       │ 'brightness'  │ '3.25' │ '-1.75'    │ '35.0%' │ '4.74'   │ '6.19'    │ '-1.45'       │
+│ 5       │ 'sensitivity' │ '5.21' │ '+0.21'    │ '4.2%'  │ '6.55'   │ '6.42'    │ '+0.13'       │
+│ 6       │ 'control'     │ '4.04' │ '-0.96'    │ '19.2%' │ '5.90'   │ '6.48'    │ '-0.58'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a fuller center, and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A warmer, more wood-forward FEUZØN direction with a broader and more seasoned feel under the stick.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 1.35
+
+==================================================
+COMPOUND — 15x8 MODERN CUT
+==================================================
+
+=== INPUT ===
+15" x 8" • 10 lugs • 20 - 14mm • Maple / Maple + Bubinga • Die-Cast • Chrome • Modern Precision Edge • Standard • Natural Gloss • scorched
+Price: $1750 • Estimated delivery: 8–11 weeks
+┌─────────┬───────────────┬────────┬────────────┬─────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ fill    │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼─────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '6.04' │ '+1.04'    │ '20.8%' │ '7.73'   │ '7.10'    │ '+0.63'       │
+│ 1       │ 'sustain'     │ '5.10' │ '+0.10'    │ '2.0%'  │ '6.38'   │ '6.32'    │ '+0.06'       │
+│ 2       │ 'warmth'      │ '5.21' │ '+0.21'    │ '4.2%'  │ '6.47'   │ '6.34'    │ '+0.13'       │
+│ 3       │ 'projection'  │ '6.60' │ '+1.60'    │ '32.0%' │ '8.13'   │ '6.92'    │ '+1.21'       │
+│ 4       │ 'brightness'  │ '5.02' │ '+0.02'    │ '0.4%'  │ '6.20'   │ '6.19'    │ '+0.01'       │
+│ 5       │ 'sensitivity' │ '4.21' │ '-0.79'    │ '15.8%' │ '5.94'   │ '6.42'    │ '-0.48'       │
+│ 6       │ 'control'     │ '6.25' │ '+1.25'    │ '25.0%' │ '7.24'   │ '6.48'    │ '+0.76'       │
+└─────────┴───────────────┴────────┴────────────┴─────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge and more focus compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A tighter, more modern FEUZØN direction with quicker articulation and stronger front-end definition.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 3.01
+
+
+==================================================
+SUMMARY COMPARISON TABLE
+==================================================
+┌─────────┬─────────────────────────────────────────────────────────────────┬─────────┬──────────────┬────────┬─────────┬────────┬────────────┬────────────┬─────────────┬─────────┬─────────┬────────────┐
+│ (index) │ case                                                            │ price   │ delivery     │ attack │ sustain │ warmth │ projection │ brightness │ sensitivity │ control │ maxMove │ voiceRange │
+├─────────┼─────────────────────────────────────────────────────────────────┼─────────┼──────────────┼────────┼─────────┼────────┼────────────┼────────────┼─────────────┼─────────┼─────────┼────────────┤
+│ 0       │ 'FEUZØN STANDARD / SHOULD BE CENTERED'                          │ '$1450' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 1       │ 'LOWEST PRICE PRESET'                                           │ '$950'  │ '7–10 weeks' │ '+0.4' │ '+0.3'  │ '-0.6' │ '-1.3'     │ '+0.9'     │ '+1.2'      │ '-1.3'  │ '1.34'  │ 3.21       │
+│ 2       │ 'PRICING — LOWEST PRICE / 12x5 / TRIPLE FLANGE / NATURAL SATIN' │ '$950'  │ '7–10 weeks' │ '+0.4' │ '+0.3'  │ '-0.6' │ '-1.3'     │ '+0.9'     │ '+1.2'      │ '-1.3'  │ '1.34'  │ 3.21       │
+│ 3       │ 'PRICING — FEUZØN STANDARD / 14x6 / DIE-CAST / NATURAL GLOSS'   │ '$1450' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 4       │ 'PRICING — STANDARD + BLACK NICKEL'                             │ '$1500' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 5       │ 'PRICING — STANDARD + BRASS/GOLD'                               │ '$1600' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 6       │ 'PRICING — STANDARD + STAINED SATIN'                            │ '$1450' │ '8–11 weeks' │ '-0.0' │ '+0.0'  │ '+0.1' │ '+0.0'     │ '-0.1'     │ '+0.0'      │ '-0.0'  │ '0.10'  │ 2.79       │
+│ 7       │ 'PRICING — STANDARD + STAINED GLOSS'                            │ '$1550' │ '9–12 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.1'     │ '+0.1'     │ '+0.0'      │ '+0.0'  │ '0.10'  │ 2.89       │
+│ 8       │ 'PRICING — 15x8 / BRASS GOLD / STAINED GLOSS'                   │ '$2000' │ '9–12 weeks' │ '-0.4' │ '+0.5'  │ '+1.1' │ '+1.3'     │ '-0.7'     │ '-0.5'      │ '+0.5'  │ '1.32'  │ 2.41       │
+│ 9       │ 'DIAMETER ONLY — 12"'                                           │ '$1250' │ '8–11 weeks' │ '+0.6' │ '-0.4'  │ '-0.6' │ '-0.4'     │ '+0.6'     │ '+0.3'      │ '+0.2'  │ '0.64'  │ 3.21       │
+│ 10      │ 'DIAMETER ONLY — 13"'                                           │ '$1350' │ '8–11 weeks' │ '+0.3' │ '-0.2'  │ '-0.3' │ '-0.1'     │ '+0.3'     │ '+0.1'      │ '+0.1'  │ '0.31'  │ 3.02       │
+│ 11      │ 'DIAMETER ONLY — 15"'                                           │ '$1550' │ '8–11 weeks' │ '+0.2' │ '-0.2'  │ '+0.3' │ '+0.9'     │ '-0.3'     │ '-0.3'      │ '+0.7'  │ '0.91'  │ 2.75       │
+│ 12      │ 'DEPTH ONLY — 5.0"'                                             │ '$1350' │ '8–11 weeks' │ '+0.5' │ '-0.5'  │ '-0.5' │ '-0.4'     │ '+0.4'     │ '+0.2'      │ '+0.2'  │ '0.54'  │ 3.12       │
+│ 13      │ 'DEPTH ONLY — 5.5"'                                             │ '$1400' │ '8–11 weeks' │ '+0.3' │ '-0.3'  │ '-0.2' │ '-0.1'     │ '+0.2'     │ '+0.1'      │ '+0.0'  │ '0.26'  │ 2.97       │
+│ 14      │ 'DEPTH ONLY — 6.5"'                                             │ '$1500' │ '8–11 weeks' │ '-0.2' │ '+0.3'  │ '+0.3' │ '+0.2'     │ '-0.2'     │ '-0.0'      │ '-0.1'  │ '0.30'  │ 2.71       │
+│ 15      │ 'DEPTH ONLY — 7.0"'                                             │ '$1550' │ '8–11 weeks' │ '-0.5' │ '+0.6'  │ '+0.7' │ '+0.4'     │ '-0.4'     │ '-0.2'      │ '-0.2'  │ '0.66'  │ 2.57       │
+│ 16      │ 'DEPTH ONLY — 8.0"'                                             │ '$1650' │ '8–11 weeks' │ '-0.6' │ '+0.7'  │ '+0.8' │ '+0.3'     │ '-0.5'     │ '-0.3'      │ '-0.3'  │ '0.79'  │ 2.47       │
+│ 17      │ 'LUGS ONLY — 10 LUGS'                                           │ '$1450' │ '8–11 weeks' │ '+0.5' │ '-0.5'  │ '-0.2' │ '+0.6'     │ '+0.0'     │ '-0.2'      │ '+0.8'  │ '0.76'  │ 2.96       │
+│ 18      │ 'LUGS / LIGHTER PATH — 6 LUGS'                                  │ '$1250' │ '8–11 weeks' │ '+0.5' │ '+0.1'  │ '-0.5' │ '-0.7'     │ '+0.7'     │ '+0.7'      │ '-0.4'  │ '0.69'  │ 3.18       │
+│ 19      │ 'STAVES ONLY — 12 STAVES / 10MM'                                │ '$1250' │ '8–11 weeks' │ '+0.5' │ '+0.1'  │ '-0.5' │ '-0.7'     │ '+0.7'     │ '+0.7'      │ '-0.4'  │ '0.69'  │ 3.18       │
+│ 20      │ 'STAVES ONLY — 20 STAVES / 14MM'                                │ '$1450' │ '8–11 weeks' │ '+0.5' │ '-0.5'  │ '-0.2' │ '+0.6'     │ '+0.0'     │ '-0.2'      │ '+0.8'  │ '0.76'  │ 2.96       │
+│ 21      │ 'HOOPS ONLY — TRIPLE FLANGE'                                    │ '$1350' │ '8–11 weeks' │ '-0.6' │ '+0.8'  │ '+0.4' │ '-0.2'     │ '-0.2'     │ '+0.3'      │ '-1.1'  │ '1.11'  │ 2.63       │
+│ 22      │ 'LOWEST PRICE WITH DIE-CAST HOOPS'                              │ '$1050' │ '7–10 weeks' │ '+1.0' │ '-0.5'  │ '-1.0' │ '-1.1'     │ '+1.1'     │ '+0.9'      │ '-0.2'  │ '1.11'  │ 3.44       │
+│ 23      │ 'EDGE ONLY — WARM HYBRID EDGE'                                  │ '$1450' │ '8–11 weeks' │ '-0.6' │ '+0.6'  │ '+0.8' │ '-0.1'     │ '-0.6'     │ '+0.2'      │ '-0.2'  │ '0.83'  │ 2.36       │
+│ 24      │ 'EDGE ONLY — MODERN PRECISION EDGE'                             │ '$1450' │ '8–11 weeks' │ '+0.9' │ '-0.4'  │ '-0.6' │ '+0.1'     │ '+0.8'     │ '-0.1'      │ '+0.4'  │ '0.86'  │ 3.31       │
+│ 25      │ 'SNARE BED ONLY — SHALLOW'                                      │ '$1450' │ '8–11 weeks' │ '+0.1' │ '-0.1'  │ '-0.1' │ '+0.0'     │ '+0.1'     │ '-0.4'      │ '+0.3'  │ '0.43'  │ 2.89       │
+│ 26      │ 'SNARE BED ONLY — DEEP'                                         │ '$1450' │ '8–11 weeks' │ '-0.1' │ '+0.1'  │ '+0.0' │ '-0.0'     │ '-0.1'     │ '+0.5'      │ '-0.2'  │ '0.54'  │ 2.82       │
+│ 27      │ 'SHELL ONLY — MAPLE / OAK + CHERRY'                             │ '$1450' │ '8–11 weeks' │ '+0.1' │ '-0.2'  │ '-0.1' │ '-0.0'     │ '-0.1'     │ '-0.1'      │ '+0.3'  │ '0.26'  │ 2.82       │
+│ 28      │ 'SHELL ONLY — MAPLE / MAPLE + BUBINGA'                          │ '$1450' │ '8–11 weeks' │ '+0.6' │ '+0.0'  │ '-0.3' │ '+0.6'     │ '+0.1'     │ '-0.1'      │ '+0.4'  │ '0.61'  │ 3.03       │
+│ 29      │ 'SHELL ONLY — WALNUT / MAHOGANY + CHERRY'                       │ '$1450' │ '8–11 weeks' │ '-0.5' │ '+0.2'  │ '+1.0' │ '-0.4'     │ '-0.7'     │ '+0.3'      │ '-0.1'  │ '0.97'  │ 2.25       │
+│ 30      │ 'SHELL ONLY — WALNUT / OAK + WENGE'                             │ '$1450' │ '8–11 weeks' │ '-0.0' │ '+0.0'  │ '+0.5' │ '+0.1'     │ '-0.4'     │ '-0.1'      │ '+0.4'  │ '0.51'  │ 2.56       │
+│ 31      │ 'SHELL ONLY — CHERRY / BIRCH + MAPLE'                           │ '$1450' │ '8–11 weeks' │ '+0.5' │ '-0.1'  │ '-0.5' │ '+0.4'     │ '+0.5'     │ '-0.1'      │ '+0.1'  │ '0.53'  │ 3.24       │
+│ 32      │ 'SHELL ONLY — CHERRY / PADAUK + ASH'                            │ '$1450' │ '8–11 weeks' │ '+0.3' │ '+0.0'  │ '-0.0' │ '+0.5'     │ '+0.2'     │ '-0.1'      │ '+0.2'  │ '0.51'  │ 2.99       │
+│ 33      │ 'FINISH ONLY — NON-SCORCHED NATURAL GLOSS'                      │ '$1450' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.1' │ '+0.0'     │ '-0.1'     │ '+0.0'      │ '+0.0'  │ '0.10'  │ 2.78       │
+│ 34      │ 'FINISH ONLY — NATURAL SATIN'                                   │ '$1350' │ '7–10 weeks' │ '-0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '-0.0'     │ '+0.0'      │ '-0.0'  │ '0.02'  │ 2.84       │
+│ 35      │ 'FINISH ONLY — STAINED GLOSS'                                   │ '$1550' │ '9–12 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.1'     │ '+0.1'     │ '+0.0'      │ '+0.0'  │ '0.10'  │ 2.89       │
+│ 36      │ 'FINISH ONLY — STAINED SATIN'                                   │ '$1450' │ '8–11 weeks' │ '-0.0' │ '+0.0'  │ '+0.1' │ '+0.0'     │ '-0.1'     │ '+0.0'      │ '-0.0'  │ '0.10'  │ 2.79       │
+│ 37      │ 'HARDWARE FINISH ONLY — BLACK NICKEL / SHOULD BE CENTERED'      │ '$1500' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 38      │ 'HARDWARE FINISH ONLY — BRASS/GOLD / SHOULD BE CENTERED'        │ '$1600' │ '8–11 weeks' │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 39      │ 'COMPOUND — 12x5 LOWEST PRICE'                                  │ '$950'  │ '7–10 weeks' │ '+0.4' │ '+0.3'  │ '-0.6' │ '-1.3'     │ '+0.9'     │ '+1.2'      │ '-1.3'  │ '1.34'  │ 3.21       │
+│ 40      │ 'COMPOUND — 12x5 MODERN / DIE-CAST'                             │ '$1050' │ '7–10 weeks' │ '+1.5' │ '-0.9'  │ '-1.4' │ '-1.0'     │ '+1.5'     │ '+0.7'      │ '+0.2'  │ '1.54'  │ 3.9        │
+│ 41      │ 'COMPOUND — 14x7 WARM / TRIPLE FLANGE'                          │ '$1450' │ '8–11 weeks' │ '-1.5' │ '+1.6'  │ '+1.6' │ '+0.1'     │ '-1.2'     │ '+0.3'      │ '-1.4'  │ '1.56'  │ 1.85       │
+│ 42      │ 'COMPOUND — 14x7 MODERN / DIE-CAST / 10 LUG'                    │ '$1550' │ '8–11 weeks' │ '+0.9' │ '-0.3'  │ '-0.1' │ '+1.1'     │ '+0.4'     │ '-0.5'      │ '+1.0'  │ '1.12'  │ 3.14       │
+│ 43      │ 'COMPOUND — 15x8 BIG BODY'                                      │ '$1650' │ '8–11 weeks' │ '-1.6' │ '+1.6'  │ '+1.9' │ '+0.5'     │ '-1.8'     │ '+0.2'      │ '-1.0'  │ '1.95'  │ 1.35       │
+│ 44      │ 'COMPOUND — 15x8 MODERN CUT'                                    │ '$1750' │ '8–11 weeks' │ '+1.0' │ '+0.1'  │ '+0.2' │ '+1.6'     │ '+0.0'     │ '-0.8'      │ '+1.3'  │ '1.60'  │ 3.01       │
+└─────────┴─────────────────────────────────────────────────────────────────┴─────────┴──────────────┴────────┴─────────┴────────┴────────────┴────────────┴─────────────┴─────────┴─────────┴────────────┘
+
+
+==================================================
+ASSERTIONS
+==================================================
+✅ PASS — FEUZØN Standard price should be $1450 — $1450
+✅ PASS — FEUZØN Standard chart should be centered — maxMove 0.00
+✅ PASS — Lowest Price preset should be $950 — $950
+✅ PASS — Black Nickel should not move chart — maxMove 0.00
+✅ PASS — Black Nickel should add $50 over FEUZØN Standard — $1500
+✅ PASS — Brass/Gold should not move chart — maxMove 0.00
+✅ PASS — Brass/Gold should add $150 over FEUZØN Standard — $1600
