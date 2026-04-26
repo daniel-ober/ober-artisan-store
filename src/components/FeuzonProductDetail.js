@@ -325,10 +325,6 @@ const FEUZON_STANDARD_REFERENCE = {
   muffling: 'None',
 };
 
-const FEUZON_STANDARD_BEARING_EDGE = FEUZON_STANDARD_REFERENCE.bearingEdge;
-
-const FEUZON_STANDARD_SNARE_BED = FEUZON_STANDARD_REFERENCE.snareBed;
-
 const FEUZON_REFERENCE_IMAGE_FALLBACK =
   '/legacyprint-benchmarks/ober-custom/ober-feuzon-maple.png';
 
@@ -1160,6 +1156,328 @@ const BENCHMARK_VOICE_RANGE_FALLBACKS = {
   'solid-oak-reference': 3.05,
 };
 
+const BENCHMARK_AXIS_PROFILE_FALLBACKS = {
+  'heritage-oak-reference': {
+    attack: 6.75,
+
+    sustain: 6.05,
+
+    warmth: 6.85,
+
+    projection: 6.75,
+
+    brightness: 5.7,
+
+    sensitivity: 6.2,
+
+    control: 6.35,
+  },
+
+  'feuzon-hybrid-reference': {
+    attack: 7.1,
+
+    sustain: 6.32,
+
+    warmth: 6.34,
+
+    projection: 6.92,
+
+    brightness: 6.19,
+
+    sensitivity: 6.42,
+
+    control: 6.48,
+  },
+
+  'maple-ply-reference': {
+    attack: 7.05,
+
+    sustain: 5.75,
+
+    warmth: 5.75,
+
+    projection: 6.65,
+
+    brightness: 6.95,
+
+    sensitivity: 6.25,
+
+    control: 6.25,
+  },
+
+  'birch-ply-reference': {
+    attack: 7.35,
+
+    sustain: 5.55,
+
+    warmth: 5.35,
+
+    projection: 7.25,
+
+    brightness: 7.3,
+
+    sensitivity: 6.1,
+
+    control: 6.45,
+  },
+
+  'oak-ply-reference': {
+    attack: 7.2,
+
+    sustain: 5.9,
+
+    warmth: 6.1,
+
+    projection: 7.35,
+
+    brightness: 6.6,
+
+    sensitivity: 5.95,
+
+    control: 6.55,
+  },
+
+  'walnut-ply-reference': {
+    attack: 6.35,
+
+    sustain: 6.15,
+
+    warmth: 7.15,
+
+    projection: 6.15,
+
+    brightness: 5.45,
+
+    sensitivity: 6.25,
+
+    control: 6.25,
+  },
+
+  'mahogany-ply-reference': {
+    attack: 6.15,
+
+    sustain: 6.3,
+
+    warmth: 7.45,
+
+    projection: 5.95,
+
+    brightness: 5.2,
+
+    sensitivity: 6.35,
+
+    control: 6.1,
+  },
+
+  'brass-reference': {
+    attack: 7.45,
+
+    sustain: 6.65,
+
+    warmth: 6.05,
+
+    projection: 7.55,
+
+    brightness: 7.25,
+
+    sensitivity: 6.5,
+
+    control: 6.35,
+  },
+
+  'steel-reference': {
+    attack: 7.85,
+
+    sustain: 6.25,
+
+    warmth: 5.25,
+
+    projection: 7.75,
+
+    brightness: 8.15,
+
+    sensitivity: 6.45,
+
+    control: 6.5,
+  },
+
+  'aluminum-reference': {
+    attack: 7.3,
+
+    sustain: 5.85,
+
+    warmth: 5.55,
+
+    projection: 6.9,
+
+    brightness: 7.75,
+
+    sensitivity: 6.65,
+
+    control: 6.55,
+  },
+
+  'copper-reference': {
+    attack: 6.85,
+
+    sustain: 6.4,
+
+    warmth: 6.85,
+
+    projection: 6.85,
+
+    brightness: 6.65,
+
+    sensitivity: 6.45,
+
+    control: 6.25,
+  },
+
+  'bronze-reference': {
+    attack: 7.05,
+
+    sustain: 6.45,
+
+    warmth: 6.55,
+
+    projection: 7.15,
+
+    brightness: 6.95,
+
+    sensitivity: 6.35,
+
+    control: 6.35,
+  },
+
+  'thin-acrylic-reference': {
+    attack: 7.75,
+
+    sustain: 6.05,
+
+    warmth: 5.15,
+
+    projection: 7.45,
+
+    brightness: 8.25,
+
+    sensitivity: 6.65,
+
+    control: 6.2,
+  },
+
+  'medium-acrylic-reference': {
+    attack: 7.45,
+
+    sustain: 6.2,
+
+    warmth: 5.35,
+
+    projection: 7.25,
+
+    brightness: 7.95,
+
+    sensitivity: 6.45,
+
+    control: 6.3,
+  },
+
+  'thick-acrylic-reference': {
+    attack: 7.25,
+
+    sustain: 6.35,
+
+    warmth: 5.55,
+
+    projection: 7.05,
+
+    brightness: 7.65,
+
+    sensitivity: 6.25,
+
+    control: 6.45,
+  },
+
+  'steam-bent-maple-reference': {
+    attack: 7.0,
+
+    sustain: 6.45,
+
+    warmth: 6.25,
+
+    projection: 6.85,
+
+    brightness: 6.7,
+
+    sensitivity: 6.55,
+
+    control: 6.2,
+  },
+
+  'steam-bent-mahogany-reference': {
+    attack: 6.25,
+
+    sustain: 6.65,
+
+    warmth: 7.35,
+
+    projection: 6.15,
+
+    brightness: 5.35,
+
+    sensitivity: 6.55,
+
+    control: 6.05,
+  },
+
+  'solid-maple-reference': {
+    attack: 7.15,
+
+    sustain: 6.15,
+
+    warmth: 6.2,
+
+    projection: 7.0,
+
+    brightness: 6.85,
+
+    sensitivity: 6.2,
+
+    control: 6.55,
+  },
+
+  'solid-walnut-reference': {
+    attack: 6.45,
+
+    sustain: 6.35,
+
+    warmth: 7.2,
+
+    projection: 6.25,
+
+    brightness: 5.45,
+
+    sensitivity: 6.3,
+
+    control: 6.45,
+  },
+
+  'solid-oak-reference': {
+    attack: 7.15,
+
+    sustain: 6.1,
+
+    warmth: 6.45,
+
+    projection: 7.25,
+
+    brightness: 6.35,
+
+    sensitivity: 6.05,
+
+    control: 6.65,
+  },
+};
+
 const parseBenchmarkDimensions = (benchmarkSize) => {
   const label = String(benchmarkSize?.label || '');
 
@@ -1280,6 +1598,94 @@ const buildProjectedVoiceRange = (summary) => {
   return clampRangePosition(weighted);
 };
 
+const getSelectedBenchmarkProfile = (
+  selectedBenchmarkType,
+
+  selectedBenchmarkSize
+) => {
+  const directProfile =
+    selectedBenchmarkSize?.profile ||
+    selectedBenchmarkSize?.voiceProfile ||
+    selectedBenchmarkSize?.scores ||
+    selectedBenchmarkType?.profile ||
+    selectedBenchmarkType?.voiceProfile ||
+    selectedBenchmarkType?.scores ||
+    null;
+
+  if (directProfile) {
+    return directProfile;
+  }
+
+  const typeId = selectedBenchmarkType?.typeId;
+
+  return BENCHMARK_AXIS_PROFILE_FALLBACKS[typeId] || null;
+};
+
+const clampChartValue = (value) => {
+  const num = Number(value);
+
+  if (!Number.isFinite(num)) return 5;
+
+  return Math.max(1, Math.min(10, Number(num.toFixed(2))));
+};
+
+const buildBenchmarkRelativeFeuzonRead = ({
+  voiceRead,
+
+  selectedBenchmarkType,
+
+  selectedBenchmarkSize,
+}) => {
+  if (!voiceRead) return voiceRead;
+
+  const selectedTypeId = selectedBenchmarkType?.typeId || '';
+
+  const isDefaultFeuzonReference =
+    selectedTypeId === DEFAULT_BENCHMARK_TYPE_ID ||
+    selectedTypeId === 'feuzon-hybrid-reference';
+
+  if (isDefaultFeuzonReference) {
+    return voiceRead;
+  }
+
+  const benchmarkProfile = getSelectedBenchmarkProfile(
+    selectedBenchmarkType,
+
+    selectedBenchmarkSize
+  );
+
+  if (!benchmarkProfile) {
+    return voiceRead;
+  }
+
+  const currentAbsoluteProfile =
+    voiceRead.absoluteProfile || voiceRead.currentAbsoluteProfile || {};
+
+  const nextProfile = AXIS_META.reduce((acc, axis) => {
+    const key = axis.key;
+
+    const currentValue = Number(currentAbsoluteProfile[key] ?? 5);
+
+    const benchmarkValue = Number(benchmarkProfile[key] ?? 5);
+
+    const relativeDelta = currentValue - benchmarkValue;
+
+    acc[key] = clampChartValue(5 + relativeDelta);
+
+    return acc;
+  }, {});
+
+  return {
+    ...voiceRead,
+
+    profile: nextProfile,
+
+    selectedBenchmarkProfile: benchmarkProfile,
+
+    referenceAbsoluteProfile: benchmarkProfile,
+  };
+};
+
 const MetricIcon = ({ type, color = '#8da2ff', size = 22 }) => {
   const iconProps = {
     size,
@@ -1351,7 +1757,7 @@ const FeuzonProductDetail = () => {
 
   const [bearingEdge, setBearingEdge] = useState('Balanced Hybrid Edge');
 
-  const [finishSystem, setFinishSystem] = useState('Natural Gloss');
+  const [finishSystem, setFinishSystem] = useState('Natural Satin');
 
   const [stainStyle, setStainStyle] = useState('full-stained');
 
@@ -2111,9 +2517,21 @@ const FeuzonProductDetail = () => {
       benchmarkTypeId,
 
       benchmarkSizeId,
+
+      selectedBenchmarkType,
+
+      selectedBenchmarkSize,
     });
 
-    setSelectedDrumSummary(voiceRead);
+    const benchmarkRelativeVoiceRead = buildBenchmarkRelativeFeuzonRead({
+      voiceRead,
+
+      selectedBenchmarkType,
+
+      selectedBenchmarkSize,
+    });
+
+    setSelectedDrumSummary(benchmarkRelativeVoiceRead);
   }, [
     size,
 
@@ -2150,6 +2568,10 @@ const FeuzonProductDetail = () => {
     benchmarkTypeId,
 
     benchmarkSizeId,
+
+    selectedBenchmarkType,
+
+    selectedBenchmarkSize,
   ]);
 
   useEffect(() => {
@@ -2421,7 +2843,6 @@ const FeuzonProductDetail = () => {
       toast.error('❌ Failed to add item to cart.');
     }
   };
-
   const handleRemoveFromCart = async () => {
     try {
       await removeFromCart(cartItemId || currentCartId);
@@ -2512,42 +2933,92 @@ const FeuzonProductDetail = () => {
                 your hardware.
               </p>
 
-              <div className="feuzon-builder-preset-card">
-                <span className="feuzon-builder-preset-label">Start from</span>
+              <div className="feuzon-builder-preset-card feuzon-builder-preset-card--guided">
+                <div className="feuzon-builder-preset-intro">
+                  <span className="feuzon-builder-preset-label">
+                    Choose a starting point
+                  </span>
 
-                <div className="feuzon-builder-preset-actions">
+                  <p className="feuzon-builder-preset-helper">
+                    Pick a starting recipe for your build. Nothing is locked —
+                    this only sets the initial size, hoops, finish, and baseline
+                    FEUZØN response before you customize below.
+                  </p>
+                </div>
+
+                <div className="feuzon-builder-preset-actions feuzon-builder-preset-actions--cards">
                   <button
                     type="button"
-                    className={`feuzon-builder-preset-button ${
+                    className={`feuzon-builder-preset-button feuzon-builder-preset-button--guided ${
                       isFeuzonLowestPreset ? 'is-active' : ''
                     }`}
                     onClick={() => applyFeuzonPreset('lowest')}
                   >
-                    <span>Lowest Price</span>
+                    <span className="feuzon-builder-preset-title">
+                      Lowest Starting Price
+                    </span>
+
+                    <span className="feuzon-builder-preset-price">
+                      From $950
+                    </span>
+
+                    <span className="feuzon-builder-preset-description">
+                      The most affordable FEUZØN foundation: smaller shell,
+                      triple-flange hoops, natural satin finish, and a quicker,
+                      more open response.
+                    </span>
+
+                    <span className="feuzon-builder-preset-best-for">
+                      Best for: keeping the entry price low while still shaping
+                      the build from there.
+                    </span>
 
                     {isFeuzonLowestPreset && (
                       <small className="feuzon-builder-preset-status">
-                        Current
+                        Current starting point
                       </small>
                     )}
                   </button>
 
                   <button
                     type="button"
-                    className={`feuzon-builder-preset-button feuzon-builder-preset-button--standard ${
+                    className={`feuzon-builder-preset-button feuzon-builder-preset-button--guided feuzon-builder-preset-button--standard ${
                       isFeuzonStandardPreset ? 'is-active' : ''
                     }`}
                     onClick={() => applyFeuzonPreset('standard')}
                   >
-                    <span>FEUZØN Standard</span>
+                    <span className="feuzon-builder-preset-title">
+                      FEUZØN Standard Reference
+                    </span>
+
+                    <span className="feuzon-builder-preset-price">
+                      From $1,450
+                    </span>
+
+                    <span className="feuzon-builder-preset-description">
+                      Ober’s balanced FEUZØN reference build: 14&quot; ×
+                      6.0&quot;, die-cast hoops, natural gloss finish, and the
+                      centered voice profile used as the comparison point.
+                    </span>
+
+                    <span className="feuzon-builder-preset-best-for">
+                      Best for: starting from the default FEUZØN sound before
+                      making personal changes.
+                    </span>
 
                     {isFeuzonStandardPreset && (
                       <small className="feuzon-builder-preset-status">
-                        Current
+                        Current starting point
                       </small>
                     )}
                   </button>
                 </div>
+
+                <p className="feuzon-builder-preset-footnote">
+                  You can still change size, shell pairing, finish, hardware,
+                  hoops, bearing edge, and snare bed after choosing either
+                  starting point.
+                </p>
               </div>
             </div>
 

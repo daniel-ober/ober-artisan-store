@@ -1,0 +1,611 @@
+(node:20717) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/danober/Code/ober-artisan-store/src/data/legacyPrint/buildFeuzonVoiceRead.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/danober/Code/ober-artisan-store/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+==================================================
+FEUZØN STANDARD / CENTERED
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+FEUZØN LOWEST / MOVES FROM STANDARD
+==================================================
+
+=== INPUT ===
+FEUZON • 12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Triple Flange • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.40' │ '+0.40'    │ '7.34'   │ '7.10'    │ '+0.24'       │
+│ 1       │ 'sustain'     │ '5.26' │ '+0.26'    │ '6.48'   │ '6.32'    │ '+0.16'       │
+│ 2       │ 'warmth'      │ '4.36' │ '-0.64'    │ '5.95'   │ '6.34'    │ '-0.39'       │
+│ 3       │ 'projection'  │ '3.66' │ '-1.34'    │ '6.11'   │ '6.92'    │ '-0.81'       │
+│ 4       │ 'brightness'  │ '5.86' │ '+0.86'    │ '6.71'   │ '6.19'    │ '+0.52'       │
+│ 5       │ 'sensitivity' │ '6.16' │ '+1.16'    │ '7.12'   │ '6.42'    │ '+0.70'       │
+│ 6       │ 'control'     │ '3.71' │ '-1.29'    │ '5.70'   │ '6.48'    │ '-0.78'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center, more top-end edge, and a more open feel compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.21
+
+==================================================
+FEUZØN WARM / DEEP / TRIPLE FLANGE
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 7" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Triple Flange • Chrome • Warm Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '3.53' │ '-1.47'    │ '6.09'   │ '7.10'    │ '-1.01'       │
+│ 1       │ 'sustain'     │ '6.56' │ '+1.56'    │ '7.47'   │ '6.32'    │ '+1.15'       │
+│ 2       │ 'warmth'      │ '6.55' │ '+1.55'    │ '7.47'   │ '6.34'    │ '+1.13'       │
+│ 3       │ 'projection'  │ '5.08' │ '+0.08'    │ '6.97'   │ '6.92'    │ '+0.05'       │
+│ 4       │ 'brightness'  │ '3.76' │ '-1.24'    │ '5.44'   │ '6.19'    │ '-0.75'       │
+│ 5       │ 'sensitivity' │ '5.33' │ '+0.33'    │ '6.62'   │ '6.42'    │ '+0.20'       │
+│ 6       │ 'control'     │ '3.59' │ '-1.41'    │ '5.56'   │ '6.48'    │ '-0.92'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a rounder front edge, a fuller center, and a smoother top end compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A warmer, more wood-forward FEUZØN direction with a broader and more seasoned feel under the stick.
+Highlighted: A deeper FEUZØN build with broader body, richer shell bloom, and more dimensional weight through the full note.
+Voice Range: 1.85
+
+==================================================
+FEUZØN MODERN / SHALLOW / DIE-CAST
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 5" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Modern Precision Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '6.34' │ '+1.34'    │ '7.91'   │ '7.10'    │ '+0.81'       │
+│ 1       │ 'sustain'     │ '4.06' │ '-0.94'    │ '5.75'   │ '6.32'    │ '-0.57'       │
+│ 2       │ 'warmth'      │ '3.91' │ '-1.09'    │ '5.68'   │ '6.34'    │ '-0.66'       │
+│ 3       │ 'projection'  │ '4.74' │ '-0.26'    │ '6.76'   │ '6.92'    │ '-0.16'       │
+│ 4       │ 'brightness'  │ '6.17' │ '+1.17'    │ '6.90'   │ '6.19'    │ '+0.71'       │
+│ 5       │ 'sensitivity' │ '5.07' │ '+0.07'    │ '6.46'   │ '6.42'    │ '+0.04'       │
+│ 6       │ 'control'     │ '5.58' │ '+0.58'    │ '6.83'   │ '6.48'    │ '+0.35'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A tighter, more modern FEUZØN direction with quicker articulation and stronger front-end definition.
+Highlighted: A quicker FEUZØN configuration with strong front-end definition, sharper articulation, and a tighter modern crack.
+Voice Range: 3.58
+
+==================================================
+HERITAGE STANDARD / CENTERED
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.07' │ '+0.07'    │ '5.07'   │ '0.00'    │ '+5.07'       │
+│ 1       │ 'sustain'     │ '5.01' │ '+0.01'    │ '5.01'   │ '0.00'    │ '+5.01'       │
+│ 2       │ 'warmth'      │ '4.99' │ '-0.01'    │ '4.99'   │ '0.00'    │ '+4.99'       │
+│ 3       │ 'projection'  │ '4.93' │ '-0.07'    │ '4.93'   │ '0.00'    │ '+4.93'       │
+│ 4       │ 'brightness'  │ '5.08' │ '+0.08'    │ '5.08'   │ '0.00'    │ '+5.08'       │
+│ 5       │ 'sensitivity' │ '5.20' │ '+0.20'    │ '5.20'   │ '0.00'    │ '+5.20'       │
+│ 6       │ 'control'     │ '5.19' │ '+0.19'    │ '5.19'   │ '0.00'    │ '+5.19'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE WARM BUILD
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 7" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Warm Roundover • Standard • Natural Satin • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.97' │ '-0.03'    │ '4.97'   │ '0.00'    │ '+4.97'       │
+│ 1       │ 'sustain'     │ '5.20' │ '+0.20'    │ '5.20'   │ '0.00'    │ '+5.20'       │
+│ 2       │ 'warmth'      │ '5.19' │ '+0.19'    │ '5.19'   │ '0.00'    │ '+5.19'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '5.00'   │ '0.00'    │ '+5.00'       │
+│ 4       │ 'brightness'  │ '5.05' │ '+0.05'    │ '5.05'   │ '0.00'    │ '+5.05'       │
+│ 5       │ 'sensitivity' │ '5.15' │ '+0.15'    │ '5.15'   │ '0.00'    │ '+5.15'       │
+│ 6       │ 'control'     │ '5.18' │ '+0.18'    │ '5.18'   │ '0.00'    │ '+5.18'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE BRIGHT BUILD
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 5.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Modern 45 • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.36' │ '+0.36'    │ '5.36'   │ '0.00'    │ '+5.36'       │
+│ 1       │ 'sustain'     │ '4.59' │ '-0.41'    │ '4.59'   │ '0.00'    │ '+4.59'       │
+│ 2       │ 'warmth'      │ '4.55' │ '-0.45'    │ '4.55'   │ '0.00'    │ '+4.55'       │
+│ 3       │ 'projection'  │ '4.82' │ '-0.18'    │ '4.82'   │ '0.00'    │ '+4.82'       │
+│ 4       │ 'brightness'  │ '5.35' │ '+0.35'    │ '5.35'   │ '0.00'    │ '+5.35'       │
+│ 5       │ 'sensitivity' │ '5.28' │ '+0.28'    │ '5.28'   │ '0.00'    │ '+5.28'       │
+│ 6       │ 'control'     │ '5.25' │ '+0.25'    │ '5.25'   │ '0.00'    │ '+5.25'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+FEUZØN STANDARD VS MAPLE PLY
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.05' │ '+0.05'    │ '7.10'   │ '7.05'    │ '+0.05'       │
+│ 1       │ 'sustain'     │ '5.57' │ '+0.57'    │ '6.32'   │ '5.75'    │ '+0.57'       │
+│ 2       │ 'warmth'      │ '5.59' │ '+0.59'    │ '6.34'   │ '5.75'    │ '+0.59'       │
+│ 3       │ 'projection'  │ '5.27' │ '+0.27'    │ '6.92'   │ '6.65'    │ '+0.27'       │
+│ 4       │ 'brightness'  │ '4.24' │ '-0.76'    │ '6.19'   │ '6.95'    │ '-0.76'       │
+│ 5       │ 'sensitivity' │ '5.17' │ '+0.17'    │ '6.42'   │ '6.25'    │ '+0.17'       │
+│ 6       │ 'control'     │ '5.23' │ '+0.23'    │ '6.48'   │ '6.25'    │ '+0.23'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+FEUZØN STANDARD VS BIRCH PLY
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.75' │ '-0.25'    │ '7.10'   │ '7.35'    │ '-0.25'       │
+│ 1       │ 'sustain'     │ '5.77' │ '+0.77'    │ '6.32'   │ '5.55'    │ '+0.77'       │
+│ 2       │ 'warmth'      │ '5.99' │ '+0.99'    │ '6.34'   │ '5.35'    │ '+0.99'       │
+│ 3       │ 'projection'  │ '4.67' │ '-0.33'    │ '6.92'   │ '7.25'    │ '-0.33'       │
+│ 4       │ 'brightness'  │ '3.89' │ '-1.11'    │ '6.19'   │ '7.30'    │ '-1.11'       │
+│ 5       │ 'sensitivity' │ '5.32' │ '+0.32'    │ '6.42'   │ '6.10'    │ '+0.32'       │
+│ 6       │ 'control'     │ '5.03' │ '+0.03'    │ '6.48'   │ '6.45'    │ '+0.03'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+FEUZØN STANDARD VS WALNUT PLY
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.75' │ '+0.75'    │ '7.10'   │ '6.35'    │ '+0.75'       │
+│ 1       │ 'sustain'     │ '5.17' │ '+0.17'    │ '6.32'   │ '6.15'    │ '+0.17'       │
+│ 2       │ 'warmth'      │ '4.19' │ '-0.81'    │ '6.34'   │ '7.15'    │ '-0.81'       │
+│ 3       │ 'projection'  │ '5.77' │ '+0.77'    │ '6.92'   │ '6.15'    │ '+0.77'       │
+│ 4       │ 'brightness'  │ '5.74' │ '+0.74'    │ '6.19'   │ '5.45'    │ '+0.74'       │
+│ 5       │ 'sensitivity' │ '5.17' │ '+0.17'    │ '6.42'   │ '6.25'    │ '+0.17'       │
+│ 6       │ 'control'     │ '5.23' │ '+0.23'    │ '6.48'   │ '6.25'    │ '+0.23'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+FEUZØN STANDARD VS BRASS
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.65' │ '-0.35'    │ '7.10'   │ '7.45'    │ '-0.35'       │
+│ 1       │ 'sustain'     │ '4.67' │ '-0.33'    │ '6.32'   │ '6.65'    │ '-0.33'       │
+│ 2       │ 'warmth'      │ '5.29' │ '+0.29'    │ '6.34'   │ '6.05'    │ '+0.29'       │
+│ 3       │ 'projection'  │ '4.37' │ '-0.63'    │ '6.92'   │ '7.55'    │ '-0.63'       │
+│ 4       │ 'brightness'  │ '3.94' │ '-1.06'    │ '6.19'   │ '7.25'    │ '-1.06'       │
+│ 5       │ 'sensitivity' │ '4.92' │ '-0.08'    │ '6.42'   │ '6.50'    │ '-0.08'       │
+│ 6       │ 'control'     │ '5.13' │ '+0.13'    │ '6.48'   │ '6.35'    │ '+0.13'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+FEUZØN STANDARD VS STEEL
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.25' │ '-0.75'    │ '7.10'   │ '7.85'    │ '-0.75'       │
+│ 1       │ 'sustain'     │ '5.07' │ '+0.07'    │ '6.32'   │ '6.25'    │ '+0.07'       │
+│ 2       │ 'warmth'      │ '6.09' │ '+1.09'    │ '6.34'   │ '5.25'    │ '+1.09'       │
+│ 3       │ 'projection'  │ '4.17' │ '-0.83'    │ '6.92'   │ '7.75'    │ '-0.83'       │
+│ 4       │ 'brightness'  │ '3.04' │ '-1.96'    │ '6.19'   │ '8.15'    │ '-1.96'       │
+│ 5       │ 'sensitivity' │ '4.97' │ '-0.03'    │ '6.42'   │ '6.45'    │ '-0.03'       │
+│ 6       │ 'control'     │ '4.98' │ '-0.02'    │ '6.48'   │ '6.50'    │ '-0.02'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+FEUZØN STANDARD VS THIN ACRYLIC
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.35' │ '-0.65'    │ '7.10'   │ '7.75'    │ '-0.65'       │
+│ 1       │ 'sustain'     │ '5.27' │ '+0.27'    │ '6.32'   │ '6.05'    │ '+0.27'       │
+│ 2       │ 'warmth'      │ '6.19' │ '+1.19'    │ '6.34'   │ '5.15'    │ '+1.19'       │
+│ 3       │ 'projection'  │ '4.47' │ '-0.53'    │ '6.92'   │ '7.45'    │ '-0.53'       │
+│ 4       │ 'brightness'  │ '2.94' │ '-2.06'    │ '6.19'   │ '8.25'    │ '-2.06'       │
+│ 5       │ 'sensitivity' │ '4.77' │ '-0.23'    │ '6.42'   │ '6.65'    │ '-0.23'       │
+│ 6       │ 'control'     │ '5.28' │ '+0.28'    │ '6.48'   │ '6.20'    │ '+0.28'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+HERITAGE STANDARD VS MAPLE PLY
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '3.02' │ '-1.98'    │ '3.02'   │ '7.05'    │ '-4.03'       │
+│ 1       │ 'sustain'     │ '4.26' │ '-0.74'    │ '4.26'   │ '5.75'    │ '-1.49'       │
+│ 2       │ 'warmth'      │ '4.24' │ '-0.76'    │ '4.24'   │ '5.75'    │ '-1.51'       │
+│ 3       │ 'projection'  │ '3.28' │ '-1.72'    │ '3.28'   │ '6.65'    │ '-3.37'       │
+│ 4       │ 'brightness'  │ '3.13' │ '-1.87'    │ '3.13'   │ '6.95'    │ '-3.82'       │
+│ 5       │ 'sensitivity' │ '3.95' │ '-1.05'    │ '3.95'   │ '6.25'    │ '-2.30'       │
+│ 6       │ 'control'     │ '3.94' │ '-1.06'    │ '3.94'   │ '6.25'    │ '-2.31'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE STANDARD VS BIRCH PLY
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '2.72' │ '-2.28'    │ '2.72'   │ '7.35'    │ '-4.63'       │
+│ 1       │ 'sustain'     │ '4.46' │ '-0.54'    │ '4.46'   │ '5.55'    │ '-1.09'       │
+│ 2       │ 'warmth'      │ '4.64' │ '-0.36'    │ '4.64'   │ '5.35'    │ '-0.71'       │
+│ 3       │ 'projection'  │ '2.68' │ '-2.32'    │ '2.68'   │ '7.25'    │ '-4.57'       │
+│ 4       │ 'brightness'  │ '2.78' │ '-2.22'    │ '2.78'   │ '7.30'    │ '-4.52'       │
+│ 5       │ 'sensitivity' │ '4.10' │ '-0.90'    │ '4.10'   │ '6.10'    │ '-2.00'       │
+│ 6       │ 'control'     │ '3.74' │ '-1.26'    │ '3.74'   │ '6.45'    │ '-2.71'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE STANDARD VS WALNUT PLY
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '3.72' │ '-1.28'    │ '3.72'   │ '6.35'    │ '-2.63'       │
+│ 1       │ 'sustain'     │ '3.86' │ '-1.14'    │ '3.86'   │ '6.15'    │ '-2.29'       │
+│ 2       │ 'warmth'      │ '2.84' │ '-2.16'    │ '2.84'   │ '7.15'    │ '-4.31'       │
+│ 3       │ 'projection'  │ '3.78' │ '-1.22'    │ '3.78'   │ '6.15'    │ '-2.37'       │
+│ 4       │ 'brightness'  │ '4.63' │ '-0.37'    │ '4.63'   │ '5.45'    │ '-0.82'       │
+│ 5       │ 'sensitivity' │ '3.95' │ '-1.05'    │ '3.95'   │ '6.25'    │ '-2.30'       │
+│ 6       │ 'control'     │ '3.94' │ '-1.06'    │ '3.94'   │ '6.25'    │ '-2.31'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE STANDARD VS BRASS
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '2.62' │ '-2.38'    │ '2.62'   │ '7.45'    │ '-4.83'       │
+│ 1       │ 'sustain'     │ '3.36' │ '-1.64'    │ '3.36'   │ '6.65'    │ '-3.29'       │
+│ 2       │ 'warmth'      │ '3.94' │ '-1.06'    │ '3.94'   │ '6.05'    │ '-2.11'       │
+│ 3       │ 'projection'  │ '2.38' │ '-2.62'    │ '2.38'   │ '7.55'    │ '-5.17'       │
+│ 4       │ 'brightness'  │ '2.83' │ '-2.17'    │ '2.83'   │ '7.25'    │ '-4.42'       │
+│ 5       │ 'sensitivity' │ '3.70' │ '-1.30'    │ '3.70'   │ '6.50'    │ '-2.80'       │
+│ 6       │ 'control'     │ '3.84' │ '-1.16'    │ '3.84'   │ '6.35'    │ '-2.51'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE STANDARD VS STEEL
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '2.22' │ '-2.78'    │ '2.22'   │ '7.85'    │ '-5.63'       │
+│ 1       │ 'sustain'     │ '3.76' │ '-1.24'    │ '3.76'   │ '6.25'    │ '-2.49'       │
+│ 2       │ 'warmth'      │ '4.74' │ '-0.26'    │ '4.74'   │ '5.25'    │ '-0.51'       │
+│ 3       │ 'projection'  │ '2.18' │ '-2.82'    │ '2.18'   │ '7.75'    │ '-5.57'       │
+│ 4       │ 'brightness'  │ '1.93' │ '-3.07'    │ '1.93'   │ '8.15'    │ '-6.22'       │
+│ 5       │ 'sensitivity' │ '3.75' │ '-1.25'    │ '3.75'   │ '6.45'    │ '-2.70'       │
+│ 6       │ 'control'     │ '3.69' │ '-1.31'    │ '3.69'   │ '6.50'    │ '-2.81'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+HERITAGE STANDARD VS THIN ACRYLIC
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '2.32' │ '-2.68'    │ '2.32'   │ '7.75'    │ '-5.43'       │
+│ 1       │ 'sustain'     │ '3.96' │ '-1.04'    │ '3.96'   │ '6.05'    │ '-2.09'       │
+│ 2       │ 'warmth'      │ '4.84' │ '-0.16'    │ '4.84'   │ '5.15'    │ '-0.31'       │
+│ 3       │ 'projection'  │ '2.48' │ '-2.52'    │ '2.48'   │ '7.45'    │ '-4.97'       │
+│ 4       │ 'brightness'  │ '1.83' │ '-3.17'    │ '1.83'   │ '8.25'    │ '-6.42'       │
+│ 5       │ 'sensitivity' │ '3.55' │ '-1.45'    │ '3.55'   │ '6.65'    │ '-3.10'       │
+│ 6       │ 'control'     │ '3.99' │ '-1.01'    │ '3.99'   │ '6.20'    │ '-2.21'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+CROSS — FEUZØN STANDARD
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 6" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Balanced Hybrid Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.00' │ '+0.00'    │ '7.10'   │ '7.10'    │ '+0.00'       │
+│ 1       │ 'sustain'     │ '5.00' │ '+0.00'    │ '6.32'   │ '6.32'    │ '+0.00'       │
+│ 2       │ 'warmth'      │ '5.00' │ '+0.00'    │ '6.34'   │ '6.34'    │ '+0.00'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '6.92'   │ '6.92'    │ '+0.00'       │
+│ 4       │ 'brightness'  │ '5.00' │ '+0.00'    │ '6.19'   │ '6.19'    │ '+0.00'       │
+│ 5       │ 'sensitivity' │ '5.00' │ '+0.00'    │ '6.42'   │ '6.42'    │ '+0.00'       │
+│ 6       │ 'control'     │ '5.00' │ '+0.00'    │ '6.48'   │ '6.48'    │ '+0.00'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections sit very close to the selected reference, keeping the overall hybrid response balanced, modern, and centered.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 2.85
+
+==================================================
+CROSS — HERITAGE STANDARD
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 6.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Classic Roundover • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.07' │ '+0.07'    │ '5.07'   │ '0.00'    │ '+5.07'       │
+│ 1       │ 'sustain'     │ '5.01' │ '+0.01'    │ '5.01'   │ '0.00'    │ '+5.01'       │
+│ 2       │ 'warmth'      │ '4.99' │ '-0.01'    │ '4.99'   │ '0.00'    │ '+4.99'       │
+│ 3       │ 'projection'  │ '4.93' │ '-0.07'    │ '4.93'   │ '0.00'    │ '+4.93'       │
+│ 4       │ 'brightness'  │ '5.08' │ '+0.08'    │ '5.08'   │ '0.00'    │ '+5.08'       │
+│ 5       │ 'sensitivity' │ '5.20' │ '+0.20'    │ '5.20'   │ '0.00'    │ '+5.20'       │
+│ 6       │ 'control'     │ '5.19' │ '+0.19'    │ '5.19'   │ '0.00'    │ '+5.19'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+CROSS — FEUZØN LOWEST
+==================================================
+
+=== INPUT ===
+FEUZON • 12" x 5" • 6 lugs • 12 - 10mm • Maple / Walnut + Birch • Triple Flange • Chrome • Balanced Hybrid Edge • Standard • Natural Satin • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.40' │ '+0.40'    │ '7.34'   │ '7.10'    │ '+0.24'       │
+│ 1       │ 'sustain'     │ '5.26' │ '+0.26'    │ '6.48'   │ '6.32'    │ '+0.16'       │
+│ 2       │ 'warmth'      │ '4.36' │ '-0.64'    │ '5.95'   │ '6.34'    │ '-0.39'       │
+│ 3       │ 'projection'  │ '3.66' │ '-1.34'    │ '6.11'   │ '6.92'    │ '-0.81'       │
+│ 4       │ 'brightness'  │ '5.86' │ '+0.86'    │ '6.71'   │ '6.19'    │ '+0.52'       │
+│ 5       │ 'sensitivity' │ '6.16' │ '+1.16'    │ '7.12'   │ '6.42'    │ '+0.70'       │
+│ 6       │ 'control'     │ '3.71' │ '-1.29'    │ '5.70'   │ '6.48'    │ '-0.78'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a leaner center, more top-end edge, and a more open feel compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A hybrid-shell build that leans modern, articulate, and dimensional without giving up body.
+Highlighted: A hybrid FEUZØN voice with articulate front-end response, layered body, and a modern note shape that still carries depth under the stick.
+Voice Range: 3.21
+
+==================================================
+CROSS — HERITAGE WARM
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 7" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Warm Roundover • Standard • Natural Satin • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '4.97' │ '-0.03'    │ '4.97'   │ '0.00'    │ '+4.97'       │
+│ 1       │ 'sustain'     │ '5.20' │ '+0.20'    │ '5.20'   │ '0.00'    │ '+5.20'       │
+│ 2       │ 'warmth'      │ '5.19' │ '+0.19'    │ '5.19'   │ '0.00'    │ '+5.19'       │
+│ 3       │ 'projection'  │ '5.00' │ '+0.00'    │ '5.00'   │ '0.00'    │ '+5.00'       │
+│ 4       │ 'brightness'  │ '5.05' │ '+0.05'    │ '5.05'   │ '0.00'    │ '+5.05'       │
+│ 5       │ 'sensitivity' │ '5.15' │ '+0.15'    │ '5.15'   │ '0.00'    │ '+5.15'       │
+│ 6       │ 'control'     │ '5.18' │ '+0.18'    │ '5.18'   │ '0.00'    │ '+5.18'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+==================================================
+CROSS — FEUZØN MODERN
+==================================================
+
+=== INPUT ===
+FEUZON • 14" x 5" • 8 lugs • 16 - 13mm • Maple / Walnut + Birch • Die-Cast • Chrome • Modern Precision Edge • Standard • Natural Gloss • scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '6.34' │ '+1.34'    │ '7.91'   │ '7.10'    │ '+0.81'       │
+│ 1       │ 'sustain'     │ '4.06' │ '-0.94'    │ '5.75'   │ '6.32'    │ '-0.57'       │
+│ 2       │ 'warmth'      │ '3.91' │ '-1.09'    │ '5.68'   │ '6.34'    │ '-0.66'       │
+│ 3       │ 'projection'  │ '4.74' │ '-0.26'    │ '6.76'   │ '6.92'    │ '-0.16'       │
+│ 4       │ 'brightness'  │ '6.17' │ '+1.17'    │ '6.90'   │ '6.19'    │ '+0.71'       │
+│ 5       │ 'sensitivity' │ '5.07' │ '+0.07'    │ '6.46'   │ '6.42'    │ '+0.04'       │
+│ 6       │ 'control'     │ '5.58' │ '+0.58'    │ '6.83'   │ '6.48'    │ '+0.35'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: Your current FEUZØN selections point toward a quicker front edge, a leaner center, and more top-end edge compared with the selected reference, while keeping the overall shell response layered and modern.
+Feel Read: A tighter, more modern FEUZØN direction with quicker articulation and stronger front-end definition.
+Highlighted: A quicker FEUZØN configuration with strong front-end definition, sharper articulation, and a tighter modern crack.
+Voice Range: 3.58
+
+==================================================
+CROSS — HERITAGE BRIGHT
+==================================================
+
+=== INPUT ===
+HERITAGE • 14" x 5.5" • 8 lugs • 16 - 13mm • Oak • Die-Cast • Chrome • Modern 45 • Standard • Natural Gloss • non-scorched
+┌─────────┬───────────────┬────────┬────────────┬──────────┬───────────┬───────────────┐
+│ (index) │ axis          │ chart  │ chartDelta │ absolute │ reference │ absoluteDelta │
+├─────────┼───────────────┼────────┼────────────┼──────────┼───────────┼───────────────┤
+│ 0       │ 'attack'      │ '5.36' │ '+0.36'    │ '5.36'   │ '0.00'    │ '+5.36'       │
+│ 1       │ 'sustain'     │ '4.59' │ '-0.41'    │ '4.59'   │ '0.00'    │ '+4.59'       │
+│ 2       │ 'warmth'      │ '4.55' │ '-0.45'    │ '4.55'   │ '0.00'    │ '+4.55'       │
+│ 3       │ 'projection'  │ '4.82' │ '-0.18'    │ '4.82'   │ '0.00'    │ '+4.82'       │
+│ 4       │ 'brightness'  │ '5.35' │ '+0.35'    │ '5.35'   │ '0.00'    │ '+5.35'       │
+│ 5       │ 'sensitivity' │ '5.28' │ '+0.28'    │ '5.28'   │ '0.00'    │ '+5.28'       │
+│ 6       │ 'control'     │ '5.25' │ '+0.25'    │ '5.25'   │ '0.00'    │ '+5.25'       │
+└─────────┴───────────────┴────────┴────────────┴──────────┴───────────┴───────────────┘
+Tone Summary: —
+Feel Read: A seasoned, classic Heritage presentation with a balanced TorchTuned posture, while keeping the shell-first balance intact.
+Highlighted: tonally close to the benchmark Heritage warmth posture, the Medium Torch benchmark keeps the line centered between openness and control, Die-Cast hoops push the read toward added focus and containment.
+Voice Range: —
+
+
+==================================================
+SUMMARY COMPARISON TABLE
+==================================================
+┌─────────┬───────────────────────────────────────┬────────────┬────────┬─────────┬────────┬────────────┬────────────┬─────────────┬─────────┬─────────┬────────────┐
+│ (index) │ case                                  │ series     │ attack │ sustain │ warmth │ projection │ brightness │ sensitivity │ control │ maxMove │ voiceRange │
+├─────────┼───────────────────────────────────────┼────────────┼────────┼─────────┼────────┼────────────┼────────────┼─────────────┼─────────┼─────────┼────────────┤
+│ 0       │ 'FEUZØN STANDARD / CENTERED'          │ 'FEUZON'   │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 1       │ 'FEUZØN LOWEST / MOVES FROM STANDARD' │ 'FEUZON'   │ '+0.4' │ '+0.3'  │ '-0.6' │ '-1.3'     │ '+0.9'     │ '+1.2'      │ '-1.3'  │ '1.34'  │ 3.21       │
+│ 2       │ 'FEUZØN WARM / DEEP / TRIPLE FLANGE'  │ 'FEUZON'   │ '-1.5' │ '+1.6'  │ '+1.6' │ '+0.1'     │ '-1.2'     │ '+0.3'      │ '-1.4'  │ '1.56'  │ 1.85       │
+│ 3       │ 'FEUZØN MODERN / SHALLOW / DIE-CAST'  │ 'FEUZON'   │ '+1.3' │ '-0.9'  │ '-1.1' │ '-0.3'     │ '+1.2'     │ '+0.1'      │ '+0.6'  │ '1.34'  │ 3.58       │
+│ 4       │ 'HERITAGE STANDARD / CENTERED'        │ 'HERITAGE' │ '+0.1' │ '+0.0'  │ '-0.0' │ '-0.1'     │ '+0.1'     │ '+0.2'      │ '+0.2'  │ '0.20'  │ '—'        │
+│ 5       │ 'HERITAGE WARM BUILD'                 │ 'HERITAGE' │ '-0.0' │ '+0.2'  │ '+0.2' │ '+0.0'     │ '+0.1'     │ '+0.1'      │ '+0.2'  │ '0.20'  │ '—'        │
+│ 6       │ 'HERITAGE BRIGHT BUILD'               │ 'HERITAGE' │ '+0.4' │ '-0.4'  │ '-0.5' │ '-0.2'     │ '+0.3'     │ '+0.3'      │ '+0.3'  │ '0.45'  │ '—'        │
+│ 7       │ 'FEUZØN STANDARD VS MAPLE PLY'        │ 'FEUZON'   │ '+0.1' │ '+0.6'  │ '+0.6' │ '+0.3'     │ '-0.8'     │ '+0.2'      │ '+0.2'  │ '0.76'  │ 2.85       │
+│ 8       │ 'FEUZØN STANDARD VS BIRCH PLY'        │ 'FEUZON'   │ '-0.3' │ '+0.8'  │ '+1.0' │ '-0.3'     │ '-1.1'     │ '+0.3'      │ '+0.0'  │ '1.11'  │ 2.85       │
+│ 9       │ 'FEUZØN STANDARD VS WALNUT PLY'       │ 'FEUZON'   │ '+0.8' │ '+0.2'  │ '-0.8' │ '+0.8'     │ '+0.7'     │ '+0.2'      │ '+0.2'  │ '0.81'  │ 2.85       │
+│ 10      │ 'FEUZØN STANDARD VS BRASS'            │ 'FEUZON'   │ '-0.3' │ '-0.3'  │ '+0.3' │ '-0.6'     │ '-1.1'     │ '-0.1'      │ '+0.1'  │ '1.06'  │ 2.85       │
+│ 11      │ 'FEUZØN STANDARD VS STEEL'            │ 'FEUZON'   │ '-0.8' │ '+0.1'  │ '+1.1' │ '-0.8'     │ '-2.0'     │ '-0.0'      │ '-0.0'  │ '1.96'  │ 2.85       │
+│ 12      │ 'FEUZØN STANDARD VS THIN ACRYLIC'     │ 'FEUZON'   │ '-0.7' │ '+0.3'  │ '+1.2' │ '-0.5'     │ '-2.1'     │ '-0.2'      │ '+0.3'  │ '2.06'  │ 2.85       │
+│ 13      │ 'HERITAGE STANDARD VS MAPLE PLY'      │ 'HERITAGE' │ '-2.0' │ '-0.7'  │ '-0.8' │ '-1.7'     │ '-1.9'     │ '-1.1'      │ '-1.1'  │ '1.98'  │ '—'        │
+│ 14      │ 'HERITAGE STANDARD VS BIRCH PLY'      │ 'HERITAGE' │ '-2.3' │ '-0.5'  │ '-0.4' │ '-2.3'     │ '-2.2'     │ '-0.9'      │ '-1.3'  │ '2.32'  │ '—'        │
+│ 15      │ 'HERITAGE STANDARD VS WALNUT PLY'     │ 'HERITAGE' │ '-1.3' │ '-1.1'  │ '-2.2' │ '-1.2'     │ '-0.4'     │ '-1.1'      │ '-1.1'  │ '2.16'  │ '—'        │
+│ 16      │ 'HERITAGE STANDARD VS BRASS'          │ 'HERITAGE' │ '-2.4' │ '-1.6'  │ '-1.1' │ '-2.6'     │ '-2.2'     │ '-1.3'      │ '-1.2'  │ '2.62'  │ '—'        │
+│ 17      │ 'HERITAGE STANDARD VS STEEL'          │ 'HERITAGE' │ '-2.8' │ '-1.2'  │ '-0.3' │ '-2.8'     │ '-3.1'     │ '-1.3'      │ '-1.3'  │ '3.07'  │ '—'        │
+│ 18      │ 'HERITAGE STANDARD VS THIN ACRYLIC'   │ 'HERITAGE' │ '-2.7' │ '-1.0'  │ '-0.2' │ '-2.5'     │ '-3.2'     │ '-1.4'      │ '-1.0'  │ '3.17'  │ '—'        │
+│ 19      │ 'CROSS — FEUZØN STANDARD'             │ 'FEUZON'   │ '+0.0' │ '+0.0'  │ '+0.0' │ '+0.0'     │ '+0.0'     │ '+0.0'      │ '+0.0'  │ '0.00'  │ 2.85       │
+│ 20      │ 'CROSS — HERITAGE STANDARD'           │ 'HERITAGE' │ '+0.1' │ '+0.0'  │ '-0.0' │ '-0.1'     │ '+0.1'     │ '+0.2'      │ '+0.2'  │ '0.20'  │ '—'        │
+│ 21      │ 'CROSS — FEUZØN LOWEST'               │ 'FEUZON'   │ '+0.4' │ '+0.3'  │ '-0.6' │ '-1.3'     │ '+0.9'     │ '+1.2'      │ '-1.3'  │ '1.34'  │ 3.21       │
+│ 22      │ 'CROSS — HERITAGE WARM'               │ 'HERITAGE' │ '-0.0' │ '+0.2'  │ '+0.2' │ '+0.0'     │ '+0.1'     │ '+0.1'      │ '+0.2'  │ '0.20'  │ '—'        │
+│ 23      │ 'CROSS — FEUZØN MODERN'               │ 'FEUZON'   │ '+1.3' │ '-0.9'  │ '-1.1' │ '-0.3'     │ '+1.2'     │ '+0.1'      │ '+0.6'  │ '1.34'  │ 3.58       │
+│ 24      │ 'CROSS — HERITAGE BRIGHT'             │ 'HERITAGE' │ '+0.4' │ '-0.4'  │ '-0.5' │ '-0.2'     │ '+0.3'     │ '+0.3'      │ '+0.3'  │ '0.45'  │ '—'        │
+└─────────┴───────────────────────────────────────┴────────────┴────────┴─────────┴────────┴────────────┴────────────┴─────────────┴─────────┴─────────┴────────────┘
+
+
+==================================================
+ASSERTIONS
+==================================================
+✅ PASS — FEUZØN Standard should be centered — maxMove 0.00
+✅ PASS — FEUZØN Lowest should move away from standard — maxMove 1.34
+❌ FAIL — HERITAGE Standard should be centered — maxMove 0.20
+❌ FAIL — HERITAGE Warm build should move from standard — maxMove 0.20
+✅ PASS — HERITAGE Bright build should move from standard — maxMove 0.45
+✅ PASS — FEUZØN STANDARD VS MAPLE PLY should not flatten to all 5s — maxMove 0.76
+✅ PASS — FEUZØN STANDARD VS BIRCH PLY should not flatten to all 5s — maxMove 1.11
+✅ PASS — FEUZØN STANDARD VS WALNUT PLY should not flatten to all 5s — maxMove 0.81
+✅ PASS — FEUZØN STANDARD VS BRASS should not flatten to all 5s — maxMove 1.06
+✅ PASS — FEUZØN STANDARD VS STEEL should not flatten to all 5s — maxMove 1.96
+✅ PASS — FEUZØN STANDARD VS THIN ACRYLIC should not flatten to all 5s — maxMove 2.06
+✅ PASS — HERITAGE STANDARD VS MAPLE PLY should not flatten to all 5s — maxMove 1.98
+✅ PASS — HERITAGE STANDARD VS BIRCH PLY should not flatten to all 5s — maxMove 2.32
+✅ PASS — HERITAGE STANDARD VS WALNUT PLY should not flatten to all 5s — maxMove 2.16
+✅ PASS — HERITAGE STANDARD VS BRASS should not flatten to all 5s — maxMove 2.62
+✅ PASS — HERITAGE STANDARD VS STEEL should not flatten to all 5s — maxMove 3.07
+✅ PASS — HERITAGE STANDARD VS THIN ACRYLIC should not flatten to all 5s — maxMove 3.17
+✅ PASS — FEUZØN and HERITAGE standard absolute profiles should not be identical — absoluteDifference 10.30
