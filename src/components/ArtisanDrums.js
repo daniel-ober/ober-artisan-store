@@ -332,7 +332,7 @@ export const DRUM_SERIES = [
 
     href: '/artisan-shop/soundlegend',
 
-    cta: 'Explore SoundLegend',
+    cta: 'Begin Your SoundLegend Experience',
 
     activeLayer: `${ASSET_BASE}/drums-only-soundlegend.png`,
   },
