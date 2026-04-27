@@ -439,11 +439,14 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How quickly the drum speaks at the start of the note. Rounded attack feels softer and woodier; immediate attack feels quicker, sharper, and more defined.',
 
-    readLow:
-      'Rounded attack feels softer, woodier, and less sharp at the front of the note.',
+    rangeBar:
+      'On a range bar, Attack shows where the drum tends to sit between a softer rounded front edge and a quicker, more immediate crack.',
 
-    readHigh:
-      'Immediate attack feels quicker, cleaner, more defined, and more articulate.',
+    spiderChart:
+      'On a spider chart, a longer Attack point means the drum speaks faster and more clearly at the first touch.',
+
+    drummerRead:
+      'Rounded feels woodier and softer. Immediate feels quicker, cleaner, and more articulate.',
   },
 
   Sustain: {
@@ -460,11 +463,14 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How long the note carries after the initial hit. Shorter sustain feels controlled and dry; more open sustain adds bloom, air, and room presence.',
 
-    readLow:
-      'Short sustain keeps the note tighter, drier, and more controlled.',
+    rangeBar:
+      'On a range bar, Sustain shows whether the drum leans drier and tighter or lets the note breathe longer after the hit.',
 
-    readHigh:
-      'Open sustain lets the note bloom longer with more air and room presence.',
+    spiderChart:
+      'On a spider chart, a longer Sustain point means more bloom, more ring, and more air around the note.',
+
+    drummerRead:
+      'Short feels tighter and drier. Open feels roomier, bloomier, and more alive after the stroke.',
   },
 
   Warmth: {
@@ -481,10 +487,14 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How much body, depth, and low-mid character the drum carries. Leaner voices feel cleaner and tighter; warmer voices feel fuller, rounder, and more organic.',
 
-    readLow: 'Lean warmth feels cleaner, tighter, and less low-mid heavy.',
+    rangeBar:
+      'On a range bar, Warmth shows how much low-mid body and wood character is expected in the voice.',
 
-    readHigh:
-      'More warmth feels fuller, rounder, woodier, and more organic through the center of the note.',
+    spiderChart:
+      'On a spider chart, a longer Warmth point means the drum should feel fuller, rounder, and more centered in the body.',
+
+    drummerRead:
+      'Lean feels cleaner and tighter. Warm feels fuller, woodier, and more rounded through the center.',
   },
 
   Projection: {
@@ -501,11 +511,14 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How strongly the drum carries into the room or mix. A closer voice feels intimate and controlled; a forward voice pushes more presence and authority.',
 
-    readLow:
-      'Close projection feels more intimate, contained, and controlled near the kit.',
+    rangeBar:
+      'On a range bar, Projection shows whether the drum sits close to the kit or steps forward into the room.',
 
-    readHigh:
-      'Forward projection carries harder into the room or mix with more presence and authority.',
+    spiderChart:
+      'On a spider chart, a longer Projection point means the drum should carry farther and feel more present in a mix.',
+
+    drummerRead:
+      'Close feels contained and intimate. Forward feels stronger, more present, and more commanding.',
   },
 
   Brightness: {
@@ -522,11 +535,14 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How much upper-register edge and clarity the drum has. Darker voices feel smoother and woodier; brighter voices feel more open, crisp, and cutting.',
 
-    readLow:
-      'Darker brightness feels smoother, woodier, and less cutting on top.',
+    rangeBar:
+      'On a range bar, Brightness shows how much top-end edge, clarity, and cut the drum has.',
 
-    readHigh:
-      'Brighter voices feel more open, crisp, clear, and able to cut through.',
+    spiderChart:
+      'On a spider chart, a longer Brightness point means more upper-register clarity and bite.',
+
+    drummerRead:
+      'Dark feels smoother and woodier. Bright feels clearer, crisper, and more cutting.',
   },
 
   Sensitivity: {
@@ -543,11 +559,14 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How easily the drum reacts to lighter playing. A forgiving response feels stable and controlled; a responsive drum reveals more ghost notes, touch, and nuance.',
 
-    readLow:
-      'Forgiving sensitivity feels stable and controlled, with less exposure of every small touch.',
+    rangeBar:
+      'On a range bar, Sensitivity shows how readily the drum responds to soft strokes, ghost notes, and small changes in touch.',
 
-    readHigh:
-      'Responsive sensitivity reveals more ghost notes, touch, soft strokes, and nuance.',
+    spiderChart:
+      'On a spider chart, a longer Sensitivity point means the drum reveals more subtle playing detail.',
+
+    drummerRead:
+      'Forgiving feels stable and controlled. Responsive feels more detailed, touchy, and alive under lighter hands.',
   },
 
   Control: {
@@ -564,61 +583,64 @@ const LEGACYPRINT_AXIS_META = {
     meaning:
       'How organized the overall note feels. More open drums have extra movement and spread; more composed drums keep the note focused and easier to manage.',
 
-    readLow:
-      'Open control allows more movement, spread, ring, and personality in the note.',
+    rangeBar:
+      'On a range bar, Control shows whether the note has more movement and spread or stays focused and organized.',
 
-    readHigh:
-      'Composed control keeps the note focused, organized, and easier to manage.',
+    spiderChart:
+      'On a spider chart, a longer Control point means the drum should feel more composed, focused, and easy to place.',
+
+    drummerRead:
+      'Open feels more lively and loose. Composed feels focused, tidy, and easier to control.',
   },
 };
 
 const LEGACYPRINT_RANGE_BY_SERIES = {
   heritage: {
-    Attack: [42, 68],
+    Attack: [40, 66],
 
-    Sustain: [32, 62],
+    Sustain: [30, 58],
 
-    Warmth: [54, 82],
+    Warmth: [56, 82],
 
-    Projection: [44, 70],
+    Projection: [42, 68],
 
-    Brightness: [34, 64],
+    Brightness: [32, 60],
 
-    Sensitivity: [34, 64],
+    Sensitivity: [34, 62],
 
-    Control: [48, 76],
+    Control: [50, 78],
   },
 
   feuzon: {
-    Attack: [56, 86],
+    Attack: [56, 84],
 
-    Sustain: [46, 78],
+    Sustain: [46, 76],
 
     Warmth: [44, 72],
 
     Projection: [56, 86],
 
-    Brightness: [48, 80],
+    Brightness: [48, 78],
 
-    Sensitivity: [52, 84],
+    Sensitivity: [52, 82],
 
-    Control: [50, 78],
+    Control: [48, 76],
   },
 
   soundlegend: {
-    Attack: [34, 96],
+    Attack: [34, 94],
 
-    Sustain: [30, 92],
+    Sustain: [28, 88],
 
-    Warmth: [36, 98],
+    Warmth: [38, 96],
 
-    Projection: [42, 98],
+    Projection: [40, 96],
 
-    Brightness: [34, 94],
+    Brightness: [30, 90],
 
-    Sensitivity: [40, 98],
+    Sensitivity: [38, 96],
 
-    Control: [38, 96],
+    Control: [36, 92],
   },
 };
 
@@ -629,6 +651,22 @@ const VOICE_NODE_GUIDE = Object.entries(LEGACYPRINT_AXIS_META).map(
     ...meta,
   })
 );
+
+const GUIDE_NODE_POSITIONS = {
+  attack: { x: 50, y: 10.5 },
+
+  sustain: { x: 80.9, y: 25.4 },
+
+  warmth: { x: 88.5, y: 58.8 },
+
+  projection: { x: 67.2, y: 85.8 },
+
+  brightness: { x: 32.8, y: 85.8 },
+
+  sensitivity: { x: 11.5, y: 58.8 },
+
+  control: { x: 19.1, y: 25.4 },
+};
 
 const getSeriesById = (id) =>
   DRUM_SERIES.find((series) => series.id === id) || DRUM_SERIES[0];
@@ -671,165 +709,377 @@ const MetricIcon = ({ type, color = '#d6b277', size = 16 }) => {
   }
 };
 
-const VoiceNodeGuideModal = ({ onClose }) => (
-  <div
-    className="oad-node-modal-backdrop"
-    role="presentation"
-    onMouseDown={onClose}
-  >
+const VoiceNodeGuideModal = ({ onClose }) => {
+  const [activeNodeKey, setActiveNodeKey] = useState(null);
+
+  const [activeInfoPanel, setActiveInfoPanel] = useState('overview');
+
+  const activeNode =
+    VOICE_NODE_GUIDE.find((node) => node.key === activeNodeKey) || null;
+
+  const polygonSegments = VOICE_NODE_GUIDE.map((node, index) => {
+    const nextNode = VOICE_NODE_GUIDE[(index + 1) % VOICE_NODE_GUIDE.length];
+
+    return {
+      from: node,
+
+      to: nextNode,
+
+      fromPosition: GUIDE_NODE_POSITIONS[node.key],
+
+      toPosition: GUIDE_NODE_POSITIONS[nextNode.key],
+
+      gradientId: `oadVoiceSegmentGradient-${node.key}-${nextNode.key}`,
+    };
+  });
+
+  const handleNodeClick = (nodeKey) => {
+    setActiveNodeKey(nodeKey);
+
+    setActiveInfoPanel('overview');
+  };
+
+  const activeInfoContent = activeNode
+    ? {
+        overview: {
+          label: 'Overview',
+
+          text: activeNode.meaning,
+        },
+
+        read: {
+          label: 'How to read it',
+
+          text: 'Whether you are looking at a range bar, spider chart, or comparison graph, the idea is the same: the farther the shape pushes toward the outside, the more strongly that trait is showing up in the drum’s voice.',
+        },
+
+        translation: {
+          label: 'Drummer translation',
+
+          text: activeNode.drummerRead,
+        },
+      }
+    : null;
+
+  return (
     <div
-      className="oad-node-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="oad-node-modal-title"
-      onMouseDown={(event) => event.stopPropagation()}
+      className="oad-node-modal-backdrop"
+      role="presentation"
+      onMouseDown={onClose}
     >
-      <div className="oad-node-modal-head">
-        <div className="oad-node-modal-title-block">
-          <span className="oad-node-modal-kicker">
-            LegacyPrint™ field guide
-          </span>
+      <div
+        className="oad-node-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="oad-node-modal-title"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <div className="oad-node-modal-head">
+          <div className="oad-node-modal-title-block">
+            <span className="oad-node-modal-kicker">
+              LegacyPrint™ sound guide
+            </span>
 
-          <h3 id="oad-node-modal-title">Reading the voice of a drum</h3>
+            <h3 id="oad-node-modal-title">Voice Map Reference</h3>
+          </div>
 
-          <p>
-            LegacyPrint™ uses seven plain-language sound markers to describe how
-            a drum speaks, feels under the stick, and carries in real playing.
-          </p>
+          <button
+            type="button"
+            className="oad-node-modal-close"
+            onClick={onClose}
+            aria-label="Close voice node guide"
+          >
+            ×
+          </button>
         </div>
 
-        <button
-          type="button"
-          className="oad-node-modal-close"
-          onClick={onClose}
-          aria-label="Close voice node guide"
-        >
-          ×
-        </button>
-      </div>
-
-      <div className="oad-node-modal-body">
-        <section className="oad-node-field-note">
-          <span>Workshop note</span>
-
-          <p>
-            These are not ratings. They are listening cues. A drum is not better
-            because it is brighter, more open, or more forward. The right voice
-            depends on the player, the room, the music, the tuning range, and
-            the way the drum needs to feel in the hands.
-          </p>
-        </section>
-
-        <div className="oad-node-guide-list">
-          {VOICE_NODE_GUIDE.map((node) => {
-            const axisColor = AXIS_COLOR_BY_KEY[node.key] || '#d6b277';
-
-            return (
-              <article
-                key={node.label}
-                className="oad-node-guide-row"
-                style={{ '--oad-axis-color': axisColor }}
+        <div className="oad-node-modal-body">
+          <div className="oad-voice-engine">
+            <div className="oad-voice-engine-orbit" aria-hidden="true">
+              <svg
+                className="oad-voice-polygon-svg"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
               >
-                <div className="oad-node-guide-marker" aria-hidden="true">
-                  <MetricIcon type={node.icon} color={axisColor} size={17} />
+                <defs>
+                  {polygonSegments.map((segment) => (
+                    <linearGradient
+                      key={segment.gradientId}
+                      id={segment.gradientId}
+                      gradientUnits="userSpaceOnUse"
+                      x1={segment.fromPosition.x}
+                      y1={segment.fromPosition.y}
+                      x2={segment.toPosition.x}
+                      y2={segment.toPosition.y}
+                    >
+                      <stop
+                        offset="0%"
+                        stopColor={
+                          AXIS_COLOR_BY_KEY[segment.from.key] || '#d6b277'
+                        }
+                      />
+
+                      <stop
+                        offset="50%"
+                        stopColor={
+                          AXIS_COLOR_BY_KEY[segment.from.key] &&
+                          AXIS_COLOR_BY_KEY[segment.to.key]
+                            ? `color-mix(in srgb, ${
+                                AXIS_COLOR_BY_KEY[segment.from.key]
+                              } 50%, ${AXIS_COLOR_BY_KEY[segment.to.key]} 50%)`
+                            : '#d6b277'
+                        }
+                      />
+
+                      <stop
+                        offset="100%"
+                        stopColor={
+                          AXIS_COLOR_BY_KEY[segment.to.key] || '#d6b277'
+                        }
+                      />
+                    </linearGradient>
+                  ))}
+
+                  <filter id="oadVoicePolygonGlow">
+                    <feGaussianBlur stdDeviation="1.4" result="blur" />
+
+                    <feMerge>
+                      <feMergeNode in="blur" />
+
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {polygonSegments.map((segment) => (
+                  <line
+                    key={`${segment.gradientId}-glow`}
+                    className="oad-voice-polygon-segment oad-voice-polygon-segment-glow"
+                    x1={segment.fromPosition.x}
+                    y1={segment.fromPosition.y}
+                    x2={segment.toPosition.x}
+                    y2={segment.toPosition.y}
+                    stroke={`url(#${segment.gradientId})`}
+                  />
+                ))}
+
+                {polygonSegments.map((segment) => (
+                  <line
+                    key={`${segment.gradientId}-main`}
+                    className="oad-voice-polygon-segment oad-voice-polygon-segment-main"
+                    x1={segment.fromPosition.x}
+                    y1={segment.fromPosition.y}
+                    x2={segment.toPosition.x}
+                    y2={segment.toPosition.y}
+                    stroke={`url(#${segment.gradientId})`}
+                    filter="url(#oadVoicePolygonGlow)"
+                  />
+                ))}
+
+                {polygonSegments.map((segment) => (
+                  <line
+                    key={`${segment.gradientId}-core`}
+                    className="oad-voice-polygon-segment oad-voice-polygon-segment-core"
+                    x1={segment.fromPosition.x}
+                    y1={segment.fromPosition.y}
+                    x2={segment.toPosition.x}
+                    y2={segment.toPosition.y}
+                    stroke={`url(#${segment.gradientId})`}
+                  />
+                ))}
+              </svg>
+            </div>
+
+            <div className="oad-node-button-layer">
+              {VOICE_NODE_GUIDE.map((node) => {
+                const axisColor = AXIS_COLOR_BY_KEY[node.key] || '#d6b277';
+
+                const position = GUIDE_NODE_POSITIONS[node.key];
+
+                return (
+                  <button
+                    key={node.key}
+                    type="button"
+                    className={`oad-guide-node-button oad-guide-node-${node.key} ${
+                      activeNodeKey === node.key ? 'is-active' : ''
+                    }`}
+                    style={{
+                      '--oad-axis-color': axisColor,
+
+                      '--node-x': `${position.x}%`,
+
+                      '--node-y': `${position.y}%`,
+                    }}
+                    onClick={() => handleNodeClick(node.key)}
+                    aria-label={`Read ${node.label}`}
+                  >
+                    <span className="oad-guide-node-icon">
+                      <MetricIcon
+                        type={node.icon}
+                        color={axisColor}
+                        size={18}
+                      />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <section
+              className={`oad-engine-center ${
+                activeNode ? 'is-showing-node' : ''
+              }`}
+              style={{
+                '--oad-axis-color': activeNode
+                  ? AXIS_COLOR_BY_KEY[activeNode.key]
+                  : '#d6b277',
+              }}
+            >
+              {!activeNode && (
+                <div className="oad-engine-intro">
+                  <span className="oad-engine-intro-kicker">
+                    LegacyPrint™ voice engine
+                  </span>
+
+                  <h4>Tap a sound node.</h4>
+
+                  <p>
+                    Each node represents one part of how a drum speaks, feels,
+                    responds, and carries.
+                  </p>
+
+                  <p>
+                    Tap an icon around the polygon to learn how to read that
+                    trait across range bars, spider charts, and build notes.
+                  </p>
+
+                  <div className="oad-engine-mini-map" aria-hidden="true">
+                    {VOICE_NODE_GUIDE.map((node) => {
+                      const axisColor =
+                        AXIS_COLOR_BY_KEY[node.key] || '#d6b277';
+
+                      return (
+                        <span
+                          key={node.key}
+                          style={{ '--oad-axis-color': axisColor }}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
+              )}
 
-                <div className="oad-node-guide-content">
-                  <div className="oad-node-guide-heading">
-                    <div>
-                      <h4>{node.label}</h4>
+              {activeNode && (
+                <div className="oad-engine-node-detail">
+                  <div className="oad-engine-node-title">
+                    <span className="oad-engine-node-title-icon">
+                      <MetricIcon
+                        type={activeNode.icon}
+                        color={AXIS_COLOR_BY_KEY[activeNode.key]}
+                        size={24}
+                      />
+                    </span>
 
-                      <span>
-                        {node.low} → {node.high}
-                      </span>
+                    <h4>{activeNode.label}</h4>
+                  </div>
+
+                  <span className="oad-engine-node-range">
+                    {activeNode.low} / {activeNode.high}
+                  </span>
+
+                  <div className="oad-engine-info-card">
+                    {activeInfoPanel === 'overview' && (
+                      <>
+                        <span>Overview</span>
+
+                        <p>{activeNode.meaning}</p>
+                      </>
+                    )}
+
+                    {activeInfoPanel === 'read' && (
+                      <>
+                        <span>How to read it</span>
+
+                        <p>
+                          Whether you are looking at a range bar, spider chart,
+                          or comparison graph, the idea is the same: the farther
+                          the shape pushes toward the outside, the more strongly
+                          that trait is showing up in the drum’s voice.
+                        </p>
+                      </>
+                    )}
+
+                    {activeInfoPanel === 'translation' && (
+                      <>
+                        <span>Drummer translation</span>
+
+                        <p>{activeNode.drummerRead}</p>
+                      </>
+                    )}
+                  </div>
+
+                  <div className="oad-engine-node-controls">
+                    <div
+                      className="oad-engine-dot-nav"
+                      aria-label="Voice node detail selector"
+                    >
+                      <button
+                        type="button"
+                        className={`oad-engine-dot ${activeInfoPanel === 'overview' ? 'is-active' : ''}`}
+                        onClick={() => setActiveInfoPanel('overview')}
+                        aria-label="Overview"
+                      />
+
+                      <button
+                        type="button"
+                        className={`oad-engine-dot ${activeInfoPanel === 'read' ? 'is-active' : ''}`}
+                        onClick={() => setActiveInfoPanel('read')}
+                        aria-label="How to read it"
+                      />
+
+                      <button
+                        type="button"
+                        className={`oad-engine-dot ${activeInfoPanel === 'translation' ? 'is-active' : ''}`}
+                        onClick={() => setActiveInfoPanel('translation')}
+                        aria-label="Drummer translation"
+                      />
                     </div>
-                  </div>
 
-                  <p className="oad-node-guide-meaning">{node.meaning}</p>
-
-                  <div className="oad-node-voice-ends">
-                    <p>
-                      <strong>{node.low}</strong>
-
-                      {node.readLow}
-                    </p>
-
-                    <p>
-                      <strong>{node.high}</strong>
-
-                      {node.readHigh}
-                    </p>
+                    <button
+                      type="button"
+                      className="oad-engine-back-button"
+                      onClick={() => setActiveNodeKey(null)}
+                    >
+                      Back
+                    </button>
                   </div>
                 </div>
-              </article>
-            );
-          })}
+              )}
+            </section>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
-const ToneBars = ({ profile, seriesId, onOpenGuide }) => {
-
+const ToneBars = ({ profile, seriesId }) => {
   const seriesColor = SERIES_RANGE_COLORS[seriesId] || '#398FA3';
 
   const [activeTouchNode, setActiveTouchNode] = useState(null);
 
   const handleTouchToggle = (label) => {
-
     setActiveTouchNode((current) => (current === label ? null : label));
-
   };
 
   return (
-
     <div
-
       className={`oad-tone-bars oad-tone-bars-${seriesId}`}
-
       aria-label="Ober LegacyPrint series voice range"
-
       style={{ '--oad-series-range-color': seriesColor }}
-
     >
-
-      <div className="oad-tone-intro">
-
-        <div className="oad-tone-intro-top">
-
-          <span className="oad-tone-intro-label">Voice range preview</span>
-
-          <button
-
-            type="button"
-
-            className="oad-tone-guide-button"
-
-            onClick={onOpenGuide}
-
-          >
-
-            How to read the voice nodes
-
-          </button>
-
-        </div>
-
-        <p>
-
-          These ranges show the general voicing area each series can cover
-
-          across size, shell, edge, hoop, finish, setup, and player direction.
-
-        </p>
-
-      </div>
-
       <div className="oad-tone-row-stack">
-
         {profile.map((item) => {
-
           const axisMeta = LEGACYPRINT_AXIS_META[item.label];
 
           const axisKey = axisMeta?.key || item.label.toLowerCase();
@@ -837,9 +1087,7 @@ const ToneBars = ({ profile, seriesId, onOpenGuide }) => {
           const axisColor = AXIS_COLOR_BY_KEY[axisKey] || '#d6b277';
 
           const seriesRange = LEGACYPRINT_RANGE_BY_SERIES[seriesId]?.[
-
             item.label
-
           ] || [Math.max(item.value - 10, 0), Math.min(item.value + 10, 100)];
 
           const [rangeStart, rangeEnd] = seriesRange;
@@ -849,127 +1097,84 @@ const ToneBars = ({ profile, seriesId, onOpenGuide }) => {
           const isTouchOpen = activeTouchNode === item.label;
 
           return (
-
             <button
-
               key={item.label}
-
               type="button"
-
               className={`oad-tone-row oad-tone-row-${axisKey} ${
-
                 isTouchOpen ? 'is-touch-open' : ''
-
               }`}
+              style={{
+                '--oad-axis-color': axisColor,
 
-              style={{ '--oad-axis-color': axisColor }}
+                '--range-start': rangeStart,
 
+                '--range-width': rangeWidth,
+              }}
               onClick={() => handleTouchToggle(item.label)}
-
               aria-expanded={isTouchOpen}
-
             >
-
               <div className="oad-tone-meta">
-
                 <div className="oad-tone-title-group">
-
                   <span className="oad-tone-icon" aria-hidden="true">
-
                     <MetricIcon type={axisMeta?.icon} color={axisColor} />
-
                   </span>
 
                   <div className="oad-tone-title-copy">
-
                     <span className="oad-tone-label">{item.label}</span>
 
                     <span className="oad-tone-sublabel">
-
                       {axisMeta?.sublabel}
-
                     </span>
-
                   </div>
-
                 </div>
 
                 <span className="oad-tone-range-label">
-
                   {axisMeta?.low} → {axisMeta?.high}
-
                 </span>
-
               </div>
 
               <div
-
                 className="oad-tone-track"
-
                 aria-label={`${item.label}: ${axisMeta?.low} to ${axisMeta?.high}`}
-
               >
-
                 <div className="oad-tone-track-glow" aria-hidden="true" />
 
                 <span className="oad-tone-scale-label oad-tone-scale-label-left">
-
                   {axisMeta?.low}
-
                 </span>
 
                 <span className="oad-tone-scale-label oad-tone-scale-label-right">
-
                   {axisMeta?.high}
-
                 </span>
 
                 <div
-
                   className="oad-tone-range-fill"
-
                   style={{
-
                     left: `${rangeStart}%`,
 
                     width: `${rangeWidth}%`,
-
                   }}
-
                   aria-hidden="true"
-
                 />
-
               </div>
 
               <div className="oad-tone-tooltip" role="tooltip">
+                <strong>{item.label}</strong>
 
-                <strong>{item.note}</strong>
-
-                <span>{axisMeta?.meaning}</span>
-
+                <span>{item.note}</span>
               </div>
 
               <div className="oad-tone-touch-note" aria-hidden={!isTouchOpen}>
+                <strong>{item.label}</strong>
 
-                <strong>{item.note}</strong>
-
-                <span>{axisMeta?.meaning}</span>
-
+                <span>{item.note}</span>
               </div>
-
             </button>
-
           );
-
         })}
-
       </div>
-
     </div>
-
   );
-
 };
 
 const SeriesFeature = ({ series, onNavigate, onCompare }) => {
@@ -1029,15 +1234,21 @@ const SeriesFeature = ({ series, onNavigate, onCompare }) => {
             <p className="oad-side-copy">{series.snapshotSummary}</p>
           </div>
 
-          <ToneBars
-            profile={series.legacyPrintProfile}
-            seriesId={series.id}
-            onOpenGuide={() => setShowVoiceNodeGuide(true)}
-          />
+          <ToneBars profile={series.legacyPrintProfile} seriesId={series.id} />
 
-          <p className="oad-legacyprint-powered">
-            Powered by the Ober LegacyPrint™ Voicing Engine
-          </p>
+          <div className="oad-legacyprint-footer-read">
+            <p className="oad-legacyprint-powered">
+              Powered by the Ober LegacyPrint™ Voicing Engine
+            </p>
+
+            <button
+              type="button"
+              className="oad-tone-guide-button oad-tone-guide-button-footer"
+              onClick={() => setShowVoiceNodeGuide(true)}
+            >
+              How to read the voice nodes
+            </button>
+          </div>
 
           <VoiceProfileDisclaimer />
         </div>

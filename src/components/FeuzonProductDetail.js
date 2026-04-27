@@ -4134,9 +4134,9 @@ const FeuzonProductDetail = () => {
             </div>
 
             <div className="feuzon-price-stack">
-              <span className="feuzon-price-starting-label">
+              {/* <span className="feuzon-price-starting-label">
                 Builds starting at $950
-              </span>
+              </span> */}
 
               <p className="feuzon-detail-price">
                 {formatCurrency(totalPrice)}
