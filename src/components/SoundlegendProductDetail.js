@@ -392,7 +392,7 @@ const SoundLegendProductDetail = () => {
               <li>High-resolution design mockups</li>
               <li>Priority SoundLegend Portal access during active builds</li>
               <li>Legacy Vault artist page opportunity</li>
-              <li>Builds starting at $1,499</li>
+              <li>Builds starting at $1,850</li>
             </ul>
           </div>
 
