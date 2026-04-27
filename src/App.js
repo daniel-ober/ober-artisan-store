@@ -40,6 +40,8 @@ import Cart from './components/Cart.js';
 
 import ArtisanDrums from './components/ArtisanDrums.js';
 
+import LegacyPrintEnginePage from './components/LegacyPrintEnginePage.js';
+
 import Register from './components/Register.js';
 
 import ForgotPassword from './components/ForgotPassword.js';
@@ -199,6 +201,8 @@ function App() {
       '/our-craft': 'OurCraft',
 
       '/our-collection': 'OurCollection',
+
+      '/legacyprint': 'LegacyPrint',
 
       '/artisan-portal/signin': 'SignIn',
 
@@ -448,6 +452,8 @@ function App() {
 
             />
 
+            <Route path="/legacyprint" element={<LegacyPrintEnginePage />} />
+
             <Route
 
               path="/founders-batch"
@@ -468,7 +474,13 @@ function App() {
 
             <Route path="/terms-of-service" element={<TermsOfService />} />
 
-            <Route path="/custom-drum-builder" element={<CustomDrumBuilder />} />
+            <Route
+
+              path="/custom-drum-builder"
+
+              element={<CustomDrumBuilder />}
+
+            />
 
             <Route
 

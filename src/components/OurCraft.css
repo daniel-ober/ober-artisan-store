@@ -1,3 +1,5 @@
+/* src/pages/OurCraft.css */
+
 :root {
 
   --oc-bg: #070707;
@@ -7,6 +9,8 @@
   --oc-panel-strong: rgba(10, 10, 10, 0.74);
 
   --oc-border: rgba(255, 255, 255, 0.08);
+
+  --oc-border-strong: rgba(214, 178, 119, 0.22);
 
   --oc-text: rgba(255, 255, 255, 0.95);
 
@@ -22,11 +26,7 @@
 
   --oc-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
 
-  --oc-vh: 100svh;
-
-  --oc-nav-offset: 0px;
-
-  --oc-section-height: 100svh;
+  --oc-shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.42);
 
 }
 
@@ -49,10 +49,6 @@ body {
 body.our-craft-page {
 
   background: #000;
-
-  scroll-snap-type: y mandatory;
-
-  scroll-padding-top: 0;
 
 }
 
@@ -106,7 +102,7 @@ body.our-craft-page {
 
   line-height: 1;
 
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 
   color: #fff;
 
@@ -114,7 +110,7 @@ body.our-craft-page {
 
 /* -------------------------------------------------------------------------- */
 
-/* Vertical story sections */
+/* Story rail */
 
 /* -------------------------------------------------------------------------- */
 
@@ -122,7 +118,63 @@ body.our-craft-page {
 
   position: relative;
 
+  min-height: 100svh;
+
   background: #050505;
+
+  overflow: hidden;
+
+}
+
+@supports (height: 100dvh) {
+
+  .oc-story-shell {
+
+    min-height: 100dvh;
+
+  }
+
+}
+
+.oc-story-rail {
+
+  display: grid;
+
+  grid-auto-flow: column;
+
+  grid-auto-columns: 100%;
+
+  min-height: 100svh;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+
+  overscroll-behavior-x: contain;
+
+  overscroll-behavior-y: auto;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+
+}
+
+@supports (height: 100dvh) {
+
+  .oc-story-rail {
+
+    min-height: 100dvh;
+
+  }
+
+}
+
+.oc-story-rail::-webkit-scrollbar {
+
+  display: none;
 
 }
 
@@ -130,13 +182,11 @@ body.our-craft-page {
 
   position: relative;
 
-  min-height: var(--oc-section-height);
-
-  height: var(--oc-section-height);
+  min-height: 100svh;
 
   display: flex;
 
-  align-items: stretch;
+  align-items: center;
 
   justify-content: center;
 
@@ -144,11 +194,17 @@ body.our-craft-page {
 
   scroll-snap-stop: always;
 
-  scroll-margin-top: 0;
-
   overflow: hidden;
 
-  isolation: isolate;
+}
+
+@supports (height: 100dvh) {
+
+  .oc-story-slide {
+
+    min-height: 100dvh;
+
+  }
 
 }
 
@@ -164,9 +220,9 @@ body.our-craft-page {
 
   background-repeat: no-repeat;
 
-  transform: scale(1.03);
+  transform: scale(1.02);
 
-  filter: brightness(0.4) saturate(0.78);
+  filter: brightness(0.34) saturate(0.76) contrast(1.02);
 
 }
 
@@ -182,15 +238,13 @@ body.our-craft-page {
 
       180deg,
 
-      rgba(0, 0, 0, 0.78) 0%,
+      rgba(0, 0, 0, 0.58) 0%,
 
-      rgba(0, 0, 0, 0.74) 20%,
+      rgba(0, 0, 0, 0.68) 36%,
 
-      rgba(0, 0, 0, 0.8) 52%,
+      rgba(0, 0, 0, 0.76) 70%,
 
-      rgba(0, 0, 0, 0.88) 78%,
-
-      rgba(0, 0, 0, 0.94) 100%
+      rgba(0, 0, 0, 0.9) 100%
 
     ),
 
@@ -198,9 +252,9 @@ body.our-craft-page {
 
       circle at center,
 
-      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.035) 0%,
 
-      rgba(255, 255, 255, 0) 56%
+      rgba(255, 255, 255, 0) 58%
 
     );
 
@@ -220,23 +274,13 @@ body.our-craft-page {
 
   width: 100%;
 
-  min-height: var(--oc-section-height);
-
-  height: 100%;
-
-  padding: 20px 0 22px;
-
-  box-sizing: border-box;
-
-  overflow: hidden;
+  padding: 86px 0 126px;
 
 }
 
 .oc-story-inner {
 
   width: min(1040px, 100%);
-
-  max-height: 100%;
 
   display: flex;
 
@@ -246,17 +290,15 @@ body.our-craft-page {
 
   justify-content: center;
 
-  gap: 18px;
+  gap: 24px;
 
   margin: 0 auto;
-
-  overflow: hidden;
 
 }
 
 .oc-story-copy {
 
-  width: min(760px, 100%);
+  width: min(780px, 100%);
 
   text-align: center;
 
@@ -272,9 +314,11 @@ body.our-craft-page {
 
   line-height: 0.92;
 
-  letter-spacing: -0.05em;
+  letter-spacing: -0.055em;
 
   color: #fff;
+
+  text-wrap: balance;
 
 }
 
@@ -282,13 +326,15 @@ body.our-craft-page {
 
   width: min(760px, 100%);
 
-  margin: 0 auto 12px;
+  margin: 0 auto 14px;
 
-  font-size: 0.98rem;
+  font-size: 1.03rem;
 
-  line-height: 1.6;
+  line-height: 1.72;
 
   color: var(--oc-text-soft);
+
+  text-wrap: pretty;
 
 }
 
@@ -392,87 +438,85 @@ body.our-craft-page {
 
 }
 
-.oc-discovery-stack {
+.oc-discovery-promo {
 
-  width: min(1040px, 100%);
+  width: min(960px, 100%);
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 16px;
+  gap: 18px;
+
+  align-items: center;
 
 }
 
-.oc-discovery-summary-card {
+.oc-discovery-link {
 
-  width: min(760px, 100%);
+  display: inline-flex;
 
-  margin: 0 auto;
+  align-items: center;
 
-  padding: 18px 18px 16px;
+  gap: 8px;
 
-  border-radius: 18px;
+  min-height: auto;
 
-  border: 1px solid rgba(214, 178, 119, 0.14);
+  padding: 0;
 
-  background: rgba(6, 6, 6, 0.64);
+  border: none;
 
-  backdrop-filter: blur(10px);
+  border-radius: 0;
 
-  box-shadow: var(--oc-shadow);
+  background: transparent;
 
-  text-align: center;
+  color: #f3dfbd;
 
-}
-
-.oc-discovery-summary-kicker {
-
-  display: inline-block;
-
-  margin-bottom: 10px;
-
-  font-size: 0.72rem;
+  font-size: 0.9rem;
 
   font-weight: 800;
 
-  letter-spacing: 0.16em;
+  cursor: pointer;
 
-  text-transform: uppercase;
+  backdrop-filter: none;
 
-  color: var(--oc-gold);
+  transition:
+
+    transform 0.18s ease,
+
+    color 0.18s ease,
+
+    opacity 0.18s ease;
 
 }
 
-.oc-discovery-summary-card p {
+.oc-discovery-link:hover {
 
-  margin: 0;
+  transform: translateX(3px);
 
-  font-size: 0.92rem;
-
-  line-height: 1.58;
-
-  color: var(--oc-text-soft);
+  color: #fff;
 
 }
 
 /* -------------------------------------------------------------------------- */
 
-/* UI */
+/* Story controls */
 
 /* -------------------------------------------------------------------------- */
 
 .oc-story-ui {
 
-  position: fixed;
+  position: absolute;
 
-  right: 18px;
+  left: 50%;
 
-  top: 50%;
+  bottom: 24px;
 
-  transform: translateY(-50%);
+  transform: translateX(-50%);
 
-  z-index: 50;
+  z-index: 30;
+
+  width: min(860px, calc(100% - 48px));
 
   display: flex;
 
@@ -480,9 +524,31 @@ body.our-craft-page {
 
   align-items: center;
 
-  gap: 12px;
+  gap: 13px;
 
   pointer-events: auto;
+
+}
+
+.oc-story-arrow-row {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: transparent;
+
+  backdrop-filter: none;
 
 }
 
@@ -498,15 +564,15 @@ body.our-craft-page {
 
   height: 42px;
 
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
 
-  border-radius: 999px;
+  border: none;
 
-  background: rgba(8, 8, 8, 0.72);
+  border-radius: 0;
 
-  backdrop-filter: blur(8px);
+  background: transparent;
 
-  color: #fff;
+  color: rgba(255, 255, 255, 0.72);
 
   cursor: pointer;
 
@@ -514,9 +580,7 @@ body.our-craft-page {
 
     transform 0.18s ease,
 
-    background 0.18s ease,
-
-    border-color 0.18s ease,
+    color 0.18s ease,
 
     opacity 0.18s ease;
 
@@ -524,17 +588,15 @@ body.our-craft-page {
 
 .oc-story-arrow:hover:not(:disabled) {
 
-  transform: scale(1.03);
+  transform: translateY(-1px);
 
-  background: rgba(255, 255, 255, 0.07);
-
-  border-color: rgba(214, 178, 119, 0.28);
+  color: #fff;
 
 }
 
 .oc-story-arrow:disabled {
 
-  opacity: 0.35;
+  opacity: 0.24;
 
   cursor: default;
 
@@ -544,51 +606,469 @@ body.our-craft-page {
 
   display: flex;
 
-  flex-direction: column;
-
   align-items: center;
 
   gap: 10px;
-
-  padding: 10px 8px;
-
-  border-radius: 999px;
-
-  background: rgba(8, 8, 8, 0.68);
-
-  border: 1px solid rgba(255, 255, 255, 0.08);
-
-  backdrop-filter: blur(8px);
 
 }
 
 .oc-story-dot {
 
-  width: 9px;
+  width: 28px;
 
-  height: 9px;
+  height: 2px;
+
+  padding: 0;
 
   border: none;
 
-  border-radius: 999px;
+  border-radius: 0;
 
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.28);
 
   cursor: pointer;
 
   transition:
 
-    transform 0.18s ease,
+    width 0.18s ease,
 
-    background 0.18s ease;
+    background 0.18s ease,
+
+    opacity 0.18s ease;
 
 }
 
 .oc-story-dot.is-active {
 
+  width: 42px;
+
   background: var(--oc-gold);
 
-  transform: scale(1.18);
+}
+
+.oc-next-link {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin: 0 auto;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color: rgba(214, 178, 119, 0.92);
+
+  font-size: 0.92rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  transition:
+
+    transform 0.18s ease,
+
+    opacity 0.18s ease,
+
+    color 0.18s ease;
+
+}
+
+.oc-next-link:hover {
+
+  transform: translateY(2px);
+
+  color: #f0d49b;
+
+}
+
+.oc-next-link-arrow {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 1.05rem;
+
+  animation: ocFloatArrow 1.7s ease-in-out infinite;
+
+}
+
+.oc-next-link-founder {
+
+  margin-top: 0;
+
+}
+
+@keyframes ocFloatArrow {
+
+  0%,
+
+  100% {
+
+    transform: translateY(0);
+
+    opacity: 0.92;
+
+  }
+
+  50% {
+
+    transform: translateY(5px);
+
+    opacity: 1;
+
+  }
+
+}
+
+/* -------------------------------------------------------------------------- */
+
+/* Founder’s Batch */
+
+/* -------------------------------------------------------------------------- */
+
+.oc-section {
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+.oc-section-founder {
+
+  position: relative;
+
+  min-height: calc(100svh - 92px);
+
+  background: #050505;
+
+  overflow: hidden;
+
+}
+
+@supports (height: 100dvh) {
+
+  .oc-section-founder {
+
+    min-height: calc(100dvh - 92px);
+
+  }
+
+}
+
+.oc-founder-bg,
+
+.oc-founder-drums-all,
+
+.oc-founder-smoke-layer,
+
+.oc-founder-vignette {
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+}
+
+.oc-founder-bg,
+
+.oc-founder-drums-all {
+
+  background-repeat: no-repeat;
+
+  background-size: cover;
+
+}
+
+.oc-founder-bg {
+
+  z-index: 1;
+
+  background-position: center center;
+
+  filter: brightness(0.36) saturate(0.74);
+
+}
+
+.oc-founder-drums-all {
+
+  z-index: 2;
+
+  background-position: center bottom;
+
+  opacity: 0.96;
+
+  filter: brightness(0.82) saturate(0.96) contrast(1.04);
+
+}
+
+.oc-founder-smoke-layer {
+
+  z-index: 3;
+
+  overflow: hidden;
+
+  mix-blend-mode: screen;
+
+  opacity: 0.2;
+
+}
+
+.oc-founder-smoke-video {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(1.08);
+
+  filter: blur(1px) brightness(0.85) contrast(1.18);
+
+}
+
+.oc-founder-vignette {
+
+  z-index: 4;
+
+  background:
+
+    linear-gradient(
+
+      180deg,
+
+      rgba(0, 0, 0, 0.28) 0%,
+
+      rgba(0, 0, 0, 0.32) 22%,
+
+      rgba(0, 0, 0, 0.3) 42%,
+
+      rgba(0, 0, 0, 0.54) 72%,
+
+      rgba(0, 0, 0, 0.82) 100%
+
+    ),
+
+    radial-gradient(
+
+      circle at center 48%,
+
+      rgba(255, 255, 255, 0.035) 0%,
+
+      rgba(255, 255, 255, 0) 44%
+
+    );
+
+}
+
+.oc-founder-shell {
+
+  position: relative;
+
+  z-index: 5;
+
+  min-height: calc(100svh - 92px);
+
+  display: flex;
+
+  align-items: stretch;
+
+}
+
+@supports (height: 100dvh) {
+
+  .oc-founder-shell {
+
+    min-height: calc(100dvh - 92px);
+
+  }
+
+}
+
+.oc-founder-shell .oc-wrap {
+
+  position: relative;
+
+  min-height: calc(100svh - 92px);
+
+  width: min(var(--oc-max), calc(100% - 48px));
+
+  display: grid;
+
+  grid-template-rows: auto 1fr auto;
+
+}
+
+@supports (height: 100dvh) {
+
+  .oc-founder-shell .oc-wrap {
+
+    min-height: calc(100dvh - 92px);
+
+  }
+
+}
+
+.oc-founder-top {
+
+  position: relative;
+
+  z-index: 8;
+
+  padding-top: clamp(34px, 5vh, 58px);
+
+  text-align: center;
+
+}
+
+.oc-founder-title {
+
+  max-width: 720px;
+
+  margin: 0 auto;
+
+  font-size: clamp(2.9rem, 5vw, 4.85rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.055em;
+
+}
+
+.oc-founder-content {
+
+  position: relative;
+
+  z-index: 8;
+
+  align-self: end;
+
+  justify-self: center;
+
+  width: min(720px, calc(100% - 32px));
+
+  margin-bottom: clamp(34px, 6vh, 64px);
+
+  padding: 18px 22px 0;
+
+  text-align: center;
+
+}
+
+.oc-founder-content::before {
+
+  content: '';
+
+  position: absolute;
+
+  left: 50%;
+
+  top: -14px;
+
+  width: min(620px, 92%);
+
+  height: 1px;
+
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    rgba(214, 178, 119, 0.28),
+
+    transparent
+
+  );
+
+}
+
+.oc-founder-quote {
+
+  width: min(660px, 100%);
+
+  margin: 0 auto;
+
+  font-size: clamp(0.96rem, 1.12vw, 1.08rem);
+
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  text-wrap: balance;
+
+}
+
+.oc-founder-cta {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 0.55rem;
+
+  min-height: auto;
+
+  margin-top: 16px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 0;
+
+  background: transparent;
+
+  color: #f3dfbd;
+
+  font-size: 0.98rem;
+
+  font-weight: 800;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  backdrop-filter: none;
+
+  transition:
+
+    transform 180ms ease,
+
+    color 180ms ease,
+
+    opacity 180ms ease;
+
+}
+
+.oc-founder-cta:hover {
+
+  transform: translateX(3px);
+
+  color: #fff;
 
 }
 
@@ -612,6 +1092,32 @@ body.our-craft-page {
 
   }
 
+  .oc-founder-title {
+
+    max-width: 650px;
+
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .oc-founder-title {
+
+    max-width: 560px;
+
+    font-size: clamp(2.5rem, 6.6vw, 4rem);
+
+  }
+
+  .oc-founder-content {
+
+    width: min(560px, calc(100% - 32px));
+
+    margin-bottom: 38px;
+
+  }
+
 }
 
 @media (max-width: 780px) {
@@ -624,7 +1130,7 @@ body.our-craft-page {
 
   .oc-story-wrap {
 
-    padding: 16px 0 18px;
+    padding: 58px 0 104px;
 
   }
 
@@ -632,15 +1138,15 @@ body.our-craft-page {
 
     width: min(100%, 430px);
 
-    gap: 10px;
+    gap: 12px;
 
   }
 
   .oc-story-title {
 
-    font-size: clamp(2rem, 8.2vw, 3rem);
+    font-size: clamp(2.15rem, 9vw, 3.35rem);
 
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 
   }
 
@@ -652,13 +1158,13 @@ body.our-craft-page {
 
   .oc-story-copy p {
 
-    font-size: 0.84rem;
-
-    line-height: 1.38;
-
-    margin-bottom: 8px;
-
     max-width: 100%;
+
+    margin-bottom: 10px;
+
+    font-size: 0.9rem;
+
+    line-height: 1.48;
 
   }
 
@@ -666,7 +1172,7 @@ body.our-craft-page {
 
     width: 100%;
 
-    gap: 8px;
+    gap: 10px;
 
   }
 
@@ -680,7 +1186,7 @@ body.our-craft-page {
 
   .oc-story-mini-card {
 
-    padding: 10px 10px 9px;
+    padding: 12px 12px 10px;
 
     border-radius: 14px;
 
@@ -690,53 +1196,51 @@ body.our-craft-page {
 
     gap: 8px;
 
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 
   }
 
   .oc-story-mini-icon {
 
-    width: 22px;
+    width: 24px;
 
-    height: 22px;
+    height: 24px;
 
   }
 
   .oc-story-mini-card h3 {
 
-    font-size: 0.82rem;
+    font-size: 0.88rem;
 
   }
 
   .oc-story-mini-card p {
 
-    font-size: 0.72rem;
+    font-size: 0.79rem;
 
-    line-height: 1.3;
-
-  }
-
-  .oc-discovery-summary-card {
-
-    padding: 12px 12px 11px;
-
-    border-radius: 14px;
+    line-height: 1.42;
 
   }
 
-  .oc-discovery-summary-card p {
+  .oc-discovery-link {
 
-    font-size: 0.76rem;
-
-    line-height: 1.34;
+    font-size: 0.82rem;
 
   }
 
   .oc-story-ui {
 
-    right: 10px;
+    bottom: 16px;
 
-    gap: 8px;
+    width: calc(100% - 24px);
+
+    gap: 10px;
+
+  }
+
+  .oc-story-arrow-row {
+
+    gap: 14px;
 
   }
 
@@ -748,19 +1252,97 @@ body.our-craft-page {
 
   }
 
-  .oc-story-dots {
+  .oc-story-dot {
 
-    gap: 8px;
-
-    padding: 8px 7px;
+    width: 22px;
 
   }
 
-  .oc-story-dot {
+  .oc-story-dot.is-active {
 
-    width: 8px;
+    width: 34px;
 
-    height: 8px;
+  }
+
+  .oc-next-link {
+
+    font-size: 0.82rem;
+
+  }
+
+  .oc-section-founder,
+
+  .oc-founder-shell,
+
+  .oc-founder-shell .oc-wrap {
+
+    min-height: 100svh;
+
+  }
+
+  @supports (height: 100dvh) {
+
+    .oc-section-founder,
+
+    .oc-founder-shell,
+
+    .oc-founder-shell .oc-wrap {
+
+      min-height: 100dvh;
+
+    }
+
+  }
+
+  .oc-founder-shell .oc-wrap {
+
+    width: calc(100% - 24px);
+
+  }
+
+  .oc-founder-top {
+
+    padding-top: 42px;
+
+  }
+
+  .oc-founder-title {
+
+    max-width: 430px;
+
+    font-size: clamp(2.25rem, 10vw, 3.35rem);
+
+  }
+
+  .oc-founder-content {
+
+    width: min(420px, calc(100% - 20px));
+
+    margin-bottom: 30px;
+
+    padding-inline: 12px;
+
+  }
+
+  .oc-founder-quote {
+
+    font-size: 0.88rem;
+
+    line-height: 1.46;
+
+  }
+
+  .oc-founder-cta {
+
+    margin-top: 14px;
+
+    font-size: 0.88rem;
+
+  }
+
+  .oc-founder-smoke-layer {
+
+    opacity: 0.18;
 
   }
 
@@ -768,127 +1350,37 @@ body.our-craft-page {
 
 @media (max-width: 560px) {
 
-  .oc-kicker {
-
-    margin-bottom: 6px;
-
-    font-size: 0.58rem;
-
-  }
-
   .oc-story-wrap {
 
-    padding-top: 12px;
-
-    padding-bottom: 14px;
+    padding: 46px 0 96px;
 
   }
 
   .oc-story-inner {
 
-    width: min(100%, 360px);
+    width: min(100%, 390px);
 
-    gap: 8px;
+    gap: 10px;
 
   }
 
   .oc-story-title {
 
-    font-size: clamp(1.62rem, 7vw, 2.15rem);
+    margin-bottom: 10px;
+
+    font-size: clamp(2rem, 10vw, 2.85rem);
 
     line-height: 0.95;
 
+  }
+
+  .oc-story-copy p {
+
     margin-bottom: 8px;
 
-  }
+    font-size: 0.84rem;
 
-  .oc-story-copy p {
-
-    font-size: 0.74rem;
-
-    line-height: 1.24;
-
-    margin-bottom: 6px;
-
-  }
-
-  .oc-story-grid {
-
-    gap: 7px;
-
-  }
-
-  .oc-story-mini-card {
-
-    padding: 8px 8px 7px;
-
-  }
-
-  .oc-story-mini-card h3 {
-
-    font-size: 0.75rem;
-
-  }
-
-  .oc-story-mini-card p {
-
-    font-size: 0.67rem;
-
-    line-height: 1.22;
-
-  }
-
-  .oc-discovery-summary-kicker {
-
-    font-size: 0.58rem;
-
-  }
-
-  .oc-discovery-summary-card p {
-
-    font-size: 0.7rem;
-
-    line-height: 1.24;
-
-  }
-
-  .oc-story-ui {
-
-    right: 8px;
-
-  }
-
-  .oc-story-arrow {
-
-    width: 32px;
-
-    height: 32px;
-
-  }
-
-}
-
-@media (max-width: 430px) {
-
-  .oc-story-wrap {
-
-    padding-top: 10px;
-
-    padding-bottom: 12px;
-
-  }
-
-  .oc-story-title {
-
-    font-size: clamp(1.5rem, 6.5vw, 1.95rem);
-
-  }
-
-  .oc-story-copy p {
-
-    font-size: 0.7rem;
-
-    line-height: 1.18;
+    line-height: 1.42;
 
   }
 
@@ -900,19 +1392,175 @@ body.our-craft-page {
 
   }
 
-  .oc-story-ui {
+  .oc-story-mini-card {
 
-    right: 6px;
+    padding: 11px 12px 10px;
 
   }
 
-  .oc-story-slide-philosophy .oc-story-inner,
+  .oc-story-mini-card p {
 
-  .oc-story-slide-discovery .oc-story-inner {
+    font-size: 0.78rem;
 
-    justify-content: flex-start;
+    line-height: 1.38;
 
-    padding-top: 6px;
+  }
+
+  .oc-story-grid-discovery .oc-story-mini-card {
+
+    padding: 10px 11px 9px;
+
+  }
+
+  .oc-discovery-promo {
+
+    gap: 12px;
+
+  }
+
+  .oc-founder-bg,
+
+  .oc-founder-drums-all {
+
+    background-size: cover;
+
+    background-position: center bottom;
+
+  }
+
+  .oc-founder-top {
+
+    padding-top: 38px;
+
+  }
+
+  .oc-founder-title {
+
+    max-width: 360px;
+
+    font-size: clamp(2.05rem, 11vw, 2.85rem);
+
+  }
+
+  .oc-founder-content {
+
+    margin-bottom: 24px;
+
+    max-width: 350px;
+
+  }
+
+  .oc-founder-quote {
+
+    font-size: 0.8rem;
+
+    line-height: 1.4;
+
+  }
+
+  .oc-founder-cta {
+
+    font-size: 0.82rem;
+
+  }
+
+}
+
+@media (max-width: 420px) {
+
+  .oc-story-wrap {
+
+    padding: 40px 0 88px;
+
+  }
+
+  .oc-story-inner {
+
+    width: min(100%, 350px);
+
+  }
+
+  .oc-story-title {
+
+    font-size: clamp(1.9rem, 11vw, 2.55rem);
+
+  }
+
+  .oc-story-copy p {
+
+    font-size: 0.8rem;
+
+    line-height: 1.38;
+
+  }
+
+  .oc-story-mini-top {
+
+    margin-bottom: 6px;
+
+  }
+
+  .oc-story-mini-card h3 {
+
+    font-size: 0.84rem;
+
+  }
+
+  .oc-story-mini-card p {
+
+    font-size: 0.74rem;
+
+  }
+
+  .oc-story-arrow {
+
+    width: 34px;
+
+    height: 34px;
+
+  }
+
+  .oc-story-dot {
+
+    width: 18px;
+
+  }
+
+  .oc-story-dot.is-active {
+
+    width: 30px;
+
+  }
+
+  .oc-next-link {
+
+    font-size: 0.76rem;
+
+  }
+
+  .oc-founder-top {
+
+    padding-top: 34px;
+
+  }
+
+  .oc-founder-content {
+
+    margin-bottom: 20px;
+
+    max-width: 315px;
+
+  }
+
+  .oc-founder-quote {
+
+    font-size: 0.75rem;
+
+  }
+
+  .oc-founder-cta {
+
+    font-size: 0.78rem;
 
   }
 
