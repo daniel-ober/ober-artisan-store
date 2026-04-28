@@ -1,0 +1,923 @@
+
+import React, { useMemo, useState } from 'react';
+
+import {
+
+  AXIS_COLOR_BY_KEY,
+
+  GUIDE_NODE_POSITIONS,
+
+  MetricIcon,
+
+  VOICE_NODE_GUIDE,
+
+} from './legacyPrintVoiceMapData';
+
+import {
+
+  LEGACYPRINT_RELATIONSHIPS,
+
+  getRelationshipById,
+
+} from './legacyPrintRelationships';
+
+const CYCLE_ORDER = [
+
+  'attack',
+
+  'brightness',
+
+  'projection',
+
+  'sustain',
+
+  'warmth',
+
+  'sensitivity',
+
+  'control',
+
+];
+
+const CYCLE_POSITIONS = {
+
+  attack: { x: 50, y: 11 },
+
+  brightness: { x: 80.5, y: 25.6 },
+
+  projection: { x: 88, y: 58.5 },
+
+  sustain: { x: 67, y: 84.8 },
+
+  warmth: { x: 33, y: 84.8 },
+
+  sensitivity: { x: 12, y: 58.5 },
+
+  control: { x: 19.5, y: 25.6 },
+
+};
+
+const GAUGE_VALUES = {
+
+  balanced: {
+
+    attack: 72,
+
+    brightness: 72,
+
+    projection: 72,
+
+    sustain: 72,
+
+    warmth: 72,
+
+    sensitivity: 72,
+
+    control: 72,
+
+  },
+
+  current: {
+
+    attack: 78,
+
+    brightness: 64,
+
+    projection: 82,
+
+    sustain: 58,
+
+    warmth: 70,
+
+    sensitivity: 66,
+
+    control: 84,
+
+  },
+
+  reference: {
+
+    attack: 58,
+
+    brightness: 52,
+
+    projection: 61,
+
+    sustain: 48,
+
+    warmth: 76,
+
+    sensitivity: 54,
+
+    control: 68,
+
+  },
+
+};
+
+const getPointForNode = (nodeKey, mode) => {
+
+  if (mode === 'playCycle') {
+
+    return CYCLE_POSITIONS[nodeKey] || { x: 50, y: 50 };
+
+  }
+
+  return GUIDE_NODE_POSITIONS[nodeKey] || { x: 50, y: 50 };
+
+};
+
+const getSpiderPoints = (values) =>
+
+  VOICE_NODE_GUIDE.map((node) => {
+
+    const position = getPointForNode(node.key);
+
+    const dx = position.x - 50;
+
+    const dy = position.y - 50;
+
+    const scale = (values[node.key] || 0) / 100;
+
+    return `${50 + dx * scale},${50 + dy * scale}`;
+
+  }).join(' ');
+
+const describeArc = (from, to) => {
+
+  const radius = 39;
+
+  const largeArcFlag = 0;
+
+  const sweepFlag = 1;
+
+  return `M ${from.x} ${from.y} A ${radius} ${radius} 0 ${largeArcFlag} ${sweepFlag} ${to.x} ${to.y}`;
+
+};
+
+const LegacyPrintInteractivePolygon = ({
+
+  mode,
+
+  activeNodeKey,
+
+  onSelectNode,
+
+  gaugeView,
+
+  activeRelationshipId,
+
+  onSelectRelationship,
+
+  finderAnswers = [],
+
+  finderComplete = false,
+
+}) => {
+
+  const [hoveredRelationshipId, setHoveredRelationshipId] = useState(null);
+
+  const polygonSegments = useMemo(
+
+    () =>
+
+      VOICE_NODE_GUIDE.map((node, index) => {
+
+        const nextNode = VOICE_NODE_GUIDE[(index + 1) % VOICE_NODE_GUIDE.length];
+
+        return {
+
+          from: node,
+
+          to: nextNode,
+
+          fromPosition: getPointForNode(node.key, mode),
+
+          toPosition: getPointForNode(nextNode.key, mode),
+
+          gradientId: `oadMasterGradient-${node.key}-${nextNode.key}`,
+
+        };
+
+      }),
+
+    [mode]
+
+  );
+
+  const relationshipLines = useMemo(
+
+    () =>
+
+      LEGACYPRINT_RELATIONSHIPS.map((relationship) => ({
+
+        ...relationship,
+
+        fromPosition: getPointForNode(relationship.nodes[0], mode),
+
+        toPosition: getPointForNode(relationship.nodes[1], mode),
+
+        gradientId: `lpvmRelationshipGradient-${relationship.id}`,
+
+      })),
+
+    [mode]
+
+  );
+
+  const finderActiveNodes = useMemo(() => {
+
+    const nodeKeys = finderAnswers.flatMap((answer) => answer.nodes || []);
+
+    return [...new Set(nodeKeys)];
+
+  }, [finderAnswers]);
+
+  const finderPrintLines = useMemo(() => {
+
+    const lines = [];
+
+    finderAnswers.forEach((answer, answerIndex) => {
+
+      const nextAnswer = finderAnswers[answerIndex + 1];
+
+      if (!nextAnswer) return;
+
+      answer.nodes.forEach((fromNode, fromIndex) => {
+
+        nextAnswer.nodes.forEach((toNode, toIndex) => {
+
+          lines.push({
+
+            id: `${answerIndex}-${fromIndex}-${toIndex}-${fromNode}-${toNode}`,
+
+            fromNode,
+
+            toNode,
+
+          });
+
+        });
+
+      });
+
+    });
+
+    return lines;
+
+  }, [finderAnswers]);
+
+  const selectedRelationship = getRelationshipById(activeRelationshipId);
+
+  const hoveredRelationship = getRelationshipById(hoveredRelationshipId);
+
+  const selectedRelationshipNodes = selectedRelationship?.nodes || [];
+
+  const hoveredRelationshipNodes = hoveredRelationship?.nodes || [];
+
+  const activeRelationshipNodes = [
+
+    ...new Set([...selectedRelationshipNodes, ...hoveredRelationshipNodes]),
+
+  ];
+
+  const handleRelationshipSelect = (event, relationshipId) => {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+    onSelectRelationship?.(relationshipId);
+
+  };
+
+  const renderModeLayer = () => {
+
+    if (mode === 'playCycle') {
+
+      return (
+
+        <g className="oad-master-cycle-layer">
+
+          <circle
+
+            className="oad-master-cycle-guide-ring"
+
+            cx="50"
+
+            cy="50"
+
+            r="39"
+
+          />
+
+          {CYCLE_ORDER.map((nodeKey, index) => {
+
+            const from = getPointForNode(nodeKey, mode);
+
+            const to = getPointForNode(
+
+              CYCLE_ORDER[(index + 1) % CYCLE_ORDER.length],
+
+              mode
+
+            );
+
+            const isActive = activeNodeKey === nodeKey;
+
+            return (
+
+              <path
+
+                key={`${nodeKey}-cycle`}
+
+                className={`oad-master-cycle-arrow ${isActive ? 'is-active' : ''}`}
+
+                d={describeArc(from, to)}
+
+                markerEnd={isActive ? 'url(#lpvmCycleArrowActive)' : ''}
+
+              />
+
+            );
+
+          })}
+
+        </g>
+
+      );
+
+    }
+
+    if (mode === 'voiceGauge') {
+
+      return (
+
+        <g className="oad-master-gauge-layer">
+
+          <polygon
+
+            className="oad-master-gauge-grid oad-master-gauge-grid-outer"
+
+            points={getSpiderPoints({
+
+              attack: 100,
+
+              brightness: 100,
+
+              projection: 100,
+
+              sustain: 100,
+
+              warmth: 100,
+
+              sensitivity: 100,
+
+              control: 100,
+
+            })}
+
+          />
+
+          <polygon
+
+            className="oad-master-gauge-grid oad-master-gauge-grid-mid"
+
+            points={getSpiderPoints({
+
+              attack: 66,
+
+              brightness: 66,
+
+              projection: 66,
+
+              sustain: 66,
+
+              warmth: 66,
+
+              sensitivity: 66,
+
+              control: 66,
+
+            })}
+
+          />
+
+          <polygon
+
+            className="oad-master-gauge-grid oad-master-gauge-grid-inner"
+
+            points={getSpiderPoints({
+
+              attack: 33,
+
+              brightness: 33,
+
+              projection: 33,
+
+              sustain: 33,
+
+              warmth: 33,
+
+              sensitivity: 33,
+
+              control: 33,
+
+            })}
+
+          />
+
+          {VOICE_NODE_GUIDE.map((node) => {
+
+            const position = getPointForNode(node.key, mode);
+
+            return (
+
+              <line
+
+                key={`${node.key}-axis`}
+
+                className="oad-master-gauge-axis"
+
+                x1="50"
+
+                y1="50"
+
+                x2={position.x}
+
+                y2={position.y}
+
+              />
+
+            );
+
+          })}
+
+          {(gaugeView === 'spiderCompare' || gaugeView === 'reference') && (
+
+            <polygon
+
+              className="oad-master-gauge-reference"
+
+              points={getSpiderPoints(GAUGE_VALUES.reference)}
+
+            />
+
+          )}
+
+          <polygon
+
+            className={`oad-master-gauge-current ${
+
+              gaugeView === 'balanced' ? 'is-balanced' : ''
+
+            }`}
+
+            points={getSpiderPoints(
+
+              gaugeView === 'balanced'
+
+                ? GAUGE_VALUES.balanced
+
+                : GAUGE_VALUES.current
+
+            )}
+
+          />
+
+        </g>
+
+      );
+
+    }
+
+    if (mode === 'relationships') {
+
+      return (
+
+        <g className="lpvm-relationship-layer">
+
+          {relationshipLines.map((relationship) => {
+
+            const isActive = relationship.id === activeRelationshipId;
+
+            const isHovered = relationship.id === hoveredRelationshipId;
+
+            const isLit = isActive || isHovered;
+
+            return (
+
+              <g
+
+                key={relationship.id}
+
+                className={`lpvm-relationship-group ${
+
+                  isActive ? 'is-active' : ''
+
+                } ${isHovered ? 'is-hovered' : ''}`}
+
+                onMouseEnter={() => setHoveredRelationshipId(relationship.id)}
+
+                onMouseLeave={() => setHoveredRelationshipId(null)}
+
+                onFocus={() => setHoveredRelationshipId(relationship.id)}
+
+                onBlur={() => setHoveredRelationshipId(null)}
+
+                onClick={(event) =>
+
+                  handleRelationshipSelect(event, relationship.id)
+
+                }
+
+                onKeyDown={(event) => {
+
+                  if (event.key === 'Enter' || event.key === ' ') {
+
+                    handleRelationshipSelect(event, relationship.id);
+
+                  }
+
+                }}
+
+                role="button"
+
+                tabIndex="0"
+
+                aria-label={`Read ${relationship.shortLabel}`}
+
+              >
+
+                <line
+
+                  className="lpvm-relationship-hitline"
+
+                  x1={relationship.fromPosition.x}
+
+                  y1={relationship.fromPosition.y}
+
+                  x2={relationship.toPosition.x}
+
+                  y2={relationship.toPosition.y}
+
+                />
+
+                <line
+
+                  className="lpvm-relationship-visible-line"
+
+                  x1={relationship.fromPosition.x}
+
+                  y1={relationship.fromPosition.y}
+
+                  x2={relationship.toPosition.x}
+
+                  y2={relationship.toPosition.y}
+
+                  stroke={
+
+                    isLit
+
+                      ? `url(#${relationship.gradientId})`
+
+                      : 'rgba(255, 255, 255, 0.28)'
+
+                  }
+
+                />
+
+              </g>
+
+            );
+
+          })}
+
+        </g>
+
+      );
+
+    }
+
+    if (mode === 'voiceFinder') {
+
+      return (
+
+        <g
+
+          className={`oad-master-finder-layer ${
+
+            finderComplete ? 'is-complete' : ''
+
+          }`}
+
+        >
+
+          <circle className="oad-master-finder-core" cx="50" cy="50" r="5" />
+
+          {VOICE_NODE_GUIDE.map((node) => {
+
+            const position = getPointForNode(node.key, mode);
+
+            return (
+
+              <line
+
+                key={`${node.key}-finder-ghost`}
+
+                className="oad-master-finder-ghost"
+
+                x1="50"
+
+                y1="50"
+
+                x2={position.x}
+
+                y2={position.y}
+
+              />
+
+            );
+
+          })}
+
+          {finderPrintLines.map((line) => {
+
+            const from = getPointForNode(line.fromNode, mode);
+
+            const to = getPointForNode(line.toNode, mode);
+
+            return (
+
+              <path
+
+                key={line.id}
+
+                className="oad-master-finder-print"
+
+                d={`M ${from.x} ${from.y} Q 50 50 ${to.x} ${to.y}`}
+
+              />
+
+            );
+
+          })}
+
+        </g>
+
+      );
+
+    }
+
+    return null;
+
+  };
+
+  return (
+
+    <div className={`oad-master-polygon oad-master-polygon-${mode}`}>
+
+      <svg
+
+        className="oad-master-polygon-svg"
+
+        viewBox="0 0 100 100"
+
+        preserveAspectRatio="xMidYMid meet"
+
+        aria-label="LegacyPrint Voice Map"
+
+      >
+
+        <defs>
+
+          <marker
+
+            id="lpvmCycleArrowActive"
+
+            markerWidth="8"
+
+            markerHeight="8"
+
+            refX="6.2"
+
+            refY="4"
+
+            orient="auto"
+
+            markerUnits="strokeWidth"
+
+          >
+
+            <path d="M 0 0 L 8 4 L 0 8 z" fill="rgba(214, 178, 119, 0.98)" />
+
+          </marker>
+
+          {polygonSegments.map((segment) => (
+
+            <linearGradient
+
+              key={segment.gradientId}
+
+              id={segment.gradientId}
+
+              gradientUnits="userSpaceOnUse"
+
+              x1={segment.fromPosition.x}
+
+              y1={segment.fromPosition.y}
+
+              x2={segment.toPosition.x}
+
+              y2={segment.toPosition.y}
+
+            >
+
+              <stop
+
+                offset="0%"
+
+                stopColor={AXIS_COLOR_BY_KEY[segment.from.key] || '#d6b277'}
+
+              />
+
+              <stop offset="50%" stopColor="#d6b277" stopOpacity="0.72" />
+
+              <stop
+
+                offset="100%"
+
+                stopColor={AXIS_COLOR_BY_KEY[segment.to.key] || '#d6b277'}
+
+              />
+
+            </linearGradient>
+
+          ))}
+
+          {relationshipLines.map((relationship) => (
+
+            <linearGradient
+
+              key={relationship.gradientId}
+
+              id={relationship.gradientId}
+
+              gradientUnits="userSpaceOnUse"
+
+              x1={relationship.fromPosition.x}
+
+              y1={relationship.fromPosition.y}
+
+              x2={relationship.toPosition.x}
+
+              y2={relationship.toPosition.y}
+
+            >
+
+              <stop
+
+                offset="0%"
+
+                stopColor={
+
+                  AXIS_COLOR_BY_KEY[relationship.nodes[0]] || '#d6b277'
+
+                }
+
+              />
+
+              <stop offset="50%" stopColor="#d6b277" stopOpacity="0.9" />
+
+              <stop
+
+                offset="100%"
+
+                stopColor={
+
+                  AXIS_COLOR_BY_KEY[relationship.nodes[1]] || '#d6b277'
+
+                }
+
+              />
+
+            </linearGradient>
+
+          ))}
+
+        </defs>
+
+        {mode !== 'playCycle' &&
+
+          polygonSegments.map((segment) => (
+
+            <line
+
+              key={`${segment.gradientId}-glow`}
+
+              className="oad-master-polygon-segment oad-master-polygon-segment-glow"
+
+              x1={segment.fromPosition.x}
+
+              y1={segment.fromPosition.y}
+
+              x2={segment.toPosition.x}
+
+              y2={segment.toPosition.y}
+
+              stroke={`url(#${segment.gradientId})`}
+
+            />
+
+          ))}
+
+        {mode !== 'playCycle' &&
+
+          polygonSegments.map((segment) => (
+
+            <line
+
+              key={`${segment.gradientId}-main`}
+
+              className="oad-master-polygon-segment oad-master-polygon-segment-main"
+
+              x1={segment.fromPosition.x}
+
+              y1={segment.fromPosition.y}
+
+              x2={segment.toPosition.x}
+
+              y2={segment.toPosition.y}
+
+              stroke={`url(#${segment.gradientId})`}
+
+            />
+
+          ))}
+
+        {renderModeLayer()}
+
+      </svg>
+
+      <div className="oad-master-polygon-node-layer">
+
+        {VOICE_NODE_GUIDE.map((node) => {
+
+          const position = getPointForNode(node.key, mode);
+
+          const axisColor = AXIS_COLOR_BY_KEY[node.key] || '#d6b277';
+
+          const isActive =
+
+            activeNodeKey === node.key ||
+
+            activeRelationshipNodes.includes(node.key) ||
+
+            finderActiveNodes.includes(node.key);
+
+          return (
+
+            <button
+
+              key={node.key}
+
+              type="button"
+
+              className={`oad-master-node ${isActive ? 'is-active' : ''}`}
+
+              style={{
+
+                '--oad-axis-color': axisColor,
+
+                '--node-x': `${position.x}%`,
+
+                '--node-y': `${position.y}%`,
+
+              }}
+
+              onClick={() => onSelectNode?.(node.key)}
+
+              aria-label={`Select ${node.label}`}
+
+            >
+
+              <MetricIcon type={node.icon} color={axisColor} size={19} />
+
+              <span>{node.label}</span>
+
+            </button>
+
+          );
+
+        })}
+
+      </div>
+
+    </div>
+
+  );
+
+};
+
+export default LegacyPrintInteractivePolygon;
+

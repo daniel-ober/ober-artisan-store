@@ -1,0 +1,1607 @@
+
+import React, { useMemo, useState } from 'react';
+
+import {
+
+  Zap,
+
+  Waves,
+
+  Flame,
+
+  Volume2,
+
+  SunMedium,
+
+  Feather,
+
+  Crosshair,
+
+} from 'lucide-react';
+
+import './LegacyPrintVoiceMapModal.css';
+
+const AXIS_COLOR_BY_KEY = {
+
+  attack: '#ff7448',
+
+  brightness: '#e7d98f',
+
+  projection: '#ffb53a',
+
+  sustain: '#4d86ff',
+
+  warmth: '#c1682e',
+
+  sensitivity: '#68d9df',
+
+  control: '#9e8bff',
+
+};
+
+const NODE_ORDER = [
+
+  {
+
+    key: 'attack',
+
+    label: 'Attack',
+
+    low: 'Rounded',
+
+    high: 'Immediate',
+
+    motion: 'Strike',
+
+    icon: 'attack',
+
+    value: 5.8,
+
+    meaning:
+
+      'How quickly the drum speaks at the start of the note. More attack feels quicker, cleaner, sharper, and more defined.',
+
+  },
+
+  {
+
+    key: 'brightness',
+
+    label: 'Brightness',
+
+    low: 'Dark',
+
+    high: 'Bright',
+
+    motion: 'Clarity',
+
+    icon: 'brightness',
+
+    value: 6.4,
+
+    meaning:
+
+      'How much top-end clarity, detail, and edge the drum carries. More brightness helps the voice feel clearer and more cutting.',
+
+  },
+
+  {
+
+    key: 'projection',
+
+    label: 'Projection',
+
+    low: 'Close',
+
+    high: 'Forward',
+
+    motion: 'Carry',
+
+    icon: 'projection',
+
+    value: 7.0,
+
+    meaning:
+
+      'How strongly the drum carries into the room or mix. More projection feels more present, bold, and forward.',
+
+  },
+
+  {
+
+    key: 'sustain',
+
+    label: 'Sustain',
+
+    low: 'Short',
+
+    high: 'Open',
+
+    motion: 'Bloom',
+
+    icon: 'sustain',
+
+    value: 5.6,
+
+    meaning:
+
+      'How long the note carries after the initial hit. More sustain adds bloom, air, ring, and room presence.',
+
+  },
+
+  {
+
+    key: 'warmth',
+
+    label: 'Warmth',
+
+    low: 'Lean',
+
+    high: 'Warm',
+
+    motion: 'Body',
+
+    icon: 'warmth',
+
+    value: 6.2,
+
+    meaning:
+
+      'How much body, depth, and low-mid character the drum carries. More warmth feels fuller, rounder, and woodier.',
+
+  },
+
+  {
+
+    key: 'sensitivity',
+
+    label: 'Sensitivity',
+
+    low: 'Forgiving',
+
+    high: 'Responsive',
+
+    motion: 'Touch',
+
+    icon: 'sensitivity',
+
+    value: 6.9,
+
+    meaning:
+
+      'How easily the drum reacts to lighter playing. More sensitivity reveals ghost notes, touch, detail, and nuance.',
+
+  },
+
+  {
+
+    key: 'control',
+
+    label: 'Control',
+
+    low: 'Open',
+
+    high: 'Composed',
+
+    motion: 'Refinement',
+
+    icon: 'control',
+
+    value: 6.0,
+
+    meaning:
+
+      'How organized the overall note feels. More control keeps the sound focused, composed, and easier to place.',
+
+  },
+
+];
+
+const MODES = [
+
+  {
+
+    id: 'playCycle',
+
+    label: 'Play Cycle',
+
+    helper: 'How the player feels the drum respond',
+
+  },
+
+  {
+
+    id: 'voiceGauge',
+
+    label: 'Voice Gauge',
+
+    helper: 'How a drum compares',
+
+  },
+
+  {
+
+    id: 'relationshipMap',
+
+    label: 'Tonal Relationship',
+
+    helper: 'How traits connect',
+
+  },
+
+  {
+
+    id: 'voiceFinder',
+
+    label: 'Voice Finder',
+
+    helper: 'Guided discovery',
+
+  },
+
+];
+
+const RELATIONSHIPS = [
+
+  {
+
+    id: 'attack_brightness',
+
+    a: 'attack',
+
+    b: 'brightness',
+
+    title: 'Snap with clarity',
+
+    subtitle: 'Strike into detail',
+
+    text: 'The first contact speaks clearly, with enough top-end detail to feel articulate.',
+
+  },
+
+  {
+
+    id: 'brightness_projection',
+
+    a: 'brightness',
+
+    b: 'projection',
+
+    title: 'Cut that carries',
+
+    subtitle: 'Clarity into the room',
+
+    text: 'The upper detail helps the drum step forward without needing extra force.',
+
+  },
+
+  {
+
+    id: 'projection_sustain',
+
+    a: 'projection',
+
+    b: 'sustain',
+
+    title: 'Forward bloom',
+
+    subtitle: 'Carry into openness',
+
+    text: 'The drum pushes into the room and lets the note breathe after the hit.',
+
+  },
+
+  {
+
+    id: 'sustain_warmth',
+
+    a: 'sustain',
+
+    b: 'warmth',
+
+    title: 'Bloom with body',
+
+    subtitle: 'Air over foundation',
+
+    text: 'The note opens up while still feeling full, round, and supported underneath.',
+
+  },
+
+  {
+
+    id: 'warmth_sensitivity',
+
+    a: 'warmth',
+
+    b: 'sensitivity',
+
+    title: 'Touch tone',
+
+    subtitle: 'Body under the hands',
+
+    text: 'Light playing still reveals fullness, color, and wood character.',
+
+  },
+
+  {
+
+    id: 'sensitivity_control',
+
+    a: 'sensitivity',
+
+    b: 'control',
+
+    title: 'Responsive precision',
+
+    subtitle: 'Touch with focus',
+
+    text: 'The drum reacts easily without feeling messy or unpredictable.',
+
+  },
+
+  {
+
+    id: 'control_attack',
+
+    a: 'control',
+
+    b: 'attack',
+
+    title: 'Clean articulation',
+
+    subtitle: 'Refinement into strike',
+
+    text: 'The note resets cleanly so the next hit speaks with definition.',
+
+  },
+
+  {
+
+    id: 'attack_warmth',
+
+    a: 'attack',
+
+    b: 'warmth',
+
+    title: 'Crack with body',
+
+    subtitle: 'Immediate but full',
+
+    text: 'The first hit has definition without losing the fullness underneath.',
+
+  },
+
+  {
+
+    id: 'projection_control',
+
+    a: 'projection',
+
+    b: 'control',
+
+    title: 'Power with focus',
+
+    subtitle: 'Forward but managed',
+
+    text: 'The drum carries strongly without becoming unruly or hard to place.',
+
+  },
+
+  {
+
+    id: 'brightness_control',
+
+    a: 'brightness',
+
+    b: 'control',
+
+    title: 'Cut without harshness',
+
+    subtitle: 'Clear but refined',
+
+    text: 'The top end stays musical instead of sharp, brittle, or excessive.',
+
+  },
+
+];
+
+const VOICE_FINDER_QUESTIONS = [
+
+  {
+
+    question: 'What are you trying to hear or feel more of?',
+
+    answers: ['Snap', 'Body', 'Cut', 'Warmth', 'Control', 'Touch'],
+
+  },
+
+  {
+
+    question: 'What should the drum avoid?',
+
+    answers: ['Harshness', 'Mud', 'Too much ring', 'Thinness', 'Sluggish response'],
+
+  },
+
+  {
+
+    question: 'Where will this drum mostly live?',
+
+    answers: ['Studio', 'Live room', 'Church', 'Loud band', 'Low-volume playing'],
+
+  },
+
+];
+
+const MetricIcon = ({ type, color = '#d6b277', size = 18 }) => {
+
+  const props = { size, strokeWidth: 2.15, color, 'aria-hidden': true };
+
+  switch (type) {
+
+    case 'attack':
+
+      return <Zap {...props} />;
+
+    case 'sustain':
+
+      return <Waves {...props} />;
+
+    case 'warmth':
+
+      return <Flame {...props} />;
+
+    case 'projection':
+
+      return <Volume2 {...props} />;
+
+    case 'brightness':
+
+      return <SunMedium {...props} />;
+
+    case 'sensitivity':
+
+      return <Feather {...props} />;
+
+    case 'control':
+
+      return <Crosshair {...props} />;
+
+    default:
+
+      return <Zap {...props} />;
+
+  }
+
+};
+
+const toPoint = (index, radius = 38, center = 50) => {
+
+  const angle = -90 + index * (360 / NODE_ORDER.length);
+
+  const radians = (angle * Math.PI) / 180;
+
+  return {
+
+    x: center + radius * Math.cos(radians),
+
+    y: center + radius * Math.sin(radians),
+
+    angle,
+
+  };
+
+};
+
+const points = NODE_ORDER.map((node, index) => ({
+
+  ...node,
+
+  ...toPoint(index),
+
+}));
+
+const pointMap = points.reduce((acc, point) => {
+
+  acc[point.key] = point;
+
+  return acc;
+
+}, {});
+
+const buildPolygonPoints = (values) =>
+
+  NODE_ORDER.map((node, index) => {
+
+    const value = values[node.key] ?? 5;
+
+    const radius = 3.8 * value;
+
+    const point = toPoint(index, radius);
+
+    return `${point.x},${point.y}`;
+
+  }).join(' ');
+
+const currentValues = NODE_ORDER.reduce((acc, node) => {
+
+  acc[node.key] = node.value;
+
+  return acc;
+
+}, {});
+
+const referenceValues = NODE_ORDER.reduce((acc, node) => {
+
+  acc[node.key] = 5;
+
+  return acc;
+
+}, {});
+
+const getDeltaPhrase = (node) => {
+
+  const delta = Number((node.value - 5).toFixed(1));
+
+  if (delta > 1) {
+
+    return `${node.label} is strongly above the reference drum, so this configuration should feel noticeably more ${node.high.toLowerCase()}.`;
+
+  }
+
+  if (delta > 0.25) {
+
+    return `${node.label} sits slightly above the reference drum, adding more ${node.high.toLowerCase()} character without dominating the voice.`;
+
+  }
+
+  if (delta < -1) {
+
+    return `${node.label} is strongly below the reference drum, so this configuration should feel noticeably more ${node.low.toLowerCase()}.`;
+
+  }
+
+  if (delta < -0.25) {
+
+    return `${node.label} sits slightly below the reference drum, leaning more ${node.low.toLowerCase()} than the neutral reference point.`;
+
+  }
+
+  return `${node.label} is very close to the reference drum, so this trait should feel balanced and familiar.`;
+
+};
+
+const getOverallRead = () => {
+
+  const sorted = [...NODE_ORDER].sort((a, b) => b.value - a.value);
+
+  const top = sorted.slice(0, 3).map((node) => node.label);
+
+  const lowest = sorted[sorted.length - 1];
+
+  return `Overall, this reads as a ${top[0].toLowerCase()}-led voice with strong ${top[1].toLowerCase()} and ${top[2].toLowerCase()}. Compared to the reference drum, it should feel more expressive and forward, while ${lowest.label.toLowerCase()} is the most restrained trait.`;
+
+};
+
+const LegacyPrintVoiceMapModal = ({ onClose }) => {
+
+  const [activeMode, setActiveMode] = useState('voiceGauge');
+
+  const [activeNodeKey, setActiveNodeKey] = useState('attack');
+
+  const [activeRelationshipId, setActiveRelationshipId] = useState('attack_warmth');
+
+  const [gaugeView, setGaugeView] = useState('balanced');
+
+  const [finderStep, setFinderStep] = useState(0);
+
+  const [finderAnswers, setFinderAnswers] = useState([]);
+
+  const activeNode =
+
+    NODE_ORDER.find((node) => node.key === activeNodeKey) || NODE_ORDER[0];
+
+  const activeRelationship =
+
+    RELATIONSHIPS.find((relationship) => relationship.id === activeRelationshipId) ||
+
+    RELATIONSHIPS[0];
+
+  const selectedRelationshipPoints = {
+
+    a: pointMap[activeRelationship.a],
+
+    b: pointMap[activeRelationship.b],
+
+  };
+
+  const relationshipGradientId = `rel-${activeRelationship.a}-${activeRelationship.b}`;
+
+  const overallRead = useMemo(() => getOverallRead(), []);
+
+  const finderComplete = finderStep >= VOICE_FINDER_QUESTIONS.length;
+
+  const finderQuestion = VOICE_FINDER_QUESTIONS[finderStep];
+
+  const handleNodeSelect = (nodeKey) => {
+
+    setActiveNodeKey(nodeKey);
+
+  };
+
+  const handleRelationshipSelect = (relationshipId) => {
+
+    setActiveRelationshipId(relationshipId);
+
+  };
+
+  const handleFinderAnswer = (answer) => {
+
+    setFinderAnswers((current) => [...current, answer]);
+
+    setFinderStep((current) => current + 1);
+
+  };
+
+  const resetFinder = () => {
+
+    setFinderAnswers([]);
+
+    setFinderStep(0);
+
+  };
+
+  const showSpider =
+
+    activeMode === 'voiceGauge' &&
+
+    ['balanced', 'current', 'compare'].includes(gaugeView);
+
+  const showBars =
+
+    activeMode === 'voiceGauge' &&
+
+    ['bars', 'rangeBars', 'compareBars'].includes(gaugeView);
+
+  return (
+
+    <div className="lpvm-backdrop" role="presentation" onMouseDown={onClose}>
+
+      <div
+
+        className="lpvm-modal"
+
+        role="dialog"
+
+        aria-modal="true"
+
+        aria-label="LegacyPrint Voice Map Reference"
+
+        onMouseDown={(event) => event.stopPropagation()}
+
+      >
+
+        <button
+
+          type="button"
+
+          className="lpvm-close"
+
+          onClick={onClose}
+
+          aria-label="Close Voice Map Reference"
+
+        >
+
+          ×
+
+        </button>
+
+        <header className="lpvm-header">
+
+          <span className="lpvm-kicker">LegacyPrint™ Sound Guide</span>
+
+          <h2>Voice Map Reference</h2>
+
+          <p>A seven-point listening framework for drum tone, feel, and response.</p>
+
+        </header>
+
+        <nav className="lpvm-mode-tabs" aria-label="Voice Map modes">
+
+          {MODES.map((mode) => (
+
+            <button
+
+              key={mode.id}
+
+              type="button"
+
+              className={`lpvm-mode-tab ${activeMode === mode.id ? 'is-active' : ''}`}
+
+              onClick={() => setActiveMode(mode.id)}
+
+            >
+
+              <strong>{mode.label}</strong>
+
+              <span>{mode.helper}</span>
+
+            </button>
+
+          ))}
+
+        </nav>
+
+        <main className={`lpvm-workspace lpvm-workspace-${activeMode}`}>
+
+          <section className="lpvm-visual" aria-label="Interactive Voice Map visual">
+
+            <div className={`lpvm-map lpvm-map-${activeMode}`}>
+
+              <svg className="lpvm-svg" viewBox="0 0 100 100" aria-hidden="true">
+
+                <defs>
+
+                  {NODE_ORDER.map((node, index) => {
+
+                    const nextNode = NODE_ORDER[(index + 1) % NODE_ORDER.length];
+
+                    return (
+
+                      <linearGradient
+
+                        key={`${node.key}-${nextNode.key}`}
+
+                        id={`edge-${node.key}-${nextNode.key}`}
+
+                        x1={toPoint(index).x}
+
+                        y1={toPoint(index).y}
+
+                        x2={toPoint((index + 1) % NODE_ORDER.length).x}
+
+                        y2={toPoint((index + 1) % NODE_ORDER.length).y}
+
+                        gradientUnits="userSpaceOnUse"
+
+                      >
+
+                        <stop offset="0%" stopColor={AXIS_COLOR_BY_KEY[node.key]} />
+
+                        <stop offset="100%" stopColor={AXIS_COLOR_BY_KEY[nextNode.key]} />
+
+                      </linearGradient>
+
+                    );
+
+                  })}
+
+                  {RELATIONSHIPS.map((relationship) => {
+
+                    const a = pointMap[relationship.a];
+
+                    const b = pointMap[relationship.b];
+
+                    return (
+
+                      <linearGradient
+
+                        key={`relationship-gradient-${relationship.id}`}
+
+                        id={`relationship-gradient-${relationship.id}`}
+
+                        x1={a.x}
+
+                        y1={a.y}
+
+                        x2={b.x}
+
+                        y2={b.y}
+
+                        gradientUnits="userSpaceOnUse"
+
+                      >
+
+                        <stop offset="0%" stopColor={AXIS_COLOR_BY_KEY[relationship.a]} />
+
+                        <stop offset="100%" stopColor={AXIS_COLOR_BY_KEY[relationship.b]} />
+
+                      </linearGradient>
+
+                    );
+
+                  })}
+
+                  <filter id="lpvmGlow">
+
+                    <feGaussianBlur stdDeviation="1.2" result="blur" />
+
+                    <feMerge>
+
+                      <feMergeNode in="blur" />
+
+                      <feMergeNode in="SourceGraphic" />
+
+                    </feMerge>
+
+                  </filter>
+
+                  <marker
+
+                    id="lpvmArrow"
+
+                    markerWidth="7"
+
+                    markerHeight="7"
+
+                    refX="4.6"
+
+                    refY="3.5"
+
+                    orient="auto"
+
+                  >
+
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(214,178,119,0.82)" />
+
+                  </marker>
+
+                </defs>
+
+                {activeMode === 'playCycle' && (
+
+                  <>
+
+                    <circle
+
+                      cx="50"
+
+                      cy="50"
+
+                      r="38"
+
+                      className="lpvm-play-cycle-ring"
+
+                    />
+
+                    {NODE_ORDER.map((node, index) => {
+
+                      const nextIndex = (index + 1) % NODE_ORDER.length;
+
+                      const p1 = toPoint(index, 38);
+
+                      const p2 = toPoint(nextIndex, 38);
+
+                      return (
+
+                        <line
+
+                          key={`play-${node.key}`}
+
+                          x1={p1.x}
+
+                          y1={p1.y}
+
+                          x2={p2.x}
+
+                          y2={p2.y}
+
+                          className="lpvm-play-cycle-arrow"
+
+                          stroke={`url(#edge-${node.key}-${NODE_ORDER[nextIndex].key})`}
+
+                          markerEnd={index === 0 ? 'url(#lpvmArrow)' : undefined}
+
+                        />
+
+                      );
+
+                    })}
+
+                  </>
+
+                )}
+
+                {activeMode === 'relationshipMap' && (
+
+                  <>
+
+                    {RELATIONSHIPS.map((relationship) => {
+
+                      const a = pointMap[relationship.a];
+
+                      const b = pointMap[relationship.b];
+
+                      const isActive = relationship.id === activeRelationshipId;
+
+                      return (
+
+                        <g key={relationship.id}>
+
+                          <line
+
+                            x1={a.x}
+
+                            y1={a.y}
+
+                            x2={b.x}
+
+                            y2={b.y}
+
+                            className={`lpvm-relationship-line ${isActive ? 'is-active' : ''}`}
+
+                            stroke={
+
+                              isActive
+
+                                ? `url(#relationship-gradient-${relationship.id})`
+
+                                : 'rgba(255,255,255,0.22)'
+
+                            }
+
+                          />
+
+                          <line
+
+                            x1={a.x}
+
+                            y1={a.y}
+
+                            x2={b.x}
+
+                            y2={b.y}
+
+                            className="lpvm-relationship-hitline"
+
+                            onClick={() => handleRelationshipSelect(relationship.id)}
+
+                          />
+
+                        </g>
+
+                      );
+
+                    })}
+
+                  </>
+
+                )}
+
+                {activeMode === 'voiceGauge' && showSpider && (
+
+                  <>
+
+                    {[10, 9, 8, 7, 6, 5, 4, 3, 2].map((level) => (
+
+                      <polygon
+
+                        key={level}
+
+                        points={buildPolygonPoints(
+
+                          NODE_ORDER.reduce((acc, node) => {
+
+                            acc[node.key] = level;
+
+                            return acc;
+
+                          }, {})
+
+                        )}
+
+                        className={`lpvm-spider-grid ${level === 5 ? 'is-reference-level' : ''}`}
+
+                      />
+
+                    ))}
+
+                    {NODE_ORDER.map((node, index) => {
+
+                      const outer = toPoint(index, 38);
+
+                      return (
+
+                        <line
+
+                          key={`axis-${node.key}`}
+
+                          x1="50"
+
+                          y1="50"
+
+                          x2={outer.x}
+
+                          y2={outer.y}
+
+                          className="lpvm-spider-axis"
+
+                        />
+
+                      );
+
+                    })}
+
+                    {gaugeView !== 'current' && (
+
+                      <polygon
+
+                        points={buildPolygonPoints(referenceValues)}
+
+                        className="lpvm-reference-polygon"
+
+                      />
+
+                    )}
+
+                    <polygon
+
+                      points={buildPolygonPoints(currentValues)}
+
+                      className="lpvm-current-fill"
+
+                    />
+
+                    {NODE_ORDER.map((node, index) => {
+
+                      const currentPoint = toPoint(index, node.value * 3.8);
+
+                      const nextNode = NODE_ORDER[(index + 1) % NODE_ORDER.length];
+
+                      const nextPoint = toPoint((index + 1) % NODE_ORDER.length, nextNode.value * 3.8);
+
+                      return (
+
+                        <line
+
+                          key={`current-line-${node.key}`}
+
+                          x1={currentPoint.x}
+
+                          y1={currentPoint.y}
+
+                          x2={nextPoint.x}
+
+                          y2={nextPoint.y}
+
+                          className="lpvm-current-segment"
+
+                          stroke={`url(#edge-${node.key}-${nextNode.key})`}
+
+                        />
+
+                      );
+
+                    })}
+
+                    {NODE_ORDER.map((node, index) => {
+
+                      const currentPoint = toPoint(index, node.value * 3.8);
+
+                      const color = AXIS_COLOR_BY_KEY[node.key];
+
+                      return (
+
+                        <g key={`point-${node.key}`}>
+
+                          <circle
+
+                            cx={currentPoint.x}
+
+                            cy={currentPoint.y}
+
+                            r="2.1"
+
+                            fill={color}
+
+                            className={`lpvm-spider-dot ${activeNodeKey === node.key ? 'is-active' : ''}`}
+
+                            onClick={() => handleNodeSelect(node.key)}
+
+                          />
+
+                          <circle
+
+                            cx={currentPoint.x}
+
+                            cy={currentPoint.y}
+
+                            r="6"
+
+                            fill="transparent"
+
+                            className="lpvm-spider-dot-hit"
+
+                            onClick={() => handleNodeSelect(node.key)}
+
+                          />
+
+                        </g>
+
+                      );
+
+                    })}
+
+                  </>
+
+                )}
+
+                {activeMode === 'voiceGauge' && showBars && (
+
+                  <g className="lpvm-bars-svg">
+
+                    {NODE_ORDER.map((node, index) => {
+
+                      const y = 18 + index * 10;
+
+                      return (
+
+                        <g key={`bar-${node.key}`}>
+
+                          <line
+
+                            x1="28"
+
+                            x2="78"
+
+                            y1={y}
+
+                            y2={y}
+
+                            className="lpvm-bar-track"
+
+                          />
+
+                          <line
+
+                            x1="28"
+
+                            x2={28 + node.value * 5}
+
+                            y1={y}
+
+                            y2={y}
+
+                            className="lpvm-bar-fill"
+
+                            stroke={AXIS_COLOR_BY_KEY[node.key]}
+
+                            onClick={() => handleNodeSelect(node.key)}
+
+                          />
+
+                        </g>
+
+                      );
+
+                    })}
+
+                  </g>
+
+                )}
+
+                {activeMode === 'voiceFinder' && (
+
+                  <>
+
+                    {RELATIONSHIPS.map((relationship, index) => {
+
+                      const a = pointMap[relationship.a];
+
+                      const b = pointMap[relationship.b];
+
+                      const active = index % 3 === finderAnswers.length % 3;
+
+                      return (
+
+                        <line
+
+                          key={`finder-${relationship.id}`}
+
+                          x1={a.x}
+
+                          y1={a.y}
+
+                          x2={b.x}
+
+                          y2={b.y}
+
+                          className={`lpvm-finder-line ${active ? 'is-active' : ''}`}
+
+                          stroke={`url(#relationship-gradient-${relationship.id})`}
+
+                        />
+
+                      );
+
+                    })}
+
+                  </>
+
+                )}
+
+              </svg>
+
+              {points.map((node) => {
+
+                const color = AXIS_COLOR_BY_KEY[node.key];
+
+                return (
+
+                  <button
+
+                    key={node.key}
+
+                    type="button"
+
+                    className={`lpvm-node-button ${
+
+                      activeNodeKey === node.key ? 'is-active' : ''
+
+                    }`}
+
+                    style={{
+
+                      '--node-x': `${node.x}%`,
+
+                      '--node-y': `${node.y}%`,
+
+                      '--node-color': color,
+
+                    }}
+
+                    onClick={() => handleNodeSelect(node.key)}
+
+                    aria-label={`Select ${node.label}`}
+
+                  >
+
+                    <MetricIcon type={node.icon} color={color} size={activeNodeKey === node.key ? 21 : 19} />
+
+                  </button>
+
+                );
+
+              })}
+
+            </div>
+
+          </section>
+
+          <aside className="lpvm-panel">
+
+            {activeMode === 'playCycle' && (
+
+              <>
+
+                <span className="lpvm-panel-kicker">Play Cycle</span>
+
+                <h3>How the player feels the drum respond.</h3>
+
+                <p>
+
+                  This mode follows the felt experience of a hit: the first strike,
+
+                  the clarity that follows, how it carries, how it blooms, how it
+
+                  fills out, how it reacts to touch, and how it comes back into focus.
+
+                </p>
+
+                <div className="lpvm-motion-grid">
+
+                  {NODE_ORDER.map((node, index) => (
+
+                    <button
+
+                      key={node.key}
+
+                      type="button"
+
+                      className={`lpvm-motion-chip ${activeNodeKey === node.key ? 'is-active' : ''}`}
+
+                      onClick={() => handleNodeSelect(node.key)}
+
+                    >
+
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+
+                      <MetricIcon type={node.icon} color={AXIS_COLOR_BY_KEY[node.key]} size={15} />
+
+                      <strong>{node.motion}</strong>
+
+                    </button>
+
+                  ))}
+
+                </div>
+
+                <NodeReadout node={activeNode} />
+
+                <OutputBox text="Node definition, note-cycle position, and drummer translation." />
+
+              </>
+
+            )}
+
+            {activeMode === 'voiceGauge' && (
+
+              <>
+
+                <span className="lpvm-panel-kicker">Voice Gauge</span>
+
+                <h3>How a drum compares.</h3>
+
+                <p>
+
+                  Voice Gauge turns the seven nodes into a measurable shape. The
+
+                  dotted reference is a neutral 5-point drum. The colored shape shows
+
+                  the current configuration.
+
+                </p>
+
+                <div className="lpvm-submode-grid">
+
+                  {[
+
+                    ['balanced', 'Balanced Spider'],
+
+                    ['current', 'Current Spider'],
+
+                    ['compare', 'Spider Compare'],
+
+                    ['bars', 'Bars'],
+
+                    ['rangeBars', 'Range Bars'],
+
+                    ['compareBars', 'Compare Bars'],
+
+                  ].map(([id, label]) => (
+
+                    <button
+
+                      key={id}
+
+                      type="button"
+
+                      className={gaugeView === id ? 'is-active' : ''}
+
+                      onClick={() => setGaugeView(id)}
+
+                    >
+
+                      {label}
+
+                    </button>
+
+                  ))}
+
+                </div>
+
+                <div className="lpvm-overall-read">
+
+                  <span>Overall drum read</span>
+
+                  <p>{overallRead}</p>
+
+                </div>
+
+                <NodeReadout node={activeNode} comparison />
+
+                <OutputBox text="Overall voice read plus selected node comparison against the reference drum." />
+
+              </>
+
+            )}
+
+            {activeMode === 'relationshipMap' && (
+
+              <>
+
+                <span className="lpvm-panel-kicker">Tonal Relationship</span>
+
+                <h3>How traits connect.</h3>
+
+                <p>
+
+                  Tap a connector line to see how two traits shape one another.
+
+                  Selected lines blend the colors of the two connected nodes.
+
+                </p>
+
+                <div className="lpvm-relationship-card">
+
+                  <strong>{activeRelationship.title}</strong>
+
+                  <small>{activeRelationship.subtitle}</small>
+
+                  <p>{activeRelationship.text}</p>
+
+                </div>
+
+                <div className="lpvm-relationship-buttons">
+
+                  {RELATIONSHIPS.map((relationship) => (
+
+                    <button
+
+                      key={relationship.id}
+
+                      type="button"
+
+                      className={activeRelationshipId === relationship.id ? 'is-active' : ''}
+
+                      onClick={() => handleRelationshipSelect(relationship.id)}
+
+                    >
+
+                      {relationship.title}
+
+                    </button>
+
+                  ))}
+
+                </div>
+
+                <OutputBox text="Relationship phrase, meaning, and build implication." />
+
+              </>
+
+            )}
+
+            {activeMode === 'voiceFinder' && (
+
+              <>
+
+                <span className="lpvm-panel-kicker">Voice Finder</span>
+
+                <h3>One guided session. One Voice Target.</h3>
+
+                <p>
+
+                  Voice Finder uses the map as an adaptive discovery tool. Each
+
+                  answer shifts the network and helps translate player language into
+
+                  a clear drum direction.
+
+                </p>
+
+                {!finderComplete && (
+
+                  <div className="lpvm-finder-question">
+
+                    <strong>{finderQuestion.question}</strong>
+
+                    <div>
+
+                      {finderQuestion.answers.map((answer) => (
+
+                        <button
+
+                          key={answer}
+
+                          type="button"
+
+                          onClick={() => handleFinderAnswer(answer)}
+
+                        >
+
+                          {answer}
+
+                        </button>
+
+                      ))}
+
+                    </div>
+
+                  </div>
+
+                )}
+
+                {finderComplete && (
+
+                  <div className="lpvm-finder-result">
+
+                    <strong>Voice Target Preview</strong>
+
+                    <p>
+
+                      Based on these answers, this player is describing a focused,
+
+                      expressive drum voice with a need for clarity, response, and
+
+                      useful control.
+
+                    </p>
+
+                    <button type="button" onClick={resetFinder}>
+
+                      Restart Preview
+
+                    </button>
+
+                  </div>
+
+                )}
+
+                <OutputBox text="Player language translated into a one-of-one LegacyPrint™ Voice Target." />
+
+              </>
+
+            )}
+
+          </aside>
+
+        </main>
+
+      </div>
+
+    </div>
+
+  );
+
+};
+
+const NodeReadout = ({ node, comparison = false }) => (
+
+  <div
+
+    className="lpvm-node-readout"
+
+    style={{ '--node-color': AXIS_COLOR_BY_KEY[node.key] }}
+
+  >
+
+    <div className="lpvm-node-readout-head">
+
+      <MetricIcon type={node.icon} color={AXIS_COLOR_BY_KEY[node.key]} size={19} />
+
+      <div>
+
+        <strong>{node.label}</strong>
+
+        <span>
+
+          {node.low} / {node.high}
+
+        </span>
+
+      </div>
+
+    </div>
+
+    <p>{comparison ? getDeltaPhrase(node) : node.meaning}</p>
+
+    {comparison && (
+
+      <small>
+
+        Current value: {node.value.toFixed(1)} / 10 · Reference drum: 5.0 / 10
+
+      </small>
+
+    )}
+
+  </div>
+
+);
+
+const OutputBox = ({ text }) => (
+
+  <div className="lpvm-output">
+
+    <strong>Output:</strong>
+
+    <span>{text}</span>
+
+  </div>
+
+);
+
+export default LegacyPrintVoiceMapModal;
+
