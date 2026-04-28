@@ -1644,6 +1644,8 @@
 
   --oad-modal-nav-offset: 92px;
 
+  --oad-modal-footer-safe: 108px;
+
   position: fixed;
 
   inset: 0;
@@ -1656,7 +1658,7 @@
 
   justify-content: center;
 
-  padding: var(--oad-modal-nav-offset) 0 0;
+  padding: var(--oad-modal-nav-offset) 0 var(--oad-modal-footer-safe);
 
   background:
 
@@ -1682,9 +1684,9 @@
 
   width: 100%;
 
-  height: calc(100dvh - var(--oad-modal-nav-offset));
+  height: calc(100dvh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe));
 
-  max-height: calc(100dvh - var(--oad-modal-nav-offset));
+  max-height: calc(100dvh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe));
 
   display: grid;
 
@@ -1756,7 +1758,7 @@
 
   align-items: start;
 
-  padding: clamp(18px, 2.4vh, 28px) 0 clamp(14px, 2vh, 20px);
+  padding: clamp(14px, 2vh, 22px) 0 clamp(10px, 1.6vh, 16px);
 
   border-bottom: 1px solid rgba(214, 178, 119, 0.12);
 
@@ -1774,11 +1776,11 @@
 
   display: block;
 
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 
   color: rgba(214, 178, 119, 0.88);
 
-  font-size: clamp(0.56rem, 0.7vw, 0.68rem);
+  font-size: clamp(0.52rem, 0.62vw, 0.64rem);
 
   font-weight: 950;
 
@@ -1796,7 +1798,7 @@
 
   color: #fff;
 
-  font-size: clamp(2.45rem, 5.1vw, 5.65rem);
+  font-size: clamp(2.1rem, 4.4vw, 4.95rem);
 
   font-weight: 950;
 
@@ -1876,6 +1878,8 @@
 
   min-height: 0;
 
+  height: 100%;
+
   overflow: hidden;
 
   overscroll-behavior: none;
@@ -1906,7 +1910,7 @@
 
   min-height: 0;
 
-  padding: clamp(12px, 2vh, 24px) 0 clamp(18px, 2.2vh, 30px);
+  padding: clamp(8px, 1.4vh, 16px) 0 clamp(10px, 1.8vh, 22px);
 
   display: grid;
 
@@ -1942,7 +1946,9 @@
 
 }
 
-.oad-voice-engine-orbit {
+.oad-voice-engine-orbit,
+
+.oad-node-button-layer {
 
   position: absolute;
 
@@ -1950,13 +1956,33 @@
 
   top: 50%;
 
-  width: min(660px, 61vh, 62vw);
+  width: min(
+
+    620px,
+
+    calc(100dvh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 150px),
+
+    58vw
+
+  );
 
   aspect-ratio: 1;
 
   transform: translate(-50%, -50%);
 
+}
+
+.oad-voice-engine-orbit {
+
   z-index: 1;
+
+  pointer-events: none;
+
+}
+
+.oad-node-button-layer {
+
+  z-index: 4;
 
   pointer-events: none;
 
@@ -2011,26 +2037,6 @@
   stroke-width: 2.4;
 
   opacity: 0.58;
-
-}
-
-.oad-node-button-layer {
-
-  position: absolute;
-
-  left: 50%;
-
-  top: 50%;
-
-  width: min(660px, 61vh, 62vw);
-
-  aspect-ratio: 1;
-
-  transform: translate(-50%, -50%);
-
-  z-index: 4;
-
-  pointer-events: none;
 
 }
 
@@ -2178,15 +2184,15 @@
 
   z-index: 3;
 
-  width: min(420px, 42vh, 38vw);
+  width: min(360px, 36vh, 32vw);
 
-  min-height: min(460px, 49vh);
+  min-height: min(390px, 42vh);
 
   display: grid;
 
   place-items: center;
 
-  padding: clamp(18px, 2.6vh, 32px) clamp(18px, 2.4vh, 30px);
+  padding: clamp(14px, 2vh, 24px);
 
   box-sizing: border-box;
 
@@ -3624,12 +3630,6 @@
 
   }
 
-  .oad-node-modal-backdrop {
-
-    --oad-modal-nav-offset: 92px;
-
-  }
-
   .oad-node-modal-head {
 
     width: min(940px, calc(100% - 36px));
@@ -3646,7 +3646,15 @@
 
   .oad-node-button-layer {
 
-    width: min(600px, 60vh, 72vw);
+    width: min(
+
+      560px,
+
+      calc(100dvh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 140px),
+
+      62vw
+
+    );
 
   }
 
@@ -3830,33 +3838,35 @@
 
     --oad-modal-nav-offset: 82px;
 
+    --oad-modal-footer-safe: 110px;
+
   }
 
   .oad-node-modal-head {
 
-    padding-top: 14px;
+    padding-top: 12px;
 
-    padding-bottom: 12px;
+    padding-bottom: 10px;
 
   }
 
   .oad-node-modal-kicker {
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 
   }
 
   .oad-node-modal h3 {
 
-    font-size: clamp(2rem, 4.5vw, 4.3rem);
+    font-size: clamp(1.9rem, 4vw, 3.9rem);
 
   }
 
   .oad-voice-engine {
 
-    padding-top: 10px;
+    padding-top: 8px;
 
-    padding-bottom: 14px;
+    padding-bottom: 10px;
 
   }
 
@@ -3864,47 +3874,71 @@
 
   .oad-node-button-layer {
 
-    width: min(520px, 58vh, 58vw);
+    width: min(
+
+      500px,
+
+      calc(100dvh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 118px),
+
+      54vw
+
+    );
 
   }
 
   .oad-engine-center {
 
-    width: min(360px, 40vh, 34vw);
+    width: min(320px, 34vh, 30vw);
 
-    min-height: min(390px, 46vh);
+    min-height: min(340px, 39vh);
 
-    padding-top: 18px;
+    padding-top: 14px;
 
-    padding-bottom: 18px;
+    padding-bottom: 14px;
+
+  }
+
+  .oad-engine-intro h4 {
+
+    font-size: clamp(1.25rem, 2.4vh, 1.85rem);
+
+  }
+
+  .oad-engine-intro p {
+
+    width: min(230px, 100%);
+
+    font-size: clamp(0.62rem, 1.08vh, 0.82rem);
+
+    line-height: 1.3;
 
   }
 
   .oad-engine-node-title h4 {
 
-    font-size: clamp(1.62rem, 4.4vh, 2.85rem);
+    font-size: clamp(1.42rem, 3.8vh, 2.65rem);
 
   }
 
   .oad-engine-info-card {
 
-    width: min(380px, 100%);
+    width: min(340px, 100%);
 
   }
 
   .oad-engine-info-card p {
 
-    font-size: clamp(0.76rem, 1.32vh, 0.92rem);
+    font-size: clamp(0.72rem, 1.22vh, 0.9rem);
 
   }
 
   .oad-guide-node-button {
 
-    width: clamp(48px, 6.6vh, 66px);
+    width: clamp(46px, 6.2vh, 62px);
 
-    height: clamp(48px, 6.6vh, 66px);
+    height: clamp(46px, 6.2vh, 62px);
 
-    min-height: clamp(48px, 6.6vh, 66px);
+    min-height: clamp(46px, 6.2vh, 62px);
 
   }
 
@@ -4440,7 +4474,9 @@
 
     --oad-modal-nav-offset: 112px;
 
-    padding: var(--oad-modal-nav-offset) 0 0;
+    --oad-modal-footer-safe: 104px;
+
+    padding: var(--oad-modal-nav-offset) 0 var(--oad-modal-footer-safe);
 
     overflow: hidden;
 
@@ -4454,9 +4490,9 @@
 
     width: 100%;
 
-    height: calc(100svh - var(--oad-modal-nav-offset));
+    height: calc(100svh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe));
 
-    max-height: calc(100svh - var(--oad-modal-nav-offset));
+    max-height: calc(100svh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe));
 
     display: grid;
 
@@ -4476,7 +4512,7 @@
 
     width: 100%;
 
-    padding: 16px 14px 12px;
+    padding: 14px 14px 10px;
 
     gap: 12px;
 
@@ -4490,9 +4526,9 @@
 
   .oad-node-modal-kicker {
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 
-    font-size: 0.52rem;
+    font-size: 0.5rem;
 
     letter-spacing: 0.18em;
 
@@ -4500,7 +4536,7 @@
 
   .oad-node-modal h3 {
 
-    font-size: clamp(1.62rem, 8vw, 2.45rem);
+    font-size: clamp(1.45rem, 7vw, 2.15rem);
 
     line-height: 0.9;
 
@@ -4524,6 +4560,8 @@
 
     min-height: 0;
 
+    height: 100%;
+
   }
 
   .oad-voice-engine {
@@ -4534,7 +4572,7 @@
 
     min-height: 0;
 
-    padding: 12px 0 22px;
+    padding: 8px 0 12px;
 
     display: grid;
 
@@ -4558,7 +4596,9 @@
 
   }
 
-  .oad-voice-engine-orbit {
+  .oad-voice-engine-orbit,
+
+  .oad-node-button-layer {
 
     display: block;
 
@@ -4566,29 +4606,29 @@
 
     top: 50%;
 
-    width: min(404px, 96vw, 58svh);
+    width: min(
+
+      390px,
+
+      92vw,
+
+      calc(100svh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 106px)
+
+    );
+
+    aspect-ratio: 1;
 
     transform: translate(-50%, -50%);
+
+  }
+
+  .oad-voice-engine-orbit {
 
     z-index: 1;
 
   }
 
   .oad-node-button-layer {
-
-    position: absolute;
-
-    left: 50%;
-
-    top: 50%;
-
-    width: min(404px, 96vw, 58svh);
-
-    aspect-ratio: 1;
-
-    transform: translate(-50%, -50%);
-
-    display: block;
 
     z-index: 5;
 
@@ -4604,11 +4644,11 @@
 
     top: var(--node-y);
 
-    width: clamp(38px, 6.2svh, 44px);
+    width: clamp(36px, 5.8svh, 42px);
 
-    height: clamp(38px, 6.2svh, 44px);
+    height: clamp(36px, 5.8svh, 42px);
 
-    min-height: clamp(38px, 6.2svh, 44px);
+    min-height: clamp(36px, 5.8svh, 42px);
 
     transform: translate(-50%, -50%);
 
@@ -4636,7 +4676,7 @@
 
   .oad-guide-node-icon {
 
-    transform: scale(0.84);
+    transform: scale(0.82);
 
   }
 
@@ -4674,11 +4714,11 @@
 
     position: relative;
 
-    width: min(238px, 64vw, 33svh);
+    width: min(224px, 60vw, 30svh);
 
-    min-height: min(350px, 48svh);
+    min-height: min(310px, 42svh);
 
-    padding: 18px 12px;
+    padding: 14px 10px;
 
     z-index: 3;
 
@@ -4702,15 +4742,15 @@
 
   .oad-engine-intro {
 
-    transform: translateY(8px);
+    transform: translateY(4px);
 
   }
 
   .oad-engine-intro-kicker {
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 
-    font-size: clamp(0.48rem, 1.2svh, 0.58rem);
+    font-size: clamp(0.44rem, 1.05svh, 0.54rem);
 
     line-height: 1.16;
 
@@ -4720,11 +4760,11 @@
 
   .oad-engine-intro h4 {
 
-    max-width: 180px;
+    max-width: 170px;
 
-    margin: 0 0 8px;
+    margin: 0 0 7px;
 
-    font-size: clamp(1rem, 3.6svh, 1.44rem);
+    font-size: clamp(0.95rem, 3.2svh, 1.32rem);
 
     line-height: 0.94;
 
@@ -4734,13 +4774,13 @@
 
   .oad-engine-intro p {
 
-    width: min(174px, 100%);
+    width: min(162px, 100%);
 
-    margin: 0 auto 8px;
+    margin: 0 auto 7px;
 
-    font-size: clamp(0.48rem, 1.25svh, 0.58rem);
+    font-size: clamp(0.44rem, 1.05svh, 0.54rem);
 
-    line-height: 1.24;
+    line-height: 1.2;
 
     color: rgba(255, 255, 255, 0.74);
 
@@ -4748,17 +4788,11 @@
 
   .oad-engine-mini-map {
 
-    width: clamp(52px, 8.2svh, 64px);
+    width: clamp(46px, 7.4svh, 58px);
 
-    height: clamp(52px, 8.2svh, 64px);
+    height: clamp(46px, 7.4svh, 58px);
 
-    margin-top: 8px;
-
-    background:
-
-      radial-gradient(circle at 50% 50%, rgba(214, 178, 119, 0.13), transparent 34%),
-
-      radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.035), transparent 62%);
+    margin-top: 7px;
 
   }
 
@@ -5190,23 +5224,25 @@
 
     --oad-modal-nav-offset: 78px;
 
+    --oad-modal-footer-safe: 92px;
+
   }
 
   .oad-node-modal-head {
 
-    padding: 12px 16px 10px;
+    padding: 10px 16px 8px;
 
   }
 
   .oad-node-modal h3 {
 
-    font-size: clamp(1.35rem, 5vw, 2rem);
+    font-size: clamp(1.28rem, 4.5vw, 1.85rem);
 
   }
 
   .oad-voice-engine {
 
-    padding: 8px 0 14px;
+    padding: 6px 0 10px;
 
   }
 
@@ -5214,45 +5250,53 @@
 
   .oad-node-button-layer {
 
-    width: min(390px, 67vw, 58svh);
+    width: min(
+
+      360px,
+
+      64vw,
+
+      calc(100svh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 82px)
+
+    );
 
   }
 
   .oad-engine-center {
 
-    width: min(300px, 48vw, 38svh);
+    width: min(280px, 46vw, 36svh);
 
-    min-height: min(330px, 48svh);
+    min-height: min(300px, 44svh);
 
-    padding: 14px 18px;
+    padding: 12px 16px;
 
   }
 
   .oad-guide-node-button {
 
-    width: clamp(36px, 6.4svh, 48px);
+    width: clamp(34px, 6svh, 44px);
 
-    height: clamp(36px, 6.4svh, 48px);
+    height: clamp(34px, 6svh, 44px);
 
-    min-height: clamp(36px, 6.4svh, 48px);
+    min-height: clamp(34px, 6svh, 44px);
 
   }
 
   .oad-engine-node-title h4 {
 
-    font-size: clamp(1.05rem, 4.4svh, 1.6rem);
+    font-size: clamp(1rem, 4svh, 1.48rem);
 
   }
 
   .oad-engine-info-card {
 
-    width: min(240px, 100%);
+    width: min(230px, 100%);
 
   }
 
   .oad-engine-info-card p {
 
-    font-size: clamp(0.54rem, 1.52svh, 0.7rem);
+    font-size: clamp(0.52rem, 1.42svh, 0.68rem);
 
     line-height: 1.2;
 
@@ -5374,17 +5418,19 @@
 
     --oad-modal-nav-offset: 126px;
 
+    --oad-modal-footer-safe: 108px;
+
   }
 
   .oad-node-modal-head {
 
-    padding: 15px 13px 11px;
+    padding: 12px 13px 9px;
 
   }
 
   .oad-node-modal h3 {
 
-    font-size: clamp(1.5rem, 8vw, 2.18rem);
+    font-size: clamp(1.32rem, 7.2vw, 1.9rem);
 
   }
 
@@ -5392,93 +5438,61 @@
 
   .oad-node-button-layer {
 
-    width: min(378px, 97vw, 57svh);
+    width: min(
+
+      360px,
+
+      94vw,
+
+      calc(100svh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 96px)
+
+    );
 
   }
 
   .oad-guide-node-button {
 
-    width: clamp(37px, 6svh, 41px);
+    width: clamp(34px, 5.4svh, 39px);
 
-    height: clamp(37px, 6svh, 41px);
+    height: clamp(34px, 5.4svh, 39px);
 
-    min-height: clamp(37px, 6svh, 41px);
+    min-height: clamp(34px, 5.4svh, 39px);
 
   }
 
   .oad-guide-node-icon {
 
-    transform: scale(0.82);
+    transform: scale(0.78);
 
   }
 
   .oad-engine-center {
 
-    width: min(230px, 63vw, 33svh);
+    width: min(212px, 58vw, 29svh);
 
-    min-height: min(338px, 47svh);
+    min-height: min(292px, 40svh);
 
-    padding: 16px 12px;
-
-  }
-
-  .oad-engine-node-title {
-
-    gap: 5px;
-
-    margin-bottom: 10px;
-
-  }
-
-  .oad-engine-node-title-icon svg {
-
-    width: clamp(14px, 2.25svh, 18px);
-
-    height: clamp(14px, 2.25svh, 18px);
+    padding: 12px 10px;
 
   }
 
   .oad-engine-node-title h4 {
 
-    font-size: clamp(0.96rem, 3.8svh, 1.38rem);
-
-  }
-
-  .oad-engine-node-range {
-
-    margin-bottom: clamp(14px, 2.4svh, 20px);
-
-    font-size: clamp(0.34rem, 0.96svh, 0.44rem);
+    font-size: clamp(0.9rem, 3.3svh, 1.26rem);
 
   }
 
   .oad-engine-info-card {
 
-    width: min(198px, 100%);
-
-  }
-
-  .oad-engine-info-card span {
-
-    font-size: clamp(0.36rem, 0.9svh, 0.44rem);
-
-    margin-bottom: 5px;
+    width: min(188px, 100%);
 
   }
 
   .oad-engine-info-card p {
 
-    font-size: clamp(0.48rem, 1.18svh, 0.58rem);
+    font-size: clamp(0.44rem, 1.05svh, 0.54rem);
 
-    line-height: 1.18;
-
-  }
-
-  .oad-engine-node-controls {
-
-    margin-top: clamp(28px, 4.8svh, 40px);
-
-    gap: 8px;
+    line-height: 1.16;
 
   }
 
@@ -5490,23 +5504,25 @@
 
     --oad-modal-nav-offset: 130px;
 
+    --oad-modal-footer-safe: 112px;
+
   }
 
   .oad-node-modal-head {
 
-    padding: 13px 11px 10px;
+    padding: 10px 11px 8px;
 
   }
 
   .oad-node-modal h3 {
 
-    font-size: clamp(1.38rem, 7.5vw, 1.9rem);
+    font-size: clamp(1.22rem, 6.8vw, 1.68rem);
 
   }
 
   .oad-voice-engine {
 
-    padding: 8px 0 18px;
+    padding: 6px 0 10px;
 
   }
 
@@ -5514,97 +5530,77 @@
 
   .oad-node-button-layer {
 
-    width: min(358px, 97vw, 56svh);
+    width: min(
+
+      336px,
+
+      94vw,
+
+      calc(100svh - var(--oad-modal-nav-offset) - var(--oad-modal-footer-safe) - 84px)
+
+    );
 
   }
 
   .oad-guide-node-button {
 
-    width: clamp(35px, 5.8svh, 39px);
+    width: clamp(32px, 5.2svh, 37px);
 
-    height: clamp(35px, 5.8svh, 39px);
+    height: clamp(32px, 5.2svh, 37px);
 
-    min-height: clamp(35px, 5.8svh, 39px);
+    min-height: clamp(32px, 5.2svh, 37px);
 
   }
 
   .oad-guide-node-icon {
 
-    transform: scale(0.76);
+    transform: scale(0.72);
 
   }
 
   .oad-engine-center {
 
-    width: min(214px, 61vw, 31svh);
+    width: min(198px, 56vw, 28svh);
 
-    min-height: min(320px, 46svh);
+    min-height: min(276px, 39svh);
 
-    padding: 14px 11px;
+    padding: 11px 9px;
 
   }
 
   .oad-engine-intro h4 {
 
-    max-width: 150px;
+    max-width: 145px;
 
-    font-size: clamp(0.94rem, 3.7svh, 1.22rem);
+    font-size: clamp(0.86rem, 3.2svh, 1.12rem);
 
   }
 
   .oad-engine-intro p {
 
-    width: min(150px, 100%);
+    width: min(144px, 100%);
 
-    font-size: clamp(0.39rem, 1svh, 0.47rem);
+    font-size: clamp(0.36rem, 0.92svh, 0.44rem);
 
   }
 
   .oad-engine-node-title h4 {
 
-    font-size: clamp(0.9rem, 3.55svh, 1.18rem);
-
-  }
-
-  .oad-engine-node-title-icon svg {
-
-    width: clamp(13px, 2.1svh, 16px);
-
-    height: clamp(13px, 2.1svh, 16px);
-
-  }
-
-  .oad-engine-node-range {
-
-    font-size: clamp(0.32rem, 0.88svh, 0.4rem);
-
-    margin-bottom: 13px;
+    font-size: clamp(0.84rem, 3.25svh, 1.08rem);
 
   }
 
   .oad-engine-info-card {
 
-    width: min(184px, 100%);
-
-  }
-
-  .oad-engine-info-card span {
-
-    font-size: clamp(0.34rem, 0.84svh, 0.4rem);
+    width: min(174px, 100%);
 
   }
 
   .oad-engine-info-card p {
 
-    font-size: clamp(0.45rem, 1.1svh, 0.54rem);
+    font-size: clamp(0.42rem, 1svh, 0.5rem);
 
-    line-height: 1.16;
-
-  }
-
-  .oad-engine-node-controls {
-
-    margin-top: clamp(26px, 4.5svh, 36px);
+    line-height: 1.14;
 
   }
 
