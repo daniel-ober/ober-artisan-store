@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const LegacyPrintModeTabs = ({ modes = [], activeMode, onChange }) => {
@@ -40,4 +39,3 @@ const LegacyPrintModeTabs = ({ modes = [], activeMode, onChange }) => {
 };
 
 export default LegacyPrintModeTabs;
-

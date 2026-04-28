@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import {
@@ -47,7 +46,7 @@ export const LEGACYPRINT_AXIS_META = {
 
     high: 'Immediate',
 
-    sublabel: 'Quickness',
+    sublabel: 'Strike',
 
     icon: 'attack',
 
@@ -77,7 +76,7 @@ export const LEGACYPRINT_AXIS_META = {
 
     high: 'Bright',
 
-    sublabel: 'Top End',
+    sublabel: 'Clarity',
 
     icon: 'brightness',
 
@@ -107,7 +106,7 @@ export const LEGACYPRINT_AXIS_META = {
 
     high: 'Forward',
 
-    sublabel: 'Throw',
+    sublabel: 'Carry',
 
     icon: 'projection',
 
@@ -137,7 +136,7 @@ export const LEGACYPRINT_AXIS_META = {
 
     high: 'Open',
 
-    sublabel: 'Length',
+    sublabel: 'Bloom',
 
     icon: 'sustain',
 
@@ -197,7 +196,7 @@ export const LEGACYPRINT_AXIS_META = {
 
     high: 'Responsive',
 
-    sublabel: 'Response',
+    sublabel: 'Touch',
 
     icon: 'sensitivity',
 
@@ -227,7 +226,7 @@ export const LEGACYPRINT_AXIS_META = {
 
     high: 'Composed',
 
-    sublabel: 'Focus',
+    sublabel: 'Refinement',
 
     icon: 'control',
 
@@ -332,4 +331,3 @@ export const MetricIcon = ({ type, color = '#d6b277', size = 16 }) => {
   }
 
 };
-

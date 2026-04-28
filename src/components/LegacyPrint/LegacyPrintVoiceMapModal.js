@@ -1,9 +1,18 @@
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import React, { useMemo, useState } from 'react';
+import ReactDOM from 'react-dom';
 
 import LegacyPrintInteractivePolygon from './LegacyPrintInteractivePolygon';
 
 import LegacyPrintModeTabs from './LegacyPrintModeTabs';
+
+import {
+
+  LEGACYPRINT_SNARE_SAMPLES,
+
+  playLegacyPrintSnare,
+
+} from '../../utils/legacyPrintAudioEngine';
 
 import {
 
@@ -53,6 +62,24 @@ const NODE_LABELS = {
 
 };
 
+const NODE_VOICE_NAMES = {
+
+  attack: 'Strike',
+
+  brightness: 'Clarity',
+
+  projection: 'Carry',
+
+  sustain: 'Bloom',
+
+  warmth: 'Body',
+
+  sensitivity: 'Touch',
+
+  control: 'Refinement',
+
+};
+
 const NODE_LOW_HIGH = {
 
   attack: ['Rounded', 'Immediate'],
@@ -71,6 +98,24 @@ const NODE_LOW_HIGH = {
 
 };
 
+const RESET_PLAY_VALUES = {
+
+  attack: 5,
+
+  brightness: 5,
+
+  projection: 5,
+
+  sustain: 5,
+
+  warmth: 5,
+
+  sensitivity: 5,
+
+  control: 5,
+
+};
+
 const NODE_PLAY_STEPS = {
 
   attack: {
@@ -81,7 +126,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'The first contact. How quickly the drum answers the stick and gives the player something to react to.',
+      'Attack is the front edge of the drum. It is the first thing the stick gives back to the player: soft and woody on one end, quick and immediate on the other.',
+
+    hear: 'How fast the drum speaks when the stick first touches the head.',
+
+    words: ['rounded', 'quick', 'crisp', 'immediate'],
+
+    affects: ['bearing edge', 'head choice', 'shell stiffness', 'tuning'],
 
     closing: 'The note begins.',
 
@@ -95,7 +146,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'The edge and top-end detail that helps the player hear definition, crispness, and presence.',
+      'Brightness is the upper edge of the voice. It is where definition, crispness, and top-end detail help the drum stay clear under the hands and in the room.',
+
+    hear: 'How much top-end detail and clean separation the note carries.',
+
+    words: ['dark', 'clear', 'crisp', 'cutting'],
+
+    affects: ['head coating', 'rim choice', 'wire response', 'room brightness'],
 
     closing: 'The edge appears.',
 
@@ -109,7 +166,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'How the sound moves away from the kit and pushes into the room, band, or mix.',
+      'Projection is how far the drum steps away from the kit. Some voices stay close and controlled. Others move forward and take up more space in the band or room.',
+
+    hear: 'How strongly the drum moves outward after the first hit.',
+
+    words: ['close', 'present', 'forward', 'commanding'],
+
+    affects: ['shell depth', 'material', 'hoops', 'tuning range'],
 
     closing: 'The voice moves outward.',
 
@@ -123,7 +186,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'What remains after the hit. The note can open, linger, breathe, or stay short and contained.',
+      'Sustain is the part of the note that stays after the first hit. Some snares dry up quickly. Others open, bloom, and leave more air around the stroke.',
+
+    hear: 'How long the note breathes after impact.',
+
+    words: ['short', 'open', 'airy', 'dry'],
+
+    affects: ['heads', 'muffling', 'shell thickness', 'room response'],
 
     closing: 'The note breathes.',
 
@@ -137,7 +206,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'The low-mid center, woodiness, and fullness that make the drum feel round or grounded under the player.',
+      'Warmth is the center and weight of the drum. It is the wood, low-mid fullness, and roundness that keeps the voice from feeling thin or papery.',
+
+    hear: 'How much fullness and low-mid center sits underneath the note.',
+
+    words: ['lean', 'round', 'woody', 'full'],
+
+    affects: ['wood species', 'shell depth', 'edge shape', 'head pairing'],
 
     closing: 'The drum gains weight.',
 
@@ -151,7 +226,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'How small changes in hand, ghost notes, and dynamics come back through the shell and wires.',
+      'Sensitivity is how easily the drum wakes up under lighter playing. A more sensitive drum reveals wire detail, head contact, and low-level shell response without needing to be hit as hard.',
+
+    hear: 'How easily ghost notes, smaller motions, and lighter strokes speak.',
+
+    words: ['forgiving', 'responsive', 'alive', 'detailed'],
+
+    affects: ['snare wires', 'snare bed', 'head tension', 'bearing edge'],
 
     closing: 'The player feels response.',
 
@@ -165,7 +246,13 @@ const NODE_PLAY_STEPS = {
 
     detail:
 
-      'How organized the note feels after everything else has happened. Control brings the sound back into focus.',
+      'Control is how organized the finished note feels. It does not mean dead or muted. It means the drum gives the player something musical, focused, and usable.',
+
+    hear: 'How focused and manageable the full voice feels after the hit.',
+
+    words: ['open', 'focused', 'composed', 'finished'],
+
+    affects: ['muffling', 'wire balance', 'tuning', 'overall build design'],
 
     closing: 'The sound becomes usable.',
 
@@ -199,7 +286,17 @@ const MODE_TABS = [
 
     label: 'PLAY CYCLE',
 
-    sublabel: 'How the player feels the drum respond',
+    sublabel: 'How a hit unfolds',
+
+  },
+
+  {
+
+    id: 'voiceSculptor',
+
+    label: 'VOICE SCULPTOR',
+
+    sublabel: 'Shape and audition',
 
   },
 
@@ -209,7 +306,7 @@ const MODE_TABS = [
 
     label: 'VOICE GAUGE',
 
-    sublabel: 'How a drum compares',
+    sublabel: 'How the shape reads',
 
   },
 
@@ -217,7 +314,7 @@ const MODE_TABS = [
 
     id: 'relationship',
 
-    label: 'TONAL RELATIONSHIP',
+    label: 'NODE RELATIONSHIPS',
 
     sublabel: 'How traits connect',
 
@@ -229,7 +326,53 @@ const MODE_TABS = [
 
     label: 'VOICE FINDER',
 
-    sublabel: 'Guided discovery',
+    sublabel: 'Guided preview',
+
+  },
+
+];
+
+const GAUGE_VIEW_OPTIONS = [
+
+  {
+
+    id: 'shape',
+
+    label: 'Shape',
+
+    title: 'Read the shape like a drum voice.',
+
+    text:
+
+      'Wider areas show where the drum has more of a trait. Tighter areas show where the voice is more restrained.',
+
+  },
+
+  {
+
+    id: 'balance',
+
+    label: 'Balance',
+
+    title: 'Look for the lean, not just the score.',
+
+    text:
+
+      'A useful drum voice does not need to be flat or neutral. The map helps show which traits lead and which traits support the player.',
+
+  },
+
+  {
+
+    id: 'playerRead',
+
+    label: 'Player Read',
+
+    title: 'Turn the chart into drummer language.',
+
+    text:
+
+      'The map matters most when it helps someone say what they actually hear and feel: quick, warm, open, controlled, sensitive, forward, or refined.',
 
   },
 
@@ -243,13 +386,23 @@ const RELATIONSHIPS = [
 
     label: 'Snap with clarity',
 
-    tag: 'front edge + detail',
+    tag: 'Attack + Brightness',
 
     from: 'attack',
 
     to: 'brightness',
 
-    text: 'How fast the drum speaks and how clearly that first edge is heard.',
+    text: 'How the first edge of the note stays clean and easy to hear.',
+
+    hear:
+
+      'A quicker front edge with enough top-end detail to feel crisp and articulate.',
+
+    playerWords: ['snappy', 'crisp', 'clean crack'],
+
+    watchOut:
+
+      'Too much of this pairing can start to feel sharp if the body underneath is missing.',
 
   },
 
@@ -259,13 +412,23 @@ const RELATIONSHIPS = [
 
     label: 'Cut that carries',
 
-    tag: 'clarity + throw',
+    tag: 'Brightness + Projection',
 
     from: 'brightness',
 
     to: 'projection',
 
-    text: 'How bright detail helps the drum move through a room or mix.',
+    text: 'How clear top-end detail helps the drum move through a room or mix.',
+
+    hear:
+
+      'A drum that does not just sound clear up close, but keeps that clarity as it moves outward.',
+
+    playerWords: ['cuts', 'present', 'speaks through the band'],
+
+    watchOut:
+
+      'Too much top-end carry can feel harsh in bright rooms or close microphones.',
 
   },
 
@@ -275,13 +438,23 @@ const RELATIONSHIPS = [
 
     label: 'Forward bloom',
 
-    tag: 'carry + openness',
+    tag: 'Projection + Sustain',
 
     from: 'projection',
 
     to: 'sustain',
 
-    text: 'The drum pushes into the room and lets the note breathe after the hit.',
+    text: 'How the drum pushes forward while still letting the note breathe.',
+
+    hear:
+
+      'A voice that projects strongly and leaves air or ring behind the initial stroke.',
+
+    playerWords: ['big', 'open', 'roomy'],
+
+    watchOut:
+
+      'If the bloom is not controlled, the drum may feel too wide or ringy.',
 
   },
 
@@ -291,13 +464,23 @@ const RELATIONSHIPS = [
 
     label: 'Bloom with body',
 
-    tag: 'length + fullness',
+    tag: 'Sustain + Warmth',
 
     from: 'sustain',
 
     to: 'warmth',
 
-    text: 'How the lingering note carries weight, roundness, and low-mid center.',
+    text: 'How the lingering note keeps weight and roundness underneath it.',
+
+    hear:
+
+      'A note that opens up without getting thin, papery, or all top-end.',
+
+    playerWords: ['warm ring', 'round', 'full sustain'],
+
+    watchOut:
+
+      'Too much warmth and bloom can become cloudy if the refinement is low.',
 
   },
 
@@ -307,13 +490,23 @@ const RELATIONSHIPS = [
 
     label: 'Touch tone',
 
-    tag: 'body + response',
+    tag: 'Warmth + Sensitivity',
 
     from: 'warmth',
 
     to: 'sensitivity',
 
-    text: 'How full the drum feels while still reacting to lighter playing.',
+    text: 'How the drum keeps body while still reacting to lighter playing.',
+
+    hear:
+
+      'A drum that keeps weight under the note even when the player backs off.',
+
+    playerWords: ['easy', 'expressive', 'warm under the hands'],
+
+    watchOut:
+
+      'If the response is too soft, the drum can feel less precise under faster playing.',
 
   },
 
@@ -323,13 +516,23 @@ const RELATIONSHIPS = [
 
     label: 'Responsive precision',
 
-    tag: 'touch + focus',
+    tag: 'Sensitivity + Control',
 
     from: 'sensitivity',
 
     to: 'control',
 
     text: 'How much detail the drum reveals without becoming messy or unruly.',
+
+    hear:
+
+      'A sensitive drum that still keeps ghost notes, wires, and overtones organized.',
+
+    playerWords: ['detailed', 'controlled', 'clean response'],
+
+    watchOut:
+
+      'Too much control can make a sensitive drum feel less alive.',
 
   },
 
@@ -339,13 +542,23 @@ const RELATIONSHIPS = [
 
     label: 'Crack with body',
 
-    tag: 'strike + fullness',
+    tag: 'Attack + Warmth',
 
     from: 'attack',
 
     to: 'warmth',
 
     text: 'How the first hit balances with fullness underneath it.',
+
+    hear:
+
+      'Clear first contact with enough fullness to avoid sounding thin or papery.',
+
+    playerWords: ['cracky but fat', 'punchy', 'quick but full'],
+
+    watchOut:
+
+      'Too much attack without body can feel thin. Too much body without attack can feel slow.',
 
   },
 
@@ -355,13 +568,23 @@ const RELATIONSHIPS = [
 
     label: 'Power with focus',
 
-    tag: 'carry + refinement',
+    tag: 'Projection + Control',
 
     from: 'projection',
 
     to: 'control',
 
     text: 'How strongly the drum carries without getting chaotic.',
+
+    hear:
+
+      'A drum that can step forward in a mix while still sounding organized and usable.',
+
+    playerWords: ['powerful', 'focused', 'mix-ready'],
+
+    watchOut:
+
+      'Too much focus can reduce the sense of size or movement.',
 
   },
 
@@ -371,13 +594,23 @@ const RELATIONSHIPS = [
 
     label: 'Cut without harshness',
 
-    tag: 'clarity + control',
+    tag: 'Brightness + Control',
 
     from: 'brightness',
 
     to: 'control',
 
     text: 'How clear the top end feels while staying refined and musical.',
+
+    hear:
+
+      'Enough clarity to hear detail, but enough organization to keep the top end from feeling brittle.',
+
+    playerWords: ['clear but smooth', 'crisp not harsh', 'polished'],
+
+    watchOut:
+
+      'If over-controlled, the drum can lose sparkle or openness.',
 
   },
 
@@ -387,13 +620,23 @@ const RELATIONSHIPS = [
 
     label: 'Open but controlled',
 
-    tag: 'bloom + focus',
+    tag: 'Sustain + Control',
 
     from: 'sustain',
 
     to: 'control',
 
     text: 'How the drum breathes without becoming too ringy or uncontrolled.',
+
+    hear:
+
+      'A note that opens after the hit but settles in a way that stays musical.',
+
+    playerWords: ['open but usable', 'controlled ring', 'musical bloom'],
+
+    watchOut:
+
+      'Too much control may make the drum feel dry; too little may make it feel messy.',
 
   },
 
@@ -403,13 +646,23 @@ const RELATIONSHIPS = [
 
     label: 'Warmth without mud',
 
-    tag: 'body + focus',
+    tag: 'Warmth + Control',
 
     from: 'warmth',
 
     to: 'control',
 
     text: 'How full the drum feels while staying shaped and usable.',
+
+    hear:
+
+      'Low-mid body that stays focused instead of turning cloudy or undefined.',
+
+    playerWords: ['full but clean', 'warm but focused', 'round'],
+
+    watchOut:
+
+      'Too much body without clarity can disappear in dense mixes.',
 
   },
 
@@ -419,13 +672,23 @@ const RELATIONSHIPS = [
 
     label: 'Crisp but full',
 
-    tag: 'top end + body',
+    tag: 'Brightness + Warmth',
 
     from: 'brightness',
 
     to: 'warmth',
 
     text: 'How the drum keeps clarity while still feeling round and musical.',
+
+    hear:
+
+      'A voice with enough top-end detail to stay clear and enough center to avoid sounding thin.',
+
+    playerWords: ['crisp and fat', 'clear but warm', 'balanced'],
+
+    watchOut:
+
+      'This pairing needs careful balance; too much of either side can dominate the read.',
 
   },
 
@@ -439,17 +702,17 @@ const FINDER_QUESTIONS = [
 
     options: [
 
-      { label: 'Snap', key: 'attack' },
+      { label: 'Snap', key: 'attack', hint: 'More attack' },
 
-      { label: 'Body', key: 'warmth' },
+      { label: 'Body', key: 'warmth', hint: 'More warmth' },
 
-      { label: 'Cut', key: 'brightness' },
+      { label: 'Cut', key: 'brightness', hint: 'More clarity' },
 
-      { label: 'Power', key: 'projection' },
+      { label: 'Power', key: 'projection', hint: 'More projection' },
 
-      { label: 'Touch', key: 'sensitivity' },
+      { label: 'Touch', key: 'sensitivity', hint: 'More sensitivity' },
 
-      { label: 'Control', key: 'control' },
+      { label: 'Control', key: 'control', hint: 'More refinement' },
 
     ],
 
@@ -461,45 +724,217 @@ const FINDER_QUESTIONS = [
 
     options: [
 
-      { label: 'Too harsh', key: 'brightness' },
+      { label: 'Too harsh', key: 'brightness', hint: 'Tame brightness' },
 
-      { label: 'Too ringy', key: 'sustain' },
+      { label: 'Too ringy', key: 'sustain', hint: 'Tame bloom' },
 
-      { label: 'Too thin', key: 'warmth' },
+      { label: 'Too thin', key: 'warmth', hint: 'Add body' },
 
-      { label: 'Too messy', key: 'control' },
+      { label: 'Too messy', key: 'control', hint: 'Add focus' },
 
-      { label: 'Too quiet', key: 'projection' },
+      { label: 'Too quiet', key: 'projection', hint: 'Add carry' },
 
-      { label: 'Too stiff', key: 'sensitivity' },
-
-    ],
-
-  },
-
-  {
-
-    question: 'What should lead the voice?',
-
-    options: [
-
-      { label: 'Strike', key: 'attack' },
-
-      { label: 'Clarity', key: 'brightness' },
-
-      { label: 'Carry', key: 'projection' },
-
-      { label: 'Bloom', key: 'sustain' },
-
-      { label: 'Touch', key: 'sensitivity' },
-
-      { label: 'Focus', key: 'control' },
+      { label: 'Too stiff', key: 'sensitivity', hint: 'Add touch' },
 
     ],
 
   },
 
 ];
+
+const ENGINE_MODES = [
+
+  {
+
+    id: 'teaching',
+
+    label: 'Teaching',
+
+    description: 'Bigger changes so the listening trait is easier to hear.',
+
+  },
+
+  {
+
+    id: 'realistic',
+
+    label: 'Realistic',
+
+    description: 'More restrained shaping for a more natural drum read.',
+
+  },
+
+];
+
+const HIT_STRENGTH_OPTIONS = [
+
+  {
+
+    id: 'soft',
+
+    label: 'Soft Hit',
+
+    description:
+
+      'Less shell, body, projection, and bloom. More head/contact and low-level response.',
+
+  },
+
+  {
+
+    id: 'medium',
+
+    label: 'Medium Hit',
+
+    description: 'Balanced playing strength.',
+
+  },
+
+  {
+
+    id: 'hard',
+
+    label: 'Hard Hit',
+
+    description:
+
+      'More shell, body, projection, bloom, hoop/stick energy, and room response.',
+
+  },
+
+];
+
+const RANDOMIZER_PRESETS = [
+
+  {
+
+    name: 'Warm Studio',
+
+    values: {
+
+      attack: [4, 7],
+
+      brightness: [3, 6],
+
+      projection: [4, 7],
+
+      sustain: [4, 7],
+
+      warmth: [7, 9],
+
+      sensitivity: [5, 8],
+
+      control: [6, 9],
+
+    },
+
+  },
+
+  {
+
+    name: 'Open Bloom',
+
+    values: {
+
+      attack: [4, 7],
+
+      brightness: [5, 8],
+
+      projection: [6, 9],
+
+      sustain: [7, 9],
+
+      warmth: [5, 8],
+
+      sensitivity: [5, 8],
+
+      control: [3, 6],
+
+    },
+
+  },
+
+  {
+
+    name: 'Crisp & Controlled',
+
+    values: {
+
+      attack: [7, 9],
+
+      brightness: [7, 9],
+
+      projection: [5, 8],
+
+      sustain: [3, 6],
+
+      warmth: [4, 7],
+
+      sensitivity: [5, 8],
+
+      control: [7, 9],
+
+    },
+
+  },
+
+  {
+
+    name: 'Touch Responsive',
+
+    values: {
+
+      attack: [4, 7],
+
+      brightness: [5, 8],
+
+      projection: [4, 7],
+
+      sustain: [4, 7],
+
+      warmth: [5, 8],
+
+      sensitivity: [8, 10],
+
+      control: [5, 8],
+
+    },
+
+  },
+
+];
+
+const getRandomInt = (min, max) => {
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+
+};
+
+const buildRandomVoice = () => {
+
+  const preset =
+
+    RANDOMIZER_PRESETS[Math.floor(Math.random() * RANDOMIZER_PRESETS.length)];
+
+  return {
+
+    name: preset.name,
+
+    values: Object.fromEntries(
+
+      NODE_ORDER.map((key) => {
+
+        const range = preset.values[key] || [3, 9];
+
+        return [key, getRandomInt(range[0], range[1])];
+
+      })
+
+    ),
+
+  };
+
+};
 
 const getMeta = (key) => {
 
@@ -514,6 +949,8 @@ const getMeta = (key) => {
     key,
 
     label,
+
+    voiceName: NODE_VOICE_NAMES[key] || label,
 
     low: meta.low || low,
 
@@ -545,9 +982,7 @@ const getRelationshipById = (id) =>
 
   RELATIONSHIPS.find(
 
-    (relationship) =>
-
-      [relationship.from, relationship.to].sort().join('_') === id
+    (relationship) => [relationship.from, relationship.to].sort().join('_') === id
 
   ) ||
 
@@ -563,19 +998,19 @@ const getGaugeOverallRead = () => {
 
   const softest = entries[entries.length - 1];
 
-  return `Overall, this reads as a ${NODE_LABELS[
+  return `This voice is led by ${NODE_LABELS[
 
     strongest[0]
 
-  ].toLowerCase()}-led voice with strong ${NODE_LABELS[
+  ].toLowerCase()}, supported by ${NODE_LABELS[
 
     second[0]
 
-  ].toLowerCase()} and a more restrained ${NODE_LABELS[
+  ].toLowerCase()}, with a more restrained ${NODE_LABELS[
 
     softest[0]
 
-  ].toLowerCase()} area. Compared to the neutral reference drum, it should feel more expressive and forward where the colored shape pushes outside the dotted line.`;
+  ].toLowerCase()} area. In plain terms, the drum should feel more forward where the shape pushes out, and more contained where it pulls inward.`;
 
 };
 
@@ -591,7 +1026,55 @@ const getGaugeNodeRead = (key) => {
 
   const amount = Math.abs(delta).toFixed(1);
 
-  return `${meta.label} is ${amount} points ${direction} the neutral reference. That means this configuration leans more toward “${delta >= 0 ? meta.high : meta.low}” for this trait.`;
+  return `${meta.label} sits ${amount} points ${direction} the neutral reference. In the shop, that means this drum leans more toward “${
+
+    delta >= 0 ? meta.high : meta.low
+
+  }” for this part of the voice.`;
+
+};
+
+const getFocusReadout = (soloNodeKeys = [], muteNodeKeys = []) => {
+
+  const soloCount = soloNodeKeys.length;
+
+  const muteCount = muteNodeKeys.length;
+
+  if (soloCount > 0 && muteCount > 0) {
+
+    return `Soloing ${soloCount} / Muting ${muteCount}`;
+
+  }
+
+  if (soloCount === 1) {
+
+    const node = getMeta(soloNodeKeys[0]);
+
+    return `Soloing ${node.label} / ${node.voiceName}`;
+
+  }
+
+  if (soloCount > 1) {
+
+    return `Soloing ${soloCount} nodes`;
+
+  }
+
+  if (muteCount === 1) {
+
+    const node = getMeta(muteNodeKeys[0]);
+
+    return `Muting ${node.label} / ${node.voiceName}`;
+
+  }
+
+  if (muteCount > 1) {
+
+    return `Muting ${muteCount} nodes`;
+
+  }
+
+  return 'Full shaped voice';
 
 };
 
@@ -603,9 +1086,35 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
   const [activeRelationshipId, setActiveRelationshipId] = useState('attack_warmth');
 
+  const [activeGaugeView, setActiveGaugeView] = useState('shape');
+
   const [finderAnswers, setFinderAnswers] = useState([]);
 
   const [finderStepIndex, setFinderStepIndex] = useState(0);
+
+  const [selectedSampleKey, setSelectedSampleKey] = useState('snare10x4Maple');
+
+  const [isPlayingSample, setIsPlayingSample] = useState(false);
+
+  const [audioError, setAudioError] = useState('');
+
+  const [playValues, setPlayValues] = useState(RESET_PLAY_VALUES);
+
+  const [soloNodeKeys, setSoloNodeKeys] = useState([]);
+
+  const [muteNodeKeys, setMuteNodeKeys] = useState([]);
+
+  const [engineMode, setEngineMode] = useState('teaching');
+
+  const [hitStrength, setHitStrength] = useState('medium');
+
+  const [randomVoiceName, setRandomVoiceName] = useState('');
+
+  const [autoPlayEnabled, setAutoPlayEnabled] = useState(false);
+
+  const autoPlayTimerRef = useRef(null);
+
+  const shouldAutoPlayNextChangeRef = useRef(false);
 
   const activeNode = useMemo(() => getMeta(activeNodeKey), [activeNodeKey]);
 
@@ -619,11 +1128,201 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
   );
 
+  const activeGaugeCopy = useMemo(
+
+    () =>
+
+      GAUGE_VIEW_OPTIONS.find((option) => option.id === activeGaugeView) ||
+
+      GAUGE_VIEW_OPTIONS[0],
+
+    [activeGaugeView]
+
+  );
+
   const activeFinderQuestion =
 
     FINDER_QUESTIONS[finderStepIndex] ||
 
     FINDER_QUESTIONS[FINDER_QUESTIONS.length - 1];
+
+  const selectedSample =
+
+    LEGACYPRINT_SNARE_SAMPLES.find((sample) => sample.key === selectedSampleKey) ||
+
+    LEGACYPRINT_SNARE_SAMPLES[0];
+
+  const activeEngineCopy =
+
+    ENGINE_MODES.find((mode) => mode.id === engineMode) || ENGINE_MODES[0];
+
+  const activeHitCopy =
+
+    HIT_STRENGTH_OPTIONS.find((option) => option.id === hitStrength) ||
+
+    HIT_STRENGTH_OPTIONS[1];
+
+  const firstSoloNodeKey = soloNodeKeys[0] || null;
+
+  const firstMuteNodeKey = muteNodeKeys[0] || null;
+
+  const legacyFocusMode =
+
+    soloNodeKeys.length > 0 ? 'solo' : muteNodeKeys.length > 0 ? 'mute' : 'full';
+
+  const legacyFocusNodeKey = firstSoloNodeKey || firstMuteNodeKey || null;
+
+  const playCurrentHit = useCallback(
+
+    async (
+
+      valuesOverride = null,
+
+      sampleOverride = null,
+
+      focusOverride = null
+
+    ) => {
+
+      setAudioError('');
+
+      setIsPlayingSample(true);
+
+      const resolvedFocus = focusOverride || {
+
+        soloNodeKeys,
+
+        muteNodeKeys,
+
+      };
+
+      try {
+
+        await playLegacyPrintSnare({
+
+          sampleKey: sampleOverride || selectedSampleKey,
+
+          values: valuesOverride || playValues,
+
+          soloNodeKeys: resolvedFocus.soloNodeKeys,
+
+          muteNodeKeys: resolvedFocus.muteNodeKeys,
+
+          focusMode:
+
+            resolvedFocus.soloNodeKeys?.length > 0
+
+              ? 'solo'
+
+              : resolvedFocus.muteNodeKeys?.length > 0
+
+                ? 'mute'
+
+                : 'full',
+
+          focusNodeKey:
+
+            resolvedFocus.soloNodeKeys?.[0] || resolvedFocus.muteNodeKeys?.[0] || null,
+
+          hitStrength,
+
+          engineMode,
+
+        });
+
+      } catch (error) {
+
+        console.error(error);
+
+        setAudioError('Could not play that sample yet. Check the audio file path.');
+
+      } finally {
+
+        window.setTimeout(() => {
+
+          setIsPlayingSample(false);
+
+        }, 220);
+
+      }
+
+    },
+
+    [
+
+      selectedSampleKey,
+
+      playValues,
+
+      soloNodeKeys,
+
+      muteNodeKeys,
+
+      hitStrength,
+
+      engineMode,
+
+    ]
+
+  );
+
+  useEffect(() => {
+
+    if (!autoPlayEnabled || !shouldAutoPlayNextChangeRef.current) {
+
+      return undefined;
+
+    }
+
+    window.clearTimeout(autoPlayTimerRef.current);
+
+    autoPlayTimerRef.current = window.setTimeout(() => {
+
+      playCurrentHit(playValues);
+
+      shouldAutoPlayNextChangeRef.current = false;
+
+    }, 280);
+
+    return () => {
+
+      window.clearTimeout(autoPlayTimerRef.current);
+
+    };
+
+  }, [autoPlayEnabled, playValues, playCurrentHit]);
+
+  const updatePlayValuesFromMixer = (nextValues) => {
+
+    shouldAutoPlayNextChangeRef.current = true;
+
+    setPlayValues(nextValues);
+
+    setRandomVoiceName('');
+
+  };
+
+  const handleSampleChange = (sampleKey) => {
+
+    setSelectedSampleKey(sampleKey);
+
+    setSoloNodeKeys([]);
+
+    setMuteNodeKeys([]);
+
+    window.setTimeout(() => {
+
+      playCurrentHit(playValues, sampleKey, {
+
+        soloNodeKeys: [],
+
+        muteNodeKeys: [],
+
+      });
+
+    }, 80);
+
+  };
 
   const handleFinderAnswer = (key) => {
 
@@ -639,13 +1338,43 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
   };
 
+  const resetFinderPreview = () => {
+
+    setFinderAnswers([]);
+
+    setFinderStepIndex(0);
+
+    setActiveNodeKey('attack');
+
+  };
+
   const handleModeChange = (modeId) => {
 
     setActiveMode(modeId);
 
+    if (modeId === 'playCycle') {
+
+      setActiveNodeKey('attack');
+
+      setSoloNodeKeys([]);
+
+      setMuteNodeKeys([]);
+
+    }
+
+    if (modeId === 'voiceSculptor') {
+
+      setActiveNodeKey('attack');
+
+    }
+
     if (modeId === 'voiceGauge') {
 
       setActiveNodeKey('projection');
+
+      setSoloNodeKeys([]);
+
+      setMuteNodeKeys([]);
 
     }
 
@@ -653,17 +1382,109 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
       setActiveRelationshipId('attack_warmth');
 
+      setActiveNodeKey('attack');
+
+      setSoloNodeKeys([]);
+
+      setMuteNodeKeys([]);
+
     }
 
-    if (modeId === 'playCycle') {
+    if (modeId === 'voiceFinder') {
 
-      setActiveNodeKey('attack');
+      setActiveNodeKey(finderAnswers[0] || 'attack');
+
+      setSoloNodeKeys([]);
+
+      setMuteNodeKeys([]);
 
     }
 
   };
 
-  return (
+  const handleResetVoice = () => {
+
+    shouldAutoPlayNextChangeRef.current = true;
+
+    setPlayValues(RESET_PLAY_VALUES);
+
+    setRandomVoiceName('');
+
+    setSoloNodeKeys([]);
+
+    setMuteNodeKeys([]);
+
+    setActiveNodeKey('attack');
+
+  };
+
+  const handleRandomizeVoice = () => {
+
+    const nextVoice = buildRandomVoice();
+
+    shouldAutoPlayNextChangeRef.current = true;
+
+    setPlayValues(nextVoice.values);
+
+    setRandomVoiceName(nextVoice.name);
+
+  };
+
+  const handleNodeFocus = (event, nodeKey, nextFocusMode) => {
+
+    event.stopPropagation();
+
+    setActiveNodeKey(nodeKey);
+
+    if (nextFocusMode === 'solo') {
+
+      setSoloNodeKeys((current) => {
+
+        if (current.includes(nodeKey)) {
+
+          return current.filter((key) => key !== nodeKey);
+
+        }
+
+        return [...current, nodeKey];
+
+      });
+
+      setMuteNodeKeys((current) => current.filter((key) => key !== nodeKey));
+
+      return;
+
+    }
+
+    if (nextFocusMode === 'mute') {
+
+      setMuteNodeKeys((current) => {
+
+        if (current.includes(nodeKey)) {
+
+          return current.filter((key) => key !== nodeKey);
+
+        }
+
+        return [...current, nodeKey];
+
+      });
+
+      setSoloNodeKeys((current) => current.filter((key) => key !== nodeKey));
+
+    }
+
+  };
+
+  const handlePlayHit = () => {
+
+    shouldAutoPlayNextChangeRef.current = false;
+
+    playCurrentHit(playValues);
+
+  };
+
+  const modalContent = (
 
     <div className="lp-modal-page" role="dialog" aria-modal="true">
 
@@ -687,11 +1508,15 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
         <header className="lp-modal-header">
 
-          <span className="lp-kicker">LegacyPrint™ Sound Guide</span>
+          <span className="lp-kicker">LegacyPrint™ Listening Guide</span>
 
           <h2>Voice Map Reference</h2>
 
-          <p>A seven-point listening framework for drum tone, feel, and response.</p>
+          <p>
+
+            A practical way to hear how a snare speaks, carries, blooms, and settles.
+
+          </p>
 
         </header>
 
@@ -707,23 +1532,39 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
         <div className="lp-modal-workspace">
 
-          <LegacyPrintInteractivePolygon
+          <div className="lp-map-and-mixer">
 
-            mode={activeMode}
+            <LegacyPrintInteractivePolygon
 
-            activeNodeKey={activeNodeKey}
+              mode={activeMode}
 
-            onSelectNode={setActiveNodeKey}
+              activeNodeKey={activeNodeKey}
 
-            activeRelationshipId={activeRelationshipId}
+              onSelectNode={setActiveNodeKey}
 
-            onSelectRelationship={setActiveRelationshipId}
+              activeRelationshipId={activeRelationshipId}
 
-            gaugeValues={GAUGE_VALUES}
+              onSelectRelationship={setActiveRelationshipId}
 
-            finderAnswers={finderAnswers}
+              gaugeValues={GAUGE_VALUES}
 
-          />
+              finderAnswers={finderAnswers}
+
+              playValues={playValues}
+
+              onPlayValuesChange={updatePlayValuesFromMixer}
+
+              soloNodeKeys={soloNodeKeys}
+
+              muteNodeKeys={muteNodeKeys}
+
+              focusMode={legacyFocusMode}
+
+              focusNodeKey={legacyFocusNodeKey}
+
+            />
+
+          </div>
 
           <aside className="lp-readout-panel">
 
@@ -733,21 +1574,21 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 <span className="lp-panel-kicker">Play Cycle</span>
 
-                <h3>How the player feels the drum respond.</h3>
+                <h3>How a snare hit unfolds.</h3>
 
-                <p>
+                <p className="lp-panel-lede">
 
-                  This mode follows the felt experience of a hit: the first
+                  Before shaping a drum voice, it helps to hear the order of the
 
-                  strike, the clarity that follows, how it carries, how it
+                  listening path. A snare hit starts with the strike, finds clarity,
 
-                  blooms, how it fills out, how it reacts to touch, and how it
+                  moves outward, blooms, gains body, answers the player’s touch, and
 
-                  comes back into focus.
+                  finally settles into refinement.
 
                 </p>
 
-                <div className="lp-step-grid">
+                <div className="lp-listening-index lp-play-cycle-index">
 
                   {NODE_ORDER.map((key) => {
 
@@ -763,7 +1604,7 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                         type="button"
 
-                        className={`lp-step-pill ${
+                        className={`lp-listening-row ${
 
                           activeNodeKey === key ? 'is-active' : ''
 
@@ -775,11 +1616,17 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                       >
 
-                        <span>{step.number}</span>
+                        <span className="lp-listening-number">{step.number}</span>
 
-                        <MetricIcon type={key} color={color} size={14} />
+                        <span className="lp-listening-mark">
 
-                        <strong>{step.step}</strong>
+                          <MetricIcon type={key} color={color} size={15} />
+
+                        </span>
+
+                        <span className="lp-listening-name">{NODE_LABELS[key]}</span>
+
+                        <span className="lp-listening-language">{step.step}</span>
 
                       </button>
 
@@ -791,13 +1638,13 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 <div
 
-                  className="lp-detail-card"
+                  className="lp-field-note"
 
                   style={{ '--axis-color': AXIS_COLOR_BY_KEY[activeNodeKey] }}
 
                 >
 
-                  <div className="lp-detail-title">
+                  <div className="lp-field-note-heading">
 
                     <MetricIcon
 
@@ -815,7 +1662,7 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                       <small>
 
-                        {activeNode.low} / {activeNode.high}
+                        {activePlayStep.step} · {activeNode.low} / {activeNode.high}
 
                       </small>
 
@@ -825,15 +1672,431 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                   <p>{activePlayStep.detail}</p>
 
-                  <b>{activePlayStep.closing}</b>
+                  <dl className="lp-shop-note-list">
+
+                    <div>
+
+                      <dt>At the kit</dt>
+
+                      <dd>{activePlayStep.hear}</dd>
+
+                    </div>
+
+                    <div>
+
+                      <dt>Player language</dt>
+
+                      <dd>{activePlayStep.words.join(' · ')}</dd>
+
+                    </div>
+
+                    <div>
+
+                      <dt>Craft notes</dt>
+
+                      <dd>{activePlayStep.affects.join(', ')}</dd>
+
+                    </div>
+
+                  </dl>
+
+                  <em>{activePlayStep.closing}</em>
 
                 </div>
 
-                <div className="lp-output-card">
+                <div className="lp-bench-note">
 
-                  <strong>Output:</strong>
+                  <strong>Next step</strong>
 
-                  <span>Node definition, player response, and note-cycle position.</span>
+                  <span>
+
+                    Move into Voice Sculptor when you are ready to shape and audition
+
+                    the sound itself.
+
+                  </span>
+
+                </div>
+
+              </>
+
+            )}
+
+            {activeMode === 'voiceSculptor' && (
+
+              <>
+
+                <section className="lp-node-mixer-box" aria-label="Voice mixer">
+
+                  <div className="lp-mixer-topline">
+
+                    <div>
+
+                      <span className="lp-panel-kicker">Voice Sculptor</span>
+
+                      <strong>{getFocusReadout(soloNodeKeys, muteNodeKeys)}</strong>
+
+                    </div>
+
+                    <button
+
+                      type="button"
+
+                      className={`lp-autoplay-toggle ${
+
+                        autoPlayEnabled ? 'is-active' : ''
+
+                      }`}
+
+                      onClick={() => setAutoPlayEnabled((current) => !current)}
+
+                    >
+
+                      Auto-Play {autoPlayEnabled ? 'On' : 'Off'}
+
+                    </button>
+
+                  </div>
+
+                  <div className="lp-mixer-control-grid">
+
+                    <div className="lp-sample-picker">
+
+                      {LEGACYPRINT_SNARE_SAMPLES.map((sample) => (
+
+                        <button
+
+                          key={sample.key}
+
+                          type="button"
+
+                          className={
+
+                            selectedSampleKey === sample.key ? 'is-active' : ''
+
+                          }
+
+                          onClick={() => handleSampleChange(sample.key)}
+
+                        >
+
+                          <span>{sample.label}</span>
+
+                          <small>{sample.description}</small>
+
+                        </button>
+
+                      ))}
+
+                    </div>
+
+                    <div className="lp-quiet-selector lp-engine-selector">
+
+                      {ENGINE_MODES.map((mode) => (
+
+                        <button
+
+                          key={mode.id}
+
+                          type="button"
+
+                          className={engineMode === mode.id ? 'is-active' : ''}
+
+                          onClick={() => setEngineMode(mode.id)}
+
+                          title={mode.description}
+
+                        >
+
+                          {mode.label}
+
+                        </button>
+
+                      ))}
+
+                    </div>
+
+                    <div className="lp-quiet-selector lp-hit-selector">
+
+                      {HIT_STRENGTH_OPTIONS.map((option) => (
+
+                        <button
+
+                          key={option.id}
+
+                          type="button"
+
+                          className={hitStrength === option.id ? 'is-active' : ''}
+
+                          onClick={() => setHitStrength(option.id)}
+
+                          title={option.description}
+
+                        >
+
+                          {option.label}
+
+                        </button>
+
+                      ))}
+
+                    </div>
+
+                  </div>
+
+                  <div className="lp-mixer-actions">
+
+                    <button
+
+                      type="button"
+
+                      className="is-primary"
+
+                      onClick={handlePlayHit}
+
+                      disabled={isPlayingSample}
+
+                    >
+
+                      Play Hit
+
+                    </button>
+
+                    <button type="button" onClick={handleResetVoice}>
+
+                      Reset
+
+                    </button>
+
+                    <button type="button" onClick={handleRandomizeVoice}>
+
+                      Randomize
+
+                    </button>
+
+                  </div>
+
+                  {randomVoiceName && (
+
+                    <div className="lp-random-readout">
+
+                      Current random voice: <strong>{randomVoiceName}</strong>
+
+                    </div>
+
+                  )}
+
+                  {audioError && <p className="lp-audio-error">{audioError}</p>}
+
+                  <div className="lp-listening-index lp-mixer-node-list">
+
+                    {NODE_ORDER.map((key) => {
+
+                      const step = NODE_PLAY_STEPS[key];
+
+                      const color = AXIS_COLOR_BY_KEY[key];
+
+                      const isSoloActive = soloNodeKeys.includes(key);
+
+                      const isMuteActive = muteNodeKeys.includes(key);
+
+                      return (
+
+                        <div
+
+                          key={key}
+
+                          role="button"
+
+                          tabIndex="0"
+
+                          className={`lp-listening-row ${
+
+                            activeNodeKey === key ? 'is-active' : ''
+
+                          } ${isSoloActive ? 'is-soloing' : ''} ${
+
+                            isMuteActive ? 'is-muting' : ''
+
+                          }`}
+
+                          onClick={() => setActiveNodeKey(key)}
+
+                          onKeyDown={(event) => {
+
+                            if (event.key === 'Enter' || event.key === ' ') {
+
+                              event.preventDefault();
+
+                              setActiveNodeKey(key);
+
+                            }
+
+                          }}
+
+                          style={{ '--axis-color': color }}
+
+                        >
+
+                          <span className="lp-listening-mark">
+
+                            <MetricIcon type={key} color={color} size={15} />
+
+                          </span>
+
+                          <span className="lp-listening-name">
+
+                            {NODE_LABELS[key]}
+
+                          </span>
+
+                          <span className="lp-listening-language">
+
+                            {step.step}
+
+                          </span>
+
+                          <span className="lp-node-focus-actions">
+
+                            <button
+
+                              type="button"
+
+                              className={isSoloActive ? 'is-active' : ''}
+
+                              onClick={(event) =>
+
+                                handleNodeFocus(event, key, 'solo')
+
+                              }
+
+                            >
+
+                              Solo
+
+                            </button>
+
+                            <button
+
+                              type="button"
+
+                              className={isMuteActive ? 'is-active' : ''}
+
+                              onClick={(event) =>
+
+                                handleNodeFocus(event, key, 'mute')
+
+                              }
+
+                            >
+
+                              Mute
+
+                            </button>
+
+                          </span>
+
+                        </div>
+
+                      );
+
+                    })}
+
+                  </div>
+
+                </section>
+
+                <span className="lp-panel-kicker">Voice Sculptor</span>
+
+                <h3>Shape and audition the snare voice.</h3>
+
+                <p className="lp-panel-lede">
+
+                  Voice Sculptor is the hands-on model. Adjust the inner shape, switch
+
+                  drum examples, solo or mute nodes, and listen for how each trait
+
+                  changes the hit.
+
+                </p>
+
+                <div
+
+                  className="lp-field-note"
+
+                  style={{ '--axis-color': AXIS_COLOR_BY_KEY[activeNodeKey] }}
+
+                >
+
+                  <div className="lp-field-note-heading">
+
+                    <MetricIcon
+
+                      type={activeNodeKey}
+
+                      color={AXIS_COLOR_BY_KEY[activeNodeKey]}
+
+                      size={18}
+
+                    />
+
+                    <div>
+
+                      <strong>{activeNode.label}</strong>
+
+                      <small>
+
+                        {activePlayStep.step} · {activeNode.low} / {activeNode.high}
+
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <p>{activePlayStep.detail}</p>
+
+                  <dl className="lp-shop-note-list">
+
+                    <div>
+
+                      <dt>At the kit</dt>
+
+                      <dd>{activePlayStep.hear}</dd>
+
+                    </div>
+
+                    <div>
+
+                      <dt>Player language</dt>
+
+                      <dd>{activePlayStep.words.join(' · ')}</dd>
+
+                    </div>
+
+                    <div>
+
+                      <dt>Craft notes</dt>
+
+                      <dd>{activePlayStep.affects.join(', ')}</dd>
+
+                    </div>
+
+                  </dl>
+
+                  <em>{activePlayStep.closing}</em>
+
+                </div>
+
+                <div className="lp-bench-note">
+
+                  <strong>{selectedSample.label}</strong>
+
+                  <span>
+
+                    {`${selectedSample.description}. ${activeEngineCopy.description} ${activeHitCopy.description}`}
+
+                  </span>
 
                 </div>
 
@@ -847,47 +2110,35 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 <span className="lp-panel-kicker">Voice Gauge</span>
 
-                <h3>How a drum compares.</h3>
+                <h3>Read the drum’s shape.</h3>
 
-                <p>
+                <p className="lp-panel-lede">
 
-                  Voice Gauge turns the seven nodes into a measurable shape. The
+                  Voice Gauge turns the seven nodes into a visual voice shape. The
 
-                  dotted reference is a neutral 5-point drum. The colored shape
+                  dotted reference shows a neutral center. The colored shape shows where
 
-                  shows the current configuration.
+                  this drum leans.
 
                 </p>
 
-                <div className="lp-option-grid">
+                <div className="lp-quiet-selector">
 
-                  {[
-
-                    'Balanced Spider',
-
-                    'Current Spider',
-
-                    'Spider Compare',
-
-                    'Bars',
-
-                    'Range Bars',
-
-                    'Compare Bars',
-
-                  ].map((label, index) => (
+                  {GAUGE_VIEW_OPTIONS.map((option) => (
 
                     <button
 
-                      key={label}
+                      key={option.id}
 
                       type="button"
 
-                      className={index === 0 ? 'is-active' : ''}
+                      className={activeGaugeView === option.id ? 'is-active' : ''}
+
+                      onClick={() => setActiveGaugeView(option.id)}
 
                     >
 
-                      {label}
+                      {option.label}
 
                     </button>
 
@@ -895,7 +2146,15 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 </div>
 
-                <div className="lp-output-card lp-output-card-readable">
+                <div className="lp-bench-note">
+
+                  <strong>{activeGaugeCopy.title}</strong>
+
+                  <span>{activeGaugeCopy.text}</span>
+
+                </div>
+
+                <div className="lp-bench-note">
 
                   <strong>Overall drum read</strong>
 
@@ -905,13 +2164,13 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 <div
 
-                  className="lp-detail-card"
+                  className="lp-field-note"
 
                   style={{ '--axis-color': AXIS_COLOR_BY_KEY[activeNodeKey] }}
 
                 >
 
-                  <div className="lp-detail-title">
+                  <div className="lp-field-note-heading">
 
                     <MetricIcon
 
@@ -929,7 +2188,9 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                       <small>
 
-                        Current: {GAUGE_VALUES[activeNodeKey].toFixed(1)} / Reference: 5.0
+                        {activeNode.voiceName} ·{' '}
+
+                        {GAUGE_VALUES[activeNodeKey].toFixed(1)} / Reference 5.0
 
                       </small>
 
@@ -941,6 +2202,18 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 </div>
 
+                <div className="lp-bench-note">
+
+                  <strong>Next listening step</strong>
+
+                  <span>
+
+                    Explore Node Relationships to see how two traits shape one another.
+
+                  </span>
+
+                </div>
+
               </>
 
             )}
@@ -949,21 +2222,23 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
               <>
 
-                <span className="lp-panel-kicker">Tonal Relationship</span>
+                <span className="lp-panel-kicker">Node Relationships</span>
 
-                <h3>How traits connect.</h3>
+                <h3>Learn what combinations mean.</h3>
 
-                <p>
+                <p className="lp-panel-lede">
 
-                  Tap a connector line to see how two traits shape one another.
+                  Select a relationship to hear how two parts of the voice shape each
 
-                  Selected lines blend the colors of the two connected nodes.
+                  other. This helps turn vague player language into a clearer sound
+
+                  direction.
 
                 </p>
 
                 <div
 
-                  className="lp-detail-card"
+                  className="lp-field-note"
 
                   style={{
 
@@ -975,15 +2250,61 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 >
 
-                  <strong>{activeRelationship.label}</strong>
+                  <div className="lp-field-note-heading">
 
-                  <small>{activeRelationship.tag}</small>
+                    <MetricIcon
+
+                      type={activeRelationship.from}
+
+                      color={AXIS_COLOR_BY_KEY[activeRelationship.from]}
+
+                      size={18}
+
+                    />
+
+                    <div>
+
+                      <strong>{activeRelationship.label}</strong>
+
+                      <small>{activeRelationship.tag}</small>
+
+                    </div>
+
+                  </div>
 
                   <p>{activeRelationship.text}</p>
 
+                  <dl className="lp-shop-note-list">
+
+                    <div>
+
+                      <dt>At the kit</dt>
+
+                      <dd>{activeRelationship.hear}</dd>
+
+                    </div>
+
+                    <div>
+
+                      <dt>Player language</dt>
+
+                      <dd>{activeRelationship.playerWords.join(' · ')}</dd>
+
+                    </div>
+
+                    <div>
+
+                      <dt>Craft notes</dt>
+
+                      <dd>{activeRelationship.watchOut}</dd>
+
+                    </div>
+
+                  </dl>
+
                 </div>
 
-                <div className="lp-relationship-list">
+                <div className="lp-relation-ledger">
 
                   {RELATIONSHIPS.map((relationship) => (
 
@@ -1001,9 +2322,17 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                       onClick={() => setActiveRelationshipId(relationship.id)}
 
+                      style={{
+
+                        '--axis-color': AXIS_COLOR_BY_KEY[relationship.from],
+
+                      }}
+
                     >
 
-                      {relationship.label}
+                      <span>{relationship.label}</span>
+
+                      <small>{relationship.tag}</small>
 
                     </button>
 
@@ -1011,11 +2340,17 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 </div>
 
-                <div className="lp-output-card">
+                <div className="lp-bench-note">
 
-                  <strong>Output:</strong>
+                  <strong>Next listening step</strong>
 
-                  <span>Relationship phrase, meaning, and build implication.</span>
+                  <span>
+
+                    Try Voice Finder Preview to see how player language can become a
+
+                    target direction.
+
+                  </span>
 
                 </div>
 
@@ -1027,23 +2362,35 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
               <>
 
-                <span className="lp-panel-kicker">Voice Finder</span>
+                <span className="lp-panel-kicker">Voice Finder Preview</span>
 
-                <h3>One guided session. One Voice Target.</h3>
+                <h3>Turn preference into direction.</h3>
 
-                <p>
+                <p className="lp-panel-lede">
 
-                  Voice Finder uses the map as an adaptive discovery tool. Each
+                  This preview shows how guided listening questions can translate player
 
-                  answer shifts the network and helps translate player language
-
-                  into a clear drum direction.
+                  language into a clearer drum voice target.
 
                 </p>
 
-                <div className="lp-finder-question-card">
+                <div className="lp-field-note lp-finder-note">
 
-                  <strong>{activeFinderQuestion.question}</strong>
+                  <div className="lp-finder-topline">
+
+                    <strong>{activeFinderQuestion.question}</strong>
+
+                    {finderAnswers.length > 0 && (
+
+                      <button type="button" onClick={resetFinderPreview}>
+
+                        Reset
+
+                      </button>
+
+                    )}
+
+                  </div>
 
                   <div className="lp-finder-answer-grid">
 
@@ -1059,7 +2406,9 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                       >
 
-                        {option.label}
+                        <span>{option.label}</span>
+
+                        <small>{option.hint}</small>
 
                       </button>
 
@@ -1069,21 +2418,35 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
                 </div>
 
-                <div className="lp-output-card lp-output-card-readable">
+                <div className="lp-bench-note">
 
-                  <strong>Live readout</strong>
+                  <strong>Example voice direction</strong>
 
                   <span>
 
                     {finderAnswers.length === 0
 
-                      ? 'Start with one answer. The map will begin shaping a custom Voice Target.'
+                      ? 'Start with one answer. The map will begin shaping a sample Voice Target.'
 
-                      : `Current direction is leaning toward ${finderAnswers
+                      : `This sample direction is leaning toward ${finderAnswers
 
                           .map((key) => NODE_LABELS[key])
 
-                          .join(', ')}.`}
+                          .join(', ')}. A full finder would turn this into a more complete voice summary.`}
+
+                  </span>
+
+                </div>
+
+                <div className="lp-bench-note">
+
+                  <strong>Workshop note</strong>
+
+                  <span>
+
+                    Voice Finder is a conversation starter. Final fit still depends on
+
+                    the player, room, tuning, heads, sticks, and expert judgment.
 
                   </span>
 
@@ -1103,7 +2466,8 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
 
   );
 
+  return ReactDOM.createPortal(modalContent, document.body);
+
 };
 
 export default LegacyPrintVoiceMapModal;
-

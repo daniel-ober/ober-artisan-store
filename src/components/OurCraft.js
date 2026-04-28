@@ -5,28 +5,47 @@ import { useNavigate } from 'react-router-dom';
 import './OurCraft.css';
 
 import {
-  Sparkles,
-  HandHeart,
+
   Flame,
+
   Music,
-  TreeDeciduous,
-  SearchCheck,
+
   Ear,
-  ScanSearch,
+
   SlidersHorizontal,
-  Hammer,
+
   ChevronLeft,
+
   ChevronRight,
+
+  Fingerprint,
+
+  Waves,
+
+  BookOpenText,
+
+  Compass,
+
+  Gauge,
+
+  MessageCircleHeart,
+
+  ShieldCheck,
+
 } from 'lucide-react';
 
 function usePrefersReducedMotion() {
+
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
+
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     const handleChange = () => {
+
       setPrefersReducedMotion(mediaQuery.matches);
+
     };
 
     handleChange();
@@ -34,178 +53,349 @@ function usePrefersReducedMotion() {
     mediaQuery.addEventListener?.('change', handleChange);
 
     return () => {
+
       mediaQuery.removeEventListener?.('change', handleChange);
+
     };
+
   }, []);
 
   return prefersReducedMotion;
+
 }
 
 const PUBLIC = process.env.PUBLIC_URL || '';
 
-const SHOWROOM_BASE = `${PUBLIC}/ober-artisan-showroom/color`;
-
 const storySlides = [
+
   {
+
     key: 'craft',
 
     kicker: 'Our Craft',
 
+    eyebrow: 'Ober Artisan Drums',
+
     title: (
+
       <>
-        Built by hand.
+
+        We don’t tell a drum
+
         <br />
-        Guided by ear.
-        <br />
-        Refined by story.
+
+        what to be.
+
       </>
+
     ),
 
     body: [
-      'Ober Artisan Drums is about building instruments with soul, clarity, and purpose — not just making another product.',
 
-      'Based in Nashville, Dan Ober designs, builds, tunes, documents, and continues refining the full experience in-house. From shell shaping to systems thinking, every part of the work is treated as craft.',
+      'Ober Artisan Drums builds custom instruments by listening — to the player, the material, the shell, and the finished voice.',
+
+      'The work is part handcraft, part ear, part story, and part restraint: shaping with care until the drum opens up and tells us it is ready.',
+
     ],
+
+    quote: 'Built by hand. Guided by ear. Refined by story.',
 
     mediaUrl: `${PUBLIC}/our-craft/1.png`,
 
     type: 'craft',
+
   },
 
   {
-    key: 'philosophy',
 
-    kicker: 'Our Philosophy',
+    key: 'soundlegend-process',
 
-    title: <>Built with intention.</>,
+    kicker: 'SoundLegend Experience',
 
-    body: [
-      'At Ober, listening comes first — to the player, the materials, and the instrument’s natural response.',
-
-      'The goal is not to force identity onto a drum, but to shape it with care, honesty, and musical purpose.',
-    ],
-
-    mediaUrl: `${PUBLIC}/our-craft/2.png`,
-
-    type: 'philosophy',
-  },
-
-  {
-    key: 'discovery',
-
-    kicker: 'LegacyPrint™ Discovery System',
+    eyebrow: 'Discovery · Voice · Story',
 
     title: (
+
       <>
-        Where listening
+
+        A custom build
+
         <br />
-        becomes direction.
+
+        deserves a deeper read.
+
       </>
+
     ),
 
     body: [
-      'Our discovery system helps slow the right moments down so build direction can become clearer, more personal, and more intentional.',
 
-      'It is a key part of the SoundLegend experience — and the foundation for broader LegacyPrint™ tools still to come.',
+      'SoundLegend is where Ober’s full custom process comes together: player discovery, voice direction, build interpretation, story development, and final documentation.',
+
+      'It is not about rushing toward a spec sheet. It is about understanding the person, the music, the sound they are chasing, and the drum that can meet them there.',
+
     ],
+
+    quote:
+
+      'Discovery helps us listen to the player. Voice helps us shape the direction. Story helps the drum carry meaning forward.',
+
+    mediaUrl: `${PUBLIC}/our-craft/2.png`,
+
+    type: 'soundlegend',
+
+  },
+
+  {
+
+    key: 'voice-engine',
+
+    kicker: 'Ober LegacyPrint™ Voice Engine',
+
+    eyebrow: 'A hybrid craft-intelligence system',
+
+    title: (
+
+      <>
+
+        Where player language
+
+        <br />
+
+        becomes build direction.
+
+      </>
+
+    ),
+
+    body: [
+
+      'The Ober LegacyPrint™ Voice Engine brings together human ear, customer discovery, acoustic knowledge, build experience, research, interactive tools, and final craftsman judgment.',
+
+      'It helps us ask better questions, compare drums more clearly, shape stronger build direction, and understand how a finished drum actually speaks.',
+
+    ],
+
+    quote: 'The tools guide the direction. The drum gives the final answer.',
 
     mediaUrl: `${PUBLIC}/our-craft/3.png`,
 
-    type: 'discovery',
+    type: 'voiceEngine',
+
   },
+
+  {
+
+    key: 'shell-voice',
+
+    kicker: 'Shell Voice',
+
+    eyebrow: 'Where the drum starts to answer',
+
+    title: (
+
+      <>
+
+        The shell gets
+
+        <br />
+
+        the final word.
+
+      </>
+
+    ),
+
+    body: [
+
+      'Every shell carries its own weight, movement, response, and resistance. Ober’s job is to shape with intention while still leaving room for the drum to reveal itself.',
+
+      'TorchTune™ helps reveal natural wood response in stave-construction shells. LegacyTuning™ is where a specific shell opens up, settles in, and tells us it is ready.',
+
+    ],
+
+    quote: 'We listen for the point where the shell starts to speak back.',
+
+    mediaUrl: `${PUBLIC}/our-craft/4.png`,
+
+    type: 'shellVoice',
+
+  },
+
 ];
 
-const principles = [
+const craftPrinciples = [
+
   {
-    label: 'Creative Spark',
+
+    label: 'Listen first',
 
     description:
-      'Every drum begins with an idea worth honoring — not a template to copy.',
 
-    icon: Sparkles,
+      'The player, the material, and the finished drum all have something to say.',
+
+    icon: Ear,
+
   },
 
   {
-    label: 'Maker’s Touch',
+
+    label: 'Shape with restraint',
 
     description:
-      'Every instrument is shaped by real hands, real listening, and real judgment.',
 
-    icon: HandHeart,
+      'The craft is knowing when to guide the drum and when to leave room for it to open up.',
+
+    icon: ShieldCheck,
+
   },
 
   {
-    label: 'Torch-Tuned Resonance',
+
+    label: 'Build for expression',
 
     description:
-      'Our proprietary torch-tuning approach helps reveal the shell’s natural voice with intention.',
 
-    icon: Flame,
-  },
-
-  {
-    label: 'Built for Expression',
-
-    description:
       'A great drum should not just sound good. It should invite more truth out of the player.',
 
     icon: Music,
+
   },
 
-  {
-    label: 'Timeless Materials',
-
-    description:
-      'We choose woods and components for tone, character, and longevity.',
-
-    icon: TreeDeciduous,
-  },
-
-  {
-    label: 'Care in the Details',
-
-    description:
-      'From bearing edges to finish behavior, each detail is approached with care and respect for the instrument.',
-
-    icon: SearchCheck,
-  },
 ];
 
-const discoverySteps = [
-  {
-    title: 'Listen',
+const soundLegendSteps = [
 
-    text: 'A deeper read of the player — not just what looks good on paper, but what feels true in purpose, touch, sound, and story.',
+  {
+
+    title: 'Discovery',
+
+    text:
+
+      'A deeper read of the player — goals, genre, touch, feel, sound language, and the story behind the build.',
+
+    icon: Compass,
+
+  },
+
+  {
+
+    title: 'Voice',
+
+    text:
+
+      'The target direction becomes easier to hear, compare, and shape through Ober’s listening language and voice tools.',
+
+    icon: Gauge,
+
+  },
+
+  {
+
+    title: 'Story',
+
+    text:
+
+      'The finished build carries more than specs: notes, choices, media, milestones, and the reason the drum exists.',
+
+    icon: BookOpenText,
+
+  },
+
+];
+
+const voiceEngineParts = [
+
+  {
+
+    title: 'Human ear',
+
+    text: 'The system starts and ends with actual listening — not blind prediction.',
 
     icon: Ear,
+
   },
 
   {
-    title: 'Interpret',
 
-    text: 'Discovery helps separate what is already clear from what still needs pressure-testing, so the build can move with clarity and purpose.',
+    title: 'Player discovery',
 
-    icon: ScanSearch,
+    text:
+
+      'Customer language, musical context, goals, feel, and sound preferences help shape the direction.',
+
+    icon: MessageCircleHeart,
+
   },
 
   {
-    title: 'Refine',
 
-    text: 'Direction becomes more specific and more personal through consultation, mapping, and review.',
+    title: 'Voice tools',
+
+    text:
+
+      'Voice Nodes, charts, comparison tools, and guided matching make drum voice easier to understand.',
 
     icon: SlidersHorizontal,
+
   },
 
   {
-    title: 'Build with intent',
 
-    text: 'Once direction is clear, shell, voicing, materials, finish, hardware, and feel can move together in a more cohesive way.',
+    title: 'Craft judgment',
 
-    icon: Hammer,
+    text:
+
+      'The finished drum still has to speak for itself before a final LegacyPrint™ profile is captured.',
+
+    icon: Fingerprint,
+
   },
+
+];
+
+const shellVoiceItems = [
+
+  {
+
+    title: 'TorchTune™',
+
+    text:
+
+      'Ober’s proprietary torching technique for bringing out natural wood response in stave-construction shells.',
+
+    icon: Flame,
+
+  },
+
+  {
+
+    title: 'LegacyTuning™',
+
+    text:
+
+      'The natural resonance and tuning identity of a specific shell — the place where the drum opens up, settles in, and tells us, “I’m ready.”',
+
+    icon: Waves,
+
+  },
+
+  {
+
+    title: 'LegacyPrint™',
+
+    text:
+
+      'The final voice readout or stamp of a drum or target build — how the finished instrument speaks, responds, carries, blooms, and settles.',
+
+    icon: Fingerprint,
+
+  },
+
 ];
 
 const OurCraft = () => {
+
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const navigate = useNavigate();
@@ -219,62 +409,83 @@ const OurCraft = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
+
     document.body.classList.add('our-craft-page');
 
     return () => {
+
       document.body.classList.remove('our-craft-page');
+
     };
+
   }, []);
 
   const scrollToFounders = useCallback(() => {
+
     if (!foundersRef.current) return;
 
     foundersRef.current.scrollIntoView({
+
       behavior: prefersReducedMotion ? 'auto' : 'smooth',
 
       block: 'start',
+
     });
+
   }, [prefersReducedMotion]);
 
   const scrollToSlide = useCallback(
+
     (index) => {
+
       const target = slideRefs.current[index];
 
       if (!target) return;
 
       target.scrollIntoView({
+
         behavior: prefersReducedMotion ? 'auto' : 'smooth',
 
         inline: 'start',
 
         block: 'nearest',
+
       });
 
       setActiveSlide(index);
+
     },
 
     [prefersReducedMotion]
+
   );
 
   const goPrev = useCallback(() => {
+
     scrollToSlide(Math.max(activeSlide - 1, 0));
+
   }, [activeSlide, scrollToSlide]);
 
   const goNext = useCallback(() => {
+
     scrollToSlide(Math.min(activeSlide + 1, storySlides.length - 1));
+
   }, [activeSlide, scrollToSlide]);
 
   useEffect(() => {
+
     const rail = railRef.current;
 
     if (!rail) return undefined;
 
     const handleScroll = () => {
+
       const width = rail.clientWidth || 1;
 
       const index = Math.round(rail.scrollLeft / width);
 
       setActiveSlide(Math.max(0, Math.min(index, storySlides.length - 1)));
+
     };
 
     rail.addEventListener('scroll', handleScroll, { passive: true });
@@ -282,256 +493,529 @@ const OurCraft = () => {
     handleScroll();
 
     return () => {
+
       rail.removeEventListener('scroll', handleScroll);
+
     };
+
   }, []);
 
   const renderSupplement = useCallback(
+
     (slide) => {
-      if (slide.type === 'philosophy') {
+
+      if (slide.type === 'craft') {
+
         return (
+
           <div
-            className="oc-story-grid oc-story-grid-philosophy"
+
+            className="oc-note-strip oc-note-strip-three"
+
             role="list"
-            aria-label="Philosophy highlights"
+
+            aria-label="Ober craft principles"
+
           >
-            {principles.map((item) => {
+
+            {craftPrinciples.map((item) => {
+
               const Icon = item.icon;
 
               return (
-                <article
-                  key={item.label}
-                  className="oc-story-mini-card"
-                  role="listitem"
-                >
-                  <div className="oc-story-mini-top">
-                    <span className="oc-story-mini-icon">
-                      <Icon size={15} aria-hidden />
-                    </span>
+
+                <article key={item.label} className="oc-note" role="listitem">
+
+                  <span className="oc-note-icon">
+
+                    <Icon size={15} aria-hidden />
+
+                  </span>
+
+                  <div>
 
                     <h3>{item.label}</h3>
+
+                    <p>{item.description}</p>
+
                   </div>
 
-                  <p>{item.description}</p>
                 </article>
+
               );
+
             })}
+
           </div>
+
         );
+
       }
 
-      if (slide.type === 'discovery') {
+      if (slide.type === 'soundlegend') {
+
         return (
-          <div className="oc-discovery-promo">
-            <div
-              className="oc-story-grid oc-story-grid-discovery"
-              role="list"
-              aria-label="Discovery steps"
-            >
-              {discoverySteps.map((item) => {
-                const Icon = item.icon;
 
-                return (
-                  <article
-                    key={item.title}
-                    className="oc-story-mini-card"
-                    role="listitem"
-                  >
-                    <div className="oc-story-mini-top">
-                      <span className="oc-story-mini-icon">
-                        <Icon size={15} aria-hidden />
-                      </span>
+          <div
 
-                      <h3>{item.title}</h3>
-                    </div>
+            className="oc-note-strip oc-note-strip-three"
+
+            role="list"
+
+            aria-label="SoundLegend experience"
+
+          >
+
+            {soundLegendSteps.map((item) => {
+
+              const Icon = item.icon;
+
+              return (
+
+                <article key={item.title} className="oc-note" role="listitem">
+
+                  <span className="oc-note-icon">
+
+                    <Icon size={15} aria-hidden />
+
+                  </span>
+
+                  <div>
+
+                    <h3>{item.title}</h3>
 
                     <p>{item.text}</p>
-                  </article>
-                );
-              })}
-            </div>
+
+                  </div>
+
+                </article>
+
+              );
+
+            })}
+
+          </div>
+
+        );
+
+      }
+
+      if (slide.type === 'voiceEngine') {
+
+        return (
+
+          <div
+
+            className="oc-note-strip oc-note-strip-four"
+
+            role="list"
+
+            aria-label="Ober Voice Engine parts"
+
+          >
+
+            {voiceEngineParts.map((item) => {
+
+              const Icon = item.icon;
+
+              return (
+
+                <article key={item.title} className="oc-note" role="listitem">
+
+                  <span className="oc-note-icon">
+
+                    <Icon size={15} aria-hidden />
+
+                  </span>
+
+                  <div>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+
+                  </div>
+
+                </article>
+
+              );
+
+            })}
 
             <button
+
               type="button"
-              className="oc-discovery-link"
+
+              className="oc-inline-link"
+
               onClick={() => navigate('/legacyprint')}
+
             >
-              Learn more about LegacyPrint™
+
+              Open the Voice Workbench
+
               <span aria-hidden="true">→</span>
+
             </button>
+
           </div>
+
         );
+
+      }
+
+      if (slide.type === 'shellVoice') {
+
+        return (
+
+          <div
+
+            className="oc-note-strip oc-note-strip-three"
+
+            role="list"
+
+            aria-label="Ober shell voice language"
+
+          >
+
+            {shellVoiceItems.map((item) => {
+
+              const Icon = item.icon;
+
+              return (
+
+                <article key={item.title} className="oc-note" role="listitem">
+
+                  <span className="oc-note-icon">
+
+                    <Icon size={15} aria-hidden />
+
+                  </span>
+
+                  <div>
+
+                    <h3>{item.title}</h3>
+
+                    <p>{item.text}</p>
+
+                  </div>
+
+                </article>
+
+              );
+
+            })}
+
+          </div>
+
+        );
+
       }
 
       return null;
+
     },
 
     [navigate]
+
   );
 
   return (
-    <div className="ourcraft-page-shell">
-      <main className="ourcraft-root">
-        <section className="oc-story-shell" aria-label="Our Craft story panels">
-          <div className="oc-story-rail" ref={railRef}>
-            {storySlides.map((slide, index) => (
-              <section
-                key={slide.key}
-                ref={(el) => {
-                  slideRefs.current[index] = el;
-                }}
-                className="oc-story-slide"
-                aria-label={slide.kicker}
-              >
-                <div
-                  className="oc-story-media"
-                  aria-hidden="true"
-                  style={{ backgroundImage: `url("${slide.mediaUrl}")` }}
-                />
 
-                <div className="oc-story-overlay" />
+    <div className="ourcraft-page-shell">
+
+      <main className="ourcraft-root">
+
+        <section className="oc-story-shell" aria-label="Our Craft story panels">
+
+          <div className="oc-story-bg-stack" aria-hidden="true">
+
+            {storySlides.map((slide, index) => (
+
+              <div
+
+                key={slide.key}
+
+                className={`oc-story-bg ${
+
+                  activeSlide === index ? 'is-active' : ''
+
+                }`}
+
+                style={{ backgroundImage: `url("${slide.mediaUrl}")` }}
+
+              />
+
+            ))}
+
+          </div>
+
+          <div className="oc-story-bg-overlay" aria-hidden="true" />
+
+          <div className="oc-story-rail" ref={railRef}>
+
+            {storySlides.map((slide, index) => (
+
+              <section
+
+                key={slide.key}
+
+                ref={(el) => {
+
+                  slideRefs.current[index] = el;
+
+                }}
+
+                className={`oc-story-slide oc-story-slide-${slide.type}`}
+
+                aria-label={slide.kicker}
+
+              >
 
                 <div className="oc-wrap oc-story-wrap">
+
                   <div className="oc-story-inner">
+
                     <div className="oc-story-copy">
+
                       <span className="oc-kicker">{slide.kicker}</span>
+
+                      <span className="oc-eyebrow">{slide.eyebrow}</span>
 
                       <h1 className="oc-story-title">{slide.title}</h1>
 
                       {slide.body.map((paragraph) => (
+
                         <p key={paragraph}>{paragraph}</p>
+
                       ))}
+
+                      {slide.quote && (
+
+                        <div className="oc-story-quote">
+
+                          <span aria-hidden="true">“</span>
+
+                          {slide.quote}
+
+                          <span aria-hidden="true">”</span>
+
+                        </div>
+
+                      )}
+
                     </div>
 
                     {renderSupplement(slide)}
+
                   </div>
+
                 </div>
+
               </section>
+
             ))}
+
           </div>
 
           <div className="oc-story-ui">
+
             <div className="oc-story-arrow-row">
+
               <button
+
                 type="button"
+
                 className="oc-story-arrow"
+
                 onClick={goPrev}
+
                 disabled={activeSlide === 0}
+
                 aria-label="Previous panel"
+
               >
+
                 <ChevronLeft size={18} />
+
               </button>
 
-              <div
-                className="oc-story-dots"
-                aria-label="Story slide navigation"
-              >
+              <div className="oc-story-dots" aria-label="Story slide navigation">
+
                 {storySlides.map((slide, index) => (
+
                   <button
+
                     key={slide.key}
+
                     type="button"
+
                     className={`oc-story-dot ${
+
                       activeSlide === index ? 'is-active' : ''
+
                     }`}
+
                     onClick={() => scrollToSlide(index)}
+
                     aria-label={`Go to ${slide.kicker}`}
+
                   />
+
                 ))}
+
               </div>
 
               <button
+
                 type="button"
+
                 className="oc-story-arrow"
+
                 onClick={goNext}
+
                 disabled={activeSlide === storySlides.length - 1}
+
                 aria-label="Next panel"
+
               >
+
                 <ChevronRight size={18} />
+
               </button>
+
             </div>
 
             <button
+
               type="button"
+
               className="oc-next-link oc-next-link-founder"
+
               onClick={scrollToFounders}
+
             >
-              <span>Explore and compare the collection</span>
+
+              <span>Explore the collection</span>
 
               <span className="oc-next-link-arrow" aria-hidden="true">
+
                 ↓
+
               </span>
+
             </button>
+
           </div>
+
         </section>
 
         <section
+
           ref={foundersRef}
+
           className="oc-section oc-section-founder"
+
           aria-label="Our Founder’s Batch"
+
         >
-          <div
-            className="oc-founder-bg"
-            aria-hidden="true"
-            style={{
-              backgroundImage: `url("${SHOWROOM_BASE}/background-only.png")`,
-            }}
-          />
 
           <div
-            className="oc-founder-drums-all"
+
+            className="oc-founder-bg"
+
             aria-hidden="true"
+
             style={{
-              backgroundImage: `url("${SHOWROOM_BASE}/all-bright.png")`,
+
+              backgroundImage: `url("${PUBLIC}/our-craft/wide.png")`,
+
             }}
+
           />
 
           <div className="oc-founder-smoke-layer" aria-hidden="true">
+
             <video
+
               className="oc-founder-smoke-video"
+
               autoPlay
+
               muted
+
               loop
+
               playsInline
+
               preload="auto"
+
             >
+
               <source src={`${PUBLIC}/videos/smoke.mp4`} type="video/mp4" />
+
             </video>
+
           </div>
 
           <div className="oc-founder-vignette" aria-hidden="true" />
 
           <div className="oc-founder-shell">
+
             <div className="oc-wrap">
+
               <div className="oc-founder-top">
+
                 <span className="oc-kicker">Our Founder’s Batch</span>
 
                 <h2 className="oc-title oc-founder-title">
+
                   The instruments that shaped the path forward.
+
                 </h2>
+
               </div>
 
               <div className="oc-founder-content">
+
                 <p className="oc-founder-quote">
-                  A preview of the three lines that shape the Ober collection —
-                  rooted tradition, immersive custom collaboration, and hybrid
-                  experimentation.
+
+                  A preview of the collection’s first paths forward — tradition,
+
+                  immersive custom collaboration, and hybrid experimentation.
+
                 </p>
 
                 <button
+
                   type="button"
+
                   className="oc-founder-cta"
+
                   onClick={() => navigate('/our-collection')}
+
                 >
+
                   Explore our custom collection
+
                   <span aria-hidden="true">→</span>
+
                 </button>
+
               </div>
+
             </div>
+
           </div>
+
         </section>
+
       </main>
+
     </div>
+
   );
+
 };
 
 export default OurCraft;
