@@ -1266,6 +1266,38 @@ const StageImage = ({
 
   const isCollection = primaryTab === 'collection';
 
+  const [previousSeries, setPreviousSeries] = useState(null);
+
+  const [visibleSeries, setVisibleSeries] = useState(activeSeries);
+
+  React.useEffect(() => {
+
+    if (!isCollection) {
+
+      setPreviousSeries(null);
+
+      setVisibleSeries(activeSeries);
+
+      return undefined;
+
+    }
+
+    if (activeSeries.id === visibleSeries.id) return undefined;
+
+    setPreviousSeries(visibleSeries);
+
+    setVisibleSeries(activeSeries);
+
+    const timer = window.setTimeout(() => {
+
+      setPreviousSeries(null);
+
+    }, 760);
+
+    return () => window.clearTimeout(timer);
+
+  }, [activeSeries, visibleSeries, isCollection]);
+
   return (
 
     <div
@@ -1284,7 +1316,7 @@ const StageImage = ({
 
           <img
 
-            src={isCollection ? collectionBaseImage : brightAllImage}
+            src={collectionBaseImage}
 
             alt=""
 
@@ -1294,15 +1326,47 @@ const StageImage = ({
 
           />
 
-          {isCollection && (
+          <img
+
+            src={brightAllImage}
+
+            alt=""
+
+            className="oad-stage-image oad-stage-image-compare-bright"
+
+            draggable="false"
+
+          />
+
+          {isCollection && previousSeries && (
 
             <img
 
-              src={activeSeries.activeLayer}
+              key={`previous-${previousSeries.id}`}
+
+              src={previousSeries.activeLayer}
 
               alt=""
 
-              className={`oad-stage-image oad-stage-image-active is-visible oad-active-${activeSeries.id}`}
+              className={`oad-stage-image oad-stage-image-active oad-stage-image-active-previous oad-active-${previousSeries.id}`}
+
+              draggable="false"
+
+            />
+
+          )}
+
+          {isCollection && visibleSeries && (
+
+            <img
+
+              key={`current-${visibleSeries.id}`}
+
+              src={visibleSeries.activeLayer}
+
+              alt=""
+
+              className={`oad-stage-image oad-stage-image-active oad-stage-image-active-current oad-active-${visibleSeries.id}`}
 
               draggable="false"
 
@@ -1392,19 +1456,15 @@ const StageImage = ({
 
       </div>
 
- {primaryTab === 'collection' && (
+     <div className="oad-stage-helper-wrap">
 
-  <div className="oad-stage-helper-wrap">
+  <p className="oad-stage-helper">
 
-    <p className="oad-stage-helper">
+    Hover or click one of the drums to preview each Ober line.
 
-      Hover or click one of the drums to preview each Ober line.
+  </p>
 
-    </p>
-
-  </div>
-
-)}
+</div>
 
     </div>
 
