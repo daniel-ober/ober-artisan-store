@@ -9,19 +9,21 @@ import LEGACYPRINT_BENCHMARK_CATALOG from '../../data/legacyPrint/benchmarkCatal
 import { BENCHMARK_DEFINITIONS } from '../../data/legacyPrint/benchmarkDefinitions.js';
 
 const AXES = [
+
   'attack',
+
+  'brightness',
+
+  'projection',
 
   'sustain',
 
   'warmth',
 
-  'projection',
-
-  'brightness',
-
   'sensitivity',
 
   'control',
+
 ];
 
 const clamp = (value, min = 1, max = 10) => {

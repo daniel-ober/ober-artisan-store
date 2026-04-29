@@ -548,6 +548,76 @@
 
 }
 
+.bar-chart-card--standalone .bar-chart-benchmark-guide {
+
+  justify-content: flex-start;
+
+}
+
+.bar-chart-card--standalone .bar-chart-benchmark-guide-label {
+
+  color: rgba(214, 178, 119, 0.86);
+
+}
+
+.bar-chart-track--standalone {
+
+  overflow: hidden;
+
+}
+
+.bar-chart-card--standalone .bar-chart-midline {
+
+  display: none;
+
+}
+
+.bar-chart-score-fill-shell {
+
+  position: absolute;
+
+  inset: 0 auto 0 0;
+
+  width: 0%;
+
+  min-width: 2px;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+
+  transition: width 420ms ease;
+
+}
+
+.bar-chart-card--standalone .bar-chart-fill--score {
+
+  width: 100%;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+}
+
+.bar-chart-value--visible.is-score {
+
+  font-weight: 900;
+
+}
+
+.bar-chart-score-max {
+
+  margin-left: 2px;
+
+  color: rgba(255, 255, 255, 0.36);
+
+  font-size: 0.62rem;
+
+  font-weight: 800;
+
+}
+
 @media (max-width: 940px) {
 
   .bar-chart-list::before {
