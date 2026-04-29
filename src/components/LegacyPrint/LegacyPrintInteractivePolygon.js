@@ -2020,29 +2020,35 @@ const LegacyPrintInteractivePolygon = ({
 
               />
 
-<g
+              <foreignObject
 
-  className="lp-map-node-icon lp-map-node-icon-svg"
+                x={iconPoint.x - 34}
 
-  transform={`translate(${iconPoint.x - 10} ${iconPoint.y - 10})`}
+                y={iconPoint.y - 34}
 
-  style={{ color: node.color }}
+                width="68"
 
->
+                height="68"
 
-  <MetricIcon
+                className="lp-map-node-icon-wrap"
 
-    type={node.key}
+              >
 
-    color={visual.shouldGreySliceColor ? '#8d8d8d' : node.color}
+                <div className="lp-map-node-icon" style={{ color: node.color }}>
 
-    size={20}
+                  <MetricIcon
 
-  />
+                    type={node.key}
 
-</g>
+                    color={visual.shouldGreySliceColor ? '#8d8d8d' : node.color}
 
-        
+                    size={20}
+
+                  />
+
+                </div>
+
+              </foreignObject>
 
             </g>
 

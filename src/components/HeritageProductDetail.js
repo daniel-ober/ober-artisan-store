@@ -849,15 +849,13 @@ const HeritageProductDetail = () => {
 
   const [benchmarkGlowPulseKey, setBenchmarkGlowPulseKey] = useState(0);
 
-const confirmStartOverBuild = () => {
+  const confirmStartOverBuild = () => {
+    applyHeritagePreset('lowest');
 
-  applyHeritagePreset('lowest');
+    setShowConfigBreakdown(false);
 
-  setShowConfigBreakdown(false);
-
-  setShowResetModal(false);
-
-};
+    setShowResetModal(false);
+  };
 
   const handleResetBenchmark = () => {
     setBenchmarkFamilyId(DEFAULT_BENCHMARK_FAMILY_ID);
@@ -1703,7 +1701,7 @@ const confirmStartOverBuild = () => {
                 then refine your hardware.
               </p>
 
-              <div className="heritage-builder-preset-card">
+              {/* <div className="heritage-builder-preset-card">
                 <span className="heritage-builder-preset-label">
                   Start from
                 </span>
@@ -1725,7 +1723,7 @@ const confirmStartOverBuild = () => {
                     HERITAGE Standard
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="heritage-builder-sections">
@@ -1771,7 +1769,7 @@ const confirmStartOverBuild = () => {
                   <div className="heritage-builder-section-body">
                     <label>Snare Size (Diameter)</label>
 
-                    <div className="heritage-option-grid heritage-option-grid-compact">
+                    <div className="heritage-option-grid heritage-option-grid-compact heritage-option-grid--size">
                       {Object.keys(basePrices).map((sizeOption) => {
                         const isSelected = size === sizeOption;
 
@@ -1810,7 +1808,7 @@ const confirmStartOverBuild = () => {
 
                     <label>Depth</label>
 
-                    <div className="heritage-option-grid heritage-option-grid-compact">
+                    <div className="heritage-option-grid heritage-option-grid-compact heritage-option-grid--depth">
                       {Object.keys(depthPrices[size]).map((depthOption) => {
                         const isSelected = depth === depthOption;
 
@@ -2126,7 +2124,7 @@ const confirmStartOverBuild = () => {
                   <div className="heritage-builder-section-body">
                     <label>Hardware Finish</label>
 
-                    <div className="heritage-option-grid">
+                    <div className="heritage-option-grid heritage-option-grid--hardware-finish">
                       {hardwareOptions.map((option) => {
                         const isSelected = hardwareColor === option.value;
 

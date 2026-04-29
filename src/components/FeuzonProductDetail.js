@@ -507,7 +507,7 @@ const lugOptions = {
 
   14: ['8', '10'],
 
-  15: ['10'],
+  15: ['8'],
 };
 
 const staveMapping = {
@@ -528,16 +528,308 @@ const staveMapping = {
   },
 
   15: {
-    10: ['20 - 14mm'],
+    8: ['16 - 12mm'],
   },
 };
 
-const shellOptions = {
-  Maple: ['Walnut + Birch', 'Oak + Cherry', 'Maple + Bubinga'],
+const CORE_STAVE_OPTIONS = [
+  {
+    label: 'Walnut + Birch',
 
-  Walnut: ['Mahogany + Cherry', 'Walnut + Padauk', 'Oak + Wenge'],
+    value: 'Walnut + Birch',
 
-  Cherry: ['Birch + Maple', 'Zebrawood + Mahogany', 'Padauk + Ash'],
+    category: 'Balanced / Most Common',
+
+    swatch: '/swatches/feuzon/core-stave/walnut-birch.png',
+
+    recommendedOuterShell: 'Maple',
+
+    recommendationReason:
+      'Maple keeps the response articulate while Walnut + Birch adds low-mid body and balanced internal focus.',
+  },
+
+  {
+    label: 'Oak + Cherry',
+
+    value: 'Oak + Cherry',
+
+    category: 'Balanced / Most Common',
+
+    swatch: '/swatches/feuzon/core-stave/oak-cherry.png',
+
+    recommendedOuterShell: 'Maple',
+
+    recommendationReason:
+      'Maple keeps the attack clean while Oak + Cherry adds density, punch, and a warmer wood center.',
+  },
+
+  {
+    label: 'Birch + Maple',
+
+    value: 'Birch + Maple',
+
+    category: 'Bright / Articulate',
+
+    swatch: '/swatches/feuzon/core-stave/birch-maple.png',
+
+    recommendedOuterShell: 'Cherry',
+
+    recommendationReason:
+      'Cherry rounds out the brighter Birch + Maple core with a more musical, slightly sweeter outer shell.',
+  },
+
+  {
+    label: 'Maple + Bubinga',
+
+    value: 'Maple + Bubinga',
+
+    category: 'Bright / Articulate',
+
+    swatch: '/swatches/feuzon/core-stave/maple-bubinga.png',
+
+    recommendedOuterShell: 'Maple',
+
+    recommendationReason:
+      'Maple reinforces the fast, clear attack while Bubinga adds weight and authority underneath.',
+  },
+
+  {
+    label: 'Mahogany + Cherry',
+
+    value: 'Mahogany + Cherry',
+
+    category: 'Warm / Full',
+
+    swatch: '/swatches/feuzon/core-stave/mahogany-cherry.png',
+
+    recommendedOuterShell: 'Walnut',
+
+    recommendationReason:
+      'Walnut deepens the darker, fuller character while Mahogany + Cherry keeps the center warm and broad.',
+  },
+
+  {
+    label: 'Walnut + Padauk',
+
+    value: 'Walnut + Padauk',
+
+    category: 'Warm / Full',
+
+    swatch: '/swatches/feuzon/core-stave/walnut-padauk.png',
+
+    recommendedOuterShell: 'Walnut',
+
+    recommendationReason:
+      'Walnut pairs naturally with this richer core while Padauk helps keep the note from feeling too soft.',
+  },
+
+  {
+    label: 'Oak + Wenge',
+
+    value: 'Oak + Wenge',
+
+    category: 'Dense / Focused',
+
+    swatch: '/swatches/feuzon/core-stave/oak-wenge.png',
+
+    recommendedOuterShell: 'Walnut',
+
+    recommendationReason:
+      'Walnut complements the darker density while Oak + Wenge keeps the response firm and focused.',
+  },
+
+  {
+    label: 'Zebrawood + Mahogany',
+
+    value: 'Zebrawood + Mahogany',
+
+    category: 'Experimental / Character',
+
+    swatch: '/swatches/feuzon/core-stave/zebrawood-mahogany.png',
+
+    recommendedOuterShell: 'Cherry',
+
+    recommendationReason:
+      'Cherry adds a more musical outer voice while Zebrawood + Mahogany brings texture and complexity.',
+  },
+
+  {
+    label: 'Padauk + Ash',
+
+    value: 'Padauk + Ash',
+
+    category: 'Experimental / Character',
+
+    swatch: '/swatches/feuzon/core-stave/padauk-ash.png',
+
+    recommendedOuterShell: 'Cherry',
+
+    recommendationReason:
+      'Cherry balances the livelier Padauk + Ash core with a warmer, more controlled outer shell.',
+  },
+];
+
+const EXTERIOR_SHELL_SWATCHES = {
+  Maple: '/swatches/feuzon/maple/non-scorched/natural/no-stain-no-scorch.png',
+
+  Walnut: '/swatches/feuzon/walnut/non-scorched/natural/no-stain-no-scorch.png',
+
+  Cherry: '/swatches/feuzon/cherry/non-scorched/natural/no-stain-no-scorch.png',
+};
+
+const coreStaveShellOptions = [
+  {
+    label: 'Walnut + Birch',
+
+    value: 'Walnut + Birch',
+
+    sortGroup: 'Balanced / Most Common',
+
+    recommendedExterior: 'Maple',
+
+    recommendationWhy:
+      'Maple keeps the outside articulate and quick while Walnut + Birch adds low-mid body and balanced internal focus.',
+
+    helperText:
+      'Balanced, familiar, and versatile. A strong all-around FEUZØN core with body, clarity, and control.',
+  },
+
+  {
+    label: 'Oak + Cherry',
+
+    value: 'Oak + Cherry',
+
+    sortGroup: 'Balanced / Most Common',
+
+    recommendedExterior: 'Maple',
+
+    recommendationWhy:
+      'Maple keeps the front edge clean while Oak + Cherry adds density, punch, and warmer wood center.',
+
+    helperText:
+      'Punchier and a little denser, with a warm center and confident projection.',
+  },
+
+  {
+    label: 'Birch + Maple',
+
+    value: 'Birch + Maple',
+
+    sortGroup: 'Bright / Articulate',
+
+    recommendedExterior: 'Cherry',
+
+    recommendationWhy:
+      'Cherry softens the sharper Birch + Maple interior with a sweeter, more musical outer shell.',
+
+    helperText:
+      'Fast, clean, and articulate with a controlled modern response.',
+  },
+
+  {
+    label: 'Maple + Bubinga',
+
+    value: 'Maple + Bubinga',
+
+    sortGroup: 'Bright / Articulate',
+
+    recommendedExterior: 'Maple',
+
+    recommendationWhy:
+      'A Maple exterior keeps the response immediate while Bubinga reinforces weight and authority inside.',
+
+    helperText:
+      'Immediate and authoritative, with extra weight behind the note.',
+  },
+
+  {
+    label: 'Mahogany + Cherry',
+
+    value: 'Mahogany + Cherry',
+
+    sortGroup: 'Warm / Full',
+
+    recommendedExterior: 'Walnut',
+
+    recommendationWhy:
+      'Walnut complements the darker Mahogany + Cherry core with a richer, more seasoned outer voice.',
+
+    helperText:
+      'Warmer, darker, and more vintage-leaning with a fuller center.',
+  },
+
+  {
+    label: 'Walnut + Padauk',
+
+    value: 'Walnut + Padauk',
+
+    sortGroup: 'Warm / Full',
+
+    recommendedExterior: 'Walnut',
+
+    recommendationWhy:
+      'Walnut keeps the exterior rich while Padauk adds firmer projection and note shape inside.',
+
+    helperText:
+      'Rich and firm with stronger note shape, added projection, and a more colorful response.',
+  },
+
+  {
+    label: 'Oak + Wenge',
+
+    value: 'Oak + Wenge',
+
+    sortGroup: 'Dense / Focused',
+
+    recommendedExterior: 'Walnut',
+
+    recommendationWhy:
+      'Walnut balances the dense Oak + Wenge core with a darker, more controlled exterior voice.',
+
+    helperText:
+      'Dense, authoritative, darker, and controlled. Built for focus and strong projection.',
+  },
+
+  {
+    label: 'Zebrawood + Mahogany',
+
+    value: 'Zebrawood + Mahogany',
+
+    sortGroup: 'Experimental / Character',
+
+    recommendedExterior: 'Cherry',
+
+    recommendationWhy:
+      'Cherry adds musical sweetness around the more textured Zebrawood + Mahogany interior.',
+
+    helperText:
+      'Textured, complex, and character-forward with a warmer musical foundation.',
+  },
+
+  {
+    label: 'Padauk + Ash',
+
+    value: 'Padauk + Ash',
+
+    sortGroup: 'Experimental / Character',
+
+    recommendedExterior: 'Cherry',
+
+    recommendationWhy:
+      'Cherry keeps the exterior musical while Padauk + Ash adds crack, lift, and liveliness inside.',
+
+    helperText: 'Lively, quick, and more aggressive through the center hit.',
+  },
+];
+
+const exteriorShellOptions = ['Maple', 'Walnut', 'Cherry'];
+
+const exteriorShellPreviewMap = {
+  Maple: '/swatches/feuzon/maple/non-scorched/natural/no-stain-no-scorch.png',
+
+  Walnut: '/swatches/feuzon/walnut/non-scorched/natural/no-stain-no-scorch.png',
+
+  Cherry: '/swatches/feuzon/cherry/non-scorched/natural/no-stain-no-scorch.png',
 };
 
 const hardwareOptions = [
@@ -885,6 +1177,17 @@ const FEUZON_SWATCHES = {
   },
 };
 
+const FEUZON_EXTERIOR_SHELL_PREVIEWS = {
+  Maple: '/swatches/feuzon/maple/non-scorched/natural/no-stain-no-scorch.png',
+
+  Walnut: '/swatches/feuzon/walnut/non-scorched/natural/no-stain-no-scorch.png',
+
+  Cherry: '/swatches/feuzon/cherry/non-scorched/natural/no-stain-no-scorch.png',
+};
+
+const getExteriorShellPreview = (wood) =>
+  FEUZON_EXTERIOR_SHELL_PREVIEWS[wood] || FEUZON_EXTERIOR_SHELL_PREVIEWS.Maple;
+
 const hardwareUpchargeMap = {
   Chrome: 0,
 
@@ -1073,45 +1376,19 @@ const getSnareBedMeta = (value) =>
   snareBedOptions[0];
 
 const getShellComboNarrative = (outerShell, innerStave) => {
-  const comboMap = {
-    Maple: {
-      'Walnut + Birch':
-        'Maple keeps the outer shell articulate and fast, while Walnut + Birch adds low-mid body and balanced internal focus.',
-
-      'Oak + Cherry':
-        'Maple keeps the attack clean, while Oak + Cherry adds density, punch, and a warmer wood center.',
-
-      'Maple + Bubinga':
-        'A more immediate maple-forward voice, reinforced by Bubinga for added weight and authority.',
-    },
-
-    Walnut: {
-      'Mahogany + Cherry':
-        'Walnut leans darker and richer, while Mahogany + Cherry deepens warmth and vintage-style fullness.',
-
-      'Walnut + Padauk':
-        'A richer outer voice with a firmer, more projected inner response and stronger note shape.',
-
-      'Oak + Wenge':
-        'A dense, authoritative pairing built for stronger projection, darker tone, and added control.',
-    },
-
-    Cherry: {
-      'Birch + Maple':
-        'Cherry adds warmth and musical sweetness, while Birch + Maple keeps the interior articulate and balanced.',
-
-      'Zebrawood + Mahogany':
-        'Cherry keeps the note musical and broad while Zebrawood + Mahogany adds texture, weight, and complexity.',
-
-      'Padauk + Ash':
-        'A lively outer shell with a more aggressive inner response and added crack through the center hit.',
-    },
-  };
-
-  return (
-    comboMap?.[outerShell]?.[innerStave] ||
-    `${outerShell} exterior paired with ${innerStave} interior for a layered hybrid response.`
+  const selectedCore = coreStaveShellOptions.find(
+    (option) => option.value === innerStave
   );
+
+  if (!selectedCore) {
+    return `${innerStave} core stave shell paired with ${outerShell} steam-bent exterior for a layered FEUZØN response.`;
+  }
+
+  if (selectedCore.recommendedExterior === outerShell) {
+    return `${innerStave} core stave shell paired with ${outerShell} steam-bent exterior. Ober recommended pairing: ${selectedCore.recommendationWhy}`;
+  }
+
+  return `${innerStave} core stave shell paired with ${outerShell} steam-bent exterior. Ober’s recommended exterior for this core is ${selectedCore.recommendedExterior}: ${selectedCore.recommendationWhy}`;
 };
 
 const BENCHMARK_VOICE_RANGE_FALLBACKS = {
@@ -1956,7 +2233,7 @@ const FeuzonProductDetail = () => {
 
   const foundationSummary = `${size}" x ${depth}" • ${lugs} lugs • ${staveOption}`;
 
-  const shellSummary = `${outerShell} / ${innerStave}`;
+  const shellSummary = `${innerStave} • ${outerShell}`;
 
   const finishSummary = isNaturalFinish
     ? `${scorchStyle === 'scorched' ? 'Natural Scorched' : 'Non-Scorched'} • ${
@@ -2414,12 +2691,14 @@ const FeuzonProductDetail = () => {
   }, [size, depth]);
 
   useEffect(() => {
-    const innerOptions = shellOptions[outerShell] || [];
+    const validCoreOptions = coreStaveShellOptions.map(
+      (option) => option.value
+    );
 
-    if (!innerOptions.includes(innerStave)) {
-      setInnerStave(innerOptions[0] || '');
+    if (!validCoreOptions.includes(innerStave)) {
+      setInnerStave(coreStaveShellOptions[0]?.value || '');
     }
-  }, [outerShell, innerStave]);
+  }, [innerStave]);
 
   useEffect(() => {
     const options = staveMapping[size]?.[Number(lugs)] || [];
@@ -2681,13 +2960,7 @@ const FeuzonProductDetail = () => {
   };
 
   const handleOuterShellSelect = (newOuterShell) => {
-    if (newOuterShell === outerShell) return;
-
-    const nextInnerOptions = shellOptions[newOuterShell] || [];
-
     setOuterShell(newOuterShell);
-
-    setInnerStave(nextInnerOptions[0] || '');
   };
 
   const handleInnerStaveSelect = (newInnerStave) => {
@@ -2843,6 +3116,7 @@ const FeuzonProductDetail = () => {
       toast.error('❌ Failed to add item to cart.');
     }
   };
+
   const handleRemoveFromCart = async () => {
     try {
       await removeFromCart(cartItemId || currentCartId);
@@ -2933,93 +3207,155 @@ const FeuzonProductDetail = () => {
                 your hardware.
               </p>
 
-              <div className="feuzon-builder-preset-card feuzon-builder-preset-card--guided">
+              {/* <div className="feuzon-builder-preset-card feuzon-builder-preset-card--guided">
+
                 <div className="feuzon-builder-preset-intro">
+
                   <span className="feuzon-builder-preset-label">
+
                     Choose a starting point
+
                   </span>
 
                   <p className="feuzon-builder-preset-helper">
+
                     Pick a starting recipe for your build. Nothing is locked —
+
                     this only sets the initial size, hoops, finish, and baseline
+
                     FEUZØN response before you customize below.
+
                   </p>
+
                 </div>
 
                 <div className="feuzon-builder-preset-actions feuzon-builder-preset-actions--cards">
+
                   <button
+
                     type="button"
+
                     className={`feuzon-builder-preset-button feuzon-builder-preset-button--guided ${
+
                       isFeuzonLowestPreset ? 'is-active' : ''
+
                     }`}
+
                     onClick={() => applyFeuzonPreset('lowest')}
+
                   >
+
                     <span className="feuzon-builder-preset-title">
+
                       Lowest Starting Price
+
                     </span>
 
                     <span className="feuzon-builder-preset-price">
+
                       From $950
+
                     </span>
 
                     <span className="feuzon-builder-preset-description">
+
                       The most affordable FEUZØN foundation: smaller shell,
+
                       triple-flange hoops, natural satin finish, and a quicker,
+
                       more open response.
+
                     </span>
 
                     <span className="feuzon-builder-preset-best-for">
+
                       Best for: keeping the entry price low while still shaping
+
                       the build from there.
+
                     </span>
 
                     {isFeuzonLowestPreset && (
+
                       <small className="feuzon-builder-preset-status">
+
                         Current starting point
+
                       </small>
+
                     )}
+
                   </button>
 
                   <button
+
                     type="button"
+
                     className={`feuzon-builder-preset-button feuzon-builder-preset-button--guided feuzon-builder-preset-button--standard ${
+
                       isFeuzonStandardPreset ? 'is-active' : ''
+
                     }`}
+
                     onClick={() => applyFeuzonPreset('standard')}
+
                   >
+
                     <span className="feuzon-builder-preset-title">
+
                       FEUZØN Standard Reference
+
                     </span>
 
                     <span className="feuzon-builder-preset-price">
+
                       From $1,450
+
                     </span>
 
                     <span className="feuzon-builder-preset-description">
+
                       Ober’s balanced FEUZØN reference build: 14&quot; ×
+
                       6.0&quot;, die-cast hoops, natural gloss finish, and the
+
                       centered voice profile used as the comparison point.
+
                     </span>
 
                     <span className="feuzon-builder-preset-best-for">
+
                       Best for: starting from the default FEUZØN sound before
+
                       making personal changes.
+
                     </span>
 
                     {isFeuzonStandardPreset && (
+
                       <small className="feuzon-builder-preset-status">
+
                         Current starting point
+
                       </small>
+
                     )}
+
                   </button>
+
                 </div>
 
                 <p className="feuzon-builder-preset-footnote">
+
                   You can still change size, shell pairing, finish, hardware,
+
                   hoops, bearing edge, and snare bed after choosing either
+
                   starting point.
+
                 </p>
-              </div>
+
+              </div> */}
             </div>
 
             <div className="feuzon-builder-sections">
@@ -3063,7 +3399,7 @@ const FeuzonProductDetail = () => {
                   <div className="feuzon-builder-section-body">
                     <label>Snare Size (Diameter)</label>
 
-                    <div className="feuzon-option-grid feuzon-option-grid-compact">
+                    <div className="feuzon-option-grid feuzon-option-grid-compact feuzon-option-grid--three">
                       {Object.keys(basePrices).map((sizeOption) => {
                         const isSelected = size === sizeOption;
 
@@ -3102,7 +3438,7 @@ const FeuzonProductDetail = () => {
 
                     <label>Depth</label>
 
-                    <div className="feuzon-option-grid feuzon-option-grid-compact">
+                    <div className="feuzon-option-grid feuzon-option-grid-compact feuzon-option-grid--three">
                       {Object.keys(depthPrices[size]).map((depthOption) => {
                         const isSelected = depth === depthOption;
 
@@ -3141,7 +3477,7 @@ const FeuzonProductDetail = () => {
 
                     <label>Lug Quantity</label>
 
-                    <div className="feuzon-option-grid feuzon-option-grid-compact">
+                    <div className="feuzon-option-grid feuzon-option-grid-compact feuzon-option-grid--three">
                       {(lugOptions[size] || []).map((lugOption) => {
                         const isSelected = lugs === lugOption;
 
@@ -3170,7 +3506,7 @@ const FeuzonProductDetail = () => {
 
                     <label>Stave Quantity &amp; Shell Thickness</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--three">
                       {staveQuantities.map((option) => {
                         const isSelected = staveOption === option;
 
@@ -3259,61 +3595,122 @@ const FeuzonProductDetail = () => {
 
                 {openBuilderSection === 'shell' && (
                   <div className="feuzon-builder-section-body">
-                    <label>Exterior Shell (Steam Bent)</label>
+                    <label>Core Stave Shell</label>
 
-                    <div className="feuzon-option-grid">
-                      {Object.keys(shellOptions).map((shell) => {
+                    <div className="feuzon-core-stave-grid">
+                      {CORE_STAVE_OPTIONS.map((option) => {
+                        const isSelected = innerStave === option.value;
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`feuzon-core-stave-tile ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => handleInnerStaveSelect(option.value)}
+                          >
+                            <span className="feuzon-core-stave-image">
+                              <img
+                                src={option.swatch}
+                                alt={`${option.label} core stave shell`}
+                              />
+                            </span>
+
+                            <span className="feuzon-core-stave-overlay" />
+
+                            <span className="feuzon-core-stave-content">
+                              <span className="feuzon-core-stave-title">
+                                {option.label}
+                              </span>
+
+                              <span className="feuzon-core-stave-category">
+                                {option.category}
+                              </span>
+
+                              {isSelected && (
+                                <span className="feuzon-option-meta is-selected">
+                                  Selected
+                                </span>
+                              )}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <label>Paired Exterior Shell (Steam Bent)</label>
+
+                    <div className="feuzon-exterior-shell-grid">
+                      {exteriorShellOptions.map((shell) => {
                         const isSelected = outerShell === shell;
+
+                        const selectedCoreOption =
+                          CORE_STAVE_OPTIONS.find(
+                            (option) => option.value === innerStave
+                          ) || CORE_STAVE_OPTIONS[0];
+
+                        const isRecommended =
+                          selectedCoreOption?.recommendedOuterShell === shell;
 
                         return (
                           <button
                             key={shell}
                             type="button"
-                            className={`feuzon-option-tile ${
+                            className={`feuzon-exterior-shell-tile ${
                               isSelected ? 'is-selected' : ''
-                            }`}
+                            } ${isRecommended ? 'is-recommended' : ''}`}
                             onClick={() => handleOuterShellSelect(shell)}
                           >
-                            <span className="feuzon-option-title">{shell}</span>
-
-                            {isSelected && (
-                              <span className="feuzon-option-meta is-selected">
-                                Selected
+                            {isRecommended && (
+                              <span className="feuzon-recommended-pill">
+                                Ober pick
                               </span>
                             )}
-                          </button>
-                        );
-                      })}
-                    </div>
 
-                    <label>Paired Interior Stave Shell</label>
-
-                    <div className="feuzon-option-grid">
-                      {(shellOptions[outerShell] || []).map((option) => {
-                        const isSelected = innerStave === option;
-
-                        return (
-                          <button
-                            key={option}
-                            type="button"
-                            className={`feuzon-option-tile feuzon-option-tile-detail ${
-                              isSelected ? 'is-selected' : ''
-                            }`}
-                            onClick={() => handleInnerStaveSelect(option)}
-                          >
-                            <span className="feuzon-option-title">
-                              {option}
+                            <span className="feuzon-exterior-shell-image">
+                              <img
+                                src={EXTERIOR_SHELL_SWATCHES[shell]}
+                                alt={`${shell} steam-bent exterior shell`}
+                              />
                             </span>
 
-                            {isSelected && (
-                              <span className="feuzon-option-meta is-selected">
-                                Selected
+                            <span className="feuzon-exterior-shell-overlay" />
+
+                            <span className="feuzon-exterior-shell-content">
+                              <span className="feuzon-exterior-shell-title">
+                                {shell}
                               </span>
-                            )}
+
+                              <span className="feuzon-exterior-shell-subtitle">
+                                Steam-bent exterior
+                              </span>
+
+                              {isSelected && (
+                                <span className="feuzon-option-meta is-selected">
+                                  Selected
+                                </span>
+                              )}
+                            </span>
                           </button>
                         );
                       })}
                     </div>
+
+                    {(() => {
+                      const selectedCoreOption =
+                        CORE_STAVE_OPTIONS.find(
+                          (option) => option.value === innerStave
+                        ) || CORE_STAVE_OPTIONS[0];
+
+                      return (
+                        <p className="feuzon-select-helper">
+                          <strong>Ober recommendation:</strong>{' '}
+                          {selectedCoreOption.recommendedOuterShell} exterior.{' '}
+                          {selectedCoreOption.recommendationReason}
+                        </p>
+                      );
+                    })()}
 
                     <p className="feuzon-select-helper">
                       {shellComboNarrative}
@@ -3377,9 +3774,57 @@ const FeuzonProductDetail = () => {
 
                 {openBuilderSection === 'finish' && (
                   <div className="feuzon-builder-section-body">
+                    <label>Finish Direction</label>
+
+                    <div className="feuzon-option-grid feuzon-option-grid--two">
+                      <button
+                        type="button"
+                        className={`feuzon-option-tile feuzon-option-tile-detail ${
+                          isNaturalFinish ? 'is-selected' : ''
+                        }`}
+                        onClick={() => setFinishSystem('Natural Satin')}
+                      >
+                        <span className="feuzon-option-title">Natural</span>
+
+                        <span className="feuzon-option-subtitle">
+                          Keep the shell closer to its raw wood and torch
+                          character.
+                        </span>
+
+                        <span
+                          className={`feuzon-option-meta ${
+                            isNaturalFinish ? 'is-selected' : 'is-negative'
+                          }`}
+                        >
+                          {isNaturalFinish ? 'Selected' : '-$100'}
+                        </span>
+                      </button>
+
+                      <button
+                        type="button"
+                        className={`feuzon-option-tile feuzon-option-tile-detail ${
+                          !isNaturalFinish ? 'is-selected' : ''
+                        }`}
+                        onClick={() => setFinishSystem('Stained Satin')}
+                      >
+                        <span className="feuzon-option-title">Stained</span>
+
+                        <span className="feuzon-option-subtitle">
+                          Add a richer stained finish with more visual
+                          direction.
+                        </span>
+
+                        <span
+                          className={`feuzon-option-meta ${!isNaturalFinish ? 'is-selected' : 'is-positive'}`}
+                        >
+                          {!isNaturalFinish ? 'Selected' : '+$100'}
+                        </span>
+                      </button>
+                    </div>
+
                     <label>Exterior Scorch</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--two">
                       {scorchOptions.map((option) => {
                         const isSelected = scorchStyle === option.value;
 
@@ -3387,7 +3832,7 @@ const FeuzonProductDetail = () => {
                           <button
                             key={option.value}
                             type="button"
-                            className={`feuzon-option-tile ${
+                            className={`feuzon-option-tile feuzon-option-tile-detail ${
                               isSelected ? 'is-selected' : ''
                             }`}
                             onClick={() => setScorchStyle(option.value)}
@@ -3404,92 +3849,6 @@ const FeuzonProductDetail = () => {
                           </button>
                         );
                       })}
-                    </div>
-
-                    <p className="feuzon-select-helper">
-                      Choose whether the exterior stays cleaner and more
-                      restrained or leans further into FEUZØN’s scorched visual
-                      character.
-                    </p>
-
-                    <label>Finish Direction</label>
-
-                    <div className="feuzon-option-grid">
-                      <button
-                        type="button"
-                        className={`feuzon-option-tile feuzon-option-tile-detail ${
-                          isNaturalFinish ? 'is-selected' : ''
-                        }`}
-                        onClick={() => setFinishSystem('Natural Satin')}
-                      >
-                        <span className="feuzon-option-title">Natural</span>
-
-                        <span className="feuzon-option-subtitle">
-                          Keep the shell closer to its raw wood and torch
-                          character.
-                        </span>
-
-                        {(() => {
-                          const deltaMeta = getOptionDeltaMeta({
-                            finishSystem:
-                              finishSystem === 'Natural Satin'
-                                ? 'Natural Satin'
-                                : 'Natural Gloss',
-                          });
-
-                          return (
-                            (isNaturalFinish || deltaMeta.text) && (
-                              <span
-                                className={`feuzon-option-meta ${
-                                  isNaturalFinish
-                                    ? 'is-selected'
-                                    : deltaMeta.className
-                                }`}
-                              >
-                                {isNaturalFinish ? 'Selected' : deltaMeta.text}
-                              </span>
-                            )
-                          );
-                        })()}
-                      </button>
-
-                      <button
-                        type="button"
-                        className={`feuzon-option-tile feuzon-option-tile-detail ${
-                          !isNaturalFinish ? 'is-selected' : ''
-                        }`}
-                        onClick={() => setFinishSystem('Stained Gloss')}
-                      >
-                        <span className="feuzon-option-title">Stained</span>
-
-                        <span className="feuzon-option-subtitle">
-                          Add a richer stained finish with more visual
-                          direction.
-                        </span>
-
-                        {(() => {
-                          const deltaMeta = getOptionDeltaMeta({
-                            finishSystem:
-                              finishSystem === 'Stained Satin'
-                                ? 'Stained Satin'
-                                : 'Stained Gloss',
-                          });
-
-                          return (
-                            (!isNaturalFinish || deltaMeta.text) && (
-                              <span
-                                className={`feuzon-option-meta ${
-                                  !isNaturalFinish
-                                    ? 'is-selected'
-                                    : deltaMeta.className
-                                }`}
-                              >
-                                {!isNaturalFinish ? 'Selected' : deltaMeta.text}
-                              </span>
-                            )
-                          );
-                        })()}
-                      </button>
                     </div>
 
                     {!isNaturalFinish && (
@@ -3584,20 +3943,22 @@ const FeuzonProductDetail = () => {
                       </>
                     )}
 
+                    {swatchPreviewImage && (
+                      <div className="feuzon-swatch-preview-wrap feuzon-swatch-preview-wrap--before-final">
+                        <div className="feuzon-swatch-preview">
+                          <img
+                            src={swatchPreviewImage}
+                            alt="Selected FEUZØN finish swatch"
+                          />
+                        </div>
+                      </div>
+                    )}
+
                     <label>Final Finish</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--two">
                       {(isNaturalFinish
                         ? [
-                            {
-                              label: 'Natural Gloss',
-
-                              value: 'Natural Gloss',
-
-                              helperText:
-                                'More polished, reflective, and vivid while staying natural.',
-                            },
-
                             {
                               label: 'Natural Satin',
 
@@ -3606,17 +3967,17 @@ const FeuzonProductDetail = () => {
                               helperText:
                                 'Softer sheen with a more organic, understated natural look.',
                             },
-                          ]
-                        : [
-                            {
-                              label: 'Gloss',
 
-                              value: 'Stained Gloss',
+                            {
+                              label: 'Natural Gloss',
+
+                              value: 'Natural Gloss',
 
                               helperText:
-                                'Richer depth, more pop, and stronger reflectivity.',
+                                'More polished, reflective, and vivid while staying natural.',
                             },
-
+                          ]
+                        : [
                             {
                               label: 'Satin',
 
@@ -3624,6 +3985,15 @@ const FeuzonProductDetail = () => {
 
                               helperText:
                                 'Softer sheen with a moodier, more understated look.',
+                            },
+
+                            {
+                              label: 'Gloss',
+
+                              value: 'Stained Gloss',
+
+                              helperText:
+                                'Richer depth, more pop, and stronger reflectivity.',
                             },
                           ]
                       ).map((option) => {
@@ -3666,24 +4036,13 @@ const FeuzonProductDetail = () => {
                       })}
                     </div>
 
-                    {swatchPreviewImage && (
-                      <div className="feuzon-swatch-preview-wrap">
-                        <div className="feuzon-swatch-preview">
-                          <img
-                            src={swatchPreviewImage}
-                            alt="Selected FEUZØN finish swatch"
-                          />
-                        </div>
-
-                        <p className="feuzon-swatch-disclaimer">
-                          This preview is a general finish reference. Final
-                          appearance may vary based on wood figure, stain
-                          absorption, scorch response, lighting, and the unique
-                          character of each shell. We’ll aim to get your drum as
-                          close as possible to the selected preview.
-                        </p>
-                      </div>
-                    )}
+                    <p className="feuzon-swatch-disclaimer">
+                      This preview is a general finish reference. Final
+                      appearance may vary based on wood figure, stain
+                      absorption, scorch response, lighting, and the unique
+                      character of each shell. We’ll aim to get your drum as
+                      close as possible to the selected preview.
+                    </p>
 
                     <div className="feuzon-builder-next-row">
                       <button
@@ -3745,7 +4104,7 @@ const FeuzonProductDetail = () => {
                   <div className="feuzon-builder-section-body">
                     <label>Bearing Edge</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--three">
                       {bearingEdgeOptions.map((option) => {
                         const isSelected = bearingEdge === option.value;
 
@@ -3783,7 +4142,7 @@ const FeuzonProductDetail = () => {
 
                     <label>Snare Bed Depth</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--three">
                       {snareBedOptions.map((option) => {
                         const isSelected = snareBed === option.value;
 
@@ -3878,7 +4237,7 @@ const FeuzonProductDetail = () => {
                   <div className="feuzon-builder-section-body">
                     <label>Hoop Type</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--two">
                       {hoopOptions.map((option) => {
                         const isSelected = hoopType === option.value;
 
@@ -3921,7 +4280,7 @@ const FeuzonProductDetail = () => {
 
                     <label>Hardware Finish</label>
 
-                    <div className="feuzon-option-grid">
+                    <div className="feuzon-option-grid feuzon-option-grid--three">
                       {hardwareOptions.map((option) => {
                         const isSelected = hardwareColor === option.value;
 
@@ -3993,10 +4352,22 @@ const FeuzonProductDetail = () => {
                 </div>
 
                 <div className="feuzon-config-selection-row">
-                  <span className="feuzon-config-selection-label">Shell</span>
+                  <span className="feuzon-config-selection-label">
+                    Core Shell
+                  </span>
 
                   <span className="feuzon-config-selection-value">
-                    {outerShell} / {innerStave}
+                    {innerStave}
+                  </span>
+                </div>
+
+                <div className="feuzon-config-selection-row">
+                  <span className="feuzon-config-selection-label">
+                    Exterior Shell
+                  </span>
+
+                  <span className="feuzon-config-selection-value">
+                    {outerShell} steam-bent exterior
                   </span>
                 </div>
 
@@ -4135,7 +4506,9 @@ const FeuzonProductDetail = () => {
 
             <div className="feuzon-price-stack">
               {/* <span className="feuzon-price-starting-label">
+
                 Builds starting at $950
+
               </span> */}
 
               <p className="feuzon-detail-price">

@@ -752,6 +752,18 @@
 
 }
 
+.feuzon-option-grid--two {
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+}
+
+.feuzon-option-grid--three {
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+}
+
 .feuzon-option-tile {
 
   width: 100%;
@@ -891,6 +903,170 @@
 .feuzon-option-tile.is-selected .feuzon-option-meta {
 
   color: #c8d4ff;
+
+}
+
+/* =========================================================
+
+   EXTERIOR SHELL PREVIEW TILES
+
+   ========================================================= */
+
+.feuzon-exterior-shell-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-bottom: 14px;
+
+}
+
+.feuzon-exterior-shell-tile {
+
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 116px;
+
+  padding: 0;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(9, 11, 18, 0.96);
+
+  color: #fff;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  transition:
+
+    transform 180ms ease,
+
+    border-color 180ms ease,
+
+    box-shadow 180ms ease;
+
+}
+
+.feuzon-exterior-shell-tile:hover {
+
+  transform: translateY(-1px);
+
+  border-color: rgba(141, 162, 255, 0.38);
+
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+
+}
+
+.feuzon-exterior-shell-tile.is-selected {
+
+  border-color: rgba(141, 162, 255, 0.95);
+
+  box-shadow:
+
+    0 0 0 1px rgba(141, 162, 255, 0.22),
+
+    0 10px 22px rgba(0, 0, 0, 0.28);
+
+}
+
+.feuzon-exterior-shell-image-wrap {
+
+  position: absolute;
+
+  inset: 0;
+
+}
+
+.feuzon-exterior-shell-image {
+
+  display: block;
+
+  width: 100%;
+
+  height: 120%;
+
+  object-fit: cover;
+
+  object-position: center 14%;
+
+  transform: scale(1.18);
+
+}
+
+.feuzon-exterior-shell-tile::after {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+
+    180deg,
+
+    rgba(4, 6, 12, 0.04) 0%,
+
+    rgba(4, 6, 12, 0.18) 40%,
+
+    rgba(4, 6, 12, 0.8) 100%
+
+  );
+
+  pointer-events: none;
+
+}
+
+.feuzon-exterior-shell-label {
+
+  position: relative;
+
+  z-index: 2;
+
+  min-height: 116px;
+
+  padding: 12px 9px 26px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: center;
+
+  color: #fff;
+
+  font-size: 0.78rem;
+
+  line-height: 1.1;
+
+  font-weight: 850;
+
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+
+}
+
+.feuzon-exterior-shell-tile .feuzon-option-meta {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 10px;
+
+  z-index: 3;
+
+  transform: translateX(-50%);
+
+  margin: 0;
 
 }
 
@@ -1045,6 +1221,12 @@
 .feuzon-swatch-preview-wrap {
 
   margin: 10px 0 16px;
+
+}
+
+.feuzon-swatch-preview-wrap--before-final {
+
+  margin: 12px 0 18px;
 
 }
 
@@ -3452,6 +3634,424 @@
 
 }
 
+.feuzon-recommended-pill {
+
+  position: absolute;
+
+  top: 8px;
+
+  left: 8px;
+
+  z-index: 4;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(214, 178, 119, 0.44);
+
+  background: rgba(10, 8, 4, 0.72);
+
+  color: rgba(245, 225, 185, 0.96);
+
+  font-size: 0.48rem;
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24);
+
+}
+
+.feuzon-exterior-shell-tile.is-selected .feuzon-recommended-pill {
+
+  border-color: rgba(214, 178, 119, 0.72);
+
+  background: rgba(43, 32, 12, 0.78);
+
+}
+
+/* =========================================================
+
+   FEUZØN — CORE STAVE / EXTERIOR SHELL SWATCH TILES
+
+   ========================================================= */
+
+.feuzon-core-stave-grid,
+
+.feuzon-exterior-shell-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 16px;
+
+}
+
+.feuzon-core-stave-tile,
+
+.feuzon-exterior-shell-tile {
+
+  position: relative;
+
+  min-height: 132px;
+
+  overflow: hidden;
+
+  padding: 0;
+
+  border-radius: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(7, 8, 13, 0.95);
+
+  color: #fff;
+
+  cursor: pointer;
+
+  isolation: isolate;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+  transition:
+
+    border-color 180ms ease,
+
+    transform 180ms ease,
+
+    box-shadow 180ms ease;
+
+}
+
+.feuzon-core-stave-tile:hover,
+
+.feuzon-exterior-shell-tile:hover {
+
+  transform: translateY(-1px);
+
+  border-color: rgba(141, 162, 255, 0.42);
+
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.26);
+
+}
+
+.feuzon-core-stave-tile.is-selected,
+
+.feuzon-exterior-shell-tile.is-selected {
+
+  border-color: rgba(141, 162, 255, 0.96);
+
+  box-shadow:
+
+    0 0 0 1px rgba(141, 162, 255, 0.22),
+
+    0 12px 26px rgba(0, 0, 0, 0.32);
+
+}
+
+.feuzon-core-stave-image,
+
+.feuzon-exterior-shell-image {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+}
+
+.feuzon-core-stave-image img,
+
+.feuzon-exterior-shell-image img {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center center;
+
+  transform: scale(1.04);
+
+}
+
+.feuzon-core-stave-overlay,
+
+.feuzon-exterior-shell-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  background:
+
+    linear-gradient(
+
+      180deg,
+
+      rgba(4, 6, 12, 0.12) 0%,
+
+      rgba(4, 6, 12, 0.28) 34%,
+
+      rgba(4, 6, 12, 0.82) 100%
+
+    ),
+
+    radial-gradient(circle at top, rgba(141, 162, 255, 0.08), transparent 54%);
+
+}
+
+.feuzon-core-stave-content,
+
+.feuzon-exterior-shell-content {
+
+  position: relative;
+
+  z-index: 3;
+
+  min-height: 132px;
+
+  padding: 14px 10px 12px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 5px;
+
+  text-align: center;
+
+}
+
+.feuzon-core-stave-title,
+
+.feuzon-exterior-shell-title {
+
+  color: #fff;
+
+  font-size: 0.82rem;
+
+  line-height: 1.06;
+
+  font-weight: 900;
+
+  letter-spacing: -0.02em;
+
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.66);
+
+}
+
+.feuzon-core-stave-category,
+
+.feuzon-exterior-shell-subtitle {
+
+  color: rgba(245, 243, 238, 0.76);
+
+  font-size: 0.62rem;
+
+  line-height: 1.18;
+
+  font-weight: 700;
+
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.62);
+
+}
+
+.feuzon-exterior-shell-tile.is-recommended {
+
+  border-color: rgba(214, 178, 119, 0.42);
+
+}
+
+.feuzon-recommended-pill {
+
+  position: absolute;
+
+  top: 8px;
+
+  left: 8px;
+
+  z-index: 4;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(214, 178, 119, 0.44);
+
+  background: rgba(16, 12, 7, 0.82);
+
+  color: rgba(245, 225, 185, 0.98);
+
+  font-size: 0.48rem;
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24);
+
+}
+
+.feuzon-exterior-shell-tile.is-selected .feuzon-recommended-pill {
+
+  border-color: rgba(214, 178, 119, 0.72);
+
+  background: rgba(43, 32, 12, 0.78);
+
+}
+
+/* Mobile keeps the tiles readable, still compact */
+
+@media (max-width: 640px) {
+
+  .feuzon-core-stave-grid,
+
+  .feuzon-exterior-shell-grid {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+
+  }
+
+  .feuzon-core-stave-tile,
+
+  .feuzon-exterior-shell-tile {
+
+    min-height: 96px;
+
+    border-radius: 12px;
+
+  }
+
+  .feuzon-core-stave-content,
+
+  .feuzon-exterior-shell-content {
+
+    min-height: 96px;
+
+    padding: 10px 5px 8px;
+
+    gap: 3px;
+
+  }
+
+  .feuzon-core-stave-title,
+
+  .feuzon-exterior-shell-title {
+
+    font-size: 0.58rem;
+
+    line-height: 1.05;
+
+  }
+
+  .feuzon-core-stave-category,
+
+  .feuzon-exterior-shell-subtitle {
+
+    font-size: 0.46rem;
+
+    line-height: 1.12;
+
+  }
+
+  .feuzon-recommended-pill {
+
+    top: 5px;
+
+    left: 5px;
+
+    padding: 3px 5px;
+
+    font-size: 0.38rem;
+
+    letter-spacing: 0.06em;
+
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .feuzon-core-stave-grid,
+
+  .feuzon-exterior-shell-grid {
+
+    gap: 6px;
+
+  }
+
+  .feuzon-core-stave-tile,
+
+  .feuzon-exterior-shell-tile {
+
+    min-height: 90px;
+
+  }
+
+  .feuzon-core-stave-content,
+
+  .feuzon-exterior-shell-content {
+
+    min-height: 90px;
+
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  .feuzon-recommended-pill {
+
+    top: 6px;
+
+    left: 6px;
+
+    padding: 3px 6px;
+
+    font-size: 0.42rem;
+
+  }
+
+}
+
 /* =========================================================
 
    RESPONSIVE
@@ -3744,7 +4344,11 @@
 
   .feuzon-option-grid,
 
-  .feuzon-option-grid-compact {
+  .feuzon-option-grid-compact,
+
+  .feuzon-option-grid--two,
+
+  .feuzon-option-grid--three {
 
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
@@ -3779,6 +4383,32 @@
   .feuzon-option-meta {
 
     font-size: 0.54rem;
+
+  }
+
+  .feuzon-exterior-shell-grid {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+
+  }
+
+  .feuzon-exterior-shell-tile {
+
+    min-height: 92px;
+
+    border-radius: 12px;
+
+  }
+
+  .feuzon-exterior-shell-label {
+
+    min-height: 92px;
+
+    padding: 10px 7px 24px;
+
+    font-size: 0.66rem;
 
   }
 
@@ -4378,6 +5008,38 @@
 
   }
 
+  .feuzon-option-grid,
+
+  .feuzon-option-grid-compact,
+
+  .feuzon-option-grid--two,
+
+  .feuzon-option-grid--three {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .feuzon-exterior-shell-grid {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  }
+
+  .feuzon-exterior-shell-tile {
+
+    min-height: 84px;
+
+  }
+
+  .feuzon-exterior-shell-label {
+
+    min-height: 84px;
+
+    font-size: 0.6rem;
+
+  }
+
   .feuzon-voice-read-card--reworked {
 
     padding: 16px 12px 17px !important;
@@ -4461,8 +5123,6 @@
 /* =========================================================
 
    FEUZØN — BENCHMARK DESCRIPTION MOBILE / NARROW POLISH
-
-   Append to bottom of FeuzonProductDetail.css
 
    ========================================================= */
 
@@ -4622,191 +5282,7 @@
 
 /* =========================================================
 
-   FEUZØN — INTRO TEXT RESPONSIVE CLEANUP
-
-   Append to bottom of FeuzonProductDetail.css
-
-   ========================================================= */
-
-@media (max-width: 1100px) {
-
-  .feuzon-overview-card {
-
-    padding: 24px 24px 22px !important;
-
-  }
-
-  .feuzon-story-lede {
-
-    max-width: 22ch !important;
-
-    font-size: clamp(1.55rem, 3.6vw, 2.15rem) !important;
-
-    line-height: 1.08 !important;
-
-    letter-spacing: -0.045em !important;
-
-  }
-
-  .feuzon-story-copy {
-
-    max-width: 64ch !important;
-
-    font-size: 0.98rem !important;
-
-    line-height: 1.62 !important;
-
-  }
-
-}
-
-@media (max-width: 768px) {
-
-  .feuzon-overview-card {
-
-    padding: 22px 20px 22px !important;
-
-    border-radius: 20px !important;
-
-  }
-
-  .feuzon-story-lede {
-
-    max-width: 100% !important;
-
-    margin: 0 0 16px !important;
-
-    font-size: clamp(1.45rem, 5.3vw, 1.82rem) !important;
-
-    line-height: 1.08 !important;
-
-    font-weight: 875 !important;
-
-    letter-spacing: -0.045em !important;
-
-  }
-
-  .feuzon-story-copy {
-
-    max-width: 100% !important;
-
-    margin: 0 0 12px !important;
-
-    font-size: 0.9rem !important;
-
-    line-height: 1.58 !important;
-
-  }
-
-  .feuzon-story-copy:last-of-type {
-
-    margin-bottom: 0 !important;
-
-  }
-
-  .feuzon-overview-divider {
-
-    margin: 20px 0 16px !important;
-
-  }
-
-  .feuzon-overview-subtitle {
-
-    font-size: 1.08rem !important;
-
-    line-height: 1.16 !important;
-
-  }
-
-}
-
-@media (max-width: 520px) {
-
-  .feuzon-overview-card {
-
-    padding: 20px 18px 20px !important;
-
-  }
-
-  .feuzon-story-lede {
-
-    max-width: 100% !important;
-
-    font-size: clamp(1.24rem, 6.05vw, 1.55rem) !important;
-
-    line-height: 1.12 !important;
-
-    font-weight: 850 !important;
-
-    letter-spacing: -0.04em !important;
-
-  }
-
-  .feuzon-story-copy {
-
-    font-size: 0.82rem !important;
-
-    line-height: 1.55 !important;
-
-  }
-
-  .feuzon-overview-list li {
-
-    font-size: 0.82rem !important;
-
-    line-height: 1.45 !important;
-
-  }
-
-  .order-to-build-disclaimer {
-
-    font-size: 0.74rem !important;
-
-    line-height: 1.45 !important;
-
-  }
-
-}
-
-@media (max-width: 430px) {
-
-  .feuzon-overview-card {
-
-    padding: 18px 16px 18px !important;
-
-  }
-
-  .feuzon-story-lede {
-
-    font-size: clamp(1.14rem, 5.8vw, 1.38rem) !important;
-
-    line-height: 1.14 !important;
-
-    letter-spacing: -0.035em !important;
-
-  }
-
-  .feuzon-story-copy {
-
-    font-size: 0.78rem !important;
-
-    line-height: 1.52 !important;
-
-  }
-
-  .feuzon-overview-subtitle {
-
-    font-size: 1rem !important;
-
-  }
-
-}
-
-/* =========================================================
-
    FEUZØN — INTRO STORY CARD FINAL RESPONSIVE PASS
-
-   Append to bottom of FeuzonProductDetail.css
 
    ========================================================= */
 

@@ -3439,6 +3439,120 @@
 
 /* =========================================================
 
+   HERITAGE — HARDWARE GRID CLEANUP
+
+   Keeps hardware finish options three-across when possible
+
+   ========================================================= */
+
+.heritage-builder-section-body .heritage-option-grid {
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+}
+
+.heritage-builder-section-body .heritage-option-grid--two {
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+}
+
+.heritage-builder-section-body .heritage-option-grid--three {
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+}
+
+.heritage-builder-section-body .heritage-option-tile,
+
+.heritage-builder-section-body .heritage-option-tile-detail {
+
+  min-height: 74px;
+
+  padding: 9px 8px;
+
+}
+
+.heritage-builder-section-body .heritage-option-title {
+
+  font-size: 0.74rem;
+
+  line-height: 1.12;
+
+}
+
+.heritage-builder-section-body .heritage-option-subtitle {
+
+  font-size: 0.56rem;
+
+  line-height: 1.2;
+
+}
+
+.heritage-builder-section-body .heritage-option-meta {
+
+  font-size: 0.52rem;
+
+  line-height: 1;
+
+}
+
+@media (max-width: 430px) {
+
+  .heritage-builder-section-body .heritage-option-grid,
+
+  .heritage-builder-section-body .heritage-option-grid--three {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 6px;
+
+  }
+
+  .heritage-builder-section-body .heritage-option-grid--two {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .heritage-builder-section-body .heritage-option-tile,
+
+  .heritage-builder-section-body .heritage-option-tile-detail {
+
+    min-height: 68px;
+
+    padding: 8px 5px;
+
+    border-radius: 10px;
+
+  }
+
+  .heritage-builder-section-body .heritage-option-title {
+
+    font-size: 0.66rem;
+
+  }
+
+  .heritage-builder-section-body .heritage-option-subtitle {
+
+    font-size: 0.49rem;
+
+    line-height: 1.18;
+
+  }
+
+  .heritage-builder-section-body .heritage-option-meta {
+
+    font-size: 0.46rem;
+
+    letter-spacing: 0.06em;
+
+  }
+
+}
+
+/* =========================================================
+
    TABLET / NARROW DESKTOP
 
    ========================================================= */
@@ -5068,4 +5182,224 @@
   .heritage-overview-subtitle {
     font-size: 0.98rem !important;
   }
+}
+
+/* =========================================================
+
+   HERITAGE — COMPACT OPTION ROWS
+
+   ========================================================= */
+
+/* Hardware Finish: force 3 across everywhere */
+
+.heritage-builder-section-body .heritage-option-grid--hardware-finish {
+
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+  gap: 6px !important;
+
+}
+
+.heritage-builder-section-body
+
+  .heritage-option-grid--hardware-finish
+
+  .heritage-option-tile,
+
+.heritage-builder-section-body
+
+  .heritage-option-grid--hardware-finish
+
+  .heritage-option-tile-detail {
+
+  min-height: 66px !important;
+
+  padding: 7px 4px !important;
+
+  gap: 3px !important;
+
+  border-radius: 10px !important;
+
+}
+
+.heritage-builder-section-body
+
+  .heritage-option-grid--hardware-finish
+
+  .heritage-option-title {
+
+  font-size: 0.61rem !important;
+
+  line-height: 1.05 !important;
+
+}
+
+.heritage-builder-section-body
+
+  .heritage-option-grid--hardware-finish
+
+  .heritage-option-subtitle {
+
+  font-size: 0.45rem !important;
+
+  line-height: 1.12 !important;
+
+  max-width: 12ch !important;
+
+}
+
+.heritage-builder-section-body
+
+  .heritage-option-grid--hardware-finish
+
+  .heritage-option-meta {
+
+  margin-top: 1px !important;
+
+  font-size: 0.42rem !important;
+
+  line-height: 1.05 !important;
+
+  letter-spacing: 0.04em !important;
+
+}
+
+/* Hoop Type: keep 2 across */
+
+.heritage-builder-section-body .heritage-option-grid--hoop-type {
+
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+}
+
+/* Snare Size + Depth: 3 across on mobile */
+
+@media (max-width: 640px) {
+
+  .heritage-builder-section-body .heritage-option-grid--size,
+
+  .heritage-builder-section-body .heritage-option-grid--depth {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 6px !important;
+
+  }
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--size
+
+    .heritage-option-tile,
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--depth
+
+    .heritage-option-tile {
+
+    min-height: 68px !important;
+
+    padding: 7px 5px !important;
+
+    gap: 3px !important;
+
+  }
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--size
+
+    .heritage-option-title,
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--depth
+
+    .heritage-option-title {
+
+    font-size: 0.72rem !important;
+
+  }
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--size
+
+    .heritage-option-meta,
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--depth
+
+    .heritage-option-meta {
+
+    font-size: 0.5rem !important;
+
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .heritage-builder-section-body .heritage-option-grid--size,
+
+  .heritage-builder-section-body .heritage-option-grid--depth {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+    gap: 5px !important;
+
+  }
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--size
+
+    .heritage-option-tile,
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--depth
+
+    .heritage-option-tile {
+
+    min-height: 64px !important;
+
+    padding: 6px 4px !important;
+
+  }
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--size
+
+    .heritage-option-title,
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--depth
+
+    .heritage-option-title {
+
+    font-size: 0.68rem !important;
+
+  }
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--size
+
+    .heritage-option-meta,
+
+  .heritage-builder-section-body
+
+    .heritage-option-grid--depth
+
+    .heritage-option-meta {
+
+    font-size: 0.46rem !important;
+
+  }
+
 }
