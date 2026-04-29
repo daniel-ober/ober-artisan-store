@@ -26,13 +26,13 @@ const DEFAULT_POINT_COLORS = [
 
   '#ff7448',
 
-  '#4d86ff',
-
-  '#c1682e',
+  '#e7d98f',
 
   '#ffb53a',
 
-  '#e7d98f',
+  '#4d86ff',
+
+  '#c1682e',
 
   '#68d9df',
 
@@ -44,13 +44,13 @@ const AXIS_KEYS = [
 
   'attack',
 
-  'sustain',
-
-  'warmth',
+  'brightness',
 
   'projection',
 
-  'brightness',
+  'sustain',
+
+  'warmth',
 
   'sensitivity',
 
@@ -62,13 +62,13 @@ const AXIS_COLOR_BY_KEY = {
 
   attack: '#ff7448',
 
-  sustain: '#4d86ff',
-
-  warmth: '#c1682e',
+  brightness: '#e7d98f',
 
   projection: '#ffb53a',
 
-  brightness: '#e7d98f',
+  sustain: '#4d86ff',
+
+  warmth: '#c1682e',
 
   sensitivity: '#68d9df',
 
@@ -200,7 +200,9 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
 
   const avg = values.length
 
-    ? values.reduce((sum, value) => sum + (Number(value) || 0), 0) / values.length
+    ? values.reduce((sum, value) => sum + (Number(value) || 0), 0) /
+
+      values.length
 
     : 5;
 
@@ -212,9 +214,25 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
 
   const radius =
 
-    Math.max(chartArea.right - chartArea.left, chartArea.bottom - chartArea.top) * 0.58;
+    Math.max(chartArea.right - chartArea.left, chartArea.bottom - chartArea.top) *
 
-  const gradient = ctx.createRadialGradient(centerX, centerY, 12, centerX, centerY, radius);
+    0.58;
+
+  const gradient = ctx.createRadialGradient(
+
+    centerX,
+
+    centerY,
+
+    12,
+
+    centerX,
+
+    centerY,
+
+    radius
+
+  );
 
   gradient.addColorStop(0, rgbToString(blend, 0.3 * intensity + 0.1));
 
@@ -228,7 +246,15 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
 
 }
 
-function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COLORS) {
+function createGradientRadarPlugin(
+
+  activeKeyRef,
+
+  pointColors = DEFAULT_POINT_COLORS,
+
+  modeRef
+
+) {
 
   return {
 
@@ -246,6 +272,8 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
       if (!scale || !points.length) return;
 
+      const mode = modeRef.current || 'standalone';
+
       const values = chart.data?.datasets?.[0]?.data || [];
 
       const blend = getWeightedBlendColor(values, pointColors);
@@ -256,11 +284,25 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
       ctx.save();
 
-      const centerGlow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 132);
+      const centerGlow = ctx.createRadialGradient(
 
-      centerGlow.addColorStop(0, rgbToString(blend, 0.13));
+        centerX,
 
-      centerGlow.addColorStop(0.5, rgbToString(blend, 0.05));
+        centerY,
+
+        0,
+
+        centerX,
+
+        centerY,
+
+        mode === 'compare' ? 132 : 150
+
+      );
+
+      centerGlow.addColorStop(0, rgbToString(blend, mode === 'compare' ? 0.13 : 0.17));
+
+      centerGlow.addColorStop(0.5, rgbToString(blend, mode === 'compare' ? 0.05 : 0.07));
 
       centerGlow.addColorStop(1, 'rgba(0,0,0,0)');
 
@@ -268,43 +310,47 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
       ctx.beginPath();
 
-      ctx.arc(centerX, centerY, 132, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, mode === 'compare' ? 132 : 150, 0, Math.PI * 2);
 
       ctx.fill();
 
       ctx.restore();
 
-      const benchmarkRadius = scale.getDistanceFromCenterForValue(5);
+      if (mode === 'compare') {
 
-      ctx.save();
+        const benchmarkRadius = scale.getDistanceFromCenterForValue(5);
 
-      ctx.beginPath();
+        ctx.save();
 
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.34)';
+        ctx.beginPath();
 
-      ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.34)';
 
-      ctx.setLineDash([7, 7]);
+        ctx.lineWidth = 1.5;
 
-      points.forEach((point, index) => {
+        ctx.setLineDash([7, 7]);
 
-        const angle = scale.getIndexAngle(index) - Math.PI / 2;
+        points.forEach((point, index) => {
 
-        const x = centerX + Math.cos(angle) * benchmarkRadius;
+          const angle = scale.getIndexAngle(index) - Math.PI / 2;
 
-        const y = centerY + Math.sin(angle) * benchmarkRadius;
+          const x = centerX + Math.cos(angle) * benchmarkRadius;
 
-        if (index === 0) ctx.moveTo(x, y);
+          const y = centerY + Math.sin(angle) * benchmarkRadius;
 
-        else ctx.lineTo(x, y);
+          if (index === 0) ctx.moveTo(x, y);
 
-      });
+          else ctx.lineTo(x, y);
 
-      ctx.closePath();
+        });
 
-      ctx.stroke();
+        ctx.closePath();
 
-      ctx.restore();
+        ctx.stroke();
+
+        ctx.restore();
+
+      }
 
       ctx.save();
 
@@ -312,9 +358,9 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
       ctx.lineJoin = 'round';
 
-      ctx.lineWidth = 5.6;
+      ctx.lineWidth = mode === 'compare' ? 5.6 : 6.4;
 
-      ctx.shadowBlur = 16;
+      ctx.shadowBlur = mode === 'compare' ? 16 : 20;
 
       for (let i = 0; i < points.length; i += 1) {
 
@@ -336,7 +382,7 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
         ctx.strokeStyle = gradient;
 
-        ctx.shadowColor = mixColor(currentColor, nextColor, 0.5, 0.34);
+        ctx.shadowColor = mixColor(currentColor, nextColor, 0.5, mode === 'compare' ? 0.34 : 0.42);
 
         ctx.beginPath();
 
@@ -364,9 +410,9 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
         ctx.fillStyle = isActive
 
-          ? `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.34)`
+          ? `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.36)`
 
-          : `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.19)`;
+          : `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.2)`;
 
         ctx.arc(point.x, point.y, isActive ? 18 : 10, 0, Math.PI * 2);
 
@@ -376,7 +422,7 @@ function createGradientRadarPlugin(activeKeyRef, pointColors = DEFAULT_POINT_COL
 
           ctx.beginPath();
 
-          ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.36)`;
+          ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.4)`;
 
           ctx.lineWidth = 1.5;
 
@@ -480,6 +526,8 @@ const SpiderChart = ({
 
   onAxisChange,
 
+  mode = 'standalone',
+
 }) => {
 
   const canvasRef = useRef(null);
@@ -490,9 +538,13 @@ const SpiderChart = ({
 
   const onAxisChangeRef = useRef(onAxisChange);
 
+  const modeRef = useRef(mode);
+
   const frameRef = useRef(null);
 
   const [axisPositions, setAxisPositions] = React.useState([]);
+
+  const isCompareMode = mode === 'compare';
 
   const overlayAxes = useMemo(
 
@@ -586,6 +638,18 @@ const SpiderChart = ({
 
   useEffect(() => {
 
+    modeRef.current = mode;
+
+    if (chartInstanceRef.current) {
+
+      chartInstanceRef.current.render();
+
+    }
+
+  }, [mode]);
+
+  useEffect(() => {
+
     if (!canvasRef.current) return;
 
     const ctx = canvasRef.current.getContext('2d');
@@ -600,7 +664,7 @@ const SpiderChart = ({
 
     }
 
-    const plugin = createGradientRadarPlugin(activeKeyRef, pointColors);
+    const plugin = createGradientRadarPlugin(activeKeyRef, pointColors, modeRef);
 
     const handleAxisInteraction = (event, chart) => {
 
@@ -644,7 +708,7 @@ const SpiderChart = ({
 
           {
 
-            label: 'Current Build',
+            label: isCompareMode ? 'Current Build' : 'Ober Voice Score',
 
             data,
 
@@ -788,13 +852,21 @@ const SpiderChart = ({
 
             grid: {
 
-              color: 'rgba(255,255,255,0.11)',
+              color: isCompareMode
+
+                ? 'rgba(255,255,255,0.11)'
+
+                : 'rgba(214,178,119,0.09)',
 
             },
 
             angleLines: {
 
-              color: 'rgba(255,255,255,0.12)',
+              color: isCompareMode
+
+                ? 'rgba(255,255,255,0.12)'
+
+                : 'rgba(255,255,255,0.10)',
 
             },
 
@@ -848,7 +920,7 @@ const SpiderChart = ({
 
     };
 
-  }, [compact, pointColors, data, overlayAxes]);
+  }, [compact, pointColors, data, overlayAxes, isCompareMode]);
 
   useEffect(() => {
 
@@ -857,6 +929,12 @@ const SpiderChart = ({
     const chart = chartInstanceRef.current;
 
     chart.data.labels = overlayAxes.map(() => '');
+
+    chart.data.datasets[0].label = isCompareMode
+
+      ? 'Current Build'
+
+      : 'Ober Voice Score';
 
     chart.data.datasets[0].data = data;
 
@@ -878,17 +956,29 @@ const SpiderChart = ({
 
     }, 40);
 
-  }, [data, compact, pointColors, overlayAxes]);
+  }, [data, compact, pointColors, overlayAxes, isCompareMode]);
 
   return (
 
-    <div className={`spider-chart-card ${compact ? 'spider-chart-card--compact' : ''}`}>
+    <div
+
+      className={`spider-chart-card ${
+
+        compact ? 'spider-chart-card--compact' : ''
+
+      } ${isCompareMode ? 'spider-chart-card--compare' : 'spider-chart-card--standalone'}`}
+
+    >
 
       <div
 
         ref={frameRef}
 
-        className={`spider-chart-frame ${compact ? 'spider-chart-frame--compact' : ''}`}
+        className={`spider-chart-frame ${
+
+          compact ? 'spider-chart-frame--compact' : ''
+
+        }`}
 
       >
 
@@ -898,17 +988,25 @@ const SpiderChart = ({
 
             <span className="spider-chart-legend-line spider-chart-legend-line--current" />
 
-            <span className="spider-chart-legend-text">Current Build</span>
+            <span className="spider-chart-legend-text">
+
+              {isCompareMode ? 'Current Build' : 'Ober Voice Score'}
+
+            </span>
 
           </div>
 
-          <div className="spider-chart-legend-item">
+          {isCompareMode && (
 
-            <span className="spider-chart-legend-line spider-chart-legend-line--reference" />
+            <div className="spider-chart-legend-item">
 
-            <span className="spider-chart-legend-text">Reference Drum</span>
+              <span className="spider-chart-legend-line spider-chart-legend-line--reference" />
 
-          </div>
+              <span className="spider-chart-legend-text">Reference Drum</span>
+
+            </div>
+
+          )}
 
         </div>
 
@@ -926,7 +1024,11 @@ const SpiderChart = ({
 
                 key={axis.key}
 
-                className={`spider-chart-axis-button is-decorative ${isActive ? 'is-active' : ''}`}
+                className={`spider-chart-axis-button is-decorative ${
+
+                  isActive ? 'is-active' : ''
+
+                }`}
 
                 style={{
 

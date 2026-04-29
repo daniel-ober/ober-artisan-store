@@ -24,13 +24,13 @@ const BAR_ORDER = [
 
   'attack',
 
-  'sustain',
-
-  'warmth',
+  'brightness',
 
   'projection',
 
-  'brightness',
+  'sustain',
+
+  'warmth',
 
   'sensitivity',
 
@@ -44,9 +44,29 @@ const AXIS_META = {
 
     label: 'Attack',
 
-    subLabel: 'Quickness',
+    subLabel: 'Strike',
 
     icon: 'attack',
+
+  },
+
+  brightness: {
+
+    label: 'Brightness',
+
+    subLabel: 'Clarity',
+
+    icon: 'brightness',
+
+  },
+
+  projection: {
+
+    label: 'Projection',
+
+    subLabel: 'Carry',
+
+    icon: 'projection',
 
   },
 
@@ -54,7 +74,7 @@ const AXIS_META = {
 
     label: 'Sustain',
 
-    subLabel: 'Length',
+    subLabel: 'Bloom',
 
     icon: 'sustain',
 
@@ -70,31 +90,11 @@ const AXIS_META = {
 
   },
 
-  projection: {
-
-    label: 'Projection',
-
-    subLabel: 'Throw',
-
-    icon: 'projection',
-
-  },
-
-  brightness: {
-
-    label: 'Brightness',
-
-    subLabel: 'Top End',
-
-    icon: 'brightness',
-
-  },
-
   sensitivity: {
 
     label: 'Sensitivity',
 
-    subLabel: 'Response',
+    subLabel: 'Touch',
 
     icon: 'sensitivity',
 
@@ -104,7 +104,7 @@ const AXIS_META = {
 
     label: 'Control',
 
-    subLabel: 'Focus',
+    subLabel: 'Refinement',
 
     icon: 'control',
 
@@ -116,13 +116,13 @@ const COLOR_BY_KEY = {
 
   attack: '#ff7448',
 
-  sustain: '#4d86ff',
-
-  warmth: '#c1682e',
+  brightness: '#e7d98f',
 
   projection: '#ffb53a',
 
-  brightness: '#e7d98f',
+  sustain: '#4d86ff',
+
+  warmth: '#c1682e',
 
   sensitivity: '#68d9df',
 
@@ -220,21 +220,49 @@ const BarChart = ({
 
   onAxisChange,
 
+  mode = 'standalone',
+
 }) => {
+
+  const isCompareMode = mode === 'compare';
 
   return (
 
-    <div className={`bar-chart-card ${compact ? 'bar-chart-card--compact' : ''}`}>
+    <div
 
-      <div className="bar-chart-benchmark-guide">
+      className={`bar-chart-card ${compact ? 'bar-chart-card--compact' : ''} ${
 
-        <span className="bar-chart-benchmark-guide-label">
+        isCompareMode ? 'bar-chart-card--compare' : 'bar-chart-card--standalone'
 
-          Reference Drum Center Line
+      }`}
 
-        </span>
+    >
 
-      </div>
+      {isCompareMode ? (
+
+        <div className="bar-chart-benchmark-guide">
+
+          <span className="bar-chart-benchmark-guide-label">
+
+            Reference Drum Center Line
+
+          </span>
+
+        </div>
+
+      ) : (
+
+        <div className="bar-chart-benchmark-guide bar-chart-benchmark-guide--standalone">
+
+          <span className="bar-chart-benchmark-guide-label">
+
+            Ober Voice Score · 0–10
+
+          </span>
+
+        </div>
+
+      )}
 
       <div className="bar-chart-list">
 
@@ -252,13 +280,15 @@ const BarChart = ({
 
           const isActive = activeKey === key;
 
-          const valueCopy =
+          const compareValueCopy =
 
             deltaFromBenchmark > 0
 
               ? `+${deltaFromBenchmark.toFixed(1)}`
 
               : deltaFromBenchmark.toFixed(1);
+
+          const scoreValueCopy = `${safeValue.toFixed(1)}`;
 
           const fillDirectionClass =
 
@@ -272,7 +302,9 @@ const BarChart = ({
 
                 : 'is-benchmark';
 
-          const fillWidthPercent = `${Math.abs(deltaFromBenchmark) * 10}%`;
+          const compareFillWidthPercent = `${Math.abs(deltaFromBenchmark) * 10}%`;
+
+          const standaloneFillWidthPercent = `${safeValue * 10}%`;
 
           const valueClass =
 
@@ -338,7 +370,15 @@ const BarChart = ({
 
                   <div
 
-                    className="bar-chart-track bar-chart-track--benchmark"
+                    className={`bar-chart-track ${
+
+                      isCompareMode
+
+                        ? 'bar-chart-track--benchmark'
+
+                        : 'bar-chart-track--standalone'
+
+                    }`}
 
                     style={
 
@@ -358,37 +398,79 @@ const BarChart = ({
 
                   >
 
-                    <div className="bar-chart-midline" />
+                    {isCompareMode && <div className="bar-chart-midline" />}
 
-                    <div
-
-                      className={`bar-chart-fill-shell ${fillDirectionClass}`}
-
-                      style={{
-
-                        width: deltaFromBenchmark === 0 ? '0%' : fillWidthPercent,
-
-                      }}
-
-                    >
+                    {isCompareMode ? (
 
                       <div
 
-                        className={`bar-chart-fill ${key}`}
+                        className={`bar-chart-fill-shell ${fillDirectionClass}`}
 
                         style={{
 
-                          boxShadow: isActive
+                          width:
 
-                            ? `0 0 16px ${activeColor}50`
+                            deltaFromBenchmark === 0
 
-                            : undefined,
+                              ? '0%'
+
+                              : compareFillWidthPercent,
 
                         }}
 
-                      />
+                      >
 
-                    </div>
+                        <div
+
+                          className={`bar-chart-fill ${key}`}
+
+                          style={{
+
+                            boxShadow: isActive
+
+                              ? `0 0 16px ${activeColor}50`
+
+                              : undefined,
+
+                          }}
+
+                        />
+
+                      </div>
+
+                    ) : (
+
+                      <div
+
+                        className="bar-chart-score-fill-shell"
+
+                        style={{
+
+                          width: standaloneFillWidthPercent,
+
+                        }}
+
+                      >
+
+                        <div
+
+                          className={`bar-chart-fill bar-chart-fill--score ${key}`}
+
+                          style={{
+
+                            boxShadow: isActive
+
+                              ? `0 0 16px ${activeColor}50`
+
+                              : undefined,
+
+                          }}
+
+                        />
+
+                      </div>
+
+                    )}
 
                   </div>
 
@@ -398,23 +480,37 @@ const BarChart = ({
 
                   <span
 
-                    className={`bar-chart-value--visible ${valueClass}`}
+                    className={`bar-chart-value--visible ${
+
+                      isCompareMode ? valueClass : 'is-score'
+
+                    }`}
 
                     style={
 
-                      Math.abs(deltaFromBenchmark) >= 0.15
+                      isCompareMode
 
-                        ? { color: activeColor }
+                        ? Math.abs(deltaFromBenchmark) >= 0.15
 
-                        : undefined
+                          ? { color: activeColor }
+
+                          : undefined
+
+                        : { color: activeColor }
 
                     }
 
                   >
 
-                    {valueCopy}
+                    {isCompareMode ? compareValueCopy : scoreValueCopy}
 
                   </span>
+
+                  {!isCompareMode && (
+
+                    <span className="bar-chart-score-max">/10</span>
+
+                  )}
 
                 </div>
 

@@ -12,6 +12,7 @@ import {
   SunMedium,
   Feather,
   Crosshair,
+  Lock,
 } from 'lucide-react';
 
 import { db } from '../firebaseConfig';
@@ -35,13 +36,13 @@ import buildHeritageVoiceRead from '../utils/legacyPrint/buildHeritageVoiceRead'
 const AXIS_META = [
   { key: 'attack', label: 'Attack', icon: 'attack' },
 
-  { key: 'sustain', label: 'Sustain', icon: 'sustain' },
-
-  { key: 'warmth', label: 'Warmth', icon: 'warmth' },
+  { key: 'brightness', label: 'Brightness', icon: 'brightness' },
 
   { key: 'projection', label: 'Projection', icon: 'projection' },
 
-  { key: 'brightness', label: 'Brightness', icon: 'brightness' },
+  { key: 'sustain', label: 'Sustain', icon: 'sustain' },
+
+  { key: 'warmth', label: 'Warmth', icon: 'warmth' },
 
   { key: 'sensitivity', label: 'Sensitivity', icon: 'sensitivity' },
 
@@ -49,31 +50,31 @@ const AXIS_META = [
 ];
 
 const AXIS_POINT_COLORS = [
-  '#ff7448',
+  '#ff7448', // attack
 
-  '#4d86ff',
+  '#e7d98f', // brightness
 
-  '#c1682e',
+  '#ffb53a', // projection
 
-  '#ffb53a',
+  '#4d86ff', // sustain
 
-  '#e7d98f',
+  '#c1682e', // warmth
 
-  '#68d9df',
+  '#68d9df', // sensitivity
 
-  '#9e8bff',
+  '#9e8bff', // control
 ];
 
 const AXIS_COLOR_BY_KEY = {
   attack: '#ff7448',
 
-  sustain: '#4d86ff',
-
-  warmth: '#c1682e',
+  brightness: '#e7d98f',
 
   projection: '#ffb53a',
 
-  brightness: '#e7d98f',
+  sustain: '#4d86ff',
+
+  warmth: '#c1682e',
 
   sensitivity: '#68d9df',
 
@@ -81,19 +82,19 @@ const AXIS_COLOR_BY_KEY = {
 };
 
 const AXIS_SUBLABELS = {
-  attack: 'Quickness',
+  attack: 'Strike',
 
-  sustain: 'Length',
+  brightness: 'Clarity',
+
+  projection: 'Carry',
+
+  sustain: 'Bloom',
 
   warmth: 'Body',
 
-  projection: 'Throw',
+  sensitivity: 'Touch',
 
-  brightness: 'Top End',
-
-  sensitivity: 'Response',
-
-  control: 'Focus',
+  control: 'Refinement',
 };
 
 const AXIS_IMPACT_FACTORS = {
@@ -168,6 +169,436 @@ const AXIS_IMPACT_FACTORS = {
   ],
 };
 
+const BASE_LEGACYPRINT_TABS = [
+  {
+    key: 'voiceRead',
+
+    label: 'Voice Read',
+  },
+
+  {
+    key: 'legacyTuning',
+
+    label: 'LegacyTuning™',
+  },
+
+  {
+    key: 'traitInsight',
+
+    label: 'Trait Insight',
+  },
+
+  {
+    key: 'relationships',
+
+    label: 'Key Relationships',
+  },
+];
+
+const REFERENCE_SETUP_TAB = {
+  key: 'referenceSetup',
+
+  label: 'Reference Setup',
+};
+
+const DISCOVERY_LEGACYPRINT_TAB = {
+  key: 'discovery',
+
+  label: 'Discovery',
+
+  locked: true,
+};
+
+const COMPARE_INTRO_STORAGE_KEY = 'heritageLegacyPrintCompareIntroSeen';
+
+const getLegacyTuningRangeBounds = (position) => {
+  const center = Number(position || 3);
+
+  const width = 0.42;
+
+  return {
+    start: Math.max(1, center - width),
+
+    end: Math.min(5, center + width),
+
+    center,
+  };
+};
+
+const getLegacyTuningHzRange = (range) => {
+  const mapPositionToHz = (position) => {
+    const clamped = Math.max(1, Math.min(5, Number(position || 3)));
+
+    if (clamped <= 2) {
+      return 80 + ((clamped - 1) / 1) * (180 - 80);
+    }
+
+    if (clamped <= 3) {
+      return 180 + ((clamped - 2) / 1) * (350 - 180);
+    }
+
+    if (clamped <= 4) {
+      return 350 + ((clamped - 3) / 1) * (1200 - 350);
+    }
+
+    return 1200 + ((clamped - 4) / 1) * (4000 - 1200);
+  };
+
+  const startHz = Math.round(mapPositionToHz(range.start));
+
+  const endHz = Math.round(mapPositionToHz(range.end));
+
+  return `${startHz}–${endHz} Hz`;
+};
+
+const NOTE_NAMES = [
+  'C',
+
+  'C#',
+
+  'D',
+
+  'D#',
+
+  'E',
+
+  'F',
+
+  'F#',
+
+  'G',
+
+  'G#',
+
+  'A',
+
+  'A#',
+
+  'B',
+];
+
+const frequencyToNearestNote = (frequency) => {
+  const hz = Number(frequency);
+
+  if (!Number.isFinite(hz) || hz <= 0) return null;
+
+  const midi = Math.round(69 + 12 * Math.log2(hz / 440));
+
+  const noteIndex = ((midi % 12) + 12) % 12;
+
+  const octave = Math.floor(midi / 12) - 1;
+
+  return `${NOTE_NAMES[noteIndex]}${octave}`;
+};
+
+const parseHzRange = (rangeText = '') => {
+  const matches = String(rangeText).match(/\d+/g);
+
+  if (!matches || matches.length < 2) {
+    return {
+      startHz: null,
+
+      endHz: null,
+    };
+  }
+
+  return {
+    startHz: Number(matches[0]),
+
+    endHz: Number(matches[1]),
+  };
+};
+
+const getNearestNoteWindow = (rangeText = '') => {
+  const { startHz, endHz } = parseHzRange(rangeText);
+
+  const startNote = frequencyToNearestNote(startHz);
+
+  const endNote = frequencyToNearestNote(endHz);
+
+  if (!startNote || !endNote) return '—';
+
+  return `${startNote}–${endNote}`;
+};
+
+const KEY_RELATIONSHIP_DEFINITIONS = [
+  {
+    id: 'attack-brightness',
+
+    nodes: ['attack', 'brightness'],
+
+    title: 'Fast, articulate front edge',
+
+    summary:
+      'The drum should speak quickly with more visible stick definition and upper-register clarity.',
+
+    playerRead:
+      'Lean into clean backbeats, detailed fills, ghost-note accents, and parts where the drum needs to speak clearly without extra force.',
+
+    bestFits: ['Funk', 'Pop', 'Country', 'Session work'],
+
+    drivers: ['Bearing edge', 'Hoop type', 'Shell depth'],
+
+    relevance: {
+      attack: 1,
+
+      brightness: 1,
+
+      control: 0.25,
+    },
+  },
+
+  {
+    id: 'attack-control',
+
+    nodes: ['attack', 'control'],
+
+    title: 'Focused front edge',
+
+    summary:
+      'The drum should feel immediate and organized, with a clear note start and less loose after-ring.',
+
+    playerRead:
+      'Best used for tight grooves, focused rimshots, clean pocket playing, and faster passages where note shape matters.',
+
+    bestFits: ['Modern roots', 'Studio pop', 'Tighter rock', 'Gospel'],
+
+    drivers: ['Die-cast hoops', 'Lug count', 'Shell thickness'],
+
+    relevance: {
+      attack: 1,
+
+      control: 1,
+
+      brightness: 0.2,
+    },
+  },
+
+  {
+    id: 'brightness-projection',
+
+    nodes: ['brightness', 'projection'],
+
+    title: 'Cutting presence',
+
+    summary:
+      'The drum should push forward with more top-end clarity and enough presence to sit above a denser arrangement.',
+
+    playerRead:
+      'Use this when the snare needs to hold its place against guitars, keys, louder stages, or more layered mixes.',
+
+    bestFits: ['Live rooms', 'Country rock', 'Indie rock', 'Pop arrangements'],
+
+    drivers: ['Shell size', 'Hoop type', 'Bearing edge'],
+
+    relevance: {
+      brightness: 1,
+
+      projection: 1,
+
+      attack: 0.25,
+    },
+  },
+
+  {
+    id: 'warmth-sustain',
+
+    nodes: ['warmth', 'sustain'],
+
+    title: 'Fuller body with longer bloom',
+
+    summary:
+      'The drum should carry a rounder center and a note that opens up after the initial hit.',
+
+    playerRead:
+      'Let the drum breathe. This relationship rewards open tuning, wider dynamics, and parts where body matters more than sharpness.',
+
+    bestFits: ['Americana', 'Soul', 'Singer-songwriter', 'Roots'],
+
+    drivers: ['Shell depth', 'Shell size', 'Triple flange hoops'],
+
+    relevance: {
+      warmth: 1,
+
+      sustain: 1,
+
+      sensitivity: 0.25,
+    },
+  },
+
+  {
+    id: 'warmth-control',
+
+    nodes: ['warmth', 'control'],
+
+    title: 'Body without excess wash',
+
+    summary:
+      'The drum should keep a grounded center while still feeling shaped and manageable.',
+
+    playerRead:
+      'Good for players who want warmth and wood character without the drum feeling too loose or wide open.',
+
+    bestFits: ['Studio roots', 'Classic country', 'Soul', 'General session'],
+
+    drivers: ['Shell thickness', 'Hoop type', 'Finish intensity'],
+
+    relevance: {
+      warmth: 1,
+
+      control: 1,
+
+      projection: 0.15,
+    },
+  },
+
+  {
+    id: 'sensitivity-warmth',
+
+    nodes: ['sensitivity', 'warmth'],
+
+    title: 'Tone at lower dynamics',
+
+    summary:
+      'The drum should still carry body and character when played lightly.',
+
+    playerRead:
+      'Great for ghost notes, brush-style detail, lower-volume playing, and parts where touch should reveal the drum instead of disappearing.',
+
+    bestFits: [
+      'Jazz',
+
+      'Singer-songwriter',
+
+      'Soft session work',
+
+      'Dynamic roots',
+    ],
+
+    drivers: ['Snare response setup', 'Bearing edge', 'Shell depth'],
+
+    relevance: {
+      sensitivity: 1,
+
+      warmth: 1,
+
+      sustain: 0.2,
+    },
+  },
+
+  {
+    id: 'sensitivity-control',
+
+    nodes: ['sensitivity', 'control'],
+
+    title: 'Detailed but focused response',
+
+    summary:
+      'The drum should reveal smaller touch changes while keeping the note organized.',
+
+    playerRead:
+      'Use this for nuanced phrasing, ghost notes, drag patterns, and controlled studio parts that still need life under the hands.',
+
+    bestFits: ['Studio work', 'Funk', 'Gospel', 'Detailed pocket playing'],
+
+    drivers: ['Snare response setup', 'Hoop type', 'Bearing edge'],
+
+    relevance: {
+      sensitivity: 1,
+
+      control: 1,
+
+      attack: 0.2,
+    },
+  },
+
+  {
+    id: 'projection-sustain',
+
+    nodes: ['projection', 'sustain'],
+
+    title: 'Room-filling carry',
+
+    summary:
+      'The drum should feel larger in the room, with a note that travels and hangs longer after impact.',
+
+    playerRead:
+      'Works well when the snare needs to feel open, big, and alive rather than short or heavily controlled.',
+
+    bestFits: ['Live rooms', 'Blues rock', 'Americana', 'Cinematic session'],
+
+    drivers: ['Depth', 'Shell size', 'Triple flange hoops'],
+
+    relevance: {
+      projection: 1,
+
+      sustain: 1,
+
+      warmth: 0.25,
+    },
+  },
+
+  {
+    id: 'attack-sensitivity-control',
+
+    nodes: ['attack', 'sensitivity', 'control'],
+
+    title: 'Fast, disciplined touch response',
+
+    summary:
+      'The drum should respond quickly across dynamic levels while keeping the note tidy and controlled.',
+
+    playerRead:
+      'A strong fit for players who want precise response from ghost notes to accents without the drum becoming messy.',
+
+    bestFits: ['Studio pop', 'Funk', 'Gospel', 'Modern country'],
+
+    drivers: ['Bearing edge', 'Hoop type', 'Snare response setup'],
+
+    relevance: {
+      attack: 1,
+
+      sensitivity: 1,
+
+      control: 1,
+    },
+  },
+
+  {
+    id: 'warmth-sustain-sensitivity',
+
+    nodes: ['warmth', 'sustain', 'sensitivity'],
+
+    title: 'Expressive, blooming response',
+
+    summary:
+      'The drum should feel more reactive and musical under the hands, with body and bloom developing after the stroke.',
+
+    playerRead:
+      'Best for players who shape sound through touch, tuning, and dynamics instead of relying only on volume or crack.',
+
+    bestFits: [
+      'Singer-songwriter',
+
+      'Soul',
+
+      'Jazz-influenced roots',
+
+      'Americana',
+    ],
+
+    drivers: ['Shell depth', 'Lighter finish treatment', 'Triple flange hoops'],
+
+    relevance: {
+      warmth: 1,
+
+      sustain: 1,
+
+      sensitivity: 1,
+    },
+  },
+];
+
 const getReferenceLabel = (selectedBenchmarkType, selectedBenchmarkSize) => {
   const typeLabel =
     selectedBenchmarkType?.typeLabel || 'Heritage reference drum';
@@ -204,13 +635,9 @@ const buildProjectedVoiceRange = (summary) => {
 };
 
 const BENCHMARK_VOICE_RANGE_FALLBACKS = {
-  // Ober Custom
-
   'heritage-oak-reference': 2.9,
 
   'feuzon-hybrid-reference': 3.35,
-
-  // Ply
 
   'maple-ply-reference': 3.45,
 
@@ -222,8 +649,6 @@ const BENCHMARK_VOICE_RANGE_FALLBACKS = {
 
   'mahogany-ply-reference': 2.1,
 
-  // Metal
-
   'brass-reference': 3.75,
 
   'steel-reference': 4.35,
@@ -234,15 +659,11 @@ const BENCHMARK_VOICE_RANGE_FALLBACKS = {
 
   'bronze-reference': 3.55,
 
-  // Acrylic
-
   'thin-acrylic-reference': 4.7,
 
   'medium-acrylic-reference': 4.4,
 
   'thick-acrylic-reference': 4.15,
-
-  // Solid / steam-bent
 
   'steam-bent-maple-reference': 3.2,
 
@@ -315,6 +736,65 @@ const buildBenchmarkVoiceRange = (benchmarkType, benchmarkSize) => {
   return Math.max(1, Math.min(5, typeFallback + sizeAdjustment));
 };
 
+const buildCurrentBuildToneSummary = (summary) => {
+  const profile = summary?.profile || {};
+
+  const values = {
+    attack: Number(profile.attack ?? 5),
+
+    sustain: Number(profile.sustain ?? 5),
+
+    warmth: Number(profile.warmth ?? 5),
+
+    projection: Number(profile.projection ?? 5),
+
+    brightness: Number(profile.brightness ?? 5),
+
+    sensitivity: Number(profile.sensitivity ?? 5),
+
+    control: Number(profile.control ?? 5),
+  };
+
+  const phrases = [];
+
+  if (values.warmth >= 5.6) phrases.push('a fuller, body-forward center');
+  else if (values.warmth <= 4.4) phrases.push('a leaner center');
+
+  if (values.attack >= 5.6) phrases.push('a quicker front edge');
+  else if (values.attack <= 4.4) phrases.push('a rounder front edge');
+
+  if (values.sustain >= 5.6) phrases.push('a longer bloom after the strike');
+  else if (values.sustain <= 4.4) phrases.push('a shorter, tighter note tail');
+
+  if (values.projection >= 5.6) phrases.push('more outward push');
+  else if (values.projection <= 4.4) phrases.push('a more intimate room feel');
+
+  if (values.brightness >= 5.6) phrases.push('more top-end clarity');
+  else if (values.brightness <= 4.4) phrases.push('a darker upper edge');
+
+  if (values.sensitivity >= 5.6) phrases.push('more touch response');
+  else if (values.sensitivity <= 4.4) phrases.push('a firmer playing feel');
+
+  if (values.control >= 5.6) phrases.push('a more focused note shape');
+  else if (values.control <= 4.4) phrases.push('a more open note shape');
+
+  const topPhrases = phrases.slice(0, 3);
+
+  if (!topPhrases.length) {
+    return 'This Heritage configuration stays close to the center of the line: grounded, familiar, and balanced without one voice trait taking over.';
+  }
+
+  if (topPhrases.length === 1) {
+    return `This Heritage configuration leans toward ${topPhrases[0]} while staying inside the rooted Heritage voice.`;
+  }
+
+  if (topPhrases.length === 2) {
+    return `This Heritage configuration leans toward ${topPhrases[0]} and ${topPhrases[1]} while staying inside the rooted Heritage voice.`;
+  }
+
+  return `This Heritage configuration leans toward ${topPhrases[0]}, ${topPhrases[1]}, and ${topPhrases[2]} while staying inside the rooted Heritage voice.`;
+};
+
 const buildToneSummary = (
   summary,
 
@@ -368,112 +848,112 @@ const buildToneSummary = (
     phrases.push('slightly less touch response');
 
   if (!phrases.length) {
-    return `Your current build selections would likely sound very close to ${referenceLabel}. To compare this build against another reference drum, use the Reference Drum selectors above.`;
+    return `This Heritage configuration sits very close to ${referenceLabel}. The selected reference is acting as the benchmark, so small movements show where this build adds or reduces emphasis.`;
   }
 
   const topPhrases = phrases.slice(0, 3);
 
   if (topPhrases.length === 1) {
-    return `Your current build selections would likely produce ${topPhrases[0]} compared with ${referenceLabel}. To compare this build against another reference drum, use the Reference Drum selectors above.`;
+    return `Compared with ${referenceLabel}, this Heritage configuration leans toward ${topPhrases[0]}.`;
   }
 
   if (topPhrases.length === 2) {
-    return `Your current build selections would likely produce ${topPhrases[0]} and ${topPhrases[1]} compared with ${referenceLabel}. To compare this build against another reference drum, use the Reference Drum selectors above.`;
+    return `Compared with ${referenceLabel}, this Heritage configuration leans toward ${topPhrases[0]} and ${topPhrases[1]}.`;
   }
 
-  return `Your current build selections would likely produce ${topPhrases[0]}, ${topPhrases[1]}, and ${topPhrases[2]} compared with ${referenceLabel}. To compare this build against another reference drum, use the Reference Drum selectors above.`;
+  return `Compared with ${referenceLabel}, this Heritage configuration leans toward ${topPhrases[0]}, ${topPhrases[1]}, and ${topPhrases[2]}.`;
 };
 
 const AXIS_INSIGHT_COPY = {
   attack: {
-    short: 'Fast front-end response with stronger note definition.',
+    short: 'How quickly the note speaks at the front edge.',
 
     detail:
-      'Compared with the selected benchmark, this Heritage configuration speaks with a firmer front edge and a little more immediacy at the start of the note.',
+      'Attack is the first thing the stick gives back to the player. In this Heritage build, it describes how immediate, rounded, crisp, or assertive the drum feels at the start of the note.',
 
     scaleLow:
-      'Softer front-end response with less immediate crack. The drum feels rounder and more relaxed at the start of the note than the selected benchmark.',
+      'A lower attack read means the note starts rounder and softer. The drum feels less sharp at the front edge and more relaxed under the stick.',
 
     scaleHigh:
-      'Sharper attack with stronger note definition and quicker front-edge response. The drum feels more immediate and assertive than the selected benchmark.',
+      'A higher attack read means the note starts quicker and more defined. The drum feels more immediate, articulate, and assertive on the first strike.',
   },
 
   sustain: {
-    short: 'A controlled note tail with a measured amount of bloom.',
+    short: 'How long the note blooms after the strike.',
 
     detail:
-      'Compared with the selected benchmark, this reflects how long the shell wants to hold onto the note after the strike and how much openness sits in the decay.',
+      'Sustain describes how much the shell wants to hold onto the note after impact. It is the length, openness, and bloom that follow the first hit.',
 
     scaleLow:
-      'Shorter decay and a quicker note exit. The drum feels tighter and more contained than the selected benchmark.',
+      'A lower sustain read means the note exits sooner. The drum feels tighter, shorter, and more contained.',
 
     scaleHigh:
-      'Longer bloom and more note extension. The shell feels more open and willing to hang in the air than the selected benchmark.',
+      'A higher sustain read means the note hangs longer. The shell feels more open and willing to bloom after the strike.',
   },
 
   warmth: {
-    short: 'A fuller, richer center through the body of the note.',
+    short: 'How much body and low-mid weight sit in the voice.',
 
     detail:
-      'Compared with the selected benchmark, this Heritage build leans more into tonal weight and low-mid richness, affecting how grounded and seasoned the shell feels.',
+      'Warmth is the center of the drum — the woodiness, body, and low-mid richness that make the shell feel grounded instead of sharp or glassy.',
 
     scaleLow:
-      'Leaner body and less low-mid weight. The drum feels cleaner and a little less body-forward than the selected benchmark.',
+      'A lower warmth read means a leaner center with less low-mid body. The drum feels cleaner, tighter, or more direct.',
 
     scaleHigh:
-      'Richer body and a fuller center to the note. The shell feels deeper, broader, and more substantial than the selected benchmark.',
+      'A higher warmth read means more body in the center of the note. The shell feels fuller, deeper, and more grounded.',
   },
 
   projection: {
-    short: 'Clear outward push with confident room presence.',
+    short: 'How confidently the drum pushes into the room.',
 
     detail:
-      'Compared with the selected benchmark, projection reflects how assertively this shell throws the note into the room and how strongly it carries.',
+      'Projection describes how strongly the drum carries outward. It is not just volume — it is the way the note moves through a room or mix.',
 
     scaleLow:
-      'More intimate and less forceful in the room. The shell feels more contained and closer to the player than the selected benchmark.',
+      'A lower projection read means the drum feels more intimate and closer to the player.',
 
     scaleHigh:
-      'Stronger room presence and more outward push. The note carries farther and feels more commanding than the selected benchmark.',
+      'A higher projection read means stronger room presence and more outward push. The note carries farther and feels more commanding.',
   },
 
   brightness: {
-    short: 'A measured amount of top-end edge and upper-register cut.',
+    short: 'How much upper-register clarity sits on top.',
 
     detail:
-      'Compared with the selected benchmark, brightness shapes how much sheen, snap, and upper-register clarity sit on top of the drum’s core voice.',
+      'Brightness is the top edge of the sound: snap, sheen, cut, and upper-register clarity. It affects how easily the drum speaks through a mix.',
 
     scaleLow:
-      'Darker top-end with less snap and less sheen. The shell feels woodier, rounder, and more restrained than the selected benchmark.',
+      'A lower brightness read means a darker top end with less sheen. The drum feels woodier and more restrained.',
 
     scaleHigh:
-      'More top-end edge, snap, and cut. The drum feels more articulate and able to speak through a mix than the selected benchmark.',
+      'A higher brightness read means more top-end edge, snap, and cut. The drum feels clearer and more articulate.',
   },
 
   sensitivity: {
-    short: 'Responsive to lighter playing and subtle dynamic detail.',
+    short: 'How easily the drum responds to lighter touch.',
 
     detail:
-      'Compared with the selected benchmark, sensitivity reflects how easily the shell and wire response open up under lighter hands, ghost notes, and softer touch.',
+      'Sensitivity describes how much the shell and snare response open up under lighter hands, ghost notes, soft playing, and dynamic nuance.',
 
     scaleLow:
-      'Needs a little more input to fully wake up. The drum feels firmer and more centered around medium-to-strong playing than the selected benchmark.',
+      'A lower sensitivity read means the drum wants a little more input before it fully wakes up.',
 
     scaleHigh:
-      'Opens up more easily at lower dynamics. The shell feels more alive under softer touch and nuanced phrasing than the selected benchmark.',
+      'A higher sensitivity read means the drum opens more easily at lower dynamics and reveals more detail under softer touch.',
   },
 
   control: {
-    short: 'Shaped and contained in a way that feels easy to manage.',
+    short: 'How shaped and manageable the note feels.',
 
     detail:
-      'Compared with the selected benchmark, control reflects how organized and disciplined the note feels through overtone behavior and decay.',
+      'Control describes how organized the note feels through overtone behavior, decay, and focus. It is the difference between open spread and composed shape.',
 
     scaleLow:
-      'More open and less contained. The note feels broader, freer, and a bit less disciplined than the selected benchmark.',
+      'A lower control read means the drum feels more open, wider, and less contained.',
 
     scaleHigh:
-      'Tighter note shape with more organized overtone behavior. The drum feels easier to place and keep composed than the selected benchmark.',
+      'A higher control read means the note feels tighter, more organized, and easier to place.',
   },
 };
 
@@ -552,31 +1032,49 @@ const reRingCost = 150;
 const depthPrices = {
   12: {
     '5.0': 0,
+
     5.5: 50,
+
     '6.0': 100,
+
     6.5: 150,
+
     '7.0': 200,
+
     7.5: 250,
+
     '8.0': 300,
   },
 
   13: {
     '5.0': 0,
+
     5.5: 50,
+
     '6.0': 100,
+
     6.5: 150,
+
     '7.0': 200,
+
     7.5: 250,
+
     '8.0': 300,
   },
 
   14: {
     '5.0': 0,
+
     5.5: 50,
+
     '6.0': 100,
+
     6.5: 150,
+
     '7.0': 200,
+
     7.5: 250,
+
     '8.0': 300,
   },
 };
@@ -794,6 +1292,32 @@ const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
   }
 };
 
+const getRelationshipScore = (relationship, profile = {}) => {
+  const relevance = relationship.relevance || {};
+
+  return Object.entries(relevance).reduce((score, [axis, weight]) => {
+    const value = Number(profile?.[axis] ?? 5);
+
+    const distanceFromCenter = Math.abs(value - 5);
+
+    return score + distanceFromCenter * weight;
+  }, 0);
+};
+
+const buildKeyRelationships = (summary = {}) => {
+  const profile = summary?.profile || {};
+
+  return KEY_RELATIONSHIP_DEFINITIONS.map((relationship) => ({
+    ...relationship,
+
+    score: getRelationshipScore(relationship, profile),
+  }))
+
+    .sort((a, b) => b.score - a.score)
+
+    .slice(0, 3);
+};
+
 const HeritageProductDetail = () => {
   const navigate = useNavigate();
 
@@ -824,6 +1348,12 @@ const HeritageProductDetail = () => {
   const [cartItemId, setCartItemId] = useState(null);
 
   const [chartView, setChartView] = useState('spider');
+
+  const [legacyPrintTab, setLegacyPrintTab] = useState('voiceRead');
+
+  const [isCompareModeEnabled, setIsCompareModeEnabled] = useState(false);
+
+  const [showCompareIntro, setShowCompareIntro] = useState(false);
 
   const [selectedDrumSummary, setSelectedDrumSummary] = useState({});
 
@@ -993,10 +1523,10 @@ const HeritageProductDetail = () => {
       !selectedBenchmarkType ||
       !selectedBenchmarkSize
     ) {
-      return 'These scores are benchmark-relative. A centered read reflects the selected reference drum, and movement above or below center shows how your current build shifts against it.';
+      return 'Choose a familiar reference drum to use as your listening anchor. Once Compare mode is enabled, this build will be read against that selected benchmark.';
     }
 
-    return `${selectedBenchmarkFamily.familyLabel} benchmark selected. This Heritage build is being compared against the ${selectedBenchmarkType.typeLabel} reference at ${selectedBenchmarkSize.label}. The chart is reference-relative: center represents the selected benchmark, values above center indicate more emphasis, and values below center indicate less emphasis.`;
+    return `${selectedBenchmarkFamily.familyLabel} benchmark selected. This Heritage build is being compared against the ${selectedBenchmarkType.typeLabel} reference at ${selectedBenchmarkSize.label}. In Compare mode, the selected reference becomes the listening anchor for the chart and tone summary.`;
   }, [selectedBenchmarkFamily, selectedBenchmarkType, selectedBenchmarkSize]);
 
   const heritageHighlights = [
@@ -1058,30 +1588,6 @@ const HeritageProductDetail = () => {
 
   const hardwareSummary = `${hardwareColor} • ${hoopType} • ${HERITAGE_STANDARD_SNARE_BED} bed`;
 
-  const chartValues = useMemo(() => {
-    return AXIS_META.map(({ key }) => {
-      const rawValue =
-        selectedDrumSummary?.profile?.[key] != null
-          ? Number(selectedDrumSummary.profile[key])
-          : 5;
-
-      return getDisplayMetricValue(rawValue);
-    });
-  }, [selectedDrumSummary]);
-
-  const chartBarData = useMemo(() => {
-    return AXIS_META.reduce((acc, axis) => {
-      const rawValue =
-        selectedDrumSummary?.profile?.[axis.key] != null
-          ? Number(selectedDrumSummary.profile[axis.key])
-          : 5;
-
-      acc[axis.key] = getDisplayMetricValue(rawValue);
-
-      return acc;
-    }, {});
-  }, [selectedDrumSummary]);
-
   const currentBuildPrice = useMemo(() => {
     return computeHeritagePrice({
       size,
@@ -1095,16 +1601,6 @@ const HeritageProductDetail = () => {
       hoopType,
     });
   }, [size, depth, staveOption, hardwareColor, hoopType]);
-
-  const toneSummaryText = useMemo(() => {
-    return buildToneSummary(
-      selectedDrumSummary,
-
-      selectedBenchmarkType,
-
-      selectedBenchmarkSize
-    );
-  }, [selectedDrumSummary, selectedBenchmarkType, selectedBenchmarkSize]);
 
   const currentBuildVoiceRangeSummary = useMemo(() => {
     return buildHeritageVoiceRead({
@@ -1122,8 +1618,6 @@ const HeritageProductDetail = () => {
 
       scorchDepth,
 
-      // Keep this locked so the BUILD dot does not move when reference changes.
-
       benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
 
       benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
@@ -1132,9 +1626,75 @@ const HeritageProductDetail = () => {
     });
   }, [size, depth, lugs, staveOption, hardwareColor, hoopType, scorchDepth]);
 
+  const activeVoiceSummary = useMemo(() => {
+    return isCompareModeEnabled
+      ? selectedDrumSummary
+      : currentBuildVoiceRangeSummary;
+  }, [
+    isCompareModeEnabled,
+    selectedDrumSummary,
+    currentBuildVoiceRangeSummary,
+  ]);
+
+  const chartValues = useMemo(() => {
+    return AXIS_META.map(({ key }) => {
+      const rawValue =
+        activeVoiceSummary?.profile?.[key] != null
+          ? Number(activeVoiceSummary.profile[key])
+          : 5;
+
+      return getDisplayMetricValue(rawValue);
+    });
+  }, [activeVoiceSummary]);
+
+  const chartBarData = useMemo(() => {
+    return AXIS_META.reduce((acc, axis) => {
+      const rawValue =
+        activeVoiceSummary?.profile?.[axis.key] != null
+          ? Number(activeVoiceSummary.profile[axis.key])
+          : 5;
+
+      acc[axis.key] = getDisplayMetricValue(rawValue);
+
+      return acc;
+    }, {});
+  }, [activeVoiceSummary]);
+
+  const toneSummaryText = useMemo(() => {
+    if (isCompareModeEnabled) {
+      return buildToneSummary(
+        selectedDrumSummary,
+
+        selectedBenchmarkType,
+
+        selectedBenchmarkSize
+      );
+    }
+
+    return buildCurrentBuildToneSummary(currentBuildVoiceRangeSummary);
+  }, [
+    isCompareModeEnabled,
+
+    selectedDrumSummary,
+
+    currentBuildVoiceRangeSummary,
+
+    selectedBenchmarkType,
+
+    selectedBenchmarkSize,
+  ]);
+
   const projectedVoiceRangePosition = useMemo(() => {
     return buildProjectedVoiceRange(currentBuildVoiceRangeSummary);
   }, [currentBuildVoiceRangeSummary]);
+
+  const legacyTuningRange = useMemo(() => {
+    return getLegacyTuningRangeBounds(projectedVoiceRangePosition);
+  }, [projectedVoiceRangePosition]);
+
+  const legacyTuningHzRange = useMemo(() => {
+    return getLegacyTuningHzRange(legacyTuningRange);
+  }, [legacyTuningRange]);
 
   const benchmarkVoiceRangePosition = useMemo(() => {
     return buildBenchmarkVoiceRange(
@@ -1143,12 +1703,32 @@ const HeritageProductDetail = () => {
     );
   }, [selectedBenchmarkType, selectedBenchmarkSize]);
 
+  const benchmarkLegacyTuningRange = useMemo(() => {
+    return getLegacyTuningRangeBounds(benchmarkVoiceRangePosition);
+  }, [benchmarkVoiceRangePosition]);
+
+  const benchmarkLegacyTuningHzRange = useMemo(() => {
+    return getLegacyTuningHzRange(benchmarkLegacyTuningRange);
+  }, [benchmarkLegacyTuningRange]);
+
+const currentNearestNoteWindow = useMemo(() => {
+
+  return getNearestNoteWindow(legacyTuningHzRange);
+
+}, [legacyTuningHzRange]);
+
+const referenceNearestNoteWindow = useMemo(() => {
+
+  return getNearestNoteWindow(benchmarkLegacyTuningHzRange);
+
+}, [benchmarkLegacyTuningHzRange]);
+
   const activeAxisMeta =
     AXIS_META.find((axis) => axis.key === activeAxisKey) || AXIS_META[0];
 
   const rawAxisValue =
-    selectedDrumSummary?.profile?.[activeAxisKey] != null
-      ? Number(selectedDrumSummary.profile[activeAxisKey])
+    activeVoiceSummary?.profile?.[activeAxisKey] != null
+      ? Number(activeVoiceSummary.profile[activeAxisKey])
       : 5;
 
   const activeAxisDeltaValue = Number((rawAxisValue - 5).toFixed(1));
@@ -1165,6 +1745,10 @@ const HeritageProductDetail = () => {
 
   const activeAxisImpactFactors =
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
+
+  const keyRelationships = useMemo(() => {
+    return buildKeyRelationships(currentBuildVoiceRangeSummary);
+  }, [currentBuildVoiceRangeSummary]);
 
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
@@ -1235,6 +1819,35 @@ const HeritageProductDetail = () => {
 
   const handleBenchmarkSizeChange = (nextSizeId) => {
     setBenchmarkSizeId(nextSizeId);
+  };
+
+  const handleRequestCompareMode = () => {
+    const hasSeenIntro =
+      localStorage.getItem(COMPARE_INTRO_STORAGE_KEY) === 'true';
+
+    if (hasSeenIntro) {
+      setIsCompareModeEnabled(true);
+
+      return;
+    }
+
+    setShowCompareIntro(true);
+  };
+
+  const handleEnableCompareMode = () => {
+    localStorage.setItem(COMPARE_INTRO_STORAGE_KEY, 'true');
+
+    setShowCompareIntro(false);
+
+    setIsCompareModeEnabled(true);
+  };
+
+  const handleDisableCompareMode = () => {
+    setIsCompareModeEnabled(false);
+
+    if (legacyPrintTab === 'referenceSetup') {
+      setLegacyPrintTab('voiceRead');
+    }
   };
 
   useEffect(() => {
@@ -1635,6 +2248,823 @@ const HeritageProductDetail = () => {
     setStaveOption(option);
   };
 
+  const renderReferenceSelectorPanel = () => {
+    return (
+      <div className="heritage-reference-card-shell">
+        <div className="heritage-reference-card-head">
+          <span className="heritage-summary-kicker">Reference Drum</span>
+
+          <p className="heritage-chart-reference-subcopy">
+            Choose the drum you want this build compared against. By default,
+            HERITAGE starts from a 14&quot; × 5.5&quot; Northern Red Oak stave
+            reference with 16 staves, 8 lugs, Triple Flange hoops, Chrome
+            hardware, a 45° inner edge with softened outer roundover, Standard
+            snare bed, Medium Torch finish, Remo Ambassador Coated batter, Remo
+            Ambassador Hazy Snare Side, and PureSound Custom Pro Steel 20-Strand
+            wires.
+          </p>
+        </div>
+
+        <div
+          className="heritage-benchmark-read heritage-benchmark-read--glow"
+          key={benchmarkGlowPulseKey}
+        >
+          <div className="heritage-benchmark-hero heritage-benchmark-hero--refined">
+            <div className="heritage-benchmark-hero-image-shell">
+              <img
+                src={selectedBenchmarkImagePath}
+                alt={
+                  selectedBenchmarkType?.typeLabel
+                    ? `${selectedBenchmarkType.typeLabel} reference drum`
+                    : 'Selected reference drum'
+                }
+                className="heritage-benchmark-hero-image"
+              />
+            </div>
+
+            <div className="heritage-benchmark-hero-copy">
+              <div className="heritage-benchmark-hero-copy-top">
+                <span className="heritage-benchmark-pill">
+                  Selected Reference
+                </span>
+
+                <h4 className="heritage-benchmark-hero-title">
+                  {selectedBenchmarkType?.typeLabel || 'Reference Drum'}
+
+                  {selectedBenchmarkSize?.label
+                    ? ` • ${selectedBenchmarkSize.label}`
+                    : ''}
+                </h4>
+
+                <p className="heritage-benchmark-hero-description">
+                  {selectedBenchmarkType?.shortDescription ||
+                    'Reference drum selected for tonal comparison.'}
+                </p>
+
+                <p className="heritage-benchmark-hero-body">
+                  {benchmarkReadBody}
+                </p>
+              </div>
+            </div>
+
+            <div className="heritage-benchmark-selector-panel">
+              <div className="heritage-benchmark-selector-stack heritage-benchmark-selector-stack--hero">
+                <div className="heritage-benchmark-selector-group">
+                  <label className="heritage-benchmark-selector-label">
+                    Reference Family
+                  </label>
+
+                  <select
+                    className="heritage-benchmark-selector"
+                    value={selectedBenchmarkFamily?.familyId || ''}
+                    onChange={(e) =>
+                      handleBenchmarkFamilyChange(e.target.value)
+                    }
+                  >
+                    {benchmarkFamilyOptions.map((family) => (
+                      <option key={family.familyId} value={family.familyId}>
+                        {family.familyLabel}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="heritage-benchmark-selector-group">
+                  <label className="heritage-benchmark-selector-label">
+                    Reference Drum
+                  </label>
+
+                  <select
+                    className="heritage-benchmark-selector"
+                    value={selectedBenchmarkType?.typeId || ''}
+                    onChange={(e) => handleBenchmarkTypeChange(e.target.value)}
+                  >
+                    {(selectedBenchmarkFamily?.benchmarkTypes || []).map(
+                      (type) => (
+                        <option key={type.typeId} value={type.typeId}>
+                          {type.typeLabel}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
+
+                <div className="heritage-benchmark-selector-group">
+                  <label className="heritage-benchmark-selector-label">
+                    Reference Size
+                  </label>
+
+                  <select
+                    className="heritage-benchmark-selector"
+                    value={selectedBenchmarkSize?.sizeId || ''}
+                    onChange={(e) => handleBenchmarkSizeChange(e.target.value)}
+                  >
+                    {(selectedBenchmarkType?.presetSizeOptions || []).map(
+                      (sizeOption) => (
+                        <option
+                          key={sizeOption.sizeId}
+                          value={sizeOption.sizeId}
+                        >
+                          {sizeOption.label}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="heritage-benchmark-selector-reset-row">
+                <button
+                  type="button"
+                  className="heritage-benchmark-reset-button"
+                  onClick={handleResetBenchmark}
+                >
+                  Reset to Heritage Standard
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderToneSummaryCard = () => {
+    return (
+      <div className="heritage-tone-summary-card heritage-tone-summary-card--stacked heritage-tone-summary-card--polished">
+        <div className="heritage-tone-summary-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h3l2-4 3 8 2-4h4" />
+          </svg>
+        </div>
+
+        <div className="heritage-tone-summary-copy">
+          <span className="heritage-summary-kicker">Tone Summary</span>
+
+          <p>{toneSummaryText}</p>
+
+          <p className="heritage-tone-summary-helper">
+            {isCompareModeEnabled
+              ? 'Compare mode is enabled. This read is benchmark-relative against your selected reference drum.'
+              : 'This read responds to your current build selections.'}
+          </p>
+        </div>
+      </div>
+    );
+  };
+
+  const renderVoiceRangeCard = () => {
+    const rangeStartPercent = ((legacyTuningRange.start - 1) / 4) * 100;
+
+    const rangeEndPercent = ((legacyTuningRange.end - 1) / 4) * 100;
+
+    const rangeWidthPercent = rangeEndPercent - rangeStartPercent;
+
+    const benchmarkRangeStartPercent =
+      ((benchmarkLegacyTuningRange.start - 1) / 4) * 100;
+
+    const benchmarkRangeEndPercent =
+      ((benchmarkLegacyTuningRange.end - 1) / 4) * 100;
+
+    const benchmarkRangeWidthPercent =
+      benchmarkRangeEndPercent - benchmarkRangeStartPercent;
+
+    return (
+      <div
+        className={`heritage-voice-range-card heritage-voice-range-card--polished ${
+          isCompareModeEnabled
+            ? 'heritage-voice-range-card--range-compare'
+            : 'heritage-voice-range-card--single-range'
+        }`}
+      >
+        <div className="heritage-voice-range-head">
+          <span className="heritage-summary-kicker">
+            Target LegacyTuning™ Range
+          </span>
+
+          <p className="heritage-voice-range-intro">
+            LegacyTuning™ is the natural resonance lane of this shell — the
+            range where the drum wants to vibrate, open up, and feel balanced
+            under the stick. It is not a reference comparison; it is the voice
+            this build is naturally leaning toward.
+          </p>
+
+          <div
+            className={`heritage-voice-range-readout-grid ${
+              isCompareModeEnabled ? 'is-compare-mode' : ''
+            }`}
+          >
+            <div className="heritage-voice-range-readout heritage-voice-range-readout--current">
+              <span>
+                {isCompareModeEnabled ? 'Current build range' : 'Target range'}
+              </span>
+
+              <strong>{legacyTuningHzRange}</strong>
+
+              <em>{currentNearestNoteWindow} nearest note window</em>
+            </div>
+
+            {isCompareModeEnabled && (
+              <div className="heritage-voice-range-readout heritage-voice-range-readout--reference">
+                <span>Reference range</span>
+
+                <strong>{benchmarkLegacyTuningHzRange}</strong>
+
+                <em>{referenceNearestNoteWindow} nearest note window</em>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="heritage-voice-range-scale">
+          <div className="heritage-voice-range-labels">
+            <div className="heritage-voice-range-stop">
+              <span className="heritage-voice-range-stop-title">
+                Warm / Full
+              </span>
+
+              <span className="heritage-voice-range-stop-sub">
+                80–180 Hz · Lower body
+              </span>
+            </div>
+
+            <div className="heritage-voice-range-stop">
+              <span className="heritage-voice-range-stop-title">Balanced</span>
+
+              <span className="heritage-voice-range-stop-sub">
+                180–350 Hz · Low-mid
+              </span>
+            </div>
+
+            <div className="heritage-voice-range-stop">
+              <span className="heritage-voice-range-stop-title">Presence</span>
+
+              <span className="heritage-voice-range-stop-sub">
+                350 Hz–1.2 kHz · Mid
+              </span>
+            </div>
+
+            <div className="heritage-voice-range-stop">
+              <span className="heritage-voice-range-stop-title">
+                Crisp / Cutting
+              </span>
+
+              <span className="heritage-voice-range-stop-sub">
+                1.2–4 kHz · Upper-mid
+              </span>
+            </div>
+
+            <div className="heritage-voice-range-stop">
+              <span className="heritage-voice-range-stop-title">
+                Bright / Airy
+              </span>
+
+              <span className="heritage-voice-range-stop-sub">
+                4–10 kHz · Highs
+              </span>
+            </div>
+          </div>
+
+          <div
+            className={`heritage-voice-range-track ${
+              isCompareModeEnabled ? 'heritage-voice-range-track--compare' : ''
+            }`}
+            aria-label="Target LegacyTuning range from warm and full to bright and airy"
+          >
+            <div className="heritage-voice-range-track-line" />
+
+            <div
+              className="heritage-voice-range-band heritage-voice-range-band--current"
+              style={{
+                left: `${rangeStartPercent}%`,
+
+                width: `${rangeWidthPercent}%`,
+              }}
+            >
+              <span className="heritage-voice-range-band-label">
+                Current Build
+              </span>
+            </div>
+
+            <div
+              className="heritage-voice-range-range-cap heritage-voice-range-range-cap--start"
+              style={{
+                left: `${rangeStartPercent}%`,
+              }}
+            />
+
+            <div
+              className="heritage-voice-range-range-cap heritage-voice-range-range-cap--end"
+              style={{
+                left: `${rangeEndPercent}%`,
+              }}
+            />
+
+            {isCompareModeEnabled && (
+              <>
+                <div
+                  className="heritage-voice-range-band heritage-voice-range-band--reference"
+                  style={{
+                    left: `${benchmarkRangeStartPercent}%`,
+
+                    width: `${benchmarkRangeWidthPercent}%`,
+                  }}
+                >
+                  <span className="heritage-voice-range-band-label">
+                    Reference
+                  </span>
+                </div>
+
+                <div
+                  className="heritage-voice-range-range-cap heritage-voice-range-range-cap--reference-start"
+                  style={{
+                    left: `${benchmarkRangeStartPercent}%`,
+                  }}
+                />
+
+                <div
+                  className="heritage-voice-range-range-cap heritage-voice-range-range-cap--reference-end"
+                  style={{
+                    left: `${benchmarkRangeEndPercent}%`,
+                  }}
+                />
+              </>
+            )}
+          </div>
+
+          <div className="heritage-voice-range-footer">
+            <span>Darker / thicker body</span>
+
+            <span>Brighter / more articulate edge</span>
+          </div>
+
+          <div className="heritage-voice-range-legend">
+            <span className="heritage-voice-range-legend-item">
+              <span className="heritage-voice-range-dot heritage-voice-range-dot--range" />
+              Current Build Range
+            </span>
+
+            {isCompareModeEnabled && (
+              <span className="heritage-voice-range-legend-item">
+                <span className="heritage-voice-range-dot heritage-voice-range-dot--reference-range" />
+                Reference Range
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderComparisonChart = () => {
+    return (
+      <div className="heritage-chart-module">
+        <div className="heritage-chart-module-head">
+          <div className="heritage-chart-module-copy">
+            <span className="heritage-chart-eyebrow">
+              {isCompareModeEnabled ? 'Benchmark Compare' : 'Voice Trait Map'}
+            </span>
+
+            <h4 className="heritage-chart-title">
+              {isCompareModeEnabled
+                ? 'Build vs Reference'
+                : 'Current Build Voice Shape'}
+            </h4>
+
+            <p className="heritage-chart-title-subcopy">
+              {isCompareModeEnabled
+                ? 'Shows how this Heritage build shifts against your selected listening benchmark.'
+                : 'Shows the current Heritage configuration as its own Ober voice profile.'}
+            </p>
+          </div>
+
+          <div
+            className="heritage-chart-view-switch heritage-chart-view-switch--inline"
+            role="tablist"
+            aria-label="Chart view"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={chartView === 'spider'}
+              className={`heritage-chart-icon-toggle ${
+                chartView === 'spider' ? 'is-active' : ''
+              }`}
+              onClick={() => setChartView('spider')}
+              title="Spider chart"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polygon points="12 3.5 19 8 16.5 17.5 7.5 17.5 5 8 12 3.5" />
+
+                <polygon points="12 7 15.8 9.4 14.5 14.8 9.5 14.8 8.2 9.4 12 7" />
+
+                <line x1="12" y1="3.5" x2="12" y2="20" />
+
+                <line x1="5" y1="8" x2="19" y2="8" />
+
+                <line x1="7.5" y1="17.5" x2="16.5" y2="17.5" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              role="tab"
+              aria-selected={chartView === 'bars'}
+              className={`heritage-chart-icon-toggle ${
+                chartView === 'bars' ? 'is-active' : ''
+              }`}
+              onClick={() => setChartView('bars')}
+              title="Bar chart"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <line x1="4" y1="20" x2="20" y2="20" />
+
+                <rect x="5.5" y="11.5" width="3" height="8" rx="1" />
+
+                <rect x="10.5" y="8.5" width="3" height="11" rx="1" />
+
+                <rect x="15.5" y="5.5" width="3" height="14" rx="1" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="heritage-chart-wrap heritage-chart-wrap--voice-read heritage-chart-wrap--simple heritage-chart-wrap--compare-enabled">
+          <div className="heritage-chart-stage">
+            {chartView === 'spider' ? (
+              <SpiderChart
+                data={chartValues}
+                labels={AXIS_META}
+                pointColors={AXIS_POINT_COLORS}
+                activeKey={activeAxisKey}
+                onAxisChange={handleAxisChange}
+                mode={isCompareModeEnabled ? 'compare' : 'standalone'}
+              />
+            ) : (
+              <BarChart
+                data={chartBarData}
+                activeKey={activeAxisKey}
+                onAxisChange={handleAxisChange}
+                mode={isCompareModeEnabled ? 'compare' : 'standalone'}
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderTraitInsightPanel = () => {
+    return (
+      <div
+        className="heritage-axis-insight-panel"
+        style={{
+          '--axis-accent': activeAxisColor,
+        }}
+      >
+        <div className="heritage-axis-insight-panel-head">
+          <div className="heritage-axis-insight-panel-title-group">
+            <span className="heritage-summary-kicker">Voice Trait Insight</span>
+
+            <div className="heritage-axis-insight-panel-title-row">
+              <span className="heritage-axis-insight-panel-icon">
+                <MetricIcon
+                  type={activeAxisMeta.icon}
+                  color={activeAxisColor}
+                  size={20}
+                />
+              </span>
+
+              <div className="heritage-axis-insight-panel-title-copy">
+                <h4>{activeAxisMeta.label}</h4>
+
+                <span>{AXIS_SUBLABELS[activeAxisMeta.key]}</span>
+              </div>
+            </div>
+          </div>
+
+          <span
+            className={`heritage-axis-insight-score-pill ${
+              activeAxisDeltaValue > 0
+                ? 'is-positive'
+                : activeAxisDeltaValue < 0
+                  ? 'is-negative'
+                  : 'is-neutral'
+            }`}
+          >
+            {activeAxisScore}
+          </span>
+        </div>
+
+        <div className="heritage-axis-insight-panel-body">
+          <div className="heritage-axis-insight-main-copy">
+            <p className="heritage-axis-insight-short">
+              {activeAxisCopy.short}
+            </p>
+
+            <p className="heritage-axis-insight-detail">
+              {activeAxisCopy.detail}
+            </p>
+
+            <p className="heritage-axis-insight-scale-read">
+              <strong>Lower / closer to center:</strong>{' '}
+              {activeAxisCopy.scaleLow}
+            </p>
+
+            <p className="heritage-axis-insight-scale-read">
+              <strong>Higher / farther outward:</strong>{' '}
+              {activeAxisCopy.scaleHigh}
+            </p>
+          </div>
+
+          <div className="heritage-axis-impact-panel">
+            <span className="heritage-axis-impact-label">
+              Voice contributors
+            </span>
+
+            <div className="heritage-axis-impact-list">
+              {activeAxisImpactFactors.map((factor) => (
+                <div
+                  key={factor.label}
+                  className={`heritage-axis-impact-row is-${factor.strength}`}
+                >
+                  <span className="heritage-axis-impact-name">
+                    {factor.label}
+                  </span>
+
+                  <span className="heritage-axis-impact-strength">
+                    <span className="heritage-axis-impact-dot" />
+
+                    <span className="heritage-axis-impact-text">
+                      {factor.strength === 'strong'
+                        ? 'High'
+                        : factor.strength === 'medium'
+                          ? 'Medium'
+                          : 'Light'}
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const visibleLegacyPrintTabs = useMemo(() => {
+    return [
+      ...BASE_LEGACYPRINT_TABS,
+
+      ...(isCompareModeEnabled ? [REFERENCE_SETUP_TAB] : []),
+
+      DISCOVERY_LEGACYPRINT_TAB,
+    ];
+  }, [isCompareModeEnabled]);
+
+  const renderLegacyPrintPanel = () => {
+    if (legacyPrintTab === 'voiceRead') {
+      return (
+        <div
+          className={`heritage-legacyprint-panel heritage-legacyprint-panel--voice-read ${
+            isCompareModeEnabled ? 'is-compare-mode' : 'is-standalone-mode'
+          }`}
+        >
+          <div className="heritage-voice-comparison-shell heritage-voice-comparison-shell--voice-read">
+            {renderComparisonChart()}
+          </div>
+
+          <div className="heritage-voice-support-grid heritage-voice-support-grid--top">
+            {renderToneSummaryCard()}
+          </div>
+        </div>
+      );
+    }
+
+    if (legacyPrintTab === 'legacyTuning') {
+      return (
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--legacy-tuning">
+          <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
+            <div className="heritage-chart-title-shell">
+              <span className="heritage-chart-eyebrow">LegacyTuning™</span>
+
+              <h4 className="heritage-chart-title">Natural resonance lane</h4>
+
+              <p className="heritage-chart-title-subcopy">
+                This view shows where the shell naturally wants to sit: darker
+                and fuller on one side, brighter and more articulate on the
+                other.
+              </p>
+            </div>
+          </div>
+
+          {renderVoiceRangeCard()}
+        </div>
+      );
+    }
+
+    if (legacyPrintTab === 'traitInsight') {
+      return (
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--trait">
+          <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
+            <div className="heritage-chart-title-shell">
+              <span className="heritage-chart-eyebrow">
+                Choose a voice trait
+              </span>
+
+              <h4 className="heritage-chart-title">
+                Explore how each trait speaks
+              </h4>
+
+              <p className="heritage-chart-title-subcopy">
+                {isCompareModeEnabled
+                  ? 'Compare mode is enabled. Select a trait below to see how this build shifts against your selected reference drum.'
+                  : 'Select a trait below to understand how this build speaks and feels on its own. Turn on Compare mode when you want to hear those traits against a reference drum.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="heritage-legacyprint-trait-chip-row">
+            {AXIS_META.map((axis) => {
+              const isActive = activeAxisKey === axis.key;
+
+              const color = AXIS_COLOR_BY_KEY[axis.key];
+
+              return (
+                <button
+                  key={axis.key}
+                  type="button"
+                  className={`heritage-legacyprint-trait-chip ${
+                    isActive ? 'is-active' : ''
+                  }`}
+                  style={{
+                    '--axis-accent': color,
+                  }}
+                  onClick={() => setActiveAxisKey(axis.key)}
+                >
+                  <MetricIcon type={axis.icon} color={color} size={16} />
+
+                  <span>{axis.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {renderTraitInsightPanel()}
+        </div>
+      );
+    }
+
+    if (legacyPrintTab === 'relationships') {
+      return (
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships">
+          <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
+            <div className="heritage-chart-title-shell">
+              <span className="heritage-chart-eyebrow">Key Relationships</span>
+
+              <h4 className="heritage-chart-title">
+                Top voice pairings for this build
+              </h4>
+
+              <p className="heritage-chart-title-subcopy">
+                {isCompareModeEnabled
+                  ? 'Compare mode is enabled. These relationships show which voice pairings most clearly shape how this build differs from your selected benchmark.'
+                  : 'These are the most useful voice combinations for interpreting how this Heritage configuration should feel and respond on its own.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="heritage-key-relationships-grid">
+            {keyRelationships.map((relationship, index) => (
+              <article
+                key={relationship.id}
+                className="heritage-key-relationship-card"
+              >
+                <div className="heritage-key-relationship-head">
+                  <span className="heritage-key-relationship-rank">
+                    {index + 1}
+                  </span>
+
+                  <div className="heritage-key-relationship-title-group">
+                    <div className="heritage-key-relationship-node-row">
+                      {relationship.nodes.map((node) => {
+                        const axis = AXIS_META.find(
+                          (item) => item.key === node
+                        );
+
+                        const color = AXIS_COLOR_BY_KEY[node];
+
+                        return (
+                          <span
+                            key={node}
+                            className="heritage-key-relationship-node-pill"
+                            style={{
+                              '--axis-accent': color,
+                            }}
+                          >
+                            {axis?.label || node}
+                          </span>
+                        );
+                      })}
+                    </div>
+
+                    <h4>{relationship.title}</h4>
+                  </div>
+                </div>
+
+                <p className="heritage-key-relationship-summary">
+                  {relationship.summary}
+                </p>
+
+                <div className="heritage-key-relationship-block">
+                  <span>How to play into it</span>
+
+                  <p>{relationship.playerRead}</p>
+                </div>
+
+                <div className="heritage-key-relationship-block">
+                  <span>Best fits</span>
+
+                  <p>{relationship.bestFits.join(' • ')}</p>
+                </div>
+
+                <div className="heritage-key-relationship-block">
+                  <span>Build drivers</span>
+
+                  <p>{relationship.drivers.join(' • ')}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (legacyPrintTab === 'referenceSetup') {
+      return (
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--reference-setup">
+          <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
+            <div className="heritage-chart-title-shell">
+              <span className="heritage-chart-eyebrow">Reference Setup</span>
+
+              <h4 className="heritage-chart-title">
+                Choose your listening benchmark
+              </h4>
+
+              <p className="heritage-chart-title-subcopy">
+                This reference drum becomes the anchor for Compare mode. The
+                Voice Engine will show how your current Heritage build moves
+                against that selected benchmark.
+              </p>
+            </div>
+          </div>
+
+          {renderReferenceSelectorPanel()}
+        </div>
+      );
+    }
+
+    if (legacyPrintTab === 'discovery') {
+      return (
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--locked">
+          <div className="heritage-locked-workbench-card">
+            <div className="heritage-locked-workbench-icon">
+              <Lock size={24} />
+            </div>
+
+            <span className="heritage-summary-kicker">
+              LegacyPrint™ Discovery WorkBench
+            </span>
+
+            <h4>Go deeper than product selection.</h4>
+
+            <p>
+              Discovery WorkBench maps player intent, genre, feel, touch,
+              reference sounds, and build priorities into a guided voicing
+              direction.
+            </p>
+
+            <p>
+              Available for SoundLegend artists and LegacyPartner accounts.
+              SoundLegend artists also unlock the Story WorkBench for build
+              notes, consultation history, and the living story behind the drum.
+            </p>
+
+            <button
+              type="button"
+              className="heritage-benchmark-reset-button"
+              onClick={() => navigate('/artisan-shop/soundlegend')}
+            >
+              Explore SoundLegend
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div className="heritage-product-detail">
       <img
@@ -1700,30 +3130,6 @@ const HeritageProductDetail = () => {
                 Builds start at $850. Shape your foundation, choose your finish,
                 then refine your hardware.
               </p>
-
-              {/* <div className="heritage-builder-preset-card">
-                <span className="heritage-builder-preset-label">
-                  Start from
-                </span>
-
-                <div className="heritage-builder-preset-actions">
-                  <button
-                    type="button"
-                    className="heritage-builder-preset-button"
-                    onClick={() => applyHeritagePreset('lowest')}
-                  >
-                    Lowest Price
-                  </button>
-
-                  <button
-                    type="button"
-                    className="heritage-builder-preset-button heritage-builder-preset-button--standard"
-                    onClick={() => applyHeritagePreset('standard')}
-                  >
-                    HERITAGE Standard
-                  </button>
-                </div>
-              </div> */}
             </div>
 
             <div className="heritage-builder-sections">
@@ -2420,494 +3826,149 @@ const HeritageProductDetail = () => {
             )}
           </aside>
 
-          <section className="heritage-voice-panel heritage-voice-read-card heritage-voice-read-card--reworked">
-            <div className="heritage-voice-read-header heritage-voice-read-header--polished">
-              <span className="heritage-summary-kicker">
-                LegacyPrint™ Voice Comparison
-              </span>
-
-              <p className="heritage-read-summary heritage-read-summary--wide">
-                Compare your current Heritage build against a reference drum to
-                see how its response shifts across the core sound metrics.
-              </p>
-            </div>
-
-            <div className="heritage-voice-read-flow">
-              <div className="heritage-reference-card-shell">
-                <div className="heritage-reference-card-head">
+          <section
+            className={`heritage-voice-panel heritage-voice-read-card heritage-voice-read-card--reworked ${
+              isCompareModeEnabled ? 'is-compare-mode' : 'is-standalone-mode'
+            }`}
+          >
+            <div className="heritage-voice-read-header heritage-voice-read-header--polished heritage-voice-read-header--with-compare">
+              <div className="heritage-voice-read-header-copy">
+                <div className="heritage-voice-read-header-topline">
                   <span className="heritage-summary-kicker">
-                    Reference Drum
+                    LegacyPrint™ Voice Engine
                   </span>
 
-                  <p className="heritage-chart-reference-subcopy">
-                    Choose the drum you want this build compared against. By
-                    default, HERITAGE starts from a 14&quot; × 5.5&quot;
-                    Northern Red Oak stave reference with 16 staves, 8 lugs,
-                    Triple Flange hoops, Chrome hardware, a 45° inner edge with
-                    softened outer roundover, Standard snare bed, Medium Torch
-                    finish, Remo Ambassador Coated batter, Remo Ambassador Hazy
-                    Snare Side, and PureSound Custom Pro Steel 20-Strand wires.
-                  </p>
-                </div>
+                  <div className="heritage-compare-header-cluster">
+                    <button
+                      type="button"
+                      className={`heritage-compare-toggle heritage-compare-toggle--header ${
+                        isCompareModeEnabled ? 'is-active' : ''
+                      }`}
+                      onClick={
+                        isCompareModeEnabled
+                          ? handleDisableCompareMode
+                          : handleRequestCompareMode
+                      }
+                    >
+                      {isCompareModeEnabled ? 'Compare On' : 'Enable Compare'}
+                    </button>
 
-                <div
-                  className="heritage-benchmark-read heritage-benchmark-read--glow"
-                  key={benchmarkGlowPulseKey}
-                >
-                  <div className="heritage-benchmark-hero heritage-benchmark-hero--refined">
-                    <div className="heritage-benchmark-hero-image-shell">
-                      <img
-                        src={selectedBenchmarkImagePath}
-                        alt={
-                          selectedBenchmarkType?.typeLabel
-                            ? `${selectedBenchmarkType.typeLabel} reference drum`
-                            : 'Selected reference drum'
-                        }
-                        className="heritage-benchmark-hero-image"
-                      />
-                    </div>
+                    {isCompareModeEnabled && (
+                      <button
+                        type="button"
+                        className="heritage-compare-reference-chip"
+                        onClick={() => setLegacyPrintTab('referenceSetup')}
+                      >
+                        <span>Reference</span>
 
-                    <div className="heritage-benchmark-hero-copy">
-                      <div className="heritage-benchmark-hero-copy-top">
-                        <span className="heritage-benchmark-pill">
-                          Selected Reference
-                        </span>
-
-                        <h4 className="heritage-benchmark-hero-title">
+                        <strong>
                           {selectedBenchmarkType?.typeLabel || 'Reference Drum'}
 
                           {selectedBenchmarkSize?.label
                             ? ` • ${selectedBenchmarkSize.label}`
                             : ''}
-                        </h4>
-
-                        <p className="heritage-benchmark-hero-description">
-                          {selectedBenchmarkType?.shortDescription ||
-                            'Reference drum selected for tonal comparison.'}
-                        </p>
-
-                        <p className="heritage-benchmark-hero-body">
-                          {benchmarkReadBody}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="heritage-benchmark-selector-panel">
-                      <div className="heritage-benchmark-selector-stack heritage-benchmark-selector-stack--hero">
-                        <div className="heritage-benchmark-selector-group">
-                          <label className="heritage-benchmark-selector-label">
-                            Reference Family
-                          </label>
-
-                          <select
-                            className="heritage-benchmark-selector"
-                            value={selectedBenchmarkFamily?.familyId || ''}
-                            onChange={(e) =>
-                              handleBenchmarkFamilyChange(e.target.value)
-                            }
-                          >
-                            {benchmarkFamilyOptions.map((family) => (
-                              <option
-                                key={family.familyId}
-                                value={family.familyId}
-                              >
-                                {family.familyLabel}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="heritage-benchmark-selector-group">
-                          <label className="heritage-benchmark-selector-label">
-                            Reference Drum
-                          </label>
-
-                          <select
-                            className="heritage-benchmark-selector"
-                            value={selectedBenchmarkType?.typeId || ''}
-                            onChange={(e) =>
-                              handleBenchmarkTypeChange(e.target.value)
-                            }
-                          >
-                            {(
-                              selectedBenchmarkFamily?.benchmarkTypes || []
-                            ).map((type) => (
-                              <option key={type.typeId} value={type.typeId}>
-                                {type.typeLabel}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="heritage-benchmark-selector-group">
-                          <label className="heritage-benchmark-selector-label">
-                            Reference Size
-                          </label>
-
-                          <select
-                            className="heritage-benchmark-selector"
-                            value={selectedBenchmarkSize?.sizeId || ''}
-                            onChange={(e) =>
-                              handleBenchmarkSizeChange(e.target.value)
-                            }
-                          >
-                            {(
-                              selectedBenchmarkType?.presetSizeOptions || []
-                            ).map((sizeOption) => (
-                              <option
-                                key={sizeOption.sizeId}
-                                value={sizeOption.sizeId}
-                              >
-                                {sizeOption.label}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="heritage-benchmark-selector-reset-row">
-                        <button
-                          type="button"
-                          className="heritage-benchmark-reset-button"
-                          onClick={handleResetBenchmark}
-                        >
-                          Reset to Heritage Standard
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="heritage-voice-comparison-shell">
-                <div className="heritage-voice-support-grid heritage-voice-support-grid--top">
-                  <div className="heritage-tone-summary-card heritage-tone-summary-card--stacked heritage-tone-summary-card--polished">
-                    <div
-                      className="heritage-tone-summary-icon"
-                      aria-hidden="true"
-                    >
-                      <svg viewBox="0 0 24 24">
-                        <path d="M5 12h3l2-4 3 8 2-4h4" />
-                      </svg>
-                    </div>
-
-                    <div className="heritage-tone-summary-copy">
-                      <span className="heritage-summary-kicker">
-                        Tone Summary
-                      </span>
-
-                      <p>{toneSummaryText}</p>
-
-                      <p className="heritage-tone-summary-helper">
-                        This summary shifts as your build and selected reference
-                        drum change.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="heritage-voice-range-card heritage-voice-range-card--polished">
-                    <div className="heritage-voice-range-head">
-                      <span className="heritage-summary-kicker">
-                        Overall Voice Range
-                      </span>
-
-                      <p className="heritage-voice-range-intro">
-                        This shows where each drum generally sits across the
-                        tonal spectrum — from warmer fundamental body to
-                        brighter upper-register presence.
-                      </p>
-                    </div>
-
-                    <div className="heritage-voice-range-scale">
-                      <div className="heritage-voice-range-labels">
-                        <div className="heritage-voice-range-stop">
-                          <span className="heritage-voice-range-stop-title">
-                            Warm / Full
-                          </span>
-
-                          <span className="heritage-voice-range-stop-sub">
-                            80–180 Hz · Lower body
-                          </span>
-                        </div>
-
-                        <div className="heritage-voice-range-stop">
-                          <span className="heritage-voice-range-stop-title">
-                            Balanced
-                          </span>
-
-                          <span className="heritage-voice-range-stop-sub">
-                            180–350 Hz · Low-mid
-                          </span>
-                        </div>
-
-                        <div className="heritage-voice-range-stop">
-                          <span className="heritage-voice-range-stop-title">
-                            Presence
-                          </span>
-
-                          <span className="heritage-voice-range-stop-sub">
-                            350 Hz–1.2 kHz · Mid
-                          </span>
-                        </div>
-
-                        <div className="heritage-voice-range-stop">
-                          <span className="heritage-voice-range-stop-title">
-                            Crisp / Cutting
-                          </span>
-
-                          <span className="heritage-voice-range-stop-sub">
-                            1.2–4 kHz · Upper-mid
-                          </span>
-                        </div>
-
-                        <div className="heritage-voice-range-stop">
-                          <span className="heritage-voice-range-stop-title">
-                            Bright / Airy
-                          </span>
-
-                          <span className="heritage-voice-range-stop-sub">
-                            4–10 kHz · Highs
-                          </span>
-                        </div>
-                      </div>
-
-                      <div
-                        className="heritage-voice-range-track"
-                        aria-label="Overall voice range from warm and full to bright and airy"
-                      >
-                        <div className="heritage-voice-range-track-line" />
-
-                        <div
-                          className="heritage-voice-range-marker heritage-voice-range-marker--current"
-                          style={{
-                            left: `${((projectedVoiceRangePosition - 1) / 4) * 100}%`,
-                          }}
-                        >
-                          <span className="heritage-voice-range-marker-label">
-                            Build
-                          </span>
-                        </div>
-
-                        <div
-                          className="heritage-voice-range-marker heritage-voice-range-marker--reference"
-                          style={{
-                            left: `${((benchmarkVoiceRangePosition - 1) / 4) * 100}%`,
-                          }}
-                        >
-                          <span className="heritage-voice-range-marker-label">
-                            Ref
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="heritage-voice-range-footer">
-                        <span>Darker / thicker body</span>
-
-                        <span>Brighter / more articulate edge</span>
-                      </div>
-
-                      <div className="heritage-voice-range-legend">
-                        <span className="heritage-voice-range-legend-item">
-                          <span className="heritage-voice-range-dot heritage-voice-range-dot--current" />
-                          Current Build
-                        </span>
-
-                        <span className="heritage-voice-range-legend-item">
-                          <span className="heritage-voice-range-dot heritage-voice-range-dot--reference" />
-                          Selected Reference
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
-                  <div className="heritage-chart-title-shell">
-                    <span className="heritage-chart-eyebrow">
-                      Voice comparison
-                    </span>
-
-                    <h4 className="heritage-chart-title">
-                      Current Build vs Reference Drum
-                    </h4>
-
-                    <p className="heritage-chart-title-subcopy">
-                      Hover or click a metric to explore how this build shifts
-                      against your selected reference drum.
-                    </p>
-
-                    <div
-                      className="heritage-chart-view-switch heritage-chart-view-switch--inline"
-                      role="tablist"
-                      aria-label="Chart view"
-                    >
-                      <button
-                        type="button"
-                        role="tab"
-                        aria-selected={chartView === 'spider'}
-                        className={`heritage-chart-icon-toggle ${
-                          chartView === 'spider' ? 'is-active' : ''
-                        }`}
-                        onClick={() => setChartView('spider')}
-                        title="Spider chart"
-                      >
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <polygon points="12 3.5 19 8 16.5 17.5 7.5 17.5 5 8 12 3.5" />
-
-                          <polygon points="12 7 15.8 9.4 14.5 14.8 9.5 14.8 8.2 9.4 12 7" />
-
-                          <line x1="12" y1="3.5" x2="12" y2="20" />
-
-                          <line x1="5" y1="8" x2="19" y2="8" />
-
-                          <line x1="7.5" y1="17.5" x2="16.5" y2="17.5" />
-                        </svg>
+                        </strong>
                       </button>
-
-                      <button
-                        type="button"
-                        role="tab"
-                        aria-selected={chartView === 'bars'}
-                        className={`heritage-chart-icon-toggle ${
-                          chartView === 'bars' ? 'is-active' : ''
-                        }`}
-                        onClick={() => setChartView('bars')}
-                        title="Bar chart"
-                      >
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                          <line x1="4" y1="20" x2="20" y2="20" />
-
-                          <rect x="5.5" y="11.5" width="3" height="8" rx="1" />
-
-                          <rect x="10.5" y="8.5" width="3" height="11" rx="1" />
-
-                          <rect x="15.5" y="5.5" width="3" height="14" rx="1" />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="heritage-chart-wrap heritage-chart-wrap--voice-read heritage-chart-wrap--simple">
-                  <div className="heritage-chart-stage">
-                    {chartView === 'spider' ? (
-                      <SpiderChart
-                        data={chartValues}
-                        labels={AXIS_META}
-                        pointColors={AXIS_POINT_COLORS}
-                        activeKey={activeAxisKey}
-                        onAxisChange={handleAxisChange}
-                      />
-                    ) : (
-                      <BarChart
-                        data={chartBarData}
-                        activeKey={activeAxisKey}
-                        onAxisChange={handleAxisChange}
-                      />
                     )}
-                  </div>
-                </div>
-
-                <div
-                  className="heritage-axis-insight-panel"
-                  style={{
-                    '--axis-accent': activeAxisColor,
-                  }}
-                >
-                  <div className="heritage-axis-insight-panel-head">
-                    <div className="heritage-axis-insight-panel-title-group">
-                      <span className="heritage-summary-kicker">
-                        Metric Insight
-                      </span>
-
-                      <div className="heritage-axis-insight-panel-title-row">
-                        <span className="heritage-axis-insight-panel-icon">
-                          <MetricIcon
-                            type={activeAxisMeta.icon}
-                            color={activeAxisColor}
-                            size={20}
-                          />
-                        </span>
-
-                        <div className="heritage-axis-insight-panel-title-copy">
-                          <h4>{activeAxisMeta.label}</h4>
-
-                          <span>{AXIS_SUBLABELS[activeAxisMeta.key]}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <span
-                      className={`heritage-axis-insight-score-pill ${
-                        activeAxisDeltaValue > 0
-                          ? 'is-positive'
-                          : activeAxisDeltaValue < 0
-                            ? 'is-negative'
-                            : 'is-neutral'
-                      }`}
-                    >
-                      {activeAxisScore}
-                    </span>
-                  </div>
-
-                  <div className="heritage-axis-insight-panel-body">
-                    <div className="heritage-axis-insight-main-copy">
-                      <p className="heritage-axis-insight-short">
-                        {activeAxisCopy.short}
-                      </p>
-
-                      <p className="heritage-axis-insight-detail">
-                        {activeAxisCopy.detail}
-                      </p>
-
-                      <p className="heritage-axis-insight-scale-read">
-                        <strong>Lower / closer to center:</strong>{' '}
-                        {activeAxisCopy.scaleLow}
-                      </p>
-
-                      <p className="heritage-axis-insight-scale-read">
-                        <strong>Higher / farther outward:</strong>{' '}
-                        {activeAxisCopy.scaleHigh}
-                      </p>
-                    </div>
-
-                    <div className="heritage-axis-impact-panel">
-                      <span className="heritage-axis-impact-label">
-                        Voice contributors
-                      </span>
-
-                      <div className="heritage-axis-impact-list">
-                        {activeAxisImpactFactors.map((factor) => (
-                          <div
-                            key={factor.label}
-                            className={`heritage-axis-impact-row is-${factor.strength}`}
-                          >
-                            <span className="heritage-axis-impact-name">
-                              {factor.label}
-                            </span>
-
-                            <span className="heritage-axis-impact-strength">
-                              <span className="heritage-axis-impact-dot" />
-
-                              <span className="heritage-axis-impact-text">
-                                {factor.strength === 'strong'
-                                  ? 'High'
-                                  : factor.strength === 'medium'
-                                    ? 'Medium'
-                                    : 'Light'}
-                              </span>
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div className="heritage-legacyprint-nav-row">
+              <div
+                className="heritage-legacyprint-tabs"
+                role="tablist"
+                aria-label="LegacyPrint Voice Engine sections"
+              >
+                {visibleLegacyPrintTabs.map((tab) => {
+                  const isActive = legacyPrintTab === tab.key;
+
+                  return (
+                    <button
+                      key={tab.key}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      className={`heritage-legacyprint-tab ${
+                        isActive ? 'is-active' : ''
+                      } ${tab.locked ? 'is-locked' : ''}`}
+                      onClick={() => setLegacyPrintTab(tab.key)}
+                    >
+                      <span>{tab.label}</span>
+
+                      {tab.locked && <Lock size={13} aria-hidden="true" />}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="heritage-voice-read-flow">
+              {renderLegacyPrintPanel()}
+            </div>
           </section>
         </section>
       </div>
+
+      {showCompareIntro && (
+        <div
+          className="heritage-reset-modal-backdrop"
+          onClick={() => setShowCompareIntro(false)}
+        >
+          <div
+            className="heritage-compare-intro-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="heritage-reset-modal-header">
+              <span className="heritage-reset-modal-kicker">
+                Benchmark Compare
+              </span>
+
+              <button
+                type="button"
+                className="heritage-reset-modal-close"
+                onClick={() => setShowCompareIntro(false)}
+                aria-label="Close compare explanation"
+              >
+                ×
+              </button>
+            </div>
+
+            <h4>Use a reference drum as your listening anchor.</h4>
+
+            <p>
+              Compare mode is optional. It lets you choose a drum you already
+              know, then shows how this Heritage build shifts against that
+              reference.
+            </p>
+
+            <p>
+              When Compare is enabled, the charts and tone summary become
+              benchmark-relative. When Compare is off, the Voice Engine
+              describes the current Ober build on its own.
+            </p>
+
+            <div className="heritage-reset-modal-actions">
+              <button
+                type="button"
+                className="heritage-reset-modal-cancel"
+                onClick={() => setShowCompareIntro(false)}
+              >
+                Maybe Later
+              </button>
+
+              <button
+                type="button"
+                className="heritage-reset-modal-confirm"
+                onClick={handleEnableCompareMode}
+              >
+                Enable Compare
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showResetModal && (
         <div

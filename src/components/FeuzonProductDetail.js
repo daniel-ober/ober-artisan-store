@@ -33,67 +33,75 @@ import './FeuzonProductDetail.css';
 import toast from 'react-hot-toast';
 
 const AXIS_META = [
+
   { key: 'attack', label: 'Attack', icon: 'attack' },
+
+  { key: 'brightness', label: 'Brightness', icon: 'brightness' },
+
+  { key: 'projection', label: 'Projection', icon: 'projection' },
 
   { key: 'sustain', label: 'Sustain', icon: 'sustain' },
 
   { key: 'warmth', label: 'Warmth', icon: 'warmth' },
 
-  { key: 'projection', label: 'Projection', icon: 'projection' },
-
-  { key: 'brightness', label: 'Brightness', icon: 'brightness' },
-
   { key: 'sensitivity', label: 'Sensitivity', icon: 'sensitivity' },
 
   { key: 'control', label: 'Control', icon: 'control' },
+
 ];
 
 const AXIS_POINT_COLORS = [
-  '#ff7448',
 
-  '#4d86ff',
+  '#ff7448', // attack
 
-  '#c1682e',
+  '#e7d98f', // brightness
 
-  '#ffb53a',
+  '#ffb53a', // projection
 
-  '#e7d98f',
+  '#4d86ff', // sustain
 
-  '#68d9df',
+  '#c1682e', // warmth
 
-  '#9e8bff',
+  '#68d9df', // sensitivity
+
+  '#9e8bff', // control
+
 ];
 
 const AXIS_COLOR_BY_KEY = {
+
   attack: '#ff7448',
+
+  brightness: '#e7d98f',
+
+  projection: '#ffb53a',
 
   sustain: '#4d86ff',
 
   warmth: '#c1682e',
 
-  projection: '#ffb53a',
-
-  brightness: '#e7d98f',
-
   sensitivity: '#68d9df',
 
   control: '#9e8bff',
+
 };
 
 const AXIS_SUBLABELS = {
-  attack: 'Quickness',
 
-  sustain: 'Length',
+  attack: 'Strike',
+
+  brightness: 'Clarity',
+
+  projection: 'Carry',
+
+  sustain: 'Bloom',
 
   warmth: 'Body',
 
-  projection: 'Throw',
+  sensitivity: 'Touch',
 
-  brightness: 'Top End',
+  control: 'Refinement',
 
-  sensitivity: 'Response',
-
-  control: 'Focus',
 };
 
 const AXIS_INSIGHT_COPY = {
@@ -853,22 +861,31 @@ const hardwareOptions = [
 ];
 
 const hoopOptions = [
-  {
-    label: 'Die-Cast',
-
-    value: 'Die-Cast',
-
-    helperText: 'More focused attack, tighter note shape, and added control.',
-  },
 
   {
-    label: 'Triple Flange',
 
     value: 'Triple Flange',
 
-    helperText:
+    label: 'Triple Flange',
+
+    description:
+
       'A more open feel with broader shell bloom and slightly looser response.',
+
   },
+
+  {
+
+    value: 'Die-Cast',
+
+    label: 'Die-Cast',
+
+    description:
+
+      'More focused attack, tighter note shape, and added control.',
+
+  },
+
 ];
 
 const bearingEdgeOptions = [
@@ -2028,7 +2045,7 @@ const FeuzonProductDetail = () => {
 
   const [hardwareColor, setHardwareColor] = useState('Chrome');
 
-  const [hoopType, setHoopType] = useState('Triple Flange');
+const [hoopType, setHoopType] = useState('Triple Flange');
 
   const [snareBed, setSnareBed] = useState('Standard');
 
@@ -4259,8 +4276,10 @@ const FeuzonProductDetail = () => {
                             </span>
 
                             <span className="feuzon-option-subtitle">
-                              {option.helperText}
-                            </span>
+
+  {option.description}
+
+</span>
 
                             {(isSelected || deltaMeta.text) && (
                               <span
