@@ -10572,3 +10572,275 @@
   color: rgba(205, 214, 255, 0.62);
 
 }
+
+/* =========================================================
+
+   HERITAGE — VOICEPRINT SUMMARY ICON
+
+   ========================================================= */
+
+.heritage-tone-summary-icon--legacyprint {
+
+  display: grid;
+
+  place-items: center;
+
+  overflow: hidden;
+
+}
+
+.heritage-tone-summary-legacyprint-icon {
+
+  width: 26px;
+
+  height: 26px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter:
+
+    drop-shadow(0 0 10px rgba(214, 178, 119, 0.28))
+
+    drop-shadow(0 0 18px rgba(141, 162, 255, 0.16));
+
+}
+
+/* =========================================================
+
+   HERITAGE — VOICEPRINT SUMMARY LOGO REFINEMENT
+
+   ========================================================= */
+
+.heritage-tone-summary-icon--legacyprint {
+
+  width: 98px !important;
+
+  height: 98px !important;
+
+  min-width: 98px !important;
+
+  border: 0 !important;
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  outline: 0 !important;
+
+  display: grid;
+
+  place-items: center;
+
+  overflow: visible !important;
+
+}
+
+.heritage-tone-summary-icon--legacyprint::before,
+
+.heritage-tone-summary-icon--legacyprint::after {
+
+  display: none !important;
+
+  content: none !important;
+
+}
+
+.heritage-tone-summary-legacyprint-icon {
+
+  width: 86px !important;
+
+  height: 86px !important;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter:
+
+    drop-shadow(0 0 10px rgba(214, 178, 119, 0.22))
+
+    drop-shadow(0 0 18px rgba(141, 162, 255, 0.16));
+
+}
+
+@media (max-width: 640px) {
+
+  .heritage-tone-summary-icon--legacyprint {
+
+    width: 72px !important;
+
+    height: 72px !important;
+
+    min-width: 72px !important;
+
+  }
+
+  .heritage-tone-summary-legacyprint-icon {
+
+    width: 64px !important;
+
+    height: 64px !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   HERITAGE — VOICEPRINT SUMMARY INLINE ICON
+
+   ========================================================= */
+
+.heritage-tone-summary-card--voiceprint {
+
+  display: block !important;
+
+  padding: 30px 34px 30px !important;
+
+}
+
+.heritage-tone-summary-card--voiceprint .heritage-tone-summary-copy {
+
+  display: block !important;
+
+  width: 100%;
+
+}
+
+.heritage-summary-kicker--voiceprint {
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  margin-bottom: 18px !important;
+
+}
+
+.heritage-summary-kicker-icon {
+
+  width: 28px;
+
+  height: 28px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter:
+
+    drop-shadow(0 0 8px rgba(214, 178, 119, 0.22))
+
+    drop-shadow(0 0 12px rgba(141, 162, 255, 0.16));
+
+}
+
+.heritage-tone-summary-card--voiceprint .heritage-tone-summary-copy > p:first-of-type {
+
+  max-width: 980px;
+
+}
+
+@media (max-width: 640px) {
+
+  .heritage-tone-summary-card--voiceprint {
+
+    padding: 24px 22px !important;
+
+  }
+
+  .heritage-summary-kicker-icon {
+
+    width: 24px;
+
+    height: 24px;
+
+  }
+
+}
+
+/* =========================================================
+
+   HERITAGE — LEGACYPRINT ENGINE HEADER ICON
+
+   ========================================================= */
+
+.heritage-summary-kicker--legacyprint-engine {
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  gap: 12px !important;
+
+}
+
+.heritage-legacyprint-engine-icon {
+
+  width: 34px;
+
+  height: 34px;
+
+  object-fit: contain;
+
+  display: block;
+
+  flex: 0 0 auto;
+
+  filter:
+
+    drop-shadow(0 0 10px rgba(214, 178, 119, 0.2))
+
+    drop-shadow(0 0 16px rgba(141, 162, 255, 0.14));
+
+}
+
+@media (max-width: 640px) {
+
+  .heritage-legacyprint-engine-icon {
+
+    width: 28px;
+
+    height: 28px;
+
+  }
+
+  .heritage-summary-kicker--legacyprint-engine {
+
+    gap: 10px !important;
+
+  }
+
+}
+
+
+/* =========================================================
+
+   HERITAGE — LEGACYPRINT HEADER ICON CLEANUP
+
+   Removes warm/yellow halo behind icon
+
+   ========================================================= */
+
+.heritage-legacyprint-engine-icon {
+
+  filter:
+
+    drop-shadow(0 0 100px rgba(141, 162, 255, 0.22))
+
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.25)) !important;
+
+}
+
+.heritage-summary-kicker--legacyprint-engine {
+
+  text-shadow: none !important;
+
+}
+

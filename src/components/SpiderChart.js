@@ -300,9 +300,21 @@ function createGradientRadarPlugin(
 
       );
 
-      centerGlow.addColorStop(0, rgbToString(blend, mode === 'compare' ? 0.13 : 0.17));
+      centerGlow.addColorStop(
 
-      centerGlow.addColorStop(0.5, rgbToString(blend, mode === 'compare' ? 0.05 : 0.07));
+        0,
+
+        rgbToString(blend, mode === 'compare' ? 0.13 : 0.17)
+
+      );
+
+      centerGlow.addColorStop(
+
+        0.5,
+
+        rgbToString(blend, mode === 'compare' ? 0.05 : 0.07)
+
+      );
 
       centerGlow.addColorStop(1, 'rgba(0,0,0,0)');
 
@@ -372,7 +384,17 @@ function createGradientRadarPlugin(
 
         const nextColor = pointColors[(i + 1) % pointColors.length];
 
-        const gradient = ctx.createLinearGradient(current.x, current.y, next.x, next.y);
+        const gradient = ctx.createLinearGradient(
+
+          current.x,
+
+          current.y,
+
+          next.x,
+
+          next.y
+
+        );
 
         gradient.addColorStop(0, mixColor(currentColor, nextColor, 0.04, 0.99));
 
@@ -382,7 +404,17 @@ function createGradientRadarPlugin(
 
         ctx.strokeStyle = gradient;
 
-        ctx.shadowColor = mixColor(currentColor, nextColor, 0.5, mode === 'compare' ? 0.34 : 0.42);
+        ctx.shadowColor = mixColor(
+
+          currentColor,
+
+          nextColor,
+
+          0.5,
+
+          mode === 'compare' ? 0.34 : 0.42
+
+        );
 
         ctx.beginPath();
 
@@ -650,11 +682,11 @@ const SpiderChart = ({
 
   useEffect(() => {
 
-    if (!canvasRef.current) return;
+    if (!canvasRef.current) return undefined;
 
     const ctx = canvasRef.current.getContext('2d');
 
-    if (!ctx) return;
+    if (!ctx) return undefined;
 
     if (chartInstanceRef.current) {
 
@@ -708,7 +740,7 @@ const SpiderChart = ({
 
           {
 
-            label: isCompareMode ? 'Current Build' : 'Ober Voice Score',
+            label: 'Current Build',
 
             data,
 
@@ -930,11 +962,7 @@ const SpiderChart = ({
 
     chart.data.labels = overlayAxes.map(() => '');
 
-    chart.data.datasets[0].label = isCompareMode
-
-      ? 'Current Build'
-
-      : 'Ober Voice Score';
+    chart.data.datasets[0].label = 'Current Build';
 
     chart.data.datasets[0].data = data;
 
@@ -966,7 +994,15 @@ const SpiderChart = ({
 
         compact ? 'spider-chart-card--compact' : ''
 
-      } ${isCompareMode ? 'spider-chart-card--compare' : 'spider-chart-card--standalone'}`}
+      } ${
+
+        isCompareMode
+
+          ? 'spider-chart-card--compare'
+
+          : 'spider-chart-card--standalone'
+
+      }`}
 
     >
 
@@ -988,11 +1024,7 @@ const SpiderChart = ({
 
             <span className="spider-chart-legend-line spider-chart-legend-line--current" />
 
-            <span className="spider-chart-legend-text">
-
-              {isCompareMode ? 'Current Build' : 'Ober Voice Score'}
-
-            </span>
+            <span className="spider-chart-legend-text">Current Build</span>
 
           </div>
 

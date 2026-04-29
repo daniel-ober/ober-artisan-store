@@ -173,7 +173,7 @@ const BASE_LEGACYPRINT_TABS = [
   {
     key: 'voiceRead',
 
-    label: 'Voice Read',
+    label: 'VoiceMap™',
   },
 
   {
@@ -185,13 +185,13 @@ const BASE_LEGACYPRINT_TABS = [
   {
     key: 'traitInsight',
 
-    label: 'Trait Insight',
+    label: 'Node Insights',
   },
 
   {
     key: 'relationships',
 
-    label: 'Key Relationships',
+    label: 'Voice Threads',
   },
 ];
 
@@ -1711,17 +1711,13 @@ const HeritageProductDetail = () => {
     return getLegacyTuningHzRange(benchmarkLegacyTuningRange);
   }, [benchmarkLegacyTuningRange]);
 
-const currentNearestNoteWindow = useMemo(() => {
+  const currentNearestNoteWindow = useMemo(() => {
+    return getNearestNoteWindow(legacyTuningHzRange);
+  }, [legacyTuningHzRange]);
 
-  return getNearestNoteWindow(legacyTuningHzRange);
-
-}, [legacyTuningHzRange]);
-
-const referenceNearestNoteWindow = useMemo(() => {
-
-  return getNearestNoteWindow(benchmarkLegacyTuningHzRange);
-
-}, [benchmarkLegacyTuningHzRange]);
+  const referenceNearestNoteWindow = useMemo(() => {
+    return getNearestNoteWindow(benchmarkLegacyTuningHzRange);
+  }, [benchmarkLegacyTuningHzRange]);
 
   const activeAxisMeta =
     AXIS_META.find((axis) => axis.key === activeAxisKey) || AXIS_META[0];
@@ -2391,22 +2387,24 @@ const referenceNearestNoteWindow = useMemo(() => {
 
   const renderToneSummaryCard = () => {
     return (
-      <div className="heritage-tone-summary-card heritage-tone-summary-card--stacked heritage-tone-summary-card--polished">
-        <div className="heritage-tone-summary-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 12h3l2-4 3 8 2-4h4" />
-          </svg>
-        </div>
-
+      <div className="heritage-tone-summary-card heritage-tone-summary-card--stacked heritage-tone-summary-card--polished heritage-tone-summary-card--voiceprint">
         <div className="heritage-tone-summary-copy">
-          <span className="heritage-summary-kicker">Tone Summary</span>
+          <span className="heritage-summary-kicker heritage-summary-kicker--voiceprint">
+            <img
+              src="/legacyprint-benchmarks/legacyprint-icon.png"
+              alt=""
+              className="heritage-summary-kicker-icon"
+              aria-hidden="true"
+            />
+            VoiceMap Summary
+          </span>
 
           <p>{toneSummaryText}</p>
 
           <p className="heritage-tone-summary-helper">
             {isCompareModeEnabled
-              ? 'Compare mode is enabled. This read is benchmark-relative against your selected reference drum.'
-              : 'This read responds to your current build selections.'}
+              ? 'Compare mode is enabled. This VoiceMap Summary is benchmark-relative against your selected reference drum.'
+              : 'This VoiceMap Summary responds to your current build selections.'}
           </p>
         </div>
       </div>
@@ -2438,15 +2436,14 @@ const referenceNearestNoteWindow = useMemo(() => {
         }`}
       >
         <div className="heritage-voice-range-head">
-          <span className="heritage-summary-kicker">
-            Target LegacyTuning™ Range
-          </span>
+          <span className="heritage-summary-kicker">LegacyTuning™ Zone</span>
 
           <p className="heritage-voice-range-intro">
-            LegacyTuning™ is the natural resonance lane of this shell — the
-            range where the drum wants to vibrate, open up, and feel balanced
-            under the stick. It is not a reference comparison; it is the voice
-            this build is naturally leaning toward.
+            LegacyTuning™ starts with a broader Zone — the resonance area where
+            this shell naturally wants to live. The measured Range shows the
+            current frequency span inside that Zone. The Pocket is the final
+            craftsman-read decision: the place where the shell opens up, settles
+            in, and tells us it is ready.
           </p>
 
           <div
@@ -2456,7 +2453,7 @@ const referenceNearestNoteWindow = useMemo(() => {
           >
             <div className="heritage-voice-range-readout heritage-voice-range-readout--current">
               <span>
-                {isCompareModeEnabled ? 'Current build range' : 'Target range'}
+                {isCompareModeEnabled ? 'Current Range' : 'Current Range'}
               </span>
 
               <strong>{legacyTuningHzRange}</strong>
@@ -2466,7 +2463,7 @@ const referenceNearestNoteWindow = useMemo(() => {
 
             {isCompareModeEnabled && (
               <div className="heritage-voice-range-readout heritage-voice-range-readout--reference">
-                <span>Reference range</span>
+                <span>Reference Range</span>
 
                 <strong>{benchmarkLegacyTuningHzRange}</strong>
 
@@ -2529,7 +2526,7 @@ const referenceNearestNoteWindow = useMemo(() => {
             className={`heritage-voice-range-track ${
               isCompareModeEnabled ? 'heritage-voice-range-track--compare' : ''
             }`}
-            aria-label="Target LegacyTuning range from warm and full to bright and airy"
+            aria-label="LegacyTuning Zone from warm and full to bright and airy"
           >
             <div className="heritage-voice-range-track-line" />
 
@@ -2622,92 +2619,33 @@ const referenceNearestNoteWindow = useMemo(() => {
         <div className="heritage-chart-module-head">
           <div className="heritage-chart-module-copy">
             <span className="heritage-chart-eyebrow">
-              {isCompareModeEnabled ? 'Benchmark Compare' : 'Voice Trait Map'}
+              {isCompareModeEnabled ? 'VoiceMap™ Compare' : 'VoiceMap™'}
             </span>
 
             <h4 className="heritage-chart-title">
               {isCompareModeEnabled
-                ? 'Build vs Reference'
-                : 'Current Build Voice Shape'}
+                ? 'Current build vs reference'
+                : 'Current build voice shape'}
             </h4>
 
             <p className="heritage-chart-title-subcopy">
               {isCompareModeEnabled
-                ? 'Shows how this Heritage build shifts against your selected listening benchmark.'
-                : 'Shows the current Heritage configuration as its own Ober voice profile.'}
+                ? 'Shows how this Heritage build shifts against your selected listening benchmark across the seven Voice Nodes.'
+                : 'Shows the current Heritage configuration across the seven Voice Nodes.'}
             </p>
-          </div>
-
-          <div
-            className="heritage-chart-view-switch heritage-chart-view-switch--inline"
-            role="tablist"
-            aria-label="Chart view"
-          >
-            <button
-              type="button"
-              role="tab"
-              aria-selected={chartView === 'spider'}
-              className={`heritage-chart-icon-toggle ${
-                chartView === 'spider' ? 'is-active' : ''
-              }`}
-              onClick={() => setChartView('spider')}
-              title="Spider chart"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <polygon points="12 3.5 19 8 16.5 17.5 7.5 17.5 5 8 12 3.5" />
-
-                <polygon points="12 7 15.8 9.4 14.5 14.8 9.5 14.8 8.2 9.4 12 7" />
-
-                <line x1="12" y1="3.5" x2="12" y2="20" />
-
-                <line x1="5" y1="8" x2="19" y2="8" />
-
-                <line x1="7.5" y1="17.5" x2="16.5" y2="17.5" />
-              </svg>
-            </button>
-
-            <button
-              type="button"
-              role="tab"
-              aria-selected={chartView === 'bars'}
-              className={`heritage-chart-icon-toggle ${
-                chartView === 'bars' ? 'is-active' : ''
-              }`}
-              onClick={() => setChartView('bars')}
-              title="Bar chart"
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <line x1="4" y1="20" x2="20" y2="20" />
-
-                <rect x="5.5" y="11.5" width="3" height="8" rx="1" />
-
-                <rect x="10.5" y="8.5" width="3" height="11" rx="1" />
-
-                <rect x="15.5" y="5.5" width="3" height="14" rx="1" />
-              </svg>
-            </button>
           </div>
         </div>
 
         <div className="heritage-chart-wrap heritage-chart-wrap--voice-read heritage-chart-wrap--simple heritage-chart-wrap--compare-enabled">
           <div className="heritage-chart-stage">
-            {chartView === 'spider' ? (
-              <SpiderChart
-                data={chartValues}
-                labels={AXIS_META}
-                pointColors={AXIS_POINT_COLORS}
-                activeKey={activeAxisKey}
-                onAxisChange={handleAxisChange}
-                mode={isCompareModeEnabled ? 'compare' : 'standalone'}
-              />
-            ) : (
-              <BarChart
-                data={chartBarData}
-                activeKey={activeAxisKey}
-                onAxisChange={handleAxisChange}
-                mode={isCompareModeEnabled ? 'compare' : 'standalone'}
-              />
-            )}
+            <SpiderChart
+              data={chartValues}
+              labels={AXIS_META}
+              pointColors={AXIS_POINT_COLORS}
+              activeKey={activeAxisKey}
+              onAxisChange={handleAxisChange}
+              mode={isCompareModeEnabled ? 'compare' : 'standalone'}
+            />
           </div>
         </div>
       </div>
@@ -2724,7 +2662,7 @@ const referenceNearestNoteWindow = useMemo(() => {
       >
         <div className="heritage-axis-insight-panel-head">
           <div className="heritage-axis-insight-panel-title-group">
-            <span className="heritage-summary-kicker">Voice Trait Insight</span>
+            <span className="heritage-summary-kicker">Node Insight</span>
 
             <div className="heritage-axis-insight-panel-title-row">
               <span className="heritage-axis-insight-panel-icon">
@@ -2779,7 +2717,7 @@ const referenceNearestNoteWindow = useMemo(() => {
 
           <div className="heritage-axis-impact-panel">
             <span className="heritage-axis-impact-label">
-              Voice contributors
+              Node contributors
             </span>
 
             <div className="heritage-axis-impact-list">
@@ -2869,17 +2807,15 @@ const referenceNearestNoteWindow = useMemo(() => {
           <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
             <div className="heritage-chart-title-shell">
               <span className="heritage-chart-eyebrow">
-                Choose a voice trait
+                Voice Node Glossary
               </span>
 
-              <h4 className="heritage-chart-title">
-                Explore how each trait speaks
-              </h4>
+              <h4 className="heritage-chart-title">Explore each Voice Node</h4>
 
               <p className="heritage-chart-title-subcopy">
                 {isCompareModeEnabled
-                  ? 'Compare mode is enabled. Select a trait below to see how this build shifts against your selected reference drum.'
-                  : 'Select a trait below to understand how this build speaks and feels on its own. Turn on Compare mode when you want to hear those traits against a reference drum.'}
+                  ? 'Compare mode is enabled. Select a Voice Node below to see how this build shifts against your selected reference drum.'
+                  : 'Select a Voice Node below to understand how this build speaks and feels on its own. Turn on Compare mode when you want to read those nodes against a reference drum.'}
               </p>
             </div>
           </div>
@@ -2919,19 +2855,17 @@ const referenceNearestNoteWindow = useMemo(() => {
       return (
         <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships">
           <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
-            <div className="heritage-chart-title-shell">
-              <span className="heritage-chart-eyebrow">Key Relationships</span>
+            <span className="heritage-chart-eyebrow">Voice Threads</span>
 
-              <h4 className="heritage-chart-title">
-                Top voice pairings for this build
-              </h4>
+            <h4 className="heritage-chart-title">
+              Strongest Voice Node relationships
+            </h4>
 
-              <p className="heritage-chart-title-subcopy">
-                {isCompareModeEnabled
-                  ? 'Compare mode is enabled. These relationships show which voice pairings most clearly shape how this build differs from your selected benchmark.'
-                  : 'These are the most useful voice combinations for interpreting how this Heritage configuration should feel and respond on its own.'}
-              </p>
-            </div>
+            <p className="heritage-chart-title-subcopy">
+              {isCompareModeEnabled
+                ? 'Compare mode is enabled. These Voice Threads show which node relationships most clearly shape how this build differs from your selected benchmark.'
+                : 'These Voice Threads show the strongest node relationships shaping this Heritage configuration.'}
+            </p>
           </div>
 
           <div className="heritage-key-relationships-grid">
@@ -2977,7 +2911,7 @@ const referenceNearestNoteWindow = useMemo(() => {
                 </p>
 
                 <div className="heritage-key-relationship-block">
-                  <span>How to play into it</span>
+                  <span>How to use this thread</span>
 
                   <p>{relationship.playerRead}</p>
                 </div>
@@ -2989,7 +2923,7 @@ const referenceNearestNoteWindow = useMemo(() => {
                 </div>
 
                 <div className="heritage-key-relationship-block">
-                  <span>Build drivers</span>
+                  <span>Build contributors</span>
 
                   <p>{relationship.drivers.join(' • ')}</p>
                 </div>
@@ -3033,21 +2967,22 @@ const referenceNearestNoteWindow = useMemo(() => {
             </div>
 
             <span className="heritage-summary-kicker">
-              LegacyPrint™ Discovery WorkBench
+              LegacyPrint™ Discovery Workbench{' '}
             </span>
 
             <h4>Go deeper than product selection.</h4>
 
             <p>
-              Discovery WorkBench maps player intent, genre, feel, touch,
-              reference sounds, and build priorities into a guided voicing
-              direction.
+              Discovery Workbench maps player intent, genre, feel, touch,
+              reference sounds, Voice Nodes, Voice Threads, and build priorities
+              into a guided voicing direction.
             </p>
 
             <p>
               Available for SoundLegend artists and LegacyPartner accounts.
-              SoundLegend artists also unlock the Story WorkBench for build
-              notes, consultation history, and the living story behind the drum.
+              SoundLegend artists also unlock deeper VoiceMap, VoiceRange, Story
+              Workbench, consultation history, and the living story behind the
+              drum.
             </p>
 
             <button
@@ -3834,7 +3769,13 @@ const referenceNearestNoteWindow = useMemo(() => {
             <div className="heritage-voice-read-header heritage-voice-read-header--polished heritage-voice-read-header--with-compare">
               <div className="heritage-voice-read-header-copy">
                 <div className="heritage-voice-read-header-topline">
-                  <span className="heritage-summary-kicker">
+                  <span className="heritage-summary-kicker heritage-summary-kicker--legacyprint-engine">
+                    <img
+                      src="/legacyprint-benchmarks/legacyprint-icon.png"
+                      alt=""
+                      className="heritage-legacyprint-engine-icon"
+                      aria-hidden="true"
+                    />
                     LegacyPrint™ Voice Engine
                   </span>
 
