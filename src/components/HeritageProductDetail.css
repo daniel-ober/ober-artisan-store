@@ -5359,3 +5359,46 @@
 .heritage-thread-card-topline--no-rank .heritage-thread-card-type {
   text-align: right !important;
 }
+
+
+.heritage-voice-shift-readout {
+
+  margin: 16px 0 0;
+
+  padding: 12px 14px;
+
+  border: 1px solid rgba(214, 178, 119, 0.18);
+
+  border-left: 3px solid rgba(214, 178, 119, 0.62);
+
+  border-radius: 14px;
+
+  background:
+
+    linear-gradient(135deg, rgba(214, 178, 119, 0.08), rgba(255, 255, 255, 0.025)),
+
+    rgba(0, 0, 0, 0.18);
+
+  color: rgba(245, 243, 238, 0.82);
+
+  font-size: 0.88rem;
+
+  line-height: 1.55;
+
+}
+
+.heritage-voice-shift-readout strong {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--heritage-gold);
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+}

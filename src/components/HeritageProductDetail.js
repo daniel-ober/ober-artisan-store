@@ -3015,14 +3015,56 @@ const HeritageProductDetail = () => {
     if (legacyPrintTab === 'relationships') {
       const activeReadout = activeVoiceThreadReadout;
 
+      const voiceShiftText = (() => {
+        const profile = activeVoiceSummary?.profile || {};
+
+        const sizeLabel = `${size}x${depth}`;
+
+        const shifts = [
+          { label: 'attack', value: profile.attack },
+
+          { label: 'warmth', value: profile.warmth },
+
+          { label: 'brightness', value: profile.brightness },
+
+          { label: 'sustain', value: profile.sustain },
+
+          { label: 'projection', value: profile.projection },
+        ]
+
+          .filter((item) => Number.isFinite(Number(item.value)))
+
+          .map((item) => ({
+            ...item,
+
+            delta: Number(item.value) - 5,
+          }))
+
+          .filter((item) => Math.abs(item.delta) >= 0.12)
+
+          .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
+
+          .slice(0, 3)
+
+          .map((item) => {
+            const direction = item.delta > 0 ? 'more' : 'less';
+
+            return `${direction} ${item.label}`;
+          });
+
+        if (!shifts.length) return '';
+
+        return `${sizeLabel} keeps the same main thread, but shifts toward ${shifts.join(
+          ', '
+        )}.`;
+      })();
+
       return (
         <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-reference--cards heritage-thread-reference--calm">
           <div className="heritage-thread-reference-head">
             <span className="heritage-chart-eyebrow">Voice Threads</span>
 
-            <h4 className="heritage-chart-title">
-              Current Voice Thread paths
-            </h4>
+            <h4 className="heritage-chart-title">Current Voice Thread paths</h4>
 
             <p className="heritage-chart-title-subcopy">
               A Voice Thread is a simple way to describe how a few parts of the
@@ -3136,6 +3178,14 @@ const HeritageProductDetail = () => {
                   {activeReadout.nodeLabels}
                 </span>
               </div>
+
+              {voiceShiftText && (
+                <p className="heritage-voice-shift-readout">
+                  <strong>Voice shift</strong>
+
+                  {voiceShiftText}
+                </p>
+              )}
 
               <div className="heritage-thread-listening-note">
                 <section>
