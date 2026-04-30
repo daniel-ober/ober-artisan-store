@@ -2,60 +2,17 @@
 
 import buildHeritageVoiceRead from './buildHeritageVoiceRead.js';
 
-const TEST_DEPTHS_BY_SIZE = {
-
-  12: ['5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
-
-  13: ['5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
-
-  14: ['5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
-
-};
-
-const TEST_STAVE_OPTIONS_BY_SIZE_AND_LUGS = {
-
-  12: {
-
-    6: ['12 - 8mm + $150 (Re-Rings Required)'],
-
-    8: ['16 - 10mm'],
-
-  },
-
-  13: {
-
-    8: ['16 - 10mm'],
-
-  },
-
-  14: {
-
-    8: ['16 - 10mm'],
-
-    10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'],
-
-  },
-
-};
-
-const TEST_HOOPS = ['Triple Flange', 'Die-Cast'];
-
-const TEST_HARDWARE = ['Chrome', 'Black Nickel', 'Brass/Gold'];
-
-const TEST_FINISHES = ['Light Torch', 'Medium Torch', 'Blackened'];
+import { buildKeyRelationships } from './heritageKeyRelationships.js';
 
 const DEFAULT_BENCHMARK = {
-
   benchmarkFamilyId: 'ober-custom',
 
   benchmarkTypeId: 'heritage-oak-reference',
 
   benchmarkSizeId: '14x5_5',
-
 };
 
 const AXES = [
-
   'attack',
 
   'brightness',
@@ -69,42 +26,349 @@ const AXES = [
   'sensitivity',
 
   'control',
-
 ];
 
-function getSortedAxes(profile = {}) {
+const TEST_DEPTHS_BY_SIZE = {
+  12: ['5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
 
-  return [...AXES].sort((a, b) => {
+  13: ['5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
 
-    const aValue = Number(profile?.[a] ?? 5);
+  14: ['5.0', '5.5', '6.0', '6.5', '7.0', '7.5', '8.0'],
+};
 
-    const bValue = Number(profile?.[b] ?? 5);
+const TEST_STAVE_OPTIONS_BY_SIZE_AND_LUGS = {
+  12: {
+    6: ['12 - 8mm + $150 (Re-Rings Required)'],
 
-    return bValue - aValue;
+    8: ['16 - 10mm'],
+  },
 
-  });
+  13: {
+    8: ['16 - 10mm'],
+  },
 
+  14: {
+    8: ['16 - 10mm'],
+
+    10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'],
+  },
+};
+
+const TEST_HOOPS = ['Triple Flange', 'Die-Cast'];
+
+const TEST_HARDWARE = ['Chrome', 'Black Nickel', 'Brass/Gold'];
+
+const TEST_FINISHES = ['Light Torch', 'Medium Torch', 'Blackened'];
+
+const FOCUS_CASES = [
+  {
+    label: 'Small shallow quick read',
+
+    size: '12',
+
+    depth: '5.0',
+
+    lugs: '8',
+
+    staveOption: '16 - 10mm',
+
+    hoopType: 'Triple Flange',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Medium Torch',
+  },
+
+  {
+    label: 'Small deep bloom read',
+
+    size: '12',
+
+    depth: '8.0',
+
+    lugs: '8',
+
+    staveOption: '16 - 10mm',
+
+    hoopType: 'Triple Flange',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Medium Torch',
+  },
+
+  {
+    label: 'Small re-ring read',
+
+    size: '12',
+
+    depth: '6.5',
+
+    lugs: '6',
+
+    staveOption: '12 - 8mm + $150 (Re-Rings Required)',
+
+    hoopType: 'Triple Flange',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Medium Torch',
+  },
+
+  {
+    label: 'Standard Heritage reference-like read',
+
+    size: '14',
+
+    depth: '5.5',
+
+    lugs: '8',
+
+    staveOption: '16 - 10mm',
+
+    hoopType: 'Triple Flange',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Medium Torch',
+  },
+
+  {
+    label: 'Deep 14 open read',
+
+    size: '14',
+
+    depth: '8.0',
+
+    lugs: '8',
+
+    staveOption: '16 - 10mm',
+
+    hoopType: 'Triple Flange',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Medium Torch',
+  },
+
+  {
+    label: 'Heavy focused 14 read',
+
+    size: '14',
+
+    depth: '6.5',
+
+    lugs: '10',
+
+    staveOption: '20 - 12mm',
+
+    hoopType: 'Die-Cast',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Blackened',
+  },
+
+  {
+    label: 'Thin re-ring 14 read',
+
+    size: '14',
+
+    depth: '6.5',
+
+    lugs: '10',
+
+    staveOption: '10 - 7mm + $150 (Re-Rings Required)',
+
+    hoopType: 'Triple Flange',
+
+    hardwareColor: 'Chrome',
+
+    scorchDepth: 'Light Torch',
+  },
+];
+
+function toNumber(value, fallback = 5) {
+  const parsed = Number(value);
+
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function round(value, places = 2) {
+  return Number(Number(value || 0).toFixed(places));
 }
 
 function getAxisDelta(profile = {}, axis) {
-
-  return Number(profile?.[axis] ?? 5) - 5;
-
+  return toNumber(profile?.[axis], 5) - 5;
 }
 
 function getAxisDeltaFixed(profile = {}, axis) {
+  return round(getAxisDelta(profile, axis), 2);
+}
 
-  return Number(getAxisDelta(profile, axis).toFixed(2));
+function getSortedAxes(profile = {}) {
+  return [...AXES].sort((a, b) => {
+    const aValue = toNumber(profile?.[a], 5);
 
+    const bValue = toNumber(profile?.[b], 5);
+
+    return bValue - aValue;
+  });
+}
+
+function getProfileSpread(profile = {}) {
+  const values = AXES.map((axis) => toNumber(profile?.[axis], 5));
+
+  const highest = Math.max(...values);
+
+  const lowest = Math.min(...values);
+
+  return round(highest - lowest, 2);
+}
+
+function getProfileMovementScore(profile = {}) {
+  const movement = AXES.reduce((sum, axis) => {
+    return sum + Math.abs(getAxisDelta(profile, axis));
+  }, 0);
+
+  return round(movement, 2);
+}
+
+function getInputSignature(input = {}) {
+  return [
+    input.size,
+
+    input.depth,
+
+    input.lugs,
+
+    input.staveOption,
+
+    input.hoopType,
+
+    input.hardwareColor,
+
+    input.scorchDepth,
+  ].join('|');
+}
+
+function buildTestCaseLabel(input = {}) {
+  return [
+    `${input.size}x${input.depth}`,
+
+    `${input.lugs} lugs`,
+
+    input.staveOption,
+
+    input.hoopType,
+
+    input.hardwareColor,
+
+    input.scorchDepth,
+  ].join(' • ');
+}
+
+function hasReRings(input = {}) {
+  return (
+    String(input.staveOption || '')
+      .toLowerCase()
+      .includes('re-rings') ||
+    String(input.staveOption || '').includes('+ $150')
+  );
+}
+
+function isThinShell(input = {}) {
+  return String(input.staveOption || '').includes('7mm');
+}
+
+function isSmallThinShell(input = {}) {
+  return String(input.staveOption || '').includes('8mm');
+}
+
+function isThickShell(input = {}) {
+  return String(input.staveOption || '').includes('12mm');
+}
+
+function createTestInputs() {
+  const inputs = [];
+
+  Object.entries(TEST_DEPTHS_BY_SIZE).forEach(([size, depths]) => {
+    depths.forEach((depth) => {
+      const lugMap = TEST_STAVE_OPTIONS_BY_SIZE_AND_LUGS[size] || {};
+
+      Object.entries(lugMap).forEach(([lugs, staveOptions]) => {
+        staveOptions.forEach((staveOption) => {
+          TEST_HOOPS.forEach((hoopType) => {
+            TEST_HARDWARE.forEach((hardwareColor) => {
+              TEST_FINISHES.forEach((scorchDepth) => {
+                inputs.push({
+                  ...DEFAULT_BENCHMARK,
+
+                  size,
+
+                  depth,
+
+                  lugs,
+
+                  staveOption,
+
+                  hoopType,
+
+                  hardwareColor,
+
+                  scorchDepth,
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
+  return inputs;
+}
+
+function buildProfileDeltas(profile = {}) {
+  return AXES.reduce((acc, axis) => {
+    acc[axis] = getAxisDeltaFixed(profile, axis);
+
+    return acc;
+  }, {});
+}
+
+function summarizeRelationships(read = {}) {
+  const relationships = buildKeyRelationships(read).slice(0, 3);
+
+  return relationships.map((relationship, index) => ({
+    rank: index + 1,
+
+    id: relationship.id,
+
+    slotKey: relationship.slotKey,
+
+    title: relationship.title,
+
+    nodes: Array.isArray(relationship.nodes)
+      ? relationship.nodes.join(' / ')
+      : '',
+
+    score: round(relationship.score, 4),
+
+    summary: relationship.summary,
+  }));
 }
 
 function buildSanityWarnings(input = {}, read = {}) {
-
   const warnings = [];
 
   const profile = read.profile || {};
 
   const depth = Number(input.depth);
+
+  const size = String(input.size);
+
+  const lugs = String(input.lugs);
 
   const isDeep = depth >= 7;
 
@@ -116,45 +380,21 @@ function buildSanityWarnings(input = {}, read = {}) {
 
   const isTripleFlange = input.hoopType === 'Triple Flange';
 
-  const isBlackened = String(input.scorchDepth || '')
+  const finish = String(input.scorchDepth || '').toLowerCase();
 
-    .toLowerCase()
+  const isBlackened = finish.includes('black');
 
-    .includes('black');
+  const isLight = finish.includes('light');
 
-  const isLight = String(input.scorchDepth || '')
+  const reRings = hasReRings(input);
 
-    .toLowerCase()
+  const thinShell = isThinShell(input);
 
-    .includes('light');
+  const smallThinShell = isSmallThinShell(input);
 
-  const isMedium = String(input.scorchDepth || '')
+  const thickShell = isThickShell(input);
 
-    .toLowerCase()
-
-    .includes('medium');
-
-  const hasReRings =
-
-    String(input.staveOption || '').toLowerCase().includes('re-rings') ||
-
-    String(input.staveOption || '').includes('+ $150');
-
-  const isThinReRingShell =
-
-    hasReRings && String(input.staveOption || '').includes('7mm');
-
-  const isSmallReRingShell =
-
-    hasReRings && String(input.staveOption || '').includes('8mm');
-
-  const isThickHighLugShell =
-
-    String(input.size) === '14' &&
-
-    String(input.lugs) === '10' &&
-
-    String(input.staveOption || '').includes('20 - 12mm');
+  const isThickHighLugShell = size === '14' && lugs === '10' && thickShell;
 
   const attackDelta = getAxisDelta(profile, 'attack');
 
@@ -170,432 +410,174 @@ function buildSanityWarnings(input = {}, read = {}) {
 
   const controlDelta = getAxisDelta(profile, 'control');
 
-  /*
+  const spread = getProfileSpread(profile);
 
-    Deep-shell rule:
+  const movementScore = getProfileMovementScore(profile);
 
-    Deep shells do not always need high sustain once heavy control factors are present.
+  if (spread < 0.55) {
+    warnings.push(
+      'Voice profile may be too flat. The graph/readout may not visibly change enough.'
+    );
+  }
 
-    A deep 14x7+ / 10-lug / 12mm / Die-Cast / Blackened build can believably read
-
-    short, focused, and controlled. Only warn when sustain is low without a clear
-
-    control-forward reason.
-
-  */
+  if (movementScore < 1.45) {
+    warnings.push(
+      'Total profile movement is low. This configuration may feel too similar to the center/reference.'
+    );
+  }
 
   if (
-
     isDeep &&
-
     sustainDelta < -0.35 &&
-
     !(isThickHighLugShell && (isDieCast || isBlackened) && controlDelta > 0.65)
-
   ) {
-
     warnings.push('Deep shell is reading unexpectedly low on sustain.');
-
   }
 
-  /*
-
-    Deep warmth rule:
-
-    Keep this, but make it less sensitive. Deep shells should almost never read
-
-    meaningfully thin unless multiple bright/focused choices are overpowering it.
-
-  */
-
   if (
-
     isDeep &&
-
     warmthDelta < -0.35 &&
-
     !(isThickHighLugShell && projectionDelta > 0.75)
-
   ) {
-
     warnings.push('Deep shell is reading unexpectedly low on warmth.');
-
   }
 
-  /*
-
-    Shallow attack rule:
-
-    A shallow shell can still read rounder if it is thin, low-lug, re-ringed,
-
-    and Triple Flange. Warn only when attack is very low without that explanation.
-
-  */
-
-  if (
-
-    isShallow &&
-
-    attackDelta < -0.45 &&
-
-    !(hasReRings && isTripleFlange)
-
-  ) {
-
+  if (isShallow && attackDelta < -0.45 && !(reRings && isTripleFlange)) {
     warnings.push('Shallow shell is reading unexpectedly low on attack.');
-
   }
 
-  /*
-
-    Die-Cast control rule:
-
-    Die-Cast adds focus, but a deep thin re-ring shell can still stay open.
-
-    Warn only when Die-Cast control is clearly below center and there is not
-
-    a strong deep/thin/open-shell explanation.
-
-  */
-
-if (
-
-  isDieCast &&
-
-  controlDelta < -0.4 &&
-
-  !(
-
-    hasReRings &&
-
-    (String(input.size) === '12' || isDeep) &&
-
-    (sustainDelta > 0.25 || sensitivityDelta > 0.35)
-
-  )
-
-) {
-
-  warnings.push('Die-Cast hoop is reading unexpectedly low on control.');
-
-}
-
-  /*
-
-    Die-Cast sustain rule:
-
-    Die-Cast can still allow sustain on deep, thin, re-ring shells.
-
-    Warn only when sustain gets very high without that expected open-shell reason.
-
-  */
-
-if (
-
-  isDieCast &&
-
-  sustainDelta > 1.25 &&
-
-  !(hasReRings && isVeryDeep && warmthDelta > 0.65)
-
-) {
-
-  warnings.push('Die-Cast hoop may be allowing too much sustain increase.');
-
-}
-
-  /*
-
-    Triple Flange sensitivity rule:
-
-    Triple Flange preserves openness, but Blackened finish / thick 10-lug shells
-
-    can intentionally trade sensitivity for a more locked-in note center.
-
-  */
-
   if (
-
-    isTripleFlange &&
-
-    sensitivityDelta < -1.05 &&
-
-    !(isBlackened && isThickHighLugShell && controlDelta > 0.75)
-
-  ) {
-
-    warnings.push('Triple Flange read may be too insensitive.');
-
-  }
-
-  /*
-
-    Blackened control rule:
-
-    Blackened should generally add control, but small/thin/re-ring shells can
-
-    still read open. Warn only when blackened control is clearly low without a
-
-    small-shell / re-ring explanation.
-
-  */
-
-  if (
-
-    isBlackened &&
-
-    controlDelta < -0.45 &&
-
-    !(hasReRings && (isSmallReRingShell || isThinReRingShell))
-
-  ) {
-
-    warnings.push('Blackened finish is reading unexpectedly low on control.');
-
-  }
-
-  /*
-
-    Light Torch sensitivity rule:
-
-    Light Torch preserves touch, but 14 / 10-lug / 12mm builds can still read
-
-    more powerful and less sensitive because mass and lug count dominate.
-
-  */
-
-  if (
-
-    isLight &&
-
-    sensitivityDelta < -0.65 &&
-
-    !(isThickHighLugShell && projectionDelta > 0.85)
-
-  ) {
-
-    warnings.push('Light finish did not preserve enough sensitivity.');
-
-  }
-
-  /*
-
-    Re-ring control rule:
-
-    Re-rings add support, not automatic control. Thin/deep/open builds can still
-
-    read loose and blooming. Warn only when control is very low on a re-ring build
-
-    that is not clearly leaning into sustain/body.
-
-  */
-
-  if (
-
-    hasReRings &&
-
-    controlDelta < -0.75 &&
-
-    !(sustainDelta > 0.75 || warmthDelta > 0.55 || sensitivityDelta > 0.35)
-
-  ) {
-
-    warnings.push('Re-rings are reading unexpectedly low on control.');
-
-  }
-
-  /*
-
-    Extra coherence checks:
-
-    These are better “real” contradictions than the old broad warnings.
-
-  */
-
-  if (
-
-    isBlackened &&
-
     isDieCast &&
-
-    controlDelta < 0.15 &&
-
-    !hasReRings
-
+    controlDelta < -0.4 &&
+    !(
+      reRings &&
+      (size === '12' || isDeep) &&
+      (sustainDelta > 0.25 || sensitivityDelta > 0.35)
+    )
   ) {
-
-    warnings.push('Blackened + Die-Cast build is not gaining expected control.');
-
+    warnings.push('Die-Cast hoop is reading unexpectedly low on control.');
   }
 
   if (
-
-    isLight &&
-
-    isTripleFlange &&
-
-    sensitivityDelta < -0.55 &&
-
-    !isThickHighLugShell
-
+    isDieCast &&
+    sustainDelta > 1.25 &&
+    !(reRings && isVeryDeep && warmthDelta > 0.65)
   ) {
-
-    warnings.push('Light Torch + Triple Flange build may be losing too much touch response.');
-
+    warnings.push('Die-Cast hoop may be allowing too much sustain increase.');
   }
 
-   if (
-
-    isDeep &&
-
+  if (
     isTripleFlange &&
-
-    !isBlackened &&
-
-    sustainDelta < -0.15 &&
-
-    warmthDelta < 0.15
-
+    sensitivityDelta < -1.05 &&
+    !(isBlackened && isThickHighLugShell && controlDelta > 0.75)
   ) {
+    warnings.push('Triple Flange read may be too insensitive.');
+  }
 
-    warnings.push('Deep Triple Flange build may not be preserving enough bloom.');
+  if (
+    isBlackened &&
+    controlDelta < -0.45 &&
+    !(reRings && (smallThinShell || thinShell))
+  ) {
+    warnings.push('Blackened finish is reading unexpectedly low on control.');
+  }
 
+  if (
+    isLight &&
+    sensitivityDelta < -0.65 &&
+    !(isThickHighLugShell && projectionDelta > 0.85)
+  ) {
+    warnings.push('Light finish did not preserve enough sensitivity.');
+  }
+
+  if (
+    reRings &&
+    controlDelta < -0.75 &&
+    !(sustainDelta > 0.75 || warmthDelta > 0.55 || sensitivityDelta > 0.35)
+  ) {
+    warnings.push('Re-rings are reading unexpectedly low on control.');
+  }
+
+  if (isBlackened && isDieCast && controlDelta < 0.15 && !reRings) {
+    warnings.push(
+      'Blackened + Die-Cast build is not gaining expected control.'
+    );
+  }
+
+  if (
+    isLight &&
+    isTripleFlange &&
+    sensitivityDelta < -0.55 &&
+    !isThickHighLugShell
+  ) {
+    warnings.push(
+      'Light Torch + Triple Flange build may be losing too much touch response.'
+    );
+  }
+
+  if (
+    isDeep &&
+    isTripleFlange &&
+    !isBlackened &&
+    sustainDelta < -0.15 &&
+    warmthDelta < 0.15
+  ) {
+    warnings.push(
+      'Deep Triple Flange build may not be preserving enough bloom.'
+    );
+  }
+
+  if (isDieCast && isBlackened && controlDelta <= sustainDelta && !reRings) {
+    warnings.push(
+      'Focused Die-Cast + Blackened build should generally place control above sustain.'
+    );
+  }
+
+  if (isShallow && attackDelta <= warmthDelta && !reRings) {
+    warnings.push(
+      'Shallow non-re-ring build should usually read with attack leading warmth.'
+    );
+  }
+
+  if (isDeep && warmthDelta <= brightnessDelta && !isBlackened) {
+    warnings.push(
+      'Deep non-blackened build should usually read warmer than brighter.'
+    );
   }
 
   return warnings;
-
-}
-
-function buildTestCaseLabel(input = {}) {
-
-  return [
-
-    `${input.size}x${input.depth}`,
-
-    `${input.lugs} lugs`,
-
-    input.staveOption,
-
-    input.hoopType,
-
-    input.hardwareColor,
-
-    input.scorchDepth,
-
-  ].join(' • ');
-
-}
-
-function createTestInputs() {
-
-  const inputs = [];
-
-  Object.entries(TEST_DEPTHS_BY_SIZE).forEach(([size, depths]) => {
-
-    depths.forEach((depth) => {
-
-      const lugMap = TEST_STAVE_OPTIONS_BY_SIZE_AND_LUGS[size] || {};
-
-      Object.entries(lugMap).forEach(([lugs, staveOptions]) => {
-
-        staveOptions.forEach((staveOption) => {
-
-          TEST_HOOPS.forEach((hoopType) => {
-
-            TEST_FINISHES.forEach((scorchDepth) => {
-
-              inputs.push({
-
-                ...DEFAULT_BENCHMARK,
-
-                size,
-
-                depth,
-
-                lugs,
-
-                staveOption,
-
-                hoopType,
-
-                hardwareColor: 'Chrome',
-
-                scorchDepth,
-
-              });
-
-            });
-
-          });
-
-        });
-
-      });
-
-    });
-
-  });
-
-  TEST_HARDWARE.forEach((hardwareColor) => {
-
-    inputs.push({
-
-      ...DEFAULT_BENCHMARK,
-
-      size: '14',
-
-      depth: '5.5',
-
-      lugs: '8',
-
-      staveOption: '16 - 10mm',
-
-      hoopType: 'Triple Flange',
-
-      hardwareColor,
-
-      scorchDepth: 'Medium Torch',
-
-    });
-
-  });
-
-  return inputs;
-
 }
 
 function summarizeRead(input = {}, read = {}) {
-
   const profile = read.profile || {};
 
   const sortedAxes = getSortedAxes(profile);
 
+  const keyRelationships = summarizeRelationships(read);
+
   const warnings = buildSanityWarnings(input, read);
 
   return {
-
     label: buildTestCaseLabel(input),
+
+    signature: getInputSignature(input),
 
     input,
 
     profile,
 
-    deltas: AXES.reduce((acc, axis) => {
+    deltas: buildProfileDeltas(profile),
 
-      acc[axis] = getAxisDeltaFixed(profile, axis);
+    spread: getProfileSpread(profile),
 
-      return acc;
-
-    }, {}),
+    movementScore: getProfileMovementScore(profile),
 
     highestAxes: sortedAxes.slice(0, 3).map((axis) => ({
-
       axis,
 
       value: profile[axis],
 
       delta: getAxisDeltaFixed(profile, axis),
-
     })),
 
     lowestAxes: sortedAxes
@@ -605,14 +587,18 @@ function summarizeRead(input = {}, read = {}) {
       .reverse()
 
       .map((axis) => ({
-
         axis,
 
         value: profile[axis],
 
         delta: getAxisDeltaFixed(profile, axis),
-
       })),
+
+    keyRelationships,
+
+    topRelationshipId: keyRelationships[0]?.id || '',
+
+    topRelationshipTitle: keyRelationships[0]?.title || '',
 
     primaryGenre: read.primaryGenre,
 
@@ -629,7 +615,6 @@ function summarizeRead(input = {}, read = {}) {
     sourceBuildRead: read.sourceBuildRead,
 
     benchmark: {
-
       familyId: read.benchmark?.familyId,
 
       familyLabel: read.benchmark?.familyLabel,
@@ -641,125 +626,405 @@ function summarizeRead(input = {}, read = {}) {
       sizeId: read.benchmark?.sizeId,
 
       sizeLabel: read.benchmark?.sizeLabel,
-
     },
 
     warnings,
-
   };
+}
 
+function buildComparisonRows(results = []) {
+  const bySignature = new Map();
+
+  results.forEach((result) => {
+    bySignature.set(result.signature, result);
+  });
+
+  const comparisonPairs = [
+    {
+      label:
+        '12x6.0 → 12x6.5 / 8 lugs / 16 - 10mm / Triple Flange / Medium Torch',
+
+      from: {
+        size: '12',
+
+        depth: '6.0',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+
+      to: {
+        size: '12',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+    },
+
+    {
+      label:
+        '14x6.0 → 14x6.5 / 8 lugs / 16 - 10mm / Triple Flange / Medium Torch',
+
+      from: {
+        size: '14',
+
+        depth: '6.0',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+
+      to: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+    },
+
+    {
+      label: '14x6.5 / 8 lugs / 16 - 10mm → 14x6.5 / 10 lugs / 20 - 12mm',
+
+      from: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+
+      to: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '10',
+
+        staveOption: '20 - 12mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+    },
+
+    {
+      label: '14x6.5 / Triple Flange → Die-Cast',
+
+      from: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+
+      to: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Die-Cast',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+    },
+
+    {
+      label: '14x6.5 / Medium Torch → Blackened',
+
+      from: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Medium Torch',
+      },
+
+      to: {
+        size: '14',
+
+        depth: '6.5',
+
+        lugs: '8',
+
+        staveOption: '16 - 10mm',
+
+        hoopType: 'Triple Flange',
+
+        hardwareColor: 'Chrome',
+
+        scorchDepth: 'Blackened',
+      },
+    },
+  ];
+
+  return comparisonPairs.map((pair) => {
+    const fromResult = bySignature.get(getInputSignature(pair.from));
+
+    const toResult = bySignature.get(getInputSignature(pair.to));
+
+    if (!fromResult || !toResult) {
+      return {
+        comparison: pair.label,
+
+        status: 'missing case',
+      };
+    }
+
+    const axisDeltas = AXES.reduce((acc, axis) => {
+      const fromValue = toNumber(fromResult.profile?.[axis], 5);
+
+      const toValue = toNumber(toResult.profile?.[axis], 5);
+
+      acc[axis] = round(toValue - fromValue, 2);
+
+      return acc;
+    }, {});
+
+    const totalMovement = AXES.reduce((sum, axis) => {
+      return sum + Math.abs(axisDeltas[axis]);
+    }, 0);
+
+    return {
+      comparison: pair.label,
+
+      totalMovement: round(totalMovement, 2),
+
+      topRelationshipFrom: fromResult.topRelationshipTitle,
+
+      topRelationshipTo: toResult.topRelationshipTitle,
+
+      changedTopRelationship:
+        fromResult.topRelationshipId !== toResult.topRelationshipId,
+
+      ...axisDeltas,
+    };
+  });
+}
+
+function printResult(result = {}, index = 0, collapsed = true) {
+  const method = collapsed ? console.groupCollapsed : console.group;
+
+  method(`${index + 1}. ${result.label}`);
+
+  console.log('Input:', result.input);
+
+  console.log('Profile:', result.profile);
+
+  console.log('Deltas from Heritage center:', result.deltas);
+
+  console.log('Spread:', result.spread);
+
+  console.log('Movement Score:', result.movementScore);
+
+  console.log('Highest Axes:', result.highestAxes);
+
+  console.log('Lowest Axes:', result.lowestAxes);
+
+  console.log('Key Relationships:');
+
+  console.table(result.keyRelationships);
+
+  console.log('Primary Genre:', result.primaryGenre);
+
+  console.log('Secondary Genres:', result.secondaryGenres);
+
+  console.log('Recording Mic:', result.recordingMic);
+
+  console.log('Playing Situation:', result.playingSituation);
+
+  console.log('Feel Read:', result.feelRead);
+
+  console.log(
+    'Highlighted Characteristics:',
+    result.highlightedCharacteristics
+  );
+
+  console.log('Source Build Read:', result.sourceBuildRead);
+
+  console.log('Benchmark:', result.benchmark);
+
+  if (result.warnings.length > 0) {
+    console.warn('Sanity Warnings:', result.warnings);
+  } else {
+    console.log('Sanity Warnings: none');
+  }
+
+  console.groupEnd();
 }
 
 export function runHeritageVoiceReadTestMatrix({
-
   limit,
 
   onlyWarnings = false,
 
   collapsed = true,
 
-} = {}) {
+  focusOnly = false,
 
-  const inputs = createTestInputs();
+  includeComparisons = true,
+} = {}) {
+  const rawInputs = focusOnly
+    ? FOCUS_CASES.map((item) => ({
+        ...DEFAULT_BENCHMARK,
+
+        ...item,
+      }))
+    : createTestInputs();
 
   const hasLimit = limit !== undefined && limit !== null && limit !== '';
 
   const selectedInputs =
-
     hasLimit && Number.isFinite(Number(limit))
-
-      ? inputs.slice(0, Number(limit))
-
-      : inputs;
+      ? rawInputs.slice(0, Number(limit))
+      : rawInputs;
 
   const results = selectedInputs.map((input) => {
-
     const read = buildHeritageVoiceRead(input);
 
     return summarizeRead(input, read);
-
   });
 
   const visibleResults = onlyWarnings
-
     ? results.filter((result) => result.warnings.length > 0)
-
     : results;
+
+  const warningCount = results.filter(
+    (result) => result.warnings.length > 0
+  ).length;
+
+  const flatCount = results.filter((result) => result.spread < 0.55).length;
+
+  const lowMovementCount = results.filter(
+    (result) => result.movementScore < 1.45
+  ).length;
+
+  const relationshipCounts = results.reduce((acc, result) => {
+    const key = result.topRelationshipTitle || 'None';
+
+    acc[key] = (acc[key] || 0) + 1;
+
+    return acc;
+  }, {});
 
   console.clear();
 
   console.log(
-
     '%cHeritage LegacyPrint™ Voice Read Test Matrix',
 
     'font-size: 16px; font-weight: bold;'
-
   );
 
-  console.log({
-
+  console.table({
     totalGeneratedCases: results.length,
 
     visibleCases: visibleResults.length,
 
+    warningCases: warningCount,
+
+    flatProfileCases: flatCount,
+
+    lowMovementCases: lowMovementCount,
+
     onlyWarnings,
 
+    focusOnly,
   });
 
+  console.log('Top Relationship Distribution:');
+
+  console.table(
+    Object.entries(relationshipCounts)
+
+      .sort((a, b) => b[1] - a[1])
+
+      .map(([relationship, count]) => ({
+        relationship,
+
+        count,
+      }))
+  );
+
+  if (includeComparisons && !focusOnly) {
+    console.log('Targeted Change Comparisons:');
+
+    console.table(buildComparisonRows(results));
+  }
+
   visibleResults.forEach((result, index) => {
-
-    const method = collapsed ? console.groupCollapsed : console.group;
-
-    method(`${index + 1}. ${result.label}`);
-
-    console.log('Input:', result.input);
-
-    console.log('Profile:', result.profile);
-
-    console.log('Deltas from Heritage center:', result.deltas);
-
-    console.log('Highest Axes:', result.highestAxes);
-
-    console.log('Lowest Axes:', result.lowestAxes);
-
-    console.log('Primary Genre:', result.primaryGenre);
-
-    console.log('Secondary Genres:', result.secondaryGenres);
-
-    console.log('Recording Mic:', result.recordingMic);
-
-    console.log('Playing Situation:', result.playingSituation);
-
-    console.log('Feel Read:', result.feelRead);
-
-    console.log('Highlighted Characteristics:', result.highlightedCharacteristics);
-
-    console.log('Source Build Read:', result.sourceBuildRead);
-
-    console.log('Benchmark:', result.benchmark);
-
-    if (result.warnings.length > 0) {
-
-      console.warn('Sanity Warnings:', result.warnings);
-
-    } else {
-
-      console.log('Sanity Warnings: none');
-
-    }
-
-    console.groupEnd();
-
+    printResult(result, index, collapsed);
   });
 
   return visibleResults;
-
 }
 
 export function runOneHeritageVoiceReadTest(input = {}) {
-
   const resolvedInput = {
-
     ...DEFAULT_BENCHMARK,
 
     size: '14',
@@ -777,7 +1042,6 @@ export function runOneHeritageVoiceReadTest(input = {}) {
     scorchDepth: 'Medium Torch',
 
     ...input,
-
   };
 
   const read = buildHeritageVoiceRead(resolvedInput);
@@ -794,9 +1058,17 @@ export function runOneHeritageVoiceReadTest(input = {}) {
 
   console.log('Deltas from Heritage center:', summary.deltas);
 
+  console.log('Spread:', summary.spread);
+
+  console.log('Movement Score:', summary.movementScore);
+
   console.log('Highest Axes:', summary.highestAxes);
 
   console.log('Lowest Axes:', summary.lowestAxes);
+
+  console.log('Key Relationships:');
+
+  console.table(summary.keyRelationships);
 
   console.log('Primary Genre:', summary.primaryGenre);
 
@@ -808,26 +1080,34 @@ export function runOneHeritageVoiceReadTest(input = {}) {
 
   console.log('Feel Read:', summary.feelRead);
 
-  console.log('Highlighted Characteristics:', summary.highlightedCharacteristics);
+  console.log(
+    'Highlighted Characteristics:',
+    summary.highlightedCharacteristics
+  );
 
   console.log('Source Build Read:', summary.sourceBuildRead);
 
   console.log('Benchmark:', summary.benchmark);
 
   if (summary.warnings.length > 0) {
-
     console.warn('Sanity Warnings:', summary.warnings);
-
   } else {
-
     console.log('Sanity Warnings: none');
-
   }
 
   console.groupEnd();
 
   return summary;
+}
 
+export function runHeritageVoiceReadFocusedTests() {
+  return runHeritageVoiceReadTestMatrix({
+    focusOnly: true,
+
+    collapsed: false,
+
+    includeComparisons: false,
+  });
 }
 
 export default runHeritageVoiceReadTestMatrix;

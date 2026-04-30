@@ -150,7 +150,7 @@ const storySlides = [
 
     key: 'voice-engine',
 
-    kicker: 'Ober LegacyPrint™ Voicing Engine',
+    kicker: 'Ober LegacyPrint™ voice engine',
 
     eyebrow: 'A hybrid craft-intelligence system',
 
@@ -170,7 +170,7 @@ const storySlides = [
 
     body: [
 
-      'The Ober LegacyPrint™ Voicing Engine brings together human ear, customer discovery, acoustic knowledge, build experience, research, interactive tools, and final craftsman judgment.',
+      'The Ober LegacyPrint™ voice engine brings together human ear, customer discovery, acoustic knowledge, build experience, research, interactive tools, and final craftsman judgment.',
 
       'It helps us ask better questions, compare drums more clearly, shape stronger build direction, and understand how a finished drum actually speaks.',
 
@@ -610,7 +610,7 @@ const OurCraft = () => {
 
             role="list"
 
-            aria-label="Ober Voicing Engine parts"
+            aria-label="Ober voice engine parts"
 
           >
 

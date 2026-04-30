@@ -884,7 +884,7 @@ const SeriesFeature = ({ series, onNavigate, onCompare }) => {
 
             <p className="oad-legacyprint-powered">
 
-              Powered by the Ober LegacyPrint™ Voicing Engine
+              Powered by the Ober LegacyPrint™ voice engine
 
             </p>
 
@@ -940,7 +940,7 @@ const LegacyPrintView = ({ onShowSoundLegend, onCompare }) => (
 
     <div className="oad-legacy-head">
 
-      <span className="oad-side-kicker">Ober LegacyPrint™ Voicing Engine</span>
+      <span className="oad-side-kicker">Ober LegacyPrint™ voice engine</span>
 
       <h2>Listening made more measurable.</h2>
 

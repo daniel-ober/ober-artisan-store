@@ -94,6 +94,7 @@
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
     "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx}'",
+    "heritage:voice:audit": "node scripts/audit-heritage-voice-read.mjs",
     "sl:bands:one": "node updateSoundLegendBands.js",
     "sl:bands:all": "node updateSoundLegendBands.js --all",
     "sl:bands:write": "node updateSoundLegendBands.js --all --write"

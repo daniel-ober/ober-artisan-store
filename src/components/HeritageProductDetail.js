@@ -182,6 +182,7 @@ const BASE_LEGACYPRINT_TABS = [
 
     label: 'VoiceMap™',
   },
+
   {
     key: 'relationships',
 
@@ -592,49 +593,6 @@ const buildToneSummary = (
   return `Compared with ${referenceLabel}, this Heritage configuration leans toward ${topPhrases[0]}, ${topPhrases[1]}, and ${topPhrases[2]}.`;
 };
 
-const buildLegacyPrintAnalysis = ({
-  toneSummaryText,
-
-  legacyTuningHzRange,
-
-  currentNearestNoteWindow,
-
-  keyRelationships,
-
-  isCompareModeEnabled,
-
-  selectedBenchmarkType,
-
-  selectedBenchmarkSize,
-}) => {
-  const strongestThread = keyRelationships?.[0];
-
-  const referenceLabel = getReferenceLabel(
-    selectedBenchmarkType,
-
-    selectedBenchmarkSize
-  );
-
-  return {
-    voiceMap:
-      toneSummaryText ||
-      'This build is reading close to the center of the current VoiceMap.',
-
-    legacyTuning: `This build is currently reading in the ${legacyTuningHzRange} range, with a nearest note window around ${currentNearestNoteWindow}. That places the drum inside the broader resonance zone where the shell is likely to feel most balanced before final craftsman tuning.`,
-
-    thread: strongestThread
-      ? `${strongestThread.title}. ${strongestThread.summary}`
-      : 'No dominant Voice Thread is strongly leading this configuration yet.',
-
-    craftsman:
-      'This read is a build-direction guide, not a final verdict. The finished drum still has to be tuned, played, heard, and allowed to show where its final pocket lives.',
-
-    compare: isCompareModeEnabled
-      ? `Compare mode is currently reading this build against ${referenceLabel}.`
-      : 'Compare mode is off, so this read is describing the current Ober build on its own.',
-  };
-};
-
 const AXIS_INSIGHT_COPY = {
   attack: {
     short: 'How quickly the note speaks at the front edge.',
@@ -967,6 +925,14 @@ const getReadableDelta = (delta) => {
   if (delta > 0) return `+$${delta}`;
 
   return `-$${Math.abs(delta)}`;
+};
+
+const getDeltaClassName = (delta) => {
+  if (delta > 0) return 'is-positive';
+
+  if (delta < 0) return 'is-negative';
+
+  return 'is-neutral';
 };
 
 const normalizeDepthKey = (value) => {
@@ -1416,158 +1382,6 @@ const VoiceThreadMap = ({ activeThread, compact = false }) => {
   );
 };
 
-const MiniVoiceThreadMap = ({ thread }) => {
-  const activeSegments = buildThreadSegments(thread?.nodes);
-
-  const activeNodeSet = new Set(thread?.nodes || []);
-
-  const mapId = `heritage-mini-thread-${String(thread?.id || 'none').replace(
-    /[^a-zA-Z0-9_-]/g,
-
-    '-'
-  )}`;
-
-  const isActiveSegment = (source, target) =>
-    activeSegments.some(
-      ([a, b]) =>
-        (a === source && b === target) || (a === target && b === source)
-    );
-
-  return (
-    <svg
-      className="heritage-mini-thread-map"
-      viewBox="0 0 500 500"
-      aria-hidden="true"
-    >
-      <defs>
-        <filter
-          id={`${mapId}-miniGlow`}
-          x="-80%"
-          y="-80%"
-          width="260%"
-          height="260%"
-        >
-          <feGaussianBlur stdDeviation="5" result="blur" />
-
-          <feMerge>
-            <feMergeNode in="blur" />
-
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-
-        {THREAD_NODE_PAIRS.map(([source, target]) => {
-          const sourcePoint = THREAD_NODE_POSITIONS[source];
-
-          const targetPoint = THREAD_NODE_POSITIONS[target];
-
-          if (!sourcePoint || !targetPoint) return null;
-
-          const gradientId = `${mapId}-${source}-${target}`;
-
-          return (
-            <linearGradient
-              key={gradientId}
-              id={gradientId}
-              gradientUnits="userSpaceOnUse"
-              x1={sourcePoint.x * 5}
-              y1={sourcePoint.y * 5}
-              x2={targetPoint.x * 5}
-              y2={targetPoint.y * 5}
-            >
-              <stop
-                offset="0%"
-                stopColor={AXIS_COLOR_BY_KEY[source] || '#d6b277'}
-              />
-
-              <stop
-                offset="100%"
-                stopColor={AXIS_COLOR_BY_KEY[target] || '#d6b277'}
-              />
-            </linearGradient>
-          );
-        })}
-      </defs>
-
-      {THREAD_NODE_PAIRS.map(([source, target]) => {
-        const sourcePoint = THREAD_NODE_POSITIONS[source];
-
-        const targetPoint = THREAD_NODE_POSITIONS[target];
-
-        if (!sourcePoint || !targetPoint) return null;
-
-        const selected = isActiveSegment(source, target);
-
-        const gradientId = `${mapId}-${source}-${target}`;
-
-        return (
-          <g
-            key={`${source}-${target}`}
-            className={`heritage-mini-thread-line-group ${
-              selected ? 'is-active' : ''
-            }`}
-          >
-            <line
-              x1={sourcePoint.x * 5}
-              y1={sourcePoint.y * 5}
-              x2={targetPoint.x * 5}
-              y2={targetPoint.y * 5}
-              className="heritage-mini-thread-line heritage-mini-thread-line--network"
-              stroke={`url(#${gradientId})`}
-            />
-
-            {selected && (
-              <>
-                <line
-                  x1={sourcePoint.x * 5}
-                  y1={sourcePoint.y * 5}
-                  x2={targetPoint.x * 5}
-                  y2={targetPoint.y * 5}
-                  className="heritage-mini-thread-line heritage-mini-thread-line--glow"
-                  stroke={`url(#${gradientId})`}
-                  filter={`url(#${mapId}-miniGlow)`}
-                />
-
-                <line
-                  x1={sourcePoint.x * 5}
-                  y1={sourcePoint.y * 5}
-                  x2={targetPoint.x * 5}
-                  y2={targetPoint.y * 5}
-                  className="heritage-mini-thread-line heritage-mini-thread-line--core"
-                  stroke={`url(#${gradientId})`}
-                />
-              </>
-            )}
-          </g>
-        );
-      })}
-
-      {THREAD_NODE_ORDER.map((nodeKey) => {
-        const point = THREAD_NODE_POSITIONS[nodeKey];
-
-        const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
-
-        const isActive = activeNodeSet.has(nodeKey);
-
-        if (!point) return null;
-
-        return (
-          <circle
-            key={nodeKey}
-            cx={point.x * 5}
-            cy={point.y * 5}
-            r={isActive ? '12' : '6'}
-            fill={color}
-            className={`heritage-mini-thread-dot ${
-              isActive ? 'is-active' : ''
-            }`}
-          />
-        );
-      })}
-    </svg>
-  );
-};
-
 const HeritageProductDetail = () => {
   const navigate = useNavigate();
 
@@ -1597,8 +1411,6 @@ const HeritageProductDetail = () => {
 
   const [cartItemId, setCartItemId] = useState(null);
 
-  const [chartView, setChartView] = useState('spider');
-
   const [legacyPrintTab, setLegacyPrintTab] = useState('voiceRead');
 
   const [isCompareModeEnabled, setIsCompareModeEnabled] = useState(false);
@@ -1611,13 +1423,15 @@ const HeritageProductDetail = () => {
 
   const [activeAxisKey, setActiveAxisKey] = useState('attack');
 
-  const [activeThreadSlot, setActiveThreadSlot] = useState('simple');
+  const [activeThreadSelection, setActiveThreadSelection] = useState({
+    id: '',
+
+    signature: '',
+  });
 
   const [showConfigBreakdown, setShowConfigBreakdown] = useState(false);
 
   const [showResetModal, setShowResetModal] = useState(false);
-
-  
 
   const [benchmarkFamilyId, setBenchmarkFamilyId] = useState(
     DEFAULT_BENCHMARK_FAMILY_ID
@@ -1886,8 +1700,58 @@ const HeritageProductDetail = () => {
       : currentBuildVoiceRangeSummary;
   }, [
     isCompareModeEnabled,
+
     selectedDrumSummary,
+
     currentBuildVoiceRangeSummary,
+  ]);
+
+  const activeBuildSignature = useMemo(() => {
+    return [
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hardwareColor,
+
+      hoopType,
+
+      scorchDepth,
+
+      isCompareModeEnabled ? 'compare' : 'standalone',
+
+      isCompareModeEnabled ? benchmarkFamilyId : DEFAULT_BENCHMARK_FAMILY_ID,
+
+      isCompareModeEnabled ? benchmarkTypeId : DEFAULT_BENCHMARK_TYPE_ID,
+
+      isCompareModeEnabled ? benchmarkSizeId : DEFAULT_BENCHMARK_SIZE_ID,
+    ].join('|');
+  }, [
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hardwareColor,
+
+    hoopType,
+
+    scorchDepth,
+
+    isCompareModeEnabled,
+
+    benchmarkFamilyId,
+
+    benchmarkTypeId,
+
+    benchmarkSizeId,
   ]);
 
   const chartValues = useMemo(() => {
@@ -1899,19 +1763,6 @@ const HeritageProductDetail = () => {
 
       return getDisplayMetricValue(rawValue);
     });
-  }, [activeVoiceSummary]);
-
-  const chartBarData = useMemo(() => {
-    return AXIS_META.reduce((acc, axis) => {
-      const rawValue =
-        activeVoiceSummary?.profile?.[axis.key] != null
-          ? Number(activeVoiceSummary.profile[axis.key])
-          : 5;
-
-      acc[axis.key] = getDisplayMetricValue(rawValue);
-
-      return acc;
-    }, {});
   }, [activeVoiceSummary]);
 
   const toneSummaryText = useMemo(() => {
@@ -1953,6 +1804,7 @@ const HeritageProductDetail = () => {
   const benchmarkVoiceRangePosition = useMemo(() => {
     return buildBenchmarkVoiceRange(
       selectedBenchmarkType,
+
       selectedBenchmarkSize
     );
   }, [selectedBenchmarkType, selectedBenchmarkSize]);
@@ -1996,54 +1848,40 @@ const HeritageProductDetail = () => {
   const activeAxisImpactFactors =
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
-const keyRelationships = useMemo(() => {
+  const keyRelationships = useMemo(() => {
+    return buildKeyRelationships(activeVoiceSummary).slice(0, 3);
+  }, [activeVoiceSummary]);
 
-  const relationships = buildKeyRelationships(activeVoiceSummary);
+  const selectedThreadId = useMemo(() => {
+    if (!keyRelationships.length) return '';
 
-  const slotOrder = ['simple', 'shaped', 'complex'];
+    const manualSelectionBelongsToCurrentBuild =
+      activeThreadSelection.signature === activeBuildSignature;
 
-  return slotOrder
+    const manualThreadStillExists =
+      manualSelectionBelongsToCurrentBuild &&
+      keyRelationships.some(
+        (relationship) => relationship.id === activeThreadSelection.id
+      );
 
-    .map((slotKey) =>
-
-      relationships.find((relationship) => relationship.slotKey === slotKey)
-
-    )
-
-    .filter(Boolean);
-
-}, [activeVoiceSummary]);
-
-  useEffect(() => {
-    if (!keyRelationships.length) return;
-
-    const hasActiveSlot = keyRelationships.some(
-      (relationship) => relationship.slotKey === activeThreadSlot
-    );
-
-    if (!hasActiveSlot) {
-      setActiveThreadSlot(keyRelationships[0]?.slotKey || 'simple');
+    if (manualThreadStillExists) {
+      return activeThreadSelection.id;
     }
-  }, [keyRelationships, activeThreadSlot]);
 
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') return;
+    return keyRelationships[0].id;
+  }, [keyRelationships, activeThreadSelection, activeBuildSignature]);
 
-    window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
-
-    window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
-
-    console.info(
-      'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...})'
+  const activeThread = useMemo(() => {
+    return (
+      keyRelationships.find(
+        (relationship) => relationship.id === selectedThreadId
+      ) ||
+      keyRelationships[0] ||
+      null
     );
-  }, []);
+  }, [keyRelationships, selectedThreadId]);
 
   const activeVoiceThreadReadout = useMemo(() => {
-    const activeThread =
-      keyRelationships.find(
-        (relationship) => relationship.slotKey === activeThreadSlot
-      ) || keyRelationships[0];
-
     if (!activeThread) return null;
 
     return buildVoiceThreadReadout({
@@ -2053,39 +1891,7 @@ const keyRelationships = useMemo(() => {
 
       sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
     });
-  }, [keyRelationships, activeThreadSlot, activeVoiceSummary]);
-
-  const legacyPrintAnalysis = useMemo(() => {
-    return buildLegacyPrintAnalysis({
-      toneSummaryText,
-
-      legacyTuningHzRange,
-
-      currentNearestNoteWindow,
-
-      keyRelationships,
-
-      isCompareModeEnabled,
-
-      selectedBenchmarkType,
-
-      selectedBenchmarkSize,
-    });
-  }, [
-    toneSummaryText,
-
-    legacyTuningHzRange,
-
-    currentNearestNoteWindow,
-
-    keyRelationships,
-
-    isCompareModeEnabled,
-
-    selectedBenchmarkType,
-
-    selectedBenchmarkSize,
-  ]);
+  }, [activeThread, activeVoiceSummary]);
 
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
@@ -2107,16 +1913,6 @@ const keyRelationships = useMemo(() => {
 
       className: getDeltaClassName(delta),
     };
-  };
-
-  const getDeltaClassName = (delta, isSelected = false) => {
-    if (isSelected) return 'is-selected';
-
-    if (delta > 0) return 'is-positive';
-
-    if (delta < 0) return 'is-negative';
-
-    return '';
   };
 
   const handleBenchmarkFamilyChange = (nextFamilyId) => {
@@ -2186,6 +1982,26 @@ const keyRelationships = useMemo(() => {
       setLegacyPrintTab('voiceRead');
     }
   };
+
+  const handleThreadSelect = (relationshipId) => {
+    setActiveThreadSelection({
+      id: relationshipId,
+
+      signature: activeBuildSignature,
+    });
+  };
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'development') return;
+
+    window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
+
+    window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
+
+    console.info(
+      'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...})'
+    );
+  }, []);
 
   useEffect(() => {
     setBenchmarkGlowPulseKey((prev) => prev + 1);
@@ -2362,6 +2178,12 @@ const keyRelationships = useMemo(() => {
 
       setShowConfigBreakdown(false);
 
+      setActiveThreadSelection({
+        id: '',
+
+        signature: '',
+      });
+
       return;
     }
 
@@ -2382,6 +2204,12 @@ const keyRelationships = useMemo(() => {
     setOpenBuilderSection('construction');
 
     setShowConfigBreakdown(false);
+
+    setActiveThreadSelection({
+      id: '',
+
+      signature: '',
+    });
   };
 
   const handleReviewBuild = () => {
@@ -2560,10 +2388,22 @@ const keyRelationships = useMemo(() => {
     setLugs(nextLugs);
 
     setStaveOption(nextStaveOption);
+
+    setActiveThreadSelection({
+      id: '',
+
+      signature: '',
+    });
   };
 
   const handleDepthSelect = (newDepth) => {
     setDepth(newDepth);
+
+    setActiveThreadSelection({
+      id: '',
+
+      signature: '',
+    });
   };
 
   const handleLugSelect = (newLug) => {
@@ -2579,10 +2419,22 @@ const keyRelationships = useMemo(() => {
     setLugs(newLug);
 
     setStaveOption(nextStaveOption);
+
+    setActiveThreadSelection({
+      id: '',
+
+      signature: '',
+    });
   };
 
   const handleStaveSelect = (option) => {
     setStaveOption(option);
+
+    setActiveThreadSelection({
+      id: '',
+
+      signature: '',
+    });
   };
 
   const renderReferenceSelectorPanel = () => {
@@ -2835,9 +2687,7 @@ const keyRelationships = useMemo(() => {
             }`}
           >
             <div className="heritage-voice-range-readout heritage-voice-range-readout--current">
-              <span>
-                {isCompareModeEnabled ? 'Current Range' : 'Current Range'}
-              </span>
+              <span>Current Range</span>
 
               <strong>{legacyTuningHzRange}</strong>
 
@@ -3113,104 +2963,6 @@ const keyRelationships = useMemo(() => {
     );
   };
 
-  const renderTraitInsightPanel = () => {
-    return (
-      <div
-        className="heritage-axis-insight-panel"
-        style={{
-          '--axis-accent': activeAxisColor,
-        }}
-      >
-        <div className="heritage-axis-insight-panel-head">
-          <div className="heritage-axis-insight-panel-title-group">
-            <span className="heritage-summary-kicker">Node Insight</span>
-
-            <div className="heritage-axis-insight-panel-title-row">
-              <span className="heritage-axis-insight-panel-icon">
-                <MetricIcon
-                  type={activeAxisMeta.icon}
-                  color={activeAxisColor}
-                  size={20}
-                />
-              </span>
-
-              <div className="heritage-axis-insight-panel-title-copy">
-                <h4>{activeAxisMeta.label}</h4>
-
-                <span>{AXIS_SUBLABELS[activeAxisMeta.key]}</span>
-              </div>
-            </div>
-          </div>
-
-          <span
-            className={`heritage-axis-insight-score-pill ${
-              activeAxisDeltaValue > 0
-                ? 'is-positive'
-                : activeAxisDeltaValue < 0
-                  ? 'is-negative'
-                  : 'is-neutral'
-            }`}
-          >
-            {activeAxisScore}
-          </span>
-        </div>
-
-        <div className="heritage-axis-insight-panel-body">
-          <div className="heritage-axis-insight-main-copy">
-            <p className="heritage-axis-insight-short">
-              {activeAxisCopy.short}
-            </p>
-
-            <p className="heritage-axis-insight-detail">
-              {activeAxisCopy.detail}
-            </p>
-
-            <p className="heritage-axis-insight-scale-read">
-              <strong>Lower / closer to center:</strong>{' '}
-              {activeAxisCopy.scaleLow}
-            </p>
-
-            <p className="heritage-axis-insight-scale-read">
-              <strong>Higher / farther outward:</strong>{' '}
-              {activeAxisCopy.scaleHigh}
-            </p>
-          </div>
-
-          <div className="heritage-axis-impact-panel">
-            <span className="heritage-axis-impact-label">
-              Node contributors
-            </span>
-
-            <div className="heritage-axis-impact-list">
-              {activeAxisImpactFactors.map((factor) => (
-                <div
-                  key={factor.label}
-                  className={`heritage-axis-impact-row is-${factor.strength}`}
-                >
-                  <span className="heritage-axis-impact-name">
-                    {factor.label}
-                  </span>
-
-                  <span className="heritage-axis-impact-strength">
-                    <span className="heritage-axis-impact-dot" />
-
-                    <span className="heritage-axis-impact-text">
-                      {factor.strength === 'strong'
-                        ? 'High'
-                        : factor.strength === 'medium'
-                          ? 'Medium'
-                          : 'Light'}
-                    </span>
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const visibleLegacyPrintTabs = useMemo(() => {
     return [
       ...BASE_LEGACYPRINT_TABS,
@@ -3259,29 +3011,12 @@ const keyRelationships = useMemo(() => {
         </div>
       );
     }
+
     if (legacyPrintTab === 'relationships') {
-      const activeThread =
-        keyRelationships.find(
-          (relationship) => relationship.slotKey === activeThreadSlot
-        ) || keyRelationships[0];
-
-      const activeThreadIndex = keyRelationships.findIndex(
-        (relationship) => relationship.id === activeThread?.id
-      );
-
-      const activeThreadNodeLabels =
-        activeThread?.nodes
-
-          ?.map(
-            (node) => AXIS_META.find((axis) => axis.key === node)?.label || node
-          )
-
-          .join(', ') || '';
-
       const activeReadout = activeVoiceThreadReadout;
 
       return (
-        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-reference--cards">
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-reference--cards heritage-thread-reference--calm">
           <div className="heritage-thread-reference-head">
             <span className="heritage-chart-eyebrow">Voice Threads</span>
 
@@ -3290,12 +3025,10 @@ const keyRelationships = useMemo(() => {
             </h4>
 
             <p className="heritage-chart-title-subcopy">
-              Voice Threads take the seven Voice Nodes and turn them into a
-              shared language for how this drum speaks, feels, and behaves. A
-              Simple Thread shows the first relationship your ear may notice. A
-              Shaped Thread shows how traits begin working together under the
-              hands. A Complex Thread shows the broader drum personality forming
-              across the build.
+              A Voice Thread is a simple way to describe how a few parts of the
+              drum’s voice are working together. It is not meant to label the
+              drum forever — it gives you a useful listening angle for the build
+              in front of you.
             </p>
           </div>
 
@@ -3303,8 +3036,8 @@ const keyRelationships = useMemo(() => {
             className="heritage-thread-card-row"
             aria-label="Strongest Voice Threads"
           >
-            {keyRelationships.map((relationship, index) => {
-              const isActive = activeThread?.slotKey === relationship.slotKey;
+            {keyRelationships.map((relationship) => {
+              const isActive = selectedThreadId === relationship.id;
 
               const threadColorVars = getThreadColorVars(relationship.nodes);
 
@@ -3316,23 +3049,29 @@ const keyRelationships = useMemo(() => {
                 sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
               });
 
+              const nodeLabels =
+                relationship.nodes
+
+                  ?.map(
+                    (node) =>
+                      AXIS_META.find((axis) => axis.key === node)?.label || node
+                  )
+
+                  .join(' / ') || '';
+
               return (
                 <button
-                  key={relationship.id}
+                  key={`${activeBuildSignature}-${relationship.id}`}
                   type="button"
-                  className={`heritage-thread-card ${isActive ? 'is-active' : ''}`}
-                  onClick={() => setActiveThreadSlot(relationship.slotKey)}
+                  className={`heritage-thread-card heritage-thread-card--calm ${
+                    isActive ? 'is-active' : ''
+                  }`}
+                  onClick={() => handleThreadSelect(relationship.id)}
                   style={threadColorVars}
                 >
-                  <span className="heritage-thread-card-topline">
-                    <span className="heritage-thread-card-rank">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-
-                    <span className="heritage-thread-card-type-stack">
-                      <span className="heritage-thread-card-type">
-                        {cardReadout.threadName}
-                      </span>
+                  <span className="heritage-thread-card-topline heritage-thread-card-topline--no-rank">
+                    <span className="heritage-thread-card-type">
+                      {cardReadout.threadName}
                     </span>
                   </span>
 
@@ -3343,7 +3082,7 @@ const keyRelationships = useMemo(() => {
                   <span className="heritage-thread-card-copy">
                     <strong>{relationship.title}</strong>
 
-                    {renderThreadNodeIcons(relationship.nodes)}
+                    <em>{nodeLabels}</em>
                   </span>
                 </button>
               );
@@ -3352,17 +3091,13 @@ const keyRelationships = useMemo(() => {
 
           {activeThread && activeReadout && (
             <article
-              className="heritage-thread-read-panel heritage-thread-read-panel--expanded"
+              key={`${activeBuildSignature}-${activeThread.id}-read-panel`}
+              className="heritage-thread-read-panel heritage-thread-read-panel--expanded heritage-thread-read-panel--calm"
               style={getThreadColorVars(activeThread.nodes)}
             >
               <div className="heritage-thread-read-panel-head">
                 <div>
-                  <span className="heritage-summary-kicker">
-                    Voice Thread{' '}
-                    {activeThreadIndex >= 0
-                      ? String(activeThreadIndex + 1).padStart(2, '0')
-                      : ''}
-                  </span>
+                  <span className="heritage-summary-kicker">Voice Thread</span>
 
                   <h4>{activeThread.title}</h4>
 
@@ -3376,11 +3111,11 @@ const keyRelationships = useMemo(() => {
                 </span>
               </div>
 
-              <p className="heritage-thread-read-lede">
-                {activeReadout.openingRead}
+              <p className="heritage-thread-read-lede heritage-thread-read-lede--calm">
+                {activeThread.summary}
               </p>
 
-              <div className="heritage-thread-readout-meta">
+              <div className="heritage-thread-readout-meta heritage-thread-readout-meta--calm">
                 <span>
                   <strong>Shape</strong>
 
@@ -3388,21 +3123,21 @@ const keyRelationships = useMemo(() => {
                 </span>
 
                 <span>
-                  <strong>Intensity</strong>
+                  <strong>Feel</strong>
 
                   {activeReadout.intensityLabel}
                 </span>
 
                 <span>
-                  <strong>Nodes</strong>
+                  <strong>Voice nodes</strong>
 
                   {activeReadout.nodeLabels}
                 </span>
               </div>
 
-              <div className="heritage-thread-read-grid heritage-thread-read-grid--expanded">
-                <section className="heritage-thread-read-grid-wide">
-                  <span>What this thread is telling us</span>
+              <div className="heritage-thread-listening-note">
+                <section>
+                  <span>What you may notice</span>
 
                   <p>{activeReadout.whatThreadIsTellingUs}</p>
                 </section>
@@ -3420,75 +3155,7 @@ const keyRelationships = useMemo(() => {
                 </section>
 
                 <section>
-                  <span>How this was determined</span>
-
-                  <p>
-                    The Voicing Engine is reading the strongest combined
-                    movement across {activeThreadNodeLabels}. It weighs the
-                    current build choices against each node’s relevance, then
-                    ranks the thread by the strongest combined shift from the
-                    Heritage reference center.
-                  </p>
-                </section>
-
-                <section>
-                  <span>Best fit</span>
-
-                  <p>{activeReadout.bestFitRead}</p>
-                </section>
-
-                <section>
-                  <span>Read strength</span>
-
-                  <p>
-                    <strong>{activeReadout.intensityLabel}.</strong>{' '}
-                    {activeReadout.intensityDetail}
-                  </p>
-                </section>
-
-                <section className="heritage-thread-read-grid-wide">
-                  <span>Trait evidence</span>
-
-                  <div className="heritage-thread-evidence-list">
-                    {activeReadout.traitEvidence.map((item) => (
-                      <div
-                        key={item.axis}
-                        className={`heritage-thread-evidence-row is-${item.direction}`}
-                      >
-                        <strong>{item.label}</strong>
-
-                        <p>{item.read}</p>
-
-                        <em>
-                          {item.value.toFixed(1)} / 10 · shift{' '}
-                          {item.delta > 0
-                            ? `+${item.delta.toFixed(1)}`
-                            : item.delta.toFixed(1)}
-                        </em>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-                <section className="heritage-thread-read-grid-wide">
-                  <span>Build contributors</span>
-
-                  <div className="heritage-thread-driver-list">
-                    {activeReadout.driverEvidence.map((driver) => (
-                      <div
-                        key={driver.label}
-                        className="heritage-thread-driver-row"
-                      >
-                        <strong>{driver.label}</strong>
-
-                        <p>{driver.read}</p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-
-                <section className="heritage-thread-read-grid-wide">
-                  <span>Trust note</span>
+                  <span>Listening note</span>
 
                   <p>{activeReadout.trustNote}</p>
                 </section>
@@ -3941,7 +3608,15 @@ const keyRelationships = useMemo(() => {
                             className={`heritage-finish-swatch-tile ${
                               isSelected ? 'is-selected' : ''
                             }`}
-                            onClick={() => setScorchDepth(option)}
+                            onClick={() => {
+                              setScorchDepth(option);
+
+                              setActiveThreadSelection({
+                                id: '',
+
+                                signature: '',
+                              });
+                            }}
                           >
                             <span className="heritage-finish-swatch-image-wrap">
                               <img
@@ -4053,7 +3728,15 @@ const keyRelationships = useMemo(() => {
                             className={`heritage-option-tile heritage-option-tile-detail ${
                               isSelected ? 'is-selected' : ''
                             }`}
-                            onClick={() => setHardwareColor(option.value)}
+                            onClick={() => {
+                              setHardwareColor(option.value);
+
+                              setActiveThreadSelection({
+                                id: '',
+
+                                signature: '',
+                              });
+                            }}
                           >
                             <span className="heritage-option-title">
                               {option.label}
@@ -4096,7 +3779,15 @@ const keyRelationships = useMemo(() => {
                             className={`heritage-option-tile heritage-option-tile-detail ${
                               isSelected ? 'is-selected' : ''
                             }`}
-                            onClick={() => setHoopType(option.value)}
+                            onClick={() => {
+                              setHoopType(option.value);
+
+                              setActiveThreadSelection({
+                                id: '',
+
+                                signature: '',
+                              });
+                            }}
                           >
                             <span className="heritage-option-title">
                               {option.label}

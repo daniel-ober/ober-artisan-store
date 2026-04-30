@@ -135,7 +135,7 @@ const TermsOfService = forwardRef((props, ref) => {
       <h2>8A. LegacyPrint™ / Proprietary Tools</h2>
 
       <p>
-        LegacyPrint™, the Ober LegacyPrint™ Voicing Engine, and related
+        LegacyPrint™, the Ober LegacyPrint™ voice engine, and related
         terminology, outputs, summaries, scores, comparative visualizations,
         recommendation logic, voicing-language, visualizations, and heuristics
         are proprietary to Ober Artisan Drums. Any frequency views, tonal
@@ -264,7 +264,7 @@ const TermsOfService = forwardRef((props, ref) => {
 
       <p>
         This includes, without limitation, reliance on the Ober LegacyPrint™
-        Voicing Engine, recommendation panels, tonal estimates, comparative
+        voice engine, recommendation panels, tonal estimates, comparative
         scores, voice profiles, archive features, or user-submitted storytelling
         content.
       </p>
