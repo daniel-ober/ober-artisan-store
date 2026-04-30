@@ -3021,7 +3021,7 @@ const HeritageProductDetail = () => {
             <span className="heritage-chart-eyebrow">Voice Threads</span>
 
             <h4 className="heritage-chart-title">
-              Strongest relationship paths
+              Current Voice Thread paths
             </h4>
 
             <p className="heritage-chart-title-subcopy">
@@ -3034,7 +3034,7 @@ const HeritageProductDetail = () => {
 
           <div
             className="heritage-thread-card-row"
-            aria-label="Strongest Voice Threads"
+            aria-label="Current Voice Threads"
           >
             {keyRelationships.map((relationship) => {
               const isActive = selectedThreadId === relationship.id;
@@ -4081,7 +4081,6 @@ const HeritageProductDetail = () => {
                 </div>
               </div>
             </div>
-
             <div className="heritage-legacyprint-nav-row">
               <div
                 className="heritage-legacyprint-tabs"
