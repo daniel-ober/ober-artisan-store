@@ -1344,6 +1344,16 @@ export function buildHeritageVoiceRead(input = {}) {
 
     sourceBuildRead: buildSourceBuildRead(currentSpec),
 
+    shapedThreadTitle: null,
+
+    shapedThreadNodes: [],
+
+    shapedThreadScore: null,
+
+    complexThreadTitle: null,
+
+    complexThreadNodes: [],
+
     meta: {
 
       engineVersion: 'heritage-v1.6',

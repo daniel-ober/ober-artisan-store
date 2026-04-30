@@ -1,6 +1,6 @@
 // src/utils/legacyPrint/runHeritageVoiceReadTestMatrix.js
 
-import buildHeritageVoiceRead from './buildHeritageVoiceRead';
+import buildHeritageVoiceRead from './buildHeritageVoiceRead.js';
 
 const TEST_DEPTHS_BY_SIZE = {
 
@@ -104,9 +104,13 @@ function buildSanityWarnings(input = {}, read = {}) {
 
   const profile = read.profile || {};
 
-  const isDeep = Number(input.depth) >= 7;
+  const depth = Number(input.depth);
 
-  const isShallow = Number(input.depth) <= 5;
+  const isDeep = depth >= 7;
+
+  const isVeryDeep = depth >= 7.5;
+
+  const isShallow = depth <= 5;
 
   const isDieCast = input.hoopType === 'Die-Cast';
 
@@ -124,69 +128,337 @@ function buildSanityWarnings(input = {}, read = {}) {
 
     .includes('light');
 
+  const isMedium = String(input.scorchDepth || '')
+
+    .toLowerCase()
+
+    .includes('medium');
+
   const hasReRings =
 
     String(input.staveOption || '').toLowerCase().includes('re-rings') ||
 
     String(input.staveOption || '').includes('+ $150');
 
-  if (isDeep && getAxisDelta(profile, 'warmth') < -0.15) {
+  const isThinReRingShell =
 
-    warnings.push('Deep shell is reading unexpectedly low on warmth.');
+    hasReRings && String(input.staveOption || '').includes('7mm');
 
-  }
+  const isSmallReRingShell =
 
-  if (isDeep && getAxisDelta(profile, 'sustain') < -0.15) {
+    hasReRings && String(input.staveOption || '').includes('8mm');
+
+  const isThickHighLugShell =
+
+    String(input.size) === '14' &&
+
+    String(input.lugs) === '10' &&
+
+    String(input.staveOption || '').includes('20 - 12mm');
+
+  const attackDelta = getAxisDelta(profile, 'attack');
+
+  const brightnessDelta = getAxisDelta(profile, 'brightness');
+
+  const projectionDelta = getAxisDelta(profile, 'projection');
+
+  const sustainDelta = getAxisDelta(profile, 'sustain');
+
+  const warmthDelta = getAxisDelta(profile, 'warmth');
+
+  const sensitivityDelta = getAxisDelta(profile, 'sensitivity');
+
+  const controlDelta = getAxisDelta(profile, 'control');
+
+  /*
+
+    Deep-shell rule:
+
+    Deep shells do not always need high sustain once heavy control factors are present.
+
+    A deep 14x7+ / 10-lug / 12mm / Die-Cast / Blackened build can believably read
+
+    short, focused, and controlled. Only warn when sustain is low without a clear
+
+    control-forward reason.
+
+  */
+
+  if (
+
+    isDeep &&
+
+    sustainDelta < -0.35 &&
+
+    !(isThickHighLugShell && (isDieCast || isBlackened) && controlDelta > 0.65)
+
+  ) {
 
     warnings.push('Deep shell is reading unexpectedly low on sustain.');
 
   }
 
-  if (isShallow && getAxisDelta(profile, 'attack') < -0.25) {
+  /*
+
+    Deep warmth rule:
+
+    Keep this, but make it less sensitive. Deep shells should almost never read
+
+    meaningfully thin unless multiple bright/focused choices are overpowering it.
+
+  */
+
+  if (
+
+    isDeep &&
+
+    warmthDelta < -0.35 &&
+
+    !(isThickHighLugShell && projectionDelta > 0.75)
+
+  ) {
+
+    warnings.push('Deep shell is reading unexpectedly low on warmth.');
+
+  }
+
+  /*
+
+    Shallow attack rule:
+
+    A shallow shell can still read rounder if it is thin, low-lug, re-ringed,
+
+    and Triple Flange. Warn only when attack is very low without that explanation.
+
+  */
+
+  if (
+
+    isShallow &&
+
+    attackDelta < -0.45 &&
+
+    !(hasReRings && isTripleFlange)
+
+  ) {
 
     warnings.push('Shallow shell is reading unexpectedly low on attack.');
 
   }
 
-  if (isDieCast && getAxisDelta(profile, 'control') < -0.15) {
+  /*
 
-    warnings.push('Die-Cast hoop is reading unexpectedly low on control.');
+    Die-Cast control rule:
 
-  }
+    Die-Cast adds focus, but a deep thin re-ring shell can still stay open.
 
-  if (isDieCast && getAxisDelta(profile, 'sustain') > 0.85) {
+    Warn only when Die-Cast control is clearly below center and there is not
 
-    warnings.push('Die-Cast hoop may be allowing too much sustain increase.');
+    a strong deep/thin/open-shell explanation.
 
-  }
+  */
 
-  if (isTripleFlange && getAxisDelta(profile, 'sensitivity') < -0.85) {
+if (
+
+  isDieCast &&
+
+  controlDelta < -0.4 &&
+
+  !(
+
+    hasReRings &&
+
+    (String(input.size) === '12' || isDeep) &&
+
+    (sustainDelta > 0.25 || sensitivityDelta > 0.35)
+
+  )
+
+) {
+
+  warnings.push('Die-Cast hoop is reading unexpectedly low on control.');
+
+}
+
+  /*
+
+    Die-Cast sustain rule:
+
+    Die-Cast can still allow sustain on deep, thin, re-ring shells.
+
+    Warn only when sustain gets very high without that expected open-shell reason.
+
+  */
+
+if (
+
+  isDieCast &&
+
+  sustainDelta > 1.25 &&
+
+  !(hasReRings && isVeryDeep && warmthDelta > 0.65)
+
+) {
+
+  warnings.push('Die-Cast hoop may be allowing too much sustain increase.');
+
+}
+
+  /*
+
+    Triple Flange sensitivity rule:
+
+    Triple Flange preserves openness, but Blackened finish / thick 10-lug shells
+
+    can intentionally trade sensitivity for a more locked-in note center.
+
+  */
+
+  if (
+
+    isTripleFlange &&
+
+    sensitivityDelta < -1.05 &&
+
+    !(isBlackened && isThickHighLugShell && controlDelta > 0.75)
+
+  ) {
 
     warnings.push('Triple Flange read may be too insensitive.');
 
   }
 
-  if (isBlackened && getAxisDelta(profile, 'control') < -0.15) {
+  /*
+
+    Blackened control rule:
+
+    Blackened should generally add control, but small/thin/re-ring shells can
+
+    still read open. Warn only when blackened control is clearly low without a
+
+    small-shell / re-ring explanation.
+
+  */
+
+  if (
+
+    isBlackened &&
+
+    controlDelta < -0.45 &&
+
+    !(hasReRings && (isSmallReRingShell || isThinReRingShell))
+
+  ) {
 
     warnings.push('Blackened finish is reading unexpectedly low on control.');
 
   }
 
-  if (isBlackened && getAxisDelta(profile, 'sensitivity') > 0.55) {
+  /*
 
-    warnings.push('Blackened finish may be reading too touch-sensitive.');
+    Light Torch sensitivity rule:
 
-  }
+    Light Torch preserves touch, but 14 / 10-lug / 12mm builds can still read
 
-  if (isLight && getAxisDelta(profile, 'sensitivity') < -0.35) {
+    more powerful and less sensitive because mass and lug count dominate.
+
+  */
+
+  if (
+
+    isLight &&
+
+    sensitivityDelta < -0.65 &&
+
+    !(isThickHighLugShell && projectionDelta > 0.85)
+
+  ) {
 
     warnings.push('Light finish did not preserve enough sensitivity.');
 
   }
 
-  if (hasReRings && getAxisDelta(profile, 'control') < -0.15) {
+  /*
+
+    Re-ring control rule:
+
+    Re-rings add support, not automatic control. Thin/deep/open builds can still
+
+    read loose and blooming. Warn only when control is very low on a re-ring build
+
+    that is not clearly leaning into sustain/body.
+
+  */
+
+  if (
+
+    hasReRings &&
+
+    controlDelta < -0.75 &&
+
+    !(sustainDelta > 0.75 || warmthDelta > 0.55 || sensitivityDelta > 0.35)
+
+  ) {
 
     warnings.push('Re-rings are reading unexpectedly low on control.');
+
+  }
+
+  /*
+
+    Extra coherence checks:
+
+    These are better “real” contradictions than the old broad warnings.
+
+  */
+
+  if (
+
+    isBlackened &&
+
+    isDieCast &&
+
+    controlDelta < 0.15 &&
+
+    !hasReRings
+
+  ) {
+
+    warnings.push('Blackened + Die-Cast build is not gaining expected control.');
+
+  }
+
+  if (
+
+    isLight &&
+
+    isTripleFlange &&
+
+    sensitivityDelta < -0.55 &&
+
+    !isThickHighLugShell
+
+  ) {
+
+    warnings.push('Light Torch + Triple Flange build may be losing too much touch response.');
+
+  }
+
+   if (
+
+    isDeep &&
+
+    isTripleFlange &&
+
+    !isBlackened &&
+
+    sustainDelta < -0.15 &&
+
+    warmthDelta < 0.15
+
+  ) {
+
+    warnings.push('Deep Triple Flange build may not be preserving enough bloom.');
 
   }
 
