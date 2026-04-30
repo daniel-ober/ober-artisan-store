@@ -5,6 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 
 import {
+  runHeritageVoiceReadTestMatrix,
+  runOneHeritageVoiceReadTest,
+} from '../utils/legacyPrint/runHeritageVoiceReadTestMatrix';
+
+import {
   Zap,
   Waves,
   Flame,
@@ -32,6 +37,8 @@ import toast from 'react-hot-toast';
 import LEGACYPRINT_BENCHMARK_CATALOG from '../data/legacyPrint/benchmarkCatalog';
 
 import buildHeritageVoiceRead from '../utils/legacyPrint/buildHeritageVoiceRead';
+
+import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadout';
 
 const AXIS_META = [
   { key: 'attack', label: 'Attack', icon: 'attack' },
@@ -175,6 +182,11 @@ const BASE_LEGACYPRINT_TABS = [
 
     label: 'VoiceMap™',
   },
+  {
+    key: 'relationships',
+
+    label: 'Voice Threads',
+  },
 
   {
     key: 'legacyTuning',
@@ -183,15 +195,9 @@ const BASE_LEGACYPRINT_TABS = [
   },
 
   {
-    key: 'traitInsight',
+    key: 'legacyPrintRead',
 
-    label: 'Node Insights',
-  },
-
-  {
-    key: 'relationships',
-
-    label: 'Voice Threads',
+    label: 'LegacyPrint™ Read',
   },
 ];
 
@@ -372,6 +378,198 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
       brightness: 0.2,
     },
+  },
+
+    {
+
+    id: 'attack-projection',
+
+    nodes: ['attack', 'projection'],
+
+    title: 'Immediate room push',
+
+    summary:
+
+      'The drum should speak quickly and carry forward with a more assertive presence in the room.',
+
+    playerRead:
+
+      'Use this when the snare needs to feel immediate, confident, and present without relying only on brightness.',
+
+    bestFits: ['Live rooms', 'Country rock', 'Pop', 'Modern roots'],
+
+    drivers: ['Shell depth', 'Lug count', 'Shell thickness', 'Hoop type'],
+
+    relevance: {
+
+      attack: 1,
+
+      projection: 1,
+
+      control: 0.15,
+
+    },
+
+  },
+
+  {
+
+    id: 'attack-warmth',
+
+    nodes: ['attack', 'warmth'],
+
+    title: 'Quick response with body',
+
+    summary:
+
+      'The drum should give a clear note start while still keeping wood character and center weight in the voice.',
+
+    playerRead:
+
+      'Good for players who want articulation without the drum becoming thin, sharp, or overly modern.',
+
+    bestFits: ['Roots', 'Soul', 'Country', 'Session work'],
+
+    drivers: ['Shell depth', 'Bearing edge', 'Wood recipe', 'Tuning range'],
+
+    relevance: {
+
+      attack: 1,
+
+      warmth: 1,
+
+      sustain: 0.15,
+
+    },
+
+  },
+
+  {
+
+    id: 'brightness-control',
+
+    nodes: ['brightness', 'control'],
+
+    title: 'Clear top with tighter shape',
+
+    summary:
+
+      'The drum should keep upper-register clarity while holding the note in a more organized and controlled shape.',
+
+    playerRead:
+
+      'Useful when the snare needs to stay clear in the mix without spreading too wide or getting washy.',
+
+    bestFits: ['Studio pop', 'Modern country', 'Gospel', 'Detailed rock'],
+
+    drivers: ['Hoop type', 'Bearing edge', 'Shell thickness', 'Finish intensity'],
+
+    relevance: {
+
+      brightness: 1,
+
+      control: 1,
+
+      attack: 0.2,
+
+    },
+
+  },
+
+  {
+
+    id: 'brightness-sensitivity',
+
+    nodes: ['brightness', 'sensitivity'],
+
+    title: 'Light touch clarity',
+
+    summary:
+
+      'The drum should reveal smaller dynamic details with enough top-end information to make soft notes speak clearly.',
+
+    playerRead:
+
+      'Good for ghost notes, articulate lighter playing, brush-style work, and detailed pocket parts.',
+
+    bestFits: ['Funk', 'Jazz', 'Studio work', 'Dynamic pop'],
+
+    drivers: ['Snare response setup', 'Bearing edge', 'Hoop type', 'Shell depth'],
+
+    relevance: {
+
+      brightness: 1,
+
+      sensitivity: 1,
+
+      attack: 0.15,
+
+    },
+
+  },
+
+  {
+
+    id: 'warmth-projection',
+
+    nodes: ['warmth', 'projection'],
+
+    title: 'Body that carries',
+
+    summary:
+
+      'The drum should keep a fuller center while still pushing enough sound outward to feel present in the room.',
+
+    playerRead:
+
+      'Use this when the snare needs weight and room presence without becoming overly sharp or bright.',
+
+    bestFits: ['Americana', 'Blues rock', 'Roots rock', 'Live rooms'],
+
+    drivers: ['Shell size', 'Shell depth', 'Wood recipe', 'Tuning range'],
+
+    relevance: {
+
+      warmth: 1,
+
+      projection: 1,
+
+      sustain: 0.2,
+
+    },
+
+  },
+
+  {
+
+    id: 'sustain-sensitivity',
+
+    nodes: ['sustain', 'sensitivity'],
+
+    title: 'Responsive bloom',
+
+    summary:
+
+      'The drum should open up after the stroke and respond easily to smaller dynamic changes.',
+
+    playerRead:
+
+      'Best for players who shape the drum through touch, tuning, and dynamics rather than only volume or rimshot force.',
+
+    bestFits: ['Singer-songwriter', 'Jazz-influenced roots', 'Soul', 'Americana'],
+
+    drivers: ['Shell depth', 'Triple flange hoops', 'Snare response setup', 'Lighter finish treatment'],
+
+    relevance: {
+
+      sustain: 1,
+
+      sensitivity: 1,
+
+      warmth: 0.25,
+
+    },
+
   },
 
   {
@@ -864,6 +1062,49 @@ const buildToneSummary = (
   return `Compared with ${referenceLabel}, this Heritage configuration leans toward ${topPhrases[0]}, ${topPhrases[1]}, and ${topPhrases[2]}.`;
 };
 
+const buildLegacyPrintAnalysis = ({
+  toneSummaryText,
+
+  legacyTuningHzRange,
+
+  currentNearestNoteWindow,
+
+  keyRelationships,
+
+  isCompareModeEnabled,
+
+  selectedBenchmarkType,
+
+  selectedBenchmarkSize,
+}) => {
+  const strongestThread = keyRelationships?.[0];
+
+  const referenceLabel = getReferenceLabel(
+    selectedBenchmarkType,
+
+    selectedBenchmarkSize
+  );
+
+  return {
+    voiceMap:
+      toneSummaryText ||
+      'This build is reading close to the center of the current VoiceMap.',
+
+    legacyTuning: `This build is currently reading in the ${legacyTuningHzRange} range, with a nearest note window around ${currentNearestNoteWindow}. That places the drum inside the broader resonance zone where the shell is likely to feel most balanced before final craftsman tuning.`,
+
+    thread: strongestThread
+      ? `${strongestThread.title}. ${strongestThread.summary}`
+      : 'No dominant Voice Thread is strongly leading this configuration yet.',
+
+    craftsman:
+      'This read is a build-direction guide, not a final verdict. The finished drum still has to be tuned, played, heard, and allowed to show where its final pocket lives.',
+
+    compare: isCompareModeEnabled
+      ? `Compare mode is currently reading this build against ${referenceLabel}.`
+      : 'Compare mode is off, so this read is describing the current Ober build on its own.',
+  };
+};
+
 const AXIS_INSIGHT_COPY = {
   attack: {
     short: 'How quickly the note speaks at the front edge.',
@@ -1304,18 +1545,1039 @@ const getRelationshipScore = (relationship, profile = {}) => {
   }, 0);
 };
 
+const getAxisDistanceFromCenter = (profile = {}, axis) => {
+  return Math.abs(Number(profile?.[axis] ?? 5) - 5);
+};
+
+const buildDynamicComplexVoiceThread = (profile = {}) => {
+
+  const getDelta = (axis) => Number((Number(profile?.[axis] ?? 5) - 5).toFixed(2));
+
+  const deltas = {
+
+    attack: getDelta('attack'),
+
+    brightness: getDelta('brightness'),
+
+    projection: getDelta('projection'),
+
+    sustain: getDelta('sustain'),
+
+    warmth: getDelta('warmth'),
+
+    sensitivity: getDelta('sensitivity'),
+
+    control: getDelta('control'),
+
+  };
+
+  const rankedAxes = AXIS_META.map((axis) => ({
+
+    key: axis.key,
+
+    label: axis.label,
+
+    distance: getAxisDistanceFromCenter(profile, axis.key),
+
+    value: Number(profile?.[axis.key] ?? 5),
+
+    delta: deltas[axis.key],
+
+  })).sort((a, b) => b.distance - a.distance);
+
+  const meaningfulAxes = rankedAxes.filter((axis) => axis.distance >= 0.24);
+
+  const selectedAxes =
+
+    meaningfulAxes.length >= 4
+
+      ? meaningfulAxes.slice(0, Math.min(5, meaningfulAxes.length))
+
+      : rankedAxes.slice(0, 4);
+
+  let nodes = selectedAxes.map((axis) => axis.key);
+
+  const ensureNodes = (requiredNodes = []) => {
+
+    const merged = [...requiredNodes, ...nodes];
+
+    nodes = merged.filter(
+
+      (node, index, array) => node && array.indexOf(node) === index
+
+    );
+
+  };
+
+  const warmSustainStrength = deltas.warmth + deltas.sustain;
+
+  const frontEdgeReduction =
+
+    Math.abs(Math.min(0, deltas.attack)) +
+
+    Math.abs(Math.min(0, deltas.brightness));
+
+  const focusedStrength =
+
+    Math.max(0, deltas.attack) +
+
+    Math.max(0, deltas.control) +
+
+    Math.max(0, deltas.projection);
+
+  const openTouchStrength =
+
+    Math.max(0, deltas.sensitivity) +
+
+    Math.max(0, deltas.sustain) +
+
+    Math.abs(Math.min(0, deltas.control));
+
+  let title = 'Current drum personality pattern';
+
+  let summary =
+
+    'The drum is showing a wider pattern across several traits rather than one isolated sound characteristic. This read is meant to describe how the current build behaves as a complete instrument.';
+
+  let playerRead =
+
+    'This is the deeper personality read of the current configuration — the place where the VoiceMap turns into a more practical sense of how the drum may want to be played, heard, and used.';
+
+  let bestFits = [
+
+    'General session',
+
+    'Player-specific tuning',
+
+    'Studio reference',
+
+  ];
+
+  let drivers = ['Shell depth', 'Shell size', 'Hoop type', 'Shell thickness'];
+
+  if (warmSustainStrength >= 1.85 && frontEdgeReduction >= 0.85) {
+
+    title = 'Deep shell bloom with rounded attack';
+
+    summary =
+
+      'The drum is reading as strongly body-forward, with longer bloom and a rounder front edge. The voice is moving away from quick snap and toward depth, weight, and shell presence.';
+
+    playerRead =
+
+      'This points toward a drum that wants space around it. It should reward open tuning, slower backbeats, roots-oriented parts, and playing where the shell body is allowed to speak.';
+
+    bestFits = ['Americana', 'Roots rock', 'Singer-songwriter', 'Cinematic session'];
+
+    drivers = [
+
+      'Deeper shell',
+
+      'Triple flange hoops',
+
+      'Medium shell thickness',
+
+      'Open Heritage tuning lane',
+
+    ];
+
+    ensureNodes(['warmth', 'sustain', 'attack', 'brightness']);
+
+  } else if (warmSustainStrength >= 1.35) {
+
+    title = 'Body-forward bloom pattern';
+
+    summary =
+
+      'The drum is reading with a fuller center and longer note development, while the front edge starts to feel rounder and less immediate.';
+
+    playerRead =
+
+      'This points toward a drum that should feel broad, musical, and less aggressive at the start of the note. It should sit well where body and natural shell character matter more than sharp cut.';
+
+    bestFits = ['Americana', 'Soul', 'Roots', 'Singer-songwriter'];
+
+    drivers = [
+
+      'Shell depth',
+
+      'Shell size',
+
+      'Triple flange hoops',
+
+      'Medium Torch finish',
+
+    ];
+
+    ensureNodes(['warmth', 'sustain', 'attack']);
+
+  } else if (warmSustainStrength >= 0.85) {
+
+    title = 'Fuller shell response';
+
+    summary =
+
+      'The drum is beginning to lean warmer and more open, with body and bloom becoming more noticeable without fully overtaking the Heritage center.';
+
+    playerRead =
+
+      'This points toward a balanced Heritage voice that is starting to favor body and resonance while still staying usable across general session, roots, and live settings.';
+
+    bestFits = ['Roots', 'Country', 'Soul', 'General session'];
+
+    drivers = [
+
+      'Moderate shell depth',
+
+      'Triple flange hoops',
+
+      'Oak stave shell',
+
+      'Medium Torch finish',
+
+    ];
+
+    ensureNodes(['warmth', 'sustain', 'projection']);
+
+  } else if (focusedStrength >= 2.15) {
+
+    title = 'Focused, forward note shape';
+
+    summary =
+
+      'The drum is reading with a stronger front edge, tighter control, and more outward push. The note feels more organized and immediate.';
+
+    playerRead =
+
+      'This points toward a drum that should speak clearly in a mix, hold tighter grooves, and keep the note from spreading too wide.';
+
+    bestFits = ['Studio pop', 'Modern country', 'Funk', 'Gospel'];
+
+    drivers = ['Die-cast hoops', 'Higher lug count', 'Shell thickness', 'Finish intensity'];
+
+    ensureNodes(['attack', 'control', 'projection']);
+
+  } else if (openTouchStrength >= 1.4) {
+
+    title = 'Open touch response';
+
+    summary =
+
+      'The drum is reading as more reactive under the hands, with extra bloom and a freer response around lighter playing.';
+
+    playerRead =
+
+      'This points toward a drum that rewards dynamics, ghost notes, softer phrasing, and more expressive tuning choices.';
+
+    bestFits = ['Soul', 'Jazz-influenced roots', 'Singer-songwriter', 'Dynamic session work'];
+
+    drivers = [
+
+      'Lighter finish treatment',
+
+      'Triple flange hoops',
+
+      'Snare response setup',
+
+      'Open tuning lane',
+
+    ];
+
+    ensureNodes(['sensitivity', 'sustain', 'warmth']);
+
+  } else if (deltas.warmth >= 0.35 && deltas.control >= 0.35) {
+
+    title = 'Grounded body with shaped control';
+
+    summary =
+
+      'The drum is reading with a stronger center and a more managed note shape, giving it body without letting the voice spread too far.';
+
+    playerRead =
+
+      'This points toward a drum that should feel warm and grounded, but still composed enough for practical playing and recording.';
+
+    bestFits = ['Studio roots', 'Classic country', 'Soul', 'General session'];
+
+    drivers = [
+
+      'Shell thickness',
+
+      'Hoop type',
+
+      'Finish intensity',
+
+      'Shell depth',
+
+    ];
+
+    ensureNodes(['warmth', 'control', 'projection']);
+
+  }
+
+  nodes = nodes.slice(0, 5);
+
+  const relevance = nodes.reduce((acc, node, index) => {
+
+    acc[node] = Math.max(0.45, 1 - index * 0.12);
+
+    return acc;
+
+  }, {});
+
+  return {
+
+    id: `complex-${nodes.join('-')}-${title
+
+      .toLowerCase()
+
+      .replace(/[^a-z0-9]+/g, '-')
+
+      .replace(/(^-|-$)/g, '')}`,
+
+    nodes,
+
+    title,
+
+    summary,
+
+    playerRead,
+
+    bestFits,
+
+    drivers,
+
+    relevance,
+
+    score: nodes.reduce(
+
+      (sum, node) => sum + getAxisDistanceFromCenter(profile, node),
+
+      0
+
+    ),
+
+    threadType: 'Complex Thread',
+
+    threadTypeDetail:
+
+      'A 4+ node pattern shows the deeper voice pattern: the broader drum personality suggested by the current configuration.',
+
+  };
+
+};
+
 const buildKeyRelationships = (summary = {}) => {
   const profile = summary?.profile || {};
 
-  return KEY_RELATIONSHIP_DEFINITIONS.map((relationship) => ({
-    ...relationship,
+  const scoredRelationships = KEY_RELATIONSHIP_DEFINITIONS.map(
+    (relationship) => ({
+      ...relationship,
 
-    score: getRelationshipScore(relationship, profile),
-  }))
+      score: getRelationshipScore(relationship, profile),
+    })
+  ).sort((a, b) => b.score - a.score);
 
-    .sort((a, b) => b.score - a.score)
+  const strongestTwoNode =
+    scoredRelationships.find(
+      (relationship) => relationship.nodes.length === 2
+    ) || scoredRelationships[0];
 
-    .slice(0, 3);
+  const strongestThreeNode =
+    scoredRelationships.find(
+      (relationship) => relationship.nodes.length === 3
+    ) ||
+    scoredRelationships.find(
+      (relationship) => relationship.id === 'warmth-sustain-sensitivity'
+    ) ||
+    scoredRelationships[1] ||
+    strongestTwoNode;
+
+  const complexVoiceThread = buildDynamicComplexVoiceThread(profile);
+
+  return [
+    {
+      ...strongestTwoNode,
+
+      slotKey: 'simple',
+
+      threadType: 'Simple Thread',
+
+      threadTypeDetail:
+        'A 2-node connector shows the clearest first-impression relationship: the paired traits a listener is most likely to notice first.',
+    },
+
+    {
+      ...strongestThreeNode,
+
+      slotKey: 'shaped',
+
+      threadType: 'Shaped Thread',
+
+      threadTypeDetail:
+        'A 3-node triangle shows playing personality: how the drum begins to behave under the hands as multiple traits work together.',
+    },
+
+    {
+      ...complexVoiceThread,
+
+      slotKey: 'complex',
+
+      threadType: 'Complex Thread',
+
+      threadTypeDetail:
+        'A 4+ node pattern shows the deeper voice pattern: the broader drum personality suggested by the current configuration.',
+    },
+  ].filter(Boolean);
+};
+
+const buildThreadSegments = (nodes = []) => {
+  const cleanNodes = Array.isArray(nodes) ? nodes.filter(Boolean) : [];
+
+  if (cleanNodes.length < 2) return [];
+
+  if (cleanNodes.length === 2) {
+    return [[cleanNodes[0], cleanNodes[1]]];
+  }
+
+  return cleanNodes.map((node, index) => {
+    const nextNode = cleanNodes[(index + 1) % cleanNodes.length];
+
+    return [node, nextNode];
+  });
+};
+
+const renderThreadNodeIcons = (nodes = []) => {
+  return (
+    <span className="heritage-thread-node-icon-list" aria-label="Thread nodes">
+      {nodes.map((nodeKey) => {
+        const axis = AXIS_META.find((axisItem) => axisItem.key === nodeKey);
+
+        const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+        return (
+          <span
+            key={nodeKey}
+            className="heritage-thread-node-icon-chip"
+            style={{ '--thread-node-color': color }}
+            title={axis?.label || nodeKey}
+            aria-label={axis?.label || nodeKey}
+          >
+            <MetricIcon type={axis?.icon || nodeKey} color={color} size={16} />
+          </span>
+        );
+      })}
+    </span>
+  );
+};
+
+const getThreadColorVars = (nodes = []) => {
+  const colors = nodes
+
+    .map((nodeKey) => AXIS_COLOR_BY_KEY[nodeKey])
+
+    .filter(Boolean);
+
+  const fallback = '#d6b277';
+
+  return {
+    '--thread-accent': colors[0] || fallback,
+
+    '--thread-accent-2': colors[1] || colors[0] || fallback,
+
+    '--thread-accent-3': colors[2] || colors[1] || colors[0] || fallback,
+
+    '--thread-accent-4':
+      colors[3] || colors[2] || colors[1] || colors[0] || fallback,
+  };
+};
+
+const THREAD_NODE_POSITIONS = {
+  attack: { x: 50, y: 16 },
+
+  brightness: { x: 80, y: 31 },
+
+  projection: { x: 86, y: 58 },
+
+  sustain: { x: 66, y: 84 },
+
+  warmth: { x: 34, y: 84 },
+
+  sensitivity: { x: 14, y: 58 },
+
+  control: { x: 20, y: 31 },
+};
+
+const THREAD_NODE_ICON_POSITIONS = {
+  attack: { x: 50, y: 9 },
+
+  brightness: { x: 88, y: 27 },
+
+  projection: { x: 95, y: 58 },
+
+  sustain: { x: 69, y: 93 },
+
+  warmth: { x: 31, y: 93 },
+
+  sensitivity: { x: 5, y: 58 },
+
+  control: { x: 12, y: 27 },
+};
+
+const THREAD_NODE_ORDER = [
+  'attack',
+
+  'brightness',
+
+  'projection',
+
+  'sustain',
+
+  'warmth',
+
+  'sensitivity',
+
+  'control',
+];
+
+const getThreadNodePairs = () => {
+  const pairs = [];
+
+  THREAD_NODE_ORDER.forEach((source, sourceIndex) => {
+    THREAD_NODE_ORDER.forEach((target, targetIndex) => {
+      if (targetIndex <= sourceIndex) return;
+
+      pairs.push([source, target]);
+    });
+  });
+
+  return pairs;
+};
+
+const THREAD_NODE_PAIRS = getThreadNodePairs();
+
+const getThreadGradientId = (mapId, source, target) => {
+
+  const sourceIndex = THREAD_NODE_ORDER.indexOf(source);
+
+  const targetIndex = THREAD_NODE_ORDER.indexOf(target);
+
+  if (sourceIndex === -1 || targetIndex === -1) {
+
+    return `${mapId}-thread-${source}-${target}`;
+
+  }
+
+  const first = sourceIndex <= targetIndex ? source : target;
+
+  const second = sourceIndex <= targetIndex ? target : source;
+
+  return `${mapId}-thread-${first}-${second}`;
+
+};
+
+const VoiceThreadMap = ({ activeThread, compact = false }) => {
+
+  const activeSegments = buildThreadSegments(activeThread?.nodes);
+
+  const activeNodeSet = new Set(activeThread?.nodes || []);
+
+  const mapId = `heritage-voice-thread-${
+
+    compact ? 'compact' : 'large'
+
+  }-${String(activeThread?.id || 'none').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
+
+  const isActiveSegment = (source, target) =>
+
+    activeSegments.some(
+
+      ([a, b]) =>
+
+        (a === source && b === target) || (a === target && b === source)
+
+    );
+
+  return (
+
+    <div
+
+      className={`heritage-voice-thread-map ${
+
+        compact ? 'heritage-voice-thread-map--compact' : ''
+
+      }`}
+
+      aria-label={
+
+        activeThread
+
+          ? `Voice Thread map showing ${activeThread.title}`
+
+          : 'Voice Thread map'
+
+      }
+
+    >
+
+      <svg
+
+        className="heritage-voice-thread-svg"
+
+        viewBox="0 0 500 500"
+
+        role="img"
+
+        aria-hidden="true"
+
+      >
+
+        <defs>
+
+          <filter
+
+            id={`${mapId}-activeGlow`}
+
+            x="-80%"
+
+            y="-80%"
+
+            width="260%"
+
+            height="260%"
+
+          >
+
+            <feGaussianBlur stdDeviation="5.5" result="blur" />
+
+            <feMerge>
+
+              <feMergeNode in="blur" />
+
+              <feMergeNode in="SourceGraphic" />
+
+            </feMerge>
+
+          </filter>
+
+          {THREAD_NODE_PAIRS.map(([source, target]) => {
+
+            const sourcePoint = THREAD_NODE_POSITIONS[source];
+
+            const targetPoint = THREAD_NODE_POSITIONS[target];
+
+            if (!sourcePoint || !targetPoint) return null;
+
+            const sourceColor = AXIS_COLOR_BY_KEY[source] || '#d6b277';
+
+            const targetColor = AXIS_COLOR_BY_KEY[target] || '#d6b277';
+
+            const gradientId = `${mapId}-thread-${source}-${target}`;
+
+            return (
+
+              <linearGradient
+
+                key={gradientId}
+
+                id={gradientId}
+
+                gradientUnits="userSpaceOnUse"
+
+                x1={sourcePoint.x * 5}
+
+                y1={sourcePoint.y * 5}
+
+                x2={targetPoint.x * 5}
+
+                y2={targetPoint.y * 5}
+
+              >
+
+                <stop offset="0%" stopColor={sourceColor} />
+
+                <stop offset="100%" stopColor={targetColor} />
+
+              </linearGradient>
+
+            );
+
+          })}
+
+        </defs>
+
+        {THREAD_NODE_PAIRS.map(([source, target]) => {
+
+          const sourcePoint = THREAD_NODE_POSITIONS[source];
+
+          const targetPoint = THREAD_NODE_POSITIONS[target];
+
+          if (!sourcePoint || !targetPoint) return null;
+
+          const selected = isActiveSegment(source, target);
+
+          const gradientId = getThreadGradientId(mapId, source, target);
+
+          return (
+
+            <g
+
+              key={`${source}-${target}`}
+
+              className={`heritage-voice-thread-line-group ${
+
+                selected ? 'is-active' : ''
+
+              }`}
+
+            >
+
+              <line
+
+                x1={sourcePoint.x * 5}
+
+                y1={sourcePoint.y * 5}
+
+                x2={targetPoint.x * 5}
+
+                y2={targetPoint.y * 5}
+
+                className="heritage-voice-thread-line heritage-voice-thread-line--base"
+
+                stroke={`url(#${gradientId})`}
+
+              />
+
+              {selected && (
+
+                <>
+
+                  <line
+
+                    x1={sourcePoint.x * 5}
+
+                    y1={sourcePoint.y * 5}
+
+                    x2={targetPoint.x * 5}
+
+                    y2={targetPoint.y * 5}
+
+                    className="heritage-voice-thread-line heritage-voice-thread-line--active-glow"
+
+                    stroke={`url(#${gradientId})`}
+
+                    filter={`url(#${mapId}-activeGlow)`}
+
+                  />
+
+                  <line
+
+                    x1={sourcePoint.x * 5}
+
+                    y1={sourcePoint.y * 5}
+
+                    x2={targetPoint.x * 5}
+
+                    y2={targetPoint.y * 5}
+
+                    className="heritage-voice-thread-line heritage-voice-thread-line--active-core"
+
+                    stroke={`url(#${gradientId})`}
+
+                  />
+
+                </>
+
+              )}
+
+            </g>
+
+          );
+
+        })}
+
+        {THREAD_NODE_ORDER.map((nodeKey, index) => {
+
+          const nextNodeKey =
+
+            THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
+
+          const point = THREAD_NODE_POSITIONS[nodeKey];
+
+          const nextPoint = THREAD_NODE_POSITIONS[nextNodeKey];
+
+          if (!point || !nextPoint) return null;
+
+          const gradientId = getThreadGradientId(mapId, nodeKey, nextNodeKey);
+
+          return (
+
+            <line
+
+              key={`outer-${nodeKey}-${nextNodeKey}`}
+
+              className="heritage-voice-thread-outer-line"
+
+              x1={point.x * 5}
+
+              y1={point.y * 5}
+
+              x2={nextPoint.x * 5}
+
+              y2={nextPoint.y * 5}
+
+              stroke={`url(#${gradientId})`}
+
+            />
+
+          );
+
+        })}
+
+        {THREAD_NODE_ORDER.map((nodeKey) => {
+
+          const point = THREAD_NODE_POSITIONS[nodeKey];
+
+          const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
+
+          const axis = AXIS_META.find((item) => item.key === nodeKey);
+
+          const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+          const isActive = activeNodeSet.has(nodeKey);
+
+          return (
+
+            <g
+
+              key={nodeKey}
+
+              className={`heritage-voice-thread-node ${
+
+                isActive ? 'is-active' : ''
+
+              }`}
+
+              style={{ '--node-color': color }}
+
+            >
+
+              <circle
+
+                cx={point.x * 5}
+
+                cy={point.y * 5}
+
+                r={isActive ? '5.2' : '3.4'}
+
+                className="heritage-voice-thread-anchor-dot"
+
+                fill={color}
+
+              />
+
+              <foreignObject
+
+                x={iconPoint.x * 5 - 25}
+
+                y={iconPoint.y * 5 - 25}
+
+                width="50"
+
+                height="50"
+
+                className="heritage-voice-thread-node-icon-wrap"
+
+              >
+
+                <div
+
+                  xmlns="http://www.w3.org/1999/xhtml"
+
+                  className="heritage-voice-thread-node-icon"
+
+                  style={{ color }}
+
+                >
+
+                  <MetricIcon
+
+                    type={axis?.icon || nodeKey}
+
+                    color={color}
+
+                    size={22}
+
+                  />
+
+                </div>
+
+              </foreignObject>
+
+            </g>
+
+          );
+
+        })}
+
+      </svg>
+
+    </div>
+
+  );
+
+};
+
+const MiniVoiceThreadMap = ({ thread }) => {
+  const activeSegments = buildThreadSegments(thread?.nodes);
+
+  const activeNodeSet = new Set(thread?.nodes || []);
+
+  const mapId = `heritage-mini-thread-${String(thread?.id || 'none').replace(
+    /[^a-zA-Z0-9_-]/g,
+
+    '-'
+  )}`;
+
+  const isActiveSegment = (source, target) =>
+    activeSegments.some(
+      ([a, b]) =>
+        (a === source && b === target) || (a === target && b === source)
+    );
+
+  return (
+    <svg
+      className="heritage-mini-thread-map"
+      viewBox="0 0 500 500"
+      aria-hidden="true"
+    >
+      <defs>
+        <filter
+          id={`${mapId}-miniGlow`}
+          x="-80%"
+          y="-80%"
+          width="260%"
+          height="260%"
+        >
+          <feGaussianBlur stdDeviation="5" result="blur" />
+
+          <feMerge>
+            <feMergeNode in="blur" />
+
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        {THREAD_NODE_PAIRS.map(([source, target]) => {
+          const sourcePoint = THREAD_NODE_POSITIONS[source];
+
+          const targetPoint = THREAD_NODE_POSITIONS[target];
+
+          if (!sourcePoint || !targetPoint) return null;
+
+          const gradientId = `${mapId}-${source}-${target}`;
+
+          return (
+            <linearGradient
+              key={gradientId}
+              id={gradientId}
+              gradientUnits="userSpaceOnUse"
+              x1={sourcePoint.x * 5}
+              y1={sourcePoint.y * 5}
+              x2={targetPoint.x * 5}
+              y2={targetPoint.y * 5}
+            >
+              <stop
+                offset="0%"
+                stopColor={AXIS_COLOR_BY_KEY[source] || '#d6b277'}
+              />
+
+              <stop
+                offset="100%"
+                stopColor={AXIS_COLOR_BY_KEY[target] || '#d6b277'}
+              />
+            </linearGradient>
+          );
+        })}
+      </defs>
+
+      {THREAD_NODE_PAIRS.map(([source, target]) => {
+        const sourcePoint = THREAD_NODE_POSITIONS[source];
+
+        const targetPoint = THREAD_NODE_POSITIONS[target];
+
+        if (!sourcePoint || !targetPoint) return null;
+
+        const selected = isActiveSegment(source, target);
+
+        const gradientId = `${mapId}-${source}-${target}`;
+
+        return (
+          <g
+            key={`${source}-${target}`}
+            className={`heritage-mini-thread-line-group ${
+              selected ? 'is-active' : ''
+            }`}
+          >
+            <line
+              x1={sourcePoint.x * 5}
+              y1={sourcePoint.y * 5}
+              x2={targetPoint.x * 5}
+              y2={targetPoint.y * 5}
+              className="heritage-mini-thread-line heritage-mini-thread-line--network"
+              stroke={`url(#${gradientId})`}
+            />
+
+            {selected && (
+              <>
+                <line
+                  x1={sourcePoint.x * 5}
+                  y1={sourcePoint.y * 5}
+                  x2={targetPoint.x * 5}
+                  y2={targetPoint.y * 5}
+                  className="heritage-mini-thread-line heritage-mini-thread-line--glow"
+                  stroke={`url(#${gradientId})`}
+                  filter={`url(#${mapId}-miniGlow)`}
+                />
+
+                <line
+                  x1={sourcePoint.x * 5}
+                  y1={sourcePoint.y * 5}
+                  x2={targetPoint.x * 5}
+                  y2={targetPoint.y * 5}
+                  className="heritage-mini-thread-line heritage-mini-thread-line--core"
+                  stroke={`url(#${gradientId})`}
+                />
+              </>
+            )}
+          </g>
+        );
+      })}
+
+      {THREAD_NODE_ORDER.map((nodeKey) => {
+        const point = THREAD_NODE_POSITIONS[nodeKey];
+
+        const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+        const isActive = activeNodeSet.has(nodeKey);
+
+        if (!point) return null;
+
+        return (
+          <circle
+            key={nodeKey}
+            cx={point.x * 5}
+            cy={point.y * 5}
+            r={isActive ? '12' : '6'}
+            fill={color}
+            className={`heritage-mini-thread-dot ${
+              isActive ? 'is-active' : ''
+            }`}
+          />
+        );
+      })}
+    </svg>
+  );
 };
 
 const HeritageProductDetail = () => {
@@ -1360,6 +2622,8 @@ const HeritageProductDetail = () => {
   const [openBuilderSection, setOpenBuilderSection] = useState('construction');
 
   const [activeAxisKey, setActiveAxisKey] = useState('attack');
+
+  const [activeThreadSlot, setActiveThreadSlot] = useState('simple');
 
   const [showConfigBreakdown, setShowConfigBreakdown] = useState(false);
 
@@ -1745,6 +3009,67 @@ const HeritageProductDetail = () => {
   const keyRelationships = useMemo(() => {
     return buildKeyRelationships(currentBuildVoiceRangeSummary);
   }, [currentBuildVoiceRangeSummary]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'development') return;
+
+    window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
+
+    window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
+
+    console.info(
+      'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...})'
+    );
+  }, []);
+
+  const activeVoiceThreadReadout = useMemo(() => {
+    const activeThread =
+      keyRelationships.find(
+        (relationship) => relationship.slotKey === activeThreadSlot
+      ) || keyRelationships[0];
+
+    if (!activeThread) return null;
+
+    return buildVoiceThreadReadout({
+      thread: activeThread,
+
+      profile: currentBuildVoiceRangeSummary?.profile || {},
+
+      sourceBuildRead: currentBuildVoiceRangeSummary?.sourceBuildRead || '',
+    });
+  }, [keyRelationships, activeThreadSlot, currentBuildVoiceRangeSummary]);
+
+  const legacyPrintAnalysis = useMemo(() => {
+    return buildLegacyPrintAnalysis({
+      toneSummaryText,
+
+      legacyTuningHzRange,
+
+      currentNearestNoteWindow,
+
+      keyRelationships,
+
+      isCompareModeEnabled,
+
+      selectedBenchmarkType,
+
+      selectedBenchmarkSize,
+    });
+  }, [
+    toneSummaryText,
+
+    legacyTuningHzRange,
+
+    currentNearestNoteWindow,
+
+    keyRelationships,
+
+    isCompareModeEnabled,
+
+    selectedBenchmarkType,
+
+    selectedBenchmarkSize,
+  ]);
 
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
@@ -2385,10 +3710,12 @@ const HeritageProductDetail = () => {
     );
   };
 
-  const renderToneSummaryCard = () => {
+  const renderLegacyPrintSummaryCard = () => {
+    const topRelationship = keyRelationships[0];
+
     return (
-      <div className="heritage-tone-summary-card heritage-tone-summary-card--stacked heritage-tone-summary-card--polished heritage-tone-summary-card--voiceprint">
-        <div className="heritage-tone-summary-copy">
+      <div className="heritage-legacyprint-summary-card">
+        <div className="heritage-legacyprint-summary-head">
           <span className="heritage-summary-kicker heritage-summary-kicker--voiceprint">
             <img
               src="/legacyprint-benchmarks/legacyprint-icon.png"
@@ -2396,16 +3723,56 @@ const HeritageProductDetail = () => {
               className="heritage-summary-kicker-icon"
               aria-hidden="true"
             />
-            VoiceMap Summary
+            LegacyPrint™ Summary
           </span>
 
-          <p>{toneSummaryText}</p>
+          <h4>Current build analysis</h4>
 
-          <p className="heritage-tone-summary-helper">
-            {isCompareModeEnabled
-              ? 'Compare mode is enabled. This VoiceMap Summary is benchmark-relative against your selected reference drum.'
-              : 'This VoiceMap Summary responds to your current build selections.'}
+          <p>
+            A plain-language read of this Heritage configuration across
+            VoiceMap™, LegacyTuning™, and Voice Threads.
           </p>
+        </div>
+
+        <div className="heritage-legacyprint-summary-grid">
+          <article className="heritage-legacyprint-summary-section">
+            <span>VoiceMap™ Read</span>
+
+            <p>{toneSummaryText}</p>
+          </article>
+
+          <article className="heritage-legacyprint-summary-section">
+            <span>LegacyTuning™ Zone</span>
+
+            <p>
+              This build is currently reading in the {legacyTuningHzRange}{' '}
+              range, with a nearest note window around{' '}
+              {currentNearestNoteWindow}. That places the drum inside the
+              broader resonance zone where the shell is likely to feel most
+              balanced before final craftsman tuning.
+            </p>
+          </article>
+
+          {topRelationship && (
+            <article className="heritage-legacyprint-summary-section">
+              <span>Strongest Voice Thread</span>
+
+              <p>
+                <strong>{topRelationship.title}.</strong>{' '}
+                {topRelationship.summary}
+              </p>
+            </article>
+          )}
+
+          <article className="heritage-legacyprint-summary-section heritage-legacyprint-summary-section--takeaway">
+            <span>Craftsman Takeaway</span>
+
+            <p>
+              This read is a build-direction guide, not a final verdict. The
+              finished drum still has to be tuned, played, heard, and allowed to
+              show where its final pocket lives.
+            </p>
+          </article>
         </div>
       </div>
     );
@@ -2652,6 +4019,84 @@ const HeritageProductDetail = () => {
     );
   };
 
+  const renderVoiceMapNodeInsight = () => {
+    return (
+      <div
+        className="heritage-voicemap-node-insight"
+        style={{
+          '--axis-accent': activeAxisColor,
+        }}
+      >
+        <div className="heritage-voicemap-node-insight-head">
+          <div className="heritage-voicemap-node-title-row">
+            <span className="heritage-voicemap-node-icon">
+              <MetricIcon
+                type={activeAxisMeta.icon}
+                color={activeAxisColor}
+                size={19}
+              />
+            </span>
+
+            <div>
+              <span className="heritage-summary-kicker">Active Voice Node</span>
+
+              <h4>
+                {activeAxisMeta.label}
+
+                <em>{AXIS_SUBLABELS[activeAxisMeta.key]}</em>
+              </h4>
+            </div>
+          </div>
+
+          <span
+            className={`heritage-voicemap-node-shift ${
+              activeAxisDeltaValue > 0
+                ? 'is-positive'
+                : activeAxisDeltaValue < 0
+                  ? 'is-negative'
+                  : 'is-neutral'
+            }`}
+          >
+            Shift {activeAxisScore}
+          </span>
+        </div>
+
+        <div className="heritage-voicemap-node-insight-body">
+          <div className="heritage-voicemap-node-copy">
+            <p className="heritage-voicemap-node-short">
+              {activeAxisCopy.short}
+            </p>
+
+            <p>{activeAxisCopy.detail}</p>
+          </div>
+
+          <div className="heritage-voicemap-node-contributors">
+            <span>Primary contributors</span>
+
+            <div className="heritage-voicemap-node-contributor-list">
+              {activeAxisImpactFactors.map((factor) => (
+                <span
+                  key={factor.label}
+                  className={`heritage-voicemap-node-contributor is-${factor.strength}`}
+                >
+                  {factor.label}
+
+                  <em>
+                    {factor.strength === 'strong'
+                      ? 'High'
+                      : factor.strength === 'medium'
+                        ? 'Medium'
+                        : 'Light'}
+                  </em>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderTraitInsightPanel = () => {
     return (
       <div
@@ -2770,10 +4215,8 @@ const HeritageProductDetail = () => {
         >
           <div className="heritage-voice-comparison-shell heritage-voice-comparison-shell--voice-read">
             {renderComparisonChart()}
-          </div>
 
-          <div className="heritage-voice-support-grid heritage-voice-support-grid--top">
-            {renderToneSummaryCard()}
+            {renderVoiceMapNodeInsight()}
           </div>
         </div>
       );
@@ -2800,136 +4243,251 @@ const HeritageProductDetail = () => {
         </div>
       );
     }
+    if (legacyPrintTab === 'relationships') {
+      const activeThread =
+        keyRelationships.find(
+          (relationship) => relationship.slotKey === activeThreadSlot
+        ) || keyRelationships[0];
 
-    if (legacyPrintTab === 'traitInsight') {
+      const activeThreadIndex = keyRelationships.findIndex(
+        (relationship) => relationship.id === activeThread?.id
+      );
+
+      const activeThreadNodeLabels =
+        activeThread?.nodes
+
+          ?.map(
+            (node) => AXIS_META.find((axis) => axis.key === node)?.label || node
+          )
+
+          .join(', ') || '';
+
+      const activeReadout = activeVoiceThreadReadout;
+
       return (
-        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--trait">
-          <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
-            <div className="heritage-chart-title-shell">
-              <span className="heritage-chart-eyebrow">
-                Voice Node Glossary
-              </span>
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-reference--cards">
+          <div className="heritage-thread-reference-head">
+            <span className="heritage-chart-eyebrow">Voice Threads</span>
 
-              <h4 className="heritage-chart-title">Explore each Voice Node</h4>
+            <h4 className="heritage-chart-title">
+              Strongest relationship paths
+            </h4>
 
-              <p className="heritage-chart-title-subcopy">
-                {isCompareModeEnabled
-                  ? 'Compare mode is enabled. Select a Voice Node below to see how this build shifts against your selected reference drum.'
-                  : 'Select a Voice Node below to understand how this build speaks and feels on its own. Turn on Compare mode when you want to read those nodes against a reference drum.'}
-              </p>
-            </div>
+            <p className="heritage-chart-title-subcopy">
+              Voice Threads take the seven Voice Nodes and turn them into a
+              shared language for how this drum speaks, feels, and behaves. A
+              Simple Thread shows the first relationship your ear may notice. A
+              Shaped Thread shows how traits begin working together under the
+              hands. A Complex Thread shows the broader drum personality forming
+              across the build.
+            </p>
           </div>
 
-          <div className="heritage-legacyprint-trait-chip-row">
-            {AXIS_META.map((axis) => {
-              const isActive = activeAxisKey === axis.key;
+          <div
+            className="heritage-thread-card-row"
+            aria-label="Strongest Voice Threads"
+          >
+            {keyRelationships.map((relationship, index) => {
+              const isActive = activeThread?.slotKey === relationship.slotKey;
 
-              const color = AXIS_COLOR_BY_KEY[axis.key];
+              const threadColorVars = getThreadColorVars(relationship.nodes);
+
+              const cardReadout = buildVoiceThreadReadout({
+                thread: relationship,
+
+                profile: currentBuildVoiceRangeSummary?.profile || {},
+
+                sourceBuildRead:
+                  currentBuildVoiceRangeSummary?.sourceBuildRead || '',
+              });
 
               return (
                 <button
-                  key={axis.key}
+                  key={relationship.id}
                   type="button"
-                  className={`heritage-legacyprint-trait-chip ${
-                    isActive ? 'is-active' : ''
-                  }`}
-                  style={{
-                    '--axis-accent': color,
-                  }}
-                  onClick={() => setActiveAxisKey(axis.key)}
+                  className={`heritage-thread-card ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setActiveThreadSlot(relationship.slotKey)}
+                  style={threadColorVars}
                 >
-                  <MetricIcon type={axis.icon} color={color} size={16} />
+                  <span className="heritage-thread-card-topline">
+                    <span className="heritage-thread-card-rank">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
 
-                  <span>{axis.label}</span>
+                    <span className="heritage-thread-card-type-stack">
+                      <span className="heritage-thread-card-type">
+                        {cardReadout.threadName}
+                      </span>
+                    </span>
+                  </span>
+
+                  <span className="heritage-thread-card-map">
+                    <VoiceThreadMap activeThread={relationship} compact />
+                  </span>
+
+                  <span className="heritage-thread-card-copy">
+                    <strong>{relationship.title}</strong>
+
+                    {renderThreadNodeIcons(relationship.nodes)}
+                  </span>
                 </button>
               );
             })}
           </div>
 
-          {renderTraitInsightPanel()}
+          {activeThread && activeReadout && (
+            <article
+              className="heritage-thread-read-panel heritage-thread-read-panel--expanded"
+              style={getThreadColorVars(activeThread.nodes)}
+            >
+              <div className="heritage-thread-read-panel-head">
+                <div>
+                  <span className="heritage-summary-kicker">
+                    Voice Thread{' '}
+                    {activeThreadIndex >= 0
+                      ? String(activeThreadIndex + 1).padStart(2, '0')
+                      : ''}
+                  </span>
+
+                  <h4>{activeThread.title}</h4>
+
+                  <div className="heritage-thread-read-icons">
+                    {renderThreadNodeIcons(activeThread.nodes)}
+                  </div>
+                </div>
+
+                <span className="heritage-thread-read-type heritage-thread-read-type--minimal">
+                  {activeReadout.threadName}
+                </span>
+              </div>
+
+              <p className="heritage-thread-read-lede">
+                {activeReadout.openingRead}
+              </p>
+
+              <div className="heritage-thread-readout-meta">
+                <span>
+                  <strong>Shape</strong>
+
+                  {activeReadout.shapeLabel}
+                </span>
+
+                <span>
+                  <strong>Intensity</strong>
+
+                  {activeReadout.intensityLabel}
+                </span>
+
+                <span>
+                  <strong>Nodes</strong>
+
+                  {activeReadout.nodeLabels}
+                </span>
+              </div>
+
+              <div className="heritage-thread-read-grid heritage-thread-read-grid--expanded">
+                <section className="heritage-thread-read-grid-wide">
+                  <span>What this thread is telling us</span>
+
+                  <p>{activeReadout.whatThreadIsTellingUs}</p>
+                </section>
+
+                <section>
+                  <span>Why it matters</span>
+
+                  <p>{activeReadout.whyItMatters}</p>
+                </section>
+
+                <section>
+                  <span>How to use this read</span>
+
+                  <p>{activeReadout.howToUseThis}</p>
+                </section>
+
+                <section>
+                  <span>How this was determined</span>
+
+                  <p>
+                    The Voicing Engine is reading the strongest combined
+                    movement across {activeThreadNodeLabels}. It weighs the
+                    current build choices against each node’s relevance, then
+                    ranks the thread by the strongest combined shift from the
+                    Heritage reference center.
+                  </p>
+                </section>
+
+                <section>
+                  <span>Best fit</span>
+
+                  <p>{activeReadout.bestFitRead}</p>
+                </section>
+
+                <section>
+                  <span>Read strength</span>
+
+                  <p>
+                    <strong>{activeReadout.intensityLabel}.</strong>{' '}
+                    {activeReadout.intensityDetail}
+                  </p>
+                </section>
+
+                <section className="heritage-thread-read-grid-wide">
+                  <span>Trait evidence</span>
+
+                  <div className="heritage-thread-evidence-list">
+                    {activeReadout.traitEvidence.map((item) => (
+                      <div
+                        key={item.axis}
+                        className={`heritage-thread-evidence-row is-${item.direction}`}
+                      >
+                        <strong>{item.label}</strong>
+
+                        <p>{item.read}</p>
+
+                        <em>
+                          {item.value.toFixed(1)} / 10 · shift{' '}
+                          {item.delta > 0
+                            ? `+${item.delta.toFixed(1)}`
+                            : item.delta.toFixed(1)}
+                        </em>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="heritage-thread-read-grid-wide">
+                  <span>Build contributors</span>
+
+                  <div className="heritage-thread-driver-list">
+                    {activeReadout.driverEvidence.map((driver) => (
+                      <div
+                        key={driver.label}
+                        className="heritage-thread-driver-row"
+                      >
+                        <strong>{driver.label}</strong>
+
+                        <p>{driver.read}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="heritage-thread-read-grid-wide">
+                  <span>Trust note</span>
+
+                  <p>{activeReadout.trustNote}</p>
+                </section>
+              </div>
+            </article>
+          )}
         </div>
       );
     }
 
-    if (legacyPrintTab === 'relationships') {
+    if (legacyPrintTab === 'legacyPrintRead') {
       return (
-        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships">
-          <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
-            <span className="heritage-chart-eyebrow">Voice Threads</span>
-
-            <h4 className="heritage-chart-title">
-              Strongest Voice Node relationships
-            </h4>
-
-            <p className="heritage-chart-title-subcopy">
-              {isCompareModeEnabled
-                ? 'Compare mode is enabled. These Voice Threads show which node relationships most clearly shape how this build differs from your selected benchmark.'
-                : 'These Voice Threads show the strongest node relationships shaping this Heritage configuration.'}
-            </p>
-          </div>
-
-          <div className="heritage-key-relationships-grid">
-            {keyRelationships.map((relationship, index) => (
-              <article
-                key={relationship.id}
-                className="heritage-key-relationship-card"
-              >
-                <div className="heritage-key-relationship-head">
-                  <span className="heritage-key-relationship-rank">
-                    {index + 1}
-                  </span>
-
-                  <div className="heritage-key-relationship-title-group">
-                    <div className="heritage-key-relationship-node-row">
-                      {relationship.nodes.map((node) => {
-                        const axis = AXIS_META.find(
-                          (item) => item.key === node
-                        );
-
-                        const color = AXIS_COLOR_BY_KEY[node];
-
-                        return (
-                          <span
-                            key={node}
-                            className="heritage-key-relationship-node-pill"
-                            style={{
-                              '--axis-accent': color,
-                            }}
-                          >
-                            {axis?.label || node}
-                          </span>
-                        );
-                      })}
-                    </div>
-
-                    <h4>{relationship.title}</h4>
-                  </div>
-                </div>
-
-                <p className="heritage-key-relationship-summary">
-                  {relationship.summary}
-                </p>
-
-                <div className="heritage-key-relationship-block">
-                  <span>How to use this thread</span>
-
-                  <p>{relationship.playerRead}</p>
-                </div>
-
-                <div className="heritage-key-relationship-block">
-                  <span>Best fits</span>
-
-                  <p>{relationship.bestFits.join(' • ')}</p>
-                </div>
-
-                <div className="heritage-key-relationship-block">
-                  <span>Build contributors</span>
-
-                  <p>{relationship.drivers.join(' • ')}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--read">
+          {renderLegacyPrintSummaryCard()}
         </div>
       );
     }
@@ -2947,7 +4505,7 @@ const HeritageProductDetail = () => {
 
               <p className="heritage-chart-title-subcopy">
                 This reference drum becomes the anchor for Compare mode. The
-                Voice Engine will show how your current Heritage build moves
+                Voicing Engine will show how your current Heritage build moves
                 against that selected benchmark.
               </p>
             </div>
@@ -3776,7 +5334,7 @@ const HeritageProductDetail = () => {
                       className="heritage-legacyprint-engine-icon"
                       aria-hidden="true"
                     />
-                    LegacyPrint™ Voice Engine
+                    LegacyPrint™ Voicing Engine
                   </span>
 
                   <div className="heritage-compare-header-cluster">
@@ -3820,7 +5378,7 @@ const HeritageProductDetail = () => {
               <div
                 className="heritage-legacyprint-tabs"
                 role="tablist"
-                aria-label="LegacyPrint Voice Engine sections"
+                aria-label="LegacyPrint Voicing Engine sections"
               >
                 {visibleLegacyPrintTabs.map((tab) => {
                   const isActive = legacyPrintTab === tab.key;
@@ -3886,7 +5444,7 @@ const HeritageProductDetail = () => {
 
             <p>
               When Compare is enabled, the charts and tone summary become
-              benchmark-relative. When Compare is off, the Voice Engine
+              benchmark-relative. When Compare is off, the Voicing Engine
               describes the current Ober build on its own.
             </p>
 
