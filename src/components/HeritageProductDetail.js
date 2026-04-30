@@ -3097,7 +3097,9 @@ const HeritageProductDetail = () => {
             >
               <div className="heritage-thread-read-panel-head">
                 <div>
-                  <span className="heritage-summary-kicker">Voice Thread</span>
+                  <span className="heritage-summary-kicker">
+                    Ober voice read
+                  </span>
 
                   <h4>{activeThread.title}</h4>
 
@@ -3117,13 +3119,13 @@ const HeritageProductDetail = () => {
 
               <div className="heritage-thread-readout-meta heritage-thread-readout-meta--calm">
                 <span>
-                  <strong>Shape</strong>
+                  <strong>Pattern</strong>
 
                   {activeReadout.shapeLabel}
                 </span>
 
                 <span>
-                  <strong>Feel</strong>
+                  <strong>Hand feel</strong>
 
                   {activeReadout.intensityLabel}
                 </span>
@@ -3137,25 +3139,25 @@ const HeritageProductDetail = () => {
 
               <div className="heritage-thread-listening-note">
                 <section>
-                  <span>What you may notice</span>
+                  <span>At the kit</span>
 
                   <p>{activeReadout.whatThreadIsTellingUs}</p>
                 </section>
 
                 <section>
-                  <span>Why it matters</span>
+                  <span>Bench note</span>
 
                   <p>{activeReadout.whyItMatters}</p>
                 </section>
 
                 <section>
-                  <span>How to use this read</span>
+                  <span>Good for</span>
 
                   <p>{activeReadout.howToUseThis}</p>
                 </section>
 
                 <section>
-                  <span>Listening note</span>
+                  <span>Keep in mind</span>
 
                   <p>{activeReadout.trustNote}</p>
                 </section>

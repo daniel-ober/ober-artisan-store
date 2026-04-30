@@ -92,45 +92,45 @@ const THREAD_AXIS_PLAYER_LANGUAGE = {
 
 const THREAD_SHAPE_META = {
   simple: {
-    label: 'Simple Thread',
+    label: 'First read',
 
-    listenerLevel: 'First impression',
+    listenerLevel: 'clearest pairing',
 
-    shapeLabel: '2-node connector',
+    shapeLabel: '2-point path',
 
     shortDefinition:
-      'The first useful relationship a listener is likely to notice.',
+      'The first useful relationship a player is likely to notice.',
 
     whyItMatters:
-      'A Simple Thread gives the player a clean starting point. Instead of trying to explain the whole drum at once, it names the clearest paired relationship: what the ear notices first and what that trait is working with.',
+      'This is the first bench note: one plain relationship before asking the player to read the whole drum.',
   },
 
   shaped: {
-    label: 'Shaped Thread',
+    label: 'Feel read',
 
-    listenerLevel: 'Playing personality',
+    listenerLevel: 'under-the-hands pattern',
 
-    shapeLabel: '3-node triangle',
+    shapeLabel: '3-point path',
 
     shortDefinition:
       'How the drum begins to behave under the hands, not just how it sounds at first hit.',
 
     whyItMatters:
-      'A Shaped Thread starts to explain feel. It shows how three traits combine into a playing personality: the way the drum responds, opens, focuses, or carries as the player actually works the instrument.',
+      'This is where the drum starts to feel like a build rather than a list of traits. The three points describe how it behaves under the hands.',
   },
 
   complex: {
-    label: 'Complex Thread',
+    label: 'Bench read',
 
-    listenerLevel: 'Deeper voice pattern',
+    listenerLevel: 'deeper shell pattern',
 
-    shapeLabel: '4+ node pattern',
+    shapeLabel: '4-point path',
 
     shortDefinition:
       'The wider pattern that describes the current drum personality.',
 
     whyItMatters:
-      'A Complex Thread is the deeper read. It does not try to replace the VoiceMap. It translates the wider pattern into a practical player-facing idea: how the drum wants to be used, where it feels natural, and what kind of musical identity it is beginning to show.',
+      'This is the larger bench read: where the drum opens, where it stays held, and what kind of musical job it naturally wants.',
   },
 };
 
@@ -550,28 +550,28 @@ const buildWhatThreadIsTellingUs = ({ nodes, profile, thread }) => {
 
 const buildWhyItMatters = ({ kind, kindMeta, thread }) => {
   if (kind === 'simple') {
-    return `${kindMeta.whyItMatters} For this build, that gives the player an easy first sentence: “I notice ${String(
+    return `${kindMeta.whyItMatters} For this build, the first sentence is simple: “I notice ${String(
       thread?.title || 'this relationship'
     ).toLowerCase()}.”`;
   }
 
   if (kind === 'shaped') {
-    return `${kindMeta.whyItMatters} For this build, the triangle helps explain why the drum may feel like more than the sum of its parts.`;
+    return `${kindMeta.whyItMatters} For this build, it points to the way the shell, hardware, and tuning lane start working as one feel.`;
   }
 
-  return `${kindMeta.whyItMatters} For this build, the wider pattern is useful because it turns the VoiceMap into a more human read of the drum’s personality.`;
+  return `${kindMeta.whyItMatters} For this build, it keeps the VoiceMap grounded in the way a player would actually talk about the drum.`;
 };
 
 const buildHowToUseThis = ({ kind, thread }) => {
   if (kind === 'simple') {
-    return `Use this as the first comparison point when talking about the drum. It should help answer: “What do I notice first, and what is that first impression connected to?”`;
+    return `Use this as the first comparison point: what the ear catches first, and what that first impression is tied to.`;
   }
 
   if (kind === 'shaped') {
-    return `Use this when talking about feel, touch, and musical behavior. It should help answer: “How does the drum start behaving once I actually play it?”`;
+    return `Use this when talking about feel, touch, and behavior once the drum is actually being played.`;
   }
 
-  return `Use this as the broader personality read. It should help answer: “What kind of player, room, arrangement, or musical role does this drum naturally seem to understand?”`;
+  return `Use this for player fit, room choice, tuning lane, and the musical role this drum seems built to serve.`;
 };
 
 const buildTrustNote = ({ kind, evidence, nodes = [] }) => {
@@ -590,10 +590,10 @@ const buildTrustNote = ({ kind, evidence, nodes = [] }) => {
   }
 
   if (kind === 'complex') {
-    return 'This is a pattern read, not a lab measurement. It should be treated as practical listening language: useful for comparison, conversation, and build direction, then confirmed by real playing and final tuning.';
+    return 'Treat it like a bench note, not a promise. Heads, wires, room, player, and final tuning still get the last word.';
   }
 
-  return 'This read is meant to support listening, not replace it. It gives the player shared language for what the drum appears to be emphasizing.';
+  return 'Use it as shared listening language. The final call still comes from the drum in the room.';
 };
 
 const buildDriverEvidence = (drivers = []) => {
@@ -606,8 +606,8 @@ const buildDriverEvidence = (drivers = []) => {
   }));
 };
 
-const buildThreadName = ({ kindMeta, thread }) => {
-  return `${kindMeta.label} • ${kindMeta.listenerLevel}`;
+const buildThreadName = ({ kindMeta }) => {
+  return kindMeta.label;
 };
 
 export function buildVoiceThreadReadout({
@@ -634,7 +634,7 @@ export function buildVoiceThreadReadout({
 
     title: thread?.title || 'Voice Thread',
 
-    threadName: buildThreadName({ kindMeta, thread }),
+    threadName: buildThreadName({ kindMeta }),
 
     threadKind: kind,
 
