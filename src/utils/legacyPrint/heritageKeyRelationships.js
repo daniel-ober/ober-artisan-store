@@ -291,13 +291,13 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       'The shell is reading as fuller and more open, with the note developing outward after the strike while still keeping enough shape to remain usable.',
 
     relevance: {
-      warmth: 1,
+      warmth: 0.85,
 
-      sustain: 1,
+      sustain: 0.9,
 
-      projection: 0.85,
+      projection: 0.45,
 
-      control: 0.45,
+      control: 0.25,
     },
 
     preferredDirection: {
@@ -324,13 +324,13 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       'The drum is reading with a more open note shape, more bloom after the strike, and a freer shell response.',
 
     relevance: {
-      sustain: 1,
+      sustain: 0.95,
 
-      warmth: 0.9,
+      warmth: 0.75,
 
-      sensitivity: 0.75,
+      sensitivity: 0.5,
 
-      brightness: 0.5,
+      brightness: 0.35,
     },
 
     preferredDirection: {
@@ -451,9 +451,13 @@ const clampNumber = (value, fallback = 0) => {
 };
 
 const includesText = (value = '', needle = '') => {
+
   return String(value || '')
+
     .toLowerCase()
+
     .includes(needle.toLowerCase());
+
 };
 
 const getProfileDelta = (profile = {}, axis) => {
@@ -585,15 +589,19 @@ const getSpecBias = (relationshipId, summary = {}) => {
       break;
 
     case 'warm-deep-settled-center':
-      if (depthBand === 'deep') bias += 1.1;
+      if (depthBand === 'deep') bias += 1.55;
 
-      if (depthBand === 'veryDeep') bias += 1.45;
+      if (depthBand === 'veryDeep') bias += 1.9;
 
-      if (depthBand === 'extraDeep') bias += 1.8;
+      if (depthBand === 'extraDeep') bias += 2.15;
 
-      if (isMediumDiameter || isLarge) bias += 0.35;
+      if (isCompact && depthBand === 'veryDeep') bias += 0.25;
 
-      if (isTripleFlange) bias += 0.25;
+      if (isMediumDiameter) bias += 0.3;
+
+      if (isLarge) bias += 0.18;
+
+      if (isTripleFlange) bias += 0.2;
 
       if (isMediumFinish) bias += 0.2;
 
@@ -603,6 +611,8 @@ const getSpecBias = (relationshipId, summary = {}) => {
       if (depthBand === 'medium') bias += 1.1;
 
       if (depthBand === 'mediumDeep') bias += 1.75;
+
+      if (depthBand === 'deep') bias += 0.45;
 
       if (isMediumDiameter) bias += 0.45;
 
@@ -615,28 +625,32 @@ const getSpecBias = (relationshipId, summary = {}) => {
       break;
 
     case 'grounded-body-directed-carry':
-      if (depthBand === 'deep') bias += 1.9;
+      if (depthBand === 'deep') bias += 1.85;
 
-      if (depthBand === 'veryDeep') bias += 0.65;
+      if (depthBand === 'veryDeep') bias += 1.2;
 
-      if (isMediumDiameter || isLarge) bias += 0.45;
+      if (depthBand === 'extraDeep') bias += 1.0;
 
-      if (isDieCast) bias += 0.5;
+      if (isMediumDiameter) bias += 0.5;
 
-      if (isTenLug) bias += 0.35;
+      if (isLarge) bias += 0.75;
+
+      if (isDieCast) bias += 0.65;
+
+      if (isTenLug) bias += 0.45;
 
       break;
 
     case 'expressive-blooming-response':
       if (depthBand === 'mediumDeep') bias += 0.55;
 
-      if (depthBand === 'deep') bias += 0.95;
+      if (depthBand === 'deep') bias += 0.85;
 
-      if (depthBand === 'veryDeep') bias += 1.15;
+      if (depthBand === 'veryDeep') bias += 1.05;
 
       if (isLightFinish) bias += 0.85;
 
-      if (isTripleFlange) bias += 0.45;
+      if (isTripleFlange) bias += 0.35;
 
       break;
 
@@ -654,43 +668,49 @@ const getSpecBias = (relationshipId, summary = {}) => {
       break;
 
     case 'body-blooms-outward':
-      if (depthBand === 'deep') bias += 1.2;
+      if (depthBand === 'deep') bias += 0.25;
 
-      if (depthBand === 'veryDeep') bias += 1.35;
+      if (depthBand === 'veryDeep') bias += 0.45;
 
-      if (isLarge) bias += 0.55;
+      if (depthBand === 'extraDeep') bias += 0.7;
 
-      if (isMediumDiameter) bias += 0.35;
+      if (isLarge) bias += 0.15;
 
-      if (isTripleFlange) bias += 0.35;
+      if (isMediumDiameter) bias += 0.08;
 
-      if (isMediumFinish) bias += 0.25;
+      if (isTripleFlange) bias += 0.08;
+
+      if (isMediumFinish) bias += 0.08;
+
+      if (isDieCast || isTenLug || hasReRings) bias -= 0.35;
 
       break;
 
     case 'wide-open-heritage-bloom':
-      if (depthBand === 'veryDeep') bias += 1.0;
+      if (depthBand === 'veryDeep') bias += 0.85;
 
-      if (depthBand === 'extraDeep') bias += 0.9;
+      if (depthBand === 'extraDeep') bias += 0.8;
 
-      if (isTripleFlange) bias += 0.65;
+      if (isTripleFlange) bias += 0.35;
 
       if (isLightFinish) bias += 0.75;
 
-      if (!hasReRings) bias += 0.25;
+      if (!hasReRings) bias += 0.15;
+
+      if (depthBand === 'deep' && isMediumFinish) bias -= 0.2;
 
       break;
 
     case 'dark-complex-heritage-bloom':
       if (hasReRings && isThinShell) bias += 1.45;
 
-      if (isTripleFlange) bias += 0.45;
+      if (isTripleFlange) bias += 0.35;
 
       if (isLightFinish) bias += 0.35;
 
       if (depthBand === 'mediumDeep') bias += 0.35;
 
-      if (depthBand === 'deep') bias += 0.55;
+      if (depthBand === 'deep') bias += 0.45;
 
       break;
 
