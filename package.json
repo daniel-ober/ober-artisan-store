@@ -97,7 +97,8 @@
     "heritage:voice:audit": "node scripts/audit-heritage-voice-read.mjs",
     "sl:bands:one": "node updateSoundLegendBands.js",
     "sl:bands:all": "node updateSoundLegendBands.js --all",
-    "sl:bands:write": "node updateSoundLegendBands.js --all --write"
+    "sl:bands:write": "node updateSoundLegendBands.js --all --write",
+    "heritage:threads:audit": "node scripts/audit-heritage-voice-threads.mjs"
   },
   "eslintConfig": {
     "extends": [
