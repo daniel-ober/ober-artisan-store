@@ -5,11 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 
 import {
-  runHeritageVoiceReadTestMatrix,
-  runOneHeritageVoiceReadTest,
-} from '../utils/legacyPrint/runHeritageVoiceReadTestMatrix';
-
-import {
   Zap,
   Waves,
   Flame,
@@ -20,25 +15,30 @@ import {
   Lock,
 } from 'lucide-react';
 
+import toast from 'react-hot-toast';
+
 import { db } from '../firebaseConfig';
 
 import heritageSummaries from '../data/heritageSummaries';
+
+import LEGACYPRINT_BENCHMARK_CATALOG from '../data/legacyPrint/benchmarkCatalog';
 
 import { useCart } from '../context/CartContext';
 
 import SpiderChart from './SpiderChart';
 
-import BarChart from './BarChart';
-
-import './HeritageProductDetail.css';
-
-import toast from 'react-hot-toast';
-
-import LEGACYPRINT_BENCHMARK_CATALOG from '../data/legacyPrint/benchmarkCatalog';
-
 import buildHeritageVoiceRead from '../utils/legacyPrint/buildHeritageVoiceRead';
 
 import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadout';
+
+import { buildKeyRelationships } from '../utils/legacyPrint/heritageKeyRelationships';
+
+import {
+  runHeritageVoiceReadTestMatrix,
+  runOneHeritageVoiceReadTest,
+} from '../utils/legacyPrint/runHeritageVoiceReadTestMatrix';
+
+import './HeritageProductDetail.css';
 
 const AXIS_META = [
   { key: 'attack', label: 'Attack', icon: 'attack' },
@@ -326,476 +326,6 @@ const getNearestNoteWindow = (rangeText = '') => {
 
   return `${startNote}–${endNote}`;
 };
-
-const KEY_RELATIONSHIP_DEFINITIONS = [
-  {
-    id: 'attack-brightness',
-
-    nodes: ['attack', 'brightness'],
-
-    title: 'Fast, articulate front edge',
-
-    summary:
-      'The drum should speak quickly with more visible stick definition and upper-register clarity.',
-
-    playerRead:
-      'Lean into clean backbeats, detailed fills, ghost-note accents, and parts where the drum needs to speak clearly without extra force.',
-
-    bestFits: ['Funk', 'Pop', 'Country', 'Session work'],
-
-    drivers: ['Bearing edge', 'Hoop type', 'Shell depth'],
-
-    relevance: {
-      attack: 1,
-
-      brightness: 1,
-
-      control: 0.25,
-    },
-  },
-
-  {
-    id: 'attack-control',
-
-    nodes: ['attack', 'control'],
-
-    title: 'Focused front edge',
-
-    summary:
-      'The drum should feel immediate and organized, with a clear note start and less loose after-ring.',
-
-    playerRead:
-      'Best used for tight grooves, focused rimshots, clean pocket playing, and faster passages where note shape matters.',
-
-    bestFits: ['Modern roots', 'Studio pop', 'Tighter rock', 'Gospel'],
-
-    drivers: ['Die-cast hoops', 'Lug count', 'Shell thickness'],
-
-    relevance: {
-      attack: 1,
-
-      control: 1,
-
-      brightness: 0.2,
-    },
-  },
-
-    {
-
-    id: 'attack-projection',
-
-    nodes: ['attack', 'projection'],
-
-    title: 'Immediate room push',
-
-    summary:
-
-      'The drum should speak quickly and carry forward with a more assertive presence in the room.',
-
-    playerRead:
-
-      'Use this when the snare needs to feel immediate, confident, and present without relying only on brightness.',
-
-    bestFits: ['Live rooms', 'Country rock', 'Pop', 'Modern roots'],
-
-    drivers: ['Shell depth', 'Lug count', 'Shell thickness', 'Hoop type'],
-
-    relevance: {
-
-      attack: 1,
-
-      projection: 1,
-
-      control: 0.15,
-
-    },
-
-  },
-
-  {
-
-    id: 'attack-warmth',
-
-    nodes: ['attack', 'warmth'],
-
-    title: 'Quick response with body',
-
-    summary:
-
-      'The drum should give a clear note start while still keeping wood character and center weight in the voice.',
-
-    playerRead:
-
-      'Good for players who want articulation without the drum becoming thin, sharp, or overly modern.',
-
-    bestFits: ['Roots', 'Soul', 'Country', 'Session work'],
-
-    drivers: ['Shell depth', 'Bearing edge', 'Wood recipe', 'Tuning range'],
-
-    relevance: {
-
-      attack: 1,
-
-      warmth: 1,
-
-      sustain: 0.15,
-
-    },
-
-  },
-
-  {
-
-    id: 'brightness-control',
-
-    nodes: ['brightness', 'control'],
-
-    title: 'Clear top with tighter shape',
-
-    summary:
-
-      'The drum should keep upper-register clarity while holding the note in a more organized and controlled shape.',
-
-    playerRead:
-
-      'Useful when the snare needs to stay clear in the mix without spreading too wide or getting washy.',
-
-    bestFits: ['Studio pop', 'Modern country', 'Gospel', 'Detailed rock'],
-
-    drivers: ['Hoop type', 'Bearing edge', 'Shell thickness', 'Finish intensity'],
-
-    relevance: {
-
-      brightness: 1,
-
-      control: 1,
-
-      attack: 0.2,
-
-    },
-
-  },
-
-  {
-
-    id: 'brightness-sensitivity',
-
-    nodes: ['brightness', 'sensitivity'],
-
-    title: 'Light touch clarity',
-
-    summary:
-
-      'The drum should reveal smaller dynamic details with enough top-end information to make soft notes speak clearly.',
-
-    playerRead:
-
-      'Good for ghost notes, articulate lighter playing, brush-style work, and detailed pocket parts.',
-
-    bestFits: ['Funk', 'Jazz', 'Studio work', 'Dynamic pop'],
-
-    drivers: ['Snare response setup', 'Bearing edge', 'Hoop type', 'Shell depth'],
-
-    relevance: {
-
-      brightness: 1,
-
-      sensitivity: 1,
-
-      attack: 0.15,
-
-    },
-
-  },
-
-  {
-
-    id: 'warmth-projection',
-
-    nodes: ['warmth', 'projection'],
-
-    title: 'Body that carries',
-
-    summary:
-
-      'The drum should keep a fuller center while still pushing enough sound outward to feel present in the room.',
-
-    playerRead:
-
-      'Use this when the snare needs weight and room presence without becoming overly sharp or bright.',
-
-    bestFits: ['Americana', 'Blues rock', 'Roots rock', 'Live rooms'],
-
-    drivers: ['Shell size', 'Shell depth', 'Wood recipe', 'Tuning range'],
-
-    relevance: {
-
-      warmth: 1,
-
-      projection: 1,
-
-      sustain: 0.2,
-
-    },
-
-  },
-
-  {
-
-    id: 'sustain-sensitivity',
-
-    nodes: ['sustain', 'sensitivity'],
-
-    title: 'Responsive bloom',
-
-    summary:
-
-      'The drum should open up after the stroke and respond easily to smaller dynamic changes.',
-
-    playerRead:
-
-      'Best for players who shape the drum through touch, tuning, and dynamics rather than only volume or rimshot force.',
-
-    bestFits: ['Singer-songwriter', 'Jazz-influenced roots', 'Soul', 'Americana'],
-
-    drivers: ['Shell depth', 'Triple flange hoops', 'Snare response setup', 'Lighter finish treatment'],
-
-    relevance: {
-
-      sustain: 1,
-
-      sensitivity: 1,
-
-      warmth: 0.25,
-
-    },
-
-  },
-
-  {
-    id: 'brightness-projection',
-
-    nodes: ['brightness', 'projection'],
-
-    title: 'Cutting presence',
-
-    summary:
-      'The drum should push forward with more top-end clarity and enough presence to sit above a denser arrangement.',
-
-    playerRead:
-      'Use this when the snare needs to hold its place against guitars, keys, louder stages, or more layered mixes.',
-
-    bestFits: ['Live rooms', 'Country rock', 'Indie rock', 'Pop arrangements'],
-
-    drivers: ['Shell size', 'Hoop type', 'Bearing edge'],
-
-    relevance: {
-      brightness: 1,
-
-      projection: 1,
-
-      attack: 0.25,
-    },
-  },
-
-  {
-    id: 'warmth-sustain',
-
-    nodes: ['warmth', 'sustain'],
-
-    title: 'Fuller body with longer bloom',
-
-    summary:
-      'The drum should carry a rounder center and a note that opens up after the initial hit.',
-
-    playerRead:
-      'Let the drum breathe. This relationship rewards open tuning, wider dynamics, and parts where body matters more than sharpness.',
-
-    bestFits: ['Americana', 'Soul', 'Singer-songwriter', 'Roots'],
-
-    drivers: ['Shell depth', 'Shell size', 'Triple flange hoops'],
-
-    relevance: {
-      warmth: 1,
-
-      sustain: 1,
-
-      sensitivity: 0.25,
-    },
-  },
-
-  {
-    id: 'warmth-control',
-
-    nodes: ['warmth', 'control'],
-
-    title: 'Body without excess wash',
-
-    summary:
-      'The drum should keep a grounded center while still feeling shaped and manageable.',
-
-    playerRead:
-      'Good for players who want warmth and wood character without the drum feeling too loose or wide open.',
-
-    bestFits: ['Studio roots', 'Classic country', 'Soul', 'General session'],
-
-    drivers: ['Shell thickness', 'Hoop type', 'Finish intensity'],
-
-    relevance: {
-      warmth: 1,
-
-      control: 1,
-
-      projection: 0.15,
-    },
-  },
-
-  {
-    id: 'sensitivity-warmth',
-
-    nodes: ['sensitivity', 'warmth'],
-
-    title: 'Tone at lower dynamics',
-
-    summary:
-      'The drum should still carry body and character when played lightly.',
-
-    playerRead:
-      'Great for ghost notes, brush-style detail, lower-volume playing, and parts where touch should reveal the drum instead of disappearing.',
-
-    bestFits: [
-      'Jazz',
-
-      'Singer-songwriter',
-
-      'Soft session work',
-
-      'Dynamic roots',
-    ],
-
-    drivers: ['Snare response setup', 'Bearing edge', 'Shell depth'],
-
-    relevance: {
-      sensitivity: 1,
-
-      warmth: 1,
-
-      sustain: 0.2,
-    },
-  },
-
-  {
-    id: 'sensitivity-control',
-
-    nodes: ['sensitivity', 'control'],
-
-    title: 'Detailed but focused response',
-
-    summary:
-      'The drum should reveal smaller touch changes while keeping the note organized.',
-
-    playerRead:
-      'Use this for nuanced phrasing, ghost notes, drag patterns, and controlled studio parts that still need life under the hands.',
-
-    bestFits: ['Studio work', 'Funk', 'Gospel', 'Detailed pocket playing'],
-
-    drivers: ['Snare response setup', 'Hoop type', 'Bearing edge'],
-
-    relevance: {
-      sensitivity: 1,
-
-      control: 1,
-
-      attack: 0.2,
-    },
-  },
-
-  {
-    id: 'projection-sustain',
-
-    nodes: ['projection', 'sustain'],
-
-    title: 'Room-filling carry',
-
-    summary:
-      'The drum should feel larger in the room, with a note that travels and hangs longer after impact.',
-
-    playerRead:
-      'Works well when the snare needs to feel open, big, and alive rather than short or heavily controlled.',
-
-    bestFits: ['Live rooms', 'Blues rock', 'Americana', 'Cinematic session'],
-
-    drivers: ['Depth', 'Shell size', 'Triple flange hoops'],
-
-    relevance: {
-      projection: 1,
-
-      sustain: 1,
-
-      warmth: 0.25,
-    },
-  },
-
-  {
-    id: 'attack-sensitivity-control',
-
-    nodes: ['attack', 'sensitivity', 'control'],
-
-    title: 'Fast, disciplined touch response',
-
-    summary:
-      'The drum should respond quickly across dynamic levels while keeping the note tidy and controlled.',
-
-    playerRead:
-      'A strong fit for players who want precise response from ghost notes to accents without the drum becoming messy.',
-
-    bestFits: ['Studio pop', 'Funk', 'Gospel', 'Modern country'],
-
-    drivers: ['Bearing edge', 'Hoop type', 'Snare response setup'],
-
-    relevance: {
-      attack: 1,
-
-      sensitivity: 1,
-
-      control: 1,
-    },
-  },
-
-  {
-    id: 'warmth-sustain-sensitivity',
-
-    nodes: ['warmth', 'sustain', 'sensitivity'],
-
-    title: 'Expressive, blooming response',
-
-    summary:
-      'The drum should feel more reactive and musical under the hands, with body and bloom developing after the stroke.',
-
-    playerRead:
-      'Best for players who shape sound through touch, tuning, and dynamics instead of relying only on volume or crack.',
-
-    bestFits: [
-      'Singer-songwriter',
-
-      'Soul',
-
-      'Jazz-influenced roots',
-
-      'Americana',
-    ],
-
-    drivers: ['Shell depth', 'Lighter finish treatment', 'Triple flange hoops'],
-
-    relevance: {
-      warmth: 1,
-
-      sustain: 1,
-
-      sensitivity: 1,
-    },
-  },
-];
 
 const getReferenceLabel = (selectedBenchmarkType, selectedBenchmarkSize) => {
   const typeLabel =
@@ -1533,404 +1063,6 @@ const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
   }
 };
 
-const getRelationshipScore = (relationship, profile = {}) => {
-  const relevance = relationship.relevance || {};
-
-  return Object.entries(relevance).reduce((score, [axis, weight]) => {
-    const value = Number(profile?.[axis] ?? 5);
-
-    const distanceFromCenter = Math.abs(value - 5);
-
-    return score + distanceFromCenter * weight;
-  }, 0);
-};
-
-const getAxisDistanceFromCenter = (profile = {}, axis) => {
-  return Math.abs(Number(profile?.[axis] ?? 5) - 5);
-};
-
-const buildDynamicComplexVoiceThread = (profile = {}) => {
-
-  const getDelta = (axis) => Number((Number(profile?.[axis] ?? 5) - 5).toFixed(2));
-
-  const deltas = {
-
-    attack: getDelta('attack'),
-
-    brightness: getDelta('brightness'),
-
-    projection: getDelta('projection'),
-
-    sustain: getDelta('sustain'),
-
-    warmth: getDelta('warmth'),
-
-    sensitivity: getDelta('sensitivity'),
-
-    control: getDelta('control'),
-
-  };
-
-  const rankedAxes = AXIS_META.map((axis) => ({
-
-    key: axis.key,
-
-    label: axis.label,
-
-    distance: getAxisDistanceFromCenter(profile, axis.key),
-
-    value: Number(profile?.[axis.key] ?? 5),
-
-    delta: deltas[axis.key],
-
-  })).sort((a, b) => b.distance - a.distance);
-
-  const meaningfulAxes = rankedAxes.filter((axis) => axis.distance >= 0.24);
-
-  const selectedAxes =
-
-    meaningfulAxes.length >= 4
-
-      ? meaningfulAxes.slice(0, Math.min(5, meaningfulAxes.length))
-
-      : rankedAxes.slice(0, 4);
-
-  let nodes = selectedAxes.map((axis) => axis.key);
-
-  const ensureNodes = (requiredNodes = []) => {
-
-    const merged = [...requiredNodes, ...nodes];
-
-    nodes = merged.filter(
-
-      (node, index, array) => node && array.indexOf(node) === index
-
-    );
-
-  };
-
-  const warmSustainStrength = deltas.warmth + deltas.sustain;
-
-  const frontEdgeReduction =
-
-    Math.abs(Math.min(0, deltas.attack)) +
-
-    Math.abs(Math.min(0, deltas.brightness));
-
-  const focusedStrength =
-
-    Math.max(0, deltas.attack) +
-
-    Math.max(0, deltas.control) +
-
-    Math.max(0, deltas.projection);
-
-  const openTouchStrength =
-
-    Math.max(0, deltas.sensitivity) +
-
-    Math.max(0, deltas.sustain) +
-
-    Math.abs(Math.min(0, deltas.control));
-
-  let title = 'Current drum personality pattern';
-
-  let summary =
-
-    'The drum is showing a wider pattern across several traits rather than one isolated sound characteristic. This read is meant to describe how the current build behaves as a complete instrument.';
-
-  let playerRead =
-
-    'This is the deeper personality read of the current configuration — the place where the VoiceMap turns into a more practical sense of how the drum may want to be played, heard, and used.';
-
-  let bestFits = [
-
-    'General session',
-
-    'Player-specific tuning',
-
-    'Studio reference',
-
-  ];
-
-  let drivers = ['Shell depth', 'Shell size', 'Hoop type', 'Shell thickness'];
-
-  if (warmSustainStrength >= 1.85 && frontEdgeReduction >= 0.85) {
-
-    title = 'Deep shell bloom with rounded attack';
-
-    summary =
-
-      'The drum is reading as strongly body-forward, with longer bloom and a rounder front edge. The voice is moving away from quick snap and toward depth, weight, and shell presence.';
-
-    playerRead =
-
-      'This points toward a drum that wants space around it. It should reward open tuning, slower backbeats, roots-oriented parts, and playing where the shell body is allowed to speak.';
-
-    bestFits = ['Americana', 'Roots rock', 'Singer-songwriter', 'Cinematic session'];
-
-    drivers = [
-
-      'Deeper shell',
-
-      'Triple flange hoops',
-
-      'Medium shell thickness',
-
-      'Open Heritage tuning lane',
-
-    ];
-
-    ensureNodes(['warmth', 'sustain', 'attack', 'brightness']);
-
-  } else if (warmSustainStrength >= 1.35) {
-
-    title = 'Body-forward bloom pattern';
-
-    summary =
-
-      'The drum is reading with a fuller center and longer note development, while the front edge starts to feel rounder and less immediate.';
-
-    playerRead =
-
-      'This points toward a drum that should feel broad, musical, and less aggressive at the start of the note. It should sit well where body and natural shell character matter more than sharp cut.';
-
-    bestFits = ['Americana', 'Soul', 'Roots', 'Singer-songwriter'];
-
-    drivers = [
-
-      'Shell depth',
-
-      'Shell size',
-
-      'Triple flange hoops',
-
-      'Medium Torch finish',
-
-    ];
-
-    ensureNodes(['warmth', 'sustain', 'attack']);
-
-  } else if (warmSustainStrength >= 0.85) {
-
-    title = 'Fuller shell response';
-
-    summary =
-
-      'The drum is beginning to lean warmer and more open, with body and bloom becoming more noticeable without fully overtaking the Heritage center.';
-
-    playerRead =
-
-      'This points toward a balanced Heritage voice that is starting to favor body and resonance while still staying usable across general session, roots, and live settings.';
-
-    bestFits = ['Roots', 'Country', 'Soul', 'General session'];
-
-    drivers = [
-
-      'Moderate shell depth',
-
-      'Triple flange hoops',
-
-      'Oak stave shell',
-
-      'Medium Torch finish',
-
-    ];
-
-    ensureNodes(['warmth', 'sustain', 'projection']);
-
-  } else if (focusedStrength >= 2.15) {
-
-    title = 'Focused, forward note shape';
-
-    summary =
-
-      'The drum is reading with a stronger front edge, tighter control, and more outward push. The note feels more organized and immediate.';
-
-    playerRead =
-
-      'This points toward a drum that should speak clearly in a mix, hold tighter grooves, and keep the note from spreading too wide.';
-
-    bestFits = ['Studio pop', 'Modern country', 'Funk', 'Gospel'];
-
-    drivers = ['Die-cast hoops', 'Higher lug count', 'Shell thickness', 'Finish intensity'];
-
-    ensureNodes(['attack', 'control', 'projection']);
-
-  } else if (openTouchStrength >= 1.4) {
-
-    title = 'Open touch response';
-
-    summary =
-
-      'The drum is reading as more reactive under the hands, with extra bloom and a freer response around lighter playing.';
-
-    playerRead =
-
-      'This points toward a drum that rewards dynamics, ghost notes, softer phrasing, and more expressive tuning choices.';
-
-    bestFits = ['Soul', 'Jazz-influenced roots', 'Singer-songwriter', 'Dynamic session work'];
-
-    drivers = [
-
-      'Lighter finish treatment',
-
-      'Triple flange hoops',
-
-      'Snare response setup',
-
-      'Open tuning lane',
-
-    ];
-
-    ensureNodes(['sensitivity', 'sustain', 'warmth']);
-
-  } else if (deltas.warmth >= 0.35 && deltas.control >= 0.35) {
-
-    title = 'Grounded body with shaped control';
-
-    summary =
-
-      'The drum is reading with a stronger center and a more managed note shape, giving it body without letting the voice spread too far.';
-
-    playerRead =
-
-      'This points toward a drum that should feel warm and grounded, but still composed enough for practical playing and recording.';
-
-    bestFits = ['Studio roots', 'Classic country', 'Soul', 'General session'];
-
-    drivers = [
-
-      'Shell thickness',
-
-      'Hoop type',
-
-      'Finish intensity',
-
-      'Shell depth',
-
-    ];
-
-    ensureNodes(['warmth', 'control', 'projection']);
-
-  }
-
-  nodes = nodes.slice(0, 5);
-
-  const relevance = nodes.reduce((acc, node, index) => {
-
-    acc[node] = Math.max(0.45, 1 - index * 0.12);
-
-    return acc;
-
-  }, {});
-
-  return {
-
-    id: `complex-${nodes.join('-')}-${title
-
-      .toLowerCase()
-
-      .replace(/[^a-z0-9]+/g, '-')
-
-      .replace(/(^-|-$)/g, '')}`,
-
-    nodes,
-
-    title,
-
-    summary,
-
-    playerRead,
-
-    bestFits,
-
-    drivers,
-
-    relevance,
-
-    score: nodes.reduce(
-
-      (sum, node) => sum + getAxisDistanceFromCenter(profile, node),
-
-      0
-
-    ),
-
-    threadType: 'Complex Thread',
-
-    threadTypeDetail:
-
-      'A 4+ node pattern shows the deeper voice pattern: the broader drum personality suggested by the current configuration.',
-
-  };
-
-};
-
-const buildKeyRelationships = (summary = {}) => {
-  const profile = summary?.profile || {};
-
-  const scoredRelationships = KEY_RELATIONSHIP_DEFINITIONS.map(
-    (relationship) => ({
-      ...relationship,
-
-      score: getRelationshipScore(relationship, profile),
-    })
-  ).sort((a, b) => b.score - a.score);
-
-  const strongestTwoNode =
-    scoredRelationships.find(
-      (relationship) => relationship.nodes.length === 2
-    ) || scoredRelationships[0];
-
-  const strongestThreeNode =
-    scoredRelationships.find(
-      (relationship) => relationship.nodes.length === 3
-    ) ||
-    scoredRelationships.find(
-      (relationship) => relationship.id === 'warmth-sustain-sensitivity'
-    ) ||
-    scoredRelationships[1] ||
-    strongestTwoNode;
-
-  const complexVoiceThread = buildDynamicComplexVoiceThread(profile);
-
-  return [
-    {
-      ...strongestTwoNode,
-
-      slotKey: 'simple',
-
-      threadType: 'Simple Thread',
-
-      threadTypeDetail:
-        'A 2-node connector shows the clearest first-impression relationship: the paired traits a listener is most likely to notice first.',
-    },
-
-    {
-      ...strongestThreeNode,
-
-      slotKey: 'shaped',
-
-      threadType: 'Shaped Thread',
-
-      threadTypeDetail:
-        'A 3-node triangle shows playing personality: how the drum begins to behave under the hands as multiple traits work together.',
-    },
-
-    {
-      ...complexVoiceThread,
-
-      slotKey: 'complex',
-
-      threadType: 'Complex Thread',
-
-      threadTypeDetail:
-        'A 4+ node pattern shows the deeper voice pattern: the broader drum personality suggested by the current configuration.',
-    },
-  ].filter(Boolean);
-};
-
 const buildThreadSegments = (nodes = []) => {
   const cleanNodes = Array.isArray(nodes) ? nodes.filter(Boolean) : [];
 
@@ -2057,15 +1189,12 @@ const getThreadNodePairs = () => {
 const THREAD_NODE_PAIRS = getThreadNodePairs();
 
 const getThreadGradientId = (mapId, source, target) => {
-
   const sourceIndex = THREAD_NODE_ORDER.indexOf(source);
 
   const targetIndex = THREAD_NODE_ORDER.indexOf(target);
 
   if (sourceIndex === -1 || targetIndex === -1) {
-
     return `${mapId}-thread-${source}-${target}`;
-
   }
 
   const first = sourceIndex <= targetIndex ? source : target;
@@ -2073,95 +1202,58 @@ const getThreadGradientId = (mapId, source, target) => {
   const second = sourceIndex <= targetIndex ? target : source;
 
   return `${mapId}-thread-${first}-${second}`;
-
 };
 
 const VoiceThreadMap = ({ activeThread, compact = false }) => {
-
   const activeSegments = buildThreadSegments(activeThread?.nodes);
 
   const activeNodeSet = new Set(activeThread?.nodes || []);
 
   const mapId = `heritage-voice-thread-${
-
     compact ? 'compact' : 'large'
-
   }-${String(activeThread?.id || 'none').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
 
   const isActiveSegment = (source, target) =>
-
     activeSegments.some(
-
       ([a, b]) =>
-
         (a === source && b === target) || (a === target && b === source)
-
     );
 
   return (
-
     <div
-
       className={`heritage-voice-thread-map ${
-
         compact ? 'heritage-voice-thread-map--compact' : ''
-
       }`}
-
       aria-label={
-
         activeThread
-
           ? `Voice Thread map showing ${activeThread.title}`
-
           : 'Voice Thread map'
-
       }
-
     >
-
       <svg
-
         className="heritage-voice-thread-svg"
-
         viewBox="0 0 500 500"
-
         role="img"
-
         aria-hidden="true"
-
       >
-
         <defs>
-
           <filter
-
             id={`${mapId}-activeGlow`}
-
             x="-80%"
-
             y="-80%"
-
             width="260%"
-
             height="260%"
-
           >
-
             <feGaussianBlur stdDeviation="5.5" result="blur" />
 
             <feMerge>
-
               <feMergeNode in="blur" />
 
               <feMergeNode in="SourceGraphic" />
-
             </feMerge>
-
           </filter>
 
           {THREAD_NODE_PAIRS.map(([source, target]) => {
-
             const sourcePoint = THREAD_NODE_POSITIONS[source];
 
             const targetPoint = THREAD_NODE_POSITIONS[target];
@@ -2175,39 +1267,24 @@ const VoiceThreadMap = ({ activeThread, compact = false }) => {
             const gradientId = `${mapId}-thread-${source}-${target}`;
 
             return (
-
               <linearGradient
-
                 key={gradientId}
-
                 id={gradientId}
-
                 gradientUnits="userSpaceOnUse"
-
                 x1={sourcePoint.x * 5}
-
                 y1={sourcePoint.y * 5}
-
                 x2={targetPoint.x * 5}
-
                 y2={targetPoint.y * 5}
-
               >
-
                 <stop offset="0%" stopColor={sourceColor} />
 
                 <stop offset="100%" stopColor={targetColor} />
-
               </linearGradient>
-
             );
-
           })}
-
         </defs>
 
         {THREAD_NODE_PAIRS.map(([source, target]) => {
-
           const sourcePoint = THREAD_NODE_POSITIONS[source];
 
           const targetPoint = THREAD_NODE_POSITIONS[target];
@@ -2219,87 +1296,49 @@ const VoiceThreadMap = ({ activeThread, compact = false }) => {
           const gradientId = getThreadGradientId(mapId, source, target);
 
           return (
-
             <g
-
               key={`${source}-${target}`}
-
               className={`heritage-voice-thread-line-group ${
-
                 selected ? 'is-active' : ''
-
               }`}
-
             >
-
               <line
-
                 x1={sourcePoint.x * 5}
-
                 y1={sourcePoint.y * 5}
-
                 x2={targetPoint.x * 5}
-
                 y2={targetPoint.y * 5}
-
                 className="heritage-voice-thread-line heritage-voice-thread-line--base"
-
                 stroke={`url(#${gradientId})`}
-
               />
 
               {selected && (
-
                 <>
-
                   <line
-
                     x1={sourcePoint.x * 5}
-
                     y1={sourcePoint.y * 5}
-
                     x2={targetPoint.x * 5}
-
                     y2={targetPoint.y * 5}
-
                     className="heritage-voice-thread-line heritage-voice-thread-line--active-glow"
-
                     stroke={`url(#${gradientId})`}
-
                     filter={`url(#${mapId}-activeGlow)`}
-
                   />
 
                   <line
-
                     x1={sourcePoint.x * 5}
-
                     y1={sourcePoint.y * 5}
-
                     x2={targetPoint.x * 5}
-
                     y2={targetPoint.y * 5}
-
                     className="heritage-voice-thread-line heritage-voice-thread-line--active-core"
-
                     stroke={`url(#${gradientId})`}
-
                   />
-
                 </>
-
               )}
-
             </g>
-
           );
-
         })}
 
         {THREAD_NODE_ORDER.map((nodeKey, index) => {
-
           const nextNodeKey =
-
             THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
 
           const point = THREAD_NODE_POSITIONS[nodeKey];
@@ -2311,31 +1350,19 @@ const VoiceThreadMap = ({ activeThread, compact = false }) => {
           const gradientId = getThreadGradientId(mapId, nodeKey, nextNodeKey);
 
           return (
-
             <line
-
               key={`outer-${nodeKey}-${nextNodeKey}`}
-
               className="heritage-voice-thread-outer-line"
-
               x1={point.x * 5}
-
               y1={point.y * 5}
-
               x2={nextPoint.x * 5}
-
               y2={nextPoint.y * 5}
-
               stroke={`url(#${gradientId})`}
-
             />
-
           );
-
         })}
 
         {THREAD_NODE_ORDER.map((nodeKey) => {
-
           const point = THREAD_NODE_POSITIONS[nodeKey];
 
           const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
@@ -2347,85 +1374,46 @@ const VoiceThreadMap = ({ activeThread, compact = false }) => {
           const isActive = activeNodeSet.has(nodeKey);
 
           return (
-
             <g
-
               key={nodeKey}
-
               className={`heritage-voice-thread-node ${
-
                 isActive ? 'is-active' : ''
-
               }`}
-
               style={{ '--node-color': color }}
-
             >
-
               <circle
-
                 cx={point.x * 5}
-
                 cy={point.y * 5}
-
                 r={isActive ? '5.2' : '3.4'}
-
                 className="heritage-voice-thread-anchor-dot"
-
                 fill={color}
-
               />
 
               <foreignObject
-
                 x={iconPoint.x * 5 - 25}
-
                 y={iconPoint.y * 5 - 25}
-
                 width="50"
-
                 height="50"
-
                 className="heritage-voice-thread-node-icon-wrap"
-
               >
-
                 <div
-
                   xmlns="http://www.w3.org/1999/xhtml"
-
                   className="heritage-voice-thread-node-icon"
-
                   style={{ color }}
-
                 >
-
                   <MetricIcon
-
                     type={axis?.icon || nodeKey}
-
                     color={color}
-
                     size={22}
-
                   />
-
                 </div>
-
               </foreignObject>
-
             </g>
-
           );
-
         })}
-
       </svg>
-
     </div>
-
   );
-
 };
 
 const MiniVoiceThreadMap = ({ thread }) => {
@@ -2628,6 +1616,8 @@ const HeritageProductDetail = () => {
   const [showConfigBreakdown, setShowConfigBreakdown] = useState(false);
 
   const [showResetModal, setShowResetModal] = useState(false);
+
+  
 
   const [benchmarkFamilyId, setBenchmarkFamilyId] = useState(
     DEFAULT_BENCHMARK_FAMILY_ID
@@ -3007,8 +1997,20 @@ const HeritageProductDetail = () => {
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
   const keyRelationships = useMemo(() => {
-    return buildKeyRelationships(currentBuildVoiceRangeSummary);
-  }, [currentBuildVoiceRangeSummary]);
+    return buildKeyRelationships(activeVoiceSummary);
+  }, [activeVoiceSummary]);
+
+  useEffect(() => {
+    if (!keyRelationships.length) return;
+
+    const hasActiveSlot = keyRelationships.some(
+      (relationship) => relationship.slotKey === activeThreadSlot
+    );
+
+    if (!hasActiveSlot) {
+      setActiveThreadSlot(keyRelationships[0]?.slotKey || 'simple');
+    }
+  }, [keyRelationships, activeThreadSlot]);
 
   useEffect(() => {
     if (process.env.NODE_ENV !== 'development') return;
@@ -3033,11 +2035,11 @@ const HeritageProductDetail = () => {
     return buildVoiceThreadReadout({
       thread: activeThread,
 
-      profile: currentBuildVoiceRangeSummary?.profile || {},
+      profile: activeVoiceSummary?.profile || {},
 
-      sourceBuildRead: currentBuildVoiceRangeSummary?.sourceBuildRead || '',
+      sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
     });
-  }, [keyRelationships, activeThreadSlot, currentBuildVoiceRangeSummary]);
+  }, [keyRelationships, activeThreadSlot, activeVoiceSummary]);
 
   const legacyPrintAnalysis = useMemo(() => {
     return buildLegacyPrintAnalysis({
@@ -4295,10 +3297,9 @@ const HeritageProductDetail = () => {
               const cardReadout = buildVoiceThreadReadout({
                 thread: relationship,
 
-                profile: currentBuildVoiceRangeSummary?.profile || {},
+                profile: activeVoiceSummary?.profile || {},
 
-                sourceBuildRead:
-                  currentBuildVoiceRangeSummary?.sourceBuildRead || '',
+                sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
               });
 
               return (
