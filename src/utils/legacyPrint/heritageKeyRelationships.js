@@ -10,19 +10,17 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
     title: 'Focused throw with clean shape',
 
-    nodes: ['attack', 'projection', 'control'],
+    nodes: ['attack', 'projection'],
 
     summary:
 
-      'The drum is reading with a stronger front edge, more outward push, and a more organized note shape.',
+      'The drum is reading with a stronger front edge and more outward push.',
 
     relevance: {
 
       attack: 1,
 
       projection: 1,
-
-      control: 1,
 
     },
 
@@ -31,8 +29,6 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       attack: 'high',
 
       projection: 'high',
-
-      control: 'high',
 
     },
 
@@ -82,11 +78,11 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
     title: 'Body that blooms outward',
 
-    nodes: ['warmth', 'sustain', 'projection'],
+    nodes: ['warmth', 'sustain', 'projection', 'control'],
 
     summary:
 
-      'The shell is reading as fuller and more open, with the note developing outward after the strike.',
+      'The shell is reading as fuller and more open, with the note developing outward after the strike while still keeping enough shape to remain usable.',
 
     relevance: {
 
@@ -95,6 +91,8 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       sustain: 1,
 
       projection: 0.8,
+
+      control: 0.55,
 
     },
 
@@ -105,6 +103,8 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       sustain: 'high',
 
       projection: 'high',
+
+      control: 'either',
 
     },
 
@@ -118,19 +118,17 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
     title: 'Lively touch with open detail',
 
-    nodes: ['sensitivity', 'brightness', 'sustain'],
+    nodes: ['sensitivity', 'brightness'],
 
     summary:
 
-      'The drum is reading as more responsive under lighter hands, with extra detail and a freer note tail.',
+      'The drum is reading as more responsive under lighter hands, with extra upper detail.',
 
     relevance: {
 
       sensitivity: 1,
 
       brightness: 0.85,
-
-      sustain: 0.75,
 
     },
 
@@ -139,8 +137,6 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       sensitivity: 'high',
 
       brightness: 'high',
-
-      sustain: 'high',
 
     },
 
@@ -190,11 +186,11 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
     title: 'Shorter note with firm response',
 
-    nodes: ['control', 'sustain', 'attack'],
+    nodes: ['control', 'sustain', 'attack', 'projection'],
 
     summary:
 
-      'The drum is reading with a tighter note tail, firmer response, and more controlled front edge.',
+      'The drum is reading with a tighter note tail, firmer response, stronger front edge, and enough outward push to keep the note present.',
 
     relevance: {
 
@@ -203,6 +199,8 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       sustain: 1,
 
       attack: 0.8,
+
+      projection: 0.55,
 
     },
 
@@ -213,6 +211,8 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       sustain: 'low',
 
       attack: 'high',
+
+      projection: 'either',
 
     },
 
@@ -262,19 +262,17 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
     title: 'Articulate snap with restraint',
 
-    nodes: ['brightness', 'control', 'attack'],
+    nodes: ['brightness', 'control'],
 
     summary:
 
-      'The drum is reading with more top-edge clarity and front articulation while keeping the note contained.',
+      'The drum is reading with more top-edge clarity while keeping the note contained.',
 
     relevance: {
 
       brightness: 1,
 
       control: 0.9,
-
-      attack: 0.9,
 
     },
 
@@ -283,8 +281,6 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       brightness: 'high',
 
       control: 'high',
-
-      attack: 'high',
 
     },
 
@@ -298,19 +294,17 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
 
     title: 'Clear front edge with lift',
 
-    nodes: ['attack', 'brightness', 'projection'],
+    nodes: ['attack', 'brightness'],
 
     summary:
 
-      'The drum is reading with a clearer start, more upper edge, and stronger lift into the room.',
+      'The drum is reading with a clearer start and more upper edge.',
 
     relevance: {
 
       attack: 1,
 
       brightness: 0.85,
-
-      projection: 0.85,
 
     },
 
@@ -319,8 +313,6 @@ const KEY_RELATIONSHIP_DEFINITIONS = [
       attack: 'high',
 
       brightness: 'high',
-
-      projection: 'high',
 
     },
 
