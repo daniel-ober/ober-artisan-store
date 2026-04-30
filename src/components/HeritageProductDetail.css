@@ -5028,7 +5028,7 @@
    ========================================================= */
 
 .heritage-thread-reference--calm {
-  gap: 24px !important;
+  gap: 22px !important;
 }
 
 .heritage-thread-reference--calm .heritage-thread-reference-head {
@@ -5036,34 +5036,59 @@
 }
 
 .heritage-thread-reference--calm .heritage-chart-title {
-  max-width: 12ch !important;
+  max-width: 18ch !important;
 }
 
 .heritage-thread-reference--calm .heritage-chart-title-subcopy {
-  max-width: 46ch !important;
+  max-width: 52ch !important;
 
-  color: rgba(244, 241, 234, 0.64) !important;
+  color: rgba(244, 241, 234, 0.68) !important;
 }
 
 .heritage-thread-card--calm {
-  min-height: 276px !important;
+  min-height: 214px !important;
 
   border-radius: 18px !important;
 
+  border-color: rgba(255, 255, 255, 0.075) !important;
+
   background:
     radial-gradient(
-      circle at 28% 18%,
+      circle at 24% 12%,
 
-      color-mix(in srgb, var(--thread-accent, #d6b277) 4%, transparent),
-      transparent 42%
+      color-mix(in srgb, var(--thread-accent, #d6b277) 3%, transparent),
+      transparent 38%
     ),
-    linear-gradient(145deg, rgba(8, 9, 12, 0.99), rgba(3, 4, 7, 0.995)) !important;
+    linear-gradient(145deg, rgba(18, 19, 24, 0.92), rgba(6, 7, 10, 0.96)) !important;
+
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+.heritage-thread-card--calm::before,
+.heritage-thread-card--calm::after {
+  opacity: 0 !important;
+}
+
+.heritage-thread-card--calm:hover,
+.heritage-thread-card--calm.is-active {
+  border-color: rgba(214, 178, 119, 0.26) !important;
+
+  background:
+    radial-gradient(
+      circle at 24% 12%,
+
+      color-mix(in srgb, var(--thread-accent, #d6b277) 5%, transparent),
+      transparent 38%
+    ),
+    linear-gradient(145deg, rgba(21, 21, 25, 0.94), rgba(8, 9, 12, 0.98)) !important;
 }
 
 .heritage-thread-card--calm .heritage-thread-card-type {
-  color: rgba(214, 178, 119, 0.76) !important;
+  color: rgba(214, 178, 119, 0.82) !important;
 
-  font-size: 0.54rem !important;
+  font-size: 0.58rem !important;
 
   font-weight: 900 !important;
 
@@ -5077,11 +5102,11 @@
 }
 
 .heritage-thread-card--calm .heritage-thread-card-copy strong {
-  max-width: 15ch !important;
+  max-width: 18ch !important;
 
-  font-size: clamp(1rem, 1.35vw, 1.15rem) !important;
+  font-size: clamp(1.02rem, 1.25vw, 1.14rem) !important;
 
-  line-height: 1.02 !important;
+  line-height: 1.08 !important;
 }
 
 .heritage-thread-card--calm .heritage-thread-card-copy em {
@@ -5101,17 +5126,49 @@
 }
 
 .heritage-thread-read-panel--calm {
-  border-radius: 24px !important;
+  border-radius: 22px !important;
+
+  border-color: rgba(255, 255, 255, 0.075) !important;
+
+  background:
+    radial-gradient(
+      circle at 16% 0%,
+      color-mix(in srgb, var(--thread-accent, #d6b277) 5%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(145deg, rgba(18, 19, 24, 0.94), rgba(6, 7, 10, 0.98)) !important;
+
+  box-shadow:
+    0 22px 54px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+.heritage-thread-read-panel--calm::before {
+  display: none !important;
+}
+
+.heritage-thread-read-panel--calm::after {
+  opacity: 0.045 !important;
 }
 
 .heritage-thread-read-panel--calm .heritage-thread-read-panel-head {
-  padding: 28px 30px 22px !important;
+  padding: 30px 34px 24px !important;
+
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+
+  background: transparent !important;
 }
 
 .heritage-thread-read-panel--calm .heritage-thread-read-panel-head h4 {
-  max-width: 13ch !important;
+  max-width: 18ch !important;
 
-  margin-bottom: 14px !important;
+  margin-bottom: 16px !important;
+
+  font-size: clamp(1.9rem, 2.7vw, 2.6rem) !important;
+
+  line-height: 1.02 !important;
+
+  letter-spacing: -0.045em !important;
 }
 
 .heritage-thread-read-lede--calm {
@@ -5119,13 +5176,13 @@
 
   margin: 0 !important;
 
-  padding: 24px 30px !important;
+  padding: 22px 34px !important;
 
-  color: rgba(245, 243, 238, 0.76) !important;
+  color: rgba(245, 243, 238, 0.74) !important;
 
-  font-size: clamp(1.02rem, 1.35vw, 1.18rem) !important;
+  font-size: clamp(0.98rem, 1.18vw, 1.08rem) !important;
 
-  line-height: 1.55 !important;
+  line-height: 1.6 !important;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
 }
@@ -5139,13 +5196,13 @@
 
   gap: 0 !important;
 
-  padding: 0 30px !important;
+  padding: 0 34px !important;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.055);
 }
 
 .heritage-thread-readout-meta--calm span {
-  padding: 18px 20px 18px 0 !important;
+  padding: 17px 20px 17px 0 !important;
 
   border: 0 !important;
 
@@ -5167,7 +5224,7 @@
 
   color: rgba(214, 178, 119, 0.78) !important;
 
-  font-size: 0.56rem !important;
+  font-size: 0.58rem !important;
 
   font-weight: 950 !important;
 
@@ -5183,13 +5240,13 @@
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  padding: 0 30px 30px !important;
+  padding: 0 34px 34px !important;
 }
 
 .heritage-thread-listening-note section {
   min-width: 0;
 
-  padding: 24px 28px 22px 0;
+  padding: 22px 28px 22px 0;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.055);
 }
@@ -5213,7 +5270,7 @@
 
   color: rgba(214, 178, 119, 0.82);
 
-  font-size: 0.58rem;
+  font-size: 0.6rem;
 
   line-height: 1;
 
@@ -5225,7 +5282,7 @@
 }
 
 .heritage-thread-listening-note p {
-  max-width: 34ch;
+  max-width: 36ch;
 
   margin: 0;
 
