@@ -66,3 +66,5 @@ backend/serviceAccountKey-dev.json
 backend/serviceAccountKey-prod.json
 backend/serviceAccountKey-stg.json
 functions/serviceAccountKey.json
+
+tmp/
