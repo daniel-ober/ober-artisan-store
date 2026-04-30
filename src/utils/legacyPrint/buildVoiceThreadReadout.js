@@ -346,12 +346,24 @@ const getAxisIntensity = (profile = {}, axis) => {
   return 'centered';
 };
 
-const getThreadKind = (nodeCount = 0) => {
+const getThreadKind = (thread = {}) => {
+
+  const slotKey = String(thread?.slotKey || '').toLowerCase();
+
+  if (slotKey === 'simple') return 'simple';
+
+  if (slotKey === 'shaped') return 'shaped';
+
+  if (slotKey === 'complex') return 'complex';
+
+  const nodeCount = Array.isArray(thread?.nodes) ? thread.nodes.length : 0;
+
   if (nodeCount <= 2) return 'simple';
 
   if (nodeCount === 3) return 'shaped';
 
   return 'complex';
+
 };
 
 const formatNodeList = (nodes = []) => {
@@ -609,7 +621,7 @@ export function buildVoiceThreadReadout({
     ? thread.nodes.filter(Boolean)
     : [];
 
-  const kind = getThreadKind(nodes.length);
+  const kind = getThreadKind(thread);
 
   const kindMeta = THREAD_SHAPE_META[kind];
 

@@ -1996,9 +1996,23 @@ const HeritageProductDetail = () => {
   const activeAxisImpactFactors =
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
-  const keyRelationships = useMemo(() => {
-    return buildKeyRelationships(activeVoiceSummary);
-  }, [activeVoiceSummary]);
+const keyRelationships = useMemo(() => {
+
+  const relationships = buildKeyRelationships(activeVoiceSummary);
+
+  const slotOrder = ['simple', 'shaped', 'complex'];
+
+  return slotOrder
+
+    .map((slotKey) =>
+
+      relationships.find((relationship) => relationship.slotKey === slotKey)
+
+    )
+
+    .filter(Boolean);
+
+}, [activeVoiceSummary]);
 
   useEffect(() => {
     if (!keyRelationships.length) return;
