@@ -6706,7 +6706,7 @@
 
    ========================================================= */
 
-/* Give the full Voice Engine shell a clear standalone/compare state */
+/* Give the full Voicing Engine shell a clear standalone/compare state */
 
 .heritage-voice-read-card.is-standalone-mode {
   border-color: rgba(255, 255, 255, 0.08) !important;
@@ -7586,7 +7586,7 @@
 
 /* =========================================================
 
-   HERITAGE — VOICE ENGINE HEADER COMPARE DETAILS REWORK
+   HERITAGE — VOICING ENGINE HEADER COMPARE DETAILS REWORK
 
    ========================================================= */
 
@@ -7739,45 +7739,34 @@
   }
 }
 
-
-.heritage-legacyprint-panel--voice-read .heritage-voice-comparison-shell--voice-read {
-
+.heritage-legacyprint-panel--voice-read
+  .heritage-voice-comparison-shell--voice-read {
   margin-bottom: 2px;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning {
-
   gap: 18px;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning .heritage-voice-range-card {
-
   margin-top: 0;
-
 }
 
 /* =========================================================
 
-   HERITAGE — VOICE ENGINE HEADER + COMPACT CHART MODULE
+   HERITAGE — VOICING ENGINE HEADER + COMPACT CHART MODULE
 
    ========================================================= */
 
 .heritage-voice-read-header--with-compare {
-
   margin-bottom: 22px !important;
-
 }
 
 .heritage-voice-read-header-copy {
-
   gap: 0 !important;
-
 }
 
 .heritage-voice-read-header-topline {
-
   display: grid !important;
 
   grid-template-columns: minmax(0, 1fr) auto;
@@ -7785,19 +7774,15 @@
   align-items: start;
 
   gap: 22px;
-
 }
 
 .heritage-voice-read-header-topline .heritage-summary-kicker {
-
   margin: 0 !important;
 
   padding-top: 4px;
-
 }
 
 .heritage-compare-header-cluster {
-
   display: grid;
 
   justify-items: end;
@@ -7805,11 +7790,9 @@
   gap: 8px;
 
   min-width: 0;
-
 }
 
 .heritage-compare-toggle--header {
-
   width: fit-content !important;
 
   min-width: 0 !important;
@@ -7821,17 +7804,13 @@
   padding: 0 0 8px !important;
 
   border-bottom: 1px solid currentColor !important;
-
 }
 
 .heritage-compare-toggle--header::after {
-
   display: none !important;
-
 }
 
 .heritage-compare-reference-chip {
-
   appearance: none;
 
   -webkit-appearance: none;
@@ -7853,11 +7832,9 @@
   text-align: right;
 
   cursor: pointer;
-
 }
 
 .heritage-compare-reference-chip span {
-
   color: rgba(157, 177, 255, 0.78);
 
   font-size: 0.56rem;
@@ -7869,11 +7846,9 @@
   letter-spacing: 0.18em;
 
   text-transform: uppercase;
-
 }
 
 .heritage-compare-reference-chip strong {
-
   color: rgba(245, 247, 255, 0.94);
 
   font-size: 0.82rem;
@@ -7881,45 +7856,33 @@
   line-height: 1.25;
 
   font-weight: 800;
-
 }
 
 .heritage-compare-reference-chip:hover strong,
-
 .heritage-compare-reference-chip:hover span {
-
   color: #ffffff;
-
 }
 
 .heritage-read-summary--wide {
-
   display: none !important;
-
 }
 
 .heritage-compare-active-strip,
-
 .heritage-compare-active-strip--header {
-
   display: none !important;
-
 }
 
 /* Compact chart intro block */
 
 .heritage-chart-module {
-
   display: grid;
 
   gap: 14px;
 
   min-width: 0;
-
 }
 
 .heritage-chart-module-head {
-
   display: grid;
 
   grid-template-columns: minmax(0, 1fr) auto;
@@ -7933,37 +7896,29 @@
   border-top: 1px solid rgba(157, 177, 255, 0.08);
 
   border-bottom: 1px solid rgba(157, 177, 255, 0.08);
-
 }
 
 .heritage-chart-module-copy {
-
   display: grid;
 
   gap: 5px;
 
   min-width: 0;
-
 }
 
 .heritage-chart-module .heritage-chart-eyebrow {
-
   font-size: 0.6rem;
 
   letter-spacing: 0.18em;
-
 }
 
 .heritage-chart-module .heritage-chart-title {
-
   font-size: clamp(1.25rem, 1.7vw, 1.65rem);
 
   line-height: 1.04;
-
 }
 
 .heritage-chart-module .heritage-chart-title-subcopy {
-
   max-width: 44ch;
 
   font-size: 0.84rem;
@@ -7971,125 +7926,87 @@
   line-height: 1.45;
 
   color: rgba(233, 234, 238, 0.68);
-
 }
 
 .heritage-chart-module .heritage-chart-view-switch--inline {
-
   margin: 0;
-
 }
 
 .heritage-chart-module .heritage-chart-wrap {
-
   padding: 14px;
 
   border-radius: 18px;
-
 }
 
 .heritage-chart-module .heritage-chart-wrap--voice-read {
-
   min-height: 0;
-
 }
 
 .heritage-chart-module .spider-chart-frame {
-
   min-height: 420px;
-
 }
 
 @media (max-width: 900px) {
-
   .heritage-voice-read-header-topline {
-
     grid-template-columns: 1fr;
 
     gap: 14px;
-
   }
 
   .heritage-compare-header-cluster {
-
     justify-items: start;
-
   }
 
   .heritage-compare-reference-chip {
-
     justify-items: start;
 
     text-align: left;
 
     max-width: 100%;
-
   }
 
   .heritage-chart-module-head {
-
     grid-template-columns: 1fr;
 
     align-items: start;
 
     gap: 12px;
-
   }
 
   .heritage-chart-module .heritage-chart-view-switch--inline {
-
     justify-self: start;
-
   }
-
 }
 
 @media (max-width: 640px) {
-
   .heritage-voice-read-header--with-compare {
-
     margin-bottom: 18px !important;
-
   }
 
   .heritage-compare-reference-chip strong {
-
     font-size: 0.74rem;
-
   }
 
   .heritage-chart-module-head {
-
     padding: 14px 0 10px;
-
   }
 
   .heritage-chart-module .heritage-chart-title {
-
     font-size: 1.22rem;
-
   }
 
   .heritage-chart-module .heritage-chart-title-subcopy {
-
     font-size: 0.78rem;
-
   }
 
   .heritage-chart-module .heritage-chart-wrap {
-
     padding: 10px;
-
   }
 
   .heritage-chart-module .spider-chart-frame {
-
     min-height: 340px;
-
   }
-
 }
-
 
 /* =========================================================
 
@@ -8098,7 +8015,6 @@
    ========================================================= */
 
 .heritage-voice-range-readout {
-
   display: inline-grid;
 
   gap: 4px;
@@ -8114,23 +8030,15 @@
   border: 1px solid rgba(214, 178, 119, 0.2);
 
   background:
-
     linear-gradient(
-
       135deg,
-
       rgba(214, 178, 119, 0.11),
-
       rgba(214, 178, 119, 0.028)
-
     ),
-
     rgba(5, 6, 10, 0.48);
-
 }
 
 .heritage-voice-range-readout span {
-
   color: rgba(214, 178, 119, 0.88);
 
   font-size: 0.58rem;
@@ -8142,11 +8050,9 @@
   letter-spacing: 0.18em;
 
   text-transform: uppercase;
-
 }
 
 .heritage-voice-range-readout strong {
-
   color: #fbf6ec;
 
   font-size: clamp(1.05rem, 1.4vw, 1.35rem);
@@ -8156,53 +8062,37 @@
   line-height: 1;
 
   letter-spacing: -0.025em;
-
 }
 
 .heritage-voice-range-band {
-
   top: 17px !important;
 
   height: 24px !important;
 
   border-radius: 999px !important;
 
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      rgba(214, 178, 119, 0.08),
-
-      rgba(214, 178, 119, 0.42),
-
-      rgba(214, 178, 119, 0.08)
-
-    ) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 178, 119, 0.08),
+    rgba(214, 178, 119, 0.42),
+    rgba(214, 178, 119, 0.08)
+  ) !important;
 
   border: 1px solid rgba(214, 178, 119, 0.46) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(214, 178, 119, 0.08),
-
     0 0 24px rgba(214, 178, 119, 0.13),
-
     inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-
 }
 
 .heritage-voice-range-band-label {
-
   bottom: -25px !important;
 
   color: rgba(214, 178, 119, 0.88) !important;
-
 }
 
 .heritage-voice-range-range-cap {
-
   position: absolute;
 
   top: 12px;
@@ -8220,19 +8110,14 @@
   background: rgba(255, 235, 190, 0.9);
 
   box-shadow:
-
     0 0 0 4px rgba(214, 178, 119, 0.08),
-
     0 0 18px rgba(214, 178, 119, 0.26);
 
   pointer-events: none;
-
 }
 
 .heritage-voice-range-range-cap--start::after,
-
 .heritage-voice-range-range-cap--end::after {
-
   content: '';
 
   position: absolute;
@@ -8252,55 +8137,40 @@
   background: #d6b277;
 
   border: 2px solid rgba(255, 239, 205, 0.95);
-
 }
 
 .heritage-voice-range-dot--current,
-
 .heritage-voice-range-marker--current {
-
   display: none !important;
-
 }
 
 @media (max-width: 768px) {
-
   .heritage-voice-range-readout {
-
     width: 100%;
 
     box-sizing: border-box;
 
     padding: 10px 12px;
-
   }
 
   .heritage-voice-range-band {
-
     top: 5px !important;
 
     height: 18px !important;
-
   }
 
   .heritage-voice-range-range-cap {
-
     top: 2px;
 
     height: 25px;
-
   }
 
   .heritage-voice-range-range-cap--start::after,
-
   .heritage-voice-range-range-cap--end::after {
-
     width: 7px;
 
     height: 7px;
-
   }
-
 }
 
 /* =========================================================
@@ -8310,7 +8180,6 @@
    ========================================================= */
 
 .heritage-legacytuning-readout-grid {
-
   display: grid;
 
   grid-template-columns: minmax(0, 0.42fr);
@@ -8318,17 +8187,13 @@
   gap: 12px;
 
   margin: 16px 0 18px;
-
 }
 
 .heritage-legacytuning-readout-grid.is-compare-mode {
-
   grid-template-columns: repeat(2, minmax(0, 1fr));
-
 }
 
 .heritage-legacytuning-readout-card {
-
   position: relative;
 
   display: grid;
@@ -8346,53 +8211,35 @@
   border: 1px solid rgba(214, 178, 119, 0.18);
 
   background:
-
     linear-gradient(
-
       115deg,
-
       rgba(214, 178, 119, 0.11),
-
       rgba(214, 178, 119, 0.028) 56%,
 
       rgba(255, 255, 255, 0.01)
-
     ),
-
     rgba(5, 6, 10, 0.48);
 
   box-shadow:
-
     inset 0 1px 0 rgba(255, 255, 255, 0.03),
-
     0 10px 22px rgba(0, 0, 0, 0.18);
-
 }
 
 .heritage-legacytuning-readout-card.is-reference {
-
   border-color: rgba(157, 177, 255, 0.22);
 
   background:
-
     linear-gradient(
-
       115deg,
-
       rgba(157, 177, 255, 0.12),
-
       rgba(157, 177, 255, 0.03) 56%,
 
       rgba(255, 255, 255, 0.01)
-
     ),
-
     rgba(5, 6, 10, 0.48);
-
 }
 
 .heritage-legacytuning-readout-card span {
-
   color: rgba(214, 178, 119, 0.86);
 
   font-size: 0.58rem;
@@ -8404,17 +8251,13 @@
   letter-spacing: 0.18em;
 
   text-transform: uppercase;
-
 }
 
 .heritage-legacytuning-readout-card.is-reference span {
-
   color: rgba(157, 177, 255, 0.9);
-
 }
 
 .heritage-legacytuning-readout-card strong {
-
   color: #fff6e4;
 
   font-size: clamp(1.05rem, 1.8vw, 1.42rem);
@@ -8424,17 +8267,13 @@
   font-weight: 900;
 
   letter-spacing: -0.035em;
-
 }
 
 .heritage-legacytuning-readout-card.is-reference strong {
-
   color: rgba(239, 242, 255, 0.95);
-
 }
 
 .heritage-legacytuning-compare-copy {
-
   margin: -4px 0 18px;
 
   max-width: 60ch;
@@ -8444,107 +8283,77 @@
   font-size: 0.84rem;
 
   line-height: 1.55;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-track {
-
   height: 76px !important;
 
   margin-top: 2px !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-track-line {
-
   top: 36px !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-band {
-
   height: 16px !important;
 
   border-radius: 999px;
-
 }
 
 .heritage-voice-range-band--current {
-
   top: 22px !important;
 
   z-index: 3;
 
   background: linear-gradient(
-
     90deg,
-
     rgba(214, 178, 119, 0.12),
-
     rgba(214, 178, 119, 0.52),
-
     rgba(214, 178, 119, 0.14)
-
   ) !important;
 
   border: 1px solid rgba(214, 178, 119, 0.58) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(214, 178, 119, 0.09),
-
     0 0 24px rgba(214, 178, 119, 0.16) !important;
-
 }
 
 .heritage-voice-range-band--reference {
-
   top: 46px !important;
 
   z-index: 2;
 
   background: linear-gradient(
-
     90deg,
-
     rgba(157, 177, 255, 0.08),
-
     rgba(157, 177, 255, 0.34),
-
     rgba(157, 177, 255, 0.08)
-
   ) !important;
 
   border: 1px solid rgba(157, 177, 255, 0.46) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(157, 177, 255, 0.07),
-
     0 0 22px rgba(157, 177, 255, 0.12) !important;
-
 }
 
 .heritage-voice-range-band--current .heritage-voice-range-band-label {
-
   bottom: auto;
 
   top: -20px;
 
   color: rgba(244, 224, 181, 0.78);
-
 }
 
 .heritage-voice-range-band--reference .heritage-voice-range-band-label {
-
   bottom: -20px;
 
   color: rgba(205, 214, 255, 0.72);
-
 }
 
 .heritage-voice-range-dot--reference-range {
-
   width: 18px !important;
 
   height: 8px !important;
@@ -8554,67 +8363,46 @@
   background: rgba(157, 177, 255, 0.28);
 
   border: 1px solid rgba(157, 177, 255, 0.52);
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-marker,
-
 .heritage-voice-range-card--range-compare .heritage-voice-range-marker--current,
-
-.heritage-voice-range-card--range-compare .heritage-voice-range-marker--reference {
-
+.heritage-voice-range-card--range-compare
+  .heritage-voice-range-marker--reference {
   display: none !important;
-
 }
 
 @media (max-width: 768px) {
-
   .heritage-legacytuning-readout-grid,
-
   .heritage-legacytuning-readout-grid.is-compare-mode {
-
     grid-template-columns: 1fr;
-
   }
 
   .heritage-legacytuning-readout-card {
-
     width: 100%;
 
     min-width: 0;
-
   }
 
   .heritage-voice-range-card--range-compare .heritage-voice-range-track {
-
     height: 64px !important;
-
   }
 
   .heritage-voice-range-card--range-compare .heritage-voice-range-track-line {
-
     top: 30px !important;
-
   }
 
   .heritage-voice-range-band--current {
-
     top: 17px !important;
-
   }
 
   .heritage-voice-range-band--reference {
-
     top: 39px !important;
-
   }
 
   .heritage-voice-range-band-label {
-
     display: none !important;
-
   }
-
 }
 
 /* =========================================================
@@ -8626,21 +8414,16 @@
    ========================================================= */
 
 .heritage-voice-range-card--polished {
-
   padding: 22px 24px 20px !important;
-
 }
 
 .heritage-voice-range-head {
-
   gap: 10px !important;
 
   margin-bottom: 18px !important;
-
 }
 
 .heritage-voice-range-intro {
-
   max-width: 62ch !important;
 
   color: rgba(244, 241, 234, 0.66) !important;
@@ -8648,13 +8431,11 @@
   font-size: 0.84rem !important;
 
   line-height: 1.52 !important;
-
 }
 
 /* Readout cards */
 
 .heritage-voice-range-readout-grid {
-
   display: grid !important;
 
   grid-template-columns: minmax(0, 180px);
@@ -8662,17 +8443,13 @@
   gap: 10px;
 
   margin: 12px 0 4px;
-
 }
 
 .heritage-voice-range-readout-grid.is-compare-mode {
-
   grid-template-columns: repeat(2, minmax(0, 180px));
-
 }
 
 .heritage-voice-range-readout {
-
   position: relative;
 
   display: grid !important;
@@ -8690,55 +8467,37 @@
   border-radius: 13px !important;
 
   background:
-
     linear-gradient(
-
       135deg,
-
       rgba(214, 178, 119, 0.13),
-
       rgba(214, 178, 119, 0.026) 58%,
 
       rgba(255, 255, 255, 0.012)
-
     ),
-
     rgba(5, 6, 10, 0.48) !important;
 
   border: 1px solid rgba(214, 178, 119, 0.22) !important;
 
   box-shadow:
-
     inset 0 1px 0 rgba(255, 255, 255, 0.035),
-
     0 12px 24px rgba(0, 0, 0, 0.18) !important;
-
 }
 
 .heritage-voice-range-readout--reference {
-
   background:
-
     linear-gradient(
-
       135deg,
-
       rgba(157, 177, 255, 0.13),
-
       rgba(157, 177, 255, 0.03) 58%,
 
       rgba(255, 255, 255, 0.012)
-
     ),
-
     rgba(5, 6, 10, 0.48) !important;
 
   border-color: rgba(157, 177, 255, 0.24) !important;
-
 }
 
 .heritage-voice-range-readout span {
-
   color: rgba(214, 178, 119, 0.88) !important;
 
   font-size: 0.56rem !important;
@@ -8750,17 +8509,13 @@
   letter-spacing: 0.17em !important;
 
   text-transform: uppercase !important;
-
 }
 
 .heritage-voice-range-readout--reference span {
-
   color: rgba(157, 177, 255, 0.9) !important;
-
 }
 
 .heritage-voice-range-readout strong {
-
   color: #fff6e4 !important;
 
   font-size: clamp(1.05rem, 1.45vw, 1.35rem) !important;
@@ -8770,117 +8525,88 @@
   font-weight: 950 !important;
 
   letter-spacing: -0.04em !important;
-
 }
 
 .heritage-voice-range-readout--reference strong {
-
   color: rgba(239, 242, 255, 0.96) !important;
-
 }
 
 /* Label row above the rail */
 
 .heritage-voice-range-labels {
-
   gap: 10px !important;
 
   margin-top: 2px;
 
   margin-bottom: 0;
-
 }
 
 .heritage-voice-range-stop-title {
-
   font-size: 0.72rem !important;
 
   font-weight: 900 !important;
-
 }
 
 .heritage-voice-range-stop-sub {
-
   font-size: 0.57rem !important;
 
   line-height: 1.18 !important;
 
   color: rgba(255, 255, 255, 0.42) !important;
-
 }
 
 /* Main scale rail */
 
 .heritage-voice-range-track {
-
   position: relative;
 
   height: 56px !important;
 
   margin: 0 10px !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-track {
-
   height: 74px !important;
-
 }
 
 .heritage-voice-range-track-line {
-
   top: 28px !important;
 
   height: 2px !important;
 
   opacity: 0.92;
 
-  background:
+  background: linear-gradient(
+    90deg,
+    rgba(151, 82, 34, 0.95) 0%,
 
-    linear-gradient(
+    rgba(214, 178, 119, 0.98) 25%,
 
-      90deg,
+    rgba(231, 221, 199, 0.92) 50%,
 
-      rgba(151, 82, 34, 0.95) 0%,
+    rgba(143, 172, 226, 0.94) 76%,
 
-      rgba(214, 178, 119, 0.98) 25%,
-
-      rgba(231, 221, 199, 0.92) 50%,
-
-      rgba(143, 172, 226, 0.94) 76%,
-
-      rgba(92, 140, 255, 0.98) 100%
-
-    ) !important;
+    rgba(92, 140, 255, 0.98) 100%
+  ) !important;
 
   box-shadow:
-
     0 0 18px rgba(214, 178, 119, 0.1),
-
     0 0 22px rgba(95, 147, 255, 0.07) !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-track-line {
-
   top: 36px !important;
-
 }
 
 /* Tick marks */
 
 .heritage-voice-range-track::before,
-
 .heritage-voice-range-track::after {
-
   display: none !important;
-
 }
 
 .heritage-voice-range-track-line::before,
-
 .heritage-voice-range-track-line::after {
-
   content: '';
 
   position: absolute;
@@ -8892,25 +8618,19 @@
   height: 10px;
 
   background: rgba(255, 255, 255, 0.14);
-
 }
 
 .heritage-voice-range-track-line::before {
-
   left: 25%;
-
 }
 
 .heritage-voice-range-track-line::after {
-
   left: 75%;
-
 }
 
 /* Range bands */
 
 .heritage-voice-range-band {
-
   position: absolute !important;
 
   height: 15px !important;
@@ -8918,89 +8638,58 @@
   border-radius: 999px !important;
 
   pointer-events: none;
-
 }
 
 .heritage-voice-range-card--single-range .heritage-voice-range-band--current,
-
 .heritage-voice-range-card--single-range .heritage-voice-range-band {
-
   top: 21px !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-band--current {
-
   top: 22px !important;
 
   z-index: 3;
-
 }
 
 .heritage-voice-range-band--current {
-
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      rgba(214, 178, 119, 0.1),
-
-      rgba(214, 178, 119, 0.52),
-
-      rgba(214, 178, 119, 0.1)
-
-    ) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 178, 119, 0.1),
+    rgba(214, 178, 119, 0.52),
+    rgba(214, 178, 119, 0.1)
+  ) !important;
 
   border: 1px solid rgba(214, 178, 119, 0.56) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(214, 178, 119, 0.08),
-
     0 0 22px rgba(214, 178, 119, 0.14),
-
     inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
-
 }
 
 .heritage-voice-range-band--reference {
-
   top: 47px !important;
 
   z-index: 2;
 
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      rgba(157, 177, 255, 0.08),
-
-      rgba(157, 177, 255, 0.34),
-
-      rgba(157, 177, 255, 0.08)
-
-    ) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(157, 177, 255, 0.08),
+    rgba(157, 177, 255, 0.34),
+    rgba(157, 177, 255, 0.08)
+  ) !important;
 
   border: 1px solid rgba(157, 177, 255, 0.45) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(157, 177, 255, 0.06),
-
     0 0 20px rgba(157, 177, 255, 0.1),
-
     inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-
 }
 
 /* Range end caps */
 
 .heritage-voice-range-range-cap {
-
   position: absolute;
 
   width: 2px !important;
@@ -9016,57 +8705,37 @@
   background: rgba(255, 235, 190, 0.9);
 
   box-shadow:
-
     0 0 0 4px rgba(214, 178, 119, 0.08),
-
     0 0 16px rgba(214, 178, 119, 0.22);
 
   pointer-events: none;
-
 }
 
 .heritage-voice-range-card--single-range .heritage-voice-range-range-cap {
-
   top: 14px !important;
-
 }
 
 .heritage-voice-range-card--range-compare
-
   .heritage-voice-range-range-cap--start,
-
-.heritage-voice-range-card--range-compare
-
-  .heritage-voice-range-range-cap--end {
-
+.heritage-voice-range-card--range-compare .heritage-voice-range-range-cap--end {
   top: 15px !important;
-
 }
 
 .heritage-voice-range-range-cap--reference-start,
-
 .heritage-voice-range-range-cap--reference-end {
-
   top: 40px !important;
 
   background: rgba(205, 214, 255, 0.9) !important;
 
   box-shadow:
-
     0 0 0 4px rgba(157, 177, 255, 0.07),
-
     0 0 16px rgba(157, 177, 255, 0.18) !important;
-
 }
 
 .heritage-voice-range-range-cap--start::after,
-
 .heritage-voice-range-range-cap--end::after,
-
 .heritage-voice-range-range-cap--reference-start::after,
-
 .heritage-voice-range-range-cap--reference-end::after {
-
   content: '';
 
   position: absolute;
@@ -9086,23 +8755,18 @@
   background: #d6b277;
 
   border: 2px solid rgba(255, 239, 205, 0.95);
-
 }
 
 .heritage-voice-range-range-cap--reference-start::after,
-
 .heritage-voice-range-range-cap--reference-end::after {
-
   background: #9fb1ff;
 
   border-color: rgba(239, 242, 255, 0.95);
-
 }
 
 /* Band labels */
 
 .heritage-voice-range-band-label {
-
   position: absolute;
 
   left: 50%;
@@ -9120,77 +8784,59 @@
   letter-spacing: 0.15em !important;
 
   text-transform: uppercase;
-
 }
 
 .heritage-voice-range-band--current .heritage-voice-range-band-label {
-
   top: -19px !important;
 
   bottom: auto !important;
 
   color: rgba(244, 224, 181, 0.8) !important;
-
 }
 
 .heritage-voice-range-band--reference .heritage-voice-range-band-label {
-
   top: auto !important;
 
   bottom: -19px !important;
 
   color: rgba(205, 214, 255, 0.72) !important;
-
 }
 
 /* Remove old dot marker behavior */
 
 .heritage-voice-range-marker,
-
 .heritage-voice-range-marker--current,
-
 .heritage-voice-range-marker--reference,
-
 .heritage-voice-range-dot--current,
-
 .heritage-voice-range-dot--reference {
-
   display: none !important;
-
 }
 
 /* Footer + legend */
 
 .heritage-voice-range-footer {
-
   margin-top: -3px !important;
 
   font-size: 0.64rem !important;
 
   color: rgba(255, 255, 255, 0.48) !important;
-
 }
 
 .heritage-voice-range-legend {
-
   gap: 14px !important;
 
   padding-top: 0 !important;
-
 }
 
 .heritage-voice-range-legend-item {
-
   gap: 7px !important;
 
   color: rgba(255, 255, 255, 0.68) !important;
 
   font-size: 0.68rem !important;
-
 }
 
 .heritage-voice-range-dot--range {
-
   width: 18px !important;
 
   height: 7px !important;
@@ -9200,11 +8846,9 @@
   background: rgba(214, 178, 119, 0.34) !important;
 
   border: 1px solid rgba(214, 178, 119, 0.54) !important;
-
 }
 
 .heritage-voice-range-dot--reference-range {
-
   width: 18px !important;
 
   height: 7px !important;
@@ -9214,129 +8858,87 @@
   background: rgba(157, 177, 255, 0.3) !important;
 
   border: 1px solid rgba(157, 177, 255, 0.52) !important;
-
 }
 
 /* Mobile */
 
 @media (max-width: 768px) {
-
   .heritage-voice-range-readout-grid,
-
   .heritage-voice-range-readout-grid.is-compare-mode {
-
     grid-template-columns: 1fr !important;
 
     gap: 8px !important;
-
   }
 
   .heritage-voice-range-readout {
-
     width: 100% !important;
 
     box-sizing: border-box;
-
   }
 
   .heritage-voice-range-track {
-
     height: 46px !important;
 
     margin: 2px 2px 0 !important;
-
   }
 
   .heritage-voice-range-card--range-compare .heritage-voice-range-track {
-
     height: 60px !important;
-
   }
 
   .heritage-voice-range-track-line {
-
     top: 22px !important;
-
   }
 
   .heritage-voice-range-card--range-compare .heritage-voice-range-track-line {
-
     top: 30px !important;
-
   }
 
   .heritage-voice-range-card--single-range .heritage-voice-range-band--current,
-
   .heritage-voice-range-card--single-range .heritage-voice-range-band {
-
     top: 15px !important;
-
   }
 
   .heritage-voice-range-card--range-compare
-
     .heritage-voice-range-band--current {
-
     top: 17px !important;
-
   }
 
   .heritage-voice-range-band--reference {
-
     top: 39px !important;
-
   }
 
   .heritage-voice-range-card--single-range .heritage-voice-range-range-cap {
-
     top: 8px !important;
-
   }
 
   .heritage-voice-range-card--range-compare
-
     .heritage-voice-range-range-cap--start,
-
   .heritage-voice-range-card--range-compare
-
     .heritage-voice-range-range-cap--end {
-
     top: 10px !important;
-
   }
 
   .heritage-voice-range-range-cap--reference-start,
-
   .heritage-voice-range-range-cap--reference-end {
-
     top: 32px !important;
-
   }
 
   .heritage-voice-range-range-cap {
-
     height: 26px !important;
-
   }
 
   .heritage-voice-range-band-label {
-
     display: none !important;
-
   }
 
   .heritage-voice-range-labels {
-
     grid-template-columns: 1fr !important;
-
   }
 
   .heritage-voice-range-footer {
-
     font-size: 0.58rem !important;
-
   }
-
 }
 
 /* =========================================================
@@ -9348,31 +8950,24 @@
    ========================================================= */
 
 .heritage-legacyprint-panel--legacy-tuning {
-
   gap: 20px !important;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning .heritage-chart-top-shell {
-
   margin: 0 !important;
 
   padding: 0 !important;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title-shell {
-
   justify-items: start !important;
 
   text-align: left !important;
 
   max-width: 680px;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning .heritage-chart-eyebrow {
-
   color: rgba(214, 178, 119, 0.86) !important;
 
   font-size: 0.58rem !important;
@@ -9380,11 +8975,9 @@
   font-weight: 950 !important;
 
   letter-spacing: 0.22em !important;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title {
-
   color: #fff8ed !important;
 
   font-size: clamp(1.72rem, 2.4vw, 2.45rem) !important;
@@ -9394,11 +8987,9 @@
   font-weight: 925 !important;
 
   letter-spacing: -0.06em !important;
-
 }
 
 .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title-subcopy {
-
   max-width: 48ch !important;
 
   color: rgba(244, 241, 234, 0.66) !important;
@@ -9406,13 +8997,11 @@
   font-size: 0.9rem !important;
 
   line-height: 1.55 !important;
-
 }
 
 /* Main LegacyTuning card becomes a low-profile instrument panel */
 
 .heritage-voice-range-card--polished {
-
   position: relative !important;
 
   overflow: hidden !important;
@@ -9424,49 +9013,31 @@
   border: 1px solid rgba(214, 178, 119, 0.13) !important;
 
   background:
-
     linear-gradient(
-
       180deg,
-
       rgba(255, 255, 255, 0.025),
-
       rgba(255, 255, 255, 0.006)
-
     ),
-
     radial-gradient(
-
       circle at 12% 0%,
 
       rgba(214, 178, 119, 0.08),
-
       transparent 38%
-
     ),
-
     radial-gradient(
-
       circle at 86% 88%,
 
       rgba(92, 140, 255, 0.075),
-
       transparent 34%
-
     ),
-
     linear-gradient(145deg, rgba(8, 9, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
 
   box-shadow:
-
     0 24px 58px rgba(0, 0, 0, 0.34),
-
     inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
-
 }
 
 .heritage-voice-range-card--polished::before {
-
   content: '';
 
   position: absolute;
@@ -9480,11 +9051,9 @@
   border: 1px solid rgba(214, 178, 119, 0.045);
 
   pointer-events: none;
-
 }
 
 .heritage-voice-range-card--polished::after {
-
   content: '';
 
   position: absolute;
@@ -9498,31 +9067,30 @@
   pointer-events: none;
 
   background-image:
-
     linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 
   background-size: 36px 36px;
 
-  mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 74%, transparent 100%);
-
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 24%,
+    #000 74%,
+    transparent 100%
+  );
 }
 
 .heritage-voice-range-head,
-
 .heritage-voice-range-scale {
-
   position: relative;
 
   z-index: 1;
-
 }
 
 /* Compact upper information band */
 
 .heritage-voice-range-head {
-
   display: grid !important;
 
   grid-template-columns: minmax(0, 1fr) auto;
@@ -9536,11 +9104,9 @@
   padding: 24px 26px 18px !important;
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.065);
-
 }
 
 .heritage-voice-range-head .heritage-summary-kicker {
-
   grid-column: 1 / -1;
 
   margin: 0 !important;
@@ -9554,11 +9120,9 @@
   font-weight: 950 !important;
 
   letter-spacing: 0.24em !important;
-
 }
 
 .heritage-voice-range-intro {
-
   grid-column: 1 / 2;
 
   max-width: 58ch !important;
@@ -9570,13 +9134,11 @@
   font-size: 0.86rem !important;
 
   line-height: 1.58 !important;
-
 }
 
 /* Frequency readout plates */
 
 .heritage-voice-range-readout-grid {
-
   grid-column: 2 / 3;
 
   grid-row: 2 / 3;
@@ -9594,17 +9156,13 @@
   width: 210px !important;
 
   margin: 0 !important;
-
 }
 
 .heritage-voice-range-readout-grid.is-compare-mode {
-
   width: 230px !important;
-
 }
 
 .heritage-voice-range-readout {
-
   display: grid !important;
 
   gap: 5px !important;
@@ -9625,48 +9183,32 @@
 
   border-left: 2px solid rgba(214, 178, 119, 0.72) !important;
 
-  background:
+  background: linear-gradient(
+    90deg,
+    rgba(214, 178, 119, 0.095),
+    rgba(214, 178, 119, 0.026) 48%,
 
-    linear-gradient(
-
-      90deg,
-
-      rgba(214, 178, 119, 0.095),
-
-      rgba(214, 178, 119, 0.026) 48%,
-
-      transparent
-
-    ) !important;
+    transparent
+  ) !important;
 
   box-shadow: none !important;
-
 }
 
 .heritage-voice-range-readout--reference {
-
   border-bottom-color: rgba(157, 177, 255, 0.3) !important;
 
   border-left-color: rgba(157, 177, 255, 0.74) !important;
 
-  background:
+  background: linear-gradient(
+    90deg,
+    rgba(157, 177, 255, 0.1),
+    rgba(157, 177, 255, 0.028) 48%,
 
-    linear-gradient(
-
-      90deg,
-
-      rgba(157, 177, 255, 0.1),
-
-      rgba(157, 177, 255, 0.028) 48%,
-
-      transparent
-
-    ) !important;
-
+    transparent
+  ) !important;
 }
 
 .heritage-voice-range-readout span {
-
   color: rgba(214, 178, 119, 0.86) !important;
 
   font-size: 0.55rem !important;
@@ -9678,17 +9220,13 @@
   letter-spacing: 0.18em !important;
 
   text-transform: uppercase !important;
-
 }
 
 .heritage-voice-range-readout--reference span {
-
   color: rgba(157, 177, 255, 0.9) !important;
-
 }
 
 .heritage-voice-range-readout strong {
-
   color: #fff8ed !important;
 
   font-size: 1.3rem !important;
@@ -9698,29 +9236,23 @@
   font-weight: 925 !important;
 
   letter-spacing: -0.045em !important;
-
 }
 
 .heritage-voice-range-readout--reference strong {
-
   color: rgba(239, 242, 255, 0.96) !important;
-
 }
 
 /* The resonance rail section */
 
 .heritage-voice-range-scale {
-
   display: grid !important;
 
   gap: 0 !important;
 
   padding: 22px 26px 24px !important;
-
 }
 
 .heritage-voice-range-labels {
-
   display: grid !important;
 
   grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
@@ -9730,11 +9262,9 @@
   margin: 0 0 18px !important;
 
   padding: 0 !important;
-
 }
 
 .heritage-voice-range-stop {
-
   position: relative;
 
   display: grid !important;
@@ -9748,11 +9278,9 @@
   text-align: left !important;
 
   border: 0 !important;
-
 }
 
 .heritage-voice-range-stop::before {
-
   content: '';
 
   width: 1px;
@@ -9762,11 +9290,9 @@
   margin-bottom: 3px;
 
   background: rgba(255, 255, 255, 0.18);
-
 }
 
 .heritage-voice-range-stop-title {
-
   color: rgba(255, 248, 235, 0.88) !important;
 
   font-size: 0.68rem !important;
@@ -9776,11 +9302,9 @@
   font-weight: 925 !important;
 
   letter-spacing: -0.01em !important;
-
 }
 
 .heritage-voice-range-stop-sub {
-
   max-width: 14ch;
 
   color: rgba(255, 255, 255, 0.38) !important;
@@ -9790,13 +9314,11 @@
   line-height: 1.2 !important;
 
   font-weight: 700 !important;
-
 }
 
 /* Track: thin, precise, not slider-like */
 
 .heritage-voice-range-track {
-
   position: relative !important;
 
   height: 76px !important;
@@ -9804,23 +9326,17 @@
   margin: 0 !important;
 
   padding: 0 !important;
-
 }
 
 .heritage-voice-range-card--single-range .heritage-voice-range-track {
-
   height: 58px !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-track {
-
   height: 76px !important;
-
 }
 
 .heritage-voice-range-track-line {
-
   position: absolute !important;
 
   left: 0 !important;
@@ -9835,42 +9351,30 @@
 
   opacity: 1 !important;
 
-  background:
+  background: linear-gradient(
+    90deg,
+    rgba(151, 82, 34, 0.95) 0%,
 
-    linear-gradient(
+    rgba(214, 178, 119, 0.95) 24%,
 
-      90deg,
+    rgba(232, 222, 199, 0.88) 50%,
 
-      rgba(151, 82, 34, 0.95) 0%,
+    rgba(143, 172, 226, 0.9) 76%,
 
-      rgba(214, 178, 119, 0.95) 24%,
-
-      rgba(232, 222, 199, 0.88) 50%,
-
-      rgba(143, 172, 226, 0.9) 76%,
-
-      rgba(92, 140, 255, 0.95) 100%
-
-    ) !important;
+    rgba(92, 140, 255, 0.95) 100%
+  ) !important;
 
   box-shadow:
-
     0 0 16px rgba(214, 178, 119, 0.09),
-
     0 0 16px rgba(92, 140, 255, 0.08) !important;
-
 }
 
 .heritage-voice-range-card--range-compare .heritage-voice-range-track-line {
-
   top: 36px !important;
-
 }
 
 .heritage-voice-range-track-line::before,
-
 .heritage-voice-range-track-line::after {
-
   content: '' !important;
 
   position: absolute !important;
@@ -9882,33 +9386,24 @@
   height: 13px !important;
 
   background: rgba(255, 255, 255, 0.14) !important;
-
 }
 
 .heritage-voice-range-track-line::before {
-
   left: 25% !important;
-
 }
 
 .heritage-voice-range-track-line::after {
-
   left: 75% !important;
-
 }
 
 .heritage-voice-range-track::before,
-
 .heritage-voice-range-track::after {
-
   display: none !important;
-
 }
 
 /* Range bands: underline-style resonance windows */
 
 .heritage-voice-range-band {
-
   position: absolute !important;
 
   height: 11px !important;
@@ -9918,28 +9413,19 @@
   pointer-events: none !important;
 
   transform: none !important;
-
 }
 
 .heritage-voice-range-band--current {
-
   top: 25px !important;
 
   z-index: 3 !important;
 
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      rgba(214, 178, 119, 0.05),
-
-      rgba(214, 178, 119, 0.48),
-
-      rgba(214, 178, 119, 0.05)
-
-    ) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 178, 119, 0.05),
+    rgba(214, 178, 119, 0.48),
+    rgba(214, 178, 119, 0.05)
+  ) !important;
 
   border-top: 1px solid rgba(214, 178, 119, 0.58) !important;
 
@@ -9950,38 +9436,25 @@
   border-left: 0 !important;
 
   box-shadow:
-
     0 0 18px rgba(214, 178, 119, 0.14),
-
     inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
-
 }
 
 .heritage-voice-range-card--single-range .heritage-voice-range-band--current {
-
   top: 25px !important;
-
 }
 
 .heritage-voice-range-band--reference {
-
   top: 49px !important;
 
   z-index: 2 !important;
 
-  background:
-
-    linear-gradient(
-
-      90deg,
-
-      rgba(157, 177, 255, 0.045),
-
-      rgba(157, 177, 255, 0.34),
-
-      rgba(157, 177, 255, 0.045)
-
-    ) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(157, 177, 255, 0.045),
+    rgba(157, 177, 255, 0.34),
+    rgba(157, 177, 255, 0.045)
+  ) !important;
 
   border-top: 1px solid rgba(157, 177, 255, 0.48) !important;
 
@@ -9992,17 +9465,13 @@
   border-left: 0 !important;
 
   box-shadow:
-
     0 0 16px rgba(157, 177, 255, 0.1),
-
     inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
-
 }
 
 /* End caps become measurement marks */
 
 .heritage-voice-range-range-cap {
-
   position: absolute !important;
 
   width: 1px !important;
@@ -10020,49 +9489,32 @@
   background: rgba(255, 235, 190, 0.88) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(214, 178, 119, 0.18),
-
     0 0 14px rgba(214, 178, 119, 0.24) !important;
-
 }
 
 .heritage-voice-range-card--single-range .heritage-voice-range-range-cap {
-
   top: 16px !important;
-
 }
 
 .heritage-voice-range-card--range-compare
-
   .heritage-voice-range-range-cap--start,
-
-.heritage-voice-range-card--range-compare
-
-  .heritage-voice-range-range-cap--end {
-
+.heritage-voice-range-card--range-compare .heritage-voice-range-range-cap--end {
   top: 16px !important;
-
 }
 
 .heritage-voice-range-range-cap--reference-start,
-
 .heritage-voice-range-range-cap--reference-end {
-
   top: 40px !important;
 
   background: rgba(205, 214, 255, 0.88) !important;
 
   box-shadow:
-
     0 0 0 1px rgba(157, 177, 255, 0.18),
-
     0 0 14px rgba(157, 177, 255, 0.18) !important;
-
 }
 
 .heritage-voice-range-range-cap::before {
-
   content: '';
 
   position: absolute;
@@ -10080,11 +9532,9 @@
   background: currentColor;
 
   opacity: 0.7;
-
 }
 
 .heritage-voice-range-range-cap::after {
-
   content: '' !important;
 
   position: absolute !important;
@@ -10108,29 +9558,21 @@
   background: currentColor !important;
 
   opacity: 0.7 !important;
-
 }
 
 .heritage-voice-range-range-cap--start,
-
 .heritage-voice-range-range-cap--end {
-
   color: rgba(255, 235, 190, 0.9);
-
 }
 
 .heritage-voice-range-range-cap--reference-start,
-
 .heritage-voice-range-range-cap--reference-end {
-
   color: rgba(205, 214, 255, 0.9);
-
 }
 
 /* Labels: small blueprint callouts */
 
 .heritage-voice-range-band-label {
-
   position: absolute !important;
 
   left: 50% !important;
@@ -10148,33 +9590,27 @@
   letter-spacing: 0.16em !important;
 
   text-transform: uppercase !important;
-
 }
 
 .heritage-voice-range-band--current .heritage-voice-range-band-label {
-
   top: -17px !important;
 
   bottom: auto !important;
 
   color: rgba(244, 224, 181, 0.74) !important;
-
 }
 
 .heritage-voice-range-band--reference .heritage-voice-range-band-label {
-
   top: auto !important;
 
   bottom: -17px !important;
 
   color: rgba(205, 214, 255, 0.68) !important;
-
 }
 
 /* Footer / legend */
 
 .heritage-voice-range-footer {
-
   display: flex !important;
 
   justify-content: space-between !important;
@@ -10190,11 +9626,9 @@
   line-height: 1.2 !important;
 
   font-weight: 800 !important;
-
 }
 
 .heritage-voice-range-legend {
-
   display: flex !important;
 
   flex-wrap: wrap !important;
@@ -10206,11 +9640,9 @@
   padding-top: 12px !important;
 
   border-top: 1px solid rgba(255, 255, 255, 0.055);
-
 }
 
 .heritage-voice-range-legend-item {
-
   display: inline-flex !important;
 
   align-items: center !important;
@@ -10224,13 +9656,10 @@
   line-height: 1 !important;
 
   font-weight: 825 !important;
-
 }
 
 .heritage-voice-range-dot--range,
-
 .heritage-voice-range-dot--reference-range {
-
   display: inline-block !important;
 
   width: 22px !important;
@@ -10238,105 +9667,71 @@
   height: 2px !important;
 
   border-radius: 0 !important;
-
 }
 
 .heritage-voice-range-dot--range {
-
   background: rgba(214, 178, 119, 0.78) !important;
 
   border: 0 !important;
-
 }
 
 .heritage-voice-range-dot--reference-range {
-
   background: rgba(157, 177, 255, 0.78) !important;
 
   border: 0 !important;
-
 }
 
 .heritage-voice-range-marker,
-
 .heritage-voice-range-marker--current,
-
 .heritage-voice-range-marker--reference,
-
 .heritage-voice-range-dot--current,
-
 .heritage-voice-range-dot--reference {
-
   display: none !important;
-
 }
 
 /* Optional: when compare is on, keep the whole panel blue-tinted but not loud */
 
 .heritage-voice-read-card.is-compare-mode .heritage-voice-range-card--polished {
-
   border-color: rgba(157, 177, 255, 0.18) !important;
 
   background:
-
     linear-gradient(
-
       180deg,
-
       rgba(157, 177, 255, 0.035),
-
       rgba(255, 255, 255, 0.006)
-
     ),
-
     radial-gradient(
-
       circle at 12% 0%,
 
       rgba(214, 178, 119, 0.06),
-
       transparent 38%
-
     ),
-
     radial-gradient(
-
       circle at 86% 88%,
 
       rgba(92, 140, 255, 0.11),
-
       transparent 34%
-
     ),
-
     linear-gradient(145deg, rgba(8, 9, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
-
 }
 
 /* Mobile / tablet */
 
 @media (max-width: 900px) {
-
   .heritage-voice-range-head {
-
     grid-template-columns: 1fr !important;
 
     gap: 14px !important;
 
     padding: 22px 20px 16px !important;
-
   }
 
   .heritage-voice-range-intro {
-
     grid-column: auto !important;
-
   }
 
   .heritage-voice-range-readout-grid,
-
   .heritage-voice-range-readout-grid.is-compare-mode {
-
     grid-column: auto !important;
 
     grid-row: auto !important;
@@ -10346,51 +9741,37 @@
     width: 100% !important;
 
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
   }
 
   .heritage-voice-range-readout-grid:not(.is-compare-mode) {
-
     grid-template-columns: minmax(0, 1fr) !important;
-
   }
 
   .heritage-voice-range-scale {
-
     padding: 18px 20px 22px !important;
-
   }
-
 }
 
 @media (max-width: 768px) {
-
   .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title-shell {
-
     text-align: left !important;
 
     justify-items: start !important;
-
   }
 
   .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title {
-
     font-size: 1.65rem !important;
-
   }
 
   .heritage-voice-range-labels {
-
     grid-template-columns: 1fr !important;
 
     gap: 0 !important;
 
     margin-bottom: 16px !important;
-
   }
 
   .heritage-voice-range-stop {
-
     grid-template-columns: minmax(0, 1fr) auto !important;
 
     align-items: baseline !important;
@@ -10398,151 +9779,102 @@
     padding: 8px 0 !important;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
-
   }
 
   .heritage-voice-range-stop::before {
-
     display: none !important;
-
   }
 
   .heritage-voice-range-stop-title {
-
     font-size: 0.72rem !important;
-
   }
 
   .heritage-voice-range-stop-sub {
-
     max-width: 120px !important;
 
     text-align: right !important;
 
     font-size: 0.56rem !important;
-
   }
 
   .heritage-voice-range-track {
-
     height: 54px !important;
-
   }
 
   .heritage-voice-range-card--range-compare .heritage-voice-range-track {
-
     height: 68px !important;
-
   }
 
   .heritage-voice-range-track-line {
-
     top: 25px !important;
-
   }
 
   .heritage-voice-range-card--range-compare .heritage-voice-range-track-line {
-
     top: 32px !important;
-
   }
 
   .heritage-voice-range-band--current,
-
   .heritage-voice-range-card--single-range .heritage-voice-range-band--current {
-
     top: 20px !important;
-
   }
 
-  .heritage-voice-range-card--range-compare .heritage-voice-range-band--current {
-
+  .heritage-voice-range-card--range-compare
+    .heritage-voice-range-band--current {
     top: 21px !important;
-
   }
 
   .heritage-voice-range-band--reference {
-
     top: 43px !important;
-
   }
 
   .heritage-voice-range-card--single-range .heritage-voice-range-range-cap,
-
   .heritage-voice-range-card--range-compare
-
     .heritage-voice-range-range-cap--start,
-
   .heritage-voice-range-card--range-compare
-
     .heritage-voice-range-range-cap--end {
-
     top: 11px !important;
-
   }
 
   .heritage-voice-range-range-cap--reference-start,
-
   .heritage-voice-range-range-cap--reference-end {
-
     top: 34px !important;
-
   }
 
   .heritage-voice-range-band-label {
-
     display: none !important;
-
   }
 
   .heritage-voice-range-footer {
-
     font-size: 0.56rem !important;
-
   }
-
 }
 
 @media (max-width: 520px) {
-
   .heritage-voice-range-head {
-
     padding: 18px 16px 14px !important;
-
   }
 
   .heritage-voice-range-scale {
-
     padding: 16px 16px 18px !important;
-
   }
 
   .heritage-voice-range-readout-grid,
-
   .heritage-voice-range-readout-grid.is-compare-mode {
-
     grid-template-columns: 1fr !important;
-
   }
 
   .heritage-voice-range-readout strong {
-
     font-size: 1.16rem !important;
-
   }
 
   .heritage-voice-range-intro {
-
     font-size: 0.78rem !important;
 
     line-height: 1.5 !important;
-
   }
-
 }
 
 .heritage-voice-range-readout em {
-
   display: block;
 
   margin-top: 1px;
@@ -10558,19 +9890,14 @@
   font-weight: 800;
 
   letter-spacing: 0.04em;
-
 }
 
 .heritage-voice-range-readout--current em {
-
   color: rgba(244, 224, 181, 0.62);
-
 }
 
 .heritage-voice-range-readout--reference em {
-
   color: rgba(205, 214, 255, 0.62);
-
 }
 
 /* =========================================================
@@ -10580,17 +9907,14 @@
    ========================================================= */
 
 .heritage-tone-summary-icon--legacyprint {
-
   display: grid;
 
   place-items: center;
 
   overflow: hidden;
-
 }
 
 .heritage-tone-summary-legacyprint-icon {
-
   width: 26px;
 
   height: 26px;
@@ -10599,12 +9923,8 @@
 
   display: block;
 
-  filter:
-
-    drop-shadow(0 0 10px rgba(214, 178, 119, 0.28))
-
+  filter: drop-shadow(0 0 10px rgba(214, 178, 119, 0.28))
     drop-shadow(0 0 18px rgba(141, 162, 255, 0.16));
-
 }
 
 /* =========================================================
@@ -10614,7 +9934,6 @@
    ========================================================= */
 
 .heritage-tone-summary-icon--legacyprint {
-
   width: 98px !important;
 
   height: 98px !important;
@@ -10636,21 +9955,16 @@
   place-items: center;
 
   overflow: visible !important;
-
 }
 
 .heritage-tone-summary-icon--legacyprint::before,
-
 .heritage-tone-summary-icon--legacyprint::after {
-
   display: none !important;
 
   content: none !important;
-
 }
 
 .heritage-tone-summary-legacyprint-icon {
-
   width: 86px !important;
 
   height: 86px !important;
@@ -10659,34 +9973,24 @@
 
   display: block;
 
-  filter:
-
-    drop-shadow(0 0 10px rgba(214, 178, 119, 0.22))
-
+  filter: drop-shadow(0 0 10px rgba(214, 178, 119, 0.22))
     drop-shadow(0 0 18px rgba(141, 162, 255, 0.16));
-
 }
 
 @media (max-width: 640px) {
-
   .heritage-tone-summary-icon--legacyprint {
-
     width: 72px !important;
 
     height: 72px !important;
 
     min-width: 72px !important;
-
   }
 
   .heritage-tone-summary-legacyprint-icon {
-
     width: 64px !important;
 
     height: 64px !important;
-
   }
-
 }
 
 /* =========================================================
@@ -10696,23 +10000,18 @@
    ========================================================= */
 
 .heritage-tone-summary-card--voiceprint {
-
   display: block !important;
 
   padding: 30px 34px 30px !important;
-
 }
 
 .heritage-tone-summary-card--voiceprint .heritage-tone-summary-copy {
-
   display: block !important;
 
   width: 100%;
-
 }
 
 .heritage-summary-kicker--voiceprint {
-
   display: inline-flex !important;
 
   align-items: center !important;
@@ -10720,11 +10019,9 @@
   gap: 10px !important;
 
   margin-bottom: 18px !important;
-
 }
 
 .heritage-summary-kicker-icon {
-
   width: 28px;
 
   height: 28px;
@@ -10733,36 +10030,26 @@
 
   display: block;
 
-  filter:
-
-    drop-shadow(0 0 8px rgba(214, 178, 119, 0.22))
-
+  filter: drop-shadow(0 0 8px rgba(214, 178, 119, 0.22))
     drop-shadow(0 0 12px rgba(141, 162, 255, 0.16));
-
 }
 
-.heritage-tone-summary-card--voiceprint .heritage-tone-summary-copy > p:first-of-type {
-
+.heritage-tone-summary-card--voiceprint
+  .heritage-tone-summary-copy
+  > p:first-of-type {
   max-width: 980px;
-
 }
 
 @media (max-width: 640px) {
-
   .heritage-tone-summary-card--voiceprint {
-
     padding: 24px 22px !important;
-
   }
 
   .heritage-summary-kicker-icon {
-
     width: 24px;
 
     height: 24px;
-
   }
-
 }
 
 /* =========================================================
@@ -10772,17 +10059,14 @@
    ========================================================= */
 
 .heritage-summary-kicker--legacyprint-engine {
-
   display: inline-flex !important;
 
   align-items: center !important;
 
   gap: 12px !important;
-
 }
 
 .heritage-legacyprint-engine-icon {
-
   width: 34px;
 
   height: 34px;
@@ -10793,32 +10077,21 @@
 
   flex: 0 0 auto;
 
-  filter:
-
-    drop-shadow(0 0 10px rgba(214, 178, 119, 0.2))
-
+  filter: drop-shadow(0 0 10px rgba(214, 178, 119, 0.2))
     drop-shadow(0 0 16px rgba(141, 162, 255, 0.14));
-
 }
 
 @media (max-width: 640px) {
-
   .heritage-legacyprint-engine-icon {
-
     width: 28px;
 
     height: 28px;
-
   }
 
   .heritage-summary-kicker--legacyprint-engine {
-
     gap: 10px !important;
-
   }
-
 }
-
 
 /* =========================================================
 
@@ -10829,18 +10102,4560 @@
    ========================================================= */
 
 .heritage-legacyprint-engine-icon {
-
-  filter:
-
-    drop-shadow(0 0 100px rgba(141, 162, 255, 0.22))
-
+  filter: drop-shadow(0 0 100px rgba(141, 162, 255, 0.22))
     drop-shadow(0 0 1px rgba(255, 255, 255, 0.25)) !important;
-
 }
 
 .heritage-summary-kicker--legacyprint-engine {
-
   text-shadow: none !important;
-
 }
 
+/* =========================================================
+
+   HERITAGE — MOBILE OVERFLOW FIX PASS
+
+   iPhone Pro Max / Safari polish
+
+   Paste at very bottom of HeritageProductDetail.css
+
+   ========================================================= */
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .heritage-product-detail,
+  .heritage-hero-shell,
+  .heritage-workspace-section,
+  .heritage-voice-panel,
+  .heritage-voice-read-card,
+  .heritage-voice-read-flow,
+  .heritage-legacyprint-panel,
+  .heritage-chart-module,
+  .heritage-chart-wrap,
+  .heritage-chart-stage,
+  .heritage-tone-summary-card,
+  .heritage-voice-range-card,
+  .heritage-axis-insight-panel,
+  .heritage-key-relationships-grid,
+  .heritage-key-relationship-card {
+    min-width: 0 !important;
+
+    max-width: 100% !important;
+
+    box-sizing: border-box !important;
+  }
+
+  .heritage-product-detail {
+    width: 100%;
+
+    padding-left: 12px !important;
+
+    padding-right: 12px !important;
+
+    overflow-x: hidden !important;
+  }
+
+  .heritage-hero-shell {
+    width: 100%;
+
+    overflow-x: hidden !important;
+  }
+
+  .heritage-workspace-section {
+    display: grid !important;
+
+    grid-template-columns: minmax(0, 1fr) !important;
+
+    gap: 22px !important;
+
+    overflow-x: hidden !important;
+  }
+
+  .heritage-builder-card,
+  .heritage-voice-read-card {
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-voice-read-card--reworked {
+    padding: 18px 14px 22px !important;
+
+    border-radius: 20px !important;
+  }
+
+  /* Header: icon + title + compare */
+
+  .heritage-voice-read-header--with-compare {
+    margin-bottom: 20px !important;
+  }
+
+  .heritage-voice-read-header-topline {
+    grid-template-columns: 1fr !important;
+
+    gap: 18px !important;
+  }
+
+  .heritage-summary-kicker--legacyprint-engine {
+    display: grid !important;
+
+    grid-template-columns: 30px minmax(0, 1fr);
+
+    align-items: center !important;
+
+    gap: 11px !important;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    line-height: 1.35 !important;
+
+    white-space: normal !important;
+  }
+
+  .heritage-legacyprint-engine-icon {
+    width: 28px !important;
+
+    height: 28px !important;
+  }
+
+  .heritage-compare-header-cluster {
+    justify-items: start !important;
+
+    width: 100%;
+  }
+
+  .heritage-compare-toggle--header {
+    max-width: 100% !important;
+
+    white-space: nowrap !important;
+  }
+
+  /* Tabs: keep horizontal, but prevent page-wide overflow */
+
+  .heritage-legacyprint-nav-row {
+    width: 100%;
+
+    max-width: 100%;
+
+    overflow: hidden !important;
+
+    margin-bottom: 22px !important;
+  }
+
+  .heritage-legacyprint-nav-row .heritage-legacyprint-tabs {
+    width: 100%;
+
+    max-width: 100%;
+
+    display: flex !important;
+
+    flex-wrap: nowrap !important;
+
+    gap: 26px !important;
+
+    overflow-x: auto !important;
+
+    overflow-y: hidden !important;
+
+    padding-bottom: 12px !important;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .heritage-legacyprint-nav-row .heritage-legacyprint-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heritage-legacyprint-tab {
+    flex: 0 0 auto !important;
+
+    font-size: 0.56rem !important;
+
+    letter-spacing: 0.17em !important;
+
+    white-space: nowrap !important;
+  }
+
+  /* VoiceMap chart mobile sizing */
+
+  .heritage-chart-module-head {
+    grid-template-columns: 1fr !important;
+
+    align-items: start !important;
+
+    gap: 10px !important;
+
+    padding: 12px 0 10px !important;
+  }
+
+  .heritage-chart-module .heritage-chart-title {
+    font-size: 1.42rem !important;
+
+    line-height: 1.04 !important;
+
+    max-width: 100% !important;
+  }
+
+  .heritage-chart-module .heritage-chart-title-subcopy {
+    max-width: 100% !important;
+
+    font-size: 0.8rem !important;
+
+    line-height: 1.45 !important;
+  }
+
+  .heritage-chart-wrap,
+  .heritage-chart-wrap--voice-read,
+  .heritage-chart-wrap--simple {
+    width: 100% !important;
+
+    padding: 8px !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-chart-module .spider-chart-frame,
+  .spider-chart-frame {
+    min-height: 330px !important;
+
+    height: 330px !important;
+
+    max-height: 330px !important;
+  }
+
+  .spider-chart-legend--inside {
+    top: 12px !important;
+
+    left: 50% !important;
+
+    transform: translateX(-50%) !important;
+
+    width: max-content !important;
+
+    max-width: calc(100% - 24px) !important;
+  }
+
+  .spider-chart-legend-text {
+    font-size: 0.68rem !important;
+
+    white-space: nowrap !important;
+  }
+
+  .spider-chart-axis-button {
+    transform: translate(-50%, -50%) scale(0.92) !important;
+  }
+
+  .spider-chart-axis-button.is-active {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+
+  /* VoiceMap Summary */
+
+  .heritage-tone-summary-card--voiceprint {
+    padding: 20px 18px 22px !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-summary-kicker--voiceprint {
+    display: inline-grid !important;
+
+    grid-template-columns: 24px minmax(0, 1fr);
+
+    align-items: center !important;
+
+    gap: 10px !important;
+
+    margin-bottom: 16px !important;
+
+    max-width: 100% !important;
+
+    white-space: normal !important;
+  }
+
+  .heritage-summary-kicker-icon {
+    width: 22px !important;
+
+    height: 22px !important;
+  }
+
+  .heritage-tone-summary-card--voiceprint .heritage-tone-summary-copy > p {
+    max-width: 100% !important;
+
+    font-size: 0.86rem !important;
+
+    line-height: 1.55 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-tone-summary-helper {
+    font-size: 0.78rem !important;
+
+    line-height: 1.5 !important;
+  }
+
+  /* LegacyTuning copy/card */
+
+  .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title-shell {
+    max-width: 100% !important;
+  }
+
+  .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title {
+    font-size: 1.65rem !important;
+
+    line-height: 1.02 !important;
+
+    max-width: 100% !important;
+  }
+
+  .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title-subcopy {
+    max-width: 100% !important;
+
+    font-size: 0.84rem !important;
+
+    line-height: 1.5 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-voice-range-card--polished {
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-voice-range-head {
+    display: grid !important;
+
+    grid-template-columns: 1fr !important;
+
+    gap: 16px !important;
+
+    padding: 20px 18px 18px !important;
+  }
+
+  .heritage-voice-range-head .heritage-summary-kicker {
+    font-size: 0.58rem !important;
+
+    line-height: 1.35 !important;
+
+    letter-spacing: 0.2em !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-voice-range-intro {
+    max-width: 100% !important;
+
+    font-size: 0.82rem !important;
+
+    line-height: 1.52 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-voice-range-readout-grid,
+  .heritage-voice-range-readout-grid.is-compare-mode {
+    width: 100% !important;
+
+    grid-template-columns: 1fr !important;
+
+    justify-self: stretch !important;
+  }
+
+  .heritage-voice-range-readout {
+    width: 100% !important;
+
+    padding: 13px 14px 12px !important;
+  }
+
+  .heritage-voice-range-readout strong {
+    font-size: 1.18rem !important;
+
+    line-height: 1.05 !important;
+  }
+
+  .heritage-voice-range-readout em {
+    font-size: 0.68rem !important;
+
+    line-height: 1.25 !important;
+  }
+
+  .heritage-voice-range-scale {
+    padding: 16px 18px 20px !important;
+  }
+
+  .heritage-voice-range-labels {
+    grid-template-columns: 1fr !important;
+
+    margin-bottom: 18px !important;
+  }
+
+  .heritage-voice-range-stop {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+
+    gap: 12px !important;
+
+    padding: 8px 0 !important;
+  }
+
+  .heritage-voice-range-stop-title {
+    font-size: 0.72rem !important;
+  }
+
+  .heritage-voice-range-stop-sub {
+    max-width: 120px !important;
+
+    text-align: right !important;
+
+    font-size: 0.56rem !important;
+  }
+
+  .heritage-voice-range-footer {
+    font-size: 0.56rem !important;
+
+    gap: 10px !important;
+  }
+
+  .heritage-voice-range-legend {
+    gap: 12px !important;
+  }
+
+  .heritage-voice-range-legend-item {
+    font-size: 0.62rem !important;
+  }
+
+  /* Node Insights */
+
+  .heritage-legacyprint-panel--trait .heritage-chart-title-shell {
+    text-align: left !important;
+
+    justify-items: start !important;
+  }
+
+  .heritage-legacyprint-panel--trait .heritage-chart-title {
+    font-size: 1.5rem !important;
+
+    max-width: 100% !important;
+  }
+
+  .heritage-legacyprint-panel--trait .heritage-chart-title-subcopy {
+    max-width: 100% !important;
+
+    font-size: 0.82rem !important;
+
+    line-height: 1.5 !important;
+
+    text-align: left !important;
+  }
+
+  .heritage-legacyprint-trait-chip-row {
+    width: 100%;
+
+    max-width: 100%;
+
+    justify-content: flex-start !important;
+
+    flex-wrap: nowrap !important;
+
+    overflow-x: auto !important;
+
+    gap: 22px !important;
+
+    padding-bottom: 14px !important;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  .heritage-legacyprint-trait-chip-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .heritage-legacyprint-trait-chip {
+    flex: 0 0 auto !important;
+
+    font-size: 0.56rem !important;
+
+    letter-spacing: 0.16em !important;
+  }
+
+  .heritage-axis-insight-panel {
+    padding: 20px 16px 18px !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-axis-insight-panel::after {
+    display: none !important;
+  }
+
+  .heritage-axis-insight-panel-head {
+    grid-template-columns: 1fr !important;
+
+    gap: 14px !important;
+
+    margin-bottom: 20px !important;
+  }
+
+  .heritage-axis-insight-panel-body {
+    grid-template-columns: 1fr !important;
+
+    gap: 18px !important;
+  }
+
+  .heritage-axis-insight-short {
+    max-width: 100% !important;
+
+    font-size: 1rem !important;
+
+    line-height: 1.28 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-axis-insight-detail,
+  .heritage-axis-insight-scale-read {
+    max-width: 100% !important;
+
+    font-size: 0.82rem !important;
+
+    line-height: 1.5 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-axis-impact-panel {
+    width: 100% !important;
+
+    max-width: 100% !important;
+  }
+
+  /* Voice Threads */
+
+  .heritage-legacyprint-panel--relationships .heritage-chart-title-shell {
+    text-align: left !important;
+
+    justify-items: start !important;
+  }
+
+  .heritage-legacyprint-panel--relationships .heritage-chart-title {
+    max-width: 100% !important;
+
+    font-size: 1.45rem !important;
+
+    line-height: 1.04 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-legacyprint-panel--relationships .heritage-chart-title-subcopy {
+    max-width: 100% !important;
+
+    font-size: 0.82rem !important;
+
+    line-height: 1.48 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-key-relationships-grid {
+    display: grid !important;
+
+    grid-template-columns: 1fr !important;
+
+    gap: 16px !important;
+
+    width: 100%;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-key-relationship-card {
+    width: 100% !important;
+
+    padding: 18px 16px !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-key-relationship-head {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+
+    gap: 12px !important;
+  }
+
+  .heritage-key-relationship-title-group {
+    min-width: 0 !important;
+  }
+
+  .heritage-key-relationship-node-row {
+    max-width: 100% !important;
+
+    overflow: hidden !important;
+  }
+
+  .heritage-key-relationship-node-pill {
+    font-size: 0.52rem !important;
+
+    letter-spacing: 0.15em !important;
+
+    max-width: 100% !important;
+  }
+
+  .heritage-key-relationship-card h4 {
+    max-width: 100% !important;
+
+    font-size: 1rem !important;
+
+    line-height: 1.14 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-key-relationship-summary {
+    max-width: 100% !important;
+
+    font-size: 0.98rem !important;
+
+    line-height: 1.45 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+
+  .heritage-key-relationship-block span {
+    font-size: 0.58rem !important;
+
+    letter-spacing: 0.15em !important;
+  }
+
+  .heritage-key-relationship-block p {
+    max-width: 100% !important;
+
+    font-size: 0.86rem !important;
+
+    line-height: 1.45 !important;
+
+    overflow-wrap: anywhere !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .heritage-product-detail {
+    padding-left: 10px !important;
+
+    padding-right: 10px !important;
+  }
+
+  .heritage-voice-read-card--reworked {
+    padding-left: 12px !important;
+
+    padding-right: 12px !important;
+  }
+
+  .heritage-summary-kicker--legacyprint-engine {
+    grid-template-columns: 26px minmax(0, 1fr);
+
+    font-size: 0.56rem !important;
+
+    letter-spacing: 0.17em !important;
+  }
+
+  .heritage-legacyprint-engine-icon {
+    width: 24px !important;
+
+    height: 24px !important;
+  }
+
+  .heritage-legacyprint-nav-row .heritage-legacyprint-tabs {
+    gap: 22px !important;
+  }
+
+  .heritage-legacyprint-tab {
+    font-size: 0.5rem !important;
+
+    letter-spacing: 0.15em !important;
+  }
+
+  .heritage-chart-module .spider-chart-frame,
+  .spider-chart-frame {
+    min-height: 300px !important;
+
+    height: 300px !important;
+
+    max-height: 300px !important;
+  }
+
+  .heritage-chart-wrap,
+  .heritage-chart-wrap--voice-read,
+  .heritage-chart-wrap--simple {
+    padding: 6px !important;
+  }
+
+  .spider-chart-axis-button {
+    transform: translate(-50%, -50%) scale(0.82) !important;
+  }
+
+  .spider-chart-axis-button.is-active {
+    transform: translate(-50%, -50%) scale(0.92) !important;
+  }
+
+  .heritage-tone-summary-card--voiceprint {
+    padding: 18px 16px 20px !important;
+  }
+
+  .heritage-tone-summary-card--voiceprint .heritage-tone-summary-copy > p {
+    font-size: 0.8rem !important;
+  }
+
+  .heritage-legacyprint-panel--legacy-tuning .heritage-chart-title,
+  .heritage-legacyprint-panel--trait .heritage-chart-title,
+  .heritage-legacyprint-panel--relationships .heritage-chart-title {
+    font-size: 1.34rem !important;
+  }
+
+  .heritage-voice-range-head {
+    padding: 18px 16px 16px !important;
+  }
+
+  .heritage-voice-range-scale {
+    padding: 14px 16px 18px !important;
+  }
+
+  .heritage-key-relationship-card {
+    padding: 16px 14px !important;
+  }
+
+  .heritage-key-relationship-summary {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* =========================================================
+
+   HERITAGE — MOBILE BUILDER / VOICING ENGINE BUFFER
+
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .heritage-config-panel.heritage-builder-card {
+    margin-bottom: 18px !important;
+  }
+
+  .heritage-voice-read-card {
+    margin-top: 8px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .heritage-config-panel.heritage-builder-card {
+    margin-bottom: 22px !important;
+  }
+
+  .heritage-voice-read-card {
+    margin-top: 10px !important;
+  }
+}
+
+/* =========================================================
+
+   HERITAGE — VOICEMAP NODE INSIGHT EMBED
+
+   Moves Node Insight into VoiceMap as a compact readout
+
+   ========================================================= */
+
+.heritage-voicemap-node-insight {
+  position: relative;
+
+  margin-top: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      color-mix(in srgb, var(--axis-accent) 22%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(135deg, rgba(16, 17, 22, 0.96), rgba(5, 6, 9, 0.98));
+
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 178, 119, 0.04),
+    0 18px 46px rgba(0, 0, 0, 0.28);
+}
+
+.heritage-voicemap-node-insight::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--axis-accent) 34%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 45%);
+
+  opacity: 0.46;
+}
+
+.heritage-voicemap-node-insight-head,
+.heritage-voicemap-node-insight-body {
+  position: relative;
+
+  z-index: 1;
+}
+
+.heritage-voicemap-node-insight-head {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 22px 24px 18px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.heritage-voicemap-node-title-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.heritage-voicemap-node-icon {
+  width: 44px;
+
+  height: 44px;
+
+  flex: 0 0 auto;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 14px;
+
+  border: 1px solid color-mix(in srgb, var(--axis-accent) 52%, transparent);
+
+  background:
+    radial-gradient(
+      circle,
+      color-mix(in srgb, var(--axis-accent) 24%, transparent),
+      transparent 68%
+    ),
+    rgba(0, 0, 0, 0.32);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 22px color-mix(in srgb, var(--axis-accent) 22%, transparent);
+}
+
+.heritage-voicemap-node-title-row h4 {
+  margin: 5px 0 0;
+
+  display: flex;
+
+  align-items: baseline;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  color: rgba(255, 252, 244, 0.96);
+
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+}
+
+.heritage-voicemap-node-title-row h4 em {
+  font-style: normal;
+
+  color: color-mix(in srgb, var(--axis-accent) 72%, rgba(255, 255, 255, 0.76));
+
+  font-size: 0.58em;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+.heritage-voicemap-node-shift {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 36px;
+
+  padding: 0 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid color-mix(in srgb, var(--axis-accent) 38%, transparent);
+
+  background: rgba(0, 0, 0, 0.28);
+
+  color: color-mix(in srgb, var(--axis-accent) 82%, #ffffff);
+
+  font-size: 0.74rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.heritage-voicemap-node-shift.is-neutral {
+  color: rgba(255, 255, 255, 0.68);
+
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.heritage-voicemap-node-insight-body {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.8fr);
+
+  gap: 22px;
+
+  padding: 22px 24px 24px;
+}
+
+.heritage-voicemap-node-copy {
+  min-width: 0;
+}
+
+.heritage-voicemap-node-copy p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: clamp(0.95rem, 1.35vw, 1.08rem);
+
+  line-height: 1.58;
+}
+
+.heritage-voicemap-node-copy p + p {
+  margin-top: 10px;
+}
+
+.heritage-voicemap-node-short {
+  color: rgba(255, 252, 244, 0.92) !important;
+
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem) !important;
+
+  line-height: 1.28 !important;
+
+  font-weight: 800;
+
+  letter-spacing: -0.03em;
+}
+
+.heritage-voicemap-node-contributors {
+  align-self: stretch;
+
+  padding: 16px;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.heritage-voicemap-node-contributors > span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: rgba(214, 178, 119, 0.88);
+
+  font-size: 0.7rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.heritage-voicemap-node-contributor-list {
+  display: grid;
+
+  gap: 8px;
+}
+
+.heritage-voicemap-node-contributor {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 9px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+
+  color: rgba(255, 255, 255, 0.84);
+
+  font-size: 0.86rem;
+
+  font-weight: 800;
+}
+
+.heritage-voicemap-node-contributor:last-child {
+  border-bottom: 0;
+}
+
+.heritage-voicemap-node-contributor em {
+  font-style: normal;
+
+  color: color-mix(in srgb, var(--axis-accent) 76%, rgba(255, 255, 255, 0.65));
+
+  font-size: 0.65rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+
+   HERITAGE — LEGACYPRINT SUMMARY CARD
+
+   Replaces simple VoiceMap Summary with section analysis
+
+   ========================================================= */
+
+.heritage-legacyprint-summary-card {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 26px;
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+
+  background:
+    radial-gradient(circle at 0% 0%, rgba(214, 178, 119, 0.1), transparent 32%),
+    linear-gradient(135deg, rgba(15, 15, 18, 0.98), rgba(4, 5, 7, 0.99));
+
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 178, 119, 0.04),
+    0 20px 54px rgba(0, 0, 0, 0.32);
+}
+
+.heritage-legacyprint-summary-head {
+  padding: 28px 30px 22px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.heritage-legacyprint-summary-head h4 {
+  margin: 14px 0 8px;
+
+  color: rgba(255, 252, 244, 0.96);
+
+  font-size: clamp(1.6rem, 2.4vw, 2.25rem);
+
+  line-height: 1;
+
+  letter-spacing: -0.055em;
+}
+
+.heritage-legacyprint-summary-head p {
+  max-width: 760px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.64);
+
+  font-size: 1rem;
+
+  line-height: 1.55;
+}
+
+.heritage-legacyprint-summary-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.heritage-legacyprint-summary-section {
+  min-width: 0;
+
+  padding: 24px 28px;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.065);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+}
+
+.heritage-legacyprint-summary-section:nth-child(2n) {
+  border-right: 0;
+}
+
+.heritage-legacyprint-summary-section:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.heritage-legacyprint-summary-section > span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: rgba(214, 178, 119, 0.9);
+
+  font-size: 0.72rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.heritage-legacyprint-summary-section p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: clamp(0.96rem, 1.3vw, 1.08rem);
+
+  line-height: 1.62;
+}
+
+.heritage-legacyprint-summary-section strong {
+  color: rgba(255, 252, 244, 0.94);
+}
+
+.heritage-legacyprint-summary-section--takeaway {
+  background: linear-gradient(
+    135deg,
+    rgba(214, 178, 119, 0.055),
+    transparent 70%
+  );
+}
+
+/* =========================================================
+
+   MOBILE
+
+   ========================================================= */
+
+@media (max-width: 760px) {
+  .heritage-voicemap-node-insight {
+    margin-top: 14px;
+
+    border-radius: 22px;
+  }
+
+  .heritage-voicemap-node-insight-head {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 14px;
+
+    padding: 18px 18px 16px;
+  }
+
+  .heritage-voicemap-node-title-row {
+    align-items: flex-start;
+  }
+
+  .heritage-voicemap-node-icon {
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 13px;
+  }
+
+  .heritage-voicemap-node-title-row h4 {
+    font-size: 1.35rem;
+  }
+
+  .heritage-voicemap-node-shift {
+    align-self: flex-start;
+
+    min-height: 32px;
+
+    font-size: 0.68rem;
+  }
+
+  .heritage-voicemap-node-insight-body {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+
+    padding: 18px;
+  }
+
+  .heritage-voicemap-node-copy p {
+    font-size: 0.95rem;
+
+    line-height: 1.5;
+  }
+
+  .heritage-voicemap-node-short {
+    font-size: 1.05rem !important;
+  }
+
+  .heritage-voicemap-node-contributors {
+    padding: 14px;
+  }
+
+  .heritage-legacyprint-summary-head {
+    padding: 22px 20px 18px;
+  }
+
+  .heritage-legacyprint-summary-head h4 {
+    font-size: 1.55rem;
+  }
+
+  .heritage-legacyprint-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heritage-legacyprint-summary-section {
+    padding: 20px;
+
+    border-right: 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+  }
+
+  .heritage-legacyprint-summary-section:nth-last-child(-n + 2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+  }
+
+  .heritage-legacyprint-summary-section:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* =========================================================
+
+   HERITAGE — VOICE THREADS FINAL
+
+   Current-build voice story graph
+
+   ========================================================= */
+
+.heritage-legacyprint-panel--relationships,
+.heritage-legacyprint-panel--relationships.heritage-thread-reference {
+  width: 100%;
+
+  min-width: 0;
+
+  padding: 0 !important;
+
+  overflow: visible;
+}
+
+.heritage-thread-reference {
+  display: grid;
+
+  gap: 22px;
+
+  width: 100%;
+
+  min-width: 0;
+
+  padding-bottom: 34px;
+}
+
+.heritage-thread-reference-head {
+  max-width: 790px;
+
+  margin: 0;
+}
+
+.heritage-thread-reference-head .heritage-chart-eyebrow {
+  color: rgba(214, 178, 119, 0.82);
+
+  font-size: 0.62rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-reference-head .heritage-chart-title {
+  max-width: 760px;
+
+  margin: 10px 0 10px;
+
+  color: #fff8ed;
+
+  font-size: clamp(2.55rem, 5.15vw, 5.3rem);
+
+  font-weight: 950;
+
+  line-height: 0.86;
+
+  letter-spacing: -0.09em;
+}
+
+.heritage-thread-reference-head .heritage-chart-title-subcopy {
+  max-width: 680px;
+
+  margin: 0;
+
+  color: rgba(244, 241, 234, 0.68);
+
+  font-size: 0.95rem;
+
+  line-height: 1.48;
+}
+
+/* Graph shell */
+
+.heritage-thread-reference-graph-shell {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 560px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  background:
+    radial-gradient(
+      circle at 50% 49%,
+      rgba(214, 178, 119, 0.1),
+      transparent 29%
+    ),
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(141, 162, 255, 0.055),
+      transparent 36%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.015) 0,
+
+      rgba(255, 255, 255, 0.015) 1px,
+
+      transparent 1px,
+
+      transparent 7px
+    ),
+    linear-gradient(180deg, rgba(5, 6, 9, 0.7), rgba(1, 1, 3, 0.96));
+
+  box-shadow:
+    0 26px 72px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+  overflow: hidden;
+}
+
+.heritage-thread-reference-graph-shell::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px),
+    radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.22) 74%);
+
+  background-size:
+    58px 100%,
+    auto;
+
+  opacity: 0.42;
+}
+
+.heritage-thread-reference-graph-shell::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(214, 178, 119, 0.09),
+      transparent 18%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.2),
+      transparent 20%,
+
+      transparent 70%,
+
+      rgba(0, 0, 0, 0.32)
+    );
+
+  opacity: 0.82;
+}
+
+/* Main SVG map */
+
+.heritage-voice-thread-map {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(620px, 88%);
+
+  aspect-ratio: 1;
+
+  display: grid;
+
+  place-items: center;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  border-radius: 0 !important;
+
+  min-height: 0 !important;
+
+  overflow: visible !important;
+
+  isolation: isolate;
+
+  filter: drop-shadow(0 0 22px rgba(214, 178, 119, 0.025))
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.01));
+}
+
+.heritage-voice-thread-map::before,
+.heritage-voice-thread-map::after {
+  display: none !important;
+}
+
+.heritage-voice-thread-svg {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: visible;
+}
+
+.heritage-voice-thread-center-aura {
+  opacity: 0.82;
+}
+
+/* Relationship network */
+
+.heritage-voice-thread-line {
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  pointer-events: none;
+}
+
+.heritage-voice-thread-line--base {
+  stroke-width: 2.05;
+
+  opacity: 0.48;
+
+  transition:
+    opacity 160ms ease,
+    stroke-width 160ms ease;
+}
+
+.heritage-voice-thread-line-group.is-active .heritage-voice-thread-line--base {
+  opacity: 0.68;
+
+  stroke-width: 2.4;
+}
+
+.heritage-voice-thread-line--active-glow {
+  stroke-width: 14;
+
+  opacity: 0.2;
+
+  animation: heritageVoiceThreadActivePulse 2.8s ease-in-out infinite;
+}
+
+.heritage-voice-thread-line--active-core {
+  stroke-width: 5.5;
+
+  opacity: 1;
+}
+
+/* Colored outside polygon */
+
+.heritage-voice-thread-outer-line {
+  stroke-width: 2.8;
+
+  stroke-linecap: round;
+
+  opacity: 0.5;
+
+  vector-effect: non-scaling-stroke;
+
+  pointer-events: none;
+}
+
+/* Nodes */
+
+.heritage-voice-thread-node {
+  opacity: 0.62;
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.heritage-voice-thread-node.is-active {
+  opacity: 1;
+}
+
+.heritage-voice-thread-node-glow {
+  opacity: 0.34;
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-glow {
+  opacity: 0.72;
+}
+
+.heritage-voice-thread-node-icon-wrap {
+  overflow: visible;
+
+  pointer-events: none;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.heritage-voice-thread-node-icon {
+  width: 48px;
+
+  height: 48px;
+
+  display: grid;
+
+  place-items: center;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  opacity: 0.82;
+
+  filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor)
+    drop-shadow(0 0 16px color-mix(in srgb, currentColor 34%, transparent));
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.heritage-voice-thread-node-icon svg {
+  display: block;
+
+  width: 22px;
+
+  height: 22px;
+
+  stroke-width: 2.35;
+
+  overflow: visible;
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-icon {
+  opacity: 1;
+
+  transform: scale(1.12);
+
+  filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 10px currentColor)
+    drop-shadow(0 0 22px color-mix(in srgb, currentColor 44%, transparent));
+}
+
+/* Thread list beneath graph */
+
+.heritage-thread-picker,
+.heritage-thread-picker--reference-list {
+  margin-top: 0;
+
+  padding: 22px 24px 24px;
+
+  border-radius: 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(214, 178, 119, 0.052),
+      transparent 54%
+    ),
+    linear-gradient(180deg, rgba(9, 9, 11, 0.68), rgba(4, 4, 6, 0.82));
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.heritage-thread-picker > .heritage-summary-kicker,
+.heritage-thread-picker--reference-list > .heritage-summary-kicker {
+  margin: 0 0 10px;
+
+  color: rgba(214, 178, 119, 0.82);
+
+  font-size: 0.58rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-picker-list {
+  display: grid;
+
+  gap: 0;
+
+  margin-top: 8px;
+}
+
+.heritage-thread-picker-row {
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  width: 100%;
+
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns: 42px minmax(0, 1fr) minmax(130px, 220px);
+
+  gap: 18px;
+
+  align-items: center;
+
+  padding: 15px 0;
+
+  border: 0;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+
+  border-radius: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow: none;
+}
+
+.heritage-thread-picker-row:first-child {
+  border-top: 0;
+}
+
+.heritage-thread-picker-row:hover,
+.heritage-thread-picker-row:focus-visible,
+.heritage-thread-picker-row.is-active {
+  outline: none;
+
+  background: transparent;
+}
+
+.heritage-thread-picker-row-count {
+  display: inline-block;
+
+  color: rgba(214, 178, 119, 0.72);
+
+  font-size: 0.64rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.14em;
+
+  line-height: 1;
+}
+
+.heritage-thread-picker-row-main {
+  min-width: 0;
+
+  display: grid;
+
+  gap: 5px;
+}
+
+.heritage-thread-picker-row-main strong {
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 0.94rem;
+
+  font-weight: 850;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.02em;
+}
+
+.heritage-thread-picker-row-main em {
+  color: rgba(214, 178, 119, 0.62);
+
+  font-size: 0.58rem;
+
+  font-style: normal;
+
+  font-weight: 950;
+
+  letter-spacing: 0.16em;
+
+  line-height: 1.1;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-picker-row-bar {
+  justify-self: end;
+
+  width: min(220px, 100%);
+
+  height: 3px;
+
+  display: grid;
+
+  grid-auto-flow: column;
+
+  grid-auto-columns: 1fr;
+
+  gap: 3px;
+
+  opacity: 0.78;
+}
+
+.heritage-thread-picker-row-bar span {
+  display: block;
+
+  width: 100%;
+
+  height: 3px;
+
+  background: var(--bar-color, #d6b277);
+
+  box-shadow:
+    0 0 10px color-mix(in srgb, var(--bar-color, #d6b277) 34%, transparent),
+    0 0 18px color-mix(in srgb, var(--bar-color, #d6b277) 16%, transparent);
+}
+
+.heritage-thread-picker-row:hover .heritage-thread-picker-row-main strong,
+.heritage-thread-picker-row.is-active .heritage-thread-picker-row-main strong {
+  color: #fff;
+}
+
+.heritage-thread-picker-row:hover .heritage-thread-picker-row-count,
+.heritage-thread-picker-row.is-active .heritage-thread-picker-row-count {
+  color: rgba(243, 215, 147, 0.96);
+}
+
+.heritage-thread-picker-row:hover .heritage-thread-picker-row-main em,
+.heritage-thread-picker-row.is-active .heritage-thread-picker-row-main em {
+  color: rgba(214, 178, 119, 0.84);
+}
+
+.heritage-thread-picker-row:hover .heritage-thread-picker-row-bar,
+.heritage-thread-picker-row.is-active .heritage-thread-picker-row-bar {
+  opacity: 1;
+}
+
+@keyframes heritageVoiceThreadActivePulse {
+  0%,
+  100% {
+    opacity: 0.14;
+
+    stroke-width: 12;
+  }
+
+  50% {
+    opacity: 0.34;
+
+    stroke-width: 17;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 1180px) {
+  .heritage-thread-reference-graph-shell {
+    min-height: 520px;
+  }
+
+  .heritage-voice-thread-map {
+    width: min(560px, 88%);
+  }
+}
+
+@media (max-width: 820px) {
+  .heritage-thread-reference {
+    gap: 18px;
+
+    padding-bottom: 28px;
+  }
+
+  .heritage-thread-reference-head .heritage-chart-title {
+    font-size: clamp(2.05rem, 11vw, 3.35rem);
+
+    line-height: 0.9;
+  }
+
+  .heritage-thread-reference-head .heritage-chart-title-subcopy {
+    font-size: 0.86rem;
+  }
+
+  .heritage-thread-reference-graph-shell {
+    min-height: 390px;
+
+    border-radius: 22px;
+  }
+
+  .heritage-voice-thread-map {
+    width: min(370px, 88%);
+  }
+
+  .heritage-thread-picker,
+  .heritage-thread-picker--reference-list {
+    padding: 16px 14px 18px;
+
+    border-radius: 20px;
+  }
+
+  .heritage-thread-picker-row {
+    grid-template-columns: 34px minmax(0, 1fr);
+
+    gap: 12px;
+
+    padding: 13px 0;
+  }
+
+  .heritage-thread-picker-row-bar {
+    grid-column: 2 / 3;
+
+    justify-self: stretch;
+
+    width: 100%;
+
+    max-width: 220px;
+
+    margin-top: 4px;
+  }
+
+  .heritage-thread-picker-row-main strong {
+    font-size: 0.86rem;
+  }
+
+  .heritage-thread-picker-row-main em {
+    font-size: 0.54rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .heritage-thread-reference-graph-shell {
+    min-height: 320px;
+  }
+
+  .heritage-voice-thread-map {
+    width: min(300px, 86%);
+  }
+
+  .heritage-voice-thread-line--active-glow {
+    stroke-width: 10;
+  }
+
+  .heritage-voice-thread-line--active-core {
+    stroke-width: 4.2;
+  }
+
+  .heritage-thread-picker-row {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+}
+
+.heritage-voice-thread-line--base {
+  stroke-width: 2.15;
+
+  opacity: 0.22;
+
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.035))
+    drop-shadow(0 0 9px currentColor);
+
+  transition:
+    opacity 160ms ease,
+    stroke-width 160ms ease,
+    filter 160ms ease;
+}
+
+.heritage-voice-thread-line-group.is-active .heritage-voice-thread-line--base {
+  opacity: 0.38;
+
+  stroke-width: 2.4;
+}
+
+.heritage-voice-thread-line--active-glow {
+  stroke-width: 15;
+
+  opacity: 0.24;
+
+  animation: heritageVoiceThreadActivePulse 2.8s ease-in-out infinite;
+}
+
+.heritage-voice-thread-line--active-core {
+  stroke-width: 5.8;
+
+  opacity: 1;
+}
+
+.heritage-voice-thread-anchor-dot {
+  opacity: 0.72;
+
+  filter: drop-shadow(0 0 4px currentColor) drop-shadow(0 0 10px currentColor);
+}
+
+.heritage-voice-thread-node {
+  opacity: 0.74;
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.heritage-voice-thread-node.is-active {
+  opacity: 1;
+}
+
+.heritage-voice-thread-node-glow {
+  opacity: 0.28;
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-glow {
+  opacity: 0.68;
+}
+
+.heritage-voice-thread-node-icon {
+  width: 50px;
+
+  height: 50px;
+
+  display: grid;
+
+  place-items: center;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  opacity: 0.78;
+
+  filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 8px currentColor)
+    drop-shadow(0 0 18px color-mix(in srgb, currentColor 32%, transparent));
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.heritage-voice-thread-node-icon svg {
+  display: block;
+
+  width: 24px;
+
+  height: 24px;
+
+  stroke-width: 2.35;
+
+  overflow: visible;
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-icon {
+  opacity: 1;
+
+  transform: scale(1.13);
+
+  filter: drop-shadow(0 0 4px currentColor) drop-shadow(0 0 12px currentColor)
+    drop-shadow(0 0 24px color-mix(in srgb, currentColor 46%, transparent));
+}
+
+.heritage-thread-reference-graph-shell {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  border: 1px solid rgba(255, 255, 255, 0.055);
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(214, 178, 119, 0.035),
+      transparent 42%
+    ),
+    linear-gradient(180deg, rgba(10, 10, 12, 0.94), rgba(3, 3, 4, 0.98));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 26px 70px rgba(0, 0, 0, 0.34);
+}
+
+.heritage-voice-thread-line--base {
+  stroke-width: 1.85;
+
+  opacity: 0.24;
+
+  stroke-linecap: round;
+
+  transition:
+    opacity 160ms ease,
+    stroke-width 160ms ease,
+    filter 160ms ease;
+}
+
+.heritage-voice-thread-line-group.is-active .heritage-voice-thread-line--base {
+  opacity: 0.34;
+
+  stroke-width: 2.1;
+}
+
+.heritage-voice-thread-line--active-glow {
+  stroke-width: 13;
+
+  opacity: 0.18;
+
+  stroke-linecap: round;
+
+  animation: heritageVoiceThreadActivePulse 2.8s ease-in-out infinite;
+}
+
+.heritage-voice-thread-line--active-core {
+  stroke-width: 5.4;
+
+  opacity: 1;
+
+  stroke-linecap: round;
+}
+
+.heritage-voice-thread-outer-line {
+  stroke-width: 2.35;
+
+  opacity: 0.42;
+
+  stroke-linecap: round;
+
+  pointer-events: none;
+}
+
+.heritage-voice-thread-anchor-dot {
+  opacity: 0.82;
+}
+
+.heritage-voice-thread-node-icon-wrap {
+  overflow: visible;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.heritage-voice-thread-node-icon-wrap > div {
+  width: 50px;
+
+  height: 50px;
+
+  display: grid;
+
+  place-items: center;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.heritage-voice-thread-node-icon {
+  width: 50px;
+
+  height: 50px;
+
+  display: grid;
+
+  place-items: center;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  opacity: 0.64;
+
+  filter: drop-shadow(0 0 2px currentColor)
+    drop-shadow(0 0 5px color-mix(in srgb, currentColor 28%, transparent));
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-icon {
+  opacity: 0.94;
+
+  transform: scale(1.05);
+
+  filter: drop-shadow(0 0 3px currentColor)
+    drop-shadow(0 0 8px color-mix(in srgb, currentColor 34%, transparent));
+}
+
+.heritage-thread-picker-row-preview {
+  width: 126px;
+
+  height: 76px;
+
+  display: grid;
+
+  place-items: center;
+
+  justify-self: end;
+
+  opacity: 0.82;
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.heritage-thread-picker-row:hover .heritage-thread-picker-row-preview,
+.heritage-thread-picker-row.is-active .heritage-thread-picker-row-preview {
+  opacity: 1;
+
+  transform: translateX(2px);
+}
+
+.heritage-mini-thread-map {
+  width: 124px;
+
+  height: 76px;
+
+  display: block;
+
+  overflow: visible;
+}
+
+.heritage-mini-thread-line--glow {
+  stroke-width: 16;
+
+  opacity: 0.14;
+
+  stroke-linecap: round;
+}
+
+.heritage-mini-thread-line--core {
+  stroke-width: 8.5;
+
+  opacity: 0.96;
+
+  stroke-linecap: round;
+}
+
+.heritage-mini-thread-dot {
+  opacity: 0.95;
+
+  filter: drop-shadow(0 0 4px currentColor)
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.08));
+}
+
+@keyframes heritageVoiceThreadActivePulse {
+  0%,
+  100% {
+    opacity: 0.13;
+  }
+
+  50% {
+    opacity: 0.28;
+  }
+}
+
+.heritage-thread-node-icon-meta {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 9px;
+}
+
+.heritage-thread-node-icon-list {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.heritage-thread-node-icon-chip {
+  width: 26px;
+
+  height: 26px;
+
+  display: grid;
+
+  place-items: center;
+
+  color: var(--thread-node-color);
+
+  opacity: 0.9;
+
+  border-radius: 999px;
+
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--thread-node-color) 16%, transparent) 0%,
+
+    rgba(0, 0, 0, 0.32) 62%,
+
+    transparent 100%
+  );
+
+  filter: drop-shadow(
+      0 0 4px color-mix(in srgb, var(--thread-node-color) 42%, transparent)
+    )
+    drop-shadow(
+      0 0 10px color-mix(in srgb, var(--thread-node-color) 18%, transparent)
+    );
+}
+
+.heritage-thread-node-icon-chip svg {
+  width: 16px;
+
+  height: 16px;
+
+  stroke-width: 2.35;
+}
+
+.heritage-thread-picker-row:hover .heritage-thread-node-icon-chip,
+.heritage-thread-picker-row.is-active .heritage-thread-node-icon-chip {
+  opacity: 1;
+}
+
+/* ================================
+
+   Voice Threads — three-card layout
+
+   ================================ */
+
+.heritage-thread-reference--cards {
+  display: grid;
+
+  gap: 28px;
+}
+
+.heritage-thread-reference--cards .heritage-thread-reference-head {
+  max-width: 760px;
+}
+
+.heritage-thread-card-row {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+
+  width: 100%;
+}
+
+.heritage-thread-card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-rows: auto minmax(0, 1fr) auto;
+
+  gap: 12px;
+
+  min-height: 310px;
+
+  padding: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+
+  border-radius: 22px;
+
+  background:
+    radial-gradient(
+      circle at 50% 32%,
+      color-mix(in srgb, var(--thread-accent, #d6b277) 13%, transparent),
+      transparent 48%
+    ),
+    linear-gradient(180deg, rgba(15, 15, 17, 0.94), rgba(4, 4, 5, 0.98));
+
+  color: #f7f3ea;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 18px 42px rgba(0, 0, 0, 0.26);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.heritage-thread-card::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.18;
+
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.028) 0,
+
+    rgba(255, 255, 255, 0.028) 1px,
+
+    transparent 1px,
+
+    transparent 7px
+  );
+}
+
+.heritage-thread-card:hover {
+  transform: translateY(-3px);
+
+  border-color: color-mix(
+    in srgb,
+    var(--thread-accent, #d6b277) 42%,
+    rgba(255, 255, 255, 0.1)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 24px 58px rgba(0, 0, 0, 0.34),
+    0 0 28px color-mix(in srgb, var(--thread-accent, #d6b277) 10%, transparent);
+}
+
+.heritage-thread-card.is-active {
+  border-color: color-mix(
+    in srgb,
+    var(--thread-accent, #d6b277) 64%,
+    rgba(255, 255, 255, 0.12)
+  );
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      color-mix(in srgb, var(--thread-accent, #d6b277) 20%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(180deg, rgba(20, 18, 16, 0.98), rgba(5, 5, 6, 0.99));
+}
+
+.heritage-thread-card-topline,
+.heritage-thread-card-map,
+.heritage-thread-card-copy {
+  position: relative;
+
+  z-index: 1;
+}
+
+.heritage-thread-card-topline {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.heritage-thread-card-rank {
+  color: rgba(214, 178, 119, 0.9);
+
+  font-size: 0.68rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.18em;
+}
+
+.heritage-thread-card-type {
+  color: rgba(255, 255, 255, 0.46);
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-card-map {
+  display: grid;
+
+  place-items: center;
+
+  min-height: 145px;
+
+  width: 100%;
+
+  border-radius: 18px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(214, 178, 119, 0.05),
+      transparent 56%
+    ),
+    rgba(0, 0, 0, 0.2);
+
+  overflow: hidden;
+}
+
+.heritage-thread-card-copy {
+  display: grid;
+
+  gap: 10px;
+
+  align-content: start;
+}
+
+.heritage-thread-card-copy strong {
+  display: block;
+
+  color: rgba(255, 255, 255, 0.94);
+
+  font-size: clamp(0.92rem, 1.6vw, 1.08rem);
+
+  line-height: 1.08;
+
+  font-weight: 900;
+
+  letter-spacing: -0.04em;
+}
+
+.heritage-thread-node-icon-list {
+  display: inline-flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.heritage-thread-node-icon-chip {
+  width: 28px;
+
+  height: 28px;
+
+  display: inline-grid;
+
+  place-items: center;
+
+  border-radius: 999px;
+
+  color: var(--thread-node-color);
+
+  background: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--thread-node-color) 24%, transparent),
+    rgba(0, 0, 0, 0.5)
+  );
+
+  border: 1px solid
+    color-mix(in srgb, var(--thread-node-color) 36%, rgba(255, 255, 255, 0.08));
+
+  box-shadow: 0 0 16px
+    color-mix(in srgb, var(--thread-node-color) 18%, transparent);
+}
+
+.heritage-thread-node-icon-chip svg {
+  width: 15px;
+
+  height: 15px;
+}
+
+/* ================================
+
+   Mini thread maps
+
+   ================================ */
+
+.heritage-voice-thread-map,
+.heritage-voice-thread-map--compact {
+  width: 100%;
+
+  height: 100%;
+
+  background: transparent !important;
+}
+
+.heritage-voice-thread-map--compact {
+  max-width: 175px;
+
+  aspect-ratio: 1 / 1;
+}
+
+.heritage-voice-thread-svg {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: visible;
+
+  background: transparent !important;
+}
+
+.heritage-voice-thread-line--base {
+  stroke-width: 1.15;
+
+  opacity: 0.18;
+
+  stroke-linecap: round;
+}
+
+.heritage-voice-thread-line--active-glow {
+  stroke-width: 8;
+
+  opacity: 0.22;
+
+  stroke-linecap: round;
+}
+
+.heritage-voice-thread-line--active-core {
+  stroke-width: 4.4;
+
+  opacity: 0.96;
+
+  stroke-linecap: round;
+}
+
+.heritage-voice-thread-outer-line {
+  stroke-width: 1.7;
+
+  opacity: 0.3;
+
+  stroke-linecap: round;
+}
+
+.heritage-voice-thread-anchor-dot {
+  opacity: 0.82;
+
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+.heritage-voice-thread-node-icon-wrap {
+  overflow: visible;
+
+  pointer-events: none;
+}
+
+.heritage-voice-thread-node-icon {
+  width: 50px;
+
+  height: 50px;
+
+  display: grid;
+
+  place-items: center;
+
+  opacity: 0.7;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  filter: drop-shadow(0 0 5px currentColor);
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-icon {
+  opacity: 1;
+
+  transform: scale(1.05);
+}
+
+/* ================================
+
+   Selected thread read panel
+
+   ================================ */
+
+.heritage-thread-read-panel {
+  position: relative;
+
+  padding: clamp(22px, 3vw, 34px);
+
+  border: 1px solid rgba(255, 255, 255, 0.085);
+
+  border-radius: 26px;
+
+  background:
+    radial-gradient(
+      circle at 8% 0%,
+      color-mix(in srgb, var(--thread-accent, #d6b277) 14%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(13, 13, 14, 0.96), rgba(3, 3, 4, 0.985));
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 22px 54px rgba(0, 0, 0, 0.28);
+
+  overflow: hidden;
+}
+
+.heritage-thread-read-panel::before {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  top: 28px;
+
+  bottom: 28px;
+
+  width: 2px;
+
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--thread-accent, #d6b277) 85%, #fff),
+    transparent
+  );
+
+  opacity: 0.8;
+}
+
+.heritage-thread-read-panel-head {
+  position: relative;
+
+  z-index: 1;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 18px;
+}
+
+.heritage-thread-read-panel-head h4 {
+  margin: 8px 0 10px;
+
+  color: rgba(255, 255, 255, 0.94);
+
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
+
+  line-height: 0.92;
+
+  letter-spacing: -0.07em;
+}
+
+.heritage-thread-read-icons {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.heritage-thread-read-type {
+  flex: 0 0 auto;
+
+  padding: 8px 10px;
+
+  border-radius: 999px;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--thread-accent, #d6b277) 34%,
+      rgba(255, 255, 255, 0.08)
+    );
+
+  color: rgba(214, 178, 119, 0.9);
+
+  background: rgba(0, 0, 0, 0.28);
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-read-lede {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 760px;
+
+  margin: 0 0 24px;
+
+  color: rgba(255, 255, 255, 0.78);
+
+  font-size: 1.02rem;
+
+  line-height: 1.55;
+}
+
+.heritage-thread-read-grid {
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0 28px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.heritage-thread-read-grid section {
+  padding: 18px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+}
+
+.heritage-thread-read-grid section span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: rgba(214, 178, 119, 0.84);
+
+  font-size: 0.64rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-read-grid section p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.92rem;
+
+  line-height: 1.52;
+}
+
+.heritage-thread-read-grid-wide {
+  grid-column: 1 / -1;
+}
+
+/* ================================
+
+   Responsive
+
+   ================================ */
+
+@media (max-width: 1100px) {
+  .heritage-thread-card-row {
+    grid-template-columns: 1fr;
+  }
+
+  .heritage-thread-card {
+    min-height: 260px;
+  }
+
+  .heritage-thread-card-map {
+    min-height: 170px;
+  }
+
+  .heritage-voice-thread-map--compact {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 720px) {
+  .heritage-thread-read-panel-head {
+    display: grid;
+  }
+
+  .heritage-thread-read-type {
+    justify-self: start;
+  }
+
+  .heritage-thread-read-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heritage-thread-card {
+    min-height: 245px;
+
+    padding: 14px;
+  }
+
+  .heritage-thread-card-map {
+    min-height: 150px;
+  }
+
+  .heritage-voice-thread-map--compact {
+    max-width: 190px;
+  }
+}
+
+.heritage-thread-read-type {
+  flex: 0 0 auto;
+
+  position: relative;
+
+  padding: 0 0 7px;
+
+  border: 0;
+
+  border-radius: 0;
+
+  background: transparent;
+
+  color: rgba(214, 178, 119, 0.82);
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  box-shadow: none;
+}
+
+.heritage-thread-read-type::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+
+  right: 0;
+
+  bottom: 0;
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--thread-accent, #d6b277) 80%, #fff),
+    rgba(214, 178, 119, 0.12)
+  );
+}
+
+/* =========================================================
+
+   HERITAGE — VOICE THREADS / LEGACYTUNING ALIGNMENT PASS
+
+   Paste at very bottom of HeritageProductDetail.css
+
+   ========================================================= */
+
+.heritage-legacyprint-panel--relationships,
+.heritage-legacyprint-panel--relationships.heritage-thread-reference {
+  gap: 20px !important;
+}
+
+/* Match LegacyTuning header scale and direction */
+
+.heritage-thread-reference-head {
+  max-width: 680px !important;
+
+  margin: 0 !important;
+
+  text-align: left !important;
+}
+
+.heritage-thread-reference-head .heritage-chart-eyebrow {
+  color: rgba(214, 178, 119, 0.86) !important;
+
+  font-size: 0.58rem !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.22em !important;
+
+  line-height: 1 !important;
+
+  text-transform: uppercase !important;
+}
+
+.heritage-thread-reference-head .heritage-chart-title {
+  max-width: 600px !important;
+
+  margin: 10px 0 9px !important;
+
+  color: #fff8ed !important;
+
+  font-size: clamp(1.72rem, 2.4vw, 2.45rem) !important;
+
+  line-height: 0.98 !important;
+
+  font-weight: 925 !important;
+
+  letter-spacing: -0.06em !important;
+}
+
+.heritage-thread-reference-head .heritage-chart-title-subcopy {
+  max-width: 52ch !important;
+
+  margin: 0 !important;
+
+  color: rgba(244, 241, 234, 0.66) !important;
+
+  font-size: 0.9rem !important;
+
+  line-height: 1.55 !important;
+
+  font-weight: 500 !important;
+}
+
+/* Three thread cards become quieter instrument cards */
+
+.heritage-thread-card-row {
+  gap: 14px !important;
+
+  margin-top: 2px !important;
+}
+
+.heritage-thread-card {
+  min-height: 292px !important;
+
+  padding: 14px !important;
+
+  border-radius: 18px !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.075) !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.006)
+    ),
+    radial-gradient(
+      circle at 50% 22%,
+
+      color-mix(in srgb, var(--thread-accent, #d6b277) 11%, transparent),
+      transparent 48%
+    ),
+    linear-gradient(145deg, rgba(9, 10, 14, 0.985), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+.heritage-thread-card::before {
+  opacity: 0.1 !important;
+}
+
+.heritage-thread-card:hover {
+  transform: translateY(-2px) !important;
+
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent, #d6b277) 38%,
+
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+}
+
+.heritage-thread-card.is-active {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent, #d6b277) 58%,
+
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(
+        in srgb,
+        var(--thread-accent, #d6b277) 7%,
+        rgba(255, 255, 255, 0.018)
+      ),
+      rgba(255, 255, 255, 0.004)
+    ),
+    radial-gradient(
+      circle at 50% 22%,
+
+      color-mix(in srgb, var(--thread-accent, #d6b277) 17%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(145deg, rgba(10, 10, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
+}
+
+.heritage-thread-card-rank {
+  color: rgba(214, 178, 119, 0.82) !important;
+
+  font-size: 0.58rem !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.18em !important;
+}
+
+.heritage-thread-card-type {
+  color: rgba(255, 255, 255, 0.42) !important;
+
+  font-size: 0.53rem !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.18em !important;
+}
+
+.heritage-thread-card-map {
+  min-height: 150px !important;
+
+  border-radius: 14px !important;
+
+  background:
+    radial-gradient(
+      circle at center,
+
+      color-mix(in srgb, var(--thread-accent, #d6b277) 7%, transparent),
+      transparent 58%
+    ),
+    rgba(0, 0, 0, 0.16) !important;
+}
+
+.heritage-thread-card-copy {
+  gap: 9px !important;
+}
+
+.heritage-thread-card-copy strong {
+  max-width: 14ch !important;
+
+  color: rgba(255, 248, 235, 0.92) !important;
+
+  font-size: clamp(0.92rem, 1.25vw, 1.04rem) !important;
+
+  line-height: 1.06 !important;
+
+  font-weight: 900 !important;
+
+  letter-spacing: -0.045em !important;
+}
+
+/* Selected read panel should feel like LegacyTuning's card */
+
+.heritage-thread-read-panel {
+  position: relative !important;
+
+  padding: 0 !important;
+
+  border-radius: 22px !important;
+
+  border: 1px solid rgba(214, 178, 119, 0.13) !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.006)
+    ),
+    radial-gradient(
+      circle at 12% 0%,
+
+      color-mix(in srgb, var(--thread-accent, #d6b277) 10%, transparent),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 88% 92%,
+
+      rgba(92, 140, 255, 0.045),
+      transparent 34%
+    ),
+    linear-gradient(145deg, rgba(8, 9, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+
+  overflow: hidden !important;
+}
+
+.heritage-thread-read-panel::before {
+  content: '' !important;
+
+  position: absolute !important;
+
+  inset: 14px !important;
+
+  width: auto !important;
+
+  top: 14px !important;
+
+  bottom: 14px !important;
+
+  left: 14px !important;
+
+  z-index: 0 !important;
+
+  border-radius: 17px !important;
+
+  border: 1px solid rgba(214, 178, 119, 0.045) !important;
+
+  background: transparent !important;
+
+  pointer-events: none !important;
+
+  opacity: 1 !important;
+}
+
+.heritage-thread-read-panel::after {
+  content: '' !important;
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 0 !important;
+
+  opacity: 0.18 !important;
+
+  pointer-events: none !important;
+
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+
+  background-size: 36px 36px;
+
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+
+    #000 24%,
+
+    #000 74%,
+
+    transparent 100%
+  );
+}
+
+.heritage-thread-read-panel-head {
+  position: relative !important;
+
+  z-index: 1 !important;
+
+  display: grid !important;
+
+  grid-template-columns: minmax(0, 1fr) auto !important;
+
+  align-items: start !important;
+
+  gap: 24px !important;
+
+  margin: 0 !important;
+
+  padding: 24px 26px 18px !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.065) !important;
+}
+
+.heritage-thread-read-panel-head .heritage-summary-kicker {
+  margin: 0 0 11px !important;
+
+  color: rgba(214, 178, 119, 0.9) !important;
+
+  font-size: 0.6rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.24em !important;
+}
+
+.heritage-thread-read-panel-head h4 {
+  max-width: 13ch !important;
+
+  margin: 0 0 12px !important;
+
+  color: #fff8ed !important;
+
+  font-size: clamp(1.72rem, 2.45vw, 2.35rem) !important;
+
+  line-height: 0.98 !important;
+
+  font-weight: 925 !important;
+
+  letter-spacing: -0.06em !important;
+}
+
+/* No pills — editorial read type */
+
+.heritage-thread-read-type,
+.heritage-thread-read-type--minimal {
+  align-self: start !important;
+
+  justify-self: end !important;
+
+  position: relative !important;
+
+  padding: 0 0 7px !important;
+
+  border: 0 !important;
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  color: color-mix(in srgb, var(--thread-accent, #d6b277) 68%, #fff) !important;
+
+  font-size: 0.56rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.18em !important;
+
+  text-transform: uppercase !important;
+}
+
+.heritage-thread-read-type::after,
+.heritage-thread-read-type--minimal::after {
+  content: '' !important;
+
+  position: absolute !important;
+
+  left: 0 !important;
+
+  right: 0 !important;
+
+  bottom: 0 !important;
+
+  height: 1px !important;
+
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--thread-accent, #d6b277) 80%, #fff),
+    rgba(214, 178, 119, 0.12)
+  ) !important;
+}
+
+/* Node icons inside read panel: keep glow, reduce bubble feeling */
+
+.heritage-thread-read-icons {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 9px !important;
+}
+
+.heritage-thread-read-icons .heritage-thread-node-icon-chip {
+  width: 25px !important;
+
+  height: 25px !important;
+
+  border: 0 !important;
+
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--thread-node-color) 16%, transparent),
+    transparent 70%
+  ) !important;
+
+  box-shadow: 0 0 12px
+    color-mix(in srgb, var(--thread-node-color) 22%, transparent) !important;
+}
+
+.heritage-thread-read-icons .heritage-thread-node-icon-chip svg {
+  width: 15px !important;
+
+  height: 15px !important;
+}
+
+/* Main summary line */
+
+.heritage-thread-read-lede {
+  position: relative !important;
+
+  z-index: 1 !important;
+
+  max-width: 58ch !important;
+
+  margin: 0 !important;
+
+  padding: 20px 26px 22px !important;
+
+  color: rgba(244, 241, 234, 0.68) !important;
+
+  font-size: 0.92rem !important;
+
+  line-height: 1.58 !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+}
+
+/* Analysis grid: closer to LegacyTuning instrument-panel read */
+
+.heritage-thread-read-grid {
+  position: relative !important;
+
+  z-index: 1 !important;
+
+  display: grid !important;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  gap: 0 !important;
+
+  border-top: 0 !important;
+
+  padding: 0 26px 24px !important;
+}
+
+.heritage-thread-read-grid section {
+  padding: 20px 22px 18px 0 !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+}
+
+.heritage-thread-read-grid section:nth-child(2n) {
+  padding-right: 0 !important;
+}
+
+.heritage-thread-read-grid section:nth-last-child(-n + 2) {
+  border-bottom: 0 !important;
+}
+
+.heritage-thread-read-grid section span {
+  display: block !important;
+
+  margin: 0 0 8px !important;
+
+  color: rgba(214, 178, 119, 0.84) !important;
+
+  font-size: 0.58rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.19em !important;
+
+  text-transform: uppercase !important;
+}
+
+.heritage-thread-read-grid section p {
+  max-width: 34ch !important;
+
+  margin: 0 !important;
+
+  color: rgba(244, 241, 234, 0.67) !important;
+
+  font-size: 0.84rem !important;
+
+  line-height: 1.55 !important;
+
+  font-weight: 500 !important;
+}
+
+/* Make the first two read blocks feel like primary readout copy */
+
+.heritage-thread-read-grid section:nth-child(1) p,
+.heritage-thread-read-grid section:nth-child(2) p {
+  color: rgba(255, 248, 235, 0.76) !important;
+
+  font-size: 0.9rem !important;
+}
+
+/* Mobile */
+
+@media (max-width: 1100px) {
+  .heritage-thread-card-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .heritage-thread-card {
+    min-height: 270px !important;
+  }
+
+  .heritage-thread-card-map {
+    min-height: 128px !important;
+  }
+
+  .heritage-voice-thread-map--compact {
+    max-width: 150px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .heritage-thread-card-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .heritage-thread-card {
+    min-height: 240px !important;
+  }
+
+  .heritage-thread-card-map {
+    min-height: 150px !important;
+  }
+
+  .heritage-voice-thread-map--compact {
+    max-width: 190px !important;
+  }
+
+  .heritage-thread-read-panel-head {
+    grid-template-columns: 1fr !important;
+
+    gap: 14px !important;
+
+    padding: 22px 20px 16px !important;
+  }
+
+  .heritage-thread-read-type,
+  .heritage-thread-read-type--minimal {
+    justify-self: start !important;
+  }
+
+  .heritage-thread-read-lede {
+    padding: 18px 20px !important;
+  }
+
+  .heritage-thread-read-grid {
+    grid-template-columns: 1fr !important;
+
+    padding: 0 20px 20px !important;
+  }
+
+  .heritage-thread-read-grid section {
+    padding: 18px 0 !important;
+  }
+
+  .heritage-thread-read-grid section:nth-last-child(-n + 2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .heritage-thread-read-grid section:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .heritage-thread-read-grid section p {
+    max-width: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .heritage-thread-reference-head .heritage-chart-title {
+    font-size: 1.65rem !important;
+
+    line-height: 1.02 !important;
+
+    letter-spacing: -0.055em !important;
+  }
+
+  .heritage-thread-reference-head .heritage-chart-title-subcopy {
+    max-width: 100% !important;
+
+    font-size: 0.84rem !important;
+
+    line-height: 1.5 !important;
+  }
+
+  .heritage-thread-card {
+    border-radius: 18px !important;
+  }
+
+  .heritage-thread-read-panel {
+    border-radius: 18px !important;
+  }
+
+  .heritage-thread-read-panel::before {
+    inset: 10px !important;
+
+    border-radius: 13px !important;
+  }
+
+  .heritage-thread-read-panel-head h4 {
+    font-size: 1.48rem !important;
+
+    max-width: 14ch !important;
+  }
+
+  .heritage-thread-read-lede {
+    font-size: 0.84rem !important;
+
+    line-height: 1.5 !important;
+  }
+
+  .heritage-thread-read-grid section p {
+    font-size: 0.82rem !important;
+
+    line-height: 1.5 !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .heritage-thread-reference-head .heritage-chart-title {
+    font-size: 1.34rem !important;
+  }
+
+  .heritage-thread-card {
+    min-height: 225px !important;
+
+    padding: 13px !important;
+  }
+
+  .heritage-thread-card-map {
+    min-height: 135px !important;
+  }
+
+  .heritage-voice-thread-map--compact {
+    max-width: 165px !important;
+  }
+
+  .heritage-thread-card-copy strong {
+    font-size: 0.92rem !important;
+  }
+
+  .heritage-thread-read-panel-head {
+    padding: 20px 16px 15px !important;
+  }
+
+  .heritage-thread-read-lede {
+    padding: 16px !important;
+  }
+
+  .heritage-thread-read-grid {
+    padding: 0 16px 18px !important;
+  }
+}
+
+/* =========================================================
+
+   HERITAGE — VOICE THREADS MULTI-NODE COLOR SHADOW FIX
+
+   Paste at very bottom of HeritageProductDetail.css
+
+   ========================================================= */
+
+.heritage-thread-card {
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+
+      color-mix(in srgb, var(--thread-accent) 10%, transparent),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 76% 20%,
+
+      color-mix(in srgb, var(--thread-accent-2) 10%, transparent),
+      transparent 44%
+    ),
+    radial-gradient(
+      circle at 50% 72%,
+
+      color-mix(in srgb, var(--thread-accent-3) 8%, transparent),
+      transparent 46%
+    ),
+    linear-gradient(145deg, rgba(9, 10, 14, 0.985), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+.heritage-thread-card:hover {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 32%,
+
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+
+  box-shadow:
+    0 22px 54px rgba(0, 0, 0, 0.34),
+    0 0 18px color-mix(in srgb, var(--thread-accent) 10%, transparent),
+    0 0 22px color-mix(in srgb, var(--thread-accent-2) 10%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045) !important;
+}
+
+.heritage-thread-card.is-active {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 48%,
+
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+
+  background:
+    radial-gradient(
+      circle at 22% 18%,
+
+      color-mix(in srgb, var(--thread-accent) 14%, transparent),
+      transparent 44%
+    ),
+    radial-gradient(
+      circle at 78% 22%,
+
+      color-mix(in srgb, var(--thread-accent-2) 15%, transparent),
+      transparent 46%
+    ),
+    radial-gradient(
+      circle at 50% 74%,
+
+      color-mix(in srgb, var(--thread-accent-3) 12%, transparent),
+      transparent 48%
+    ),
+    linear-gradient(145deg, rgba(10, 10, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.36),
+    0 0 22px color-mix(in srgb, var(--thread-accent) 12%, transparent),
+    0 0 30px color-mix(in srgb, var(--thread-accent-2) 12%, transparent),
+    0 0 34px color-mix(in srgb, var(--thread-accent-3) 9%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045) !important;
+}
+
+.heritage-thread-card.is-active::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.5;
+
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--thread-accent) 18%, transparent),
+    transparent 30%,
+
+    color-mix(in srgb, var(--thread-accent-2) 14%, transparent) 58%,
+
+    color-mix(in srgb, var(--thread-accent-3) 12%, transparent)
+  );
+
+  mix-blend-mode: screen;
+}
+
+/* Remove the red-heavy read panel cast */
+
+.heritage-thread-read-panel {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 22%,
+
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.022),
+      rgba(255, 255, 255, 0.006)
+    ),
+    radial-gradient(
+      circle at 8% 0%,
+
+      color-mix(in srgb, var(--thread-accent) 9%, transparent),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 82% 10%,
+
+      color-mix(in srgb, var(--thread-accent-2) 9%, transparent),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 62% 94%,
+
+      color-mix(in srgb, var(--thread-accent-3) 7%, transparent),
+      transparent 38%
+    ),
+    linear-gradient(145deg, rgba(8, 9, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.34),
+    0 0 24px color-mix(in srgb, var(--thread-accent) 7%, transparent),
+    0 0 32px color-mix(in srgb, var(--thread-accent-2) 7%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+.heritage-thread-read-panel::before {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 16%,
+
+    rgba(214, 178, 119, 0.035)
+  ) !important;
+}
+
+.heritage-thread-read-panel-head {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--thread-accent) 5%, transparent),
+    color-mix(in srgb, var(--thread-accent-2) 5%, transparent),
+    transparent
+  ) !important;
+}
+
+.heritage-thread-read-type,
+.heritage-thread-read-type--minimal {
+  color: color-mix(in srgb, var(--thread-accent-2) 70%, #fff) !important;
+}
+
+.heritage-thread-read-type::after,
+.heritage-thread-read-type--minimal::after {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--thread-accent) 75%, #fff),
+    color-mix(in srgb, var(--thread-accent-2) 75%, #fff),
+    color-mix(in srgb, var(--thread-accent-3) 52%, transparent)
+  ) !important;
+}
+
+.heritage-thread-read-grid section span,
+.heritage-thread-read-panel-head .heritage-summary-kicker {
+  color: color-mix(in srgb, var(--thread-accent-2) 58%, #f3d793) !important;
+}
+
+/* Keep the card maps darker/cleaner so the node colors do the work */
+
+.heritage-thread-card-map {
+  background:
+    radial-gradient(
+      circle at center,
+
+      color-mix(in srgb, var(--thread-accent-2) 5%, transparent),
+      transparent 58%
+    ),
+    rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Mini map inactive network lines should glow subtly without washing red */
+
+.heritage-thread-card .heritage-voice-thread-line--base {
+  opacity: 0.16 !important;
+
+  stroke-width: 1.05 !important;
+}
+
+.heritage-thread-card.is-active .heritage-voice-thread-line--base {
+  opacity: 0.2 !important;
+}
+
+.heritage-thread-card .heritage-voice-thread-line--active-glow {
+  opacity: 0.18 !important;
+}
+
+.heritage-thread-card .heritage-voice-thread-line--active-core {
+  opacity: 0.94 !important;
+}
+
+/* Tone down the orange/red glow from icon bubbles */
+
+.heritage-thread-node-icon-chip {
+  background: radial-gradient(
+    circle at center,
+
+    color-mix(in srgb, var(--thread-node-color) 14%, transparent),
+    rgba(0, 0, 0, 0.4) 68%,
+
+    transparent 100%
+  ) !important;
+
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-node-color) 22%,
+
+    rgba(255, 255, 255, 0.06)
+  ) !important;
+
+  box-shadow: 0 0 10px
+    color-mix(in srgb, var(--thread-node-color) 12%, transparent) !important;
+}
+
+/* =========================================================
+
+   HERITAGE — VOICE THREADS SOFT MULTI-NODE COLOR PASS
+
+   Softer, less aggressive than previous shadow override
+
+   ========================================================= */
+
+.heritage-thread-card {
+  background:
+    radial-gradient(
+      circle at 26% 18%,
+
+      color-mix(in srgb, var(--thread-accent) 5%, transparent),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 74% 22%,
+
+      color-mix(in srgb, var(--thread-accent-2) 5%, transparent),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 52% 76%,
+
+      color-mix(in srgb, var(--thread-accent-3) 4%, transparent),
+      transparent 44%
+    ),
+    linear-gradient(145deg, rgba(9, 10, 14, 0.985), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.032) !important;
+}
+
+.heritage-thread-card:hover {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 24%,
+
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.28),
+    0 0 12px color-mix(in srgb, var(--thread-accent) 5%, transparent),
+    0 0 14px color-mix(in srgb, var(--thread-accent-2) 5%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+}
+
+.heritage-thread-card.is-active {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 34%,
+
+    rgba(255, 255, 255, 0.12)
+  ) !important;
+
+  background:
+    radial-gradient(
+      circle at 24% 18%,
+
+      color-mix(in srgb, var(--thread-accent) 7%, transparent),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 76% 22%,
+
+      color-mix(in srgb, var(--thread-accent-2) 8%, transparent),
+      transparent 44%
+    ),
+    radial-gradient(
+      circle at 52% 74%,
+
+      color-mix(in srgb, var(--thread-accent-3) 6%, transparent),
+      transparent 46%
+    ),
+    linear-gradient(145deg, rgba(10, 10, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 20px 46px rgba(0, 0, 0, 0.32),
+    0 0 12px color-mix(in srgb, var(--thread-accent) 5%, transparent),
+    0 0 16px color-mix(in srgb, var(--thread-accent-2) 5%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.042) !important;
+}
+
+/* Kill the large screen-blend wash from the previous version */
+
+.heritage-thread-card.is-active::after {
+  display: none !important;
+
+  content: none !important;
+}
+
+/* Softer selected read panel */
+
+.heritage-thread-read-panel {
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-accent-2) 15%,
+
+    rgba(255, 255, 255, 0.08)
+  ) !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.018),
+      rgba(255, 255, 255, 0.005)
+    ),
+    radial-gradient(
+      circle at 8% 0%,
+
+      color-mix(in srgb, var(--thread-accent) 5%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 10%,
+
+      color-mix(in srgb, var(--thread-accent-2) 5%, transparent),
+      transparent 36%
+    ),
+    radial-gradient(
+      circle at 62% 94%,
+
+      color-mix(in srgb, var(--thread-accent-3) 4%, transparent),
+      transparent 38%
+    ),
+    linear-gradient(145deg, rgba(8, 9, 13, 0.99), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.3),
+    0 0 14px color-mix(in srgb, var(--thread-accent) 4%, transparent),
+    0 0 18px color-mix(in srgb, var(--thread-accent-2) 4%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.032) !important;
+}
+
+.heritage-thread-read-panel-head {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--thread-accent) 3%, transparent),
+    color-mix(in srgb, var(--thread-accent-2) 3%, transparent),
+    transparent
+  ) !important;
+}
+
+/* Softer text accents */
+
+.heritage-thread-read-type,
+.heritage-thread-read-type--minimal {
+  color: color-mix(in srgb, var(--thread-accent-2) 55%, #fff) !important;
+}
+
+.heritage-thread-read-type::after,
+.heritage-thread-read-type--minimal::after {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--thread-accent) 58%, #fff),
+    color-mix(in srgb, var(--thread-accent-2) 58%, #fff),
+    color-mix(in srgb, var(--thread-accent-3) 32%, transparent)
+  ) !important;
+}
+
+.heritage-thread-read-grid section span,
+.heritage-thread-read-panel-head .heritage-summary-kicker {
+  color: color-mix(in srgb, var(--thread-accent-2) 38%, #f3d793) !important;
+}
+
+/* Card map stays dark; graph colors stay visible */
+
+.heritage-thread-card-map {
+  background:
+    radial-gradient(
+      circle at center,
+
+      color-mix(in srgb, var(--thread-accent-2) 3%, transparent),
+      transparent 58%
+    ),
+    rgba(0, 0, 0, 0.22) !important;
+}
+
+/* Tone down mini map network/active line glow */
+
+.heritage-thread-card .heritage-voice-thread-line--base {
+  opacity: 0.13 !important;
+
+  stroke-width: 1 !important;
+}
+
+.heritage-thread-card.is-active .heritage-voice-thread-line--base {
+  opacity: 0.17 !important;
+}
+
+.heritage-thread-card .heritage-voice-thread-line--active-glow {
+  opacity: 0.12 !important;
+
+  stroke-width: 6.5 !important;
+}
+
+.heritage-thread-card .heritage-voice-thread-line--active-core {
+  opacity: 0.9 !important;
+
+  stroke-width: 3.8 !important;
+}
+
+/* Tone down icon bubble glow */
+
+.heritage-thread-node-icon-chip {
+  background: radial-gradient(
+    circle at center,
+
+    color-mix(in srgb, var(--thread-node-color) 9%, transparent),
+    rgba(0, 0, 0, 0.42) 68%,
+
+    transparent 100%
+  ) !important;
+
+  border-color: color-mix(
+    in srgb,
+
+    var(--thread-node-color) 16%,
+
+    rgba(255, 255, 255, 0.06)
+  ) !important;
+
+  box-shadow: 0 0 7px
+    color-mix(in srgb, var(--thread-node-color) 8%, transparent) !important;
+}
+
+.heritage-thread-reference-head .heritage-chart-title {
+  max-width: 720px !important;
+
+  font-size: clamp(2.05rem, 3.2vw, 3.25rem) !important;
+
+  line-height: 0.96 !important;
+
+  letter-spacing: -0.075em !important;
+}
+
+/* =========================================================
+
+   HERITAGE — VOICE THREAD READ PANEL TYPOGRAPHY NORMALIZER
+
+   Keeps all read panels visually consistent across selected threads
+
+   ========================================================= */
+
+.heritage-thread-read-panel {
+  color: rgba(245, 243, 238, 0.92) !important;
+}
+
+/* Top kicker: Voice Thread Read 01 / 02 / 03 */
+
+.heritage-thread-read-panel-head .heritage-summary-kicker {
+  color: rgba(214, 178, 119, 0.86) !important;
+
+  font-size: 0.58rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.22em !important;
+
+  text-transform: uppercase !important;
+}
+
+/* Main title */
+
+.heritage-thread-read-panel-head h4 {
+  max-width: 13ch !important;
+
+  margin: 10px 0 12px !important;
+
+  color: #fff8ed !important;
+
+  font-size: clamp(1.9rem, 3.25vw, 2.8rem) !important;
+
+  line-height: 0.9 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: -0.075em !important;
+}
+
+/* Right-side read type: Primary Read / Personality Read / Complex Voice Read */
+
+.heritage-thread-read-type,
+.heritage-thread-read-type--minimal {
+  color: rgba(214, 178, 119, 0.82) !important;
+
+  font-size: 0.56rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.18em !important;
+
+  text-transform: uppercase !important;
+}
+
+.heritage-thread-read-type::after,
+.heritage-thread-read-type--minimal::after {
+  background: linear-gradient(
+    90deg,
+    rgba(214, 178, 119, 0.82),
+    rgba(214, 178, 119, 0.18)
+  ) !important;
+}
+
+/* Lede paragraph directly under title */
+
+.heritage-thread-read-lede {
+  max-width: 760px !important;
+
+  margin: 0 0 24px !important;
+
+  color: rgba(245, 243, 238, 0.72) !important;
+
+  font-size: 0.98rem !important;
+
+  line-height: 1.55 !important;
+
+  font-weight: 500 !important;
+
+  letter-spacing: -0.01em !important;
+}
+
+/* Grid labels: Why it matters / How this was determined / etc. */
+
+.heritage-thread-read-grid section span {
+  color: rgba(214, 178, 119, 0.82) !important;
+
+  font-size: 0.58rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.18em !important;
+
+  text-transform: uppercase !important;
+}
+
+/* Grid body copy */
+
+.heritage-thread-read-grid section p {
+  color: rgba(245, 243, 238, 0.68) !important;
+
+  font-size: 0.9rem !important;
+
+  line-height: 1.54 !important;
+
+  font-weight: 500 !important;
+
+  letter-spacing: -0.005em !important;
+}
+
+/* Keep the panel dividers consistent */
+
+.heritage-thread-read-grid {
+  border-top-color: rgba(255, 255, 255, 0.065) !important;
+}
+
+.heritage-thread-read-grid section {
+  border-bottom-color: rgba(255, 255, 255, 0.055) !important;
+}
+
+/* Keep thread color present only as subtle structural accent */
+
+.heritage-thread-read-panel::before {
+  width: 1px !important;
+
+  opacity: 0.62 !important;
+
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--thread-accent) 52%, rgba(214, 178, 119, 0.65)),
+    color-mix(in srgb, var(--thread-accent-2) 42%, rgba(214, 178, 119, 0.45)),
+    transparent
+  ) !important;
+}
+
+/* Normalize active read panel background so different selected reads don't feel like different components */
+
+.heritage-thread-read-panel {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.018),
+      rgba(255, 255, 255, 0.005)
+    ),
+    radial-gradient(
+      circle at 8% 0%,
+
+      color-mix(in srgb, var(--thread-accent) 4%, transparent),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 82% 10%,
+
+      color-mix(in srgb, var(--thread-accent-2) 4%, transparent),
+      transparent 36%
+    ),
+    linear-gradient(145deg, rgba(8, 9, 13, 0.992), rgba(3, 4, 7, 0.997)) !important;
+}
+
+/* Mobile consistency */
+
+@media (max-width: 720px) {
+  .heritage-thread-read-panel-head h4 {
+    max-width: 100% !important;
+
+    font-size: clamp(1.65rem, 9vw, 2.25rem) !important;
+
+    line-height: 0.94 !important;
+  }
+
+  .heritage-thread-read-lede {
+    font-size: 0.9rem !important;
+
+    line-height: 1.5 !important;
+  }
+
+  .heritage-thread-read-grid section p {
+    font-size: 0.84rem !important;
+
+    line-height: 1.5 !important;
+  }
+}
+
+.heritage-thread-card-type-stack {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.heritage-thread-card-type {
+  color: rgba(246, 242, 234, 0.9);
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-card-subtype {
+  color: rgba(214, 178, 119, 0.76);
+
+  font-size: 0.72rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.03em;
+
+  text-transform: none;
+}
+
+.heritage-thread-read-type--minimal {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 3px;
+
+  line-height: 1.1;
+}
+
+.heritage-thread-read-type--minimal strong {
+  color: rgba(246, 242, 234, 0.92);
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-read-type--minimal em {
+  color: rgba(214, 178, 119, 0.78);
+
+  font-size: 0.74rem;
+
+  font-style: normal;
+
+  font-weight: 500;
+
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 700px) {
+  .heritage-thread-card-type-stack,
+  .heritage-thread-read-type--minimal {
+    align-items: flex-start;
+  }
+}
+
+.heritage-thread-read-panel--expanded {
+  overflow: hidden;
+}
+
+.heritage-thread-readout-intro {
+  display: grid;
+
+  gap: 16px;
+
+  margin-top: 18px;
+}
+
+.heritage-thread-readout-meta {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.heritage-thread-readout-meta span {
+  display: grid;
+
+  gap: 4px;
+
+  padding: 12px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--thread-accent) 10%, transparent),
+    rgba(255, 255, 255, 0.025)
+  );
+
+  border-radius: 14px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.78rem;
+
+  line-height: 1.35;
+}
+
+.heritage-thread-readout-meta strong {
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 0.68rem;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-read-grid--expanded {
+  margin-top: 18px;
+}
+
+.heritage-thread-evidence-list,
+.heritage-thread-driver-list {
+  display: grid;
+
+  gap: 10px;
+}
+
+.heritage-thread-evidence-row,
+.heritage-thread-driver-row {
+  display: grid;
+
+  gap: 5px;
+
+  padding: 12px 13px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.075);
+
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.heritage-thread-evidence-row strong,
+.heritage-thread-driver-row strong {
+  color: rgba(255, 255, 255, 0.94);
+
+  font-size: 0.82rem;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-evidence-row p,
+.heritage-thread-driver-row p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.74);
+
+  font-size: 0.9rem;
+
+  line-height: 1.55;
+}
+
+.heritage-thread-evidence-row em {
+  color: rgba(255, 255, 255, 0.48);
+
+  font-size: 0.76rem;
+
+  font-style: normal;
+
+  letter-spacing: 0.04em;
+}
+
+.heritage-thread-evidence-row.is-high {
+  border-color: color-mix(
+    in srgb,
+    var(--thread-accent) 28%,
+    rgba(255, 255, 255, 0.08)
+  );
+
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--thread-accent) 11%, transparent),
+    rgba(0, 0, 0, 0.18)
+  );
+}
+
+.heritage-thread-evidence-row.is-low {
+  border-color: color-mix(
+    in srgb,
+    var(--thread-accent-2) 24%,
+    rgba(255, 255, 255, 0.08)
+  );
+}
+
+@media (max-width: 720px) {
+  .heritage-thread-readout-meta {
+    grid-template-columns: 1fr;
+  }
+}

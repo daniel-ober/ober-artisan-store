@@ -9,7 +9,6 @@ import LEGACYPRINT_BENCHMARK_CATALOG from '../../data/legacyPrint/benchmarkCatal
 import { BENCHMARK_DEFINITIONS } from '../../data/legacyPrint/benchmarkDefinitions.js';
 
 const AXES = [
-
   'attack',
 
   'brightness',
@@ -23,7 +22,6 @@ const AXES = [
   'sensitivity',
 
   'control',
-
 ];
 
 const clamp = (value, min = 1, max = 10) => {
@@ -357,13 +355,10 @@ function buildHeritageSpec({
 }
 
 function getFinishVoicingProfile(finish = '') {
-
   const value = String(finish || '').toLowerCase();
 
   if (value.includes('light')) {
-
     return {
-
       finishLevel: 'light',
 
       tonalShift: -1,
@@ -375,25 +370,16 @@ function getFinishVoicingProfile(finish = '') {
       torchTuneDemand: -1,
 
       sectionVarianceRisk: -1,
-
     };
-
   }
 
   if (
-
     value.includes('blackened') ||
-
     value.includes('black stain') ||
-
     value.includes('black stained') ||
-
     value.includes('blacked')
-
   ) {
-
     return {
-
       finishLevel: 'blackened',
 
       tonalShift: 1,
@@ -405,13 +391,10 @@ function getFinishVoicingProfile(finish = '') {
       torchTuneDemand: 1,
 
       sectionVarianceRisk: 1,
-
     };
-
   }
 
   return {
-
     finishLevel: 'medium',
 
     tonalShift: 0,
@@ -421,9 +404,7 @@ function getFinishVoicingProfile(finish = '') {
     torchTuneDemand: 0,
 
     sectionVarianceRisk: 0,
-
   };
-
 }
 
 function rebaseAgainstBenchmark(currentProfile = {}, benchmarkProfile = {}) {
@@ -493,7 +474,6 @@ function normalizeFinishLevel(finish = '') {
 }
 
 function applyHeritageReferenceShaping(
-
   rebasedProfile = {},
 
   spec = {},
@@ -501,43 +481,31 @@ function applyHeritageReferenceShaping(
   benchmarkSpec = {},
 
   finishVoicing = getFinishVoicingProfile(spec.finish)
-
 ) {
-
   const next = { ...rebasedProfile };
 
   const widthDelta =
-
     Number(spec.width || 14) - Number(benchmarkSpec.width || 14);
 
   const depthDelta =
-
     Number(spec.depth || 5.5) - Number(benchmarkSpec.depth || 5.5);
 
   const lugDelta =
-
     Number(spec.lugQuantity || 8) - Number(benchmarkSpec.lugQuantity || 8);
 
   const staveDelta =
-
     Number(spec.staveCount || 16) - Number(benchmarkSpec.staveCount || 16);
 
   const thicknessDelta =
-
     Number(spec.shellThicknessMm || 10) -
-
     Number(benchmarkSpec.shellThicknessMm || 10);
 
   const currentHasReRings =
-
     String(spec.reRings || '').toLowerCase() !== 'none' &&
-
     String(spec.reRings || '').trim() !== '';
 
   const benchmarkHasReRings =
-
     String(benchmarkSpec.reRings || '').toLowerCase() !== 'none' &&
-
     String(benchmarkSpec.reRings || '').trim() !== '';
 
   const reRingDelta = Number(currentHasReRings) - Number(benchmarkHasReRings);
@@ -559,9 +527,7 @@ function applyHeritageReferenceShaping(
   const tripleFlangeDelta = Number(currentIsTriple) - Number(benchmarkIsTriple);
 
   const finishDelta =
-
     normalizeFinishLevel(spec.finish) -
-
     normalizeFinishLevel(benchmarkSpec.finish);
 
   // ATTACK
@@ -691,13 +657,11 @@ function applyHeritageReferenceShaping(
   applyAxisDelta(next, 'sensitivity', finishDelta * -0.16);
 
   applyAxisDelta(
-
     next,
 
     'sensitivity',
 
     finishVoicing.sectionVarianceRisk * -0.08
-
   );
 
   // CONTROL
@@ -723,13 +687,10 @@ function applyHeritageReferenceShaping(
   applyAxisDelta(next, 'control', finishVoicing.torchTuneDemand * 0.1);
 
   return AXES.reduce((acc, axis) => {
-
     acc[axis] = round2(clamp(next[axis]));
 
     return acc;
-
   }, {});
-
 }
 
 function pickPrimaryGenre(spec = {}, profile = {}) {
@@ -781,281 +742,184 @@ function pickRecordingMic(spec = {}, profile = {}) {
 }
 
 function buildPlayingSituation(spec = {}, profile = {}) {
-
   const finish = String(spec.finish || '').toLowerCase();
 
   const isBlackened =
-
     finish.includes('blackened') ||
-
     finish.includes('black stain') ||
-
     finish.includes('black stained') ||
-
     finish.includes('blacked');
 
   const isLight = finish.includes('light');
 
   if (spec.hoopType === 'Die-Cast') {
-
     return 'A more focused Heritage read with firmer note shape, cleaner front edge, and tighter overall behavior.';
-
   }
 
   if (isBlackened && profile.control >= 5.5) {
-
     return 'A more TorchTuned-forward Heritage read, where the heavier scorch treatment pushes the shell toward firmer control, a denser center image, and a more intentional note shape across the stave body.';
-
   }
 
   if (isLight && profile.sensitivity >= 5.1) {
-
     return 'A more open Heritage read, where the lighter torch treatment preserves extra liveliness, touch response, and a slightly freer bloom through the shell.';
-
   }
 
   if (spec.depth >= 7) {
-
     return 'A fuller Heritage read with broader body, deeper bloom, and a more grounded voice in the room.';
-
   }
 
   if (profile.sensitivity >= 5.5) {
-
     return 'A touch-friendly Heritage read that stays expressive under lighter hands while keeping its shell identity.';
-
   }
 
   return 'A balanced Heritage read with natural openness, grounded body, and classic shell-first response.';
-
 }
 
 function buildFeelRead(spec = {}, profile = {}) {
-
   const visualParts = [];
 
   const finish = String(spec.finish || '').toLowerCase();
 
   const isBlackened =
-
     finish.includes('blackened') ||
-
     finish.includes('black stain') ||
-
     finish.includes('black stained') ||
-
     finish.includes('blacked');
 
   const isLight = finish.includes('light');
 
   if (isBlackened) {
-
     visualParts.push('darker');
-
   } else if (isLight) {
-
     visualParts.push('cleaner');
-
   } else {
-
     visualParts.push('seasoned');
-
   }
 
   if (spec.hardwareFinish === 'Brass/Gold') {
-
     visualParts.push('richer');
-
   } else if (spec.hardwareFinish === 'Black Nickel') {
-
     visualParts.push('slightly more modern');
-
   } else {
-
     visualParts.push('classic');
-
   }
 
   let finishLean = 'with a balanced TorchTuned posture';
 
   if (isBlackened) {
-
     finishLean =
-
       'with a stronger TorchTuned imprint that favors firmer note control, slightly lower sensitivity, and a more unified shell response under heavier treatment';
-
   } else if (isLight) {
-
     finishLean =
-
       'with a lighter TorchTuned imprint that preserves more openness, touch response, and a slightly freer shell reaction';
-
   }
 
   const soundLean =
-
     profile.warmth >= 5.7
-
       ? 'while keeping the emphasis on body, weight, and shell character'
-
       : profile.attack >= 5.6
-
         ? 'while keeping the front edge firm and articulate'
-
         : profile.control >= 5.5
-
           ? 'while keeping the shell centered and composed'
-
           : 'while keeping the shell-first balance intact';
 
   return `A ${visualParts.join(', ')} Heritage presentation ${finishLean}, ${soundLean}.`;
-
 }
 
 function buildHighlightedCharacteristics(spec = {}, profile = {}) {
-
   const parts = [];
 
   const finish = String(spec.finish || '').toLowerCase();
 
   const isBlackened =
-
     finish.includes('blackened') ||
-
     finish.includes('black stain') ||
-
     finish.includes('black stained') ||
-
     finish.includes('blacked');
 
   const isLight = finish.includes('light');
 
-  if (axisDelta(profile, 'warmth') >= 0.8) {
+if (axisDelta(profile, 'warmth') >= 0.55) {
 
-    parts.push(
+  parts.push(
 
-      'noticeably warmer and more body-forward than the benchmark Heritage build'
+    'warmer and more body-forward than the benchmark Heritage build'
 
-    );
+  );
 
-  } else if (axisDelta(profile, 'warmth') <= -0.8) {
+} else if (axisDelta(profile, 'warmth') <= -0.55) {
 
-    parts.push(
+  parts.push(
 
-      'noticeably leaner and less low-mid heavy than the benchmark Heritage build'
+    'leaner and more controlled through the center than the benchmark Heritage build'
 
-    );
+  );
 
-  } else {
+} else {
 
-    parts.push('tonally close to the benchmark Heritage warmth posture');
+  parts.push('close to the benchmark Heritage warmth posture');
 
-  }
+}
 
   if (axisDelta(profile, 'attack') >= 0.65) {
-
     parts.push('with a quicker and more defined front edge');
-
   } else if (axisDelta(profile, 'attack') <= -0.65) {
-
     parts.push('with a rounder and less immediate note start');
-
   }
 
   if (axisDelta(profile, 'sustain') >= 0.65) {
-
     parts.push('and a longer, broader note bloom');
-
   } else if (axisDelta(profile, 'sustain') <= -0.65) {
-
     parts.push('and a shorter, tighter note shape');
-
   }
 
   if (axisDelta(profile, 'projection') >= 0.6) {
-
     parts.push('with stronger outward throw');
-
   } else if (axisDelta(profile, 'projection') <= -0.6) {
-
     parts.push('with a slightly more intimate room presence');
-
   }
 
   if (isBlackened) {
-
     if (axisDelta(profile, 'control') >= 0.45) {
-
       parts.push(
-
         'the heavier TorchTune finish pushes the read toward stronger control and a more disciplined shell response'
-
       );
-
     }
 
     if (axisDelta(profile, 'sensitivity') <= -0.45) {
-
       parts.push(
-
         'with some touch sensitivity traded for a more locked-in and deliberate note center'
-
       );
-
     }
-
   } else if (isLight) {
-
     if (axisDelta(profile, 'sensitivity') >= 0.12) {
-
       parts.push(
-
         'the lighter TorchTune finish preserves more touch response and a freer shell reaction'
-
       );
-
     }
 
     if (axisDelta(profile, 'control') <= -0.18) {
-
       parts.push(
-
         'with slightly less containment than the benchmark in exchange for added openness'
-
       );
-
     }
-
   } else {
-
     parts.push(
-
       'the Medium Torch benchmark keeps the line centered between openness and control'
-
     );
-
   }
 
   if (spec.hoopType === 'Die-Cast') {
-
     parts.push(
-
       'Die-Cast hoops push the read toward added focus and containment'
-
     );
-
   } else {
-
     parts.push(
-
       'Triple Flange hoops preserve more of the line’s native openness'
-
     );
-
   }
 
   return `${parts.join(', ')}.`;
-
 }
 
 function buildSourceBuildRead(spec = {}) {
