@@ -1378,7 +1378,7 @@ const SoundLegendProductDetail = () => {
 
             in real time, and request a free LegacyVoice Read powered by the
 
-            Ober LegacyPrint™ Voicing Engine.
+            Ober LegacyPrint™ voice engine.
 
           </p>
 
@@ -2524,7 +2524,7 @@ const SoundLegendProductDetail = () => {
 
             Submit your Workbench direction and receive a free LegacyVoice Read
 
-            powered by the Ober LegacyPrint™ Voicing Engine.
+            powered by the Ober LegacyPrint™ voice engine.
 
           </p>
 

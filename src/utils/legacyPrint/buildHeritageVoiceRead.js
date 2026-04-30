@@ -790,6 +790,12 @@ function applyHeritageReferenceShaping(
 
   applyAxisDelta(next, 'control', finishVoicing.torchTuneDemand * 0.1);
 
+  if (currentHasReRings && Number(spec.width || 14) <= 12) {
+    applyAxisDelta(next, 'control', 0.28);
+
+    applyAxisDelta(next, 'projection', 0.1);
+  }
+
   return AXES.reduce((acc, axis) => {
 
     acc[axis] = round2(clamp(next[axis]));
@@ -894,9 +900,18 @@ function buildPlayingSituation(spec = {}, profile = {}) {
 
   const isTripleFlange = hoop.includes('triple');
 
+  const hasReRings = String(spec.reRings || '').toLowerCase() !== 'none';
+
+  const isThickHighLugShell =
+    Number(spec.width) >= 14 &&
+    Number(spec.lugQuantity) >= 10 &&
+    Number(spec.shellThicknessMm) >= 12;
+
   const isCompactShell = Number(spec.width) <= 12 || Number(spec.depth) <= 5.5;
 
   const isDeepShell = Number(spec.depth) >= 7;
+
+  const isVeryDeepShell = Number(spec.depth) >= 7.5;
 
   const attackDelta = axisDelta(profile, 'attack');
 
@@ -936,6 +951,12 @@ function buildPlayingSituation(spec = {}, profile = {}) {
 
   }
 
+  if (isBlackened && isDieCast && isThickHighLugShell) {
+
+    return 'A beefy, high-projection Heritage read with a pronounced crack, firmer die-cast focus, and a drier TorchTuned shell response from the Blackened finish.';
+
+  }
+
   if (isBlackened && isCompactShell && isTripleFlange) {
 
     return 'A compact, TorchTuned Heritage read: still lively from the smaller shell, but darker and more settled than the same build in a lighter finish.';
@@ -968,7 +989,31 @@ function buildPlayingSituation(spec = {}, profile = {}) {
 
   if (isLight && sensitivityDelta >= 0.1) {
 
+    if (hasReRings && sustainDelta >= 0.65 && brightnessDelta <= -0.15) {
+
+      return 'A darker, more complex Heritage read with a drier top edge, longer sustain, and extra overtone character from the thin re-ring shell.';
+
+    }
+
     return 'A more open Heritage read, where the lighter torch treatment preserves extra liveliness, touch response, and a slightly freer bloom through the shell.';
+
+  }
+
+  if (
+
+    isVeryDeepShell &&
+
+    isTripleFlange &&
+
+    !isLight &&
+
+    !isBlackened &&
+
+    brightnessDelta <= -0.35
+
+  ) {
+
+    return 'A darker, deeper Heritage read with a drier top edge, grounded body, and enough classic Triple Flange openness to keep the shell alive.';
 
   }
 
@@ -980,13 +1025,29 @@ function buildPlayingSituation(spec = {}, profile = {}) {
 
   if (isCompactShell && attackDelta >= 0.45 && warmthDelta <= -0.35) {
 
-    return 'A compact Heritage read with quicker response, leaner body, and a more immediate front edge than the reference build.';
+    return 'A compact Heritage read with more bite, quicker sustain, leaner body, and a dry, immediate front edge than the reference build.';
 
   }
 
   if (sensitivityDelta >= 0.55) {
 
     return 'A touch-friendly Heritage read that stays expressive under lighter hands while keeping its shell identity.';
+
+  }
+
+  if (
+
+    hasReRings &&
+
+    Number(spec.width) <= 12 &&
+
+    Number(spec.depth) >= 6.5 &&
+
+    warmthDelta >= 0.25
+
+  ) {
+
+    return 'A compact all-round Heritage read with extra studio warmth from the deeper small shell and a supported re-ring response.';
 
   }
 
@@ -1092,7 +1153,22 @@ function buildHighlightedCharacteristics(spec = {}, profile = {}) {
 
   const isDieCast = hoop.includes('die');
 
+  const isTripleFlange = hoop.includes('triple');
+
   const hasReRings = String(spec.reRings || '').toLowerCase() !== 'none';
+
+  const isThinShell = Number(spec.shellThicknessMm || 10) <= 8;
+
+  const isThickHighLugShell =
+    Number(spec.width) >= 14 &&
+    Number(spec.lugQuantity) >= 10 &&
+    Number(spec.shellThicknessMm || 10) >= 12;
+
+  const isVeryDeepTripleMedium =
+    Number(spec.depth) >= 7.5 &&
+    isTripleFlange &&
+    !isLight &&
+    !isBlackened;
 
   const attackDelta = axisDelta(profile, 'attack');
 
@@ -1128,6 +1204,12 @@ function buildHighlightedCharacteristics(spec = {}, profile = {}) {
 
   const parts = [];
 
+  if (strongestMovement < 0.12) {
+
+    parts.push('a balanced all-round Heritage voice with warm body, crisp attack, even projection, and usable control');
+
+  }
+
   if (warmthDelta >= 0.55) {
 
     parts.push('warmer and more body-forward than the benchmark Heritage build');
@@ -1148,7 +1230,7 @@ function buildHighlightedCharacteristics(spec = {}, profile = {}) {
 
   if (attackDelta >= 0.65) {
 
-    parts.push('with a quicker and more defined front edge');
+    parts.push('with a quicker, drier bite and more defined front edge');
 
   } else if (attackDelta <= -0.65) {
 
@@ -1179,6 +1261,10 @@ function buildHighlightedCharacteristics(spec = {}, profile = {}) {
   if (isLight && isDieCast) {
 
     parts.push('Light Torch keeps more touch and liveliness while the die-cast hoops add rim focus');
+
+  } else if (isBlackened && isDieCast && isThickHighLugShell) {
+
+    parts.push('the 10-lug 12mm shell adds beef and crack while Die-Cast hoops push projection');
 
   } else if (isBlackened) {
 
@@ -1214,7 +1300,17 @@ function buildHighlightedCharacteristics(spec = {}, profile = {}) {
 
   if (hasReRings && Number(spec.width) <= 12) {
 
-    parts.push('the 6-lug re-ring layout keeps the smaller shell supported while preserving a compact, responsive feel');
+    parts.push('the deeper 12-inch re-ring shell keeps studio warmth and balance');
+
+  } else if (isLight && hasReRings && isThinShell && Number(spec.width) >= 14) {
+
+    parts.push('the thin re-ring shell adds darker complex overtones and longer sustain');
+
+  }
+
+  if (isVeryDeepTripleMedium) {
+
+    parts.push('darker and drier through the top edge while the Triple Flange hoop keeps the classic Heritage openness');
 
   }
 

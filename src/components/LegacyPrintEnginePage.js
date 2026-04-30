@@ -298,7 +298,7 @@ const LegacyPrintEnginePage = () => {
 
             <span className="legacyprint-kicker">
 
-              Ober LegacyPrint™ Voicing Engine
+              Ober LegacyPrint™ voice engine
 
             </span>
 
@@ -314,7 +314,7 @@ const LegacyPrintEnginePage = () => {
 
               LegacyPrint™ is Ober Artisan’s unbiased drum interpretation and
 
-              voicing engine — built to help players, builders, shops,
+              voice engine — built to help players, builders, shops,
 
               producers, educators, and brands describe drums with more clarity,
 

@@ -709,13 +709,13 @@ const CustomDrumBuilder = () => {
         <header className="cdb-hero">
           <div className="cdb-hero-copy">
             <p className="cdb-kicker">Proprietary Voicing System</p>
-            <h1>Ober LegacyPrint™ Voicing Engine</h1>
+            <h1>Ober LegacyPrint™ voice engine</h1>
             <p className="cdb-hero-text">
               Shape the build, compare tonal behavior, and explore the expected
               voice of the drum in real time.
             </p>
             <p className="cdb-hero-legal">
-              LegacyPrint™ and the Ober LegacyPrint™ Voicing Engine are
+              LegacyPrint™ and the Ober LegacyPrint™ voice engine are
               proprietary to Ober Artisan Drums. This tool provides an Ober
               voicing estimate based on proprietary heuristics and artistic
               build logic. It is not a laboratory acoustic measurement tool.

@@ -1156,7 +1156,7 @@
 }
 
 /* =========================================================
-   LEGACYPRINT VOICING ENGINE â€” HEADER / NAV / MODES
+   LEGACYPRINT voice engine â€” HEADER / NAV / MODES
    ========================================================= */
 
 .heritage-voice-read-card--reworked {
@@ -5019,4 +5019,286 @@
   .heritage-thread-read-grid section p {
     font-size: 0.82rem !important;
   }
+}
+
+/* =========================================================
+
+   VOICE THREADS — CALM CUSTOMER-FACING POLISH
+
+   ========================================================= */
+
+.heritage-thread-reference--calm {
+  gap: 24px !important;
+}
+
+.heritage-thread-reference--calm .heritage-thread-reference-head {
+  max-width: 620px !important;
+}
+
+.heritage-thread-reference--calm .heritage-chart-title {
+  max-width: 12ch !important;
+}
+
+.heritage-thread-reference--calm .heritage-chart-title-subcopy {
+  max-width: 46ch !important;
+
+  color: rgba(244, 241, 234, 0.64) !important;
+}
+
+.heritage-thread-card--calm {
+  min-height: 276px !important;
+
+  border-radius: 18px !important;
+
+  background:
+    radial-gradient(
+      circle at 28% 18%,
+
+      color-mix(in srgb, var(--thread-accent, #d6b277) 4%, transparent),
+      transparent 42%
+    ),
+    linear-gradient(145deg, rgba(8, 9, 12, 0.99), rgba(3, 4, 7, 0.995)) !important;
+}
+
+.heritage-thread-card--calm .heritage-thread-card-type {
+  color: rgba(214, 178, 119, 0.76) !important;
+
+  font-size: 0.54rem !important;
+
+  font-weight: 900 !important;
+
+  letter-spacing: 0.16em !important;
+
+  text-align: right !important;
+}
+
+.heritage-thread-card--calm .heritage-thread-card-copy {
+  gap: 7px !important;
+}
+
+.heritage-thread-card--calm .heritage-thread-card-copy strong {
+  max-width: 15ch !important;
+
+  font-size: clamp(1rem, 1.35vw, 1.15rem) !important;
+
+  line-height: 1.02 !important;
+}
+
+.heritage-thread-card--calm .heritage-thread-card-copy em {
+  display: block;
+
+  color: rgba(245, 243, 238, 0.48);
+
+  font-size: 0.72rem;
+
+  line-height: 1.35;
+
+  font-style: normal;
+
+  font-weight: 700;
+
+  letter-spacing: 0.02em;
+}
+
+.heritage-thread-read-panel--calm {
+  border-radius: 24px !important;
+}
+
+.heritage-thread-read-panel--calm .heritage-thread-read-panel-head {
+  padding: 28px 30px 22px !important;
+}
+
+.heritage-thread-read-panel--calm .heritage-thread-read-panel-head h4 {
+  max-width: 13ch !important;
+
+  margin-bottom: 14px !important;
+}
+
+.heritage-thread-read-lede--calm {
+  max-width: none !important;
+
+  margin: 0 !important;
+
+  padding: 24px 30px !important;
+
+  color: rgba(245, 243, 238, 0.76) !important;
+
+  font-size: clamp(1.02rem, 1.35vw, 1.18rem) !important;
+
+  line-height: 1.55 !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+}
+
+.heritage-thread-readout-meta--calm {
+  position: relative;
+
+  z-index: 1;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 0 !important;
+
+  padding: 0 30px !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.heritage-thread-readout-meta--calm span {
+  padding: 18px 20px 18px 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  color: rgba(245, 243, 238, 0.72) !important;
+}
+
+.heritage-thread-readout-meta--calm span + span {
+  padding-left: 20px !important;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.055) !important;
+}
+
+.heritage-thread-readout-meta--calm strong {
+  margin-bottom: 6px;
+
+  color: rgba(214, 178, 119, 0.78) !important;
+
+  font-size: 0.56rem !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.18em !important;
+}
+
+.heritage-thread-listening-note {
+  position: relative;
+
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  padding: 0 30px 30px !important;
+}
+
+.heritage-thread-listening-note section {
+  min-width: 0;
+
+  padding: 24px 28px 22px 0;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.heritage-thread-listening-note section:nth-child(2n) {
+  padding-right: 0;
+
+  padding-left: 28px;
+
+  border-left: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.heritage-thread-listening-note section:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.heritage-thread-listening-note span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: rgba(214, 178, 119, 0.82);
+
+  font-size: 0.58rem;
+
+  line-height: 1;
+
+  font-weight: 950;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+.heritage-thread-listening-note p {
+  max-width: 34ch;
+
+  margin: 0;
+
+  color: rgba(245, 243, 238, 0.7);
+
+  font-size: 0.92rem;
+
+  line-height: 1.56;
+
+  font-weight: 500;
+}
+
+.heritage-thread-read-panel--calm .heritage-thread-read-grid,
+.heritage-thread-read-panel--calm .heritage-thread-evidence-list,
+.heritage-thread-read-panel--calm .heritage-thread-driver-list {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .heritage-thread-readout-meta--calm {
+    grid-template-columns: 1fr !important;
+
+    padding: 0 20px !important;
+  }
+
+  .heritage-thread-readout-meta--calm span {
+    padding: 16px 0 !important;
+  }
+
+  .heritage-thread-readout-meta--calm span + span {
+    padding-left: 0 !important;
+
+    border-left: 0 !important;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .heritage-thread-listening-note {
+    grid-template-columns: 1fr !important;
+
+    padding: 0 20px 22px !important;
+  }
+
+  .heritage-thread-listening-note section,
+  .heritage-thread-listening-note section:nth-child(2n) {
+    padding: 18px 0 !important;
+
+    border-left: 0 !important;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+  }
+
+  .heritage-thread-listening-note section:last-child {
+    border-bottom: 0 !important;
+  }
+
+  .heritage-thread-listening-note p {
+    max-width: none !important;
+
+    font-size: 0.86rem !important;
+  }
+
+  .heritage-thread-read-lede--calm {
+    padding: 18px 20px !important;
+
+    font-size: 0.92rem !important;
+  }
+}
+
+.heritage-thread-card-topline--no-rank {
+  justify-content: flex-end !important;
+}
+
+.heritage-thread-card-topline--no-rank .heritage-thread-card-type {
+  text-align: right !important;
 }
