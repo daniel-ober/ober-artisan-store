@@ -36,8 +36,13 @@ import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadou
 import { buildKeyRelationships } from '../utils/legacyPrint/heritageKeyRelationships';
 
 import {
+
   runHeritageVoiceReadTestMatrix,
+
   runOneHeritageVoiceReadTest,
+
+  runHeritageShellThicknessSweep,
+
 } from '../utils/legacyPrint/runHeritageVoiceReadTestMatrix';
 
 import './HeritageProductDetail.css';
@@ -1697,17 +1702,23 @@ const HeritageProductDetail = () => {
     });
   };
 
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') return;
+useEffect(() => {
 
-    window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
+  if (process.env.NODE_ENV !== 'development') return;
 
-    window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
+  window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
 
-    console.info(
-      'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...})'
-    );
-  }, []);
+  window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
+
+  window.runHeritageShellThicknessSweep = runHeritageShellThicknessSweep;
+
+  console.info(
+
+    'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...}), runHeritageShellThicknessSweep({...})'
+
+  );
+
+}, []);
 
   useEffect(() => {
     setBenchmarkGlowPulseKey((prev) => prev + 1);
