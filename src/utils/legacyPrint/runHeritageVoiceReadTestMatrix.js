@@ -1677,4 +1677,290 @@ export function runHeritageVoiceReadFocusedTests() {
   });
 }
 
+export function runHeritageShellThicknessSweep({
+
+  size = '14',
+
+  depth = '5.5',
+
+  lugs = '8',
+
+  staveOption = '16 - 10mm',
+
+  hoopType = 'Triple Flange',
+
+  hardwareColor = 'Chrome',
+
+  scorchDepth = 'Medium Torch',
+
+  minThickness = 5,
+
+  maxThickness = 25,
+
+  printDetails = false,
+
+} = {}) {
+
+  const rows = [];
+
+  for (let thickness = minThickness; thickness <= maxThickness; thickness += 1) {
+
+    const input = {
+
+      ...DEFAULT_BENCHMARK,
+
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      hardwareColor,
+
+      scorchDepth,
+
+      shellThicknessMm: thickness,
+
+    };
+
+    const read = buildHeritageVoiceRead(input);
+
+    const summary = summarizeRead(input, read);
+
+    const profile = summary.profile || {};
+
+    const movedAxes = AXES.map((axis) => ({
+
+      axis,
+
+      value: profile[axis],
+
+      delta: getAxisDeltaFixed(profile, axis),
+
+      movement: Math.abs(getAxisDelta(profile, axis)),
+
+    }))
+
+      .sort((a, b) => b.movement - a.movement)
+
+      .slice(0, 3);
+
+    const firstTell =
+
+      summary.keyRelationships.find((relationship) => relationship.slotKey === 'simple') ||
+
+      summary.keyRelationships[0];
+
+    const playerRead =
+
+      summary.keyRelationships.find((relationship) => relationship.slotKey === 'shaped') ||
+
+      summary.keyRelationships[1];
+
+    const legacyPrint =
+
+      summary.keyRelationships.find((relationship) => relationship.slotKey === 'complex') ||
+
+      summary.keyRelationships[2];
+
+    rows.push({
+
+      thicknessMm: thickness,
+
+      sourceBuild: `${size}x${depth} • ${lugs} lugs • ${thickness}mm shell • ${hoopType} • ${scorchDepth}`,
+
+      attack: profile.attack,
+
+      brightness: profile.brightness,
+
+      projection: profile.projection,
+
+      sustain: profile.sustain,
+
+      warmth: profile.warmth,
+
+      sensitivity: profile.sensitivity,
+
+      control: profile.control,
+
+      attackDelta: summary.deltas.attack,
+
+      brightnessDelta: summary.deltas.brightness,
+
+      projectionDelta: summary.deltas.projection,
+
+      sustainDelta: summary.deltas.sustain,
+
+      warmthDelta: summary.deltas.warmth,
+
+      sensitivityDelta: summary.deltas.sensitivity,
+
+      controlDelta: summary.deltas.control,
+
+      spread: summary.spread,
+
+      movementScore: summary.movementScore,
+
+      strongestNode: movedAxes[0]?.axis || '',
+
+      secondaryNode: movedAxes[1]?.axis || '',
+
+      tertiaryNode: movedAxes[2]?.axis || '',
+
+      firstTellTitle: firstTell?.title || '',
+
+      firstTellNodes: firstTell?.nodes || '',
+
+      playerReadTitle: playerRead?.title || '',
+
+      playerReadNodes: playerRead?.nodes || '',
+
+      legacyPrintTitle: legacyPrint?.title || '',
+
+      legacyPrintNodes: legacyPrint?.nodes || '',
+
+      playingSituation: summary.playingSituation,
+
+      feelRead: summary.feelRead,
+
+      highlightedCharacteristics: summary.highlightedCharacteristics,
+
+      warnings: summary.warnings?.join(' | ') || '',
+
+      infoNotes: summary.infoNotes?.join(' | ') || '',
+
+    });
+
+    if (printDetails) {
+
+      printResult(summary, thickness - minThickness, true);
+
+    }
+
+  }
+
+  console.clear();
+
+  console.log(
+
+    `%cHeritage Shell Thickness Sweep: ${size}x${depth} / ${lugs} lugs / ${hoopType} / ${scorchDepth}`,
+
+    'font-size: 16px; font-weight: bold;'
+
+  );
+
+  console.table(rows);
+
+  const movementRows = rows.map((row, index) => {
+
+    const previous = rows[index - 1];
+
+    if (!previous) {
+
+      return {
+
+        thicknessMm: row.thicknessMm,
+
+        fromPrevious: 'baseline',
+
+      };
+
+    }
+
+    return {
+
+      thicknessMm: row.thicknessMm,
+
+      fromPrevious: `${previous.thicknessMm}mm → ${row.thicknessMm}mm`,
+
+      attack: round(row.attack - previous.attack, 2),
+
+      brightness: round(row.brightness - previous.brightness, 2),
+
+      projection: round(row.projection - previous.projection, 2),
+
+      sustain: round(row.sustain - previous.sustain, 2),
+
+      warmth: round(row.warmth - previous.warmth, 2),
+
+      sensitivity: round(row.sensitivity - previous.sensitivity, 2),
+
+      control: round(row.control - previous.control, 2),
+
+      changedFirstTell: row.firstTellTitle !== previous.firstTellTitle,
+
+      changedPlayerRead: row.playerReadTitle !== previous.playerReadTitle,
+
+      changedLegacyPrint: row.legacyPrintTitle !== previous.legacyPrintTitle,
+
+    };
+
+  });
+
+  console.log('Thickness-to-thickness movement:');
+
+  console.table(movementRows);
+
+  const relationshipRows = rows.map((row) => ({
+
+    thicknessMm: row.thicknessMm,
+
+    firstTellTitle: row.firstTellTitle,
+
+    playerReadTitle: row.playerReadTitle,
+
+    legacyPrintTitle: row.legacyPrintTitle,
+
+    strongestNode: row.strongestNode,
+
+    secondaryNode: row.secondaryNode,
+
+    tertiaryNode: row.tertiaryNode,
+
+    movementScore: row.movementScore,
+
+    spread: row.spread,
+
+  }));
+
+  console.log('Relationship movement by thickness:');
+
+  console.table(relationshipRows);
+
+  if (typeof window !== 'undefined') {
+
+    window.heritageShellThicknessSweep = rows;
+
+    window.heritageShellThicknessMovement = movementRows;
+
+    window.heritageShellThicknessRelationships = relationshipRows;
+
+  }
+
+  console.log('Saved debug globals:', {
+
+    sweep: 'window.heritageShellThicknessSweep',
+
+    movement: 'window.heritageShellThicknessMovement',
+
+    relationships: 'window.heritageShellThicknessRelationships',
+
+  });
+
+  return {
+
+    rows,
+
+    movementRows,
+
+    relationshipRows,
+
+  };
+
+}
+
 export default runHeritageVoiceReadTestMatrix;
