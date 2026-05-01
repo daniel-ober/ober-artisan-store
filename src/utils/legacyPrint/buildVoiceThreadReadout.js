@@ -2,90 +2,58 @@
 
 const THREAD_AXIS_LABELS = {
   attack: 'Attack',
-
   brightness: 'Brightness',
-
   projection: 'Projection',
-
   sustain: 'Sustain',
-
   warmth: 'Warmth',
-
   sensitivity: 'Sensitivity',
-
   control: 'Control',
 };
 
 const THREAD_AXIS_SPOKEN_LABELS = {
   attack: 'front edge',
-
   brightness: 'top-end clarity',
-
   projection: 'room carry',
-
   sustain: 'bloom',
-
   warmth: 'body',
-
   sensitivity: 'touch response',
-
   control: 'note control',
 };
 
 const THREAD_AXIS_PLAYER_LANGUAGE = {
   attack: {
     high: 'the note speaks quicker and gives the player a more immediate response',
-
     low: 'the note starts rounder and feels less pointed at the first hit',
-
     neutral: 'the front edge stays close to the Heritage center',
   },
-
   brightness: {
     high: 'the upper edge reads clearer and more articulate',
-
     low: 'the top end feels smoother, darker, and less glassy',
-
     neutral: 'the top-end clarity stays close to the Heritage center',
   },
-
   projection: {
     high: 'the drum feels like it pushes farther into the room',
-
     low: 'the drum feels more intimate and closer to the player',
-
     neutral: 'the room carry stays close to the Heritage center',
   },
-
   sustain: {
     high: 'the note opens up longer after the strike',
-
     low: 'the note exits sooner and feels more contained',
-
     neutral: 'the bloom stays close to the Heritage center',
   },
-
   warmth: {
     high: 'the shell carries more body and low-mid weight',
-
     low: 'the shell reads leaner with less low-mid density',
-
     neutral: 'the body stays close to the Heritage center',
   },
-
   sensitivity: {
     high: 'lighter touch reveals more of the drum',
-
     low: 'the drum asks for a little more input before it fully wakes up',
-
     neutral: 'the touch response stays close to the Heritage center',
   },
-
   control: {
     high: 'the note shape feels more organized and easier to place',
-
     low: 'the note feels more open, wider, and less contained',
-
     neutral: 'the note control stays close to the Heritage center',
   },
 };
@@ -93,89 +61,115 @@ const THREAD_AXIS_PLAYER_LANGUAGE = {
 const THREAD_SHAPE_META = {
   simple: {
     label: 'First read',
-
     listenerLevel: 'clearest pairing',
-
     shapeLabel: '2-point path',
-
     shortDefinition:
-      'The first useful relationship a player is likely to notice.',
 
+      'The first useful relationship a player is likely to notice.',
     whyItMatters:
+
       'This is the first bench note: one plain relationship before asking the player to read the whole drum.',
   },
-
   shaped: {
     label: 'Feel read',
-
     listenerLevel: 'under-the-hands pattern',
-
     shapeLabel: '3-point path',
-
     shortDefinition:
-      'How the drum begins to behave under the hands, not just how it sounds at first hit.',
 
+      'How the drum begins to behave under the hands, not just how it sounds at first hit.',
     whyItMatters:
+
       'This is where the drum starts to feel like a build rather than a list of traits. The three points describe how it behaves under the hands.',
   },
-
   complex: {
     label: 'Bench read',
-
     listenerLevel: 'deeper shell pattern',
-
-    shapeLabel: '4-point path',
-
+    shapeLabel: 'unique bench shape',
     shortDefinition:
-      'The wider pattern that describes the current drum personality.',
 
+      'The wider visual pattern that describes this exact tone-affecting build configuration.',
     whyItMatters:
-      'This is the larger bench read: where the drum opens, where it stays held, and what kind of musical job it naturally wants.',
+
+      'This is the larger bench read: where the drum opens, where it stays held, and how this exact configuration separates itself from nearby builds.',
   },
 };
 
 const BUILD_DRIVER_COPY = {
   'Bearing edge':
+
     'Bearing edge shape affects how quickly the head transfers energy into the shell and how defined the note start feels.',
-
   'Hoop type':
+
     'Hoop choice changes the balance between openness, focus, rimshot firmness, and overtone control.',
-
   'Shell depth':
+
     'Shell depth changes how much air the drum moves, which affects body, bloom, and how big the drum feels.',
-
   Depth:
+
     'Depth changes how much air the drum moves, which affects body, bloom, and how big the drum feels.',
-
   'Shell size':
+
     'Shell size shifts the overall center of the drum: smaller shells often feel quicker, while larger shells tend to carry more body.',
-
   'Shell thickness':
+
     'Shell thickness affects how stiff or relaxed the shell feels, which changes focus, projection, and sustain.',
-
   'Lug count':
+
     'Lug count affects tension distribution and can change how controlled, even, or open the drum feels.',
-
   'Wood / shell recipe':
+
     'The shell recipe sets the core voice of the drum: body, density, response, and how the note develops after impact.',
-
   'Finish intensity':
+
     'Finish intensity can slightly change the way the shell feels under tension and how controlled or open the voice reads.',
-
   'Shell construction':
+
     'Shell construction shapes how energy moves through the drum and how cohesive the note feels.',
-
   'Die-cast hoops':
+
     'Die-cast hoops usually push the read toward more focus, firmer rimshot behavior, and stronger note containment.',
-
   'Triple flange hoops':
+
     'Triple flange hoops usually preserve more openness, spread, and natural shell bloom.',
-
   'Snare response setup':
-    'Snare response setup affects how much detail comes through at lower dynamics, ghost notes, and softer playing.',
 
+    'Snare response setup affects how much detail comes through at lower dynamics, ghost notes, and softer playing.',
   'Lighter finish treatment':
+
     'A lighter finish treatment tends to preserve more openness, touch response, and natural shell movement.',
+};
+
+const includesText = (value = '', needle = '') => {
+  return String(value || '').toLowerCase().includes(needle.toLowerCase());
+};
+
+const getHoopRead = (sourceBuildRead = '') => {
+  const isDieCast = includesText(sourceBuildRead, 'die-cast');
+
+  const isTripleFlange = includesText(sourceBuildRead, 'triple flange');
+
+  if (isDieCast) {
+    return {
+      hoopLabel: 'Die-Cast',
+      hoopEffect:
+
+        'Die-Cast hoops are pushing this read toward more focus, stronger note control, a firmer front edge, and a shorter note tail.',
+    };
+  }
+
+  if (isTripleFlange) {
+    return {
+      hoopLabel: 'Triple Flange',
+      hoopEffect:
+
+        'Triple Flange hoops keep this version a little more open and classic, with less clamp than the Die-Cast version even though the shell and finish still read focused.',
+    };
+  }
+
+  return {
+    hoopLabel: '',
+    hoopEffect: '',
+  };
 };
 
 const normalizeThreadKey = (nodes = []) => {
@@ -185,122 +179,156 @@ const normalizeThreadKey = (nodes = []) => {
 const THREAD_RELATIONSHIP_LANGUAGE = {
   [normalizeThreadKey(['attack', 'brightness'])]: {
     listenerHook:
+
       'This is the kind of drum a player notices right away because the note has a clear front edge and enough top-end detail to make articulation obvious.',
-
     playerTranslation:
-      'In snare language, this points toward clean stick definition, crisp backbeats, articulate ghost notes, and a drum that explains itself quickly in the mix.',
 
+      'In snare language, this points toward clean stick definition, crisp backbeats, articulate ghost notes, and a drum that explains itself quickly in the mix.',
     caution:
+
       'The useful word here is clarity, not harshness. A good read should describe definition without implying the drum is thin, brittle, or overly sharp.',
   },
-
   [normalizeThreadKey(['attack', 'control'])]: {
     listenerHook:
+
       'This thread points to a drum that feels organized from the first hit. The note starts clearly, then stays shaped instead of spreading too far.',
-
     playerTranslation:
-      'In snare language, this is about pocket placement, focused rimshots, tighter grooves, and a drum that feels easy to put exactly where the player wants it.',
 
+      'In snare language, this is about pocket placement, focused rimshots, tighter grooves, and a drum that feels easy to put exactly where the player wants it.',
     caution:
+
       'The useful word here is focus, not stiffness. The read should avoid making the drum sound lifeless or over-controlled.',
   },
-
   [normalizeThreadKey(['brightness', 'projection'])]: {
     listenerHook:
+
       'This thread points to a drum that announces itself in the room. The upper edge and outward push are working together.',
-
     playerTranslation:
-      'In snare language, this usually means the drum can hold its place against guitars, keys, louder rooms, or busier arrangements without needing to be forced.',
 
+      'In snare language, this usually means the drum can hold its place against guitars, keys, louder rooms, or busier arrangements without needing to be forced.',
     caution:
+
       'The useful word here is presence, not volume alone. Projection should be described as carry and placement, not just loudness.',
   },
-
   [normalizeThreadKey(['warmth', 'sustain'])]: {
     listenerHook:
+
       'This thread points to a drum whose body and bloom are working together. The ear notices the center of the note, then hears it open after the hit.',
-
     playerTranslation:
-      'In snare language, this leans toward roundness, shell character, open tuning, rootsier backbeats, and a drum that rewards letting the note breathe.',
 
+      'In snare language, this leans toward roundness, shell character, open tuning, rootsier backbeats, and a drum that rewards letting the note breathe.',
     caution:
+
       'The useful word here is bloom, not ring. Sustain should sound musical and controlled by context, not like uncontrolled overtones.',
   },
-
   [normalizeThreadKey(['warmth', 'control'])]: {
     listenerHook:
+
       'This thread points to body with boundaries. The drum keeps a grounded center while still feeling manageable.',
-
     playerTranslation:
-      'In snare language, this is for players who want wood character and warmth without the drum becoming too loose, washy, or hard to place.',
 
+      'In snare language, this is for players who want wood character and warmth without the drum becoming too loose, washy, or hard to place.',
     caution:
+
       'The useful word here is shaped warmth. Avoid implying that control removes character.',
   },
-
   [normalizeThreadKey(['sensitivity', 'warmth'])]: {
     listenerHook:
+
       'This thread points to a drum that still has body when the player backs off. The quieter notes do not disappear.',
-
     playerTranslation:
-      'In snare language, this means ghost notes, softer strokes, brush-style ideas, and dynamic playing can still carry tone instead of only snare-wire chatter.',
 
+      'In snare language, this means ghost notes, softer strokes, brush-style ideas, and dynamic playing can still carry tone instead of only snare-wire chatter.',
     caution:
+
       'The useful word here is touch, not delicacy. This can still apply to strong players; it simply means the drum gives information back at lower dynamics.',
   },
-
   [normalizeThreadKey(['sensitivity', 'control'])]: {
     listenerHook:
+
       'This thread points to detail that stays organized. The drum reveals touch changes without the note getting messy.',
-
     playerTranslation:
-      'In snare language, this is about ghost-note clarity, controlled drag patterns, studio phrasing, and a drum that reacts without spilling all over the track.',
 
+      'In snare language, this is about ghost-note clarity, controlled drag patterns, studio phrasing, and a drum that reacts without spilling all over the track.',
     caution:
+
       'The useful word here is responsive focus. Avoid making it sound clinical or overly restrained.',
   },
-
   [normalizeThreadKey(['projection', 'sustain'])]: {
     listenerHook:
+
       'This thread points to a drum that feels larger after impact. The note travels and hangs in the room.',
-
     playerTranslation:
-      'In snare language, this is about open rooms, bigger backbeats, wider arrangements, and a snare that feels alive beyond the first crack.',
 
+      'In snare language, this is about open rooms, bigger backbeats, wider arrangements, and a snare that feels alive beyond the first crack.',
     caution:
+
       'The useful word here is carry. It should not imply the drum is uncontrolled or too ringy.',
   },
-
   [normalizeThreadKey(['attack', 'sensitivity', 'control'])]: {
     listenerHook:
+
       'This triangle points to a drum that responds quickly, tracks touch changes, and keeps the note disciplined.',
-
     playerTranslation:
-      'In snare language, this is a precision-feel read: ghost notes speak, accents pop, and the player can move between soft and strong without the drum losing shape.',
 
+      'In snare language, this is a precision-feel read: ghost notes speak, accents pop, and the player can move between soft and strong without the drum losing shape.',
     caution:
+
       'The useful word here is disciplined response. Avoid making the drum sound rigid; the point is control across dynamics.',
   },
-
   [normalizeThreadKey(['sensitivity', 'sustain', 'warmth'])]: {
     listenerHook:
+
       'This triangle points to a drum that feels expressive under the hands. Body, bloom, and touch response are working as one behavior.',
-
     playerTranslation:
-      'In snare language, this is a musical-feel read: the drum opens up when played, carries tone at lower dynamics, and rewards players who shape sound through touch.',
 
+      'In snare language, this is a musical-feel read: the drum opens up when played, carries tone at lower dynamics, and rewards players who shape sound through touch.',
     caution:
+
       'The useful word here is expressiveness. Avoid over-romanticizing it; the practical point is that the drum gives usable tone across a wider dynamic range.',
   },
+  [normalizeThreadKey(['attack', 'warmth', 'sustain'])]: {
+    listenerHook:
 
+      'This triangle points to a drum that keeps a clear start while letting the shell body and bloom remain part of the note.',
+    playerTranslation:
+
+      'In snare language, this is about a drum that can feel round and musical without losing stick definition. The front edge is still there, but it is not the only thing the player hears.',
+    caution:
+
+      'The useful word here is rounded clarity. Avoid making it sound like attack and warmth are fighting each other.',
+  },
+  [normalizeThreadKey(['projection', 'control', 'warmth'])]: {
+    listenerHook:
+
+      'This triangle points to a drum with body, carry, and a held-together note shape.',
+    playerTranslation:
+
+      'In snare language, this is about a drum that feels grounded but still useful in a room. It carries without becoming loose, and it stays warm without becoming cloudy.',
+    caution:
+
+      'The useful word here is directed body. It should not imply the drum is overly controlled or muted.',
+  },
+  [normalizeThreadKey(['sustain', 'warmth', 'attack', 'control'])]: {
+    listenerHook:
+
+      'This bench shape points to a build where body, bloom, front edge, and note control are all pulling on the final personality.',
+    playerTranslation:
+
+      'In snare language, this is a full-build read: the drum has enough body to feel grounded, enough bloom to feel alive, enough edge to speak, and enough control to stay useful.',
+    caution:
+
+      'The useful phrase here is full-build balance. The shape should describe the exact configuration, not claim that every finished drum will land identically.',
+  },
   [normalizeThreadKey(['control', 'sensitivity', 'sustain', 'warmth'])]: {
     listenerHook:
+
       'This wider pattern points to the drum’s deeper personality: body, bloom, touch, and control are all part of the same voice behavior.',
-
     playerTranslation:
-      'In snare language, this is not just one trait standing out. It describes a drum that wants to feel dimensional: warm enough to have a center, open enough to breathe, responsive enough to follow the hands, and controlled enough to stay usable.',
 
+      'In snare language, this is not just one trait standing out. It describes a drum that wants to feel dimensional: warm enough to have a center, open enough to breathe, responsive enough to follow the hands, and controlled enough to stay usable.',
     caution:
+
       'The useful word here is personality. This should be presented as a practical listening read, not a claim that the engine fully predicts the finished drum.',
   },
 };
@@ -322,6 +350,7 @@ const round1 = (value) => Math.round(Number(value || 0) * 10) / 10;
 const getAxisValue = (profile = {}, axis) => Number(profile?.[axis] ?? 5);
 
 const getAxisDelta = (profile = {}, axis) =>
+
   round1(getAxisValue(profile, axis) - 5);
 
 const getAxisDirection = (profile = {}, axis) => {
@@ -347,7 +376,6 @@ const getAxisIntensity = (profile = {}, axis) => {
 };
 
 const getThreadKind = (thread = {}) => {
-
   const slotKey = String(thread?.slotKey || '').toLowerCase();
 
   if (slotKey === 'simple') return 'simple';
@@ -363,7 +391,6 @@ const getThreadKind = (thread = {}) => {
   if (nodeCount === 3) return 'shaped';
 
   return 'complex';
-
 };
 
 const formatNodeList = (nodes = []) => {
@@ -394,17 +421,14 @@ const getDominantAxis = (nodes = [], profile = {}) => {
       if (delta > strongest.delta) {
         return {
           axis: node,
-
           delta,
         };
       }
 
       return strongest;
     },
-
     {
       axis: nodes[0] || 'attack',
-
       delta: 0,
     }
   ).axis;
@@ -420,22 +444,18 @@ const buildTraitEvidence = (nodes = [], profile = {}) => {
 
     return {
       axis: node,
-
       label: THREAD_AXIS_LABELS[node] || node,
-
       spokenLabel: THREAD_AXIS_SPOKEN_LABELS[node] || node,
-
       value: round1(getAxisValue(profile, node)),
-
       delta,
-
       direction,
-
       intensity,
-
       read:
+
         THREAD_AXIS_PLAYER_LANGUAGE[node]?.[direction] ||
+
         THREAD_AXIS_PLAYER_LANGUAGE[node]?.neutral ||
+
         'this trait stays close to the center',
     };
   });
@@ -445,8 +465,11 @@ const buildIntensityLabel = (evidence = []) => {
   const deltas = evidence.map((item) => Math.abs(Number(item.delta || 0)));
 
   const average =
+
     deltas.length > 0
+
       ? deltas.reduce((sum, value) => sum + value, 0) / deltas.length
+
       : 0;
 
   const strongest = Math.max(...deltas, 0);
@@ -456,8 +479,8 @@ const buildIntensityLabel = (evidence = []) => {
   if (combined >= 1.15) {
     return {
       label: 'Strong',
-
       detail:
+
         'This thread is clearly shaping the current read and should be easy to discuss with a player.',
     };
   }
@@ -465,8 +488,8 @@ const buildIntensityLabel = (evidence = []) => {
   if (combined >= 0.65) {
     return {
       label: 'Moderate',
-
       detail:
+
         'This thread is present enough to matter, but it is still working inside the broader Heritage balance.',
     };
   }
@@ -474,22 +497,92 @@ const buildIntensityLabel = (evidence = []) => {
   if (combined >= 0.35) {
     return {
       label: 'Subtle',
-
       detail:
+
         'This thread is more of a gentle lean than a hard personality shift.',
     };
   }
 
   return {
     label: 'Centered',
-
     detail:
+
       'This thread is reading close to the reference center, so it should be described carefully and without overstatement.',
+  };
+};
+
+const buildBenchShapeDetail = ({ thread, nodes, profile }) => {
+  const visualSignatureHash = thread?.visualSignatureHash || '';
+
+  const uniqueBenchShapeKey = thread?.uniqueBenchShapeKey || '';
+
+  const signature = thread?.visualSignature || null;
+
+  const kind = getThreadKind(thread);
+
+  if (kind !== 'complex') {
+    return {
+      visualSignatureHash,
+      uniqueBenchShapeKey,
+      visualSignature: signature,
+      benchShapeRead: '',
+    };
+  }
+
+  const evidence = buildTraitEvidence(nodes, profile);
+
+  const activeEvidence = evidence
+
+    .filter((item) => item.intensity !== 'centered')
+
+    .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
+
+  const lead = activeEvidence[0];
+
+  const secondary = activeEvidence[1];
+
+  const leadPhrase = lead
+
+    ? `${lead.spokenLabel} ${lead.delta >= 0 ? 'pulling higher' : 'settling lower'}`
+
+    : 'the connected nodes staying close to center';
+
+  const secondaryPhrase = secondary
+
+    ? ` with ${secondary.spokenLabel} ${
+        secondary.delta >= 0 ? 'also opening up' : 'also tightening down'
+      }`
+
+    : '';
+
+  const signaturePhrase = visualSignatureHash
+
+    ? ` Shape ID ${visualSignatureHash} is attached to this exact tone-affecting build recipe.`
+
+    : '';
+
+  return {
+    visualSignatureHash,
+    uniqueBenchShapeKey,
+    visualSignature: signature,
+    benchShapeRead: `The Bench shape is the unique visual fingerprint for this configuration: ${leadPhrase}${secondaryPhrase}.${signaturePhrase}`,
   };
 };
 
 const buildOpeningRead = ({ thread, kindMeta, nodes, profile }) => {
   const relationshipLanguage = getRelationshipLanguage(nodes);
+
+  const kind = getThreadKind(thread);
+
+  const benchShape = buildBenchShapeDetail({
+    thread,
+    nodes,
+    profile,
+  });
+
+  if (kind === 'complex' && benchShape.benchShapeRead) {
+    return benchShape.benchShapeRead;
+  }
 
   if (relationshipLanguage?.listenerHook) {
     return relationshipLanguage.listenerHook;
@@ -512,10 +605,55 @@ const buildOpeningRead = ({ thread, kindMeta, nodes, profile }) => {
   return `This wider pattern is the current drum-personality read. The engine is looking beyond one trait or one relationship and reading how ${nodeText} form a broader musical behavior.`;
 };
 
-const buildWhatThreadIsTellingUs = ({ nodes, profile, thread }) => {
+const buildWhatThreadIsTellingUs = ({
+  nodes,
+  profile,
+  thread,
+  sourceBuildRead = '',
+}) => {
+  const hoopRead = getHoopRead(sourceBuildRead);
+
   const relationshipLanguage = getRelationshipLanguage(nodes);
 
+  const kind = getThreadKind(thread);
+
+  const benchShape = buildBenchShapeDetail({
+    thread,
+    nodes,
+    profile,
+  });
+
+  if (kind === 'complex' && benchShape.benchShapeRead) {
+    const evidence = buildTraitEvidence(nodes, profile);
+
+    const meaningfulEvidence = evidence.filter(
+      (item) => item.intensity !== 'centered'
+    );
+
+    const evidenceToUse = meaningfulEvidence.length
+
+      ? meaningfulEvidence
+
+      : evidence;
+
+    const phrases = evidenceToUse.slice(0, 3).map((item) => item.read);
+
+    if (phrases.length >= 2) {
+      return `In player terms, ${phrases[0]}, while ${phrases[1]}. The visual shape is intentionally unique to this build recipe, so nearby configurations can share a thread title while still showing a different bench-path fingerprint.`;
+    }
+
+    if (phrases.length === 1) {
+      return `In player terms, ${phrases[0]}. The visual shape is intentionally unique to this build recipe, so nearby configurations can share a thread title while still showing a different bench-path fingerprint.`;
+    }
+
+    return benchShape.benchShapeRead;
+  }
+
   if (relationshipLanguage?.playerTranslation) {
+    if (thread?.id === 'shorter-note-firm-response' && hoopRead.hoopEffect) {
+      return `${relationshipLanguage.playerTranslation} ${hoopRead.hoopEffect}`;
+    }
+
     return relationshipLanguage.playerTranslation;
   }
 
@@ -526,26 +664,36 @@ const buildWhatThreadIsTellingUs = ({ nodes, profile, thread }) => {
   );
 
   const evidenceToUse = meaningfulEvidence.length
+
     ? meaningfulEvidence
+
     : evidence;
 
   const phrases = evidenceToUse.slice(0, 4).map((item) => item.read);
 
+  const hoopSentence =
+
+    thread?.id === 'shorter-note-firm-response' && hoopRead.hoopEffect
+
+      ? ` ${hoopRead.hoopEffect}`
+
+      : '';
+
   if (phrases.length === 0) {
-    return (
+    return `${
       thread?.summary || 'This thread is reading close to the Heritage center.'
-    );
+    }${hoopSentence}`;
   }
 
   if (phrases.length === 1) {
-    return `In player terms, ${phrases[0]}.`;
+    return `In player terms, ${phrases[0]}.${hoopSentence}`;
   }
 
   if (phrases.length === 2) {
-    return `In player terms, ${phrases[0]}, while ${phrases[1]}.`;
+    return `In player terms, ${phrases[0]}, while ${phrases[1]}.${hoopSentence}`;
   }
 
-  return `In player terms, ${phrases[0]}, ${phrases[1]}, and ${phrases[2]}.`;
+  return `In player terms, ${phrases[0]}, ${phrases[1]}, and ${phrases[2]}.${hoopSentence}`;
 };
 
 const buildWhyItMatters = ({ kind, kindMeta, thread }) => {
@@ -559,7 +707,7 @@ const buildWhyItMatters = ({ kind, kindMeta, thread }) => {
     return `${kindMeta.whyItMatters} For this build, it points to the way the shell, hardware, and tuning lane start working as one feel.`;
   }
 
-  return `${kindMeta.whyItMatters} For this build, it keeps the VoiceMap grounded in the way a player would actually talk about the drum.`;
+  return `${kindMeta.whyItMatters} The title can describe a family of behavior, but the visual Bench shape should act like this build’s individual voiceprint.`;
 };
 
 const buildHowToUseThis = ({ kind, thread }) => {
@@ -571,11 +719,19 @@ const buildHowToUseThis = ({ kind, thread }) => {
     return `Use this when talking about feel, touch, and behavior once the drum is actually being played.`;
   }
 
+  if (thread?.visualSignatureHash) {
+    return `Use this for player fit, room choice, tuning lane, and build comparison. The Bench shape can separate this exact configuration from nearby versions even when the same broad thread title appears.`;
+  }
+
   return `Use this for player fit, room choice, tuning lane, and the musical role this drum seems built to serve.`;
 };
 
-const buildTrustNote = ({ kind, evidence, nodes = [] }) => {
+const buildTrustNote = ({ kind, evidence, nodes = [], thread = null }) => {
   const relationshipLanguage = getRelationshipLanguage(nodes);
+
+  if (kind === 'complex' && thread?.visualSignatureHash) {
+    return 'Treat the Bench shape like a visual bench note, not a final promise. It is designed to separate tone-affecting configurations before the finished drum is tuned, played, and heard in the room.';
+  }
 
   if (relationshipLanguage?.caution) {
     return relationshipLanguage.caution;
@@ -599,9 +755,10 @@ const buildTrustNote = ({ kind, evidence, nodes = [] }) => {
 const buildDriverEvidence = (drivers = []) => {
   return drivers.map((driver) => ({
     label: driver,
-
     read:
+
       BUILD_DRIVER_COPY[driver] ||
+
       'This build choice contributes to the way the connected traits are being shaped.',
   }));
 };
@@ -612,13 +769,13 @@ const buildThreadName = ({ kindMeta }) => {
 
 export function buildVoiceThreadReadout({
   thread = null,
-
   profile = {},
-
   sourceBuildRead = '',
 } = {}) {
   const nodes = Array.isArray(thread?.nodes)
+
     ? thread.nodes.filter(Boolean)
+
     : [];
 
   const kind = getThreadKind(thread);
@@ -629,79 +786,70 @@ export function buildVoiceThreadReadout({
 
   const intensity = buildIntensityLabel(evidence);
 
+  const benchShape = buildBenchShapeDetail({
+    thread,
+    nodes,
+    profile,
+  });
+
   return {
     id: thread?.id || 'voice-thread',
-
     title: thread?.title || 'Voice Thread',
-
     threadName: buildThreadName({ kindMeta }),
-
     threadKind: kind,
-
     listenerLevel: kindMeta.listenerLevel,
+    shapeLabel:
 
-    shapeLabel: kindMeta.shapeLabel,
+      kind === 'complex' && thread?.visualSignatureHash
 
+        ? 'unique bench shape'
+
+        : kindMeta.shapeLabel,
     shortDefinition: kindMeta.shortDefinition,
-
     intensityLabel: intensity.label,
-
     intensityDetail: intensity.detail,
-
     nodeLabels: formatNodeList(nodes),
-
     spokenNodeLabels: formatSpokenNodeList(nodes),
-
     openingRead: buildOpeningRead({
       thread,
-
       kindMeta,
-
       nodes,
-
       profile,
     }),
-
     whatThreadIsTellingUs: buildWhatThreadIsTellingUs({
       nodes,
-
       profile,
-
       thread,
+      sourceBuildRead,
     }),
-
     whyItMatters: buildWhyItMatters({
       kind,
-
       kindMeta,
-
       thread,
     }),
-
     howToUseThis: buildHowToUseThis({
       kind,
-
       thread,
     }),
-
     bestFitRead: thread?.bestFits?.length
+
       ? `This thread tends to make the most sense for ${thread.bestFits.join(
           ', '
         )}.`
-      : 'This thread should be treated as a general voicing direction until more player context is known.',
 
+      : 'This thread should be treated as a general voicing direction until more player context is known.',
     trustNote: buildTrustNote({
       kind,
-
       evidence,
-
       nodes,
+      thread,
     }),
-
     traitEvidence: evidence,
-
     driverEvidence: buildDriverEvidence(thread?.drivers || []),
-
+    visualSignatureHash: benchShape.visualSignatureHash,
+    uniqueBenchShapeKey: benchShape.uniqueBenchShapeKey,
+    visualSignature: benchShape.visualSignature,
+    benchShapeRead: benchShape.benchShapeRead,
     sourceBuildRead,
   };
 }

@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { doc, getDoc } from 'firebase/firestore';
 
+import VoiceThreadMap from './VoiceThreadMap';
+
+import buildHeritageMusicalIdentityTitle from '../utils/legacyPrint/buildHeritageMusicalIdentityTitle';
+
 import {
   Zap,
   Waves,
@@ -42,136 +46,85 @@ import './HeritageProductDetail.css';
 
 const AXIS_META = [
   { key: 'attack', label: 'Attack', icon: 'attack' },
-
   { key: 'brightness', label: 'Brightness', icon: 'brightness' },
-
   { key: 'projection', label: 'Projection', icon: 'projection' },
-
   { key: 'sustain', label: 'Sustain', icon: 'sustain' },
-
   { key: 'warmth', label: 'Warmth', icon: 'warmth' },
-
   { key: 'sensitivity', label: 'Sensitivity', icon: 'sensitivity' },
-
   { key: 'control', label: 'Control', icon: 'control' },
 ];
 
 const AXIS_POINT_COLORS = [
-  '#ff7448', // attack
-
-  '#e7d98f', // brightness
-
-  '#ffb53a', // projection
-
-  '#4d86ff', // sustain
-
-  '#c1682e', // warmth
-
-  '#68d9df', // sensitivity
-
-  '#9e8bff', // control
+  '#ff7448',
+  '#e7d98f',
+  '#ffb53a',
+  '#4d86ff',
+  '#c1682e',
+  '#68d9df',
+  '#9e8bff',
 ];
 
 const AXIS_COLOR_BY_KEY = {
   attack: '#ff7448',
-
   brightness: '#e7d98f',
-
   projection: '#ffb53a',
-
   sustain: '#4d86ff',
-
   warmth: '#c1682e',
-
   sensitivity: '#68d9df',
-
   control: '#9e8bff',
 };
 
 const AXIS_SUBLABELS = {
   attack: 'Strike',
-
   brightness: 'Clarity',
-
   projection: 'Carry',
-
   sustain: 'Bloom',
-
   warmth: 'Body',
-
   sensitivity: 'Touch',
-
   control: 'Refinement',
 };
 
 const AXIS_IMPACT_FACTORS = {
   attack: [
     { label: 'Hoop type', strength: 'strong' },
-
     { label: 'Bearing edge', strength: 'strong' },
-
     { label: 'Shell depth', strength: 'medium' },
-
     { label: 'Lug count', strength: 'light' },
   ],
-
   sustain: [
     { label: 'Hoop type', strength: 'strong' },
-
     { label: 'Shell depth', strength: 'strong' },
-
     { label: 'Shell thickness', strength: 'medium' },
-
     { label: 'Lug count', strength: 'light' },
   ],
-
   warmth: [
     { label: 'Shell size', strength: 'strong' },
-
     { label: 'Wood / shell recipe', strength: 'strong' },
-
     { label: 'Shell thickness', strength: 'medium' },
-
     { label: 'Finish intensity', strength: 'light' },
   ],
-
   projection: [
     { label: 'Shell size', strength: 'strong' },
-
     { label: 'Depth', strength: 'strong' },
-
     { label: 'Hoop type', strength: 'medium' },
-
     { label: 'Shell construction', strength: 'light' },
   ],
-
   brightness: [
     { label: 'Bearing edge', strength: 'strong' },
-
     { label: 'Hoop type', strength: 'strong' },
-
     { label: 'Shell thickness', strength: 'medium' },
-
     { label: 'Finish intensity', strength: 'light' },
   ],
-
   sensitivity: [
     { label: 'Snare response setup', strength: 'strong' },
-
     { label: 'Bearing edge', strength: 'strong' },
-
     { label: 'Shell depth', strength: 'medium' },
-
     { label: 'Hoop type', strength: 'light' },
   ],
-
   control: [
     { label: 'Hoop type', strength: 'strong' },
-
     { label: 'Lug count', strength: 'strong' },
-
     { label: 'Shell thickness', strength: 'medium' },
-
     { label: 'Bearing edge', strength: 'light' },
   ],
 };
@@ -179,40 +132,30 @@ const AXIS_IMPACT_FACTORS = {
 const BASE_LEGACYPRINT_TABS = [
   {
     key: 'voiceRead',
-
     label: 'VoiceMap™',
   },
-
   {
     key: 'relationships',
-
     label: 'Voice Threads',
   },
-
   {
     key: 'legacyTuning',
-
     label: 'LegacyTuning™',
   },
-
   {
     key: 'legacyPrintRead',
-
     label: 'LegacyPrint™ Read',
   },
 ];
 
 const REFERENCE_SETUP_TAB = {
   key: 'referenceSetup',
-
   label: 'Reference Setup',
 };
 
 const DISCOVERY_LEGACYPRINT_TAB = {
   key: 'discovery',
-
   label: 'Discovery',
-
   locked: true,
 };
 
@@ -225,9 +168,7 @@ const getLegacyTuningRangeBounds = (position) => {
 
   return {
     start: Math.max(1, center - width),
-
     end: Math.min(5, center + width),
-
     center,
   };
 };
@@ -260,27 +201,16 @@ const getLegacyTuningHzRange = (range) => {
 
 const NOTE_NAMES = [
   'C',
-
   'C#',
-
   'D',
-
   'D#',
-
   'E',
-
   'F',
-
   'F#',
-
   'G',
-
   'G#',
-
   'A',
-
   'A#',
-
   'B',
 ];
 
@@ -304,14 +234,12 @@ const parseHzRange = (rangeText = '') => {
   if (!matches || matches.length < 2) {
     return {
       startHz: null,
-
       endHz: null,
     };
   }
 
   return {
     startHz: Number(matches[0]),
-
     endHz: Number(matches[1]),
   };
 };
@@ -365,43 +293,24 @@ const buildProjectedVoiceRange = (summary) => {
 
 const BENCHMARK_VOICE_RANGE_FALLBACKS = {
   'heritage-oak-reference': 2.9,
-
   'feuzon-hybrid-reference': 3.35,
-
   'maple-ply-reference': 3.45,
-
   'birch-ply-reference': 3.8,
-
   'oak-ply-reference': 3.15,
-
   'walnut-ply-reference': 2.3,
-
   'mahogany-ply-reference': 2.1,
-
   'brass-reference': 3.75,
-
   'steel-reference': 4.35,
-
   'aluminum-reference': 4.05,
-
   'copper-reference': 3.2,
-
   'bronze-reference': 3.55,
-
   'thin-acrylic-reference': 4.7,
-
   'medium-acrylic-reference': 4.4,
-
   'thick-acrylic-reference': 4.15,
-
   'steam-bent-maple-reference': 3.2,
-
   'steam-bent-mahogany-reference': 2.15,
-
   'solid-maple-reference': 3.25,
-
   'solid-walnut-reference': 2.35,
-
   'solid-oak-reference': 3.05,
 };
 
@@ -470,17 +379,11 @@ const buildCurrentBuildToneSummary = (summary) => {
 
   const values = {
     attack: Number(profile.attack ?? 5),
-
     sustain: Number(profile.sustain ?? 5),
-
     warmth: Number(profile.warmth ?? 5),
-
     projection: Number(profile.projection ?? 5),
-
     brightness: Number(profile.brightness ?? 5),
-
     sensitivity: Number(profile.sensitivity ?? 5),
-
     control: Number(profile.control ?? 5),
   };
 
@@ -526,32 +429,23 @@ const buildCurrentBuildToneSummary = (summary) => {
 
 const buildToneSummary = (
   summary,
-
   selectedBenchmarkType = null,
-
   selectedBenchmarkSize = null
 ) => {
   const profile = summary?.profile || {};
 
   const referenceLabel = getReferenceLabel(
     selectedBenchmarkType,
-
     selectedBenchmarkSize
   );
 
   const deltas = {
     attack: Number((Number(profile.attack ?? 5) - 5).toFixed(1)),
-
     sustain: Number((Number(profile.sustain ?? 5) - 5).toFixed(1)),
-
     warmth: Number((Number(profile.warmth ?? 5) - 5).toFixed(1)),
-
     projection: Number((Number(profile.projection ?? 5) - 5).toFixed(1)),
-
     brightness: Number((Number(profile.brightness ?? 5) - 5).toFixed(1)),
-
     sensitivity: Number((Number(profile.sensitivity ?? 5) - 5).toFixed(1)),
-
     control: Number((Number(profile.control ?? 5) - 5).toFixed(1)),
   };
 
@@ -596,91 +490,64 @@ const buildToneSummary = (
 const AXIS_INSIGHT_COPY = {
   attack: {
     short: 'How quickly the note speaks at the front edge.',
-
     detail:
       'Attack is the first thing the stick gives back to the player. In this Heritage build, it describes how immediate, rounded, crisp, or assertive the drum feels at the start of the note.',
-
     scaleLow:
       'A lower attack read means the note starts rounder and softer. The drum feels less sharp at the front edge and more relaxed under the stick.',
-
     scaleHigh:
       'A higher attack read means the note starts quicker and more defined. The drum feels more immediate, articulate, and assertive on the first strike.',
   },
-
   sustain: {
     short: 'How long the note blooms after the strike.',
-
     detail:
       'Sustain describes how much the shell wants to hold onto the note after impact. It is the length, openness, and bloom that follow the first hit.',
-
     scaleLow:
       'A lower sustain read means the note exits sooner. The drum feels tighter, shorter, and more contained.',
-
     scaleHigh:
       'A higher sustain read means the note hangs longer. The shell feels more open and willing to bloom after the strike.',
   },
-
   warmth: {
     short: 'How much body and low-mid weight sit in the voice.',
-
     detail:
       'Warmth is the center of the drum — the woodiness, body, and low-mid richness that make the shell feel grounded instead of sharp or glassy.',
-
     scaleLow:
       'A lower warmth read means a leaner center with less low-mid body. The drum feels cleaner, tighter, or more direct.',
-
     scaleHigh:
       'A higher warmth read means more body in the center of the note. The shell feels fuller, deeper, and more grounded.',
   },
-
   projection: {
     short: 'How confidently the drum pushes into the room.',
-
     detail:
       'Projection describes how strongly the drum carries outward. It is not just volume — it is the way the note moves through a room or mix.',
-
     scaleLow:
       'A lower projection read means the drum feels more intimate and closer to the player.',
-
     scaleHigh:
       'A higher projection read means stronger room presence and more outward push. The note carries farther and feels more commanding.',
   },
-
   brightness: {
     short: 'How much upper-register clarity sits on top.',
-
     detail:
       'Brightness is the top edge of the sound: snap, sheen, cut, and upper-register clarity. It affects how easily the drum speaks through a mix.',
-
     scaleLow:
       'A lower brightness read means a darker top end with less sheen. The drum feels woodier and more restrained.',
-
     scaleHigh:
       'A higher brightness read means more top-end edge, snap, and cut. The drum feels clearer and more articulate.',
   },
-
   sensitivity: {
     short: 'How easily the drum responds to lighter touch.',
-
     detail:
       'Sensitivity describes how much the shell and snare response open up under lighter hands, ghost notes, soft playing, and dynamic nuance.',
-
     scaleLow:
       'A lower sensitivity read means the drum wants a little more input before it fully wakes up.',
-
     scaleHigh:
       'A higher sensitivity read means the drum opens more easily at lower dynamics and reveals more detail under softer touch.',
   },
-
   control: {
     short: 'How shaped and manageable the note feels.',
-
     detail:
       'Control describes how organized the note feels through overtone behavior, decay, and focus. It is the difference between open spread and composed shape.',
-
     scaleLow:
       'A lower control read means the drum feels more open, wider, and less contained.',
-
     scaleHigh:
       'A higher control read means the note feels tighter, more organized, and easier to place.',
   },
@@ -694,49 +561,27 @@ const DEFAULT_BENCHMARK_SIZE_ID = '14x5_5';
 
 const HERITAGE_STANDARD_REFERENCE = {
   series: 'HERITAGE Standard Reference',
-
   benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
-
   benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
-
   benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
-
   size: '14',
-
   depth: '5.5',
-
   lugs: '8',
-
   staveOption: '16 - 10mm',
-
   staveQuantity: 16,
-
   shellThickness: '10mm',
-
   shellConstruction: 'Northern Red Oak stave shell',
-
   primaryWood: 'Northern Red Oak',
-
   hoopType: 'Triple Flange',
-
   hardwareColor: 'Chrome',
-
   bearingEdge: '45° inner bearing edge with softened outer roundover',
-
   snareBed: 'Standard',
-
   finish: 'Medium Torch',
-
   throwOff: 'Trick GS007',
-
   batterHead: 'Remo Ambassador Coated',
-
   resonantHead: 'Remo Ambassador Hazy Snare Side',
-
   snareWires: 'PureSound Custom Pro Steel 20-Strand',
-
   tuning: 'Medium',
-
   muffling: 'None',
 };
 
@@ -748,9 +593,7 @@ const HERITAGE_STANDARD_SNARE_BED = HERITAGE_STANDARD_REFERENCE.snareBed;
 
 const HERITAGE_FINISH_SWATCHES = {
   'Light Torch': '/swatches/heritage/light.png',
-
   'Medium Torch': '/swatches/heritage/medium.png',
-
   Blackened: '/swatches/heritage/blackened.png',
 };
 
@@ -761,49 +604,29 @@ const reRingCost = 150;
 const depthPrices = {
   12: {
     '5.0': 0,
-
     5.5: 50,
-
     '6.0': 100,
-
     6.5: 150,
-
     '7.0': 200,
-
     7.5: 250,
-
     '8.0': 300,
   },
-
   13: {
     '5.0': 0,
-
     5.5: 50,
-
     '6.0': 100,
-
     6.5: 150,
-
     '7.0': 200,
-
     7.5: 250,
-
     '8.0': 300,
   },
-
   14: {
     '5.0': 0,
-
     5.5: 50,
-
     '6.0': 100,
-
     6.5: 150,
-
     '7.0': 200,
-
     7.5: 250,
-
     '8.0': 300,
   },
 };
@@ -811,55 +634,38 @@ const depthPrices = {
 const staveOptions = {
   12: {
     6: ['12 - 8mm + $150 (Re-Rings Required)'],
-
     8: ['16 - 10mm'],
   },
-
   13: { 8: ['16 - 10mm'] },
-
   14: {
     8: ['16 - 10mm'],
-
     10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'],
   },
 };
 
 const lugOptions = {
   12: ['8', '6'],
-
   13: ['8'],
-
   14: ['8', '10'],
 };
 
 const hardwareOptions = [
   {
     label: 'Chrome',
-
     value: 'Chrome',
-
     upcharge: 0,
-
     description: 'Classic and clean.',
   },
-
   {
     label: 'Black Nickel',
-
     value: 'Black Nickel',
-
     upcharge: 50,
-
     description: 'Slightly darker, more modern feel.',
   },
-
   {
     label: 'Brass / Gold',
-
     value: 'Brass/Gold',
-
     upcharge: 150,
-
     description: 'Richer, warmer visual statement.',
   },
 ];
@@ -867,21 +673,14 @@ const hardwareOptions = [
 const hoopOptions = [
   {
     label: 'Triple Flange',
-
     value: 'Triple Flange',
-
     upcharge: 0,
-
     description: 'More open and classic.',
   },
-
   {
     label: 'Die-Cast',
-
     value: 'Die-Cast',
-
     upcharge: 100,
-
     description: 'Tighter response and more focus.',
   },
 ];
@@ -890,15 +689,12 @@ const scorchOptions = ['Light Torch', 'Medium Torch', 'Blackened'];
 
 const hardwareUpchargeMap = {
   Chrome: 0,
-
   'Black Nickel': 50,
-
   'Brass/Gold': 150,
 };
 
 const hoopUpchargeMap = {
   'Triple Flange': 0,
-
   'Die-Cast': 100,
 };
 
@@ -969,13 +765,9 @@ const getDisplayMetricValue = (rawValue) => {
 
 const computeHeritagePrice = ({
   size,
-
   depth,
-
   staveOption,
-
   hardwareColor,
-
   hoopType,
 }) => {
   let price = basePrices[size] || 0;
@@ -994,11 +786,8 @@ const computeHeritagePrice = ({
 const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
   const iconProps = {
     size,
-
     strokeWidth: 2.15,
-
     color,
-
     'aria-hidden': true,
   };
 
@@ -1029,22 +818,6 @@ const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
   }
 };
 
-const buildThreadSegments = (nodes = []) => {
-  const cleanNodes = Array.isArray(nodes) ? nodes.filter(Boolean) : [];
-
-  if (cleanNodes.length < 2) return [];
-
-  if (cleanNodes.length === 2) {
-    return [[cleanNodes[0], cleanNodes[1]]];
-  }
-
-  return cleanNodes.map((node, index) => {
-    const nextNode = cleanNodes[(index + 1) % cleanNodes.length];
-
-    return [node, nextNode];
-  });
-};
-
 const renderThreadNodeIcons = (nodes = []) => {
   return (
     <span className="heritage-thread-node-icon-list" aria-label="Thread nodes">
@@ -1069,6 +842,30 @@ const renderThreadNodeIcons = (nodes = []) => {
   );
 };
 
+const renderThreadNodeLabelList = (nodes = []) => {
+  return (
+    <span className="heritage-thread-card-node-list">
+      {nodes.map((nodeKey) => {
+        const axis = AXIS_META.find((axisItem) => axisItem.key === nodeKey);
+
+        const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+        return (
+          <span
+            key={nodeKey}
+            className="heritage-thread-card-node-item"
+            style={{ '--axis-color': color }}
+          >
+            <MetricIcon type={axis?.icon || nodeKey} color={color} size={13} />
+
+            <span>{axis?.label || nodeKey}</span>
+          </span>
+        );
+      })}
+    </span>
+  );
+};
+
 const getThreadColorVars = (nodes = []) => {
   const colors = nodes
 
@@ -1080,306 +877,11 @@ const getThreadColorVars = (nodes = []) => {
 
   return {
     '--thread-accent': colors[0] || fallback,
-
     '--thread-accent-2': colors[1] || colors[0] || fallback,
-
     '--thread-accent-3': colors[2] || colors[1] || colors[0] || fallback,
-
     '--thread-accent-4':
       colors[3] || colors[2] || colors[1] || colors[0] || fallback,
   };
-};
-
-const THREAD_NODE_POSITIONS = {
-  attack: { x: 50, y: 16 },
-
-  brightness: { x: 80, y: 31 },
-
-  projection: { x: 86, y: 58 },
-
-  sustain: { x: 66, y: 84 },
-
-  warmth: { x: 34, y: 84 },
-
-  sensitivity: { x: 14, y: 58 },
-
-  control: { x: 20, y: 31 },
-};
-
-const THREAD_NODE_ICON_POSITIONS = {
-  attack: { x: 50, y: 9 },
-
-  brightness: { x: 88, y: 27 },
-
-  projection: { x: 95, y: 58 },
-
-  sustain: { x: 69, y: 93 },
-
-  warmth: { x: 31, y: 93 },
-
-  sensitivity: { x: 5, y: 58 },
-
-  control: { x: 12, y: 27 },
-};
-
-const THREAD_NODE_ORDER = [
-  'attack',
-
-  'brightness',
-
-  'projection',
-
-  'sustain',
-
-  'warmth',
-
-  'sensitivity',
-
-  'control',
-];
-
-const getThreadNodePairs = () => {
-  const pairs = [];
-
-  THREAD_NODE_ORDER.forEach((source, sourceIndex) => {
-    THREAD_NODE_ORDER.forEach((target, targetIndex) => {
-      if (targetIndex <= sourceIndex) return;
-
-      pairs.push([source, target]);
-    });
-  });
-
-  return pairs;
-};
-
-const THREAD_NODE_PAIRS = getThreadNodePairs();
-
-const getThreadGradientId = (mapId, source, target) => {
-  const sourceIndex = THREAD_NODE_ORDER.indexOf(source);
-
-  const targetIndex = THREAD_NODE_ORDER.indexOf(target);
-
-  if (sourceIndex === -1 || targetIndex === -1) {
-    return `${mapId}-thread-${source}-${target}`;
-  }
-
-  const first = sourceIndex <= targetIndex ? source : target;
-
-  const second = sourceIndex <= targetIndex ? target : source;
-
-  return `${mapId}-thread-${first}-${second}`;
-};
-
-const VoiceThreadMap = ({ activeThread, compact = false }) => {
-  const activeSegments = buildThreadSegments(activeThread?.nodes);
-
-  const activeNodeSet = new Set(activeThread?.nodes || []);
-
-  const mapId = `heritage-voice-thread-${
-    compact ? 'compact' : 'large'
-  }-${String(activeThread?.id || 'none').replace(/[^a-zA-Z0-9_-]/g, '-')}`;
-
-  const isActiveSegment = (source, target) =>
-    activeSegments.some(
-      ([a, b]) =>
-        (a === source && b === target) || (a === target && b === source)
-    );
-
-  return (
-    <div
-      className={`heritage-voice-thread-map ${
-        compact ? 'heritage-voice-thread-map--compact' : ''
-      }`}
-      aria-label={
-        activeThread
-          ? `Voice Thread map showing ${activeThread.title}`
-          : 'Voice Thread map'
-      }
-    >
-      <svg
-        className="heritage-voice-thread-svg"
-        viewBox="0 0 500 500"
-        role="img"
-        aria-hidden="true"
-      >
-        <defs>
-          <filter
-            id={`${mapId}-activeGlow`}
-            x="-80%"
-            y="-80%"
-            width="260%"
-            height="260%"
-          >
-            <feGaussianBlur stdDeviation="5.5" result="blur" />
-
-            <feMerge>
-              <feMergeNode in="blur" />
-
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          {THREAD_NODE_PAIRS.map(([source, target]) => {
-            const sourcePoint = THREAD_NODE_POSITIONS[source];
-
-            const targetPoint = THREAD_NODE_POSITIONS[target];
-
-            if (!sourcePoint || !targetPoint) return null;
-
-            const sourceColor = AXIS_COLOR_BY_KEY[source] || '#d6b277';
-
-            const targetColor = AXIS_COLOR_BY_KEY[target] || '#d6b277';
-
-            const gradientId = `${mapId}-thread-${source}-${target}`;
-
-            return (
-              <linearGradient
-                key={gradientId}
-                id={gradientId}
-                gradientUnits="userSpaceOnUse"
-                x1={sourcePoint.x * 5}
-                y1={sourcePoint.y * 5}
-                x2={targetPoint.x * 5}
-                y2={targetPoint.y * 5}
-              >
-                <stop offset="0%" stopColor={sourceColor} />
-
-                <stop offset="100%" stopColor={targetColor} />
-              </linearGradient>
-            );
-          })}
-        </defs>
-
-        {THREAD_NODE_PAIRS.map(([source, target]) => {
-          const sourcePoint = THREAD_NODE_POSITIONS[source];
-
-          const targetPoint = THREAD_NODE_POSITIONS[target];
-
-          if (!sourcePoint || !targetPoint) return null;
-
-          const selected = isActiveSegment(source, target);
-
-          const gradientId = getThreadGradientId(mapId, source, target);
-
-          return (
-            <g
-              key={`${source}-${target}`}
-              className={`heritage-voice-thread-line-group ${
-                selected ? 'is-active' : ''
-              }`}
-            >
-              <line
-                x1={sourcePoint.x * 5}
-                y1={sourcePoint.y * 5}
-                x2={targetPoint.x * 5}
-                y2={targetPoint.y * 5}
-                className="heritage-voice-thread-line heritage-voice-thread-line--base"
-                stroke={`url(#${gradientId})`}
-              />
-
-              {selected && (
-                <>
-                  <line
-                    x1={sourcePoint.x * 5}
-                    y1={sourcePoint.y * 5}
-                    x2={targetPoint.x * 5}
-                    y2={targetPoint.y * 5}
-                    className="heritage-voice-thread-line heritage-voice-thread-line--active-glow"
-                    stroke={`url(#${gradientId})`}
-                    filter={`url(#${mapId}-activeGlow)`}
-                  />
-
-                  <line
-                    x1={sourcePoint.x * 5}
-                    y1={sourcePoint.y * 5}
-                    x2={targetPoint.x * 5}
-                    y2={targetPoint.y * 5}
-                    className="heritage-voice-thread-line heritage-voice-thread-line--active-core"
-                    stroke={`url(#${gradientId})`}
-                  />
-                </>
-              )}
-            </g>
-          );
-        })}
-
-        {THREAD_NODE_ORDER.map((nodeKey, index) => {
-          const nextNodeKey =
-            THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
-
-          const point = THREAD_NODE_POSITIONS[nodeKey];
-
-          const nextPoint = THREAD_NODE_POSITIONS[nextNodeKey];
-
-          if (!point || !nextPoint) return null;
-
-          const gradientId = getThreadGradientId(mapId, nodeKey, nextNodeKey);
-
-          return (
-            <line
-              key={`outer-${nodeKey}-${nextNodeKey}`}
-              className="heritage-voice-thread-outer-line"
-              x1={point.x * 5}
-              y1={point.y * 5}
-              x2={nextPoint.x * 5}
-              y2={nextPoint.y * 5}
-              stroke={`url(#${gradientId})`}
-            />
-          );
-        })}
-
-        {THREAD_NODE_ORDER.map((nodeKey) => {
-          const point = THREAD_NODE_POSITIONS[nodeKey];
-
-          const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
-
-          const axis = AXIS_META.find((item) => item.key === nodeKey);
-
-          const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
-
-          const isActive = activeNodeSet.has(nodeKey);
-
-          return (
-            <g
-              key={nodeKey}
-              className={`heritage-voice-thread-node ${
-                isActive ? 'is-active' : ''
-              }`}
-              style={{ '--node-color': color }}
-            >
-              <circle
-                cx={point.x * 5}
-                cy={point.y * 5}
-                r={isActive ? '5.2' : '3.4'}
-                className="heritage-voice-thread-anchor-dot"
-                fill={color}
-              />
-
-              <foreignObject
-                x={iconPoint.x * 5 - 25}
-                y={iconPoint.y * 5 - 25}
-                width="50"
-                height="50"
-                className="heritage-voice-thread-node-icon-wrap"
-              >
-                <div
-                  xmlns="http://www.w3.org/1999/xhtml"
-                  className="heritage-voice-thread-node-icon"
-                  style={{ color }}
-                >
-                  <MetricIcon
-                    type={axis?.icon || nodeKey}
-                    color={color}
-                    size={22}
-                  />
-                </div>
-              </foreignObject>
-            </g>
-          );
-        })}
-      </svg>
-    </div>
-  );
 };
 
 const HeritageProductDetail = () => {
@@ -1426,7 +928,7 @@ const HeritageProductDetail = () => {
   const [activeThreadSelection, setActiveThreadSelection] = useState({
     id: '',
 
-    signature: '',
+    slotKey: '',
   });
 
   const [showConfigBreakdown, setShowConfigBreakdown] = useState(false);
@@ -1518,62 +1020,43 @@ const HeritageProductDetail = () => {
     const IMAGE_MAP = {
       ply: {
         'maple-ply-reference': '/legacyprint-benchmarks/ply/ply-maple.png',
-
         'birch-ply-reference': '/legacyprint-benchmarks/ply/ply-birch.png',
-
         'oak-ply-reference': '/legacyprint-benchmarks/ply/ply-oak.png',
-
         'walnut-ply-reference': '/legacyprint-benchmarks/ply/ply-walnut.png',
-
         'mahogany-ply-reference':
           '/legacyprint-benchmarks/ply/ply-mohogany.png',
       },
-
       metal: {
         'brass-reference': '/legacyprint-benchmarks/metal/metal-brass.png',
-
         'steel-reference': '/legacyprint-benchmarks/metal/metal-steel.png',
-
         'aluminum-reference':
           '/legacyprint-benchmarks/metal/metal-aluminum.png',
-
         'copper-reference': '/legacyprint-benchmarks/metal/metal-copper.png',
-
         'bronze-reference': '/legacyprint-benchmarks/metal/metal-bronze.png',
       },
-
       acrylic: {
         'thin-acrylic-reference':
           '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
-
         'medium-acrylic-reference':
           '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
-
         'thick-acrylic-reference':
           '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
       },
-
       'ober-custom': {
         'heritage-oak-reference':
           '/legacyprint-benchmarks/ober-custom/ober-heritage-oak.png',
-
         'feuzon-hybrid-reference':
           '/legacyprint-benchmarks/ober-custom/ober-feuzon-maple.png',
       },
-
       'solid-steambent': {
         'steam-bent-maple-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-maple.png',
-
         'steam-bent-mahogany-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-mahogany.png',
-
         'solid-maple-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-maple.png',
-
         'solid-walnut-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-walnut.png',
-
         'solid-oak-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-oak.png',
       },
@@ -1599,29 +1082,17 @@ const HeritageProductDetail = () => {
 
   const heritageHighlights = [
     'Northern Red Oak stave shell construction.',
-
     'Grounded, warm, seasoned Ober voice.',
-
     '45° inner edge with softened outer roundover.',
-
     'Standard snare beds.',
-
     '12", 13", and 14" build sizes.',
-
     '36 core Heritage voicing paths.',
-
     'Vintage double-ended tube lugs.',
-
     'Triple flange or die-cast response.',
-
     'Chrome, Black Nickel, or Brass / Gold hardware.',
-
     'Stock Trick GS007 throw-off.',
-
     'Controlled torching shapes visual character and resonance.',
-
     'PureSound Custom Pro Steel 20-Strand wires.',
-
     'Estimated delivery: 6–8 weeks.',
   ];
 
@@ -1659,13 +1130,9 @@ const HeritageProductDetail = () => {
   const currentBuildPrice = useMemo(() => {
     return computeHeritagePrice({
       size,
-
       depth,
-
       staveOption,
-
       hardwareColor,
-
       hoopType,
     });
   }, [size, depth, staveOption, hardwareColor, hoopType]);
@@ -1673,23 +1140,14 @@ const HeritageProductDetail = () => {
   const currentBuildVoiceRangeSummary = useMemo(() => {
     return buildHeritageVoiceRead({
       size,
-
       depth,
-
       lugs,
-
       staveOption,
-
       hardwareColor,
-
       hoopType,
-
       scorchDepth,
-
       benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
-
       benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
-
       benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
     });
   }, [size, depth, lugs, staveOption, hardwareColor, hoopType, scorchDepth]);
@@ -1700,57 +1158,35 @@ const HeritageProductDetail = () => {
       : currentBuildVoiceRangeSummary;
   }, [
     isCompareModeEnabled,
-
     selectedDrumSummary,
-
     currentBuildVoiceRangeSummary,
   ]);
 
   const activeBuildSignature = useMemo(() => {
     return [
       size,
-
       depth,
-
       lugs,
-
       staveOption,
-
-      hardwareColor,
-
       hoopType,
-
+      hardwareColor,
       scorchDepth,
-
       isCompareModeEnabled ? 'compare' : 'standalone',
-
       isCompareModeEnabled ? benchmarkFamilyId : DEFAULT_BENCHMARK_FAMILY_ID,
-
       isCompareModeEnabled ? benchmarkTypeId : DEFAULT_BENCHMARK_TYPE_ID,
-
       isCompareModeEnabled ? benchmarkSizeId : DEFAULT_BENCHMARK_SIZE_ID,
     ].join('|');
   }, [
     size,
-
     depth,
-
     lugs,
-
     staveOption,
-
-    hardwareColor,
-
     hoopType,
-
+    hardwareColor,
     scorchDepth,
-
     isCompareModeEnabled,
-
     benchmarkFamilyId,
-
     benchmarkTypeId,
-
     benchmarkSizeId,
   ]);
 
@@ -1769,9 +1205,7 @@ const HeritageProductDetail = () => {
     if (isCompareModeEnabled) {
       return buildToneSummary(
         selectedDrumSummary,
-
         selectedBenchmarkType,
-
         selectedBenchmarkSize
       );
     }
@@ -1779,13 +1213,9 @@ const HeritageProductDetail = () => {
     return buildCurrentBuildToneSummary(currentBuildVoiceRangeSummary);
   }, [
     isCompareModeEnabled,
-
     selectedDrumSummary,
-
     currentBuildVoiceRangeSummary,
-
     selectedBenchmarkType,
-
     selectedBenchmarkSize,
   ]);
 
@@ -1804,7 +1234,6 @@ const HeritageProductDetail = () => {
   const benchmarkVoiceRangePosition = useMemo(() => {
     return buildBenchmarkVoiceRange(
       selectedBenchmarkType,
-
       selectedBenchmarkSize
     );
   }, [selectedBenchmarkType, selectedBenchmarkSize]);
@@ -1849,27 +1278,46 @@ const HeritageProductDetail = () => {
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
   const keyRelationships = useMemo(() => {
-    return buildKeyRelationships(activeVoiceSummary).slice(0, 3);
+    const relationships = buildKeyRelationships(activeVoiceSummary);
+
+    const threadSlotOrder = {
+      simple: 0,
+      shaped: 1,
+      complex: 2,
+    };
+
+    return relationships.slice(0, 3).sort((a, b) => {
+      const aOrder = threadSlotOrder[a.slotKey] ?? 99;
+
+      const bOrder = threadSlotOrder[b.slotKey] ?? 99;
+
+      if (aOrder !== bOrder) return aOrder - bOrder;
+
+      return Number(b.score || 0) - Number(a.score || 0);
+    });
   }, [activeVoiceSummary]);
 
   const selectedThreadId = useMemo(() => {
     if (!keyRelationships.length) return '';
 
-    const manualSelectionBelongsToCurrentBuild =
-      activeThreadSelection.signature === activeBuildSignature;
+    const selectedByExactId = keyRelationships.find(
+      (relationship) => relationship.id === activeThreadSelection.id
+    );
 
-    const manualThreadStillExists =
-      manualSelectionBelongsToCurrentBuild &&
-      keyRelationships.some(
-        (relationship) => relationship.id === activeThreadSelection.id
-      );
+    if (selectedByExactId) {
+      return selectedByExactId.id;
+    }
 
-    if (manualThreadStillExists) {
-      return activeThreadSelection.id;
+    const selectedBySlot = keyRelationships.find(
+      (relationship) => relationship.slotKey === activeThreadSelection.slotKey
+    );
+
+    if (selectedBySlot) {
+      return selectedBySlot.id;
     }
 
     return keyRelationships[0].id;
-  }, [keyRelationships, activeThreadSelection, activeBuildSignature]);
+  }, [keyRelationships, activeThreadSelection]);
 
   const activeThread = useMemo(() => {
     return (
@@ -1886,23 +1334,59 @@ const HeritageProductDetail = () => {
 
     return buildVoiceThreadReadout({
       thread: activeThread,
-
       profile: activeVoiceSummary?.profile || {},
-
       sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
     });
   }, [activeThread, activeVoiceSummary]);
 
+  const musicalIdentityTitle = useMemo(() => {
+
+  return buildHeritageMusicalIdentityTitle({
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    hardwareColor,
+
+    scorchDepth,
+
+    currentSpec: activeVoiceSummary?.currentSpec || {},
+
+  });
+
+}, [
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  hardwareColor,
+
+  scorchDepth,
+
+  activeVoiceSummary,
+
+]);
+
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
       size: nextSelections.size ?? size,
-
       depth: nextSelections.depth ?? depth,
-
       staveOption: nextSelections.staveOption ?? staveOption,
-
       hardwareColor: nextSelections.hardwareColor ?? hardwareColor,
-
       hoopType: nextSelections.hoopType ?? hoopType,
     });
 
@@ -1910,7 +1394,6 @@ const HeritageProductDetail = () => {
 
     return {
       text: getReadableDelta(delta),
-
       className: getDeltaClassName(delta),
     };
   };
@@ -1984,10 +1467,14 @@ const HeritageProductDetail = () => {
   };
 
   const handleThreadSelect = (relationshipId) => {
+    const selectedRelationship = keyRelationships.find(
+      (relationship) => relationship.id === relationshipId
+    );
+
     setActiveThreadSelection({
       id: relationshipId,
 
-      signature: activeBuildSignature,
+      slotKey: selectedRelationship?.slotKey || '',
     });
   };
 
@@ -2037,47 +1524,28 @@ const HeritageProductDetail = () => {
     setSelectedDrumSummary(
       buildHeritageVoiceRead({
         size,
-
         depth,
-
         lugs,
-
         staveOption,
-
         hardwareColor,
-
         hoopType,
-
         scorchDepth,
-
         benchmarkFamilyId,
-
         benchmarkTypeId,
-
         benchmarkSizeId,
       })
     );
   }, [
     size,
-
     depth,
-
     lugs,
-
     staveOption,
-
     hardwareColor,
-
     hoopType,
-
     scorchDepth,
-
     currentBuildPrice,
-
     benchmarkFamilyId,
-
     benchmarkTypeId,
-
     benchmarkSizeId,
   ]);
 
@@ -2142,19 +1610,12 @@ const HeritageProductDetail = () => {
     }
   }, [
     cart,
-
     size,
-
     depth,
-
     staveOption,
-
     lugs,
-
     hardwareColor,
-
     hoopType,
-
     scorchDepth,
   ]);
 
@@ -2178,12 +1639,6 @@ const HeritageProductDetail = () => {
 
       setShowConfigBreakdown(false);
 
-      setActiveThreadSelection({
-        id: '',
-
-        signature: '',
-      });
-
       return;
     }
 
@@ -2204,12 +1659,6 @@ const HeritageProductDetail = () => {
     setOpenBuilderSection('construction');
 
     setShowConfigBreakdown(false);
-
-    setActiveThreadSelection({
-      id: '',
-
-      signature: '',
-    });
   };
 
   const handleReviewBuild = () => {
@@ -2254,94 +1703,52 @@ const HeritageProductDetail = () => {
 
     const newCartItemId = generateCartItemId({
       stripePriceId: matchedPricingOption.stripePriceId,
-
       size,
-
       depth,
-
       reRing: hasReRing,
-
       lugQuantity: lugs,
-
       staveQuantity: staveOption.split(' - ')[0],
-
       hardwareColor,
-
       hoopType,
-
       scorchDepth,
     });
 
     const cartItem = {
       id: newCartItemId,
-
       productId: 'heritage',
-
       name: 'HERITAGE',
-
       size,
-
       depth,
-
       reRing: hasReRing,
-
       lugQuantity: lugs,
-
       staveQuantity: staveOption.split(' - ')[0],
-
       price: totalPrice,
-
       stripePriceId: null,
-
       quantity: 1,
-
       images: [productImage],
-
       category: 'artisan',
-
       hardwareColor,
-
       hoopType,
-
       snareBedDepth: HERITAGE_STANDARD_SNARE_BED,
-
       bearingEdge: HERITAGE_STANDARD_BEARING_EDGE,
-
       scorchDepth,
-
       snareWireModel: HERITAGE_STANDARD_REFERENCE.snareWires,
-
       batterHead: HERITAGE_STANDARD_REFERENCE.batterHead,
-
       resonantHead: HERITAGE_STANDARD_REFERENCE.resonantHead,
-
       config: {
         series: 'HERITAGE',
-
         size,
-
         depth,
-
         reRing: hasReRing,
-
         lugQuantity: lugs,
-
         staveQuantity: staveOption.split(' - ')[0],
-
         hardwareColor,
-
         hoopType,
-
         snareBedDepth: HERITAGE_STANDARD_SNARE_BED,
-
         bearingEdge: HERITAGE_STANDARD_BEARING_EDGE,
-
         scorchDepth,
-
         snareWireModel: HERITAGE_STANDARD_REFERENCE.snareWires,
-
         batterHead: HERITAGE_STANDARD_REFERENCE.batterHead,
-
         resonantHead: HERITAGE_STANDARD_REFERENCE.resonantHead,
       },
     };
@@ -2388,22 +1795,10 @@ const HeritageProductDetail = () => {
     setLugs(nextLugs);
 
     setStaveOption(nextStaveOption);
-
-    setActiveThreadSelection({
-      id: '',
-
-      signature: '',
-    });
   };
 
   const handleDepthSelect = (newDepth) => {
     setDepth(newDepth);
-
-    setActiveThreadSelection({
-      id: '',
-
-      signature: '',
-    });
   };
 
   const handleLugSelect = (newLug) => {
@@ -2419,22 +1814,10 @@ const HeritageProductDetail = () => {
     setLugs(newLug);
 
     setStaveOption(nextStaveOption);
-
-    setActiveThreadSelection({
-      id: '',
-
-      signature: '',
-    });
   };
 
   const handleStaveSelect = (option) => {
     setStaveOption(option);
-
-    setActiveThreadSelection({
-      id: '',
-
-      signature: '',
-    });
   };
 
   const renderReferenceSelectorPanel = () => {
@@ -2647,20 +2030,47 @@ const HeritageProductDetail = () => {
   };
 
   const renderVoiceRangeCard = () => {
-    const rangeStartPercent = ((legacyTuningRange.start - 1) / 4) * 100;
+    const normalizedRangeStart = Math.min(
+      Number(legacyTuningRange.start) || 1,
 
-    const rangeEndPercent = ((legacyTuningRange.end - 1) / 4) * 100;
+      Number(legacyTuningRange.end) || 1
+    );
 
-    const rangeWidthPercent = rangeEndPercent - rangeStartPercent;
+    const normalizedRangeEnd = Math.max(
+      Number(legacyTuningRange.start) || 1,
+
+      Number(legacyTuningRange.end) || 1
+    );
+
+    const normalizedBenchmarkRangeStart = Math.min(
+      Number(benchmarkLegacyTuningRange.start) || 1,
+
+      Number(benchmarkLegacyTuningRange.end) || 1
+    );
+
+    const normalizedBenchmarkRangeEnd = Math.max(
+      Number(benchmarkLegacyTuningRange.start) || 1,
+
+      Number(benchmarkLegacyTuningRange.end) || 1
+    );
+
+    const rangeStartPercent = ((normalizedRangeStart - 1) / 4) * 100;
+
+    const rangeEndPercent = ((normalizedRangeEnd - 1) / 4) * 100;
+
+    const rangeWidthPercent = Math.max(0, rangeEndPercent - rangeStartPercent);
 
     const benchmarkRangeStartPercent =
-      ((benchmarkLegacyTuningRange.start - 1) / 4) * 100;
+      ((normalizedBenchmarkRangeStart - 1) / 4) * 100;
 
     const benchmarkRangeEndPercent =
-      ((benchmarkLegacyTuningRange.end - 1) / 4) * 100;
+      ((normalizedBenchmarkRangeEnd - 1) / 4) * 100;
 
-    const benchmarkRangeWidthPercent =
-      benchmarkRangeEndPercent - benchmarkRangeStartPercent;
+    const benchmarkRangeWidthPercent = Math.max(
+      0,
+
+      benchmarkRangeEndPercent - benchmarkRangeStartPercent
+    );
 
     return (
       <div
@@ -2767,7 +2177,6 @@ const HeritageProductDetail = () => {
               className="heritage-voice-range-band heritage-voice-range-band--current"
               style={{
                 left: `${rangeStartPercent}%`,
-
                 width: `${rangeWidthPercent}%`,
               }}
             >
@@ -2796,7 +2205,6 @@ const HeritageProductDetail = () => {
                   className="heritage-voice-range-band heritage-voice-range-band--reference"
                   style={{
                     left: `${benchmarkRangeStartPercent}%`,
-
                     width: `${benchmarkRangeWidthPercent}%`,
                   }}
                 >
@@ -2966,9 +2374,7 @@ const HeritageProductDetail = () => {
   const visibleLegacyPrintTabs = useMemo(() => {
     return [
       ...BASE_LEGACYPRINT_TABS,
-
       ...(isCompareModeEnabled ? [REFERENCE_SETUP_TAB] : []),
-
       DISCOVERY_LEGACYPRINT_TAB,
     ];
   }, [isCompareModeEnabled]);
@@ -3023,13 +2429,17 @@ const HeritageProductDetail = () => {
         const shifts = [
           { label: 'attack', value: profile.attack },
 
+          { label: 'projection', value: profile.projection },
+
+          { label: 'control', value: profile.control },
+
+          { label: 'sustain', value: profile.sustain },
+
           { label: 'warmth', value: profile.warmth },
 
           { label: 'brightness', value: profile.brightness },
 
-          { label: 'sustain', value: profile.sustain },
-
-          { label: 'projection', value: profile.projection },
+          { label: 'sensitivity', value: profile.sensitivity },
         ]
 
           .filter((item) => Number.isFinite(Number(item.value)))
@@ -3060,28 +2470,25 @@ const HeritageProductDetail = () => {
       })();
 
       return (
-        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-reference--cards heritage-thread-reference--calm">
+        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read">
           <div className="heritage-thread-reference-head">
             <span className="heritage-chart-eyebrow">Voice Threads</span>
 
-            <h4 className="heritage-chart-title">Current Voice Thread paths</h4>
+            <h4 className="heritage-chart-title">Current Voice Thread read</h4>
 
             <p className="heritage-chart-title-subcopy">
               A Voice Thread is a simple way to describe how a few parts of the
-              drum’s voice are working together. It is not meant to label the
-              drum forever — it gives you a useful listening angle for the build
-              in front of you.
+              drum’s voice are working together. It gives you one useful
+              listening angle for the build in front of you.
             </p>
           </div>
 
           <div
-            className="heritage-thread-card-row"
-            aria-label="Current Voice Threads"
+            className="heritage-thread-single-selector"
+            aria-label="Current Voice Thread selector"
           >
             {keyRelationships.map((relationship) => {
               const isActive = selectedThreadId === relationship.id;
-
-              const threadColorVars = getThreadColorVars(relationship.nodes);
 
               const cardReadout = buildVoiceThreadReadout({
                 thread: relationship,
@@ -3091,41 +2498,39 @@ const HeritageProductDetail = () => {
                 sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
               });
 
-              const nodeLabels =
-                relationship.nodes
-
-                  ?.map(
-                    (node) =>
-                      AXIS_META.find((axis) => axis.key === node)?.label || node
-                  )
-
-                  .join(' / ') || '';
-
               return (
                 <button
-                  key={`${activeBuildSignature}-${relationship.id}`}
+                  key={`${activeBuildSignature}-${relationship.id}-selector`}
                   type="button"
-                  className={`heritage-thread-card heritage-thread-card--calm ${
+                  className={`heritage-thread-single-selector-button ${
                     isActive ? 'is-active' : ''
                   }`}
                   onClick={() => handleThreadSelect(relationship.id)}
-                  style={threadColorVars}
+                  style={getThreadColorVars(relationship.nodes)}
                 >
-                  <span className="heritage-thread-card-topline heritage-thread-card-topline--no-rank">
-                    <span className="heritage-thread-card-type">
-                      {cardReadout.threadName}
-                    </span>
+                  <span className="heritage-thread-single-selector-kicker">
+                   {relationship.slotKey === 'simple'
+
+  ? 'First Tell'
+
+  : relationship.slotKey === 'shaped'
+
+    ? 'Player Read'
+
+    : 'Musical Identity'}
                   </span>
 
-                  <span className="heritage-thread-card-map">
-                    <VoiceThreadMap activeThread={relationship} compact />
-                  </span>
+                  <strong>
 
-                  <span className="heritage-thread-card-copy">
-                    <strong>{relationship.title}</strong>
+  {relationship.slotKey === 'complex'
 
-                    <em>{nodeLabels}</em>
-                  </span>
+    ? musicalIdentityTitle
+
+    : relationship.title}
+
+</strong>
+
+                  <em>{cardReadout.intensityLabel} read</em>
                 </button>
               );
             })}
@@ -3133,84 +2538,163 @@ const HeritageProductDetail = () => {
 
           {activeThread && activeReadout && (
             <article
-              key={`${activeBuildSignature}-${activeThread.id}-read-panel`}
-              className="heritage-thread-read-panel heritage-thread-read-panel--expanded heritage-thread-read-panel--calm"
+              key={`${activeBuildSignature}-${activeThread.id}-single-read`}
+              className="heritage-thread-single-read-panel"
               style={getThreadColorVars(activeThread.nodes)}
             >
-              <div className="heritage-thread-read-panel-head">
-                <div>
-                  <span className="heritage-summary-kicker">
-                    Ober voice read
-                  </span>
+              <div className="heritage-thread-single-read-visual">
+                <VoiceThreadMap
+                  activeThread={activeThread}
+                  strengthScore={activeThread.score}
+                  profile={activeVoiceSummary?.profile || {}}
+                  sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
+                  currentSpec={activeVoiceSummary?.currentSpec || {}}
+                  input={{
+                    size,
 
-                  <h4>{activeThread.title}</h4>
+                    depth,
+
+                    lugs,
+
+                    staveOption,
+
+                    hoopType,
+
+                    hardwareColor,
+
+                    scorchDepth,
+                  }}
+                />
+              </div>
+
+              <div className="heritage-thread-single-read-content">
+                <div className="heritage-thread-single-read-head">
+                  <div>
+                    <span className="heritage-summary-kicker">
+                      Ober voice read
+                    </span>
+
+                    <h4>
+
+  {activeThread.slotKey === 'complex'
+
+    ? musicalIdentityTitle
+
+    : activeThread.title}
+
+</h4>
+
+                    <p className="heritage-thread-single-read-type">
+                  {activeThread.slotKey === 'simple'
+
+  ? 'First Tell'
+
+  : activeThread.slotKey === 'shaped'
+
+    ? 'Player Read'
+
+    : 'Musical Identity'}{' '}
+
+/ {activeReadout.intensityLabel} read
+                    </p>
+                  </div>
 
                   <div className="heritage-thread-read-icons">
                     {renderThreadNodeIcons(activeThread.nodes)}
                   </div>
                 </div>
 
-                <span className="heritage-thread-read-type heritage-thread-read-type--minimal">
-                  {activeReadout.threadName}
-                </span>
-              </div>
-
-              <p className="heritage-thread-read-lede heritage-thread-read-lede--calm">
-                {activeThread.summary}
-              </p>
-
-              <div className="heritage-thread-readout-meta heritage-thread-readout-meta--calm">
-                <span>
-                  <strong>Pattern</strong>
-
-                  {activeReadout.shapeLabel}
-                </span>
-
-                <span>
-                  <strong>Hand feel</strong>
-
-                  {activeReadout.intensityLabel}
-                </span>
-
-                <span>
-                  <strong>Voice nodes</strong>
-
-                  {activeReadout.nodeLabels}
-                </span>
-              </div>
-
-              {voiceShiftText && (
-                <p className="heritage-voice-shift-readout">
-                  <strong>Voice shift</strong>
-
-                  {voiceShiftText}
+                <p className="heritage-thread-single-read-lede">
+                  {activeThread.summary}
                 </p>
-              )}
 
-              <div className="heritage-thread-listening-note">
-                <section>
-                  <span>At the kit</span>
+                <div className="heritage-thread-single-meta-grid">
+                  <span>
+                    <strong>Pattern</strong>
 
-                  <p>{activeReadout.whatThreadIsTellingUs}</p>
-                </section>
+                    {activeReadout.shapeLabel}
+                  </span>
 
-                <section>
-                  <span>Bench note</span>
+                  <span>
+                    <strong>Hand feel</strong>
 
-                  <p>{activeReadout.whyItMatters}</p>
-                </section>
+                    {activeReadout.intensityLabel}
+                  </span>
 
-                <section>
-                  <span>Good for</span>
+                  <span>
+                    <strong>Voice nodes</strong>
 
-                  <p>{activeReadout.howToUseThis}</p>
-                </section>
+                    {activeReadout.nodeLabels}
+                  </span>
+                </div>
 
-                <section>
-                  <span>Keep in mind</span>
+                <div className="heritage-thread-axis-delta-list heritage-thread-axis-delta-list--single">
+                  {(activeThread.nodes || []).map((nodeKey) => {
+                    const axis = AXIS_META.find((item) => item.key === nodeKey);
 
-                  <p>{activeReadout.trustNote}</p>
-                </section>
+                    const rawValue = Number(
+                      activeVoiceSummary?.profile?.[nodeKey] ?? 5
+                    );
+
+                    const delta = Number((rawValue - 5).toFixed(2));
+
+                    const deltaLabel = delta > 0 ? `+${delta}` : `${delta}`;
+
+                    const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+                    return (
+                      <div
+                        key={nodeKey}
+                        className={`heritage-thread-axis-delta-line ${
+                          delta > 0
+                            ? 'is-positive'
+                            : delta < 0
+                              ? 'is-negative'
+                              : 'is-neutral'
+                        }`}
+                        style={{ '--axis-color': color }}
+                      >
+                        <span>{axis?.label || nodeKey}</span>
+
+                        <strong>{deltaLabel}</strong>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {voiceShiftText && (
+                  <p className="heritage-voice-shift-readout heritage-voice-shift-readout--single">
+                    <strong>Voice shift</strong>
+
+                    {voiceShiftText}
+                  </p>
+                )}
+
+                <div className="heritage-thread-listening-note heritage-thread-listening-note--single">
+                  <section>
+                    <span>At the kit</span>
+
+                    <p>{activeReadout.whatThreadIsTellingUs}</p>
+                  </section>
+
+                  <section>
+                    <span>Bench note</span>
+
+                    <p>{activeReadout.whyItMatters}</p>
+                  </section>
+
+                  <section>
+                    <span>Good for</span>
+
+                    <p>{activeReadout.howToUseThis}</p>
+                  </section>
+
+                  <section>
+                    <span>Keep in mind</span>
+
+                    <p>{activeReadout.trustNote}</p>
+                  </section>
+                </div>
               </div>
             </article>
           )}
@@ -3662,12 +3146,6 @@ const HeritageProductDetail = () => {
                             }`}
                             onClick={() => {
                               setScorchDepth(option);
-
-                              setActiveThreadSelection({
-                                id: '',
-
-                                signature: '',
-                              });
                             }}
                           >
                             <span className="heritage-finish-swatch-image-wrap">
@@ -3782,12 +3260,6 @@ const HeritageProductDetail = () => {
                             }`}
                             onClick={() => {
                               setHardwareColor(option.value);
-
-                              setActiveThreadSelection({
-                                id: '',
-
-                                signature: '',
-                              });
                             }}
                           >
                             <span className="heritage-option-title">
@@ -3833,12 +3305,6 @@ const HeritageProductDetail = () => {
                             }`}
                             onClick={() => {
                               setHoopType(option.value);
-
-                              setActiveThreadSelection({
-                                id: '',
-
-                                signature: '',
-                              });
                             }}
                           >
                             <span className="heritage-option-title">
@@ -4131,6 +3597,7 @@ const HeritageProductDetail = () => {
                 </div>
               </div>
             </div>
+
             <div className="heritage-legacyprint-nav-row">
               <div
                 className="heritage-legacyprint-tabs"

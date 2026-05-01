@@ -1,0 +1,893 @@
+/* src/components/VoiceThreadMap.css */
+
+.heritage-voice-thread-map {
+
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+
+  place-items: center;
+
+  overflow: visible;
+
+  isolation: isolate;
+
+}
+
+.heritage-voice-thread-map--compact {
+
+  min-height: 0;
+
+}
+
+.heritage-voice-thread-svg {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  overflow: visible;
+
+}
+
+/* =========================================================
+
+   BASE NETWORK
+
+   ========================================================= */
+
+.heritage-voice-thread-line,
+
+.heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-shape-halo,
+
+.heritage-voice-thread-shape-glow,
+
+.heritage-voice-thread-shape-core,
+
+.heritage-voice-thread-shape-hotline,
+
+.heritage-voice-thread-complex-fill,
+
+.heritage-voice-thread-complex-sheen,
+
+.heritage-voice-thread-anchor-dot {
+
+  transition:
+
+    opacity 360ms ease,
+
+    stroke-width 360ms ease,
+
+    filter 360ms ease,
+
+    transform 360ms ease;
+
+}
+
+.heritage-voice-thread-line,
+
+.heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-shape-halo,
+
+.heritage-voice-thread-shape-glow,
+
+.heritage-voice-thread-shape-core,
+
+.heritage-voice-thread-shape-hotline {
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  pointer-events: none;
+
+}
+
+.heritage-voice-thread-line--base {
+
+  stroke-width: 0.95;
+
+  opacity: 0.1;
+
+  stroke-linecap: round;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-outer-line {
+
+  stroke-width: 1.15;
+
+  opacity: 0.17;
+
+  stroke-linecap: round;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--simple .heritage-voice-thread-outer-line,
+
+.heritage-voice-thread-map--shaped .heritage-voice-thread-outer-line {
+
+  opacity: 0.18;
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-outer-line {
+
+  opacity: 0.16;
+
+}
+
+/* =========================================================
+
+   ACTIVE SHAPES
+
+   ========================================================= */
+
+.heritage-voice-thread-active-shape {
+
+  transform-box: view-box;
+
+  transform-origin: center;
+
+  pointer-events: none;
+
+}
+
+.heritage-voice-thread-shape-halo {
+
+  opacity: 0.22;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-shape-glow {
+
+  opacity: 0.5;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-shape-core {
+
+  opacity: 0.96;
+
+  mix-blend-mode: screen;
+
+  filter:
+
+    drop-shadow(0 0 6px rgba(255, 246, 218, 0.18))
+
+    drop-shadow(0 0 14px rgba(214, 178, 119, 0.12));
+
+}
+
+.heritage-voice-thread-shape-hotline {
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-complex-fill {
+
+  opacity: 0.86;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-complex-sheen {
+
+  opacity: 0.38;
+
+  mix-blend-mode: screen;
+
+}
+
+/* Simple / First Read */
+
+.heritage-voice-thread-map--simple .heritage-voice-thread-shape-halo {
+
+  opacity: 0.23;
+
+}
+
+.heritage-voice-thread-map--simple .heritage-voice-thread-shape-glow {
+
+  opacity: 0.58;
+
+}
+
+.heritage-voice-thread-map--simple .heritage-voice-thread-shape-core {
+
+  opacity: 0.99;
+
+}
+
+/* Shaped / Feel Read */
+
+.heritage-voice-thread-map--shaped .heritage-voice-thread-shape-halo {
+
+  opacity: 0.24;
+
+}
+
+.heritage-voice-thread-map--shaped .heritage-voice-thread-shape-glow {
+
+  opacity: 0.6;
+
+}
+
+.heritage-voice-thread-map--shaped .heritage-voice-thread-shape-core {
+
+  opacity: 0.99;
+
+}
+
+/* Complex / Character Read */
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-halo {
+
+  opacity: 0.2;
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-glow {
+
+  opacity: 0.46;
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-core {
+
+  opacity: 0.94;
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.24;
+
+}
+
+/* =========================================================
+
+   NODE DOTS / ICONS
+
+   ========================================================= */
+
+.heritage-voice-thread-node {
+
+  pointer-events: none;
+
+  opacity: 0.78;
+
+  transition:
+
+    opacity 180ms ease,
+
+    transform 180ms ease;
+
+}
+
+.heritage-voice-thread-node.is-active {
+
+  opacity: 1;
+
+}
+
+.heritage-voice-thread-anchor-dot {
+
+  opacity: 0.42;
+
+  filter: drop-shadow(
+
+    0 0 4px color-mix(in srgb, var(--node-color), transparent 46%)
+
+  );
+
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.98;
+
+  filter:
+
+    drop-shadow(0 0 5px color-mix(in srgb, var(--node-color), transparent 18%))
+
+    drop-shadow(0 0 13px color-mix(in srgb, var(--node-color), transparent 44%))
+
+    drop-shadow(0 0 24px color-mix(in srgb, var(--node-color), transparent 68%));
+
+}
+
+.heritage-voice-thread-node-icon-wrap {
+
+  overflow: visible;
+
+  pointer-events: none;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+}
+
+.heritage-voice-thread-node-icon {
+
+  width: 50px;
+
+  height: 50px;
+
+  display: grid;
+
+  place-items: center;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  opacity: 0.76;
+
+  filter: drop-shadow(0 0 6px currentColor);
+
+  transition:
+
+    opacity 180ms ease,
+
+    transform 180ms ease,
+
+    filter 180ms ease;
+
+}
+
+.heritage-voice-thread-node-icon svg {
+
+  display: block;
+
+  width: 24px;
+
+  height: 24px;
+
+  stroke-width: 2.35;
+
+  overflow: visible;
+
+}
+
+.heritage-voice-thread-node.is-active .heritage-voice-thread-node-icon {
+
+  opacity: 1;
+
+  transform: scale(1.06);
+
+  filter:
+
+    drop-shadow(0 0 6px currentColor)
+
+    drop-shadow(0 0 13px currentColor)
+
+    drop-shadow(0 0 24px currentColor);
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-node-icon-wrap {
+
+  display: none !important;
+
+}
+
+/* =========================================================
+
+   COMPACT CARD BALANCE
+
+   ========================================================= */
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-line--base {
+
+  stroke-width: 0.88;
+
+  opacity: 0.12;
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-outer-line {
+
+  stroke-width: 1.05;
+
+  opacity: 0.18;
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-shape-halo {
+
+  opacity: 0.2;
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-shape-glow {
+
+  opacity: 0.46;
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-shape-core {
+
+  opacity: 0.92;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.54;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.97;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--shaped
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.56;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--shaped
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.97;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-fill {
+
+  opacity: 0.78;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-sheen {
+
+  opacity: 0.3;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.42;
+
+}
+
+.heritage-voice-thread-map--compact.heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.9;
+
+}
+
+/* =========================================================
+
+   CARD SELECTED VS HOVER BEHAVIOR
+
+   ========================================================= */
+
+.heritage-thread-card .heritage-voice-thread-map {
+
+  opacity: 0.92;
+
+  transform: translateZ(0) scale(0.995);
+
+  transition:
+
+    opacity 300ms ease,
+
+    transform 300ms ease,
+
+    filter 300ms ease;
+
+}
+
+.heritage-thread-card:hover .heritage-voice-thread-map {
+
+  opacity: 0.98;
+
+  transform: translateZ(0) scale(1);
+
+}
+
+.heritage-thread-card.is-active .heritage-voice-thread-map {
+
+  opacity: 1;
+
+  transform: translateZ(0) scale(1.014);
+
+  filter:
+
+    drop-shadow(0 0 12px color-mix(in srgb, var(--thread-accent, #d6b277) 14%, transparent))
+
+    drop-shadow(0 0 24px color-mix(in srgb, var(--thread-accent-2, #d6b277) 11%, transparent));
+
+}
+
+.heritage-thread-card:not(.is-active):hover
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.42;
+
+}
+
+.heritage-thread-card:not(.is-active):hover
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.38;
+
+}
+
+.heritage-thread-card:not(.is-active):hover
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.9;
+
+}
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-glow,
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--shaped
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.64;
+
+}
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-core,
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--shaped
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 1;
+
+}
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-fill {
+
+  opacity: 0.88;
+
+}
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-sheen {
+
+  opacity: 0.42;
+
+}
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.5;
+
+}
+
+.heritage-thread-card.is-active
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.96;
+
+}
+
+/* =========================================================
+
+   CARD-SPECIFIC MINI MAP OVERRIDES
+
+   ========================================================= */
+
+.heritage-thread-card .heritage-voice-thread-line--base {
+
+  opacity: 0.12 !important;
+
+  stroke-width: 0.88 !important;
+
+}
+
+.heritage-thread-card.is-active .heritage-voice-thread-line--base {
+
+  opacity: 0.15 !important;
+
+}
+
+.heritage-thread-card .heritage-voice-thread-outer-line {
+
+  opacity: 0.17 !important;
+
+  stroke-width: 1.05 !important;
+
+}
+
+.heritage-thread-card.is-active .heritage-voice-thread-outer-line {
+
+  opacity: 0.22 !important;
+
+  stroke-width: 1.1 !important;
+
+}
+
+.heritage-thread-card .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.56 !important;
+
+}
+
+.heritage-thread-card .heritage-voice-thread-node.is-active .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.98 !important;
+
+}
+
+/* =========================================================
+
+   SINGLE READ PANEL / LARGE VIEW CLEANUP
+
+   ========================================================= */
+
+.heritage-thread-single-read-visual .heritage-voice-thread-map {
+
+  filter:
+
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.025))
+
+    drop-shadow(0 0 34px rgba(214, 178, 119, 0.035));
+
+}
+
+.heritage-thread-single-read-visual .heritage-voice-thread-line--base {
+
+  opacity: 0.1;
+
+}
+
+.heritage-thread-single-read-visual .heritage-voice-thread-outer-line {
+
+  opacity: 0.17;
+
+}
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-glow,
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--shaped
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.66;
+
+}
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-core,
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--shaped
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 1;
+
+}
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-fill {
+
+  opacity: 0.9;
+
+}
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-sheen {
+
+  opacity: 0.46;
+
+}
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.52;
+
+}
+
+.heritage-thread-single-read-visual
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.96;
+
+}
+
+/* =========================================================
+
+   SAFARI / OLDER BROWSER FALLBACKS
+
+   ========================================================= */
+
+@supports not (color: color-mix(in srgb, red, transparent 50%)) {
+
+  .heritage-voice-thread-anchor-dot {
+
+    filter: drop-shadow(0 0 4px rgba(214, 178, 119, 0.46));
+
+  }
+
+  .heritage-voice-thread-node.is-active .heritage-voice-thread-anchor-dot {
+
+    filter:
+
+      drop-shadow(0 0 5px rgba(214, 178, 119, 0.62))
+
+      drop-shadow(0 0 10px rgba(214, 178, 119, 0.34));
+
+  }
+
+  .heritage-thread-card.is-active .heritage-voice-thread-map {
+
+    filter:
+
+      drop-shadow(0 0 10px rgba(214, 178, 119, 0.12))
+
+      drop-shadow(0 0 18px rgba(214, 178, 119, 0.1));
+
+  }
+
+}
+
+/* =========================================================
+
+   MOTION SAFETY
+
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .heritage-voice-thread-line,
+
+  .heritage-voice-thread-outer-line,
+
+  .heritage-voice-thread-shape-halo,
+
+  .heritage-voice-thread-shape-glow,
+
+  .heritage-voice-thread-shape-core,
+
+  .heritage-voice-thread-shape-hotline,
+
+  .heritage-voice-thread-complex-fill,
+
+  .heritage-voice-thread-complex-sheen,
+
+  .heritage-voice-thread-anchor-dot,
+
+  .heritage-thread-card .heritage-voice-thread-map {
+
+    transition: none;
+
+  }
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-complex-fill {
+
+  filter: blur(0.4px);
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-halo {
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-glow {
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-core {
+
+  filter: drop-shadow(0 0 10px currentColor);
+
+}
+
+.heritage-voice-thread-map--complex .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.22;
+
+}
