@@ -96,9 +96,9 @@
 
 .heritage-voice-thread-line--base {
 
-  stroke-width: 0.95;
+  stroke-width: 0.9;
 
-  opacity: 0.1;
+  opacity: 0.105;
 
   stroke-linecap: round;
 
@@ -108,9 +108,9 @@
 
 .heritage-voice-thread-outer-line {
 
-  stroke-width: 1.15;
+  stroke-width: 1.1;
 
-  opacity: 0.17;
+  opacity: 0.155;
 
   stroke-linecap: round;
 
@@ -122,13 +122,13 @@
 
 .heritage-voice-thread-map--shaped .heritage-voice-thread-outer-line {
 
-  opacity: 0.18;
+  opacity: 0.17;
 
 }
 
 .heritage-voice-thread-map--complex .heritage-voice-thread-outer-line {
 
-  opacity: 0.16;
+  opacity: 0.14;
 
 }
 
@@ -150,7 +150,7 @@
 
 .heritage-voice-thread-shape-halo {
 
-  opacity: 0.22;
+  opacity: 0.2;
 
   mix-blend-mode: screen;
 
@@ -172,9 +172,9 @@
 
   filter:
 
-    drop-shadow(0 0 6px rgba(255, 246, 218, 0.18))
+    drop-shadow(0 0 5px rgba(255, 246, 218, 0.08))
 
-    drop-shadow(0 0 14px rgba(214, 178, 119, 0.12));
+    drop-shadow(0 0 13px rgba(214, 178, 119, 0.06));
 
 }
 
@@ -186,71 +186,101 @@
 
 .heritage-voice-thread-complex-fill {
 
-  opacity: 0.86;
+  opacity: 0.82;
 
   mix-blend-mode: screen;
+
+  filter: blur(0.45px);
 
 }
 
 .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.38;
+  opacity: 0.34;
 
   mix-blend-mode: screen;
 
 }
 
-/* Simple / First Read */
+/* First Tell */
 
-.heritage-voice-thread-map--simple .heritage-voice-thread-shape-halo {
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-halo {
 
-  opacity: 0.23;
-
-}
-
-.heritage-voice-thread-map--simple .heritage-voice-thread-shape-glow {
-
-  opacity: 0.58;
+  opacity: 0.19;
 
 }
 
-.heritage-voice-thread-map--simple .heritage-voice-thread-shape-core {
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-halo {
 
-  opacity: 0.99;
-
-}
-
-/* Shaped / Feel Read */
-
-.heritage-voice-thread-map--shaped .heritage-voice-thread-shape-halo {
-
-  opacity: 0.24;
+  opacity: 0.14;
 
 }
 
-.heritage-voice-thread-map--shaped .heritage-voice-thread-shape-glow {
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-glow {
 
-  opacity: 0.6;
-
-}
-
-.heritage-voice-thread-map--shaped .heritage-voice-thread-shape-core {
-
-  opacity: 0.99;
+  opacity: 0.42;
 
 }
 
-/* Complex / Character Read */
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-core {
+
+  opacity: 0.96;
+
+  filter:
+
+    drop-shadow(0 0 5px color-mix(in srgb, var(--thread-accent, #d6b277) 30%, transparent))
+
+    drop-shadow(0 0 13px color-mix(in srgb, var(--thread-accent-2, #d6b277) 18%, transparent));
+
+}
+
+/* Player Read */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
+
+  opacity: 0.18;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
+
+  opacity: 0.5;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
+
+  opacity: 0.98;
+
+}
+
+.heritage-voice-thread-player-segments .heritage-voice-thread-shape-core,
+
+.heritage-voice-thread-relationship-segments .heritage-voice-thread-shape-core {
+
+  filter:
+
+    drop-shadow(0 0 6px rgba(255, 246, 218, 0.14))
+
+    drop-shadow(0 0 16px rgba(255, 255, 255, 0.08));
+
+}
+
+/* LegacyPrint™ */
 
 .heritage-voice-thread-map--complex .heritage-voice-thread-shape-halo {
 
   opacity: 0.2;
 
+  mix-blend-mode: screen;
+
 }
 
 .heritage-voice-thread-map--complex .heritage-voice-thread-shape-glow {
 
-  opacity: 0.46;
+  opacity: 0.48;
+
+  mix-blend-mode: screen;
 
 }
 
@@ -258,11 +288,53 @@
 
   opacity: 0.94;
 
+  filter:
+
+    drop-shadow(0 0 8px rgba(255, 246, 218, 0.14))
+
+    drop-shadow(0 0 18px rgba(214, 178, 119, 0.12));
+
 }
 
 .heritage-voice-thread-map--complex .heritage-voice-thread-shape-hotline {
 
-  opacity: 0.24;
+  opacity: 0.2;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
+
+  opacity: 0.18;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
+
+  opacity: 0.18;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
+
+  opacity: 0.12;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
+
+  opacity: 0.34;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-core {
+
+  stroke-width: 3.8;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.34;
 
 }
 
@@ -276,7 +348,7 @@
 
   pointer-events: none;
 
-  opacity: 0.78;
+  opacity: 0.82;
 
   transition:
 
@@ -288,17 +360,17 @@
 
 .heritage-voice-thread-node.is-active {
 
-  opacity: 1;
+  opacity: 0.88;
 
 }
 
 .heritage-voice-thread-anchor-dot {
 
-  opacity: 0.42;
+  opacity: 0.34;
 
   filter: drop-shadow(
 
-    0 0 4px color-mix(in srgb, var(--node-color), transparent 46%)
+    0 0 3px color-mix(in srgb, var(--node-color), transparent 58%)
 
   );
 
@@ -306,15 +378,13 @@
 
 .heritage-voice-thread-node.is-active .heritage-voice-thread-anchor-dot {
 
-  opacity: 0.98;
+  opacity: 0.52;
 
-  filter:
+  filter: drop-shadow(
 
-    drop-shadow(0 0 5px color-mix(in srgb, var(--node-color), transparent 18%))
+    0 0 5px color-mix(in srgb, var(--node-color), transparent 42%)
 
-    drop-shadow(0 0 13px color-mix(in srgb, var(--node-color), transparent 44%))
-
-    drop-shadow(0 0 24px color-mix(in srgb, var(--node-color), transparent 68%));
+  );
 
 }
 
@@ -348,9 +418,9 @@
 
   box-shadow: none !important;
 
-  opacity: 0.76;
+  opacity: 0.72;
 
-  filter: drop-shadow(0 0 6px currentColor);
+  filter: drop-shadow(0 0 5px currentColor);
 
   transition:
 
@@ -378,17 +448,15 @@
 
 .heritage-voice-thread-node.is-active .heritage-voice-thread-node-icon {
 
-  opacity: 1;
+  opacity: 0.86;
 
-  transform: scale(1.06);
+  transform: scale(1.025);
 
   filter:
 
-    drop-shadow(0 0 6px currentColor)
+    drop-shadow(0 0 5px currentColor)
 
-    drop-shadow(0 0 13px currentColor)
-
-    drop-shadow(0 0 24px currentColor);
+    drop-shadow(0 0 11px currentColor);
 
 }
 
@@ -406,35 +474,35 @@
 
 .heritage-voice-thread-map--compact .heritage-voice-thread-line--base {
 
-  stroke-width: 0.88;
+  stroke-width: 0.84;
 
-  opacity: 0.12;
+  opacity: 0.11;
 
 }
 
 .heritage-voice-thread-map--compact .heritage-voice-thread-outer-line {
 
-  stroke-width: 1.05;
+  stroke-width: 1;
 
-  opacity: 0.18;
+  opacity: 0.16;
 
 }
 
 .heritage-voice-thread-map--compact .heritage-voice-thread-shape-halo {
 
-  opacity: 0.2;
+  opacity: 0.18;
 
 }
 
 .heritage-voice-thread-map--compact .heritage-voice-thread-shape-glow {
 
-  opacity: 0.46;
+  opacity: 0.43;
 
 }
 
 .heritage-voice-thread-map--compact .heritage-voice-thread-shape-core {
 
-  opacity: 0.92;
+  opacity: 0.9;
 
 }
 
@@ -442,7 +510,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.54;
+  opacity: 0.5;
 
 }
 
@@ -450,7 +518,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 0.97;
+  opacity: 0.96;
 
 }
 
@@ -458,7 +526,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.56;
+  opacity: 0.52;
 
 }
 
@@ -466,7 +534,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 0.97;
+  opacity: 0.96;
 
 }
 
@@ -474,7 +542,7 @@
 
   .heritage-voice-thread-complex-fill {
 
-  opacity: 0.78;
+  opacity: 0.74;
 
 }
 
@@ -482,7 +550,7 @@
 
   .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.3;
+  opacity: 0.28;
 
 }
 
@@ -490,7 +558,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.42;
+  opacity: 0.4;
 
 }
 
@@ -498,7 +566,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 0.9;
+  opacity: 0.88;
 
 }
 
@@ -536,13 +604,13 @@
 
   opacity: 1;
 
-  transform: translateZ(0) scale(1.014);
+  transform: translateZ(0) scale(1.012);
 
   filter:
 
-    drop-shadow(0 0 12px color-mix(in srgb, var(--thread-accent, #d6b277) 14%, transparent))
+    drop-shadow(0 0 12px color-mix(in srgb, var(--thread-accent, #d6b277) 12%, transparent))
 
-    drop-shadow(0 0 24px color-mix(in srgb, var(--thread-accent-2, #d6b277) 11%, transparent));
+    drop-shadow(0 0 24px color-mix(in srgb, var(--thread-accent-2, #d6b277) 9%, transparent));
 
 }
 
@@ -550,7 +618,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.42;
+  opacity: 0.4;
 
 }
 
@@ -560,7 +628,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.38;
+  opacity: 0.37;
 
 }
 
@@ -584,7 +652,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.64;
+  opacity: 0.6;
 
 }
 
@@ -600,7 +668,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 1;
+  opacity: 0.99;
 
 }
 
@@ -610,7 +678,7 @@
 
   .heritage-voice-thread-complex-fill {
 
-  opacity: 0.88;
+  opacity: 0.86;
 
 }
 
@@ -620,7 +688,7 @@
 
   .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.42;
+  opacity: 0.38;
 
 }
 
@@ -630,7 +698,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.5;
+  opacity: 0.48;
 
 }
 
@@ -640,7 +708,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 0.96;
+  opacity: 0.95;
 
 }
 
@@ -652,43 +720,43 @@
 
 .heritage-thread-card .heritage-voice-thread-line--base {
 
-  opacity: 0.12 !important;
+  opacity: 0.11 !important;
 
-  stroke-width: 0.88 !important;
+  stroke-width: 0.84 !important;
 
 }
 
 .heritage-thread-card.is-active .heritage-voice-thread-line--base {
 
-  opacity: 0.15 !important;
+  opacity: 0.14 !important;
 
 }
 
 .heritage-thread-card .heritage-voice-thread-outer-line {
 
-  opacity: 0.17 !important;
+  opacity: 0.16 !important;
 
-  stroke-width: 1.05 !important;
+  stroke-width: 1 !important;
 
 }
 
 .heritage-thread-card.is-active .heritage-voice-thread-outer-line {
 
-  opacity: 0.22 !important;
+  opacity: 0.2 !important;
 
-  stroke-width: 1.1 !important;
+  stroke-width: 1.05 !important;
 
 }
 
 .heritage-thread-card .heritage-voice-thread-anchor-dot {
 
-  opacity: 0.56 !important;
+  opacity: 0.38 !important;
 
 }
 
 .heritage-thread-card .heritage-voice-thread-node.is-active .heritage-voice-thread-anchor-dot {
 
-  opacity: 0.98 !important;
+  opacity: 0.54 !important;
 
 }
 
@@ -710,13 +778,13 @@
 
 .heritage-thread-single-read-visual .heritage-voice-thread-line--base {
 
-  opacity: 0.1;
+  opacity: 0.095;
 
 }
 
 .heritage-thread-single-read-visual .heritage-voice-thread-outer-line {
 
-  opacity: 0.17;
+  opacity: 0.155;
 
 }
 
@@ -732,7 +800,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.66;
+  opacity: 0.62;
 
 }
 
@@ -748,7 +816,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 1;
+  opacity: 0.99;
 
 }
 
@@ -758,7 +826,7 @@
 
   .heritage-voice-thread-complex-fill {
 
-  opacity: 0.9;
+  opacity: 0.88;
 
 }
 
@@ -768,7 +836,7 @@
 
   .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.46;
+  opacity: 0.42;
 
 }
 
@@ -778,7 +846,7 @@
 
   .heritage-voice-thread-shape-glow {
 
-  opacity: 0.52;
+  opacity: 0.5;
 
 }
 
@@ -788,7 +856,7 @@
 
   .heritage-voice-thread-shape-core {
 
-  opacity: 0.96;
+  opacity: 0.95;
 
 }
 
@@ -802,7 +870,7 @@
 
   .heritage-voice-thread-anchor-dot {
 
-    filter: drop-shadow(0 0 4px rgba(214, 178, 119, 0.46));
+    filter: drop-shadow(0 0 4px rgba(214, 178, 119, 0.28));
 
   }
 
@@ -810,9 +878,9 @@
 
     filter:
 
-      drop-shadow(0 0 5px rgba(214, 178, 119, 0.62))
+      drop-shadow(0 0 5px rgba(214, 178, 119, 0.34))
 
-      drop-shadow(0 0 10px rgba(214, 178, 119, 0.34));
+      drop-shadow(0 0 10px rgba(214, 178, 119, 0.18));
 
   }
 
@@ -820,9 +888,9 @@
 
     filter:
 
-      drop-shadow(0 0 10px rgba(214, 178, 119, 0.12))
+      drop-shadow(0 0 10px rgba(214, 178, 119, 0.1))
 
-      drop-shadow(0 0 18px rgba(214, 178, 119, 0.1));
+      drop-shadow(0 0 18px rgba(214, 178, 119, 0.08));
 
   }
 
@@ -862,32 +930,144 @@
 
 }
 
-.heritage-voice-thread-map--complex .heritage-voice-thread-complex-fill {
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
 
-  filter: blur(0.4px);
-
-}
-
-.heritage-voice-thread-map--complex .heritage-voice-thread-shape-halo {
-
-  mix-blend-mode: screen;
+  opacity: 0.1;
 
 }
 
-.heritage-voice-thread-map--complex .heritage-voice-thread-shape-glow {
-
-  mix-blend-mode: screen;
-
-}
-
-.heritage-voice-thread-map--complex .heritage-voice-thread-shape-core {
-
-  filter: drop-shadow(0 0 10px currentColor);
-
-}
-
-.heritage-voice-thread-map--complex .heritage-voice-thread-shape-hotline {
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
 
   opacity: 0.22;
+
+}
+
+.heritage-voice-thread-relationship-segments .heritage-voice-thread-shape-halo,
+
+.heritage-voice-thread-relationship-segments .heritage-voice-thread-shape-glow,
+
+.heritage-voice-thread-relationship-segments .heritage-voice-thread-shape-core {
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-halo {
+
+  opacity: 0.16;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.48;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.98;
+
+  filter:
+
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.06))
+
+    drop-shadow(0 0 16px rgba(214, 178, 119, 0.08));
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.1;
+
+  stroke: rgba(255, 246, 218, 0.18);
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.42;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-core {
+
+  filter:
+
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.035))
+
+    drop-shadow(0 0 15px rgba(214, 178, 119, 0.06));
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-hotline {
+
+  opacity: 0 !important;
+
+  stroke: transparent !important;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-halo {
+
+  opacity: 0.13 !important;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.38 !important;
+
+}
+
+.heritage-voice-thread-map--read-firstTell
+
+  .heritage-voice-thread-relationship-segments
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.96 !important;
+
+  filter:
+
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.018))
+
+    drop-shadow(0 0 14px rgba(214, 178, 119, 0.045)) !important;
 
 }

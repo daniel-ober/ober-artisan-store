@@ -29,8 +29,6 @@ import LEGACYPRINT_BENCHMARK_CATALOG from '../data/legacyPrint/benchmarkCatalog'
 
 import { useCart } from '../context/CartContext';
 
-import SpiderChart from './SpiderChart';
-
 import buildHeritageVoiceRead from '../utils/legacyPrint/buildHeritageVoiceRead';
 
 import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadout';
@@ -132,18 +130,25 @@ const AXIS_IMPACT_FACTORS = {
 const BASE_LEGACYPRINT_TABS = [
   {
     key: 'voiceRead',
+
     label: 'VoiceMap™',
   },
+
   {
     key: 'relationships',
+
     label: 'Voice Threads',
   },
+
   {
     key: 'legacyTuning',
+
     label: 'LegacyTuning™',
   },
+
   {
     key: 'legacyPrintRead',
+
     label: 'LegacyPrint™ Read',
   },
 ];
@@ -884,6 +889,226 @@ const getThreadColorVars = (nodes = []) => {
   };
 };
 
+const getVoiceReadLabel = (slotKey) => {
+  if (slotKey === 'simple') return 'First Tell';
+
+  if (slotKey === 'shaped') return 'Player Read';
+
+  return 'LegacyPrint™';
+};
+
+const VOICEMAP_READ_COPY = {
+  simple: {
+    kicker: 'First Tell',
+
+    titleFallback: 'First Tell',
+
+    typeLabel: 'First Tell',
+
+    visualMode: 'triangle',
+
+    intro:
+      'The immediate sonic clue: what the ear catches first when the drum speaks once.',
+  },
+
+  shaped: {
+    kicker: 'Player Read',
+
+    titleFallback: 'Player Read',
+
+    typeLabel: 'Player Read',
+
+    visualMode: 'spider',
+
+    intro:
+      'The playing experience: how the drum starts to feel under the hands across the full VoiceMap.',
+  },
+
+  complex: {
+    kicker: 'LegacyPrint™',
+
+    titleFallback: 'LegacyPrint™',
+
+    typeLabel: 'LegacyPrint™',
+
+    visualMode: 'legacyprint',
+
+    intro:
+      'The identity print: the drum’s one-of-one character, shaped by sound, feel, construction, and visual presence.',
+  },
+};
+
+const getVoiceMapReadCopy = (slotKey = '') => {
+  return VOICEMAP_READ_COPY[slotKey] || VOICEMAP_READ_COPY.simple;
+};
+
+const getVoiceMapDisplayTitle = (relationship, legacyPrintTitle) => {
+  if (relationship?.slotKey === 'complex') {
+    return legacyPrintTitle || relationship?.title || 'LegacyPrint™ Voice';
+  }
+
+  return relationship?.title || 'VoiceMap Read';
+};
+
+const getVoiceMapVariantForSlot = (slotKey = '') => {
+  if (slotKey === 'simple') return 'firstTell';
+
+  if (slotKey === 'shaped') return 'player';
+
+  return 'legacyprint';
+};
+
+const HERITAGE_FIRST_TELL_DEPTH_MAP = {
+  12: {
+    '5.0': ['attack', 'brightness', 'sensitivity'],
+
+    5.5: ['attack', 'sensitivity', 'brightness'],
+
+    '6.0': ['attack', 'sensitivity', 'control'],
+
+    6.5: ['attack', 'sensitivity', 'control'],
+
+    '7.0': ['attack', 'control', 'sensitivity'],
+
+    7.5: ['control', 'attack', 'projection'],
+
+    '8.0': ['control', 'projection', 'attack'],
+  },
+
+  13: {
+    '5.0': ['attack', 'brightness', 'control'],
+
+    5.5: ['attack', 'control', 'brightness'],
+
+    '6.0': ['attack', 'control', 'sensitivity'],
+
+    6.5: ['attack', 'control', 'sensitivity'],
+
+    '7.0': ['control', 'attack', 'projection'],
+
+    7.5: ['control', 'projection', 'attack'],
+
+    '8.0': ['control', 'projection', 'warmth'],
+  },
+
+  14: {
+    '5.0': ['attack', 'warmth', 'control'],
+
+    5.5: ['warmth', 'attack', 'control'],
+
+    '6.0': ['warmth', 'attack', 'projection'],
+
+    6.5: ['warmth', 'projection', 'attack'],
+
+    '7.0': ['warmth', 'projection', 'sustain'],
+
+    7.5: ['warmth', 'sustain', 'projection'],
+
+    '8.0': ['sustain', 'warmth', 'projection'],
+  },
+};
+
+const getNormalizedFirstTellDepthKey = (value) => {
+  const numberValue = Number(value);
+
+  if (!Number.isFinite(numberValue)) {
+    return String(value || '');
+  }
+
+  return numberValue.toFixed(1);
+};
+
+const getLockedFirstTellDepthNodes = ({ size, depth }) => {
+  const sizeKey = String(size);
+
+  const depthKey = getNormalizedFirstTellDepthKey(depth);
+
+  return (
+    HERITAGE_FIRST_TELL_DEPTH_MAP[sizeKey]?.[depthKey] || [
+      'warmth',
+
+      'attack',
+
+      'control',
+    ]
+  );
+};
+
+const getTopThreeTellerNodes = ({
+  relationship = {},
+
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  return getLockedFirstTellDepthNodes({ size, depth });
+};
+
+const getFirstTellTriangleNodes = ({
+  relationship = {},
+
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  return getLockedFirstTellDepthNodes({ size, depth });
+};
+
+const getVoiceMapVisualThread = ({
+  relationship = {},
+
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  if (!relationship) return null;
+
+  const voiceMapVariant = getVoiceMapVariantForSlot(relationship.slotKey);
+
+  const relationshipNodes = Array.isArray(relationship.nodes)
+    ? relationship.nodes.filter(Boolean)
+    : [];
+
+  const visualNodes =
+    voiceMapVariant === 'firstTell'
+      ? getLockedFirstTellDepthNodes({ size, depth })
+      : relationshipNodes;
+
+  return {
+    ...relationship,
+
+    id: `${relationship.id || 'voice-read'}-${voiceMapVariant}-visual`,
+
+    nodes: visualNodes,
+
+    title: relationship.title,
+  };
+};
+
 const HeritageProductDetail = () => {
   const navigate = useNavigate();
 
@@ -1340,9 +1565,24 @@ const HeritageProductDetail = () => {
   }, [activeThread, activeVoiceSummary]);
 
   const musicalIdentityTitle = useMemo(() => {
+    return buildHeritageMusicalIdentityTitle({
+      size,
 
-  return buildHeritageMusicalIdentityTitle({
+      depth,
 
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      hardwareColor,
+
+      scorchDepth,
+
+      currentSpec: activeVoiceSummary?.currentSpec || {},
+    });
+  }, [
     size,
 
     depth,
@@ -1357,29 +1597,8 @@ const HeritageProductDetail = () => {
 
     scorchDepth,
 
-    currentSpec: activeVoiceSummary?.currentSpec || {},
-
-  });
-
-}, [
-
-  size,
-
-  depth,
-
-  lugs,
-
-  staveOption,
-
-  hoopType,
-
-  hardwareColor,
-
-  scorchDepth,
-
-  activeVoiceSummary,
-
-]);
+    activeVoiceSummary,
+  ]);
 
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
@@ -2254,45 +2473,6 @@ const HeritageProductDetail = () => {
     );
   };
 
-  const renderComparisonChart = () => {
-    return (
-      <div className="heritage-chart-module">
-        <div className="heritage-chart-module-head">
-          <div className="heritage-chart-module-copy">
-            <span className="heritage-chart-eyebrow">
-              {isCompareModeEnabled ? 'VoiceMap™ Compare' : 'VoiceMap™'}
-            </span>
-
-            <h4 className="heritage-chart-title">
-              {isCompareModeEnabled
-                ? 'Current build vs reference'
-                : 'Current build voice shape'}
-            </h4>
-
-            <p className="heritage-chart-title-subcopy">
-              {isCompareModeEnabled
-                ? 'Shows how this Heritage build shifts against your selected listening benchmark across the seven Voice Nodes.'
-                : 'Shows the current Heritage configuration across the seven Voice Nodes.'}
-            </p>
-          </div>
-        </div>
-
-        <div className="heritage-chart-wrap heritage-chart-wrap--voice-read heritage-chart-wrap--simple heritage-chart-wrap--compare-enabled">
-          <div className="heritage-chart-stage">
-            <SpiderChart
-              data={chartValues}
-              labels={AXIS_META}
-              pointColors={AXIS_POINT_COLORS}
-              activeKey={activeAxisKey}
-              onAxisChange={handleAxisChange}
-              mode={isCompareModeEnabled ? 'compare' : 'standalone'}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const renderVoiceMapNodeInsight = () => {
     return (
       <div
@@ -2371,6 +2551,296 @@ const HeritageProductDetail = () => {
     );
   };
 
+  const renderVoiceMapReadExperience = () => {
+    const activeReadout = activeVoiceThreadReadout;
+
+    if (!activeThread || !activeReadout) {
+      return null;
+    }
+
+    const readCopy = getVoiceMapReadCopy(activeThread.slotKey);
+
+    const displayTitle = getVoiceMapDisplayTitle(
+      activeThread,
+
+      musicalIdentityTitle
+    );
+
+    const voiceMapVariant = getVoiceMapVariantForSlot(activeThread.slotKey);
+
+    const isFirstTell = voiceMapVariant === 'firstTell';
+
+    const isPlayerRead = voiceMapVariant === 'player';
+
+    const firstTellKeys = getFirstTellTriangleNodes({
+      relationship: activeThread,
+
+      profile: activeVoiceSummary?.profile || {},
+
+      size,
+
+      depth,
+
+      lugs,
+
+      hoopType,
+
+      scorchDepth,
+    });
+
+    const visualThread = getVoiceMapVisualThread({
+      relationship: activeThread,
+
+      profile: activeVoiceSummary?.profile || {},
+
+      size,
+
+      depth,
+
+      lugs,
+
+      hoopType,
+
+      scorchDepth,
+    });
+
+    const visualNodes = visualThread?.nodes || [];
+
+    const firstTellPrimaryNode = visualNodes[0] || firstTellKeys[0] || 'attack';
+
+    const firstTellPrimaryColor =
+      AXIS_COLOR_BY_KEY[firstTellPrimaryNode] || AXIS_COLOR_BY_KEY.attack;
+
+    const visualNodeLabels = visualNodes
+
+      .map(
+        (nodeKey) =>
+          AXIS_META.find((axis) => axis.key === nodeKey)?.label || nodeKey
+      )
+
+      .join(', ');
+
+    return (
+      <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read heritage-voicemap-read-experience">
+        <div className="heritage-thread-reference-head">
+          <span className="heritage-chart-eyebrow">VoiceMap™</span>
+
+          <h4 className="heritage-chart-title">Current VoiceMap read</h4>
+
+          <p className="heritage-chart-title-subcopy">
+            VoiceMap reads the drum in three passes: the First Tell, the Player
+            Read, and the one-of-one LegacyPrint™ identity.
+          </p>
+        </div>
+
+        <div
+          className="heritage-thread-single-selector"
+          aria-label="Current VoiceMap read selector"
+        >
+          {keyRelationships.map((relationship) => {
+            const isActive = selectedThreadId === relationship.id;
+
+            const cardReadout = buildVoiceThreadReadout({
+              thread: relationship,
+
+              profile: activeVoiceSummary?.profile || {},
+
+              sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
+            });
+
+            const cardCopy = getVoiceMapReadCopy(relationship.slotKey);
+
+            const cardTitle = getVoiceMapDisplayTitle(
+              relationship,
+
+              musicalIdentityTitle
+            );
+
+            return (
+              <button
+                key={`${activeBuildSignature}-${relationship.id}-voicemap-selector`}
+                type="button"
+                className={`heritage-thread-single-selector-button ${
+                  isActive ? 'is-active' : ''
+                }`}
+                onClick={() => handleThreadSelect(relationship.id)}
+                style={getThreadColorVars(relationship.nodes)}
+              >
+                <span className="heritage-thread-single-selector-kicker">
+                  {cardCopy.kicker}
+                </span>
+
+                <strong>{cardTitle}</strong>
+
+                <em>{cardReadout.intensityLabel} read</em>
+              </button>
+            );
+          })}
+        </div>
+
+        <article
+          key={`${activeBuildSignature}-${activeThread.id}-voicemap-read`}
+          className={`heritage-thread-single-read-panel heritage-voicemap-read-panel heritage-voicemap-read-panel--${activeThread.slotKey}`}
+          style={getThreadColorVars(visualNodes)}
+        >
+          <div className="heritage-thread-single-read-visual heritage-voicemap-read-visual">
+            <div
+              className={`heritage-voicemap-relationship-graph-shell heritage-voicemap-relationship-graph-shell--${voiceMapVariant}`}
+              style={{
+                '--first-tell-primary-color': firstTellPrimaryColor,
+              }}
+            >
+              <VoiceThreadMap
+                activeThread={visualThread}
+                compact={false}
+                strengthScore={activeThread.score}
+                profile={activeVoiceSummary?.profile || {}}
+                sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
+                currentSpec={activeVoiceSummary?.currentSpec || {}}
+                input={{
+                  size,
+
+                  depth,
+
+                  lugs,
+
+                  staveOption,
+
+                  hoopType,
+
+                  hardwareColor,
+
+                  scorchDepth,
+                }}
+                displayMode="voicemap"
+                readVariant={voiceMapVariant}
+                firstTellKeys={firstTellKeys}
+              />
+            </div>
+          </div>
+
+          <div className="heritage-thread-single-read-content">
+            <div className="heritage-thread-single-read-head">
+              <div>
+                <span className="heritage-summary-kicker">
+                  Ober VoiceMap read
+                </span>
+
+                <h4>{displayTitle}</h4>
+
+                <p className="heritage-thread-single-read-type">
+                  {readCopy.typeLabel} / {activeReadout.intensityLabel} read
+                </p>
+              </div>
+
+              <div className="heritage-thread-read-icons">
+                {renderThreadNodeIcons(visualNodes)}
+              </div>
+            </div>
+
+            <p className="heritage-thread-single-read-lede">{readCopy.intro}</p>
+
+            <p className="heritage-thread-single-read-lede">
+              {activeThread.summary}
+            </p>
+
+            <div className="heritage-thread-single-meta-grid">
+              <span>
+                <strong>Read type</strong>
+
+                {readCopy.typeLabel}
+              </span>
+
+              <span>
+                <strong>Visual</strong>
+
+                {isFirstTell
+                  ? 'First Tell triangle'
+                  : isPlayerRead
+                    ? 'Full VoiceMap relationship shape'
+                    : 'LegacyPrint™ fingerprint'}
+              </span>
+
+              <span>
+                <strong>Voice nodes</strong>
+
+                {visualNodeLabels}
+              </span>
+            </div>
+
+            {!isPlayerRead && (
+              <div className="heritage-thread-axis-delta-list heritage-thread-axis-delta-list--single">
+                {visualNodes.map((nodeKey) => {
+                  const axis = AXIS_META.find((item) => item.key === nodeKey);
+
+                  const rawValue = Number(
+                    activeVoiceSummary?.profile?.[nodeKey] ?? 5
+                  );
+
+                  const delta = Number((rawValue - 5).toFixed(2));
+
+                  const deltaLabel = delta > 0 ? `+${delta}` : `${delta}`;
+
+                  const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+                  return (
+                    <div
+                      key={nodeKey}
+                      className={`heritage-thread-axis-delta-line ${
+                        delta > 0
+                          ? 'is-positive'
+                          : delta < 0
+                            ? 'is-negative'
+                            : 'is-neutral'
+                      }`}
+                      style={{ '--axis-color': color }}
+                    >
+                      <span>{axis?.label || nodeKey}</span>
+
+                      <strong>{deltaLabel}</strong>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className="heritage-thread-listening-note heritage-thread-listening-note--single">
+              <section>
+                <span>
+                  {activeThread.slotKey === 'simple'
+                    ? 'First tell'
+                    : activeThread.slotKey === 'shaped'
+                      ? 'Player read'
+                      : 'LegacyPrint™'}
+                </span>
+
+                <p>{activeReadout.whatThreadIsTellingUs}</p>
+              </section>
+
+              <section>
+                <span>Why it matters</span>
+
+                <p>{activeReadout.whyItMatters}</p>
+              </section>
+
+              <section>
+                <span>How to use it</span>
+
+                <p>{activeReadout.howToUseThis}</p>
+              </section>
+
+              <section>
+                <span>Keep in mind</span>
+
+                <p>{activeReadout.trustNote}</p>
+              </section>
+            </div>
+          </div>
+        </article>
+      </div>
+    );
+  };
+
   const visibleLegacyPrintTabs = useMemo(() => {
     return [
       ...BASE_LEGACYPRINT_TABS,
@@ -2381,19 +2851,7 @@ const HeritageProductDetail = () => {
 
   const renderLegacyPrintPanel = () => {
     if (legacyPrintTab === 'voiceRead') {
-      return (
-        <div
-          className={`heritage-legacyprint-panel heritage-legacyprint-panel--voice-read ${
-            isCompareModeEnabled ? 'is-compare-mode' : 'is-standalone-mode'
-          }`}
-        >
-          <div className="heritage-voice-comparison-shell heritage-voice-comparison-shell--voice-read">
-            {renderComparisonChart()}
-
-            {renderVoiceMapNodeInsight()}
-          </div>
-        </div>
-      );
+      return renderVoiceMapReadExperience();
     }
 
     if (legacyPrintTab === 'legacyTuning') {
@@ -2419,56 +2877,6 @@ const HeritageProductDetail = () => {
     }
 
     if (legacyPrintTab === 'relationships') {
-      const activeReadout = activeVoiceThreadReadout;
-
-      const voiceShiftText = (() => {
-        const profile = activeVoiceSummary?.profile || {};
-
-        const sizeLabel = `${size}x${depth}`;
-
-        const shifts = [
-          { label: 'attack', value: profile.attack },
-
-          { label: 'projection', value: profile.projection },
-
-          { label: 'control', value: profile.control },
-
-          { label: 'sustain', value: profile.sustain },
-
-          { label: 'warmth', value: profile.warmth },
-
-          { label: 'brightness', value: profile.brightness },
-
-          { label: 'sensitivity', value: profile.sensitivity },
-        ]
-
-          .filter((item) => Number.isFinite(Number(item.value)))
-
-          .map((item) => ({
-            ...item,
-
-            delta: Number(item.value) - 5,
-          }))
-
-          .filter((item) => Math.abs(item.delta) >= 0.12)
-
-          .sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta))
-
-          .slice(0, 3)
-
-          .map((item) => {
-            const direction = item.delta > 0 ? 'more' : 'less';
-
-            return `${direction} ${item.label}`;
-          });
-
-        if (!shifts.length) return '';
-
-        return `${sizeLabel} keeps the same main thread, but shifts toward ${shifts.join(
-          ', '
-        )}.`;
-      })();
-
       return (
         <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read">
           <div className="heritage-thread-reference-head">
@@ -2509,26 +2917,14 @@ const HeritageProductDetail = () => {
                   style={getThreadColorVars(relationship.nodes)}
                 >
                   <span className="heritage-thread-single-selector-kicker">
-                   {relationship.slotKey === 'simple'
-
-  ? 'First Tell'
-
-  : relationship.slotKey === 'shaped'
-
-    ? 'Player Read'
-
-    : 'Musical Identity'}
+                    {getVoiceReadLabel(relationship.slotKey)}
                   </span>
 
                   <strong>
-
-  {relationship.slotKey === 'complex'
-
-    ? musicalIdentityTitle
-
-    : relationship.title}
-
-</strong>
+                    {relationship.slotKey === 'complex'
+                      ? musicalIdentityTitle
+                      : relationship.title}
+                  </strong>
 
                   <em>{cardReadout.intensityLabel} read</em>
                 </button>
@@ -2536,168 +2932,28 @@ const HeritageProductDetail = () => {
             })}
           </div>
 
-          {activeThread && activeReadout && (
-            <article
-              key={`${activeBuildSignature}-${activeThread.id}-single-read`}
-              className="heritage-thread-single-read-panel"
-              style={getThreadColorVars(activeThread.nodes)}
-            >
-              <div className="heritage-thread-single-read-visual">
-                <VoiceThreadMap
-                  activeThread={activeThread}
-                  strengthScore={activeThread.score}
-                  profile={activeVoiceSummary?.profile || {}}
-                  sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
-                  currentSpec={activeVoiceSummary?.currentSpec || {}}
-                  input={{
-                    size,
+          <VoiceThreadMap
+            activeThread={activeThread}
+            strengthScore={activeThread.score}
+            profile={activeVoiceSummary?.profile || {}}
+            sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
+            currentSpec={activeVoiceSummary?.currentSpec || {}}
+            input={{
+              size,
 
-                    depth,
+              depth,
 
-                    lugs,
+              lugs,
 
-                    staveOption,
+              staveOption,
 
-                    hoopType,
+              hoopType,
 
-                    hardwareColor,
+              hardwareColor,
 
-                    scorchDepth,
-                  }}
-                />
-              </div>
-
-              <div className="heritage-thread-single-read-content">
-                <div className="heritage-thread-single-read-head">
-                  <div>
-                    <span className="heritage-summary-kicker">
-                      Ober voice read
-                    </span>
-
-                    <h4>
-
-  {activeThread.slotKey === 'complex'
-
-    ? musicalIdentityTitle
-
-    : activeThread.title}
-
-</h4>
-
-                    <p className="heritage-thread-single-read-type">
-                  {activeThread.slotKey === 'simple'
-
-  ? 'First Tell'
-
-  : activeThread.slotKey === 'shaped'
-
-    ? 'Player Read'
-
-    : 'Musical Identity'}{' '}
-
-/ {activeReadout.intensityLabel} read
-                    </p>
-                  </div>
-
-                  <div className="heritage-thread-read-icons">
-                    {renderThreadNodeIcons(activeThread.nodes)}
-                  </div>
-                </div>
-
-                <p className="heritage-thread-single-read-lede">
-                  {activeThread.summary}
-                </p>
-
-                <div className="heritage-thread-single-meta-grid">
-                  <span>
-                    <strong>Pattern</strong>
-
-                    {activeReadout.shapeLabel}
-                  </span>
-
-                  <span>
-                    <strong>Hand feel</strong>
-
-                    {activeReadout.intensityLabel}
-                  </span>
-
-                  <span>
-                    <strong>Voice nodes</strong>
-
-                    {activeReadout.nodeLabels}
-                  </span>
-                </div>
-
-                <div className="heritage-thread-axis-delta-list heritage-thread-axis-delta-list--single">
-                  {(activeThread.nodes || []).map((nodeKey) => {
-                    const axis = AXIS_META.find((item) => item.key === nodeKey);
-
-                    const rawValue = Number(
-                      activeVoiceSummary?.profile?.[nodeKey] ?? 5
-                    );
-
-                    const delta = Number((rawValue - 5).toFixed(2));
-
-                    const deltaLabel = delta > 0 ? `+${delta}` : `${delta}`;
-
-                    const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
-
-                    return (
-                      <div
-                        key={nodeKey}
-                        className={`heritage-thread-axis-delta-line ${
-                          delta > 0
-                            ? 'is-positive'
-                            : delta < 0
-                              ? 'is-negative'
-                              : 'is-neutral'
-                        }`}
-                        style={{ '--axis-color': color }}
-                      >
-                        <span>{axis?.label || nodeKey}</span>
-
-                        <strong>{deltaLabel}</strong>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {voiceShiftText && (
-                  <p className="heritage-voice-shift-readout heritage-voice-shift-readout--single">
-                    <strong>Voice shift</strong>
-
-                    {voiceShiftText}
-                  </p>
-                )}
-
-                <div className="heritage-thread-listening-note heritage-thread-listening-note--single">
-                  <section>
-                    <span>At the kit</span>
-
-                    <p>{activeReadout.whatThreadIsTellingUs}</p>
-                  </section>
-
-                  <section>
-                    <span>Bench note</span>
-
-                    <p>{activeReadout.whyItMatters}</p>
-                  </section>
-
-                  <section>
-                    <span>Good for</span>
-
-                    <p>{activeReadout.howToUseThis}</p>
-                  </section>
-
-                  <section>
-                    <span>Keep in mind</span>
-
-                    <p>{activeReadout.trustNote}</p>
-                  </section>
-                </div>
-              </div>
-            </article>
-          )}
+              scorchDepth,
+            }}
+          />
         </div>
       );
     }

@@ -190,11 +190,27 @@ function getWeightedBlendColor(values = [], colors = DEFAULT_POINT_COLORS) {
 
 }
 
-function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLORS) {
+function createInteriorGradient(
+
+  chart,
+
+  values = [],
+
+  colors = DEFAULT_POINT_COLORS,
+
+  voiceMapVariant = 'player'
+
+) {
 
   const { ctx, chartArea } = chart;
 
   if (!chartArea) return 'rgba(120, 190, 220, 0.12)';
+
+  if (voiceMapVariant === 'firstTell') {
+
+    return 'rgba(0, 0, 0, 0)';
+
+  }
 
   const blend = getWeightedBlendColor(values, colors);
 
@@ -246,15 +262,791 @@ function createInteriorGradient(chart, values = [], colors = DEFAULT_POINT_COLOR
 
 }
 
-function createGradientRadarPlugin(
+function getTopThreeAxisKeysFromValues(values = []) {
+
+  return AXIS_KEYS.map((key, index) => ({
+
+    key,
+
+    value: Number(values[index] ?? 5),
+
+  }))
+
+    .sort((a, b) => Math.abs(b.value - 5) - Math.abs(a.value - 5))
+
+    .slice(0, 3)
+
+    .map((item) => item.key);
+
+}
+
+function getOuterPoint(scale, index, radiusValue = 10) {
+
+  return scale.getPointPositionForValue(index, radiusValue);
+
+}
+
+function drawColoredOuterPolygon(ctx, scale, pointColors = DEFAULT_POINT_COLORS) {
+
+  const outerPoints = AXIS_KEYS.map((_, index) =>
+
+    getOuterPoint(scale, index, scale.max)
+
+  );
+
+  ctx.save();
+
+  ctx.lineCap = 'round';
+
+  ctx.lineJoin = 'round';
+
+  outerPoints.forEach((point, index) => {
+
+    const next = outerPoints[(index + 1) % outerPoints.length];
+
+    const currentColor = pointColors[index % pointColors.length];
+
+    const nextColor = pointColors[(index + 1) % pointColors.length];
+
+    const gradient = ctx.createLinearGradient(point.x, point.y, next.x, next.y);
+
+    gradient.addColorStop(0, mixColor(currentColor, nextColor, 0.08, 0.42));
+
+    gradient.addColorStop(0.5, mixColor(currentColor, nextColor, 0.5, 0.34));
+
+    gradient.addColorStop(1, mixColor(currentColor, nextColor, 0.92, 0.42));
+
+    ctx.beginPath();
+
+    ctx.strokeStyle = gradient;
+
+    ctx.lineWidth = 1.35;
+
+    ctx.shadowBlur = 5;
+
+    ctx.shadowColor = mixColor(currentColor, nextColor, 0.5, 0.16);
+
+    ctx.moveTo(point.x, point.y);
+
+    ctx.lineTo(next.x, next.y);
+
+    ctx.stroke();
+
+  });
+
+  ctx.restore();
+
+}
+
+function drawFirstTellTriangle({
+
+  ctx,
+
+  scale,
+
+  values = [],
+
+  pointColors = DEFAULT_POINT_COLORS,
+
+  firstTellKeys = [],
+
+}) {
+
+  const selectedKeys =
+
+    Array.isArray(firstTellKeys) && firstTellKeys.length >= 3
+
+      ? firstTellKeys.slice(0, 3)
+
+      : getTopThreeAxisKeysFromValues(values);
+
+  const selectedPoints = selectedKeys
+
+    .map((axisKey) => {
+
+      const index = AXIS_KEYS.indexOf(axisKey);
+
+      if (index === -1) return null;
+
+      return {
+
+        key: axisKey,
+
+        index,
+
+        point: getOuterPoint(scale, index, scale.max),
+
+        color: pointColors[index % pointColors.length],
+
+      };
+
+    })
+
+    .filter(Boolean);
+
+  if (selectedPoints.length < 3) return;
+
+  const blend = getWeightedBlendColor(
+
+    selectedPoints.map((item) => values[item.index] ?? 8),
+
+    selectedPoints.map((item) => item.color)
+
+  );
+
+  const triangleGradient = ctx.createLinearGradient(
+
+    selectedPoints[0].point.x,
+
+    selectedPoints[0].point.y,
+
+    selectedPoints[2].point.x,
+
+    selectedPoints[2].point.y
+
+  );
+
+  triangleGradient.addColorStop(
+
+    0,
+
+    mixColor(selectedPoints[0].color, '#ffffff', 0.08, 0.96)
+
+  );
+
+  triangleGradient.addColorStop(
+
+    0.5,
+
+    mixColor(selectedPoints[1].color, '#ffffff', 0.08, 0.96)
+
+  );
+
+  triangleGradient.addColorStop(
+
+    1,
+
+    mixColor(selectedPoints[2].color, '#ffffff', 0.08, 0.96)
+
+  );
+
+  ctx.save();
+
+  ctx.lineCap = 'round';
+
+  ctx.lineJoin = 'round';
+
+  ctx.beginPath();
+
+  selectedPoints.forEach(({ point }, index) => {
+
+    if (index === 0) ctx.moveTo(point.x, point.y);
+
+    else ctx.lineTo(point.x, point.y);
+
+  });
+
+  ctx.closePath();
+
+  ctx.fillStyle = rgbToString(blend, 0.035);
+
+  ctx.fill();
+
+  ctx.strokeStyle = triangleGradient;
+
+  ctx.globalAlpha = 0.18;
+
+  ctx.lineWidth = 12;
+
+  ctx.shadowBlur = 18;
+
+  ctx.shadowColor = rgbToString(blend, 0.34);
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.44;
+
+  ctx.lineWidth = 6.5;
+
+  ctx.shadowBlur = 14;
+
+  ctx.shadowColor = rgbToString(blend, 0.3);
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.96;
+
+  ctx.lineWidth = 2.85;
+
+  ctx.shadowBlur = 8;
+
+  ctx.shadowColor = rgbToString(blend, 0.24);
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.5;
+
+  ctx.strokeStyle = 'rgba(255, 246, 218, 0.44)';
+
+  ctx.lineWidth = 0.9;
+
+  ctx.shadowBlur = 0;
+
+  ctx.stroke();
+
+  ctx.restore();
+
+  ctx.save();
+
+  selectedPoints.forEach(({ point, color }) => {
+
+    const glow = hexToRgb(color);
+
+    ctx.beginPath();
+
+    ctx.fillStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.2)`;
+
+    ctx.arc(point.x, point.y, 18, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    ctx.beginPath();
+
+    ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.4)`;
+
+    ctx.lineWidth = 1.35;
+
+    ctx.arc(point.x, point.y, 16.5, 0, Math.PI * 2);
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.fillStyle = color;
+
+    ctx.arc(point.x, point.y, 5.8, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    ctx.beginPath();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+
+    ctx.arc(point.x, point.y, 1.9, 0, Math.PI * 2);
+
+    ctx.fill();
+
+  });
+
+  ctx.restore();
+
+}
+
+function drawLegacyPrintShape({
+
+  ctx,
+
+  scale,
+
+  values = [],
+
+  pointColors = DEFAULT_POINT_COLORS,
+
+  legacyPrintKeys = [],
+
+}) {
+
+  drawColoredOuterPolygon(ctx, scale, pointColors);
+
+  const selectedKeys =
+
+    Array.isArray(legacyPrintKeys) && legacyPrintKeys.length >= 3
+
+      ? legacyPrintKeys.slice(0, 4)
+
+      : getTopThreeAxisKeysFromValues(values);
+
+  const selectedPoints = selectedKeys
+
+    .map((axisKey) => {
+
+      const index = AXIS_KEYS.indexOf(axisKey);
+
+      if (index === -1) return null;
+
+      const rawValue = Number(values[index] ?? 5);
+
+      const shapedValue = clamp(rawValue, 3.2, 9.2);
+
+      return {
+
+        key: axisKey,
+
+        index,
+
+        point: getOuterPoint(scale, index, shapedValue),
+
+        outerPoint: getOuterPoint(scale, index, scale.max),
+
+        color: pointColors[index % pointColors.length],
+
+        value: shapedValue,
+
+      };
+
+    })
+
+    .filter(Boolean);
+
+  if (selectedPoints.length < 3) return;
+
+  const blend = getWeightedBlendColor(
+
+    selectedPoints.map((item) => item.value),
+
+    selectedPoints.map((item) => item.color)
+
+  );
+
+  const centerPoint = {
+
+    x: scale.xCenter,
+
+    y: scale.yCenter,
+
+  };
+
+  ctx.save();
+
+  const centerGlow = ctx.createRadialGradient(
+
+    centerPoint.x,
+
+    centerPoint.y,
+
+    0,
+
+    centerPoint.x,
+
+    centerPoint.y,
+
+    128
+
+  );
+
+  centerGlow.addColorStop(0, rgbToString(blend, 0.12));
+
+  centerGlow.addColorStop(0.5, rgbToString(blend, 0.05));
+
+  centerGlow.addColorStop(1, 'rgba(0,0,0,0)');
+
+  ctx.fillStyle = centerGlow;
+
+  ctx.beginPath();
+
+  ctx.arc(centerPoint.x, centerPoint.y, 128, 0, Math.PI * 2);
+
+  ctx.fill();
+
+  ctx.restore();
+
+  ctx.save();
+
+  ctx.lineCap = 'round';
+
+  ctx.lineJoin = 'round';
+
+  const sortedPoints = [...selectedPoints].sort((a, b) => a.index - b.index);
+
+  const gradient = ctx.createLinearGradient(
+
+    sortedPoints[0].point.x,
+
+    sortedPoints[0].point.y,
+
+    sortedPoints[sortedPoints.length - 1].point.x,
+
+    sortedPoints[sortedPoints.length - 1].point.y
+
+  );
+
+  sortedPoints.forEach((item, index) => {
+
+    gradient.addColorStop(
+
+      sortedPoints.length === 1 ? 0 : index / (sortedPoints.length - 1),
+
+      mixColor(item.color, '#ffffff', 0.08, 0.96)
+
+    );
+
+  });
+
+  ctx.beginPath();
+
+  sortedPoints.forEach((item, index) => {
+
+    const current = item.point;
+
+    const next = sortedPoints[(index + 1) % sortedPoints.length].point;
+
+    const midX = (current.x + next.x) / 2;
+
+    const midY = (current.y + next.y) / 2;
+
+    const pullX = centerPoint.x + (midX - centerPoint.x) * 0.72;
+
+    const pullY = centerPoint.y + (midY - centerPoint.y) * 0.72;
+
+    if (index === 0) {
+
+      ctx.moveTo(current.x, current.y);
+
+    }
+
+    ctx.quadraticCurveTo(pullX, pullY, next.x, next.y);
+
+  });
+
+  ctx.closePath();
+
+  ctx.fillStyle = rgbToString(blend, 0.07);
+
+  ctx.fill();
+
+  ctx.strokeStyle = gradient;
+
+  ctx.globalAlpha = 0.2;
+
+  ctx.lineWidth = 15;
+
+  ctx.shadowBlur = 24;
+
+  ctx.shadowColor = rgbToString(blend, 0.38);
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.52;
+
+  ctx.lineWidth = 8;
+
+  ctx.shadowBlur = 18;
+
+  ctx.shadowColor = rgbToString(blend, 0.34);
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.98;
+
+  ctx.lineWidth = 3.4;
+
+  ctx.shadowBlur = 10;
+
+  ctx.shadowColor = rgbToString(blend, 0.26);
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 0.48;
+
+  ctx.strokeStyle = 'rgba(255, 246, 218, 0.44)';
+
+  ctx.lineWidth = 0.9;
+
+  ctx.shadowBlur = 0;
+
+  ctx.stroke();
+
+  ctx.restore();
+
+  ctx.save();
+
+  selectedPoints.forEach(({ outerPoint, color }) => {
+
+    const glow = hexToRgb(color);
+
+    ctx.beginPath();
+
+    ctx.fillStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.2)`;
+
+    ctx.arc(outerPoint.x, outerPoint.y, 18, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    ctx.beginPath();
+
+    ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.4)`;
+
+    ctx.lineWidth = 1.35;
+
+    ctx.arc(outerPoint.x, outerPoint.y, 16.5, 0, Math.PI * 2);
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.fillStyle = color;
+
+    ctx.arc(outerPoint.x, outerPoint.y, 5.8, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    ctx.beginPath();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+
+    ctx.arc(outerPoint.x, outerPoint.y, 1.9, 0, Math.PI * 2);
+
+    ctx.fill();
+
+  });
+
+  ctx.restore();
+
+}
+
+function drawPlayerRead({
+
+  ctx,
+
+  chart,
+
+  scale,
+
+  points = [],
+
+  values = [],
+
+  pointColors = DEFAULT_POINT_COLORS,
+
+  activeKeyRef,
+
+  mode,
+
+}) {
+
+  const blend = getWeightedBlendColor(values, pointColors);
+
+  const centerX = scale.xCenter;
+
+  const centerY = scale.yCenter;
+
+  ctx.save();
+
+  const centerGlow = ctx.createRadialGradient(
+
+    centerX,
+
+    centerY,
+
+    0,
+
+    centerX,
+
+    centerY,
+
+    mode === 'compare' ? 132 : 150
+
+  );
+
+  centerGlow.addColorStop(
+
+    0,
+
+    rgbToString(blend, mode === 'compare' ? 0.13 : 0.17)
+
+  );
+
+  centerGlow.addColorStop(
+
+    0.5,
+
+    rgbToString(blend, mode === 'compare' ? 0.05 : 0.07)
+
+  );
+
+  centerGlow.addColorStop(1, 'rgba(0,0,0,0)');
+
+  ctx.fillStyle = centerGlow;
+
+  ctx.beginPath();
+
+  ctx.arc(centerX, centerY, mode === 'compare' ? 132 : 150, 0, Math.PI * 2);
+
+  ctx.fill();
+
+  ctx.restore();
+
+  if (mode === 'compare') {
+
+    const benchmarkRadius = scale.getDistanceFromCenterForValue(5);
+
+    ctx.save();
+
+    ctx.beginPath();
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.34)';
+
+    ctx.lineWidth = 1.5;
+
+    ctx.setLineDash([7, 7]);
+
+    points.forEach((point, index) => {
+
+      const angle = scale.getIndexAngle(index) - Math.PI / 2;
+
+      const x = centerX + Math.cos(angle) * benchmarkRadius;
+
+      const y = centerY + Math.sin(angle) * benchmarkRadius;
+
+      if (index === 0) ctx.moveTo(x, y);
+
+      else ctx.lineTo(x, y);
+
+    });
+
+    ctx.closePath();
+
+    ctx.stroke();
+
+    ctx.restore();
+
+  }
+
+  ctx.save();
+
+  ctx.lineCap = 'round';
+
+  ctx.lineJoin = 'round';
+
+  ctx.lineWidth = mode === 'compare' ? 5.6 : 6.4;
+
+  ctx.shadowBlur = mode === 'compare' ? 16 : 20;
+
+  for (let i = 0; i < points.length; i += 1) {
+
+    const current = points[i];
+
+    const next = points[(i + 1) % points.length];
+
+    const currentColor = pointColors[i % pointColors.length];
+
+    const nextColor = pointColors[(i + 1) % pointColors.length];
+
+    const gradient = ctx.createLinearGradient(
+
+      current.x,
+
+      current.y,
+
+      next.x,
+
+      next.y
+
+    );
+
+    gradient.addColorStop(0, mixColor(currentColor, nextColor, 0.04, 0.99));
+
+    gradient.addColorStop(0.5, mixColor(currentColor, nextColor, 0.5, 0.99));
+
+    gradient.addColorStop(1, mixColor(currentColor, nextColor, 0.96, 0.99));
+
+    ctx.strokeStyle = gradient;
+
+    ctx.shadowColor = mixColor(
+
+      currentColor,
+
+      nextColor,
+
+      0.5,
+
+      mode === 'compare' ? 0.34 : 0.42
+
+    );
+
+    ctx.beginPath();
+
+    ctx.moveTo(current.x, current.y);
+
+    ctx.lineTo(next.x, next.y);
+
+    ctx.stroke();
+
+  }
+
+  ctx.restore();
+
+  ctx.save();
+
+  points.forEach((point, index) => {
+
+    const color = pointColors[index % pointColors.length];
+
+    const glow = hexToRgb(color);
+
+    const isActive = AXIS_KEYS[index] === activeKeyRef.current;
+
+    ctx.beginPath();
+
+    ctx.fillStyle = isActive
+
+      ? `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.36)`
+
+      : `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.2)`;
+
+    ctx.arc(point.x, point.y, isActive ? 18 : 10, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    if (isActive) {
+
+      ctx.beginPath();
+
+      ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.4)`;
+
+      ctx.lineWidth = 1.5;
+
+      ctx.arc(point.x, point.y, 20, 0, Math.PI * 2);
+
+      ctx.stroke();
+
+    }
+
+    ctx.beginPath();
+
+    ctx.fillStyle = color;
+
+    ctx.arc(point.x, point.y, isActive ? 6.8 : 5.1, 0, Math.PI * 2);
+
+    ctx.fill();
+
+    ctx.beginPath();
+
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+
+    ctx.arc(point.x, point.y, isActive ? 2.1 : 1.6, 0, Math.PI * 2);
+
+    ctx.fill();
+
+  });
+
+  ctx.restore();
+
+}
+
+function createGradientRadarPlugin({
 
   activeKeyRef,
 
   pointColors = DEFAULT_POINT_COLORS,
 
-  modeRef
+  modeRef,
 
-) {
+  voiceMapVariantRef,
+
+  firstTellKeysRef,
+
+}) {
 
   return {
 
@@ -274,215 +1066,91 @@ function createGradientRadarPlugin(
 
       const mode = modeRef.current || 'standalone';
 
+      const voiceMapVariant = voiceMapVariantRef.current || 'player';
+
       const values = chart.data?.datasets?.[0]?.data || [];
 
-      const blend = getWeightedBlendColor(values, pointColors);
+if (voiceMapVariant === 'firstTell') {
 
-      const centerX = scale.xCenter;
+  drawColoredOuterPolygon(ctx, scale, pointColors);
 
-      const centerY = scale.yCenter;
+  drawFirstTellTriangle({
 
-      ctx.save();
+    ctx,
 
-      const centerGlow = ctx.createRadialGradient(
+    scale,
 
-        centerX,
+    values,
 
-        centerY,
+    pointColors,
 
-        0,
+    firstTellKeys: firstTellKeysRef.current || [],
 
-        centerX,
+  });
 
-        centerY,
+  return;
 
-        mode === 'compare' ? 132 : 150
+}
 
-      );
+if (voiceMapVariant === 'legacyprint') {
 
-      centerGlow.addColorStop(
+  drawLegacyPrintShape({
 
-        0,
+    ctx,
 
-        rgbToString(blend, mode === 'compare' ? 0.13 : 0.17)
+    scale,
 
-      );
+    values,
 
-      centerGlow.addColorStop(
+    pointColors,
 
-        0.5,
+    legacyPrintKeys: firstTellKeysRef.current || [],
 
-        rgbToString(blend, mode === 'compare' ? 0.05 : 0.07)
+  });
 
-      );
+  return;
 
-      centerGlow.addColorStop(1, 'rgba(0,0,0,0)');
+}
 
-      ctx.fillStyle = centerGlow;
+drawPlayerRead({
 
-      ctx.beginPath();
+  ctx,
 
-      ctx.arc(centerX, centerY, mode === 'compare' ? 132 : 150, 0, Math.PI * 2);
+  chart,
 
-      ctx.fill();
+  scale,
 
-      ctx.restore();
+  points,
 
-      if (mode === 'compare') {
+  values,
 
-        const benchmarkRadius = scale.getDistanceFromCenterForValue(5);
+  pointColors,
 
-        ctx.save();
+  activeKeyRef,
 
-        ctx.beginPath();
+  mode,
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.34)';
+});
 
-        ctx.lineWidth = 1.5;
+      drawPlayerRead({
 
-        ctx.setLineDash([7, 7]);
+        ctx,
 
-        points.forEach((point, index) => {
+        chart,
 
-          const angle = scale.getIndexAngle(index) - Math.PI / 2;
+        scale,
 
-          const x = centerX + Math.cos(angle) * benchmarkRadius;
+        points,
 
-          const y = centerY + Math.sin(angle) * benchmarkRadius;
+        values,
 
-          if (index === 0) ctx.moveTo(x, y);
+        pointColors,
 
-          else ctx.lineTo(x, y);
+        activeKeyRef,
 
-        });
-
-        ctx.closePath();
-
-        ctx.stroke();
-
-        ctx.restore();
-
-      }
-
-      ctx.save();
-
-      ctx.lineCap = 'round';
-
-      ctx.lineJoin = 'round';
-
-      ctx.lineWidth = mode === 'compare' ? 5.6 : 6.4;
-
-      ctx.shadowBlur = mode === 'compare' ? 16 : 20;
-
-      for (let i = 0; i < points.length; i += 1) {
-
-        const current = points[i];
-
-        const next = points[(i + 1) % points.length];
-
-        const currentColor = pointColors[i % pointColors.length];
-
-        const nextColor = pointColors[(i + 1) % pointColors.length];
-
-        const gradient = ctx.createLinearGradient(
-
-          current.x,
-
-          current.y,
-
-          next.x,
-
-          next.y
-
-        );
-
-        gradient.addColorStop(0, mixColor(currentColor, nextColor, 0.04, 0.99));
-
-        gradient.addColorStop(0.5, mixColor(currentColor, nextColor, 0.5, 0.99));
-
-        gradient.addColorStop(1, mixColor(currentColor, nextColor, 0.96, 0.99));
-
-        ctx.strokeStyle = gradient;
-
-        ctx.shadowColor = mixColor(
-
-          currentColor,
-
-          nextColor,
-
-          0.5,
-
-          mode === 'compare' ? 0.34 : 0.42
-
-        );
-
-        ctx.beginPath();
-
-        ctx.moveTo(current.x, current.y);
-
-        ctx.lineTo(next.x, next.y);
-
-        ctx.stroke();
-
-      }
-
-      ctx.restore();
-
-      ctx.save();
-
-      points.forEach((point, index) => {
-
-        const color = pointColors[index % pointColors.length];
-
-        const glow = hexToRgb(color);
-
-        const isActive = AXIS_KEYS[index] === activeKeyRef.current;
-
-        ctx.beginPath();
-
-        ctx.fillStyle = isActive
-
-          ? `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.36)`
-
-          : `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.2)`;
-
-        ctx.arc(point.x, point.y, isActive ? 18 : 10, 0, Math.PI * 2);
-
-        ctx.fill();
-
-        if (isActive) {
-
-          ctx.beginPath();
-
-          ctx.strokeStyle = `rgba(${glow.r}, ${glow.g}, ${glow.b}, 0.4)`;
-
-          ctx.lineWidth = 1.5;
-
-          ctx.arc(point.x, point.y, 20, 0, Math.PI * 2);
-
-          ctx.stroke();
-
-        }
-
-        ctx.beginPath();
-
-        ctx.fillStyle = color;
-
-        ctx.arc(point.x, point.y, isActive ? 6.8 : 5.1, 0, Math.PI * 2);
-
-        ctx.fill();
-
-        ctx.beginPath();
-
-        ctx.fillStyle = 'rgba(255,255,255,0.9)';
-
-        ctx.arc(point.x, point.y, isActive ? 2.1 : 1.6, 0, Math.PI * 2);
-
-        ctx.fill();
+        mode,
 
       });
-
-      ctx.restore();
 
     },
 
@@ -560,6 +1228,20 @@ const SpiderChart = ({
 
   mode = 'standalone',
 
+  /**
+
+   * VoiceMap variants:
+
+   * - player: current filled/glowing spider read
+
+   * - firstTell: simple outer 7-node polygon + glowing triangle touching 3 nodes
+
+   */
+
+  voiceMapVariant = 'player',
+
+  firstTellKeys = [],
+
 }) => {
 
   const canvasRef = useRef(null);
@@ -572,11 +1254,17 @@ const SpiderChart = ({
 
   const modeRef = useRef(mode);
 
+  const voiceMapVariantRef = useRef(voiceMapVariant);
+
+  const firstTellKeysRef = useRef(firstTellKeys);
+
   const frameRef = useRef(null);
 
   const [axisPositions, setAxisPositions] = React.useState([]);
 
   const isCompareMode = mode === 'compare';
+
+  const isFirstTell = voiceMapVariant === 'firstTell';
 
   const overlayAxes = useMemo(
 
@@ -682,6 +1370,30 @@ const SpiderChart = ({
 
   useEffect(() => {
 
+    voiceMapVariantRef.current = voiceMapVariant;
+
+    if (chartInstanceRef.current) {
+
+      chartInstanceRef.current.render();
+
+    }
+
+  }, [voiceMapVariant]);
+
+  useEffect(() => {
+
+    firstTellKeysRef.current = firstTellKeys;
+
+    if (chartInstanceRef.current) {
+
+      chartInstanceRef.current.render();
+
+    }
+
+  }, [firstTellKeys]);
+
+  useEffect(() => {
+
     if (!canvasRef.current) return undefined;
 
     const ctx = canvasRef.current.getContext('2d');
@@ -696,7 +1408,19 @@ const SpiderChart = ({
 
     }
 
-    const plugin = createGradientRadarPlugin(activeKeyRef, pointColors, modeRef);
+    const plugin = createGradientRadarPlugin({
+
+      activeKeyRef,
+
+      pointColors,
+
+      modeRef,
+
+      voiceMapVariantRef,
+
+      firstTellKeysRef,
+
+    });
 
     const handleAxisInteraction = (event, chart) => {
 
@@ -740,25 +1464,41 @@ const SpiderChart = ({
 
           {
 
-            label: 'Current Build',
+            label:
+
+              voiceMapVariantRef.current === 'firstTell'
+
+                ? 'First Tell'
+
+                : 'Current Build',
 
             data,
 
             rawData: data,
 
-            fill: true,
+            fill: !isFirstTell,
 
             backgroundColor: (context) => {
 
               const chart = context.chart;
 
-              return createInteriorGradient(chart, data, pointColors);
+              return createInteriorGradient(
+
+                chart,
+
+                data,
+
+                pointColors,
+
+                voiceMapVariantRef.current
+
+              );
 
             },
 
-            borderColor: 'rgba(255, 255, 255, 0.10)',
+            borderColor: 'rgba(255, 255, 255, 0)',
 
-            borderWidth: 1,
+            borderWidth: 0,
 
             pointRadius: 0,
 
@@ -884,21 +1624,29 @@ const SpiderChart = ({
 
             grid: {
 
-              color: isCompareMode
+              color: isFirstTell
 
-                ? 'rgba(255,255,255,0.11)'
+                ? 'rgba(255,255,255,0)'
 
-                : 'rgba(214,178,119,0.09)',
+                : isCompareMode
+
+                  ? 'rgba(255,255,255,0.11)'
+
+                  : 'rgba(214,178,119,0.09)',
 
             },
 
             angleLines: {
 
-              color: isCompareMode
+              color: isFirstTell
 
-                ? 'rgba(255,255,255,0.12)'
+                ? 'rgba(255,255,255,0)'
 
-                : 'rgba(255,255,255,0.10)',
+                : isCompareMode
+
+                  ? 'rgba(255,255,255,0.12)'
+
+                  : 'rgba(255,255,255,0.10)',
 
             },
 
@@ -952,7 +1700,7 @@ const SpiderChart = ({
 
     };
 
-  }, [compact, pointColors, data, overlayAxes, isCompareMode]);
+  }, [compact, pointColors, data, overlayAxes, isCompareMode, isFirstTell]);
 
   useEffect(() => {
 
@@ -962,19 +1710,57 @@ const SpiderChart = ({
 
     chart.data.labels = overlayAxes.map(() => '');
 
-    chart.data.datasets[0].label = 'Current Build';
+    chart.data.datasets[0].label =
+
+      voiceMapVariant === 'firstTell' ? 'First Tell' : 'Current Build';
 
     chart.data.datasets[0].data = data;
 
     chart.data.datasets[0].rawData = data;
 
+    chart.data.datasets[0].fill = voiceMapVariant !== 'firstTell';
+
     chart.data.datasets[0].backgroundColor = (context) => {
 
       const chartRef = context.chart;
 
-      return createInteriorGradient(chartRef, data, pointColors);
+      return createInteriorGradient(
+
+        chartRef,
+
+        data,
+
+        pointColors,
+
+        voiceMapVariant
+
+      );
 
     };
+
+    chart.options.scales.r.grid.color =
+
+      voiceMapVariant === 'firstTell'
+
+        ? 'rgba(255,255,255,0)'
+
+        : isCompareMode
+
+          ? 'rgba(255,255,255,0.11)'
+
+          : 'rgba(214,178,119,0.09)';
+
+    chart.options.scales.r.angleLines.color =
+
+      voiceMapVariant === 'firstTell'
+
+        ? 'rgba(255,255,255,0)'
+
+        : isCompareMode
+
+          ? 'rgba(255,255,255,0.12)'
+
+          : 'rgba(255,255,255,0.10)';
 
     chart.update('default');
 
@@ -984,7 +1770,7 @@ const SpiderChart = ({
 
     }, 40);
 
-  }, [data, compact, pointColors, overlayAxes, isCompareMode]);
+  }, [data, compact, pointColors, overlayAxes, isCompareMode, voiceMapVariant]);
 
   return (
 
@@ -1002,7 +1788,7 @@ const SpiderChart = ({
 
           : 'spider-chart-card--standalone'
 
-      }`}
+      } spider-chart-card--${voiceMapVariant}`}
 
     >
 
@@ -1014,7 +1800,7 @@ const SpiderChart = ({
 
           compact ? 'spider-chart-frame--compact' : ''
 
-        }`}
+        } spider-chart-frame--${voiceMapVariant}`}
 
       >
 
@@ -1024,11 +1810,15 @@ const SpiderChart = ({
 
             <span className="spider-chart-legend-line spider-chart-legend-line--current" />
 
-            <span className="spider-chart-legend-text">Current Build</span>
+            <span className="spider-chart-legend-text">
+
+              {voiceMapVariant === 'firstTell' ? 'First Tell' : 'Current Build'}
+
+            </span>
 
           </div>
 
-          {isCompareMode && (
+          {isCompareMode && voiceMapVariant !== 'firstTell' && (
 
             <div className="spider-chart-legend-item">
 
@@ -1048,6 +1838,8 @@ const SpiderChart = ({
 
             const isActive = activeKey === axis.key;
 
+            const isFirstTellNode = firstTellKeys.includes(axis.key);
+
             const position = axisPositions.find((item) => item.key === axis.key);
 
             return (
@@ -1060,7 +1852,7 @@ const SpiderChart = ({
 
                   isActive ? 'is-active' : ''
 
-                }`}
+                } ${isFirstTell && isFirstTellNode ? 'is-first-tell-node' : ''}`}
 
                 style={{
 
@@ -1076,7 +1868,13 @@ const SpiderChart = ({
 
                 <span className="spider-chart-axis-button-icon">
 
-                  <AxisIcon axisKey={axis.key} size={isActive ? 20 : 18} />
+                  <AxisIcon
+
+                    axisKey={axis.key}
+
+                    size={isActive || isFirstTellNode ? 20 : 18}
+
+                  />
 
                 </span>
 

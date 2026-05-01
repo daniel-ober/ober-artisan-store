@@ -9360,3 +9360,245 @@
   opacity: 0.96 !important;
 
 }
+
+/* =========================================================
+
+   LEGACYPRINT VOICE READS — FINAL OVERRIDES
+
+   First Tell = triangle
+
+   Player Read = SpiderChart
+
+   LegacyPrint = fingerprint/blob
+
+   ========================================================= */
+
+.heritage-product-detail .heritage-thread-reference-head .heritage-chart-eyebrow {
+
+  color: rgba(214, 178, 119, 0.86) !important;
+
+}
+
+.heritage-product-detail .heritage-thread-reference-head .heritage-chart-title {
+
+  max-width: 18ch !important;
+
+}
+
+.heritage-product-detail .heritage-thread-single-selector-button {
+
+  border-radius: 0 !important;
+
+}
+
+.heritage-product-detail .heritage-thread-single-selector-button strong {
+
+  max-width: 18ch !important;
+
+}
+
+.heritage-product-detail .heritage-thread-single-selector-button em {
+
+  display: block !important;
+
+  color: rgba(245, 243, 238, 0.48) !important;
+
+}
+
+/* Keep the top visual active again. Earlier duplicate CSS hides it. */
+
+.heritage-product-detail .heritage-thread-single-read-visual {
+
+  display: grid !important;
+
+  place-items: center !important;
+
+  min-height: 320px !important;
+
+  padding: 24px !important;
+
+  background:
+
+    radial-gradient(
+
+      circle at center,
+
+      color-mix(in srgb, var(--thread-accent-2, #d6b277) 5%, transparent),
+
+      transparent 58%
+
+    ),
+
+    linear-gradient(180deg, rgba(8, 9, 12, 0.72), rgba(4, 5, 8, 0.82)) !important;
+
+}
+
+/* Player Read uses the same SpiderChart language as the main VoiceMap. */
+
+.heritage-player-read-chart-shell {
+
+  width: min(100%, 520px);
+
+  margin: 0 auto;
+
+}
+
+.heritage-player-read-chart-shell .spider-chart-card {
+
+  width: 100%;
+
+}
+
+.heritage-player-read-chart-shell .spider-chart-frame {
+
+  height: 420px !important;
+
+  min-height: 420px !important;
+
+  max-height: 420px !important;
+
+  background:
+
+    radial-gradient(circle at top left, rgba(82, 132, 255, 0.1), transparent 32%),
+
+    radial-gradient(circle at bottom right, rgba(214, 178, 119, 0.06), transparent 26%),
+
+    linear-gradient(180deg, rgba(12, 15, 24, 0.98), rgba(8, 10, 16, 0.99)) !important;
+
+}
+
+/* First Tell should feel simpler and more triangular. */
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-complex-fill,
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-complex-sheen {
+
+  display: none !important;
+
+}
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-halo {
+
+  opacity: 0.18 !important;
+
+}
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.5 !important;
+
+}
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--simple
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.98 !important;
+
+}
+
+/* LegacyPrint keeps the fingerprint/blob feeling. */
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-complex-fill {
+
+  opacity: 0.86 !important;
+
+  filter: blur(0.45px) !important;
+
+}
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.5 !important;
+
+}
+
+.heritage-product-detail
+
+  .heritage-voice-thread-map--complex
+
+  .heritage-voice-thread-shape-core {
+
+  opacity: 0.95 !important;
+
+}
+
+/* Rename visual language away from pill-heavy readouts. */
+
+.heritage-product-detail .heritage-thread-single-read-type {
+
+  border-bottom: 1px solid rgba(214, 178, 119, 0.42) !important;
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+}
+
+@media (max-width: 900px) {
+
+  .heritage-product-detail .heritage-thread-single-read-visual {
+
+    min-height: 260px !important;
+
+    padding: 18px !important;
+
+  }
+
+  .heritage-player-read-chart-shell {
+
+    width: 100%;
+
+  }
+
+  .heritage-player-read-chart-shell .spider-chart-frame {
+
+    height: 340px !important;
+
+    min-height: 340px !important;
+
+    max-height: 340px !important;
+
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .heritage-player-read-chart-shell .spider-chart-frame {
+
+    height: 300px !important;
+
+    min-height: 300px !important;
+
+    max-height: 300px !important;
+
+  }
+
+}
