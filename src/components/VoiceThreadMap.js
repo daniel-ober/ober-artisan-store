@@ -12,11 +12,6 @@ import {
   Crosshair,
 } from 'lucide-react';
 
-import {
-  buildVoiceThreadFingerprint,
-  getComplexThreadVisualSignature,
-} from '../utils/legacyPrint/voiceThreadGeometry';
-
 import './VoiceThreadMap.css';
 
 const AXIS_META = [
@@ -99,6 +94,8 @@ const THREAD_NODE_ICON_POSITIONS = {
   control: { x: 12, y: 27 },
 };
 
+const SVG_SIZE = 500;
+
 const SVG_CENTER = { x: 250, y: 250 };
 
 const THREAD_FRAME_RADIUS = 205;
@@ -161,72 +158,6 @@ const sanitizeMapId = (value = '') => {
   return String(value || 'none').replace(/[^a-zA-Z0-9_-]/g, '-');
 };
 
-const isFinitePoint = (point) => {
-  return (
-    point &&
-    Number.isFinite(Number(point.x)) &&
-    Number.isFinite(Number(point.y))
-  );
-};
-
-const toSvgPoint = (point) => ({
-  x: Number(point?.x || 0) * 5,
-
-  y: Number(point?.y || 0) * 5,
-});
-
-const getPointForNode = (nodeKey) => {
-  const point = THREAD_NODE_POSITIONS[nodeKey];
-
-  return point ? toSvgPoint(point) : null;
-};
-
-const getAxisValue = (profile = {}, axisKey) => {
-  const value = Number(profile?.[axisKey] ?? 5);
-
-  return Number.isFinite(value) ? value : 5;
-};
-
-const getAxisDelta = (profile = {}, axisKey) => {
-  return getAxisValue(profile, axisKey) - 5;
-};
-
-const getAxisMovement = (profile = {}, axisKey) => {
-  return clamp(Math.abs(getAxisDelta(profile, axisKey)) / 1.5, 0, 1);
-};
-
-const getSignedAxisMovement = (profile = {}, axisKey) => {
-  return clamp(getAxisDelta(profile, axisKey) / 1.5, -1, 1);
-};
-
-const getAxisDominance = (profile = {}, axisKey) => {
-  const rawValue = getAxisValue(profile, axisKey);
-
-  const deltaWeight = Math.abs(rawValue - 5) * 0.18;
-
-  return clamp(rawValue + deltaWeight, 1, 10);
-};
-
-const getNodeVoiceWeight = (profile = {}, nodeKey) => {
-  const rawValue = getAxisValue(profile, nodeKey);
-
-  const delta = Math.abs(rawValue - 5);
-
-  /**
-
-   * Meaning:
-
-   * - 5.0 is neutral, so it should not glow hard.
-
-   * - movement away from 5.0 should visually matter more than raw value.
-
-   * - clamp keeps quiet nodes visible but restrained.
-
-   */
-
-  return clamp(0.28 + delta / 2.25, 0.28, 1);
-};
-
 const hexToRgb = (hex = '#d6b277') => {
   const clean = String(hex).replace('#', '');
 
@@ -267,55 +198,6 @@ const rgbToHex = ({ r, g, b }) => {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
-const mixNodeColorsByWeight = ({ nodes = [], profile = {} }) => {
-  const cleanNodes = nodes.filter(Boolean);
-
-  if (!cleanNodes.length) return '#d6b277';
-
-  const weighted = cleanNodes.map((nodeKey) => {
-    const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
-
-    const movement = getAxisMovement(profile, nodeKey);
-
-    const value = getAxisValue(profile, nodeKey);
-
-    return {
-      color,
-
-      weight: Math.max(
-        0.35,
-        0.55 + movement * 1.25 + Math.abs(value - 5) * 0.18
-      ),
-    };
-  });
-
-  const totalWeight = weighted.reduce((sum, item) => sum + item.weight, 0);
-
-  const mixed = weighted.reduce(
-    (acc, item) => {
-      const rgb = hexToRgb(item.color);
-
-      return {
-        r: acc.r + rgb.r * item.weight,
-
-        g: acc.g + rgb.g * item.weight,
-
-        b: acc.b + rgb.b * item.weight,
-      };
-    },
-
-    { r: 0, g: 0, b: 0 }
-  );
-
-  return rgbToHex({
-    r: mixed.r / totalWeight,
-
-    g: mixed.g / totalWeight,
-
-    b: mixed.b / totalWeight,
-  });
-};
-
 const mixTwoHexColors = (colorA, colorB, amount = 0.5) => {
   const a = hexToRgb(colorA);
 
@@ -332,162 +214,64 @@ const mixTwoHexColors = (colorA, colorB, amount = 0.5) => {
   });
 };
 
-const getPairColorBalance = ({ profile = {}, sourceNode, targetNode }) => {
-  const sourceWeight = getNodeVoiceWeight(profile, sourceNode);
-
-  const targetWeight = getNodeVoiceWeight(profile, targetNode);
-
-  const total = Math.max(0.001, sourceWeight + targetWeight);
-
-  const sourceShare = sourceWeight / total;
-
-  /**
-
-   * Higher sourceShare means source color should travel farther
-
-   * before blending into target.
-
-   */
-
-  const blendCenter = clamp(sourceShare * 100, 34, 66);
-
-  return {
-    sourceWeight,
-
-    targetWeight,
-
-    blendCenter,
-
-    sourceHold: clamp(blendCenter - 20, 8, 58),
-
-    blendStart: clamp(blendCenter - 10, 18, 66),
-
-    blendEnd: clamp(blendCenter + 10, 34, 82),
-
-    targetHold: clamp(blendCenter + 20, 42, 92),
-  };
+const softenColor = (color, amount = 0.18) => {
+  return mixTwoHexColors(color, '#fff6da', amount);
 };
 
-const getProfileMovementAverage = (profile = {}) => {
+const darkenColor = (color, amount = 0.18) => {
+  return mixTwoHexColors(color, '#050506', amount);
+};
+
+const isFinitePoint = (point) => {
   return (
-    THREAD_NODE_ORDER.reduce((total, nodeKey) => {
-      return total + getAxisMovement(profile, nodeKey);
-    }, 0) / THREAD_NODE_ORDER.length
+    point &&
+    Number.isFinite(Number(point.x)) &&
+    Number.isFinite(Number(point.y))
   );
 };
 
-const getDepthLeanFromProfile = (profile = {}) => {
-  const warmth = getAxisDelta(profile, 'warmth');
+const toSvgPoint = (point) => ({
+  x: Number(point?.x || 0) * 5,
 
-  const sustain = getAxisDelta(profile, 'sustain');
+  y: Number(point?.y || 0) * 5,
+});
 
-  const projection = getAxisDelta(profile, 'projection');
+const getPointForNode = (nodeKey) => {
+  const point = THREAD_NODE_POSITIONS[nodeKey];
 
-  const attack = getAxisDelta(profile, 'attack');
-
-  const brightness = getAxisDelta(profile, 'brightness');
-
-  return clamp(
-    (warmth + sustain + projection - attack - brightness) / 5,
-
-    -1,
-
-    1
-  );
+  return point ? toSvgPoint(point) : null;
 };
 
-const getProfileDirectionNodes = (profile = {}) => {
-  return THREAD_NODE_ORDER.map((nodeKey) => ({
-    nodeKey,
+const getAxisValue = (profile = {}, axisKey) => {
+  const value = Number(profile?.[axisKey] ?? 5);
 
-    movement: getAxisMovement(profile, nodeKey),
-  }))
-
-    .sort((a, b) => b.movement - a.movement)
-
-    .slice(0, 3)
-
-    .map((item) => item.nodeKey);
+  return Number.isFinite(value) ? value : 5;
 };
 
-const pullPointFromCenter = (point, amount = 1) => {
-  const x = Number(point?.x ?? SVG_CENTER.x);
-
-  const y = Number(point?.y ?? SVG_CENTER.y);
-
-  return {
-    x: SVG_CENTER.x + (x - SVG_CENTER.x) * amount,
-
-    y: SVG_CENTER.y + (y - SVG_CENTER.y) * amount,
-  };
+const getAxisDelta = (profile = {}, axisKey) => {
+  return getAxisValue(profile, axisKey) - 5;
 };
 
-const keepPointInsideThreadFrame = (point, maxRadius = 0.94) => {
-  const x = Number(point?.x ?? SVG_CENTER.x);
-
-  const y = Number(point?.y ?? SVG_CENTER.y);
-
-  const dx = x - SVG_CENTER.x;
-
-  const dy = y - SVG_CENTER.y;
-
-  const distance = Math.sqrt(dx * dx + dy * dy);
-
-  const maxDistance = THREAD_FRAME_RADIUS * maxRadius;
-
-  if (!Number.isFinite(distance) || distance <= maxDistance) {
-    return { x, y };
-  }
-
-  const scale = maxDistance / distance;
-
-  return {
-    x: SVG_CENTER.x + dx * scale,
-
-    y: SVG_CENTER.y + dy * scale,
-  };
+const getAxisMovement = (profile = {}, axisKey) => {
+  return clamp(Math.abs(getAxisDelta(profile, axisKey)) / 1.5, 0, 1);
 };
 
-const mixPoints = (a, b, amount = 0.5) => {
-  return {
-    x:
-      Number(a?.x ?? SVG_CENTER.x) +
-      (Number(b?.x ?? SVG_CENTER.x) - Number(a?.x ?? SVG_CENTER.x)) * amount,
+const getNodeVoiceWeight = (profile = {}, nodeKey) => {
+  const rawValue = getAxisValue(profile, nodeKey);
 
-    y:
-      Number(a?.y ?? SVG_CENTER.y) +
-      (Number(b?.y ?? SVG_CENTER.y) - Number(a?.y ?? SVG_CENTER.y)) * amount,
-  };
+  const delta = Math.abs(rawValue - 5);
+
+  return clamp(0.28 + delta / 2.25, 0.28, 1);
 };
 
-const offsetPoint = (point, offsetX = 0, offsetY = 0, maxRadius = 0.94) => {
-  return keepPointInsideThreadFrame(
-    {
-      x: Number(point?.x ?? SVG_CENTER.x) + offsetX,
-
-      y: Number(point?.y ?? SVG_CENTER.y) + offsetY,
-    },
-
-    maxRadius
-  );
+const getProfileSignature = (profile = {}) => {
+  return THREAD_NODE_ORDER.map((nodeKey) => {
+    return `${nodeKey}:${round(getAxisValue(profile, nodeKey), 2)}`;
+  }).join('|');
 };
 
-const hashStringToUnit = (value = '') => {
-  const str = String(value || 'none');
-
-  let hash = 2166136261;
-
-  for (let i = 0; i < str.length; i += 1) {
-    hash ^= str.charCodeAt(i);
-
-    hash = Math.imul(hash, 16777619);
-  }
-
-  return ((hash >>> 0) % 10000) / 10000;
-};
-
-const getSeededSignedValue = (seed, salt = '') => {
-  return hashStringToUnit(`${seed}|${salt}`) * 2 - 1;
+const getNodesSignature = (thread = {}) => {
+  return Array.isArray(thread?.nodes) ? thread.nodes.join('|') : '';
 };
 
 const getInputSignature = (input = {}, currentSpec = {}) => {
@@ -501,6 +285,8 @@ const getInputSignature = (input = {}, currentSpec = {}) => {
     input?.staveOption,
 
     input?.hoopType,
+
+    input?.hardwareColor,
 
     input?.scorchDepth,
 
@@ -542,12 +328,26 @@ const getInputSignature = (input = {}, currentSpec = {}) => {
     .join('|');
 };
 
+const hashStringToUnit = (value = '') => {
+  const str = String(value || 'none');
+
+  let hash = 2166136261;
+
+  for (let i = 0; i < str.length; i += 1) {
+    hash ^= str.charCodeAt(i);
+
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return ((hash >>> 0) % 10000) / 10000;
+};
+
+const getSeededSignedValue = (seed, salt = '') => {
+  return hashStringToUnit(`${seed}|${salt}`) * 2 - 1;
+};
+
 const getVisualSeed = ({ thread, profile, input, currentSpec }) => {
   const nodes = Array.isArray(thread?.nodes) ? thread.nodes.join('|') : 'none';
-
-  const profilePart = THREAD_NODE_ORDER.map((nodeKey) => {
-    return `${nodeKey}:${round(getAxisValue(profile, nodeKey), 2)}`;
-  }).join('|');
 
   return [
     thread?.id || 'thread',
@@ -558,7 +358,7 @@ const getVisualSeed = ({ thread, profile, input, currentSpec }) => {
 
     nodes,
 
-    profilePart,
+    getProfileSignature(profile),
 
     getInputSignature(input, currentSpec),
   ].join('|');
@@ -630,14 +430,262 @@ const getThreadKind = (thread = {}) => {
   return 'complex';
 };
 
-const getDefaultRelationshipPoints = (nodes = []) => {
-  return nodes
+const mixPoints = (a, b, amount = 0.5) => {
+  return {
+    x:
+      Number(a?.x ?? SVG_CENTER.x) +
+      (Number(b?.x ?? SVG_CENTER.x) - Number(a?.x ?? SVG_CENTER.x)) * amount,
 
-    .map((nodeKey) => getPointForNode(nodeKey))
+    y:
+      Number(a?.y ?? SVG_CENTER.y) +
+      (Number(b?.y ?? SVG_CENTER.y) - Number(a?.y ?? SVG_CENTER.y)) * amount,
+  };
+};
 
-    .filter(Boolean)
+const getDistanceBetweenPoints = (a, b) => {
 
-    .map((point) => keepPointInsideThreadFrame(point, 0.9));
+  if (!isFinitePoint(a) || !isFinitePoint(b)) return 0;
+
+  const dx = Number(a.x) - Number(b.x);
+
+  const dy = Number(a.y) - Number(b.y);
+
+  return Math.sqrt(dx * dx + dy * dy);
+
+};
+
+const getTriangleArea = (points = []) => {
+
+  const cleanPoints = points.filter(isFinitePoint);
+
+  if (cleanPoints.length < 3) return 0;
+
+  const [a, b, c] = cleanPoints;
+
+  return Math.abs(
+
+    (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2
+
+  );
+
+};
+
+const getTriangleSpread = (points = []) => {
+
+  const cleanPoints = points.filter(isFinitePoint);
+
+  if (cleanPoints.length < 3) return 0;
+
+  const distances = [
+
+    getDistanceBetweenPoints(cleanPoints[0], cleanPoints[1]),
+
+    getDistanceBetweenPoints(cleanPoints[1], cleanPoints[2]),
+
+    getDistanceBetweenPoints(cleanPoints[2], cleanPoints[0]),
+
+  ];
+
+  return Math.min(...distances);
+
+};
+
+const pushPointAwayFromLine = (point, lineA, lineB, amount = 18) => {
+
+  if (!isFinitePoint(point) || !isFinitePoint(lineA) || !isFinitePoint(lineB)) {
+
+    return point;
+
+  }
+
+  const dx = lineB.x - lineA.x;
+
+  const dy = lineB.y - lineA.y;
+
+  const length = Math.sqrt(dx * dx + dy * dy) || 1;
+
+  const normalA = {
+
+    x: -dy / length,
+
+    y: dx / length,
+
+  };
+
+  const normalB = {
+
+    x: dy / length,
+
+    y: -dx / length,
+
+  };
+
+  const candidateA = keepPointInsideThreadFrame(
+
+    {
+
+      x: point.x + normalA.x * amount,
+
+      y: point.y + normalA.y * amount,
+
+    },
+
+    0.86
+
+  );
+
+  const candidateB = keepPointInsideThreadFrame(
+
+    {
+
+      x: point.x + normalB.x * amount,
+
+      y: point.y + normalB.y * amount,
+
+    },
+
+    0.86
+
+  );
+
+  const areaA = getTriangleArea([lineA, lineB, candidateA]);
+
+  const areaB = getTriangleArea([lineA, lineB, candidateB]);
+
+  return areaA >= areaB ? candidateA : candidateB;
+
+};
+
+const widenFirstTellTriangle = (items = []) => {
+
+  if (items.length < 3) return items;
+
+  let widened = items.map((item) => ({ ...item, point: { ...item.point } }));
+
+  const points = widened.map((item) => item.point);
+
+  const area = getTriangleArea(points);
+
+  const spread = getTriangleSpread(points);
+
+  if (area >= 5200 && spread >= 54) {
+
+    return widened;
+
+  }
+
+  const centroid = getCentroid(points);
+
+  widened = widened.map((item, index) => {
+
+    const point = item.point;
+
+    const dx = point.x - centroid.x;
+
+    const dy = point.y - centroid.y;
+
+    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+
+    const rankBoost = index === 0 ? 1.08 : index === 1 ? 1.14 : 1.22;
+
+    return {
+
+      ...item,
+
+      point: keepPointInsideThreadFrame(
+
+        {
+
+          x: centroid.x + dx * rankBoost,
+
+          y: centroid.y + dy * rankBoost,
+
+        },
+
+        0.86
+
+      ),
+
+    };
+
+  });
+
+  const widenedPoints = widened.map((item) => item.point);
+
+  if (getTriangleArea(widenedPoints) < 5200 || getTriangleSpread(widenedPoints) < 54) {
+
+    widened[2] = {
+
+      ...widened[2],
+
+      point: pushPointAwayFromLine(
+
+        widened[2].point,
+
+        widened[0].point,
+
+        widened[1].point,
+
+        24
+
+      ),
+
+    };
+
+  }
+
+  return widened;
+
+};
+
+const pullPointFromCenter = (point, amount = 1) => {
+  const x = Number(point?.x ?? SVG_CENTER.x);
+
+  const y = Number(point?.y ?? SVG_CENTER.y);
+
+  return {
+    x: SVG_CENTER.x + (x - SVG_CENTER.x) * amount,
+
+    y: SVG_CENTER.y + (y - SVG_CENTER.y) * amount,
+  };
+};
+
+const keepPointInsideThreadFrame = (point, maxRadius = 0.94) => {
+  const x = Number(point?.x ?? SVG_CENTER.x);
+
+  const y = Number(point?.y ?? SVG_CENTER.y);
+
+  const dx = x - SVG_CENTER.x;
+
+  const dy = y - SVG_CENTER.y;
+
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  const maxDistance = THREAD_FRAME_RADIUS * maxRadius;
+
+  if (!Number.isFinite(distance) || distance <= maxDistance) {
+    return { x, y };
+  }
+
+  const scale = maxDistance / distance;
+
+  return {
+    x: SVG_CENTER.x + dx * scale,
+
+    y: SVG_CENTER.y + dy * scale,
+  };
+};
+
+const offsetPoint = (point, offsetX = 0, offsetY = 0, maxRadius = 0.94) => {
+  return keepPointInsideThreadFrame(
+    {
+      x: Number(point?.x ?? SVG_CENTER.x) + offsetX,
+
+      y: Number(point?.y ?? SVG_CENTER.y) + offsetY,
+    },
+
+    maxRadius
+  );
 };
 
 const getCentroid = (points = []) => {
@@ -664,6 +712,18 @@ const getCentroid = (points = []) => {
   };
 };
 
+const sortPointsClockwise = (points = []) => {
+  const center = getCentroid(points);
+
+  return [...points].filter(isFinitePoint).sort((a, b) => {
+    const angleA = Math.atan2(Number(a.y) - center.y, Number(a.x) - center.x);
+
+    const angleB = Math.atan2(Number(b.y) - center.y, Number(b.x) - center.x);
+
+    return angleA - angleB;
+  });
+};
+
 const recenterPoints = (points = [], amount = 0.32) => {
   const cleanPoints = points.filter(isFinitePoint);
 
@@ -678,756 +738,11 @@ const recenterPoints = (points = [], amount = 0.32) => {
   }));
 };
 
-const sortPointsClockwise = (points = []) => {
-  const center = getCentroid(points);
-
-  return [...points].filter(isFinitePoint).sort((a, b) => {
-    const angleA = Math.atan2(Number(a.y) - center.y, Number(a.x) - center.x);
-
-    const angleB = Math.atan2(Number(b.y) - center.y, Number(b.x) - center.x);
-
-    return angleA - angleB;
-  });
-};
-
-const removeNearDuplicatePoints = (points = [], threshold = 12) => {
-  const cleanPoints = [];
-
-  points.filter(isFinitePoint).forEach((point) => {
-    const alreadyExists = cleanPoints.some((existing) => {
-      const dx = Number(existing.x) - Number(point.x);
-
-      const dy = Number(existing.y) - Number(point.y);
-
-      return Math.sqrt(dx * dx + dy * dy) < threshold;
-    });
-
-    if (!alreadyExists) {
-      cleanPoints.push(point);
-    }
-  });
-
-  return cleanPoints;
-};
-
-const getShapePath = (points = [], close = true) => {
-  const cleanPoints = points.filter(isFinitePoint);
-
-  if (!cleanPoints.length) return '';
-
-  const [first, ...rest] = cleanPoints;
-
-  const body = [
-    `M ${first.x.toFixed(2)} ${first.y.toFixed(2)}`,
-
-    ...rest.map((point) => `L ${point.x.toFixed(2)} ${point.y.toFixed(2)}`),
-  ].join(' ');
-
-  return close && cleanPoints.length > 2 ? `${body} Z` : body;
-};
-
-const getSegmentPath = (from, to, curveTowardCenter = 0.06) => {
-  if (!isFinitePoint(from) || !isFinitePoint(to)) return '';
-
-  if (!curveTowardCenter) {
-    return `M ${from.x.toFixed(2)} ${from.y.toFixed(2)} L ${to.x.toFixed(
-      2
-    )} ${to.y.toFixed(2)}`;
-  }
-
-  const midpoint = mixPoints(from, to, 0.5);
-
-  const control = mixPoints(midpoint, SVG_CENTER, curveTowardCenter);
-
-  return `M ${from.x.toFixed(2)} ${from.y.toFixed(2)} Q ${control.x.toFixed(
-    2
-  )} ${control.y.toFixed(2)} ${to.x.toFixed(2)} ${to.y.toFixed(2)}`;
-};
-
-const getBlobPath = (points = [], tension = 0.44) => {
-  const cleanPoints = points.filter(isFinitePoint);
-
-  if (cleanPoints.length < 3) {
-    return getShapePath(cleanPoints, true);
-  }
-
-  const sorted = sortPointsClockwise(cleanPoints);
-
-  const getPoint = (index) => {
-    return sorted[(index + sorted.length) % sorted.length];
-  };
-
-  const first = sorted[0];
-
-  const commands = [`M ${first.x.toFixed(2)} ${first.y.toFixed(2)}`];
-
-  for (let i = 0; i < sorted.length; i += 1) {
-    const p0 = getPoint(i - 1);
-
-    const p1 = getPoint(i);
-
-    const p2 = getPoint(i + 1);
-
-    const p3 = getPoint(i + 2);
-
-    const cp1 = {
-      x: p1.x + ((p2.x - p0.x) / 6) * tension,
-
-      y: p1.y + ((p2.y - p0.y) / 6) * tension,
-    };
-
-    const cp2 = {
-      x: p2.x - ((p3.x - p1.x) / 6) * tension,
-
-      y: p2.y - ((p3.y - p1.y) / 6) * tension,
-    };
-
-    commands.push(
-      `C ${cp1.x.toFixed(2)} ${cp1.y.toFixed(2)} ${cp2.x.toFixed(
-        2
-      )} ${cp2.y.toFixed(2)} ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`
-    );
-  }
-
-  return `${commands.join(' ')} Z`;
-};
-
-const expandBlobPoints = ({
-  points = [],
-
-  profile = {},
-
-  personality = {},
-
-  thread = {},
-}) => {
-  const cleanPoints = sortPointsClockwise(points.filter(isFinitePoint));
-
-  if (cleanPoints.length < 3) return cleanPoints;
-
-  const centroid = getCentroid(cleanPoints);
-
-  const nodes = Array.isArray(thread?.nodes)
-    ? thread.nodes.filter(Boolean)
-    : [];
-
-  const seed = personality.seed || thread?.id || 'heritage-blob';
-
-  const movementAverage =
-    personality.movementAverage ?? getProfileMovementAverage(profile);
-
-  const expanded = [];
-
-  cleanPoints.forEach((point, index) => {
-    const prev =
-      cleanPoints[(index - 1 + cleanPoints.length) % cleanPoints.length];
-
-    const next = cleanPoints[(index + 1) % cleanPoints.length];
-
-    const nodeKey =
-      nodes[index % Math.max(nodes.length, 1)] ||
-      THREAD_NODE_ORDER[index % THREAD_NODE_ORDER.length];
-
-    const nodeMovement = getAxisMovement(profile, nodeKey);
-
-    const seedOut = getSeededSignedValue(seed, `blob-out-${index}`);
-
-    const seedSide = getSeededSignedValue(seed, `blob-side-${index}`);
-
-    const seedMid = getSeededSignedValue(seed, `blob-mid-${index}`);
-
-    const dx = point.x - centroid.x;
-
-    const dy = point.y - centroid.y;
-
-    const distance = Math.max(1, Math.sqrt(dx * dx + dy * dy));
-
-    const normal = {
-      x: dx / distance,
-
-      y: dy / distance,
-    };
-
-    const tangent = {
-      x: -normal.y,
-
-      y: normal.x,
-    };
-
-    const outwardAmount =
-      10 + movementAverage * 28 + nodeMovement * 18 + seedOut * 16;
-
-    const sideAmount = seedSide * (14 + movementAverage * 18);
-
-    const blobPoint = keepPointInsideThreadFrame(
-      {
-        x: point.x + normal.x * outwardAmount + tangent.x * sideAmount,
-
-        y: point.y + normal.y * outwardAmount + tangent.y * sideAmount,
-      },
-
-      0.84
-    );
-
-    const midpointA = mixPoints(prev, point, 0.5);
-
-    const midpointB = mixPoints(point, next, 0.5);
-
-    const tuckedA = keepPointInsideThreadFrame(
-      mixPoints(
-        midpointA,
-
-        {
-          x: centroid.x + seedMid * 18,
-
-          y: centroid.y - seedSide * 14,
-        },
-
-        0.22
-      ),
-
-      0.8
-    );
-
-    const tuckedB = keepPointInsideThreadFrame(
-      mixPoints(
-        midpointB,
-
-        {
-          x: centroid.x - seedSide * 16,
-
-          y: centroid.y + seedOut * 12,
-        },
-
-        0.18
-      ),
-
-      0.8
-    );
-
-    expanded.push(tuckedA, blobPoint, tuckedB);
-  });
-
-  return removeNearDuplicatePoints(expanded, 9);
-};
-
-const getStrongestThreadNode = (thread = {}, profile = {}) => {
-  const nodes = Array.isArray(thread?.nodes)
-    ? thread.nodes.filter(Boolean)
-    : [];
-
-  if (!nodes.length) return null;
-
-  return nodes
-
-    .map((nodeKey) => ({
-      nodeKey,
-
-      value: getAxisMovement(profile, nodeKey),
-    }))
-
-    .sort((a, b) => b.value - a.value)[0]?.nodeKey;
-};
-
-const getThreadGradientVector = (thread = {}, profile = {}) => {
-  const nodes = Array.isArray(thread?.nodes)
-    ? thread.nodes.filter(Boolean)
-    : [];
-
-  const fallbackStart = nodes[0] || 'attack';
-
-  const fallbackEnd = nodes[nodes.length - 1] || 'warmth';
-
-  const strongestNode = getStrongestThreadNode(thread, profile) || fallbackEnd;
-
-  const weakestNode =
-    nodes
-
-      .map((nodeKey) => ({
-        nodeKey,
-
-        value: getAxisMovement(profile, nodeKey),
-      }))
-
-      .sort((a, b) => a.value - b.value)[0]?.nodeKey || fallbackStart;
-
-  const startPoint =
-    getPointForNode(weakestNode) ||
-    getPointForNode(fallbackStart) ||
-    SVG_CENTER;
-
-  const endPoint =
-    getPointForNode(strongestNode) ||
-    getPointForNode(fallbackEnd) ||
-    SVG_CENTER;
-
-  return {
-    x1: startPoint.x,
-
-    y1: startPoint.y,
-
-    x2: endPoint.x,
-
-    y2: endPoint.y,
-
-    strongestNode,
-
-    weakestNode,
-  };
-};
-
-const getSimpleCurvePath = ({ thread, profile, input, currentSpec }) => {
-  const nodes = Array.isArray(thread?.nodes)
-    ? thread.nodes.filter(Boolean)
-    : [];
-
-  const fallbackNodes =
-    nodes.length >= 2 ? nodes.slice(0, 2) : ['attack', 'warmth'];
-
-  const seed = getVisualSeed({ thread, profile, input, currentSpec });
-
-  const movementAverage = getProfileMovementAverage(profile);
-
-  const depthLean = getDepthLeanFromProfile(profile);
-
-  const directionNodes = getProfileDirectionNodes(profile);
-
-  const activeSet = new Set(fallbackNodes);
-
-  const startBase =
-    getPointForNode(fallbackNodes[0]) || getPointForNode('attack');
-
-  const endBase =
-    getPointForNode(fallbackNodes[1]) || getPointForNode('warmth');
-
-  const pullNode =
-    directionNodes.find((nodeKey) => !activeSet.has(nodeKey)) ||
-    directionNodes[0] ||
-    'projection';
-
-  const pullBase =
-    getPointForNode(pullNode) || getPointForNode('projection') || SVG_CENTER;
-
-  const start = keepPointInsideThreadFrame(
-    pullPointFromCenter(
-      startBase,
-
-      0.58 + getAxisMovement(profile, fallbackNodes[0]) * 0.06
-    ),
-
-    0.74
-  );
-
-  const end = keepPointInsideThreadFrame(
-    pullPointFromCenter(
-      endBase,
-
-      0.58 + getAxisMovement(profile, fallbackNodes[1]) * 0.06
-    ),
-
-    0.74
-  );
-
-  const apex = keepPointInsideThreadFrame(
-    offsetPoint(
-      pullPointFromCenter(pullBase, 0.5 + movementAverage * 0.08),
-
-      depthLean * 9 + getSeededSignedValue(seed, 'first-tell-apex-x') * 7,
-
-      getSeededSignedValue(seed, 'first-tell-apex-y') * 7,
-
-      0.72
-    ),
-
-    0.72
-  );
-
-  const trianglePoints = sortPointsClockwise(
-    recenterPoints([start, apex, end], 0.36)
-  );
-
-  return getCurvedClosedPath(trianglePoints);
-};
-
-const getShapedPoints = ({ thread, profile, input, currentSpec }) => {
-  const nodes = Array.isArray(thread?.nodes)
-    ? thread.nodes.filter(Boolean)
-    : [];
-
-  const fallbackNodes =
-    nodes.length >= 3
-      ? nodes.slice(0, 3)
-      : [...nodes, 'control', 'sustain', 'projection'].slice(0, 3);
-
-  const seed = getVisualSeed({ thread, profile, input, currentSpec });
-
-  const movementAverage = getProfileMovementAverage(profile);
-
-  const depthLean = getDepthLeanFromProfile(profile);
-
-  const points = fallbackNodes.map((nodeKey, index) => {
-    const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
-
-    const movement = getAxisMovement(profile, nodeKey);
-
-    const signed = getSignedAxisMovement(profile, nodeKey);
-
-    const radius = clamp(
-      0.62 + movement * 0.1 + movementAverage * 0.045 + signed * 0.03,
-
-      0.56,
-
-      0.78
-    );
-
-    const pulled = pullPointFromCenter(basePoint, radius);
-
-    const xJitter = getSeededSignedValue(seed, `shape-x-${index}`) * 7;
-
-    const yJitter = getSeededSignedValue(seed, `shape-y-${index}`) * 7;
-
-    return keepPointInsideThreadFrame(
-      offsetPoint(pulled, xJitter + depthLean * 5, yJitter, 0.78),
-
-      0.78
-    );
-  });
-
-  return sortPointsClockwise(recenterPoints(points, 0.36));
-};
-
-const getVoiceMapRelationshipPoints = ({
-  activeThread,
-
-  resolvedReadVariant,
-
-  profile,
-
-  input,
-
-  currentSpec,
-}) => {
-  const nodes = Array.isArray(activeThread?.nodes)
-    ? activeThread.nodes.filter(Boolean)
-    : [];
-
-  const fallbackNodes =
-    resolvedReadVariant === 'firstTell'
-      ? ['attack', 'warmth', 'control']
-      : ['attack', 'brightness', 'warmth', 'control'];
-
-  const voiceMapNodes =
-    resolvedReadVariant === 'firstTell'
-      ? nodes.length >= 3
-        ? nodes.slice(0, 3)
-        : [...nodes, ...fallbackNodes]
-
-            .filter((nodeKey, index, arr) => arr.indexOf(nodeKey) === index)
-
-            .slice(0, 3)
-      : nodes.length >= 3
-        ? nodes.slice(0, 3)
-        : [...nodes, ...fallbackNodes]
-
-            .filter((nodeKey, index, arr) => arr.indexOf(nodeKey) === index)
-
-            .slice(0, 3);
-
-  const seed = getVisualSeed({
-    thread: activeThread,
-
-    profile,
-
-    input,
-
-    currentSpec,
-  });
-
-  const movementAverage = getProfileMovementAverage(profile);
-
-  const depthLean = getDepthLeanFromProfile(profile);
-
-  const points = voiceMapNodes
-
-    .map((nodeKey, index) => {
-      const basePoint = getPointForNode(nodeKey);
-
-      if (!basePoint) return null;
-
-      const movement = getAxisMovement(profile, nodeKey);
-
-      const signed = getSignedAxisMovement(profile, nodeKey);
-
-      const radius =
-        resolvedReadVariant === 'firstTell'
-          ? 0.9
-          : clamp(
-              0.62 + movement * 0.1 + movementAverage * 0.045 + signed * 0.03,
-
-              0.56,
-
-              0.78
-            );
-
-      const pulled =
-        resolvedReadVariant === 'firstTell'
-          ? basePoint
-          : pullPointFromCenter(basePoint, radius);
-
-      const xJitter =
-        resolvedReadVariant === 'firstTell'
-          ? 0
-          : getSeededSignedValue(seed, `voicemap-point-x-${index}`) * 7;
-
-      const yJitter =
-        resolvedReadVariant === 'firstTell'
-          ? 0
-          : getSeededSignedValue(seed, `voicemap-point-y-${index}`) * 7;
-
-      return {
-        nodeKey,
-
-        point: keepPointInsideThreadFrame(
-          offsetPoint(pulled, xJitter + depthLean * 5, yJitter, 0.9),
-
-          0.9
-        ),
-      };
-    })
-
-    .filter((item) => item && isFinitePoint(item.point));
-
-  if (resolvedReadVariant === 'firstTell') {
-    return points;
-  }
-
-  return sortPointsClockwise(points.map((item) => item.point)).map((point) => {
-    const match = points.find((item) => {
-      return (
-        Math.abs(item.point.x - point.x) < 0.01 &&
-        Math.abs(item.point.y - point.y) < 0.01
-      );
-    });
-
-    return {
-      nodeKey: match?.nodeKey || 'attack',
-
-      point,
-    };
-  });
-};
-
-const getPlayerReadPoints = ({ activeThread, profile, input, currentSpec }) => {
-  const seed = getVisualSeed({
-    thread: activeThread,
-
-    profile,
-
-    input,
-
-    currentSpec,
-  });
-
-  return THREAD_NODE_ORDER.map((nodeKey, index) => {
-    const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
-
-    const movement = getAxisMovement(profile, nodeKey);
-
-    const signed = getSignedAxisMovement(profile, nodeKey);
-
-    const radius = clamp(
-      0.58 + movement * 0.16 + signed * 0.055,
-
-      0.44,
-
-      0.86
-    );
-
-    const pulled = pullPointFromCenter(basePoint, radius);
-
-    const xNudge =
-      getSeededSignedValue(seed, `player-x-${nodeKey}-${index}`) * 4;
-
-    const yNudge =
-      getSeededSignedValue(seed, `player-y-${nodeKey}-${index}`) * 4;
-
-    return keepPointInsideThreadFrame(
-      offsetPoint(pulled, xNudge, yNudge, 0.88),
-
-      0.88
-    );
-  });
-};
-
-const getComplexPoints = ({ thread, profile, input, currentSpec }) => {
-  const nodes = Array.isArray(thread?.nodes)
-    ? thread.nodes.filter(Boolean)
-    : [];
-
-  const seed = getVisualSeed({ thread, profile, input, currentSpec });
-
-  const movementAverage = getProfileMovementAverage(profile);
-
-  const depthLean = getDepthLeanFromProfile(profile);
-
-  const directionNodes = getProfileDirectionNodes(profile);
-
-  const complexShape = getComplexThreadVisualSignature({
-    thread,
-
-    profile,
-
-    nodeOrder: THREAD_NODE_ORDER,
-
-    nodePositions: THREAD_NODE_POSITIONS,
-  });
-
-  const rawShapePoints = [
-    ...(Array.isArray(complexShape?.points) ? complexShape.points : []),
-
-    ...(Array.isArray(complexShape?.innerPoints)
-      ? complexShape.innerPoints
-      : []),
-
-    ...(Array.isArray(complexShape?.interiorSegments)
-      ? complexShape.interiorSegments.flatMap((segment) =>
-          segment?.from && segment?.to ? [segment.from, segment.to] : []
-        )
-      : []),
-  ]
-
-    .filter(isFinitePoint)
-
-    .map((point) =>
-      keepPointInsideThreadFrame(
-        {
-          x: Number(point.x),
-
-          y: Number(point.y),
-        },
-
-        0.68
-      )
-    );
-
-  const weightedNodeKeys = [
-    ...nodes,
-
-    ...directionNodes,
-
-    ...nodes,
-
-    'attack',
-
-    'brightness',
-
-    'projection',
-
-    'sustain',
-
-    'warmth',
-
-    'sensitivity',
-
-    'control',
-  ].filter(Boolean);
-
-  const nodePoints = weightedNodeKeys
-
-    .map((nodeKey, index) => {
-      const basePoint = getPointForNode(nodeKey);
-
-      if (!basePoint) return null;
-
-      const movement = getAxisMovement(profile, nodeKey);
-
-      const signed = getSignedAxisMovement(profile, nodeKey);
-
-      const radius = clamp(
-        0.44 + movementAverage * 0.08 + movement * 0.11 + signed * 0.035,
-
-        0.38,
-
-        0.68
-      );
-
-      const pulled = pullPointFromCenter(basePoint, radius);
-
-      const xJitter =
-        getSeededSignedValue(seed, `complex-node-x-${index}`) * 12;
-
-      const yJitter =
-        getSeededSignedValue(seed, `complex-node-y-${index}`) * 12;
-
-      return keepPointInsideThreadFrame(
-        offsetPoint(
-          pulled,
-
-          xJitter + depthLean * 7,
-
-          yJitter + Math.abs(depthLean) * 4,
-
-          0.7
-        ),
-
-        0.7
-      );
-    })
-
-    .filter(Boolean);
-
-  const combined = removeNearDuplicatePoints(
-    [...nodePoints, ...rawShapePoints],
-
-    10
-  );
-
-  const safeCombined =
-    combined.length >= 4
-      ? combined
-      : getDefaultRelationshipPoints(
-          [...nodes, 'attack', 'projection', 'sustain', 'warmth'].slice(0, 4)
-        );
-
-  const selected = sortPointsClockwise(safeCombined)
-    .slice(0, clamp(nodes.length + 2, 5, 7))
-
-    .map((point, index) => {
-      const xJitter =
-        getSeededSignedValue(seed, `complex-core-x-${index}`) * 10;
-
-      const yJitter =
-        getSeededSignedValue(seed, `complex-core-y-${index}`) * 10;
-
-      return keepPointInsideThreadFrame(
-        offsetPoint(point, xJitter, yJitter, 0.72),
-
-        0.72
-      );
-    });
-
-  const centeredCore = sortPointsClockwise(recenterPoints(selected, 0.46));
-
-  return expandBlobPoints({
-    points: centeredCore,
-
-    profile,
-
-    personality: {
-      seed,
-
-      movementAverage,
-    },
-
-    thread,
-  });
-};
-
-const getCurvedClosedPath = (points = []) => {
+const getCurvedClosedPath = (points = [], curveTowardCenter = 0.08) => {
   const cleanPoints = sortPointsClockwise(points.filter(isFinitePoint));
 
   if (cleanPoints.length < 3) {
-    return getShapePath(cleanPoints, true);
+    return getOpenPath(cleanPoints);
   }
 
   const first = cleanPoints[0];
@@ -1439,7 +754,7 @@ const getCurvedClosedPath = (points = []) => {
 
     const midpoint = mixPoints(point, next, 0.5);
 
-    const control = mixPoints(midpoint, SVG_CENTER, 0.1);
+    const control = mixPoints(midpoint, SVG_CENTER, curveTowardCenter);
 
     segments.push(
       `Q ${control.x.toFixed(2)} ${control.y.toFixed(2)} ${next.x.toFixed(
@@ -1449,6 +764,32 @@ const getCurvedClosedPath = (points = []) => {
   });
 
   return `${segments.join(' ')} Z`;
+};
+
+const getOpenPath = (points = []) => {
+  const cleanPoints = points.filter(isFinitePoint);
+
+  if (!cleanPoints.length) return '';
+
+  const [first, ...rest] = cleanPoints;
+
+  return [
+    `M ${first.x.toFixed(2)} ${first.y.toFixed(2)}`,
+
+    ...rest.map((point) => `L ${point.x.toFixed(2)} ${point.y.toFixed(2)}`),
+  ].join(' ');
+};
+
+const getCurvedOpenSegmentPath = (from, to, curveTowardCenter = 0.06) => {
+  if (!isFinitePoint(from) || !isFinitePoint(to)) return '';
+
+  const midpoint = mixPoints(from, to, 0.5);
+
+  const control = mixPoints(midpoint, SVG_CENTER, curveTowardCenter);
+
+  return `M ${from.x.toFixed(2)} ${from.y.toFixed(2)} Q ${control.x.toFixed(
+    2
+  )} ${control.y.toFixed(2)} ${to.x.toFixed(2)} ${to.y.toFixed(2)}`;
 };
 
 const getShapeColors = (activeThread = {}) => {
@@ -1473,145 +814,534 @@ const getShapeColors = (activeThread = {}) => {
   };
 };
 
-const getProfileSignature = (profile = {}) => {
-  return THREAD_NODE_ORDER.map((nodeKey) => {
-    return `${nodeKey}:${round(getAxisValue(profile, nodeKey), 2)}`;
-  }).join('|');
+const getProfileMovementAverage = (profile = {}) => {
+  return (
+    THREAD_NODE_ORDER.reduce((total, nodeKey) => {
+      return total + getAxisMovement(profile, nodeKey);
+    }, 0) / THREAD_NODE_ORDER.length
+  );
 };
 
-const getNodesSignature = (thread = {}) => {
-  return Array.isArray(thread?.nodes) ? thread.nodes.join('|') : '';
+const getDepthLeanFromProfile = (profile = {}) => {
+  const warmth = getAxisDelta(profile, 'warmth');
+
+  const sustain = getAxisDelta(profile, 'sustain');
+
+  const projection = getAxisDelta(profile, 'projection');
+
+  const attack = getAxisDelta(profile, 'attack');
+
+  const brightness = getAxisDelta(profile, 'brightness');
+
+  return clamp(
+    (warmth + sustain + projection - attack - brightness) / 5,
+    -1,
+    1
+  );
 };
 
-const getSlotStableVisualKey = ({
-  thread,
+const getRankedThreadNodes = ({
+  profile = {},
+
+  activeThread = {},
+
+  resolvedReadVariant = '',
+
+  firstTellKeys = [],
+}) => {
+  const threadNodes = Array.isArray(activeThread?.nodes)
+    ? activeThread.nodes.filter(Boolean)
+    : [];
+
+  const firstTellNodes =
+    firstTellKeys && firstTellKeys.length ? firstTellKeys : threadNodes;
+
+  if (resolvedReadVariant === 'firstTell') {
+    return (
+      firstTellNodes.length ? firstTellNodes : ['attack', 'warmth', 'control']
+    )
+
+      .slice(0, 3)
+
+      .map((nodeKey, index) => ({
+        nodeKey,
+
+        rank: index,
+
+        color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
+
+        movement: getAxisMovement(profile, nodeKey),
+
+        weight: index === 0 ? 1 : index === 1 ? 0.72 : 0.5,
+      }));
+  }
+
+  const candidates = threadNodes.length ? threadNodes : THREAD_NODE_ORDER;
+
+  return candidates
+
+    .map((nodeKey, index) => ({
+      nodeKey,
+
+      index,
+
+      color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
+
+      movement: getAxisMovement(profile, nodeKey),
+
+      weight: getNodeVoiceWeight(profile, nodeKey),
+    }))
+
+    .sort((a, b) => {
+      if (b.weight !== a.weight) return b.weight - a.weight;
+
+      if (b.movement !== a.movement) return b.movement - a.movement;
+
+      return a.index - b.index;
+    })
+
+    .slice(0, resolvedReadVariant === 'legacyprint' ? 4 : 7)
+
+    .map((item, index) => ({
+      ...item,
+
+      rank: index,
+    }));
+};
+
+const getRankMap = (rankedNodes = []) => {
+  return rankedNodes.reduce((acc, item) => {
+    acc[item.nodeKey] = item;
+
+    return acc;
+  }, {});
+};
+
+const getSegmentStrength = ({ sourceNode, targetNode, rankMap = {} }) => {
+  const source = rankMap[sourceNode];
+
+  const target = rankMap[targetNode];
+
+  const sourceRank = Number.isFinite(source?.rank) ? source.rank : 99;
+
+  const targetRank = Number.isFinite(target?.rank) ? target.rank : 99;
+
+  const bestRank = Math.min(sourceRank, targetRank);
+
+  const sourceWeight = Number(source?.weight || 0);
+
+  const targetWeight = Number(target?.weight || 0);
+
+  const weight = Math.max(sourceWeight, targetWeight);
+
+  const rankStrength =
+    bestRank === 0 ? 1 : bestRank === 1 ? 0.66 : bestRank === 2 ? 0.43 : 0.2;
+
+  return clamp(rankStrength * 0.82 + weight * 0.18, 0.18, 1);
+};
+
+const getThreadShapePoints = ({
+  activeThread,
 
   profile,
-
-  kind,
 
   input,
 
   currentSpec,
+
+  resolvedReadVariant,
+
+  threadKind,
+
+  firstTellKeys,
 }) => {
-  const nodes = Array.isArray(thread?.nodes) ? thread.nodes.join('-') : 'none';
+  const threadNodes = Array.isArray(activeThread?.nodes)
+    ? activeThread.nodes.filter(Boolean)
+    : [];
 
-  return [
-    thread?.id || 'thread',
-
-    thread?.slotKey || kind,
-
-    nodes,
-
-    getProfileSignature(profile),
-
-    getInputSignature(input, currentSpec),
-
-    thread?.visualSignatureHash || thread?.visualSignature || '',
-  ]
-
-    .filter(Boolean)
-
-    .join('|');
-};
-
-const getBuiltFingerprintForHashCompatibility = ({ thread, profile, kind }) => {
-  if (!thread) return null;
-
-  if (kind === 'complex') {
-    return getComplexThreadVisualSignature({
-      thread,
-
-      profile,
-
-      nodeOrder: THREAD_NODE_ORDER,
-
-      nodePositions: THREAD_NODE_POSITIONS,
-    });
-  }
-
-  return buildVoiceThreadFingerprint({
-    thread,
+  const seed = getVisualSeed({
+    thread: activeThread,
 
     profile,
 
-    nodeOrder: THREAD_NODE_ORDER,
+    input,
 
-    nodePositions: THREAD_NODE_POSITIONS,
+    currentSpec,
+  });
+
+  const movementAverage = getProfileMovementAverage(profile);
+
+  const depthLean = getDepthLeanFromProfile(profile);
+
+if (resolvedReadVariant === 'firstTell') {
+
+  const nodes =
+
+    firstTellKeys && firstTellKeys.length
+
+      ? firstTellKeys
+
+      : threadNodes.length >= 3
+
+        ? threadNodes.slice(0, 3)
+
+        : ['attack', 'warmth', 'control'];
+
+  const triangleItems = nodes.slice(0, 3).map((nodeKey, index) => {
+
+    const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+
+    const movement = getAxisMovement(profile, nodeKey);
+
+    const rankBasePull =
+
+      index === 0
+
+        ? 0.72
+
+        : index === 1
+
+          ? 0.62
+
+          : 0.54;
+
+    const movementPull =
+
+      index === 0
+
+        ? movement * 0.09
+
+        : index === 1
+
+          ? movement * 0.07
+
+          : movement * 0.055;
+
+    const rankPull = clamp(rankBasePull + movementPull, 0.48, 0.82);
+
+    const xJitter = getSeededSignedValue(seed, `first-tell-x-${index}`) * 4.5;
+
+    const yJitter = getSeededSignedValue(seed, `first-tell-y-${index}`) * 4.5;
+
+    return {
+
+      nodeKey,
+
+      point: keepPointInsideThreadFrame(
+
+        offsetPoint(
+
+          pullPointFromCenter(basePoint, rankPull),
+
+          xJitter,
+
+          yJitter,
+
+          0.86
+
+        ),
+
+        0.86
+
+      ),
+
+    };
+
+  });
+
+  return widenFirstTellTriangle(triangleItems);
+
+}
+
+  if (resolvedReadVariant === 'player') {
+    return THREAD_NODE_ORDER.map((nodeKey, index) => {
+      const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+
+      const movement = getAxisMovement(profile, nodeKey);
+
+      const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
+
+      const radius = clamp(0.56 + movement * 0.18 + signed * 0.055, 0.43, 0.88);
+
+      const pulled = pullPointFromCenter(basePoint, radius);
+
+      const xJitter =
+        getSeededSignedValue(seed, `player-x-${nodeKey}-${index}`) * 4;
+
+      const yJitter =
+        getSeededSignedValue(seed, `player-y-${nodeKey}-${index}`) * 4;
+
+      return {
+        nodeKey,
+
+        point: keepPointInsideThreadFrame(
+          offsetPoint(pulled, xJitter, yJitter, 0.9),
+          0.9
+        ),
+      };
+    });
+  }
+
+  if (threadKind === 'simple') {
+    const nodes =
+      threadNodes.length >= 2 ? threadNodes.slice(0, 2) : ['attack', 'warmth'];
+
+    return nodes.map((nodeKey, index) => {
+      const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+
+      const movement = getAxisMovement(profile, nodeKey);
+
+      const radius = clamp(0.6 + movement * 0.1, 0.58, 0.76);
+
+      return {
+        nodeKey,
+
+        point: keepPointInsideThreadFrame(
+          offsetPoint(
+            pullPointFromCenter(basePoint, radius),
+
+            getSeededSignedValue(seed, `simple-x-${index}`) * 5,
+
+            getSeededSignedValue(seed, `simple-y-${index}`) * 5,
+
+            0.78
+          ),
+
+          0.78
+        ),
+      };
+    });
+  }
+
+  if (threadKind === 'shaped') {
+    const nodes =
+      threadNodes.length >= 3
+        ? threadNodes.slice(0, 3)
+        : [...threadNodes, 'control', 'sustain', 'projection'].slice(0, 3);
+
+    return sortPointsClockwise(
+      nodes.map((nodeKey, index) => {
+        const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+
+        const movement = getAxisMovement(profile, nodeKey);
+
+        const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
+
+        const radius = clamp(
+          0.6 + movement * 0.12 + movementAverage * 0.045 + signed * 0.03,
+
+          0.54,
+
+          0.8
+        );
+
+        const pulled = pullPointFromCenter(basePoint, radius);
+
+        const xJitter = getSeededSignedValue(seed, `shaped-x-${index}`) * 7;
+
+        const yJitter = getSeededSignedValue(seed, `shaped-y-${index}`) * 7;
+
+        return keepPointInsideThreadFrame(
+          offsetPoint(pulled, xJitter + depthLean * 5, yJitter, 0.82),
+
+          0.82
+        );
+      })
+    ).map((point) => {
+      const match = nodes.find((nodeKey) => {
+        const basePoint = getPointForNode(nodeKey);
+
+        return basePoint
+          ? Math.abs(basePoint.x - point.x) < 95 &&
+              Math.abs(basePoint.y - point.y) < 95
+          : false;
+      });
+
+      return {
+        nodeKey: match || nodes[0] || 'attack',
+
+        point,
+      };
+    });
+  }
+
+  const complexNodes = [
+    ...threadNodes,
+
+    ...THREAD_NODE_ORDER.map((nodeKey) => ({
+      nodeKey,
+
+      movement: getAxisMovement(profile, nodeKey),
+    }))
+
+      .sort((a, b) => b.movement - a.movement)
+
+      .slice(0, 3)
+
+      .map((item) => item.nodeKey),
+  ].filter((nodeKey, index, arr) => nodeKey && arr.indexOf(nodeKey) === index);
+
+  const baseNodes =
+    complexNodes.length >= 4
+      ? complexNodes
+      : [...complexNodes, 'attack', 'projection', 'sustain', 'warmth'].filter(
+          (nodeKey, index, arr) => arr.indexOf(nodeKey) === index
+        );
+
+  const corePoints = baseNodes.slice(0, 7).map((nodeKey, index) => {
+    const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+
+    const movement = getAxisMovement(profile, nodeKey);
+
+    const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
+
+    const radius = clamp(
+      0.45 + movementAverage * 0.08 + movement * 0.13 + signed * 0.035,
+
+      0.36,
+
+      0.7
+    );
+
+    const pulled = pullPointFromCenter(basePoint, radius);
+
+    const xJitter = getSeededSignedValue(seed, `complex-x-${index}`) * 12;
+
+    const yJitter = getSeededSignedValue(seed, `complex-y-${index}`) * 12;
+
+    return {
+      nodeKey,
+
+      point: keepPointInsideThreadFrame(
+        offsetPoint(
+          pulled,
+
+          xJitter + depthLean * 7,
+
+          yJitter + Math.abs(depthLean) * 4,
+
+          0.74
+        ),
+
+        0.74
+      ),
+    };
+  });
+
+  const centered = recenterPoints(
+    sortPointsClockwise(corePoints.map((item) => item.point)),
+
+    0.42
+  );
+
+  return centered.map((point, index) => ({
+    nodeKey: corePoints[index % corePoints.length]?.nodeKey || 'attack',
+
+    point,
+  }));
+};
+
+const buildSegments = ({ shapeItems, closed = true }) => {
+  const cleanItems = shapeItems.filter(
+    (item) => item?.nodeKey && isFinitePoint(item?.point)
+  );
+
+  if (cleanItems.length < 2) return [];
+
+  const segmentCount =
+    closed && cleanItems.length > 2 ? cleanItems.length : cleanItems.length - 1;
+
+  return Array.from({ length: segmentCount }).map((_, index) => {
+    const item = cleanItems[index];
+
+    const next = cleanItems[(index + 1) % cleanItems.length];
+
+    return {
+      key: `${item.nodeKey}-${next.nodeKey}-${index}`,
+
+      sourceNode: item.nodeKey,
+
+      targetNode: next.nodeKey,
+
+      sourcePoint: item.point,
+
+      targetPoint: next.point,
+
+      path: getCurvedOpenSegmentPath(
+        item.point,
+        next.point,
+        closed ? 0.055 : 0.035
+      ),
+    };
   });
 };
-const renderSoftRelationshipStops = ({
-  profile,
 
-  sourceNode,
+const getGradientVector = (shapeItems = []) => {
+  const cleanItems = shapeItems.filter(
+    (item) => item?.nodeKey && isFinitePoint(item?.point)
+  );
 
-  targetNode,
+  if (!cleanItems.length) {
+    return {
+      x1: SVG_CENTER.x,
 
+      y1: SVG_CENTER.y,
+
+      x2: SVG_CENTER.x + 1,
+
+      y2: SVG_CENTER.y + 1,
+    };
+  }
+
+  const first = cleanItems[0];
+
+  const last = cleanItems[cleanItems.length - 1];
+
+  return {
+    x1: first.point.x,
+
+    y1: first.point.y,
+
+    x2: last.point.x,
+
+    y2: last.point.y,
+  };
+};
+
+const renderSmoothSegmentStops = ({
   sourceColor,
 
   targetColor,
 
-  dominantShareByNode = {},
+  sourceStrength = 0.5,
+
+  targetStrength = 0.5,
+
+  sourceRank = 99,
+
+  targetRank = 99,
 }) => {
-  const sourceShare =
-    dominantShareByNode[sourceNode]?.share ??
-    getNodeVoiceWeight(profile, sourceNode) * 0.33;
+  const sourceHold = sourceRank === 0 ? 27 : sourceRank === 1 ? 22 : 16;
 
-  const targetShare =
-    dominantShareByNode[targetNode]?.share ??
-    getNodeVoiceWeight(profile, targetNode) * 0.33;
+  const targetHold = targetRank === 0 ? 73 : targetRank === 1 ? 78 : 84;
 
-  const total = Math.max(0.001, sourceShare + targetShare);
+  const middleColor = mixTwoHexColors(sourceColor, targetColor, 0.5);
 
-  const normalizedSourceShare = sourceShare / total;
+  const earlyBlend = mixTwoHexColors(sourceColor, targetColor, 0.26);
 
-  /**
+  const lateBlend = mixTwoHexColors(sourceColor, targetColor, 0.74);
 
-   * Keep the meeting point weighted, but never let it jump too far.
+  const sourceOpacity = clamp(0.36 + sourceStrength * 0.56, 0.36, 0.98);
 
-   * This keeps dominant colors feeling like they originate from their node.
+  const targetOpacity = clamp(0.36 + targetStrength * 0.56, 0.36, 0.98);
 
-   */
+  const midOpacity = clamp(
+    Math.min(sourceOpacity, targetOpacity) + 0.04,
 
-  const blendCenter = clamp(50 + (normalizedSourceShare - 0.5) * 22, 39, 61);
+    0.42,
 
-  /**
-
-   * Wider blend zone = less hard seam.
-
-   */
-
-  const blendWidth = 42;
-
-  const sourceHold = clamp(blendCenter - blendWidth * 0.58, 10, 42);
-
-  const sourceFeather = clamp(blendCenter - blendWidth * 0.24, 24, 50);
-
-  const targetFeather = clamp(blendCenter + blendWidth * 0.24, 50, 76);
-
-  const targetHold = clamp(blendCenter + blendWidth * 0.58, 58, 90);
-
-  /**
-
-   * IMPORTANT:
-
-   * This avoids the pale/white bridge.
-
-   * Instead of averaging through a bright midpoint, it creates several
-
-   * real color-to-color mix stops between the two node colors.
-
-   */
-
-  const blendA = mixTwoHexColors(sourceColor, targetColor, 0.28);
-
-  const blendMid = mixTwoHexColors(sourceColor, targetColor, 0.5);
-
-  const blendB = mixTwoHexColors(sourceColor, targetColor, 0.72);
-
-  const sourceOpacity = clamp(0.74 + sourceShare * 0.2, 0.74, 0.9);
-
-  const targetOpacity = clamp(0.74 + targetShare * 0.2, 0.74, 0.9);
+    0.82
+  );
 
   return (
     <>
@@ -1619,261 +1349,33 @@ const renderSoftRelationshipStops = ({
 
       <stop
         offset={`${sourceHold}%`}
-        stopColor={sourceColor}
+        stopColor={softenColor(sourceColor, 0.12)}
         stopOpacity={sourceOpacity}
       />
 
       <stop
-        offset={`${sourceFeather}%`}
-        stopColor={blendA}
-        stopOpacity={0.84}
+        offset="38%"
+        stopColor={earlyBlend}
+        stopOpacity={sourceOpacity * 0.9}
       />
 
-      <stop
-        offset={`${blendCenter}%`}
-        stopColor={blendMid}
-        stopOpacity={0.82}
-      />
+      <stop offset="50%" stopColor={middleColor} stopOpacity={midOpacity} />
 
       <stop
-        offset={`${targetFeather}%`}
-        stopColor={blendB}
-        stopOpacity={0.84}
+        offset="62%"
+        stopColor={lateBlend}
+        stopOpacity={targetOpacity * 0.9}
       />
 
       <stop
         offset={`${targetHold}%`}
-        stopColor={targetColor}
+        stopColor={softenColor(targetColor, 0.12)}
         stopOpacity={targetOpacity}
       />
 
       <stop offset="100%" stopColor={targetColor} stopOpacity={targetOpacity} />
     </>
   );
-};
-
-const getDominantVoiceNodes = ({
-  profile = {},
-
-  activeThread = {},
-
-  limit = 4,
-}) => {
-  const threadNodes = Array.isArray(activeThread?.nodes)
-    ? activeThread.nodes.filter(Boolean)
-    : [];
-
-  const candidateNodes = threadNodes.length ? threadNodes : THREAD_NODE_ORDER;
-
-  return candidateNodes
-
-    .map((nodeKey, index) => ({
-      nodeKey,
-
-      color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
-
-      weight: getNodeVoiceWeight(profile, nodeKey),
-
-      delta: Math.abs(getAxisDelta(profile, nodeKey)),
-
-      index,
-    }))
-
-    .sort((a, b) => {
-      if (b.weight !== a.weight) return b.weight - a.weight;
-
-      if (b.delta !== a.delta) return b.delta - a.delta;
-
-      return a.index - b.index;
-    })
-
-    .slice(0, limit);
-};
-
-const getDominantNodeShareMap = ({ profile = {}, activeThread = {} }) => {
-  const dominantNodes = getDominantVoiceNodes({
-    profile,
-
-    activeThread,
-
-    limit: 3,
-  });
-
-  const totalWeight = dominantNodes.reduce(
-    (sum, item) => sum + Math.max(0.001, Number(item.weight || 0)),
-
-    0
-  );
-
-  return dominantNodes.reduce((acc, item) => {
-    acc[item.nodeKey] = {
-      ...item,
-
-      share: Math.max(0.001, Number(item.weight || 0)) / totalWeight,
-    };
-
-    return acc;
-  }, {});
-};
-
-const getDominantThreadColor = ({
-  profile = {},
-
-  activeThread = {},
-}) => {
-  const dominantNodes = getDominantVoiceNodes({
-    profile,
-
-    activeThread,
-
-    limit: 1,
-  });
-
-  return dominantNodes[0]?.color || '#d6b277';
-};
-
-const getGradientNodeSequence = ({
-  profile = {},
-
-  activeThread = {},
-
-  resolvedReadVariant = '',
-}) => {
-  const threadNodes = Array.isArray(activeThread?.nodes)
-    ? activeThread.nodes.filter(Boolean)
-    : [];
-
-  if (resolvedReadVariant === 'player') {
-    return THREAD_NODE_ORDER.map((nodeKey) => ({
-      nodeKey,
-
-      color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
-
-      weight: getNodeVoiceWeight(profile, nodeKey),
-    }));
-  }
-
-  const sequence = threadNodes.length
-    ? threadNodes
-    : THREAD_NODE_ORDER.slice(0, 3);
-
-  return sequence.map((nodeKey) => ({
-    nodeKey,
-
-    color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
-
-    weight: getNodeVoiceWeight(profile, nodeKey),
-  }));
-};
-
-const renderVoiceGradientStops = ({
-  nodes = [],
-  fallbackColor = '#d6b277',
-}) => {
-  const cleanNodes = nodes.filter(Boolean);
-
-  if (!cleanNodes.length) {
-    return (
-      <>
-        <stop offset="0%" stopColor={fallbackColor} />
-
-        <stop offset="100%" stopColor={fallbackColor} />
-      </>
-    );
-  }
-
-  if (cleanNodes.length === 1) {
-    return (
-      <>
-        <stop offset="0%" stopColor={cleanNodes[0].color} />
-
-        <stop offset="100%" stopColor={cleanNodes[0].color} />
-      </>
-    );
-  }
-
-  const totalWeight = cleanNodes.reduce(
-    (sum, item) => sum + Math.max(0.1, Number(item.weight || 0.1)),
-
-    0
-  );
-
-  let cursor = 0;
-
-  const stops = [];
-
-  cleanNodes.forEach((item, index) => {
-    const weight = Math.max(0.1, Number(item.weight || 0.1));
-
-    const share = (weight / totalWeight) * 100;
-
-    const start = cursor;
-
-    const end = index === cleanNodes.length - 1 ? 100 : cursor + share;
-
-    const blend = Math.min(7, Math.max(3, share * 0.18));
-
-    if (index === 0) {
-      stops.push({
-        offset: 0,
-
-        color: item.color,
-
-        opacity: 0.96,
-      });
-    }
-
-    stops.push({
-      offset: clamp(start + blend, 0, 100),
-
-      color: item.color,
-
-      opacity: 0.96,
-    });
-
-    stops.push({
-      offset: clamp(end - blend, 0, 100),
-
-      color: item.color,
-
-      opacity: 0.96,
-    });
-
-    if (index < cleanNodes.length - 1) {
-      const next = cleanNodes[index + 1];
-
-      stops.push({
-        offset: clamp(end, 0, 100),
-
-        color: next.color,
-
-        opacity: 0.92,
-      });
-    } else {
-      stops.push({
-        offset: 100,
-
-        color: item.color,
-
-        opacity: 0.96,
-      });
-    }
-
-    cursor = end;
-  });
-
-  return stops
-
-    .sort((a, b) => a.offset - b.offset)
-
-    .map((stop, index) => (
-      <stop
-        key={`${stop.color}-${stop.offset}-${index}`}
-        offset={`${stop.offset}%`}
-        stopColor={stop.color}
-        stopOpacity={stop.opacity}
-      />
-    ));
 };
 
 const VoiceThreadMap = ({
@@ -1913,421 +1415,220 @@ const VoiceThreadMap = ({
 
   const inputSignature = getInputSignature(input, currentSpec);
 
-  const activeNodeSet = useMemo(() => {
-    return new Set(activeThread?.nodes || []);
-  }, [nodesSignature, activeThread?.nodes]);
-
-  const fingerprintForHashCompatibility = useMemo(() => {
-    return getBuiltFingerprintForHashCompatibility({
-      thread: activeThread,
-
-      profile,
-
-      kind: threadKind,
-    });
-  }, [activeThread, profile, profileSignature, threadKind]);
-
-  const visualKey = getSlotStableVisualKey({
-    thread: activeThread,
-
-    profile,
-
-    kind: threadKind,
-
-    input,
-
-    currentSpec,
-  });
-
-  const mapId = `heritage-voice-thread-${
-    compact ? 'compact' : 'large'
-  }-${sanitizeMapId(activeThread?.id)}-${sanitizeMapId(visualKey)}`;
-
-  const voiceMapRelationshipPoints = useMemo(() => {
-    if (!isVoiceMapMode || resolvedReadVariant === 'legacyprint') {
-      return [];
-    }
-
-    return getVoiceMapRelationshipPoints({
-      activeThread,
-
-      resolvedReadVariant,
-
-      profile,
-
-      input,
-
-      currentSpec,
-    });
-  }, [
-    activeThread,
-
-    nodesSignature,
-
-    profile,
-
-    profileSignature,
-
-    inputSignature,
-
-    isVoiceMapMode,
-
-    resolvedReadVariant,
-  ]);
-
-  const playerReadPoints = useMemo(() => {
-    if (!activeThread || !isVoiceMapMode || resolvedReadVariant !== 'player') {
-      return [];
-    }
-
-    return getPlayerReadPoints({
-      activeThread,
-
-      profile,
-
-      input,
-
-      currentSpec,
-    });
-  }, [
-    activeThread,
-
-    isVoiceMapMode,
-
-    resolvedReadVariant,
-
-    profile,
-
-    profileSignature,
-
-    inputSignature,
-
-    currentSpec,
-  ]);
-
-  const playerReadSegments = useMemo(() => {
-    if (!playerReadPoints.length) return [];
-
-    return playerReadPoints.map((point, index) => {
-      const nextPoint = playerReadPoints[(index + 1) % playerReadPoints.length];
-
-      const sourceNode = THREAD_NODE_ORDER[index];
-
-      const targetNode =
-        THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
-
-      return {
-        id: `${sourceNode}-${targetNode}`,
-
-        path: getSegmentPath(point, nextPoint, 0.06),
-
-        sourceNode,
-
-        targetNode,
-
-        sourceColor: AXIS_COLOR_BY_KEY[sourceNode] || '#d6b277',
-
-        targetColor: AXIS_COLOR_BY_KEY[targetNode] || '#d6b277',
-
-        x1: point.x,
-
-        y1: point.y,
-
-        x2: nextPoint.x,
-
-        y2: nextPoint.y,
-      };
-    });
-  }, [playerReadPoints]);
-
-  const voiceMapRelationshipSegments = useMemo(() => {
-    if (
-      !isVoiceMapMode ||
-      resolvedReadVariant === 'legacyprint' ||
-      resolvedReadVariant === 'player' ||
-      voiceMapRelationshipPoints.length < 2
-    ) {
-      return [];
-    }
-
-    return voiceMapRelationshipPoints.map((item, index) => {
-      const next =
-        voiceMapRelationshipPoints[
-          (index + 1) % voiceMapRelationshipPoints.length
-        ];
-
-      return {
-        key: `${item.nodeKey}-${next.nodeKey}-${index}`,
-
-        sourceNode: item.nodeKey,
-
-        targetNode: next.nodeKey,
-
-        sourcePoint: item.point,
-
-        targetPoint: next.point,
-
-        path: getSegmentPath(item.point, next.point, 0),
-      };
-    });
-  }, [isVoiceMapMode, resolvedReadVariant, voiceMapRelationshipPoints]);
-
-  const shapePath = useMemo(() => {
-    if (!activeThread) return '';
-
-    if (isVoiceMapMode && resolvedReadVariant === 'firstTell') {
-      const points = voiceMapRelationshipPoints.map((item) => item.point);
-
-      return getShapePath(points, true);
-    }
-
-    if (isVoiceMapMode && resolvedReadVariant === 'player') {
-      return getCurvedClosedPath(playerReadPoints);
-    }
-
-    if (threadKind === 'simple') {
-      return getSimpleCurvePath({
-        thread: activeThread,
-
-        profile,
-
-        input,
-
-        currentSpec,
-      });
-    }
-
-    if (threadKind === 'shaped') {
-      const points = getShapedPoints({
-        thread: activeThread,
-
-        profile,
-
-        input,
-
-        currentSpec,
-      });
-
-      return getCurvedClosedPath(points);
-    }
-
-    const points = getComplexPoints({
-      thread: activeThread,
-
-      profile,
-
-      input,
-
-      currentSpec,
-    });
-
-    return getBlobPath(points, compact ? 0.62 : 0.78);
-  }, [
-    activeThread,
-
-    activeThread?.id,
-
-    activeThread?.slotKey,
-
-    activeThread?.visualMode,
-
-    activeThread?.mapMode,
-
-    nodesSignature,
-
-    profile,
-
-    profileSignature,
-
-    inputSignature,
-
-    threadKind,
-
-    isVoiceMapMode,
-
-    resolvedReadVariant,
-
-    firstTellKeys,
-
-    compact,
-
-    voiceMapRelationshipPoints,
-
-    playerReadPoints,
-  ]);
-
   const shapeColors = useMemo(
     () => getShapeColors(activeThread),
 
     [activeThread]
   );
 
-  const dominantVoiceNodes = useMemo(() => {
-    return getDominantVoiceNodes({
-      profile,
-
-      activeThread,
-
-      limit: resolvedReadVariant === 'legacyprint' ? 4 : 7,
-    });
-  }, [profileSignature, resolvedReadVariant, nodesSignature, activeThread]);
-
-  const activeGradientNodes = useMemo(() => {
-    return getGradientNodeSequence({
+  const rankedNodes = useMemo(() => {
+    return getRankedThreadNodes({
       profile,
 
       activeThread,
 
       resolvedReadVariant,
-    });
-  }, [profileSignature, resolvedReadVariant, nodesSignature, activeThread]);
 
-  const dominantThreadColor = useMemo(() => {
-    return getDominantThreadColor({
+      firstTellKeys,
+    });
+  }, [
+    profile,
+
+    profileSignature,
+
+    activeThread,
+
+    nodesSignature,
+
+    resolvedReadVariant,
+
+    firstTellKeys,
+  ]);
+
+  const rankMap = useMemo(() => getRankMap(rankedNodes), [rankedNodes]);
+
+  const activeNodeSet = useMemo(() => {
+    return new Set(
+      resolvedReadVariant === 'firstTell' && firstTellKeys.length
+        ? firstTellKeys
+        : activeThread?.nodes || []
+    );
+  }, [nodesSignature, activeThread?.nodes, resolvedReadVariant, firstTellKeys]);
+
+  const shapeItems = useMemo(() => {
+    if (!activeThread) return [];
+
+    return getThreadShapePoints({
+      activeThread,
+
       profile,
 
-      activeThread,
+      input,
+
+      currentSpec,
+
+      resolvedReadVariant,
+
+      threadKind,
+
+      firstTellKeys,
     });
-  }, [profileSignature, nodesSignature, activeThread]);
+  }, [
+    activeThread,
 
-  const dominantShareByNode = useMemo(() => {
-    return getDominantNodeShareMap({
-      profile,
+    nodesSignature,
 
-      activeThread,
-    });
-  }, [profileSignature, nodesSignature, activeThread]);
+    profile,
 
-  const dominantPrimary = dominantVoiceNodes[0] || {
-    color: shapeColors.first,
+    profileSignature,
 
-    nodeKey: 'attack',
+    input,
 
-    weight: 0.5,
-  };
+    inputSignature,
 
-  const dominantSecondary = dominantVoiceNodes[1] || {
-    color: shapeColors.second,
+    currentSpec,
 
-    nodeKey: 'warmth',
+    resolvedReadVariant,
 
-    weight: 0.5,
-  };
+    threadKind,
 
-  const dominantTertiary = dominantVoiceNodes[2] || {
-    color: shapeColors.third,
+    firstTellKeys,
+  ]);
 
-    nodeKey: 'control',
+  const shouldCloseShape = !(
+    threadKind === 'simple' &&
+    !isVoiceMapMode &&
+    shapeItems.length <= 2
+  );
 
-    weight: 0.5,
-  };
+  const shapePath = useMemo(() => {
+    const points = shapeItems.map((item) => item.point).filter(isFinitePoint);
 
-  const firstTellNodeOrder =
-    resolvedReadVariant === 'firstTell'
-      ? Array.isArray(activeThread?.nodes)
-        ? activeThread.nodes.filter(Boolean)
-        : []
-      : [];
+    if (!points.length) return '';
 
-  const firstTellPrimaryNode = firstTellNodeOrder[0] || 'attack';
-
-  const firstTellSecondaryNode = firstTellNodeOrder[1] || firstTellPrimaryNode;
-
-  const firstTellTertiaryNode = firstTellNodeOrder[2] || firstTellSecondaryNode;
-
-  const firstTellPrimaryColor =
-    AXIS_COLOR_BY_KEY[firstTellPrimaryNode] || '#d6b277';
-
-  const firstTellSecondaryColor =
-    AXIS_COLOR_BY_KEY[firstTellSecondaryNode] || firstTellPrimaryColor;
-
-  const firstTellTertiaryColor =
-    AXIS_COLOR_BY_KEY[firstTellTertiaryNode] || firstTellSecondaryColor;
-
-  const gradientVector = useMemo(() => {
-    if (resolvedReadVariant === 'firstTell') {
-      const nodes = Array.isArray(activeThread?.nodes)
-        ? activeThread.nodes.filter(Boolean)
-        : [];
-
-      const startNode = nodes[0] || 'attack';
-
-      const endNode = nodes[2] || nodes[1] || startNode;
-
-      const startPoint = getPointForNode(startNode) || SVG_CENTER;
-
-      const endPoint = getPointForNode(endNode) || startPoint;
-
-      return {
-        x1: startPoint.x,
-
-        y1: startPoint.y,
-
-        x2: endPoint.x,
-
-        y2: endPoint.y,
-
-        strongestNode: startNode,
-
-        weakestNode: endNode,
-      };
+    if (!shouldCloseShape || points.length < 3) {
+      return getOpenPath(points);
     }
 
-    return getThreadGradientVector(activeThread, profile);
-  }, [activeThread, profileSignature, resolvedReadVariant]);
+    return getCurvedClosedPath(
+      points,
+      resolvedReadVariant === 'legacyprint' ? 0.12 : 0.075
+    );
+  }, [shapeItems, shouldCloseShape, resolvedReadVariant]);
 
-  const strongestColor =
-    AXIS_COLOR_BY_KEY[gradientVector.strongestNode] || shapeColors.second;
+  const relationshipSegments = useMemo(() => {
+    return buildSegments({
+      shapeItems,
 
-  const weakestColor =
-    AXIS_COLOR_BY_KEY[gradientVector.weakestNode] || shapeColors.first;
+      closed: shouldCloseShape,
+    });
+  }, [shapeItems, shouldCloseShape]);
 
-  const isLegacyPrintShape =
-    threadKind === 'complex' || resolvedReadVariant === 'legacyprint';
+  const mapId = `heritage-voice-thread-${
+    compact ? 'compact' : 'large'
+  }-${sanitizeMapId(activeThread?.id)}-${sanitizeMapId(
+    [
+      activeThread?.slotKey,
 
-  const coreStrokeWidth = isLegacyPrintShape
-    ? compact
-      ? 3.2
-      : 4.4
-    : threadKind === 'shaped'
+      threadKind,
+
+      resolvedReadVariant,
+
+      nodesSignature,
+
+      profileSignature,
+
+      inputSignature,
+    ].join('|')
+  )}`;
+
+  const primaryNode = rankedNodes[0] || {
+    nodeKey: 'attack',
+
+    color: shapeColors.first,
+
+    rank: 0,
+
+    weight: 1,
+  };
+
+  const secondaryNode = rankedNodes[1] || {
+    nodeKey: 'warmth',
+
+    color: shapeColors.second,
+
+    rank: 1,
+
+    weight: 0.72,
+  };
+
+  const tertiaryNode = rankedNodes[2] || {
+    nodeKey: 'control',
+
+    color: shapeColors.third,
+
+    rank: 2,
+
+    weight: 0.5,
+  };
+
+  const gradientVector = getGradientVector(shapeItems);
+
+  const shouldRenderComplexFill =
+    shapePath &&
+    (threadKind === 'complex' || resolvedReadVariant === 'legacyprint');
+
+  const baseCoreStrokeWidth =
+    resolvedReadVariant === 'legacyprint'
       ? compact
-        ? 3.8
-        : 5.2
-      : compact
-        ? 4
-        : 5.4;
+        ? 3.1
+        : 4.15
+      : resolvedReadVariant === 'player'
+        ? compact
+          ? 3.6
+          : 4.8
+        : compact
+          ? 3.8
+          : 5.2;
 
-  const glowStrokeWidth = isLegacyPrintShape
-    ? compact
-      ? 16
-      : 24
-    : threadKind === 'shaped'
+  const baseGlowStrokeWidth =
+    resolvedReadVariant === 'legacyprint'
       ? compact
-        ? 11
-        : 16
-      : compact
         ? 12
-        : 17;
+        : 19
+      : resolvedReadVariant === 'player'
+        ? compact
+          ? 12
+          : 17
+        : compact
+          ? 13
+          : 19;
 
-  const haloStrokeWidth = isLegacyPrintShape
-    ? compact
-      ? 30
-      : 42
-    : threadKind === 'shaped'
+  const baseHaloStrokeWidth =
+    resolvedReadVariant === 'legacyprint'
       ? compact
-        ? 19
-        : 27
-      : compact
-        ? 19
-        : 26;
-
-  const shouldRenderComplexFill = isLegacyPrintShape && shapePath;
+        ? 24
+        : 36
+      : resolvedReadVariant === 'player'
+        ? compact
+          ? 23
+          : 34
+        : compact
+          ? 24
+          : 35;
 
   return (
     <div
       className={`heritage-voice-thread-map ${
         compact ? 'heritage-voice-thread-map--compact' : ''
       } heritage-voice-thread-map--${threadKind} heritage-voice-thread-map--${displayMode} heritage-voice-thread-map--read-${resolvedReadVariant}`}
+      style={{
+        '--dominant-thread-color': primaryNode.color,
+
+        '--secondary-thread-color': secondaryNode.color,
+
+        '--tertiary-thread-color': tertiaryNode.color,
+      }}
       aria-label={
         activeThread
           ? `Voice Thread map showing ${activeThread.title}`
@@ -2336,16 +1637,10 @@ const VoiceThreadMap = ({
       data-thread-id={activeThread?.id || ''}
       data-thread-kind={threadKind}
       data-strength-score={strengthScore}
-      data-visual-signature={
-        activeThread?.visualSignatureHash ||
-        activeThread?.visualSignature ||
-        fingerprintForHashCompatibility?.visualSignature ||
-        ''
-      }
     >
       <svg
         className="heritage-voice-thread-svg"
-        viewBox="0 0 500 500"
+        viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
         role="img"
         aria-hidden="true"
       >
@@ -2358,7 +1653,7 @@ const VoiceThreadMap = ({
             height="300%"
           >
             <feGaussianBlur
-              stdDeviation={compact ? '4.6' : '6.8'}
+              stdDeviation={compact ? '4.2' : '6.2'}
               result="softBlur"
             />
 
@@ -2371,22 +1666,29 @@ const VoiceThreadMap = ({
 
           <filter
             id={`${mapId}-neonGlow`}
-            x="-120%"
-            y="-120%"
-            width="340%"
-            height="340%"
+            x="-130%"
+            y="-130%"
+            width="360%"
+            height="360%"
           >
             <feGaussianBlur
-              stdDeviation={compact ? '3' : '4.4'}
+              stdDeviation={compact ? '2.3' : '3.4'}
               result="glowA"
             />
 
             <feGaussianBlur
-              stdDeviation={compact ? '7' : '10'}
+              stdDeviation={compact ? '6.5' : '9.6'}
               result="glowB"
             />
 
+            <feGaussianBlur
+              stdDeviation={compact ? '13' : '18'}
+              result="glowC"
+            />
+
             <feMerge>
+              <feMergeNode in="glowC" />
+
               <feMergeNode in="glowB" />
 
               <feMergeNode in="glowA" />
@@ -2396,13 +1698,46 @@ const VoiceThreadMap = ({
           </filter>
 
           <filter
-            id={`${mapId}-nodeGlow`}
-            x="-120%"
-            y="-120%"
-            width="340%"
-            height="340%"
+            id={`${mapId}-primaryGlow`}
+            x="-150%"
+            y="-150%"
+            width="400%"
+            height="400%"
           >
-            <feGaussianBlur stdDeviation="2.8" result="nodeGlow" />
+            <feGaussianBlur
+              stdDeviation={compact ? '3.8' : '5.4'}
+              result="primaryA"
+            />
+
+            <feGaussianBlur
+              stdDeviation={compact ? '10' : '15'}
+              result="primaryB"
+            />
+
+            <feGaussianBlur
+              stdDeviation={compact ? '18' : '26'}
+              result="primaryC"
+            />
+
+            <feMerge>
+              <feMergeNode in="primaryC" />
+
+              <feMergeNode in="primaryB" />
+
+              <feMergeNode in="primaryA" />
+
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <filter
+            id={`${mapId}-nodeGlow`}
+            x="-130%"
+            y="-130%"
+            width="360%"
+            height="360%"
+          >
+            <feGaussianBlur stdDeviation="3.2" result="nodeGlow" />
 
             <feMerge>
               <feMergeNode in="nodeGlow" />
@@ -2434,19 +1769,47 @@ const VoiceThreadMap = ({
                 x2={targetPoint.x * 5}
                 y2={targetPoint.y * 5}
               >
-                <stop offset="0%" stopColor={sourceColor} />
+                <stop offset="0%" stopColor={darkenColor(sourceColor, 0.12)} />
 
-                <stop offset="100%" stopColor={targetColor} />
+                <stop
+                  offset="50%"
+                  stopColor={mixTwoHexColors(sourceColor, targetColor, 0.5)}
+                />
+
+                <stop
+                  offset="100%"
+                  stopColor={darkenColor(targetColor, 0.12)}
+                />
               </linearGradient>
             );
           })}
 
-          {voiceMapRelationshipSegments.map((segment) => {
+          {relationshipSegments.map((segment) => {
             const sourceColor =
               AXIS_COLOR_BY_KEY[segment.sourceNode] || '#d6b277';
 
             const targetColor =
               AXIS_COLOR_BY_KEY[segment.targetNode] || '#d6b277';
+
+            const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
+
+            const targetRank = rankMap[segment.targetNode]?.rank ?? 99;
+
+            const sourceStrength = getSegmentStrength({
+              sourceNode: segment.sourceNode,
+
+              targetNode: segment.sourceNode,
+
+              rankMap,
+            });
+
+            const targetStrength = getSegmentStrength({
+              sourceNode: segment.targetNode,
+
+              targetNode: segment.targetNode,
+
+              rankMap,
+            });
 
             return (
               <linearGradient
@@ -2458,46 +1821,18 @@ const VoiceThreadMap = ({
                 x2={segment.targetPoint.x}
                 y2={segment.targetPoint.y}
               >
-                {renderSoftRelationshipStops({
-                  profile,
-
-                  sourceNode: segment.sourceNode,
-
-                  targetNode: segment.targetNode,
-
+                {renderSmoothSegmentStops({
                   sourceColor,
 
                   targetColor,
 
-                  dominantShareByNode,
-                })}
-              </linearGradient>
-            );
-          })}
+                  sourceStrength,
 
-          {playerReadSegments.map((segment) => {
-            return (
-              <linearGradient
-                key={`${mapId}-player-${segment.id}`}
-                id={`${mapId}-player-${segment.id}`}
-                gradientUnits="userSpaceOnUse"
-                x1={segment.x1}
-                y1={segment.y1}
-                x2={segment.x2}
-                y2={segment.y2}
-              >
-                {renderSoftRelationshipStops({
-                  profile,
+                  targetStrength,
 
-                  sourceNode: segment.sourceNode,
+                  sourceRank,
 
-                  targetNode: segment.targetNode,
-
-                  sourceColor: segment.sourceColor,
-
-                  targetColor: segment.targetColor,
-
-                  dominantShareByNode,
+                  targetRank,
                 })}
               </linearGradient>
             );
@@ -2511,51 +1846,39 @@ const VoiceThreadMap = ({
             x2={gradientVector.x2}
             y2={gradientVector.y2}
           >
-           {resolvedReadVariant === 'firstTell' ? (
+            <stop
+              offset="0%"
+              stopColor={primaryNode.color}
+              stopOpacity="0.96"
+            />
 
-  <>
+            <stop
+              offset="31%"
+              stopColor={softenColor(primaryNode.color, 0.12)}
+              stopOpacity="0.94"
+            />
 
-    <stop offset="0%" stopColor={firstTellPrimaryColor} stopOpacity="0.94" />
+            <stop
+              offset="48%"
+              stopColor={mixTwoHexColors(
+                primaryNode.color,
+                secondaryNode.color,
+                0.52
+              )}
+              stopOpacity="0.82"
+            />
 
-    <stop offset="24%" stopColor={firstTellPrimaryColor} stopOpacity="0.9" />
+            <stop
+              offset="67%"
+              stopColor={softenColor(secondaryNode.color, 0.1)}
+              stopOpacity="0.78"
+            />
 
-    <stop
-
-      offset="39%"
-
-      stopColor={mixTwoHexColors(firstTellPrimaryColor, firstTellSecondaryColor, 0.35)}
-
-      stopOpacity="0.84"
-
-    />
-
-    <stop offset="50%" stopColor={firstTellSecondaryColor} stopOpacity="0.82" />
-
-    <stop
-
-      offset="61%"
-
-      stopColor={mixTwoHexColors(firstTellSecondaryColor, firstTellTertiaryColor, 0.65)}
-
-      stopOpacity="0.84"
-
-    />
-
-    <stop offset="76%" stopColor={firstTellTertiaryColor} stopOpacity="0.9" />
-
-    <stop offset="100%" stopColor={firstTellTertiaryColor} stopOpacity="0.94" />
-
-  </>
-
-) : (
-              <>
-                <stop offset="0%" stopColor={dominantThreadColor} />
-
-                <stop offset="52%" stopColor={dominantThreadColor} />
-
-                <stop offset="100%" stopColor={dominantThreadColor} />
-              </>
-            )}
+            <stop
+              offset="100%"
+              stopColor={tertiaryNode.color}
+              stopOpacity="0.7"
+            />
           </linearGradient>
 
           <radialGradient
@@ -2566,20 +1889,20 @@ const VoiceThreadMap = ({
           >
             <stop
               offset="0%"
-              stopColor={dominantPrimary.color}
-              stopOpacity={0.12 + dominantPrimary.weight * 0.12}
+              stopColor={primaryNode.color}
+              stopOpacity="0.26"
             />
 
             <stop
-              offset="42%"
-              stopColor={dominantSecondary.color}
-              stopOpacity={0.07 + dominantSecondary.weight * 0.1}
+              offset="38%"
+              stopColor={secondaryNode.color}
+              stopOpacity="0.16"
             />
 
             <stop
-              offset="72%"
-              stopColor={dominantTertiary.color}
-              stopOpacity={0.04 + dominantTertiary.weight * 0.08}
+              offset="68%"
+              stopColor={tertiaryNode.color}
+              stopOpacity="0.09"
             />
 
             <stop offset="100%" stopColor="#050506" stopOpacity="0" />
@@ -2593,60 +1916,78 @@ const VoiceThreadMap = ({
             x2={gradientVector.x2}
             y2={gradientVector.y2}
           >
-            {renderVoiceGradientStops({
-              nodes: activeGradientNodes,
+            <stop
+              offset="0%"
+              stopColor={primaryNode.color}
+              stopOpacity="0.68"
+            />
 
-              fallbackColor: dominantPrimary.color,
-            })}
+            <stop
+              offset="42%"
+              stopColor={mixTwoHexColors(
+                primaryNode.color,
+                secondaryNode.color,
+                0.5
+              )}
+              stopOpacity="0.36"
+            />
+
+            <stop
+              offset="100%"
+              stopColor={tertiaryNode.color}
+              stopOpacity="0.18"
+            />
           </linearGradient>
         </defs>
 
-        {THREAD_NODE_PAIRS.map(([source, target]) => {
-          const sourcePoint = THREAD_NODE_POSITIONS[source];
+        <g className="heritage-voice-thread-network">
+          {THREAD_NODE_PAIRS.map(([source, target]) => {
+            const sourcePoint = THREAD_NODE_POSITIONS[source];
 
-          const targetPoint = THREAD_NODE_POSITIONS[target];
+            const targetPoint = THREAD_NODE_POSITIONS[target];
 
-          if (!sourcePoint || !targetPoint) return null;
+            if (!sourcePoint || !targetPoint) return null;
 
-          const gradientId = getThreadGradientId(mapId, source, target);
+            const gradientId = getThreadGradientId(mapId, source, target);
 
-          return (
-            <line
-              key={`${source}-${target}`}
-              x1={sourcePoint.x * 5}
-              y1={sourcePoint.y * 5}
-              x2={targetPoint.x * 5}
-              y2={targetPoint.y * 5}
-              className="heritage-voice-thread-line heritage-voice-thread-line--base"
-              stroke={`url(#${gradientId})`}
-            />
-          );
-        })}
+            return (
+              <line
+                key={`${source}-${target}`}
+                x1={sourcePoint.x * 5}
+                y1={sourcePoint.y * 5}
+                x2={targetPoint.x * 5}
+                y2={targetPoint.y * 5}
+                className="heritage-voice-thread-line heritage-voice-thread-line--base"
+                stroke={`url(#${gradientId})`}
+              />
+            );
+          })}
 
-        {THREAD_NODE_ORDER.map((nodeKey, index) => {
-          const nextNodeKey =
-            THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
+          {THREAD_NODE_ORDER.map((nodeKey, index) => {
+            const nextNodeKey =
+              THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
 
-          const point = THREAD_NODE_POSITIONS[nodeKey];
+            const point = THREAD_NODE_POSITIONS[nodeKey];
 
-          const nextPoint = THREAD_NODE_POSITIONS[nextNodeKey];
+            const nextPoint = THREAD_NODE_POSITIONS[nextNodeKey];
 
-          if (!point || !nextPoint) return null;
+            if (!point || !nextPoint) return null;
 
-          const gradientId = getThreadGradientId(mapId, nodeKey, nextNodeKey);
+            const gradientId = getThreadGradientId(mapId, nodeKey, nextNodeKey);
 
-          return (
-            <line
-              key={`outer-${nodeKey}-${nextNodeKey}`}
-              className="heritage-voice-thread-outer-line"
-              x1={point.x * 5}
-              y1={point.y * 5}
-              x2={nextPoint.x * 5}
-              y2={nextPoint.y * 5}
-              stroke={`url(#${gradientId})`}
-            />
-          );
-        })}
+            return (
+              <line
+                key={`outer-${nodeKey}-${nextNodeKey}`}
+                className="heritage-voice-thread-outer-line"
+                x1={point.x * 5}
+                y1={point.y * 5}
+                x2={nextPoint.x * 5}
+                y2={nextPoint.y * 5}
+                stroke={`url(#${gradientId})`}
+              />
+            );
+          })}
+        </g>
 
         {shapePath && (
           <g
@@ -2659,7 +2000,6 @@ const VoiceThreadMap = ({
                   className="heritage-voice-thread-complex-fill"
                   fill={`url(#${mapId}-complexFillGradient)`}
                   stroke="none"
-                  opacity={0.42}
                 />
 
                 <path
@@ -2671,80 +2011,72 @@ const VoiceThreadMap = ({
               </>
             )}
 
-            {isVoiceMapMode && resolvedReadVariant === 'player' ? (
-              <g className="heritage-voice-thread-player-segments">
-                {playerReadSegments.map((segment) => (
-                  <React.Fragment key={segment.id}>
-                    <path
-                      d={shapePath}
-                      className="heritage-voice-thread-shape-halo"
-                      fill="none"
-                      stroke={
-                        resolvedReadVariant === 'firstTell'
-                          ? firstTellPrimaryColor
-                          : `url(#${mapId}-activeShapeGradient)`
-                      }
-                      strokeWidth={haloStrokeWidth}
-                      opacity={compact ? 0.16 : 0.2}
-                      filter={`url(#${mapId}-softGlow)`}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-
-                    <path
-                      d={shapePath}
-                      className="heritage-voice-thread-shape-glow"
-                      fill="none"
-                      stroke={
-                        resolvedReadVariant === 'firstTell'
-                          ? firstTellPrimaryColor
-                          : `url(#${mapId}-activeShapeGradient)`
-                      }
-                      strokeWidth={glowStrokeWidth}
-                      opacity={compact ? 0.4 : 0.5}
-                      filter={`url(#${mapId}-neonGlow)`}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-
-                    <path
-                      d={shapePath}
-                      className="heritage-voice-thread-shape-core"
-                      fill="none"
-                      stroke={`url(#${mapId}-activeShapeGradient)`}
-                      strokeWidth={coreStrokeWidth}
-                      opacity={0.98}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-
-                    <path
-                      d={segment.path}
-                      className="heritage-voice-thread-shape-hotline"
-                      fill="none"
-                      stroke="rgba(255, 246, 218, 0.5)"
-                      strokeWidth={compact ? 0.7 : 0.95}
-                      opacity={0.24}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </React.Fragment>
-                ))}
-              </g>
-            ) : voiceMapRelationshipSegments.length > 0 ? (
+            {relationshipSegments.length > 0 ? (
               <g className="heritage-voice-thread-relationship-segments">
-                {voiceMapRelationshipSegments.map((segment) => {
+                {relationshipSegments.map((segment) => {
                   const segmentGradientId = `${mapId}-active-segment-${segment.key}`;
 
+                  const segmentStrength = getSegmentStrength({
+                    sourceNode: segment.sourceNode,
+
+                    targetNode: segment.targetNode,
+
+                    rankMap,
+                  });
+
+                  const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
+
+                  const targetRank = rankMap[segment.targetNode]?.rank ?? 99;
+
+                  const bestRank = Math.min(sourceRank, targetRank);
+
+                  const isPrimarySegment = bestRank === 0;
+
+                  const segmentHaloWidth =
+                    baseHaloStrokeWidth * (0.46 + segmentStrength * 0.74);
+
+                  const segmentGlowWidth =
+                    baseGlowStrokeWidth * (0.54 + segmentStrength * 0.78);
+
+                  const segmentCoreWidth =
+                    baseCoreStrokeWidth * (0.72 + segmentStrength * 0.58);
+
+                  const segmentHaloOpacity = clamp(
+                    0.055 + segmentStrength * 0.19,
+
+                    0.055,
+
+                    0.27
+                  );
+
+                  const segmentGlowOpacity = clamp(
+                    0.16 + segmentStrength * 0.52,
+
+                    0.16,
+
+                    0.72
+                  );
+
+                  const segmentCoreOpacity = clamp(
+                    0.58 + segmentStrength * 0.4,
+
+                    0.58,
+
+                    0.99
+                  );
+
                   return (
-                    <React.Fragment key={segment.key}>
+                    <g
+                      key={segment.key}
+                      className={`heritage-voice-thread-segment heritage-voice-thread-segment--rank-${bestRank}`}
+                    >
                       <path
                         d={segment.path}
                         className="heritage-voice-thread-shape-halo"
                         fill="none"
                         stroke={`url(#${segmentGradientId})`}
-                        strokeWidth={haloStrokeWidth}
-                        opacity={compact ? 0.16 : 0.2}
+                        strokeWidth={segmentHaloWidth}
+                        opacity={segmentHaloOpacity}
                         filter={`url(#${mapId}-softGlow)`}
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -2755,9 +2087,13 @@ const VoiceThreadMap = ({
                         className="heritage-voice-thread-shape-glow"
                         fill="none"
                         stroke={`url(#${segmentGradientId})`}
-                        strokeWidth={glowStrokeWidth}
-                        opacity={compact ? 0.4 : 0.5}
-                        filter={`url(#${mapId}-neonGlow)`}
+                        strokeWidth={segmentGlowWidth}
+                        opacity={segmentGlowOpacity}
+                        filter={
+                          isPrimarySegment
+                            ? `url(#${mapId}-primaryGlow)`
+                            : `url(#${mapId}-neonGlow)`
+                        }
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -2767,8 +2103,8 @@ const VoiceThreadMap = ({
                         className="heritage-voice-thread-shape-core"
                         fill="none"
                         stroke={`url(#${segmentGradientId})`}
-                        strokeWidth={coreStrokeWidth}
-                        opacity={0.98}
+                        strokeWidth={segmentCoreWidth}
+                        opacity={segmentCoreOpacity}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
@@ -2777,13 +2113,27 @@ const VoiceThreadMap = ({
                         d={segment.path}
                         className="heritage-voice-thread-shape-hotline"
                         fill="none"
-                        stroke="rgba(255, 246, 218, 0.42)"
-                        strokeWidth={compact ? 0.75 : 0.95}
-                        opacity={0.24}
+                        stroke="rgba(255, 246, 218, 0.54)"
+                        strokeWidth={
+                          isPrimarySegment
+                            ? compact
+                              ? 1.15
+                              : 1.5
+                            : compact
+                              ? 0.7
+                              : 0.95
+                        }
+                        opacity={clamp(
+                          0.035 + segmentStrength * 0.24,
+
+                          0.035,
+
+                          0.28
+                        )}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
-                    </React.Fragment>
+                    </g>
                   );
                 })}
               </g>
@@ -2794,8 +2144,8 @@ const VoiceThreadMap = ({
                   className="heritage-voice-thread-shape-halo"
                   fill="none"
                   stroke={`url(#${mapId}-activeShapeGradient)`}
-                  strokeWidth={haloStrokeWidth}
-                  opacity={compact ? 0.16 : 0.2}
+                  strokeWidth={baseHaloStrokeWidth}
+                  opacity={compact ? 0.15 : 0.21}
                   filter={`url(#${mapId}-softGlow)`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -2806,9 +2156,9 @@ const VoiceThreadMap = ({
                   className="heritage-voice-thread-shape-glow"
                   fill="none"
                   stroke={`url(#${mapId}-activeShapeGradient)`}
-                  strokeWidth={glowStrokeWidth}
-                  opacity={compact ? 0.4 : 0.5}
-                  filter={`url(#${mapId}-neonGlow)`}
+                  strokeWidth={baseGlowStrokeWidth}
+                  opacity={compact ? 0.4 : 0.58}
+                  filter={`url(#${mapId}-primaryGlow)`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -2818,24 +2168,19 @@ const VoiceThreadMap = ({
                   className="heritage-voice-thread-shape-core"
                   fill="none"
                   stroke={`url(#${mapId}-activeShapeGradient)`}
-                  strokeWidth={coreStrokeWidth}
-                  opacity={0.98}
+                  strokeWidth={baseCoreStrokeWidth}
+                  opacity="0.96"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
+
                 <path
                   d={shapePath}
                   className="heritage-voice-thread-shape-hotline"
                   fill="none"
                   stroke={`url(#${mapId}-complexSheenGradient)`}
                   strokeWidth={compact ? 0.95 : 1.25}
-                  opacity={
-                    resolvedReadVariant === 'firstTell'
-                      ? 0.42
-                      : threadKind === 'complex'
-                        ? 0.2
-                        : 0.34
-                  }
+                  opacity="0.34"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -2844,59 +2189,79 @@ const VoiceThreadMap = ({
           </g>
         )}
 
-        {THREAD_NODE_ORDER.map((nodeKey) => {
-          const point = THREAD_NODE_POSITIONS[nodeKey];
+        <g className="heritage-voice-thread-node-layer">
+          {THREAD_NODE_ORDER.map((nodeKey) => {
+            const point = THREAD_NODE_POSITIONS[nodeKey];
 
-          const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
+            const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
 
-          if (!point) return null;
+            if (!point) return null;
 
-          const axis = AXIS_META.find((item) => item.key === nodeKey);
+            const axis = AXIS_META.find((item) => item.key === nodeKey);
 
-          const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+            const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
-          const isActive = activeNodeSet.has(nodeKey);
+            const rankItem = rankMap[nodeKey];
 
-          return (
-            <g
-              key={nodeKey}
-              className={`heritage-voice-thread-node ${
-                isActive ? 'is-active' : ''
-              }`}
-              style={{ '--node-color': color }}
-            >
-              <circle
-                cx={point.x * 5}
-                cy={point.y * 5}
-                r={isActive ? 4.2 : 2.6}
-                className="heritage-voice-thread-anchor-dot"
-                fill={color}
-              />
+            const isActive = activeNodeSet.has(nodeKey);
 
-              {!compact && (
-                <foreignObject
-                  x={iconPoint.x * 5 - 25}
-                  y={iconPoint.y * 5 - 25}
-                  width="50"
-                  height="50"
-                  className="heritage-voice-thread-node-icon-wrap"
-                >
-                  <div
-                    xmlns="http://www.w3.org/1999/xhtml"
-                    className="heritage-voice-thread-node-icon"
-                    style={{ color }}
+            const rank = Number.isFinite(rankItem?.rank) ? rankItem.rank : 99;
+
+            return (
+              <g
+                key={nodeKey}
+                className={`heritage-voice-thread-node ${
+                  isActive ? 'is-active' : ''
+                } heritage-voice-thread-node--rank-${rank}`}
+                style={{ '--node-color': color }}
+                data-rank={rank}
+              >
+                <circle
+                  cx={point.x * 5}
+                  cy={point.y * 5}
+                  r={
+                    rank === 0 ? 5.4 : rank === 1 ? 4.4 : isActive ? 3.7 : 2.45
+                  }
+                  className="heritage-voice-thread-anchor-dot"
+                  fill={color}
+                  filter={rank <= 2 ? `url(#${mapId}-nodeGlow)` : undefined}
+                />
+
+                {rank <= 2 && (
+                  <circle
+                    cx={point.x * 5}
+                    cy={point.y * 5}
+                    r={rank === 0 ? 17 : rank === 1 ? 12 : 8}
+                    className="heritage-voice-thread-anchor-pulse"
+                    fill={color}
+                  />
+                )}
+
+                {!compact && (
+                  <foreignObject
+                    x={iconPoint.x * 5 - 25}
+                    y={iconPoint.y * 5 - 25}
+                    width="50"
+                    height="50"
+                    className="heritage-voice-thread-node-icon-wrap"
                   >
-                    <MetricIcon
-                      type={axis?.icon || nodeKey}
-                      color={color}
-                      size={22}
-                    />
-                  </div>
-                </foreignObject>
-              )}
-            </g>
-          );
-        })}
+                    <div
+                      xmlns="http://www.w3.org/1999/xhtml"
+                      className="heritage-voice-thread-node-icon"
+                      style={{ color }}
+                    >
+                      <MetricIcon
+                        type={axis?.icon || nodeKey}
+                        color={color}
+                        size={22}
+                      />
+                    </div>
+                  </foreignObject>
+                )}
+              </g>
+            );
+          })}
+        </g>
       </svg>
     </div>
   );
