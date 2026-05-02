@@ -7892,6 +7892,7 @@
 
 }
 
+
 /* =========================================================
 
    TABLET / MOBILE RESPONSIVE
@@ -9323,6 +9324,24 @@
   .artisan-cart-hover-options span:hover {
 
     background: rgba(255, 255, 255, 0.08);
+
+  }
+
+    .heritage-thread-axis-delta-list--first-tell {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .heritage-thread-listening-note--first-tell {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .heritage-thread-listening-note--first-tell section:nth-child(2) {
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 
   }
 
@@ -10805,6 +10824,172 @@
     padding-left: 16px !important;
 
     padding-right: 16px !important;
+
+  }
+
+}
+
+
+/* =========================================================
+
+   FIX — FIRST TELL NODE LIST SPACING
+
+   Matches actual JSX classes: heritage-firsttell-*
+
+   Paste at VERY bottom of HeritageProductDetail.css
+
+   ========================================================= */
+
+.heritage-firsttell-node-list {
+
+  display: grid !important;
+
+  gap: 10px !important;
+
+  margin: 18px 34px 0 !important;
+
+  padding: 0 0 18px !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055) !important;
+
+}
+
+.heritage-firsttell-node-list-title {
+
+  margin: 0 0 2px !important;
+  color: rgba(245, 243, 238, 0.78) !important;
+
+  font-size: 0.92rem !important;
+
+  line-height: 1.45 !important;
+
+  font-weight: 500 !important;
+
+}
+
+.heritage-firsttell-node-items {
+
+  display: grid !important;
+
+  gap: 7px !important;
+
+}
+
+.heritage-firsttell-node-item {
+
+  display: grid !important;
+
+  grid-template-columns: 18px max-content minmax(0, 1fr) !important;
+
+  align-items: baseline !important;
+
+  column-gap: 5px !important;
+
+  min-width: 0 !important;
+
+  color: rgba(245, 243, 238, 0.72) !important;
+
+  font-size: 0.92rem !important;
+
+  line-height: 1.42 !important;
+
+}
+
+.heritage-firsttell-node-item svg {
+
+  display: block !important;
+
+  width: 16px !important;
+
+  height: 16px !important;
+
+  transform: translateY(2px) !important;
+
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--axis-color, #d6b277) 55%, transparent)) !important;
+
+}
+
+.heritage-firsttell-node-item strong {
+
+  display: inline-block !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  color: rgba(255, 248, 235, 0.96) !important;
+
+  font-size: 0.92rem !important;
+
+  line-height: 1.42 !important;
+
+  font-weight: 900 !important;
+
+  letter-spacing: -0.015em !important;
+
+  white-space: nowrap !important;
+
+}
+
+.heritage-firsttell-node-item span {
+
+  display: inline-block !important;
+
+  min-width: 0 !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  color: rgba(245, 243, 238, 0.72) !important;
+
+  font-size: 0.92rem !important;
+
+  line-height: 1.42 !important;
+
+  font-weight: 500 !important;
+
+  overflow-wrap: normal !important;
+
+  word-break: normal !important;
+
+}
+
+@media (max-width: 900px) {
+
+  .heritage-firsttell-node-list {
+
+    margin: 16px 20px 0 !important;
+
+    padding-bottom: 18px !important;
+
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .heritage-firsttell-node-list {
+
+    margin: 14px 16px 0 !important;
+
+  }
+
+  .heritage-firsttell-node-item {
+
+    grid-template-columns: 17px max-content minmax(0, 1fr) !important;
+
+    column-gap: 4px !important;
+
+    font-size: 0.84rem !important;
+
+  }
+
+  .heritage-firsttell-node-item strong,
+
+  .heritage-firsttell-node-item span {
+
+    font-size: 0.84rem !important;
 
   }
 

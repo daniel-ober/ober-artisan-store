@@ -951,6 +951,76 @@ const renderThreadNodeLabelList = (nodes = []) => {
   );
 };
 
+const FIRST_TELL_NODE_COPY = {
+
+  attack: 'How quickly the note speaks at the front edge.',
+
+  brightness: 'The upper-edge clarity, snap, and top-end detail.',
+
+  projection: 'How confidently the drum pushes into the room.',
+
+  sustain: 'How long the note blooms after the first hit.',
+
+  warmth: 'The body, woodiness, and low-mid center of the drum.',
+
+  sensitivity: 'How easily the drum responds to lighter touch.',
+
+  control: 'How shaped, focused, and manageable the note feels.',
+
+};
+
+const renderFirstTellNodeList = (nodes = []) => {
+
+  return (
+
+    <div className="heritage-firsttell-node-list">
+
+      <p className="heritage-firsttell-node-list-title">
+
+        These are the strongest sound nodes we first hear:
+
+      </p>
+
+      <div className="heritage-firsttell-node-items">
+
+        {nodes.map((nodeKey) => {
+
+          const axis = AXIS_META.find((item) => item.key === nodeKey);
+
+          const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+
+          return (
+
+            <div
+
+              key={nodeKey}
+
+              className="heritage-firsttell-node-item"
+
+              style={{ '--axis-color': color }}
+
+            >
+
+              <MetricIcon type={axis?.icon || nodeKey} color={color} size={18} />
+
+              <strong>{axis?.label || nodeKey}</strong>
+
+              <span>{FIRST_TELL_NODE_COPY[nodeKey] || 'A core part of the first impression.'}</span>
+
+            </div>
+
+          );
+
+        })}
+
+      </div>
+
+    </div>
+
+  );
+
+};
+
 const renderOptionGuideCopy = (guide) => {
   if (!guide) return null;
 
@@ -1438,6 +1508,68 @@ const HARDWARE_GUIDE_COPY = {
 
     body: 'A richer visual statement with a more elevated custom-shop feel.',
   },
+};
+
+const buildFirstTellSummary = ({
+  visualNodes = [],
+  activeThread,
+  activeReadout,
+}) => {
+  const nodeLabels = visualNodes
+
+    .map((nodeKey) => AXIS_META.find((axis) => axis.key === nodeKey)?.label)
+
+    .filter(Boolean);
+
+  const hasWarmth = visualNodes.includes('warmth');
+
+  const hasSustain = visualNodes.includes('sustain');
+
+  const hasProjection = visualNodes.includes('projection');
+
+  const hasAttack = visualNodes.includes('attack');
+
+  const hasBrightness = visualNodes.includes('brightness');
+
+  const hasSensitivity = visualNodes.includes('sensitivity');
+
+  const hasControl = visualNodes.includes('control');
+
+  if (hasWarmth && hasSustain) {
+    return 'The drum is reading with a fuller center and a longer, controlled note bloom — musical sustain, not loose ring.';
+  }
+
+  if (hasAttack && hasBrightness) {
+    return 'The drum is reading with a quicker front edge and clearer top-end response — immediate, articulate, and easy to notice right away.';
+  }
+
+  if (hasAttack && hasSensitivity) {
+    return 'The drum is reading with a fast first response and a more touch-sensitive feel — quick under the stick without losing musical nuance.';
+  }
+
+  if (hasControl && hasProjection) {
+    return 'The drum is reading with a more focused shape and stronger outward push — controlled, present, and easier to place in the room.';
+  }
+
+  if (hasWarmth && hasProjection) {
+    return 'The drum is reading with a fuller body and stronger room presence — grounded at the center with enough push to carry.';
+  }
+
+  if (hasControl && hasAttack) {
+    return 'The drum is reading with a cleaner front edge and a more organized note shape — focused without feeling overly stiff.';
+  }
+
+  if (nodeLabels.length) {
+    return `The drum is reading first through ${nodeLabels
+
+      .map((label) => label.toLowerCase())
+
+      .join(
+        ', '
+      )} — the strongest traits your ear is likely to notice before reading the full VoiceMap.`;
+  }
+
+  return activeThread?.summary || activeReadout?.whatThreadIsTellingUs || '';
 };
 
 const HeritageProductDetail = () => {
@@ -3051,6 +3183,14 @@ const HeritageProductDetail = () => {
 
       .join(', ');
 
+    const firstTellSummary = buildFirstTellSummary({
+      visualNodes,
+
+      activeThread,
+
+      activeReadout,
+    });
+
     return (
       <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read heritage-voicemap-read-experience">
         <div className="heritage-thread-reference-head">
@@ -3186,59 +3326,76 @@ const HeritageProductDetail = () => {
           <div className="heritage-thread-single-read-content">
             <div className="heritage-thread-single-read-head">
               <div>
-                <span className="heritage-summary-kicker">
-                  Ober VoiceMap read
+                <span className="heritage-summary-kicker heritage-summary-kicker--read-title">
+                  {isFirstTell ? (
+                    <>
+                      First Tell <em>What the ear catches first</em>
+                    </>
+                  ) : (
+                    readCopy.typeLabel
+                  )}
                 </span>
 
                 <h4>{displayTitle}</h4>
-
-                <p className="heritage-thread-single-read-type">
-                  {readCopy.typeLabel} / {activeReadout.intensityLabel} read
-                </p>
               </div>
 
-              <div className="heritage-thread-read-icons">
+              <div className="heritage-thread-read-icons heritage-thread-read-icons--bare">
                 {renderThreadNodeIcons(visualNodes)}
               </div>
             </div>
 
-            <p className="heritage-thread-single-read-lede">{readCopy.intro}</p>
+            {!isFirstTell && (
+              <p className="heritage-thread-single-read-lede">
+                {readCopy.intro}
+              </p>
+            )}
 
-            <p className="heritage-thread-single-read-lede">
-              {activeThread.summary}
+                       <p className="heritage-thread-single-read-lede heritage-thread-single-read-lede--summary">
+
+              {isFirstTell ? firstTellSummary : activeThread.summary}
+
             </p>
 
-            <div className="heritage-thread-single-meta-grid">
-              <span>
-                <strong>Read type</strong>
+            {activeThread.slotKey !== 'simple' && (
+              <div className="heritage-thread-single-meta-grid">
+                <span>
+                  <strong>Read type</strong>
 
-                {readCopy.typeLabel}
-              </span>
+                  {readCopy.typeLabel}
+                </span>
 
-              <span>
-                <strong>Visual</strong>
+                <span>
+                  <strong>Visual</strong>
 
-                {isFirstTell
-                  ? 'First Tell triangle'
-                  : isPlayerRead
-                    ? 'Full VoiceMap relationship shape'
-                    : 'LegacyPrint™ fingerprint'}
-              </span>
+                  {isFirstTell
+                    ? 'First Tell triangle'
+                    : isPlayerRead
+                      ? 'Full VoiceMap relationship shape'
+                      : 'LegacyPrint™ fingerprint'}
+                </span>
 
-              <span>
-                <strong>Voice nodes</strong>
+                <span>
+                  <strong>Voice nodes</strong>
 
-                {visualNodeLabels}
-              </span>
-            </div>
+                  {visualNodeLabels}
+                </span>
+              </div>
+            )}
 
-            {!isPlayerRead && (
+{isFirstTell && renderFirstTellNodeList(visualNodes)}
+
+            {!isFirstTell && !isPlayerRead && (
+
               <div className="heritage-thread-axis-delta-list heritage-thread-axis-delta-list--single">
+
                 {visualNodes.map((nodeKey) => {
+
                   const axis = AXIS_META.find((item) => item.key === nodeKey);
 
                   const rawValue = Number(
+
                     activeVoiceSummary?.profile?.[nodeKey] ?? 5
+
                   );
 
                   const delta = Number((rawValue - 5).toFixed(2));
@@ -3248,57 +3405,96 @@ const HeritageProductDetail = () => {
                   const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
                   return (
+
                     <div
+
                       key={nodeKey}
+
                       className={`heritage-thread-axis-delta-line ${
+
                         delta > 0
+
                           ? 'is-positive'
+
                           : delta < 0
+
                             ? 'is-negative'
+
                             : 'is-neutral'
+
                       }`}
+
                       style={{ '--axis-color': color }}
+
                     >
+
                       <span>{axis?.label || nodeKey}</span>
 
                       <strong>{deltaLabel}</strong>
+
                     </div>
+
                   );
+
                 })}
+
               </div>
+
             )}
 
-            <div className="heritage-thread-listening-note heritage-thread-listening-note--single">
-              <section>
-                <span>
-                  {activeThread.slotKey === 'simple'
-                    ? 'First tell'
-                    : activeThread.slotKey === 'shaped'
+            {activeThread.slotKey === 'simple' ? (
+              <div className="heritage-thread-listening-note heritage-thread-listening-note--single heritage-thread-listening-note--first-tell">
+                <section>
+                  <span>How to read this</span>
+
+                  <p>
+                    This is the first impression read. It points to the three
+                    strongest traits your ear is likely to notice before digging
+                    into the full VoiceMap.
+                  </p>
+                </section>
+
+                <section>
+                  <span>Why this matters</span>
+
+                  <p>
+                    Use this as the first comparison point: what the drum says
+                    immediately, what that first impression is tied to, and how
+                    the rest of the read should be understood.
+                  </p>
+                </section>
+              </div>
+            ) : (
+              <div className="heritage-thread-listening-note heritage-thread-listening-note--single">
+                <section>
+                  <span>
+                    {activeThread.slotKey === 'shaped'
                       ? 'Player read'
                       : 'LegacyPrint™'}
-                </span>
+                  </span>
 
-                <p>{activeReadout.whatThreadIsTellingUs}</p>
-              </section>
+                  <p>{activeReadout.whatThreadIsTellingUs}</p>
+                </section>
 
-              <section>
-                <span>Why it matters</span>
+                <section>
+                  <span>Why it matters</span>
 
-                <p>{activeReadout.whyItMatters}</p>
-              </section>
+                  <p>{activeReadout.whyItMatters}</p>
+                </section>
 
-              <section>
-                <span>How to use it</span>
+                <section>
+                  <span>How to use it</span>
 
-                <p>{activeReadout.howToUseThis}</p>
-              </section>
+                  <p>{activeReadout.howToUseThis}</p>
+                </section>
 
-              <section>
-                <span>Keep in mind</span>
+                <section>
+                  <span>Keep in mind</span>
 
-                <p>{activeReadout.trustNote}</p>
-              </section>
-            </div>
+                  <p>{activeReadout.trustNote}</p>
+                </section>
+              </div>
+            )}
           </div>
         </article>
       </div>
