@@ -1,6 +1,6 @@
 // src/components/VoiceThreadMap.js
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   Zap,
@@ -99,6 +99,34 @@ const SVG_SIZE = 500;
 const SVG_CENTER = { x: 250, y: 250 };
 
 const THREAD_FRAME_RADIUS = 205;
+
+const SHAPE_MORPH_CACHE = new Map();
+
+const getMorphCacheKey = ({
+
+  compact,
+
+  displayMode,
+
+  resolvedReadVariant,
+
+  threadKind,
+
+}) => {
+
+  return [
+
+    compact ? 'compact' : 'large',
+
+    displayMode || 'threads',
+
+    resolvedReadVariant || 'read',
+
+    threadKind || 'kind',
+
+  ].join('|');
+
+};
 
 const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
   const iconProps = {
@@ -253,7 +281,6 @@ const getAxisDelta = (profile = {}, axisKey) => {
 };
 
 const getAxisMovement = (profile = {}, axisKey) => {
-
   const delta = Math.abs(getAxisDelta(profile, axisKey));
 
   /*
@@ -267,7 +294,6 @@ const getAxisMovement = (profile = {}, axisKey) => {
    */
 
   return clamp(Math.pow(delta / 1.05, 0.72), 0, 1);
-
 };
 
 const getNodeVoiceWeight = (profile = {}, nodeKey) => {
@@ -456,8 +482,100 @@ const mixPoints = (a, b, amount = 0.5) => {
   };
 };
 
-const getDistanceBetweenPoints = (a, b) => {
+const hydrateShapeItemColors = (items = []) => {
 
+  return items.map((item) => ({
+
+    ...item,
+
+    color: item.color || AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277',
+
+  }));
+
+};
+
+const interpolateShapeItems = (fromItems = [], toItems = [], progress = 1) => {
+
+  if (!toItems.length) return [];
+
+  return toItems.map((toItem, index) => {
+
+    const fromItem =
+
+      fromItems.find((item) => item.nodeKey === toItem.nodeKey) ||
+
+      fromItems[index] ||
+
+      toItem;
+
+    const fromX = Number(fromItem?.point?.x ?? toItem.point.x);
+
+    const fromY = Number(fromItem?.point?.y ?? toItem.point.y);
+
+    const toX = Number(toItem.point.x);
+
+    const toY = Number(toItem.point.y);
+
+    const fromColor =
+
+      fromItem?.color ||
+
+      AXIS_COLOR_BY_KEY[fromItem?.nodeKey] ||
+
+      AXIS_COLOR_BY_KEY[toItem.nodeKey] ||
+
+      '#d6b277';
+
+    const toColor =
+
+      toItem?.color || AXIS_COLOR_BY_KEY[toItem.nodeKey] || '#d6b277';
+
+    return {
+
+      ...toItem,
+
+      color: mixTwoHexColors(fromColor, toColor, progress),
+
+      point: {
+
+        x: fromX + (toX - fromX) * progress,
+
+        y: fromY + (toY - fromY) * progress,
+
+      },
+
+    };
+
+  });
+
+};
+const getShapeItemsSignature = (items = []) => {
+  return items
+
+    .map((item) => {
+      return `${item.nodeKey}:${round(item.point?.x, 2)},${round(
+        item.point?.y,
+
+        2
+      )}`;
+    })
+
+    .join('|');
+};
+
+const easeOutCubic = (value) => {
+
+  const t = clamp(value, 0, 1);
+
+  return t < 0.5
+
+    ? 4 * t * t * t
+
+    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+};
+
+const getDistanceBetweenPoints = (a, b) => {
   if (!isFinitePoint(a) || !isFinitePoint(b)) return 0;
 
   const dx = Number(a.x) - Number(b.x);
@@ -465,11 +583,9 @@ const getDistanceBetweenPoints = (a, b) => {
   const dy = Number(a.y) - Number(b.y);
 
   return Math.sqrt(dx * dx + dy * dy);
-
 };
 
 const getTriangleArea = (points = []) => {
-
   const cleanPoints = points.filter(isFinitePoint);
 
   if (cleanPoints.length < 3) return 0;
@@ -477,39 +593,29 @@ const getTriangleArea = (points = []) => {
   const [a, b, c] = cleanPoints;
 
   return Math.abs(
-
     (a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2
-
   );
-
 };
 
 const getTriangleSpread = (points = []) => {
-
   const cleanPoints = points.filter(isFinitePoint);
 
   if (cleanPoints.length < 3) return 0;
 
   const distances = [
-
     getDistanceBetweenPoints(cleanPoints[0], cleanPoints[1]),
 
     getDistanceBetweenPoints(cleanPoints[1], cleanPoints[2]),
 
     getDistanceBetweenPoints(cleanPoints[2], cleanPoints[0]),
-
   ];
 
   return Math.min(...distances);
-
 };
 
 const pushPointAwayFromLine = (point, lineA, lineB, amount = 18) => {
-
   if (!isFinitePoint(point) || !isFinitePoint(lineA) || !isFinitePoint(lineB)) {
-
     return point;
-
   }
 
   const dx = lineB.x - lineA.x;
@@ -519,47 +625,35 @@ const pushPointAwayFromLine = (point, lineA, lineB, amount = 18) => {
   const length = Math.sqrt(dx * dx + dy * dy) || 1;
 
   const normalA = {
-
     x: -dy / length,
 
     y: dx / length,
-
   };
 
   const normalB = {
-
     x: dy / length,
 
     y: -dx / length,
-
   };
 
   const candidateA = keepPointInsideThreadFrame(
-
     {
-
       x: point.x + normalA.x * amount,
 
       y: point.y + normalA.y * amount,
-
     },
 
     0.86
-
   );
 
   const candidateB = keepPointInsideThreadFrame(
-
     {
-
       x: point.x + normalB.x * amount,
 
       y: point.y + normalB.y * amount,
-
     },
 
     0.86
-
   );
 
   const areaA = getTriangleArea([lineA, lineB, candidateA]);
@@ -567,11 +661,9 @@ const pushPointAwayFromLine = (point, lineA, lineB, amount = 18) => {
   const areaB = getTriangleArea([lineA, lineB, candidateB]);
 
   return areaA >= areaB ? candidateA : candidateB;
-
 };
 
 const widenFirstTellTriangle = (items = []) => {
-
   if (items.length < 3) return items;
 
   let widened = items.map((item) => ({ ...item, point: { ...item.point } }));
@@ -583,15 +675,12 @@ const widenFirstTellTriangle = (items = []) => {
   const spread = getTriangleSpread(points);
 
   if (area >= 5200 && spread >= 54) {
-
     return widened;
-
   }
 
   const centroid = getCentroid(points);
 
   widened = widened.map((item, index) => {
-
     const point = item.point;
 
     const dx = point.x - centroid.x;
@@ -603,37 +692,30 @@ const widenFirstTellTriangle = (items = []) => {
     const rankBoost = index === 0 ? 1.08 : index === 1 ? 1.14 : 1.22;
 
     return {
-
       ...item,
 
       point: keepPointInsideThreadFrame(
-
         {
-
           x: centroid.x + dx * rankBoost,
 
           y: centroid.y + dy * rankBoost,
-
         },
 
         0.86
-
       ),
-
     };
-
   });
 
   const widenedPoints = widened.map((item) => item.point);
 
-  if (getTriangleArea(widenedPoints) < 5200 || getTriangleSpread(widenedPoints) < 54) {
-
+  if (
+    getTriangleArea(widenedPoints) < 5200 ||
+    getTriangleSpread(widenedPoints) < 54
+  ) {
     widened[2] = {
-
       ...widened[2],
 
       point: pushPointAwayFromLine(
-
         widened[2].point,
 
         widened[0].point,
@@ -641,15 +723,11 @@ const widenFirstTellTriangle = (items = []) => {
         widened[1].point,
 
         24
-
       ),
-
     };
-
   }
 
   return widened;
-
 };
 
 const pullPointFromCenter = (point, amount = 1) => {
@@ -855,7 +933,6 @@ const getDepthLeanFromProfile = (profile = {}) => {
 };
 
 const getRankedThreadNodes = ({
-
   profile = {},
 
   activeThread = {},
@@ -863,51 +940,37 @@ const getRankedThreadNodes = ({
   resolvedReadVariant = '',
 
   firstTellKeys = [],
-
 }) => {
-
   const threadNodes = Array.isArray(activeThread?.nodes)
-
     ? activeThread.nodes.filter(Boolean)
-
     : [];
 
- if (resolvedReadVariant === 'firstTell') {
+  if (resolvedReadVariant === 'firstTell') {
+    const firstTellNodes =
+      threadNodes && threadNodes.length
+        ? threadNodes
+        : firstTellKeys && firstTellKeys.length
+          ? firstTellKeys
+          : ['attack', 'warmth', 'control'];
 
-  const firstTellNodes =
+    return firstTellNodes.slice(0, 3).map((nodeKey, index) => ({
+      nodeKey,
 
-    threadNodes && threadNodes.length
+      rank: index,
 
-      ? threadNodes
+      color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
 
-      : firstTellKeys && firstTellKeys.length
+      movement: getAxisMovement(profile, nodeKey),
 
-        ? firstTellKeys
-
-        : ['attack', 'warmth', 'control'];
-
-  return firstTellNodes.slice(0, 3).map((nodeKey, index) => ({
-
-    nodeKey,
-
-    rank: index,
-
-    color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
-
-    movement: getAxisMovement(profile, nodeKey),
-
-    weight: index === 0 ? 1 : index === 1 ? 0.72 : 0.5,
-
-  }));
-
-}
+      weight: index === 0 ? 1 : index === 1 ? 0.72 : 0.5,
+    }));
+  }
 
   const candidates = threadNodes.length ? threadNodes : THREAD_NODE_ORDER;
 
   return candidates
 
     .map((nodeKey, index) => ({
-
       nodeKey,
 
       index,
@@ -917,29 +980,23 @@ const getRankedThreadNodes = ({
       movement: getAxisMovement(profile, nodeKey),
 
       weight: getNodeVoiceWeight(profile, nodeKey),
-
     }))
 
     .sort((a, b) => {
-
       if (b.weight !== a.weight) return b.weight - a.weight;
 
       if (b.movement !== a.movement) return b.movement - a.movement;
 
       return a.index - b.index;
-
     })
 
     .slice(0, resolvedReadVariant === 'legacyprint' ? 4 : 7)
 
     .map((item, index) => ({
-
       ...item,
 
       rank: index,
-
     }));
-
 };
 
 const getRankMap = (rankedNodes = []) => {
@@ -974,7 +1031,6 @@ const getSegmentStrength = ({ sourceNode, targetNode, rankMap = {} }) => {
 };
 
 const getThreadShapePoints = ({
-
   activeThread,
 
   profile,
@@ -988,17 +1044,12 @@ const getThreadShapePoints = ({
   threadKind,
 
   firstTellKeys,
-
 }) => {
-
   const threadNodes = Array.isArray(activeThread?.nodes)
-
     ? activeThread.nodes.filter(Boolean)
-
     : [];
 
   const seed = getVisualSeed({
-
     thread: activeThread,
 
     profile,
@@ -1006,7 +1057,6 @@ const getThreadShapePoints = ({
     input,
 
     currentSpec,
-
   });
 
   const movementAverage = getProfileMovementAverage(profile);
@@ -1014,21 +1064,14 @@ const getThreadShapePoints = ({
   const depthLean = getDepthLeanFromProfile(profile);
 
   if (resolvedReadVariant === 'firstTell') {
-
     const nodes =
-
       threadNodes.length >= 3
-
         ? threadNodes.slice(0, 3)
-
         : firstTellKeys && firstTellKeys.length
-
           ? firstTellKeys.slice(0, 3)
-
           : ['attack', 'warmth', 'control'];
 
     const triangleItems = nodes.slice(0, 3).map((nodeKey, index) => {
-
       const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
       const rawValue = getAxisValue(profile, nodeKey);
@@ -1051,58 +1094,36 @@ const getThreadShapePoints = ({
 
       const signed = clamp(rawDelta / 0.95, -1, 1);
 
-      const rankBasePull =
-
-        index === 0
-
-          ? 0.78
-
-          : index === 1
-
-            ? 0.68
-
-            : 0.6;
+      const rankBasePull = index === 0 ? 0.78 : index === 1 ? 0.68 : 0.6;
 
       const movementPull =
-
         index === 0
-
           ? movement * 0.28
-
           : index === 1
-
             ? movement * 0.24
-
             : movement * 0.2;
 
       const signedPull = signed * 0.12;
 
       const rankPull = clamp(
-
         rankBasePull + movementPull + signedPull,
 
         0.36,
 
         1.04
-
       );
 
       const xJitter =
-
         getSeededSignedValue(seed, `first-tell-x-${nodeKey}-${index}`) * 9;
 
       const yJitter =
-
         getSeededSignedValue(seed, `first-tell-y-${nodeKey}-${index}`) * 9;
 
       return {
-
         nodeKey,
 
         point: keepPointInsideThreadFrame(
-
           offsetPoint(
-
             pullPointFromCenter(basePoint, rankPull),
 
             xJitter,
@@ -1110,25 +1131,18 @@ const getThreadShapePoints = ({
             yJitter,
 
             0.98
-
           ),
 
           0.98
-
         ),
-
       };
-
     });
 
     return widenFirstTellTriangle(triangleItems);
-
   }
 
   if (resolvedReadVariant === 'player') {
-
     return THREAD_NODE_ORDER.map((nodeKey, index) => {
-
       const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
       const movement = getAxisMovement(profile, nodeKey);
@@ -1136,51 +1150,38 @@ const getThreadShapePoints = ({
       const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
 
       const radius = clamp(
-
         0.56 + movement * 0.18 + signed * 0.055,
 
         0.43,
 
         0.88
-
       );
 
       const pulled = pullPointFromCenter(basePoint, radius);
 
       const xJitter =
-
         getSeededSignedValue(seed, `player-x-${nodeKey}-${index}`) * 4;
 
       const yJitter =
-
         getSeededSignedValue(seed, `player-y-${nodeKey}-${index}`) * 4;
 
       return {
-
         nodeKey,
 
         point: keepPointInsideThreadFrame(
-
           offsetPoint(pulled, xJitter, yJitter, 0.9),
 
           0.9
-
         ),
-
       };
-
     });
-
   }
 
   if (threadKind === 'simple') {
-
     const nodes =
-
       threadNodes.length >= 2 ? threadNodes.slice(0, 2) : ['attack', 'warmth'];
 
     return nodes.map((nodeKey, index) => {
-
       const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
       const movement = getAxisMovement(profile, nodeKey);
@@ -1188,13 +1189,10 @@ const getThreadShapePoints = ({
       const radius = clamp(0.6 + movement * 0.1, 0.58, 0.76);
 
       return {
-
         nodeKey,
 
         point: keepPointInsideThreadFrame(
-
           offsetPoint(
-
             pullPointFromCenter(basePoint, radius),
 
             getSeededSignedValue(seed, `simple-x-${index}`) * 5,
@@ -1202,33 +1200,22 @@ const getThreadShapePoints = ({
             getSeededSignedValue(seed, `simple-y-${index}`) * 5,
 
             0.78
-
           ),
 
           0.78
-
         ),
-
       };
-
     });
-
   }
 
   if (threadKind === 'shaped') {
-
     const nodes =
-
       threadNodes.length >= 3
-
         ? threadNodes.slice(0, 3)
-
         : [...threadNodes, 'control', 'sustain', 'projection'].slice(0, 3);
 
     return sortPointsClockwise(
-
       nodes.map((nodeKey, index) => {
-
         const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
         const movement = getAxisMovement(profile, nodeKey);
@@ -1236,13 +1223,11 @@ const getThreadShapePoints = ({
         const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
 
         const radius = clamp(
-
           0.6 + movement * 0.12 + movementAverage * 0.045 + signed * 0.03,
 
           0.54,
 
           0.8
-
         );
 
         const pulled = pullPointFromCenter(basePoint, radius);
@@ -1252,53 +1237,36 @@ const getThreadShapePoints = ({
         const yJitter = getSeededSignedValue(seed, `shaped-y-${index}`) * 7;
 
         return keepPointInsideThreadFrame(
-
           offsetPoint(pulled, xJitter + depthLean * 5, yJitter, 0.82),
 
           0.82
-
         );
-
       })
-
     ).map((point) => {
-
       const match = nodes.find((nodeKey) => {
-
         const basePoint = getPointForNode(nodeKey);
 
         return basePoint
-
           ? Math.abs(basePoint.x - point.x) < 95 &&
-
               Math.abs(basePoint.y - point.y) < 95
-
           : false;
-
       });
 
       return {
-
         nodeKey: match || nodes[0] || 'attack',
 
         point,
-
       };
-
     });
-
   }
 
   const complexNodes = [
-
     ...threadNodes,
 
     ...THREAD_NODE_ORDER.map((nodeKey) => ({
-
       nodeKey,
 
       movement: getAxisMovement(profile, nodeKey),
-
     }))
 
       .sort((a, b) => b.movement - a.movement)
@@ -1306,23 +1274,16 @@ const getThreadShapePoints = ({
       .slice(0, 3)
 
       .map((item) => item.nodeKey),
-
   ].filter((nodeKey, index, arr) => nodeKey && arr.indexOf(nodeKey) === index);
 
   const baseNodes =
-
     complexNodes.length >= 4
-
       ? complexNodes
-
       : [...complexNodes, 'attack', 'projection', 'sustain', 'warmth'].filter(
-
           (nodeKey, index, arr) => arr.indexOf(nodeKey) === index
-
         );
 
   const corePoints = baseNodes.slice(0, 7).map((nodeKey, index) => {
-
     const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
     const movement = getAxisMovement(profile, nodeKey);
@@ -1330,13 +1291,11 @@ const getThreadShapePoints = ({
     const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
 
     const radius = clamp(
-
       0.45 + movementAverage * 0.08 + movement * 0.13 + signed * 0.035,
 
       0.36,
 
       0.7
-
     );
 
     const pulled = pullPointFromCenter(basePoint, radius);
@@ -1346,13 +1305,10 @@ const getThreadShapePoints = ({
     const yJitter = getSeededSignedValue(seed, `complex-y-${index}`) * 12;
 
     return {
-
       nodeKey,
 
       point: keepPointInsideThreadFrame(
-
         offsetPoint(
-
           pulled,
 
           xJitter + depthLean * 7,
@@ -1360,68 +1316,80 @@ const getThreadShapePoints = ({
           yJitter + Math.abs(depthLean) * 4,
 
           0.74
-
         ),
 
         0.74
-
       ),
-
     };
-
   });
 
   const centered = recenterPoints(
-
     sortPointsClockwise(corePoints.map((item) => item.point)),
 
     0.42
-
   );
 
   return centered.map((point, index) => ({
-
     nodeKey: corePoints[index % corePoints.length]?.nodeKey || 'attack',
 
     point,
-
   }));
-
 };
 
 const buildSegments = ({ shapeItems, closed = true }) => {
+
   const cleanItems = shapeItems.filter(
+
     (item) => item?.nodeKey && isFinitePoint(item?.point)
+
   );
 
   if (cleanItems.length < 2) return [];
 
   const segmentCount =
+
     closed && cleanItems.length > 2 ? cleanItems.length : cleanItems.length - 1;
 
   return Array.from({ length: segmentCount }).map((_, index) => {
+
     const item = cleanItems[index];
 
     const next = cleanItems[(index + 1) % cleanItems.length];
 
     return {
+
       key: `${item.nodeKey}-${next.nodeKey}-${index}`,
 
       sourceNode: item.nodeKey,
 
       targetNode: next.nodeKey,
 
+      sourceColor:
+
+        item.color || AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277',
+
+      targetColor:
+
+        next.color || AXIS_COLOR_BY_KEY[next.nodeKey] || '#d6b277',
+
       sourcePoint: item.point,
 
       targetPoint: next.point,
 
       path: getCurvedOpenSegmentPath(
+
         item.point,
+
         next.point,
+
         closed ? 0.055 : 0.035
+
       ),
+
     };
+
   });
+
 };
 
 const getGradientVector = (shapeItems = []) => {
@@ -1597,38 +1565,38 @@ const VoiceThreadMap = ({
 
   const activeNodeSet = useMemo(() => {
     return new Set(
-
-  activeThread?.nodes && activeThread.nodes.length
-
-    ? activeThread.nodes
-
-    : resolvedReadVariant === 'firstTell' && firstTellKeys.length
-
-      ? firstTellKeys
-
-      : []
-
-);
+      activeThread?.nodes && activeThread.nodes.length
+        ? activeThread.nodes
+        : resolvedReadVariant === 'firstTell' && firstTellKeys.length
+          ? firstTellKeys
+          : []
+    );
   }, [nodesSignature, activeThread?.nodes, resolvedReadVariant, firstTellKeys]);
 
-  const shapeItems = useMemo(() => {
+  const targetShapeItems = useMemo(() => {
     if (!activeThread) return [];
 
-    return getThreadShapePoints({
-      activeThread,
+return hydrateShapeItemColors(
 
-      profile,
+  getThreadShapePoints({
 
-      input,
+    activeThread,
 
-      currentSpec,
+    profile,
 
-      resolvedReadVariant,
+    input,
 
-      threadKind,
+    currentSpec,
 
-      firstTellKeys,
-    });
+    resolvedReadVariant,
+
+    threadKind,
+
+    firstTellKeys,
+
+  })
+
+);
   }, [
     activeThread,
 
@@ -1651,6 +1619,179 @@ const VoiceThreadMap = ({
     firstTellKeys,
   ]);
 
+  const targetShapeSignature = useMemo(() => {
+    return getShapeItemsSignature(targetShapeItems);
+  }, [targetShapeItems]);
+
+const morphCacheKey = useMemo(() => {
+
+  return getMorphCacheKey({
+
+    compact,
+
+    displayMode,
+
+    resolvedReadVariant,
+
+    threadKind,
+
+  });
+
+}, [compact, displayMode, resolvedReadVariant, threadKind]);
+
+const getInitialShapeItems = () => {
+
+  const cachedItems = SHAPE_MORPH_CACHE.get(morphCacheKey);
+
+  if (cachedItems && cachedItems.length) {
+
+    return cachedItems;
+
+  }
+
+  return targetShapeItems;
+
+};
+
+const [animatedShapeItems, setAnimatedShapeItems] = useState(getInitialShapeItems);
+
+const animatedShapeItemsRef = useRef(animatedShapeItems);
+
+const animationFrameRef = useRef(null);
+
+useEffect(() => {
+
+  animatedShapeItemsRef.current = animatedShapeItems;
+
+  if (animatedShapeItems && animatedShapeItems.length) {
+
+    SHAPE_MORPH_CACHE.set(morphCacheKey, animatedShapeItems);
+
+  }
+
+}, [animatedShapeItems, morphCacheKey]);
+
+useEffect(() => {
+
+  const toItems = targetShapeItems;
+
+  if (!toItems.length) {
+
+    if (animationFrameRef.current) {
+
+      cancelAnimationFrame(animationFrameRef.current);
+
+    }
+
+    setAnimatedShapeItems([]);
+
+    animatedShapeItemsRef.current = [];
+
+    SHAPE_MORPH_CACHE.delete(morphCacheKey);
+
+    return undefined;
+
+  }
+
+  if (animationFrameRef.current) {
+
+    cancelAnimationFrame(animationFrameRef.current);
+
+    animationFrameRef.current = null;
+
+  }
+
+  const liveItems =
+
+    animatedShapeItemsRef.current && animatedShapeItemsRef.current.length
+
+      ? animatedShapeItemsRef.current
+
+      : null;
+
+  const cachedItems =
+
+    SHAPE_MORPH_CACHE.get(morphCacheKey) &&
+
+    SHAPE_MORPH_CACHE.get(morphCacheKey).length
+
+      ? SHAPE_MORPH_CACHE.get(morphCacheKey)
+
+      : null;
+
+  const fromItems = liveItems || cachedItems || toItems;
+
+  const fromSignature = getShapeItemsSignature(fromItems);
+
+  const toSignature = getShapeItemsSignature(toItems);
+
+  if (fromSignature === toSignature) {
+
+    animatedShapeItemsRef.current = toItems;
+
+    SHAPE_MORPH_CACHE.set(morphCacheKey, toItems);
+
+    setAnimatedShapeItems(toItems);
+
+    return undefined;
+
+  }
+
+  const duration = 520;
+
+  const startTime = performance.now();
+
+  const animate = (now) => {
+
+    const elapsed = now - startTime;
+
+    const rawProgress = Math.min(elapsed / duration, 1);
+
+    const easedProgress = easeOutCubic(rawProgress);
+
+    const nextItems = interpolateShapeItems(fromItems, toItems, easedProgress);
+
+    animatedShapeItemsRef.current = nextItems;
+
+    SHAPE_MORPH_CACHE.set(morphCacheKey, nextItems);
+
+    setAnimatedShapeItems(nextItems);
+
+    if (rawProgress < 1) {
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+
+      return;
+
+    }
+
+    animatedShapeItemsRef.current = toItems;
+
+    SHAPE_MORPH_CACHE.set(morphCacheKey, toItems);
+
+    setAnimatedShapeItems(toItems);
+
+    animationFrameRef.current = null;
+
+  };
+
+  animationFrameRef.current = requestAnimationFrame(animate);
+
+  return () => {
+
+    if (animationFrameRef.current) {
+
+      cancelAnimationFrame(animationFrameRef.current);
+
+      animationFrameRef.current = null;
+
+    }
+
+  };
+
+}, [targetShapeSignature, morphCacheKey]);
+
+const shapeItems = animatedShapeItems;
   const shouldCloseShape = !(
     threadKind === 'simple' &&
     !isVoiceMapMode &&
@@ -1680,23 +1821,23 @@ const VoiceThreadMap = ({
     });
   }, [shapeItems, shouldCloseShape]);
 
-  const mapId = `heritage-voice-thread-${
-    compact ? 'compact' : 'large'
-  }-${sanitizeMapId(activeThread?.id)}-${sanitizeMapId(
-    [
-      activeThread?.slotKey,
+const mapId = `heritage-voice-thread-${
 
-      threadKind,
+  compact ? 'compact' : 'large'
 
-      resolvedReadVariant,
+}-${sanitizeMapId(activeThread?.id)}-${sanitizeMapId(
 
-      nodesSignature,
+  [
 
-      profileSignature,
+    activeThread?.slotKey,
 
-      inputSignature,
-    ].join('|')
-  )}`;
+    threadKind,
+
+    resolvedReadVariant,
+
+  ].join('|')
+
+)}`;
 
   const primaryNode = rankedNodes[0] || {
     nodeKey: 'attack',
@@ -1941,11 +2082,13 @@ const VoiceThreadMap = ({
           })}
 
           {relationshipSegments.map((segment) => {
-            const sourceColor =
-              AXIS_COLOR_BY_KEY[segment.sourceNode] || '#d6b277';
+           const sourceColor =
 
-            const targetColor =
-              AXIS_COLOR_BY_KEY[segment.targetNode] || '#d6b277';
+  segment.sourceColor || AXIS_COLOR_BY_KEY[segment.sourceNode] || '#d6b277';
+
+const targetColor =
+
+  segment.targetColor || AXIS_COLOR_BY_KEY[segment.targetNode] || '#d6b277';
 
             const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
 
@@ -2146,38 +2289,63 @@ const VoiceThreadMap = ({
         </g>
 
         {shapePath && (
+
           <g
+
             className={`heritage-voice-thread-active-shape heritage-voice-thread-active-shape--${threadKind} heritage-voice-thread-active-shape--read-${resolvedReadVariant}`}
+
+            data-transition-signature={targetShapeSignature}
+
           >
+
             {shouldRenderComplexFill && (
+
               <>
+
                 <path
+
                   d={shapePath}
+
                   className="heritage-voice-thread-complex-fill"
+
                   fill={`url(#${mapId}-complexFillGradient)`}
+
                   stroke="none"
+
                 />
 
                 <path
+
                   d={shapePath}
+
                   className="heritage-voice-thread-complex-sheen"
+
                   fill={`url(#${mapId}-complexSheenGradient)`}
+
                   stroke="none"
+
                 />
+
               </>
+
             )}
 
             {relationshipSegments.length > 0 ? (
+
               <g className="heritage-voice-thread-relationship-segments">
+
                 {relationshipSegments.map((segment) => {
+
                   const segmentGradientId = `${mapId}-active-segment-${segment.key}`;
 
                   const segmentStrength = getSegmentStrength({
+
                     sourceNode: segment.sourceNode,
 
                     targetNode: segment.targetNode,
 
                     rankMap,
+
                   });
 
                   const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
@@ -2189,160 +2357,275 @@ const VoiceThreadMap = ({
                   const isPrimarySegment = bestRank === 0;
 
                   const segmentHaloWidth =
+
                     baseHaloStrokeWidth * (0.46 + segmentStrength * 0.74);
 
                   const segmentGlowWidth =
+
                     baseGlowStrokeWidth * (0.54 + segmentStrength * 0.78);
 
                   const segmentCoreWidth =
+
                     baseCoreStrokeWidth * (0.72 + segmentStrength * 0.58);
 
                   const segmentHaloOpacity = clamp(
+
                     0.055 + segmentStrength * 0.19,
 
                     0.055,
 
                     0.27
+
                   );
 
                   const segmentGlowOpacity = clamp(
+
                     0.16 + segmentStrength * 0.52,
 
                     0.16,
 
                     0.72
+
                   );
 
                   const segmentCoreOpacity = clamp(
+
                     0.58 + segmentStrength * 0.4,
 
                     0.58,
 
                     0.99
+
                   );
 
                   return (
+
                     <g
+
                       key={segment.key}
+
                       className={`heritage-voice-thread-segment heritage-voice-thread-segment--rank-${bestRank}`}
+
                     >
+
                       <path
+
                         d={segment.path}
+
                         className="heritage-voice-thread-shape-halo"
+
                         fill="none"
+
                         stroke={`url(#${segmentGradientId})`}
+
                         strokeWidth={segmentHaloWidth}
+
                         opacity={segmentHaloOpacity}
+
                         filter={`url(#${mapId}-softGlow)`}
+
                         strokeLinecap="round"
+
                         strokeLinejoin="round"
+
                       />
 
                       <path
+
                         d={segment.path}
+
                         className="heritage-voice-thread-shape-glow"
+
                         fill="none"
+
                         stroke={`url(#${segmentGradientId})`}
+
                         strokeWidth={segmentGlowWidth}
+
                         opacity={segmentGlowOpacity}
+
                         filter={
+
                           isPrimarySegment
+
                             ? `url(#${mapId}-primaryGlow)`
+
                             : `url(#${mapId}-neonGlow)`
+
                         }
+
                         strokeLinecap="round"
+
                         strokeLinejoin="round"
+
                       />
 
                       <path
+
                         d={segment.path}
+
                         className="heritage-voice-thread-shape-core"
+
                         fill="none"
+
                         stroke={`url(#${segmentGradientId})`}
+
                         strokeWidth={segmentCoreWidth}
+
                         opacity={segmentCoreOpacity}
+
                         strokeLinecap="round"
+
                         strokeLinejoin="round"
+
                       />
 
                       <path
+
                         d={segment.path}
+
                         className="heritage-voice-thread-shape-hotline"
+
                         fill="none"
+
                         stroke="rgba(255, 246, 218, 0.54)"
+
                         strokeWidth={
+
                           isPrimarySegment
+
                             ? compact
+
                               ? 1.15
+
                               : 1.5
+
                             : compact
+
                               ? 0.7
+
                               : 0.95
+
                         }
+
                         opacity={clamp(
+
                           0.035 + segmentStrength * 0.24,
 
                           0.035,
 
                           0.28
+
                         )}
+
                         strokeLinecap="round"
+
                         strokeLinejoin="round"
+
                       />
+
                     </g>
+
                   );
+
                 })}
+
               </g>
+
             ) : (
+
               <>
+
                 <path
+
                   d={shapePath}
+
                   className="heritage-voice-thread-shape-halo"
+
                   fill="none"
+
                   stroke={`url(#${mapId}-activeShapeGradient)`}
+
                   strokeWidth={baseHaloStrokeWidth}
+
                   opacity={compact ? 0.15 : 0.21}
+
                   filter={`url(#${mapId}-softGlow)`}
+
                   strokeLinecap="round"
+
                   strokeLinejoin="round"
+
                 />
 
                 <path
+
                   d={shapePath}
+
                   className="heritage-voice-thread-shape-glow"
+
                   fill="none"
+
                   stroke={`url(#${mapId}-activeShapeGradient)`}
+
                   strokeWidth={baseGlowStrokeWidth}
+
                   opacity={compact ? 0.4 : 0.58}
+
                   filter={`url(#${mapId}-primaryGlow)`}
+
                   strokeLinecap="round"
+
                   strokeLinejoin="round"
+
                 />
 
                 <path
+
                   d={shapePath}
+
                   className="heritage-voice-thread-shape-core"
+
                   fill="none"
+
                   stroke={`url(#${mapId}-activeShapeGradient)`}
+
                   strokeWidth={baseCoreStrokeWidth}
+
                   opacity="0.96"
+
                   strokeLinecap="round"
+
                   strokeLinejoin="round"
+
                 />
 
                 <path
+
                   d={shapePath}
+
                   className="heritage-voice-thread-shape-hotline"
+
                   fill="none"
+
                   stroke={`url(#${mapId}-complexSheenGradient)`}
+
                   strokeWidth={compact ? 0.95 : 1.25}
+
                   opacity="0.34"
+
                   strokeLinecap="round"
+
                   strokeLinejoin="round"
+
                 />
+
               </>
+
             )}
+
           </g>
+
         )}
 
         <g className="heritage-voice-thread-node-layer">
@@ -2382,16 +2665,6 @@ const VoiceThreadMap = ({
                   fill={color}
                   filter={rank <= 2 ? `url(#${mapId}-nodeGlow)` : undefined}
                 />
-
-                {rank <= 2 && (
-                  <circle
-                    cx={point.x * 5}
-                    cy={point.y * 5}
-                    r={rank === 0 ? 17 : rank === 1 ? 12 : 8}
-                    className="heritage-voice-thread-anchor-pulse"
-                    fill={color}
-                  />
-                )}
 
                 {!compact && (
                   <foreignObject

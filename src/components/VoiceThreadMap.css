@@ -72,9 +72,7 @@
 
 .heritage-voice-thread-complex-sheen,
 
-.heritage-voice-thread-anchor-dot,
-
-.heritage-voice-thread-anchor-pulse {
+.heritage-voice-thread-anchor-dot {
 
   transition:
 
@@ -82,9 +80,7 @@
 
     stroke-width 360ms ease,
 
-    filter 360ms ease,
-
-    transform 360ms ease;
+    filter 360ms ease;
 
 }
 
@@ -180,13 +176,13 @@
 
 }
 
-.heritage-voice-thread-shape-halo {
+.heritage-voice-thread-shape-halo,
 
-  mix-blend-mode: screen;
+.heritage-voice-thread-shape-glow,
 
-}
+.heritage-voice-thread-shape-core,
 
-.heritage-voice-thread-shape-glow {
+.heritage-voice-thread-shape-hotline {
 
   mix-blend-mode: screen;
 
@@ -194,19 +190,11 @@
 
 .heritage-voice-thread-shape-core {
 
-  mix-blend-mode: screen;
-
   filter:
 
     drop-shadow(0 0 4px color-mix(in srgb, var(--dominant-thread-color, #d6b277) 22%, transparent))
 
     drop-shadow(0 0 12px color-mix(in srgb, var(--dominant-thread-color, #d6b277) 11%, transparent));
-
-}
-
-.heritage-voice-thread-shape-hotline {
-
-  mix-blend-mode: screen;
 
 }
 
@@ -318,17 +306,9 @@
 
 }
 
-.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-halo {
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-halo,
 
-  mix-blend-mode: screen;
-
-}
-
-.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-glow {
-
-  mix-blend-mode: screen;
-
-}
+.heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-glow,
 
 .heritage-voice-thread-map--read-firstTell .heritage-voice-thread-shape-core {
 
@@ -504,27 +484,9 @@
 
 }
 
-.heritage-voice-thread-anchor-pulse {
-
-  opacity: 0;
-
-  mix-blend-mode: screen;
-
-  pointer-events: none;
-
-}
-
 .heritage-voice-thread-node--rank-0 .heritage-voice-thread-anchor-dot {
 
   opacity: 0.92;
-
-}
-
-.heritage-voice-thread-node--rank-0 .heritage-voice-thread-anchor-pulse {
-
-  opacity: 0.2;
-
-  filter: blur(1px);
 
 }
 
@@ -534,25 +496,9 @@
 
 }
 
-.heritage-voice-thread-node--rank-1 .heritage-voice-thread-anchor-pulse {
-
-  opacity: 0.12;
-
-  filter: blur(1.2px);
-
-}
-
 .heritage-voice-thread-node--rank-2 .heritage-voice-thread-anchor-dot {
 
   opacity: 0.5;
-
-}
-
-.heritage-voice-thread-node--rank-2 .heritage-voice-thread-anchor-pulse {
-
-  opacity: 0.075;
-
-  filter: blur(1.4px);
 
 }
 
@@ -1089,8 +1035,6 @@
   .heritage-voice-thread-complex-sheen,
 
   .heritage-voice-thread-anchor-dot,
-
-  .heritage-voice-thread-anchor-pulse,
 
   .heritage-thread-card .heritage-voice-thread-map {
 
