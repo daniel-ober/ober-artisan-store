@@ -102,8 +102,19 @@ const THREAD_FRAME_RADIUS = 205;
 
 const SHAPE_MORPH_CACHE = new Map();
 
-const getMorphCacheKey = ({
+const shouldReduceMotion = () => {
+  if (typeof window === 'undefined') return false;
 
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+};
+
+const isDocumentHidden = () => {
+  if (typeof document === 'undefined') return false;
+
+  return document.hidden;
+};
+
+const getMorphCacheKey = ({
   compact,
 
   displayMode,
@@ -111,11 +122,8 @@ const getMorphCacheKey = ({
   resolvedReadVariant,
 
   threadKind,
-
 }) => {
-
   return [
-
     compact ? 'compact' : 'large',
 
     displayMode || 'threads',
@@ -123,9 +131,7 @@ const getMorphCacheKey = ({
     resolvedReadVariant || 'read',
 
     threadKind || 'kind',
-
   ].join('|');
-
 };
 
 const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
@@ -483,29 +489,20 @@ const mixPoints = (a, b, amount = 0.5) => {
 };
 
 const hydrateShapeItemColors = (items = []) => {
-
   return items.map((item) => ({
-
     ...item,
 
     color: item.color || AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277',
-
   }));
-
 };
 
 const interpolateShapeItems = (fromItems = [], toItems = [], progress = 1) => {
-
   if (!toItems.length) return [];
 
   return toItems.map((toItem, index) => {
-
     const fromItem =
-
       fromItems.find((item) => item.nodeKey === toItem.nodeKey) ||
-
       fromItems[index] ||
-
       toItem;
 
     const fromX = Number(fromItem?.point?.x ?? toItem.point.x);
@@ -517,38 +514,28 @@ const interpolateShapeItems = (fromItems = [], toItems = [], progress = 1) => {
     const toY = Number(toItem.point.y);
 
     const fromColor =
-
       fromItem?.color ||
-
       AXIS_COLOR_BY_KEY[fromItem?.nodeKey] ||
-
       AXIS_COLOR_BY_KEY[toItem.nodeKey] ||
-
       '#d6b277';
 
     const toColor =
-
       toItem?.color || AXIS_COLOR_BY_KEY[toItem.nodeKey] || '#d6b277';
 
     return {
-
       ...toItem,
 
       color: mixTwoHexColors(fromColor, toColor, progress),
 
       point: {
-
         x: fromX + (toX - fromX) * progress,
 
         y: fromY + (toY - fromY) * progress,
-
       },
-
     };
-
   });
-
 };
+
 const getShapeItemsSignature = (items = []) => {
   return items
 
@@ -564,15 +551,9 @@ const getShapeItemsSignature = (items = []) => {
 };
 
 const easeOutCubic = (value) => {
-
   const t = clamp(value, 0, 1);
 
-  return t < 0.5
-
-    ? 4 * t * t * t
-
-    : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 };
 
 const getDistanceBetweenPoints = (a, b) => {
@@ -1337,59 +1318,44 @@ const getThreadShapePoints = ({
 };
 
 const buildSegments = ({ shapeItems, closed = true }) => {
-
   const cleanItems = shapeItems.filter(
-
     (item) => item?.nodeKey && isFinitePoint(item?.point)
-
   );
 
   if (cleanItems.length < 2) return [];
 
   const segmentCount =
-
     closed && cleanItems.length > 2 ? cleanItems.length : cleanItems.length - 1;
 
   return Array.from({ length: segmentCount }).map((_, index) => {
-
     const item = cleanItems[index];
 
     const next = cleanItems[(index + 1) % cleanItems.length];
 
     return {
-
       key: `${item.nodeKey}-${next.nodeKey}-${index}`,
 
       sourceNode: item.nodeKey,
 
       targetNode: next.nodeKey,
 
-      sourceColor:
+      sourceColor: item.color || AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277',
 
-        item.color || AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277',
-
-      targetColor:
-
-        next.color || AXIS_COLOR_BY_KEY[next.nodeKey] || '#d6b277',
+      targetColor: next.color || AXIS_COLOR_BY_KEY[next.nodeKey] || '#d6b277',
 
       sourcePoint: item.point,
 
       targetPoint: next.point,
 
       path: getCurvedOpenSegmentPath(
-
         item.point,
 
         next.point,
 
         closed ? 0.055 : 0.035
-
       ),
-
     };
-
   });
-
 };
 
 const getGradientVector = (shapeItems = []) => {
@@ -1576,27 +1542,23 @@ const VoiceThreadMap = ({
   const targetShapeItems = useMemo(() => {
     if (!activeThread) return [];
 
-return hydrateShapeItemColors(
+    return hydrateShapeItemColors(
+      getThreadShapePoints({
+        activeThread,
 
-  getThreadShapePoints({
+        profile,
 
-    activeThread,
+        input,
 
-    profile,
+        currentSpec,
 
-    input,
+        resolvedReadVariant,
 
-    currentSpec,
+        threadKind,
 
-    resolvedReadVariant,
-
-    threadKind,
-
-    firstTellKeys,
-
-  })
-
-);
+        firstTellKeys,
+      })
+    );
   }, [
     activeThread,
 
@@ -1623,175 +1585,151 @@ return hydrateShapeItemColors(
     return getShapeItemsSignature(targetShapeItems);
   }, [targetShapeItems]);
 
-const morphCacheKey = useMemo(() => {
+  const morphCacheKey = useMemo(() => {
+    return getMorphCacheKey({
+      compact,
 
-  return getMorphCacheKey({
+      displayMode,
 
-    compact,
+      resolvedReadVariant,
 
-    displayMode,
+      threadKind,
+    });
+  }, [compact, displayMode, resolvedReadVariant, threadKind]);
 
-    resolvedReadVariant,
+  const getInitialShapeItems = () => {
+    const cachedItems = SHAPE_MORPH_CACHE.get(morphCacheKey);
 
-    threadKind,
-
-  });
-
-}, [compact, displayMode, resolvedReadVariant, threadKind]);
-
-const getInitialShapeItems = () => {
-
-  const cachedItems = SHAPE_MORPH_CACHE.get(morphCacheKey);
-
-  if (cachedItems && cachedItems.length) {
-
-    return cachedItems;
-
-  }
-
-  return targetShapeItems;
-
-};
-
-const [animatedShapeItems, setAnimatedShapeItems] = useState(getInitialShapeItems);
-
-const animatedShapeItemsRef = useRef(animatedShapeItems);
-
-const animationFrameRef = useRef(null);
-
-useEffect(() => {
-
-  animatedShapeItemsRef.current = animatedShapeItems;
-
-  if (animatedShapeItems && animatedShapeItems.length) {
-
-    SHAPE_MORPH_CACHE.set(morphCacheKey, animatedShapeItems);
-
-  }
-
-}, [animatedShapeItems, morphCacheKey]);
-
-useEffect(() => {
-
-  const toItems = targetShapeItems;
-
-  if (!toItems.length) {
-
-    if (animationFrameRef.current) {
-
-      cancelAnimationFrame(animationFrameRef.current);
-
+    if (cachedItems && cachedItems.length) {
+      return cachedItems;
     }
 
-    setAnimatedShapeItems([]);
-
-    animatedShapeItemsRef.current = [];
-
-    SHAPE_MORPH_CACHE.delete(morphCacheKey);
-
-    return undefined;
-
-  }
-
-  if (animationFrameRef.current) {
-
-    cancelAnimationFrame(animationFrameRef.current);
-
-    animationFrameRef.current = null;
-
-  }
-
-  const liveItems =
-
-    animatedShapeItemsRef.current && animatedShapeItemsRef.current.length
-
-      ? animatedShapeItemsRef.current
-
-      : null;
-
-  const cachedItems =
-
-    SHAPE_MORPH_CACHE.get(morphCacheKey) &&
-
-    SHAPE_MORPH_CACHE.get(morphCacheKey).length
-
-      ? SHAPE_MORPH_CACHE.get(morphCacheKey)
-
-      : null;
-
-  const fromItems = liveItems || cachedItems || toItems;
-
-  const fromSignature = getShapeItemsSignature(fromItems);
-
-  const toSignature = getShapeItemsSignature(toItems);
-
-  if (fromSignature === toSignature) {
-
-    animatedShapeItemsRef.current = toItems;
-
-    SHAPE_MORPH_CACHE.set(morphCacheKey, toItems);
-
-    setAnimatedShapeItems(toItems);
-
-    return undefined;
-
-  }
-
-  const duration = 520;
-
-  const startTime = performance.now();
-
-  const animate = (now) => {
-
-    const elapsed = now - startTime;
-
-    const rawProgress = Math.min(elapsed / duration, 1);
-
-    const easedProgress = easeOutCubic(rawProgress);
-
-    const nextItems = interpolateShapeItems(fromItems, toItems, easedProgress);
-
-    animatedShapeItemsRef.current = nextItems;
-
-    SHAPE_MORPH_CACHE.set(morphCacheKey, nextItems);
-
-    setAnimatedShapeItems(nextItems);
-
-    if (rawProgress < 1) {
-
-      animationFrameRef.current = requestAnimationFrame(animate);
-
-      return;
-
-    }
-
-    animatedShapeItemsRef.current = toItems;
-
-    SHAPE_MORPH_CACHE.set(morphCacheKey, toItems);
-
-    setAnimatedShapeItems(toItems);
-
-    animationFrameRef.current = null;
-
+    return targetShapeItems;
   };
 
-  animationFrameRef.current = requestAnimationFrame(animate);
+  const [animatedShapeItems, setAnimatedShapeItems] =
+    useState(getInitialShapeItems);
 
-  return () => {
+  const animatedShapeItemsRef = useRef(animatedShapeItems);
+
+  const animationFrameRef = useRef(null);
+
+  useEffect(() => {
+    animatedShapeItemsRef.current = animatedShapeItems;
+
+    if (animatedShapeItems && animatedShapeItems.length) {
+      SHAPE_MORPH_CACHE.set(morphCacheKey, animatedShapeItems);
+    }
+  }, [animatedShapeItems, morphCacheKey]);
+
+  useEffect(() => {
+    const toItems = targetShapeItems;
+
+    if (!toItems.length) {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+
+      setAnimatedShapeItems([]);
+
+      animatedShapeItemsRef.current = [];
+
+      SHAPE_MORPH_CACHE.delete(morphCacheKey);
+
+      return undefined;
+    }
 
     if (animationFrameRef.current) {
-
       cancelAnimationFrame(animationFrameRef.current);
 
       animationFrameRef.current = null;
-
     }
 
-  };
+    const liveItems =
+      animatedShapeItemsRef.current && animatedShapeItemsRef.current.length
+        ? animatedShapeItemsRef.current
+        : null;
 
-}, [targetShapeSignature, morphCacheKey]);
+    const cachedItems =
+      SHAPE_MORPH_CACHE.get(morphCacheKey) &&
+      SHAPE_MORPH_CACHE.get(morphCacheKey).length
+        ? SHAPE_MORPH_CACHE.get(morphCacheKey)
+        : null;
 
-const shapeItems = animatedShapeItems;
+    const fromItems = liveItems || cachedItems || toItems;
+
+    const fromSignature = getShapeItemsSignature(fromItems);
+
+    const toSignature = getShapeItemsSignature(toItems);
+
+    if (
+      fromSignature === toSignature ||
+      compact ||
+      shouldReduceMotion() ||
+      isDocumentHidden()
+    ) {
+      animatedShapeItemsRef.current = toItems;
+
+      SHAPE_MORPH_CACHE.set(morphCacheKey, toItems);
+
+      setAnimatedShapeItems(toItems);
+
+      return undefined;
+    }
+
+    const duration = 520;
+
+    const startTime =
+      typeof performance !== 'undefined' ? performance.now() : Date.now();
+
+    const animate = (now) => {
+      const elapsed = now - startTime;
+
+      const rawProgress = Math.min(elapsed / duration, 1);
+
+      const easedProgress = easeOutCubic(rawProgress);
+
+      const nextItems = interpolateShapeItems(
+        fromItems,
+
+        toItems,
+
+        easedProgress
+      );
+
+      animatedShapeItemsRef.current = nextItems;
+
+      SHAPE_MORPH_CACHE.set(morphCacheKey, nextItems);
+
+      setAnimatedShapeItems(nextItems);
+
+      if (rawProgress < 1) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+
+        return;
+      }
+
+      animatedShapeItemsRef.current = toItems;
+
+      SHAPE_MORPH_CACHE.set(morphCacheKey, toItems);
+
+      setAnimatedShapeItems(toItems);
+
+      animationFrameRef.current = null;
+    };
+
+    animationFrameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+
+        animationFrameRef.current = null;
+      }
+    };
+  }, [targetShapeSignature, morphCacheKey, compact, targetShapeItems]);
+
+  const shapeItems = animatedShapeItems;
   const shouldCloseShape = !(
     threadKind === 'simple' &&
     !isVoiceMapMode &&
@@ -1821,23 +1759,11 @@ const shapeItems = animatedShapeItems;
     });
   }, [shapeItems, shouldCloseShape]);
 
-const mapId = `heritage-voice-thread-${
-
-  compact ? 'compact' : 'large'
-
-}-${sanitizeMapId(activeThread?.id)}-${sanitizeMapId(
-
-  [
-
-    activeThread?.slotKey,
-
-    threadKind,
-
-    resolvedReadVariant,
-
-  ].join('|')
-
-)}`;
+  const mapId = `heritage-voice-thread-${
+    compact ? 'compact' : 'large'
+  }-${sanitizeMapId(activeThread?.id)}-${sanitizeMapId(
+    [activeThread?.slotKey, threadKind, resolvedReadVariant].join('|')
+  )}`;
 
   const primaryNode = rankedNodes[0] || {
     nodeKey: 'attack',
@@ -2082,13 +2008,15 @@ const mapId = `heritage-voice-thread-${
           })}
 
           {relationshipSegments.map((segment) => {
-           const sourceColor =
+            const sourceColor =
+              segment.sourceColor ||
+              AXIS_COLOR_BY_KEY[segment.sourceNode] ||
+              '#d6b277';
 
-  segment.sourceColor || AXIS_COLOR_BY_KEY[segment.sourceNode] || '#d6b277';
-
-const targetColor =
-
-  segment.targetColor || AXIS_COLOR_BY_KEY[segment.targetNode] || '#d6b277';
+            const targetColor =
+              segment.targetColor ||
+              AXIS_COLOR_BY_KEY[segment.targetNode] ||
+              '#d6b277';
 
             const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
 
@@ -2289,63 +2217,39 @@ const targetColor =
         </g>
 
         {shapePath && (
-
           <g
-
             className={`heritage-voice-thread-active-shape heritage-voice-thread-active-shape--${threadKind} heritage-voice-thread-active-shape--read-${resolvedReadVariant}`}
-
             data-transition-signature={targetShapeSignature}
-
           >
-
             {shouldRenderComplexFill && (
-
               <>
-
                 <path
-
                   d={shapePath}
-
                   className="heritage-voice-thread-complex-fill"
-
                   fill={`url(#${mapId}-complexFillGradient)`}
-
                   stroke="none"
-
                 />
 
                 <path
-
                   d={shapePath}
-
                   className="heritage-voice-thread-complex-sheen"
-
                   fill={`url(#${mapId}-complexSheenGradient)`}
-
                   stroke="none"
-
                 />
-
               </>
-
             )}
 
             {relationshipSegments.length > 0 ? (
-
               <g className="heritage-voice-thread-relationship-segments">
-
                 {relationshipSegments.map((segment) => {
-
                   const segmentGradientId = `${mapId}-active-segment-${segment.key}`;
 
                   const segmentStrength = getSegmentStrength({
-
                     sourceNode: segment.sourceNode,
 
                     targetNode: segment.targetNode,
 
                     rankMap,
-
                   });
 
                   const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
@@ -2357,275 +2261,160 @@ const targetColor =
                   const isPrimarySegment = bestRank === 0;
 
                   const segmentHaloWidth =
-
                     baseHaloStrokeWidth * (0.46 + segmentStrength * 0.74);
 
                   const segmentGlowWidth =
-
                     baseGlowStrokeWidth * (0.54 + segmentStrength * 0.78);
 
                   const segmentCoreWidth =
-
                     baseCoreStrokeWidth * (0.72 + segmentStrength * 0.58);
 
                   const segmentHaloOpacity = clamp(
-
                     0.055 + segmentStrength * 0.19,
 
                     0.055,
 
                     0.27
-
                   );
 
                   const segmentGlowOpacity = clamp(
-
                     0.16 + segmentStrength * 0.52,
 
                     0.16,
 
                     0.72
-
                   );
 
                   const segmentCoreOpacity = clamp(
-
                     0.58 + segmentStrength * 0.4,
 
                     0.58,
 
                     0.99
-
                   );
 
                   return (
-
                     <g
-
                       key={segment.key}
-
                       className={`heritage-voice-thread-segment heritage-voice-thread-segment--rank-${bestRank}`}
-
                     >
-
                       <path
-
                         d={segment.path}
-
                         className="heritage-voice-thread-shape-halo"
-
                         fill="none"
-
                         stroke={`url(#${segmentGradientId})`}
-
                         strokeWidth={segmentHaloWidth}
-
                         opacity={segmentHaloOpacity}
-
                         filter={`url(#${mapId}-softGlow)`}
-
                         strokeLinecap="round"
-
                         strokeLinejoin="round"
-
                       />
 
                       <path
-
                         d={segment.path}
-
                         className="heritage-voice-thread-shape-glow"
-
                         fill="none"
-
                         stroke={`url(#${segmentGradientId})`}
-
                         strokeWidth={segmentGlowWidth}
-
                         opacity={segmentGlowOpacity}
-
                         filter={
-
                           isPrimarySegment
-
                             ? `url(#${mapId}-primaryGlow)`
-
                             : `url(#${mapId}-neonGlow)`
-
                         }
-
                         strokeLinecap="round"
-
                         strokeLinejoin="round"
-
                       />
 
                       <path
-
                         d={segment.path}
-
                         className="heritage-voice-thread-shape-core"
-
                         fill="none"
-
                         stroke={`url(#${segmentGradientId})`}
-
                         strokeWidth={segmentCoreWidth}
-
                         opacity={segmentCoreOpacity}
-
                         strokeLinecap="round"
-
                         strokeLinejoin="round"
-
                       />
 
                       <path
-
                         d={segment.path}
-
                         className="heritage-voice-thread-shape-hotline"
-
                         fill="none"
-
                         stroke="rgba(255, 246, 218, 0.54)"
-
                         strokeWidth={
-
                           isPrimarySegment
-
                             ? compact
-
                               ? 1.15
-
                               : 1.5
-
                             : compact
-
                               ? 0.7
-
                               : 0.95
-
                         }
-
                         opacity={clamp(
-
                           0.035 + segmentStrength * 0.24,
 
                           0.035,
 
                           0.28
-
                         )}
-
                         strokeLinecap="round"
-
                         strokeLinejoin="round"
-
                       />
-
                     </g>
-
                   );
-
                 })}
-
               </g>
-
             ) : (
-
               <>
-
                 <path
-
                   d={shapePath}
-
                   className="heritage-voice-thread-shape-halo"
-
                   fill="none"
-
                   stroke={`url(#${mapId}-activeShapeGradient)`}
-
                   strokeWidth={baseHaloStrokeWidth}
-
                   opacity={compact ? 0.15 : 0.21}
-
                   filter={`url(#${mapId}-softGlow)`}
-
                   strokeLinecap="round"
-
                   strokeLinejoin="round"
-
                 />
 
                 <path
-
                   d={shapePath}
-
                   className="heritage-voice-thread-shape-glow"
-
                   fill="none"
-
                   stroke={`url(#${mapId}-activeShapeGradient)`}
-
                   strokeWidth={baseGlowStrokeWidth}
-
                   opacity={compact ? 0.4 : 0.58}
-
                   filter={`url(#${mapId}-primaryGlow)`}
-
                   strokeLinecap="round"
-
                   strokeLinejoin="round"
-
                 />
 
                 <path
-
                   d={shapePath}
-
                   className="heritage-voice-thread-shape-core"
-
                   fill="none"
-
                   stroke={`url(#${mapId}-activeShapeGradient)`}
-
                   strokeWidth={baseCoreStrokeWidth}
-
                   opacity="0.96"
-
                   strokeLinecap="round"
-
                   strokeLinejoin="round"
-
                 />
 
                 <path
-
                   d={shapePath}
-
                   className="heritage-voice-thread-shape-hotline"
-
                   fill="none"
-
                   stroke={`url(#${mapId}-complexSheenGradient)`}
-
                   strokeWidth={compact ? 0.95 : 1.25}
-
                   opacity="0.34"
-
                   strokeLinecap="round"
-
                   strokeLinejoin="round"
-
                 />
-
               </>
-
             )}
-
           </g>
-
         )}
 
         <g className="heritage-voice-thread-node-layer">
