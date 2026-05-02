@@ -1070,67 +1070,47 @@ function createGradientRadarPlugin({
 
       const values = chart.data?.datasets?.[0]?.data || [];
 
-if (voiceMapVariant === 'firstTell') {
+      if (voiceMapVariant === 'firstTell') {
 
-  drawColoredOuterPolygon(ctx, scale, pointColors);
+        drawColoredOuterPolygon(ctx, scale, pointColors);
 
-  drawFirstTellTriangle({
+        drawFirstTellTriangle({
 
-    ctx,
+          ctx,
 
-    scale,
+          scale,
 
-    values,
+          values,
 
-    pointColors,
+          pointColors,
 
-    firstTellKeys: firstTellKeysRef.current || [],
+          firstTellKeys: firstTellKeysRef.current || [],
 
-  });
+        });
 
-  return;
+        return;
 
-}
+      }
 
-if (voiceMapVariant === 'legacyprint') {
+      if (voiceMapVariant === 'legacyprint') {
 
-  drawLegacyPrintShape({
+        drawLegacyPrintShape({
 
-    ctx,
+          ctx,
 
-    scale,
+          scale,
 
-    values,
+          values,
 
-    pointColors,
+          pointColors,
 
-    legacyPrintKeys: firstTellKeysRef.current || [],
+          legacyPrintKeys: firstTellKeysRef.current || [],
 
-  });
+        });
 
-  return;
+        return;
 
-}
-
-drawPlayerRead({
-
-  ctx,
-
-  chart,
-
-  scale,
-
-  points,
-
-  values,
-
-  pointColors,
-
-  activeKeyRef,
-
-  mode,
-
-});
+      }
 
       drawPlayerRead({
 

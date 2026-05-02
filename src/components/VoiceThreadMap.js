@@ -253,7 +253,21 @@ const getAxisDelta = (profile = {}, axisKey) => {
 };
 
 const getAxisMovement = (profile = {}, axisKey) => {
-  return clamp(Math.abs(getAxisDelta(profile, axisKey)) / 1.5, 0, 1);
+
+  const delta = Math.abs(getAxisDelta(profile, axisKey));
+
+  /*
+
+   * Visual movement should be more expressive than the raw score delta.
+
+   * A 0.25–0.40 tone movement is meaningful to the player, so the map
+
+   * needs to show it clearly instead of treating it as tiny.
+
+   */
+
+  return clamp(Math.pow(delta / 1.05, 0.72), 0, 1);
+
 };
 
 const getNodeVoiceWeight = (profile = {}, nodeKey) => {
@@ -841,6 +855,7 @@ const getDepthLeanFromProfile = (profile = {}) => {
 };
 
 const getRankedThreadNodes = ({
+
   profile = {},
 
   activeThread = {},
@@ -848,39 +863,51 @@ const getRankedThreadNodes = ({
   resolvedReadVariant = '',
 
   firstTellKeys = [],
+
 }) => {
+
   const threadNodes = Array.isArray(activeThread?.nodes)
+
     ? activeThread.nodes.filter(Boolean)
+
     : [];
 
+ if (resolvedReadVariant === 'firstTell') {
+
   const firstTellNodes =
-    firstTellKeys && firstTellKeys.length ? firstTellKeys : threadNodes;
 
-  if (resolvedReadVariant === 'firstTell') {
-    return (
-      firstTellNodes.length ? firstTellNodes : ['attack', 'warmth', 'control']
-    )
+    threadNodes && threadNodes.length
 
-      .slice(0, 3)
+      ? threadNodes
 
-      .map((nodeKey, index) => ({
-        nodeKey,
+      : firstTellKeys && firstTellKeys.length
 
-        rank: index,
+        ? firstTellKeys
 
-        color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
+        : ['attack', 'warmth', 'control'];
 
-        movement: getAxisMovement(profile, nodeKey),
+  return firstTellNodes.slice(0, 3).map((nodeKey, index) => ({
 
-        weight: index === 0 ? 1 : index === 1 ? 0.72 : 0.5,
-      }));
-  }
+    nodeKey,
+
+    rank: index,
+
+    color: AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277',
+
+    movement: getAxisMovement(profile, nodeKey),
+
+    weight: index === 0 ? 1 : index === 1 ? 0.72 : 0.5,
+
+  }));
+
+}
 
   const candidates = threadNodes.length ? threadNodes : THREAD_NODE_ORDER;
 
   return candidates
 
     .map((nodeKey, index) => ({
+
       nodeKey,
 
       index,
@@ -890,23 +917,29 @@ const getRankedThreadNodes = ({
       movement: getAxisMovement(profile, nodeKey),
 
       weight: getNodeVoiceWeight(profile, nodeKey),
+
     }))
 
     .sort((a, b) => {
+
       if (b.weight !== a.weight) return b.weight - a.weight;
 
       if (b.movement !== a.movement) return b.movement - a.movement;
 
       return a.index - b.index;
+
     })
 
     .slice(0, resolvedReadVariant === 'legacyprint' ? 4 : 7)
 
     .map((item, index) => ({
+
       ...item,
 
       rank: index,
+
     }));
+
 };
 
 const getRankMap = (rankedNodes = []) => {
@@ -941,6 +974,7 @@ const getSegmentStrength = ({ sourceNode, targetNode, rankMap = {} }) => {
 };
 
 const getThreadShapePoints = ({
+
   activeThread,
 
   profile,
@@ -954,12 +988,17 @@ const getThreadShapePoints = ({
   threadKind,
 
   firstTellKeys,
+
 }) => {
+
   const threadNodes = Array.isArray(activeThread?.nodes)
+
     ? activeThread.nodes.filter(Boolean)
+
     : [];
 
   const seed = getVisualSeed({
+
     thread: activeThread,
 
     profile,
@@ -967,126 +1006,181 @@ const getThreadShapePoints = ({
     input,
 
     currentSpec,
+
   });
 
   const movementAverage = getProfileMovementAverage(profile);
 
   const depthLean = getDepthLeanFromProfile(profile);
 
-if (resolvedReadVariant === 'firstTell') {
+  if (resolvedReadVariant === 'firstTell') {
 
-  const nodes =
+    const nodes =
 
-    firstTellKeys && firstTellKeys.length
-
-      ? firstTellKeys
-
-      : threadNodes.length >= 3
+      threadNodes.length >= 3
 
         ? threadNodes.slice(0, 3)
 
-        : ['attack', 'warmth', 'control'];
+        : firstTellKeys && firstTellKeys.length
 
-  const triangleItems = nodes.slice(0, 3).map((nodeKey, index) => {
+          ? firstTellKeys.slice(0, 3)
 
-    const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+          : ['attack', 'warmth', 'control'];
 
-    const movement = getAxisMovement(profile, nodeKey);
+    const triangleItems = nodes.slice(0, 3).map((nodeKey, index) => {
 
-    const rankBasePull =
+      const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
-      index === 0
+      const rawValue = getAxisValue(profile, nodeKey);
 
-        ? 0.72
+      const rawDelta = rawValue - 5;
 
-        : index === 1
+      const movement = getAxisMovement(profile, nodeKey);
 
-          ? 0.62
+      /*
 
-          : 0.54;
+       * First Tell is the big, at-a-glance read.
 
-    const movementPull =
+       * Make meaningful Heritage shell changes visually obvious:
 
-      index === 0
+       * - 7mm / open shell should bloom farther toward warmth/sustain.
 
-        ? movement * 0.09
+       * - 12mm / focused shell should pull harder toward attack/projection/control.
 
-        : index === 1
+       */
 
-          ? movement * 0.07
+      const signed = clamp(rawDelta / 0.95, -1, 1);
 
-          : movement * 0.055;
+      const rankBasePull =
 
-    const rankPull = clamp(rankBasePull + movementPull, 0.48, 0.82);
+        index === 0
 
-    const xJitter = getSeededSignedValue(seed, `first-tell-x-${index}`) * 4.5;
+          ? 0.78
 
-    const yJitter = getSeededSignedValue(seed, `first-tell-y-${index}`) * 4.5;
+          : index === 1
 
-    return {
+            ? 0.68
 
-      nodeKey,
+            : 0.6;
 
-      point: keepPointInsideThreadFrame(
+      const movementPull =
 
-        offsetPoint(
+        index === 0
 
-          pullPointFromCenter(basePoint, rankPull),
+          ? movement * 0.28
 
-          xJitter,
+          : index === 1
 
-          yJitter,
+            ? movement * 0.24
 
-          0.86
+            : movement * 0.2;
+
+      const signedPull = signed * 0.12;
+
+      const rankPull = clamp(
+
+        rankBasePull + movementPull + signedPull,
+
+        0.36,
+
+        1.04
+
+      );
+
+      const xJitter =
+
+        getSeededSignedValue(seed, `first-tell-x-${nodeKey}-${index}`) * 9;
+
+      const yJitter =
+
+        getSeededSignedValue(seed, `first-tell-y-${nodeKey}-${index}`) * 9;
+
+      return {
+
+        nodeKey,
+
+        point: keepPointInsideThreadFrame(
+
+          offsetPoint(
+
+            pullPointFromCenter(basePoint, rankPull),
+
+            xJitter,
+
+            yJitter,
+
+            0.98
+
+          ),
+
+          0.98
 
         ),
 
-        0.86
+      };
 
-      ),
+    });
 
-    };
+    return widenFirstTellTriangle(triangleItems);
 
-  });
-
-  return widenFirstTellTriangle(triangleItems);
-
-}
+  }
 
   if (resolvedReadVariant === 'player') {
+
     return THREAD_NODE_ORDER.map((nodeKey, index) => {
+
       const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
       const movement = getAxisMovement(profile, nodeKey);
 
       const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
 
-      const radius = clamp(0.56 + movement * 0.18 + signed * 0.055, 0.43, 0.88);
+      const radius = clamp(
+
+        0.56 + movement * 0.18 + signed * 0.055,
+
+        0.43,
+
+        0.88
+
+      );
 
       const pulled = pullPointFromCenter(basePoint, radius);
 
       const xJitter =
+
         getSeededSignedValue(seed, `player-x-${nodeKey}-${index}`) * 4;
 
       const yJitter =
+
         getSeededSignedValue(seed, `player-y-${nodeKey}-${index}`) * 4;
 
       return {
+
         nodeKey,
 
         point: keepPointInsideThreadFrame(
+
           offsetPoint(pulled, xJitter, yJitter, 0.9),
+
           0.9
+
         ),
+
       };
+
     });
+
   }
 
   if (threadKind === 'simple') {
+
     const nodes =
+
       threadNodes.length >= 2 ? threadNodes.slice(0, 2) : ['attack', 'warmth'];
 
     return nodes.map((nodeKey, index) => {
+
       const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
       const movement = getAxisMovement(profile, nodeKey);
@@ -1094,10 +1188,13 @@ if (resolvedReadVariant === 'firstTell') {
       const radius = clamp(0.6 + movement * 0.1, 0.58, 0.76);
 
       return {
+
         nodeKey,
 
         point: keepPointInsideThreadFrame(
+
           offsetPoint(
+
             pullPointFromCenter(basePoint, radius),
 
             getSeededSignedValue(seed, `simple-x-${index}`) * 5,
@@ -1105,22 +1202,33 @@ if (resolvedReadVariant === 'firstTell') {
             getSeededSignedValue(seed, `simple-y-${index}`) * 5,
 
             0.78
+
           ),
 
           0.78
+
         ),
+
       };
+
     });
+
   }
 
   if (threadKind === 'shaped') {
+
     const nodes =
+
       threadNodes.length >= 3
+
         ? threadNodes.slice(0, 3)
+
         : [...threadNodes, 'control', 'sustain', 'projection'].slice(0, 3);
 
     return sortPointsClockwise(
+
       nodes.map((nodeKey, index) => {
+
         const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
         const movement = getAxisMovement(profile, nodeKey);
@@ -1128,11 +1236,13 @@ if (resolvedReadVariant === 'firstTell') {
         const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
 
         const radius = clamp(
+
           0.6 + movement * 0.12 + movementAverage * 0.045 + signed * 0.03,
 
           0.54,
 
           0.8
+
         );
 
         const pulled = pullPointFromCenter(basePoint, radius);
@@ -1142,36 +1252,53 @@ if (resolvedReadVariant === 'firstTell') {
         const yJitter = getSeededSignedValue(seed, `shaped-y-${index}`) * 7;
 
         return keepPointInsideThreadFrame(
+
           offsetPoint(pulled, xJitter + depthLean * 5, yJitter, 0.82),
 
           0.82
+
         );
+
       })
+
     ).map((point) => {
+
       const match = nodes.find((nodeKey) => {
+
         const basePoint = getPointForNode(nodeKey);
 
         return basePoint
+
           ? Math.abs(basePoint.x - point.x) < 95 &&
+
               Math.abs(basePoint.y - point.y) < 95
+
           : false;
+
       });
 
       return {
+
         nodeKey: match || nodes[0] || 'attack',
 
         point,
+
       };
+
     });
+
   }
 
   const complexNodes = [
+
     ...threadNodes,
 
     ...THREAD_NODE_ORDER.map((nodeKey) => ({
+
       nodeKey,
 
       movement: getAxisMovement(profile, nodeKey),
+
     }))
 
       .sort((a, b) => b.movement - a.movement)
@@ -1179,16 +1306,23 @@ if (resolvedReadVariant === 'firstTell') {
       .slice(0, 3)
 
       .map((item) => item.nodeKey),
+
   ].filter((nodeKey, index, arr) => nodeKey && arr.indexOf(nodeKey) === index);
 
   const baseNodes =
+
     complexNodes.length >= 4
+
       ? complexNodes
+
       : [...complexNodes, 'attack', 'projection', 'sustain', 'warmth'].filter(
+
           (nodeKey, index, arr) => arr.indexOf(nodeKey) === index
+
         );
 
   const corePoints = baseNodes.slice(0, 7).map((nodeKey, index) => {
+
     const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
     const movement = getAxisMovement(profile, nodeKey);
@@ -1196,11 +1330,13 @@ if (resolvedReadVariant === 'firstTell') {
     const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
 
     const radius = clamp(
+
       0.45 + movementAverage * 0.08 + movement * 0.13 + signed * 0.035,
 
       0.36,
 
       0.7
+
     );
 
     const pulled = pullPointFromCenter(basePoint, radius);
@@ -1210,10 +1346,13 @@ if (resolvedReadVariant === 'firstTell') {
     const yJitter = getSeededSignedValue(seed, `complex-y-${index}`) * 12;
 
     return {
+
       nodeKey,
 
       point: keepPointInsideThreadFrame(
+
         offsetPoint(
+
           pulled,
 
           xJitter + depthLean * 7,
@@ -1221,24 +1360,33 @@ if (resolvedReadVariant === 'firstTell') {
           yJitter + Math.abs(depthLean) * 4,
 
           0.74
+
         ),
 
         0.74
+
       ),
+
     };
+
   });
 
   const centered = recenterPoints(
+
     sortPointsClockwise(corePoints.map((item) => item.point)),
 
     0.42
+
   );
 
   return centered.map((point, index) => ({
+
     nodeKey: corePoints[index % corePoints.length]?.nodeKey || 'attack',
 
     point,
+
   }));
+
 };
 
 const buildSegments = ({ shapeItems, closed = true }) => {
@@ -1449,10 +1597,18 @@ const VoiceThreadMap = ({
 
   const activeNodeSet = useMemo(() => {
     return new Set(
-      resolvedReadVariant === 'firstTell' && firstTellKeys.length
-        ? firstTellKeys
-        : activeThread?.nodes || []
-    );
+
+  activeThread?.nodes && activeThread.nodes.length
+
+    ? activeThread.nodes
+
+    : resolvedReadVariant === 'firstTell' && firstTellKeys.length
+
+      ? firstTellKeys
+
+      : []
+
+);
   }, [nodesSignature, activeThread?.nodes, resolvedReadVariant, firstTellKeys]);
 
   const shapeItems = useMemo(() => {

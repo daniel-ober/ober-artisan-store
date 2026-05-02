@@ -36,13 +36,9 @@ import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadou
 import { buildKeyRelationships } from '../utils/legacyPrint/heritageKeyRelationships';
 
 import {
-
   runHeritageVoiceReadTestMatrix,
-
   runOneHeritageVoiceReadTest,
-
   runHeritageShellThicknessSweep,
-
 } from '../utils/legacyPrint/runHeritageVoiceReadTestMatrix';
 
 import './HeritageProductDetail.css';
@@ -642,21 +638,91 @@ const depthPrices = {
 };
 
 const staveOptions = {
-  12: {
-    6: ['12 - 8mm + $150 (Re-Rings Required)'],
-    8: ['16 - 10mm'],
-  },
-  13: { 8: ['16 - 10mm'] },
-  14: {
-    8: ['16 - 10mm'],
-    10: ['20 - 12mm', '10 - 7mm + $150 (Re-Rings Required)'],
-  },
+  12: ['16 - 10mm', '12 - 8mm + $150 (Re-Rings Required)'],
+
+  13: ['16 - 10mm'],
+
+  14: ['20 - 12mm', '16 - 10mm', '10 - 7mm + $150 (Re-Rings Required)'],
 };
 
 const lugOptions = {
   12: ['8', '6'],
+
   13: ['8'],
+
   14: ['8', '10'],
+};
+
+const SHELL_RECIPE_LUG_RULES = {
+  '12|16 - 10mm': ['8'],
+
+  '12|12 - 8mm + $150 (Re-Rings Required)': ['6'],
+
+  '13|16 - 10mm': ['8'],
+
+  '14|20 - 12mm': ['10'],
+
+  '14|16 - 10mm': ['8'],
+
+  '14|10 - 7mm + $150 (Re-Rings Required)': ['10'],
+};
+
+const getShellRecipeKey = (selectedSize, selectedStaveOption) => {
+  return `${String(selectedSize)}|${String(selectedStaveOption)}`;
+};
+
+const getAvailableStaveOptions = (selectedSize) => {
+  return staveOptions[String(selectedSize)] || [];
+};
+
+const getAvailableLugsForShellRecipe = (selectedSize, selectedStaveOption) => {
+  return (
+    SHELL_RECIPE_LUG_RULES[
+      getShellRecipeKey(selectedSize, selectedStaveOption)
+    ] ||
+    lugOptions[String(selectedSize)] ||
+    []
+  );
+};
+
+const isLugAvailableForShellRecipe = ({
+  selectedSize,
+
+  selectedStaveOption,
+
+  lugOption,
+}) => {
+  return getAvailableLugsForShellRecipe(
+    selectedSize,
+
+    selectedStaveOption
+  ).includes(String(lugOption));
+};
+
+const getUnavailableLugReason = ({
+  selectedSize,
+
+  selectedStaveOption,
+
+  lugOption,
+}) => {
+  const availableLugs = getAvailableLugsForShellRecipe(
+    selectedSize,
+
+    selectedStaveOption
+  );
+
+  if (!availableLugs.length || availableLugs.includes(String(lugOption))) {
+    return '';
+  }
+
+  const thickness = getStaveThicknessLabel(selectedStaveOption);
+
+  const staveCount = getStaveCountLabel(selectedStaveOption);
+
+  return `Only available as ${availableLugs.join(
+    ' or '
+  )}-lug for this ${thickness} / ${staveCount} shell. Stave shells need the lug pattern to match the shell’s thickness, stave count, and tension spread so the head loads evenly around the drum.`;
 };
 
 const hardwareOptions = [
@@ -708,13 +774,22 @@ const hoopUpchargeMap = {
   'Die-Cast': 100,
 };
 
-const hasReRingFromStaveOption = (option = '') =>
-  String(option).includes('Re-Rings') || String(option).includes('+ $150');
+const hasReRingFromStaveOption = (option = '') => {
+  const text = String(option);
+
+  return (
+    text.includes('Re-Rings') ||
+    text.includes('Re-rings') ||
+    text.includes('Re Rings') ||
+    text.includes('+$150') ||
+    text.includes('+ $150')
+  );
+};
 
 const getStaveCountLabel = (option = '') => {
   const match = String(option).match(/^(\d+)/);
 
-  return match ? `${match[1]} staves` : option;
+  return match ? `${match[1]} stave` : option;
 };
 
 const getStaveThicknessLabel = (option = '') => {
@@ -876,6 +951,18 @@ const renderThreadNodeLabelList = (nodes = []) => {
   );
 };
 
+const renderOptionGuideCopy = (guide) => {
+  if (!guide) return null;
+
+  return (
+    <>
+      <span className="heritage-option-guide-title">{guide.title}</span>
+
+      <span className="heritage-option-guide-copy">{guide.body}</span>
+    </>
+  );
+};
+
 const getThreadColorVars = (nodes = []) => {
   const colors = nodes
 
@@ -961,6 +1048,16 @@ const getVoiceMapVariantForSlot = (slotKey = '') => {
   if (slotKey === 'shaped') return 'player';
 
   return 'legacyprint';
+};
+
+const getToneModelHardwareColorForSlot = (slotKey = '') => {
+  const voiceMapVariant = getVoiceMapVariantForSlot(slotKey);
+
+  if (voiceMapVariant === 'firstTell' || voiceMapVariant === 'player') {
+    return HERITAGE_STANDARD_REFERENCE.hardwareColor;
+  }
+
+  return null;
 };
 
 const HERITAGE_FIRST_TELL_DEPTH_MAP = {
@@ -1114,6 +1211,235 @@ const getVoiceMapVisualThread = ({
   };
 };
 
+const BUILDER_GUIDANCE = {
+  diameter: {
+    label: 'Snare Size',
+
+    question: 'What role do you want this snare to play?',
+
+    helper:
+      'Diameter shapes the drum’s pitch center and overall personality. Smaller drums tend to feel quicker, tighter, and more cutting. Larger drums tend to feel fuller, wider, and more familiar as a main snare voice.',
+  },
+
+  depth: {
+    label: 'Depth',
+
+    question: 'How much body do you want behind the hit?',
+
+    helper:
+      'Depth changes how much air the shell moves. Shallower depths usually feel faster, drier, and more articulate. Deeper drums add body, bloom, lower weight, and more room presence.',
+  },
+
+  shellThickness: {
+    label: 'Shell Thickness',
+
+    question: 'Do you want the shell to breathe or stay focused?',
+
+    helper:
+      'Shell thickness affects how freely the drum opens up. Thinner shells tend to feel more responsive, woody, and open. Thicker shells tend to feel more focused, controlled, and powerful.',
+  },
+
+  lugQuantity: {
+    label: 'Lug Quantity',
+
+    question: 'How much control do you want in the tuning feel?',
+
+    helper:
+      'Lug count affects tension spread, tuning stability, and how shaped the note feels. Fewer lugs can feel more open and organic. More lugs usually give more control, focus, and tuning precision.',
+  },
+
+  finish: {
+    label: 'Finish Scorch Depth',
+
+    question: 'How seasoned do you want the drum to feel?',
+
+    helper:
+      'Torch depth shapes the visual age, dryness, and finished character of the drum. Lighter scorch feels more open and natural. Deeper scorch feels darker, drier, and more visually dramatic.',
+  },
+
+  hoopType: {
+    label: 'Hoop Type',
+
+    question: 'Do you want the drum to open up or lock in?',
+
+    helper:
+      'Hoop choice changes how the head responds under the stick. Triple flange hoops keep the drum more open and familiar. Die-cast hoops add focus, control, and a tighter rim feel.',
+  },
+
+  hardwareFinish: {
+    label: 'Hardware Finish',
+
+    question: 'What visual voice should frame the shell?',
+
+    helper:
+      'Hardware finish does not lead the sound, but it strongly shapes the drum’s visual personality. Choose the finish that best supports the shell’s final character.',
+  },
+};
+
+const SIZE_GUIDE_COPY = {
+  12: {
+    title: 'Quick / tight side snare',
+
+    body: 'Best when you want a higher, faster voice with extra cut and less low-end spread.',
+  },
+
+  13: {
+    title: 'Balanced alternate voice',
+
+    body: 'Tighter than a 14", but still full enough to work as a main or auxiliary snare.',
+  },
+
+  14: {
+    title: 'Full main snare voice',
+
+    body: 'The classic foundation. Widest, most familiar Heritage body and center.',
+  },
+};
+
+const DEPTH_GUIDE_COPY = {
+  '5.0': {
+    title: 'Fast / articulate',
+
+    body: 'Quick response, less air, tighter body, and a cleaner front edge.',
+  },
+
+  5.5: {
+    title: 'Classic center',
+
+    body: 'A familiar all-purpose depth with balanced body, response, and control.',
+  },
+
+  '6.0': {
+    title: 'Added body',
+
+    body: 'More shell behind the note while still staying responsive and versatile.',
+  },
+
+  6.5: {
+    title: 'Fuller main voice',
+
+    body: 'A stronger low-mid center with more bloom and room presence.',
+  },
+
+  '7.0': {
+    title: 'Deep / weighty',
+
+    body: 'More air, body, and depth for a broader, more grounded hit.',
+  },
+
+  7.5: {
+    title: 'Big room feel',
+
+    body: 'A deeper shell voice with more bloom, spread, and physical presence.',
+  },
+
+  '8.0': {
+    title: 'Maximum depth',
+
+    body: 'The fullest Heritage depth: big body, slower bloom, and serious weight.',
+  },
+};
+
+const SHELL_THICKNESS_GUIDE_COPY = {
+  '12mm': {
+    title: 'Focused / powerful',
+
+    body: 'More stiffness, projection, control, and a stronger shaped note.',
+  },
+
+  '10mm': {
+    title: 'Balanced Heritage core',
+
+    body: 'The standard center: woody, stable, responsive, and familiar.',
+  },
+
+  '8mm': {
+    title: 'Open / responsive',
+
+    body: 'More shell movement and touch response with re-rings for support.',
+  },
+
+  '7mm': {
+    title: 'Thin / expressive',
+
+    body: 'The most open and breathing shell path, supported by re-rings.',
+  },
+};
+
+const LUG_GUIDE_COPY = {
+  6: {
+    title: 'Open / organic',
+
+    body: 'Less hardware tension around the head for a looser, more breathing feel.',
+  },
+
+  8: {
+    title: 'Classic balance',
+
+    body: 'The familiar middle ground: stable tuning, open response, and easy control.',
+  },
+
+  10: {
+    title: 'Precise / controlled',
+
+    body: 'More tension points for tighter tuning control and a more focused note.',
+  },
+};
+
+const FINISH_GUIDE_COPY = {
+  'Light Torch': {
+    title: 'Open / natural',
+
+    body: 'Keeps more of the raw oak character visible, lighter, and more organic.',
+  },
+
+  'Medium Torch': {
+    title: 'Seasoned Heritage center',
+
+    body: 'The standard voice: warm, aged, balanced, and unmistakably Heritage.',
+  },
+
+  Blackened: {
+    title: 'Dark / dry / dramatic',
+
+    body: 'The boldest visual character with a drier, more controlled finished feel.',
+  },
+};
+
+const HOOP_GUIDE_COPY = {
+  'Triple Flange': {
+    title: 'Open / classic',
+
+    body: 'More familiar rim feel, more spread, and a little more natural openness.',
+  },
+
+  'Die-Cast': {
+    title: 'Focused / locked-in',
+
+    body: 'Tighter response, stronger rim definition, and more controlled overtones.',
+  },
+};
+
+const HARDWARE_GUIDE_COPY = {
+  Chrome: {
+    title: 'Clean / timeless',
+
+    body: 'Classic, bright, and neutral. Lets the shell stay visually center stage.',
+  },
+
+  'Black Nickel': {
+    title: 'Modern / darker',
+
+    body: 'Adds a slightly moodier frame without overpowering the wood character.',
+  },
+
+  'Brass/Gold': {
+    title: 'Warm / premium',
+
+    body: 'A richer visual statement with a more elevated custom-shop feel.',
+  },
+};
+
 const HeritageProductDetail = () => {
   const navigate = useNavigate();
 
@@ -1154,6 +1480,8 @@ const HeritageProductDetail = () => {
   const [openBuilderSection, setOpenBuilderSection] = useState('construction');
 
   const [activeAxisKey, setActiveAxisKey] = useState('attack');
+
+  const [lugHelperPulseKey, setLugHelperPulseKey] = useState(0);
 
   const [activeThreadSelection, setActiveThreadSelection] = useState({
     id: '',
@@ -1355,7 +1683,7 @@ const HeritageProductDetail = () => {
 
   const finishSummary = `${scorchDepth}`;
 
-  const hardwareSummary = `${hardwareColor} • ${hoopType} • ${HERITAGE_STANDARD_SNARE_BED} bed`;
+  const hardwareSummary = `${hoopType} • ${hardwareColor} • Trick GS007 throw-off`;
 
   const currentBuildPrice = useMemo(() => {
     return computeHeritagePrice({
@@ -1508,24 +1836,95 @@ const HeritageProductDetail = () => {
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
   const keyRelationships = useMemo(() => {
-    const relationships = buildKeyRelationships(activeVoiceSummary);
+    const toneNeutralSummary = buildHeritageVoiceRead({
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hardwareColor: HERITAGE_STANDARD_REFERENCE.hardwareColor,
+
+      hoopType,
+
+      scorchDepth,
+
+      benchmarkFamilyId: isCompareModeEnabled
+        ? benchmarkFamilyId
+        : DEFAULT_BENCHMARK_FAMILY_ID,
+
+      benchmarkTypeId: isCompareModeEnabled
+        ? benchmarkTypeId
+        : DEFAULT_BENCHMARK_TYPE_ID,
+
+      benchmarkSizeId: isCompareModeEnabled
+        ? benchmarkSizeId
+        : DEFAULT_BENCHMARK_SIZE_ID,
+    });
+
+    const visualSummary = activeVoiceSummary;
+
+    const toneNeutralRelationships = buildKeyRelationships(toneNeutralSummary);
+
+    const visualRelationships = buildKeyRelationships(visualSummary);
 
     const threadSlotOrder = {
       simple: 0,
+
       shaped: 1,
+
       complex: 2,
     };
 
-    return relationships.slice(0, 3).sort((a, b) => {
-      const aOrder = threadSlotOrder[a.slotKey] ?? 99;
+    const sortRelationships = (items) =>
+      items.slice(0, 3).sort((a, b) => {
+        const aOrder = threadSlotOrder[a.slotKey] ?? 99;
 
-      const bOrder = threadSlotOrder[b.slotKey] ?? 99;
+        const bOrder = threadSlotOrder[b.slotKey] ?? 99;
 
-      if (aOrder !== bOrder) return aOrder - bOrder;
+        if (aOrder !== bOrder) return aOrder - bOrder;
 
-      return Number(b.score || 0) - Number(a.score || 0);
+        return Number(b.score || 0) - Number(a.score || 0);
+      });
+
+    const toneNeutralSorted = sortRelationships(toneNeutralRelationships);
+
+    const visualSorted = sortRelationships(visualRelationships);
+
+    return toneNeutralSorted.map((relationship) => {
+      if (relationship.slotKey !== 'complex') {
+        return relationship;
+      }
+
+      return (
+        visualSorted.find((item) => item.slotKey === 'complex') || relationship
+      );
     });
-  }, [activeVoiceSummary]);
+  }, [
+    activeVoiceSummary,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+
+    isCompareModeEnabled,
+
+    benchmarkFamilyId,
+
+    benchmarkTypeId,
+
+    benchmarkSizeId,
+  ]);
 
   const selectedThreadId = useMemo(() => {
     if (!keyRelationships.length) return '';
@@ -1702,23 +2101,19 @@ const HeritageProductDetail = () => {
     });
   };
 
-useEffect(() => {
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'development') return;
 
-  if (process.env.NODE_ENV !== 'development') return;
+    window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
 
-  window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
+    window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
 
-  window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
+    window.runHeritageShellThicknessSweep = runHeritageShellThicknessSweep;
 
-  window.runHeritageShellThicknessSweep = runHeritageShellThicknessSweep;
-
-  console.info(
-
-    'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...}), runHeritageShellThicknessSweep({...})'
-
-  );
-
-}, []);
+    console.info(
+      'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...}), runHeritageShellThicknessSweep({...})'
+    );
+  }, []);
 
   useEffect(() => {
     setBenchmarkGlowPulseKey((prev) => prev + 1);
@@ -2009,22 +2404,26 @@ useEffect(() => {
       ? String(depth)
       : availableDepths[0];
 
-    const nextLugs = lugOptions[newSize][0];
-
-    const nextStaves = staveOptions[newSize]?.[nextLugs] || [];
+    const nextStaves = getAvailableStaveOptions(newSize);
 
     const nextStaveOption =
-      nextStaves.find((item) => !item.includes('Re-Rings')) ||
+      nextStaves.find((item) => item === '16 - 10mm') ||
+      nextStaves.find((item) => !hasReRingFromStaveOption(item)) ||
       nextStaves[0] ||
+      '';
+
+    const nextLugs =
+      getAvailableLugsForShellRecipe(newSize, nextStaveOption)[0] ||
+      lugOptions[newSize]?.[0] ||
       '';
 
     setSize(newSize);
 
     setDepth(nextDepth);
 
-    setLugs(nextLugs);
-
     setStaveOption(nextStaveOption);
+
+    setLugs(nextLugs);
   };
 
   const handleDepthSelect = (newDepth) => {
@@ -2034,20 +2433,41 @@ useEffect(() => {
   const handleLugSelect = (newLug) => {
     if (newLug === lugs) return;
 
-    const nextStaves = staveOptions[size]?.[newLug] || [];
+    const isAvailable = isLugAvailableForShellRecipe({
+      selectedSize: size,
 
-    const nextStaveOption =
-      nextStaves.find((item) => !item.includes('Re-Rings')) ||
-      nextStaves[0] ||
-      '';
+      selectedStaveOption: staveOption,
+
+      lugOption: newLug,
+    });
+
+    if (!isAvailable) {
+      toast.error(
+        getUnavailableLugReason({
+          selectedSize: size,
+
+          selectedStaveOption: staveOption,
+
+          lugOption: newLug,
+        }) || 'That lug count is not available for this shell recipe.'
+      );
+
+      return;
+    }
 
     setLugs(newLug);
-
-    setStaveOption(nextStaveOption);
   };
 
   const handleStaveSelect = (option) => {
+    const availableLugs = getAvailableLugsForShellRecipe(size, option);
+
+    const nextLugs = availableLugs.includes(String(lugs))
+      ? String(lugs)
+      : availableLugs[0] || lugs;
+
     setStaveOption(option);
+
+    setLugs(nextLugs);
   };
 
   const renderReferenceSelectorPanel = () => {
@@ -2705,7 +3125,38 @@ useEffect(() => {
                 activeThread={visualThread}
                 compact={false}
                 strengthScore={activeThread.score}
-                profile={activeVoiceSummary?.profile || {}}
+                profile={
+                  activeThread.slotKey === 'complex'
+                    ? activeVoiceSummary?.profile || {}
+                    : buildHeritageVoiceRead({
+                        size,
+
+                        depth,
+
+                        lugs,
+
+                        staveOption,
+
+                        hardwareColor:
+                          HERITAGE_STANDARD_REFERENCE.hardwareColor,
+
+                        hoopType,
+
+                        scorchDepth,
+
+                        benchmarkFamilyId: isCompareModeEnabled
+                          ? benchmarkFamilyId
+                          : DEFAULT_BENCHMARK_FAMILY_ID,
+
+                        benchmarkTypeId: isCompareModeEnabled
+                          ? benchmarkTypeId
+                          : DEFAULT_BENCHMARK_TYPE_ID,
+
+                        benchmarkSizeId: isCompareModeEnabled
+                          ? benchmarkSizeId
+                          : DEFAULT_BENCHMARK_SIZE_ID,
+                      })?.profile || {}
+                }
                 sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
                 currentSpec={activeVoiceSummary?.currentSpec || {}}
                 input={{
@@ -2719,7 +3170,9 @@ useEffect(() => {
 
                   hoopType,
 
-                  hardwareColor,
+                  ...(activeThread.slotKey === 'complex'
+                    ? { hardwareColor }
+                    : {}),
 
                   scorchDepth,
                 }}
@@ -2946,7 +3399,37 @@ useEffect(() => {
           <VoiceThreadMap
             activeThread={activeThread}
             strengthScore={activeThread.score}
-            profile={activeVoiceSummary?.profile || {}}
+            profile={
+              activeThread?.slotKey === 'complex'
+                ? activeVoiceSummary?.profile || {}
+                : buildHeritageVoiceRead({
+                    size,
+
+                    depth,
+
+                    lugs,
+
+                    staveOption,
+
+                    hardwareColor: HERITAGE_STANDARD_REFERENCE.hardwareColor,
+
+                    hoopType,
+
+                    scorchDepth,
+
+                    benchmarkFamilyId: isCompareModeEnabled
+                      ? benchmarkFamilyId
+                      : DEFAULT_BENCHMARK_FAMILY_ID,
+
+                    benchmarkTypeId: isCompareModeEnabled
+                      ? benchmarkTypeId
+                      : DEFAULT_BENCHMARK_TYPE_ID,
+
+                    benchmarkSizeId: isCompareModeEnabled
+                      ? benchmarkSizeId
+                      : DEFAULT_BENCHMARK_SIZE_ID,
+                  })?.profile || {}
+            }
             sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
             currentSpec={activeVoiceSummary?.currentSpec || {}}
             input={{
@@ -2960,7 +3443,7 @@ useEffect(() => {
 
               hoopType,
 
-              hardwareColor,
+              ...(activeThread?.slotKey === 'complex' ? { hardwareColor } : {}),
 
               scorchDepth,
             }}
@@ -3151,7 +3634,13 @@ useEffect(() => {
 
                 {openBuilderSection === 'construction' && (
                   <div className="heritage-builder-section-body">
-                    <label>Snare Size (Diameter)</label>
+                    <div className="heritage-builder-field-intro">
+                      <label>Snare Size</label>
+
+                      <strong>{BUILDER_GUIDANCE.diameter.question}</strong>
+
+                      <p>{BUILDER_GUIDANCE.diameter.helper}</p>
+                    </div>
 
                     <div className="heritage-option-grid heritage-option-grid-compact heritage-option-grid--size">
                       {Object.keys(basePrices).map((sizeOption) => {
@@ -3174,6 +3663,14 @@ useEffect(() => {
                               {sizeOption}"
                             </span>
 
+                            <span className="heritage-option-guide-title">
+                              {SIZE_GUIDE_COPY[sizeOption]?.title}
+                            </span>
+
+                            <span className="heritage-option-guide-copy">
+                              {SIZE_GUIDE_COPY[sizeOption]?.body}
+                            </span>
+
                             {(isSelected || deltaMeta.text) && (
                               <span
                                 className={`heritage-option-meta ${
@@ -3190,7 +3687,13 @@ useEffect(() => {
                       })}
                     </div>
 
-                    <label>Depth</label>
+                    <div className="heritage-builder-field-intro">
+                      <label>Depth</label>
+
+                      <strong>{BUILDER_GUIDANCE.depth.question}</strong>
+
+                      <p>{BUILDER_GUIDANCE.depth.helper}</p>
+                    </div>
 
                     <div className="heritage-option-grid heritage-option-grid-compact heritage-option-grid--depth">
                       {Object.keys(depthPrices[size]).map((depthOption) => {
@@ -3213,6 +3716,10 @@ useEffect(() => {
                               {depthOption}"
                             </span>
 
+                            {renderOptionGuideCopy(
+                              DEPTH_GUIDE_COPY[depthOption]
+                            )}
+
                             {(isSelected || deltaMeta.text) && (
                               <span
                                 className={`heritage-option-meta ${
@@ -3229,57 +3736,18 @@ useEffect(() => {
                       })}
                     </div>
 
-                    <label>Lug Quantity</label>
+                    <div className="heritage-builder-field-intro">
+                      <label>Shell Thickness</label>
 
-                    <div className="heritage-option-grid heritage-option-grid-compact">
-                      {lugOptions[size].map((lugOption) => {
-                        const isSelected = lugs === lugOption;
+                      <strong>
+                        {BUILDER_GUIDANCE.shellThickness.question}
+                      </strong>
 
-                        const requiresReRingsForThisLugChoice =
-                          String(size) === '12' && String(lugOption) === '6';
-
-                        return (
-                          <button
-                            key={lugOption}
-                            type="button"
-                            className={`heritage-option-tile heritage-option-tile-detail ${
-                              isSelected ? 'is-selected' : ''
-                            }`}
-                            onClick={() => handleLugSelect(lugOption)}
-                          >
-                            <span className="heritage-option-title">
-                              {lugOption} Lugs
-                            </span>
-
-                            {requiresReRingsForThisLugChoice && (
-                              <span className="heritage-option-subtitle">
-                                Re-rings required
-                              </span>
-                            )}
-
-                            {(isSelected ||
-                              requiresReRingsForThisLugChoice) && (
-                              <span
-                                className={`heritage-option-meta ${
-                                  isSelected ? 'is-selected' : 'is-positive'
-                                }`}
-                              >
-                                {isSelected
-                                  ? requiresReRingsForThisLugChoice
-                                    ? 'Selected • +$150'
-                                    : 'Selected'
-                                  : '+$150'}
-                              </span>
-                            )}
-                          </button>
-                        );
-                      })}
+                      <p>{BUILDER_GUIDANCE.shellThickness.helper}</p>
                     </div>
 
-                    <label>Stave Quantity &amp; Shell Thickness</label>
-
                     <div className="heritage-option-grid">
-                      {(staveOptions[size]?.[lugs] || []).map((option) => {
+                      {getAvailableStaveOptions(size).map((option) => {
                         const isSelected = staveOption === option;
 
                         const deltaMeta = getOptionDeltaMeta({
@@ -3289,12 +3757,12 @@ useEffect(() => {
                         const requiresReRings =
                           hasReRingFromStaveOption(option);
 
-                        const isImplicitReRingPath =
-                          String(size) === '12' &&
-                          String(lugs) === '6' &&
-                          (staveOptions[size]?.[lugs] || []).length === 1;
+                        const isImplicitReRingPath = false;
 
                         const thicknessLabel = getStaveThicknessLabel(option);
+
+                        const reRingRequired =
+                          requiresReRings || isImplicitReRingPath;
 
                         return (
                           <button
@@ -3306,29 +3774,108 @@ useEffect(() => {
                             onClick={() => handleStaveSelect(option)}
                           >
                             <span className="heritage-option-title">
-                              {getStaveCountLabel(option)}
+                              {thicknessLabel}
                             </span>
 
                             <span className="heritage-option-subtitle">
-                              {thicknessLabel}
+                              {getStaveCountLabel(option)}
 
-                              {requiresReRings ? ' • Re-Rings required' : ''}
+                              {reRingRequired ? ' • Re-Rings required' : ''}
                             </span>
 
-                            {!isImplicitReRingPath &&
-                              (isSelected || deltaMeta.text) && (
-                                <span
-                                  className={`heritage-option-meta ${
-                                    isSelected
-                                      ? 'is-selected'
-                                      : deltaMeta.className
-                                  }`}
-                                >
-                                  {isSelected ? 'Selected' : deltaMeta.text}
-                                </span>
-                              )}
+                            {renderOptionGuideCopy(
+                              SHELL_THICKNESS_GUIDE_COPY[thicknessLabel]
+                            )}
 
-                            {isImplicitReRingPath && isSelected && (
+                            {(isSelected ||
+                              deltaMeta.text ||
+                              reRingRequired) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className || 'is-positive'
+                                }`}
+                              >
+                                {isSelected
+                                  ? reRingRequired
+                                    ? 'Selected • +$150'
+                                    : 'Selected'
+                                  : reRingRequired
+                                    ? '+$150'
+                                    : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="heritage-builder-field-intro">
+                      <label>Lug Quantity</label>
+
+                      <strong>{BUILDER_GUIDANCE.lugQuantity.question}</strong>
+
+                      <p>{BUILDER_GUIDANCE.lugQuantity.helper}</p>
+                    </div>
+
+                    <div className="heritage-option-grid heritage-option-grid-compact">
+                      {lugOptions[size].map((lugOption) => {
+                        const isSelected = lugs === lugOption;
+
+                        const isAvailable = isLugAvailableForShellRecipe({
+                          selectedSize: size,
+
+                          selectedStaveOption: staveOption,
+
+                          lugOption,
+                        });
+
+                        const matchingShellForThisLug =
+                          getAvailableStaveOptions(size).find((option) =>
+                            getAvailableLugsForShellRecipe(
+                              size,
+                              option
+                            ).includes(String(lugOption))
+                          );
+
+                        const matchingShellLabel = matchingShellForThisLug
+                          ? `${getStaveThicknessLabel(matchingShellForThisLug)} / ${getStaveCountLabel(
+                              matchingShellForThisLug
+                            )}`
+                          : '';
+
+                        return (
+                          <button
+                            key={lugOption}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            } ${!isAvailable ? 'is-disabled' : ''}`}
+                            onClick={() => {
+                              if (!isAvailable) {
+                                setLugHelperPulseKey((prev) => prev + 1);
+
+                                return;
+                              }
+
+                              handleLugSelect(lugOption);
+                            }}
+                          >
+                            <span className="heritage-option-title">
+                              {lugOption} Lugs
+                            </span>
+
+                            {!isAvailable && matchingShellLabel && (
+                              <span className="heritage-option-subtitle">
+                                Available with {matchingShellLabel}
+                              </span>
+                            )}
+
+                            {isAvailable &&
+                              renderOptionGuideCopy(LUG_GUIDE_COPY[lugOption])}
+
+                            {isSelected && (
                               <span className="heritage-option-meta is-selected">
                                 Selected
                               </span>
@@ -3336,6 +3883,59 @@ useEffect(() => {
                           </button>
                         );
                       })}
+                    </div>
+
+                    <p
+                      key={lugHelperPulseKey}
+                      className={`heritage-shell-lug-helper ${
+                        lugHelperPulseKey > 0 ? 'is-pulsing' : ''
+                      }`}
+                    >
+                      Lug count is matched to the selected shell recipe for even
+                      head tension, stable tuning, and proper stave-shell
+                      response.
+                      <span className="heritage-shell-lug-info-wrap">
+                        <button
+                          type="button"
+                          className="heritage-shell-lug-info-button"
+                          aria-label="Why lug count is matched to shell recipe"
+                          onClick={(event) => {
+                            event.stopPropagation();
+
+                            event.currentTarget.blur();
+                          }}
+                        >
+                          ?
+                        </button>
+
+                        <span
+                          className="heritage-shell-lug-tooltip"
+                          role="tooltip"
+                        >
+                          Thinner or lower-stave shells flex and breathe
+                          differently than thicker, higher-stave shells.
+                          Matching the lug count to the shell recipe helps the
+                          head pull evenly around the drum, keeps tension
+                          balanced across the stave joints, and protects the
+                          intended Heritage voice.
+                        </span>
+                      </span>
+                    </p>
+
+                    <div className="heritage-builder-note-card heritage-builder-note-card--foundation">
+                      <span>Heritage-standard edge profile</span>
+
+                      <p>
+                        Heritage comes with a fixed 45° inner bearing edge and a
+                        softened outer roundover to keep the line grounded,
+                        consistent, and unmistakably classic.
+                      </p>
+
+                      <p>
+                        Standard snare beds are included as part of the Heritage
+                        voice, giving each build a familiar response while
+                        preserving the shell-first character of the drum.
+                      </p>
                     </div>
 
                     <div className="heritage-builder-next-row">
@@ -3396,7 +3996,13 @@ useEffect(() => {
 
                 {openBuilderSection === 'finish' && (
                   <div className="heritage-builder-section-body">
-                    <label>Finish Scorch Depth</label>
+                    <div className="heritage-builder-field-intro">
+                      <label>{BUILDER_GUIDANCE.finish.label}</label>
+
+                      <strong>{BUILDER_GUIDANCE.finish.question}</strong>
+
+                      <p>{BUILDER_GUIDANCE.finish.helper}</p>
+                    </div>
 
                     <div className="heritage-finish-swatch-grid">
                       {scorchOptions.map((option) => {
@@ -3427,6 +4033,8 @@ useEffect(() => {
                               {option}
                             </span>
 
+                            {renderOptionGuideCopy(FINISH_GUIDE_COPY[option])}
+
                             {isSelected && (
                               <span className="heritage-option-meta is-selected">
                                 Selected
@@ -3437,17 +4045,29 @@ useEffect(() => {
                       })}
                     </div>
 
-                    <p className="heritage-select-helper">
-                      Heritage uses a standard snare bed and a fixed 45° inner
-                      bearing edge with a softened outer roundover to keep the
-                      line grounded, consistent, and unmistakably classic.
-                    </p>
+                    <div className="heritage-builder-note-card heritage-builder-note-card--torchtune">
+                      <span>Ober TorchTune™ process</span>
 
-                    <p className="heritage-swatch-disclaimer">
-                      Swatches are a general visual guide. Final Heritage finish
-                      character can vary based on wood grain, natural
-                      absorption, torch response, and the unique behavior of
-                      each shell.
+                      <p>
+                        Heritage finishes are not just cosmetic. Each shell is
+                        finished through Ober’s controlled TorchTune™ process,
+                        where scorch depth, wood grain, absorption, and shell
+                        behavior are handled by eye, ear, and feel.
+                      </p>
+
+                      <button
+                        type="button"
+                        className="heritage-builder-inline-link"
+                        onClick={() => navigate('/our-craft')}
+                      >
+                        Learn more about TorchTune™
+                      </button>
+                    </div>
+
+                    <p className="heritage-swatch-disclaimer heritage-swatch-disclaimer--subtle">
+                      Swatches are visual references only. Final finish
+                      character will vary with wood grain, natural absorption,
+                      torch response, and the unique behavior of each shell.
                     </p>
 
                     <div className="heritage-builder-next-row">
@@ -3508,7 +4128,66 @@ useEffect(() => {
 
                 {openBuilderSection === 'hardware' && (
                   <div className="heritage-builder-section-body">
-                    <label>Hardware Finish</label>
+                    <div className="heritage-builder-field-intro">
+                      <label>{BUILDER_GUIDANCE.hoopType.label}</label>
+
+                      <strong>{BUILDER_GUIDANCE.hoopType.question}</strong>
+
+                      <p>{BUILDER_GUIDANCE.hoopType.helper}</p>
+                    </div>
+
+                    <div className="heritage-option-grid heritage-option-grid--hoop-type">
+                      {hoopOptions.map((option) => {
+                        const isSelected = hoopType === option.value;
+
+                        const deltaMeta = getOptionDeltaMeta({
+                          hoopType: option.value,
+                        });
+
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            className={`heritage-option-tile heritage-option-tile-detail ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                            onClick={() => {
+                              setHoopType(option.value);
+                            }}
+                          >
+                            <span className="heritage-option-title">
+                              {option.label}
+                            </span>
+
+                            {renderOptionGuideCopy(
+                              HOOP_GUIDE_COPY[option.value]
+                            )}
+
+                            {(isSelected || deltaMeta.text) && (
+                              <span
+                                className={`heritage-option-meta ${
+                                  isSelected
+                                    ? 'is-selected'
+                                    : deltaMeta.className
+                                }`}
+                              >
+                                {isSelected ? 'Selected' : deltaMeta.text}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="heritage-builder-field-intro">
+                      <label>{BUILDER_GUIDANCE.hardwareFinish.label}</label>
+
+                      <strong>
+                        {BUILDER_GUIDANCE.hardwareFinish.question}
+                      </strong>
+
+                      <p>{BUILDER_GUIDANCE.hardwareFinish.helper}</p>
+                    </div>
 
                     <div className="heritage-option-grid heritage-option-grid--hardware-finish">
                       {hardwareOptions.map((option) => {
@@ -3533,9 +4212,9 @@ useEffect(() => {
                               {option.label}
                             </span>
 
-                            <span className="heritage-option-subtitle">
-                              {option.description}
-                            </span>
+                            {renderOptionGuideCopy(
+                              HARDWARE_GUIDE_COPY[option.value]
+                            )}
 
                             {(isSelected || deltaMeta.text) && (
                               <span
@@ -3553,62 +4232,21 @@ useEffect(() => {
                       })}
                     </div>
 
-                    <label>Hoop Type</label>
+                    <div className="heritage-builder-note-card heritage-builder-note-card--hardware">
+                      <span>Stock Heritage hardware package</span>
 
-                    <div className="heritage-option-grid">
-                      {hoopOptions.map((option) => {
-                        const isSelected = hoopType === option.value;
+                      <p>
+                        Every Heritage build comes stock with the Trick GS007
+                        throw-off, Remo Ambassador Coated batter head, Remo
+                        Ambassador Hazy Snare Side, and PureSound Custom Pro
+                        Steel 20-Strand wires.
+                      </p>
 
-                        const deltaMeta = getOptionDeltaMeta({
-                          hoopType: option.value,
-                        });
-
-                        return (
-                          <button
-                            key={option.value}
-                            type="button"
-                            className={`heritage-option-tile heritage-option-tile-detail ${
-                              isSelected ? 'is-selected' : ''
-                            }`}
-                            onClick={() => {
-                              setHoopType(option.value);
-                            }}
-                          >
-                            <span className="heritage-option-title">
-                              {option.label}
-                            </span>
-
-                            <span className="heritage-option-subtitle">
-                              {option.description}
-                            </span>
-
-                            {(isSelected || deltaMeta.text) && (
-                              <span
-                                className={`heritage-option-meta ${
-                                  isSelected
-                                    ? 'is-selected'
-                                    : deltaMeta.className
-                                }`}
-                              >
-                                {isSelected ? 'Selected' : deltaMeta.text}
-                              </span>
-                            )}
-                          </button>
-                        );
-                      })}
+                      <p>
+                        Hoop choice shapes response first. Hardware finish
+                        shapes the visual voice last.
+                      </p>
                     </div>
-
-                    <p className="heritage-select-helper">
-                      Heritage uses standard snare beds and a fixed
-                      Heritage-standard bearing edge to keep the line grounded,
-                      consistent, and unmistakably classic.
-                    </p>
-
-                    <p className="heritage-select-helper">
-                      The standard Heritage reference uses Remo Ambassador
-                      Coated batter, Remo Ambassador Hazy Snare Side, and
-                      PureSound Custom Pro Steel 20-Strand wires.
-                    </p>
 
                     <div className="heritage-builder-next-row heritage-builder-next-row--review">
                       <button
@@ -3657,9 +4295,8 @@ useEffect(() => {
                   </span>
 
                   <span className="heritage-config-selection-value">
-                    {size}" × {depth}" • {lugs} lugs •{' '}
-                    {getStaveCountLabel(staveOption)} •{' '}
-                    {getStaveThicknessLabel(staveOption)}
+                    {size}" × {depth}" • {getStaveThicknessLabel(staveOption)} •{' '}
+                    {getStaveCountLabel(staveOption)} • {lugs} lugs
                   </span>
                 </div>
 
