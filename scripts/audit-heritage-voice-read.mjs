@@ -496,7 +496,7 @@ const auditSingleRead = (row) => {
     const value = getAxis(read, axis);
 
     if (!Number.isFinite(value) || value < 1 || value > 10) {
-      addIssue('critical', 'voicemap-range', `${axis} is out of range.`, row, {
+      addIssue('critical', 'VoiceMapping-range', `${axis} is out of range.`, row, {
         axis,
         value,
       });
@@ -507,7 +507,7 @@ const auditSingleRead = (row) => {
     addIssue(
       'critical',
       'voice-threads',
-      'No Voice Threads were returned.',
+      'No Voice Threading were returned.',
       row
     );
   }
@@ -519,7 +519,7 @@ const auditSingleRead = (row) => {
     addIssue(
       'critical',
       'voice-threads',
-      'Voice Threads reused a slot instead of returning simple/shaped/complex coverage.',
+      'Voice Threading reused a slot instead of returning simple/shaped/complex coverage.',
       row,
       { slots: slotKeys.join(', ') }
     );
@@ -560,7 +560,7 @@ const auditSingleRead = (row) => {
         addIssue(
           'error',
           'voice-thread-contradiction',
-          `Top Voice Thread "${activeThread.title}" asks for ${axis} ${direction}, but the VoiceMap is strongly opposite.`,
+          `Top Voice Thread "${activeThread.title}" asks for ${axis} ${direction}, but the VoiceMapping is strongly opposite.`,
           row,
           {
             threadId: activeThread.id,
@@ -629,7 +629,7 @@ const auditSingleRead = (row) => {
   if (!isReferenceLike(input) && row.spread < 0.38) {
     addIssue(
       'warning',
-      'voicemap-flatness',
+      'VoiceMapping-flatness',
       'Non-reference configuration is reading very close to flat.',
       row,
       { spread: row.spread, movementScore: row.movementScore }
@@ -770,7 +770,7 @@ const compareHardwareInvariance = (rows) => {
           addIssue(
             'critical',
             'hardware-invariance',
-            `Hardware finish changed acoustic VoiceMap axis ${axis}.`,
+            `Hardware finish changed acoustic VoiceMapping axis ${axis}.`,
             row,
             {
               base: labelInput(base.input),
@@ -1109,7 +1109,7 @@ console.table({
   uniqueTopThreads: Object.keys(relationshipCounts).length,
 });
 
-console.log('\nVoiceMap axis ranges across all configs:');
+console.log('\nVoiceMapping axis ranges across all configs:');
 console.table(rangeSummary);
 
 console.log('\nTop Voice Thread distribution:');

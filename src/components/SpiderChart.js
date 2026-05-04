@@ -198,7 +198,7 @@ function createInteriorGradient(
 
   colors = DEFAULT_POINT_COLORS,
 
-  voiceMapVariant = 'player'
+  VoiceMappingVariant = 'player'
 
 ) {
 
@@ -206,7 +206,7 @@ function createInteriorGradient(
 
   if (!chartArea) return 'rgba(120, 190, 220, 0.12)';
 
-  if (voiceMapVariant === 'firstTell') {
+  if (VoiceMappingVariant === 'firstTell') {
 
     return 'rgba(0, 0, 0, 0)';
 
@@ -1042,7 +1042,7 @@ function createGradientRadarPlugin({
 
   modeRef,
 
-  voiceMapVariantRef,
+  VoiceMappingVariantRef,
 
   firstTellKeysRef,
 
@@ -1066,11 +1066,11 @@ function createGradientRadarPlugin({
 
       const mode = modeRef.current || 'standalone';
 
-      const voiceMapVariant = voiceMapVariantRef.current || 'player';
+      const VoiceMappingVariant = VoiceMappingVariantRef.current || 'player';
 
       const values = chart.data?.datasets?.[0]?.data || [];
 
-      if (voiceMapVariant === 'firstTell') {
+      if (VoiceMappingVariant === 'firstTell') {
 
         drawColoredOuterPolygon(ctx, scale, pointColors);
 
@@ -1092,7 +1092,7 @@ function createGradientRadarPlugin({
 
       }
 
-      if (voiceMapVariant === 'legacyprint') {
+      if (VoiceMappingVariant === 'legacyprint') {
 
         drawLegacyPrintShape({
 
@@ -1210,7 +1210,7 @@ const SpiderChart = ({
 
   /**
 
-   * VoiceMap variants:
+   * VoiceMapping variants:
 
    * - player: current filled/glowing spider read
 
@@ -1218,7 +1218,7 @@ const SpiderChart = ({
 
    */
 
-  voiceMapVariant = 'player',
+  VoiceMappingVariant = 'player',
 
   firstTellKeys = [],
 
@@ -1234,7 +1234,7 @@ const SpiderChart = ({
 
   const modeRef = useRef(mode);
 
-  const voiceMapVariantRef = useRef(voiceMapVariant);
+  const VoiceMappingVariantRef = useRef(VoiceMappingVariant);
 
   const firstTellKeysRef = useRef(firstTellKeys);
 
@@ -1244,7 +1244,7 @@ const SpiderChart = ({
 
   const isCompareMode = mode === 'compare';
 
-  const isFirstTell = voiceMapVariant === 'firstTell';
+  const isFirstTell = VoiceMappingVariant === 'firstTell';
 
   const overlayAxes = useMemo(
 
@@ -1350,7 +1350,7 @@ const SpiderChart = ({
 
   useEffect(() => {
 
-    voiceMapVariantRef.current = voiceMapVariant;
+    VoiceMappingVariantRef.current = VoiceMappingVariant;
 
     if (chartInstanceRef.current) {
 
@@ -1358,7 +1358,7 @@ const SpiderChart = ({
 
     }
 
-  }, [voiceMapVariant]);
+  }, [VoiceMappingVariant]);
 
   useEffect(() => {
 
@@ -1396,7 +1396,7 @@ const SpiderChart = ({
 
       modeRef,
 
-      voiceMapVariantRef,
+      VoiceMappingVariantRef,
 
       firstTellKeysRef,
 
@@ -1446,7 +1446,7 @@ const SpiderChart = ({
 
             label:
 
-              voiceMapVariantRef.current === 'firstTell'
+              VoiceMappingVariantRef.current === 'firstTell'
 
                 ? 'First Tell'
 
@@ -1470,7 +1470,7 @@ const SpiderChart = ({
 
                 pointColors,
 
-                voiceMapVariantRef.current
+                VoiceMappingVariantRef.current
 
               );
 
@@ -1692,13 +1692,13 @@ const SpiderChart = ({
 
     chart.data.datasets[0].label =
 
-      voiceMapVariant === 'firstTell' ? 'First Tell' : 'Current Build';
+      VoiceMappingVariant === 'firstTell' ? 'First Tell' : 'Current Build';
 
     chart.data.datasets[0].data = data;
 
     chart.data.datasets[0].rawData = data;
 
-    chart.data.datasets[0].fill = voiceMapVariant !== 'firstTell';
+    chart.data.datasets[0].fill = VoiceMappingVariant !== 'firstTell';
 
     chart.data.datasets[0].backgroundColor = (context) => {
 
@@ -1712,7 +1712,7 @@ const SpiderChart = ({
 
         pointColors,
 
-        voiceMapVariant
+        VoiceMappingVariant
 
       );
 
@@ -1720,7 +1720,7 @@ const SpiderChart = ({
 
     chart.options.scales.r.grid.color =
 
-      voiceMapVariant === 'firstTell'
+      VoiceMappingVariant === 'firstTell'
 
         ? 'rgba(255,255,255,0)'
 
@@ -1732,7 +1732,7 @@ const SpiderChart = ({
 
     chart.options.scales.r.angleLines.color =
 
-      voiceMapVariant === 'firstTell'
+      VoiceMappingVariant === 'firstTell'
 
         ? 'rgba(255,255,255,0)'
 
@@ -1750,7 +1750,7 @@ const SpiderChart = ({
 
     }, 40);
 
-  }, [data, compact, pointColors, overlayAxes, isCompareMode, voiceMapVariant]);
+  }, [data, compact, pointColors, overlayAxes, isCompareMode, VoiceMappingVariant]);
 
   return (
 
@@ -1768,7 +1768,7 @@ const SpiderChart = ({
 
           : 'spider-chart-card--standalone'
 
-      } spider-chart-card--${voiceMapVariant}`}
+      } spider-chart-card--${VoiceMappingVariant}`}
 
     >
 
@@ -1780,7 +1780,7 @@ const SpiderChart = ({
 
           compact ? 'spider-chart-frame--compact' : ''
 
-        } spider-chart-frame--${voiceMapVariant}`}
+        } spider-chart-frame--${VoiceMappingVariant}`}
 
       >
 
@@ -1792,13 +1792,13 @@ const SpiderChart = ({
 
             <span className="spider-chart-legend-text">
 
-              {voiceMapVariant === 'firstTell' ? 'First Tell' : 'Current Build'}
+              {VoiceMappingVariant === 'firstTell' ? 'First Tell' : 'Current Build'}
 
             </span>
 
           </div>
 
-          {isCompareMode && voiceMapVariant !== 'firstTell' && (
+          {isCompareMode && VoiceMappingVariant !== 'firstTell' && (
 
             <div className="spider-chart-legend-item">
 

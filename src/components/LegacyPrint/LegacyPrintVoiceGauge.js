@@ -9,7 +9,7 @@ import {
 
   MetricIcon,
 
-} from './legacyPrintVoiceMapData';
+} from './legacyPrintVoiceMappingData';
 
 const GAUGE_VIEWS = [
 

@@ -5,9 +5,9 @@
 
 Stabilize and validate the Heritage LegacyPrint system:
 
-- VoiceMap
+- VoiceMapping
 
-- Voice Threads
+- Voice Threading
 
 - LegacyTuning
 
@@ -41,7 +41,7 @@ Work from terminal and direct file edits only.
 
 Create a proper terminal audit workflow for Heritage so we can validate:
 
-1. VoiceMap axis movement
+1. VoiceMapping axis movement
 
 2. Voice Thread top/current relationships
 

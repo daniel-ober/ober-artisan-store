@@ -140,13 +140,13 @@
 
 }
 
-.heritage-voice-thread-map--voicemap .heritage-voice-thread-line--base {
+.heritage-voice-thread-map--VoiceMapping .heritage-voice-thread-line--base {
 
   opacity: 0.055;
 
 }
 
-.heritage-voice-thread-map--voicemap .heritage-voice-thread-outer-line {
+.heritage-voice-thread-map--VoiceMapping .heritage-voice-thread-outer-line {
 
   opacity: 0.09;
 
@@ -1041,5 +1041,1631 @@
     transition: none;
 
   }
+
+}
+
+/* =========================================================
+
+   OBER FINAL — Voice Thread / Player Read Spider Spokes
+
+   Clean colored spider lines from center to each voice node
+
+   ========================================================= */
+
+.heritage-voice-thread-spoke-layer {
+
+  pointer-events: none !important;
+
+}
+
+.heritage-voice-thread-spoke {
+
+  vector-effect: non-scaling-stroke !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  fill: none !important;
+
+}
+
+.heritage-voice-thread-spoke--base {
+
+  stroke-width: 0.9 !important;
+
+  opacity: 0.18 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-spoke--active {
+
+  stroke-width: 1.35 !important;
+
+  opacity: 0.54 !important;
+
+  filter:
+
+    drop-shadow(0 0 4px currentColor)
+
+    drop-shadow(0 0 10px currentColor) !important;
+
+}
+
+.heritage-thread-single-read-visual .heritage-voice-thread-spoke--base,
+
+.heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--base {
+
+  opacity: 0.2 !important;
+
+  stroke-width: 0.95 !important;
+
+}
+
+.heritage-thread-single-read-visual .heritage-voice-thread-spoke--active,
+
+.heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--active {
+
+  opacity: 0.62 !important;
+
+  stroke-width: 1.45 !important;
+
+}
+
+/* Keep First Tell triangle cleaner / less busy */
+
+.heritage-voice-thread-map--simple .heritage-voice-thread-spoke--base {
+
+  opacity: 0.11 !important;
+
+  stroke-width: 0.75 !important;
+
+}
+
+.heritage-voice-thread-map--simple .heritage-voice-thread-spoke--active {
+
+  opacity: 0.34 !important;
+
+  stroke-width: 1.05 !important;
+
+}
+
+/* Player Read should show the full spider framework clearly */
+
+.heritage-voice-thread-map--player .heritage-voice-thread-spoke--base,
+
+.heritage-voice-thread-active-shape--read-player
+
+  ~ .heritage-voice-thread-node-layer
+
+  .heritage-voice-thread-spoke--base {
+
+  opacity: 0.22 !important;
+
+}
+
+/* LegacyPrint fingerprint stays moodier */
+
+.heritage-voice-thread-map--legacyprint .heritage-voice-thread-spoke--base {
+
+  opacity: 0.14 !important;
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-spoke--base {
+
+  opacity: 0.1 !important;
+
+  stroke-width: 0.7 !important;
+
+}
+
+.heritage-voice-thread-map--compact .heritage-voice-thread-spoke--active {
+
+  opacity: 0.26 !important;
+
+  stroke-width: 0.95 !important;
+
+}
+
+@media (max-width: 768px) {
+
+  .heritage-thread-single-read-visual .heritage-voice-thread-spoke--base,
+
+  .heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--base {
+
+    opacity: 0.15 !important;
+
+    stroke-width: 0.75 !important;
+
+  }
+
+  .heritage-thread-single-read-visual .heritage-voice-thread-spoke--active,
+
+  .heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--active {
+
+    opacity: 0.44 !important;
+
+    stroke-width: 1.1 !important;
+
+  }
+
+}
+
+.heritage-voice-thread-spider-line {
+
+  stroke: rgba(214, 178, 119, 0.18);
+
+  stroke-width: 1.15;
+
+  stroke-linecap: round;
+
+  vector-effect: non-scaling-stroke;
+
+  filter: drop-shadow(0 0 8px rgba(214, 178, 119, 0.16));
+
+}
+
+.heritage-VoiceMapping-relationship-graph-shell--player
+
+  .heritage-voice-thread-spider-line {
+
+  opacity: 1;
+
+}
+
+.heritage-VoiceMapping-relationship-graph-shell--firstTell
+
+  .heritage-voice-thread-spider-line,
+
+.heritage-VoiceMapping-relationship-graph-shell--legacyprint
+
+  .heritage-voice-thread-spider-line {
+
+  opacity: 0;
+
+}
+
+.heritage-voice-thread-spider-grid {
+
+  pointer-events: none;
+
+}
+
+.heritage-voice-thread-spider-grid-ring {
+
+  fill: none;
+
+  stroke: rgba(214, 178, 119, 0.16);
+
+  stroke-width: 0.75;
+
+  vector-effect: non-scaling-stroke;
+
+}
+
+.heritage-voice-thread-spider-grid-ring--1,
+
+.heritage-voice-thread-spider-grid-ring--2,
+
+.heritage-voice-thread-spider-grid-ring--3 {
+
+  stroke-opacity: 0.28;
+
+}
+
+.heritage-voice-thread-spider-grid-ring--4,
+
+.heritage-voice-thread-spider-grid-ring--5,
+
+.heritage-voice-thread-spider-grid-ring--6,
+
+.heritage-voice-thread-spider-grid-ring--7 {
+
+  stroke-opacity: 0.42;
+
+}
+
+.heritage-voice-thread-spider-grid-ring--8,
+
+.heritage-voice-thread-spider-grid-ring--9 {
+
+  stroke-opacity: 0.58;
+
+}
+
+.heritage-voice-thread-spider-grid-ring--10 {
+
+  stroke: rgba(214, 178, 119, 0.28);
+
+  stroke-width: 1.05;
+
+  stroke-opacity: 0.8;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — COLORED SPIDER MAP POLISH
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
+
+  opacity: 1;
+
+}
+
+/* Outer polygon edges */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
+
+  opacity: 0.42;
+
+  stroke-width: 1.45;
+
+  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.16));
+
+}
+
+/* Center-to-node radial lines */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.32;
+
+  stroke-width: 1.05;
+
+  stroke-linecap: round;
+
+  mix-blend-mode: screen;
+
+  filter: drop-shadow(0 0 5px currentColor);
+
+}
+
+/* Hide the all-to-all background connector web in Player Read */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-line--base {
+
+  display: none;
+
+}
+
+/* Anchor dots around the polygon */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.9;
+
+  filter: drop-shadow(0 0 8px currentColor);
+
+}
+
+/* Node icons — bring back node color presence */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  opacity: 0.9;
+
+  filter:
+
+    drop-shadow(0 0 7px currentColor)
+
+    drop-shadow(0 0 18px currentColor);
+
+}
+
+/* Non-active icons stay present but quieter */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node:not(.is-active)
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.54;
+
+}
+
+/* Active node icons pop more */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 1;
+
+}
+
+/* Active shape halo — bigger colored aura */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
+
+  opacity: 0.24 !important;
+
+  mix-blend-mode: screen;
+
+}
+
+/* Active shape glow — main colored body */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
+
+  opacity: 0.72 !important;
+
+  mix-blend-mode: screen;
+
+}
+
+/* Active shape core — cleaner bright read line */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
+
+  opacity: 0.98 !important;
+
+  stroke-width: 5.8;
+
+}
+
+/* Thin highlight line */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.36 !important;
+
+  stroke: rgba(255, 244, 210, 0.72);
+
+}
+
+/* Let each segment's node colors show more strongly */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment {
+
+  mix-blend-mode: screen;
+
+}
+
+/* Make Player Read feel alive, but not as aggressive as First Tell */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-segment--rank-0
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.82 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-segment--rank-1
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.68 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-segment--rank-2
+
+  .heritage-voice-thread-shape-glow {
+
+  opacity: 0.56 !important;
+
+}
+
+/* Keep the chart centered and contained visually */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-svg {
+
+  overflow: visible;
+
+}
+
+.heritage-voice-thread-map--read-player {
+
+  --player-map-vignette: radial-gradient(
+
+    circle at 50% 50%,
+
+    rgba(214, 178, 119, 0.055),
+
+    rgba(0, 0, 0, 0) 58%
+
+  );
+
+}
+
+.heritage-voice-thread-map--read-player::before {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: var(--player-map-vignette);
+
+  opacity: 0.9;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — MULTICOLOR, NO HEAVY GLOW
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
+
+  opacity: 1;
+
+}
+
+/* Hide all-to-all background web in Player Read */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-line--base {
+
+  display: none;
+
+}
+
+/* Outer polygon */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
+
+  opacity: 0.34;
+
+  stroke-width: 1.25;
+
+  filter: none;
+
+}
+
+/* Center/radial spider slices */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.2;
+
+  stroke-width: 0.9;
+
+  stroke-linecap: round;
+
+  filter: none;
+
+}
+
+/* Node anchor dots */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.76;
+
+  filter: none;
+
+}
+
+/* Node icons: colored, but not glowing */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  opacity: 0.72;
+
+  filter: none;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.95;
+
+}
+
+/* Kill the oversized gold aura */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
+
+  opacity: 0.08 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+}
+
+/* Keep colored body, but soft */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
+
+  opacity: 0.22 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+}
+
+/* Main colored outline */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
+
+  opacity: 0.94 !important;
+
+  stroke-width: 4.6;
+
+  filter: none !important;
+
+}
+
+/* Small cream highlight, not dominant */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.14 !important;
+
+  stroke-width: 0.9;
+
+  filter: none !important;
+
+}
+
+/* Segment group stays normal so gradients show naturally */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment {
+
+  mix-blend-mode: normal;
+
+}
+
+/* No extra map vignette */
+
+.heritage-voice-thread-map--read-player::before {
+
+  display: none;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — FINAL CLEAN MULTICOLOR SPIDER MAP
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player {
+
+  --player-grid-color: rgba(214, 178, 119, 0.18);
+
+}
+
+.heritage-voice-thread-map--read-player::before {
+
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
+
+  opacity: 1;
+
+}
+
+/* Hide all-to-all thread web for Player Read only */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  display: none !important;
+
+}
+
+/* 10 internal spider rings */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-grid-ring {
+
+  fill: none;
+
+  stroke: rgba(214, 178, 119, 0.16);
+
+  stroke-width: 0.75;
+
+  vector-effect: non-scaling-stroke;
+
+  opacity: 0.42;
+
+  filter: none;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--1,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--2,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--3 {
+
+  opacity: 0.22;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--4,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--5,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--6,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--7 {
+
+  opacity: 0.34;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--8,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--9 {
+
+  opacity: 0.46;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--10 {
+
+  stroke: rgba(214, 178, 119, 0.26);
+
+  stroke-width: 1.05;
+
+  opacity: 0.62;
+
+}
+
+/* 7 center-to-node slices */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.24;
+
+  stroke-width: 0.85;
+
+  stroke-linecap: round;
+
+  vector-effect: non-scaling-stroke;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+}
+
+/* Outer polygon edge */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
+
+  opacity: 0.32;
+
+  stroke-width: 1.15;
+
+  filter: none !important;
+
+  mix-blend-mode: normal;
+
+}
+
+/* Anchor dots */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.72;
+
+  filter: none !important;
+
+}
+
+/* Icons: colored but controlled */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  opacity: 0.62;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.9;
+
+}
+
+/* Kill the big muddy aura */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
+
+  opacity: 0 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal !important;
+
+}
+
+/* Keep very light color body */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
+
+  opacity: 0.18 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+/* Main multicolor read line */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
+
+  opacity: 0.96 !important;
+
+  stroke-width: 4.9 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+/* Thin cream highlight */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.12 !important;
+
+  stroke-width: 0.85 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal !important;
+
+}
+
+/* Segment gradients should show color naturally */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-segment {
+
+  mix-blend-mode: normal !important;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — ISOLATED MULTICOLOR POLYGON LAYER
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
+
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.24 !important;
+
+  stroke-width: 0.85 !important;
+
+  stroke-linecap: round;
+
+  vector-effect: non-scaling-stroke;
+
+  filter: none !important;
+
+  mix-blend-mode: normal !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
+
+  opacity: 0.32 !important;
+
+  stroke-width: 1.1 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal !important;
+
+}
+
+.heritage-player-read-polygon-layer,
+
+.heritage-player-read-polygon-segment {
+
+  pointer-events: none;
+
+}
+
+.heritage-player-read-polygon-soft,
+
+.heritage-player-read-polygon-core {
+
+  fill: none;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  pointer-events: none;
+
+}
+
+.heritage-player-read-polygon-soft {
+
+  stroke-width: 11px;
+
+  opacity: 0.14;
+
+  filter: none;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-player-read-polygon-core {
+
+  stroke-width: 4.2px;
+
+  opacity: 0.94;
+
+  filter: none;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-player-read-value-dot {
+
+  opacity: 0.96;
+
+  filter: none;
+
+  pointer-events: none;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.72 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  opacity: 0.68 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.92 !important;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — NODE ICON COLOR OVERRIDE
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  color: var(--node-color) !important;
+
+  opacity: 0.86 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon svg {
+
+  color: var(--node-color) !important;
+
+  stroke: currentColor !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  color: var(--node-color) !important;
+
+  opacity: 1 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.86 !important;
+
+  filter: none !important;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — SPIDER GRID VISIBILITY
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring {
+
+  stroke: rgba(214, 178, 119, 0.26) !important;
+
+  stroke-width: 0.78 !important;
+
+  opacity: 0.46 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--1,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--2,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--3 {
+
+  opacity: 0.28 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--4,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--5,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--6,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--7 {
+
+  opacity: 0.42 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--8,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--9 {
+
+  opacity: 0.56 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--10 {
+
+  stroke: rgba(214, 178, 119, 0.36) !important;
+
+  stroke-width: 1.05 !important;
+
+  opacity: 0.72 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.54 !important;
+
+  stroke-width: 0.9 !important;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — HERITAGE REFERENCE BASELINE
+
+   ========================================================= */
+
+.heritage-player-read-reference-line {
+
+  stroke: rgba(255, 246, 218, 0.48);
+
+  stroke-width: 1.15;
+
+  stroke-dasharray: 3 5;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  opacity: 0.7;
+
+  filter: none;
+
+}
+
+.heritage-player-read-reference-dot {
+
+  fill: rgba(255, 246, 218, 0.72);
+
+  opacity: 0.78;
+
+  filter: none;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — FINAL VISUAL TUNING
+
+   ========================================================= */
+
+.heritage-player-read-map-key {
+
+  position: absolute;
+
+  top: 16px;
+
+  left: 18px;
+
+  right: 18px;
+
+  z-index: 4;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+
+  pointer-events: none;
+
+  color: rgba(255, 246, 218, 0.66);
+
+  font-size: 9px;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+}
+
+.heritage-player-read-map-key__item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  white-space: nowrap;
+
+}
+
+.heritage-player-read-map-key__line {
+
+  display: inline-block;
+
+  width: 24px;
+
+  height: 0;
+
+  border-top: 1px solid rgba(255, 246, 218, 0.7);
+
+}
+
+.heritage-player-read-map-key__line--reference {
+
+  border-top-style: dashed;
+
+  opacity: 0.8;
+
+}
+
+.heritage-player-read-map-key__line--selected {
+
+  border-top-style: solid;
+
+  box-shadow: 0 0 8px rgba(214, 178, 119, 0.34);
+
+}
+
+/* Make the 10 spider rings easier to read */
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring {
+
+  stroke: rgba(214, 178, 119, 0.34) !important;
+
+  stroke-width: 0.85 !important;
+
+  opacity: 0.52 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--1,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--2,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--3 {
+
+  opacity: 0.34 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--4,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--5,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--6,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--7 {
+
+  opacity: 0.5 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--8,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--9 {
+
+  opacity: 0.64 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--10 {
+
+  stroke: rgba(214, 178, 119, 0.46) !important;
+
+  stroke-width: 1.15 !important;
+
+  opacity: 0.82 !important;
+
+}
+
+/* Make the 7 center-to-node spider lines readable */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.62 !important;
+
+  stroke-width: 1.05 !important;
+
+  stroke-linecap: round !important;
+
+  vector-effect: non-scaling-stroke !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+/* Reference 5.0 baseline */
+
+.heritage-player-read-reference-line {
+
+  stroke: rgba(255, 246, 218, 0.58) !important;
+
+  stroke-width: 1.2 !important;
+
+  stroke-dasharray: 3 5 !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  vector-effect: non-scaling-stroke !important;
+
+  opacity: 0.82 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-player-read-reference-dot {
+
+  fill: rgba(255, 246, 218, 0.82) !important;
+
+  opacity: 0.9 !important;
+
+  filter: none !important;
+
+}
+
+/* Selected build polygon — slightly more glow */
+
+.heritage-player-read-polygon-soft {
+
+  stroke-width: 13px !important;
+
+  opacity: 0.22 !important;
+
+  filter: drop-shadow(0 0 8px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-player-read-polygon-core {
+
+  stroke-width: 4.35px !important;
+
+  opacity: 0.98 !important;
+
+  filter:
+
+    drop-shadow(0 0 4px rgba(255, 246, 218, 0.16))
+
+    drop-shadow(0 0 9px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-player-read-value-dot {
+
+  opacity: 1 !important;
+
+  r: 4.8;
+
+  filter:
+
+    drop-shadow(0 0 4px currentColor)
+
+    drop-shadow(0 0 9px currentColor) !important;
+
+  pointer-events: none !important;
+
+}
+
+/* Node icons must stay their axis color */
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  color: var(--node-color) !important;
+
+  opacity: 0.9 !important;
+
+  filter: drop-shadow(0 0 5px currentColor) !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon svg {
+
+  color: var(--node-color) !important;
+
+  stroke: currentColor !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 1 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.9 !important;
+
+  filter: drop-shadow(0 0 5px currentColor) !important;
+
+}
+
+/* =========================================================
+
+   PLAYER READ — FINAL GLOW REDUCTION
+
+   ========================================================= */
+
+.heritage-player-read-polygon-soft {
+
+  stroke-width: 9px !important;
+
+  opacity: 0.12 !important;
+
+  filter: drop-shadow(0 0 4px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-player-read-polygon-core {
+
+  stroke-width: 3.9px !important;
+
+  opacity: 0.94 !important;
+
+  filter:
+
+    drop-shadow(0 0 2px rgba(255, 246, 218, 0.1))
+
+    drop-shadow(0 0 5px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-player-read-value-dot {
+
+  opacity: 0.96 !important;
+
+  filter:
+
+    drop-shadow(0 0 2px currentColor)
+
+    drop-shadow(0 0 5px currentColor) !important;
+
+  pointer-events: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  filter: drop-shadow(0 0 3px currentColor) !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  filter: drop-shadow(0 0 3px currentColor) !important;
+
+
+
+}
+
+.heritage-player-read-map-key {
+
+  position: absolute;
+
+  top: -4px;
+
+  left: 18px;
+
+  right: 18px;
+
+  z-index: 4;
+
+  display: grid;
+
+  justify-content: center;
+
+  justify-items: center;
+
+  gap: 5px;
+
+  pointer-events: none;
+
+  color: rgba(255, 246, 218, 0.62);
+
+  font-size: 8px;
+
+  line-height: 1.15;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+}
+
+.heritage-player-read-map-key__item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  white-space: nowrap;
+
+}
+
+.heritage-player-read-map-key__line {
+
+  display: inline-block;
+
+  width: 22px;
+
+  height: 0;
+
+  border-top: 1px solid rgba(255, 246, 218, 0.62);
+
+}
+
+.heritage-player-read-map-key__line--reference {
+
+  border-top-style: dashed;
+
+  opacity: 0.72;
+
+}
+
+.heritage-player-read-map-key__line--selected {
+
+  border-top-style: solid;
+
+  box-shadow: 0 0 5px rgba(214, 178, 119, 0.22);
+
+}
+
+.heritage-player-read-map-key {
+
+  position: absolute;
+
+  top: -8px;
+
+  left: 18px;
+
+  right: 18px;
+
+  z-index: 4;
+
+  display: grid;
+
+  justify-content: center;
+
+  justify-items: center;
+
+  gap: 5px;
+
+  pointer-events: none;
+
+  color: rgba(255, 246, 218, 0.58);
+
+  font-size: 8px;
+
+  line-height: 1.15;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+}
+
+.heritage-player-read-map-key__item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  white-space: nowrap;
+
+}
+
+.heritage-player-read-map-key__line {
+
+  display: inline-block;
+
+  width: 22px;
+
+  height: 0;
+
+  border-top: 1px solid rgba(255, 246, 218, 0.58);
+
+}
+
+.heritage-player-read-map-key__line--reference {
+
+  border-top-style: dashed;
+
+  opacity: 0.72;
+
+}
+
+.heritage-player-read-map-key__line--selected {
+
+  border-top-style: solid;
+
+  box-shadow: 0 0 4px rgba(214, 178, 119, 0.18);
 
 }

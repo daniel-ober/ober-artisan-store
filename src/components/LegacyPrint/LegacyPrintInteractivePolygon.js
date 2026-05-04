@@ -632,7 +632,7 @@ const LegacyPrintInteractivePolygon = ({
         className="lp-map-svg"
         viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
         role="img"
-        aria-label="Ober LegacyPrint voice map"
+        aria-label="Ober LegacyPrint VoiceMapping"
       >
         <defs>
           {NODE_ORDER.map((key, index) => {

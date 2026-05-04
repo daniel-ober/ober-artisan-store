@@ -386,7 +386,7 @@ export const DRUM_SERIES = [
 
       'Priority SoundLegend Portal access during active builds',
 
-      'LegacyPrint™ voice mapping and build interpretation',
+      'LegacyPrint™ VoiceMappingping and build interpretation',
 
       'Legacy Vault artist page opportunity',
 

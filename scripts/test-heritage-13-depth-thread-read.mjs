@@ -212,7 +212,7 @@ const getPossibleProfile = (read = {}) => {
 
     read.currentBuildVoiceRangeSummary ||
 
-    read.voiceMap ||
+    read.VoiceMapping ||
 
     read.axisScores ||
 

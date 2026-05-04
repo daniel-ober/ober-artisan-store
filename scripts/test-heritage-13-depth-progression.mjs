@@ -532,7 +532,7 @@ printHeader('13-INCH HERITAGE DEPTH PROGRESSION — VALIDATION FLAGS');
 
 if (analysis.hasDuplicateProfiles) {
 
-  console.log('\nFAIL: Duplicate VoiceMap profiles found.');
+  console.log('\nFAIL: Duplicate VoiceMapping profiles found.');
 
   console.table(
 
@@ -546,7 +546,7 @@ if (analysis.hasDuplicateProfiles) {
 
 } else {
 
-  console.log('\nPASS: No duplicate VoiceMap profiles across 13-inch depths.');
+  console.log('\nPASS: No duplicate VoiceMapping profiles across 13-inch depths.');
 
 }
 
@@ -626,7 +626,7 @@ console.log(
 
 console.log(
 
-  'If VoiceMap values move but text does not, the issue is likely sourceBuildRead/highlight copy selection rather than scoring.'
+  'If VoiceMapping values move but text does not, the issue is likely sourceBuildRead/highlight copy selection rather than scoring.'
 
 );
 

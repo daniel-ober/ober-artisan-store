@@ -1214,7 +1214,7 @@ export function getRelationshipScore(relationship, profile = {}, summary = {}) {
 
    * Important:
 
-   * The new weighted VoiceMap is the source of truth.
+   * The new weighted VoiceMapping is the source of truth.
 
    * Spec bias is now only a tie-breaker / gentle nudge.
 

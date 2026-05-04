@@ -9,7 +9,7 @@ import {
 
   MetricIcon,
 
-} from './legacyPrintVoiceMapData';
+} from './legacyPrintVoiceMappingData';
 
 export const VOICE_FINDER_QUESTIONS = [
 
