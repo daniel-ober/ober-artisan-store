@@ -35,12 +35,6 @@ import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadou
 
 import { buildKeyRelationships } from '../utils/legacyPrint/heritageKeyRelationships';
 
-import {
-  runHeritageVoiceReadTestMatrix,
-  runOneHeritageVoiceReadTest,
-  runHeritageShellThicknessSweep,
-} from '../utils/legacyPrint/runHeritageVoiceReadTestMatrix';
-
 import './HeritageProductDetail.css';
 
 const AXIS_META = [
@@ -132,13 +126,13 @@ const BASE_LEGACYPRINT_TABS = [
   {
     key: 'voiceRead',
 
-    label: 'VoiceMap™',
+    label: 'VoiceMapping',
   },
 
   {
     key: 'relationships',
 
-    label: 'Voice Threads',
+    label: 'Voice Threading',
   },
 
   {
@@ -495,67 +489,94 @@ const buildToneSummary = (
 
 const AXIS_INSIGHT_COPY = {
   attack: {
-    short: 'How quickly the note speaks at the front edge.',
+    short: 'How quickly the drum responds when it is hit.',
+
     detail:
-      'Attack is the first thing the stick gives back to the player. In this Heritage build, it describes how immediate, rounded, crisp, or assertive the drum feels at the start of the note.',
+      'Attack is the very beginning of the sound — the first snap, tap, or rounded response you hear when the stick touches the head. In this Heritage build, it describes whether the drum starts the note quickly and clearly, or more softly and rounded.',
+
     scaleLow:
-      'A lower attack read means the note starts rounder and softer. The drum feels less sharp at the front edge and more relaxed under the stick.',
+      'A lower attack read means the first moment of the sound is rounder, softer, and less sharp. The drum feels a little more relaxed at the start of the hit.',
+
     scaleHigh:
-      'A higher attack read means the note starts quicker and more defined. The drum feels more immediate, articulate, and assertive on the first strike.',
+      'A higher attack read means the first moment of the sound is quicker, clearer, and more defined. The drum feels more immediate when it is played.',
   },
+
   sustain: {
-    short: 'How long the note blooms after the strike.',
+    short: 'How long the sound keeps going after the hit.',
+
     detail:
-      'Sustain describes how much the shell wants to hold onto the note after impact. It is the length, openness, and bloom that follow the first hit.',
+      'Sustain is what remains after the first strike. It describes whether the note fades quickly or continues to bloom, ring, and open up after the drum is hit.',
+
     scaleLow:
-      'A lower sustain read means the note exits sooner. The drum feels tighter, shorter, and more contained.',
+      'A lower sustain read means the sound fades sooner. The drum feels tighter, shorter, and more contained.',
+
     scaleHigh:
-      'A higher sustain read means the note hangs longer. The shell feels more open and willing to bloom after the strike.',
+      'A higher sustain read means the sound lasts longer. The drum feels more open, blooming, and resonant after the hit.',
   },
+
   warmth: {
-    short: 'How much body and low-mid weight sit in the voice.',
+    short: 'How full, woody, and body-rich the drum feels.',
+
     detail:
-      'Warmth is the center of the drum — the woodiness, body, and low-mid richness that make the shell feel grounded instead of sharp or glassy.',
+      'Warmth is the body of the drum sound — the lower, fuller, woodier part that makes a snare feel grounded instead of thin, sharp, or glassy.',
+
     scaleLow:
-      'A lower warmth read means a leaner center with less low-mid body. The drum feels cleaner, tighter, or more direct.',
+      'A lower warmth read means the drum feels leaner, cleaner, and less full in the body of the sound.',
+
     scaleHigh:
-      'A higher warmth read means more body in the center of the note. The shell feels fuller, deeper, and more grounded.',
+      'A higher warmth read means the drum has more body, wood character, and low-mid fullness. The sound feels deeper and more grounded.',
   },
+
   projection: {
-    short: 'How confidently the drum pushes into the room.',
+    short: 'How far forward the drum feels in the room or mix.',
+
     detail:
-      'Projection describes how strongly the drum carries outward. It is not just volume — it is the way the note moves through a room or mix.',
+      'Projection is about carry and presence. It can feel louder, but it is not just volume. A drum with more projection feels more forward, more present, and easier to notice in a room or recording.',
+
     scaleLow:
-      'A lower projection read means the drum feels more intimate and closer to the player.',
+      'A lower projection read means the drum feels more close, intimate, or tucked-in. It may sit nearer to the player instead of jumping forward.',
+
     scaleHigh:
-      'A higher projection read means stronger room presence and more outward push. The note carries farther and feels more commanding.',
+      'A higher projection read means the drum carries outward more strongly. It feels more present, forward, and easier to hear in a room or mix.',
   },
+
   brightness: {
-    short: 'How much upper-register clarity sits on top.',
+    short: 'How much crisp top-end snap and clarity you hear.',
+
     detail:
-      'Brightness is the top edge of the sound: snap, sheen, cut, and upper-register clarity. It affects how easily the drum speaks through a mix.',
+      'Brightness is the upper edge of the sound — the snap, crack, sheen, and clarity that help the drum cut through. It is what makes a snare feel crisp or darker on top.',
+
     scaleLow:
-      'A lower brightness read means a darker top end with less sheen. The drum feels woodier and more restrained.',
+      'A lower brightness read means the top of the sound feels darker, smoother, and less sharp.',
+
     scaleHigh:
-      'A higher brightness read means more top-end edge, snap, and cut. The drum feels clearer and more articulate.',
+      'A higher brightness read means the drum has more crispness, snap, and upper-edge clarity.',
   },
+
   sensitivity: {
-    short: 'How easily the drum responds to lighter touch.',
+    short: 'How easily the drum responds to light playing.',
+
     detail:
-      'Sensitivity describes how much the shell and snare response open up under lighter hands, ghost notes, soft playing, and dynamic nuance.',
+      'Sensitivity describes how much detail the drum gives back when it is played softly. A more sensitive drum reacts more easily to ghost notes, lighter strokes, and small changes in touch.',
+
     scaleLow:
-      'A lower sensitivity read means the drum wants a little more input before it fully wakes up.',
+      'A lower sensitivity read means the drum may need a little more energy before it fully opens up.',
+
     scaleHigh:
-      'A higher sensitivity read means the drum opens more easily at lower dynamics and reveals more detail under softer touch.',
+      'A higher sensitivity read means the drum responds more easily to lighter playing and reveals more detail at softer dynamics.',
   },
+
   control: {
-    short: 'How shaped and manageable the note feels.',
+    short: 'How focused and organized the sound feels.',
+
     detail:
-      'Control describes how organized the note feels through overtone behavior, decay, and focus. It is the difference between open spread and composed shape.',
+      'Control describes how neatly the drum holds its sound together. It is not about the drum being physically controlled — it is about whether the note feels focused, tidy, and easy to place instead of wide, messy, or overly ringy.',
+
     scaleLow:
-      'A lower control read means the drum feels more open, wider, and less contained.',
+      'A lower control read means the drum feels more open, wider, and less contained. Some players may hear this as more natural spread.',
+
     scaleHigh:
-      'A higher control read means the note feels tighter, more organized, and easier to place.',
+      'A higher control read means the note feels more focused, organized, and easier to place in a song, room, or recording.',
   },
 };
 
@@ -952,73 +973,101 @@ const renderThreadNodeLabelList = (nodes = []) => {
 };
 
 const FIRST_TELL_NODE_COPY = {
+  attack:
+    'How quickly the drum responds when it is hit — from softer and rounder to quicker and more defined.',
 
-  attack: 'How quickly the note speaks at the front edge.',
+  brightness:
+    'How much crisp top-end detail you hear — from darker and smoother to clearer and snappier.',
 
-  brightness: 'The upper-edge clarity, snap, and top-end detail.',
+  projection:
+    'How forward the drum feels in the room or mix — not just louder, but easier to notice and carry outward.',
 
-  projection: 'How confidently the drum pushes into the room.',
+  sustain:
+    'How long the sound keeps going after the hit — from short and tight to more open and ringing.',
 
-  sustain: 'How long the note blooms after the first hit.',
+  warmth:
+    'How full, woody, and body-rich the center of the sound feels — from lean and clean to deeper and rounder.',
 
-  warmth: 'The body, woodiness, and low-mid center of the drum.',
+  sensitivity:
+    'How easily the drum responds to lighter playing — especially soft notes, ghost notes, and small changes in touch.',
 
-  sensitivity: 'How easily the drum responds to lighter touch.',
-
-  control: 'How shaped, focused, and manageable the note feels.',
-
+  control:
+    'How focused and organized the sound feels — less wide or ringy, more shaped and easy to place.',
 };
 
 const renderFirstTellNodeList = (nodes = []) => {
-
   return (
-
     <div className="heritage-firsttell-node-list">
-
       <p className="heritage-firsttell-node-list-title">
-
-        These are the strongest sound nodes we first hear:
-
+        What you’re most likely to notice first:
+        <span>
+          These are the most noticeable traits in the first impression — not
+          always the loudest, best, or most extreme parts of the drum.
+        </span>
       </p>
 
       <div className="heritage-firsttell-node-items">
-
         {nodes.map((nodeKey) => {
-
           const axis = AXIS_META.find((item) => item.key === nodeKey);
 
           const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
           return (
-
             <div
-
               key={nodeKey}
-
               className="heritage-firsttell-node-item"
-
               style={{ '--axis-color': color }}
-
             >
-
-              <MetricIcon type={axis?.icon || nodeKey} color={color} size={18} />
+              <MetricIcon
+                type={axis?.icon || nodeKey}
+                color={color}
+                size={18}
+              />
 
               <strong>{axis?.label || nodeKey}</strong>
 
-              <span>{FIRST_TELL_NODE_COPY[nodeKey] || 'A core part of the first impression.'}</span>
-
+              <span>
+                {FIRST_TELL_NODE_COPY[nodeKey] ||
+                  'A core part of the first impression.'}
+              </span>
             </div>
-
           );
-
         })}
-
       </div>
-
     </div>
-
   );
+};
 
+const getCanonicalDominantNodes = ({
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  return getDominantVoiceNodes({
+    profile,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
 };
 
 const renderOptionGuideCopy = (guide) => {
@@ -1059,7 +1108,7 @@ const getVoiceReadLabel = (slotKey) => {
   return 'LegacyPrint™';
 };
 
-const VOICEMAP_READ_COPY = {
+const VoiceMapping_READ_COPY = {
   simple: {
     kicker: 'First Tell',
 
@@ -1083,7 +1132,7 @@ const VOICEMAP_READ_COPY = {
     visualMode: 'spider',
 
     intro:
-      'The playing experience: how the drum starts to feel under the hands across the full VoiceMap.',
+      'The fuller listening read: how this HERITAGE blueprint works under the hands once the full voice starts moving.',
   },
 
   complex: {
@@ -1100,19 +1149,11 @@ const VOICEMAP_READ_COPY = {
   },
 };
 
-const getVoiceMapReadCopy = (slotKey = '') => {
-  return VOICEMAP_READ_COPY[slotKey] || VOICEMAP_READ_COPY.simple;
+const getVoiceMappingReadCopy = (slotKey = '') => {
+  return VoiceMapping_READ_COPY[slotKey] || VoiceMapping_READ_COPY.simple;
 };
 
-const getVoiceMapDisplayTitle = (relationship, legacyPrintTitle) => {
-  if (relationship?.slotKey === 'complex') {
-    return legacyPrintTitle || relationship?.title || 'LegacyPrint™ Voice';
-  }
-
-  return relationship?.title || 'VoiceMap Read';
-};
-
-const getVoiceMapVariantForSlot = (slotKey = '') => {
+const getVoiceMappingVariantForSlot = (slotKey = '') => {
   if (slotKey === 'simple') return 'firstTell';
 
   if (slotKey === 'shaped') return 'player';
@@ -1120,64 +1161,48 @@ const getVoiceMapVariantForSlot = (slotKey = '') => {
   return 'legacyprint';
 };
 
-const getToneModelHardwareColorForSlot = (slotKey = '') => {
-  const voiceMapVariant = getVoiceMapVariantForSlot(slotKey);
+const getVoiceMappingDisplayTitle = ({
+  relationship,
 
-  if (voiceMapVariant === 'firstTell' || voiceMapVariant === 'player') {
-    return HERITAGE_STANDARD_REFERENCE.hardwareColor;
+  legacyPrintTitle,
+
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  if (relationship?.slotKey === 'simple') {
+    return getFirstTellDisplayTitle({
+      profile,
+
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      scorchDepth,
+    });
   }
 
-  return null;
-};
+  if (relationship?.slotKey === 'complex') {
+    return legacyPrintTitle || relationship?.title || 'LegacyPrint™ Voice';
+  }
 
-const HERITAGE_FIRST_TELL_DEPTH_MAP = {
-  12: {
-    '5.0': ['attack', 'brightness', 'sensitivity'],
-
-    5.5: ['attack', 'sensitivity', 'brightness'],
-
-    '6.0': ['attack', 'sensitivity', 'control'],
-
-    6.5: ['attack', 'sensitivity', 'control'],
-
-    '7.0': ['attack', 'control', 'sensitivity'],
-
-    7.5: ['control', 'attack', 'projection'],
-
-    '8.0': ['control', 'projection', 'attack'],
-  },
-
-  13: {
-    '5.0': ['attack', 'brightness', 'control'],
-
-    5.5: ['attack', 'control', 'brightness'],
-
-    '6.0': ['attack', 'control', 'sensitivity'],
-
-    6.5: ['attack', 'control', 'sensitivity'],
-
-    '7.0': ['control', 'attack', 'projection'],
-
-    7.5: ['control', 'projection', 'attack'],
-
-    '8.0': ['control', 'projection', 'warmth'],
-  },
-
-  14: {
-    '5.0': ['attack', 'warmth', 'control'],
-
-    5.5: ['warmth', 'attack', 'control'],
-
-    '6.0': ['warmth', 'attack', 'projection'],
-
-    6.5: ['warmth', 'projection', 'attack'],
-
-    '7.0': ['warmth', 'projection', 'sustain'],
-
-    7.5: ['warmth', 'sustain', 'projection'],
-
-    '8.0': ['sustain', 'warmth', 'projection'],
-  },
+  return relationship?.title || 'VoiceMapping Read';
 };
 
 const getNormalizedFirstTellDepthKey = (value) => {
@@ -1190,7 +1215,322 @@ const getNormalizedFirstTellDepthKey = (value) => {
   return numberValue.toFixed(1);
 };
 
-const getLockedFirstTellDepthNodes = ({ size, depth }) => {
+const getFirstTellSpecMeta = ({
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  const sizeNumber = Number(size);
+
+  const depthNumber = Number(depth);
+
+  const lugNumber = Number(lugs);
+
+  const thicknessLabel = getStaveThicknessLabel(staveOption);
+
+  const thicknessNumber = Number(String(thicknessLabel).replace('mm', ''));
+
+  const hasReRings = hasReRingFromStaveOption(staveOption);
+
+  return {
+    sizeNumber: Number.isFinite(sizeNumber) ? sizeNumber : 14,
+
+    depthNumber: Number.isFinite(depthNumber) ? depthNumber : 5.5,
+
+    lugNumber: Number.isFinite(lugNumber) ? lugNumber : 8,
+
+    thicknessNumber: Number.isFinite(thicknessNumber) ? thicknessNumber : 10,
+
+    thicknessLabel,
+
+    hasReRings,
+
+    isDeep: Number(depthNumber) >= 7,
+
+    isVeryDeep: Number(depthNumber) >= 7.5,
+
+    isShallow: Number(depthNumber) <= 5.5,
+
+    isCompact: Number(sizeNumber) <= 12,
+
+    isMiddle: Number(sizeNumber) === 13,
+
+    isFullSize: Number(sizeNumber) >= 14,
+
+    isDieCast: hoopType === 'Die-Cast',
+
+    isTripleFlange: hoopType === 'Triple Flange',
+
+    isBlackened: scorchDepth === 'Blackened',
+
+    isLightTorch: scorchDepth === 'Light Torch',
+
+    isMediumTorch: scorchDepth === 'Medium Torch',
+
+    isThinShell: Number(thicknessNumber) <= 8,
+
+    isVeryThinShell: Number(thicknessNumber) <= 7,
+
+    isThickShell: Number(thicknessNumber) >= 12,
+
+    isTenLug: Number(lugNumber) >= 10,
+
+    isSixLug: Number(lugNumber) <= 6,
+  };
+};
+
+const HERITAGE_FIRST_TELL_DEPTH_MAP = {
+  12: {
+    '5.0': ['attack', 'brightness', 'sensitivity'],
+
+    5.5: ['attack', 'sensitivity', 'brightness'],
+
+    '6.0': ['attack', 'sensitivity', 'control'],
+
+    6.5: ['attack', 'control', 'sensitivity'],
+
+    '7.0': ['control', 'attack', 'projection'],
+
+    7.5: ['control', 'projection', 'attack'],
+
+    '8.0': ['projection', 'control', 'warmth'],
+  },
+
+  13: {
+    '5.0': ['attack', 'brightness', 'control'],
+
+    5.5: ['attack', 'control', 'brightness'],
+
+    '6.0': ['control', 'attack', 'warmth'],
+
+    6.5: ['warmth', 'control', 'attack'],
+
+    '7.0': ['warmth', 'projection', 'control'],
+
+    7.5: ['warmth', 'projection', 'sustain'],
+
+    '8.0': ['warmth', 'sustain', 'projection'],
+  },
+
+  14: {
+    '5.0': ['attack', 'warmth', 'control'],
+
+    5.5: ['warmth', 'attack', 'control'],
+
+    '6.0': ['warmth', 'projection', 'attack'],
+
+    6.5: ['warmth', 'projection', 'control'],
+
+    '7.0': ['warmth', 'sustain', 'projection'],
+
+    7.5: ['warmth', 'sustain', 'projection'],
+
+    '8.0': ['sustain', 'warmth', 'projection'],
+  },
+};
+
+const FIRST_TELL_RULES = [
+  {
+    id: 'deep-13-diecast',
+
+    test: (meta) => meta.isMiddle && meta.isDeep && meta.isDieCast,
+
+    title: 'Warm, deep settled center',
+
+    nodes: ['warmth', 'projection', 'control'],
+  },
+
+  {
+    id: 'deep-13-open-hoop',
+
+    test: (meta) => meta.isMiddle && meta.isDeep && meta.isTripleFlange,
+
+    title: 'Warm body with open room bloom',
+
+    nodes: ['warmth', 'sustain', 'projection'],
+  },
+
+  {
+    id: 'deep-14-diecast',
+
+    test: (meta) => meta.isFullSize && meta.isDeep && meta.isDieCast,
+
+    title: 'Deep body with focused room push',
+
+    nodes: ['warmth', 'projection', 'control'],
+  },
+
+  {
+    id: 'deep-14-open-hoop',
+
+    test: (meta) => meta.isFullSize && meta.isDeep && meta.isTripleFlange,
+
+    title: 'Deep warmth with open bloom',
+
+    nodes: ['warmth', 'sustain', 'projection'],
+  },
+
+  {
+    id: 'very-deep-any',
+
+    test: (meta) => meta.isVeryDeep && !meta.isDieCast,
+
+    title: 'Big warm bloom with presence',
+
+    nodes: ['warmth', 'sustain', 'projection'],
+  },
+
+  {
+    id: 'blackened-deep',
+
+    test: (meta) => meta.isDeep && meta.isBlackened,
+
+    title: 'Dark, deep controlled body',
+
+    nodes: ['warmth', 'control', 'projection'],
+  },
+
+  {
+    id: 'blackened-shallow',
+
+    test: (meta) => meta.isShallow && meta.isBlackened,
+
+    title: 'Dry snap with dark control',
+
+    nodes: ['attack', 'control', 'brightness'],
+  },
+
+  {
+    id: 'light-torch-thin',
+
+    test: (meta) => meta.isThinShell && meta.isLightTorch,
+
+    title: 'Open touch with woody bloom',
+
+    nodes: ['sensitivity', 'sustain', 'warmth'],
+  },
+
+  {
+    id: 'thin-shell-re-rings',
+
+    test: (meta) => meta.isThinShell && meta.hasReRings,
+
+    title: 'Responsive shell with supported bloom',
+
+    nodes: ['sensitivity', 'warmth', 'sustain'],
+  },
+
+  {
+    id: 'very-thin-14',
+
+    test: (meta) => meta.isFullSize && meta.isVeryThinShell,
+
+    title: 'Open, breathing Heritage body',
+
+    nodes: ['warmth', 'sustain', 'sensitivity'],
+  },
+
+  {
+    id: 'thick-shell-diecast',
+
+    test: (meta) => meta.isThickShell && meta.isDieCast,
+
+    title: 'Focused power with clean shape',
+
+    nodes: ['projection', 'control', 'attack'],
+  },
+
+  {
+    id: 'thick-shell-open-hoop',
+
+    test: (meta) => meta.isThickShell && meta.isTripleFlange,
+
+    title: 'Strong shell voice with open carry',
+
+    nodes: ['projection', 'attack', 'warmth'],
+  },
+
+  {
+    id: 'ten-lug-diecast',
+
+    test: (meta) => meta.isTenLug && meta.isDieCast,
+
+    title: 'Precise throw with locked-in shape',
+
+    nodes: ['control', 'projection', 'attack'],
+  },
+
+  {
+    id: 'ten-lug-open-hoop',
+
+    test: (meta) => meta.isTenLug && meta.isTripleFlange,
+
+    title: 'Clear throw with controlled openness',
+
+    nodes: ['projection', 'control', 'brightness'],
+  },
+
+  {
+    id: 'six-lug-thin',
+
+    test: (meta) => meta.isSixLug && meta.isThinShell,
+
+    title: 'Open touch with organic response',
+
+    nodes: ['sensitivity', 'sustain', 'warmth'],
+  },
+
+  {
+    id: 'compact-shallow-diecast',
+
+    test: (meta) => meta.isCompact && meta.isShallow && meta.isDieCast,
+
+    title: 'Tight snap with clean control',
+
+    nodes: ['attack', 'control', 'brightness'],
+  },
+
+  {
+    id: 'compact-shallow-open',
+
+    test: (meta) => meta.isCompact && meta.isShallow && meta.isTripleFlange,
+
+    title: 'Quick, open side-snare snap',
+
+    nodes: ['attack', 'brightness', 'sensitivity'],
+  },
+
+  {
+    id: 'compact-deep-diecast',
+
+    test: (meta) => meta.isCompact && meta.isDeep && meta.isDieCast,
+
+    title: 'Compact depth with focused punch',
+
+    nodes: ['control', 'projection', 'attack'],
+  },
+
+  {
+    id: 'medium-center-diecast',
+
+    test: (meta) =>
+      !meta.isDeep && !meta.isShallow && meta.isDieCast && !meta.isThickShell,
+
+    title: 'Settled center with clean control',
+
+    nodes: ['warmth', 'control', 'attack'],
+  },
+];
+
+const getBaseFirstTellDepthNodes = ({ size, depth }) => {
   const sizeKey = String(size);
 
   const depthKey = getNormalizedFirstTellDepthKey(depth);
@@ -1206,6 +1546,345 @@ const getLockedFirstTellDepthNodes = ({ size, depth }) => {
   );
 };
 
+const getFirstTellProfilePriority = (profile = {}) => {
+  return AXIS_META.map(({ key }) => {
+    const value = Number(profile?.[key] ?? 5);
+
+    return {
+      key,
+
+      distance: Math.abs(value - 5),
+
+      value,
+    };
+  })
+
+    .sort((a, b) => {
+      if (b.distance !== a.distance) return b.distance - a.distance;
+
+      return b.value - a.value;
+    })
+
+    .map((item) => item.key);
+};
+
+const mergeFirstTellNodes = (...nodeGroups) => {
+  const merged = [];
+
+  nodeGroups.flat().forEach((nodeKey) => {
+    if (!nodeKey || merged.includes(nodeKey)) return;
+
+    merged.push(nodeKey);
+  });
+
+  return merged.slice(0, 3);
+};
+
+const getDominantVoiceNodes = ({
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  const curated = getCuratedFirstTell({
+    profile,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
+
+  const meta = getFirstTellSpecMeta({
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
+
+  const profilePriority = AXIS_META.map(({ key }) => {
+    const value = Number(profile?.[key] ?? 5);
+
+    const delta = Number((value - 5).toFixed(3));
+
+    const distance = Math.abs(delta);
+
+    let constructionWeight = 0;
+
+    if (key === 'attack' && meta.isShallow) constructionWeight += 0.42;
+
+    if (key === 'attack' && meta.isCompact) constructionWeight += 0.28;
+
+    if (key === 'attack' && meta.isDieCast) constructionWeight += 0.18;
+
+    if (key === 'brightness' && meta.isShallow) constructionWeight += 0.32;
+
+    if (key === 'brightness' && meta.isLightTorch) constructionWeight += 0.16;
+
+    if (key === 'warmth' && meta.isFullSize) constructionWeight += 0.36;
+
+    if (key === 'warmth' && meta.isDeep) constructionWeight += 0.34;
+
+    if (key === 'warmth' && meta.isBlackened) constructionWeight += 0.18;
+
+    if (key === 'projection' && meta.isDeep) constructionWeight += 0.3;
+
+    if (key === 'projection' && meta.isThickShell) constructionWeight += 0.24;
+
+    if (key === 'projection' && meta.isTenLug) constructionWeight += 0.16;
+
+    if (key === 'sustain' && meta.isDeep && meta.isTripleFlange)
+      constructionWeight += 0.38;
+
+    if (key === 'sustain' && meta.isThinShell) constructionWeight += 0.28;
+
+    if (key === 'sustain' && meta.isLightTorch) constructionWeight += 0.16;
+
+    if (key === 'sensitivity' && meta.isThinShell) constructionWeight += 0.38;
+
+    if (key === 'sensitivity' && meta.isSixLug) constructionWeight += 0.26;
+
+    if (key === 'sensitivity' && meta.isLightTorch) constructionWeight += 0.18;
+
+    if (key === 'control' && meta.isDieCast) constructionWeight += 0.42;
+
+    if (key === 'control' && meta.isTenLug) constructionWeight += 0.36;
+
+    if (key === 'control' && meta.isBlackened) constructionWeight += 0.26;
+
+    if (key === 'control' && meta.isThickShell) constructionWeight += 0.2;
+
+    const curatedIndex = curated.nodes.indexOf(key);
+
+    const curatedWeight = curatedIndex >= 0 ? 0.9 - curatedIndex * 0.18 : 0;
+
+    return {
+      key,
+
+      value,
+
+      delta,
+
+      distance,
+
+      score: distance + constructionWeight + curatedWeight,
+    };
+  }).sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+
+    if (b.distance !== a.distance) return b.distance - a.distance;
+
+    return b.value - a.value;
+  });
+
+  const nodes = profilePriority.slice(0, 3).map((item) => item.key);
+
+  return {
+    title: curated.title,
+
+    nodes,
+
+    ruleId: curated.ruleId,
+
+    profileNodes: profilePriority.slice(0, 3).map((item) => item.key),
+
+    curatedNodes: curated.nodes,
+
+    scores: profilePriority,
+  };
+};
+
+const getCuratedFirstTell = ({
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  const meta = getFirstTellSpecMeta({
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
+
+  const matchedRule = FIRST_TELL_RULES.find((rule) => rule.test(meta));
+
+  const baseNodes = getBaseFirstTellDepthNodes({ size, depth });
+
+  const profilePriority = getFirstTellProfilePriority(profile);
+
+  if (matchedRule) {
+    return {
+      title: matchedRule.title,
+
+      nodes: mergeFirstTellNodes(matchedRule.nodes, baseNodes, profilePriority),
+
+      ruleId: matchedRule.id,
+    };
+  }
+
+  const depthKey = getNormalizedFirstTellDepthKey(depth);
+
+  const fallbackTitleMap = {
+    '12|5.0': 'Quick, tight first response',
+
+    '12|5.5': 'Fast touch with clear edge',
+
+    '12|6.0': 'Quick response with controlled shape',
+
+    '12|6.5': 'Focused snap with clean control',
+
+    '12|7.0': 'Controlled punch with tight focus',
+
+    '12|7.5': 'Compact throw with shaped control',
+
+    '12|8.0': 'Focused depth with firm projection',
+
+    '13|5.0': 'Quick center with clean shape',
+
+    '13|5.5': 'Balanced, clear first response',
+
+    '13|6.0': 'Settled center with quick control',
+
+    '13|6.5': 'Rounded body with a clear start',
+
+    '13|7.0': 'Warm, deep settled center',
+
+    '13|7.5': 'Deep body with room presence',
+
+    '13|8.0': 'Full, warm extended bloom',
+
+    '14|5.0': 'Warm body with a quick start',
+
+    '14|5.5': 'Classic warm Heritage center',
+
+    '14|6.0': 'Full center with clear projection',
+
+    '14|6.5': 'Warm body with room push',
+
+    '14|7.0': 'Deep warmth with open bloom',
+
+    '14|7.5': 'Big warm bloom with presence',
+
+    '14|8.0': 'Maximum body and deep bloom',
+  };
+
+  return {
+    title:
+      fallbackTitleMap[`${String(size)}|${depthKey}`] ||
+      'Classic Heritage first tell',
+
+    nodes: mergeFirstTellNodes(baseNodes, profilePriority),
+
+    ruleId: 'depth-fallback',
+  };
+};
+
+const getFirstTellDisplayTitle = ({
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  const dominant = getDominantVoiceNodes({
+    profile,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
+
+  return dominant.title || 'First Tell';
+};
+
+const getLockedFirstTellDepthNodes = ({
+  profile = {},
+
+  size,
+
+  depth,
+
+  lugs,
+
+  staveOption,
+
+  hoopType,
+
+  scorchDepth,
+}) => {
+  return getCanonicalDominantNodes({
+    profile,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  }).nodes;
+};
+
 const getTopThreeTellerNodes = ({
   relationship = {},
 
@@ -1217,11 +1896,29 @@ const getTopThreeTellerNodes = ({
 
   lugs,
 
+  staveOption,
+
   hoopType,
 
   scorchDepth,
 }) => {
-  return getLockedFirstTellDepthNodes({ size, depth });
+  return getLockedFirstTellDepthNodes({
+    relationship,
+
+    profile,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
 };
 
 const getFirstTellTriangleNodes = ({
@@ -1235,14 +1932,32 @@ const getFirstTellTriangleNodes = ({
 
   lugs,
 
+  staveOption,
+
   hoopType,
 
   scorchDepth,
 }) => {
-  return getLockedFirstTellDepthNodes({ size, depth });
+  return getLockedFirstTellDepthNodes({
+    relationship,
+
+    profile,
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+  });
 };
 
-const getVoiceMapVisualThread = ({
+const getVoiceMappingVisualThread = ({
   relationship = {},
 
   profile = {},
@@ -1253,31 +1968,66 @@ const getVoiceMapVisualThread = ({
 
   lugs,
 
+  staveOption,
+
   hoopType,
 
   scorchDepth,
 }) => {
   if (!relationship) return null;
 
-  const voiceMapVariant = getVoiceMapVariantForSlot(relationship.slotKey);
+  const VoiceMappingVariant = getVoiceMappingVariantForSlot(
+    relationship.slotKey
+  );
 
   const relationshipNodes = Array.isArray(relationship.nodes)
     ? relationship.nodes.filter(Boolean)
     : [];
 
   const visualNodes =
-    voiceMapVariant === 'firstTell'
-      ? getLockedFirstTellDepthNodes({ size, depth })
+    VoiceMappingVariant === 'firstTell'
+      ? getLockedFirstTellDepthNodes({
+          profile,
+
+          size,
+
+          depth,
+
+          lugs,
+
+          staveOption,
+
+          hoopType,
+
+          scorchDepth,
+        })
       : relationshipNodes;
 
   return {
     ...relationship,
 
-    id: `${relationship.id || 'voice-read'}-${voiceMapVariant}-visual`,
+    id: `${relationship.id || 'voice-read'}-${VoiceMappingVariant}-visual`,
 
     nodes: visualNodes,
 
-    title: relationship.title,
+    title:
+      VoiceMappingVariant === 'firstTell'
+        ? getFirstTellDisplayTitle({
+            profile,
+
+            size,
+
+            depth,
+
+            lugs,
+
+            staveOption,
+
+            hoopType,
+
+            scorchDepth,
+          })
+        : relationship.title,
   };
 };
 
@@ -1566,7 +2316,7 @@ const buildFirstTellSummary = ({
 
       .join(
         ', '
-      )} — the strongest traits your ear is likely to notice before reading the full VoiceMap.`;
+      )} — the strongest traits your ear is likely to notice before reading the full VoiceMapping.`;
   }
 
   return activeThread?.summary || activeReadout?.whatThreadIsTellingUs || '';
@@ -1968,7 +2718,13 @@ const HeritageProductDetail = () => {
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
   const keyRelationships = useMemo(() => {
-    const toneNeutralSummary = buildHeritageVoiceRead({
+    const visualSummary = activeVoiceSummary;
+
+    const visualRelationships = buildKeyRelationships(visualSummary);
+
+    const dominantVoiceNodes = getDominantVoiceNodes({
+      profile: visualSummary?.profile || {},
+
       size,
 
       depth,
@@ -1977,30 +2733,10 @@ const HeritageProductDetail = () => {
 
       staveOption,
 
-      hardwareColor: HERITAGE_STANDARD_REFERENCE.hardwareColor,
-
       hoopType,
 
       scorchDepth,
-
-      benchmarkFamilyId: isCompareModeEnabled
-        ? benchmarkFamilyId
-        : DEFAULT_BENCHMARK_FAMILY_ID,
-
-      benchmarkTypeId: isCompareModeEnabled
-        ? benchmarkTypeId
-        : DEFAULT_BENCHMARK_TYPE_ID,
-
-      benchmarkSizeId: isCompareModeEnabled
-        ? benchmarkSizeId
-        : DEFAULT_BENCHMARK_SIZE_ID,
     });
-
-    const visualSummary = activeVoiceSummary;
-
-    const toneNeutralRelationships = buildKeyRelationships(toneNeutralSummary);
-
-    const visualRelationships = buildKeyRelationships(visualSummary);
 
     const threadSlotOrder = {
       simple: 0,
@@ -2010,8 +2746,11 @@ const HeritageProductDetail = () => {
       complex: 2,
     };
 
-    const sortRelationships = (items) =>
-      items.slice(0, 3).sort((a, b) => {
+    const sorted = visualRelationships
+
+      .slice()
+
+      .sort((a, b) => {
         const aOrder = threadSlotOrder[a.slotKey] ?? 99;
 
         const bOrder = threadSlotOrder[b.slotKey] ?? 99;
@@ -2021,19 +2760,53 @@ const HeritageProductDetail = () => {
         return Number(b.score || 0) - Number(a.score || 0);
       });
 
-    const toneNeutralSorted = sortRelationships(toneNeutralRelationships);
+    const simpleRelationship =
+      sorted.find((item) => item.slotKey === 'simple') || sorted[0];
 
-    const visualSorted = sortRelationships(visualRelationships);
+    const shapedRelationship =
+      sorted.find((item) => item.slotKey === 'shaped') || sorted[1];
 
-    return toneNeutralSorted.map((relationship) => {
-      if (relationship.slotKey !== 'complex') {
-        return relationship;
-      }
+    const complexRelationship =
+      sorted.find((item) => item.slotKey === 'complex') || sorted[2];
 
-      return (
-        visualSorted.find((item) => item.slotKey === 'complex') || relationship
-      );
-    });
+    return [
+      {
+        ...(simpleRelationship || {}),
+
+        id: 'first-tell-canonical',
+
+        slotKey: 'simple',
+
+        title: dominantVoiceNodes.title,
+
+        nodes: dominantVoiceNodes.nodes,
+
+        summary:
+          'The first impression read: the three traits your ear is most likely to notice before digging into the full voice map.',
+
+        ruleId: dominantVoiceNodes.ruleId,
+      },
+
+      shapedRelationship
+        ? {
+            ...shapedRelationship,
+
+            id: shapedRelationship.id || 'player-read-canonical',
+
+            slotKey: 'shaped',
+          }
+        : null,
+
+      complexRelationship
+        ? {
+            ...complexRelationship,
+
+            id: complexRelationship.id || 'legacyprint-canonical',
+
+            slotKey: 'complex',
+          }
+        : null,
+    ].filter(Boolean);
   }, [
     activeVoiceSummary,
 
@@ -2048,14 +2821,6 @@ const HeritageProductDetail = () => {
     hoopType,
 
     scorchDepth,
-
-    isCompareModeEnabled,
-
-    benchmarkFamilyId,
-
-    benchmarkTypeId,
-
-    benchmarkSizeId,
   ]);
 
   const selectedThreadId = useMemo(() => {
@@ -2232,20 +2997,6 @@ const HeritageProductDetail = () => {
       slotKey: selectedRelationship?.slotKey || '',
     });
   };
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'development') return;
-
-    window.runHeritageVoiceReadTestMatrix = runHeritageVoiceReadTestMatrix;
-
-    window.runOneHeritageVoiceReadTest = runOneHeritageVoiceReadTest;
-
-    window.runHeritageShellThicknessSweep = runHeritageShellThicknessSweep;
-
-    console.info(
-      'LegacyPrint test helpers ready: runHeritageVoiceReadTestMatrix(), runOneHeritageVoiceReadTest({...}), runHeritageShellThicknessSweep({...})'
-    );
-  }, []);
 
   useEffect(() => {
     setBenchmarkGlowPulseKey((prev) => prev + 1);
@@ -2751,7 +3502,7 @@ const HeritageProductDetail = () => {
         <div className="heritage-legacyprint-summary-head">
           <span className="heritage-summary-kicker heritage-summary-kicker--voiceprint">
             <img
-              src="/legacyprint-benchmarks/legacyprint-icon.png"
+              src="/legacyprint-benchmarks/ober-legacyprint-7-node-neon-all-connections-transparent.png"
               alt=""
               className="heritage-summary-kicker-icon"
               aria-hidden="true"
@@ -2763,13 +3514,13 @@ const HeritageProductDetail = () => {
 
           <p>
             A plain-language read of this Heritage configuration across
-            VoiceMap™, LegacyTuning™, and Voice Threads.
+            VoiceMapping, LegacyTuning™, and Voice Threading.
           </p>
         </div>
 
         <div className="heritage-legacyprint-summary-grid">
           <article className="heritage-legacyprint-summary-section">
-            <span>VoiceMap™ Read</span>
+            <span>VoiceMapping Read</span>
 
             <p>{toneSummaryText}</p>
           </article>
@@ -3036,17 +3787,17 @@ const HeritageProductDetail = () => {
     );
   };
 
-  const renderVoiceMapNodeInsight = () => {
+  const renderVoiceMappingNodeInsight = () => {
     return (
       <div
-        className="heritage-voicemap-node-insight"
+        className="heritage-VoiceMapping-node-insight"
         style={{
           '--axis-accent': activeAxisColor,
         }}
       >
-        <div className="heritage-voicemap-node-insight-head">
-          <div className="heritage-voicemap-node-title-row">
-            <span className="heritage-voicemap-node-icon">
+        <div className="heritage-VoiceMapping-node-insight-head">
+          <div className="heritage-VoiceMapping-node-title-row">
+            <span className="heritage-VoiceMapping-node-icon">
               <MetricIcon
                 type={activeAxisMeta.icon}
                 color={activeAxisColor}
@@ -3066,7 +3817,7 @@ const HeritageProductDetail = () => {
           </div>
 
           <span
-            className={`heritage-voicemap-node-shift ${
+            className={`heritage-VoiceMapping-node-shift ${
               activeAxisDeltaValue > 0
                 ? 'is-positive'
                 : activeAxisDeltaValue < 0
@@ -3078,23 +3829,23 @@ const HeritageProductDetail = () => {
           </span>
         </div>
 
-        <div className="heritage-voicemap-node-insight-body">
-          <div className="heritage-voicemap-node-copy">
-            <p className="heritage-voicemap-node-short">
+        <div className="heritage-VoiceMapping-node-insight-body">
+          <div className="heritage-VoiceMapping-node-copy">
+            <p className="heritage-VoiceMapping-node-short">
               {activeAxisCopy.short}
             </p>
 
             <p>{activeAxisCopy.detail}</p>
           </div>
 
-          <div className="heritage-voicemap-node-contributors">
+          <div className="heritage-VoiceMapping-node-contributors">
             <span>Primary contributors</span>
 
-            <div className="heritage-voicemap-node-contributor-list">
+            <div className="heritage-VoiceMapping-node-contributor-list">
               {activeAxisImpactFactors.map((factor) => (
                 <span
                   key={factor.label}
-                  className={`heritage-voicemap-node-contributor is-${factor.strength}`}
+                  className={`heritage-VoiceMapping-node-contributor is-${factor.strength}`}
                 >
                   {factor.label}
 
@@ -3114,26 +3865,42 @@ const HeritageProductDetail = () => {
     );
   };
 
-  const renderVoiceMapReadExperience = () => {
+  const renderVoiceMappingReadExperience = () => {
     const activeReadout = activeVoiceThreadReadout;
 
     if (!activeThread || !activeReadout) {
       return null;
     }
 
-    const readCopy = getVoiceMapReadCopy(activeThread.slotKey);
+    const readCopy = getVoiceMappingReadCopy(activeThread.slotKey);
 
-    const displayTitle = getVoiceMapDisplayTitle(
-      activeThread,
+    const displayTitle = getVoiceMappingDisplayTitle({
+      relationship: activeThread,
 
-      musicalIdentityTitle
+      legacyPrintTitle: musicalIdentityTitle,
+
+      profile: activeVoiceSummary?.profile || {},
+
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      scorchDepth,
+    });
+
+    const VoiceMappingVariant = getVoiceMappingVariantForSlot(
+      activeThread.slotKey
     );
 
-    const voiceMapVariant = getVoiceMapVariantForSlot(activeThread.slotKey);
+    const isFirstTell = VoiceMappingVariant === 'firstTell';
 
-    const isFirstTell = voiceMapVariant === 'firstTell';
-
-    const isPlayerRead = voiceMapVariant === 'player';
+    const isPlayerRead = VoiceMappingVariant === 'player';
 
     const firstTellKeys = getFirstTellTriangleNodes({
       relationship: activeThread,
@@ -3146,12 +3913,14 @@ const HeritageProductDetail = () => {
 
       lugs,
 
+      staveOption,
+
       hoopType,
 
       scorchDepth,
     });
 
-    const visualThread = getVoiceMapVisualThread({
+    const visualThread = getVoiceMappingVisualThread({
       relationship: activeThread,
 
       profile: activeVoiceSummary?.profile || {},
@@ -3162,12 +3931,50 @@ const HeritageProductDetail = () => {
 
       lugs,
 
+      staveOption,
+
       hoopType,
 
       scorchDepth,
     });
 
     const visualNodes = visualThread?.nodes || [];
+
+    const dominantVoiceNodes = getDominantVoiceNodes({
+      profile: activeVoiceSummary?.profile || {},
+
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      scorchDepth,
+    });
+
+    const dominantNodeKeys = dominantVoiceNodes.nodes;
+
+    const firstTellTitle = getFirstTellDisplayTitle({
+      profile: activeVoiceSummary?.profile || {},
+
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      scorchDepth,
+    });
+
+    const resolvedDisplayTitle = isFirstTell ? firstTellTitle : displayTitle;
 
     const firstTellPrimaryNode = visualNodes[0] || firstTellKeys[0] || 'attack';
 
@@ -3192,71 +3999,102 @@ const HeritageProductDetail = () => {
     });
 
     return (
-      <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read heritage-voicemap-read-experience">
-        <div className="heritage-thread-reference-head">
-          <span className="heritage-chart-eyebrow">VoiceMap™</span>
+      <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read heritage-VoiceMapping-read-experience">
+        <div className="heritage-VoiceMapping-read-intro">
+          <div className="heritage-VoiceMapping-read-intro-copy">
+            <h4>Choose how you want to listen.</h4>
 
-          <h4 className="heritage-chart-title">Current VoiceMap read</h4>
+            <p>
+              LegacyPrint™ turns your custom HERITAGE blueprint into a simple
+              listening language — translating construction choices into how the
+              drum starts, blooms, carries, responds, and settles under the
+              hands.
+            </p>
 
-          <p className="heritage-chart-title-subcopy">
-            VoiceMap reads the drum in three passes: the First Tell, the Player
-            Read, and the one-of-one LegacyPrint™ identity.
-          </p>
+            <p>
+              Start with the first impression, open the full voice read, or move
+              deeper into the one-of-one LegacyPrint™ shape behind this build.
+            </p>
+          </div>
         </div>
 
         <div
-          className="heritage-thread-single-selector"
-          aria-label="Current VoiceMap read selector"
+          className="heritage-VoiceMapping-read-picker"
+          aria-label="Choose a VoiceMapping read"
         >
           {keyRelationships.map((relationship) => {
             const isActive = selectedThreadId === relationship.id;
 
-            const cardReadout = buildVoiceThreadReadout({
-              thread: relationship,
-
-              profile: activeVoiceSummary?.profile || {},
-
-              sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
-            });
-
-            const cardCopy = getVoiceMapReadCopy(relationship.slotKey);
-
-            const cardTitle = getVoiceMapDisplayTitle(
-              relationship,
-
-              musicalIdentityTitle
+            const VoiceMappingVariant = getVoiceMappingVariantForSlot(
+              relationship.slotKey
             );
+
+            const cardCopy = getVoiceMappingReadCopy(relationship.slotKey);
+
+            const readMicrocopy =
+              VoiceMappingVariant === 'firstTell'
+                ? 'What jumps out first when the drum speaks.'
+                : VoiceMappingVariant === 'player'
+                  ? 'How the full voice works under the hands.'
+                  : 'The one-of-one fingerprint of this build.';
+
+            const readLabel =
+              VoiceMappingVariant === 'firstTell'
+                ? 'Quick read'
+                : VoiceMappingVariant === 'player'
+                  ? 'Full map'
+                  : 'Identity shape';
 
             return (
               <button
-                key={`${activeBuildSignature}-${relationship.id}-voicemap-selector`}
+                key={`${activeBuildSignature}-${relationship.id}-VoiceMapping-selector`}
                 type="button"
-                className={`heritage-thread-single-selector-button ${
+                className={`heritage-VoiceMapping-read-picker-button heritage-VoiceMapping-read-picker-button--${VoiceMappingVariant} ${
                   isActive ? 'is-active' : ''
                 }`}
                 onClick={() => handleThreadSelect(relationship.id)}
                 style={getThreadColorVars(relationship.nodes)}
               >
-                <span className="heritage-thread-single-selector-kicker">
-                  {cardCopy.kicker}
+                <span className="heritage-VoiceMapping-read-picker-preview">
+                  {VoiceMappingVariant === 'firstTell' && (
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                      <path d="M32 10 L54 48 L10 48 Z" />
+                    </svg>
+                  )}
+
+                  {VoiceMappingVariant === 'player' && (
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                      <path d="M32 8 L52 20 L58 40 L44 56 L20 56 L6 40 L12 20 Z" />
+                    </svg>
+                  )}
+
+                  {VoiceMappingVariant === 'legacyprint' && (
+                    <svg viewBox="0 0 64 64" aria-hidden="true">
+                      <path d="M32 9 C43 12 54 19 56 31 C58 43 48 54 35 57 C22 60 9 52 7 38 C5 25 17 12 32 9 Z" />
+                    </svg>
+                  )}
                 </span>
 
-                <strong>{cardTitle}</strong>
+                <span className="heritage-VoiceMapping-read-picker-copy">
+                  <strong>{cardCopy.kicker}</strong>
 
-                <em>{cardReadout.intensityLabel} read</em>
+                  <em>{readLabel}</em>
+
+                  <small>{readMicrocopy}</small>
+                </span>
               </button>
             );
           })}
         </div>
 
         <article
-          key={`${activeBuildSignature}-${activeThread.id}-voicemap-read`}
-          className={`heritage-thread-single-read-panel heritage-voicemap-read-panel heritage-voicemap-read-panel--${activeThread.slotKey}`}
+          key={`${activeBuildSignature}-${activeThread.id}-VoiceMapping-read`}
+          className={`heritage-thread-single-read-panel heritage-VoiceMapping-read-panel heritage-VoiceMapping-read-panel--${activeThread.slotKey}`}
           style={getThreadColorVars(visualNodes)}
         >
-          <div className="heritage-thread-single-read-visual heritage-voicemap-read-visual">
+          <div className="heritage-thread-single-read-visual heritage-VoiceMapping-read-visual">
             <div
-              className={`heritage-voicemap-relationship-graph-shell heritage-voicemap-relationship-graph-shell--${voiceMapVariant}`}
+              className={`heritage-VoiceMapping-relationship-graph-shell heritage-VoiceMapping-relationship-graph-shell--${VoiceMappingVariant}`}
               style={{
                 '--first-tell-primary-color': firstTellPrimaryColor,
               }}
@@ -3265,38 +4103,7 @@ const HeritageProductDetail = () => {
                 activeThread={visualThread}
                 compact={false}
                 strengthScore={activeThread.score}
-                profile={
-                  activeThread.slotKey === 'complex'
-                    ? activeVoiceSummary?.profile || {}
-                    : buildHeritageVoiceRead({
-                        size,
-
-                        depth,
-
-                        lugs,
-
-                        staveOption,
-
-                        hardwareColor:
-                          HERITAGE_STANDARD_REFERENCE.hardwareColor,
-
-                        hoopType,
-
-                        scorchDepth,
-
-                        benchmarkFamilyId: isCompareModeEnabled
-                          ? benchmarkFamilyId
-                          : DEFAULT_BENCHMARK_FAMILY_ID,
-
-                        benchmarkTypeId: isCompareModeEnabled
-                          ? benchmarkTypeId
-                          : DEFAULT_BENCHMARK_TYPE_ID,
-
-                        benchmarkSizeId: isCompareModeEnabled
-                          ? benchmarkSizeId
-                          : DEFAULT_BENCHMARK_SIZE_ID,
-                      })?.profile || {}
-                }
+                profile={activeVoiceSummary?.profile || {}}
                 sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
                 currentSpec={activeVoiceSummary?.currentSpec || {}}
                 input={{
@@ -3310,15 +4117,14 @@ const HeritageProductDetail = () => {
 
                   hoopType,
 
-                  ...(activeThread.slotKey === 'complex'
-                    ? { hardwareColor }
-                    : {}),
+                  hardwareColor,
 
                   scorchDepth,
                 }}
-                displayMode="voicemap"
-                readVariant={voiceMapVariant}
+                displayMode="VoiceMapping"
+                readVariant={VoiceMappingVariant}
                 firstTellKeys={firstTellKeys}
+                dominantNodeKeys={dominantNodeKeys}
               />
             </div>
           </div>
@@ -3336,7 +4142,7 @@ const HeritageProductDetail = () => {
                   )}
                 </span>
 
-                <h4>{displayTitle}</h4>
+                <h4>{resolvedDisplayTitle}</h4>
               </div>
 
               <div className="heritage-thread-read-icons heritage-thread-read-icons--bare">
@@ -3350,10 +4156,8 @@ const HeritageProductDetail = () => {
               </p>
             )}
 
-                       <p className="heritage-thread-single-read-lede heritage-thread-single-read-lede--summary">
-
+            <p className="heritage-thread-single-read-lede heritage-thread-single-read-lede--summary">
               {isFirstTell ? firstTellSummary : activeThread.summary}
-
             </p>
 
             {activeThread.slotKey !== 'simple' && (
@@ -3370,7 +4174,7 @@ const HeritageProductDetail = () => {
                   {isFirstTell
                     ? 'First Tell triangle'
                     : isPlayerRead
-                      ? 'Full VoiceMap relationship shape'
+                      ? 'Full VoiceMapping relationship shape'
                       : 'LegacyPrint™ fingerprint'}
                 </span>
 
@@ -3382,20 +4186,15 @@ const HeritageProductDetail = () => {
               </div>
             )}
 
-{isFirstTell && renderFirstTellNodeList(visualNodes)}
+            {isFirstTell && renderFirstTellNodeList(visualNodes)}
 
             {!isFirstTell && !isPlayerRead && (
-
               <div className="heritage-thread-axis-delta-list heritage-thread-axis-delta-list--single">
-
                 {visualNodes.map((nodeKey) => {
-
                   const axis = AXIS_META.find((item) => item.key === nodeKey);
 
                   const rawValue = Number(
-
                     activeVoiceSummary?.profile?.[nodeKey] ?? 5
-
                   );
 
                   const delta = Number((rawValue - 5).toFixed(2));
@@ -3405,41 +4204,24 @@ const HeritageProductDetail = () => {
                   const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
                   return (
-
                     <div
-
                       key={nodeKey}
-
                       className={`heritage-thread-axis-delta-line ${
-
                         delta > 0
-
                           ? 'is-positive'
-
                           : delta < 0
-
                             ? 'is-negative'
-
                             : 'is-neutral'
-
                       }`}
-
                       style={{ '--axis-color': color }}
-
                     >
-
                       <span>{axis?.label || nodeKey}</span>
 
                       <strong>{deltaLabel}</strong>
-
                     </div>
-
                   );
-
                 })}
-
               </div>
-
             )}
 
             {activeThread.slotKey === 'simple' ? (
@@ -3450,7 +4232,7 @@ const HeritageProductDetail = () => {
                   <p>
                     This is the first impression read. It points to the three
                     strongest traits your ear is likely to notice before digging
-                    into the full VoiceMap.
+                    into the full VoiceMapping.
                   </p>
                 </section>
 
@@ -3511,7 +4293,7 @@ const HeritageProductDetail = () => {
 
   const renderLegacyPrintPanel = () => {
     if (legacyPrintTab === 'voiceRead') {
-      return renderVoiceMapReadExperience();
+      return renderVoiceMappingReadExperience();
     }
 
     if (legacyPrintTab === 'legacyTuning') {
@@ -3540,7 +4322,7 @@ const HeritageProductDetail = () => {
       return (
         <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read">
           <div className="heritage-thread-reference-head">
-            <span className="heritage-chart-eyebrow">Voice Threads</span>
+            <span className="heritage-chart-eyebrow">Voice Threading</span>
 
             <h4 className="heritage-chart-title">Current Voice Thread read</h4>
 
@@ -3595,37 +4377,7 @@ const HeritageProductDetail = () => {
           <VoiceThreadMap
             activeThread={activeThread}
             strengthScore={activeThread.score}
-            profile={
-              activeThread?.slotKey === 'complex'
-                ? activeVoiceSummary?.profile || {}
-                : buildHeritageVoiceRead({
-                    size,
-
-                    depth,
-
-                    lugs,
-
-                    staveOption,
-
-                    hardwareColor: HERITAGE_STANDARD_REFERENCE.hardwareColor,
-
-                    hoopType,
-
-                    scorchDepth,
-
-                    benchmarkFamilyId: isCompareModeEnabled
-                      ? benchmarkFamilyId
-                      : DEFAULT_BENCHMARK_FAMILY_ID,
-
-                    benchmarkTypeId: isCompareModeEnabled
-                      ? benchmarkTypeId
-                      : DEFAULT_BENCHMARK_TYPE_ID,
-
-                    benchmarkSizeId: isCompareModeEnabled
-                      ? benchmarkSizeId
-                      : DEFAULT_BENCHMARK_SIZE_ID,
-                  })?.profile || {}
-            }
+            profile={activeVoiceSummary?.profile || {}}
             sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
             currentSpec={activeVoiceSummary?.currentSpec || {}}
             input={{
@@ -3639,7 +4391,7 @@ const HeritageProductDetail = () => {
 
               hoopType,
 
-              ...(activeThread?.slotKey === 'complex' ? { hardwareColor } : {}),
+              hardwareColor,
 
               scorchDepth,
             }}
@@ -3696,15 +4448,15 @@ const HeritageProductDetail = () => {
 
             <p>
               Discovery Workbench maps player intent, genre, feel, touch,
-              reference sounds, Voice Nodes, Voice Threads, and build priorities
-              into a guided voicing direction.
+              reference sounds, Voice Nodes, Voice Threading, and build
+              priorities into a guided voicing direction.
             </p>
 
             <p>
               Available for SoundLegend artists and LegacyPartner accounts.
-              SoundLegend artists also unlock deeper VoiceMap, VoiceRange, Story
-              Workbench, consultation history, and the living story behind the
-              drum.
+              SoundLegend artists also unlock deeper VoiceMapping, VoiceRange,
+              Story Workbench, consultation history, and the living story behind
+              the drum.
             </p>
 
             <button
@@ -4653,7 +5405,7 @@ const HeritageProductDetail = () => {
                 <div className="heritage-voice-read-header-topline">
                   <span className="heritage-summary-kicker heritage-summary-kicker--legacyprint-engine">
                     <img
-                      src="/legacyprint-benchmarks/legacyprint-icon.png"
+                      src="/legacyprint-benchmarks/ober-legacyprint-7-node-neon-all-connections-transparent.png"
                       alt=""
                       className="heritage-legacyprint-engine-icon"
                       aria-hidden="true"

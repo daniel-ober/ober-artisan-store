@@ -61,7 +61,7 @@ export const LEGACYPRINT_MODES = [
 
     description:
 
-      'Voice Finder is an adaptive discovery tool that uses the Voice Map to turn player language into a clear Voice Target.',
+      'Voice Finder is an adaptive discovery tool that uses the VoiceMapping to turn player language into a clear Voice Target.',
 
   },
 

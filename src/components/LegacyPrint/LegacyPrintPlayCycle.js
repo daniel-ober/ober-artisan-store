@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-import { VOICE_NODE_GUIDE, AXIS_COLOR_BY_KEY, MetricIcon } from './legacyPrintVoiceMapData';
+import { VOICE_NODE_GUIDE, AXIS_COLOR_BY_KEY, MetricIcon } from './legacyPrintVoiceMappingData';
 
 const CYCLE_STEPS = [
 

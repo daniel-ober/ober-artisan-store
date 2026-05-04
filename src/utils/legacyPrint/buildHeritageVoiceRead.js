@@ -1622,23 +1622,29 @@ function buildPlayingSituation(spec = {}, profile = {}) {
 
   );
 
-  if (isLowLug && isReferenceShell && isTripleFlange) {
+if (isThinShell && hasReRings && isLowLug) {
 
-    return 'A more open low-lug Heritage read: fewer tension points let the shell breathe more freely, rounding the attack and giving the note a broader bloom with less built-in control than the 8-lug reference.';
+  return `A low-lug thin re-ring Heritage read: ${shellRead.summary}. Fewer tension points let the head and shell breathe more freely, while the re-rings keep the thinner shell supported enough to stay musical and usable.`;
 
-  }
+}
 
-  if (isLowLug) {
+if (isHighLug && isThinShell && hasReRings) {
 
-    return 'A more open low-lug Heritage read, where fewer tension points soften the front edge, loosen the note shape, and let more shell bloom come forward.';
+  return 'A supported thin-shell Heritage read: the thinner shell adds warmer body, easier bloom, and a more responsive feel under lighter hands. The extra lug count adds some organization and note shape, but the thinner re-ring shell remains the dominant voice — warmer, more open, and more responsive than a thick high-lug build.';
 
-  }
+}
 
-  if (isHighLug && isThinShell && hasReRings) {
+if (isLowLug && isReferenceShell && isTripleFlange) {
 
-    return 'A supported thin-shell Heritage read: the thinner shell adds warmer body, easier bloom, and a more responsive feel under lighter hands. The extra lug count adds some organization and note shape, but the thinner re-ring shell remains the dominant voice — warmer, more open, and more responsive than a thick high-lug build.';
+  return 'A more open low-lug Heritage read: fewer tension points let the shell breathe more freely, rounding the attack and giving the note a broader bloom with less built-in control than the 8-lug reference.';
 
-  }
+}
+
+if (isLowLug) {
+
+  return 'A more open low-lug Heritage read, where fewer tension points soften the front edge, loosen the note shape, and let more shell bloom come forward.';
+
+}
 
   if (isHighLug && isThickHighLugShell) {
 

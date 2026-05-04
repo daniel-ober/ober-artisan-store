@@ -4,7 +4,7 @@ const LegacyPrintModeTabs = ({ modes = [], activeMode, onChange }) => {
 
   return (
 
-    <div className="lp-mode-tabs" role="tablist" aria-label="LegacyPrint Voice Map modes">
+    <div className="lp-mode-tabs" role="tablist" aria-label="LegacyPrint VoiceMapping modes">
 
       {modes.map((mode) => (
 

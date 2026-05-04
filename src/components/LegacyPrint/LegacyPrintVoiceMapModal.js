@@ -887,7 +887,7 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
         type="button"
         className="lp-modal-close"
         onClick={onClose}
-        aria-label="Close Voice Map Reference"
+        aria-label="Close VoiceMapping Reference"
       >
         ×
       </button>
@@ -896,7 +896,7 @@ const LegacyPrintVoiceMapModal = ({ onClose }) => {
         <header className="lp-modal-header">
           <span className="lp-kicker">LegacyPrint™ Listening Guide</span>
 
-          <h2>Voice Map Reference</h2>
+          <h2>VoiceMapping Reference</h2>
 
           <p>
             A practical way to hear how a snare speaks, carries, blooms, and

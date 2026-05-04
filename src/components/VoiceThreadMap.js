@@ -444,7 +444,7 @@ const getThreadGradientId = (mapId, source, target) => {
 
 const getThreadKind = (thread = {}) => {
   const visualMode = String(
-    thread?.visualMode || thread?.mapMode || thread?.voiceMapMode || ''
+    thread?.visualMode || thread?.mapMode || thread?.VoiceMappingMode || ''
   ).toLowerCase();
 
   if (visualMode === 'triangle' || visualMode === 'first-tell') {
@@ -1011,6 +1011,39 @@ const getSegmentStrength = ({ sourceNode, targetNode, rankMap = {} }) => {
   return clamp(rankStrength * 0.82 + weight * 0.18, 0.18, 1);
 };
 
+const getPlayerReadRadiusForNode = (profile = {}, nodeKey) => {
+  const value = getAxisValue(profile, nodeKey);
+
+  const rawDelta = value - 5;
+
+  const absDelta = Math.abs(rawDelta);
+
+  const direction = rawDelta === 0 ? 0 : Math.sign(rawDelta);
+
+  /*
+
+   * Player Read needs to be visually readable.
+
+   * The actual tone engine usually moves in subtle 0.15–0.85 ranges,
+
+   * but the map needs to show those differences clearly.
+
+   */
+
+  const visualDelta =
+    absDelta <= 0.2
+      ? absDelta * 1.9
+      : absDelta <= 0.6
+        ? 0.38 + (absDelta - 0.2) * 1.45
+        : absDelta <= 1.2
+          ? 0.96 + (absDelta - 0.6) * 1.05
+          : 1.59 + (absDelta - 1.2) * 0.72;
+
+  const signedVisualDelta = direction * visualDelta;
+
+  return clamp(0.56 + signedVisualDelta * 0.19, 0.28, 0.9);
+};
+
 const getThreadShapePoints = ({
   activeThread,
 
@@ -1063,15 +1096,15 @@ const getThreadShapePoints = ({
 
       /*
 
-       * First Tell is the big, at-a-glance read.
+ * First Tell is the big, at-a-glance read.
 
-       * Make meaningful Heritage shell changes visually obvious:
+ * Make meaningful Heritage shell changes visually obvious:
 
-       * - 7mm / open shell should bloom farther toward warmth/sustain.
+ * - 7mm / open shell should bloom farther toward warmth/sustain.
 
-       * - 12mm / focused shell should pull harder toward attack/projection/control.
+ * - 12mm / focused shell should pull harder toward attack/projection/control.
 
-       */
+ */
 
       const signed = clamp(rawDelta / 0.95, -1, 1);
 
@@ -1123,36 +1156,18 @@ const getThreadShapePoints = ({
   }
 
   if (resolvedReadVariant === 'player') {
-    return THREAD_NODE_ORDER.map((nodeKey, index) => {
+    return THREAD_NODE_ORDER.map((nodeKey) => {
       const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
 
-      const movement = getAxisMovement(profile, nodeKey);
-
-      const signed = clamp(getAxisDelta(profile, nodeKey) / 1.5, -1, 1);
-
-      const radius = clamp(
-        0.56 + movement * 0.18 + signed * 0.055,
-
-        0.43,
-
-        0.88
-      );
-
-      const pulled = pullPointFromCenter(basePoint, radius);
-
-      const xJitter =
-        getSeededSignedValue(seed, `player-x-${nodeKey}-${index}`) * 4;
-
-      const yJitter =
-        getSeededSignedValue(seed, `player-y-${nodeKey}-${index}`) * 4;
+      const radius = getPlayerReadRadiusForNode(profile, nodeKey);
 
       return {
         nodeKey,
 
         point: keepPointInsideThreadFrame(
-          offsetPoint(pulled, xJitter, yJitter, 0.9),
+          pullPointFromCenter(basePoint, radius),
 
-          0.9
+          0.92
         ),
       };
     });
@@ -1358,6 +1373,36 @@ const buildSegments = ({ shapeItems, closed = true }) => {
   });
 };
 
+const buildPlayerReadSegments = (shapeItems = []) => {
+  const cleanItems = shapeItems.filter(
+    (item) => item?.nodeKey && isFinitePoint(item?.point)
+  );
+
+  if (cleanItems.length < 2) return [];
+
+  return cleanItems.map((item, index) => {
+    const next = cleanItems[(index + 1) % cleanItems.length];
+
+    return {
+      key: `player-read-${item.nodeKey}-${next.nodeKey}-${index}`,
+
+      sourceNode: item.nodeKey,
+
+      targetNode: next.nodeKey,
+
+      sourcePoint: item.point,
+
+      targetPoint: next.point,
+
+      sourceColor: AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277',
+
+      targetColor: AXIS_COLOR_BY_KEY[next.nodeKey] || '#d6b277',
+
+      path: `M ${item.point.x.toFixed(2)} ${item.point.y.toFixed(2)} L ${next.point.x.toFixed(2)} ${next.point.y.toFixed(2)}`,
+    };
+  });
+};
+
 const getGradientVector = (shapeItems = []) => {
   const cleanItems = shapeItems.filter(
     (item) => item?.nodeKey && isFinitePoint(item?.point)
@@ -1460,6 +1505,88 @@ const renderSmoothSegmentStops = ({
   );
 };
 
+const renderPlayerSegmentStops = ({ sourceColor, targetColor }) => {
+  const middleColor = mixTwoHexColors(sourceColor, targetColor, 0.5);
+
+  return (
+    <>
+      <stop offset="0%" stopColor={sourceColor} stopOpacity="0.92" />
+
+      <stop offset="42%" stopColor={sourceColor} stopOpacity="0.86" />
+
+      <stop offset="50%" stopColor={middleColor} stopOpacity="0.88" />
+
+      <stop offset="58%" stopColor={targetColor} stopOpacity="0.86" />
+
+      <stop offset="100%" stopColor={targetColor} stopOpacity="0.92" />
+    </>
+  );
+};
+
+const SPIDER_GRID_LEVELS = Array.from({ length: 10 }, (_, index) => index + 1);
+
+const getSpiderGridPolygonPoints = (level) => {
+  const scale = clamp(level / 10, 0, 1);
+
+  return THREAD_NODE_ORDER.map((nodeKey) => {
+    const point = getPointForNode(nodeKey) || SVG_CENTER;
+
+    const scaledPoint = mixPoints(SVG_CENTER, point, scale);
+
+    return `${scaledPoint.x.toFixed(2)},${scaledPoint.y.toFixed(2)}`;
+  }).join(' ');
+};
+
+const HERITAGE_REFERENCE_PROFILE = {
+  attack: 5,
+
+  brightness: 5,
+
+  projection: 5,
+
+  sustain: 5,
+
+  warmth: 5,
+
+  sensitivity: 5,
+
+  control: 5,
+};
+
+const getReferenceProfilePoints = () => {
+  return THREAD_NODE_ORDER.map((nodeKey) => {
+    const basePoint = getPointForNode(nodeKey) || SVG_CENTER;
+
+    const radius = getPlayerReadRadiusForNode(
+      HERITAGE_REFERENCE_PROFILE,
+
+      nodeKey
+    );
+
+    return {
+      nodeKey,
+
+      point: mixPoints(SVG_CENTER, basePoint, radius),
+    };
+  });
+};
+
+const getReferenceProfilePath = () => {
+  const points = getReferenceProfilePoints().map((item) => item.point);
+
+  if (!points.length) return '';
+
+  const [first, ...rest] = points;
+
+  return [
+    `M ${first.x.toFixed(2)} ${first.y.toFixed(2)}`,
+
+    ...rest.map((point) => `L ${point.x.toFixed(2)} ${point.y.toFixed(2)}`),
+
+    'Z',
+  ].join(' ');
+};
+
 const VoiceThreadMap = ({
   activeThread,
 
@@ -1479,7 +1606,7 @@ const VoiceThreadMap = ({
 
   firstTellKeys = [],
 }) => {
-  const isVoiceMapMode = displayMode === 'voicemap';
+  const isVoiceMappingMode = displayMode === 'VoiceMapping';
 
   const resolvedReadVariant =
     readVariant ||
@@ -1496,6 +1623,30 @@ const VoiceThreadMap = ({
   const nodesSignature = getNodesSignature(activeThread);
 
   const inputSignature = getInputSignature(input, currentSpec);
+
+  useEffect(() => {
+    if (resolvedReadVariant !== 'player') return;
+
+    console.table(
+      THREAD_NODE_ORDER.map((nodeKey) => ({
+        node: nodeKey,
+
+        score: Number(profile?.[nodeKey] ?? 5),
+
+        delta: Number((Number(profile?.[nodeKey] ?? 5) - 5).toFixed(3)),
+
+        radius: Number(getPlayerReadRadiusForNode(profile, nodeKey).toFixed(3)),
+      }))
+    );
+
+    console.log('VoiceThreadMap input:', {
+      input,
+
+      currentSpec,
+
+      profile,
+    });
+  }, [resolvedReadVariant, profileSignature, inputSignature]);
 
   const shapeColors = useMemo(
     () => getShapeColors(activeThread),
@@ -1732,7 +1883,7 @@ const VoiceThreadMap = ({
   const shapeItems = animatedShapeItems;
   const shouldCloseShape = !(
     threadKind === 'simple' &&
-    !isVoiceMapMode &&
+    !isVoiceMappingMode &&
     shapeItems.length <= 2
   );
 
@@ -1758,6 +1909,12 @@ const VoiceThreadMap = ({
       closed: shouldCloseShape,
     });
   }, [shapeItems, shouldCloseShape]);
+
+  const playerReadSegments = useMemo(() => {
+    if (resolvedReadVariant !== 'player') return [];
+
+    return buildPlayerReadSegments(shapeItems);
+  }, [shapeItems, resolvedReadVariant]);
 
   const mapId = `heritage-voice-thread-${
     compact ? 'compact' : 'large'
@@ -1861,6 +2018,19 @@ const VoiceThreadMap = ({
       data-thread-kind={threadKind}
       data-strength-score={strengthScore}
     >
+      {resolvedReadVariant === 'player' && !compact && (
+        <div className="heritage-player-read-map-key" aria-hidden="true">
+          <span className="heritage-player-read-map-key__item">
+            <span className="heritage-player-read-map-key__line heritage-player-read-map-key__line--reference" />
+            Reference: 14&quot; × 5.5&quot; / 10mm / 16 stave / 8 lugs
+          </span>
+
+          <span className="heritage-player-read-map-key__item">
+            <span className="heritage-player-read-map-key__line heritage-player-read-map-key__line--selected" />
+            Selected build
+          </span>
+        </div>
+      )}
       <svg
         className="heritage-voice-thread-svg"
         viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
@@ -2048,22 +2218,62 @@ const VoiceThreadMap = ({
                 x2={segment.targetPoint.x}
                 y2={segment.targetPoint.y}
               >
-                {renderSmoothSegmentStops({
-                  sourceColor,
+                {resolvedReadVariant === 'player'
+                  ? renderPlayerSegmentStops({
+                      sourceColor,
 
-                  targetColor,
+                      targetColor,
+                    })
+                  : renderSmoothSegmentStops({
+                      sourceColor,
 
-                  sourceStrength,
+                      targetColor,
 
-                  targetStrength,
+                      sourceStrength,
 
-                  sourceRank,
+                      targetStrength,
 
-                  targetRank,
-                })}
+                      sourceRank,
+
+                      targetRank,
+                    })}
               </linearGradient>
             );
           })}
+
+          {playerReadSegments.map((segment) => (
+            <linearGradient
+              key={`${mapId}-${segment.key}-gradient`}
+              id={`${mapId}-${segment.key}-gradient`}
+              gradientUnits="userSpaceOnUse"
+              x1={segment.sourcePoint.x}
+              y1={segment.sourcePoint.y}
+              x2={segment.targetPoint.x}
+              y2={segment.targetPoint.y}
+            >
+              <stop
+                offset="0%"
+                stopColor={segment.sourceColor}
+                stopOpacity="0.9"
+              />
+
+              <stop
+                offset="50%"
+                stopColor={mixTwoHexColors(
+                  segment.sourceColor,
+                  segment.targetColor,
+                  0.5
+                )}
+                stopOpacity="0.86"
+              />
+
+              <stop
+                offset="100%"
+                stopColor={segment.targetColor}
+                stopOpacity="0.9"
+              />
+            </linearGradient>
+          ))}
 
           <linearGradient
             id={`${mapId}-activeShapeGradient`}
@@ -2166,319 +2376,435 @@ const VoiceThreadMap = ({
             />
           </linearGradient>
         </defs>
-
-        <g className="heritage-voice-thread-network">
-          {THREAD_NODE_PAIRS.map(([source, target]) => {
-            const sourcePoint = THREAD_NODE_POSITIONS[source];
-
-            const targetPoint = THREAD_NODE_POSITIONS[target];
-
-            if (!sourcePoint || !targetPoint) return null;
-
-            const gradientId = getThreadGradientId(mapId, source, target);
-
-            return (
-              <line
-                key={`${source}-${target}`}
-                x1={sourcePoint.x * 5}
-                y1={sourcePoint.y * 5}
-                x2={targetPoint.x * 5}
-                y2={targetPoint.y * 5}
-                className="heritage-voice-thread-line heritage-voice-thread-line--base"
-                stroke={`url(#${gradientId})`}
-              />
-            );
-          })}
-
-          {THREAD_NODE_ORDER.map((nodeKey, index) => {
-            const nextNodeKey =
-              THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
-
-            const point = THREAD_NODE_POSITIONS[nodeKey];
-
-            const nextPoint = THREAD_NODE_POSITIONS[nextNodeKey];
-
-            if (!point || !nextPoint) return null;
-
-            const gradientId = getThreadGradientId(mapId, nodeKey, nextNodeKey);
-
-            return (
-              <line
-                key={`outer-${nodeKey}-${nextNodeKey}`}
-                className="heritage-voice-thread-outer-line"
-                x1={point.x * 5}
-                y1={point.y * 5}
-                x2={nextPoint.x * 5}
-                y2={nextPoint.y * 5}
-                stroke={`url(#${gradientId})`}
-              />
-            );
-          })}
-        </g>
-
-        {shapePath && (
-          <g
-            className={`heritage-voice-thread-active-shape heritage-voice-thread-active-shape--${threadKind} heritage-voice-thread-active-shape--read-${resolvedReadVariant}`}
-            data-transition-signature={targetShapeSignature}
-          >
-            {shouldRenderComplexFill && (
-              <>
-                <path
-                  d={shapePath}
-                  className="heritage-voice-thread-complex-fill"
-                  fill={`url(#${mapId}-complexFillGradient)`}
-                  stroke="none"
-                />
+        <g
+          className={`heritage-voice-thread-map-stage heritage-voice-thread-map-stage--${resolvedReadVariant}`}
+        >
+          <g className="heritage-voice-thread-network">
+            {resolvedReadVariant === 'player' && (
+              <g
+                className="heritage-voice-thread-spider-grid"
+                aria-hidden="true"
+              >
+                {SPIDER_GRID_LEVELS.map((level) => (
+                  <polygon
+                    key={`spider-grid-level-${level}`}
+                    points={getSpiderGridPolygonPoints(level)}
+                    className={`heritage-voice-thread-spider-grid-ring heritage-voice-thread-spider-grid-ring--${level}`}
+                  />
+                ))}
 
                 <path
-                  d={shapePath}
-                  className="heritage-voice-thread-complex-sheen"
-                  fill={`url(#${mapId}-complexSheenGradient)`}
-                  stroke="none"
+                  d={getReferenceProfilePath()}
+                  className="heritage-player-read-reference-line"
+                  fill="none"
                 />
-              </>
+
+                {getReferenceProfilePoints().map((item) => (
+                  <circle
+                    key={`reference-dot-${item.nodeKey}`}
+                    cx={item.point.x}
+                    cy={item.point.y}
+                    r="2.25"
+                    className="heritage-player-read-reference-dot"
+                  />
+                ))}
+              </g>
             )}
 
-            {relationshipSegments.length > 0 ? (
-              <g className="heritage-voice-thread-relationship-segments">
-                {relationshipSegments.map((segment) => {
-                  const segmentGradientId = `${mapId}-active-segment-${segment.key}`;
+            {resolvedReadVariant === 'player' &&
+              THREAD_NODE_ORDER.map((nodeKey) => {
+                const point = THREAD_NODE_POSITIONS[nodeKey];
 
-                  const segmentStrength = getSegmentStrength({
-                    sourceNode: segment.sourceNode,
+                if (!point) return null;
 
-                    targetNode: segment.targetNode,
+                const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
-                    rankMap,
-                  });
+                return (
+                  <line
+                    key={`spider-${nodeKey}`}
+                    x1="250"
+                    y1="250"
+                    x2={point.x * 5}
+                    y2={point.y * 5}
+                    className="heritage-voice-thread-spider-line"
+                    stroke={color}
+                    style={{ color }}
+                  />
+                );
+              })}
 
-                  const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
+            {resolvedReadVariant !== 'player' &&
+              THREAD_NODE_PAIRS.map(([source, target]) => {
+                const sourcePoint = THREAD_NODE_POSITIONS[source];
 
-                  const targetRank = rankMap[segment.targetNode]?.rank ?? 99;
+                const targetPoint = THREAD_NODE_POSITIONS[target];
 
-                  const bestRank = Math.min(sourceRank, targetRank);
+                if (!sourcePoint || !targetPoint) return null;
 
-                  const isPrimarySegment = bestRank === 0;
+                const gradientId = getThreadGradientId(mapId, source, target);
 
-                  const segmentHaloWidth =
-                    baseHaloStrokeWidth * (0.46 + segmentStrength * 0.74);
+                return (
+                  <line
+                    key={`${source}-${target}`}
+                    x1={sourcePoint.x * 5}
+                    y1={sourcePoint.y * 5}
+                    x2={targetPoint.x * 5}
+                    y2={targetPoint.y * 5}
+                    className="heritage-voice-thread-line heritage-voice-thread-line--base"
+                    stroke={`url(#${gradientId})`}
+                  />
+                );
+              })}
 
-                  const segmentGlowWidth =
-                    baseGlowStrokeWidth * (0.54 + segmentStrength * 0.78);
+            {THREAD_NODE_ORDER.map((nodeKey, index) => {
+              const nextNodeKey =
+                THREAD_NODE_ORDER[(index + 1) % THREAD_NODE_ORDER.length];
 
-                  const segmentCoreWidth =
-                    baseCoreStrokeWidth * (0.72 + segmentStrength * 0.58);
+              const point = THREAD_NODE_POSITIONS[nodeKey];
 
-                  const segmentHaloOpacity = clamp(
-                    0.055 + segmentStrength * 0.19,
+              const nextPoint = THREAD_NODE_POSITIONS[nextNodeKey];
 
-                    0.055,
+              if (!point || !nextPoint) return null;
 
-                    0.27
-                  );
+              const gradientId = getThreadGradientId(
+                mapId,
 
-                  const segmentGlowOpacity = clamp(
-                    0.16 + segmentStrength * 0.52,
+                nodeKey,
 
-                    0.16,
+                nextNodeKey
+              );
 
-                    0.72
-                  );
+              return (
+                <line
+                  key={`outer-${nodeKey}-${nextNodeKey}`}
+                  className="heritage-voice-thread-outer-line"
+                  x1={point.x * 5}
+                  y1={point.y * 5}
+                  x2={nextPoint.x * 5}
+                  y2={nextPoint.y * 5}
+                  stroke={`url(#${gradientId})`}
+                />
+              );
+            })}
+          </g>
+          {shapePath && resolvedReadVariant !== 'player' && (
+            <g
+              className={`heritage-voice-thread-active-shape heritage-voice-thread-active-shape--${threadKind} heritage-voice-thread-active-shape--read-${resolvedReadVariant}`}
+              data-transition-signature={targetShapeSignature}
+            >
+              {shouldRenderComplexFill && (
+                <>
+                  <path
+                    d={shapePath}
+                    className="heritage-voice-thread-complex-fill"
+                    fill={`url(#${mapId}-complexFillGradient)`}
+                    stroke="none"
+                  />
 
-                  const segmentCoreOpacity = clamp(
-                    0.58 + segmentStrength * 0.4,
+                  <path
+                    d={shapePath}
+                    className="heritage-voice-thread-complex-sheen"
+                    fill={`url(#${mapId}-complexSheenGradient)`}
+                    stroke="none"
+                  />
+                </>
+              )}
 
-                    0.58,
+              {relationshipSegments.length > 0 ? (
+                <g className="heritage-voice-thread-relationship-segments">
+                  {relationshipSegments.map((segment) => {
+                    const segmentGradientId = `${mapId}-active-segment-${segment.key}`;
 
-                    0.99
-                  );
+                    const segmentStrength = getSegmentStrength({
+                      sourceNode: segment.sourceNode,
+
+                      targetNode: segment.targetNode,
+
+                      rankMap,
+                    });
+
+                    const sourceRank = rankMap[segment.sourceNode]?.rank ?? 99;
+
+                    const targetRank = rankMap[segment.targetNode]?.rank ?? 99;
+
+                    const bestRank = Math.min(sourceRank, targetRank);
+
+                    const isPrimarySegment = bestRank === 0;
+
+                    const segmentHaloWidth =
+                      baseHaloStrokeWidth * (0.46 + segmentStrength * 0.74);
+
+                    const segmentGlowWidth =
+                      baseGlowStrokeWidth * (0.54 + segmentStrength * 0.78);
+
+                    const segmentCoreWidth =
+                      baseCoreStrokeWidth * (0.72 + segmentStrength * 0.58);
+
+                    const segmentHaloOpacity = clamp(
+                      0.055 + segmentStrength * 0.19,
+
+                      0.055,
+
+                      0.27
+                    );
+
+                    const segmentGlowOpacity = clamp(
+                      0.16 + segmentStrength * 0.52,
+
+                      0.16,
+
+                      0.72
+                    );
+
+                    const segmentCoreOpacity = clamp(
+                      0.58 + segmentStrength * 0.4,
+
+                      0.58,
+
+                      0.99
+                    );
+
+                    return (
+                      <g
+                        key={segment.key}
+                        className={`heritage-voice-thread-segment heritage-voice-thread-segment--rank-${bestRank}`}
+                      >
+                        <path
+                          d={segment.path}
+                          className="heritage-voice-thread-shape-halo"
+                          fill="none"
+                          stroke={`url(#${segmentGradientId})`}
+                          strokeWidth={segmentHaloWidth}
+                          opacity={segmentHaloOpacity}
+                          filter={`url(#${mapId}-softGlow)`}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+
+                        <path
+                          d={segment.path}
+                          className="heritage-voice-thread-shape-glow"
+                          fill="none"
+                          stroke={`url(#${segmentGradientId})`}
+                          strokeWidth={segmentGlowWidth}
+                          opacity={segmentGlowOpacity}
+                          filter={
+                            isPrimarySegment
+                              ? `url(#${mapId}-primaryGlow)`
+                              : `url(#${mapId}-neonGlow)`
+                          }
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+
+                        <path
+                          d={segment.path}
+                          className="heritage-voice-thread-shape-core"
+                          fill="none"
+                          stroke={`url(#${segmentGradientId})`}
+                          strokeWidth={segmentCoreWidth}
+                          opacity={segmentCoreOpacity}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+
+                        <path
+                          d={segment.path}
+                          className="heritage-voice-thread-shape-hotline"
+                          fill="none"
+                          stroke="rgba(255, 246, 218, 0.54)"
+                          strokeWidth={
+                            isPrimarySegment
+                              ? compact
+                                ? 1.15
+                                : 1.5
+                              : compact
+                                ? 0.7
+                                : 0.95
+                          }
+                          opacity={clamp(
+                            0.035 + segmentStrength * 0.24,
+
+                            0.035,
+
+                            0.28
+                          )}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </g>
+                    );
+                  })}
+                </g>
+              ) : (
+                <>
+                  <path
+                    d={shapePath}
+                    className="heritage-voice-thread-shape-halo"
+                    fill="none"
+                    stroke={`url(#${mapId}-activeShapeGradient)`}
+                    strokeWidth={baseHaloStrokeWidth}
+                    opacity={compact ? 0.15 : 0.21}
+                    filter={`url(#${mapId}-softGlow)`}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+
+                  <path
+                    d={shapePath}
+                    className="heritage-voice-thread-shape-glow"
+                    fill="none"
+                    stroke={`url(#${mapId}-activeShapeGradient)`}
+                    strokeWidth={baseGlowStrokeWidth}
+                    opacity={compact ? 0.4 : 0.58}
+                    filter={`url(#${mapId}-primaryGlow)`}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+
+                  <path
+                    d={shapePath}
+                    className="heritage-voice-thread-shape-core"
+                    fill="none"
+                    stroke={`url(#${mapId}-activeShapeGradient)`}
+                    strokeWidth={baseCoreStrokeWidth}
+                    opacity="0.96"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+
+                  <path
+                    d={shapePath}
+                    className="heritage-voice-thread-shape-hotline"
+                    fill="none"
+                    stroke={`url(#${mapId}-complexSheenGradient)`}
+                    strokeWidth={compact ? 0.95 : 1.25}
+                    opacity="0.34"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </>
+              )}
+            </g>
+          )}
+
+          {resolvedReadVariant === 'player' &&
+            playerReadSegments.length > 0 && (
+              <g
+                className="heritage-player-read-polygon-layer"
+                data-transition-signature={targetShapeSignature}
+              >
+                {playerReadSegments.map((segment) => {
+                  const gradientId = `${mapId}-${segment.key}-gradient`;
 
                   return (
                     <g
                       key={segment.key}
-                      className={`heritage-voice-thread-segment heritage-voice-thread-segment--rank-${bestRank}`}
+                      className="heritage-player-read-polygon-segment"
                     >
                       <path
                         d={segment.path}
-                        className="heritage-voice-thread-shape-halo"
+                        className="heritage-player-read-polygon-soft"
                         fill="none"
-                        stroke={`url(#${segmentGradientId})`}
-                        strokeWidth={segmentHaloWidth}
-                        opacity={segmentHaloOpacity}
-                        filter={`url(#${mapId}-softGlow)`}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        stroke={`url(#${gradientId})`}
                       />
 
                       <path
                         d={segment.path}
-                        className="heritage-voice-thread-shape-glow"
+                        className="heritage-player-read-polygon-core"
                         fill="none"
-                        stroke={`url(#${segmentGradientId})`}
-                        strokeWidth={segmentGlowWidth}
-                        opacity={segmentGlowOpacity}
-                        filter={
-                          isPrimarySegment
-                            ? `url(#${mapId}-primaryGlow)`
-                            : `url(#${mapId}-neonGlow)`
-                        }
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-
-                      <path
-                        d={segment.path}
-                        className="heritage-voice-thread-shape-core"
-                        fill="none"
-                        stroke={`url(#${segmentGradientId})`}
-                        strokeWidth={segmentCoreWidth}
-                        opacity={segmentCoreOpacity}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-
-                      <path
-                        d={segment.path}
-                        className="heritage-voice-thread-shape-hotline"
-                        fill="none"
-                        stroke="rgba(255, 246, 218, 0.54)"
-                        strokeWidth={
-                          isPrimarySegment
-                            ? compact
-                              ? 1.15
-                              : 1.5
-                            : compact
-                              ? 0.7
-                              : 0.95
-                        }
-                        opacity={clamp(
-                          0.035 + segmentStrength * 0.24,
-
-                          0.035,
-
-                          0.28
-                        )}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        stroke={`url(#${gradientId})`}
                       />
                     </g>
                   );
                 })}
+
+                {shapeItems.map((item) => {
+                  const color = AXIS_COLOR_BY_KEY[item.nodeKey] || '#d6b277';
+
+                  return (
+                    <circle
+                      key={`player-value-dot-${item.nodeKey}`}
+                      cx={item.point.x}
+                      cy={item.point.y}
+                      r="4.6"
+                      className="heritage-player-read-value-dot"
+                      fill={color}
+                    />
+                  );
+                })}
               </g>
-            ) : (
-              <>
-                <path
-                  d={shapePath}
-                  className="heritage-voice-thread-shape-halo"
-                  fill="none"
-                  stroke={`url(#${mapId}-activeShapeGradient)`}
-                  strokeWidth={baseHaloStrokeWidth}
-                  opacity={compact ? 0.15 : 0.21}
-                  filter={`url(#${mapId}-softGlow)`}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                <path
-                  d={shapePath}
-                  className="heritage-voice-thread-shape-glow"
-                  fill="none"
-                  stroke={`url(#${mapId}-activeShapeGradient)`}
-                  strokeWidth={baseGlowStrokeWidth}
-                  opacity={compact ? 0.4 : 0.58}
-                  filter={`url(#${mapId}-primaryGlow)`}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                <path
-                  d={shapePath}
-                  className="heritage-voice-thread-shape-core"
-                  fill="none"
-                  stroke={`url(#${mapId}-activeShapeGradient)`}
-                  strokeWidth={baseCoreStrokeWidth}
-                  opacity="0.96"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-
-                <path
-                  d={shapePath}
-                  className="heritage-voice-thread-shape-hotline"
-                  fill="none"
-                  stroke={`url(#${mapId}-complexSheenGradient)`}
-                  strokeWidth={compact ? 0.95 : 1.25}
-                  opacity="0.34"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </>
             )}
-          </g>
-        )}
 
-        <g className="heritage-voice-thread-node-layer">
-          {THREAD_NODE_ORDER.map((nodeKey) => {
-            const point = THREAD_NODE_POSITIONS[nodeKey];
+          <g className="heritage-voice-thread-node-layer">
+            {THREAD_NODE_ORDER.map((nodeKey) => {
+              const point = THREAD_NODE_POSITIONS[nodeKey];
 
-            const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
+              const iconPoint = THREAD_NODE_ICON_POSITIONS[nodeKey] || point;
 
-            if (!point) return null;
+              if (!point) return null;
 
-            const axis = AXIS_META.find((item) => item.key === nodeKey);
+              const axis = AXIS_META.find((item) => item.key === nodeKey);
 
-            const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
+              const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
-            const rankItem = rankMap[nodeKey];
+              const rankItem = rankMap[nodeKey];
 
-            const isActive = activeNodeSet.has(nodeKey);
+              const isActive = activeNodeSet.has(nodeKey);
 
-            const rank = Number.isFinite(rankItem?.rank) ? rankItem.rank : 99;
+              const rank = Number.isFinite(rankItem?.rank) ? rankItem.rank : 99;
 
-            return (
-              <g
-                key={nodeKey}
-                className={`heritage-voice-thread-node ${
-                  isActive ? 'is-active' : ''
-                } heritage-voice-thread-node--rank-${rank}`}
-                style={{ '--node-color': color }}
-                data-rank={rank}
-              >
-                <circle
-                  cx={point.x * 5}
-                  cy={point.y * 5}
-                  r={
-                    rank === 0 ? 5.4 : rank === 1 ? 4.4 : isActive ? 3.7 : 2.45
-                  }
-                  className="heritage-voice-thread-anchor-dot"
-                  fill={color}
-                  filter={rank <= 2 ? `url(#${mapId}-nodeGlow)` : undefined}
-                />
+              return (
+                <g
+                  key={nodeKey}
+                  className={`heritage-voice-thread-node ${
+                    isActive ? 'is-active' : ''
+                  } heritage-voice-thread-node--rank-${rank}`}
+                  style={{ '--node-color': color }}
+                  data-rank={rank}
+                >
+                  <circle
+                    cx={point.x * 5}
+                    cy={point.y * 5}
+                    r={
+                      rank === 0
+                        ? 5.4
+                        : rank === 1
+                          ? 4.4
+                          : isActive
+                            ? 3.7
+                            : 2.45
+                    }
+                    className="heritage-voice-thread-anchor-dot"
+                    fill={color}
+                    filter={rank <= 2 ? `url(#${mapId}-nodeGlow)` : undefined}
+                  />
 
-                {!compact && (
-                  <foreignObject
-                    x={iconPoint.x * 5 - 25}
-                    y={iconPoint.y * 5 - 25}
-                    width="50"
-                    height="50"
-                    className="heritage-voice-thread-node-icon-wrap"
-                  >
-                    <div
-                      xmlns="http://www.w3.org/1999/xhtml"
-                      className="heritage-voice-thread-node-icon"
-                      style={{ color }}
+                  {!compact && (
+                    <foreignObject
+                      x={iconPoint.x * 5 - 25}
+                      y={iconPoint.y * 5 - 25}
+                      width="50"
+                      height="50"
+                      className="heritage-voice-thread-node-icon-wrap"
                     >
-                      <MetricIcon
-                        type={axis?.icon || nodeKey}
-                        color={color}
-                        size={22}
-                      />
-                    </div>
-                  </foreignObject>
-                )}
-              </g>
-            );
-          })}
+                      <div
+                        xmlns="http://www.w3.org/1999/xhtml"
+                        className="heritage-voice-thread-node-icon"
+                        style={{ color }}
+                      >
+                        <MetricIcon
+                          type={axis?.icon || nodeKey}
+                          color={color}
+                          size={22}
+                        />
+                      </div>
+                    </foreignObject>
+                  )}
+                </g>
+              );
+            })}
+          </g>
         </g>
       </svg>
     </div>
