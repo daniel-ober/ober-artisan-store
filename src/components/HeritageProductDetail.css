@@ -12601,3 +12601,864 @@
   text-transform: none;
 
 }
+
+/* =========================================================
+
+   OBER FINAL — LEGACYTUNING MODE TOGGLE
+
+   Bare Shell / With Hardware + Heads
+
+   ========================================================= */
+
+.heritage-legacy-tuning-mode-toggle {
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  gap: 0 !important;
+
+  width: fit-content !important;
+
+  margin-top: 14px !important;
+
+  padding: 4px !important;
+
+  overflow: hidden !important;
+
+  border-radius: 999px !important;
+
+  border: 1px solid rgba(214, 178, 119, 0.16) !important;
+
+  background:
+
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)),
+
+    rgba(4, 5, 8, 0.72) !important;
+
+  box-shadow:
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+
+    0 14px 30px rgba(0, 0, 0, 0.24) !important;
+
+}
+
+.heritage-legacy-tuning-mode-toggle button {
+
+  appearance: none !important;
+
+  -webkit-appearance: none !important;
+
+  position: relative !important;
+
+  min-height: 32px !important;
+
+  padding: 0 14px !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  background: transparent !important;
+
+  color: rgba(245, 241, 232, 0.52) !important;
+
+  font-size: 0.56rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.16em !important;
+
+  text-transform: uppercase !important;
+
+  white-space: nowrap !important;
+
+  cursor: pointer !important;
+
+  transition:
+
+    color 170ms ease,
+
+    background 170ms ease,
+
+    box-shadow 170ms ease,
+
+    transform 170ms ease !important;
+
+}
+
+.heritage-legacy-tuning-mode-toggle button:hover {
+
+  color: rgba(255, 248, 235, 0.86) !important;
+
+}
+
+.heritage-legacy-tuning-mode-toggle button.is-active {
+
+  color: #17120b !important;
+
+  background:
+
+    linear-gradient(180deg, #e4c77f, #d1ac67) !important;
+
+  box-shadow:
+
+    0 0 0 1px rgba(214, 178, 119, 0.28),
+
+    0 6px 16px rgba(0, 0, 0, 0.22),
+
+    0 0 18px rgba(214, 178, 119, 0.12),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
+
+}
+
+.heritage-legacy-tuning-mode-toggle button.is-active::before {
+
+  content: '' !important;
+
+  display: inline-block !important;
+
+  width: 5px !important;
+
+  height: 5px !important;
+
+  margin-right: 8px !important;
+
+  border-radius: 999px !important;
+
+  background: rgba(23, 18, 11, 0.72) !important;
+
+  transform: translateY(-1px) !important;
+
+}
+
+.heritage-voice-read-card.is-compare-mode .heritage-legacy-tuning-mode-toggle {
+
+  border-color: rgba(157, 177, 255, 0.18) !important;
+
+  background:
+
+    linear-gradient(180deg, rgba(157, 177, 255, 0.045), rgba(255, 255, 255, 0.012)),
+
+    rgba(4, 5, 10, 0.76) !important;
+
+}
+
+.heritage-voice-read-card.is-compare-mode .heritage-legacy-tuning-mode-toggle button.is-active {
+
+  color: #101425 !important;
+
+  background:
+
+    linear-gradient(180deg, #cdd6ff, #9fb1ff) !important;
+
+  box-shadow:
+
+    0 0 0 1px rgba(157, 177, 255, 0.28),
+
+    0 6px 16px rgba(0, 0, 0, 0.22),
+
+    0 0 18px rgba(157, 177, 255, 0.16),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
+
+}
+
+.heritage-voice-read-card.is-compare-mode .heritage-legacy-tuning-mode-toggle button.is-active::before {
+
+  background: rgba(16, 20, 37, 0.76) !important;
+
+}
+
+@media (max-width: 520px) {
+
+  .heritage-legacy-tuning-mode-toggle {
+
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns: 1fr 1fr !important;
+
+    margin-top: 12px !important;
+
+  }
+
+  .heritage-legacy-tuning-mode-toggle button {
+
+    width: 100% !important;
+
+    min-height: 34px !important;
+
+    padding: 0 10px !important;
+
+    font-size: 0.5rem !important;
+
+    letter-spacing: 0.12em !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   OBER FINAL — READ INTRO CONSOLIDATION
+
+   Moves “how to read / why it matters” guidance into the top intro
+
+   and removes the lower explanation block rhythm.
+
+   ========================================================= */
+
+.heritage-VoiceMapping-read-intro {
+
+  margin: 0 0 24px !important;
+
+  padding: 0 0 22px !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy {
+
+  max-width: 660px !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy h4 {
+
+  max-width: 10ch !important;
+
+  margin: 0 0 16px !important;
+
+  font-size: clamp(2.25rem, 3.4vw, 3.65rem) !important;
+
+  line-height: 0.88 !important;
+
+  letter-spacing: -0.085em !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy p {
+
+  max-width: 54ch !important;
+
+  color: rgba(245, 241, 232, 0.62) !important;
+
+  font-size: clamp(0.92rem, 1.05vw, 1rem) !important;
+
+  line-height: 1.52 !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy p + p {
+
+  margin-top: 9px !important;
+
+}
+
+.heritage-VoiceMapping-read-panel .heritage-thread-listening-note,
+
+.heritage-VoiceMapping-read-panel .heritage-thread-listening-note--single,
+
+.heritage-VoiceMapping-read-panel .heritage-thread-listening-note--first-tell {
+
+  display: none !important;
+
+}
+
+.heritage-VoiceMapping-read-panel .heritage-thread-single-read-lede:last-child,
+
+.heritage-VoiceMapping-read-panel .heritage-firsttell-node-list:last-child {
+
+  border-bottom: 0 !important;
+
+  padding-bottom: 26px !important;
+
+}
+
+@media (max-width: 900px) {
+
+  .heritage-VoiceMapping-read-intro {
+
+    margin-bottom: 22px !important;
+
+    padding-bottom: 20px !important;
+
+  }
+
+  .heritage-VoiceMapping-read-intro-copy h4 {
+
+    max-width: 11ch !important;
+
+    font-size: clamp(2rem, 9vw, 2.75rem) !important;
+
+  }
+
+  .heritage-VoiceMapping-read-intro-copy p {
+
+    max-width: 100% !important;
+
+    font-size: 0.86rem !important;
+
+    line-height: 1.5 !important;
+
+  }
+
+}
+
+@media (max-width: 430px) {
+
+  .heritage-VoiceMapping-read-intro-copy h4 {
+
+    font-size: clamp(1.75rem, 9.5vw, 2.2rem) !important;
+
+  }
+
+  .heritage-VoiceMapping-read-intro-copy p {
+
+    font-size: 0.8rem !important;
+
+  }
+
+}
+
+
+/* =========================================================
+
+   OBER FINAL — COMPACT READ INTRO HEADER
+
+   Removes oversized repeated read titles below LP nav.
+
+   ========================================================= */
+
+.heritage-VoiceMapping-read-intro {
+
+  margin: 0 0 22px !important;
+
+  padding: 0 0 18px !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075) !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy {
+
+  display: grid !important;
+
+  gap: 10px !important;
+
+  max-width: 680px !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy h4 {
+
+  display: none !important;
+
+}
+
+.heritage-VoiceMapping-read-kicker {
+
+  display: inline-block !important;
+
+  width: fit-content !important;
+
+  margin: 0 !important;
+
+  color: rgba(214, 178, 119, 0.9) !important;
+
+  font-size: 0.58rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.22em !important;
+
+  text-transform: uppercase !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy p {
+
+  max-width: 64ch !important;
+
+  margin: 0 !important;
+
+  color: rgba(245, 241, 232, 0.62) !important;
+
+  font-size: 0.88rem !important;
+
+  line-height: 1.55 !important;
+
+  font-weight: 500 !important;
+
+}
+
+.heritage-VoiceMapping-read-intro-copy p + p {
+
+  margin-top: 0 !important;
+
+}
+
+@media (max-width: 768px) {
+
+  .heritage-VoiceMapping-read-intro {
+
+    margin-bottom: 18px !important;
+
+    padding-bottom: 16px !important;
+
+  }
+
+  .heritage-VoiceMapping-read-intro-copy {
+
+    gap: 9px !important;
+
+  }
+
+  .heritage-VoiceMapping-read-kicker {
+
+    font-size: 0.54rem !important;
+
+    letter-spacing: 0.19em !important;
+
+  }
+
+  .heritage-VoiceMapping-read-intro-copy p {
+
+    max-width: 100% !important;
+
+    font-size: 0.8rem !important;
+
+    line-height: 1.5 !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   OBER FINAL — COMPACT LEGACYTUNING HEADER
+
+   Removes oversized "Natural resonance lane" title.
+
+   ========================================================= */
+
+.heritage-chart-title-shell--compact-legacytuning {
+
+  display: grid !important;
+
+  gap: 9px !important;
+
+  max-width: 620px !important;
+
+  margin: 0 0 14px !important;
+
+  justify-items: start !important;
+
+  text-align: left !important;
+
+}
+
+.heritage-chart-title-shell--compact-legacytuning .heritage-chart-title {
+
+  display: none !important;
+
+}
+
+.heritage-chart-title-shell--compact-legacytuning .heritage-chart-eyebrow {
+
+  color: rgba(214, 178, 119, 0.86) !important;
+
+  font-size: 0.58rem !important;
+
+  line-height: 1 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.22em !important;
+
+  text-transform: uppercase !important;
+
+}
+
+.heritage-chart-title-shell--compact-legacytuning .heritage-chart-title-subcopy {
+
+  max-width: 58ch !important;
+
+  margin: 0 !important;
+
+  color: rgba(244, 241, 234, 0.64) !important;
+
+  font-size: 0.86rem !important;
+
+  line-height: 1.55 !important;
+
+  font-weight: 500 !important;
+
+}
+
+@media (max-width: 768px) {
+
+  .heritage-chart-title-shell--compact-legacytuning {
+
+    margin-bottom: 12px !important;
+
+  }
+
+  .heritage-chart-title-shell--compact-legacytuning .heritage-chart-eyebrow {
+
+    font-size: 0.54rem !important;
+
+    letter-spacing: 0.19em !important;
+
+  }
+
+  .heritage-chart-title-shell--compact-legacytuning .heritage-chart-title-subcopy {
+
+    max-width: 100% !important;
+
+    font-size: 0.8rem !important;
+
+    line-height: 1.5 !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   OBER FINAL — SIMPLE LEGACYPRINT SUMMARY READ
+
+   Clean flowing summary, no table boxes
+
+   ========================================================= */
+
+.heritage-legacyprint-summary-card--simple {
+
+  position: relative !important;
+
+  overflow: hidden !important;
+
+  border-radius: 26px !important;
+
+  border: 1px solid rgba(214, 178, 119, 0.13) !important;
+
+  background:
+
+    radial-gradient(circle at 0% 0%, rgba(214, 178, 119, 0.085), transparent 34%),
+
+    radial-gradient(circle at 92% 10%, rgba(157, 177, 255, 0.04), transparent 34%),
+
+    linear-gradient(145deg, rgba(13, 14, 18, 0.99), rgba(3, 4, 7, 0.995)) !important;
+
+  box-shadow:
+
+    0 24px 58px rgba(0, 0, 0, 0.34),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.028) !important;
+
+}
+
+.heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-head {
+
+  padding: 30px 34px 28px !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.065) !important;
+
+}
+
+.heritage-legacyprint-summary-card--simple .heritage-summary-kicker--voiceprint {
+
+  margin-bottom: 18px !important;
+
+}
+
+.heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-head h4 {
+
+  max-width: 12ch !important;
+
+  margin: 0 0 16px !important;
+
+  color: #fff8ed !important;
+
+  font-size: clamp(2.2rem, 4vw, 4rem) !important;
+
+  line-height: 0.9 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: -0.085em !important;
+
+}
+
+.heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-head p {
+
+  max-width: 66ch !important;
+
+  margin: 0 !important;
+
+  color: rgba(245, 241, 232, 0.66) !important;
+
+  font-size: clamp(0.94rem, 1.08vw, 1.02rem) !important;
+
+  line-height: 1.58 !important;
+
+  font-weight: 500 !important;
+
+}
+
+.heritage-legacyprint-summary-flow {
+
+  display: grid !important;
+
+  gap: 0 !important;
+
+  padding: 0 34px 30px !important;
+
+}
+
+.heritage-legacyprint-summary-read {
+
+  display: grid !important;
+
+  grid-template-columns: 150px minmax(0, 1fr) !important;
+
+  gap: 28px !important;
+
+  align-items: baseline !important;
+
+  padding: 24px 0 !important;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+
+}
+
+.heritage-legacyprint-summary-read:last-child {
+
+  border-bottom: 0 !important;
+
+  padding-bottom: 0 !important;
+
+}
+
+.heritage-legacyprint-summary-read > span {
+
+  display: block !important;
+
+  color: rgba(214, 178, 119, 0.82) !important;
+
+  font-size: 0.58rem !important;
+
+  line-height: 1.2 !important;
+
+  font-weight: 950 !important;
+
+  letter-spacing: 0.22em !important;
+
+  text-transform: uppercase !important;
+
+}
+
+.heritage-legacyprint-summary-read > div {
+
+  min-width: 0 !important;
+
+}
+
+.heritage-legacyprint-summary-read strong {
+
+  display: block !important;
+
+  max-width: 24ch !important;
+
+  margin: 0 0 9px !important;
+
+  color: rgba(255, 248, 235, 0.96) !important;
+
+  font-size: clamp(1.08rem, 1.42vw, 1.35rem) !important;
+
+  line-height: 1.06 !important;
+
+  font-weight: 925 !important;
+
+  letter-spacing: -0.045em !important;
+
+}
+
+.heritage-legacyprint-summary-read p {
+
+  max-width: 62ch !important;
+
+  margin: 0 !important;
+
+  color: rgba(245, 243, 238, 0.66) !important;
+
+  font-size: 0.9rem !important;
+
+  line-height: 1.58 !important;
+
+  font-weight: 500 !important;
+
+}
+
+.heritage-legacyprint-summary-read--takeaway {
+
+  padding-top: 22px !important;
+
+}
+
+.heritage-legacyprint-summary-read--takeaway p {
+
+  color: rgba(245, 243, 238, 0.7) !important;
+
+}
+
+/* Kill old boxed/table summary styling inside this version */
+
+.heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-grid,
+
+.heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-section {
+
+  display: none !important;
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .heritage-legacyprint-summary-card--simple {
+
+    border-radius: 22px !important;
+
+  }
+
+  .heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-head {
+
+    padding: 24px 20px 22px !important;
+
+  }
+
+  .heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-head h4 {
+
+    max-width: 100% !important;
+
+    font-size: clamp(2rem, 10vw, 2.85rem) !important;
+
+    line-height: 0.92 !important;
+
+  }
+
+  .heritage-legacyprint-summary-card--simple .heritage-legacyprint-summary-head p {
+
+    max-width: 100% !important;
+
+    font-size: 0.86rem !important;
+
+    line-height: 1.52 !important;
+
+  }
+
+  .heritage-legacyprint-summary-flow {
+
+    padding: 0 20px 24px !important;
+
+  }
+
+  .heritage-legacyprint-summary-read {
+
+    grid-template-columns: 1fr !important;
+
+    gap: 10px !important;
+
+    padding: 20px 0 !important;
+
+  }
+
+  .heritage-legacyprint-summary-read strong {
+
+    max-width: 100% !important;
+
+    font-size: 1.12rem !important;
+
+  }
+
+  .heritage-legacyprint-summary-read p {
+
+    max-width: 100% !important;
+
+    font-size: 0.84rem !important;
+
+    line-height: 1.5 !important;
+
+  }
+
+}
+
+/* =========================================================
+
+   OBER FINAL — REMOVE GAP BETWEEN LP INTRO + READ CONTENT
+
+   First Listen / Player Analysis
+
+   ========================================================= */
+
+.heritage-legacyprint-panel.heritage-VoiceMapping-read-experience {
+
+  gap: 0 !important;
+
+}
+
+.heritage-VoiceMapping-read-experience .heritage-VoiceMapping-read-intro {
+
+  margin: 0 !important;
+
+  padding: 0 0 18px !important;
+
+  border-bottom: 0 !important;
+
+}
+
+.heritage-VoiceMapping-read-experience .heritage-VoiceMapping-read-intro-copy {
+
+  gap: 8px !important;
+
+}
+
+.heritage-VoiceMapping-read-experience .heritage-VoiceMapping-read-intro-copy p {
+
+  margin: 0 !important;
+
+}
+
+.heritage-VoiceMapping-read-experience .heritage-thread-single-read-panel,
+
+.heritage-VoiceMapping-read-experience .heritage-VoiceMapping-read-panel {
+
+  margin-top: 0 !important;
+
+}
+
+.heritage-VoiceMapping-read-experience .heritage-thread-single-read-visual,
+
+.heritage-VoiceMapping-read-experience .heritage-VoiceMapping-read-visual {
+
+  margin-top: 0 !important;
+
+}
+
+@media (max-width: 768px) {
+
+  .heritage-VoiceMapping-read-experience .heritage-VoiceMapping-read-intro {
+
+    padding-bottom: 14px !important;
+
+  }
+
+}
