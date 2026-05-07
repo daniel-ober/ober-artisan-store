@@ -1642,9 +1642,9 @@ const HERITAGE_FIRST_TELL_DEPTH_MAP = {
 
     5.5: ['warmth', 'attack', 'control'],
 
-    '6.0': ['warmth', 'projection', 'attack'],
+    '6.0': ['warmth', 'attack', 'projection'],
 
-    6.5: ['warmth', 'projection', 'control'],
+    6.5: ['warmth', 'projection', 'attack'],
 
     '7.0': ['warmth', 'sustain', 'projection'],
 
@@ -1810,27 +1810,20 @@ const FIRST_TELL_RULES = [
     nodes: ['projection', 'control', 'attack'],
   },
 
-{
+  {
+    id: 'thick-shell-open-hoop',
 
-  id: 'thick-shell-open-hoop',
+    test: (meta) =>
+      meta.isThickShell &&
+      meta.isTripleFlange &&
+      !meta.isCompact &&
+      !meta.isMiddle &&
+      !meta.isShallow,
 
-  test: (meta) =>
+    title: 'Strong shell voice with open carry',
 
-    meta.isThickShell &&
-
-    meta.isTripleFlange &&
-
-    !meta.isCompact &&
-
-    !meta.isMiddle &&
-
-    !meta.isShallow,
-
-  title: 'Strong shell voice with open carry',
-
-  nodes: ['projection', 'attack', 'warmth'],
-
-},
+    nodes: ['projection', 'attack', 'warmth'],
+  },
 
   {
     id: 'ten-lug-diecast',
@@ -2191,7 +2184,7 @@ const getCuratedFirstTell = ({
 
     '14|5.5': 'Classic warm Heritage center',
 
-    '14|6.0': 'Full center with clear projection',
+    '14|6.0': 'Added body with quick response',
 
     '14|6.5': 'Warm body with room push',
 
@@ -4652,195 +4645,207 @@ const HeritageProductDetail = () => {
       activeReadout,
     });
 
-const voiceMapDisplayProfile = (() => {
+    const voiceMapDisplayProfile = (() => {
+      const baseProfile = activeVoiceSummary?.profile || {};
 
-  const baseProfile = activeVoiceSummary?.profile || {};
+      if (!isPlayerRead) {
+        return baseProfile;
+      }
 
-  if (!isPlayerRead) {
+      const meta = getFirstTellSpecMeta({
+        size,
+
+        depth,
+
+        lugs,
+
+        staveOption,
+
+        hoopType,
+
+        scorchDepth,
+      });
 
-    return baseProfile;
-
-  }
-
-  const meta = getFirstTellSpecMeta({
-
-    size,
-
-    depth,
-
-    lugs,
-
-    staveOption,
-
-    hoopType,
-
-    scorchDepth,
-
-  });
-
-  const nextProfile = { ...baseProfile };
-
-  if (meta.isCompact && meta.depthNumber >= 8) {
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.65
-
-    );
-
-    nextProfile.control = Math.min(10, Number(nextProfile.control || 5) + 0.45);
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.35);
-
-    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.25);
-
-    nextProfile.brightness = Math.max(
-
-      0,
-
-      Number(nextProfile.brightness || 5) - 0.2
-
-    );
-
-    nextProfile.sensitivity = Math.max(
-
-      0,
-
-      Number(nextProfile.sensitivity || 5) - 0.2
-
-    );
-
-  } else if (meta.isCompact && meta.depthNumber >= 7.5) {
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.4
-
-    );
-
-    nextProfile.control = Math.min(10, Number(nextProfile.control || 5) + 0.3);
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.2);
-
-    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.1);
-
-  } else if (meta.isCompact && meta.depthNumber >= 7) {
-
-    nextProfile.control = Math.min(10, Number(nextProfile.control || 5) + 0.25);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.25
-
-    );
-
-  } else if (meta.isMiddle && meta.depthNumber >= 8) {
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.45);
-
-    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.5);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.35
-
-    );
-
-    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.25);
-
-  } else if (meta.isMiddle && meta.depthNumber >= 7.5) {
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.3);
-
-    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.35);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.25
-
-    );
-
-  } else if (meta.isMiddle && meta.depthNumber >= 7) {
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.2);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.2
-
-    );
-
-  } else if (meta.isFullSize && meta.depthNumber >= 8) {
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.55);
-
-    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.65);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.25
-
-    );
-
-    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.35);
-
-    nextProfile.brightness = Math.max(
-
-      0,
-
-      Number(nextProfile.brightness || 5) - 0.25
-
-    );
-
-    nextProfile.control = Math.max(0, Number(nextProfile.control || 5) - 0.15);
-
-  } else if (meta.isFullSize && meta.depthNumber >= 7.5) {
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.35);
-
-    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.35);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.2
-
-    );
-
-    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.15);
-
-  } else if (meta.isFullSize && meta.depthNumber >= 7) {
-
-    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.2);
-
-    nextProfile.projection = Math.min(
-
-      10,
-
-      Number(nextProfile.projection || 5) + 0.2
-
-    );
-
-  }
-
-  return nextProfile;
-
-})();
+      const nextProfile = { ...baseProfile };
+
+      if (meta.isCompact && meta.depthNumber >= 8) {
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.65
+        );
+
+        nextProfile.control = Math.min(
+          10,
+          Number(nextProfile.control || 5) + 0.45
+        );
+
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.35
+        );
+
+        nextProfile.attack = Math.max(
+          0,
+          Number(nextProfile.attack || 5) - 0.25
+        );
+
+        nextProfile.brightness = Math.max(
+          0,
+
+          Number(nextProfile.brightness || 5) - 0.2
+        );
+
+        nextProfile.sensitivity = Math.max(
+          0,
+
+          Number(nextProfile.sensitivity || 5) - 0.2
+        );
+      } else if (meta.isCompact && meta.depthNumber >= 7.5) {
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.4
+        );
+
+        nextProfile.control = Math.min(
+          10,
+          Number(nextProfile.control || 5) + 0.3
+        );
+
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.2
+        );
+
+        nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.1);
+      } else if (meta.isCompact && meta.depthNumber >= 7) {
+        nextProfile.control = Math.min(
+          10,
+          Number(nextProfile.control || 5) + 0.25
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.25
+        );
+      } else if (meta.isMiddle && meta.depthNumber >= 8) {
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.45
+        );
+
+        nextProfile.sustain = Math.min(
+          10,
+          Number(nextProfile.sustain || 5) + 0.5
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.35
+        );
+
+        nextProfile.attack = Math.max(
+          0,
+          Number(nextProfile.attack || 5) - 0.25
+        );
+      } else if (meta.isMiddle && meta.depthNumber >= 7.5) {
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.3
+        );
+
+        nextProfile.sustain = Math.min(
+          10,
+          Number(nextProfile.sustain || 5) + 0.35
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.25
+        );
+      } else if (meta.isMiddle && meta.depthNumber >= 7) {
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.2
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.2
+        );
+      } else if (meta.isFullSize && meta.depthNumber >= 8) {
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.55
+        );
+
+        nextProfile.sustain = Math.min(
+          10,
+          Number(nextProfile.sustain || 5) + 0.65
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.25
+        );
+
+        nextProfile.attack = Math.max(
+          0,
+          Number(nextProfile.attack || 5) - 0.35
+        );
+
+        nextProfile.brightness = Math.max(
+          0,
+
+          Number(nextProfile.brightness || 5) - 0.25
+        );
+
+        nextProfile.control = Math.max(
+          0,
+          Number(nextProfile.control || 5) - 0.15
+        );
+      } else if (meta.isFullSize && meta.depthNumber >= 7.5) {
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.35
+        );
+
+        nextProfile.sustain = Math.min(
+          10,
+          Number(nextProfile.sustain || 5) + 0.35
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.2
+        );
+
+        nextProfile.attack = Math.max(
+          0,
+          Number(nextProfile.attack || 5) - 0.15
+        );
+      } else if (meta.isFullSize && meta.depthNumber >= 7) {
+        nextProfile.warmth = Math.min(
+          10,
+          Number(nextProfile.warmth || 5) + 0.2
+        );
+
+        nextProfile.projection = Math.min(
+          10,
+
+          Number(nextProfile.projection || 5) + 0.2
+        );
+      }
+
+      return nextProfile;
+    })();
 
     return (
       <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read heritage-VoiceMapping-read-experience">
