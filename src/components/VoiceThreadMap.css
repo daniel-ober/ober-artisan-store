@@ -2669,3 +2669,193 @@
   box-shadow: 0 0 4px rgba(214, 178, 119, 0.18);
 
 }
+
+/* =========================================================
+
+   LEGACYPRINT™ IDENTITY MARK OVERRIDES
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-line--base {
+
+  display: none;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
+
+  opacity: 0.12;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
+
+  opacity: 0.46;
+
+  mix-blend-mode: screen;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-core {
+
+  opacity: 0.96;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.18;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
+
+  opacity: 0.72;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
+
+  opacity: 0.38;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-outer-line {
+
+  opacity: 0.14;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.72;
+
+}
+
+/* =========================================================
+
+   LEGACYPRINT™ IDENTITY MARK — FINAL OVERRIDE
+
+   ========================================================= */
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-line--base {
+
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-spider-line {
+
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-outer-line {
+
+  opacity: 0.11 !important;
+
+  stroke-width: 0.9 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
+
+  opacity: 0.28 !important;
+
+  filter: blur(0.2px) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
+
+  opacity: 0.16 !important;
+
+  filter: blur(0.15px) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
+
+  opacity: 0.16 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
+
+  opacity: 0.42 !important;
+
+  filter: drop-shadow(0 0 8px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-core {
+
+  opacity: 0.98 !important;
+
+  stroke-width: 4.4px !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  filter:
+
+    drop-shadow(0 0 4px rgba(255, 246, 218, 0.12))
+
+    drop-shadow(0 0 10px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-hotline {
+
+  opacity: 0.18 !important;
+
+  stroke-width: 0.8px !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.52 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-node-icon {
+
+  opacity: 0.5 !important;
+
+  filter: drop-shadow(0 0 4px currentColor) !important;
+
+}

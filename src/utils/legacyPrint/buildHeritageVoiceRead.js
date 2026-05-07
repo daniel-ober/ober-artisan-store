@@ -8,6 +8,8 @@ import LEGACYPRINT_BENCHMARK_CATALOG from '../../data/legacyPrint/benchmarkCatal
 
 import { BENCHMARK_DEFINITIONS } from '../../data/legacyPrint/benchmarkDefinitions.js';
 
+import buildHeritageIdentityShapeRead from './buildHeritageIdentityShapeRead.js';
+
 const AXES = [
   'attack',
 
@@ -1077,6 +1079,72 @@ function buildHeritageWeightedProfile(spec = {}) {
 
   const isThickShell = shellThicknessMm >= 12;
 
+  /**
+
+   * Near-center Heritage calibration:
+
+   *
+
+   * These two builds are intentionally close to the Heritage reference,
+
+   * but they should not audit as flat. A 13x6.0 should read as a slightly
+
+   * clearer alternate-center voice, while a 14x6.0 should read as a
+
+   * subtly fuller main-snare center.
+
+   *
+
+   * Keep this small. This is not meant to exaggerate the voice map.
+
+   */
+
+  const isMediumTorch = !isLight && !isBlackened;
+
+  const isReferenceShellRecipe =
+    lugQuantity === 8 &&
+    staveCount === 16 &&
+    shellThicknessMm === 10 &&
+    !hasReRings;
+
+  const isOpenReferenceHoop = isTripleFlange;
+
+  if (
+    width === 13 &&
+    depth === 6 &&
+    isReferenceShellRecipe &&
+    isOpenReferenceHoop &&
+    isMediumTorch
+  ) {
+    rawProfile.attack += 0.12;
+
+    rawProfile.brightness += 0.14;
+
+    rawProfile.sustain += 0.07;
+
+    rawProfile.control += 0.1;
+
+    rawProfile.projection += 0.04;
+  }
+
+  if (
+    width === 14 &&
+    depth === 6 &&
+    isReferenceShellRecipe &&
+    isOpenReferenceHoop &&
+    isMediumTorch
+  ) {
+    rawProfile.warmth += 0.14;
+
+    rawProfile.sustain += 0.12;
+
+    rawProfile.projection += 0.1;
+
+    rawProfile.attack -= 0.04;
+
+    rawProfile.brightness -= 0.04;
+  }
+
   if (isHighLug) {
     rawProfile.control += 0.16;
 
@@ -1509,19 +1577,14 @@ function pickRecordingMic(spec = {}, profile = {}) {
 }
 
 function buildPlayingSituation(spec = {}, profile = {}) {
-
   const finish = String(spec.finish || '').toLowerCase();
 
   const hoop = String(spec.hoopType || '').toLowerCase();
 
   const isBlackened =
-
     finish.includes('blackened') ||
-
     finish.includes('black stain') ||
-
     finish.includes('black stained') ||
-
     finish.includes('blacked');
 
   const isLight = finish.includes('light');
@@ -1533,21 +1596,15 @@ function buildPlayingSituation(spec = {}, profile = {}) {
   const hasReRings = hasStandardReRings(spec.reRings);
 
   const shellThickness = Number(
-
     spec.shellThicknessMm || HERITAGE_REFERENCE_SPEC.shellThicknessMm
-
   );
 
   const lugQuantity = Number(
-
     spec.lugQuantity || HERITAGE_REFERENCE_SPEC.lugQuantity
-
   );
 
   const staveCount = Number(
-
     spec.staveCount || HERITAGE_REFERENCE_SPEC.staveCount
-
   );
 
   const shellRead = getShellThicknessRead(spec);
@@ -1577,11 +1634,8 @@ function buildPlayingSituation(spec = {}, profile = {}) {
   const isVeryHighStave = staveCount >= 24;
 
   const isThickHighLugShell =
-
     Number(spec.width) >= 14 &&
-
     Number(spec.lugQuantity) >= 10 &&
-
     Number(spec.shellThicknessMm) >= 12;
 
   const isCompactShell = Number(spec.width) <= 12 || Number(spec.depth) <= 5.5;
@@ -1605,7 +1659,6 @@ function buildPlayingSituation(spec = {}, profile = {}) {
   const controlDelta = axisDelta(profile, 'control');
 
   const strongestMovement = Math.max(
-
     Math.abs(attackDelta),
 
     Math.abs(brightnessDelta),
@@ -1619,291 +1672,189 @@ function buildPlayingSituation(spec = {}, profile = {}) {
     Math.abs(sensitivityDelta),
 
     Math.abs(controlDelta)
-
   );
 
-if (isThinShell && hasReRings && isLowLug) {
+  if (isThinShell && hasReRings && isLowLug) {
+    return `A low-lug thin re-ring Heritage read: ${shellRead.summary}. Fewer tension points let the head and shell breathe more freely, while the re-rings keep the thinner shell supported enough to stay musical and usable.`;
+  }
 
-  return `A low-lug thin re-ring Heritage read: ${shellRead.summary}. Fewer tension points let the head and shell breathe more freely, while the re-rings keep the thinner shell supported enough to stay musical and usable.`;
+  if (isHighLug && isThinShell && hasReRings) {
+    return 'A supported thin-shell Heritage read: the thinner shell adds warmer body, easier bloom, and a more responsive feel under lighter hands. The extra lug count adds some organization and note shape, but the thinner re-ring shell remains the dominant voice — warmer, more open, and more responsive than a thick high-lug build.';
+  }
 
-}
+  if (isLowLug && isReferenceShell && isTripleFlange) {
+    return 'A more open low-lug Heritage read: fewer tension points let the shell breathe more freely, rounding the attack and giving the note a broader bloom with less built-in control than the 8-lug reference.';
+  }
 
-if (isHighLug && isThinShell && hasReRings) {
-
-  return 'A supported thin-shell Heritage read: the thinner shell adds warmer body, easier bloom, and a more responsive feel under lighter hands. The extra lug count adds some organization and note shape, but the thinner re-ring shell remains the dominant voice — warmer, more open, and more responsive than a thick high-lug build.';
-
-}
-
-if (isLowLug && isReferenceShell && isTripleFlange) {
-
-  return 'A more open low-lug Heritage read: fewer tension points let the shell breathe more freely, rounding the attack and giving the note a broader bloom with less built-in control than the 8-lug reference.';
-
-}
-
-if (isLowLug) {
-
-  return 'A more open low-lug Heritage read, where fewer tension points soften the front edge, loosen the note shape, and let more shell bloom come forward.';
-
-}
+  if (isLowLug) {
+    return 'A more open low-lug Heritage read, where fewer tension points soften the front edge, loosen the note shape, and let more shell bloom come forward.';
+  }
 
   if (isHighLug && isThickHighLugShell) {
-
     return 'A tighter high-lug thick-shell Heritage read, where the added tension points and firmer shell work together for stronger attack definition, projection, and controlled note shape.';
-
   }
 
   if (isHighLug && isReferenceShell && isTripleFlange) {
-
     return 'A tighter high-lug Heritage read: the extra tension points organize the head and shell response, giving the drum a quicker front edge, firmer note shape, and more controlled projection than the 8-lug reference.';
-
   }
 
   if (isHighLug) {
-
     return 'A tighter high-lug Heritage read, where the added tension points increase attack definition, projection, and control while trimming some loose bloom and touch openness.';
-
   }
 
   if (isVeryLowStave && isReferenceShell && isTripleFlange) {
-
     return 'A wider-stave Heritage read: the lower stave count leaves more individual wood character in each section, giving the shell a slightly rounder, warmer, more open response without moving far from the reference center.';
-
   }
 
   if (isLowStave && isReferenceShell && isTripleFlange) {
-
     return 'A slightly wider-stave Heritage read: fewer stave sections keep the shell a touch rounder and more wood-forward, with a little more bloom and less immediate structure than the 16-stave reference.';
-
   }
 
   if (isVeryHighStave && isReferenceShell && isTripleFlange) {
-
     return 'A more segmented high-stave Heritage read: the higher stave count adds subtle structure and definition, giving the shell a cleaner front edge and slightly tighter note shape while still staying close to the reference voice.';
-
   }
 
   if (isHighStave && isReferenceShell && isTripleFlange) {
-
     return 'A slightly tighter high-stave Heritage read: the added stave sections organize the shell response, adding a touch more attack definition, projection, and control than the 16-stave reference.';
-
   }
 
   if (isLowStave) {
-
     return 'A wider-stave Heritage read, where fewer shell sections keep more wood character and warmth in the response, with a rounder note shape and a little more bloom.';
-
   }
 
   if (isHighStave) {
-
     return 'A higher-stave Heritage read, where the added shell sections bring a little more structure, front-edge definition, and note organization.';
-
   }
 
   if (isVeryThinShell && hasReRings) {
-
     return `A very thin Heritage shell read with extra support from the re-rings: ${shellRead.summary}. The re-rings keep the voice from getting too loose, so the result is open and touch-friendly but still usable in the center.`;
-
   }
 
   if (isVeryThinShell) {
-
     return `A very thin Heritage shell read: ${shellRead.summary}. Expect a more breathing, expressive voice with softer attack focus and more shell movement under the stick.`;
-
   }
 
   if (isThinShell && hasReRings) {
-
     return `A thin re-ring Heritage read: ${shellRead.summary}. The re-rings add just enough structure to keep the bloom organized while preserving the livelier thin-shell response.`;
-
   }
 
   if (isThinShell && isLight) {
-
     return `A light, open Heritage read: ${shellRead.summary}. The lighter Torch Tune finish keeps the shell especially touch-friendly and lets the thinner body speak more freely.`;
-
   }
 
   if (isThinShell) {
-
     return `A thin-shell Heritage read: ${shellRead.summary}. It should feel more forgiving, warmer through the body, and a little less locked-in than the reference build.`;
-
   }
 
   if (isHeavyShell && isDieCast && isBlackened) {
-
     return `A heavy, highly focused Heritage read: ${shellRead.summary}. Die-Cast hoops and the Blackened Torch Tune finish push the drum toward maximum control, crack, and contained projection.`;
-
   }
 
   if (isHeavyShell) {
-
     return `A heavy-shell Heritage read: ${shellRead.summary}. The voice should feel dense, centered, and authoritative, with less airy bloom than the reference shell.`;
-
   }
 
   if (isFocusedShell && isDieCast) {
-
     return `A focused thick-shell Heritage read: ${shellRead.summary}. Die-Cast hoops add more rim discipline, making the note feel cleaner, firmer, and more controlled.`;
-
   }
 
   if (isFocusedShell) {
-
     return `A focused thick-shell Heritage read: ${shellRead.summary}. It keeps the Heritage wood character, but the note speaks with more crack, direction, and center.`;
-
   }
 
   if (isFirmShell && isBlackened) {
-
     return `A firm, Torch Tune-forward Heritage read: ${shellRead.summary}. The Blackened finish adds extra dryness and control, pulling the shell toward a more disciplined center.`;
-
   }
 
   if (isFirmShell) {
-
     return `A firm-shell Heritage read: ${shellRead.summary}. It should feel tighter and more articulate than the reference, with less loose bloom and a clearer front edge.`;
-
   }
 
   if (isReferenceShell && isLight && isDieCast) {
-
     return 'A focused-but-open Heritage read: the die-cast hoops tighten the rim response, while the lighter Torch Tune finish keeps more touch, air, and upper-shell liveliness in the voice.';
-
   }
 
   if (isReferenceShell && isBlackened && isDieCast && isThickHighLugShell) {
-
     return 'A beefy, high-projection Heritage read with a stronger crack, firmer die-cast focus, and a drier Torch Tuned shell response from the Blackened finish.';
-
   }
 
   if (isBlackened && isDieCast && isThickHighLugShell) {
-
     return 'A beefy, high-projection Heritage read with a stronger crack, firmer die-cast focus, and a drier Torch Tuned shell response from the Blackened finish.';
-
   }
 
   if (isBlackened && isCompactShell && isTripleFlange) {
-
     return 'A compact, Torch Tuned Heritage read: still lively from the smaller shell, but darker and more settled than the same build in a lighter finish.';
-
   }
 
   if (
-
     isBlackened &&
-
     (controlDelta >= 0.2 || sustainDelta <= -0.2 || sensitivityDelta <= -0.2)
-
   ) {
-
     return 'A more Torch Tune-forward Heritage read, where the heavier scorch treatment adds a firmer center, slightly tighter bloom, and a more settled shell response.';
-
   }
 
   if (isDieCast) {
-
     if (isDeepShell && projectionDelta >= 0.35) {
-
       return 'A deeper focused Heritage read with stronger room throw, firmer note shape, and a more controlled bloom than the open triple-flange version.';
-
     }
 
     return 'A more focused Heritage read with firmer note shape, cleaner front edge, and tighter overall behavior.';
-
   }
 
   if (isLight && sensitivityDelta >= 0.08) {
-
     if (hasReRings && sustainDelta >= 0.35 && brightnessDelta <= -0.08) {
-
       return 'A darker, more complex Heritage read with a drier top edge, longer sustain, and extra overtone character from the thin re-ring shell.';
-
     }
 
     return 'A more open Heritage read, where the lighter Torch Tune treatment preserves extra liveliness, touch response, and a slightly freer bloom through the shell.';
-
   }
 
   if (
-
     isVeryDeepShell &&
-
     isTripleFlange &&
-
     !isLight &&
-
     !isBlackened &&
-
     warmthDelta >= 0.3
-
   ) {
-
     return 'A deeper Heritage read with more shell body, longer bloom, and a broader room shape while the Triple Flange hoops keep the voice open enough to breathe.';
-
   }
 
   if (
-
     isVeryDeepShell &&
-
     isTripleFlange &&
-
     !isLight &&
-
     !isBlackened &&
-
     brightnessDelta <= -0.18
-
   ) {
-
     return 'A darker, deeper Heritage read with a drier top edge, grounded body, and enough classic Triple Flange openness to keep the shell alive.';
-
   }
 
   if (isDeepShell && (warmthDelta >= 0.25 || sustainDelta >= 0.25)) {
-
     return 'A fuller Heritage read with broader body, deeper bloom, and a more grounded voice in the room.';
-
   }
 
   if (isCompactShell && attackDelta >= 0.25 && warmthDelta <= -0.18) {
-
     return 'A compact Heritage read with more bite, quicker sustain, leaner body, and a dry, immediate front edge than the reference build.';
-
   }
 
   if (sensitivityDelta >= 0.3) {
-
     return 'A touch-friendly Heritage read that stays expressive under lighter hands while keeping its shell identity.';
-
   }
 
   if (
-
     hasReRings &&
-
     Number(spec.width) <= 12 &&
-
     Number(spec.depth) >= 6.5 &&
-
     warmthDelta >= 0.15
-
   ) {
-
     return 'A compact all-round Heritage read with extra studio warmth from the deeper small shell and a supported re-ring response.';
-
   }
 
   if (strongestMovement >= 0.3) {
-
     return 'A shifted Heritage read with a noticeable personality move away from the reference center while still keeping the line’s shell-first character.';
-
   }
 
   return 'A balanced Heritage read with natural openness, grounded body, and classic shell-first response.';
-
 }
 
 function buildFeelRead(spec = {}, profile = {}) {
@@ -1949,6 +1900,377 @@ function buildFeelRead(spec = {}, profile = {}) {
           : 'while keeping the shell-first balance intact';
 
   return `A ${visualParts.join(', ')} Heritage presentation ${finishLean}, ${soundLean}.`;
+}
+
+function getDominantToneFamily(spec = {}, profile = {}) {
+  const attackDelta = axisDelta(profile, 'attack');
+
+  const brightnessDelta = axisDelta(profile, 'brightness');
+
+  const projectionDelta = axisDelta(profile, 'projection');
+
+  const sustainDelta = axisDelta(profile, 'sustain');
+
+  const warmthDelta = axisDelta(profile, 'warmth');
+
+  const sensitivityDelta = axisDelta(profile, 'sensitivity');
+
+  const controlDelta = axisDelta(profile, 'control');
+
+  const width = Number(spec.width || HERITAGE_REFERENCE_SPEC.width);
+
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
+  const shellThicknessMm = Number(
+    spec.shellThicknessMm || HERITAGE_REFERENCE_SPEC.shellThicknessMm
+  );
+
+  const lugQuantity = Number(
+    spec.lugQuantity || HERITAGE_REFERENCE_SPEC.lugQuantity
+  );
+
+  const isBlackened = isBlackenedFinish(spec.finish);
+
+  const isLight = isLightFinish(spec.finish);
+
+  const isDieCast = isDieCastHoop(spec.hoopType);
+
+  const hasReRings = hasStandardReRings(spec.reRings);
+
+  const isCompact = width <= 12 || depth <= 5.25;
+
+  const isDeep = depth >= 7;
+
+  const isVeryDeep = depth >= 7.5;
+
+  const isThin = shellThicknessMm <= 8;
+
+  const isThick = shellThicknessMm >= 12;
+
+  const isLowLug = lugQuantity < HERITAGE_REFERENCE_SPEC.lugQuantity;
+
+  const isHighLug = lugQuantity > HERITAGE_REFERENCE_SPEC.lugQuantity;
+
+  if (isBlackened && controlDelta >= 0.25 && sustainDelta <= -0.2) {
+    return 'dryControlled';
+  }
+
+  if (isDieCast && attackDelta >= 0.45 && controlDelta >= 0.35) {
+    return 'focusedCrack';
+  }
+
+  if (isVeryDeep && warmthDelta >= 0.25 && sustainDelta >= 0.2) {
+    return 'bigBloom';
+  }
+
+  if (isDeep && warmthDelta >= 0.2) {
+    return 'warmBody';
+  }
+
+  if (isThin && hasReRings && sensitivityDelta >= 0.15) {
+    return 'openResponsive';
+  }
+
+  if (isThin && isLowLug) {
+    return 'softOpen';
+  }
+
+  if (isCompact && attackDelta >= 0.25 && brightnessDelta >= 0.25) {
+    return 'quickBright';
+  }
+
+  if (isHighLug && controlDelta >= 0.25) {
+    return 'tightDefined';
+  }
+
+  if (isLight && sensitivityDelta >= 0.15) {
+    return 'livelyOpen';
+  }
+
+  if (isThick && projectionDelta >= 0.25) {
+    return 'forwardFocused';
+  }
+
+  if (warmthDelta >= 0.25 && sustainDelta >= 0.15) {
+    return 'warmBloom';
+  }
+
+  if (attackDelta >= 0.25 && brightnessDelta >= 0.2) {
+    return 'crispAttack';
+  }
+
+  if (controlDelta >= 0.25) {
+    return 'cleanControlled';
+  }
+
+  return 'balancedCenter';
+}
+
+function buildFirstTellTitle(spec = {}, profile = {}) {
+  const family = getDominantToneFamily(spec, profile);
+
+  const titleByFamily = {
+    bigBloom: 'Big, warm, and open',
+
+    warmBody: 'Warm, full, and rounded',
+
+    warmBloom: 'Warm, open, and blooming',
+
+    quickBright: 'Quick, bright, and crisp',
+
+    crispAttack: 'Crisp, clear, and immediate',
+
+    dryControlled: 'Dry, focused, and controlled',
+
+    focusedCrack: 'Strong, clear, and punchy',
+
+    tightDefined: 'Tight, clean, and defined',
+
+    openResponsive: 'Open, warm, and responsive',
+
+    softOpen: 'Soft, round, and open',
+
+    livelyOpen: 'Lively, open, and expressive',
+
+    forwardFocused: 'Forward, firm, and focused',
+
+    cleanControlled: 'Clean, balanced, and controlled',
+
+    balancedCenter: 'Balanced, warm, and clear',
+  };
+
+  return titleByFamily[family] || titleByFamily.balancedCenter;
+}
+
+function buildPlayerReadTitle(spec = {}, profile = {}) {
+  const family = getDominantToneFamily(spec, profile);
+
+  const titleByFamily = {
+    bigBloom: 'Full body with a longer bloom',
+
+    warmBody: 'Rounded body with a grounded center',
+
+    warmBloom: 'Warm shell tone with open sustain',
+
+    quickBright: 'Fast attack with clean stick definition',
+
+    crispAttack: 'Clear front edge with quick response',
+
+    dryControlled: 'Controlled crack with a shorter note',
+
+    focusedCrack: 'Focused punch with strong rim control',
+
+    tightDefined: 'Tighter response with organized rebound',
+
+    openResponsive: 'Open shell response under lighter hands',
+
+    softOpen: 'Rounder attack with easier shell movement',
+
+    livelyOpen: 'Responsive touch with extra air',
+
+    forwardFocused: 'Forward projection with firm note shape',
+
+    cleanControlled: 'Composed response with usable focus',
+
+    balancedCenter: 'Classic Heritage balance under the hands',
+  };
+
+  return titleByFamily[family] || titleByFamily.balancedCenter;
+}
+
+function getIdentityFinishWord(spec = {}) {
+  const finish = String(spec.finish || '');
+
+  if (isBlackenedFinish(finish)) return 'Blackened';
+
+  if (isLightFinish(finish)) return 'Light-Torch';
+
+  return 'Torch';
+}
+
+function getIdentityHardwareWord(spec = {}) {
+  const hardwareFinish = String(spec.hardwareFinish || 'Chrome');
+
+  if (hardwareFinish === 'Black Nickel') return 'Shadowed';
+
+  if (hardwareFinish === 'Brass/Gold') return 'Gilded';
+
+  return 'Chrome';
+}
+
+function getIdentityShellWord(spec = {}) {
+  const width = Number(spec.width || HERITAGE_REFERENCE_SPEC.width);
+
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
+  const shellThicknessMm = Number(
+    spec.shellThicknessMm || HERITAGE_REFERENCE_SPEC.shellThicknessMm
+  );
+
+  const lugQuantity = Number(
+    spec.lugQuantity || HERITAGE_REFERENCE_SPEC.lugQuantity
+  );
+
+  const staveCount = Number(
+    spec.staveCount || HERITAGE_REFERENCE_SPEC.staveCount
+  );
+
+  const hasReRings = hasStandardReRings(spec.reRings);
+
+  if (width <= 12 && depth >= 7.5) return 'Deep-Compact';
+
+  if (width <= 12) return 'Compact';
+
+  if (width >= 14 && depth >= 7.5) return 'Deepwater';
+
+  if (depth >= 7.5) return 'Deep';
+
+  if (shellThicknessMm <= 8 && hasReRings) return 'Re-Ring';
+
+  if (shellThicknessMm <= 8) return 'Open-Shell';
+
+  if (shellThicknessMm >= 12 && lugQuantity >= 10) return 'High-Tension';
+
+  if (shellThicknessMm >= 12) return 'Firm-Shell';
+
+  if (staveCount <= 12) return 'Wide-Stave';
+
+  if (staveCount >= 20) return 'Fine-Stave';
+
+  return 'Heritage';
+}
+
+function getIdentityVoiceWord(spec = {}, profile = {}) {
+  const family = getDominantToneFamily(spec, profile);
+
+  const wordByFamily = {
+    bigBloom: 'Bloom',
+
+    warmBody: 'Body',
+
+    warmBloom: 'Bloom',
+
+    quickBright: 'Spark',
+
+    crispAttack: 'Edge',
+
+    dryControlled: 'Ember',
+
+    focusedCrack: 'Crack',
+
+    tightDefined: 'Focus',
+
+    openResponsive: 'Breath',
+
+    softOpen: 'Drift',
+
+    livelyOpen: 'Air',
+
+    forwardFocused: 'Throw',
+
+    cleanControlled: 'Center',
+
+    balancedCenter: 'Voice',
+  };
+
+  return wordByFamily[family] || wordByFamily.balancedCenter;
+}
+
+function getIdentityHoopWord(spec = {}) {
+  if (isDieCastHoop(spec.hoopType)) return 'Locked Frame';
+
+  return 'Open Frame';
+}
+
+function getIdentityDepthWord(spec = {}) {
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
+  if (depth <= 5) return 'Short Voice';
+
+  if (depth <= 5.5) return 'Main Voice';
+
+  if (depth <= 6.5) return 'Full Voice';
+
+  if (depth <= 7.5) return 'Deep Voice';
+
+  return 'Long Voice';
+}
+
+function getIdentityStructureWord(spec = {}) {
+  const lugQuantity = Number(
+    spec.lugQuantity || HERITAGE_REFERENCE_SPEC.lugQuantity
+  );
+
+  const staveCount = Number(
+    spec.staveCount || HERITAGE_REFERENCE_SPEC.staveCount
+  );
+
+  const shellThicknessMm = Number(
+    spec.shellThicknessMm || HERITAGE_REFERENCE_SPEC.shellThicknessMm
+  );
+
+  const hasReRings = hasStandardReRings(spec.reRings);
+
+  if (hasReRings && shellThicknessMm <= 8) {
+    return `${lugQuantity}-Lug Re-Ring`;
+  }
+
+  if (shellThicknessMm >= 12) {
+    return `${lugQuantity}-Lug Firm Shell`;
+  }
+
+  if (staveCount >= 20) {
+    return `${lugQuantity}-Lug Fine Stave`;
+  }
+
+  if (staveCount <= 12) {
+    return `${lugQuantity}-Lug Wide Stave`;
+  }
+
+  return `${lugQuantity}-Lug Reference Stave`;
+}
+
+function getIdentitySizeWord(spec = {}) {
+  const width = Number(spec.width || HERITAGE_REFERENCE_SPEC.width);
+
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
+  const cleanWidth = Number.isFinite(width)
+    ? width
+    : HERITAGE_REFERENCE_SPEC.width;
+
+  const cleanDepth = Number.isFinite(depth)
+    ? depth
+    : HERITAGE_REFERENCE_SPEC.depth;
+
+  return `${cleanWidth}x${cleanDepth}`;
+}
+
+function buildIdentityShapeTitle(spec = {}, profile = {}) {
+  const finishWord = getIdentityFinishWord(spec);
+
+  const hardwareWord = getIdentityHardwareWord(spec);
+
+  const shellWord = getIdentityShellWord(spec);
+
+  const voiceWord = getIdentityVoiceWord(spec, profile);
+
+  const sizeWord = getIdentitySizeWord(spec);
+
+  const depthWord = getIdentityDepthWord(spec);
+
+  const structureWord = getIdentityStructureWord(spec);
+
+  const hoopWord = getIdentityHoopWord(spec);
+
+  const coreParts =
+    hardwareWord === 'Chrome'
+      ? [finishWord, shellWord, voiceWord]
+      : [hardwareWord, finishWord, shellWord, voiceWord];
+
+  const coreTitle = coreParts.filter(Boolean).join(' ');
+
+  return `${coreTitle} — ${sizeWord}, ${depthWord}, ${structureWord}, ${hoopWord}`;
 }
 
 function pushUnique(parts, phrase) {
@@ -2440,17 +2762,48 @@ export function buildHeritageVoiceRead(input = {}) {
 
   const sourceBuildThreadScore = buildThreadScore(3);
 
-  const shapedThreadTitle = buildFeelRead(currentSpec, shapedProfile);
+  const firstTellTitle = buildFirstTellTitle(currentSpec, shapedProfile);
+
+  const playerReadTitle = buildPlayerReadTitle(currentSpec, shapedProfile);
+
+  const identityShapeTitle = buildIdentityShapeTitle(
+    currentSpec,
+
+    shapedProfile
+  );
 
   const shapedThreadNodes = buildThreadNodes(3);
 
   const shapedThreadScore = buildThreadScore(3);
 
-  const complexThreadTitle = buildPlayingSituation(currentSpec, shapedProfile);
-
   const complexThreadNodes = buildThreadNodes(4);
 
   const complexThreadScore = buildThreadScore(4);
+const identityShapeRead = buildHeritageIdentityShapeRead({
+
+  baseTitle: identityShapeTitle,
+
+  canonicalNodes: complexThreadNodes,
+
+  hardwareColor: currentSpec.hardwareFinish,
+
+  scorchDepth: currentSpec.finish,
+
+  hoopType: currentSpec.hoopType,
+
+  size: currentSpec.width,
+
+  depth: currentSpec.depth,
+
+  lugs: currentSpec.lugQuantity,
+
+  staveOption: input.staveOption,
+
+  spec: currentSpec,
+
+  profile: shapedProfile,
+
+});
 
   return {
     lineId: HERITAGE_REFERENCE_PROFILE.lineId,
@@ -2502,29 +2855,31 @@ export function buildHeritageVoiceRead(input = {}) {
 
     sourceBuildRead,
 
-    sourceBuildTitle: sourceBuildRead,
+    sourceBuildTitle: firstTellTitle,
 
     sourceBuildNodes: sourceBuildThreadNodes,
 
     sourceBuildScore: sourceBuildThreadScore,
 
-    simpleThreadTitle: sourceBuildRead,
+    simpleThreadTitle: firstTellTitle,
 
     simpleThreadNodes: sourceBuildThreadNodes,
 
     simpleThreadScore: sourceBuildThreadScore,
 
-    shapedThreadTitle,
+    shapedThreadTitle: playerReadTitle,
 
     shapedThreadNodes,
 
     shapedThreadScore,
 
-    complexThreadTitle,
+    complexThreadTitle: identityShapeRead.title,
 
     complexThreadNodes,
 
     complexThreadScore,
+
+    complexThreadSummary: identityShapeRead.summary,
 
     meta: {
       engineVersion: 'heritage-v2.2-structural-calibration-model',

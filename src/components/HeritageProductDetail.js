@@ -6,8 +6,6 @@ import { doc, getDoc } from 'firebase/firestore';
 
 import VoiceThreadMap from './VoiceThreadMap';
 
-import buildHeritageMusicalIdentityTitle from '../utils/legacyPrint/buildHeritageMusicalIdentityTitle';
-
 import {
   Zap,
   Waves,
@@ -33,106 +31,139 @@ import buildHeritageVoiceRead from '../utils/legacyPrint/buildHeritageVoiceRead'
 
 import buildVoiceThreadReadout from '../utils/legacyPrint/buildVoiceThreadReadout';
 
-import { buildKeyRelationships } from '../utils/legacyPrint/heritageKeyRelationships';
-
 import './HeritageProductDetail.css';
 
 const AXIS_META = [
   { key: 'attack', label: 'Attack', icon: 'attack' },
-  { key: 'brightness', label: 'Brightness', icon: 'brightness' },
-  { key: 'projection', label: 'Projection', icon: 'projection' },
-  { key: 'sustain', label: 'Sustain', icon: 'sustain' },
-  { key: 'warmth', label: 'Warmth', icon: 'warmth' },
-  { key: 'sensitivity', label: 'Sensitivity', icon: 'sensitivity' },
-  { key: 'control', label: 'Control', icon: 'control' },
-];
 
-const AXIS_POINT_COLORS = [
-  '#ff7448',
-  '#e7d98f',
-  '#ffb53a',
-  '#4d86ff',
-  '#c1682e',
-  '#68d9df',
-  '#9e8bff',
+  { key: 'brightness', label: 'Brightness', icon: 'brightness' },
+
+  { key: 'projection', label: 'Projection', icon: 'projection' },
+
+  { key: 'sustain', label: 'Sustain', icon: 'sustain' },
+
+  { key: 'warmth', label: 'Warmth', icon: 'warmth' },
+
+  { key: 'sensitivity', label: 'Sensitivity', icon: 'sensitivity' },
+
+  { key: 'control', label: 'Control', icon: 'control' },
 ];
 
 const AXIS_COLOR_BY_KEY = {
   attack: '#ff7448',
+
   brightness: '#e7d98f',
+
   projection: '#ffb53a',
+
   sustain: '#4d86ff',
+
   warmth: '#c1682e',
+
   sensitivity: '#68d9df',
+
   control: '#9e8bff',
 };
 
 const AXIS_SUBLABELS = {
   attack: 'Strike',
+
   brightness: 'Clarity',
+
   projection: 'Carry',
+
   sustain: 'Bloom',
+
   warmth: 'Body',
+
   sensitivity: 'Touch',
+
   control: 'Refinement',
 };
 
 const AXIS_IMPACT_FACTORS = {
   attack: [
     { label: 'Hoop type', strength: 'strong' },
+
     { label: 'Bearing edge', strength: 'strong' },
+
     { label: 'Shell depth', strength: 'medium' },
+
     { label: 'Lug count', strength: 'light' },
   ],
+
   sustain: [
     { label: 'Hoop type', strength: 'strong' },
+
     { label: 'Shell depth', strength: 'strong' },
+
     { label: 'Shell thickness', strength: 'medium' },
+
     { label: 'Lug count', strength: 'light' },
   ],
+
   warmth: [
     { label: 'Shell size', strength: 'strong' },
+
     { label: 'Wood / shell recipe', strength: 'strong' },
+
     { label: 'Shell thickness', strength: 'medium' },
+
     { label: 'Finish intensity', strength: 'light' },
   ],
+
   projection: [
     { label: 'Shell size', strength: 'strong' },
+
     { label: 'Depth', strength: 'strong' },
+
     { label: 'Hoop type', strength: 'medium' },
+
     { label: 'Shell construction', strength: 'light' },
   ],
+
   brightness: [
     { label: 'Bearing edge', strength: 'strong' },
+
     { label: 'Hoop type', strength: 'strong' },
+
     { label: 'Shell thickness', strength: 'medium' },
+
     { label: 'Finish intensity', strength: 'light' },
   ],
+
   sensitivity: [
     { label: 'Snare response setup', strength: 'strong' },
+
     { label: 'Bearing edge', strength: 'strong' },
+
     { label: 'Shell depth', strength: 'medium' },
+
     { label: 'Hoop type', strength: 'light' },
   ],
+
   control: [
     { label: 'Hoop type', strength: 'strong' },
+
     { label: 'Lug count', strength: 'strong' },
+
     { label: 'Shell thickness', strength: 'medium' },
+
     { label: 'Bearing edge', strength: 'light' },
   ],
 };
 
 const BASE_LEGACYPRINT_TABS = [
   {
-    key: 'voiceRead',
+    key: 'firstListen',
 
-    label: 'VoiceMapping',
+    label: 'First Listen',
   },
 
   {
-    key: 'relationships',
+    key: 'playerAnalysis',
 
-    label: 'Voice Threading',
+    label: 'Player Analysis',
   },
 
   {
@@ -144,22 +175,29 @@ const BASE_LEGACYPRINT_TABS = [
   {
     key: 'legacyPrintRead',
 
-    label: 'LegacyPrint™ Read',
+    label: 'LegacyPrint™ Analysis',
   },
 ];
 
 const REFERENCE_SETUP_TAB = {
   key: 'referenceSetup',
+
   label: 'Reference Setup',
 };
 
 const DISCOVERY_LEGACYPRINT_TAB = {
   key: 'discovery',
+
   label: 'Discovery',
+
   locked: true,
 };
 
 const COMPARE_INTRO_STORAGE_KEY = 'heritageLegacyPrintCompareIntroSeen';
+
+const LEGACY_TUNING_DISPLAY_MIN_HZ = 55;
+
+const LEGACY_TUNING_DISPLAY_MAX_HZ = 430;
 
 const getLegacyTuningRangeBounds = (position) => {
   const center = Number(position || 3);
@@ -168,7 +206,9 @@ const getLegacyTuningRangeBounds = (position) => {
 
   return {
     start: Math.max(1, center - width),
+
     end: Math.min(5, center + width),
+
     center,
   };
 };
@@ -177,19 +217,11 @@ const getLegacyTuningHzRange = (range) => {
   const mapPositionToHz = (position) => {
     const clamped = Math.max(1, Math.min(5, Number(position || 3)));
 
-    if (clamped <= 2) {
-      return 80 + ((clamped - 1) / 1) * (180 - 80);
-    }
-
-    if (clamped <= 3) {
-      return 180 + ((clamped - 2) / 1) * (350 - 180);
-    }
-
-    if (clamped <= 4) {
-      return 350 + ((clamped - 3) / 1) * (1200 - 350);
-    }
-
-    return 1200 + ((clamped - 4) / 1) * (4000 - 1200);
+    return (
+      LEGACY_TUNING_DISPLAY_MIN_HZ +
+      ((clamped - 1) / 4) *
+        (LEGACY_TUNING_DISPLAY_MAX_HZ - LEGACY_TUNING_DISPLAY_MIN_HZ)
+    );
   };
 
   const startHz = Math.round(mapPositionToHz(range.start));
@@ -201,16 +233,27 @@ const getLegacyTuningHzRange = (range) => {
 
 const NOTE_NAMES = [
   'C',
+
   'C#',
+
   'D',
+
   'D#',
+
   'E',
+
   'F',
+
   'F#',
+
   'G',
+
   'G#',
+
   'A',
+
   'A#',
+
   'B',
 ];
 
@@ -234,12 +277,14 @@ const parseHzRange = (rangeText = '') => {
   if (!matches || matches.length < 2) {
     return {
       startHz: null,
+
       endHz: null,
     };
   }
 
   return {
     startHz: Number(matches[0]),
+
     endHz: Number(matches[1]),
   };
 };
@@ -293,24 +338,43 @@ const buildProjectedVoiceRange = (summary) => {
 
 const BENCHMARK_VOICE_RANGE_FALLBACKS = {
   'heritage-oak-reference': 2.9,
+
   'feuzon-hybrid-reference': 3.35,
+
   'maple-ply-reference': 3.45,
+
   'birch-ply-reference': 3.8,
+
   'oak-ply-reference': 3.15,
+
   'walnut-ply-reference': 2.3,
+
   'mahogany-ply-reference': 2.1,
+
   'brass-reference': 3.75,
+
   'steel-reference': 4.35,
+
   'aluminum-reference': 4.05,
+
   'copper-reference': 3.2,
+
   'bronze-reference': 3.55,
+
   'thin-acrylic-reference': 4.7,
+
   'medium-acrylic-reference': 4.4,
+
   'thick-acrylic-reference': 4.15,
+
   'steam-bent-maple-reference': 3.2,
+
   'steam-bent-mahogany-reference': 2.15,
+
   'solid-maple-reference': 3.25,
+
   'solid-walnut-reference': 2.35,
+
   'solid-oak-reference': 3.05,
 };
 
@@ -379,11 +443,17 @@ const buildCurrentBuildToneSummary = (summary) => {
 
   const values = {
     attack: Number(profile.attack ?? 5),
+
     sustain: Number(profile.sustain ?? 5),
+
     warmth: Number(profile.warmth ?? 5),
+
     projection: Number(profile.projection ?? 5),
+
     brightness: Number(profile.brightness ?? 5),
+
     sensitivity: Number(profile.sensitivity ?? 5),
+
     control: Number(profile.control ?? 5),
   };
 
@@ -429,23 +499,32 @@ const buildCurrentBuildToneSummary = (summary) => {
 
 const buildToneSummary = (
   summary,
+
   selectedBenchmarkType = null,
+
   selectedBenchmarkSize = null
 ) => {
   const profile = summary?.profile || {};
 
   const referenceLabel = getReferenceLabel(
     selectedBenchmarkType,
+
     selectedBenchmarkSize
   );
 
   const deltas = {
     attack: Number((Number(profile.attack ?? 5) - 5).toFixed(1)),
+
     sustain: Number((Number(profile.sustain ?? 5) - 5).toFixed(1)),
+
     warmth: Number((Number(profile.warmth ?? 5) - 5).toFixed(1)),
+
     projection: Number((Number(profile.projection ?? 5) - 5).toFixed(1)),
+
     brightness: Number((Number(profile.brightness ?? 5) - 5).toFixed(1)),
+
     sensitivity: Number((Number(profile.sensitivity ?? 5) - 5).toFixed(1)),
+
     control: Number((Number(profile.control ?? 5) - 5).toFixed(1)),
   };
 
@@ -588,27 +667,49 @@ const DEFAULT_BENCHMARK_SIZE_ID = '14x5_5';
 
 const HERITAGE_STANDARD_REFERENCE = {
   series: 'HERITAGE Standard Reference',
+
   benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
+
   benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
+
   benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
+
   size: '14',
+
   depth: '5.5',
+
   lugs: '8',
-  staveOption: '16 - 10mm',
+
+  staveOption: '16 - 11mm',
+
   staveQuantity: 16,
-  shellThickness: '10mm',
+
+  shellThickness: '11mm',
+
   shellConstruction: 'Northern Red Oak stave shell',
+
   primaryWood: 'Northern Red Oak',
+
   hoopType: 'Triple Flange',
+
   hardwareColor: 'Chrome',
+
   bearingEdge: '45° inner bearing edge with softened outer roundover',
+
   snareBed: 'Standard',
+
   finish: 'Medium Torch',
+
   throwOff: 'Trick GS007',
+
   batterHead: 'Remo Ambassador Coated',
+
   resonantHead: 'Remo Ambassador Hazy Snare Side',
+
   snareWires: 'PureSound Custom Pro Steel 20-Strand',
+
   tuning: 'Medium',
+
   muffling: 'None',
 };
 
@@ -620,7 +721,9 @@ const HERITAGE_STANDARD_SNARE_BED = HERITAGE_STANDARD_REFERENCE.snareBed;
 
 const HERITAGE_FINISH_SWATCHES = {
   'Light Torch': '/swatches/heritage/light.png',
+
   'Medium Torch': '/swatches/heritage/medium.png',
+
   Blackened: '/swatches/heritage/blackened.png',
 };
 
@@ -631,39 +734,59 @@ const reRingCost = 150;
 const depthPrices = {
   12: {
     '5.0': 0,
+
     5.5: 50,
+
     '6.0': 100,
+
     6.5: 150,
+
     '7.0': 200,
+
     7.5: 250,
+
     '8.0': 300,
   },
+
   13: {
     '5.0': 0,
+
     5.5: 50,
+
     '6.0': 100,
+
     6.5: 150,
+
     '7.0': 200,
+
     7.5: 250,
+
     '8.0': 300,
   },
+
   14: {
     '5.0': 0,
+
     5.5: 50,
+
     '6.0': 100,
+
     6.5: 150,
+
     '7.0': 200,
+
     7.5: 250,
+
     '8.0': 300,
   },
 };
 
 const staveOptions = {
-  12: ['16 - 10mm', '12 - 8mm + $150 (Re-Rings Required)'],
+  12: ['16 - 13mm', '12 - 8mm + $150 (Re-Rings Required)'],
 
-  13: ['16 - 10mm'],
+  13: ['16 - 12mm'],
 
-  14: ['20 - 12mm', '16 - 10mm', '10 - 7mm + $150 (Re-Rings Required)'],
+  14: ['20 - 15mm', '16 - 11mm', '10 - 7mm + $150 (Re-Rings Required)'],
 };
 
 const lugOptions = {
@@ -675,15 +798,15 @@ const lugOptions = {
 };
 
 const SHELL_RECIPE_LUG_RULES = {
-  '12|16 - 10mm': ['8'],
+  '12|16 - 13mm': ['8'],
 
   '12|12 - 8mm + $150 (Re-Rings Required)': ['6'],
 
-  '13|16 - 10mm': ['8'],
+  '13|16 - 12mm': ['8'],
 
-  '14|20 - 12mm': ['10'],
+  '14|20 - 15mm': ['10'],
 
-  '14|16 - 10mm': ['8'],
+  '14|16 - 11mm': ['8'],
 
   '14|10 - 7mm + $150 (Re-Rings Required)': ['10'],
 };
@@ -749,20 +872,31 @@ const getUnavailableLugReason = ({
 const hardwareOptions = [
   {
     label: 'Chrome',
+
     value: 'Chrome',
+
     upcharge: 0,
+
     description: 'Classic and clean.',
   },
+
   {
     label: 'Black Nickel',
+
     value: 'Black Nickel',
+
     upcharge: 50,
+
     description: 'Slightly darker, more modern feel.',
   },
+
   {
     label: 'Brass / Gold',
+
     value: 'Brass/Gold',
+
     upcharge: 150,
+
     description: 'Richer, warmer visual statement.',
   },
 ];
@@ -770,14 +904,21 @@ const hardwareOptions = [
 const hoopOptions = [
   {
     label: 'Triple Flange',
+
     value: 'Triple Flange',
+
     upcharge: 0,
+
     description: 'More open and classic.',
   },
+
   {
     label: 'Die-Cast',
+
     value: 'Die-Cast',
+
     upcharge: 100,
+
     description: 'Tighter response and more focus.',
   },
 ];
@@ -786,12 +927,15 @@ const scorchOptions = ['Light Torch', 'Medium Torch', 'Blackened'];
 
 const hardwareUpchargeMap = {
   Chrome: 0,
+
   'Black Nickel': 50,
+
   'Brass/Gold': 150,
 };
 
 const hoopUpchargeMap = {
   'Triple Flange': 0,
+
   'Die-Cast': 100,
 };
 
@@ -819,6 +963,190 @@ const getStaveThicknessLabel = (option = '') => {
   const parts = cleaned.split(' - ');
 
   return parts[1] || '';
+};
+
+const LEGACY_TUNING_MODE = {
+  BARE_SHELL: 'bare-shell',
+
+  DRESSED: 'dressed',
+};
+
+const parseStaveOptionMeta = (option = '') => {
+  const staveMatch = String(option).match(/^(\d+)/);
+
+  const thicknessMatch = String(option).match(/(\d+(?:\.\d+)?)mm/i);
+
+  return {
+    staveCount: staveMatch ? Number(staveMatch[1]) : null,
+
+    thicknessMm: thicknessMatch ? Number(thicknessMatch[1]) : null,
+
+    hasReRings: hasReRingFromStaveOption(option),
+  };
+};
+
+const clampLegacyTuningHz = (value) => {
+  const hz = Number(value);
+
+  if (!Number.isFinite(hz)) return 180;
+
+  return Math.max(70, Math.min(420, hz));
+};
+
+const getHeritageBareShellCenterHz = ({
+  size,
+
+  depth,
+
+  staveOption,
+
+  scorchDepth,
+}) => {
+  const diameter = Number(size) || 14;
+
+  const shellDepth = Number(depth) || 5.5;
+
+  const { staveCount, thicknessMm, hasReRings } =
+    parseStaveOptionMeta(staveOption);
+
+  let hz = 185;
+
+  // Diameter: larger shells sit lower, smaller shells sit higher.
+
+  hz += (14 - diameter) * 18;
+
+  // Depth: deeper shells sit lower, shallower shells sit higher.
+
+  hz += (6 - shellDepth) * 18;
+
+  // Thickness is the strongest stiffness driver.
+
+  // 11mm is the Heritage reference center.
+
+  hz += ((thicknessMm || 11) - 11) * 13;
+
+  // Higher stave count generally reads stiffer/faster in this Heritage recipe.
+
+  hz += ((staveCount || 16) - 16) * 4;
+
+  // Thin shells with re-rings still read lower, but not as aggressively as before.
+
+  if (hasReRings) {
+    hz -= 6;
+  }
+
+  // Finish calibration: torch depth changes shell behavior, but stays subtle.
+
+  if (scorchDepth === 'Light Torch') {
+    hz += 8;
+  }
+
+  if (scorchDepth === 'Medium Torch') {
+    hz += 0;
+  }
+
+  if (scorchDepth === 'Blackened') {
+    hz -= 10;
+  }
+
+  const isThinReRingPath = hasReRings && Number(thicknessMm || 11) <= 8;
+
+  const isDeepThinFourteen =
+    diameter >= 14 && shellDepth >= 6.5 && isThinReRingPath;
+
+  if (isDeepThinFourteen) {
+    hz += 18;
+  }
+
+  if (isDeepThinFourteen && shellDepth >= 7.5) {
+    hz += 6;
+  }
+
+  if (isDeepThinFourteen && scorchDepth === 'Blackened') {
+    hz += 6;
+  }
+
+  return clampLegacyTuningHz(Math.round(hz));
+};
+
+const getHeritageDressedCenterHz = ({
+  size,
+
+  depth,
+
+  staveOption,
+
+  scorchDepth,
+
+  hoopType,
+}) => {
+  const bareCenter = getHeritageBareShellCenterHz({
+    size,
+
+    depth,
+
+    staveOption,
+
+    scorchDepth,
+  });
+
+  let dressedCenter = bareCenter * 1.15;
+
+  if (hoopType === 'Die-Cast') {
+    dressedCenter += 12;
+  }
+
+  if (hoopType === 'Triple Flange') {
+    dressedCenter -= 4;
+  }
+
+  return clampLegacyTuningHz(Math.round(dressedCenter));
+};
+
+const getLegacyTuningHzRangeFromCenter = (
+  centerHz,
+
+  mode = LEGACY_TUNING_MODE.BARE_SHELL
+) => {
+  const center = clampLegacyTuningHz(centerHz);
+
+  const spread = mode === LEGACY_TUNING_MODE.BARE_SHELL ? 18 : 28;
+
+  const startHz = clampLegacyTuningHz(Math.round(center - spread));
+
+  const endHz = clampLegacyTuningHz(Math.round(center + spread));
+
+  return {
+    startHz,
+
+    endHz,
+
+    centerHz: center,
+
+    label: `${startHz}–${endHz} Hz`,
+  };
+};
+
+const getLegacyTuningScalePositionFromHz = (hz) => {
+  const value = clampLegacyTuningHz(hz);
+
+  const position =
+    1 +
+    ((value - LEGACY_TUNING_DISPLAY_MIN_HZ) /
+      (LEGACY_TUNING_DISPLAY_MAX_HZ - LEGACY_TUNING_DISPLAY_MIN_HZ)) *
+      4;
+
+  return Math.max(1, Math.min(5, position));
+};
+
+const getLegacyTuningRangeBoundsFromHz = ({ startHz, endHz, centerHz }) => {
+  return {
+    start: getLegacyTuningScalePositionFromHz(startHz),
+
+    end: getLegacyTuningScalePositionFromHz(endHz),
+
+    center: getLegacyTuningScalePositionFromHz(centerHz),
+  };
 };
 
 const getReadableDelta = (delta) => {
@@ -871,9 +1199,13 @@ const getDisplayMetricValue = (rawValue) => {
 
 const computeHeritagePrice = ({
   size,
+
   depth,
+
   staveOption,
+
   hardwareColor,
+
   hoopType,
 }) => {
   let price = basePrices[size] || 0;
@@ -892,8 +1224,11 @@ const computeHeritagePrice = ({
 const MetricIcon = ({ type, color = '#d6b277', size = 22 }) => {
   const iconProps = {
     size,
+
     strokeWidth: 2.15,
+
     color,
+
     'aria-hidden': true,
   };
 
@@ -1093,8 +1428,11 @@ const getThreadColorVars = (nodes = []) => {
 
   return {
     '--thread-accent': colors[0] || fallback,
+
     '--thread-accent-2': colors[1] || colors[0] || fallback,
+
     '--thread-accent-3': colors[2] || colors[1] || colors[0] || fallback,
+
     '--thread-accent-4':
       colors[3] || colors[2] || colors[1] || colors[0] || fallback,
   };
@@ -1110,42 +1448,29 @@ const getVoiceReadLabel = (slotKey) => {
 
 const VoiceMapping_READ_COPY = {
   simple: {
-    kicker: 'First Tell',
+    kicker: 'First Listen',
 
-    titleFallback: 'First Tell',
+    titleFallback: 'First Listen',
 
-    typeLabel: 'First Tell',
+    typeLabel: 'First Listen',
 
     visualMode: 'triangle',
 
     intro:
-      'The immediate sonic clue: what the ear catches first when the drum speaks once.',
+      'The immediate sound impression: what your ear notices first when the drum speaks.',
   },
 
   shaped: {
-    kicker: 'Player Read',
+    kicker: 'Player Analysis',
 
-    titleFallback: 'Player Read',
+    titleFallback: 'Player Analysis',
 
-    typeLabel: 'Player Read',
+    typeLabel: 'Player Analysis',
 
     visualMode: 'spider',
 
     intro:
-      'The fuller listening read: how this HERITAGE blueprint works under the hands once the full voice starts moving.',
-  },
-
-  complex: {
-    kicker: 'LegacyPrint™',
-
-    titleFallback: 'LegacyPrint™',
-
-    typeLabel: 'LegacyPrint™',
-
-    visualMode: 'legacyprint',
-
-    intro:
-      'The identity print: the drum’s one-of-one character, shaped by sound, feel, construction, and visual presence.',
+      'A fuller build-and-feel read showing how this drum responds across the seven LegacyPrint™ voice nodes.',
   },
 };
 
@@ -1156,15 +1481,11 @@ const getVoiceMappingReadCopy = (slotKey = '') => {
 const getVoiceMappingVariantForSlot = (slotKey = '') => {
   if (slotKey === 'simple') return 'firstTell';
 
-  if (slotKey === 'shaped') return 'player';
-
-  return 'legacyprint';
+  return 'player';
 };
 
 const getVoiceMappingDisplayTitle = ({
   relationship,
-
-  legacyPrintTitle,
 
   profile = {},
 
@@ -1196,10 +1517,6 @@ const getVoiceMappingDisplayTitle = ({
 
       scorchDepth,
     });
-  }
-
-  if (relationship?.slotKey === 'complex') {
-    return legacyPrintTitle || relationship?.title || 'LegacyPrint™ Voice';
   }
 
   return relationship?.title || 'VoiceMapping Read';
@@ -1369,13 +1686,42 @@ const FIRST_TELL_RULES = [
   },
 
   {
-    id: 'deep-14-open-hoop',
+    id: 'deep-14-open-hoop-maximum-depth',
 
-    test: (meta) => meta.isFullSize && meta.isDeep && meta.isTripleFlange,
+    test: (meta) =>
+      meta.isFullSize && meta.depthNumber >= 8 && meta.isTripleFlange,
+
+    title: 'Maximum depth with extended bloom',
+
+    nodes: ['sustain', 'warmth', 'projection'],
+  },
+
+  {
+    id: 'deep-14-open-hoop-big-room',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 7.5 &&
+      meta.depthNumber < 8 &&
+      meta.isTripleFlange,
+
+    title: 'Big warmth with longer room bloom',
+
+    nodes: ['warmth', 'sustain', 'projection'],
+  },
+
+  {
+    id: 'deep-14-open-hoop-deep-body',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 7 &&
+      meta.depthNumber < 7.5 &&
+      meta.isTripleFlange,
 
     title: 'Deep warmth with open bloom',
 
-    nodes: ['warmth', 'sustain', 'projection'],
+    nodes: ['warmth', 'projection', 'sustain'],
   },
 
   {
@@ -1439,24 +1785,52 @@ const FIRST_TELL_RULES = [
   },
 
   {
+    id: 'compact-medium-thick-diecast',
+
+    test: (meta) =>
+      meta.isCompact &&
+      !meta.isDeep &&
+      !meta.isShallow &&
+      meta.isDieCast &&
+      meta.thicknessNumber >= 12,
+
+    title: 'Focused punch with clean shape',
+
+    nodes: ['control', 'attack', 'projection'],
+  },
+
+  {
     id: 'thick-shell-diecast',
 
-    test: (meta) => meta.isThickShell && meta.isDieCast,
+    test: (meta) =>
+      meta.isDieCast && meta.thicknessNumber >= 13 && !meta.isMiddle,
 
     title: 'Focused power with clean shape',
 
     nodes: ['projection', 'control', 'attack'],
   },
 
-  {
-    id: 'thick-shell-open-hoop',
+{
 
-    test: (meta) => meta.isThickShell && meta.isTripleFlange,
+  id: 'thick-shell-open-hoop',
 
-    title: 'Strong shell voice with open carry',
+  test: (meta) =>
 
-    nodes: ['projection', 'attack', 'warmth'],
-  },
+    meta.isThickShell &&
+
+    meta.isTripleFlange &&
+
+    !meta.isCompact &&
+
+    !meta.isMiddle &&
+
+    !meta.isShallow,
+
+  title: 'Strong shell voice with open carry',
+
+  nodes: ['projection', 'attack', 'warmth'],
+
+},
 
   {
     id: 'ten-lug-diecast',
@@ -1516,6 +1890,21 @@ const FIRST_TELL_RULES = [
     title: 'Compact depth with focused punch',
 
     nodes: ['control', 'projection', 'attack'],
+  },
+
+  {
+    id: 'middle-blackened-diecast-center',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      !meta.isDeep &&
+      !meta.isShallow &&
+      meta.isDieCast &&
+      meta.isBlackened,
+
+    title: 'Dark balanced center with clean control',
+
+    nodes: ['control', 'warmth', 'attack'],
   },
 
   {
@@ -1700,7 +2089,12 @@ const getDominantVoiceNodes = ({
     return b.value - a.value;
   });
 
-  const nodes = profilePriority.slice(0, 3).map((item) => item.key);
+  const profileNodes = profilePriority.slice(0, 3).map((item) => item.key);
+
+  const nodes =
+    Array.isArray(curated.nodes) && curated.nodes.length
+      ? curated.nodes.slice(0, 3)
+      : profileNodes;
 
   return {
     title: curated.title,
@@ -1709,7 +2103,7 @@ const getDominantVoiceNodes = ({
 
     ruleId: curated.ruleId,
 
-    profileNodes: profilePriority.slice(0, 3).map((item) => item.key),
+    profileNodes,
 
     curatedNodes: curated.nodes,
 
@@ -1883,42 +2277,6 @@ const getLockedFirstTellDepthNodes = ({
 
     scorchDepth,
   }).nodes;
-};
-
-const getTopThreeTellerNodes = ({
-  relationship = {},
-
-  profile = {},
-
-  size,
-
-  depth,
-
-  lugs,
-
-  staveOption,
-
-  hoopType,
-
-  scorchDepth,
-}) => {
-  return getLockedFirstTellDepthNodes({
-    relationship,
-
-    profile,
-
-    size,
-
-    depth,
-
-    lugs,
-
-    staveOption,
-
-    hoopType,
-
-    scorchDepth,
-  });
 };
 
 const getFirstTellTriangleNodes = ({
@@ -2161,16 +2519,28 @@ const DEPTH_GUIDE_COPY = {
 };
 
 const SHELL_THICKNESS_GUIDE_COPY = {
-  '12mm': {
+  '15mm': {
     title: 'Focused / powerful',
 
-    body: 'More stiffness, projection, control, and a stronger shaped note.',
+    body: 'The stiffest Heritage path: more projection, control, and a stronger shaped note.',
   },
 
-  '10mm': {
+  '13mm': {
+    title: 'Compact / focused',
+
+    body: 'A slightly thicker 12" shell path that keeps the smaller drum quick while adding focus and body.',
+  },
+
+  '12mm': {
+    title: 'Balanced alternate',
+
+    body: 'A stable 13" shell path with good focus, response, and enough body for an alternate main voice.',
+  },
+
+  '11mm': {
     title: 'Balanced Heritage core',
 
-    body: 'The standard center: woody, stable, responsive, and familiar.',
+    body: 'The standard 14" Heritage center: woody, stable, responsive, and familiar.',
   },
 
   '8mm': {
@@ -2262,7 +2632,9 @@ const HARDWARE_GUIDE_COPY = {
 
 const buildFirstTellSummary = ({
   visualNodes = [],
+
   activeThread,
+
   activeReadout,
 }) => {
   const nodeLabels = visualNodes
@@ -2333,7 +2705,7 @@ const HeritageProductDetail = () => {
 
   const [lugs, setLugs] = useState('8');
 
-  const [staveOption, setStaveOption] = useState('16 - 10mm');
+  const [staveOption, setStaveOption] = useState('16 - 13mm');
 
   const [hardwareColor, setHardwareColor] = useState('Chrome');
 
@@ -2351,7 +2723,11 @@ const HeritageProductDetail = () => {
 
   const [cartItemId, setCartItemId] = useState(null);
 
-  const [legacyPrintTab, setLegacyPrintTab] = useState('voiceRead');
+  const [legacyTuningMode, setLegacyTuningMode] = useState(
+    LEGACY_TUNING_MODE.BARE_SHELL
+  );
+
+  const [legacyPrintTab, setLegacyPrintTab] = useState('firstListen');
 
   const [isCompareModeEnabled, setIsCompareModeEnabled] = useState(false);
 
@@ -2460,43 +2836,62 @@ const HeritageProductDetail = () => {
     const IMAGE_MAP = {
       ply: {
         'maple-ply-reference': '/legacyprint-benchmarks/ply/ply-maple.png',
+
         'birch-ply-reference': '/legacyprint-benchmarks/ply/ply-birch.png',
+
         'oak-ply-reference': '/legacyprint-benchmarks/ply/ply-oak.png',
+
         'walnut-ply-reference': '/legacyprint-benchmarks/ply/ply-walnut.png',
+
         'mahogany-ply-reference':
           '/legacyprint-benchmarks/ply/ply-mohogany.png',
       },
+
       metal: {
         'brass-reference': '/legacyprint-benchmarks/metal/metal-brass.png',
+
         'steel-reference': '/legacyprint-benchmarks/metal/metal-steel.png',
+
         'aluminum-reference':
           '/legacyprint-benchmarks/metal/metal-aluminum.png',
+
         'copper-reference': '/legacyprint-benchmarks/metal/metal-copper.png',
+
         'bronze-reference': '/legacyprint-benchmarks/metal/metal-bronze.png',
       },
+
       acrylic: {
         'thin-acrylic-reference':
           '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
+
         'medium-acrylic-reference':
           '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
+
         'thick-acrylic-reference':
           '/legacyprint-benchmarks/acrylic/acrylic-clear.png',
       },
+
       'ober-custom': {
         'heritage-oak-reference':
           '/legacyprint-benchmarks/ober-custom/ober-heritage-oak.png',
+
         'feuzon-hybrid-reference':
           '/legacyprint-benchmarks/ober-custom/ober-feuzon-maple.png',
       },
+
       'solid-steambent': {
         'steam-bent-maple-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-maple.png',
+
         'steam-bent-mahogany-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-mahogany.png',
+
         'solid-maple-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-maple.png',
+
         'solid-walnut-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-walnut.png',
+
         'solid-oak-reference':
           '/legacyprint-benchmarks/solid-steambent/solid-steam-oak.png',
       },
@@ -2522,17 +2917,29 @@ const HeritageProductDetail = () => {
 
   const heritageHighlights = [
     'Northern Red Oak stave shell construction.',
+
     'Grounded, warm, seasoned Ober voice.',
+
     '45° inner edge with softened outer roundover.',
+
     'Standard snare beds.',
+
     '12", 13", and 14" build sizes.',
+
     '36 core Heritage voicing paths.',
+
     'Vintage double-ended tube lugs.',
+
     'Triple flange or die-cast response.',
+
     'Chrome, Black Nickel, or Brass / Gold hardware.',
+
     'Stock Trick GS007 throw-off.',
+
     'Controlled torching shapes visual character and resonance.',
+
     'PureSound Custom Pro Steel 20-Strand wires.',
+
     'Estimated delivery: 6–8 weeks.',
   ];
 
@@ -2570,9 +2977,13 @@ const HeritageProductDetail = () => {
   const currentBuildPrice = useMemo(() => {
     return computeHeritagePrice({
       size,
+
       depth,
+
       staveOption,
+
       hardwareColor,
+
       hoopType,
     });
   }, [size, depth, staveOption, hardwareColor, hoopType]);
@@ -2580,14 +2991,23 @@ const HeritageProductDetail = () => {
   const currentBuildVoiceRangeSummary = useMemo(() => {
     return buildHeritageVoiceRead({
       size,
+
       depth,
+
       lugs,
+
       staveOption,
+
       hardwareColor,
+
       hoopType,
+
       scorchDepth,
+
       benchmarkFamilyId: DEFAULT_BENCHMARK_FAMILY_ID,
+
       benchmarkTypeId: DEFAULT_BENCHMARK_TYPE_ID,
+
       benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
     });
   }, [size, depth, lugs, staveOption, hardwareColor, hoopType, scorchDepth]);
@@ -2598,35 +3018,57 @@ const HeritageProductDetail = () => {
       : currentBuildVoiceRangeSummary;
   }, [
     isCompareModeEnabled,
+
     selectedDrumSummary,
+
     currentBuildVoiceRangeSummary,
   ]);
 
   const activeBuildSignature = useMemo(() => {
     return [
       size,
+
       depth,
+
       lugs,
+
       staveOption,
+
       hoopType,
+
       hardwareColor,
+
       scorchDepth,
+
       isCompareModeEnabled ? 'compare' : 'standalone',
+
       isCompareModeEnabled ? benchmarkFamilyId : DEFAULT_BENCHMARK_FAMILY_ID,
+
       isCompareModeEnabled ? benchmarkTypeId : DEFAULT_BENCHMARK_TYPE_ID,
+
       isCompareModeEnabled ? benchmarkSizeId : DEFAULT_BENCHMARK_SIZE_ID,
     ].join('|');
   }, [
     size,
+
     depth,
+
     lugs,
+
     staveOption,
+
     hoopType,
+
     hardwareColor,
+
     scorchDepth,
+
     isCompareModeEnabled,
+
     benchmarkFamilyId,
+
     benchmarkTypeId,
+
     benchmarkSizeId,
   ]);
 
@@ -2645,7 +3087,9 @@ const HeritageProductDetail = () => {
     if (isCompareModeEnabled) {
       return buildToneSummary(
         selectedDrumSummary,
+
         selectedBenchmarkType,
+
         selectedBenchmarkSize
       );
     }
@@ -2653,27 +3097,60 @@ const HeritageProductDetail = () => {
     return buildCurrentBuildToneSummary(currentBuildVoiceRangeSummary);
   }, [
     isCompareModeEnabled,
+
     selectedDrumSummary,
+
     currentBuildVoiceRangeSummary,
+
     selectedBenchmarkType,
+
     selectedBenchmarkSize,
   ]);
 
-  const projectedVoiceRangePosition = useMemo(() => {
-    return buildProjectedVoiceRange(currentBuildVoiceRangeSummary);
-  }, [currentBuildVoiceRangeSummary]);
+  const legacyTuningCenterHz = useMemo(() => {
+    if (legacyTuningMode === LEGACY_TUNING_MODE.DRESSED) {
+      return getHeritageDressedCenterHz({
+        size,
+
+        depth,
+
+        staveOption,
+
+        scorchDepth,
+
+        hoopType,
+      });
+    }
+
+    return getHeritageBareShellCenterHz({
+      size,
+
+      depth,
+
+      staveOption,
+
+      scorchDepth,
+    });
+  }, [size, depth, staveOption, scorchDepth, hoopType, legacyTuningMode]);
+
+  const legacyTuningHzMeta = useMemo(() => {
+    return getLegacyTuningHzRangeFromCenter(
+      legacyTuningCenterHz,
+
+      legacyTuningMode
+    );
+  }, [legacyTuningCenterHz, legacyTuningMode]);
 
   const legacyTuningRange = useMemo(() => {
-    return getLegacyTuningRangeBounds(projectedVoiceRangePosition);
-  }, [projectedVoiceRangePosition]);
+    return getLegacyTuningRangeBoundsFromHz(legacyTuningHzMeta);
+  }, [legacyTuningHzMeta]);
 
-  const legacyTuningHzRange = useMemo(() => {
-    return getLegacyTuningHzRange(legacyTuningRange);
-  }, [legacyTuningRange]);
+  const legacyTuningHzRange = legacyTuningHzMeta.label;
 
   const benchmarkVoiceRangePosition = useMemo(() => {
     return buildBenchmarkVoiceRange(
       selectedBenchmarkType,
+
       selectedBenchmarkSize
     );
   }, [selectedBenchmarkType, selectedBenchmarkSize]);
@@ -2718,12 +3195,26 @@ const HeritageProductDetail = () => {
     AXIS_IMPACT_FACTORS[activeAxisKey] || AXIS_IMPACT_FACTORS.attack;
 
   const keyRelationships = useMemo(() => {
-    const visualSummary = activeVoiceSummary;
+    const visualSummary = activeVoiceSummary || {};
 
-    const visualRelationships = buildKeyRelationships(visualSummary);
+    const profile = visualSummary?.profile || {};
+
+    const meta = getFirstTellSpecMeta({
+      size,
+
+      depth,
+
+      lugs,
+
+      staveOption,
+
+      hoopType,
+
+      scorchDepth,
+    });
 
     const dominantVoiceNodes = getDominantVoiceNodes({
-      profile: visualSummary?.profile || {},
+      profile,
 
       size,
 
@@ -2738,75 +3229,232 @@ const HeritageProductDetail = () => {
       scorchDepth,
     });
 
-    const threadSlotOrder = {
-      simple: 0,
+    const canonicalNodes = dominantVoiceNodes.nodes || [];
 
-      shaped: 1,
+    const canonicalTitle =
+      dominantVoiceNodes.title || 'Classic Heritage first tell';
 
-      complex: 2,
+    const simpleScore = visualSummary?.simpleThreadScore || 1;
+
+    const shapedScore = visualSummary?.shapedThreadScore || simpleScore || 1;
+    const getCanonicalPlayerTitle = () => {
+      if (meta.isCompact && meta.depthNumber >= 8) {
+        return 'Compact maximum depth with focused punch';
+      }
+
+      if (meta.isCompact && meta.depthNumber >= 7.5) {
+        return 'Compact depth with stronger room push';
+      }
+
+      if (meta.isCompact && meta.depthNumber >= 7) {
+        return 'Controlled compact depth with tight focus';
+      }
+
+      if (meta.isMiddle && meta.depthNumber >= 8) {
+        return 'Full alternate voice with extended bloom';
+      }
+
+      if (meta.isMiddle && meta.depthNumber >= 7.5) {
+        return 'Deep alternate voice with longer room bloom';
+      }
+
+      if (meta.isMiddle && meta.depthNumber >= 7) {
+        return 'Warm alternate body with room presence';
+      }
+
+      if (meta.isFullSize && meta.depthNumber >= 8) {
+        return 'Maximum depth with broad shell bloom';
+      }
+
+      if (meta.isFullSize && meta.depthNumber >= 7.5) {
+        return 'Big main voice with longer room bloom';
+      }
+
+      if (meta.isFullSize && meta.depthNumber >= 7) {
+        return 'Deep main voice with open body';
+      }
+
+      if (
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('brightness') &&
+        canonicalNodes.includes('sensitivity')
+      ) {
+        return 'Quick, open touch response';
+      }
+
+      if (
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('brightness') &&
+        canonicalNodes.includes('warmth')
+      ) {
+        return 'Quick, lean articulate response';
+      }
+
+      if (
+        canonicalNodes.includes('warmth') &&
+        canonicalNodes.includes('sustain') &&
+        canonicalNodes.includes('projection')
+      ) {
+        return 'Deep warmth with open bloom';
+      }
+
+      if (
+        canonicalNodes.includes('warmth') &&
+        canonicalNodes.includes('projection') &&
+        canonicalNodes.includes('control')
+      ) {
+        return 'Warm body with focused room push';
+      }
+
+      if (
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('projection') &&
+        canonicalNodes.includes('control')
+      ) {
+        return 'Focused power with clean shape';
+      }
+
+      if (
+        canonicalNodes.includes('sensitivity') &&
+        canonicalNodes.includes('sustain') &&
+        canonicalNodes.includes('warmth')
+      ) {
+        return 'Open touch with woody bloom';
+      }
+
+      if (
+        canonicalNodes.includes('control') &&
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('brightness')
+      ) {
+        return 'Dry snap with controlled edge';
+      }
+
+      return canonicalTitle;
     };
 
-    const sorted = visualRelationships
+    const getCanonicalPlayerSummary = () => {
+      if (meta.isCompact && meta.depthNumber >= 8) {
+        return 'This 12" build is reading as a compact deep snare rather than a huge main voice. The extra depth adds punch, low-center weight, and stronger room push, but the smaller diameter keeps the response tighter, quicker, and more focused than the 13" or 14" deep paths.';
+      }
 
-      .slice()
+      if (meta.isCompact && meta.depthNumber >= 7.5) {
+        return 'This 12" build is moving into a deeper compact voice: more body and room presence than the 7" path, but still controlled and punch-focused. It should feel bigger under the stick without losing the smaller drum’s quick identity.';
+      }
 
-      .sort((a, b) => {
-        const aOrder = threadSlotOrder[a.slotKey] ?? 99;
+      if (meta.isCompact && meta.depthNumber >= 7) {
+        return 'This 12" build is reading with added depth and control while still staying tight and compact. The extra shell depth gives it more push than the shallower paths, but the voice remains focused rather than wide.';
+      }
 
-        const bOrder = threadSlotOrder[b.slotKey] ?? 99;
+      if (meta.isMiddle && meta.depthNumber >= 8) {
+        return 'This 13" build is reading as a full alternate voice with extended bloom. It carries more body and lower room shape than the 7.5" path, while still staying tighter and more compact than a 14" maximum-depth main snare.';
+      }
 
-        if (aOrder !== bOrder) return aOrder - bOrder;
+      if (meta.isMiddle && meta.depthNumber >= 7.5) {
+        return 'This 13" build is reading with a deeper alternate-snare body: longer bloom, more room presence, and more physical weight than the 7" path. It should feel broad and expressive without becoming as wide as the 14" deep builds.';
+      }
 
-        return Number(b.score || 0) - Number(a.score || 0);
-      });
+      if (meta.isMiddle && meta.depthNumber >= 7) {
+        return 'This 13" build is reading with warm body and added room presence. It should feel fuller than the shallower alternate voices, while still keeping enough definition and control to stay versatile.';
+      }
 
-    const simpleRelationship =
-      sorted.find((item) => item.slotKey === 'simple') || sorted[0];
+      if (meta.isFullSize && meta.depthNumber >= 8) {
+        return 'This 14" build is reading with the deepest Heritage body in this range: slower air movement, wider shell bloom, and a more physical low-center response. Compared with the 7.5" path, this should feel less quick and more settled, with the room shape becoming a bigger part of the voice.';
+      }
 
-    const shapedRelationship =
-      sorted.find((item) => item.slotKey === 'shaped') || sorted[1];
+      if (meta.isFullSize && meta.depthNumber >= 7.5) {
+        return 'This 14" build is reading with a big main-snare feel and a longer body shape, but still holding more immediacy than the full 8" depth. It should feel broad, weighted, and physical without fully moving into the maximum-depth bloom.';
+      }
 
-    const complexRelationship =
-      sorted.find((item) => item.slotKey === 'complex') || sorted[2];
+      if (meta.isFullSize && meta.depthNumber >= 7) {
+        return 'This 14" build is reading with deeper main-snare body and stronger room presence. It adds more low-center weight than the 6.5" path while still keeping enough front-edge definition for a usable main voice.';
+      }
+
+      if (
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('brightness') &&
+        canonicalNodes.includes('sensitivity')
+      ) {
+        return 'The drum is reading as quick, articulate, and responsive, with a clear first edge and enough openness to keep the side-snare feel lively.';
+      }
+
+      if (
+        canonicalNodes.includes('warmth') &&
+        canonicalNodes.includes('sustain') &&
+        canonicalNodes.includes('projection')
+      ) {
+        return 'The drum is reading with more body, longer bloom, and a broader room shape while still keeping the Heritage voice grounded.';
+      }
+
+      if (
+        canonicalNodes.includes('warmth') &&
+        canonicalNodes.includes('projection') &&
+        canonicalNodes.includes('control')
+      ) {
+        return 'The drum is reading with a fuller body, stronger room presence, and enough organization to keep the note shaped and usable.';
+      }
+
+      if (
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('projection') &&
+        canonicalNodes.includes('control')
+      ) {
+        return 'The drum is reading with stronger front-edge definition, more outward push, and a cleaner, more organized note shape.';
+      }
+
+      if (
+        canonicalNodes.includes('sensitivity') &&
+        canonicalNodes.includes('sustain') &&
+        canonicalNodes.includes('warmth')
+      ) {
+        return 'The drum is reading as open, touch-sensitive, and woody, with more shell movement and a more breathing response under the hands.';
+      }
+
+      if (
+        canonicalNodes.includes('control') &&
+        canonicalNodes.includes('attack') &&
+        canonicalNodes.includes('brightness')
+      ) {
+        return 'The drum is reading as drier, quicker, and more controlled, with a clearer edge and a more contained response.';
+      }
+
+      return 'The drum is reading through the same core traits as the First Listen, but with a fuller view of how the voice works under the hands.';
+    };
 
     return [
       {
-        ...(simpleRelationship || {}),
-
-        id: 'first-tell-canonical',
+        id: 'first-listen-canonical',
 
         slotKey: 'simple',
 
-        title: dominantVoiceNodes.title,
+        title: canonicalTitle,
 
-        nodes: dominantVoiceNodes.nodes,
+        nodes: canonicalNodes,
+
+        score: simpleScore,
 
         summary:
-          'The first impression read: the three traits your ear is most likely to notice before digging into the full voice map.',
+          'The first listen read: the three traits your ear is most likely to notice before digging into the full player analysis.',
 
         ruleId: dominantVoiceNodes.ruleId,
       },
 
-      shapedRelationship
-        ? {
-            ...shapedRelationship,
+      {
+        id: 'player-analysis-canonical',
 
-            id: shapedRelationship.id || 'player-read-canonical',
+        slotKey: 'shaped',
 
-            slotKey: 'shaped',
-          }
-        : null,
+        title: getCanonicalPlayerTitle(),
 
-      complexRelationship
-        ? {
-            ...complexRelationship,
+        nodes: AXIS_META.map((axis) => axis.key),
 
-            id: complexRelationship.id || 'legacyprint-canonical',
+        score: shapedScore,
 
-            slotKey: 'complex',
-          }
-        : null,
-    ].filter(Boolean);
+        summary: getCanonicalPlayerSummary(),
+
+        ruleId: dominantVoiceNodes.ruleId,
+      },
+    ];
   }, [
     activeVoiceSummary,
 
@@ -2860,53 +3508,23 @@ const HeritageProductDetail = () => {
 
     return buildVoiceThreadReadout({
       thread: activeThread,
+
       profile: activeVoiceSummary?.profile || {},
+
       sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
     });
   }, [activeThread, activeVoiceSummary]);
 
-  const musicalIdentityTitle = useMemo(() => {
-    return buildHeritageMusicalIdentityTitle({
-      size,
-
-      depth,
-
-      lugs,
-
-      staveOption,
-
-      hoopType,
-
-      hardwareColor,
-
-      scorchDepth,
-
-      currentSpec: activeVoiceSummary?.currentSpec || {},
-    });
-  }, [
-    size,
-
-    depth,
-
-    lugs,
-
-    staveOption,
-
-    hoopType,
-
-    hardwareColor,
-
-    scorchDepth,
-
-    activeVoiceSummary,
-  ]);
-
   const getOptionDeltaMeta = (nextSelections) => {
     const nextPrice = computeHeritagePrice({
       size: nextSelections.size ?? size,
+
       depth: nextSelections.depth ?? depth,
+
       staveOption: nextSelections.staveOption ?? staveOption,
+
       hardwareColor: nextSelections.hardwareColor ?? hardwareColor,
+
       hoopType: nextSelections.hoopType ?? hoopType,
     });
 
@@ -2914,6 +3532,7 @@ const HeritageProductDetail = () => {
 
     return {
       text: getReadableDelta(delta),
+
       className: getDeltaClassName(delta),
     };
   };
@@ -2982,7 +3601,7 @@ const HeritageProductDetail = () => {
     setIsCompareModeEnabled(false);
 
     if (legacyPrintTab === 'referenceSetup') {
-      setLegacyPrintTab('voiceRead');
+      setLegacyPrintTab('playerAnalysis');
     }
   };
 
@@ -3032,28 +3651,47 @@ const HeritageProductDetail = () => {
     setSelectedDrumSummary(
       buildHeritageVoiceRead({
         size,
+
         depth,
+
         lugs,
+
         staveOption,
+
         hardwareColor,
+
         hoopType,
+
         scorchDepth,
+
         benchmarkFamilyId,
+
         benchmarkTypeId,
+
         benchmarkSizeId,
       })
     );
   }, [
     size,
+
     depth,
+
     lugs,
+
     staveOption,
+
     hardwareColor,
+
     hoopType,
+
     scorchDepth,
+
     currentBuildPrice,
+
     benchmarkFamilyId,
+
     benchmarkTypeId,
+
     benchmarkSizeId,
   ]);
 
@@ -3118,12 +3756,19 @@ const HeritageProductDetail = () => {
     }
   }, [
     cart,
+
     size,
+
     depth,
+
     staveOption,
+
     lugs,
+
     hardwareColor,
+
     hoopType,
+
     scorchDepth,
   ]);
 
@@ -3135,7 +3780,7 @@ const HeritageProductDetail = () => {
 
       setLugs('8');
 
-      setStaveOption('16 - 10mm');
+      setStaveOption('16 - 11mm');
 
       setHardwareColor('Chrome');
 
@@ -3156,7 +3801,7 @@ const HeritageProductDetail = () => {
 
     setLugs('8');
 
-    setStaveOption('16 - 10mm');
+    setStaveOption('16 - 13mm');
 
     setHardwareColor('Chrome');
 
@@ -3211,52 +3856,94 @@ const HeritageProductDetail = () => {
 
     const newCartItemId = generateCartItemId({
       stripePriceId: matchedPricingOption.stripePriceId,
+
       size,
+
       depth,
+
       reRing: hasReRing,
+
       lugQuantity: lugs,
+
       staveQuantity: staveOption.split(' - ')[0],
+
       hardwareColor,
+
       hoopType,
+
       scorchDepth,
     });
 
     const cartItem = {
       id: newCartItemId,
+
       productId: 'heritage',
+
       name: 'HERITAGE',
+
       size,
+
       depth,
+
       reRing: hasReRing,
+
       lugQuantity: lugs,
+
       staveQuantity: staveOption.split(' - ')[0],
+
       price: totalPrice,
+
       stripePriceId: null,
+
       quantity: 1,
+
       images: [productImage],
+
       category: 'artisan',
+
       hardwareColor,
+
       hoopType,
+
       snareBedDepth: HERITAGE_STANDARD_SNARE_BED,
+
       bearingEdge: HERITAGE_STANDARD_BEARING_EDGE,
+
       scorchDepth,
+
       snareWireModel: HERITAGE_STANDARD_REFERENCE.snareWires,
+
       batterHead: HERITAGE_STANDARD_REFERENCE.batterHead,
+
       resonantHead: HERITAGE_STANDARD_REFERENCE.resonantHead,
+
       config: {
         series: 'HERITAGE',
+
         size,
+
         depth,
+
         reRing: hasReRing,
+
         lugQuantity: lugs,
+
         staveQuantity: staveOption.split(' - ')[0],
+
         hardwareColor,
+
         hoopType,
+
         snareBedDepth: HERITAGE_STANDARD_SNARE_BED,
+
         bearingEdge: HERITAGE_STANDARD_BEARING_EDGE,
+
         scorchDepth,
+
         snareWireModel: HERITAGE_STANDARD_REFERENCE.snareWires,
+
         batterHead: HERITAGE_STANDARD_REFERENCE.batterHead,
+
         resonantHead: HERITAGE_STANDARD_REFERENCE.resonantHead,
       },
     };
@@ -3290,7 +3977,9 @@ const HeritageProductDetail = () => {
     const nextStaves = getAvailableStaveOptions(newSize);
 
     const nextStaveOption =
-      nextStaves.find((item) => item === '16 - 10mm') ||
+      nextStaves.find((item) => item === '16 - 11mm') ||
+      nextStaves.find((item) => item === '16 - 13mm') ||
+      nextStaves.find((item) => item === '16 - 12mm') ||
       nextStaves.find((item) => !hasReRingFromStaveOption(item)) ||
       nextStaves[0] ||
       '';
@@ -3495,67 +4184,87 @@ const HeritageProductDetail = () => {
   };
 
   const renderLegacyPrintSummaryCard = () => {
-    const topRelationship = keyRelationships[0];
+    const firstListenRelationship = keyRelationships.find(
+      (relationship) => relationship.slotKey === 'simple'
+    );
+
+    const playerAnalysisRelationship = keyRelationships.find(
+      (relationship) => relationship.slotKey === 'shaped'
+    );
 
     return (
-      <div className="heritage-legacyprint-summary-card">
-        <div className="heritage-legacyprint-summary-head">
-          <span className="heritage-summary-kicker heritage-summary-kicker--voiceprint">
-            <img
-              src="/legacyprint-benchmarks/ober-legacyprint-7-node-neon-all-connections-transparent.png"
-              alt=""
-              className="heritage-summary-kicker-icon"
-              aria-hidden="true"
-            />
-            LegacyPrint™ Summary
+      <div className="heritage-legacyprint-summary-card heritage-legacyprint-summary-card--simple">
+        <div className="heritage-legacyprint-summary-head heritage-legacyprint-summary-head--minimal">
+          <span className="heritage-VoiceMapping-read-kicker">
+            LegacyPrint™ Analysis
           </span>
 
-          <h4>Current build analysis</h4>
-
           <p>
-            A plain-language read of this Heritage configuration across
-            VoiceMapping, LegacyTuning™, and Voice Threading.
+            {toneSummaryText} First Listen, Player Analysis, and LegacyTuning™
+            turn that blueprint into a practical read of how this drum starts,
+            responds, carries, and settles.
           </p>
         </div>
 
-        <div className="heritage-legacyprint-summary-grid">
-          <article className="heritage-legacyprint-summary-section">
-            <span>VoiceMapping Read</span>
+        <div className="heritage-legacyprint-summary-flow">
+          {firstListenRelationship && (
+            <article className="heritage-legacyprint-summary-read">
+              <span>First Listen</span>
 
-            <p>{toneSummaryText}</p>
-          </article>
+              <div>
+                <strong>{firstListenRelationship.title}.</strong>
 
-          <article className="heritage-legacyprint-summary-section">
-            <span>LegacyTuning™ Zone</span>
-
-            <p>
-              This build is currently reading in the {legacyTuningHzRange}{' '}
-              range, with a nearest note window around{' '}
-              {currentNearestNoteWindow}. That places the drum inside the
-              broader resonance zone where the shell is likely to feel most
-              balanced before final craftsman tuning.
-            </p>
-          </article>
-
-          {topRelationship && (
-            <article className="heritage-legacyprint-summary-section">
-              <span>Strongest Voice Thread</span>
-
-              <p>
-                <strong>{topRelationship.title}.</strong>{' '}
-                {topRelationship.summary}
-              </p>
+                <p>
+                  The immediate ear read — the traits most likely to stand out
+                  before deeper feel, response, and tuning context come into
+                  focus.
+                </p>
+              </div>
             </article>
           )}
 
-          <article className="heritage-legacyprint-summary-section heritage-legacyprint-summary-section--takeaway">
+          {playerAnalysisRelationship && (
+            <article className="heritage-legacyprint-summary-read">
+              <span>Player Analysis</span>
+
+              <div>
+                <strong>{playerAnalysisRelationship.title}.</strong>
+
+                <p>
+                  {playerAnalysisRelationship.summary} Use this as the fuller
+                  under-the-hands read once response, placement, and behavior
+                  begin working together.
+                </p>
+              </div>
+            </article>
+          )}
+
+          <article className="heritage-legacyprint-summary-read">
+            <span>LegacyTuning™ Zone</span>
+
+            <div>
+              <strong>
+                {legacyTuningHzRange} · {currentNearestNoteWindow}
+              </strong>
+
+              <p>
+                The broader resonance lane where the shell is likely to feel
+                balanced before heads, wires, hardware, and final craftsman
+                tuning decide the finished pocket.
+              </p>
+            </div>
+          </article>
+
+          <article className="heritage-legacyprint-summary-read heritage-legacyprint-summary-read--takeaway">
             <span>Craftsman Takeaway</span>
 
-            <p>
-              This read is a build-direction guide, not a final verdict. The
-              finished drum still has to be tuned, played, heard, and allowed to
-              show where its final pocket lives.
-            </p>
+            <div>
+              <p>
+                Treat this as build-direction guidance, not a final verdict. The
+                finished drum still has to be tuned, played, heard, and allowed
+                to show where its final pocket lives.
+              </p>
+            </div>
           </article>
         </div>
       </div>
@@ -3653,11 +4362,21 @@ const HeritageProductDetail = () => {
           <div className="heritage-voice-range-labels">
             <div className="heritage-voice-range-stop">
               <span className="heritage-voice-range-stop-title">
+                Low / Breathing
+              </span>
+
+              <span className="heritage-voice-range-stop-sub">
+                55–120 Hz · Loose body
+              </span>
+            </div>
+
+            <div className="heritage-voice-range-stop">
+              <span className="heritage-voice-range-stop-title">
                 Warm / Full
               </span>
 
               <span className="heritage-voice-range-stop-sub">
-                80–180 Hz · Lower body
+                120–190 Hz · Lower shell
               </span>
             </div>
 
@@ -3665,35 +4384,27 @@ const HeritageProductDetail = () => {
               <span className="heritage-voice-range-stop-title">Balanced</span>
 
               <span className="heritage-voice-range-stop-sub">
-                180–350 Hz · Low-mid
-              </span>
-            </div>
-
-            <div className="heritage-voice-range-stop">
-              <span className="heritage-voice-range-stop-title">Presence</span>
-
-              <span className="heritage-voice-range-stop-sub">
-                350 Hz–1.2 kHz · Mid
+                190–280 Hz · Core zone
               </span>
             </div>
 
             <div className="heritage-voice-range-stop">
               <span className="heritage-voice-range-stop-title">
-                Crisp / Cutting
+                Focused / Present
               </span>
 
               <span className="heritage-voice-range-stop-sub">
-                1.2–4 kHz · Upper-mid
+                280–360 Hz · Upper shell
               </span>
             </div>
 
             <div className="heritage-voice-range-stop">
               <span className="heritage-voice-range-stop-title">
-                Bright / Airy
+                Tight / Bright
               </span>
 
               <span className="heritage-voice-range-stop-sub">
-                4–10 kHz · Highs
+                360–430 Hz · Stiff response
               </span>
             </div>
           </div>
@@ -3710,6 +4421,7 @@ const HeritageProductDetail = () => {
               className="heritage-voice-range-band heritage-voice-range-band--current"
               style={{
                 left: `${rangeStartPercent}%`,
+
                 width: `${rangeWidthPercent}%`,
               }}
             >
@@ -3738,6 +4450,7 @@ const HeritageProductDetail = () => {
                   className="heritage-voice-range-band heritage-voice-range-band--reference"
                   style={{
                     left: `${benchmarkRangeStartPercent}%`,
+
                     width: `${benchmarkRangeWidthPercent}%`,
                   }}
                 >
@@ -3764,9 +4477,9 @@ const HeritageProductDetail = () => {
           </div>
 
           <div className="heritage-voice-range-footer">
-            <span>Darker / thicker body</span>
+            <span>Lower / more breathing shell response</span>
 
-            <span>Brighter / more articulate edge</span>
+            <span>Higher / tighter shell response</span>
           </div>
 
           <div className="heritage-voice-range-legend">
@@ -3787,97 +4500,36 @@ const HeritageProductDetail = () => {
     );
   };
 
-  const renderVoiceMappingNodeInsight = () => {
-    return (
-      <div
-        className="heritage-VoiceMapping-node-insight"
-        style={{
-          '--axis-accent': activeAxisColor,
-        }}
-      >
-        <div className="heritage-VoiceMapping-node-insight-head">
-          <div className="heritage-VoiceMapping-node-title-row">
-            <span className="heritage-VoiceMapping-node-icon">
-              <MetricIcon
-                type={activeAxisMeta.icon}
-                color={activeAxisColor}
-                size={19}
-              />
-            </span>
+  const renderVoiceMappingReadExperience = (targetSlotKey = 'simple') => {
+    const scopedThread =
+      keyRelationships.find(
+        (relationship) => relationship.slotKey === targetSlotKey
+      ) ||
+      keyRelationships[0] ||
+      null;
 
-            <div>
-              <span className="heritage-summary-kicker">Active Voice Node</span>
-
-              <h4>
-                {activeAxisMeta.label}
-
-                <em>{AXIS_SUBLABELS[activeAxisMeta.key]}</em>
-              </h4>
-            </div>
-          </div>
-
-          <span
-            className={`heritage-VoiceMapping-node-shift ${
-              activeAxisDeltaValue > 0
-                ? 'is-positive'
-                : activeAxisDeltaValue < 0
-                  ? 'is-negative'
-                  : 'is-neutral'
-            }`}
-          >
-            Shift {activeAxisScore}
-          </span>
-        </div>
-
-        <div className="heritage-VoiceMapping-node-insight-body">
-          <div className="heritage-VoiceMapping-node-copy">
-            <p className="heritage-VoiceMapping-node-short">
-              {activeAxisCopy.short}
-            </p>
-
-            <p>{activeAxisCopy.detail}</p>
-          </div>
-
-          <div className="heritage-VoiceMapping-node-contributors">
-            <span>Primary contributors</span>
-
-            <div className="heritage-VoiceMapping-node-contributor-list">
-              {activeAxisImpactFactors.map((factor) => (
-                <span
-                  key={factor.label}
-                  className={`heritage-VoiceMapping-node-contributor is-${factor.strength}`}
-                >
-                  {factor.label}
-
-                  <em>
-                    {factor.strength === 'strong'
-                      ? 'High'
-                      : factor.strength === 'medium'
-                        ? 'Medium'
-                        : 'Light'}
-                  </em>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderVoiceMappingReadExperience = () => {
-    const activeReadout = activeVoiceThreadReadout;
-
-    if (!activeThread || !activeReadout) {
+    if (!scopedThread) {
       return null;
     }
+
+    const activeReadout = buildVoiceThreadReadout({
+      thread: scopedThread,
+
+      profile: activeVoiceSummary?.profile || {},
+
+      sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
+    });
+
+    if (!activeReadout) {
+      return null;
+    }
+
+    const activeThread = scopedThread;
 
     const readCopy = getVoiceMappingReadCopy(activeThread.slotKey);
 
     const displayTitle = getVoiceMappingDisplayTitle({
       relationship: activeThread,
-
-      legacyPrintTitle: musicalIdentityTitle,
 
       profile: activeVoiceSummary?.profile || {},
 
@@ -3974,7 +4626,9 @@ const HeritageProductDetail = () => {
       scorchDepth,
     });
 
-    const resolvedDisplayTitle = isFirstTell ? firstTellTitle : displayTitle;
+    const resolvedDisplayTitle = isFirstTell
+      ? activeThread.title || firstTellTitle
+      : displayTitle;
 
     const firstTellPrimaryNode = visualNodes[0] || firstTellKeys[0] || 'attack';
 
@@ -3998,93 +4652,220 @@ const HeritageProductDetail = () => {
       activeReadout,
     });
 
+const voiceMapDisplayProfile = (() => {
+
+  const baseProfile = activeVoiceSummary?.profile || {};
+
+  if (!isPlayerRead) {
+
+    return baseProfile;
+
+  }
+
+  const meta = getFirstTellSpecMeta({
+
+    size,
+
+    depth,
+
+    lugs,
+
+    staveOption,
+
+    hoopType,
+
+    scorchDepth,
+
+  });
+
+  const nextProfile = { ...baseProfile };
+
+  if (meta.isCompact && meta.depthNumber >= 8) {
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.65
+
+    );
+
+    nextProfile.control = Math.min(10, Number(nextProfile.control || 5) + 0.45);
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.35);
+
+    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.25);
+
+    nextProfile.brightness = Math.max(
+
+      0,
+
+      Number(nextProfile.brightness || 5) - 0.2
+
+    );
+
+    nextProfile.sensitivity = Math.max(
+
+      0,
+
+      Number(nextProfile.sensitivity || 5) - 0.2
+
+    );
+
+  } else if (meta.isCompact && meta.depthNumber >= 7.5) {
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.4
+
+    );
+
+    nextProfile.control = Math.min(10, Number(nextProfile.control || 5) + 0.3);
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.2);
+
+    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.1);
+
+  } else if (meta.isCompact && meta.depthNumber >= 7) {
+
+    nextProfile.control = Math.min(10, Number(nextProfile.control || 5) + 0.25);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.25
+
+    );
+
+  } else if (meta.isMiddle && meta.depthNumber >= 8) {
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.45);
+
+    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.5);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.35
+
+    );
+
+    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.25);
+
+  } else if (meta.isMiddle && meta.depthNumber >= 7.5) {
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.3);
+
+    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.35);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.25
+
+    );
+
+  } else if (meta.isMiddle && meta.depthNumber >= 7) {
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.2);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.2
+
+    );
+
+  } else if (meta.isFullSize && meta.depthNumber >= 8) {
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.55);
+
+    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.65);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.25
+
+    );
+
+    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.35);
+
+    nextProfile.brightness = Math.max(
+
+      0,
+
+      Number(nextProfile.brightness || 5) - 0.25
+
+    );
+
+    nextProfile.control = Math.max(0, Number(nextProfile.control || 5) - 0.15);
+
+  } else if (meta.isFullSize && meta.depthNumber >= 7.5) {
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.35);
+
+    nextProfile.sustain = Math.min(10, Number(nextProfile.sustain || 5) + 0.35);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.2
+
+    );
+
+    nextProfile.attack = Math.max(0, Number(nextProfile.attack || 5) - 0.15);
+
+  } else if (meta.isFullSize && meta.depthNumber >= 7) {
+
+    nextProfile.warmth = Math.min(10, Number(nextProfile.warmth || 5) + 0.2);
+
+    nextProfile.projection = Math.min(
+
+      10,
+
+      Number(nextProfile.projection || 5) + 0.2
+
+    );
+
+  }
+
+  return nextProfile;
+
+})();
+
     return (
       <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read heritage-VoiceMapping-read-experience">
         <div className="heritage-VoiceMapping-read-intro">
           <div className="heritage-VoiceMapping-read-intro-copy">
-            <h4>Choose how you want to listen.</h4>
+            <span className="heritage-VoiceMapping-read-kicker">
+              {isFirstTell ? 'First Listen' : 'Player Analysis'}
+            </span>
 
-            <p>
-              LegacyPrint™ turns your custom HERITAGE blueprint into a simple
-              listening language — translating construction choices into how the
-              drum starts, blooms, carries, responds, and settles under the
-              hands.
-            </p>
-
-            <p>
-              Start with the first impression, open the full voice read, or move
-              deeper into the one-of-one LegacyPrint™ shape behind this build.
-            </p>
+            {isFirstTell ? (
+              <p>
+                A quick first-impression read of the traits your ear is most
+                likely to notice first. Use it as the starting point before
+                feel, response, tuning, and final room behavior add more
+                context.
+              </p>
+            ) : (
+              <p>
+                A fuller seven-node read of how this HERITAGE build behaves
+                under the hands. Use it as shared listening language — Compare
+                can anchor the read, but the final call still comes from the
+                drum in the room.
+              </p>
+            )}
           </div>
-        </div>
-
-        <div
-          className="heritage-VoiceMapping-read-picker"
-          aria-label="Choose a VoiceMapping read"
-        >
-          {keyRelationships.map((relationship) => {
-            const isActive = selectedThreadId === relationship.id;
-
-            const VoiceMappingVariant = getVoiceMappingVariantForSlot(
-              relationship.slotKey
-            );
-
-            const cardCopy = getVoiceMappingReadCopy(relationship.slotKey);
-
-            const readMicrocopy =
-              VoiceMappingVariant === 'firstTell'
-                ? 'What jumps out first when the drum speaks.'
-                : VoiceMappingVariant === 'player'
-                  ? 'How the full voice works under the hands.'
-                  : 'The one-of-one fingerprint of this build.';
-
-            const readLabel =
-              VoiceMappingVariant === 'firstTell'
-                ? 'Quick read'
-                : VoiceMappingVariant === 'player'
-                  ? 'Full map'
-                  : 'Identity shape';
-
-            return (
-              <button
-                key={`${activeBuildSignature}-${relationship.id}-VoiceMapping-selector`}
-                type="button"
-                className={`heritage-VoiceMapping-read-picker-button heritage-VoiceMapping-read-picker-button--${VoiceMappingVariant} ${
-                  isActive ? 'is-active' : ''
-                }`}
-                onClick={() => handleThreadSelect(relationship.id)}
-                style={getThreadColorVars(relationship.nodes)}
-              >
-                <span className="heritage-VoiceMapping-read-picker-preview">
-                  {VoiceMappingVariant === 'firstTell' && (
-                    <svg viewBox="0 0 64 64" aria-hidden="true">
-                      <path d="M32 10 L54 48 L10 48 Z" />
-                    </svg>
-                  )}
-
-                  {VoiceMappingVariant === 'player' && (
-                    <svg viewBox="0 0 64 64" aria-hidden="true">
-                      <path d="M32 8 L52 20 L58 40 L44 56 L20 56 L6 40 L12 20 Z" />
-                    </svg>
-                  )}
-
-                  {VoiceMappingVariant === 'legacyprint' && (
-                    <svg viewBox="0 0 64 64" aria-hidden="true">
-                      <path d="M32 9 C43 12 54 19 56 31 C58 43 48 54 35 57 C22 60 9 52 7 38 C5 25 17 12 32 9 Z" />
-                    </svg>
-                  )}
-                </span>
-
-                <span className="heritage-VoiceMapping-read-picker-copy">
-                  <strong>{cardCopy.kicker}</strong>
-
-                  <em>{readLabel}</em>
-
-                  <small>{readMicrocopy}</small>
-                </span>
-              </button>
-            );
-          })}
         </div>
 
         <article
@@ -4103,7 +4884,7 @@ const HeritageProductDetail = () => {
                 activeThread={visualThread}
                 compact={false}
                 strengthScore={activeThread.score}
-                profile={activeVoiceSummary?.profile || {}}
+                profile={voiceMapDisplayProfile}
                 sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
                 currentSpec={activeVoiceSummary?.currentSpec || {}}
                 input={{
@@ -4135,10 +4916,14 @@ const HeritageProductDetail = () => {
                 <span className="heritage-summary-kicker heritage-summary-kicker--read-title">
                   {isFirstTell ? (
                     <>
-                      First Tell <em>What the ear catches first</em>
+                      First Listen{' '}
+                      <em>Basic sound — what the ear catches first</em>
                     </>
                   ) : (
-                    readCopy.typeLabel
+                    <>
+                      Player Analysis{' '}
+                      <em>Build voice + feel under the hands</em>
+                    </>
                   )}
                 </span>
 
@@ -4172,10 +4957,8 @@ const HeritageProductDetail = () => {
                   <strong>Visual</strong>
 
                   {isFirstTell
-                    ? 'First Tell triangle'
-                    : isPlayerRead
-                      ? 'Full VoiceMapping relationship shape'
-                      : 'LegacyPrint™ fingerprint'}
+                    ? 'First Listen triangle'
+                    : 'Seven-node player analysis'}
                 </span>
 
                 <span>
@@ -4188,95 +4971,7 @@ const HeritageProductDetail = () => {
 
             {isFirstTell && renderFirstTellNodeList(visualNodes)}
 
-            {!isFirstTell && !isPlayerRead && (
-              <div className="heritage-thread-axis-delta-list heritage-thread-axis-delta-list--single">
-                {visualNodes.map((nodeKey) => {
-                  const axis = AXIS_META.find((item) => item.key === nodeKey);
-
-                  const rawValue = Number(
-                    activeVoiceSummary?.profile?.[nodeKey] ?? 5
-                  );
-
-                  const delta = Number((rawValue - 5).toFixed(2));
-
-                  const deltaLabel = delta > 0 ? `+${delta}` : `${delta}`;
-
-                  const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
-
-                  return (
-                    <div
-                      key={nodeKey}
-                      className={`heritage-thread-axis-delta-line ${
-                        delta > 0
-                          ? 'is-positive'
-                          : delta < 0
-                            ? 'is-negative'
-                            : 'is-neutral'
-                      }`}
-                      style={{ '--axis-color': color }}
-                    >
-                      <span>{axis?.label || nodeKey}</span>
-
-                      <strong>{deltaLabel}</strong>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {activeThread.slotKey === 'simple' ? (
-              <div className="heritage-thread-listening-note heritage-thread-listening-note--single heritage-thread-listening-note--first-tell">
-                <section>
-                  <span>How to read this</span>
-
-                  <p>
-                    This is the first impression read. It points to the three
-                    strongest traits your ear is likely to notice before digging
-                    into the full VoiceMapping.
-                  </p>
-                </section>
-
-                <section>
-                  <span>Why this matters</span>
-
-                  <p>
-                    Use this as the first comparison point: what the drum says
-                    immediately, what that first impression is tied to, and how
-                    the rest of the read should be understood.
-                  </p>
-                </section>
-              </div>
-            ) : (
-              <div className="heritage-thread-listening-note heritage-thread-listening-note--single">
-                <section>
-                  <span>
-                    {activeThread.slotKey === 'shaped'
-                      ? 'Player read'
-                      : 'LegacyPrint™'}
-                  </span>
-
-                  <p>{activeReadout.whatThreadIsTellingUs}</p>
-                </section>
-
-                <section>
-                  <span>Why it matters</span>
-
-                  <p>{activeReadout.whyItMatters}</p>
-                </section>
-
-                <section>
-                  <span>How to use it</span>
-
-                  <p>{activeReadout.howToUseThis}</p>
-                </section>
-
-                <section>
-                  <span>Keep in mind</span>
-
-                  <p>{activeReadout.trustNote}</p>
-                </section>
-              </div>
-            )}
+            {null}
           </div>
         </article>
       </div>
@@ -4284,118 +4979,34 @@ const HeritageProductDetail = () => {
   };
 
   const visibleLegacyPrintTabs = useMemo(() => {
-    return [
-      ...BASE_LEGACYPRINT_TABS,
-      ...(isCompareModeEnabled ? [REFERENCE_SETUP_TAB] : []),
-      DISCOVERY_LEGACYPRINT_TAB,
-    ];
-  }, [isCompareModeEnabled]);
+    return [...BASE_LEGACYPRINT_TABS, DISCOVERY_LEGACYPRINT_TAB];
+  }, []);
 
   const renderLegacyPrintPanel = () => {
-    if (legacyPrintTab === 'voiceRead') {
-      return renderVoiceMappingReadExperience();
+    if (legacyPrintTab === 'firstListen') {
+      return renderVoiceMappingReadExperience('simple');
+    }
+
+    if (legacyPrintTab === 'playerAnalysis') {
+      return renderVoiceMappingReadExperience('shaped');
     }
 
     if (legacyPrintTab === 'legacyTuning') {
       return (
         <div className="heritage-legacyprint-panel heritage-legacyprint-panel--legacy-tuning">
           <div className="heritage-chart-top-shell heritage-chart-top-shell--polished">
-            <div className="heritage-chart-title-shell">
+            <div className="heritage-chart-title-shell heritage-chart-title-shell--compact-legacytuning">
               <span className="heritage-chart-eyebrow">LegacyTuning™</span>
 
-              <h4 className="heritage-chart-title">Natural resonance lane</h4>
-
               <p className="heritage-chart-title-subcopy">
-                This view shows where the shell naturally wants to sit: darker
-                and fuller on one side, brighter and more articulate on the
-                other.
+                This view estimates the shell’s natural resonance window — the
+                lane where the drum wants to live before the final
+                craftsman-read settles the voice.
               </p>
             </div>
           </div>
 
           {renderVoiceRangeCard()}
-        </div>
-      );
-    }
-
-    if (legacyPrintTab === 'relationships') {
-      return (
-        <div className="heritage-legacyprint-panel heritage-legacyprint-panel--relationships heritage-thread-reference heritage-thread-single-read">
-          <div className="heritage-thread-reference-head">
-            <span className="heritage-chart-eyebrow">Voice Threading</span>
-
-            <h4 className="heritage-chart-title">Current Voice Thread read</h4>
-
-            <p className="heritage-chart-title-subcopy">
-              A Voice Thread is a simple way to describe how a few parts of the
-              drum’s voice are working together. It gives you one useful
-              listening angle for the build in front of you.
-            </p>
-          </div>
-
-          <div
-            className="heritage-thread-single-selector"
-            aria-label="Current Voice Thread selector"
-          >
-            {keyRelationships.map((relationship) => {
-              const isActive = selectedThreadId === relationship.id;
-
-              const cardReadout = buildVoiceThreadReadout({
-                thread: relationship,
-
-                profile: activeVoiceSummary?.profile || {},
-
-                sourceBuildRead: activeVoiceSummary?.sourceBuildRead || '',
-              });
-
-              return (
-                <button
-                  key={`${activeBuildSignature}-${relationship.id}-selector`}
-                  type="button"
-                  className={`heritage-thread-single-selector-button ${
-                    isActive ? 'is-active' : ''
-                  }`}
-                  onClick={() => handleThreadSelect(relationship.id)}
-                  style={getThreadColorVars(relationship.nodes)}
-                >
-                  <span className="heritage-thread-single-selector-kicker">
-                    {getVoiceReadLabel(relationship.slotKey)}
-                  </span>
-
-                  <strong>
-                    {relationship.slotKey === 'complex'
-                      ? musicalIdentityTitle
-                      : relationship.title}
-                  </strong>
-
-                  <em>{cardReadout.intensityLabel} read</em>
-                </button>
-              );
-            })}
-          </div>
-
-          <VoiceThreadMap
-            activeThread={activeThread}
-            strengthScore={activeThread.score}
-            profile={activeVoiceSummary?.profile || {}}
-            sourceBuildRead={activeVoiceSummary?.sourceBuildRead || ''}
-            currentSpec={activeVoiceSummary?.currentSpec || {}}
-            input={{
-              size,
-
-              depth,
-
-              lugs,
-
-              staveOption,
-
-              hoopType,
-
-              hardwareColor,
-
-              scorchDepth,
-            }}
-          />
         </div>
       );
     }
@@ -4705,12 +5316,7 @@ const HeritageProductDetail = () => {
                         const requiresReRings =
                           hasReRingFromStaveOption(option);
 
-                        const isImplicitReRingPath = false;
-
                         const thicknessLabel = getStaveThicknessLabel(option);
-
-                        const reRingRequired =
-                          requiresReRings || isImplicitReRingPath;
 
                         return (
                           <button
@@ -4728,7 +5334,7 @@ const HeritageProductDetail = () => {
                             <span className="heritage-option-subtitle">
                               {getStaveCountLabel(option)}
 
-                              {reRingRequired ? ' • Re-Rings required' : ''}
+                              {requiresReRings ? ' • Re-Rings required' : ''}
                             </span>
 
                             {renderOptionGuideCopy(
@@ -4737,7 +5343,7 @@ const HeritageProductDetail = () => {
 
                             {(isSelected ||
                               deltaMeta.text ||
-                              reRingRequired) && (
+                              requiresReRings) && (
                               <span
                                 className={`heritage-option-meta ${
                                   isSelected
@@ -4746,10 +5352,10 @@ const HeritageProductDetail = () => {
                                 }`}
                               >
                                 {isSelected
-                                  ? reRingRequired
+                                  ? requiresReRings
                                     ? 'Selected • +$150'
                                     : 'Selected'
-                                  : reRingRequired
+                                  : requiresReRings
                                     ? '+$150'
                                     : deltaMeta.text}
                               </span>
@@ -4783,6 +5389,7 @@ const HeritageProductDetail = () => {
                           getAvailableStaveOptions(size).find((option) =>
                             getAvailableLugsForShellRecipe(
                               size,
+
                               option
                             ).includes(String(lugOption))
                           );
