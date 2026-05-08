@@ -315,6 +315,142 @@ async function gmailSend({
   await gmail.users.messages.send({ userId: 'me', requestBody: { raw } });
 }
 
+const ADMIN_ALERT_EMAIL = 'support@oberartisandrums.com';
+
+function escapeHtml(value = '') {
+
+  return String(value || '')
+
+    .replace(/&/g, '&amp;')
+
+    .replace(/</g, '&lt;')
+
+    .replace(/>/g, '&gt;')
+
+    .replace(/"/g, '&quot;')
+
+    .replace(/'/g, '&#039;');
+
+}
+
+function formatMoneyFromCents(cents = 0, currency = 'usd') {
+
+  const amount = Number(cents || 0) / 100;
+
+  try {
+
+    return new Intl.NumberFormat('en-US', {
+
+      style: 'currency',
+
+      currency: String(currency || 'usd').toUpperCase(),
+
+    }).format(amount);
+
+  } catch {
+
+    return `$${amount.toFixed(2)}`;
+
+  }
+
+}
+
+function buildAdminAlertHtml({ title, intro, rows = [] }) {
+
+  const filteredRows = rows.filter(
+
+    (row) => row && row.label && row.value !== undefined && row.value !== null && row.value !== ''
+
+  );
+
+  return `
+
+    <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;line-height:1.55">
+
+      <h2 style="margin:0 0 12px">${escapeHtml(title)}</h2>
+
+      ${
+
+        intro
+
+          ? `<p style="margin:0 0 18px">${escapeHtml(intro)}</p>`
+
+          : ''
+
+      }
+
+      <table role="presentation" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;max-width:680px">
+
+        ${filteredRows
+
+          .map(
+
+            ({ label, value }) => `
+
+              <tr>
+
+                <td style="padding:8px 10px;border:1px solid #e5e7eb;background:#f9fafb;font-weight:700;width:180px;vertical-align:top">
+
+                  ${escapeHtml(label)}
+
+                </td>
+
+                <td style="padding:8px 10px;border:1px solid #e5e7eb;vertical-align:top">
+
+                  ${escapeHtml(value)}
+
+                </td>
+
+              </tr>
+
+            `
+
+          )
+
+          .join('')}
+
+      </table>
+
+      <p style="margin:18px 0 0;color:#6b7280;font-size:13px">
+
+        This alert was generated automatically from Firebase.
+
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+async function sendAdminAlertEmail({ subject, title, intro, rows }) {
+
+  await gmailSend({
+
+    to: ADMIN_ALERT_EMAIL,
+
+    subject,
+
+    html: buildAdminAlertHtml({
+
+      title,
+
+      intro,
+
+      rows,
+
+    }),
+
+    fromEmail: 'support@oberartisandrums.com',
+
+    replyTo: 'support@oberartisandrums.com',
+
+    fromName: 'Ober Artisan Admin Alerts',
+
+  });
+
+}
+
 function normalizeLeadEmail(email = '') {
   return String(email || '')
     .trim()
@@ -2763,19 +2899,21 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
     throw new Error(`Invalid Heritage depth: ${depth} for size ${size}`);
   }
 
-  const validBaseConfigs = new Set([
-    '12|6|12|false',
+const validBaseConfigs = new Set([
 
-    '12|8|16|false',
+  '12|6|12|true',
 
-    '13|8|16|false',
+  '12|8|16|false',
 
-    '14|8|16|false',
+  '13|8|16|false',
 
-    '14|10|20|false',
+  '14|8|16|false',
 
-    '14|10|10|true',
-  ]);
+  '14|10|20|false',
+
+  '14|10|10|true',
+
+]);
 
   const configKey = `${size}|${lugQuantity}|${staveQuantity}|${reRing}`;
 
@@ -4708,6 +4846,179 @@ exports.autoReplyEndorsement = onDocumentCreated(
       });
     } catch (err) {
       console.error('autoReplyEndorsement (gmail) failed:', err);
+    }
+  }
+);
+
+exports.notifySupportNewOrder = onDocumentCreated(
+  {
+    document: 'orders/{orderId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const data = event.data?.data();
+    if (!data) return;
+
+    const orderId = event.params?.orderId || data.orderId || '';
+
+    try {
+      await sendAdminAlertEmail({
+        subject: `New Order Received: ${orderId || 'Ober Order'}`,
+        title: 'New Order Received',
+        intro: 'A new order was created in Firestore.',
+        rows: [
+          { label: 'Order ID', value: orderId },
+          { label: 'Customer', value: data.customerName || '' },
+          { label: 'Email', value: data.customerEmail || '' },
+          { label: 'Phone', value: data.customerPhone || '' },
+          {
+            label: 'Total',
+            value:
+              data.amountTotal != null
+                ? formatMoneyFromCents(data.amountTotal, data.currency || 'usd')
+                : data.totalAmount != null
+                  ? `$${Number(data.totalAmount || 0).toFixed(2)}`
+                  : '',
+          },
+          { label: 'Status', value: data.status || '' },
+          { label: 'Stripe Session', value: data.stripeSessionId || '' },
+          {
+            label: 'Items',
+            value: Array.isArray(data.items)
+              ? data.items
+                  .map((item) => {
+                    const qty = item.quantity ? ` x${item.quantity}` : '';
+                    return `${item.name || item.description || 'Item'}${qty}`;
+                  })
+                  .join(', ')
+              : '',
+          },
+        ],
+      });
+    } catch (err) {
+      console.error('notifySupportNewOrder failed:', err);
+    }
+  }
+);
+
+exports.notifySupportNewInquiry = onDocumentCreated(
+  {
+    document: 'inquiries/{docId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const data = event.data?.data();
+    if (!data) return;
+
+    const docId = event.params?.docId || '';
+
+    try {
+      await sendAdminAlertEmail({
+        subject: `New Support Inquiry: ${data.name || data.firstName || data.email || docId}`,
+        title: 'New Support Inquiry',
+        intro: 'A new support/contact inquiry was submitted.',
+        rows: [
+          { label: 'Doc ID', value: docId },
+          { label: 'Name', value: data.name || `${data.firstName || ''} ${data.lastName || ''}`.trim() },
+          { label: 'Email', value: data.email || '' },
+          { label: 'Phone', value: data.phone || '' },
+          { label: 'Category', value: data.category || data.reason || '' },
+          { label: 'Subject', value: data.subject || '' },
+          { label: 'Message', value: data.message || data.notes || '' },
+        ],
+      });
+    } catch (err) {
+      console.error('notifySupportNewInquiry failed:', err);
+    }
+  }
+);
+
+exports.notifySupportNewSoundlegendSubmission = onDocumentCreated(
+  {
+    document: 'soundlegend_submissions/{docId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const data = event.data?.data();
+    if (!data) return;
+
+    const docId = event.params?.docId || '';
+
+    try {
+      await sendAdminAlertEmail({
+        subject: `New SoundLegend Submission: ${data.fullName || data.name || data.email || docId}`,
+        title: 'New SoundLegend Submission',
+        intro: 'A new SoundLegend submission was received.',
+        rows: [
+          { label: 'Doc ID', value: docId },
+          { label: 'Name', value: data.fullName || data.name || `${data.firstName || ''} ${data.lastName || ''}`.trim() },
+          { label: 'Email', value: data.email || '' },
+          { label: 'Phone', value: data.phone || data.phoneE164 || '' },
+          { label: 'Status', value: data.status || data.soundlegendLeadStatus || '' },
+          { label: 'Questionnaire URL', value: data.questionnaireUrl || '' },
+          { label: 'Message', value: data.message || data.notes || data.additionalNotes || '' },
+        ],
+      });
+    } catch (err) {
+      console.error('notifySupportNewSoundlegendSubmission failed:', err);
+    }
+  }
+);
+
+exports.notifySupportNewEndorsement = onDocumentCreated(
+  {
+    document: 'endorsement_applications/{docId}',
+    region: 'us-central1',
+    secrets: [
+      GMAIL_CLIENT_EMAIL,
+      GMAIL_PRIVATE_KEY,
+      GMAIL_SENDER,
+      GMAIL_IMPERSONATE,
+    ],
+  },
+  async (event) => {
+    const data = event.data?.data();
+    if (!data) return;
+
+    const docId = event.params?.docId || '';
+
+    try {
+      await sendAdminAlertEmail({
+        subject: `New Endorsement Request: ${data.fullName || data.name || data.email || docId}`,
+        title: 'New Endorsement Request',
+        intro: 'A new endorsement request/application was submitted.',
+        rows: [
+          { label: 'Doc ID', value: docId },
+          { label: 'Name', value: data.fullName || data.name || '' },
+          { label: 'Stage Name', value: data.stageName || '' },
+          { label: 'Email', value: data.email || '' },
+          { label: 'Tier Interest', value: data.tierInterest || '' },
+          { label: 'Instagram', value: data.instagram || '' },
+          { label: 'YouTube', value: data.youtube || '' },
+          { label: 'Location', value: [data.city, data.state, data.country].filter(Boolean).join(', ') },
+          { label: 'Message', value: data.message || data.notes || data.whyOber || '' },
+        ],
+      });
+    } catch (err) {
+      console.error('notifySupportNewEndorsement failed:', err);
     }
   }
 );

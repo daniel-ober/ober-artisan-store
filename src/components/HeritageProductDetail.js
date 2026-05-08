@@ -21,8 +21,6 @@ import toast from 'react-hot-toast';
 
 import { db } from '../firebaseConfig';
 
-import heritageSummaries from '../data/heritageSummaries';
-
 import LEGACYPRINT_BENCHMARK_CATALOG from '../data/legacyPrint/benchmarkCatalog';
 
 import { useCart } from '../context/CartContext';
@@ -3832,40 +3830,27 @@ const HeritageProductDetail = () => {
 
     const hasReRing = hasReRingFromStaveOption(staveOption);
 
-    const matchedPricingOption = heritageSummaries.pricingOptions.find(
-      (option) =>
-        option.size === size &&
-        option.depth === depth &&
-        option.reRing === hasReRing
-    );
+  const newCartItemId = generateCartItemId({
 
-    if (!matchedPricingOption) {
-      console.error('❌ No matching pricing option found.');
+  stripePriceId: '',
 
-      toast.error('Could not match this configuration.');
+  size,
 
-      return;
-    }
+  depth,
 
-    const newCartItemId = generateCartItemId({
-      stripePriceId: matchedPricingOption.stripePriceId,
+  reRing: hasReRing,
 
-      size,
+  lugQuantity: lugs,
 
-      depth,
+  staveQuantity: staveOption.split(' - ')[0],
 
-      reRing: hasReRing,
+  hardwareColor,
 
-      lugQuantity: lugs,
+  hoopType,
 
-      staveQuantity: staveOption.split(' - ')[0],
+  scorchDepth,
 
-      hardwareColor,
-
-      hoopType,
-
-      scorchDepth,
-    });
+});
 
     const cartItem = {
       id: newCartItemId,
