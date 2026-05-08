@@ -449,9 +449,19 @@ const SoundLegendShowroom = () => {
   const rawSamples = Array.isArray(drumData?.audioSamples)
     ? drumData.audioSamples
     : [];
-  const visibleSamples = rawSamples.filter(
-    (s) => s && s.url && s.visible !== false
-  );
+const visibleSamples = rawSamples.filter((s) => {
+
+  if (!s || !s.url || s.visible === false) return false;
+
+  if (serial === 'SL-003' && s.variant === 'adjacent-high') {
+
+    return false;
+
+  }
+
+  return true;
+
+});
 
   const order = { legacy: 0, 'adjacent-low': 1, 'adjacent-high': 2, other: 3 };
   const audioSamples = visibleSamples
