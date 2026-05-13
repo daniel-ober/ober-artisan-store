@@ -717,6 +717,9 @@ const HERITAGE_STANDARD_BEARING_EDGE = HERITAGE_STANDARD_REFERENCE.bearingEdge;
 
 const HERITAGE_STANDARD_SNARE_BED = HERITAGE_STANDARD_REFERENCE.snareBed;
 
+const HERITAGE_VOICE_READ_HARDWARE_COLOR =
+  HERITAGE_STANDARD_REFERENCE.hardwareColor;
+
 const HERITAGE_FINISH_SWATCHES = {
   'Light Torch': '/swatches/heritage/light.png',
 
@@ -1614,9 +1617,9 @@ const HERITAGE_FIRST_TELL_DEPTH_MAP = {
 
     '7.0': ['control', 'attack', 'projection'],
 
-    7.5: ['control', 'projection', 'attack'],
+    7.5: ['projection', 'control', 'attack'],
 
-    '8.0': ['projection', 'control', 'warmth'],
+    '8.0': ['projection', 'sustain', 'warmth'],
   },
 
   13: {
@@ -1630,9 +1633,9 @@ const HERITAGE_FIRST_TELL_DEPTH_MAP = {
 
     '7.0': ['warmth', 'projection', 'control'],
 
-    7.5: ['warmth', 'projection', 'sustain'],
+    7.5: ['warmth', 'sustain', 'projection'],
 
-    '8.0': ['warmth', 'sustain', 'projection'],
+    '8.0': ['sustain', 'warmth', 'projection'],
   },
 
   14: {
@@ -1644,7 +1647,7 @@ const HERITAGE_FIRST_TELL_DEPTH_MAP = {
 
     6.5: ['warmth', 'projection', 'attack'],
 
-    '7.0': ['warmth', 'sustain', 'projection'],
+    '7.0': ['warmth', 'projection', 'control'],
 
     7.5: ['warmth', 'sustain', 'projection'],
 
@@ -1654,37 +1657,535 @@ const HERITAGE_FIRST_TELL_DEPTH_MAP = {
 
 const FIRST_TELL_RULES = [
   {
-    id: 'deep-13-diecast',
+    id: 'compact-5-diecast',
 
-    test: (meta) => meta.isMiddle && meta.isDeep && meta.isDieCast,
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 5 &&
+      meta.depthNumber < 5.5 &&
+      meta.isDieCast,
 
-    title: 'Warm, deep settled center',
+    title: 'Tight snap with locked-in edge',
+
+    nodes: ['attack', 'control', 'brightness'],
+  },
+
+  {
+    id: 'compact-5-5-diecast',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 5.5 &&
+      meta.depthNumber < 6 &&
+      meta.isDieCast,
+
+    title: 'Fast touch with firmer shape',
+
+    nodes: ['attack', 'sensitivity', 'control'],
+  },
+
+  {
+    id: 'compact-5-open',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 5 &&
+      meta.depthNumber < 5.5 &&
+      meta.isTripleFlange,
+
+    title: 'Quick side-snare snap',
+
+    nodes: ['attack', 'brightness', 'sensitivity'],
+  },
+
+  {
+    id: 'compact-5-5-open',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 5.5 &&
+      meta.depthNumber < 6 &&
+      meta.isTripleFlange,
+
+    title: 'Fast touch with open response',
+
+    nodes: ['attack', 'sensitivity', 'brightness'],
+  },
+
+  {
+    id: 'middle-5-diecast',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 5 &&
+      meta.depthNumber < 5.5 &&
+      meta.isDieCast,
+
+    title: 'Quick alternate snap with clean control',
+
+    nodes: ['attack', 'control', 'brightness'],
+  },
+
+  {
+    id: 'middle-5-5-diecast',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 5.5 &&
+      meta.depthNumber < 6 &&
+      meta.isDieCast,
+
+    title: 'Balanced alternate voice with focused touch',
+
+    nodes: ['attack', 'control', 'warmth'],
+  },
+
+  {
+    id: 'middle-5-open',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 5 &&
+      meta.depthNumber < 5.5 &&
+      meta.isTripleFlange,
+
+    title: 'Quick alternate voice with clear edge',
+
+    nodes: ['attack', 'brightness', 'control'],
+  },
+
+  {
+    id: 'middle-5-5-open',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 5.5 &&
+      meta.depthNumber < 6 &&
+      meta.isTripleFlange,
+
+    title: 'Balanced alternate touch with open center',
+
+    nodes: ['attack', 'warmth', 'sensitivity'],
+  },
+
+  {
+    id: 'full-5-diecast',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 5 &&
+      meta.depthNumber < 5.5 &&
+      meta.isDieCast,
+
+    title: 'Quick main-snare body with clean control',
+
+    nodes: ['attack', 'control', 'warmth'],
+  },
+
+  {
+    id: 'full-5-5-diecast',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 5.5 &&
+      meta.depthNumber < 6 &&
+      meta.isDieCast,
+
+    title: 'Classic body with focused response',
+
+    nodes: ['warmth', 'attack', 'control'],
+  },
+
+  {
+    id: 'full-5-open',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 5 &&
+      meta.depthNumber < 5.5 &&
+      meta.isTripleFlange,
+
+    title: 'Quick main-snare body with open edge',
+
+    nodes: ['attack', 'warmth', 'brightness'],
+  },
+
+  {
+    id: 'full-5-5-open',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 5.5 &&
+      meta.depthNumber < 6 &&
+      meta.isTripleFlange,
+
+    title: 'Classic Heritage center with open response',
+
+    nodes: ['warmth', 'attack', 'sensitivity'],
+  },
+
+  {
+    id: 'compact-6-diecast',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 6 &&
+      meta.depthNumber < 6.5 &&
+      meta.isDieCast,
+
+    title: 'Quick focus with added body',
+
+    nodes: ['attack', 'control', 'projection'],
+  },
+
+  {
+    id: 'compact-6-5-diecast',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 6.5 &&
+      meta.depthNumber < 7 &&
+      meta.isDieCast,
+
+    title: 'Compact punch with clean control',
+
+    nodes: ['control', 'projection', 'attack'],
+  },
+
+  {
+    id: 'compact-6-open',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 6 &&
+      meta.depthNumber < 6.5 &&
+      meta.isTripleFlange,
+
+    title: 'Quick response with added breath',
+
+    nodes: ['attack', 'sensitivity', 'projection'],
+  },
+
+  {
+    id: 'compact-6-5-open',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 6.5 &&
+      meta.depthNumber < 7 &&
+      meta.isTripleFlange,
+
+    title: 'Compact body with open response',
+
+    nodes: ['attack', 'projection', 'sensitivity'],
+  },
+
+  {
+    id: 'middle-6-diecast',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 6 &&
+      meta.depthNumber < 6.5 &&
+      meta.isDieCast,
+
+    title: 'Balanced center with clean control',
+
+    nodes: ['control', 'attack', 'warmth'],
+  },
+
+  {
+    id: 'middle-6-5-diecast',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 6.5 &&
+      meta.depthNumber < 7 &&
+      meta.isDieCast,
+
+    title: 'Warm alternate voice with focused shape',
+
+    nodes: ['warmth', 'control', 'projection'],
+  },
+
+  {
+    id: 'middle-6-open',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 6 &&
+      meta.depthNumber < 6.5 &&
+      meta.isTripleFlange,
+
+    title: 'Balanced body with open carry',
+
+    nodes: ['warmth', 'attack', 'projection'],
+  },
+
+  {
+    id: 'middle-6-5-open',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 6.5 &&
+      meta.depthNumber < 7 &&
+      meta.isTripleFlange,
+
+    title: 'Warm alternate body with natural bloom',
+
+    nodes: ['warmth', 'projection', 'sustain'],
+  },
+
+  {
+    id: 'full-6-diecast',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 6 &&
+      meta.depthNumber < 6.5 &&
+      meta.isDieCast,
+
+    title: 'Warm body with clean focus',
+
+    nodes: ['warmth', 'control', 'attack'],
+  },
+
+  {
+    id: 'full-6-5-diecast',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 6.5 &&
+      meta.depthNumber < 7 &&
+      meta.isDieCast,
+
+    title: 'Fuller body with focused room push',
 
     nodes: ['warmth', 'projection', 'control'],
   },
 
   {
-    id: 'deep-13-open-hoop',
+    id: 'full-6-open',
 
-    test: (meta) => meta.isMiddle && meta.isDeep && meta.isTripleFlange,
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 6 &&
+      meta.depthNumber < 6.5 &&
+      meta.isTripleFlange,
 
-    title: 'Warm body with open room bloom',
+    title: 'Added body with open response',
+
+    nodes: ['warmth', 'attack', 'projection'],
+  },
+
+  {
+    id: 'full-6-5-open',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 6.5 &&
+      meta.depthNumber < 7 &&
+      meta.isTripleFlange,
+
+    title: 'Fuller main voice with open carry',
+
+    nodes: ['warmth', 'projection', 'sustain'],
+  },
+
+  {
+    id: 'compact-8-diecast',
+
+    test: (meta) => meta.isCompact && meta.depthNumber >= 8 && meta.isDieCast,
+
+    title: 'Compact depth with locked-in punch',
+
+    nodes: ['control', 'projection', 'attack'],
+  },
+
+  {
+    id: 'compact-7-5-diecast',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 7.5 &&
+      meta.depthNumber < 8 &&
+      meta.isDieCast,
+
+    title: 'Compact body with focused throw',
+
+    nodes: ['projection', 'control', 'attack'],
+  },
+
+  {
+    id: 'compact-7-diecast',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 7 &&
+      meta.depthNumber < 7.5 &&
+      meta.isDieCast,
+
+    title: 'Controlled compact depth',
+
+    nodes: ['control', 'attack', 'projection'],
+  },
+
+  {
+    id: 'compact-8-open',
+
+    test: (meta) =>
+      meta.isCompact && meta.depthNumber >= 8 && meta.isTripleFlange,
+
+    title: 'Compact depth with open bloom',
+
+    nodes: ['projection', 'sustain', 'warmth'],
+  },
+
+  {
+    id: 'compact-7-5-open',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 7.5 &&
+      meta.depthNumber < 8 &&
+      meta.isTripleFlange,
+
+    title: 'Compact room push with open response',
+
+    nodes: ['projection', 'warmth', 'sustain'],
+  },
+
+  {
+    id: 'compact-7-open',
+
+    test: (meta) =>
+      meta.isCompact &&
+      meta.depthNumber >= 7 &&
+      meta.depthNumber < 7.5 &&
+      meta.isTripleFlange,
+
+    title: 'Compact depth with lively response',
+
+    nodes: ['attack', 'projection', 'sensitivity'],
+  },
+
+  {
+    id: 'middle-8-diecast',
+
+    test: (meta) => meta.isMiddle && meta.depthNumber >= 8 && meta.isDieCast,
+
+    title: 'Deep alternate voice with shaped control',
+
+    nodes: ['warmth', 'control', 'projection'],
+  },
+
+  {
+    id: 'middle-7-5-diecast',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 7.5 &&
+      meta.depthNumber < 8 &&
+      meta.isDieCast,
+
+    title: 'Warm alternate body with focused push',
+
+    nodes: ['warmth', 'projection', 'control'],
+  },
+
+  {
+    id: 'middle-7-diecast',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 7 &&
+      meta.depthNumber < 7.5 &&
+      meta.isDieCast,
+
+    title: 'Warm center with clean control',
+
+    nodes: ['warmth', 'control', 'attack'],
+  },
+
+  {
+    id: 'middle-8-open',
+
+    test: (meta) =>
+      meta.isMiddle && meta.depthNumber >= 8 && meta.isTripleFlange,
+
+    title: 'Full alternate voice with extended bloom',
+
+    nodes: ['sustain', 'warmth', 'projection'],
+  },
+
+  {
+    id: 'middle-7-5-open',
+
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 7.5 &&
+      meta.depthNumber < 8 &&
+      meta.isTripleFlange,
+
+    title: 'Deep alternate bloom with room presence',
 
     nodes: ['warmth', 'sustain', 'projection'],
   },
 
   {
-    id: 'deep-14-diecast',
+    id: 'middle-7-open',
 
-    test: (meta) => meta.isFullSize && meta.isDeep && meta.isDieCast,
+    test: (meta) =>
+      meta.isMiddle &&
+      meta.depthNumber >= 7 &&
+      meta.depthNumber < 7.5 &&
+      meta.isTripleFlange,
 
-    title: 'Deep body with focused room push',
+    title: 'Warm alternate body with open carry',
+
+    nodes: ['warmth', 'projection', 'sustain'],
+  },
+
+  {
+    id: 'full-8-diecast',
+
+    test: (meta) => meta.isFullSize && meta.depthNumber >= 8 && meta.isDieCast,
+
+    title: 'Maximum body with focused control',
+
+    nodes: ['warmth', 'control', 'projection'],
+  },
+
+  {
+    id: 'full-7-5-diecast',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 7.5 &&
+      meta.depthNumber < 8 &&
+      meta.isDieCast,
+
+    title: 'Big body with focused room push',
 
     nodes: ['warmth', 'projection', 'control'],
   },
 
   {
-    id: 'deep-14-open-hoop-maximum-depth',
+    id: 'full-7-diecast',
+
+    test: (meta) =>
+      meta.isFullSize &&
+      meta.depthNumber >= 7 &&
+      meta.depthNumber < 7.5 &&
+      meta.isDieCast,
+
+    title: 'Deep warmth with clear presence',
+
+    nodes: ['warmth', 'control', 'attack'],
+  },
+
+  {
+    id: 'full-8-open',
 
     test: (meta) =>
       meta.isFullSize && meta.depthNumber >= 8 && meta.isTripleFlange,
@@ -1695,7 +2196,7 @@ const FIRST_TELL_RULES = [
   },
 
   {
-    id: 'deep-14-open-hoop-big-room',
+    id: 'full-7-5-open',
 
     test: (meta) =>
       meta.isFullSize &&
@@ -1709,7 +2210,7 @@ const FIRST_TELL_RULES = [
   },
 
   {
-    id: 'deep-14-open-hoop-deep-body',
+    id: 'full-7-open',
 
     test: (meta) =>
       meta.isFullSize &&
@@ -1717,25 +2218,15 @@ const FIRST_TELL_RULES = [
       meta.depthNumber < 7.5 &&
       meta.isTripleFlange,
 
-    title: 'Deep warmth with open bloom',
+    title: 'Deep warmth with open carry',
 
     nodes: ['warmth', 'projection', 'sustain'],
   },
 
   {
-    id: 'very-deep-any',
-
-    test: (meta) => meta.isVeryDeep && !meta.isDieCast,
-
-    title: 'Big warm bloom with presence',
-
-    nodes: ['warmth', 'sustain', 'projection'],
-  },
-
-  {
     id: 'blackened-deep',
 
-    test: (meta) => meta.isDeep && meta.isBlackened,
+    test: (meta) => meta.isDeep && meta.isBlackened && !meta.isVeryDeep,
 
     title: 'Dark, deep controlled body',
 
@@ -1874,16 +2365,6 @@ const FIRST_TELL_RULES = [
   },
 
   {
-    id: 'compact-deep-diecast',
-
-    test: (meta) => meta.isCompact && meta.isDeep && meta.isDieCast,
-
-    title: 'Compact depth with focused punch',
-
-    nodes: ['control', 'projection', 'attack'],
-  },
-
-  {
     id: 'middle-blackened-diecast-center',
 
     test: (meta) =>
@@ -1960,7 +2441,148 @@ const mergeFirstTellNodes = (...nodeGroups) => {
   return merged.slice(0, 3);
 };
 
+const getProfileValue = (profile = {}, key, fallback = 5) => {
+
+  const value = Number(profile?.[key]);
+
+  return Number.isFinite(value) ? value : fallback;
+
+};
+
+const getProfileDistanceFromCenter = (profile = {}, key) => {
+
+  return Math.abs(getProfileValue(profile, key) - 5);
+
+};
+
+const getStrongestProfileNodes = (profile = {}, limit = 3) => {
+
+  return AXIS_META.map(({ key }) => ({
+
+    key,
+
+    value: getProfileValue(profile, key),
+
+    distance: getProfileDistanceFromCenter(profile, key),
+
+  }))
+
+    .sort((a, b) => {
+
+      if (b.distance !== a.distance) return b.distance - a.distance;
+
+      return b.value - a.value;
+
+    })
+
+    .slice(0, limit)
+
+    .map((item) => item.key);
+
+};
+
+const shouldDeprioritizeFirstTellNode = (profile = {}, nodeKey) => {
+
+  const value = getProfileValue(profile, nodeKey);
+
+  if (nodeKey === 'warmth' && value < 5) return true;
+
+  if (nodeKey === 'sensitivity' && value < 5) return true;
+
+  if (nodeKey === 'sustain' && value < 5) return true;
+
+  return false;
+
+};
+
+const reconcileFirstTellNodesWithProfile = ({
+
+  nodes = [],
+
+  profile = {},
+
+  meta,
+
+}) => {
+
+  const strongestProfileNodes = getStrongestProfileNodes(profile, 7);
+
+  const correctedNodes = [];
+
+  nodes.forEach((nodeKey) => {
+
+    if (!nodeKey) return;
+
+    if (shouldDeprioritizeFirstTellNode(profile, nodeKey)) return;
+
+    correctedNodes.push(nodeKey);
+
+  });
+
+  strongestProfileNodes.forEach((nodeKey) => {
+
+    if (correctedNodes.includes(nodeKey)) return;
+
+    const value = getProfileValue(profile, nodeKey);
+
+    if (nodeKey === 'attack' && value >= 5.35) correctedNodes.push(nodeKey);
+
+    if (nodeKey === 'projection' && value >= 5.35) correctedNodes.push(nodeKey);
+
+    if (nodeKey === 'control' && value >= 5.35) correctedNodes.push(nodeKey);
+
+    if (nodeKey === 'warmth' && value >= 5.35) correctedNodes.push(nodeKey);
+
+    if (nodeKey === 'sustain' && value >= 5.35 && !meta?.isDieCast) {
+
+      correctedNodes.push(nodeKey);
+
+    }
+
+    if (
+
+      nodeKey === 'sensitivity' &&
+
+      value >= 5.35 &&
+
+      !meta?.isDieCast &&
+
+      meta?.isThinShell
+
+    ) {
+
+      correctedNodes.push(nodeKey);
+
+    }
+
+  });
+
+  strongestProfileNodes.forEach((nodeKey) => {
+
+    if (!correctedNodes.includes(nodeKey)) {
+
+      correctedNodes.push(nodeKey);
+
+    }
+
+  });
+
+  return correctedNodes.slice(0, 3);
+
+};
+
+const reconcileFirstTellTitleWithProfile = ({
+
+  title = '',
+
+}) => {
+
+  return title || 'Classic Heritage first tell';
+
+};
+
 const getDominantVoiceNodes = ({
+
   profile = {},
 
   size,
@@ -2103,6 +2725,7 @@ const getDominantVoiceNodes = ({
 };
 
 const getCuratedFirstTell = ({
+
   profile = {},
 
   size,
@@ -2116,8 +2739,11 @@ const getCuratedFirstTell = ({
   hoopType,
 
   scorchDepth,
+
 }) => {
+
   const meta = getFirstTellSpecMeta({
+
     size,
 
     depth,
@@ -2129,6 +2755,7 @@ const getCuratedFirstTell = ({
     hoopType,
 
     scorchDepth,
+
   });
 
   const matchedRule = FIRST_TELL_RULES.find((rule) => rule.test(meta));
@@ -2137,71 +2764,104 @@ const getCuratedFirstTell = ({
 
   const profilePriority = getFirstTellProfilePriority(profile);
 
-  if (matchedRule) {
-    return {
-      title: matchedRule.title,
+  const rawTitle = matchedRule?.title || (() => {
 
-      nodes: mergeFirstTellNodes(matchedRule.nodes, baseNodes, profilePriority),
+    const depthKey = getNormalizedFirstTellDepthKey(depth);
 
-      ruleId: matchedRule.id,
+    const fallbackTitleMap = {
+
+      '12|5.0': 'Quick, tight first response',
+
+      '12|5.5': 'Fast touch with clear edge',
+
+      '12|6.0': 'Quick response with controlled shape',
+
+      '12|6.5': 'Focused snap with clean control',
+
+      '12|7.0': 'Controlled compact depth',
+
+      '12|7.5': 'Compact body with focused throw',
+
+      '12|8.0': 'Compact depth with open bloom',
+
+      '13|5.0': 'Quick center with clean shape',
+
+      '13|5.5': 'Balanced, clear first response',
+
+      '13|6.0': 'Settled center with quick control',
+
+      '13|6.5': 'Rounded body with a clear start',
+
+      '13|7.0': 'Warm alternate body with open carry',
+
+      '13|7.5': 'Deep alternate bloom with room presence',
+
+      '13|8.0': 'Full alternate voice with extended bloom',
+
+      '14|5.0': 'Warm body with a quick start',
+
+      '14|5.5': 'Classic warm Heritage center',
+
+      '14|6.0': 'Warm body with clear room push',
+
+      '14|6.5': 'Fuller body with open room push',
+
+      '14|7.0': 'Deep warmth with open carry',
+
+      '14|7.5': 'Big warmth with longer room bloom',
+
+      '14|8.0': 'Maximum depth with extended bloom',
+
     };
-  }
 
-  const depthKey = getNormalizedFirstTellDepthKey(depth);
+    return (
 
-  const fallbackTitleMap = {
-    '12|5.0': 'Quick, tight first response',
+      fallbackTitleMap[`${String(size)}|${depthKey}`] ||
 
-    '12|5.5': 'Fast touch with clear edge',
+      'Classic Heritage first tell'
 
-    '12|6.0': 'Quick response with controlled shape',
+    );
 
-    '12|6.5': 'Focused snap with clean control',
+  })();
 
-    '12|7.0': 'Controlled punch with tight focus',
+  const rawNodes = matchedRule
 
-    '12|7.5': 'Compact throw with shaped control',
+    ? mergeFirstTellNodes(matchedRule.nodes, baseNodes, profilePriority)
 
-    '12|8.0': 'Focused depth with firm projection',
+    : mergeFirstTellNodes(baseNodes, profilePriority);
 
-    '13|5.0': 'Quick center with clean shape',
+  const reconciledNodes = reconcileFirstTellNodesWithProfile({
 
-    '13|5.5': 'Balanced, clear first response',
+    nodes: rawNodes,
 
-    '13|6.0': 'Settled center with quick control',
+    profile,
 
-    '13|6.5': 'Rounded body with a clear start',
+    meta,
 
-    '13|7.0': 'Warm, deep settled center',
+  });
 
-    '13|7.5': 'Deep body with room presence',
+  const reconciledTitle = reconcileFirstTellTitleWithProfile({
 
-    '13|8.0': 'Full, warm extended bloom',
+    title: rawTitle,
 
-    '14|5.0': 'Warm body with a quick start',
+    nodes: reconciledNodes,
 
-    '14|5.5': 'Classic warm Heritage center',
+    profile,
 
-    '14|6.0': 'Added body with quick response',
+    meta,
 
-    '14|6.5': 'Warm body with room push',
-
-    '14|7.0': 'Deep warmth with open bloom',
-
-    '14|7.5': 'Big warm bloom with presence',
-
-    '14|8.0': 'Maximum body and deep bloom',
-  };
+  });
 
   return {
-    title:
-      fallbackTitleMap[`${String(size)}|${depthKey}`] ||
-      'Classic Heritage first tell',
 
-    nodes: mergeFirstTellNodes(baseNodes, profilePriority),
+    title: reconciledTitle,
 
-    ruleId: 'depth-fallback',
+    nodes: reconciledNodes,
+
+    ruleId: matchedRule?.id || 'depth-fallback',
+
   };
+
 };
 
 const getFirstTellDisplayTitle = ({
@@ -2622,12 +3282,17 @@ const HARDWARE_GUIDE_COPY = {
 };
 
 const buildFirstTellSummary = ({
+
   visualNodes = [],
 
   activeThread,
 
   activeReadout,
+
+  profile = {},
+
 }) => {
+
   const nodeLabels = visualNodes
 
     .map((nodeKey) => AXIS_META.find((axis) => axis.key === nodeKey)?.label)
@@ -2648,41 +3313,96 @@ const buildFirstTellSummary = ({
 
   const hasControl = visualNodes.includes('control');
 
-  if (hasWarmth && hasSustain) {
-    return 'The drum is reading with a fuller center and a longer, controlled note bloom — musical sustain, not loose ring.';
+  const warmth = getProfileValue(profile, 'warmth');
+
+  const sustain = getProfileValue(profile, 'sustain');
+
+  const projection = getProfileValue(profile, 'projection');
+
+  const attack = getProfileValue(profile, 'attack');
+
+  const brightness = getProfileValue(profile, 'brightness');
+
+  const sensitivity = getProfileValue(profile, 'sensitivity');
+
+  const control = getProfileValue(profile, 'control');
+
+  if (hasControl && hasProjection && hasAttack) {
+
+    return 'The drum is reading with stronger front-edge definition, more outward push, and a cleaner, more organized note shape.';
+
+  }
+
+  if (hasWarmth && hasProjection && hasControl) {
+
+    return 'The drum is reading with a fuller body, stronger room presence, and enough organization to keep the note shaped and usable.';
+
+  }
+
+  if (hasWarmth && hasSustain && hasProjection) {
+
+    return 'The drum is reading with more body, longer bloom, and broader room shape while still keeping the Heritage voice grounded.';
+
+  }
+
+  if (hasAttack && hasBrightness && hasControl) {
+
+    return 'The drum is reading as drier, quicker, and more controlled, with a clearer edge and a more contained response.';
+
   }
 
   if (hasAttack && hasBrightness) {
+
     return 'The drum is reading with a quicker front edge and clearer top-end response — immediate, articulate, and easy to notice right away.';
+
   }
 
   if (hasAttack && hasSensitivity) {
+
     return 'The drum is reading with a fast first response and a more touch-sensitive feel — quick under the stick without losing musical nuance.';
+
   }
 
-  if (hasControl && hasProjection) {
-    return 'The drum is reading with a more focused shape and stronger outward push — controlled, present, and easier to place in the room.';
+  if (hasSensitivity && hasSustain && hasWarmth) {
+
+    return 'The drum is reading as open, touch-sensitive, and woody, with more shell movement and a more breathing response under the hands.';
+
   }
 
-  if (hasWarmth && hasProjection) {
-    return 'The drum is reading with a fuller body and stronger room presence — grounded at the center with enough push to carry.';
+  if (hasSensitivity && hasControl && hasWarmth) {
+
+    return 'The drum is reading with a breathing shell feel, darker body, and more controlled edges around the note.';
+
   }
 
-  if (hasControl && hasAttack) {
-    return 'The drum is reading with a cleaner front edge and a more organized note shape — focused without feeling overly stiff.';
+  if (projection >= 5.5 && control >= 5.5 && attack >= 5.5) {
+
+    return 'The drum is reading with projected attack and firm control — clear, present, and more shaped than open or blooming.';
+
+  }
+
+  if (warmth >= 5.5 && sustain >= 5.5) {
+
+    return 'The drum is reading with a fuller center and a longer, controlled note bloom — musical sustain, not loose ring.';
+
   }
 
   if (nodeLabels.length) {
+
     return `The drum is reading first through ${nodeLabels
 
       .map((label) => label.toLowerCase())
 
       .join(
+
         ', '
+
       )} — the strongest traits your ear is likely to notice before reading the full VoiceMapping.`;
+
   }
 
   return activeThread?.summary || activeReadout?.whatThreadIsTellingUs || '';
+
 };
 
 const HeritageProductDetail = () => {
@@ -2835,7 +3555,7 @@ const HeritageProductDetail = () => {
         'walnut-ply-reference': '/legacyprint-benchmarks/ply/ply-walnut.png',
 
         'mahogany-ply-reference':
-          '/legacyprint-benchmarks/ply/ply-mohogany.png',
+          '/legacyprint-benchmarks/ply/ply-mahogany.png',
       },
 
       metal: {
@@ -2989,7 +3709,7 @@ const HeritageProductDetail = () => {
 
       staveOption,
 
-      hardwareColor,
+      hardwareColor: HERITAGE_VOICE_READ_HARDWARE_COLOR,
 
       hoopType,
 
@@ -3001,7 +3721,7 @@ const HeritageProductDetail = () => {
 
       benchmarkSizeId: DEFAULT_BENCHMARK_SIZE_ID,
     });
-  }, [size, depth, lugs, staveOption, hardwareColor, hoopType, scorchDepth]);
+  }, [size, depth, lugs, staveOption, hoopType, scorchDepth]);
 
   const activeVoiceSummary = useMemo(() => {
     return isCompareModeEnabled
@@ -3027,8 +3747,6 @@ const HeritageProductDetail = () => {
 
       hoopType,
 
-      hardwareColor,
-
       scorchDepth,
 
       isCompareModeEnabled ? 'compare' : 'standalone',
@@ -3049,8 +3767,6 @@ const HeritageProductDetail = () => {
     staveOption,
 
     hoopType,
-
-    hardwareColor,
 
     scorchDepth,
 
@@ -3649,7 +4365,7 @@ const HeritageProductDetail = () => {
 
         staveOption,
 
-        hardwareColor,
+        hardwareColor: HERITAGE_VOICE_READ_HARDWARE_COLOR,
 
         hoopType,
 
@@ -3670,8 +4386,6 @@ const HeritageProductDetail = () => {
     lugs,
 
     staveOption,
-
-    hardwareColor,
 
     hoopType,
 
@@ -3830,27 +4544,25 @@ const HeritageProductDetail = () => {
 
     const hasReRing = hasReRingFromStaveOption(staveOption);
 
-  const newCartItemId = generateCartItemId({
+    const newCartItemId = generateCartItemId({
+      stripePriceId: '',
 
-  stripePriceId: '',
+      size,
 
-  size,
+      depth,
 
-  depth,
+      reRing: hasReRing,
 
-  reRing: hasReRing,
+      lugQuantity: lugs,
 
-  lugQuantity: lugs,
+      staveQuantity: staveOption.split(' - ')[0],
 
-  staveQuantity: staveOption.split(' - ')[0],
+      hardwareColor,
 
-  hardwareColor,
+      hoopType,
 
-  hoopType,
-
-  scorchDepth,
-
-});
+      scorchDepth,
+    });
 
     const cartItem = {
       id: newCartItemId,
@@ -4622,20 +5334,20 @@ const HeritageProductDetail = () => {
 
       .join(', ');
 
-    const firstTellSummary = buildFirstTellSummary({
-      visualNodes,
+const firstTellSummary = buildFirstTellSummary({
 
-      activeThread,
+  visualNodes,
 
-      activeReadout,
-    });
+  activeThread,
+
+  activeReadout,
+
+  profile: activeVoiceSummary?.profile || {},
+
+});
 
     const voiceMapDisplayProfile = (() => {
       const baseProfile = activeVoiceSummary?.profile || {};
-
-      if (!isPlayerRead) {
-        return baseProfile;
-      }
 
       const meta = getFirstTellSpecMeta({
         size,
@@ -4651,6 +5363,177 @@ const HeritageProductDetail = () => {
         scorchDepth,
       });
 
+      if (isFirstTell) {
+        const depthNumber = Number(depth);
+
+        const nextProfile = {
+          attack: 3.4,
+
+          brightness: 3.4,
+
+          projection: 3.4,
+
+          sustain: 3.4,
+
+          warmth: 3.4,
+
+          sensitivity: 3.4,
+
+          control: 3.4,
+
+          ...baseProfile,
+        };
+
+        const depthVisualStrengthMap = {
+          '5.0': [8.9, 6.9, 5.7],
+
+          5.5: [8.1, 7.2, 6.2],
+
+          '6.0': [7.5, 6.9, 6.4],
+
+          6.5: [8.0, 7.2, 6.1],
+
+          '7.0': [8.8, 7.7, 6.2],
+
+          7.5: [9.25, 8.1, 6.6],
+
+          '8.0': [9.75, 8.65, 7.05],
+        };
+
+        const depthKey = Number.isFinite(depthNumber)
+          ? depthNumber.toFixed(1)
+          : String(depth);
+
+        const strengths = depthVisualStrengthMap[depthKey] || [8.2, 7.1, 6.2];
+
+        const visualNodeSet = new Set(visualNodes);
+
+        AXIS_META.forEach(({ key }) => {
+          if (!visualNodeSet.has(key)) {
+            nextProfile[key] = Math.min(4.35, Number(nextProfile[key] || 3.4));
+          }
+        });
+
+        visualNodes.forEach((nodeKey, index) => {
+          const baseStrength =
+            strengths[index] ?? Math.max(5.8, 7.2 - index * 0.7);
+
+          let diameterAdjustment = 0;
+
+          if (meta.isCompact && nodeKey === 'attack') {
+            diameterAdjustment += 0.35;
+          }
+
+          if (meta.isCompact && nodeKey === 'brightness') {
+            diameterAdjustment += 0.25;
+          }
+
+          if (meta.isCompact && nodeKey === 'warmth') {
+            diameterAdjustment -= 0.35;
+          }
+
+          if (meta.isCompact && nodeKey === 'sustain') {
+            diameterAdjustment -= 0.25;
+          }
+
+          if (meta.isMiddle && nodeKey === 'projection') {
+            diameterAdjustment += 0.18;
+          }
+
+          if (meta.isMiddle && nodeKey === 'warmth') {
+            diameterAdjustment += 0.12;
+          }
+
+          if (meta.isFullSize && nodeKey === 'warmth') {
+            diameterAdjustment += 0.35;
+          }
+
+          if (meta.isFullSize && nodeKey === 'sustain') {
+            diameterAdjustment += 0.25;
+          }
+
+          if (meta.isFullSize && nodeKey === 'attack') {
+            diameterAdjustment -= 0.2;
+          }
+
+          if (meta.isDieCast && nodeKey === 'control') {
+            diameterAdjustment += 0.55;
+          }
+
+          if (meta.isDieCast && nodeKey === 'sustain') {
+            diameterAdjustment -= 0.35;
+          }
+
+          if (meta.isTripleFlange && nodeKey === 'sustain') {
+            diameterAdjustment += 0.45;
+          }
+
+          if (meta.isTripleFlange && nodeKey === 'control') {
+            diameterAdjustment -= 0.25;
+          }
+
+          nextProfile[nodeKey] = Math.max(
+            0,
+
+            Math.min(10, baseStrength + diameterAdjustment)
+          );
+        });
+
+        if (depthNumber >= 7) {
+          nextProfile.attack = Math.max(
+            2.9,
+
+            Number(nextProfile.attack || 5) - 0.45
+          );
+
+          nextProfile.brightness = Math.max(
+            2.9,
+
+            Number(nextProfile.brightness || 5) - 0.35
+          );
+        }
+
+        if (depthNumber <= 5.5) {
+          nextProfile.sustain = Math.max(
+            2.8,
+
+            Number(nextProfile.sustain || 5) - 0.55
+          );
+
+          nextProfile.warmth = Math.max(
+            3.0,
+
+            Number(nextProfile.warmth || 5) - 0.25
+          );
+        }
+
+        if (depthNumber >= 7.5) {
+          nextProfile.sustain = Math.min(
+            10,
+
+            Number(nextProfile.sustain || 5) + 0.55
+          );
+
+          nextProfile.warmth = Math.min(
+            10,
+
+            Number(nextProfile.warmth || 5) + 0.4
+          );
+
+          nextProfile.projection = Math.min(
+            10,
+
+            Number(nextProfile.projection || 5) + 0.3
+          );
+        }
+
+        return nextProfile;
+      }
+
+      if (!isPlayerRead) {
+        return baseProfile;
+      }
+
       const nextProfile = { ...baseProfile };
 
       if (meta.isCompact && meta.depthNumber >= 8) {
@@ -4662,16 +5545,19 @@ const HeritageProductDetail = () => {
 
         nextProfile.control = Math.min(
           10,
+
           Number(nextProfile.control || 5) + 0.45
         );
 
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.35
         );
 
         nextProfile.attack = Math.max(
           0,
+
           Number(nextProfile.attack || 5) - 0.25
         );
 
@@ -4695,11 +5581,13 @@ const HeritageProductDetail = () => {
 
         nextProfile.control = Math.min(
           10,
+
           Number(nextProfile.control || 5) + 0.3
         );
 
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.2
         );
 
@@ -4707,6 +5595,7 @@ const HeritageProductDetail = () => {
       } else if (meta.isCompact && meta.depthNumber >= 7) {
         nextProfile.control = Math.min(
           10,
+
           Number(nextProfile.control || 5) + 0.25
         );
 
@@ -4718,11 +5607,13 @@ const HeritageProductDetail = () => {
       } else if (meta.isMiddle && meta.depthNumber >= 8) {
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.45
         );
 
         nextProfile.sustain = Math.min(
           10,
+
           Number(nextProfile.sustain || 5) + 0.5
         );
 
@@ -4734,16 +5625,19 @@ const HeritageProductDetail = () => {
 
         nextProfile.attack = Math.max(
           0,
+
           Number(nextProfile.attack || 5) - 0.25
         );
       } else if (meta.isMiddle && meta.depthNumber >= 7.5) {
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.3
         );
 
         nextProfile.sustain = Math.min(
           10,
+
           Number(nextProfile.sustain || 5) + 0.35
         );
 
@@ -4755,6 +5649,7 @@ const HeritageProductDetail = () => {
       } else if (meta.isMiddle && meta.depthNumber >= 7) {
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.2
         );
 
@@ -4766,11 +5661,13 @@ const HeritageProductDetail = () => {
       } else if (meta.isFullSize && meta.depthNumber >= 8) {
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.55
         );
 
         nextProfile.sustain = Math.min(
           10,
+
           Number(nextProfile.sustain || 5) + 0.65
         );
 
@@ -4782,6 +5679,7 @@ const HeritageProductDetail = () => {
 
         nextProfile.attack = Math.max(
           0,
+
           Number(nextProfile.attack || 5) - 0.35
         );
 
@@ -4793,16 +5691,19 @@ const HeritageProductDetail = () => {
 
         nextProfile.control = Math.max(
           0,
+
           Number(nextProfile.control || 5) - 0.15
         );
       } else if (meta.isFullSize && meta.depthNumber >= 7.5) {
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.35
         );
 
         nextProfile.sustain = Math.min(
           10,
+
           Number(nextProfile.sustain || 5) + 0.35
         );
 
@@ -4814,11 +5715,13 @@ const HeritageProductDetail = () => {
 
         nextProfile.attack = Math.max(
           0,
+
           Number(nextProfile.attack || 5) - 0.15
         );
       } else if (meta.isFullSize && meta.depthNumber >= 7) {
         nextProfile.warmth = Math.min(
           10,
+
           Number(nextProfile.warmth || 5) + 0.2
         );
 
@@ -4888,8 +5791,7 @@ const HeritageProductDetail = () => {
 
                   hoopType,
 
-                  hardwareColor,
-
+                  hardwareColor: HERITAGE_VOICE_READ_HARDWARE_COLOR,
                   scorchDepth,
                 }}
                 displayMode="VoiceMapping"
