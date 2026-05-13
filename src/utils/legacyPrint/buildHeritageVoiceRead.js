@@ -3116,9 +3116,9 @@ function buildFirstListenSummary(nodes = []) {
 
   const hasControl = nodes.includes('control');
 
-  if (hasControl && hasProjection && hasAttack) {
+  if (hasControl && hasAttack && hasProjection) {
 
-    return 'The drum is reading with stronger front-edge definition, more outward push, and a cleaner, more organized note shape.';
+    return 'The drum is reading with a cleaner front edge, tighter note shape, and stronger forward push right away.';
 
   }
 
@@ -3173,6 +3173,7 @@ function buildFirstListenSummary(nodes = []) {
   }
 
   return 'The drum is reading with a clear first impression across its main voice traits, giving the player a quick read on body, response, and note shape before the full analysis.';
+
 }
 
 function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
@@ -3341,7 +3342,87 @@ function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
 
   let title = titleByFamily[family] || titleByFamily.balancedCenter;
 
-  if (meta.isBlackened && meta.isDeep && !meta.isVeryDeep) {
+  if (meta.isCompact && meta.isShallow) {
+
+    title = meta.isDieCast
+
+      ? 'Compact snap with clean control'
+
+      : 'Quick side-snare snap';
+
+    nodes = meta.isDieCast
+
+      ? ['attack', 'control', 'brightness']
+
+      : ['attack', 'brightness', 'sensitivity'];
+
+  }
+
+  if (meta.isCompact && !meta.isShallow && !meta.isDeep) {
+
+    title = 'Compact clear response';
+
+    nodes = ['attack', 'brightness', 'sensitivity'];
+
+  }
+
+  if (meta.isCompact && meta.isDeep) {
+
+    title = meta.isMaximumDepth
+
+      ? 'Compact depth with extended bloom'
+
+      : 'Compact depth with open bloom';
+
+    nodes = ['warmth', 'sustain', 'projection'];
+
+  }
+
+    if (
+
+    meta.isFullSize &&
+
+    meta.depth === 6 &&
+
+    !meta.isDieCast &&
+
+    !meta.isBlackened &&
+
+    !meta.isThinShell &&
+
+    !meta.isThickShell
+
+  ) {
+
+    title = 'Classic Heritage body with open carry';
+
+    nodes = ['warmth', 'attack', 'projection'];
+
+  }
+
+  if (meta.isDieCast && meta.isTenLug && meta.isThickShell) {
+
+    title = meta.isBlackened
+
+      ? 'Focused power with dark control'
+
+      : 'Focused power with clean shape';
+
+    nodes = ['control', 'attack', 'projection'];
+
+  }
+
+  if (
+
+    meta.isBlackened &&
+
+    meta.isDeep &&
+
+    !meta.isVeryDeep &&
+
+    !(meta.isDieCast && meta.isTenLug && meta.isThickShell)
+
+  ) {
 
     title = 'Dark, deep controlled body';
 
@@ -3381,7 +3462,7 @@ function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
 
   }
 
-const visualProfile = profile;
+  const visualProfile = profile;
 
   return {
 
