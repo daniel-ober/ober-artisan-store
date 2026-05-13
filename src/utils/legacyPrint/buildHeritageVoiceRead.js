@@ -3176,6 +3176,134 @@ function buildFirstListenSummary(nodes = []) {
 
 }
 
+function buildFirstListenTitleModifier(spec = {}, meta = {}) {
+
+  const parts = [];
+
+  const width = Number(spec.width || HERITAGE_REFERENCE_SPEC.width);
+
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
+  const lugs = Number(spec.lugQuantity || HERITAGE_REFERENCE_SPEC.lugQuantity);
+
+  const staves = Number(spec.staveCount || HERITAGE_REFERENCE_SPEC.staveCount);
+
+  const thickness = Number(
+
+    spec.shellThicknessMm || HERITAGE_REFERENCE_SPEC.shellThicknessMm
+
+  );
+
+  if (width <= 12) {
+
+    parts.push('compact');
+
+  } else if (width === 13) {
+
+    parts.push('alternate');
+
+  } else {
+
+    parts.push('full-size');
+
+  }
+
+  if (depth <= 5) {
+
+    parts.push('shallow');
+
+  } else if (depth <= 5.5) {
+
+    parts.push('center-depth');
+
+  } else if (depth <= 6) {
+
+    parts.push('open-depth');
+
+  } else if (depth <= 6.5) {
+
+    parts.push('full-depth');
+
+  } else if (depth <= 7) {
+
+    parts.push('deep');
+
+  } else if (depth < 8) {
+
+    parts.push('big-room');
+
+  } else {
+
+    parts.push('maximum-depth');
+
+  }
+
+  if (lugs <= 6) {
+
+    parts.push('low-lug');
+
+  } else if (lugs >= 10) {
+
+    parts.push('high-lug');
+
+  }
+
+  if (staves <= 12) {
+
+    parts.push('wide-stave');
+
+  } else if (staves >= 20) {
+
+    parts.push('fine-stave');
+
+  }
+
+  if (thickness <= 8) {
+
+    parts.push('thin-shell');
+
+  } else if (thickness >= 12) {
+
+    parts.push('firm-shell');
+
+  }
+
+  if (meta.hasReRings) {
+
+    parts.push('re-ring');
+
+  }
+
+  if (meta.isDieCast) {
+
+    parts.push('die-cast');
+
+  }
+
+  if (meta.isBlackened) {
+
+    parts.push('blackened');
+
+  } else if (meta.isLight) {
+
+    parts.push('light-torch');
+
+  }
+
+  return parts.filter(Boolean).join(' ');
+
+}
+
+function buildUniqueFirstListenTitle(baseTitle = '', spec = {}, meta = {}) {
+
+  const modifier = buildFirstListenTitleModifier(spec, meta);
+
+  if (!modifier) return baseTitle;
+
+  return `${baseTitle} — ${modifier}`;
+
+}
+
 function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
 
   const family = getDominantToneFamily(spec, profile);
@@ -3464,9 +3592,13 @@ function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
 
   const visualProfile = profile;
 
+  const uniqueTitle = buildUniqueFirstListenTitle(title, spec, meta);
+
   return {
 
-    title,
+    title: uniqueTitle,
+
+    baseTitle: title,
 
     nodes,
 
