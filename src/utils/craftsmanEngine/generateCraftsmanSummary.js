@@ -482,7 +482,6 @@ function recommendHeadTension(specs = {}, spiderProfile = {}, legacyTuning = {})
 
 function recommendHoopType(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.hoopType);
-  const explicit = hasExplicitSpec(specs.hoopType);
 
   if (existing) {
     return {
@@ -523,7 +522,6 @@ function recommendHoopType(specs = {}, spiderProfile = {}) {
 
 function recommendHardwareType(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.hardwareType);
-  const explicit = hasExplicitSpec(specs.hardwareType);
 
   if (existing) {
     return {
@@ -561,7 +559,6 @@ function recommendHardwareType(specs = {}, spiderProfile = {}) {
 
 function recommendFinishType(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.finish);
-  const explicit = hasExplicitSpec(specs.finish);
   const shellFamily = normalizeLower(specs.shellFamily || 'wood');
 
   if (existing) {
@@ -715,7 +712,6 @@ function recommendShellMaterial(specs = {}, spiderProfile = {}) {
 
 function recommendSnareBedDepth(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.snareBedDepth);
-  const explicit = hasExplicitSpec(specs.snareBedDepth);
 
   if (existing) {
     return {
@@ -751,7 +747,6 @@ function recommendSnareBedDepth(specs = {}, spiderProfile = {}) {
 
 function recommendSnareSideHead(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.snareSideHead);
-  const explicit = hasExplicitSpec(specs.snareSideHead);
 
   if (existing) {
     return {
@@ -788,7 +783,6 @@ function recommendSnareSideHead(specs = {}, spiderProfile = {}) {
 
 function recommendSnareWireCount(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.snareWireCount);
-  const explicit = hasExplicitSpec(specs.snareWireCount);
 
   if (existing) {
     return {
@@ -829,7 +823,6 @@ function recommendSnareWireCount(specs = {}, spiderProfile = {}) {
 
 function recommendSnareWireStyle(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.snareWireStyle);
-  const explicit = hasExplicitSpec(specs.snareWireStyle);
 
   if (existing) {
     return {
@@ -868,7 +861,6 @@ function recommendSnareWireStyle(specs = {}, spiderProfile = {}) {
 
 function recommendSnareWireMaterial(specs = {}, spiderProfile = {}) {
   const existing = normalizeText(specs.snareWireMaterial);
-  const explicit = hasExplicitSpec(specs.snareWireMaterial);
 
   if (existing) {
     return {
@@ -897,7 +889,6 @@ function recommendSnareWireMaterial(specs = {}, spiderProfile = {}) {
 function recommendReRings(specs = {}, spiderProfile = {}) {
   const shellFamily = normalizeLower(specs.shellFamily || 'wood');
   const existing = normalizeText(specs.reRings);
-  const explicit = hasExplicitSpec(specs.reRings);
 
   if (shellFamily !== 'wood') {
     return {
