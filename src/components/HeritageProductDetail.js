@@ -1331,47 +1331,92 @@ const FIRST_TELL_NODE_COPY = {
     'How focused and organized the sound feels — less wide or ringy, more shaped and easy to place.',
 };
 
-const renderFirstTellNodeList = (nodes = []) => {
+const renderFirstTellNodeList = (nodes = [], nodeReads = []) => {
+
+  const readByKey = nodeReads.reduce((acc, item) => {
+
+    if (item?.key) acc[item.key] = item;
+
+    return acc;
+
+  }, {});
+
   return (
+
     <div className="heritage-firsttell-node-list">
+
       <p className="heritage-firsttell-node-list-title">
+
         What you’re most likely to notice first:
+
         <span>
+
           These are the most noticeable traits in the first impression — not
+
           always the loudest, best, or most extreme parts of the drum.
+
         </span>
+
       </p>
 
       <div className="heritage-firsttell-node-items">
+
         {nodes.map((nodeKey) => {
+
           const axis = AXIS_META.find((item) => item.key === nodeKey);
 
           const color = AXIS_COLOR_BY_KEY[nodeKey] || '#d6b277';
 
+          const nodeRead = readByKey[nodeKey];
+
           return (
+
             <div
+
               key={nodeKey}
+
               className="heritage-firsttell-node-item"
+
               style={{ '--axis-color': color }}
+
+              title={nodeRead?.definition || FIRST_TELL_NODE_COPY[nodeKey]}
+
             >
+
               <MetricIcon
+
                 type={axis?.icon || nodeKey}
+
                 color={color}
+
                 size={18}
+
               />
 
               <strong>{axis?.label || nodeKey}</strong>
 
               <span>
-                {FIRST_TELL_NODE_COPY[nodeKey] ||
+
+                {nodeRead?.read ||
+
+                  FIRST_TELL_NODE_COPY[nodeKey] ||
+
                   'A core part of the first impression.'}
+
               </span>
+
             </div>
+
           );
+
         })}
+
       </div>
+
     </div>
+
   );
+
 };
 
 const getCanonicalDominantNodes = ({
@@ -2442,47 +2487,36 @@ const mergeFirstTellNodes = (...nodeGroups) => {
 };
 
 const getProfileValue = (profile = {}, key, fallback = 5) => {
-
   const value = Number(profile?.[key]);
 
   return Number.isFinite(value) ? value : fallback;
-
 };
 
 const getProfileDistanceFromCenter = (profile = {}, key) => {
-
   return Math.abs(getProfileValue(profile, key) - 5);
-
 };
 
 const getStrongestProfileNodes = (profile = {}, limit = 3) => {
-
   return AXIS_META.map(({ key }) => ({
-
     key,
 
     value: getProfileValue(profile, key),
 
     distance: getProfileDistanceFromCenter(profile, key),
-
   }))
 
     .sort((a, b) => {
-
       if (b.distance !== a.distance) return b.distance - a.distance;
 
       return b.value - a.value;
-
     })
 
     .slice(0, limit)
 
     .map((item) => item.key);
-
 };
 
 const shouldDeprioritizeFirstTellNode = (profile = {}, nodeKey) => {
-
   const value = getProfileValue(profile, nodeKey);
 
   if (nodeKey === 'warmth' && value < 5) return true;
@@ -2492,35 +2526,28 @@ const shouldDeprioritizeFirstTellNode = (profile = {}, nodeKey) => {
   if (nodeKey === 'sustain' && value < 5) return true;
 
   return false;
-
 };
 
 const reconcileFirstTellNodesWithProfile = ({
-
   nodes = [],
 
   profile = {},
 
   meta,
-
 }) => {
-
   const strongestProfileNodes = getStrongestProfileNodes(profile, 7);
 
   const correctedNodes = [];
 
   nodes.forEach((nodeKey) => {
-
     if (!nodeKey) return;
 
     if (shouldDeprioritizeFirstTellNode(profile, nodeKey)) return;
 
     correctedNodes.push(nodeKey);
-
   });
 
   strongestProfileNodes.forEach((nodeKey) => {
-
     if (correctedNodes.includes(nodeKey)) return;
 
     const value = getProfileValue(profile, nodeKey);
@@ -2534,55 +2561,33 @@ const reconcileFirstTellNodesWithProfile = ({
     if (nodeKey === 'warmth' && value >= 5.35) correctedNodes.push(nodeKey);
 
     if (nodeKey === 'sustain' && value >= 5.35 && !meta?.isDieCast) {
-
       correctedNodes.push(nodeKey);
-
     }
 
     if (
-
       nodeKey === 'sensitivity' &&
-
       value >= 5.35 &&
-
       !meta?.isDieCast &&
-
       meta?.isThinShell
-
     ) {
-
       correctedNodes.push(nodeKey);
-
     }
-
   });
 
   strongestProfileNodes.forEach((nodeKey) => {
-
     if (!correctedNodes.includes(nodeKey)) {
-
       correctedNodes.push(nodeKey);
-
     }
-
   });
 
   return correctedNodes.slice(0, 3);
-
 };
 
-const reconcileFirstTellTitleWithProfile = ({
-
-  title = '',
-
-}) => {
-
+const reconcileFirstTellTitleWithProfile = ({ title = '' }) => {
   return title || 'Classic Heritage first tell';
-
 };
 
 const getDominantVoiceNodes = ({
-
   profile = {},
 
   size,
@@ -2725,7 +2730,6 @@ const getDominantVoiceNodes = ({
 };
 
 const getCuratedFirstTell = ({
-
   profile = {},
 
   size,
@@ -2739,11 +2743,8 @@ const getCuratedFirstTell = ({
   hoopType,
 
   scorchDepth,
-
 }) => {
-
   const meta = getFirstTellSpecMeta({
-
     size,
 
     depth,
@@ -2755,7 +2756,6 @@ const getCuratedFirstTell = ({
     hoopType,
 
     scorchDepth,
-
   });
 
   const matchedRule = FIRST_TELL_RULES.find((rule) => rule.test(meta));
@@ -2764,84 +2764,74 @@ const getCuratedFirstTell = ({
 
   const profilePriority = getFirstTellProfilePriority(profile);
 
-  const rawTitle = matchedRule?.title || (() => {
+  const rawTitle =
+    matchedRule?.title ||
+    (() => {
+      const depthKey = getNormalizedFirstTellDepthKey(depth);
 
-    const depthKey = getNormalizedFirstTellDepthKey(depth);
+      const fallbackTitleMap = {
+        '12|5.0': 'Quick, tight first response',
 
-    const fallbackTitleMap = {
+        '12|5.5': 'Fast touch with clear edge',
 
-      '12|5.0': 'Quick, tight first response',
+        '12|6.0': 'Quick response with controlled shape',
 
-      '12|5.5': 'Fast touch with clear edge',
+        '12|6.5': 'Focused snap with clean control',
 
-      '12|6.0': 'Quick response with controlled shape',
+        '12|7.0': 'Controlled compact depth',
 
-      '12|6.5': 'Focused snap with clean control',
+        '12|7.5': 'Compact body with focused throw',
 
-      '12|7.0': 'Controlled compact depth',
+        '12|8.0': 'Compact depth with open bloom',
 
-      '12|7.5': 'Compact body with focused throw',
+        '13|5.0': 'Quick center with clean shape',
 
-      '12|8.0': 'Compact depth with open bloom',
+        '13|5.5': 'Balanced, clear first response',
 
-      '13|5.0': 'Quick center with clean shape',
+        '13|6.0': 'Settled center with quick control',
 
-      '13|5.5': 'Balanced, clear first response',
+        '13|6.5': 'Rounded body with a clear start',
 
-      '13|6.0': 'Settled center with quick control',
+        '13|7.0': 'Warm alternate body with open carry',
 
-      '13|6.5': 'Rounded body with a clear start',
+        '13|7.5': 'Deep alternate bloom with room presence',
 
-      '13|7.0': 'Warm alternate body with open carry',
+        '13|8.0': 'Full alternate voice with extended bloom',
 
-      '13|7.5': 'Deep alternate bloom with room presence',
+        '14|5.0': 'Warm body with a quick start',
 
-      '13|8.0': 'Full alternate voice with extended bloom',
+        '14|5.5': 'Classic warm Heritage center',
 
-      '14|5.0': 'Warm body with a quick start',
+        '14|6.0': 'Warm body with clear room push',
 
-      '14|5.5': 'Classic warm Heritage center',
+        '14|6.5': 'Fuller body with open room push',
 
-      '14|6.0': 'Warm body with clear room push',
+        '14|7.0': 'Deep warmth with open carry',
 
-      '14|6.5': 'Fuller body with open room push',
+        '14|7.5': 'Big warmth with longer room bloom',
 
-      '14|7.0': 'Deep warmth with open carry',
+        '14|8.0': 'Maximum depth with extended bloom',
+      };
 
-      '14|7.5': 'Big warmth with longer room bloom',
-
-      '14|8.0': 'Maximum depth with extended bloom',
-
-    };
-
-    return (
-
-      fallbackTitleMap[`${String(size)}|${depthKey}`] ||
-
-      'Classic Heritage first tell'
-
-    );
-
-  })();
+      return (
+        fallbackTitleMap[`${String(size)}|${depthKey}`] ||
+        'Classic Heritage first tell'
+      );
+    })();
 
   const rawNodes = matchedRule
-
     ? mergeFirstTellNodes(matchedRule.nodes, baseNodes, profilePriority)
-
     : mergeFirstTellNodes(baseNodes, profilePriority);
 
   const reconciledNodes = reconcileFirstTellNodesWithProfile({
-
     nodes: rawNodes,
 
     profile,
 
     meta,
-
   });
 
   const reconciledTitle = reconcileFirstTellTitleWithProfile({
-
     title: rawTitle,
 
     nodes: reconciledNodes,
@@ -2849,19 +2839,15 @@ const getCuratedFirstTell = ({
     profile,
 
     meta,
-
   });
 
   return {
-
     title: reconciledTitle,
 
     nodes: reconciledNodes,
 
     ruleId: matchedRule?.id || 'depth-fallback',
-
   };
-
 };
 
 const getFirstTellDisplayTitle = ({
@@ -3282,7 +3268,6 @@ const HARDWARE_GUIDE_COPY = {
 };
 
 const buildFirstTellSummary = ({
-
   visualNodes = [],
 
   activeThread,
@@ -3290,9 +3275,7 @@ const buildFirstTellSummary = ({
   activeReadout,
 
   profile = {},
-
 }) => {
-
   const nodeLabels = visualNodes
 
     .map((nodeKey) => AXIS_META.find((axis) => axis.key === nodeKey)?.label)
@@ -3328,81 +3311,56 @@ const buildFirstTellSummary = ({
   const control = getProfileValue(profile, 'control');
 
   if (hasControl && hasProjection && hasAttack) {
-
     return 'The drum is reading with stronger front-edge definition, more outward push, and a cleaner, more organized note shape.';
-
   }
 
   if (hasWarmth && hasProjection && hasControl) {
-
     return 'The drum is reading with a fuller body, stronger room presence, and enough organization to keep the note shaped and usable.';
-
   }
 
   if (hasWarmth && hasSustain && hasProjection) {
-
     return 'The drum is reading with more body, longer bloom, and broader room shape while still keeping the Heritage voice grounded.';
-
   }
 
   if (hasAttack && hasBrightness && hasControl) {
-
     return 'The drum is reading as drier, quicker, and more controlled, with a clearer edge and a more contained response.';
-
   }
 
   if (hasAttack && hasBrightness) {
-
     return 'The drum is reading with a quicker front edge and clearer top-end response — immediate, articulate, and easy to notice right away.';
-
   }
 
   if (hasAttack && hasSensitivity) {
-
     return 'The drum is reading with a fast first response and a more touch-sensitive feel — quick under the stick without losing musical nuance.';
-
   }
 
   if (hasSensitivity && hasSustain && hasWarmth) {
-
     return 'The drum is reading as open, touch-sensitive, and woody, with more shell movement and a more breathing response under the hands.';
-
   }
 
   if (hasSensitivity && hasControl && hasWarmth) {
-
     return 'The drum is reading with a breathing shell feel, darker body, and more controlled edges around the note.';
-
   }
 
   if (projection >= 5.5 && control >= 5.5 && attack >= 5.5) {
-
     return 'The drum is reading with projected attack and firm control — clear, present, and more shaped than open or blooming.';
-
   }
 
   if (warmth >= 5.5 && sustain >= 5.5) {
-
     return 'The drum is reading with a fuller center and a longer, controlled note bloom — musical sustain, not loose ring.';
-
   }
 
   if (nodeLabels.length) {
-
     return `The drum is reading first through ${nodeLabels
 
       .map((label) => label.toLowerCase())
 
       .join(
-
         ', '
-
       )} — the strongest traits your ear is likely to notice before reading the full VoiceMapping.`;
-
   }
 
   return activeThread?.summary || activeReadout?.whatThreadIsTellingUs || '';
-
 };
 
 const HeritageProductDetail = () => {
@@ -3921,6 +3879,7 @@ const HeritageProductDetail = () => {
     });
 
     const dominantVoiceNodes = getDominantVoiceNodes({
+
       profile,
 
       size,
@@ -3934,12 +3893,26 @@ const HeritageProductDetail = () => {
       hoopType,
 
       scorchDepth,
+
     });
 
-    const canonicalNodes = dominantVoiceNodes.nodes || [];
+    const firstListen = visualSummary?.firstListen || {};
+
+    const canonicalNodes =
+
+      Array.isArray(firstListen.nodes) && firstListen.nodes.length
+
+        ? firstListen.nodes
+
+        : dominantVoiceNodes.nodes || [];
 
     const canonicalTitle =
-      dominantVoiceNodes.title || 'Classic Heritage first tell';
+
+      firstListen.title ||
+
+      dominantVoiceNodes.title ||
+
+      'Classic Heritage first tell';
 
     const simpleScore = visualSummary?.simpleThreadScore || 1;
 
@@ -4141,8 +4114,8 @@ const HeritageProductDetail = () => {
         score: simpleScore,
 
         summary:
+          firstListen.summary ||
           'The first listen read: the three traits your ear is most likely to notice before digging into the full player analysis.',
-
         ruleId: dominantVoiceNodes.ruleId,
       },
 
@@ -5216,25 +5189,9 @@ const HeritageProductDetail = () => {
 
     const activeThread = scopedThread;
 
+    const firstListen = activeVoiceSummary?.firstListen || {};
+
     const readCopy = getVoiceMappingReadCopy(activeThread.slotKey);
-
-    const displayTitle = getVoiceMappingDisplayTitle({
-      relationship: activeThread,
-
-      profile: activeVoiceSummary?.profile || {},
-
-      size,
-
-      depth,
-
-      lugs,
-
-      staveOption,
-
-      hoopType,
-
-      scorchDepth,
-    });
 
     const VoiceMappingVariant = getVoiceMappingVariantForSlot(
       activeThread.slotKey
@@ -5244,7 +5201,7 @@ const HeritageProductDetail = () => {
 
     const isPlayerRead = VoiceMappingVariant === 'player';
 
-    const firstTellKeys = getFirstTellTriangleNodes({
+    const fallbackDisplayTitle = getVoiceMappingDisplayTitle({
       relationship: activeThread,
 
       profile: activeVoiceSummary?.profile || {},
@@ -5262,7 +5219,30 @@ const HeritageProductDetail = () => {
       scorchDepth,
     });
 
-    const visualThread = getVoiceMappingVisualThread({
+    const firstTellKeys =
+      isFirstTell &&
+      Array.isArray(firstListen.nodes) &&
+      firstListen.nodes.length
+        ? firstListen.nodes
+        : getFirstTellTriangleNodes({
+            relationship: activeThread,
+
+            profile: activeVoiceSummary?.profile || {},
+
+            size,
+
+            depth,
+
+            lugs,
+
+            staveOption,
+
+            hoopType,
+
+            scorchDepth,
+          });
+
+    const baseVisualThread = getVoiceMappingVisualThread({
       relationship: activeThread,
 
       profile: activeVoiceSummary?.profile || {},
@@ -5279,46 +5259,48 @@ const HeritageProductDetail = () => {
 
       scorchDepth,
     });
+
+    const visualThread =
+      isFirstTell && baseVisualThread
+        ? {
+            ...baseVisualThread,
+
+            nodes: firstTellKeys,
+
+            title:
+              firstListen.title ||
+              baseVisualThread.title ||
+              activeThread.title ||
+              'First Listen',
+          }
+        : baseVisualThread;
 
     const visualNodes = visualThread?.nodes || [];
 
-    const dominantVoiceNodes = getDominantVoiceNodes({
-      profile: activeVoiceSummary?.profile || {},
+    const dominantNodeKeys =
+      isFirstTell && Array.isArray(firstTellKeys) ? firstTellKeys : visualNodes;
 
-      size,
+    const firstTellTitle =
+      firstListen.title ||
+      getFirstTellDisplayTitle({
+        profile: activeVoiceSummary?.profile || {},
 
-      depth,
+        size,
 
-      lugs,
+        depth,
 
-      staveOption,
+        lugs,
 
-      hoopType,
+        staveOption,
 
-      scorchDepth,
-    });
+        hoopType,
 
-    const dominantNodeKeys = dominantVoiceNodes.nodes;
+        scorchDepth,
+      });
 
-    const firstTellTitle = getFirstTellDisplayTitle({
-      profile: activeVoiceSummary?.profile || {},
+    const displayTitle = isFirstTell ? firstTellTitle : fallbackDisplayTitle;
 
-      size,
-
-      depth,
-
-      lugs,
-
-      staveOption,
-
-      hoopType,
-
-      scorchDepth,
-    });
-
-    const resolvedDisplayTitle = isFirstTell
-      ? activeThread.title || firstTellTitle
-      : displayTitle;
+    const resolvedDisplayTitle = isFirstTell ? firstTellTitle : displayTitle;
 
     const firstTellPrimaryNode = visualNodes[0] || firstTellKeys[0] || 'attack';
 
@@ -5334,17 +5316,17 @@ const HeritageProductDetail = () => {
 
       .join(', ');
 
-const firstTellSummary = buildFirstTellSummary({
+    const firstTellSummary =
+      firstListen.summary ||
+      buildFirstTellSummary({
+        visualNodes,
 
-  visualNodes,
+        activeThread,
 
-  activeThread,
+        activeReadout,
 
-  activeReadout,
-
-  profile: activeVoiceSummary?.profile || {},
-
-});
+        profile: activeVoiceSummary?.profile || {},
+      });
 
     const voiceMapDisplayProfile = (() => {
       const baseProfile = activeVoiceSummary?.profile || {};
@@ -5364,6 +5346,10 @@ const firstTellSummary = buildFirstTellSummary({
       });
 
       if (isFirstTell) {
+        if (firstListen.visualProfile) {
+          return firstListen.visualProfile;
+        }
+
         const depthNumber = Number(depth);
 
         const nextProfile = {
@@ -5792,6 +5778,7 @@ const firstTellSummary = buildFirstTellSummary({
                   hoopType,
 
                   hardwareColor: HERITAGE_VOICE_READ_HARDWARE_COLOR,
+
                   scorchDepth,
                 }}
                 displayMode="VoiceMapping"
@@ -5861,7 +5848,12 @@ const firstTellSummary = buildFirstTellSummary({
               </div>
             )}
 
-            {isFirstTell && renderFirstTellNodeList(visualNodes)}
+            {isFirstTell &&
+              renderFirstTellNodeList(
+                visualNodes,
+
+                activeVoiceSummary?.firstListen?.nodeReads || []
+              )}
 
             {null}
           </div>
