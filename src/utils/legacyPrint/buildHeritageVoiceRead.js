@@ -628,7 +628,25 @@ function getDiameterFactor(spec = {}) {
 function getDepthFactor(spec = {}) {
   const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
 
-  return clampUnit((depth - HERITAGE_REFERENCE_SPEC.depth) / 2);
+  const depthDelta = depth - HERITAGE_REFERENCE_SPEC.depth;
+
+  /**
+
+   * Depth needs to move steadily at every half-inch step.
+
+   *
+
+   * The old `/ 2` curve made 6 → 6.5 and 6.5 → 7 too subtle,
+
+   * especially once shell thickness / lug count corrections were applied.
+
+   *
+
+   * This keeps the curve natural, but gives every 0.5" change a visible read.
+
+   */
+
+  return clampUnit(depthDelta / 1.65);
 }
 
 function getShellStructureFactors(spec = {}) {
@@ -750,16 +768,34 @@ function getShellWarmthModifier(spec = {}) {
     spec.shellThicknessMm || HERITAGE_REFERENCE_SPEC.shellThicknessMm
   );
 
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
   const hasReRings = hasStandardReRings(spec.reRings);
 
   let modifier = 0;
 
   if (thickness <= 8) {
-    modifier += 0.24;
+    modifier += 0.26;
   }
 
+  /**
+
+   * Thick oak stave shells should focus the note, but they should not become
+
+   * cold/thin — especially once depth reaches 6" and beyond.
+
+   */
+
   if (thickness >= 12) {
-    modifier -= 0.2;
+    modifier -= depth >= 6 ? 0.08 : 0.14;
+  }
+
+  if (thickness >= 15 && depth >= 6) {
+    modifier += 0.08;
+  }
+
+  if (thickness >= 15 && depth >= 6.5) {
+    modifier += 0.08;
   }
 
   if (hasReRings && thickness <= 8) {
@@ -985,16 +1021,18 @@ function buildHeritageWeightedProfile(spec = {}) {
     return acc;
   }, {});
 
-  if (depth >= 6.5 && !isBlackened) {
-    const deepAmount = clamp((depth - 6.5) / 1.5, 0, 1);
+  if (depth >= 6 && !isBlackened) {
+    const earlyDepthAmount = clamp((depth - 6) / 1.5, 0, 1);
 
-    rawProfile.warmth += 0.08 + deepAmount * 0.18;
+    rawProfile.warmth += 0.1 + earlyDepthAmount * 0.22;
 
-    rawProfile.sustain += 0.07 + deepAmount * 0.16;
+    rawProfile.sustain += 0.08 + earlyDepthAmount * 0.18;
 
-    rawProfile.projection += 0.04 + deepAmount * 0.1;
+    rawProfile.projection += 0.06 + earlyDepthAmount * 0.14;
 
-    rawProfile.brightness -= 0.04 + deepAmount * 0.1;
+    rawProfile.brightness -= 0.04 + earlyDepthAmount * 0.1;
+
+    rawProfile.attack -= 0.02 + earlyDepthAmount * 0.06;
   }
 
   if (depth >= 7.5 && !isBlackened) {
@@ -1200,19 +1238,43 @@ function buildHeritageWeightedProfile(spec = {}) {
   }
 
   if (isThickShell) {
-    rawProfile.attack += 0.1;
+    rawProfile.attack += 0.09;
 
     rawProfile.projection += 0.09;
 
     rawProfile.control += 0.12;
 
-    rawProfile.brightness += 0.04;
+    rawProfile.brightness += 0.035;
 
-    rawProfile.sustain -= 0.1;
+    rawProfile.sustain -= depth >= 6.5 ? 0.055 : 0.085;
 
     rawProfile.sensitivity -= 0.07;
 
-    rawProfile.warmth -= 0.055;
+    /**
+
+     * Thick oak stave shells should read focused, not thin.
+
+     * Depth should gradually restore body as the shell gets deeper.
+
+     */
+
+    rawProfile.warmth -= depth >= 6.5 ? 0.015 : 0.04;
+
+    if (width >= 14 && depth >= 6) {
+      rawProfile.warmth += 0.12;
+    }
+
+    if (width >= 14 && depth >= 6.5) {
+      rawProfile.warmth += 0.1;
+
+      rawProfile.sustain += 0.04;
+    }
+
+    if (width >= 14 && depth >= 7) {
+      rawProfile.warmth += 0.08;
+
+      rawProfile.sustain += 0.05;
+    }
   }
 
   if (isThinShell) {
@@ -1283,17 +1345,35 @@ function buildHeritageWeightedProfile(spec = {}) {
   }
 
   if (isFourteenTenLugThick) {
-    rawProfile.attack += 0.09;
+    rawProfile.attack += 0.08;
 
     rawProfile.projection += 0.09;
 
     rawProfile.control += 0.11;
 
-    rawProfile.sustain -= 0.08;
+    rawProfile.sustain -= depth >= 6.5 ? 0.035 : 0.065;
 
     rawProfile.sensitivity -= 0.055;
 
-    rawProfile.warmth -= 0.045;
+    /**
+
+     * 14" / 10-lug / thick-shell should keep firm projection and control,
+
+     * but still carry enough oak body to match titles like:
+
+     * "Warm body with clean focus" and "Big body with focused room push."
+
+     */
+
+    rawProfile.warmth += depth >= 6 ? 0.08 : 0;
+
+    if (depth >= 6.5) {
+      rawProfile.warmth += 0.08;
+    }
+
+    if (depth >= 7) {
+      rawProfile.warmth += 0.06;
+    }
   }
 
   if (isFourteenTenLugThinReRing) {
@@ -1902,7 +1982,71 @@ function buildFeelRead(spec = {}, profile = {}) {
   return `A ${visualParts.join(', ')} Heritage presentation ${finishLean}, ${soundLean}.`;
 }
 
+function getDiameterVoiceFamily(spec = {}, profile = {}) {
+  const width = Number(spec.width || HERITAGE_REFERENCE_SPEC.width);
+
+  const depth = Number(spec.depth || HERITAGE_REFERENCE_SPEC.depth);
+
+  const attackDelta = axisDelta(profile, 'attack');
+
+  const projectionDelta = axisDelta(profile, 'projection');
+
+  const sustainDelta = axisDelta(profile, 'sustain');
+
+  const warmthDelta = axisDelta(profile, 'warmth');
+
+  const controlDelta = axisDelta(profile, 'control');
+
+  const isCompactDiameter = width <= 12;
+
+  const isAlternateDiameter = width === 13;
+
+  const isFullDiameter = width >= 14;
+
+  if (isCompactDiameter) {
+    if (depth >= 7.5 && (warmthDelta >= 0.35 || sustainDelta >= 0.35)) {
+      return 'compactDeepBody';
+    }
+
+    if (depth >= 6.5 && projectionDelta >= 0.25) {
+      return 'compactPunch';
+    }
+
+    if (attackDelta >= 0.25) {
+      return 'quickBright';
+    }
+
+    return 'compactBalanced';
+  }
+
+  if (isAlternateDiameter) {
+    if (depth >= 7.5 && (warmthDelta >= 0.3 || sustainDelta >= 0.3)) {
+      return 'alternateDeepBody';
+    }
+
+    if (depth >= 6.5 && projectionDelta >= 0.25) {
+      return 'balancedCarry';
+    }
+
+    return 'balancedCenter';
+  }
+
+  if (isFullDiameter) {
+    if (depth >= 7.5) {
+      return controlDelta >= 0.35 ? 'bigControlledBody' : 'bigBloom';
+    }
+
+    if (depth >= 6.5) {
+      return controlDelta >= 0.35 ? 'warmFocusedBody' : 'warmBody';
+    }
+  }
+
+  return null;
+}
+
 function getDominantToneFamily(spec = {}, profile = {}) {
+  const diameterFamily = getDiameterVoiceFamily(spec, profile);
+
   const attackDelta = axisDelta(profile, 'attack');
 
   const brightnessDelta = axisDelta(profile, 'brightness');
@@ -1950,6 +2094,10 @@ function getDominantToneFamily(spec = {}, profile = {}) {
   const isLowLug = lugQuantity < HERITAGE_REFERENCE_SPEC.lugQuantity;
 
   const isHighLug = lugQuantity > HERITAGE_REFERENCE_SPEC.lugQuantity;
+
+  if (diameterFamily) {
+    return diameterFamily;
+  }
 
   if (isBlackened && controlDelta >= 0.25 && sustainDelta <= -0.2) {
     return 'dryControlled';
@@ -2037,6 +2185,20 @@ function buildFirstTellTitle(spec = {}, profile = {}) {
     cleanControlled: 'Clean, balanced, and controlled',
 
     balancedCenter: 'Balanced, warm, and clear',
+
+    compactDeepBody: 'Compact depth with stronger body',
+
+    compactPunch: 'Compact punch with focused carry',
+
+    compactBalanced: 'Compact, clear, and balanced',
+
+    alternateDeepBody: 'Balanced depth with added body',
+
+    balancedCarry: 'Balanced voice with focused carry',
+
+    bigControlledBody: 'Big body with focused room push',
+
+    warmFocusedBody: 'Deep warmth with clear presence',
   };
 
   return titleByFamily[family] || titleByFamily.balancedCenter;
@@ -2073,6 +2235,20 @@ function buildPlayerReadTitle(spec = {}, profile = {}) {
     cleanControlled: 'Composed response with usable focus',
 
     balancedCenter: 'Classic Heritage balance under the hands',
+
+    compactDeepBody: 'Compact shell depth with fuller punch',
+
+    compactPunch: 'Compact punch with clean control',
+
+    compactBalanced: 'Compact balance with clear response',
+
+    alternateDeepBody: 'Balanced alternate voice with added body',
+
+    balancedCarry: 'Balanced carry with a controlled center',
+
+    bigControlledBody: 'Large body with controlled room push',
+
+    warmFocusedBody: 'Warm body with focused presence',
   };
 
   return titleByFamily[family] || titleByFamily.balancedCenter;
@@ -2779,31 +2955,29 @@ export function buildHeritageVoiceRead(input = {}) {
   const complexThreadNodes = buildThreadNodes(4);
 
   const complexThreadScore = buildThreadScore(4);
-const identityShapeRead = buildHeritageIdentityShapeRead({
+  const identityShapeRead = buildHeritageIdentityShapeRead({
+    baseTitle: identityShapeTitle,
 
-  baseTitle: identityShapeTitle,
+    canonicalNodes: complexThreadNodes,
 
-  canonicalNodes: complexThreadNodes,
+    hardwareColor: currentSpec.hardwareFinish,
 
-  hardwareColor: currentSpec.hardwareFinish,
+    scorchDepth: currentSpec.finish,
 
-  scorchDepth: currentSpec.finish,
+    hoopType: currentSpec.hoopType,
 
-  hoopType: currentSpec.hoopType,
+    size: currentSpec.width,
 
-  size: currentSpec.width,
+    depth: currentSpec.depth,
 
-  depth: currentSpec.depth,
+    lugs: currentSpec.lugQuantity,
 
-  lugs: currentSpec.lugQuantity,
+    staveOption: input.staveOption,
 
-  staveOption: input.staveOption,
+    spec: currentSpec,
 
-  spec: currentSpec,
-
-  profile: shapedProfile,
-
-});
+    profile: shapedProfile,
+  });
 
   return {
     lineId: HERITAGE_REFERENCE_PROFILE.lineId,
