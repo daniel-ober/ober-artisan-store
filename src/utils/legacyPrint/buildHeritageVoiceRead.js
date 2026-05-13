@@ -8,6 +8,10 @@ import LEGACYPRINT_BENCHMARK_CATALOG from '../../data/legacyPrint/benchmarkCatal
 
 import { BENCHMARK_DEFINITIONS } from '../../data/legacyPrint/benchmarkDefinitions.js';
 
+import buildUniversalVoiceProfile from './voiceEngine/buildUniversalVoiceProfile.js';
+
+import resolveUniversalFirstListen from './resolveUniversalFirstListen.js';
+
 import buildHeritageIdentityShapeRead from './buildHeritageIdentityShapeRead.js';
 
 const AXES = [
@@ -2560,7 +2564,7 @@ function getFirstListenNodesFromTitle(title = '') {
 
   if (value.includes('maximum bloom')) {
 
-    return ['sustain', 'warmth', 'projection'];
+    return ['warmth', 'sustain', 'projection'];
 
   }
 
@@ -2578,7 +2582,7 @@ function getFirstListenNodesFromTitle(title = '') {
 
   if (value.includes('rounded carry')) {
 
-    return ['warmth', 'projection', 'sustain'];
+    return ['warmth', 'projection', 'control'];
 
   }
 
@@ -2610,7 +2614,13 @@ function getFirstListenNodesFromTitle(title = '') {
 
   ) {
 
-    return ['control', 'warmth', 'attack'];
+    if (value.includes('quick') || value.includes('snap')) {
+
+      return ['attack', 'control', 'brightness'];
+
+    }
+
+    return ['warmth', 'control', 'projection'];
 
   }
 
@@ -2619,14 +2629,6 @@ function getFirstListenNodesFromTitle(title = '') {
     value.includes('die-cast') ||
 
     value.includes('locked') ||
-
-    value.includes('control') ||
-
-    value.includes('firm') ||
-
-    value.includes('focus') ||
-
-    value.includes('focused') ||
 
     value.includes('high-tension')
 
@@ -2648,7 +2650,19 @@ function getFirstListenNodesFromTitle(title = '') {
 
   ) {
 
-    return ['sensitivity', 'warmth', 'sustain'];
+    return ['sensitivity', 'sustain', 'warmth'];
+
+  }
+
+  if (value.includes('focus') || value.includes('focused')) {
+
+    return ['control', 'projection', 'attack'];
+
+  }
+
+  if (value.includes('firm')) {
+
+    return ['control', 'attack', 'projection'];
 
   }
 
@@ -3604,6 +3618,120 @@ function buildScoringBreakdown(spec = {}, profile = {}) {
   };
 }
 
+function buildHeritageUniversalConfig(currentSpec = {}, input = {}) {
+
+  return {
+
+    drumType: 'snare',
+
+    series: 'HERITAGE',
+
+    size: Number(currentSpec.width || input.size || 14),
+
+    width: Number(currentSpec.width || input.size || 14),
+
+    depth: Number(currentSpec.depth || input.depth || 5.5),
+
+    shellConstruction: 'stave',
+
+    constructionKey: 'stave',
+
+    construction: 'stave',
+
+    material: 'oak',
+
+    shellMaterial: 'oak',
+
+    primarySpecies: 'oak',
+
+    woodSpeciesLabel: 'Northern Red Oak',
+
+    shellThicknessMm: Number(
+
+      currentSpec.shellThicknessMm ||
+
+        currentSpec.thicknessMm ||
+
+        currentSpec.shellThickness ||
+
+        10
+
+    ),
+
+    thicknessMm: Number(
+
+      currentSpec.shellThicknessMm ||
+
+        currentSpec.thicknessMm ||
+
+        currentSpec.shellThickness ||
+
+        10
+
+    ),
+
+    staveCount: Number(currentSpec.staveCount || 16),
+
+    lugQuantity: Number(currentSpec.lugQuantity || input.lugs || 8),
+
+    lugs: Number(currentSpec.lugQuantity || input.lugs || 8),
+
+    hoopType: currentSpec.hoopType || input.hoopType || 'Triple Flange',
+
+    hardwareColor:
+
+      currentSpec.hardwareFinish || input.hardwareColor || 'Chrome',
+
+    hardwareFinish:
+
+      currentSpec.hardwareFinish || input.hardwareColor || 'Chrome',
+
+    bearingEdge:
+
+      currentSpec.bearingEdge || '45 Inner / Strong Outer Roundover',
+
+    snareBed:
+
+      currentSpec.snareBedDepth || currentSpec.snareBed || 'Standard',
+
+    snareBedDepth:
+
+      currentSpec.snareBedDepth || currentSpec.snareBed || 'Standard',
+
+    batterHead: 'Coated Ambassador',
+
+    drumhead: currentSpec.drumhead || 'Coated Single Ply',
+
+    resonantHead: 'Standard Snare-Side',
+
+    snareSideHead: currentSpec.snareSideHead || 'Standard 3mil',
+
+    snareWireCount: Number(currentSpec.snareWireCount || 20),
+
+    snareWireStyle: currentSpec.snareWireStyle || 'Standard',
+
+    snareWireMaterial: currentSpec.snareWireMaterial || 'Steel',
+
+    tuning: currentSpec.tension || 'Medium',
+
+    tension: currentSpec.tension || 'Medium',
+
+    finish: currentSpec.finish || input.scorchDepth || 'Medium Torch',
+
+    finishTreatment: currentSpec.finish || input.scorchDepth || 'Medium Torch',
+
+    scorchDepth: currentSpec.finish || input.scorchDepth || 'Medium Torch',
+
+    reRings: currentSpec.reRings || 'None',
+
+    hasReRings: hasStandardReRings(currentSpec.reRings),
+
+    interiorTreatment: 'raw',
+
+  };
+
+}
+
 export function buildHeritageVoiceRead(input = {}) {
   const currentSpec = buildHeritageSpec(input);
 
@@ -3683,9 +3811,13 @@ export function buildHeritageVoiceRead(input = {}) {
     benchmarkSizeId: input.benchmarkSizeId,
   });
 
-  const currentWeightedProfile = buildHeritageWeightedProfile(currentSpec);
+const currentWeightedProfile = buildHeritageWeightedProfile(currentSpec);
 
-  const benchmarkResult = scoreSpiderProfile(benchmarkSpec);
+const universalConfig = buildHeritageUniversalConfig(currentSpec, input);
+
+const universalVoiceRead = buildUniversalVoiceProfile(universalConfig);
+
+const benchmarkResult = scoreSpiderProfile(benchmarkSpec);
 
   const shapedProfile = isDefaultHeritageBenchmark(input)
     ? currentWeightedProfile
@@ -3695,11 +3827,21 @@ export function buildHeritageVoiceRead(input = {}) {
         benchmarkResult?.profile || {}
       );
 
-  const firstListen = buildCanonicalHeritageFirstListen(
-    currentSpec,
+  const universalFirstListen = resolveUniversalFirstListen({
 
-    shapedProfile
-  );
+  profile: shapedProfile,
+
+  universalProfile: universalVoiceRead?.profile || null,
+
+  spec: universalConfig,
+
+  currentSpec,
+
+  source: 'heritage',
+
+});
+
+const firstListen = universalFirstListen;
 
   const threadAxisOrder = [
     'attack',
@@ -3797,6 +3939,32 @@ export function buildHeritageVoiceRead(input = {}) {
     spec: currentSpec,
 
     profile: shapedProfile,
+
+    universalVoiceRead,
+
+universalProfile: universalVoiceRead?.profile || null,
+
+universalCurrentSpec: universalVoiceRead?.currentSpec || null,
+
+universalReads: {
+
+  constructionRead: universalVoiceRead?.constructionRead || null,
+
+  materialRead: universalVoiceRead?.materialRead || null,
+
+  shellThicknessRead: universalVoiceRead?.shellThicknessRead || null,
+
+  bearingEdgeRead: universalVoiceRead?.bearingEdgeRead || null,
+
+  hoopHardwareRead: universalVoiceRead?.hoopHardwareRead || null,
+
+  headRead: universalVoiceRead?.headRead || null,
+
+  tuningRead: universalVoiceRead?.tuningRead || null,
+
+  finishRead: universalVoiceRead?.finishRead || null,
+
+},
   });
 
   return {
@@ -3827,11 +3995,39 @@ export function buildHeritageVoiceRead(input = {}) {
         : benchmarkResult?.profile || null,
     },
 
-    currentSpec,
+currentSpec,
 
-    profile: shapedProfile,
+profile: shapedProfile,
 
-    firstListen,
+universalVoiceRead,
+
+universalProfile: universalVoiceRead?.profile || null,
+
+universalCurrentSpec: universalVoiceRead?.currentSpec || null,
+
+universalReads: {
+
+  constructionRead: universalVoiceRead?.constructionRead || null,
+
+  materialRead: universalVoiceRead?.materialRead || null,
+
+  shellThicknessRead: universalVoiceRead?.shellThicknessRead || null,
+
+  bearingEdgeRead: universalVoiceRead?.bearingEdgeRead || null,
+
+  hoopHardwareRead: universalVoiceRead?.hoopHardwareRead || null,
+
+  headRead: universalVoiceRead?.headRead || null,
+
+  tuningRead: universalVoiceRead?.tuningRead || null,
+
+  finishRead: universalVoiceRead?.finishRead || null,
+
+},
+
+firstListen,
+
+universalFirstListen: firstListen,
 
     highlightedCharacteristics: buildHighlightedCharacteristics(
       currentSpec,
