@@ -1022,17 +1022,61 @@ function buildHeritageWeightedProfile(spec = {}) {
   }, {});
 
   if (depth >= 6 && !isBlackened) {
+
     const earlyDepthAmount = clamp((depth - 6) / 1.5, 0, 1);
 
-    rawProfile.warmth += 0.1 + earlyDepthAmount * 0.22;
+    rawProfile.warmth += 0.1 + earlyDepthAmount * 0.28;
 
-    rawProfile.sustain += 0.08 + earlyDepthAmount * 0.18;
+    rawProfile.sustain += 0.08 + earlyDepthAmount * 0.26;
 
-    rawProfile.projection += 0.06 + earlyDepthAmount * 0.14;
+    rawProfile.projection += 0.06 + earlyDepthAmount * 0.2;
 
-    rawProfile.brightness -= 0.04 + earlyDepthAmount * 0.1;
+    rawProfile.brightness -= 0.04 + earlyDepthAmount * 0.14;
 
-    rawProfile.attack -= 0.02 + earlyDepthAmount * 0.06;
+    rawProfile.attack -= 0.02 + earlyDepthAmount * 0.1;
+
+  }
+
+  /*
+
+   * 6.5" separation:
+
+   * The half-inch jump from 6.0 to 6.5 needs to visibly read as
+
+   * fuller body, stronger bloom, and more room push.
+
+   */
+
+  if (depth >= 6.5 && depth < 7 && !isBlackened) {
+
+    rawProfile.warmth += 0.22;
+
+    rawProfile.sustain += 0.2;
+
+    rawProfile.projection += 0.16;
+
+    rawProfile.attack -= 0.12;
+
+    rawProfile.brightness -= 0.1;
+
+    rawProfile.sensitivity -= 0.04;
+
+  }
+
+  if (depth >= 6.5 && depth < 7 && isBlackened) {
+
+    rawProfile.warmth += 0.1;
+
+    rawProfile.projection += 0.1;
+
+    rawProfile.control += 0.08;
+
+    rawProfile.attack -= 0.05;
+
+    rawProfile.brightness -= 0.05;
+
+    rawProfile.sensitivity -= 0.05;
+
   }
 
   if (depth >= 7.5 && !isBlackened) {
@@ -1046,6 +1090,64 @@ function buildHeritageWeightedProfile(spec = {}) {
 
     rawProfile.attack -= 0.04;
   }
+
+  /**
+
+   * Extra-deep 14" Heritage shells need separation between 7.5" and 8".
+
+   * The main depth read reaches max character too early, so this adds
+
+   * a final half-inch push for maximum-depth builds.
+
+   */
+
+  if (width >= 14 && depth > 7.5 && !isBlackened) {
+
+    const maxDepthAmount = clamp((depth - 7.5) / 0.5, 0, 1);
+
+    rawProfile.warmth += maxDepthAmount * 0.1;
+
+    rawProfile.sustain += maxDepthAmount * 0.14;
+
+    rawProfile.projection += maxDepthAmount * 0.05;
+
+    rawProfile.attack -= maxDepthAmount * 0.06;
+
+    rawProfile.brightness -= maxDepthAmount * 0.05;
+
+    rawProfile.sensitivity -= maxDepthAmount * 0.03;
+
+  }
+
+
+  /**
+
+   * Extra-deep blackened 14" Heritage shells should also separate at 8",
+
+   * but with a drier, more controlled push than light/medium torch paths.
+
+   */
+
+  if (width >= 14 && depth > 7.5 && isBlackened) {
+
+    const maxDepthAmount = clamp((depth - 7.5) / 0.5, 0, 1);
+
+    rawProfile.warmth += maxDepthAmount * 0.04;
+
+    rawProfile.sustain += maxDepthAmount * 0.06;
+
+    rawProfile.projection += maxDepthAmount * 0.025;
+
+    rawProfile.attack -= maxDepthAmount * 0.025;
+
+    rawProfile.brightness -= maxDepthAmount * 0.02;
+
+    rawProfile.sensitivity -= maxDepthAmount * 0.015;
+
+    rawProfile.control += maxDepthAmount * 0.015;
+
+  }
+
 
   if (depth >= 7.5 && width === 13 && isTripleFlange && !isBlackened) {
     const extraDeepAmount = clamp((depth - 7.5) / 0.5, 0, 1);
