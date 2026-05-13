@@ -2443,258 +2443,217 @@ function getFirstListenTitle(spec = {}, profile = {}, fallbackTitle = '') {
       HERITAGE_REFERENCE_SPEC.shellThicknessMm
   );
 
-  const hoopType = String(spec.hoopType || '').toLowerCase();
-
-  const finish = String(spec.finish || spec.torchDepth || '').toLowerCase();
+  const finish = String(spec.finish || spec.torchDepth || '');
 
   const hasReRings =
     hasStandardReRings(spec.reRings) || Boolean(spec.hasReRings);
 
-  const isDieCast = hoopType.includes('die');
+  const isDieCast = isDieCastHoop(spec.hoopType);
 
   const isBlackened = isBlackenedFinish(finish);
 
   const isLightTorch = isLightFinish(finish);
 
-  const isCompact = diameter <= 12;
+  const getDiameterVoice = () => {
+    if (diameter <= 12) return 'Compact';
 
-  const isMid = diameter === 13;
+    if (diameter === 13) return 'Balanced alternate';
 
-  const isFull = diameter >= 14;
+    if (diameter >= 14) return 'Full main';
 
-  const isShallow = depth <= 5.25;
+    return 'Heritage';
+  };
 
-  const isCenterDepth = depth > 5.25 && depth < 6;
+  const getDepthVoice = () => {
+    if (depth <= 5) return 'quick snap';
 
-  const isOpenDepth = depth >= 6 && depth < 6.5;
+    if (depth <= 5.5) return 'focused pop';
 
-  const isFullDepth = depth >= 6.5 && depth < 7.5;
+    if (depth <= 6) return 'clear body';
 
-  const isMaxDepth = depth >= 7.5;
+    if (depth <= 6.5) return 'rounded carry';
 
-  const isThinShell = shellThickness <= 8;
+    if (depth <= 7) return 'deep body';
 
-  const isVeryThinShell = shellThickness <= 7;
+    if (depth <= 7.5) return 'room bloom';
 
-  const isFirmShell = shellThickness >= 12;
+    return 'maximum bloom';
+  };
 
-  const isFocusedShell = shellThickness >= 15;
-
-  const isLowLug = lugCount <= 6;
-
-  const isHighLug = lugCount >= 10;
-
-  const isLowStave = staveCount <= 12;
-
-  const isFineStave = staveCount >= 20;
-
-  const attackDelta = axisDelta(profile, 'attack');
-
-  const projectionDelta = axisDelta(profile, 'projection');
-
-  const sustainDelta = axisDelta(profile, 'sustain');
-
-  const warmthDelta = axisDelta(profile, 'warmth');
-
-  const sensitivityDelta = axisDelta(profile, 'sensitivity');
-
-  const controlDelta = axisDelta(profile, 'control');
-
-  /*
-
-   * Strong construction identities.
-
-   * These intentionally override diameter/depth-only naming.
-
-   */
-
-  if (isBlackened && isDieCast && isHighLug && isFirmShell) {
-    return 'Dark focused crack';
-  }
-
-  if (isDieCast && isHighLug && isFirmShell) {
-    return 'Tight focused punch';
-  }
-
-  if (isHighLug && isFirmShell && isFineStave) {
-    return 'Focused powerful push';
-  }
-
-  if (isHighLug && isFirmShell) {
-    return 'Firm direct punch';
-  }
-
-  if (hasReRings && isThinShell && isLowLug) {
-    return 'Open woody bloom';
-  }
-
-  if (hasReRings && isThinShell && isHighLug) {
-    return 'Warm controlled response';
-  }
-
-  if (hasReRings && isThinShell) {
-    return 'Breathing warm bloom';
-  }
-
-  if (isVeryThinShell) {
-    return 'Open breathing body';
-  }
-
-  if (isThinShell && isLowStave) {
-    return 'Soft open warmth';
-  }
-
-  if (isThinShell) {
-    return 'Open warm response';
-  }
-
-  if (isFocusedShell && isDieCast) {
-    return 'Focused shell crack';
-  }
-
-  if (isFocusedShell) {
-    return 'Strong focused body';
-  }
-
-  if (isDieCast && isMaxDepth) {
-    return 'Deep controlled punch';
-  }
-
-  if (isDieCast && isFullDepth) {
-    return 'Controlled deep punch';
-  }
-
-  if (isDieCast) {
-    return 'Clean focused pop';
-  }
-
-  if (isCompact && isLightTorch && isFirmShell && !hasReRings) {
-    if (depth <= 5) {
-      return 'Quick compact crack';
+  const getShellVoice = () => {
+    if (diameter === 12 && shellThickness === 13 && staveCount === 16) {
+      return 'compact firm shell';
     }
 
-    if (depth <= 5.5) {
-      return 'Compact focused pop';
+    if (
+      diameter === 12 &&
+      shellThickness === 8 &&
+      staveCount === 12 &&
+      hasReRings
+    ) {
+      return 'compact re-ring shell';
     }
 
-    if (depth <= 6) {
-      return 'Compact body with clear edge';
+    if (diameter === 13 && shellThickness === 12 && staveCount === 16) {
+      return 'balanced firm shell';
     }
 
-    if (depth <= 6.5) {
-      return 'Round compact body';
+    if (
+      diameter === 14 &&
+      shellThickness === 15 &&
+      staveCount === 20 &&
+      lugCount === 10
+    ) {
+      return 'high-tension focused shell';
     }
 
-    return isMaxDepth ? 'Compact extended bloom' : 'Compact deep bloom';
+    if (
+      diameter === 14 &&
+      shellThickness === 11 &&
+      staveCount === 16 &&
+      lugCount === 8
+    ) {
+      return 'reference stave shell';
+    }
+
+    if (
+      diameter === 14 &&
+      shellThickness === 7 &&
+      staveCount === 10 &&
+      lugCount === 10 &&
+      hasReRings
+    ) {
+      return 'thin re-ring shell';
+    }
+
+    if (shellThickness <= 8 && hasReRings) return 'open re-ring shell';
+
+    if (shellThickness <= 8) return 'open thin shell';
+
+    if (shellThickness >= 15) return 'focused thick shell';
+
+    if (shellThickness >= 12) return 'firm shell';
+
+    return 'reference shell';
+  };
+
+  const getFinishVoice = () => {
+    if (isLightTorch) return 'light open torch';
+
+    if (isBlackened) return 'blackened dry torch';
+
+    return 'medium torch center';
+  };
+
+  const getHoopVoice = () => {
+    if (isDieCast) return 'die-cast focus';
+
+    return 'triple-flange openness';
+  };
+
+  return `${getDiameterVoice()} ${getDepthVoice()} with ${getShellVoice()}, ${getFinishVoice()}, and ${getHoopVoice()}`;
+}
+
+function getFirstListenNodesFromTitle(title = '') {
+
+  const value = String(title || '').toLowerCase();
+
+  if (value.includes('maximum bloom')) {
+
+    return ['sustain', 'warmth', 'projection'];
+
   }
 
-  /*
+  if (value.includes('room bloom')) {
 
-   * Torch / finish identities.
+    return ['warmth', 'sustain', 'projection'];
 
-   * Hardware color is intentionally ignored.
-
-   */
-
-  if (isBlackened && isMaxDepth) {
-    return 'Dark deep bloom';
   }
 
-  if (isBlackened && controlDelta >= 0.25) {
-    return 'Dark controlled body';
+  if (value.includes('deep body')) {
+
+    return ['warmth', 'projection', 'sustain'];
+
   }
 
-  if (isBlackened) {
-    return 'Dark dry warmth';
+  if (value.includes('rounded carry')) {
+
+    return ['warmth', 'projection', 'sustain'];
+
   }
 
-  if (isLightTorch && hasReRings) {
-    return 'Open lively warmth';
+  if (value.includes('clear body')) {
+
+    return ['attack', 'projection', 'warmth'];
+
   }
 
-  /*
+  if (value.includes('focused pop')) {
 
-   * Diameter + depth identities.
+    return ['attack', 'control', 'brightness'];
 
-   */
-
-  if (isCompact && isShallow) {
-    return 'Quick crisp snap';
   }
 
-  if (isCompact && isCenterDepth) {
-    return 'Compact lively snap';
+  if (value.includes('quick snap')) {
+
+    return ['attack', 'brightness', 'control'];
+
   }
 
-  if (isCompact && isOpenDepth) {
-    return 'Clear compact pop';
+  if (
+
+    value.includes('blackened') ||
+
+    value.includes('dark') ||
+
+    value.includes('dry torch')
+
+  ) {
+
+    return ['control', 'warmth', 'attack'];
+
   }
 
-  if (isCompact && isFullDepth) {
-    return projectionDelta >= 0.25
-      ? 'Compact punchy body'
-      : 'Round compact body';
+  if (
+
+    value.includes('die-cast') ||
+
+    value.includes('locked') ||
+
+    value.includes('control') ||
+
+    value.includes('firm') ||
+
+    value.includes('focus') ||
+
+    value.includes('focused') ||
+
+    value.includes('high-tension')
+
+  ) {
+
+    return ['control', 'attack', 'projection'];
+
   }
 
-  if (isCompact && isMaxDepth) {
-    return sustainDelta >= 0.35
-      ? 'Compact extended bloom'
-      : 'Compact deep bloom';
+  if (
+
+    value.includes('open') ||
+
+    value.includes('breathing') ||
+
+    value.includes('re-ring') ||
+
+    value.includes('thin')
+
+  ) {
+
+    return ['sensitivity', 'warmth', 'sustain'];
+
   }
 
-  if (isMid && isShallow) {
-    return 'Quick balanced pop';
-  }
+  return ['warmth', 'attack', 'projection'];
 
-  if (isMid && isCenterDepth) {
-    return 'Balanced warm snap';
-  }
-
-  if (isMid && isOpenDepth) {
-    return 'Clear balanced body';
-  }
-
-  if (isMid && isFullDepth) {
-    return 'Warm rounded carry';
-  }
-
-  if (isMid && isMaxDepth) {
-    return 'Deep balanced bloom';
-  }
-
-  if (isFull && isShallow) {
-    return 'Wide quick crack';
-  }
-
-  if (isFull && isCenterDepth) {
-    return 'Classic warm response';
-  }
-
-  if (isFull && isOpenDepth) {
-    return 'Classic warm body';
-  }
-
-  if (isFull && isFullDepth) {
-    return warmthDelta >= 0.4 ? 'Deep warm carry' : 'Fuller deeper carry';
-  }
-
-  if (isFull && isMaxDepth) {
-    return 'Big room bloom';
-  }
-
-  if (attackDelta >= 0.3) {
-    return 'Crisp clear attack';
-  }
-
-  if (controlDelta >= 0.3) {
-    return 'Clean controlled body';
-  }
-
-  if (warmthDelta >= 0.3 && sustainDelta >= 0.25) {
-    return 'Warm open bloom';
-  }
-
-  return fallbackTitle || 'Balanced Heritage voice';
 }
 
 function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
@@ -2940,75 +2899,18 @@ function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
 
   const titleOverride = getFirstListenTitle(spec, profile);
 
-  if (titleOverride === 'Dark focused crack') {
-    nodes = ['control', 'attack', 'projection'];
-  } else if (titleOverride === 'Focused powerful push') {
-    nodes = ['projection', 'control', 'attack'];
-  } else if (titleOverride === 'Tight focused punch') {
-    nodes = ['control', 'attack', 'projection'];
-  } else if (titleOverride === 'Firm direct punch') {
-    nodes = ['attack', 'projection', 'control'];
-  } else if (titleOverride === 'Open woody bloom') {
-    nodes = ['warmth', 'sustain', 'sensitivity'];
-  } else if (titleOverride === 'Warm controlled response') {
-    nodes = ['warmth', 'control', 'sensitivity'];
-  } else if (titleOverride === 'Breathing warm bloom') {
-    nodes = ['sensitivity', 'warmth', 'sustain'];
-  } else if (titleOverride === 'Soft open warmth') {
-    nodes = ['warmth', 'sustain', 'sensitivity'];
-  } else if (titleOverride === 'Controlled deep punch') {
-    nodes = ['control', 'attack', 'warmth'];
-  } else if (titleOverride === 'Clean focused pop') {
-    nodes = ['attack', 'control', 'brightness'];
-  } else if (titleOverride === 'Dark deep bloom') {
-    nodes = ['warmth', 'sustain', 'control'];
-  } else if (titleOverride === 'Dark dry warmth') {
-    nodes = ['warmth', 'control', 'brightness'];
-  } else if (titleOverride === 'Open lively warmth') {
-    nodes = ['warmth', 'sensitivity', 'sustain'];
-  } else if (titleOverride === 'Quick crisp snap') {
-    nodes = ['attack', 'brightness', 'sensitivity'];
-  } else if (titleOverride === 'Compact lively snap') {
-    nodes = ['attack', 'sensitivity', 'brightness'];
-  } else if (titleOverride === 'Clear compact pop') {
-    nodes = ['attack', 'brightness', 'projection'];
-  } else if (titleOverride === 'Round compact body') {
-    nodes = ['warmth', 'projection', 'attack'];
-  } else if (titleOverride === 'Compact deep bloom') {
-    nodes = ['warmth', 'sustain', 'projection'];
-  } else if (titleOverride === 'Quick balanced pop') {
-    nodes = ['attack', 'brightness', 'warmth'];
-  } else if (titleOverride === 'Balanced warm snap') {
-    nodes = ['warmth', 'attack', 'sensitivity'];
-  } else if (titleOverride === 'Clear balanced body') {
+  nodes = getFirstListenNodesFromTitle(titleOverride);
+
+  if (!Array.isArray(nodes) || nodes.length < 3) {
+
     nodes = ['warmth', 'attack', 'projection'];
-  } else if (titleOverride === 'Warm rounded carry') {
-    nodes = ['warmth', 'projection', 'sustain'];
-  } else if (titleOverride === 'Deep balanced bloom') {
-    nodes = ['warmth', 'sustain', 'projection'];
-  } else if (titleOverride === 'Wide quick crack') {
-    nodes = ['attack', 'projection', 'brightness'];
-  } else if (titleOverride === 'Classic warm response') {
-    nodes = ['warmth', 'attack', 'sensitivity'];
-  } else if (titleOverride === 'Classic warm body') {
-    nodes = ['warmth', 'attack', 'projection'];
-  } else if (titleOverride === 'Fuller deeper carry') {
-    nodes = ['warmth', 'projection', 'sustain'];
-  } else if (titleOverride === 'Big room bloom') {
-    nodes = ['warmth', 'sustain', 'projection'];
-  } else if (titleOverride === 'Quick compact crack') {
-    nodes = ['attack', 'brightness', 'control'];
-  } else if (titleOverride === 'Compact focused pop') {
-    nodes = ['attack', 'brightness', 'control'];
-  } else if (titleOverride === 'Compact body with clear edge') {
-    nodes = ['attack', 'projection', 'warmth'];
-  } else if (titleOverride === 'Compact extended bloom') {
-    nodes = ['warmth', 'sustain', 'projection'];
+
   }
 
   const visualProfile = profile;
 
   return {
+
     title: titleOverride,
 
     baseTitle: title,
@@ -3022,7 +2924,9 @@ function buildCanonicalHeritageFirstListen(spec = {}, profile = {}) {
     visualProfile,
 
     ruleFamily: family,
+
   };
+
 }
 
 function buildFirstTellTitle(spec = {}, profile = {}) {
