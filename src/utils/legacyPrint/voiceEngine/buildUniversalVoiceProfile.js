@@ -606,7 +606,7 @@ function applyBasicInteractions(profile = {}, config = {}) {
 
     const isNonWoodShell = isMetalShell || isAcrylicShell || isCompositeShell;
 
-    if (depthRatio >= 0.5) {
+    if (depthRatio >= 0.52) {
 
       if (isAcrylicShell) {
 

@@ -1,0 +1,2639 @@
+/* src/components/AdminLegacyPrintCalibration.css */
+
+/* =========================================================
+
+   Admin LegacyPrint Calibration
+
+   Clean base file — selector UI moved to AdminLegacyPrintSelector.css
+
+   ========================================================= */
+
+.legacyprint-admin-tool {
+
+  width: 100%;
+
+  max-width: 1080px;
+
+  margin: 0 auto;
+
+  color: #111;
+
+  --lp-ink: #111111;
+
+  --lp-muted: rgba(17, 17, 17, 0.58);
+
+  --lp-soft: #fbfaf7;
+
+  --lp-line: rgba(17, 24, 39, 0.1);
+
+  --lp-line-strong: rgba(17, 24, 39, 0.16);
+
+  --lp-gold: #8b6b3d;
+
+  --lp-purple: #8b7dff;
+
+  --lp-dark: #080a10;
+
+  --lp-dark-2: #111522;
+
+}
+
+/* =========================================================
+
+   Hero
+
+   ========================================================= */
+
+.legacyprint-admin-hero {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) auto;
+
+  gap: 1.25rem;
+
+  align-items: start;
+
+  padding: 1.35rem 1.65rem;
+
+  background:
+
+    radial-gradient(
+
+      circle at top left,
+
+      rgba(106, 130, 255, 0.16),
+
+      transparent 34%
+
+    ),
+
+    linear-gradient(135deg, #0a0c12 0%, #111522 50%, #07080d 100%);
+
+  color: #f8fafc;
+
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.2);
+
+}
+
+.legacyprint-admin-kicker,
+
+.legacyprint-admin-overline {
+
+  margin: 0 0 0.42rem;
+
+  font-size: 0.62rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.2em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-kicker {
+
+  color: #aab5ff;
+
+}
+
+.legacyprint-admin-overline {
+
+  color: var(--lp-gold);
+
+}
+
+.legacyprint-admin-hero h2 {
+
+  margin: 0 0 0.45rem;
+
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+
+  font-weight: 850;
+
+  letter-spacing: -0.055em;
+
+  line-height: 1;
+
+}
+
+.legacyprint-admin-hero p {
+
+  max-width: 620px;
+
+  margin: 0;
+
+  color: rgba(248, 250, 252, 0.75);
+
+  font-size: 0.9rem;
+
+  line-height: 1.45;
+
+}
+
+.legacyprint-admin-hero-actions {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: flex-end;
+
+  gap: 0.5rem;
+
+  flex-wrap: wrap;
+
+}
+
+.legacyprint-admin-button {
+
+  border: 1px solid transparent;
+
+  padding: 0.55rem 0.8rem;
+
+  font-family: inherit;
+
+  font-size: 0.66rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+
+    transform 160ms ease,
+
+    opacity 160ms ease,
+
+    border-color 160ms ease,
+
+    background 160ms ease;
+
+}
+
+.legacyprint-admin-button.primary {
+
+  background: #f8fafc;
+
+  color: #0d111c;
+
+}
+
+.legacyprint-admin-button.secondary {
+
+  background: transparent;
+
+  color: #f8fafc;
+
+  border-color: rgba(248, 250, 252, 0.25);
+
+}
+
+.legacyprint-admin-button:hover {
+
+  transform: translateY(-1px);
+
+}
+
+/* =========================================================
+
+   Main Admin Tabs
+
+   ========================================================= */
+
+.legacyprint-admin-tabs {
+
+  display: flex;
+
+  gap: 1rem;
+
+  overflow-x: auto;
+
+  margin: 0.9rem 0 0.75rem;
+
+  padding: 0 0 0.25rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+
+  scrollbar-width: thin;
+
+}
+
+.legacyprint-admin-tab {
+
+  flex: 0 0 auto;
+
+  border: 0;
+
+  border-bottom: 2px solid transparent;
+
+  background: transparent;
+
+  padding: 0.55rem 0 0.42rem;
+
+  color: #737373;
+
+  font-family: inherit;
+
+  font-size: 0.6rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+}
+
+.legacyprint-admin-tab.active {
+
+  color: #111;
+
+  border-bottom-color: #111;
+
+}
+
+/* =========================================================
+
+   Panel / Section Basics
+
+   ========================================================= */
+
+.legacyprint-admin-panel {
+
+  background: rgba(255, 255, 255, 0.98);
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+  padding: 1rem;
+
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+}
+
+.legacyprint-admin-section-heading {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) auto;
+
+  gap: 1rem;
+
+  align-items: end;
+
+  margin-bottom: 0.85rem;
+
+}
+
+.legacyprint-admin-section h3 {
+
+  margin: 0;
+
+  color: #111;
+
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+
+  font-weight: 850;
+
+  letter-spacing: -0.045em;
+
+  line-height: 1.05;
+
+}
+
+.legacyprint-admin-section h4 {
+
+  margin: 0 0 0.7rem;
+
+  color: #111;
+
+  font-size: 0.95rem;
+
+  line-height: 1.2;
+
+}
+
+.legacyprint-admin-status-dot {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0.32rem 0.55rem;
+
+  background: #f7f3ea;
+
+  border: 1px solid rgba(139, 107, 61, 0.16);
+
+  color: #5f4523;
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+}
+
+/* =========================================================
+
+   Overview Cards
+
+   ========================================================= */
+
+.legacyprint-admin-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-admin-stat {
+
+  padding: 0.8rem;
+
+  background: var(--lp-soft);
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-admin-stat span {
+
+  display: block;
+
+  margin-bottom: 0.35rem;
+
+  color: rgba(17, 17, 17, 0.48);
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-stat strong {
+
+  display: block;
+
+  color: #111;
+
+  font-size: 0.95rem;
+
+  line-height: 1.2;
+
+}
+
+.legacyprint-admin-stat small {
+
+  display: block;
+
+  margin-top: 0.3rem;
+
+  color: rgba(17, 17, 17, 0.58);
+
+  font-size: 0.72rem;
+
+  line-height: 1.35;
+
+}
+
+.legacyprint-admin-overview-split {
+
+  display: grid;
+
+  grid-template-columns: 1.1fr 0.9fr;
+
+  gap: 0.75rem;
+
+  margin-top: 0.75rem;
+
+}
+
+.legacyprint-admin-note {
+
+  padding: 0.85rem;
+
+  background: #fff8e8;
+
+  border: 1px solid rgba(217, 119, 6, 0.18);
+
+  color: #5f3b00;
+
+  font-size: 0.85rem;
+
+  line-height: 1.45;
+
+}
+
+.legacyprint-admin-note.neutral {
+
+  background: #f8fafc;
+
+  border-color: rgba(17, 24, 39, 0.08);
+
+  color: #374151;
+
+}
+
+.legacyprint-admin-note strong,
+
+.legacyprint-admin-note span {
+
+  display: block;
+
+}
+
+.legacyprint-admin-note strong {
+
+  margin-bottom: 0.25rem;
+
+}
+
+/* =========================================================
+
+   Voice Preview Layout
+
+   ========================================================= */
+
+.legacyprint-preview-layout {
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 0.85rem;
+
+  align-items: start;
+
+}
+
+.legacyprint-preview-main {
+
+  display: grid;
+
+  gap: 0.55rem;
+
+  min-width: 0;
+
+}
+
+/* =========================================================
+
+   Preview Read Tabs
+
+   ========================================================= */
+
+.legacyprint-preview-read-tabs {
+
+  display: flex;
+
+  gap: 0.85rem;
+
+  overflow-x: auto;
+
+  padding: 0 0 0.35rem;
+
+  margin-bottom: 0.35rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.1);
+
+  scrollbar-width: thin;
+
+}
+
+.legacyprint-preview-read-tab {
+
+  flex: 0 0 auto;
+
+  border: 0;
+
+  border-bottom: 2px solid transparent;
+
+  background: transparent;
+
+  padding: 0.35rem 0;
+
+  color: rgba(17, 17, 17, 0.5);
+
+  font-family: inherit;
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+}
+
+.legacyprint-preview-read-tab.active {
+
+  color: #111;
+
+  border-bottom-color: #111;
+
+}
+
+/* =========================================================
+
+   Preview Cards
+
+   ========================================================= */
+
+.legacyprint-preview-card {
+
+  padding: 0.8rem;
+
+  background: #fff;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-preview-card.dark {
+
+  background:
+
+    radial-gradient(
+
+      circle at top left,
+
+      rgba(106, 130, 255, 0.12),
+
+      transparent 36%
+
+    ),
+
+    linear-gradient(135deg, #0a0c12, #111522);
+
+  border-color: rgba(255, 255, 255, 0.08);
+
+  color: #f8fafc;
+
+}
+
+.legacyprint-preview-card-heading p {
+
+  margin: 0 0 0.25rem;
+
+  color: #8b6bff;
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-preview-card.dark .legacyprint-preview-card-heading p {
+
+  color: #aab5ff;
+
+}
+
+.legacyprint-preview-card-heading h4 {
+
+  margin: 0;
+
+  font-size: 1rem;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.03em;
+
+}
+
+.legacyprint-preview-description {
+
+  margin: 0;
+
+  color: rgba(17, 17, 17, 0.64);
+
+  font-size: 0.82rem;
+
+  line-height: 1.42;
+
+}
+
+.legacyprint-preview-card.dark .legacyprint-preview-description {
+
+  color: rgba(248, 250, 252, 0.72);
+
+}
+
+/* =========================================================
+
+   First Listen Compact Layout
+
+   ========================================================= */
+
+.legacyprint-preview-card--first-listen-map {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 0.9fr) minmax(220px, 0.8fr);
+
+  grid-template-areas:
+
+    'heading heading'
+
+    'readout visual'
+
+    'description visual';
+
+  gap: 0.65rem 0.9rem;
+
+  align-items: center;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  padding: 0.78rem;
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-preview-card-heading {
+
+  grid-area: heading;
+
+}
+
+.legacyprint-admin-first-triangle-shell {
+
+  width: min(340px, 100%);
+
+  margin: 0.5rem auto 0.6rem;
+
+  padding: 4px;
+
+  border: 1px solid rgba(214, 178, 119, 0.16);
+
+  background:
+
+    radial-gradient(
+
+      circle at 50% 35%,
+
+      rgba(214, 178, 119, 0.08),
+
+      transparent 56%
+
+    ),
+
+    rgba(0, 0, 0, 0.22);
+
+}
+
+.legacyprint-preview-card--first-listen-map
+
+  .legacyprint-admin-first-triangle-shell {
+
+  grid-area: visual;
+
+  width: 100%;
+
+  max-width: 280px;
+
+  margin: 0 auto;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+}
+
+.legacyprint-admin-first-triangle-shell .heritage-voice-thread-map {
+
+  width: 100%;
+
+  max-width: 320px;
+
+  margin: 0 auto;
+
+}
+
+.legacyprint-preview-card--first-listen-map
+
+  .legacyprint-admin-first-triangle-shell
+
+  .heritage-voice-thread-map {
+
+  max-width: 280px;
+
+}
+
+.legacyprint-admin-first-triangle-shell .heritage-voice-thread-svg {
+
+  overflow: visible;
+
+}
+
+.legacyprint-admin-first-triangle-shell .heritage-voice-thread-node-icon-wrap {
+
+  display: block !important;
+
+}
+
+.legacyprint-admin-first-triangle-shell .heritage-voice-thread-node-icon {
+
+  opacity: 0.72;
+
+  transform-origin: center;
+
+}
+
+.legacyprint-admin-first-triangle-shell
+
+  .heritage-voice-thread-node--rank-0
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 1;
+
+  transform: scale(1.08);
+
+}
+
+.legacyprint-admin-first-triangle-shell
+
+  .heritage-voice-thread-node--rank-1
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.86;
+
+  transform: scale(1.02);
+
+}
+
+.legacyprint-admin-first-triangle-shell
+
+  .heritage-voice-thread-node--rank-2
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.74;
+
+  transform: scale(0.96);
+
+}
+
+.legacyprint-first-listen-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 0.45rem;
+
+  margin: 0.55rem 0;
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-first-listen-list {
+
+  grid-area: readout;
+
+  grid-template-columns: 1fr;
+
+  gap: 0.42rem;
+
+  margin: 0;
+
+}
+
+.legacyprint-first-row {
+
+  display: grid;
+
+  grid-template-columns: auto 1fr auto;
+
+  gap: 0.35rem;
+
+  align-items: center;
+
+  padding: 0.45rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.035);
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-first-row {
+
+  grid-template-columns: 1rem minmax(0, 1fr) auto;
+
+  gap: 0.45rem;
+
+  padding: 0.42rem 0.5rem;
+
+}
+
+.legacyprint-first-row span {
+
+  color: #aab5ff;
+
+  font-size: 0.66rem;
+
+  font-weight: 900;
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-first-row span {
+
+  font-size: 0.62rem;
+
+}
+
+.legacyprint-first-row strong {
+
+  font-size: 0.78rem;
+
+  line-height: 1.1;
+
+}
+
+.legacyprint-first-row em {
+
+  font-size: 0.74rem;
+
+  font-style: normal;
+
+  font-weight: 900;
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-first-row em {
+
+  padding: 0.18rem 0.42rem;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  color: rgba(248, 250, 252, 0.78);
+
+  font-size: 0.58rem;
+
+  font-style: normal;
+
+  font-weight: 900;
+
+  letter-spacing: 0.11em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+}
+
+.legacyprint-first-row small {
+
+  grid-column: 1 / -1;
+
+  color: rgba(248, 250, 252, 0.62);
+
+  font-size: 0.64rem;
+
+  line-height: 1.22;
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-first-row small {
+
+  grid-column: 2 / 4;
+
+  font-size: 0.64rem;
+
+  line-height: 1.2;
+
+}
+
+.legacyprint-preview-card--first-listen-map .legacyprint-preview-description {
+
+  grid-area: description;
+
+  max-width: 100%;
+
+  font-size: 0.72rem;
+
+  line-height: 1.35;
+
+}
+
+/* =========================================================
+
+   Player Analysis / Charts
+
+   ========================================================= */
+
+.legacyprint-chart-grid {
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-chart-grid--compact {
+
+  align-items: stretch;
+
+}
+
+.legacyprint-chart-card {
+
+  min-height: 250px;
+
+  padding: 0.75rem;
+
+  background: #080a10;
+
+  border: 1px solid rgba(17, 24, 39, 0.1);
+
+  overflow: hidden;
+
+}
+
+.legacyprint-node-readout,
+
+.legacyprint-tuning-grid {
+
+  display: grid;
+
+  gap: 0.45rem;
+
+  margin-top: 0.7rem;
+
+}
+
+.legacyprint-node-readout {
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+}
+
+.legacyprint-node-readout--buttons {
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+}
+
+.legacyprint-node-readout span,
+
+.legacyprint-tuning-grid span {
+
+  padding: 0.6rem;
+
+  background: var(--lp-soft);
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-node-readout small,
+
+.legacyprint-tuning-grid small {
+
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  color: rgba(17, 17, 17, 0.48);
+
+  font-size: 0.56rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-node-readout strong,
+
+.legacyprint-tuning-grid strong {
+
+  color: #111;
+
+}
+
+.legacyprint-node-score-button {
+
+  display: grid;
+
+  gap: 0.25rem;
+
+  width: 100%;
+
+  padding: 0.55rem;
+
+  background: var(--lp-soft);
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+  color: #111;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+
+    border-color 160ms ease,
+
+    background 160ms ease,
+
+    transform 160ms ease;
+
+}
+
+.legacyprint-node-score-button:hover,
+
+.legacyprint-node-score-button.active {
+
+  background: #fff8e8;
+
+  border-color: rgba(139, 107, 61, 0.34);
+
+  transform: translateY(-1px);
+
+}
+
+.legacyprint-node-score-button small {
+
+  display: block;
+
+  margin: 0;
+
+  color: rgba(17, 17, 17, 0.48);
+
+  font-size: 0.52rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-node-score-button strong {
+
+  color: #111;
+
+  font-size: 0.9rem;
+
+}
+
+/* =========================================================
+
+   LegacyTuning
+
+   ========================================================= */
+
+.legacyprint-tuning-grid {
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+}
+
+/* =========================================================
+
+   Tables / Editable Inputs
+
+   ========================================================= */
+
+.legacyprint-admin-table-wrap {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-admin-table {
+
+  width: 100%;
+
+  min-width: 820px;
+
+  border-collapse: collapse;
+
+  background: #fff;
+
+}
+
+.legacyprint-admin-table th,
+
+.legacyprint-admin-table td {
+
+  padding: 0.58rem 0.65rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.07);
+
+  text-align: left;
+
+  vertical-align: top;
+
+  font-size: 0.78rem;
+
+}
+
+.legacyprint-admin-table th {
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 0.56rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-table td {
+
+  color: #333;
+
+}
+
+.legacyprint-admin-weight-input,
+
+.legacyprint-admin-notes-input {
+
+  width: 100%;
+
+  min-width: 76px;
+
+  padding: 0.42rem 0.48rem;
+
+  border: 1px solid rgba(17, 24, 39, 0.16);
+
+  background: #fff;
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 0.76rem;
+
+  outline: none;
+
+  border-radius: 0;
+
+}
+
+.legacyprint-admin-notes-input {
+
+  min-width: 220px;
+
+}
+
+.legacyprint-admin-weight-input:focus,
+
+.legacyprint-admin-notes-input:focus {
+
+  border-color: rgba(139, 107, 61, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(139, 107, 61, 0.08);
+
+}
+
+/* =========================================================
+
+   Config Options Tabs
+
+   ========================================================= */
+
+.legacyprint-config-shell {
+
+  display: grid;
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-config-tabs {
+
+  display: flex;
+
+  gap: 0.9rem;
+
+  overflow-x: auto;
+
+  padding-bottom: 0.3rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.1);
+
+  scrollbar-width: thin;
+
+}
+
+.legacyprint-config-tabs button {
+
+  flex: 0 0 auto;
+
+  border: 0;
+
+  border-bottom: 2px solid transparent;
+
+  background: transparent;
+
+  padding: 0.4rem 0;
+
+  color: #777;
+
+  font-family: inherit;
+
+  font-size: 0.6rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+}
+
+.legacyprint-config-tabs button.active {
+
+  color: #111;
+
+  border-bottom-color: #111;
+
+}
+
+/* =========================================================
+
+   Builder Panels
+
+   ========================================================= */
+
+.legacyprint-builder-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-two-column-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-two-column-list > div {
+
+  padding: 0.8rem;
+
+  background: var(--lp-soft);
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-two-column-list span {
+
+  display: block;
+
+  padding: 0.45rem 0;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.07);
+
+  color: #333;
+
+  font-size: 0.82rem;
+
+}
+
+.legacyprint-builder-more {
+
+  color: rgba(17, 17, 17, 0.5) !important;
+
+  font-size: 0.72rem !important;
+
+  font-weight: 800;
+
+}
+
+.legacyprint-preview-card--builder {
+
+  padding: 0.8rem;
+
+  overflow: hidden;
+
+}
+
+.legacyprint-admin-section--embedded-builder {
+
+  padding: 0;
+
+  background: transparent;
+
+  border: 0;
+
+  box-shadow: none;
+
+}
+
+.legacyprint-admin-section--embedded-builder .legacyprint-builder-grid,
+
+.legacyprint-admin-section--embedded-builder .legacyprint-two-column-list {
+
+  margin-top: 0.75rem;
+
+}
+
+.legacyprint-admin-section--embedded-builder .legacyprint-preview-card-heading {
+
+  padding: 0;
+
+}
+
+.legacyprint-admin-filter-row,
+
+.legacyprint-admin-config-toolbar {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+
+  align-items: end;
+
+}
+
+.legacyprint-admin-filter-row label,
+
+.legacyprint-admin-config-toolbar label {
+
+  display: grid;
+
+  gap: 0.28rem;
+
+  min-width: 180px;
+
+}
+
+.legacyprint-admin-filter-row span,
+
+.legacyprint-admin-config-toolbar span {
+
+  color: #8b6b3d;
+
+  font-size: 0.58rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-filter-row select,
+
+.legacyprint-admin-config-toolbar select {
+
+  min-height: 2.2rem;
+
+  padding: 0 0.7rem;
+
+  background: #fff;
+
+  border: 1px solid rgba(17, 24, 39, 0.14);
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 0.78rem;
+
+  font-weight: 800;
+
+}
+
+.legacyprint-admin-config-toolbar {
+
+  margin: 1rem 0;
+
+  padding: 0.85rem;
+
+  background: #fbfaf7;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-admin-add-config-panel {
+
+  display: grid;
+
+  gap: 1rem;
+
+  margin: 1rem 0;
+
+  padding: 1rem;
+
+  background: #f8f6f1;
+
+  border: 1px solid rgba(139, 107, 61, 0.2);
+
+}
+
+.legacyprint-admin-add-config-heading h4 {
+
+  margin: 0;
+
+  color: #111;
+
+  font-size: 1rem;
+
+  font-weight: 900;
+
+}
+
+.legacyprint-admin-add-config-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-admin-add-config-grid label,
+
+.legacyprint-admin-add-config-nodes label {
+
+  display: grid;
+
+  gap: 0.3rem;
+
+}
+
+.legacyprint-admin-add-config-grid span,
+
+.legacyprint-admin-add-config-nodes span {
+
+  color: rgba(17, 17, 17, 0.55);
+
+  font-size: 0.56rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-add-config-grid input,
+
+.legacyprint-admin-add-config-grid select {
+
+  width: 100%;
+
+  min-height: 2.25rem;
+
+  padding: 0 0.65rem;
+
+  background: #fff;
+
+  border: 1px solid rgba(17, 24, 39, 0.12);
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 0.78rem;
+
+  font-weight: 750;
+
+}
+
+.legacyprint-admin-add-config-notes {
+
+  grid-column: 1 / -1;
+
+}
+
+.legacyprint-admin-add-config-nodes {
+
+  display: grid;
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  gap: 0.65rem;
+
+}
+
+.legacyprint-admin-add-config-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 0.6rem;
+
+}
+
+.legacyprint-admin-small-input {
+
+  max-width: 130px;
+
+}
+
+.legacyprint-config-filter-bar {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.75rem;
+
+  align-items: flex-end;
+
+  padding: 1rem;
+
+  margin: 0 0 1rem;
+
+  background: #fbfaf7;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-config-filter-bar label,
+
+.legacyprint-config-filter-group {
+
+  display: grid;
+
+  gap: 0.35rem;
+
+}
+
+.legacyprint-config-filter-bar label span,
+
+.legacyprint-config-filter-group > span {
+
+  color: #8b6b3d;
+
+  font-size: 0.56rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.16em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-config-filter-bar select {
+
+  min-width: 11rem;
+
+  min-height: 2.35rem;
+
+  padding: 0 0.7rem;
+
+  background: #fff;
+
+  border: 1px solid rgba(17, 24, 39, 0.14);
+
+  color: #111;
+
+  font-family: inherit;
+
+  font-size: 0.72rem;
+
+  font-weight: 850;
+
+}
+
+.legacyprint-config-filter-bar select:disabled {
+
+  opacity: 0.55;
+
+  cursor: not-allowed;
+
+}
+
+.legacyprint-config-filter-group--wide {
+
+  flex: 1 1 100%;
+
+}
+
+.legacyprint-config-check-row {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.35rem;
+
+}
+
+.legacyprint-config-check-button {
+
+  min-height: 2.1rem;
+
+  padding: 0.45rem 0.7rem;
+
+  background: #fff;
+
+  border: 1px solid rgba(17, 24, 39, 0.12);
+
+  color: rgba(17, 17, 17, 0.72);
+
+  font-family: inherit;
+
+  font-size: 0.68rem;
+
+  font-weight: 850;
+
+  cursor: pointer;
+
+}
+
+.legacyprint-config-check-button.is-active {
+
+  background: #111;
+
+  border-color: #111;
+
+  color: #fff;
+
+}
+
+.legacyprint-admin-rule-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-top: 26px;
+
+}
+
+.legacyprint-admin-rule-card {
+
+  border: 1px solid rgba(10, 10, 10, 0.12);
+
+  background: rgba(255, 255, 255, 0.84);
+
+  padding: 18px;
+
+}
+
+.legacyprint-admin-rule-card h4 {
+
+  margin: 6px 0 10px;
+
+  font-size: 1rem;
+
+  letter-spacing: 0.04em;
+
+}
+
+.legacyprint-admin-rule-card p {
+
+  margin: 0 0 14px;
+
+  font-size: 0.86rem;
+
+  line-height: 1.55;
+
+  color: rgba(0, 0, 0, 0.68);
+
+}
+
+.legacyprint-admin-rule-card div {
+
+  display: grid;
+
+  gap: 4px;
+
+  margin-top: 12px;
+
+}
+
+.legacyprint-admin-rule-card strong {
+
+  font-size: 0.68rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.14em;
+
+}
+
+.legacyprint-admin-rule-card small {
+
+  font-size: 0.78rem;
+
+  line-height: 1.45;
+
+  color: rgba(0, 0, 0, 0.68);
+
+}
+
+/* =========================================================
+
+   LegacyPrint Admin — Master Weight Slider Layout
+
+   ========================================================= */
+
+.legacyprint-admin-section-subcopy {
+
+  max-width: 720px;
+
+  margin: 0.45rem 0 0;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 0.82rem;
+
+  font-weight: 650;
+
+  line-height: 1.5;
+
+}
+
+.legacyprint-master-weight-grid {
+
+  display: grid;
+
+  gap: 1rem;
+
+  margin-top: 1.1rem;
+
+}
+
+.legacyprint-master-weight-card {
+
+  display: grid;
+
+  gap: 1rem;
+
+  padding: 1rem;
+
+  background: #fbfaf7;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-master-weight-card-head {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding-bottom: 0.8rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-master-weight-card-head h4 {
+
+  margin: 0.25rem 0 0;
+
+  color: #111;
+
+  font-size: 1.15rem;
+
+  font-weight: 900;
+
+  letter-spacing: -0.04em;
+
+  line-height: 1;
+
+}
+
+.legacyprint-master-weight-slider-stack {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 0.85rem;
+
+}
+
+.legacyprint-master-weight-note {
+
+  display: grid;
+
+  gap: 0.4rem;
+
+}
+
+/* =========================================================
+
+   LegacyPrint Admin — Master Weight Slider Layout
+
+   ========================================================= */
+
+.legacyprint-admin-section-subcopy {
+
+  max-width: 760px;
+
+  margin: 0.55rem 0 0;
+
+  color: rgba(17, 17, 17, 0.62);
+
+  font-size: 0.84rem;
+
+  font-weight: 600;
+
+  line-height: 1.55;
+
+}
+
+.legacyprint-admin-section-subcopy--dark {
+
+  color: rgba(17, 17, 17, 0.62);
+
+}
+
+.legacyprint-master-weight-grid {
+
+  display: grid;
+
+  gap: 1.1rem;
+
+  margin-top: 1.25rem;
+
+}
+
+.legacyprint-master-weight-card {
+
+  display: grid;
+
+  gap: 1rem;
+
+  padding: 1.1rem;
+
+  background: linear-gradient(180deg, #fff 0%, #fbfaf7 100%);
+
+  border: 1px solid rgba(17, 24, 39, 0.1);
+
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055);
+
+}
+
+.legacyprint-master-weight-card-head {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding-bottom: 0.85rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-master-weight-card-head h4 {
+
+  margin: 0.25rem 0 0;
+
+  color: #111;
+
+  font-size: 1.25rem;
+
+  font-weight: 900;
+
+  letter-spacing: -0.045em;
+
+  line-height: 1;
+
+}
+
+.legacyprint-master-weight-card-head .legacyprint-admin-button.secondary {
+
+  background: #111;
+
+  border-color: #111;
+
+  color: #fff;
+
+}
+
+.legacyprint-master-weight-slider-stack {
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-master-weight-note {
+
+  display: grid;
+
+  gap: 0.45rem;
+
+  padding-top: 0.35rem;
+
+}
+
+.legacyprint-master-weight-note span {
+
+  color: rgba(17, 17, 17, 0.54);
+
+  font-size: 0.58rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.14em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-master-weight-note .legacyprint-admin-notes-input {
+
+  min-width: 0;
+
+  background: #fff;
+
+}
+
+.legacyprint-master-weight-note span {
+
+  color: rgba(17, 17, 17, 0.54);
+
+  font-size: 0.58rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.14em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+/* =========================================================
+
+   Benchmark Slider Cards
+
+   ========================================================= */
+
+.legacyprint-admin-section-subcopy--dark {
+
+  color: rgba(17, 17, 17, 0.62);
+
+}
+
+.legacyprint-admin-button--dark {
+
+  color: #111 !important;
+
+  border-color: rgba(17, 24, 39, 0.18) !important;
+
+}
+
+.legacyprint-benchmark-card-grid {
+
+  display: grid;
+
+  gap: 1rem;
+
+}
+
+.legacyprint-benchmark-card {
+
+  display: grid;
+
+  gap: 0.9rem;
+
+  padding: 1rem;
+
+  background: #fbfaf7;
+
+  border: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-benchmark-card-head {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  align-items: flex-start;
+
+  padding-bottom: 0.75rem;
+
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+
+}
+
+.legacyprint-benchmark-card-head h4 {
+
+  margin: 0.2rem 0 0;
+
+  font-size: 1.08rem;
+
+  font-weight: 900;
+
+  letter-spacing: -0.035em;
+
+}
+
+.legacyprint-benchmark-slider-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 0.75rem;
+
+}
+
+.legacyprint-benchmark-meta {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 0.55rem;
+
+}
+
+.legacyprint-benchmark-meta span {
+
+  padding: 0.55rem;
+
+  background: rgba(255, 255, 255, 0.74);
+
+  border: 1px solid rgba(17, 24, 39, 0.07);
+
+  color: rgba(17, 17, 17, 0.62);
+
+  font-size: 0.7rem;
+
+  line-height: 1.35;
+
+}
+
+.legacyprint-admin-table-button {
+
+  width: auto;
+
+  min-width: 72px;
+
+  padding: 0.42rem 0.5rem;
+
+  font-size: 0.54rem;
+
+}
+
+.legacyprint-config-slider-cell {
+
+  min-width: 220px;
+
+}
+
+.legacyprint-config-slider-meaning {
+
+  display: block;
+
+  margin-top: 0.45rem;
+
+  color: rgba(17, 17, 17, 0.56);
+
+  font-size: 0.64rem;
+
+  line-height: 1.35;
+
+}
+
+@media (max-width: 1180px) {
+
+  .legacyprint-benchmark-slider-grid,
+
+  .legacyprint-benchmark-meta {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+}
+
+@media (max-width: 760px) {
+
+  .legacyprint-benchmark-slider-grid,
+
+  .legacyprint-benchmark-meta {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .legacyprint-benchmark-card-head {
+
+    flex-direction: column;
+
+  }
+
+  .legacyprint-benchmark-card-head .legacyprint-admin-button {
+
+    width: 100%;
+
+  }
+
+}
+
+@media (max-width: 1180px) {
+
+  .legacyprint-master-weight-slider-stack {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .legacyprint-master-weight-card-head {
+
+    flex-direction: column;
+
+  }
+
+  .legacyprint-master-weight-card-head .legacyprint-admin-button {
+
+    width: 100%;
+
+  }
+
+}
+
+@media (max-width: 980px) {
+
+  .legacyprint-admin-rule-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+@media (max-width: 1000px) {
+
+  .legacyprint-admin-add-config-grid {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .legacyprint-admin-add-config-nodes {
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  }
+
+}
+
+@media (max-width: 680px) {
+
+  .legacyprint-admin-add-config-grid,
+
+  .legacyprint-admin-add-config-nodes {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .legacyprint-admin-filter-row,
+
+  .legacyprint-admin-config-toolbar {
+
+    display: grid;
+
+  }
+
+}
+
+
+
+/* =========================================================
+
+   Tablet
+
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .legacyprint-admin-tool {
+
+    max-width: 100%;
+
+  }
+
+  .legacyprint-admin-hero {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .legacyprint-admin-hero-actions {
+
+    justify-content: flex-start;
+
+  }
+
+  .legacyprint-chart-grid,
+
+  .legacyprint-admin-overview-split {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .legacyprint-node-readout {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .legacyprint-admin-grid,
+
+  .legacyprint-builder-grid {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .legacyprint-first-listen-list {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+/* =========================================================
+
+   First Listen Stack
+
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .legacyprint-preview-card--first-listen-map {
+
+    grid-template-columns: 1fr;
+
+    grid-template-areas:
+
+      'heading'
+
+      'visual'
+
+      'readout'
+
+      'description';
+
+  }
+
+  .legacyprint-preview-card--first-listen-map
+
+    .legacyprint-admin-first-triangle-shell {
+
+    max-width: 320px;
+
+  }
+
+  .legacyprint-preview-card--first-listen-map
+
+    .legacyprint-admin-first-triangle-shell
+
+    .heritage-voice-thread-map {
+
+    max-width: 320px;
+
+  }
+
+}
+
+/* =========================================================
+
+   Mobile
+
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .legacyprint-admin-tool {
+
+    width: 100%;
+
+    max-width: 100%;
+
+  }
+
+  .legacyprint-admin-hero {
+
+    padding: 1rem;
+
+  }
+
+  .legacyprint-admin-hero h2 {
+
+    font-size: 1.65rem;
+
+  }
+
+  .legacyprint-admin-hero p {
+
+    font-size: 0.82rem;
+
+  }
+
+  .legacyprint-admin-hero-actions {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .legacyprint-admin-button {
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 0.58rem 0.65rem;
+
+  }
+
+  .legacyprint-admin-button.primary {
+
+    grid-column: 1 / -1;
+
+  }
+
+  .legacyprint-admin-tabs {
+
+    gap: 0.85rem;
+
+    margin: 0.75rem 0 0.6rem;
+
+  }
+
+  .legacyprint-admin-tab {
+
+    font-size: 0.56rem;
+
+  }
+
+  .legacyprint-admin-panel {
+
+    padding: 0.8rem;
+
+  }
+
+  .legacyprint-admin-section-heading {
+
+    grid-template-columns: 1fr;
+
+    gap: 0.5rem;
+
+  }
+
+  .legacyprint-admin-status-dot {
+
+    width: fit-content;
+
+  }
+
+  .legacyprint-admin-grid,
+
+  .legacyprint-builder-grid,
+
+  .legacyprint-two-column-list,
+
+  .legacyprint-tuning-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .legacyprint-preview-read-tabs {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 3;
+
+    gap: 0.8rem;
+
+    margin-bottom: 0.65rem;
+
+    padding-top: 0.35rem;
+
+    background: rgba(255, 255, 255, 0.96);
+
+  }
+
+  .legacyprint-preview-read-tab {
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.12em;
+
+  }
+
+  .legacyprint-preview-card,
+
+  .legacyprint-chart-card {
+
+    padding: 0.75rem;
+
+  }
+
+  .legacyprint-preview-card--first-listen-map {
+
+    padding: 0.75rem;
+
+    gap: 0.55rem;
+
+  }
+
+  .legacyprint-preview-card--first-listen-map
+
+    .legacyprint-admin-first-triangle-shell {
+
+    max-width: 275px;
+
+  }
+
+  .legacyprint-preview-card--first-listen-map
+
+    .legacyprint-admin-first-triangle-shell
+
+    .heritage-voice-thread-map {
+
+    max-width: 275px;
+
+  }
+
+  .legacyprint-preview-card--first-listen-map .legacyprint-first-row small {
+
+    display: none;
+
+  }
+
+  .legacyprint-preview-card--first-listen-map .legacyprint-preview-description {
+
+    font-size: 0.72rem;
+
+  }
+
+  .legacyprint-preview-description {
+
+    font-size: 0.78rem;
+
+  }
+
+  .legacyprint-node-readout--buttons {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .legacyprint-chart-card {
+
+    min-height: 230px;
+
+  }
+
+  .legacyprint-admin-table {
+
+    min-width: 760px;
+
+  }
+
+}
+
+/* =========================================================
+
+   Small Mobile
+
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+  .legacyprint-admin-hero-actions {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .legacyprint-admin-button.primary {
+
+    grid-column: auto;
+
+  }
+
+  .legacyprint-node-readout--buttons {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

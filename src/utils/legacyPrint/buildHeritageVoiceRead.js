@@ -3722,9 +3722,11 @@ function buildHeritageUniversalConfig(currentSpec = {}, input = {}) {
 
     scorchDepth: currentSpec.finish || input.scorchDepth || 'Medium Torch',
 
-    reRings: currentSpec.reRings || 'None',
+    reRings: currentSpec.hasReRings || input.hasReRings || input.reRings || hasStandardReRings(currentSpec.reRings) ? 'Standard' : 'None',
 
-    hasReRings: hasStandardReRings(currentSpec.reRings),
+    hasReRings: Boolean(currentSpec.hasReRings || input.hasReRings || input.reRings || hasStandardReRings(currentSpec.reRings)),
+
+    reinforcement: currentSpec.hasReRings || input.hasReRings || input.reRings || hasStandardReRings(currentSpec.reRings) ? 'reRings' : 'none',
 
     interiorTreatment: 'raw',
 

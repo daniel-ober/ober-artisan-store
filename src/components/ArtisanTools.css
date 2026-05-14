@@ -1,55 +1,349 @@
-/* src/components/admin/ArtisanTools.css */
+/* src/components/ArtisanTools.css */
 
 .artisan-tools-container {
-    padding: 32px;
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    max-width: 1000px;
-    margin: 0 auto;
+
+  width: min(100%, 980px);
+
+  margin: 0 auto;
+
+  padding: 2rem;
+
+  color: #161616;
+
+  background:
+
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 248, 243, 0.96)),
+
+    radial-gradient(circle at 12% 0%, rgba(214, 178, 119, 0.14), transparent 32%);
+
+  border: 1px solid rgba(22, 22, 22, 0.08);
+
+  box-shadow: 0 18px 42px rgba(12, 12, 12, 0.08);
+
+}
+
+.artisan-tools-container--detail {
+
+  padding: 1.25rem;
+
+}
+
+.artisan-tools-header {
+
+  max-width: 720px;
+
+  margin: 0 auto 2rem;
+
+  text-align: center;
+
+}
+
+.artisan-tools-kicker {
+
+  margin: 0 0 0.45rem;
+
+  color: #8b6b3d;
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.24em;
+
+  text-transform: uppercase;
+
+}
+
+.artisan-tools-header h2 {
+
+  margin: 0;
+
+  color: #161616;
+
+  font-size: clamp(2rem, 4vw, 2.8rem);
+
+  font-weight: 800;
+
+  letter-spacing: -0.045em;
+
+  line-height: 1;
+
+}
+
+.artisan-tools-header p {
+
+  max-width: 620px;
+
+  margin: 0.85rem auto 0;
+
+  color: rgba(22, 22, 22, 0.62);
+
+  font-size: 0.96rem;
+
+  line-height: 1.65;
+
+}
+
+.tool-cards-wrapper {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 1rem;
+
+}
+
+.tool-card {
+
+  position: relative;
+
+  min-height: 180px;
+
+  padding: 1.15rem 1rem 1.1rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  border: 1px solid rgba(22, 22, 22, 0.1);
+
+  background:
+
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(244, 241, 235, 0.92));
+
+  color: #161616;
+
+  cursor: pointer;
+
+  text-align: center;
+
+  font-family: inherit;
+
+  appearance: none;
+
+  box-shadow: 0 10px 22px rgba(12, 12, 12, 0.07);
+
+  transition:
+
+    transform 180ms ease,
+
+    border-color 180ms ease,
+
+    box-shadow 180ms ease,
+
+    background 180ms ease;
+
+}
+
+.tool-card::after {
+
+  content: '';
+
+  position: absolute;
+
+  left: 1rem;
+
+  right: 1rem;
+
+  bottom: 0.75rem;
+
+  height: 1px;
+
+  background: rgba(139, 107, 61, 0);
+
+  transition: background 180ms ease;
+
+}
+
+.tool-card:hover {
+
+  transform: translateY(-3px);
+
+  border-color: rgba(139, 107, 61, 0.34);
+
+  box-shadow: 0 18px 34px rgba(12, 12, 12, 0.11);
+
+  background:
+
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 242, 234, 0.96));
+
+}
+
+.tool-card:hover::after {
+
+  background: rgba(139, 107, 61, 0.42);
+
+}
+
+.tool-card-eyebrow {
+
+  min-height: 1rem;
+
+  margin-bottom: 0.65rem;
+
+  color: rgba(22, 22, 22, 0.46);
+
+  font-size: 0.58rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.19em;
+
+  line-height: 1.1;
+
+  text-transform: uppercase;
+
+}
+
+.tool-icon-wrap {
+
+  width: 54px;
+
+  height: 54px;
+
+  margin-bottom: 0.75rem;
+
+  display: grid;
+
+  place-items: center;
+
+  color: #3c3a36;
+
+}
+
+.tool-icon-wrap svg {
+
+  width: 30px;
+
+  height: 30px;
+
+  display: block;
+
+}
+
+.tool-card-title {
+
+  color: #191919;
+
+  font-size: 1.1rem;
+
+  font-weight: 800;
+
+  letter-spacing: -0.015em;
+
+  line-height: 1.2;
+
+}
+
+.tool-card-description {
+
+  max-width: 220px;
+
+  margin-top: 0.55rem;
+
+  color: rgba(22, 22, 22, 0.58);
+
+  font-size: 0.84rem;
+
+  line-height: 1.5;
+
+}
+
+.artisan-tools-back {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.45rem;
+
+  margin-bottom: 1rem;
+
+  padding: 0.35rem 0;
+
+  border: 0;
+
+  border-bottom: 1px solid rgba(139, 107, 61, 0.35);
+
+  background: transparent;
+
+  color: #5f4523;
+
+  font-family: inherit;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+}
+
+.artisan-tools-back svg {
+
+  width: 0.75rem;
+
+  height: 0.75rem;
+
+}
+
+.artisan-tools-back:hover {
+
+  color: #161616;
+
+  border-bottom-color: rgba(22, 22, 22, 0.5);
+
+}
+
+@media (max-width: 900px) {
+
+  .artisan-tools-container {
+
+    padding: 1.25rem;
+
   }
-  
-  .artisan-tools-container h2 {
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 24px;
-    text-align: center;
-  }
-  
+
   .tool-cards-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
   }
-  
+
   .tool-card {
-    background: #f9f9f9;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid #eee;
+
+    min-height: 168px;
+
   }
-  
-  .tool-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+@media (max-width: 620px) {
+
+  .artisan-tools-container {
+
+    padding: 1rem;
+
   }
-  
-  .tool-icon {
-    font-size: 36px;
-    display: block;
-    margin-bottom: 12px;
+
+  .tool-cards-wrapper {
+
+    grid-template-columns: 1fr;
+
   }
-  
-  .tool-card h3 {
-    font-size: 20px;
-    margin-bottom: 8px;
-    font-weight: 600;
+
+  .tool-card {
+
+    min-height: 150px;
+
   }
-  
-  .tool-card p {
-    font-size: 14px;
-    color: #666;
-  }
+
+}
