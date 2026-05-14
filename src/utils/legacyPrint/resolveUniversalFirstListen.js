@@ -120,11 +120,11 @@ const NODE_DEFINITIONS = {
 
  * Values inside this distance are treated as practical ties.
 
- * This prevents 5.23 vs 5.21 from flipping reads randomly.
+ * This prevents tiny numeric differences from creating random-feeling flips.
 
  */
 
-const DEADBAND = 0.15;
+const DEADBAND = 0.08;
 
 /**
 
@@ -392,13 +392,13 @@ function classifyDepth(spec = {}) {
 
   const ratio = depth / diameter;
 
-  if (ratio <= 0.4) return 'veryShallow';
+  if (ratio <= 0.38) return 'veryShallow';
 
-  if (ratio < 0.47) return 'shallow';
+  if (ratio < 0.44) return 'shallow';
 
-  if (ratio >= 0.57) return 'deep';
+  if (ratio >= 0.6) return 'deep';
 
-  if (ratio >= 0.52) return 'mediumDeep';
+  if (ratio >= 0.55) return 'mediumDeep';
 
   return 'standard';
 
@@ -414,7 +414,7 @@ function getThicknessClass(spec = {}) {
 
   if (thickness <= 9) return 'mediumThin';
 
-  if (thickness <= 12) return 'medium';
+  if (thickness < 12) return 'medium';
 
   if (thickness <= 15) return 'mediumThick';
 
@@ -424,7 +424,11 @@ function getThicknessClass(spec = {}) {
 
 function hasReRings(spec = {}) {
 
-  const value = toLower(spec.reRings);
+  if (spec.hasReRings === true) return true;
+
+  if (spec.hasReRings === false) return false;
+
+  const value = toLower(spec.reRings || spec.reinforcementRings);
 
   if (!value || value === 'none' || value === 'no' || value === 'false') {
 
@@ -436,11 +440,285 @@ function hasReRings(spec = {}) {
 
 }
 
+function isHeritageOakStave(spec = {}) {
+
+  const material = toLower(spec.shellMaterial || spec.material);
+
+  const construction = toLower(spec.shellConstruction || spec.construction);
+
+  return includesAny(material, ['oak']) && includesAny(construction, ['stave']);
+
+}
+
 function normalizeProfile(profile = {}) {
 
   return NODES.reduce((acc, node) => {
 
     acc[node] = clamp(profile?.[node] ?? 5, 1, 10);
+
+    return acc;
+
+  }, {});
+
+}
+
+function buildHeritageOakFirstListenModifiers(spec = {}) {
+
+  const modifiers = NODES.reduce((acc, node) => {
+
+    acc[node] = 0;
+
+    return acc;
+
+  }, {});
+
+  const material = toLower(spec.shellMaterial || spec.material);
+
+  const construction = toLower(spec.shellConstruction || spec.construction);
+
+  const finish = toLower(spec.finishTreatment || spec.finish || spec.scorchDepth);
+
+  const hoop = toLower(spec.hoopType);
+
+  const diameter = Number(spec.width || spec.diameter || 14);
+
+  const depth = Number(spec.depth || 5.5);
+
+  const thickness = Number(spec.shellThicknessMm || spec.shellThickness || 10);
+
+  const isOak = includesAny(material, ['oak']);
+
+  const isStave = includesAny(construction, ['stave']);
+
+  if (!isOak || !isStave) {
+
+    return modifiers;
+
+  }
+
+  const depthOffset = Number.isFinite(depth) ? depth - 6 : 0;
+
+  const diameterOffset = Number.isFinite(diameter) ? diameter - 13 : 0;
+
+  const thicknessOffset = Number.isFinite(thickness) ? thickness - 10 : 0;
+
+  /**
+
+   * Heritage Oak trim layer.
+
+   * The universal resolver handles the main geometry curve.
+
+   * This layer keeps oak/stave behavior audible without double-counting.
+
+   */
+
+  if (depthOffset !== 0) {
+
+    const depthAmount = clamp(depthOffset / 2, -1, 1);
+
+    if (depthAmount > 0) {
+
+      modifiers.warmth += depthAmount * 0.07;
+
+      modifiers.sustain += depthAmount * 0.06;
+
+      modifiers.projection += depthAmount * 0.035;
+
+      modifiers.attack -= depthAmount * 0.035;
+
+      modifiers.brightness -= depthAmount * 0.025;
+
+      modifiers.control -= depthAmount * 0.015;
+
+    } else {
+
+      const shallowAmount = Math.abs(depthAmount);
+
+      modifiers.attack += shallowAmount * 0.07;
+
+      modifiers.brightness += shallowAmount * 0.055;
+
+      modifiers.control += shallowAmount * 0.035;
+
+      modifiers.warmth -= shallowAmount * 0.055;
+
+      modifiers.sustain -= shallowAmount * 0.045;
+
+      modifiers.projection -= shallowAmount * 0.015;
+
+    }
+
+  }
+
+  if (diameterOffset !== 0) {
+
+    const diameterAmount = clamp(diameterOffset, -1, 1);
+
+    if (diameterAmount > 0) {
+
+      modifiers.warmth += diameterAmount * 0.09;
+
+      modifiers.projection += diameterAmount * 0.06;
+
+      modifiers.sustain += diameterAmount * 0.035;
+
+      modifiers.attack -= diameterAmount * 0.06;
+
+      modifiers.brightness -= diameterAmount * 0.045;
+
+      modifiers.sensitivity -= diameterAmount * 0.035;
+
+    } else {
+
+      const compactAmount = Math.abs(diameterAmount);
+
+      modifiers.attack += compactAmount * 0.09;
+
+      modifiers.brightness += compactAmount * 0.075;
+
+      modifiers.sensitivity += compactAmount * 0.055;
+
+      modifiers.warmth -= compactAmount * 0.065;
+
+      modifiers.projection -= compactAmount * 0.045;
+
+      modifiers.sustain -= compactAmount * 0.025;
+
+    }
+
+  }
+
+  if (thicknessOffset !== 0) {
+
+    const thicknessAmount = clamp(thicknessOffset / 4, -1, 1);
+
+    if (thicknessAmount > 0) {
+
+      modifiers.attack += thicknessAmount * 0.07;
+
+      modifiers.control += thicknessAmount * 0.09;
+
+      modifiers.projection += thicknessAmount * 0.05;
+
+      modifiers.sustain -= thicknessAmount * 0.06;
+
+      modifiers.sensitivity -= thicknessAmount * 0.05;
+
+      modifiers.warmth -= thicknessAmount * 0.025;
+
+    } else {
+
+      const thinAmount = Math.abs(thicknessAmount);
+
+      modifiers.sensitivity += thinAmount * 0.09;
+
+      modifiers.sustain += thinAmount * 0.075;
+
+      modifiers.warmth += thinAmount * 0.065;
+
+      modifiers.control -= thinAmount * 0.065;
+
+      modifiers.attack -= thinAmount * 0.025;
+
+    }
+
+  }
+
+  if (hasReRings(spec)) {
+
+    modifiers.control += 0.1;
+
+    modifiers.projection += 0.05;
+
+    modifiers.sustain -= 0.05;
+
+    modifiers.sensitivity -= 0.04;
+
+    if (thickness <= 9) {
+
+      modifiers.warmth += 0.08;
+
+      modifiers.sustain += 0.04;
+
+      modifiers.sensitivity += 0.025;
+
+    }
+
+  }
+
+  if (includesAny(finish, ['light'])) {
+
+    modifiers.sensitivity += 0.1;
+
+    modifiers.sustain += 0.08;
+
+    modifiers.warmth += 0.04;
+
+    modifiers.control -= 0.06;
+
+    modifiers.attack += 0.02;
+
+  }
+
+  if (includesAny(finish, ['medium torch', 'medium'])) {
+
+    modifiers.warmth += 0.04;
+
+    modifiers.control += 0.04;
+
+    modifiers.attack += 0.02;
+
+  }
+
+  if (includesAny(finish, ['blackened', 'black stain', 'black stained', 'blacked'])) {
+
+    modifiers.control += 0.12;
+
+    modifiers.attack += 0.04;
+
+    modifiers.sustain -= 0.09;
+
+    modifiers.sensitivity -= 0.08;
+
+    modifiers.brightness -= 0.06;
+
+    modifiers.warmth -= 0.025;
+
+  }
+
+  if (includesAny(hoop, ['die-cast', 'die cast', 'diecast'])) {
+
+    modifiers.control += 0.05;
+
+    modifiers.attack += 0.04;
+
+    modifiers.sustain -= 0.04;
+
+  }
+
+  if (includesAny(hoop, ['triple', 'flange', 'flanged'])) {
+
+    modifiers.sustain += 0.04;
+
+    modifiers.sensitivity += 0.03;
+
+    modifiers.control -= 0.02;
+
+  }
+
+  return modifiers;
+
+}
+
+function mergeModifiers(...modifierSets) {
+
+  return NODES.reduce((acc, node) => {
+
+    acc[node] = modifierSets.reduce((sum, modifiers) => {
+
+      return sum + Number(modifiers?.[node] || 0);
+
+    }, 0);
 
     return acc;
 
@@ -486,83 +764,45 @@ function buildSpecModifiers(spec = {}) {
 
    * Depth guardrails.
 
-   * These are intentionally stronger than material deltas because shell geometry
-
-   * is one of the first things the ear notices.
-
    */
 
-  if (depthClass === 'veryShallow') {
+  const referenceDepth = 6;
 
-    modifiers.attack += 0.38;
+  const depthOffset = Number.isFinite(depth) ? depth - referenceDepth : 0;
 
-    modifiers.control += 0.34;
+  const depthAmount = clamp(depthOffset / 2, -1, 1);
 
-    modifiers.brightness += 0.22;
+  if (depthAmount < 0) {
 
-    modifiers.projection -= 0.08;
+    const shallowAmount = Math.abs(depthAmount);
 
-    modifiers.sustain -= 0.28;
+    modifiers.attack += shallowAmount * 0.2;
 
-    modifiers.warmth -= 0.36;
+    modifiers.control += shallowAmount * 0.14;
 
-    modifiers.sensitivity -= 0.02;
+    modifiers.brightness += shallowAmount * 0.12;
 
-  }
+    modifiers.projection -= shallowAmount * 0.04;
 
-  if (depthClass === 'shallow') {
+    modifiers.sustain -= shallowAmount * 0.12;
 
-    modifiers.attack += 0.3;
-
-    modifiers.control += 0.26;
-
-    modifiers.brightness += 0.18;
-
-    modifiers.projection -= 0.04;
-
-    modifiers.sustain -= 0.2;
-
-    modifiers.warmth -= 0.24;
+    modifiers.warmth -= shallowAmount * 0.16;
 
   }
 
-  if (depthClass === 'standard') {
+  if (depthAmount > 0) {
 
-    modifiers.attack += 0.04;
+    modifiers.warmth += depthAmount * 0.22;
 
-    modifiers.projection += 0.03;
+    modifiers.sustain += depthAmount * 0.18;
 
-    modifiers.warmth += 0.03;
+    modifiers.projection += depthAmount * 0.1;
 
-  }
+    modifiers.attack -= depthAmount * 0.1;
 
-  if (depthClass === 'mediumDeep') {
+    modifiers.brightness -= depthAmount * 0.08;
 
-    modifiers.warmth += 0.2;
-
-    modifiers.projection += 0.16;
-
-    modifiers.sustain += 0.12;
-
-    modifiers.attack -= 0.08;
-
-    modifiers.brightness -= 0.06;
-
-  }
-
-  if (depthClass === 'deep') {
-
-    modifiers.warmth += 0.34;
-
-    modifiers.projection += 0.24;
-
-    modifiers.sustain += 0.24;
-
-    modifiers.attack -= 0.14;
-
-    modifiers.brightness -= 0.12;
-
-    modifiers.control -= 0.08;
+    modifiers.control -= depthAmount * 0.04;
 
   }
 
@@ -574,13 +814,15 @@ function buildSpecModifiers(spec = {}) {
 
   if (diameter <= 12) {
 
-    modifiers.attack += 0.12;
+    modifiers.attack += 0.18;
 
-    modifiers.brightness += 0.08;
+    modifiers.brightness += 0.14;
 
-    modifiers.sensitivity += 0.06;
+    modifiers.sensitivity += 0.08;
 
-    modifiers.warmth -= 0.08;
+    modifiers.warmth -= 0.12;
+
+    modifiers.projection -= 0.06;
 
   }
 
@@ -588,15 +830,21 @@ function buildSpecModifiers(spec = {}) {
 
     modifiers.attack += 0.04;
 
-    modifiers.projection += 0.04;
+    modifiers.control += 0.02;
 
   }
 
   if (diameter >= 14) {
 
-    modifiers.warmth += 0.08;
+    modifiers.warmth += 0.16;
 
-    modifiers.projection += 0.04;
+    modifiers.projection += 0.1;
+
+    modifiers.sustain += 0.04;
+
+    modifiers.attack -= 0.08;
+
+    modifiers.brightness -= 0.04;
 
   }
 
@@ -778,7 +1026,7 @@ function buildSpecModifiers(spec = {}) {
 
    * Thickness guardrails.
 
-   * These use mm-style snare shell assumptions.
+   * 12mm+ must read as focused/thick enough to affect First Listen.
 
    */
 
@@ -816,29 +1064,33 @@ function buildSpecModifiers(spec = {}) {
 
   if (thicknessClass === 'mediumThick') {
 
-    modifiers.attack += 0.1;
+    modifiers.attack += 0.16;
 
-    modifiers.control += 0.12;
+    modifiers.control += 0.2;
 
-    modifiers.projection += 0.08;
+    modifiers.projection += 0.12;
 
-    modifiers.sustain -= 0.08;
+    modifiers.sustain -= 0.14;
 
-    modifiers.sensitivity -= 0.06;
+    modifiers.sensitivity -= 0.08;
+
+    modifiers.warmth -= 0.04;
 
   }
 
   if (thicknessClass === 'thick') {
 
-    modifiers.attack += 0.16;
+    modifiers.attack += 0.2;
 
-    modifiers.control += 0.18;
+    modifiers.control += 0.24;
 
-    modifiers.projection += 0.12;
+    modifiers.projection += 0.14;
 
-    modifiers.sustain -= 0.12;
+    modifiers.sustain -= 0.16;
 
-    modifiers.sensitivity -= 0.1;
+    modifiers.sensitivity -= 0.12;
+
+    modifiers.warmth -= 0.06;
 
   }
 
@@ -1062,8 +1314,6 @@ function buildSpecModifiers(spec = {}) {
 
   /**
 
-   * Specific acoustic correction:
-
    * Shallow drums should not resolve warmth-forward unless warmth is clearly dominant.
 
    */
@@ -1080,11 +1330,7 @@ function buildSpecModifiers(spec = {}) {
 
   /**
 
-   * Specific acoustic correction:
-
-   * Extra-deep drums should not resolve as quick/bright unless those scores are
-
-   * overwhelmingly dominant.
+   * Extra-deep drums should not resolve as quick/bright unless those scores dominate.
 
    */
 
@@ -1114,7 +1360,11 @@ function applyModifiers(profile = {}, modifiers = {}) {
 
   return NODES.reduce((acc, node) => {
 
-    acc[node] = round2(clamp(Number(profile[node] ?? 5) + Number(modifiers[node] ?? 0)));
+    acc[node] = round2(
+
+      clamp(Number(profile[node] ?? 5) + Number(modifiers[node] ?? 0))
+
+    );
 
     return acc;
 
@@ -1128,7 +1378,7 @@ function getTiePriority(spec = {}) {
 
   const thicknessClass = getThicknessClass(spec);
 
-  if (depthClass === 'deep' || depthClass === 'mediumDeep') {
+  if (depthClass === 'deep') {
 
     return DEEP_TIE_PRIORITY;
 
@@ -1192,6 +1442,60 @@ function enforceFirstListenGuardrails(nodes = [], scored = {}, spec = {}) {
 
   let resolved = [...nodes];
 
+  const diameter = Number(spec.width || spec.diameter || 14);
+
+  const depth = Number(spec.depth || 5.5);
+
+  const thickness = Number(spec.shellThicknessMm || spec.shellThickness || 10);
+
+  /**
+
+   * Heritage Oak 13x6 focused-shell correction.
+
+   * This belongs here — NOT in buildSpecModifiers — because it depends on scoredProfile.
+
+   */
+
+  if (
+
+    isHeritageOakStave(spec) &&
+
+    diameter >= 12.75 &&
+
+    diameter <= 13.25 &&
+
+    depth >= 5.75 &&
+
+    depth <= 6.25
+
+  ) {
+
+    if (thickness >= 12) {
+
+      const focusedOrder = stableSortNodes(scored, spec).filter((node) =>
+
+        ['control', 'attack', 'projection', 'brightness'].includes(node)
+
+      );
+
+      return focusedOrder.slice(0, 3);
+
+    }
+
+    if (hasReRings(spec)) {
+
+      const reRingOrder = stableSortNodes(scored, spec).filter((node) =>
+
+        ['control', 'projection', 'brightness', 'attack'].includes(node)
+
+      );
+
+      return reRingOrder.slice(0, 3);
+
+    }
+
+  }
+
   const hasNode = (node) => resolved.includes(node);
 
   const moveIntoTopThree = (node, preferredIndex = 2) => {
@@ -1238,9 +1542,7 @@ function enforceFirstListenGuardrails(nodes = [], scored = {}, spec = {}) {
 
   /**
 
-   * Shallow drum correction:
-
-   * warmth can appear, but should not beat attack/control unless clearly dominant.
+   * Shallow drum correction.
 
    */
 
@@ -1268,13 +1570,11 @@ function enforceFirstListenGuardrails(nodes = [], scored = {}, spec = {}) {
 
   /**
 
-   * Deep drum correction:
-
-   * deep builds should show body/carry/bloom unless attack/control truly dominate.
+   * Deep drum correction.
 
    */
 
-  if (depthClass === 'mediumDeep' || depthClass === 'deep') {
+  if (depthClass === 'deep') {
 
     if (warmth >= attack - 0.2 && !hasNode('warmth')) {
 
@@ -1314,6 +1614,18 @@ function buildTitle(nodes = [], spec = {}) {
 
     'attack|control|brightness': 'Quick snap with clean control',
 
+    'attack|brightness|sensitivity': 'Quick touch with clear snap',
+
+    'brightness|sensitivity|attack': 'Clear touch with quick response',
+
+    'brightness|control|attack': 'Clear edge with quick control',
+
+    'brightness|control|sustain': 'Clear edge with controlled bloom',
+
+    'brightness|sustain|sensitivity': 'clear top edge with open bloom and responsive touch',
+
+    'brightness|sensitivity|sustain': 'clear top edge with responsive touch and open bloom',
+
     'attack|projection|control': 'Punchy projection with clean control',
 
     'attack|control|projection': 'Punchy projection with clean control',
@@ -1321,6 +1633,8 @@ function buildTitle(nodes = [], spec = {}) {
     'attack|projection|warmth': 'Clear body with forward carry',
 
     'attack|warmth|projection': 'Clear body with forward carry',
+
+    'attack|warmth|control': 'Fuller center with quick response',
 
     'projection|control|attack': 'Forward throw with clean shape',
 
@@ -1338,6 +1652,10 @@ function buildTitle(nodes = [], spec = {}) {
 
     'warmth|control|projection': 'Fuller body with focused room push',
 
+    'warmth|sustain|control': 'Warm bloom with clean control',
+
+    'warmth|attack|control': 'Fuller center with quick response',
+
     'sensitivity|sustain|warmth': 'Open touch with woody bloom',
 
     'sensitivity|warmth|sustain': 'Open touch with woody bloom',
@@ -1348,7 +1666,23 @@ function buildTitle(nodes = [], spec = {}) {
 
     'control|attack|brightness': 'Dry snap with clean control',
 
-    'control|brightness|attack': 'Dry snap with clean control',
+    'control|brightness|attack': 'Controlled snap with clear edge',
+
+    'control|brightness|sustain': 'Controlled center with open edge',
+
+    'control|projection|brightness': 'Focused throw with clear edge',
+
+    'control|brightness|projection': 'Focused edge with forward carry',
+
+    'control|warmth|projection': 'Focused body with forward carry',
+
+    'sustain|warmth|control': 'Open bloom with warm control',
+
+    'sustain|warmth|projection': 'Open bloom with forward body',
+
+    'sustain|warmth|sensitivity': 'Open bloom with responsive body',
+
+    'sustain|warmth|brightness': 'open bloom with warm body and clear top edge',
 
   };
 
@@ -1361,12 +1695,6 @@ function buildTitle(nodes = [], spec = {}) {
   if (depthClass === 'veryShallow' || depthClass === 'shallow') {
 
     return 'Quick snap with clean control';
-
-  }
-
-  if (depthClass === 'mediumDeep') {
-
-    return 'Deep body with open carry';
 
   }
 
@@ -1420,9 +1748,39 @@ function buildSummary(nodes = [], spec = {}) {
 
   const hasControl = nodes.includes('control');
 
+  if (hasBrightness && hasSensitivity && hasAttack) {
+
+    return 'The drum is reading with a crisp upper edge, quick response, and enough touch detail to keep the smaller voice lively.';
+
+  }
+
+  if (hasBrightness && hasSustain && hasSensitivity) {
+
+    return 'The drum is reading with clear top-end detail, responsive touch, and enough bloom to keep the shell moving.';
+
+  }
+
   if (hasAttack && hasBrightness && hasControl) {
 
     return 'The drum is reading as quicker, clearer, and more controlled, with a defined edge and a more contained response.';
+
+  }
+
+  if (hasAttack && hasWarmth && hasControl) {
+
+    return 'The drum is reading with a quicker front edge, a fuller center, and enough control to keep the note organized.';
+
+  }
+
+  if (hasControl && hasBrightness && hasSustain) {
+
+    return 'The drum is reading with a controlled center, clear top edge, and enough bloom to keep the shell voice present.';
+
+  }
+
+  if (hasSustain && hasWarmth && hasControl) {
+
+    return 'The drum is reading with more open bloom and wood body while still keeping the note shape organized.';
 
   }
 
@@ -1444,6 +1802,12 @@ function buildSummary(nodes = [], spec = {}) {
 
   }
 
+  if (hasSustain && hasWarmth && hasSensitivity) {
+
+    return 'The drum is reading as open, touch-sensitive, and woody, with more shell movement and a breathing response under the hands.';
+
+  }
+
   if (hasSensitivity && hasSustain && hasWarmth) {
 
     return 'The drum is reading as open, touch-sensitive, and woody, with more shell movement and a breathing response under the hands.';
@@ -1453,6 +1817,12 @@ function buildSummary(nodes = [], spec = {}) {
   if (hasAttack && hasProjection && hasWarmth) {
 
     return 'The drum is reading with a clear front edge, a warm center, and enough forward push to feel present without losing body.';
+
+  }
+
+  if (hasWarmth && hasSustain && hasProjection) {
+
+    return 'The drum is reading with more open bloom, a fuller center, and a broader room shape.';
 
   }
 
@@ -1670,7 +2040,11 @@ function resolveUniversalFirstListen({
 
   const rawProfile = normalizeProfile(profile);
 
-  const specModifiers = buildSpecModifiers(normalizedSpec);
+  const baseSpecModifiers = buildSpecModifiers(normalizedSpec);
+
+  const heritageOakModifiers = buildHeritageOakFirstListenModifiers(normalizedSpec);
+
+  const specModifiers = mergeModifiers(baseSpecModifiers, heritageOakModifiers);
 
   const scoredProfile = applyModifiers(rawProfile, specModifiers);
 

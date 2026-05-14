@@ -1,0 +1,181 @@
+/* src/components/LegacyPrintAdminSlider.css */
+
+.legacyprint-admin-slider {
+
+  display: grid;
+
+  gap: 0.65rem;
+
+  padding: 0.9rem;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(17, 24, 39, 0.09);
+
+}
+
+.legacyprint-admin-slider-head {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+}
+
+.legacyprint-admin-slider-head > div {
+
+  display: grid;
+
+  gap: 0.2rem;
+
+}
+
+.legacyprint-admin-slider-label {
+
+  color: rgba(17, 17, 17, 0.58);
+
+  font-size: 0.58rem;
+
+  font-weight: 950;
+
+  letter-spacing: 0.14em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-slider-head strong {
+
+  color: #111;
+
+  font-size: 1.15rem;
+
+  font-weight: 900;
+
+  letter-spacing: -0.04em;
+
+  line-height: 1;
+
+}
+
+.legacyprint-admin-slider-head em {
+
+  flex: 0 0 auto;
+
+  padding: 0.35rem 0.5rem;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 0.58rem;
+
+  font-style: normal;
+
+  font-weight: 950;
+
+  letter-spacing: 0.12em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-admin-slider-track-row {
+
+  display: grid;
+
+  grid-template-columns: minmax(5.5rem, 0.6fr) minmax(9rem, 1fr) minmax(5.5rem, 0.6fr);
+
+  gap: 0.75rem;
+
+  align-items: center;
+
+}
+
+.legacyprint-admin-slider-track-row span {
+
+  color: rgba(17, 17, 17, 0.56);
+
+  font-size: 0.62rem;
+
+  font-weight: 850;
+
+  line-height: 1.2;
+
+}
+
+.legacyprint-admin-slider-track-row span:last-child {
+
+  text-align: right;
+
+}
+
+.legacyprint-admin-slider-track-row input[type='range'] {
+
+  width: 100%;
+
+  accent-color: #111;
+
+}
+
+.legacyprint-admin-slider-copy {
+
+  display: grid;
+
+  gap: 0.32rem;
+
+  padding-top: 0.1rem;
+
+}
+
+.legacyprint-admin-slider-copy p {
+
+  margin: 0;
+
+  color: rgba(17, 17, 17, 0.82);
+
+  font-size: 0.72rem;
+
+  font-weight: 750;
+
+  line-height: 1.45;
+
+}
+
+.legacyprint-admin-slider-copy small {
+
+  color: rgba(17, 17, 17, 0.54);
+
+  font-size: 0.66rem;
+
+  font-weight: 650;
+
+  line-height: 1.4;
+
+}
+
+@media (max-width: 760px) {
+
+  .legacyprint-admin-slider-track-row {
+
+    grid-template-columns: 1fr;
+
+    gap: 0.4rem;
+
+  }
+
+  .legacyprint-admin-slider-track-row span:last-child {
+
+    text-align: left;
+
+  }
+
+}
