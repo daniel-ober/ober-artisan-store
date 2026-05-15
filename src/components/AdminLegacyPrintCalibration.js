@@ -1412,6 +1412,7 @@ const getBenchmarkMeaning = ({ key, value }) => {
 };
 
 const rebalanceMasterWeightGroup = ({
+
   rows,
 
   changedNode,
@@ -1420,70 +1421,491 @@ const rebalanceMasterWeightGroup = ({
 
   nextValue,
 
+  lockedNodes = [],
+
   total = 7,
+
 }) => {
-  const clampedNextValue = clamp(Number(nextValue), 0.25, 1.75);
 
-  const otherRows = rows.filter((row) => row.node !== changedNode);
+  const safeRows = Array.isArray(rows) ? rows.map((row) => ({ ...row })) : [];
 
-  const remainingTotal = Math.max(0, total - clampedNextValue);
+  const minValue = 0.25;
 
-  const currentOtherTotal = otherRows.reduce(
-    (sum, row) => sum + Number(row[weightKey] || 0),
+  const maxValue = 1.75;
 
-    0
-  );
+  const lockedSet = new Set(lockedNodes || []);
 
-  const evenFallback = otherRows.length
-    ? round(remainingTotal / otherRows.length, 2)
-    : 0;
+  if (!safeRows.length) return safeRows;
 
-  const nextRows = rows.map((row) => {
-    if (row.node === changedNode) {
-      return {
-        ...row,
+  if (lockedSet.has(changedNode)) {
 
-        [weightKey]: round(clampedNextValue, 2),
-      };
-    }
+    return safeRows;
 
-    const currentValue = Number(row[weightKey] || 0);
-
-    const adjustedValue =
-      currentOtherTotal > 0
-        ? round((currentValue / currentOtherTotal) * remainingTotal, 2)
-        : evenFallback;
-
-    return {
-      ...row,
-
-      [weightKey]: clamp(adjustedValue, 0.25, 1.75),
-    };
-  });
-
-  const roundedTotal = nextRows.reduce(
-    (sum, row) => sum + Number(row[weightKey] || 0),
-
-    0
-  );
-
-  const correction = round(total - roundedTotal, 2);
-
-  if (Math.abs(correction) >= 0.01) {
-    const correctionTarget = nextRows.find((row) => row.node !== changedNode);
-
-    if (correctionTarget) {
-      correctionTarget[weightKey] = clamp(
-        round(Number(correctionTarget[weightKey] || 0) + correction, 2),
-
-        0.25,
-
-        1.75
-      );
-    }
   }
 
-  return nextRows;
+  const changedRow = safeRows.find((row) => row.node === changedNode);
+
+  if (!changedRow) {
+
+    return safeRows;
+
+  }
+
+  const lockedTotal = safeRows.reduce((sum, row) => {
+
+    if (!lockedSet.has(row.node)) return sum;
+
+    return sum + clamp(Number(row[weightKey] || 0), minValue, maxValue);
+
+  }, 0);
+
+  const otherUnlockedRows = safeRows.filter((row) => {
+
+    if (row.node === changedNode) return false;
+
+    return !lockedSet.has(row.node);
+
+  });
+
+  const minOtherTotal = otherUnlockedRows.length * minValue;
+
+  const maxOtherTotal = otherUnlockedRows.length * maxValue;
+
+  const minChangedValue = Math.max(
+
+    minValue,
+
+    total - lockedTotal - maxOtherTotal
+
+  );
+
+  const maxChangedValue = Math.min(
+
+    maxValue,
+
+    total - lockedTotal - minOtherTotal
+
+  );
+
+  const changedValue = clamp(
+
+    Number(nextValue),
+
+    minChangedValue,
+
+    maxChangedValue
+
+  );
+
+  let remainingTotal = total - lockedTotal - changedValue;
+
+  const nextRows = safeRows.map((row) => {
+
+    if (lockedSet.has(row.node)) {
+
+      return {
+
+        ...row,
+
+        [weightKey]: round(clamp(Number(row[weightKey] || 0), minValue, maxValue), 2),
+
+      };
+
+    }
+
+    if (row.node === changedNode) {
+
+      return {
+
+        ...row,
+
+        [weightKey]: round(changedValue, 2),
+
+      };
+
+    }
+
+    return {
+
+      ...row,
+
+      [weightKey]: null,
+
+    };
+
+  });
+
+  let adjustableNodes = otherUnlockedRows.map((row) => row.node);
+
+  while (adjustableNodes.length) {
+
+    const evenValue = remainingTotal / adjustableNodes.length;
+
+    if (evenValue < minValue) {
+
+      adjustableNodes.forEach((node) => {
+
+        const row = nextRows.find((item) => item.node === node);
+
+        if (row) {
+
+          row[weightKey] = minValue;
+
+        }
+
+      });
+
+      remainingTotal = 0;
+
+      break;
+
+    }
+
+    if (evenValue > maxValue) {
+
+      adjustableNodes.forEach((node) => {
+
+        const row = nextRows.find((item) => item.node === node);
+
+        if (row) {
+
+          row[weightKey] = maxValue;
+
+        }
+
+      });
+
+      remainingTotal = 0;
+
+      break;
+
+    }
+
+    adjustableNodes.forEach((node) => {
+
+      const row = nextRows.find((item) => item.node === node);
+
+      if (row) {
+
+        row[weightKey] = evenValue;
+
+      }
+
+    });
+
+    remainingTotal = 0;
+
+    break;
+
+  }
+
+  let roundedRows = nextRows.map((row) => ({
+
+    ...row,
+
+    [weightKey]: round(
+
+      clamp(Number(row[weightKey] || minValue), minValue, maxValue),
+
+      2
+
+    ),
+
+  }));
+
+  let roundedTotal = round(
+
+    roundedRows.reduce((sum, row) => sum + Number(row[weightKey] || 0), 0),
+
+    2
+
+  );
+
+  let correction = round(total - roundedTotal, 2);
+
+  for (let pass = 0; pass < 20 && Math.abs(correction) >= 0.01; pass += 1) {
+
+    const correctionTarget = roundedRows.find((row) => {
+
+      if (row.node === changedNode) return false;
+
+      if (lockedSet.has(row.node)) return false;
+
+      const value = Number(row[weightKey] || 0);
+
+      if (correction > 0) return value < maxValue;
+
+      return value > minValue;
+
+    });
+
+    if (!correctionTarget) break;
+
+    roundedRows = roundedRows.map((row) => {
+
+      if (row.node !== correctionTarget.node) return row;
+
+      return {
+
+        ...row,
+
+        [weightKey]: round(
+
+          clamp(Number(row[weightKey] || 0) + correction, minValue, maxValue),
+
+          2
+
+        ),
+
+      };
+
+    });
+
+    roundedTotal = round(
+
+      roundedRows.reduce((sum, row) => sum + Number(row[weightKey] || 0), 0),
+
+      2
+
+    );
+
+    correction = round(total - roundedTotal, 2);
+
+  }
+
+  return roundedRows;
+
+};
+
+const getMasterWeightInfluenceValue = (value) => {
+  const numericValue = Number(value);
+
+  if (!Number.isFinite(numericValue)) return 0;
+
+  return round(((numericValue - 1) / 0.75) * 100, 0);
+};
+
+const getMasterWeightDisplayValue = ({ value, displayMode }) => {
+  const numericValue = Number(value);
+
+  if (!Number.isFinite(numericValue)) return '0';
+
+  if (displayMode === 'influence') {
+    const influence = getMasterWeightInfluenceValue(numericValue);
+
+    return influence > 0 ? `+${influence}` : `${influence}`;
+  }
+
+  if (displayMode === 'share') {
+    return `${round((numericValue / 7) * 100, 1)}%`;
+  }
+
+  return round(numericValue, 2);
+};
+
+const getMasterWeightDisplayLabel = ({ value, displayMode }) => {
+  const numericValue = Number(value);
+
+  if (!Number.isFinite(numericValue)) return 'Neutral';
+
+  if (displayMode === 'influence') {
+    const influence = getMasterWeightInfluenceValue(numericValue);
+
+    if (influence < -20) return 'Cut';
+
+    if (influence > 20) return 'Boost';
+
+    return 'Neutral';
+  }
+
+  if (displayMode === 'share') {
+    if (numericValue < 1) return 'Below Avg';
+
+    if (numericValue > 1) return 'Above Avg';
+
+    return 'Avg';
+  }
+
+  if (numericValue < 0.92) return 'Cut';
+
+  if (numericValue > 1.08) return 'Boost';
+
+  return 'Center';
+};
+
+const MasterWeightKnob = ({
+  node,
+
+  weightKey,
+
+  value,
+
+  displayMode,
+
+  isLocked,
+
+  onChange,
+
+  onToggleLock,
+}) => {
+  const min = 0.25;
+
+  const max = 1.75;
+
+  const center = 1;
+
+  const numericValue = clamp(Number(value), min, max);
+
+  const percent = (numericValue - min) / (max - min);
+
+  const angle = -135 + percent * 270;
+
+  const isCentered = Math.abs(numericValue - center) < 0.005;
+
+  const updateFromClientY = (clientY, startY, startValue) => {
+    const delta = startY - clientY;
+
+    const nextValue = clamp(startValue + delta * 0.01, min, max);
+
+    const snappedValue =
+      Math.abs(nextValue - center) < 0.035 ? center : nextValue;
+
+    onChange(round(snappedValue, 2));
+  };
+
+  const handlePointerDown = (event) => {
+    if (isLocked) return;
+
+    event.preventDefault();
+
+    const startY = event.clientY;
+
+    const startValue = numericValue;
+
+    const handlePointerMove = (moveEvent) => {
+      updateFromClientY(moveEvent.clientY, startY, startValue);
+    };
+
+    const handlePointerUp = () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+
+      window.removeEventListener('pointerup', handlePointerUp);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+
+    window.addEventListener('pointerup', handlePointerUp);
+  };
+
+  const handleWheel = (event) => {
+    if (isLocked) return;
+
+    const direction = event.deltaY > 0 ? -1 : 1;
+
+    const nextValue = clamp(numericValue + direction * 0.03, min, max);
+
+    const snappedValue =
+      Math.abs(nextValue - center) < 0.025 ? center : nextValue;
+
+    onChange(round(snappedValue, 2));
+  };
+
+  const displayValue = getMasterWeightDisplayValue({
+    value: numericValue,
+
+    displayMode,
+  });
+
+  const behavior = getMasterWeightDisplayLabel({
+    value: numericValue,
+
+    displayMode,
+  });
+
+  return (
+    <div
+      className={`legacyprint-master-knob-cell ${
+        isLocked ? 'is-locked' : ''
+      } ${isCentered ? 'is-centered' : ''}`}
+    >
+      <button
+        type="button"
+        className={`legacyprint-master-knob ${node}`}
+        onPointerDown={handlePointerDown}
+        onWheel={handleWheel}
+        disabled={isLocked}
+        title="Drag up/down or scroll to adjust"
+      >
+        <span className="legacyprint-master-knob-track" />
+
+        <span
+          className="legacyprint-master-knob-indicator"
+          style={{ transform: `rotate(${angle}deg)` }}
+        />
+
+        <span className="legacyprint-master-knob-center-dot" />
+      </button>
+
+      <strong>{displayValue}</strong>
+
+      <small>
+        {isCentered
+          ? displayMode === 'influence'
+            ? '0'
+            : displayMode === 'share'
+              ? '14.3%'
+              : 'Center'
+          : behavior}
+      </small>
+
+      <button
+        type="button"
+        className={`legacyprint-master-lock-icon ${
+          isLocked ? 'is-locked' : ''
+        }`}
+        onClick={onToggleLock}
+        title={isLocked ? 'Unlock node' : 'Lock node'}
+      >
+        {isLocked ? 'Locked' : 'Editable'}
+      </button>
+    </div>
+  );
+};
+
+const normalizeAllMasterWeightRows = (masterWeights = []) => {
+  return [
+    'firstListenMultiplier',
+    'playerAnalysisMultiplier',
+    'movementMultiplier',
+  ].reduce(
+    (rows, weightKey) => {
+      const currentTotal = rows.reduce(
+        (sum, row) => sum + Number(row[weightKey] || 0),
+
+        0
+      );
+
+      if (Math.abs(currentTotal - 7) < 0.01) {
+        return rows;
+      }
+
+      return rebalanceMasterWeightGroup({
+        rows,
+
+        changedNode: rows[0]?.node || 'attack',
+
+        weightKey,
+
+        nextValue: rows[0]?.[weightKey] || 1,
+
+        lockedNodes: [],
+
+        total: 7,
+      });
+    },
+
+    masterWeights.map((row) => ({ ...row }))
+  );
 };
 
 const AdminLegacyPrintCalibration = () => {
@@ -1513,6 +1935,17 @@ const AdminLegacyPrintCalibration = () => {
   }, [selector, draftCalibration]);
 
   const [activeAxis, setActiveAxis] = useState('attack');
+
+  const [masterWeightDisplayMode, setMasterWeightDisplayMode] =
+    useState('multiplier');
+
+  const [lockedMasterWeights, setLockedMasterWeights] = useState({
+    playerAnalysisMultiplier: [],
+
+    firstListenMultiplier: [],
+
+    movementMultiplier: [],
+  });
 
   const [activeConfigCategory, setActiveConfigCategory] = useState('depth');
 
@@ -1577,7 +2010,13 @@ const AdminLegacyPrintCalibration = () => {
           const activeData = activeSnap.data();
 
           if (isMounted && activeData?.calibration) {
-            setDraftCalibration(activeData.calibration);
+            setDraftCalibration({
+              ...activeData.calibration,
+
+              masterWeights: normalizeAllMasterWeightRows(
+                activeData.calibration.masterWeights
+              ),
+            });
 
             setCalibrationSourceLabel('Firestore Active');
 
@@ -1593,7 +2032,13 @@ const AdminLegacyPrintCalibration = () => {
           const draftData = draftSnap.data();
 
           if (isMounted && draftData?.calibration) {
-            setDraftCalibration(draftData.calibration);
+            setDraftCalibration({
+              ...draftData.calibration,
+
+              masterWeights: normalizeAllMasterWeightRows(
+                draftData.calibration.masterWeights
+              ),
+            });
 
             setCalibrationSourceLabel('Firestore Draft');
 
@@ -1604,8 +2049,13 @@ const AdminLegacyPrintCalibration = () => {
         }
 
         if (isMounted) {
-          setDraftCalibration(legacyPrintCalibrationSeed);
+          setDraftCalibration({
+            ...legacyPrintCalibrationSeed,
 
+            masterWeights: normalizeAllMasterWeightRows(
+              legacyPrintCalibrationSeed.masterWeights
+            ),
+          });
           setCalibrationSourceLabel('Local Seed');
 
           setHasUnsavedChanges(false);
@@ -1614,7 +2064,13 @@ const AdminLegacyPrintCalibration = () => {
         console.error('Failed loading LegacyPrint calibration:', error);
 
         if (isMounted) {
-          setDraftCalibration(legacyPrintCalibrationSeed);
+          setDraftCalibration({
+            ...legacyPrintCalibrationSeed,
+
+            masterWeights: normalizeAllMasterWeightRows(
+              legacyPrintCalibrationSeed.masterWeights
+            ),
+          });
 
           setCalibrationSourceLabel('Local Seed Fallback');
         }
@@ -1754,9 +2210,41 @@ const AdminLegacyPrintCalibration = () => {
 
         nextValue: value,
 
+        lockedNodes: lockedMasterWeights[key] || [],
+
         total: 7,
       }),
     }));
+  };
+
+  const toggleMasterWeightLock = ({ node, weightKey }) => {
+    setLockedMasterWeights((current) => {
+      const currentLockedNodes = current[weightKey] || [];
+
+      const nextLockedNodes = currentLockedNodes.includes(node)
+        ? currentLockedNodes.filter((item) => item !== node)
+        : [...currentLockedNodes, node];
+
+      return {
+        ...current,
+
+        [weightKey]: nextLockedNodes,
+      };
+    });
+  };
+
+  const isMasterWeightLocked = ({ node, weightKey }) => {
+    return (lockedMasterWeights[weightKey] || []).includes(node);
+  };
+
+  const getMasterWeightLabel = (key) => {
+    if (key === 'playerAnalysisMultiplier') return 'Player Analysis';
+
+    if (key === 'firstListenMultiplier') return 'First Listen';
+
+    if (key === 'movementMultiplier') return 'Movement';
+
+    return key;
   };
 
   const updateBenchmarkValue = ({ drumType, node, key, value }) => {
@@ -1922,9 +2410,23 @@ const AdminLegacyPrintCalibration = () => {
   };
 
   const resetDraft = () => {
-    setDraftCalibration(legacyPrintCalibrationSeed);
+    setDraftCalibration({
+      ...legacyPrintCalibrationSeed,
+
+      masterWeights: normalizeAllMasterWeightRows(
+        legacyPrintCalibrationSeed.masterWeights
+      ),
+    });
 
     setSelector(INITIAL_SELECTOR);
+
+    setLockedMasterWeights({
+      firstListenMultiplier: [],
+
+      playerAnalysisMultiplier: [],
+
+      movementMultiplier: [],
+    });
 
     setCalibrationSourceLabel('Local Seed Reset');
 
@@ -2021,13 +2523,7 @@ const AdminLegacyPrintCalibration = () => {
 
       const versionId = `version-${Date.now()}`;
 
-      const versionRef = doc(
-        db,
-
-        LEGACYPRINT_CALIBRATION_COLLECTION,
-
-        versionId
-      );
+      const versionRef = doc(db, LEGACYPRINT_CALIBRATION_COLLECTION, versionId);
 
       const publishedPayload = {
         calibration: {
@@ -2080,7 +2576,6 @@ const AdminLegacyPrintCalibration = () => {
       setIsSavingCalibration(false);
     }
   };
-
   const renderFirstListenTriangle = () => (
     <div className="legacyprint-admin-first-triangle-shell">
       <VoiceThreadMap
@@ -2489,10 +2984,15 @@ const AdminLegacyPrintCalibration = () => {
             <div className="legacyprint-admin-section-heading">
               <div>
                 <p className="legacyprint-admin-overline">
-                  Calibration overview
+                  Calibration system status
                 </p>
 
-                <h3>Editable calibration draft is loaded.</h3>
+                <h3>LegacyPrint™ calibration dashboard</h3>
+
+                <p className="legacyprint-admin-section-subcopy">
+                  Quick health check for the active calibration source, draft
+                  state, version history, and engine coverage.
+                </p>
               </div>
 
               <span className="legacyprint-admin-status-dot">
@@ -2506,21 +3006,60 @@ const AdminLegacyPrintCalibration = () => {
 
             <div className="legacyprint-admin-grid">
               <LegacyPrintStatCard
+                label="Calibration Source"
+                value={
+                  isLoadingCalibration
+                    ? 'Loading'
+                    : calibrationSourceLabel || 'Local Seed'
+                }
+                detail={
+                  hasUnsavedChanges
+                    ? 'Draft has unsaved local changes'
+                    : 'Current working calibration'
+                }
+              />
+
+              <LegacyPrintStatCard
                 label="Active Version"
-                value={draftCalibration.version.label}
-                detail={draftCalibration.version.updatedAt}
+                value={
+                  draftCalibration.version?.label || 'Untitled Calibration'
+                }
+                detail={
+                  draftCalibration.version?.updatedAt ||
+                  'No timestamp available'
+                }
               />
 
               <LegacyPrintStatCard
                 label="Config Options"
                 value={configOptionCount}
-                detail="Across all selector categories"
+                detail="Across all selector tables"
               />
 
               <LegacyPrintStatCard
                 label="Benchmark Rows"
-                value={draftCalibration.typeBenchmarks.length}
-                detail="Drum type × seven nodes"
+                value={draftCalibration.typeBenchmarks?.length || 0}
+                detail="5 drum types × 7 voice nodes"
+              />
+            </div>
+
+            <div className="legacyprint-admin-grid legacyprint-admin-grid--compact">
+              <LegacyPrintStatCard
+                label="Voice Nodes"
+                value={LEGACYPRINT_NODE_ORDER.length}
+                detail="Attack, brightness, projection, sustain, warmth, sensitivity, control"
+              />
+
+              <LegacyPrintStatCard
+                label="Drum Types"
+                value={
+                  new Set(
+                    (draftCalibration.typeBenchmarks || []).map(
+                      (row) => row.drumType
+                    )
+                  ).size
+                }
+                detail="Snare, toms, bass, and concert tom coverage"
               />
 
               <LegacyPrintStatCard
@@ -2528,27 +3067,64 @@ const AdminLegacyPrintCalibration = () => {
                 value="SoundLegend Only"
                 detail="0.25 in depth increments"
               />
+
+              <LegacyPrintStatCard
+                label="Saved Versions"
+                value={savedVersions.length}
+                detail={
+                  savedVersions.length
+                    ? 'Loaded from Firestore snapshots'
+                    : 'Refresh from Versions tab'
+                }
+              />
             </div>
 
             <div className="legacyprint-admin-overview-split">
               <div className="legacyprint-admin-note">
-                <strong>Editable draft mode</strong>
+                <strong>Calibration workflow</strong>
 
                 <span>
-                  Master Weights, Type Benchmarks, and Config Options can now be
-                  edited locally. Voice Preview reads directly from this draft.
+                  Adjust Master Weights, Benchmarks, and Config Options. Test
+                  the result in Voice Preview. Save Draft when you want to keep
+                  working changes. Publish Active when the calibration is ready
+                  for the live engine.
                 </span>
               </div>
 
               <div className="legacyprint-admin-note neutral">
-                <strong>Firestore calibration source</strong>
+                <strong>System checklist</strong>
 
-                <span>
-                  Current source: {calibrationSourceLabel}. Save Draft writes to
-                  legacyprint_calibrations/draft. Publish Active writes to
-                  active, syncs the draft, and creates a timestamped version
-                  snapshot.
-                </span>
+                <ul className="legacyprint-admin-checklist">
+                  <li>
+                    <span>✓</span>
+
+                    <strong>Firestore source loaded</strong>
+                  </li>
+
+                  <li>
+                    <span>✓</span>
+
+                    <strong>Draft save enabled</strong>
+                  </li>
+
+                  <li>
+                    <span>✓</span>
+
+                    <strong>Publish creates active + version snapshot</strong>
+                  </li>
+
+                  <li className="pending">
+                    <span>•</span>
+
+                    <strong>Version revert controls coming next</strong>
+                  </li>
+
+                  <li className="pending">
+                    <span>•</span>
+
+                    <strong>Visibility editing controls coming next</strong>
+                  </li>
+                </ul>
               </div>
             </div>
           </section>
@@ -2726,9 +3302,10 @@ const AdminLegacyPrintCalibration = () => {
                 <h3>Master Weights</h3>
 
                 <p className="legacyprint-admin-section-subcopy">
-                  These sliders are balanced as grouped weights. Each multiplier
-                  group totals 7.00 across the seven nodes, so raising one node
-                  lowers the others proportionally.
+                  Each row controls one read layer. Every row should total 7.00
+                  across the seven voice nodes. Lock any node you want to
+                  preserve, then edit another value — only the unlocked nodes in
+                  that row will rebalance.
                 </p>
               </div>
 
@@ -2739,173 +3316,196 @@ const AdminLegacyPrintCalibration = () => {
                   updateDraftCalibration((current) => ({
                     ...current,
 
-                    masterWeights: legacyPrintCalibrationSeed.masterWeights,
+                    masterWeights: normalizeAllMasterWeightRows(
+                      legacyPrintCalibrationSeed.masterWeights
+                    ),
                   }));
+
+                  setLockedMasterWeights({
+                    playerAnalysisMultiplier: [],
+
+                    firstListenMultiplier: [],
+
+                    movementMultiplier: [],
+                  });
                 }}
               >
                 Reset Master Weights
               </button>
             </div>
 
-            <div className="legacyprint-master-weight-summary">
-              {[
-                'playerAnalysisMultiplier',
-                'firstListenMultiplier',
-                'movementMultiplier',
-              ].map((weightKey) => {
-                const total = draftCalibration.masterWeights.reduce(
-                  (sum, row) => sum + Number(row[weightKey] || 0),
+            <div className="legacyprint-master-display-toggle">
+              <span>Display Values</span>
 
-                  0
-                );
+              <div>
+                <button
+                  type="button"
+                  className={
+                    masterWeightDisplayMode === 'multiplier' ? 'active' : ''
+                  }
+                  onClick={() => setMasterWeightDisplayMode('multiplier')}
+                >
+                  Multiplier
+                </button>
 
-                const label =
-                  weightKey === 'playerAnalysisMultiplier'
-                    ? 'Player Analysis'
-                    : weightKey === 'firstListenMultiplier'
-                      ? 'First Listen'
-                      : 'Movement';
+                <button
+                  type="button"
+                  className={
+                    masterWeightDisplayMode === 'influence' ? 'active' : ''
+                  }
+                  onClick={() => setMasterWeightDisplayMode('influence')}
+                >
+                  Influence
+                </button>
 
-                return (
-                  <span key={weightKey}>
-                    <small>{label}</small>
+                <button
+                  type="button"
+                  className={
+                    masterWeightDisplayMode === 'share' ? 'active' : ''
+                  }
+                  onClick={() => setMasterWeightDisplayMode('share')}
+                >
+                  Share
+                </button>
+              </div>
 
-                    <strong>{round(total, 2)} / 7.00</strong>
-                  </span>
-                );
-              })}
+              <small>
+                Influence shows each node as a -100 to +100 bias around neutral.
+                Share shows each node as part of the row total.
+              </small>
             </div>
 
-            <div className="legacyprint-master-weight-grid">
-              {draftCalibration.masterWeights.map((row) => (
-                <div key={row.node} className="legacyprint-master-weight-card">
-                  <div className="legacyprint-master-weight-card-head">
-                    <div>
-                      <span className="legacyprint-admin-overline">
-                        Voice Node
-                      </span>
+            <div className="legacyprint-master-matrix-wrap">
+              <table className="legacyprint-master-matrix">
+                <thead>
+                  <tr>
+                    <th>Read Layer</th>
 
-                      <h4>{LEGACYPRINT_NODE_LABELS[row.node]}</h4>
-                    </div>
+                    {LEGACYPRINT_NODE_ORDER.map((node) => (
+                      <th key={node}>
+                        <span
+                          className={`legacyprint-master-node-dot ${node}`}
+                        />
 
-                    <button
-                      type="button"
-                      className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-                      onClick={() => {
-                        const defaultRow =
-                          legacyPrintCalibrationSeed.masterWeights.find(
-                            (item) => item.node === row.node
-                          );
+                        {LEGACYPRINT_NODE_LABELS[node]}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-                        if (!defaultRow) return;
+                <tbody>
+                  {[
+                    'firstListenMultiplier',
 
-                        updateDraftCalibration((current) => ({
-                          ...current,
+                    'playerAnalysisMultiplier',
 
-                          masterWeights: current.masterWeights.map((item) =>
-                            item.node === row.node
-                              ? {
-                                  ...item,
+                    'movementMultiplier',
+                  ].map((weightKey) => {
+                    return (
+                      <tr key={weightKey}>
+                        <td className="legacyprint-master-layer-cell">
+                          <strong>{getMasterWeightLabel(weightKey)}</strong>
 
-                                  playerAnalysisMultiplier:
-                                    defaultRow.playerAnalysisMultiplier,
+                          <small>
+                            {weightKey === 'playerAnalysisMultiplier'
+                              ? 'Full seven-node player read'
+                              : weightKey === 'firstListenMultiplier'
+                                ? 'What surfaces first'
+                                : 'How strongly node movement is allowed to show'}
+                          </small>
+                        </td>
 
-                                  firstListenMultiplier:
-                                    defaultRow.firstListenMultiplier,
+                        {LEGACYPRINT_NODE_ORDER.map((node) => {
+                          const row = (
+                            draftCalibration.masterWeights || []
+                          ).find((item) => item.node === node);
 
-                                  movementMultiplier:
-                                    defaultRow.movementMultiplier,
+                          const value = Number(row?.[weightKey] || 0);
 
-                                  notes: defaultRow.notes,
+                          const isLocked = isMasterWeightLocked({
+                            node,
+                            weightKey,
+                          });
+
+                          return (
+                            <td
+                              key={`${weightKey}-${node}`}
+                              className={
+                                isLocked
+                                  ? 'legacyprint-master-cell--locked'
+                                  : ''
+                              }
+                            >
+                              <MasterWeightKnob
+                                node={node}
+                                weightKey={weightKey}
+                                value={value}
+                                displayMode={masterWeightDisplayMode}
+                                isLocked={isLocked}
+                                onChange={(nextValue) =>
+                                  updateMasterWeightGroupValue({
+                                    node,
+
+                                    key: weightKey,
+
+                                    value: nextValue,
+                                  })
                                 }
-                              : item
-                          ),
-                        }));
-                      }}
-                    >
-                      Reset Node
-                    </button>
-                  </div>
+                                onToggleLock={() =>
+                                  toggleMasterWeightLock({
+                                    node,
 
-                  <div className="legacyprint-master-weight-slider-stack">
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="master"
-                      weightKey="playerAnalysisMultiplier"
-                      value={row.playerAnalysisMultiplier}
-                      min={0.25}
-                      max={1.75}
-                      step={0.01}
-                      onChange={(value) =>
-                        updateMasterWeightGroupValue({
-                          node: row.node,
+                                    weightKey,
+                                  })
+                                }
+                              />
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
 
-                          key: 'playerAnalysisMultiplier',
-
-                          value,
-                        })
-                      }
+            <div className="legacyprint-master-notes-grid">
+              {(draftCalibration.masterWeights || []).map((row) => (
+                <label key={row.node} className="legacyprint-master-note-row">
+                  <span>
+                    <span
+                      className={`legacyprint-master-node-dot ${row.node}`}
                     />
+                    {LEGACYPRINT_NODE_LABELS[row.node]} Notes
+                  </span>
 
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="master"
-                      weightKey="firstListenMultiplier"
-                      value={row.firstListenMultiplier}
-                      min={0.25}
-                      max={1.75}
-                      step={0.01}
-                      onChange={(value) =>
-                        updateMasterWeightGroupValue({
-                          node: row.node,
+                  <input
+                    type="text"
+                    value={row.notes || ''}
+                    className="legacyprint-admin-notes-input"
+                    onChange={(event) =>
+                      updateMasterWeightValue({
+                        node: row.node,
 
-                          key: 'firstListenMultiplier',
+                        key: 'notes',
 
-                          value,
-                        })
-                      }
-                    />
-
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="master"
-                      weightKey="movementMultiplier"
-                      value={row.movementMultiplier}
-                      min={0.25}
-                      max={1.75}
-                      step={0.01}
-                      onChange={(value) =>
-                        updateMasterWeightGroupValue({
-                          node: row.node,
-
-                          key: 'movementMultiplier',
-
-                          value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <label className="legacyprint-master-weight-note">
-                    <span>Internal Notes</span>
-
-                    <input
-                      type="text"
-                      value={row.notes || ''}
-                      className="legacyprint-admin-notes-input"
-                      onChange={(event) =>
-                        updateMasterWeightValue({
-                          node: row.node,
-
-                          key: 'notes',
-
-                          value: event.target.value,
-                        })
-                      }
-                    />
-                  </label>
-                </div>
+                        value: event.target.value,
+                      })
+                    }
+                  />
+                </label>
               ))}
+            </div>
+
+            <div className="legacyprint-admin-note neutral legacyprint-master-helper-note">
+              <strong>How this works</strong>
+
+              <span>
+                A neutral read layer would be 1.00 per node for a total of 7.00.
+                Values below 1.00 restrain a node. Values above 1.00 emphasize
+                it. Locked cells stay fixed while unlocked cells absorb the
+                rebalance.
+              </span>
             </div>
           </section>
         )}
