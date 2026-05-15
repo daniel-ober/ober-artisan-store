@@ -5,98 +5,109 @@ import React, { useMemo, useState } from 'react';
 import './AdminLegacyPrintSelector.css';
 
 const SELECTOR_GROUPS = [
+  {
+    key: 'referenceTarget',
+
+    title: 'Reference Target',
+
+    fields: [
+      'drumType',
+
+      'nonOberCompanyType',
+
+      'nonOberCompanyName',
+
+      'nonOberLineName',
+
+      'nonOberModelName',
+    ],
+  },
 
   {
-
     key: 'foundation',
 
     title: 'Foundation',
 
- fields: [
+    fields: [
+      'diameter',
 
-  'drumType',
+      'depth',
 
-  'construction',
+      'thickness',
 
-  'diameter',
+      'lugCount',
 
-  'depth',
+      'staveCount',
 
-  'thickness',
+      'nonOberBaselineConstruction',
 
-  'lugCount',
+      'nonOberMaterial',
 
-  'staveCount',
+      'nonOberThicknessGroup',
 
-],
-
+      'nonOberLineSoundFocus',
+    ],
   },
 
   {
-
     key: 'shellConstruction',
 
     title: 'Shell Construction',
 
-       fields: [
+    fields: [
+      'soundLegendConstructionType',
 
-  'soundLegendConstructionType',
+      'soundLegendWoodSpeciesCount',
 
-  'soundLegendWoodSpeciesCount',
+      'soundLegendWoodSpeciesPrimary',
 
-  'soundLegendWoodSpeciesPrimary',
+      'soundLegendWoodSpeciesSecondary',
 
-  'soundLegendWoodSpeciesSecondary',
+      'soundLegendWoodSpeciesTertiary',
 
-  'soundLegendWoodSpeciesTertiary',
+      'soundLegendWoodSpeciesQuaternary',
 
-  'soundLegendWoodSpeciesQuaternary',
+      'coreStaveShell',
 
-  'coreStaveShell',
+      'steamBentExterior',
 
-  'steamBentExterior',
+      'soundLegendVeneerExterior',
 
-  'soundLegendVeneerExterior',
+      'nonOberPlyLayupStyle',
 
+      'nonOberReinforcementRings',
+
+      'nonOberBeadedShell',
     ],
-
   },
 
-{
+  {
+    key: 'finish',
 
-  key: 'finish',
+    title: 'Finish',
 
-  title: 'Finish',
-
-  fields: ['finish', 'stainOption', 'exteriorScorch', 'finishCoating'],
-
-},
+    fields: ['finish', 'stainOption', 'exteriorScorch', 'finishCoating'],
+  },
 
   {
-
     key: 'response',
 
     title: 'Response',
 
-  fields: ['hoopType', 'bearingEdge', 'snareBed', 'snareWires'],
+    fields: ['hoopType', 'bearingEdge', 'snareBed', 'snareWires'],
   },
 
   {
-
     key: 'headsAndTuning',
 
     title: 'Heads & Tuning',
 
     fields: ['batterHead', 'resoHead', 'tension'],
-
   },
-
 ];
 
 const normalizeText = (value = '') => {
-
   return String(value || '')
-
     .toLowerCase()
 
     .replace(/[øØ]/g, 'o')
@@ -104,71 +115,99 @@ const normalizeText = (value = '') => {
     .replace(/[^a-z0-9]+/g, ' ')
 
     .trim();
-
 };
 
 const isHeritageConstruction = (construction = '') => {
-
   return normalizeText(construction).includes('heritage');
-
 };
 
 const isFeuzonConstruction = (construction = '') => {
-
   return normalizeText(construction).includes('feuzon');
-
 };
 
 const isSoundLegendConstruction = (construction = '') => {
-
   return normalizeText(construction).includes('soundlegend');
-
 };
 
 const isHeritageOrFeuzonConstruction = (construction = '') => {
-
   return (
-
     isHeritageConstruction(construction) || isFeuzonConstruction(construction)
-
   );
-
 };
 
 const soundLegendTypeUsesHybridShell = (constructionType = '') => {
-
   return normalizeText(constructionType).includes('hybrid');
-
 };
 
 const soundLegendTypeUsesVeneer = (constructionType = '') => {
-
   return normalizeText(constructionType).includes('veneer');
-
 };
 
 const STOCK_TEXT_ONLY_FIELDS = ['snareWires', 'batterHead', 'resoHead'];
 
 const isStockTextOnlyField = ({ selector, fieldKey, options = [] }) => {
-
   if (!isHeritageOrFeuzonConstruction(selector?.construction)) return false;
 
   if (!STOCK_TEXT_ONLY_FIELDS.includes(fieldKey)) return false;
 
   return options.length === 1;
-
 };
 
 const shouldHideField = ({ selector, fieldKey, options = [] }) => {
-
   if (!options.length) return true;
-
-  if (!isSoundLegendConstruction(selector?.construction)) {
 
     if (
 
-      [
+    selector?.nonOberCompanyType === 'Generic / Baseline Reference' &&
 
+    fieldKey === 'nonOberBaselineConstruction'
+
+  ) {
+
+    return true;
+
+  }
+
+  const isNonOberReference =
+    normalizeText(selector?.construction).includes('generic') ||
+    ['Generic Ply Shell', 'Generic Metal Shell'].includes(
+      selector?.construction
+    );
+  if (!isNonOberReference) {
+    if (
+      [
+        'nonOberReferenceTarget',
+
+        'nonOberCompanyType',
+
+        'nonOberCompanyName',
+
+        'nonOberLineName',
+
+        'nonOberModelName',
+
+        'nonOberBaselineConstruction',
+
+        'nonOberMaterial',
+
+        'nonOberThicknessGroup',
+
+        'nonOberLineSoundFocus',
+
+        'nonOberPlyLayupStyle',
+
+        'nonOberReinforcementRings',
+
+        'nonOberBeadedShell',
+      ].includes(fieldKey)
+    ) {
+      return true;
+    }
+  }
+
+  if (!isSoundLegendConstruction(selector?.construction)) {
+    if (
+      [
         'soundLegendConstructionType',
 
         'soundLegendWoodSpeciesCount',
@@ -182,21 +221,61 @@ const shouldHideField = ({ selector, fieldKey, options = [] }) => {
         'soundLegendWoodSpeciesQuaternary',
 
         'soundLegendVeneerExterior',
-
       ].includes(fieldKey)
-
     ) {
-
       return true;
+    }
+  }
 
+  if (isNonOberReference) {
+    const baselineConstruction = normalizeText(
+      selector?.nonOberBaselineConstruction
+    );
+
+    if (
+      fieldKey === 'nonOberLineSoundFocus' &&
+      selector?.nonOberReferenceTarget !== 'Overall Line Sound'
+    ) {
+      return true;
     }
 
+    if (
+      ['diameter', 'depth', 'lugCount'].includes(fieldKey) &&
+      selector?.nonOberReferenceTarget === 'Overall Line Sound'
+    ) {
+      return true;
+    }
+
+    if (fieldKey === 'staveCount' && !baselineConstruction.includes('stave')) {
+      return true;
+    }
+
+    if (
+      fieldKey === 'nonOberPlyLayupStyle' &&
+      !baselineConstruction.includes('ply')
+    ) {
+      return true;
+    }
+
+    if (
+      fieldKey === 'nonOberBeadedShell' &&
+      !baselineConstruction.includes('metal')
+    ) {
+      return true;
+    }
+
+    if (
+      fieldKey === 'nonOberReinforcementRings' &&
+      !['ply', 'steam bent', 'solid'].some((type) =>
+        baselineConstruction.includes(type)
+      )
+    ) {
+      return true;
+    }
   }
 
   if (isHeritageConstruction(selector?.construction)) {
-
     return [
-
       'exteriorScorch',
 
       'coreStaveShell',
@@ -206,57 +285,38 @@ const shouldHideField = ({ selector, fieldKey, options = [] }) => {
       'topBearingEdge',
 
       'bottomBearingEdge',
-
     ].includes(fieldKey);
-
   }
 
   if (isFeuzonConstruction(selector?.construction)) {
-
     return ['scorchDepth', 'topBearingEdge', 'bottomBearingEdge'].includes(
-
       fieldKey
-
     );
-
   }
 
   if (isSoundLegendConstruction(selector?.construction)) {
-
     const usesHybridShell = soundLegendTypeUsesHybridShell(
-
       selector?.soundLegendConstructionType
-
     );
 
     const usesVeneer = soundLegendTypeUsesVeneer(
-
       selector?.soundLegendConstructionType
-
     );
 
     if (['coreStaveShell', 'steamBentExterior'].includes(fieldKey)) {
-
       return !usesHybridShell;
-
     }
 
     if (fieldKey === 'soundLegendVeneerExterior') {
-
       return !usesVeneer;
-
     }
-
   }
 
   return false;
-
 };
 
 const formatSelectorOptionLabel = (option = '') => {
-
   return String(option || '')
-
     .replace('Single Drum Type Benchmark', 'Single Drum Type Benchmark')
 
     .replace('All Drum Type Comparison', 'All Drum Type Comparison')
@@ -275,7 +335,10 @@ const formatSelectorOptionLabel = (option = '') => {
 
     .replace('45° Inner / Soft Outer Roundover', '45° Soft')
 
-    .replace('45° inner edge with softened outer roundover', '45° inner edge with softened outer roundover')
+    .replace(
+      '45° inner edge with softened outer roundover',
+      '45° inner edge with softened outer roundover'
+    )
 
     .replace('20-strand', '20')
 
@@ -285,7 +348,10 @@ const formatSelectorOptionLabel = (option = '') => {
 
     .replace('30-strand', '30')
 
-    .replace('PureSound Custom Pro Steel 20-Strand wires', 'PureSound Custom Pro Steel 20-Strand wires')
+    .replace(
+      'PureSound Custom Pro Steel 20-Strand wires',
+      'PureSound Custom Pro Steel 20-Strand wires'
+    )
 
     .replace('Remo Coated Ambassador', 'Remo Coated Ambassador')
 
@@ -350,43 +416,53 @@ const formatSelectorOptionLabel = (option = '') => {
     .replace('Non-Scorched', 'Non-Scorched')
 
     .replace('Natural Scorched', 'Natural Scorched');
-
 };
 
 const getGroupSummary = ({ group, selector }) => {
-
- if (group.key === 'foundation') {
-
-  return [
-
-    selector.construction,
-
-    selector.diameter && selector.depth
-
-      ? `${selector.diameter} × ${selector.depth}`
-
-      : '',
-
-    selector.thickness,
-
-    selector.lugCount,
-
-    selector.staveCount,
-
-  ]
-
-    .filter(Boolean)
-
-    .map(formatSelectorOptionLabel)
-
-    .join(' · ');
-
-}
-
-   if (group.key === 'shellConstruction') {
-
+  if (group.key === 'referenceTarget') {
     return [
+      selector.nonOberReferenceTarget,
 
+      selector.nonOberCompanyType,
+
+      selector.nonOberCompanyName,
+
+      selector.nonOberLineName,
+
+      selector.nonOberModelName,
+    ]
+
+      .filter(Boolean)
+
+      .map(formatSelectorOptionLabel)
+
+      .join(' · ');
+  }
+
+  if (group.key === 'foundation') {
+    return [
+      selector.construction,
+
+      selector.diameter && selector.depth
+        ? `${selector.diameter} × ${selector.depth}`
+        : '',
+
+      selector.thickness,
+
+      selector.lugCount,
+
+      selector.staveCount,
+    ]
+
+      .filter(Boolean)
+
+      .map(formatSelectorOptionLabel)
+
+      .join(' · ');
+  }
+
+  if (group.key === 'shellConstruction') {
+    return [
       selector.soundLegendWoodSpeciesCount,
 
       selector.soundLegendWoodSpeciesPrimary,
@@ -402,7 +478,6 @@ const getGroupSummary = ({ group, selector }) => {
       selector.steamBentExterior,
 
       selector.soundLegendVeneerExterior,
-
     ]
 
       .filter(Boolean)
@@ -410,37 +485,29 @@ const getGroupSummary = ({ group, selector }) => {
       .map(formatSelectorOptionLabel)
 
       .join(' · ');
-
   }
 
-if (group.key === 'finish') {
+  if (group.key === 'finish') {
+    return [
+      selector.finish,
 
-  return [
+      selector.stainOption,
 
-    selector.finish,
+      selector.exteriorScorch,
 
-    selector.stainOption,
+      selector.finishCoating,
+    ]
 
-    selector.exteriorScorch,
+      .filter(Boolean)
 
-    selector.finishCoating,
+      .map(formatSelectorOptionLabel)
 
-  ]
-
-    .filter(Boolean)
-
-    .map(formatSelectorOptionLabel)
-
-    .join(' · ');
-
-}
+      .join(' · ');
+  }
 
   if (group.key === 'response') {
-
     const edgeLabel =
-
       selector.bearingEdge ||
-
       [selector.topBearingEdge, selector.bottomBearingEdge]
 
         .filter(Boolean)
@@ -454,11 +521,9 @@ if (group.key === 'finish') {
       .map(formatSelectorOptionLabel)
 
       .join(' · ');
-
   }
 
   if (group.key === 'headsAndTuning') {
-
     return [selector.batterHead, selector.resoHead, selector.tension]
 
       .filter(Boolean)
@@ -466,41 +531,46 @@ if (group.key === 'finish') {
       .map(formatSelectorOptionLabel)
 
       .join(' · ');
-
   }
 
   return '';
-
 };
 
 const FixedSpecField = ({ label, value, detail = '' }) => {
-
   return (
-
     <div className="lp-selector-field lp-selector-fixed-field">
-
       <div className="lp-selector-field-header">
-
         <span>{label}</span>
-
       </div>
 
       <div className="lp-selector-fixed-value">
-
         <strong>{value}</strong>
 
         {detail && <small>{detail}</small>}
-
       </div>
-
     </div>
-
   );
+};
 
+const getFieldLabel = ({ field, selector }) => {
+  if (
+    selector?.nonOberCompanyType === 'Generic / Baseline Reference' &&
+    field.key === 'nonOberLineName'
+  ) {
+    return 'Shell Construction';
+  }
+
+  if (
+    selector?.nonOberCompanyType === 'Generic / Baseline Reference' &&
+    field.key === 'nonOberModelName'
+  ) {
+    return 'Material / Core Config';
+  }
+
+  return field.label;
 };
 
 const SelectorButtonField = ({
-
   field,
 
   options = [],
@@ -510,89 +580,53 @@ const SelectorButtonField = ({
   selector,
 
   onSelectorChange,
-
 }) => {
-
   if (
-
     isStockTextOnlyField({
-
       selector,
 
       fieldKey: field.key,
 
       options,
-
     })
-
   ) {
-
     return (
-
       <FixedSpecField
-
         label={field.label}
-
         value={formatSelectorOptionLabel(options[0])}
-
         detail="Stock configuration"
-
       />
-
     );
-
   }
 
   return (
-
     <div className="lp-selector-field">
-
       <div className="lp-selector-field-header">
-
-        <span>{field.label}</span>
-
+        <span>{getFieldLabel({ field, selector })}</span>{' '}
       </div>
 
       <div className="lp-selector-option-grid">
-
         {options.map((option) => {
-
           const isActive = value === option;
 
           return (
-
             <button
-
               key={option}
-
               type="button"
-
               className={`lp-selector-option ${isActive ? 'is-active' : ''}`}
-
               title={option}
-
               onClick={() => onSelectorChange(field.key, option)}
-
             >
-
               {formatSelectorOptionLabel(option)}
-
             </button>
-
           );
-
         })}
-
       </div>
-
     </div>
-
   );
-
 };
 
 const AdminLegacyPrintSelector = ({
-
   selectorFields = [],
 
   calibration,
@@ -602,25 +636,18 @@ const AdminLegacyPrintSelector = ({
   getSelectorOptions,
 
   onSelectorChange,
-
 }) => {
-
   const [openGroup, setOpenGroup] = useState('foundation');
 
   const fieldsByKey = useMemo(() => {
-
     return selectorFields.reduce((acc, field) => {
-
       acc[field.key] = field;
 
       return acc;
-
     }, {});
-
   }, [selectorFields]);
 
   const getVisibleFieldsForGroup = (group) => {
-
     return group.fields
 
       .map((fieldKey) => fieldsByKey[fieldKey])
@@ -628,51 +655,36 @@ const AdminLegacyPrintSelector = ({
       .filter(Boolean)
 
       .filter((field) => {
-
         const options = getSelectorOptions({
-
           calibration,
 
           field,
 
           selector,
-
         });
 
         return !shouldHideField({
-
           selector,
 
           fieldKey: field.key,
 
           options,
-
         });
-
       });
-
   };
 
   return (
-
     <aside className="lp-selector-shell">
-
       <div className="lp-selector-topbar">
-
         <div>
-
           <p>Selector</p>
 
           <h4>Build Voice Input</h4>
-
         </div>
-
       </div>
 
       <div className="lp-selector-accordion">
-
         {SELECTOR_GROUPS.map((group) => {
-
           const visibleFields = getVisibleFieldsForGroup(group);
 
           if (!visibleFields.length) return null;
@@ -680,141 +692,82 @@ const AdminLegacyPrintSelector = ({
           const isOpen = openGroup === group.key;
 
           return (
-
             <section
-
               key={group.key}
-
               className={`lp-selector-section ${isOpen ? 'is-open' : ''}`}
-
             >
-
               <button
-
                 type="button"
-
                 className="lp-selector-section-trigger"
-
                 onClick={() =>
-
                   setOpenGroup((current) =>
-
                     current === group.key ? '' : group.key
-
                   )
-
                 }
-
               >
-
                 <span>{group.title}</span>
 
                 <strong>{getGroupSummary({ group, selector })}</strong>
 
                 <em>{isOpen ? '−' : '+'}</em>
-
               </button>
 
               {isOpen && (
-
                 <div className="lp-selector-section-body">
-
                   <div className="lp-selector-fields">
-
                     {visibleFields.map((field) => {
-
                       const options = getSelectorOptions({
-
                         calibration,
 
                         field,
 
                         selector,
-
                       });
 
                       return (
-
                         <SelectorButtonField
-
                           key={field.key}
-
                           field={field}
-
                           options={options}
-
                           value={selector[field.key] || ''}
-
                           selector={selector}
-
                           onSelectorChange={onSelectorChange}
-
                         />
-
                       );
-
                     })}
 
                     {group.key === 'foundation' &&
-
                       isHeritageConstruction(selector.construction) && (
-
                         <FixedSpecField
-
                           label="Construction"
-
                           value="Northern Red Oak stave shell construction"
-
                         />
-
                       )}
 
                     {group.key === 'foundation' &&
-
                       isFeuzonConstruction(selector.construction) && (
-
                         <FixedSpecField
-
                           label="Construction"
-
                           value="Hybrid shell: core stave shell with paired steam-bent exterior"
-
                         />
-
                       )}
 
-                                  {group.key === 'foundation' &&
-
+                    {group.key === 'foundation' &&
                       isSoundLegendConstruction(selector.construction) && (
-
                         <FixedSpecField
-
                           label="Line"
-
                           value="Full custom Ober / artist-led builder"
-
                         />
-
                       )}
-
                   </div>
-
                 </div>
-
               )}
-
             </section>
-
           );
-
         })}
-
       </div>
-
     </aside>
-
   );
-
 };
 
 export default AdminLegacyPrintSelector;
