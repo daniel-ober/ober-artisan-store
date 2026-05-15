@@ -89,6 +89,38 @@ const SELECTOR_FIELDS = [
   },
 
   {
+    key: 'nonOberCompanyType',
+
+    label: 'Company Type',
+
+    source: 'nonOberCompanyType',
+  },
+
+  {
+    key: 'nonOberCompanyName',
+
+    label: 'Company / Builder',
+
+    source: 'nonOberCompanyName',
+  },
+
+  {
+    key: 'nonOberLineName',
+
+    label: 'Line / Series',
+
+    source: 'nonOberLineName',
+  },
+
+  {
+    key: 'nonOberModelName',
+
+    label: 'Model',
+
+    source: 'nonOberModelName',
+  },
+
+  {
     key: 'diameter',
 
     label: 'Diameter',
@@ -113,6 +145,14 @@ const SELECTOR_FIELDS = [
   },
 
   {
+    key: 'lugCount',
+
+    label: 'Lug Count',
+
+    source: 'lugCount',
+  },
+
+  {
     key: 'staveCount',
 
     label: 'Stave Count',
@@ -120,94 +160,124 @@ const SELECTOR_FIELDS = [
     source: 'staveCount',
   },
 
-   {
+  {
+    key: 'nonOberBaselineConstruction',
 
-    key: 'lugCount',
+    label: 'Baseline Construction',
 
-    label: 'Lug Count',
-
-    source: 'lugCount',
-
+    source: 'nonOberBaselineConstruction',
   },
 
   {
+    key: 'nonOberMaterial',
 
+    label: 'Material',
+
+    source: 'nonOberMaterial',
+  },
+
+  {
+    key: 'nonOberThicknessGroup',
+
+    label: 'Thickness Range',
+
+    source: 'nonOberThicknessGroup',
+  },
+
+  {
+    key: 'nonOberLineSoundFocus',
+
+    label: 'Line Sound Focus',
+
+    source: 'nonOberLineSoundFocus',
+  },
+
+  {
+    key: 'nonOberPlyLayupStyle',
+
+    label: 'Ply Layup Style',
+
+    source: 'nonOberPlyLayupStyle',
+  },
+
+  {
+    key: 'nonOberReinforcementRings',
+
+    label: 'Reinforcement Rings',
+
+    source: 'nonOberReinforcementRings',
+  },
+
+  {
+    key: 'nonOberBeadedShell',
+
+    label: 'Beaded Shell',
+
+    source: 'nonOberBeadedShell',
+  },
+
+  {
     key: 'soundLegendConstructionType',
 
     label: 'Construction Type',
 
     source: 'soundLegendConstructionType',
-
   },
 
   {
-
     key: 'soundLegendWoodSpeciesCount',
 
     label: 'Wood Species Count',
 
     source: 'soundLegendWoodSpeciesCount',
-
   },
 
   {
-
     key: 'soundLegendWoodSpeciesPrimary',
 
     label: 'Primary Wood Species',
 
     source: 'soundLegendWoodSpeciesPrimary',
-
   },
 
   {
-
     key: 'soundLegendWoodSpeciesSecondary',
 
     label: 'Secondary Wood Species',
 
     source: 'soundLegendWoodSpeciesSecondary',
-
   },
 
   {
-
     key: 'soundLegendWoodSpeciesTertiary',
 
     label: 'Tertiary Wood Species',
 
     source: 'soundLegendWoodSpeciesTertiary',
-
   },
 
   {
-
     key: 'soundLegendWoodSpeciesQuaternary',
 
     label: 'Quaternary Wood Species',
 
     source: 'soundLegendWoodSpeciesQuaternary',
-
   },
 
   {
-
     key: 'soundLegendVeneerExterior',
 
     label: 'Veneer Exterior',
 
     source: 'soundLegendVeneerExterior',
-
   },
 
   {
-
     key: 'coreStaveShell',
 
     label: 'Core Stave Shell',
 
     source: 'coreStaveShell',
-
   },
 
   {
@@ -218,25 +288,21 @@ const SELECTOR_FIELDS = [
     source: 'steamBentExterior',
   },
 
-{
+  {
+    key: 'finish',
 
-  key: 'finish',
+    label: 'Finish Design',
 
-  label: 'Finish Design',
+    source: 'finish',
+  },
 
-  source: 'finish',
+  {
+    key: 'finishCoating',
 
-},
+    label: 'Finish / Coating',
 
-{
-
-  key: 'finishCoating',
-
-  label: 'Finish / Coating',
-
-  source: 'finishCoating',
-
-},
+    source: 'finishCoating',
+  },
 
   {
     key: 'exteriorScorch',
@@ -603,27 +669,711 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
   },
 
   default: {
+
     Snare: [
-      'Maple Snare Reference',
 
-      'Birch Snare Reference',
+      'Maple',
 
-      'Brass Snare Reference',
+      'Birch',
 
-      'Aluminum Snare Reference',
+      'Mahogany',
 
-      'Walnut Snare Reference',
+      'Walnut',
+
+      'Oak',
+
+      'Brass',
+
+      'Steel',
+
+      'Aluminum',
+
+      'Copper',
+
+      'Bronze',
+
+      'Acrylic',
+
     ],
 
-    'Rack Tom': ['Maple Rack Tom Reference', 'Birch Rack Tom Reference'],
+    'Rack Tom': [
 
-    'Floor Tom': ['Maple Floor Tom Reference', 'Birch Floor Tom Reference'],
+      'Maple',
 
-    'Bass Drum': ['Maple Bass Drum Reference', 'Birch Bass Drum Reference'],
+      'Birch',
 
-    'Concert Tom': ['Single-Headed Concert Tom Reference'],
+      'Mahogany',
+
+      'Walnut',
+
+      'Oak',
+
+      'Poplar',
+
+      'Maple / Gum',
+
+      'Acrylic',
+
+    ],
+
+    'Floor Tom': [
+
+      'Maple',
+
+      'Birch',
+
+      'Mahogany',
+
+      'Walnut',
+
+      'Oak',
+
+      'Poplar',
+
+      'Maple / Gum',
+
+      'Acrylic',
+
+    ],
+
+    'Bass Drum': [
+
+      'Maple',
+
+      'Birch',
+
+      'Mahogany',
+
+      'Walnut',
+
+      'Oak',
+
+      'Poplar',
+
+      'Maple / Gum',
+
+      'Acrylic',
+
+    ],
+
+    'Overall Kit / Line Sound': [
+
+      'Balanced Maple Kit',
+
+      'Bright Birch Kit',
+
+      'Warm Mahogany Kit',
+
+      'Vintage Maple / Gum Kit',
+
+      'Modern Maple / Walnut Kit',
+
+      'Controlled Acrylic Kit',
+
+    ],
+
   },
 };
+
+const NON_OBER_DRUM_TYPE_OPTIONS = [
+  'Snare',
+
+  'Rack Tom',
+
+  'Floor Tom',
+
+  'Bass Drum',
+
+  'Overall Kit / Line Sound',
+];
+
+const NON_OBER_COMPANY_TYPE_OPTIONS = [
+  'Generic / Baseline Reference',
+
+  'Major Manufacturer',
+
+  'Boutique Builder',
+
+  'Independent Builder',
+];
+
+const NON_OBER_COMPANY_OPTIONS_BY_TYPE = {
+  'Major Manufacturer': [
+    'Pearl',
+
+    'Tama',
+
+    'Yamaha',
+
+    'Ludwig',
+
+    'DW',
+
+    'Gretsch',
+
+    'Mapex',
+
+    'Sonor',
+
+    'PDP',
+
+    'Rogers',
+
+    'Slingerland',
+
+    'Premier',
+
+    'Natal',
+
+    'Canopus',
+
+    'Craviotto',
+  ],
+
+  'Boutique Builder': [
+    'Noble & Cooley',
+
+    'Dunnett',
+
+    'George Way',
+
+    'Keplinger',
+
+    'INDe Drum Lab',
+
+    'Oriollo',
+
+    'Q Drum Co.',
+
+    'C&C Drum Co.',
+
+    'Sugar Percussion',
+
+    'A&F Drum Co.',
+
+    'British Drum Co.',
+
+    'Doc Sweeney',
+
+    'Pork Pie',
+
+    'Spaun',
+
+    'SJC Custom Drums',
+  ],
+
+  'Independent Builder': [
+    'Evetts Drums',
+
+    'Unix Drums',
+
+    'Antonio Drums',
+
+    'Hendrix Drums',
+
+    'Stone Custom Drum',
+
+    'Kumu Drums',
+
+    'VK Drums',
+
+    'Outlaw Drums',
+
+    'TreeHouse Custom Drums',
+
+    'Barton Drum Co.',
+
+    'Black Swamp Percussion',
+
+    'Summit Drums',
+
+    'Jenkins-Martin',
+
+    'RBH Drums',
+
+    'Wacco Drums',
+  ],
+
+  'Generic / Baseline Reference': ['Generic Reference'],
+};
+
+const NON_OBER_LINE_OPTIONS_BY_COMPANY = {
+
+  Pearl: [
+
+    'Reference',
+
+    'Masters Maple Complete',
+
+    'President Series',
+
+    'Session Studio Select',
+
+    'Sensitone',
+
+    'Free Floating',
+
+  ],
+
+  Tama: [
+
+    'Starclassic Maple',
+
+    'Starclassic Walnut/Birch',
+
+    'STAR Maple',
+
+    'STAR Walnut',
+
+    'S.L.P.',
+
+    'Starphonic',
+
+  ],
+
+  Yamaha: [
+
+    'Recording Custom',
+
+    'Absolute Hybrid Maple',
+
+    'Tour Custom',
+
+    'Stage Custom Birch',
+
+  ],
+
+  Ludwig: [
+
+    'Classic Maple',
+
+    'Legacy Mahogany',
+
+    'Supraphonic',
+
+    'Black Beauty',
+
+    'Acrolite',
+
+  ],
+
+  DW: [
+
+    'Collector’s Series',
+
+    'Performance Series',
+
+    'Design Series',
+
+    'Jazz Series',
+
+  ],
+
+  Gretsch: ['USA Custom', 'Brooklyn', 'Renown', 'Broadkaster'],
+
+  Mapex: ['Saturn', 'Black Panther', 'Armory', 'Meridian'],
+
+  Sonor: ['SQ2', 'SQ1', 'Vintage Series', 'ProLite', 'AQ2'],
+
+  'Generic Reference': [
+
+    'Ply Reference',
+
+    'Stave Reference',
+
+    'Steam-Bent Reference',
+
+    'Solid Shell Reference',
+
+    'Metal Reference',
+
+    'Acrylic Reference',
+
+  ],
+
+  default: [
+
+    'Known Production Line',
+
+    'Custom Shop Line',
+
+    'Baseline Reference Line',
+
+  ],
+
+};
+
+const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
+
+  'Ply Reference': [
+
+    'Maple',
+
+    'Birch',
+
+    'Mahogany',
+
+    'Walnut',
+
+    'Oak',
+
+    'Poplar',
+
+    'Maple / Gum',
+
+    'Maple / Poplar',
+
+    'Birch / Poplar',
+
+    'Maple / Walnut',
+
+    'Maple / Mahogany',
+
+    'Birch / Walnut',
+
+    'Maple / Birch',
+
+    'Mahogany / Poplar',
+
+    'Beech',
+
+  ],
+
+  'Stave Reference': [
+
+    'Maple',
+
+    'Oak',
+
+    'Walnut',
+
+    'Cherry',
+
+    'Mahogany',
+
+    'Birch',
+
+    'Ash',
+
+    'Padauk',
+
+    'Bubinga',
+
+    'Wenge',
+
+    'Purpleheart',
+
+    'Zebrawood',
+
+    'Sapele',
+
+    'Maple / Walnut',
+
+    'Oak / Cherry',
+
+    'Walnut / Padauk',
+
+    'Maple / Bubinga',
+
+    'Mahogany / Cherry',
+
+  ],
+
+  'Steam-Bent Reference': [
+
+    'Maple',
+
+    'Walnut',
+
+    'Cherry',
+
+    'Oak',
+
+    'Mahogany',
+
+    'Ash',
+
+    'Birch',
+
+    'Beech',
+
+    'Maple with Reinforcement Rings',
+
+    'Walnut with Reinforcement Rings',
+
+    'Mahogany with Reinforcement Rings',
+
+    'Cherry with Reinforcement Rings',
+
+  ],
+
+  'Solid Shell Reference': [
+
+    'Maple',
+
+    'Walnut',
+
+    'Cherry',
+
+    'Mahogany',
+
+    'Oak',
+
+    'Ash',
+
+    'Beech',
+
+    'Birch',
+
+    'Single-Piece Maple',
+
+    'Single-Piece Walnut',
+
+    'Single-Piece Cherry',
+
+    'Single-Piece Mahogany',
+
+  ],
+
+  'Metal Reference': [
+
+    'Brass',
+
+    'Steel',
+
+    'Aluminum',
+
+    'Copper',
+
+    'Bronze',
+
+    'Bell Brass',
+
+    'Black Nickel over Brass',
+
+    'Chrome over Brass',
+
+    'Hammered Brass',
+
+    'Hammered Copper',
+
+    'Hammered Steel',
+
+    'Titanium',
+
+    'Stainless Steel',
+
+    'Seamless Aluminum',
+
+    'Seamless Brass',
+
+  ],
+
+  'Acrylic Reference': [
+
+    'Clear Acrylic',
+
+    'Colored Acrylic',
+
+    'Seamless Acrylic',
+
+    'Cast Acrylic',
+
+    'Acrylic with Reinforcement Rings',
+
+    'Acrylic / Wood Hybrid',
+
+    'Opaque Acrylic',
+
+    'Transparent Acrylic',
+
+    'Sparkle Acrylic',
+
+  ],
+
+};
+
+const NON_OBER_BASELINE_CONSTRUCTION_OPTIONS = [
+  'Ply',
+
+  'Stave',
+
+  'Steam Bent',
+
+  'Solid',
+
+  'Metal',
+
+  'Acrylic',
+];
+
+const NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION = {
+  Ply: ['Maple', 'Birch', 'Mahogany', 'Walnut', 'Oak', 'Poplar', 'Maple / Gum'],
+
+  Stave: ['Maple', 'Oak', 'Walnut', 'Cherry', 'Mahogany', 'Bubinga', 'Padauk'],
+
+  'Steam Bent': ['Maple', 'Oak', 'Walnut', 'Cherry', 'Mahogany', 'Ash'],
+
+  Solid: ['Maple', 'Walnut', 'Cherry', 'Mahogany', 'Oak'],
+
+  Metal: ['Brass', 'Steel', 'Aluminum', 'Copper', 'Bronze', 'Titanium'],
+
+  Acrylic: [
+    'Clear Acrylic',
+
+    'Colored Acrylic',
+
+    'Seamless Acrylic',
+
+    'Cast Acrylic',
+  ],
+};
+
+const NON_OBER_THICKNESS_OPTIONS_BY_CONSTRUCTION = {
+  Ply: ['Thin / 5–6mm', 'Medium / 6–8mm', 'Thick / 8–10mm'],
+
+  Stave: ['Thin / 7–9mm', 'Medium / 10–13mm', 'Thick / 14–18mm'],
+
+  'Steam Bent': ['Thin / 5–6mm', 'Medium / 6–8mm', 'Thick / 8–10mm'],
+
+  Solid: ['Thin / 5–6mm', 'Medium / 6–8mm', 'Thick / 8–10mm'],
+
+  Metal: ['Thin / 1.0–1.2mm', 'Medium / 1.2–1.5mm', 'Thick / 1.5–3.0mm'],
+
+  Acrylic: ['Thin / 4–5mm', 'Medium / 5–6mm', 'Thick / 6–8mm'],
+};
+
+const NON_OBER_LINE_SOUND_FOCUS_OPTIONS = [
+  'Balanced Studio Line',
+
+  'Bright / Projecting Line',
+
+  'Warm / Vintage Line',
+
+  'Dry / Controlled Line',
+
+  'High-Sustain / Open Line',
+];
+
+const NON_OBER_PLY_LAYUP_OPTIONS = [
+  'Standard Cross-Laminated Ply',
+
+  'Thin Vintage Ply',
+
+  'Maple / Gum Layup',
+
+  'Hybrid Wood Layup',
+
+  'Reinforced Ply Shell',
+];
+
+const NON_OBER_REINFORCEMENT_RING_OPTIONS = [
+  'No Reinforcement Rings',
+
+  'Single-Sided Reinforcement Rings',
+
+  'Double Reinforcement Rings',
+];
+
+const NON_OBER_BEADED_SHELL_OPTIONS = [
+  'No Center Bead',
+
+  'Center Bead',
+
+  'Dual Bead',
+];
+
+const NON_OBER_FINISH_TREATMENT_OPTIONS = [
+  'Natural / Minimal Finish',
+
+  'Satin Clear',
+
+  'Gloss Clear',
+
+  'Heavy Lacquer',
+
+  'Wrap',
+
+  'Oil / Wax',
+
+  'Painted Finish',
+
+  'Aged / Distressed Finish',
+];
+
+const NON_OBER_HOOP_OPTIONS = [
+  'Triple Flange 1.6mm',
+
+  'Triple Flange 2.3mm',
+
+  'Triple Flange 3.0mm',
+
+  'Die-Cast',
+
+  'S-Hoop',
+
+  'Single Flange',
+
+  'Wood Hoop',
+];
+
+const NON_OBER_SNARE_WIRE_OPTIONS = [
+  'Generic 20-Strand Steel',
+
+  'PureSound Custom Pro Steel 20-Strand wires',
+
+  'PureSound Blasters 20-Strand',
+
+  'PureSound Equalizer 16-Strand',
+
+  'Canopus Vintage Snare Wire',
+
+  'Tama Starclassic Snappy Snare',
+
+  'Ludwig Snare Wires',
+
+  'DW TrueTone Snare Wires',
+];
+
+const NON_OBER_BATTER_HEAD_OPTIONS = [
+  'Remo Coated Ambassador',
+
+  'Remo Coated Emperor',
+
+  'Remo Controlled Sound Reverse Dot',
+
+  'Remo Powerstroke 3 Coated',
+
+  'Evans G1 Coated',
+
+  'Evans G2 Coated',
+
+  'Evans HD Dry',
+
+  'Evans Genera Dry',
+
+  'Evans UV1 Coated',
+
+  'Aquarian Texture Coated',
+
+  'Aquarian Hi-Energy',
+];
+
+const NON_OBER_RESO_HEAD_OPTIONS = [
+  'Remo Ambassador Side',
+
+  'Remo Diplomat Snare Side',
+
+  'Evans Snare Side 200',
+
+  'Evans Snare Side 300',
+
+  'Evans Snare Side 500',
+
+  'Aquarian Classic Clear Snare Side',
+
+  'Aquarian Hi-Performance Snare Side',
+];
 
 const BRAND_FILTER_OPTIONS = [
   'Ober Artisan',
@@ -822,6 +1572,28 @@ const INITIAL_SELECTOR = {
 
   construction: 'Ober HERITAGE Stave',
 
+  nonOberCompanyType: 'Generic / Baseline Reference',
+
+  nonOberCompanyName: 'Generic Reference',
+
+  nonOberLineName: 'Generic Ply Reference',
+
+  nonOberModelName: '',
+
+  nonOberBaselineConstruction: 'Ply',
+
+  nonOberMaterial: 'Maple',
+
+  nonOberThicknessGroup: 'Medium / 6–8mm',
+
+  nonOberLineSoundFocus: 'Balanced Studio Line',
+
+  nonOberPlyLayupStyle: 'Standard Cross-Laminated Ply',
+
+  nonOberReinforcementRings: 'No Reinforcement Rings',
+
+  nonOberBeadedShell: 'No Center Bead',
+
   diameter: '14 in',
 
   depth: '5.0 in',
@@ -875,23 +1647,9 @@ const INITIAL_SELECTOR = {
 
 const HERITAGE_FINISH_OPTIONS = ['Light Torch', 'Medium Torch', 'Blackened'];
 
-const FEUZON_FINISH_DESIGN_OPTIONS = [
+const FEUZON_FINISH_DESIGN_OPTIONS = ['Natural', 'Full Stain', 'Faded Stain'];
 
-  'Natural',
-
-  'Full Stain',
-
-  'Faded Stain',
-
-];
-
-const FEUZON_FINISH_COATING_OPTIONS = [
-
-  'Satin',
-
-  'Gloss',
-
-];
+const FEUZON_FINISH_COATING_OPTIONS = ['Satin', 'Gloss'];
 
 const FEUZON_EXTERIOR_SCORCH_OPTIONS = ['Non-Scorched', 'Natural Scorched'];
 
@@ -904,7 +1662,6 @@ const FEUZON_STAIN_OPTIONS_BY_EXTERIOR = {
 };
 
 const SOUNDLEGEND_CONSTRUCTION_TYPE_OPTIONS = [
-
   'Stave',
 
   'Hybrid / FEUZØN',
@@ -912,11 +1669,9 @@ const SOUNDLEGEND_CONSTRUCTION_TYPE_OPTIONS = [
   'Stave with Veneer',
 
   'Hybrid / FEUZØN with Veneer',
-
 ];
 
 const SOUNDLEGEND_WOOD_SPECIES_OPTIONS = [
-
   'Maple',
 
   'Birch',
@@ -944,11 +1699,9 @@ const SOUNDLEGEND_WOOD_SPECIES_OPTIONS = [
   'Poplar',
 
   'Sapele',
-
 ];
 
 const SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS = [
-
   'Mappa Burl',
 
   'Waterfall Bubinga',
@@ -968,43 +1721,31 @@ const SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS = [
   'Macassar Ebony',
 
   'Zebrawood',
-
 ];
 
 const getAllowedSoundLegendSpeciesCountOptions = (staveCount = '') => {
-
   const count = Number.parseInt(staveCount, 10);
 
   if ([6, 12, 24].includes(count)) {
-
     return ['1 Wood Species', '2 Wood Species', '3 Wood Species'];
-
   }
 
   return ['1 Wood Species', '2 Wood Species', '4 Wood Species'];
-
 };
 
 const getSoundLegendSpeciesCountNumber = (value = '') => {
-
   return Number.parseInt(value, 10) || 1;
-
 };
 
 const soundLegendTypeUsesHybridShell = (constructionType = '') => {
-
   return normalizeText(constructionType).includes('hybrid');
-
 };
 
 const soundLegendTypeUsesVeneer = (constructionType = '') => {
-
   return normalizeText(constructionType).includes('veneer');
-
 };
 
 const SOUNDLEGEND_FINISH_DESIGN_OPTIONS = [
-
   'Natural',
 
   'Full Stain',
@@ -1014,16 +1755,9 @@ const SOUNDLEGEND_FINISH_DESIGN_OPTIONS = [
   'Spray Solid',
 
   'Spray Fade',
-
 ];
 
-const SOUNDLEGEND_FINISH_COATING_OPTIONS = [
-
-  'Satin',
-
-  'PolyGloss',
-
-];
+const SOUNDLEGEND_FINISH_COATING_OPTIONS = ['Satin', 'PolyGloss'];
 
 const SOUNDLEGEND_SCORCH_DEPTH_OPTIONS = [
   'Non-Scorched',
@@ -1967,9 +2701,7 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return ['Snare'];
     }
 
-    return getRowsForCategory(safeCalibration, 'drumType').map(
-      (row) => row.option
-    );
+    return NON_OBER_DRUM_TYPE_OPTIONS;
   }
 
   if (field.source === 'construction') {
@@ -1983,6 +2715,224 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
 
   if (!selector.drumType || !selector.construction) {
     return [];
+  }
+
+  if (field.source === 'nonOberCompanyType') {
+    if (
+      isHeritageConstruction(selector.construction) ||
+      isFeuzonConstruction(selector.construction) ||
+      isSoundLegendConstruction(selector.construction)
+    ) {
+      return [];
+    }
+
+    return NON_OBER_COMPANY_TYPE_OPTIONS;
+  }
+
+  if (field.source === 'nonOberCompanyName') {
+
+    if (
+
+      isHeritageConstruction(selector.construction) ||
+
+      isFeuzonConstruction(selector.construction) ||
+
+      isSoundLegendConstruction(selector.construction)
+
+    ) {
+
+      return [];
+
+    }
+
+    if (selector.nonOberCompanyType === 'Generic / Baseline Reference') {
+
+      return [];
+
+    }
+
+    return (
+
+      NON_OBER_COMPANY_OPTIONS_BY_TYPE[selector.nonOberCompanyType] ||
+
+      NON_OBER_COMPANY_OPTIONS_BY_TYPE['Generic / Baseline Reference']
+
+    );
+
+  }
+
+  if (field.source === 'nonOberLineName') {
+
+    if (
+
+      isHeritageConstruction(selector.construction) ||
+
+      isFeuzonConstruction(selector.construction) ||
+
+      isSoundLegendConstruction(selector.construction)
+
+    ) {
+
+      return [];
+
+    }
+
+    if (selector.nonOberCompanyType === 'Generic / Baseline Reference') {
+
+      return NON_OBER_LINE_OPTIONS_BY_COMPANY['Generic Reference'];
+
+    }
+
+    return (
+
+      NON_OBER_LINE_OPTIONS_BY_COMPANY[selector.nonOberCompanyName] ||
+
+      NON_OBER_LINE_OPTIONS_BY_COMPANY.default
+
+    );
+
+  }
+
+  if (field.source === 'nonOberModelName') {
+
+    if (
+
+      isHeritageConstruction(selector.construction) ||
+
+      isFeuzonConstruction(selector.construction) ||
+
+      isSoundLegendConstruction(selector.construction)
+
+    ) {
+
+      return [];
+
+    }
+
+    if (selector.nonOberCompanyType === 'Generic / Baseline Reference') {
+
+      return (
+
+        NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[
+
+          selector.nonOberLineName
+
+        ] ||
+
+        NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION[
+
+          selector.nonOberBaselineConstruction
+
+        ] ||
+
+        []
+
+      );
+
+    }
+
+    const makerData =
+
+      NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[selector.nonOberCompanyName] ||
+
+      NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
+
+    return makerData[selector.drumType] || [];
+
+  }
+
+  if (field.source === 'nonOberBaselineConstruction') {
+    if (
+      isHeritageConstruction(selector.construction) ||
+      isFeuzonConstruction(selector.construction) ||
+      isSoundLegendConstruction(selector.construction)
+    ) {
+      return [];
+    }
+
+    return NON_OBER_BASELINE_CONSTRUCTION_OPTIONS;
+  }
+
+  if (field.source === 'nonOberMaterial') {
+    if (
+      isHeritageConstruction(selector.construction) ||
+      isFeuzonConstruction(selector.construction) ||
+      isSoundLegendConstruction(selector.construction)
+    ) {
+      return [];
+    }
+
+    return (
+      NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION[
+        selector.nonOberBaselineConstruction
+      ] || []
+    );
+  }
+
+  if (field.source === 'nonOberThicknessGroup') {
+    if (
+      isHeritageConstruction(selector.construction) ||
+      isFeuzonConstruction(selector.construction) ||
+      isSoundLegendConstruction(selector.construction)
+    ) {
+      return [];
+    }
+
+    return (
+      NON_OBER_THICKNESS_OPTIONS_BY_CONSTRUCTION[
+        selector.nonOberBaselineConstruction
+      ] || []
+    );
+  }
+
+  if (field.source === 'nonOberLineSoundFocus') {
+
+    if (
+
+      isHeritageConstruction(selector.construction) ||
+
+      isFeuzonConstruction(selector.construction) ||
+
+      isSoundLegendConstruction(selector.construction)
+
+    ) {
+
+      return [];
+
+    }
+
+    if (selector.drumType !== 'Overall Kit / Line Sound') {
+
+      return [];
+
+    }
+
+    return NON_OBER_LINE_SOUND_FOCUS_OPTIONS;
+
+  }
+
+  if (field.source === 'nonOberPlyLayupStyle') {
+    if (selector.nonOberBaselineConstruction !== 'Ply') return [];
+
+    return NON_OBER_PLY_LAYUP_OPTIONS;
+  }
+
+  if (field.source === 'nonOberReinforcementRings') {
+    if (
+      !['Ply', 'Steam Bent', 'Solid'].includes(
+        selector.nonOberBaselineConstruction
+      )
+    ) {
+      return [];
+    }
+
+    return NON_OBER_REINFORCEMENT_RING_OPTIONS;
+  }
+
+  if (field.source === 'nonOberBeadedShell') {
+    if (selector.nonOberBaselineConstruction !== 'Metal') return [];
+
+    return NON_OBER_BEADED_SHELL_OPTIONS;
   }
 
   if (field.source === 'diameter') {
@@ -2134,169 +3084,98 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   }
 
   if (field.source === 'soundLegendConstructionType') {
-
     if (!isSoundLegendConstruction(selector.construction)) {
-
       return [];
-
     }
 
     return SOUNDLEGEND_CONSTRUCTION_TYPE_OPTIONS;
-
   }
 
   if (field.source === 'soundLegendWoodSpeciesCount') {
-
     if (!isSoundLegendConstruction(selector.construction)) {
-
       return [];
-
     }
 
     return getAllowedSoundLegendSpeciesCountOptions(selector.staveCount);
-
   }
 
   if (
-
     field.source === 'soundLegendWoodSpeciesPrimary' ||
-
     field.source === 'soundLegendWoodSpeciesSecondary' ||
-
     field.source === 'soundLegendWoodSpeciesTertiary' ||
-
     field.source === 'soundLegendWoodSpeciesQuaternary'
-
   ) {
-
     if (!isSoundLegendConstruction(selector.construction)) {
-
       return [];
-
     }
 
     const speciesCount = getSoundLegendSpeciesCountNumber(
-
       selector.soundLegendWoodSpeciesCount
-
     );
 
     if (
-
       field.source === 'soundLegendWoodSpeciesSecondary' &&
-
       speciesCount < 2
-
     ) {
-
       return [];
+    }
 
+    if (field.source === 'soundLegendWoodSpeciesTertiary' && speciesCount < 3) {
+      return [];
     }
 
     if (
-
-      field.source === 'soundLegendWoodSpeciesTertiary' &&
-
-      speciesCount < 3
-
-    ) {
-
-      return [];
-
-    }
-
-    if (
-
       field.source === 'soundLegendWoodSpeciesQuaternary' &&
-
       speciesCount < 4
-
     ) {
-
       return [];
-
     }
 
     return SOUNDLEGEND_WOOD_SPECIES_OPTIONS;
-
   }
 
   if (field.source === 'soundLegendVeneerExterior') {
-
     if (!isSoundLegendConstruction(selector.construction)) {
-
       return [];
-
     }
 
     if (!soundLegendTypeUsesVeneer(selector.soundLegendConstructionType)) {
-
       return [];
-
     }
 
     return SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS;
-
   }
 
   if (field.source === 'finish') {
-
     if (isHeritageConstruction(selector.construction)) {
-
       return HERITAGE_FINISH_OPTIONS;
-
     }
 
     if (isFeuzonConstruction(selector.construction)) {
-
       return FEUZON_FINISH_DESIGN_OPTIONS;
-
     }
 
     if (isSoundLegendConstruction(selector.construction)) {
-
       return SOUNDLEGEND_FINISH_DESIGN_OPTIONS;
-
     }
 
-    return getRowsForCategory(safeCalibration, 'finish')
-      .filter((row) => {
-        const appliesTo = String(row.appliesTo || '').trim();
-
-        return (
-          appliesTo === 'All' ||
-          appliesToIncludes(appliesTo, selector.construction) ||
-          appliesToIncludes(appliesTo, selector.drumType)
-        );
-      })
-
-      .filter((row) => constructionIncludes(row, selector.construction))
-
-      .map((row) => row.option);
+    return NON_OBER_FINISH_TREATMENT_OPTIONS;
   }
 
-    if (field.source === 'finishCoating') {
-
+  if (field.source === 'finishCoating') {
     if (isHeritageConstruction(selector.construction)) {
-
       return [];
-
     }
 
     if (isFeuzonConstruction(selector.construction)) {
-
       return FEUZON_FINISH_COATING_OPTIONS;
-
     }
 
     if (isSoundLegendConstruction(selector.construction)) {
-
       return SOUNDLEGEND_FINISH_COATING_OPTIONS;
-
     }
 
     return [];
-
   }
 
   if (field.source === 'stainOption') {
@@ -2320,51 +3199,33 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   }
 
   if (field.source === 'coreStaveShell') {
-
     if (isFeuzonConstruction(selector.construction)) {
-
       return FEUZON_CORE_STAVE_OPTIONS;
-
     }
 
     if (
-
       isSoundLegendConstruction(selector.construction) &&
-
       soundLegendTypeUsesHybridShell(selector.soundLegendConstructionType)
-
     ) {
-
       return FEUZON_CORE_STAVE_OPTIONS;
-
     }
 
     return [];
-
   }
 
   if (field.source === 'steamBentExterior') {
-
     if (isFeuzonConstruction(selector.construction)) {
-
       return FEUZON_STEAMBENT_EXTERIOR_OPTIONS;
-
     }
 
     if (
-
       isSoundLegendConstruction(selector.construction) &&
-
       soundLegendTypeUsesHybridShell(selector.soundLegendConstructionType)
-
     ) {
-
       return FEUZON_STEAMBENT_EXTERIOR_OPTIONS;
-
     }
 
     return [];
-
   }
 
   if (field.source === 'hoopType') {
@@ -2380,16 +3241,7 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return SOUNDLEGEND_HOOP_OPTIONS;
     }
 
-    return getBaseRowsByDrumType(
-      safeCalibration,
-
-      'hoopType',
-
-      selector.drumType
-    )
-      .filter((row) => constructionIncludes(row, selector.construction))
-
-      .map((row) => row.option);
+    return NON_OBER_HOOP_OPTIONS;
   }
 
   if (field.source === 'bearingEdge') {
@@ -2457,12 +3309,7 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return FEUZON_SNARE_WIRE_OPTIONS;
     }
 
-    return getRowsForCategory(safeCalibration, 'snareWires')
-      .filter((row) => appliesToIncludes(row.appliesTo, 'Snare'))
-
-      .filter((row) => constructionIncludes(row, selector.construction))
-
-      .map((row) => row.option);
+    return NON_OBER_SNARE_WIRE_OPTIONS;
   }
 
   if (field.source === 'batterHead') {
@@ -2480,12 +3327,7 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return SOUNDLEGEND_SNARE_BATTER_HEAD_OPTIONS;
     }
 
-    return getRowsForCategory(safeCalibration, 'batterHead')
-      .filter((row) => appliesToIncludes(row.appliesTo, selector.drumType))
-
-      .filter((row) => constructionIncludes(row, selector.construction))
-
-      .map((row) => row.option);
+    return NON_OBER_BATTER_HEAD_OPTIONS;
   }
 
   if (field.source === 'resoHead') {
@@ -2503,12 +3345,7 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return SOUNDLEGEND_SNARE_RESO_HEAD_OPTIONS;
     }
 
-    return getRowsForCategory(safeCalibration, 'resoHead')
-      .filter((row) => appliesToIncludes(row.appliesTo, selector.drumType))
-
-      .filter((row) => constructionIncludes(row, selector.construction))
-
-      .map((row) => row.option);
+    return NON_OBER_RESO_HEAD_OPTIONS;
   }
 
   return getBaseRowsByDrumType(
@@ -2622,13 +3459,35 @@ const buildVoicePreview = (selector, calibration) => {
 
     ['construction', selector.construction],
 
+    ['nonOberCompanyType', selector.nonOberCompanyType],
+
+    ['nonOberCompanyName', selector.nonOberCompanyName],
+
+    ['nonOberLineName', selector.nonOberLineName],
+
+    ['nonOberModelName', selector.nonOberModelName],
+
+    ['nonOberBaselineConstruction', selector.nonOberBaselineConstruction],
+
+    ['nonOberMaterial', selector.nonOberMaterial],
+
+    ['nonOberThicknessGroup', selector.nonOberThicknessGroup],
+
+    ['nonOberLineSoundFocus', selector.nonOberLineSoundFocus],
+
+    ['nonOberPlyLayupStyle', selector.nonOberPlyLayupStyle],
+
+    ['nonOberReinforcementRings', selector.nonOberReinforcementRings],
+
+    ['nonOberBeadedShell', selector.nonOberBeadedShell],
+
     ['diameter', selector.diameter],
 
     ['depth', selector.depth],
 
     ['thickness', selector.thickness],
 
-      ['finish', selector.finish],
+    ['finish', selector.finish],
 
     ['finishCoating', selector.finishCoating],
 
@@ -2638,44 +3497,22 @@ const buildVoicePreview = (selector, calibration) => {
 
     ['soundLegendConstructionType', selector.soundLegendConstructionType],
 
-    [
+    ['soundLegendWoodSpeciesCount', selector.soundLegendWoodSpeciesCount],
 
-      'soundLegendWoodSpeciesCount',
-
-      selector.soundLegendWoodSpeciesCount,
-
-    ],
+    ['soundLegendWoodSpeciesPrimary', selector.soundLegendWoodSpeciesPrimary],
 
     [
-
-      'soundLegendWoodSpeciesPrimary',
-
-      selector.soundLegendWoodSpeciesPrimary,
-
-    ],
-
-    [
-
       'soundLegendWoodSpeciesSecondary',
 
       selector.soundLegendWoodSpeciesSecondary,
-
     ],
 
-    [
-
-      'soundLegendWoodSpeciesTertiary',
-
-      selector.soundLegendWoodSpeciesTertiary,
-
-    ],
+    ['soundLegendWoodSpeciesTertiary', selector.soundLegendWoodSpeciesTertiary],
 
     [
-
       'soundLegendWoodSpeciesQuaternary',
 
       selector.soundLegendWoodSpeciesQuaternary,
-
     ],
 
     ['soundLegendVeneerExterior', selector.soundLegendVeneerExterior],
@@ -4176,7 +5013,7 @@ const AdminLegacyPrintCalibration = () => {
 
           staveCount: defaults.staveCount,
 
-                  finish: 'Natural',
+          finish: 'Natural',
 
           finishCoating: 'Satin',
 
@@ -4238,7 +5075,7 @@ const AdminLegacyPrintCalibration = () => {
 
           staveCount: defaults.staveCount,
 
-                  finish: 'Medium Torch',
+          finish: 'Medium Torch',
 
           finishCoating: '',
 
@@ -4286,7 +5123,7 @@ const AdminLegacyPrintCalibration = () => {
 
           staveCount: defaults.staveCount,
 
-                   finish: 'Natural',
+          finish: 'Natural',
 
           finishCoating: 'Satin',
 
@@ -4307,6 +5144,72 @@ const AdminLegacyPrintCalibration = () => {
           tension: 'Medium',
 
           snareWires: 'PureSound Custom Pro Steel 20-Strand wires',
+
+          batterHead: 'Remo Coated Ambassador',
+
+          resoHead: 'Remo Ambassador Side',
+        };
+      }
+
+      if (lineOption.key === 'nonOber') {
+        return {
+          ...nextSelector,
+
+          drumType: 'Snare',
+
+          diameter: '14 in',
+
+          depth: '5.5 in',
+
+          thickness: '',
+
+          lugCount: '8 lug',
+
+          staveCount: '',
+
+          nonOberCompanyType: 'Generic / Baseline Reference',
+
+          nonOberCompanyName: '',
+
+          nonOberLineName: 'Ply Reference',
+
+          nonOberModelName: 'Maple',
+
+          nonOberBaselineConstruction: 'Ply',
+
+          nonOberMaterial: 'Maple',
+
+          nonOberThicknessGroup: 'Medium / 6–8mm',
+
+          nonOberLineSoundFocus: 'Balanced Studio Line',
+
+          nonOberPlyLayupStyle: 'Standard Cross-Laminated Ply',
+
+          nonOberReinforcementRings: 'No Reinforcement Rings',
+
+          nonOberBeadedShell: 'No Center Bead',
+
+          finish: 'Satin Clear',
+
+          finishCoating: '',
+
+          stainOption: '',
+
+          exteriorScorch: '',
+
+          coreStaveShell: '',
+
+          steamBentExterior: '',
+
+          hoopType: 'Triple Flange 2.3mm',
+
+          bearingEdge: '45° inner edge with softened outer roundover',
+
+          snareBed: 'Standard',
+
+          tension: 'Medium',
+
+          snareWires: 'Generic 20-Strand Steel',
 
           batterHead: 'Remo Coated Ambassador',
 
@@ -4345,15 +5248,259 @@ const AdminLegacyPrintCalibration = () => {
           isSoundLegendConstruction(next.construction));
 
       if (!isOberBuildPath) {
+        if (key === 'nonOberCompanyType') {
+
+          if (value === 'Generic / Baseline Reference') {
+
+            const lineOptions =
+
+              NON_OBER_LINE_OPTIONS_BY_COMPANY['Generic Reference'];
+
+            const nextLineName = lineOptions[0] || 'Ply Reference';
+
+            const materialOptions =
+
+              NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[nextLineName] || [];
+
+        if (
+
+          key === 'nonOberModelName' &&
+
+          next.nonOberCompanyType === 'Generic / Baseline Reference'
+
+        ) {
+
+          return {
+
+            ...next,
+
+            nonOberMaterial: value,
+
+          };
+
+        }
+
+            return {
+
+              ...next,
+
+              nonOberCompanyName: '',
+
+              nonOberLineName: nextLineName,
+
+              nonOberModelName: materialOptions[0] || 'Maple',
+
+              nonOberBaselineConstruction: 'Ply',
+
+              nonOberMaterial: 'Maple',
+
+              nonOberThicknessGroup: 'Medium / 6–8mm',
+
+              nonOberPlyLayupStyle: NON_OBER_PLY_LAYUP_OPTIONS[0],
+
+              nonOberReinforcementRings:
+
+                NON_OBER_REINFORCEMENT_RING_OPTIONS[0],
+
+              nonOberBeadedShell: '',
+
+            };
+
+          }
+
+          const companyOptions =
+
+            NON_OBER_COMPANY_OPTIONS_BY_TYPE[value] ||
+
+            NON_OBER_COMPANY_OPTIONS_BY_TYPE['Major Manufacturer'];
+
+          const nextCompanyName = companyOptions[0] || '';
+
+          const lineOptions =
+
+            NON_OBER_LINE_OPTIONS_BY_COMPANY[nextCompanyName] ||
+
+            NON_OBER_LINE_OPTIONS_BY_COMPANY.default;
+
+          return {
+
+            ...next,
+
+            nonOberCompanyName: nextCompanyName,
+
+            nonOberLineName: lineOptions[0] || '',
+
+            nonOberModelName: '',
+
+          };
+
+        }
+
+        if (key === 'nonOberCompanyName') {
+          const lineOptions =
+            NON_OBER_LINE_OPTIONS_BY_COMPANY[value] ||
+            NON_OBER_LINE_OPTIONS_BY_COMPANY.default;
+
+          return {
+            ...next,
+
+            nonOberLineName: lineOptions[0] || '',
+
+            nonOberModelName: '',
+          };
+        }
+
+        if (
+
+          key === 'nonOberLineName' &&
+
+          next.nonOberCompanyType === 'Generic / Baseline Reference'
+
+        ) {
+
+          const constructionByLine = {
+
+            'Ply Reference': 'Ply',
+
+            'Stave Reference': 'Stave',
+
+            'Steam-Bent Reference': 'Steam Bent',
+
+            'Solid Shell Reference': 'Solid',
+
+            'Metal Reference': 'Metal',
+
+            'Acrylic Reference': 'Acrylic',
+
+          };
+
+          const nextConstruction = constructionByLine[value] || 'Ply';
+
+          const materialOptions =
+
+            NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[value] ||
+
+            NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION[nextConstruction] ||
+
+            [];
+
+          const thicknessOptions =
+
+            NON_OBER_THICKNESS_OPTIONS_BY_CONSTRUCTION[nextConstruction] || [];
+
+          return {
+
+            ...next,
+
+            nonOberBaselineConstruction: nextConstruction,
+
+            nonOberModelName: materialOptions[0] || '',
+
+            nonOberMaterial: materialOptions[0] || '',
+
+            nonOberThicknessGroup:
+
+              thicknessOptions[1] || thicknessOptions[0] || '',
+
+            nonOberPlyLayupStyle:
+
+              nextConstruction === 'Ply' ? NON_OBER_PLY_LAYUP_OPTIONS[0] : '',
+
+            nonOberReinforcementRings: [
+
+              'Ply',
+
+              'Steam Bent',
+
+              'Solid',
+
+            ].includes(nextConstruction)
+
+              ? NON_OBER_REINFORCEMENT_RING_OPTIONS[0]
+
+              : '',
+
+            nonOberBeadedShell:
+
+              nextConstruction === 'Metal'
+
+                ? NON_OBER_BEADED_SHELL_OPTIONS[0]
+
+                : '',
+
+            staveCount:
+
+              nextConstruction === 'Stave' ? next.staveCount || '16 staves' : '',
+
+          };
+
+        }
+
+        if (key === 'nonOberBaselineConstruction') {
+          const materialOptions =
+            NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION[value] || [];
+
+          const thicknessOptions =
+            NON_OBER_THICKNESS_OPTIONS_BY_CONSTRUCTION[value] || [];
+
+          return {
+            ...next,
+
+            nonOberMaterial: materialOptions[0] || '',
+
+            nonOberThicknessGroup:
+              thicknessOptions[1] || thicknessOptions[0] || '',
+
+            nonOberPlyLayupStyle:
+              value === 'Ply' ? NON_OBER_PLY_LAYUP_OPTIONS[0] : '',
+
+            nonOberReinforcementRings: ['Ply', 'Steam Bent', 'Solid'].includes(
+              value
+            )
+              ? NON_OBER_REINFORCEMENT_RING_OPTIONS[0]
+              : '',
+
+            nonOberBeadedShell:
+              value === 'Metal' ? NON_OBER_BEADED_SHELL_OPTIONS[0] : '',
+
+            staveCount: value === 'Stave' ? next.staveCount || '16 staves' : '',
+          };
+        }
+
+           if (key === 'drumType') {
+
+          return {
+
+            ...next,
+
+            nonOberLineSoundFocus:
+
+              value === 'Overall Kit / Line Sound'
+
+                ? next.nonOberLineSoundFocus ||
+
+                  NON_OBER_LINE_SOUND_FOCUS_OPTIONS[0]
+
+                : '',
+
+            nonOberModelName:
+
+              value === 'Overall Kit / Line Sound'
+
+                ? 'General Full Kit Reference'
+
+                : next.nonOberModelName,
+
+          };
+
+        }     
+
         return next;
       }
 
-            if (key === 'soundLegendConstructionType') {
-
+      if (key === 'soundLegendConstructionType') {
         if (!isSoundLegendConstruction(next.construction)) {
-
           return next;
-
         }
 
         const usesHybridShell = soundLegendTypeUsesHybridShell(value);
@@ -4361,129 +5508,85 @@ const AdminLegacyPrintCalibration = () => {
         const usesVeneer = soundLegendTypeUsesVeneer(value);
 
         return {
-
           ...next,
 
-          coreStaveShell: usesHybridShell ? next.coreStaveShell || FEUZON_CORE_STAVE_OPTIONS[0] : '',
+          coreStaveShell: usesHybridShell
+            ? next.coreStaveShell || FEUZON_CORE_STAVE_OPTIONS[0]
+            : '',
 
           steamBentExterior: usesHybridShell
-
             ? next.steamBentExterior || FEUZON_STEAMBENT_EXTERIOR_OPTIONS[0]
-
             : '',
 
           soundLegendVeneerExterior: usesVeneer
-
             ? next.soundLegendVeneerExterior ||
-
               SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS[0]
-
             : '',
-
         };
-
       }
 
       if (key === 'soundLegendWoodSpeciesCount') {
-
         if (!isSoundLegendConstruction(next.construction)) {
-
           return next;
-
         }
 
         const speciesCount = getSoundLegendSpeciesCountNumber(value);
 
         return {
-
           ...next,
 
           soundLegendWoodSpeciesPrimary:
-
             next.soundLegendWoodSpeciesPrimary ||
-
             SOUNDLEGEND_WOOD_SPECIES_OPTIONS[0],
 
           soundLegendWoodSpeciesSecondary:
-
             speciesCount >= 2
-
               ? next.soundLegendWoodSpeciesSecondary ||
-
                 SOUNDLEGEND_WOOD_SPECIES_OPTIONS[1]
-
               : '',
 
           soundLegendWoodSpeciesTertiary:
-
             speciesCount >= 3
-
               ? next.soundLegendWoodSpeciesTertiary ||
-
                 SOUNDLEGEND_WOOD_SPECIES_OPTIONS[2]
-
               : '',
 
           soundLegendWoodSpeciesQuaternary:
-
             speciesCount >= 4
-
               ? next.soundLegendWoodSpeciesQuaternary ||
-
                 SOUNDLEGEND_WOOD_SPECIES_OPTIONS[3]
-
               : '',
-
         };
-
       }
 
-        if (key === 'finish') {
-
+      if (key === 'finish') {
         if (
-
           (isFeuzonConstruction(next.construction) ||
-
             isSoundLegendConstruction(next.construction)) &&
-
           !['Full Stain', 'Faded Stain'].includes(value)
-
         ) {
-
           return {
-
             ...next,
 
             stainOption: '',
-
           };
-
         }
 
         if (
-
           isFeuzonConstruction(next.construction) &&
-
           ['Full Stain', 'Faded Stain'].includes(value)
-
         ) {
-
           const stainOptions =
-
             FEUZON_STAIN_OPTIONS_BY_EXTERIOR[next.steamBentExterior] || [];
 
           return {
-
             ...next,
 
             stainOption: stainOptions[0] || '',
-
           };
-
         }
 
         return next;
-
       }
 
       if (key === 'steamBentExterior') {
@@ -4503,28 +5606,20 @@ const AdminLegacyPrintCalibration = () => {
         return next;
       }
 
-          if (key === 'diameter') {
-
+      if (key === 'diameter') {
         const defaults = getDefaultBuildForDiameter(next.construction, value);
 
         const allowedSpeciesCounts = getAllowedSoundLegendSpeciesCountOptions(
-
           defaults.staveCount
-
         );
 
         const nextSpeciesCount = allowedSpeciesCounts.includes(
-
           next.soundLegendWoodSpeciesCount
-
         )
-
           ? next.soundLegendWoodSpeciesCount
-
           : allowedSpeciesCounts[0];
 
         return {
-
           ...next,
 
           thickness: defaults.thickness,
@@ -4534,21 +5629,14 @@ const AdminLegacyPrintCalibration = () => {
           lugCount: defaults.lugCount,
 
           soundLegendWoodSpeciesCount: isSoundLegendConstruction(
-
             next.construction
-
           )
-
             ? nextSpeciesCount
-
             : next.soundLegendWoodSpeciesCount,
-
         };
-
       }
 
-         if (key === 'thickness') {
-
+      if (key === 'thickness') {
         const buildOptions = getBuildOptionsForConstruction(next.construction);
 
         const rows = buildOptions[next.diameter]?.[value] || [];
@@ -4556,25 +5644,18 @@ const AdminLegacyPrintCalibration = () => {
         const nextStaveCount = rows[0]?.staveCount || '';
 
         const nextLugCount =
-
           rows.find((row) => row.staveCount === nextStaveCount)?.lugCount || '';
 
         const allowedSpeciesCounts =
-
           getAllowedSoundLegendSpeciesCountOptions(nextStaveCount);
 
         const nextSpeciesCount = allowedSpeciesCounts.includes(
-
           next.soundLegendWoodSpeciesCount
-
         )
-
           ? next.soundLegendWoodSpeciesCount
-
           : allowedSpeciesCounts[0];
 
         return {
-
           ...next,
 
           staveCount: nextStaveCount,
@@ -4582,61 +5663,41 @@ const AdminLegacyPrintCalibration = () => {
           lugCount: nextLugCount,
 
           soundLegendWoodSpeciesCount: isSoundLegendConstruction(
-
             next.construction
-
           )
-
             ? nextSpeciesCount
-
             : next.soundLegendWoodSpeciesCount,
-
         };
-
       }
 
-         if (key === 'staveCount') {
-
+      if (key === 'staveCount') {
         const buildOptions = getBuildOptionsForConstruction(next.construction);
 
         const rows = buildOptions[next.diameter]?.[next.thickness] || [];
 
         const nextLugCount =
-
           rows.find((row) => row.staveCount === value)?.lugCount || '';
 
         const allowedSpeciesCounts =
-
           getAllowedSoundLegendSpeciesCountOptions(value);
 
         const nextSpeciesCount = allowedSpeciesCounts.includes(
-
           next.soundLegendWoodSpeciesCount
-
         )
-
           ? next.soundLegendWoodSpeciesCount
-
           : allowedSpeciesCounts[0];
 
         return {
-
           ...next,
 
           lugCount: nextLugCount,
 
           soundLegendWoodSpeciesCount: isSoundLegendConstruction(
-
             next.construction
-
           )
-
             ? nextSpeciesCount
-
             : next.soundLegendWoodSpeciesCount,
-
         };
-
       }
 
       if (key === 'lugCount') {
@@ -4825,6 +5886,28 @@ const AdminLegacyPrintCalibration = () => {
 
           'construction',
 
+          'nonOberCompanyType',
+
+          'nonOberCompanyName',
+
+          'nonOberLineName',
+
+          'nonOberModelName',
+
+          'nonOberBaselineConstruction',
+
+          'nonOberMaterial',
+
+          'nonOberThicknessGroup',
+
+          'nonOberLineSoundFocus',
+
+          'nonOberPlyLayupStyle',
+
+          'nonOberReinforcementRings',
+
+          'nonOberBeadedShell',
+
           'exteriorScorch',
 
           'coreStaveShell',
@@ -4836,17 +5919,91 @@ const AdminLegacyPrintCalibration = () => {
 
     if (selectedLineKey === 'feuzon') {
       return SELECTOR_FIELDS.filter((field) => {
-        return !['drumType', 'construction'].includes(field.key);
+        return ![
+          'drumType',
+
+          'construction',
+
+          'nonOberCompanyType',
+
+          'nonOberCompanyName',
+
+          'nonOberLineName',
+
+          'nonOberModelName',
+
+          'nonOberBaselineConstruction',
+
+          'nonOberMaterial',
+
+          'nonOberThicknessGroup',
+
+          'nonOberLineSoundFocus',
+
+          'nonOberPlyLayupStyle',
+
+          'nonOberReinforcementRings',
+
+          'nonOberBeadedShell',
+        ].includes(field.key);
       });
     }
 
     if (selectedLineKey === 'soundlegend') {
       return SELECTOR_FIELDS.filter((field) => {
-        return !['drumType', 'construction'].includes(field.key);
+        return ![
+          'drumType',
+
+          'construction',
+
+          'nonOberCompanyType',
+
+          'nonOberCompanyName',
+
+          'nonOberLineName',
+
+          'nonOberModelName',
+
+          'nonOberBaselineConstruction',
+
+          'nonOberMaterial',
+
+          'nonOberThicknessGroup',
+
+          'nonOberLineSoundFocus',
+
+          'nonOberPlyLayupStyle',
+
+          'nonOberReinforcementRings',
+
+          'nonOberBeadedShell',
+        ].includes(field.key);
       });
     }
 
-    return SELECTOR_FIELDS;
+    return SELECTOR_FIELDS.filter((field) => {
+      return ![
+        'construction',
+
+        'soundLegendConstructionType',
+
+        'soundLegendWoodSpeciesCount',
+
+        'soundLegendWoodSpeciesPrimary',
+
+        'soundLegendWoodSpeciesSecondary',
+
+        'soundLegendWoodSpeciesTertiary',
+
+        'soundLegendWoodSpeciesQuaternary',
+
+        'soundLegendVeneerExterior',
+
+        'coreStaveShell',
+
+        'steamBentExterior',
+      ].includes(field.key);
+    });
   };
 
   const getSelectedEngineLineKey = () => {
