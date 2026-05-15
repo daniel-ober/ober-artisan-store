@@ -1,0 +1,105 @@
+{
+  "mode": "commit",
+  "importBatchId": "snare-import-2026-05-15T21-19-04-241Z",
+  "generatedAt": "2026-05-15T21:22:19.576Z",
+  "files": {
+    "allManufacturers": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "oberArtisan": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx"
+  },
+  "collections": {
+    "allManufacturers": "snareReferenceDrums",
+    "oberArtisan": "oberArtisanSnareVariants"
+  },
+  "totals": {
+    "rowsRead": 7790,
+    "docsPrepared": 7790,
+    "docsWritten": 7790,
+    "validationIssues": 0,
+    "duplicates": 0,
+    "skipped": 0
+  },
+  "masterReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "sheetName": "Combined Master Dataset",
+    "availableSheets": [
+      "README + Checklist",
+      "Combined Master Dataset",
+      "Coverage Summary",
+      "Source Log",
+      "Rubric",
+      "Validation Lists",
+      "Ludwig",
+      "Tama",
+      "Pearl",
+      "Yamaha",
+      "DW   PDP",
+      "Sonor",
+      "Gretsch",
+      "Mapex",
+      "Canopus",
+      "Noble & Cooley",
+      "Craviotto",
+      "Slingerland",
+      "Rogers",
+      "Premier",
+      "Brady",
+      "Dunnett",
+      "Pork Pie",
+      "Ahead",
+      "WorldMax   OEM",
+      "Boutique Builders"
+    ],
+    "collectionName": "snareReferenceDrums",
+    "sourceWorkbookType": "all_manufacturers",
+    "rowsRead": 1538,
+    "docsPrepared": 1538,
+    "docsWritten": 1538,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "sampleDocIds": [
+      "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-plated-_fc519760",
+      "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-plated-alum_f7629664",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_chr_30626139",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_chrome-_3cedbdbf",
+      "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-pla_212e9a9b",
+      "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-plated-_55acee9a",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_c21d5570",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_chr_7a338f83",
+      "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_1-2mm-seamless-beaded-brass-shell-smooth_brass_1-2_black-nickel-over-bras_052edcce",
+      "ludwig_black-beauty_black-beauty-5x14_14x5_1-2mm-seamless-beaded-brass-shell-smooth_brass_1-2_black-nickel-over-brass_2-_b90cf9ae"
+    ]
+  },
+  "oberReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx",
+    "sheetName": "Ober Artisan Dataset",
+    "availableSheets": [
+      "Ober Artisan Dataset",
+      "Coverage Summary",
+      "Variant Inputs",
+      "Rubric",
+      "Source Log",
+      "Validation Lists"
+    ],
+    "collectionName": "oberArtisanSnareVariants",
+    "sourceWorkbookType": "ober_artisan",
+    "rowsRead": 6252,
+    "docsPrepared": 6252,
+    "docsWritten": 6252,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "sampleDocIds": [
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-triple-flange_12x5_stave_northern-red-oak__5d4c26c2",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-die-cast_12x5_stave_northern-red-oak_45-in_94f20cf8",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-triple-flange_12x5_stave_northern-red-oak_525fd4b0",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-die-cast_12x5_stave_northern-red-oak_45-i_721046c5",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-triple-flange_12x5_stave_northern-red-oak_45-_2ea629ab",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-die-cast_12x5_stave_northern-red-oak_45-inner_5a939aac",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-triple-flange_12x5-5_stave_northern-red-_3387cced",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-die-cast_12x5-5_stave_northern-red-oak_4_05a473f5",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-triple-flange_12x5-5_stave_northern-red_615413c3",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-die-cast_12x5-5_stave_northern-red-oak__212c25ae"
+    ]
+  }
+}

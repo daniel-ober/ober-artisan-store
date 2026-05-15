@@ -1,0 +1,707 @@
+{
+  "mode": "dry-run",
+  "importBatchId": "snare-import-2026-05-15T20-53-54-772Z",
+  "generatedAt": "2026-05-15T20:53:56.330Z",
+  "files": {
+    "allManufacturers": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "oberArtisan": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx"
+  },
+  "collections": {
+    "allManufacturers": "snareReferenceDrums",
+    "oberArtisan": "oberArtisanSnareVariants"
+  },
+  "totals": {
+    "rowsRead": 7798,
+    "docsPrepared": 7651,
+    "docsWritten": 0,
+    "validationIssues": 0,
+    "duplicates": 3,
+    "skipped": 147
+  },
+  "masterReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "sheetName": "Combined Master Dataset",
+    "availableSheets": [
+      "README + Checklist",
+      "Combined Master Dataset",
+      "Coverage Summary",
+      "Source Log",
+      "Rubric",
+      "Validation Lists",
+      "Ludwig",
+      "Tama",
+      "Pearl",
+      "Yamaha",
+      "DW   PDP",
+      "Sonor",
+      "Gretsch",
+      "Mapex",
+      "Canopus",
+      "Noble & Cooley",
+      "Craviotto",
+      "Slingerland",
+      "Rogers",
+      "Premier",
+      "Brady",
+      "Dunnett",
+      "Pork Pie",
+      "Ahead",
+      "WorldMax   OEM",
+      "Boutique Builders"
+    ],
+    "collectionName": "snareReferenceDrums",
+    "sourceWorkbookType": "all_manufacturers",
+    "rowsRead": 1546,
+    "docsPrepared": 1399,
+    "docsWritten": 0,
+    "skipped": [
+      {
+        "row": 559,
+        "reason": "Blank row"
+      },
+      {
+        "row": 560,
+        "reason": "Blank row"
+      },
+      {
+        "row": 561,
+        "reason": "Blank row"
+      },
+      {
+        "row": 562,
+        "reason": "Blank row"
+      },
+      {
+        "row": 563,
+        "reason": "Blank row"
+      },
+      {
+        "row": 564,
+        "reason": "Blank row"
+      },
+      {
+        "row": 565,
+        "reason": "Blank row"
+      },
+      {
+        "row": 566,
+        "reason": "Blank row"
+      },
+      {
+        "row": 567,
+        "reason": "Blank row"
+      },
+      {
+        "row": 568,
+        "reason": "Blank row"
+      },
+      {
+        "row": 569,
+        "reason": "Blank row"
+      },
+      {
+        "row": 570,
+        "reason": "Blank row"
+      },
+      {
+        "row": 571,
+        "reason": "Blank row"
+      },
+      {
+        "row": 572,
+        "reason": "Blank row"
+      },
+      {
+        "row": 573,
+        "reason": "Blank row"
+      },
+      {
+        "row": 574,
+        "reason": "Blank row"
+      },
+      {
+        "row": 575,
+        "reason": "Blank row"
+      },
+      {
+        "row": 576,
+        "reason": "Blank row"
+      },
+      {
+        "row": 577,
+        "reason": "Blank row"
+      },
+      {
+        "row": 578,
+        "reason": "Blank row"
+      },
+      {
+        "row": 579,
+        "reason": "Blank row"
+      },
+      {
+        "row": 580,
+        "reason": "Blank row"
+      },
+      {
+        "row": 581,
+        "reason": "Blank row"
+      },
+      {
+        "row": 582,
+        "reason": "Blank row"
+      },
+      {
+        "row": 583,
+        "reason": "Blank row"
+      },
+      {
+        "row": 584,
+        "reason": "Blank row"
+      },
+      {
+        "row": 585,
+        "reason": "Blank row"
+      },
+      {
+        "row": 586,
+        "reason": "Blank row"
+      },
+      {
+        "row": 587,
+        "reason": "Blank row"
+      },
+      {
+        "row": 588,
+        "reason": "Blank row"
+      },
+      {
+        "row": 589,
+        "reason": "Blank row"
+      },
+      {
+        "row": 590,
+        "reason": "Blank row"
+      },
+      {
+        "row": 591,
+        "reason": "Blank row"
+      },
+      {
+        "row": 592,
+        "reason": "Blank row"
+      },
+      {
+        "row": 593,
+        "reason": "Blank row"
+      },
+      {
+        "row": 594,
+        "reason": "Blank row"
+      },
+      {
+        "row": 595,
+        "reason": "Blank row"
+      },
+      {
+        "row": 596,
+        "reason": "Blank row"
+      },
+      {
+        "row": 597,
+        "reason": "Blank row"
+      },
+      {
+        "row": 598,
+        "reason": "Blank row"
+      },
+      {
+        "row": 599,
+        "reason": "Blank row"
+      },
+      {
+        "row": 600,
+        "reason": "Blank row"
+      },
+      {
+        "row": 601,
+        "reason": "Blank row"
+      },
+      {
+        "row": 602,
+        "reason": "Blank row"
+      },
+      {
+        "row": 603,
+        "reason": "Blank row"
+      },
+      {
+        "row": 604,
+        "reason": "Blank row"
+      },
+      {
+        "row": 605,
+        "reason": "Blank row"
+      },
+      {
+        "row": 606,
+        "reason": "Blank row"
+      },
+      {
+        "row": 607,
+        "reason": "Blank row"
+      },
+      {
+        "row": 608,
+        "reason": "Blank row"
+      },
+      {
+        "row": 609,
+        "reason": "Blank row"
+      },
+      {
+        "row": 610,
+        "reason": "Blank row"
+      },
+      {
+        "row": 611,
+        "reason": "Blank row"
+      },
+      {
+        "row": 612,
+        "reason": "Blank row"
+      },
+      {
+        "row": 613,
+        "reason": "Blank row"
+      },
+      {
+        "row": 614,
+        "reason": "Blank row"
+      },
+      {
+        "row": 615,
+        "reason": "Blank row"
+      },
+      {
+        "row": 616,
+        "reason": "Blank row"
+      },
+      {
+        "row": 617,
+        "reason": "Blank row"
+      },
+      {
+        "row": 618,
+        "reason": "Blank row"
+      },
+      {
+        "row": 619,
+        "reason": "Blank row"
+      },
+      {
+        "row": 620,
+        "reason": "Blank row"
+      },
+      {
+        "row": 621,
+        "reason": "Blank row"
+      },
+      {
+        "row": 622,
+        "reason": "Blank row"
+      },
+      {
+        "row": 623,
+        "reason": "Blank row"
+      },
+      {
+        "row": 624,
+        "reason": "Blank row"
+      },
+      {
+        "row": 625,
+        "reason": "Blank row"
+      },
+      {
+        "row": 626,
+        "reason": "Blank row"
+      },
+      {
+        "row": 627,
+        "reason": "Blank row"
+      },
+      {
+        "row": 628,
+        "reason": "Blank row"
+      },
+      {
+        "row": 629,
+        "reason": "Blank row"
+      },
+      {
+        "row": 630,
+        "reason": "Blank row"
+      },
+      {
+        "row": 631,
+        "reason": "Blank row"
+      },
+      {
+        "row": 632,
+        "reason": "Blank row"
+      },
+      {
+        "row": 633,
+        "reason": "Blank row"
+      },
+      {
+        "row": 634,
+        "reason": "Blank row"
+      },
+      {
+        "row": 635,
+        "reason": "Blank row"
+      },
+      {
+        "row": 636,
+        "reason": "Blank row"
+      },
+      {
+        "row": 637,
+        "reason": "Blank row"
+      },
+      {
+        "row": 638,
+        "reason": "Blank row"
+      },
+      {
+        "row": 639,
+        "reason": "Blank row"
+      },
+      {
+        "row": 640,
+        "reason": "Blank row"
+      },
+      {
+        "row": 641,
+        "reason": "Blank row"
+      },
+      {
+        "row": 642,
+        "reason": "Blank row"
+      },
+      {
+        "row": 643,
+        "reason": "Blank row"
+      },
+      {
+        "row": 644,
+        "reason": "Blank row"
+      },
+      {
+        "row": 645,
+        "reason": "Blank row"
+      },
+      {
+        "row": 646,
+        "reason": "Blank row"
+      },
+      {
+        "row": 647,
+        "reason": "Blank row"
+      },
+      {
+        "row": 648,
+        "reason": "Blank row"
+      },
+      {
+        "row": 649,
+        "reason": "Blank row"
+      },
+      {
+        "row": 650,
+        "reason": "Blank row"
+      },
+      {
+        "row": 651,
+        "reason": "Blank row"
+      },
+      {
+        "row": 652,
+        "reason": "Blank row"
+      },
+      {
+        "row": 653,
+        "reason": "Blank row"
+      },
+      {
+        "row": 654,
+        "reason": "Blank row"
+      },
+      {
+        "row": 655,
+        "reason": "Blank row"
+      },
+      {
+        "row": 656,
+        "reason": "Blank row"
+      },
+      {
+        "row": 657,
+        "reason": "Blank row"
+      },
+      {
+        "row": 658,
+        "reason": "Blank row"
+      },
+      {
+        "row": 659,
+        "reason": "Blank row"
+      },
+      {
+        "row": 660,
+        "reason": "Blank row"
+      },
+      {
+        "row": 661,
+        "reason": "Blank row"
+      },
+      {
+        "row": 662,
+        "reason": "Blank row"
+      },
+      {
+        "row": 663,
+        "reason": "Blank row"
+      },
+      {
+        "row": 664,
+        "reason": "Blank row"
+      },
+      {
+        "row": 665,
+        "reason": "Blank row"
+      },
+      {
+        "row": 666,
+        "reason": "Blank row"
+      },
+      {
+        "row": 667,
+        "reason": "Blank row"
+      },
+      {
+        "row": 668,
+        "reason": "Blank row"
+      },
+      {
+        "row": 669,
+        "reason": "Blank row"
+      },
+      {
+        "row": 670,
+        "reason": "Blank row"
+      },
+      {
+        "row": 671,
+        "reason": "Blank row"
+      },
+      {
+        "row": 672,
+        "reason": "Blank row"
+      },
+      {
+        "row": 673,
+        "reason": "Blank row"
+      },
+      {
+        "row": 674,
+        "reason": "Blank row"
+      },
+      {
+        "row": 675,
+        "reason": "Blank row"
+      },
+      {
+        "row": 676,
+        "reason": "Blank row"
+      },
+      {
+        "row": 677,
+        "reason": "Blank row"
+      },
+      {
+        "row": 678,
+        "reason": "Blank row"
+      },
+      {
+        "row": 679,
+        "reason": "Blank row"
+      },
+      {
+        "row": 680,
+        "reason": "Blank row"
+      },
+      {
+        "row": 681,
+        "reason": "Blank row"
+      },
+      {
+        "row": 682,
+        "reason": "Blank row"
+      },
+      {
+        "row": 683,
+        "reason": "Blank row"
+      },
+      {
+        "row": 684,
+        "reason": "Blank row"
+      },
+      {
+        "row": 685,
+        "reason": "Blank row"
+      },
+      {
+        "row": 686,
+        "reason": "Blank row"
+      },
+      {
+        "row": 687,
+        "reason": "Blank row"
+      },
+      {
+        "row": 688,
+        "reason": "Blank row"
+      },
+      {
+        "row": 689,
+        "reason": "Blank row"
+      },
+      {
+        "row": 690,
+        "reason": "Blank row"
+      },
+      {
+        "row": 691,
+        "reason": "Blank row"
+      },
+      {
+        "row": 692,
+        "reason": "Blank row"
+      },
+      {
+        "row": 693,
+        "reason": "Blank row"
+      },
+      {
+        "row": 694,
+        "reason": "Blank row"
+      },
+      {
+        "row": 695,
+        "reason": "Blank row"
+      },
+      {
+        "row": 696,
+        "reason": "Blank row"
+      },
+      {
+        "row": 697,
+        "reason": "Blank row"
+      },
+      {
+        "row": 698,
+        "reason": "Blank row"
+      },
+      {
+        "row": 699,
+        "reason": "Blank row"
+      },
+      {
+        "row": 700,
+        "reason": "Blank row"
+      },
+      {
+        "row": 701,
+        "reason": "Blank row"
+      },
+      {
+        "row": 702,
+        "reason": "Blank row"
+      },
+      {
+        "row": 703,
+        "reason": "Blank row"
+      },
+      {
+        "row": 704,
+        "reason": "Blank row"
+      },
+      {
+        "row": 705,
+        "reason": "Blank row"
+      }
+    ],
+    "duplicateList": [
+      {
+        "docId": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_seamless-brass-shell_brass_1-2_brass-engraved-or-lacquer_die-cas_462336b3",
+        "count": 2
+      },
+      {
+        "docId": "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_nickel-over-brass-shell_brass_nickel-over-brass_triple-flan_1fc09b78",
+        "count": 2
+      },
+      {
+        "docId": "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_brass-shell_brass_raw-aged-brass_triple-flanged_83a32b5e",
+        "count": 2
+      }
+    ],
+    "validationIssues": [],
+    "sampleDocIds": [
+      "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-plated-_fc519760",
+      "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-plated-alum_f7629664",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_chr_30626139",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_chrome-_3cedbdbf",
+      "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-pla_212e9a9b",
+      "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_seamless-beaded-aluminum-shell-smooth_aluminum_1-7_chrome-plated-_55acee9a",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_c21d5570",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_seamless-beaded-aluminum-shell-hammered_aluminum_1-7_chr_7a338f83",
+      "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_1-2mm-seamless-beaded-brass-shell-smooth_brass_1-2_black-nickel-over-bras_052edcce",
+      "ludwig_black-beauty_black-beauty-5x14_14x5_1-2mm-seamless-beaded-brass-shell-smooth_brass_1-2_black-nickel-over-brass_2-_b90cf9ae"
+    ]
+  },
+  "oberReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx",
+    "sheetName": "Ober Artisan Dataset",
+    "availableSheets": [
+      "Ober Artisan Dataset",
+      "Coverage Summary",
+      "Variant Inputs",
+      "Rubric",
+      "Source Log",
+      "Validation Lists"
+    ],
+    "collectionName": "oberArtisanSnareVariants",
+    "sourceWorkbookType": "ober_artisan",
+    "rowsRead": 6252,
+    "docsPrepared": 6252,
+    "docsWritten": 0,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "sampleDocIds": [
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-triple-flange_12x5_stave_northern-red-oak__5d4c26c2",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-die-cast_12x5_stave_northern-red-oak_45-in_94f20cf8",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-triple-flange_12x5_stave_northern-red-oak_525fd4b0",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-die-cast_12x5_stave_northern-red-oak_45-i_721046c5",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-triple-flange_12x5_stave_northern-red-oak_45-_2ea629ab",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-die-cast_12x5_stave_northern-red-oak_45-inner_5a939aac",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-triple-flange_12x5-5_stave_northern-red-_3387cced",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-die-cast_12x5-5_stave_northern-red-oak_4_05a473f5",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-triple-flange_12x5-5_stave_northern-red_615413c3",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-die-cast_12x5-5_stave_northern-red-oak__212c25ae"
+    ]
+  }
+}
