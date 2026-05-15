@@ -15,6 +15,22 @@ import AdminLegacyPrintSelector from './AdminLegacyPrintSelector';
 import LegacyPrintAdminSlider from './LegacyPrintAdminSlider';
 
 import {
+
+  getReferenceCompanyTypes,
+
+  getReferenceCompaniesByType,
+
+  getReferenceLines,
+
+  getReferenceModels,
+
+  getReferenceRecord,
+
+  getReferenceSizes,
+
+} from '../data/legacyPrint/referenceDrums/referenceDrumSelectors';
+
+import {
   collection,
   doc,
   getDoc,
