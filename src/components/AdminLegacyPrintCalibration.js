@@ -44,8 +44,14 @@ const LEGACYPRINT_DRAFT_DOC_ID = 'draft';
 const LEGACYPRINT_TABS = [
   'Overview',
 
-  'Voice Preview',
+  'Engine Builder',
 
+  'Calibration Tools',
+
+  'Engine View Settings',
+];
+
+const LEGACYPRINT_CALIBRATION_TOOL_TABS = [
   'Master Weights',
 
   'Benchmarks',
@@ -53,12 +59,6 @@ const LEGACYPRINT_TABS = [
   'Config Options',
 
   'Availability',
-
-  'SoundLegend Builder',
-
-  'FEUZØN Builder',
-
-  'Visibility',
 
   'Versions',
 ];
@@ -107,17 +107,143 @@ const SELECTOR_FIELDS = [
   {
     key: 'thickness',
 
-    label: 'Thickness',
+    label: 'Shell Thickness',
 
     source: 'thickness',
   },
 
   {
-    key: 'finish',
+    key: 'staveCount',
 
-    label: 'Finish Type',
+    label: 'Stave Count',
 
-    source: 'finish',
+    source: 'staveCount',
+  },
+
+   {
+
+    key: 'lugCount',
+
+    label: 'Lug Count',
+
+    source: 'lugCount',
+
+  },
+
+  {
+
+    key: 'soundLegendConstructionType',
+
+    label: 'Construction Type',
+
+    source: 'soundLegendConstructionType',
+
+  },
+
+  {
+
+    key: 'soundLegendWoodSpeciesCount',
+
+    label: 'Wood Species Count',
+
+    source: 'soundLegendWoodSpeciesCount',
+
+  },
+
+  {
+
+    key: 'soundLegendWoodSpeciesPrimary',
+
+    label: 'Primary Wood Species',
+
+    source: 'soundLegendWoodSpeciesPrimary',
+
+  },
+
+  {
+
+    key: 'soundLegendWoodSpeciesSecondary',
+
+    label: 'Secondary Wood Species',
+
+    source: 'soundLegendWoodSpeciesSecondary',
+
+  },
+
+  {
+
+    key: 'soundLegendWoodSpeciesTertiary',
+
+    label: 'Tertiary Wood Species',
+
+    source: 'soundLegendWoodSpeciesTertiary',
+
+  },
+
+  {
+
+    key: 'soundLegendWoodSpeciesQuaternary',
+
+    label: 'Quaternary Wood Species',
+
+    source: 'soundLegendWoodSpeciesQuaternary',
+
+  },
+
+  {
+
+    key: 'soundLegendVeneerExterior',
+
+    label: 'Veneer Exterior',
+
+    source: 'soundLegendVeneerExterior',
+
+  },
+
+  {
+
+    key: 'coreStaveShell',
+
+    label: 'Core Stave Shell',
+
+    source: 'coreStaveShell',
+
+  },
+
+  {
+    key: 'steamBentExterior',
+
+    label: 'Paired Exterior Shell',
+
+    source: 'steamBentExterior',
+  },
+
+{
+
+  key: 'finish',
+
+  label: 'Finish Design',
+
+  source: 'finish',
+
+},
+
+{
+
+  key: 'finishCoating',
+
+  label: 'Finish / Coating',
+
+  source: 'finishCoating',
+
+},
+
+  {
+    key: 'exteriorScorch',
+
+    label: 'Exterior Scorch',
+
+    source: 'exteriorScorch',
   },
 
   {
@@ -145,14 +271,6 @@ const SELECTOR_FIELDS = [
   },
 
   {
-    key: 'tension',
-
-    label: 'Tension Setting',
-
-    source: 'tension',
-  },
-
-  {
     key: 'snareWires',
 
     label: 'Snare Wire Option',
@@ -175,7 +293,337 @@ const SELECTOR_FIELDS = [
 
     source: 'resoHead',
   },
+
+  {
+    key: 'tension',
+
+    label: 'Tension Setting',
+
+    source: 'tension',
+  },
 ];
+
+const NON_OBER_MANUFACTURER_GROUPS = [
+  {
+    group: 'Corporate / Major Manufacturers',
+
+    makers: [
+      'Pearl',
+
+      'Tama',
+
+      'Yamaha',
+
+      'Ludwig',
+
+      'DW',
+
+      'Gretsch',
+
+      'Mapex',
+
+      'Sonor',
+
+      'PDP',
+
+      'Rogers',
+
+      'Slingerland',
+
+      'Premier',
+
+      'Natal',
+
+      'Canopus',
+
+      'Craviotto',
+    ],
+  },
+
+  {
+    group: 'Popular / Boutique Builders',
+
+    makers: [
+      'Noble & Cooley',
+
+      'Dunnett',
+
+      'George Way',
+
+      'Keplinger',
+
+      'INDe Drum Lab',
+
+      'Oriollo',
+
+      'Q Drum Co.',
+
+      'C&C Drum Co.',
+
+      'Sugar Percussion',
+
+      'A&F Drum Co.',
+
+      'British Drum Co.',
+
+      'Doc Sweeney',
+
+      'Pork Pie',
+
+      'Spaun',
+
+      'Truth Custom Drums',
+
+      'SJC Custom Drums',
+    ],
+  },
+
+  {
+    group: 'Custom / Independent Builders',
+
+    makers: [
+      'Evetts Drums',
+
+      'Unix Drums',
+
+      'Antonio Drums',
+
+      'Hendrix Drums',
+
+      'Stone Custom Drum',
+
+      'Kumu Drums',
+
+      'VK Drums',
+
+      'Outlaw Drums',
+
+      'TreeHouse Custom Drums',
+
+      'Barton Drum Co.',
+
+      'Black Swamp Percussion',
+
+      'Summit Drums',
+
+      'Jenkins-Martin',
+
+      'RBH Drums',
+
+      'Wacco Drums',
+    ],
+  },
+];
+
+const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
+  Pearl: {
+    Snare: [
+      'Reference One Snare',
+
+      'Masters Maple Complete Snare',
+
+      'Free Floating Maple Snare',
+
+      'Sensitone Brass Snare',
+
+      'Chad Smith Signature Snare',
+    ],
+
+    'Rack Tom': ['Masters Maple Complete Rack Tom', 'Reference Pure Rack Tom'],
+
+    'Floor Tom': [
+      'Masters Maple Complete Floor Tom',
+      'Reference Pure Floor Tom',
+    ],
+
+    'Bass Drum': [
+      'Masters Maple Complete Bass Drum',
+      'Reference Pure Bass Drum',
+    ],
+  },
+
+  Tama: {
+    Snare: [
+      'Starphonic Aluminum Snare',
+
+      'S.L.P. G-Maple Snare',
+
+      'S.L.P. Big Black Steel Snare',
+
+      'Starclassic Maple Snare',
+
+      'Bell Brass Snare',
+    ],
+
+    'Rack Tom': ['Starclassic Maple Rack Tom', 'Star Walnut Rack Tom'],
+
+    'Floor Tom': ['Starclassic Maple Floor Tom', 'Star Walnut Floor Tom'],
+
+    'Bass Drum': ['Starclassic Maple Bass Drum', 'Star Walnut Bass Drum'],
+  },
+
+  Yamaha: {
+    Snare: [
+      'Recording Custom Aluminum Snare',
+
+      'Recording Custom Brass Snare',
+
+      'Tour Custom Maple Snare',
+
+      'Absolute Hybrid Maple Snare',
+    ],
+
+    'Rack Tom': ['Recording Custom Rack Tom', 'Absolute Hybrid Maple Rack Tom'],
+
+    'Floor Tom': [
+      'Recording Custom Floor Tom',
+      'Absolute Hybrid Maple Floor Tom',
+    ],
+
+    'Bass Drum': [
+      'Recording Custom Bass Drum',
+      'Absolute Hybrid Maple Bass Drum',
+    ],
+  },
+
+  Ludwig: {
+    Snare: [
+      'Supraphonic LM400',
+
+      'Supraphonic LM402',
+
+      'Black Beauty',
+
+      'Acrolite',
+
+      'Classic Maple Snare',
+
+      'Legacy Mahogany Snare',
+    ],
+
+    'Rack Tom': ['Classic Maple Rack Tom', 'Legacy Mahogany Rack Tom'],
+
+    'Floor Tom': ['Classic Maple Floor Tom', 'Legacy Mahogany Floor Tom'],
+
+    'Bass Drum': ['Classic Maple Bass Drum', 'Legacy Mahogany Bass Drum'],
+  },
+
+  DW: {
+    Snare: [
+      'Collector’s Maple Snare',
+
+      'Collector’s Bell Brass Snare',
+
+      'Performance Series Snare',
+
+      'Jazz Series Snare',
+
+      'Super Solid Snare',
+    ],
+
+    'Rack Tom': ['Collector’s Maple Rack Tom', 'Performance Series Rack Tom'],
+
+    'Floor Tom': [
+      'Collector’s Maple Floor Tom',
+      'Performance Series Floor Tom',
+    ],
+
+    'Bass Drum': [
+      'Collector’s Maple Bass Drum',
+      'Performance Series Bass Drum',
+    ],
+  },
+
+  Gretsch: {
+    Snare: [
+      'USA Custom Snare',
+
+      'Brooklyn Snare',
+
+      'Renown Maple Snare',
+
+      'Bell Brass Snare',
+
+      'Solid Aluminum Snare',
+    ],
+
+    'Rack Tom': ['USA Custom Rack Tom', 'Brooklyn Rack Tom', 'Renown Rack Tom'],
+
+    'Floor Tom': [
+      'USA Custom Floor Tom',
+      'Brooklyn Floor Tom',
+      'Renown Floor Tom',
+    ],
+
+    'Bass Drum': [
+      'USA Custom Bass Drum',
+      'Brooklyn Bass Drum',
+      'Renown Bass Drum',
+    ],
+  },
+
+  Mapex: {
+    Snare: [
+      'Black Panther Wraith',
+
+      'Black Panther Cherry Bomb',
+
+      'Black Panther Persuader',
+
+      'Saturn Maple/Walnut Snare',
+
+      'Armory Snare',
+    ],
+
+    'Rack Tom': ['Saturn Maple/Walnut Rack Tom', 'Armory Rack Tom'],
+
+    'Floor Tom': ['Saturn Maple/Walnut Floor Tom', 'Armory Floor Tom'],
+
+    'Bass Drum': ['Saturn Maple/Walnut Bass Drum', 'Armory Bass Drum'],
+  },
+
+  Sonor: {
+    Snare: [
+      'SQ2 Maple Snare',
+
+      'SQ1 Birch Snare',
+
+      'Vintage Series Snare',
+
+      'Kompressor Brass Snare',
+
+      'ProLite Snare',
+    ],
+
+    'Rack Tom': ['SQ2 Rack Tom', 'SQ1 Rack Tom', 'Vintage Series Rack Tom'],
+
+    'Floor Tom': ['SQ2 Floor Tom', 'SQ1 Floor Tom', 'Vintage Series Floor Tom'],
+
+    'Bass Drum': ['SQ2 Bass Drum', 'SQ1 Bass Drum', 'Vintage Series Bass Drum'],
+  },
+
+  default: {
+    Snare: [
+      'Maple Snare Reference',
+
+      'Birch Snare Reference',
+
+      'Brass Snare Reference',
+
+      'Aluminum Snare Reference',
+
+      'Walnut Snare Reference',
+    ],
+
+    'Rack Tom': ['Maple Rack Tom Reference', 'Birch Rack Tom Reference'],
+
+    'Floor Tom': ['Maple Floor Tom Reference', 'Birch Floor Tom Reference'],
+
+    'Bass Drum': ['Maple Bass Drum Reference', 'Birch Bass Drum Reference'],
+
+    'Concert Tom': ['Single-Headed Concert Tom Reference'],
+  },
+};
 
 const BRAND_FILTER_OPTIONS = [
   'Ober Artisan',
@@ -378,28 +826,739 @@ const INITIAL_SELECTOR = {
 
   depth: '5.0 in',
 
-  thickness: '15mm Heavy',
+  lugCount: '8 lug',
 
-  finish: 'Ober Medium Torch',
+  staveCount: '16 staves',
 
-  hoopType: 'Triple Flange',
+  thickness: '16 staves / 11mm',
 
-  bearingEdge: '45° Inner / Soft Outer Roundover',
+  finish: 'Medium Torch',
+
+  finishCoating: '',
+
+  stainOption: '',
+
+  exteriorScorch: '',
+
+  soundLegendConstructionType: 'Stave',
+
+  soundLegendWoodSpeciesCount: '1 Wood Species',
+
+  soundLegendWoodSpeciesPrimary: 'Maple',
+
+  soundLegendWoodSpeciesSecondary: '',
+
+  soundLegendWoodSpeciesTertiary: '',
+
+  soundLegendWoodSpeciesQuaternary: '',
+
+  soundLegendVeneerExterior: '',
+
+  coreStaveShell: '',
+
+  steamBentExterior: '',
+
+  hoopType: 'Triple Flange 2.3mm',
+
+  bearingEdge: '45° inner edge with softened outer roundover',
+
+  snareWires: 'PureSound Custom Pro Steel 20-Strand wires',
 
   snareBed: 'Standard',
 
   tension: 'Medium',
 
-  snareWires: '20-strand',
+  batterHead: 'Remo Coated Ambassador',
 
-  batterHead: 'Coated 1-ply',
-
-  resoHead: 'Snare Side Clear',
+  resoHead: 'Remo Ambassador Side',
 };
+
+const HERITAGE_FINISH_OPTIONS = ['Light Torch', 'Medium Torch', 'Blackened'];
+
+const FEUZON_FINISH_DESIGN_OPTIONS = [
+
+  'Natural',
+
+  'Full Stain',
+
+  'Faded Stain',
+
+];
+
+const FEUZON_FINISH_COATING_OPTIONS = [
+
+  'Satin',
+
+  'Gloss',
+
+];
+
+const FEUZON_EXTERIOR_SCORCH_OPTIONS = ['Non-Scorched', 'Natural Scorched'];
+
+const FEUZON_STAIN_OPTIONS_BY_EXTERIOR = {
+  Maple: ['Smoked Maple', 'Maple Tobacco', 'Blackened Maple'],
+
+  Walnut: ['Dark Walnut', 'Black Walnut', 'Walnut Tobacco'],
+
+  Cherry: ['Aged Cherry', 'Black Cherry', 'Dark Cherry'],
+};
+
+const SOUNDLEGEND_CONSTRUCTION_TYPE_OPTIONS = [
+
+  'Stave',
+
+  'Hybrid / FEUZØN',
+
+  'Stave with Veneer',
+
+  'Hybrid / FEUZØN with Veneer',
+
+];
+
+const SOUNDLEGEND_WOOD_SPECIES_OPTIONS = [
+
+  'Maple',
+
+  'Birch',
+
+  'Oak',
+
+  'Walnut',
+
+  'Cherry',
+
+  'Mahogany',
+
+  'Ash',
+
+  'Padauk',
+
+  'Bubinga',
+
+  'Wenge',
+
+  'Zebrawood',
+
+  'Purpleheart',
+
+  'Poplar',
+
+  'Sapele',
+
+];
+
+const SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS = [
+
+  'Mappa Burl',
+
+  'Waterfall Bubinga',
+
+  'Quilted Maple',
+
+  'Flamed Maple',
+
+  'Walnut Burl',
+
+  'Olive Ash Burl',
+
+  'Birdseye Maple',
+
+  'Curly Walnut',
+
+  'Macassar Ebony',
+
+  'Zebrawood',
+
+];
+
+const getAllowedSoundLegendSpeciesCountOptions = (staveCount = '') => {
+
+  const count = Number.parseInt(staveCount, 10);
+
+  if ([6, 12, 24].includes(count)) {
+
+    return ['1 Wood Species', '2 Wood Species', '3 Wood Species'];
+
+  }
+
+  return ['1 Wood Species', '2 Wood Species', '4 Wood Species'];
+
+};
+
+const getSoundLegendSpeciesCountNumber = (value = '') => {
+
+  return Number.parseInt(value, 10) || 1;
+
+};
+
+const soundLegendTypeUsesHybridShell = (constructionType = '') => {
+
+  return normalizeText(constructionType).includes('hybrid');
+
+};
+
+const soundLegendTypeUsesVeneer = (constructionType = '') => {
+
+  return normalizeText(constructionType).includes('veneer');
+
+};
+
+const SOUNDLEGEND_FINISH_DESIGN_OPTIONS = [
+
+  'Natural',
+
+  'Full Stain',
+
+  'Faded Stain',
+
+  'Spray Solid',
+
+  'Spray Fade',
+
+];
+
+const SOUNDLEGEND_FINISH_COATING_OPTIONS = [
+
+  'Satin',
+
+  'PolyGloss',
+
+];
+
+const SOUNDLEGEND_SCORCH_DEPTH_OPTIONS = [
+  'Non-Scorched',
+
+  'Light Scorched',
+
+  'Medium Scorched',
+
+  'Blackened',
+];
+
+const SOUNDLEGEND_SCORCH_DESIGN_OPTIONS = [
+  'Faded Scorched Top Half',
+
+  'Faded Scorched Bottom Half',
+
+  'Faded Scorched Top and Bottom',
+
+  'Faded Scorched Middle',
+];
+
+const SOUNDLEGEND_VENEER_FINISH_OPTIONS = [
+  'Sprayed Satin',
+
+  'Sprayed Gloss',
+
+  'Stained Satin',
+
+  'Stained Gloss',
+
+  'Natural Satin',
+
+  'PolyGloss',
+];
+
+const SOUNDLEGEND_ACRYLIC_ACCENT_OPTIONS = [
+  'No Acrylic Accent',
+
+  'Acrylic Accent 1 Color',
+
+  'Acrylic Accent 2 Colors',
+
+  'Acrylic Accent 3 Colors',
+];
+
+const SOUNDLEGEND_HOOP_OPTIONS = [
+  'Triple Flange 1.6mm',
+
+  'Triple Flange 2.3mm',
+
+  'Triple Flange 3.0mm',
+
+  'Die-Cast',
+
+  'S-Hoop',
+
+  'Single Flange 1.6mm',
+
+  'Single Flange 2.3mm',
+
+  'Wood Hoop',
+];
+
+const LEGACYPRINT_BEARING_EDGE_OPTIONS = [
+  '45° inner edge with softened outer roundover',
+
+  'Balanced Hybrid Edge',
+
+  'Warm Hybrid Edge',
+
+  'Modern Precision Edge',
+
+  '45° Single Edge',
+
+  '45° Double Edge',
+
+  '30° Roundover',
+
+  'Full Roundover',
+
+  'Baseball Bat Roundover',
+
+  'Vintage Roundover',
+
+  'Sharp Modern 45°',
+
+  'Reverse 45°',
+
+  'Dual 45°',
+
+  'Flat / No Edge',
+
+  'Rounded Outer Countercut',
+];
 
 const HERITAGE_SNARE_DIAMETERS = ['12 in', '13 in', '14 in'];
 
 const FEUZON_SNARE_DIAMETERS = ['12 in', '13 in', '14 in', '15 in'];
+
+const FEUZON_CORE_STAVE_OPTIONS = [
+  'Walnut + Birch',
+
+  'Oak + Cherry',
+
+  'Birch + Maple',
+
+  'Maple + Bubinga',
+
+  'Mahogany + Cherry',
+
+  'Walnut + Padauk',
+
+  'Oak + Wenge',
+
+  'Zebrawood + Mahogany',
+
+  'Padauk + Ash',
+];
+
+const FEUZON_STEAMBENT_EXTERIOR_OPTIONS = ['Maple', 'Walnut', 'Cherry'];
+
+const SOUNDLEGEND_SNARE_DIAMETERS = [
+  '10 in',
+  '12 in',
+  '13 in',
+  '14 in',
+  '15 in',
+];
+
+const SOUNDLEGEND_BUILD_OPTIONS_BY_DIAMETER_AND_THICKNESS = {
+  '10 in': {
+    '6mm': [{ lugCount: '6 lug', staveCount: '6 staves' }],
+
+    '7mm': [{ lugCount: '6 lug', staveCount: '6 staves' }],
+
+    '8mm': [
+      { lugCount: '6 lug', staveCount: '6 staves' },
+
+      { lugCount: '6 lug', staveCount: '12 staves' },
+    ],
+
+    '9mm': [
+      { lugCount: '6 lug', staveCount: '6 staves' },
+
+      { lugCount: '6 lug', staveCount: '12 staves' },
+    ],
+
+    '10mm': [{ lugCount: '6 lug', staveCount: '12 staves' }],
+
+    '11mm': [{ lugCount: '6 lug', staveCount: '12 staves' }],
+
+    '12mm': [{ lugCount: '6 lug', staveCount: '12 staves' }],
+  },
+
+  '12 in': {
+    '6mm': [{ lugCount: '6 lug', staveCount: '6 staves' }],
+
+    '7mm': [
+      { lugCount: '6 lug', staveCount: '6 staves' },
+
+      { lugCount: '6 lug', staveCount: '12 staves' },
+    ],
+
+    '8mm': [
+      { lugCount: '6 lug', staveCount: '12 staves' },
+
+      { lugCount: '8 lug', staveCount: '8 staves' },
+    ],
+
+    '9mm': [
+      { lugCount: '6 lug', staveCount: '12 staves' },
+
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '8 lug', staveCount: '16 staves' },
+    ],
+
+    '10mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '8 lug', staveCount: '16 staves' },
+    ],
+
+    '11mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '8 lug', staveCount: '24 staves' },
+    ],
+
+    '12mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '8 lug', staveCount: '24 staves' },
+    ],
+
+    '13mm': [
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '8 lug', staveCount: '32 staves' },
+    ],
+
+    '14mm': [{ lugCount: '8 lug', staveCount: '32 staves' }],
+  },
+
+  '13 in': {
+    '6mm': [{ lugCount: '8 lug', staveCount: '8 staves' }],
+
+    '7mm': [{ lugCount: '8 lug', staveCount: '8 staves' }],
+
+    '8mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '8 lug', staveCount: '16 staves' },
+    ],
+
+    '9mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+
+    '10mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '8 lug', staveCount: '24 staves' },
+    ],
+
+    '11mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '8 lug', staveCount: '24 staves' },
+    ],
+
+    '12mm': [
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '8 lug', staveCount: '32 staves' },
+    ],
+
+    '13mm': [{ lugCount: '8 lug', staveCount: '32 staves' }],
+
+    '14mm': [{ lugCount: '8 lug', staveCount: '32 staves' }],
+  },
+
+  '14 in': {
+    '6mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+    ],
+
+    '7mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+    ],
+
+    '8mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+    ],
+
+    '9mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+
+      { lugCount: '10 lug', staveCount: '20 staves' },
+    ],
+
+    '10mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '10 lug', staveCount: '20 staves' },
+    ],
+
+    '11mm': [
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '10 lug', staveCount: '20 staves' },
+
+      { lugCount: '10 lug', staveCount: '30 staves' },
+    ],
+
+    '12mm': [
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '8 lug', staveCount: '32 staves' },
+
+      { lugCount: '10 lug', staveCount: '30 staves' },
+    ],
+
+    '13mm': [
+      { lugCount: '8 lug', staveCount: '32 staves' },
+
+      { lugCount: '10 lug', staveCount: '30 staves' },
+
+      { lugCount: '10 lug', staveCount: '40 staves' },
+    ],
+
+    '14mm': [
+      { lugCount: '8 lug', staveCount: '32 staves' },
+
+      { lugCount: '10 lug', staveCount: '40 staves' },
+    ],
+
+    '15mm': [{ lugCount: '10 lug', staveCount: '40 staves' }],
+  },
+
+  '15 in': {
+    '6mm': [{ lugCount: '8 lug', staveCount: '8 staves' }],
+
+    '7mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+    ],
+
+    '8mm': [
+      { lugCount: '8 lug', staveCount: '8 staves' },
+
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+    ],
+
+    '9mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '10 lug', staveCount: '10 staves' },
+
+      { lugCount: '10 lug', staveCount: '20 staves' },
+    ],
+
+    '10mm': [
+      { lugCount: '8 lug', staveCount: '16 staves' },
+
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '10 lug', staveCount: '20 staves' },
+    ],
+
+    '11mm': [
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '10 lug', staveCount: '20 staves' },
+
+      { lugCount: '10 lug', staveCount: '30 staves' },
+    ],
+
+    '12mm': [
+      { lugCount: '8 lug', staveCount: '24 staves' },
+
+      { lugCount: '8 lug', staveCount: '32 staves' },
+
+      { lugCount: '10 lug', staveCount: '30 staves' },
+    ],
+
+    '13mm': [
+      { lugCount: '8 lug', staveCount: '32 staves' },
+
+      { lugCount: '10 lug', staveCount: '30 staves' },
+
+      { lugCount: '10 lug', staveCount: '40 staves' },
+    ],
+
+    '14mm': [
+      { lugCount: '8 lug', staveCount: '32 staves' },
+
+      { lugCount: '10 lug', staveCount: '40 staves' },
+    ],
+
+    '15mm': [{ lugCount: '10 lug', staveCount: '40 staves' }],
+
+    '16mm': [{ lugCount: '10 lug', staveCount: '40 staves' }],
+  },
+};
+
+const HERITAGE_BUILD_OPTIONS_BY_DIAMETER_AND_THICKNESS = {
+  '12 in': {
+    '8mm': [{ lugCount: '6 lug', staveCount: '12 staves' }],
+
+    '13mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+  },
+
+  '13 in': {
+    '12mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+  },
+
+  '14 in': {
+    '7mm': [{ lugCount: '10 lug', staveCount: '10 staves' }],
+
+    '11mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+
+    '15mm': [{ lugCount: '10 lug', staveCount: '20 staves' }],
+  },
+};
+
+const FEUZON_BUILD_OPTIONS_BY_DIAMETER_AND_THICKNESS = {
+  '12 in': {
+    '10mm': [{ lugCount: '6 lug', staveCount: '12 staves' }],
+
+    '13mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+  },
+
+  '13 in': {
+    '13mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+  },
+
+  '14 in': {
+    '13mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+
+    '14mm': [{ lugCount: '10 lug', staveCount: '20 staves' }],
+  },
+
+  '15 in': {
+    '12mm': [{ lugCount: '8 lug', staveCount: '16 staves' }],
+  },
+};
+
+const getBuildOptionsForConstruction = (construction) => {
+  if (isHeritageConstruction(construction)) {
+    return HERITAGE_BUILD_OPTIONS_BY_DIAMETER_AND_THICKNESS;
+  }
+
+  if (isFeuzonConstruction(construction)) {
+    return FEUZON_BUILD_OPTIONS_BY_DIAMETER_AND_THICKNESS;
+  }
+
+  if (isSoundLegendConstruction(construction)) {
+    return SOUNDLEGEND_BUILD_OPTIONS_BY_DIAMETER_AND_THICKNESS;
+  }
+
+  return {};
+};
+
+const getThicknessOptionsForBuild = (construction, diameter) => {
+  const buildOptions = getBuildOptionsForConstruction(construction);
+
+  return Object.keys(buildOptions[diameter] || {});
+};
+
+const getLugOptionsForBuild = (construction, diameter, thickness) => {
+  const buildOptions = getBuildOptionsForConstruction(construction);
+
+  const rows = buildOptions[diameter]?.[thickness] || [];
+
+  return Array.from(new Set(rows.map((row) => row.lugCount)));
+};
+
+const getStaveOptionsForBuild = (
+  construction,
+
+  diameter,
+
+  thickness,
+
+  lugCount
+) => {
+  const buildOptions = getBuildOptionsForConstruction(construction);
+
+  const rows = buildOptions[diameter]?.[thickness] || [];
+
+  return rows
+
+    .filter((row) => row.lugCount === lugCount)
+
+    .map((row) => row.staveCount);
+};
+
+const buildThicknessLabel = (staveCount, thickness) => {
+  if (!staveCount || !thickness) return thickness || '';
+
+  return `${staveCount} / ${thickness}`;
+};
+
+const getDefaultBuildForDiameter = (construction, diameter = '14 in') => {
+  const thicknessOptions = getThicknessOptionsForBuild(construction, diameter);
+
+  const preferredThickness = isHeritageConstruction(construction)
+    ? '11mm'
+    : isFeuzonConstruction(construction)
+      ? '13mm'
+      : diameter === '10 in'
+        ? '10mm'
+        : diameter === '12 in'
+          ? '10mm'
+          : diameter === '13 in'
+            ? '10mm'
+            : diameter === '14 in'
+              ? '12mm'
+              : diameter === '15 in'
+                ? '12mm'
+                : thicknessOptions[Math.floor(thicknessOptions.length / 2)];
+
+  const thickness = thicknessOptions.includes(preferredThickness)
+    ? preferredThickness
+    : thicknessOptions[Math.floor(thicknessOptions.length / 2)] || '';
+
+  const lugCount =
+    getLugOptionsForBuild(construction, diameter, thickness)[0] || '';
+
+  const staveCount =
+    getStaveOptionsForBuild(construction, diameter, thickness, lugCount)[0] ||
+    '';
+
+  return {
+    thickness,
+
+    lugCount,
+
+    staveCount,
+  };
+};
+
+const SOUNDLEGEND_SNARE_DEPTHS = [
+  '4.0 in',
+
+  '4.5 in',
+
+  '5.0 in',
+
+  '5.5 in',
+
+  '6.0 in',
+
+  '6.5 in',
+
+  '7.0 in',
+
+  '7.5 in',
+
+  '8.0 in',
+];
 
 const OBER_SNARE_DEPTHS = [
   '5.0 in',
@@ -417,29 +1576,47 @@ const OBER_SNARE_DEPTHS = [
   '8.0 in',
 ];
 
+const FEUZON_SNARE_DEPTHS = [
+  '5.0 in',
+
+  '5.5 in',
+
+  '6.0 in',
+
+  '6.5 in',
+
+  '7.0 in',
+
+  '7.5 in',
+
+  '8.0 in',
+];
+
 const HERITAGE_THICKNESS_BY_DIAMETER = {
-  '12 in': ['7mm Thin', '11mm Medium', '15mm Heavy'],
+  '12 in': ['12 staves / 8mm', '16 staves / 13mm'],
 
-  '13 in': ['8mm Thin', '12mm Medium', '15mm Heavy'],
+  '13 in': ['16 staves / 12mm'],
 
-  '14 in': [
-    '7mm Thin',
-
-    '8mm Thin',
-
-    '11mm Medium',
-
-    '12mm Medium',
-
-    '13mm Heavy',
-
-    '15mm Heavy',
-  ],
+  '14 in': ['10 staves / 7mm', '16 staves / 11mm', '20 staves / 15mm'],
 };
 
-const FEUZON_THICKNESS_OPTIONS = ['10mm Medium', '12mm Thick', '13mm Heavy'];
+const FEUZON_STAVE_OPTIONS_BY_DIAMETER = {
+  '12 in': ['12 staves / 10mm', '16 staves / 13mm'],
 
-const OBER_HOOP_OPTIONS = ['Triple Flange', 'Die Cast'];
+  '13 in': ['16 staves / 13mm'],
+
+  '14 in': ['16 staves / 13mm', '20 staves / 14mm'],
+
+  '15 in': ['16 staves / 12mm'],
+};
+
+const OBER_HOOP_OPTIONS = ['Triple Flange', 'Die-Cast'];
+
+const FEUZON_HOOP_OPTIONS = ['Triple Flange', 'Die-Cast'];
+
+const HERITAGE_BEARING_EDGE_OPTIONS = [
+  '45° inner edge with softened outer roundover',
+];
 
 const FEUZON_BEARING_EDGE_OPTIONS = [
   'Balanced Hybrid Edge',
@@ -459,13 +1636,65 @@ const SOUNDLEGEND_BEARING_EDGE_OPTIONS = [
   '45° Inner / Soft Outer Roundover',
 ];
 
-const HERITAGE_BEARING_EDGE_OPTIONS = ['45° Inner / Soft Outer Roundover'];
+const HERITAGE_SNARE_BED_OPTIONS = ['Standard snare beds'];
 
 const FEUZON_SNARE_BED_OPTIONS = ['Standard', 'Shallow', 'Deep'];
 
 const SOUNDLEGEND_SNARE_BED_OPTIONS = ['Standard', 'Shallow', 'Deep'];
 
-const HERITAGE_SNARE_BED_OPTIONS = ['Standard'];
+const FEUZON_SNARE_WIRE_OPTIONS = [
+  'PureSound Custom Pro Steel 20-Strand wires',
+];
+
+const HERITAGE_SNARE_BATTER_HEAD_OPTIONS = ['Remo Coated Ambassador'];
+
+const HERITAGE_SNARE_RESO_HEAD_OPTIONS = ['Remo Ambassador Side'];
+
+const FEUZON_SNARE_BATTER_HEAD_OPTIONS = ['Remo Coated Ambassador'];
+
+const FEUZON_SNARE_RESO_HEAD_OPTIONS = ['Remo Ambassador Side'];
+
+const SOUNDLEGEND_SNARE_BATTER_HEAD_OPTIONS = [
+  'Remo Coated Ambassador',
+
+  'Remo Coated Vintage Ambassador',
+
+  'Remo Controlled Sound Reverse Dot',
+
+  'Remo Powerstroke 3 Coated',
+
+  'Evans HD Dry',
+
+  'Evans Genera Dry',
+
+  'Evans UV1 Coated',
+
+  'Aquarian Texture Coated',
+
+  'Aquarian Hi-Energy',
+];
+
+const SOUNDLEGEND_SNARE_RESO_HEAD_OPTIONS = [
+  'Remo Ambassador Side',
+
+  'Remo Ambassador Hazy Snare Side',
+
+  'Remo Diplomat Snare Side',
+
+  'Remo Emperor Snare Side',
+
+  'Evans Snare Side 200',
+
+  'Evans Snare Side 300',
+
+  'Evans Snare Side 500',
+
+  'Evans Orchestral 300',
+
+  'Aquarian Classic Clear Snare Side',
+
+  'Aquarian Hi-Performance Snare Side',
+];
 
 const toTitleCase = (value) => {
   return String(value || '')
@@ -526,7 +1755,7 @@ const isSoundLegendLine = (line = '') => {
 };
 
 const getAllowedDrumTypeOptionsForLine = (line = '') => {
-  if (isOberSnareOnlyLine(line)) {
+  if (isOberSnareOnlyLine(line) || isSoundLegendLine(line)) {
     return ['Snare'];
   }
 
@@ -730,6 +1959,14 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   }
 
   if (field.source === 'drumType') {
+    if (
+      isHeritageConstruction(selector.construction) ||
+      isFeuzonConstruction(selector.construction) ||
+      isSoundLegendConstruction(selector.construction)
+    ) {
+      return ['Snare'];
+    }
+
     return getRowsForCategory(safeCalibration, 'drumType').map(
       (row) => row.option
     );
@@ -763,6 +2000,13 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return FEUZON_SNARE_DIAMETERS;
     }
 
+    if (
+      isSoundLegendConstruction(selector.construction) &&
+      selector.drumType === 'Snare'
+    ) {
+      return SOUNDLEGEND_SNARE_DIAMETERS;
+    }
+
     return getBaseRowsByDrumType(
       safeCalibration,
 
@@ -777,11 +2021,24 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
 
   if (field.source === 'depth') {
     if (
-      (isHeritageConstruction(selector.construction) ||
-        isFeuzonConstruction(selector.construction)) &&
+      isHeritageConstruction(selector.construction) &&
       selector.drumType === 'Snare'
     ) {
       return OBER_SNARE_DEPTHS;
+    }
+
+    if (
+      isFeuzonConstruction(selector.construction) &&
+      selector.drumType === 'Snare'
+    ) {
+      return FEUZON_SNARE_DEPTHS;
+    }
+
+    if (
+      isSoundLegendConstruction(selector.construction) &&
+      selector.drumType === 'Snare'
+    ) {
+      return SOUNDLEGEND_SNARE_DEPTHS;
     }
 
     const standardDepths = getBaseRowsByDrumType(
@@ -810,13 +2067,58 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
     });
   }
 
-  if (field.source === 'thickness') {
-    if (isHeritageConstruction(selector.construction)) {
-      return HERITAGE_THICKNESS_BY_DIAMETER[selector.diameter] || [];
+  if (field.source === 'lugCount') {
+    if (
+      selector.drumType === 'Snare' &&
+      (isHeritageConstruction(selector.construction) ||
+        isFeuzonConstruction(selector.construction) ||
+        isSoundLegendConstruction(selector.construction))
+    ) {
+      return getLugOptionsForBuild(
+        selector.construction,
+
+        selector.diameter,
+
+        selector.thickness
+      );
     }
 
-    if (isFeuzonConstruction(selector.construction)) {
-      return FEUZON_THICKNESS_OPTIONS;
+    return [];
+  }
+
+  if (field.source === 'staveCount') {
+    if (
+      selector.drumType === 'Snare' &&
+      (isHeritageConstruction(selector.construction) ||
+        isFeuzonConstruction(selector.construction) ||
+        isSoundLegendConstruction(selector.construction))
+    ) {
+      return getStaveOptionsForBuild(
+        selector.construction,
+
+        selector.diameter,
+
+        selector.thickness,
+
+        selector.lugCount
+      );
+    }
+
+    return [];
+  }
+
+  if (field.source === 'thickness') {
+    if (
+      selector.drumType === 'Snare' &&
+      (isHeritageConstruction(selector.construction) ||
+        isFeuzonConstruction(selector.construction) ||
+        isSoundLegendConstruction(selector.construction))
+    ) {
+      return getThicknessOptionsForBuild(
+        selector.construction,
+
+        selector.diameter
+      );
     }
 
     return getBaseRowsByDrumType(
@@ -831,7 +2133,132 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       .map((row) => row.option);
   }
 
+  if (field.source === 'soundLegendConstructionType') {
+
+    if (!isSoundLegendConstruction(selector.construction)) {
+
+      return [];
+
+    }
+
+    return SOUNDLEGEND_CONSTRUCTION_TYPE_OPTIONS;
+
+  }
+
+  if (field.source === 'soundLegendWoodSpeciesCount') {
+
+    if (!isSoundLegendConstruction(selector.construction)) {
+
+      return [];
+
+    }
+
+    return getAllowedSoundLegendSpeciesCountOptions(selector.staveCount);
+
+  }
+
+  if (
+
+    field.source === 'soundLegendWoodSpeciesPrimary' ||
+
+    field.source === 'soundLegendWoodSpeciesSecondary' ||
+
+    field.source === 'soundLegendWoodSpeciesTertiary' ||
+
+    field.source === 'soundLegendWoodSpeciesQuaternary'
+
+  ) {
+
+    if (!isSoundLegendConstruction(selector.construction)) {
+
+      return [];
+
+    }
+
+    const speciesCount = getSoundLegendSpeciesCountNumber(
+
+      selector.soundLegendWoodSpeciesCount
+
+    );
+
+    if (
+
+      field.source === 'soundLegendWoodSpeciesSecondary' &&
+
+      speciesCount < 2
+
+    ) {
+
+      return [];
+
+    }
+
+    if (
+
+      field.source === 'soundLegendWoodSpeciesTertiary' &&
+
+      speciesCount < 3
+
+    ) {
+
+      return [];
+
+    }
+
+    if (
+
+      field.source === 'soundLegendWoodSpeciesQuaternary' &&
+
+      speciesCount < 4
+
+    ) {
+
+      return [];
+
+    }
+
+    return SOUNDLEGEND_WOOD_SPECIES_OPTIONS;
+
+  }
+
+  if (field.source === 'soundLegendVeneerExterior') {
+
+    if (!isSoundLegendConstruction(selector.construction)) {
+
+      return [];
+
+    }
+
+    if (!soundLegendTypeUsesVeneer(selector.soundLegendConstructionType)) {
+
+      return [];
+
+    }
+
+    return SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS;
+
+  }
+
   if (field.source === 'finish') {
+
+    if (isHeritageConstruction(selector.construction)) {
+
+      return HERITAGE_FINISH_OPTIONS;
+
+    }
+
+    if (isFeuzonConstruction(selector.construction)) {
+
+      return FEUZON_FINISH_DESIGN_OPTIONS;
+
+    }
+
+    if (isSoundLegendConstruction(selector.construction)) {
+
+      return SOUNDLEGEND_FINISH_DESIGN_OPTIONS;
+
+    }
+
     return getRowsForCategory(safeCalibration, 'finish')
       .filter((row) => {
         const appliesTo = String(row.appliesTo || '').trim();
@@ -848,12 +2275,109 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       .map((row) => row.option);
   }
 
-  if (field.source === 'hoopType') {
+    if (field.source === 'finishCoating') {
+
+    if (isHeritageConstruction(selector.construction)) {
+
+      return [];
+
+    }
+
+    if (isFeuzonConstruction(selector.construction)) {
+
+      return FEUZON_FINISH_COATING_OPTIONS;
+
+    }
+
+    if (isSoundLegendConstruction(selector.construction)) {
+
+      return SOUNDLEGEND_FINISH_COATING_OPTIONS;
+
+    }
+
+    return [];
+
+  }
+
+  if (field.source === 'stainOption') {
+    if (!isFeuzonConstruction(selector.construction)) {
+      return [];
+    }
+
+    if (!['Full Stain', 'Faded Stain'].includes(selector.finish)) {
+      return [];
+    }
+
+    return FEUZON_STAIN_OPTIONS_BY_EXTERIOR[selector.steamBentExterior] || [];
+  }
+
+  if (field.source === 'exteriorScorch') {
+    if (isFeuzonConstruction(selector.construction)) {
+      return FEUZON_EXTERIOR_SCORCH_OPTIONS;
+    }
+
+    return [];
+  }
+
+  if (field.source === 'coreStaveShell') {
+
+    if (isFeuzonConstruction(selector.construction)) {
+
+      return FEUZON_CORE_STAVE_OPTIONS;
+
+    }
+
     if (
-      isHeritageConstruction(selector.construction) ||
-      isFeuzonConstruction(selector.construction)
+
+      isSoundLegendConstruction(selector.construction) &&
+
+      soundLegendTypeUsesHybridShell(selector.soundLegendConstructionType)
+
     ) {
-      return OBER_HOOP_OPTIONS;
+
+      return FEUZON_CORE_STAVE_OPTIONS;
+
+    }
+
+    return [];
+
+  }
+
+  if (field.source === 'steamBentExterior') {
+
+    if (isFeuzonConstruction(selector.construction)) {
+
+      return FEUZON_STEAMBENT_EXTERIOR_OPTIONS;
+
+    }
+
+    if (
+
+      isSoundLegendConstruction(selector.construction) &&
+
+      soundLegendTypeUsesHybridShell(selector.soundLegendConstructionType)
+
+    ) {
+
+      return FEUZON_STEAMBENT_EXTERIOR_OPTIONS;
+
+    }
+
+    return [];
+
+  }
+
+  if (field.source === 'hoopType') {
+    if (isHeritageConstruction(selector.construction)) {
+      return ['Triple Flange 2.3mm', 'Die-Cast'];
+    }
+
+    if (isFeuzonConstruction(selector.construction)) {
+      return ['Triple Flange 2.3mm', 'Die-Cast'];
+    }
+
+    if (isSoundLegendConstruction(selector.construction)) {
+      return SOUNDLEGEND_HOOP_OPTIONS;
     }
 
     return getBaseRowsByDrumType(
@@ -871,16 +2395,16 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   if (field.source === 'bearingEdge') {
     if (selector.drumType !== 'Snare') return [];
 
+    if (isHeritageConstruction(selector.construction)) {
+      return HERITAGE_BEARING_EDGE_OPTIONS;
+    }
+
     if (isFeuzonConstruction(selector.construction)) {
       return FEUZON_BEARING_EDGE_OPTIONS;
     }
 
     if (isSoundLegendConstruction(selector.construction)) {
-      return SOUNDLEGEND_BEARING_EDGE_OPTIONS;
-    }
-
-    if (isHeritageConstruction(selector.construction)) {
-      return HERITAGE_BEARING_EDGE_OPTIONS;
+      return LEGACYPRINT_BEARING_EDGE_OPTIONS;
     }
 
     return getRowsForCategory(safeCalibration, 'bearingEdge')
@@ -898,16 +2422,16 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   if (field.source === 'snareBed') {
     if (selector.drumType !== 'Snare') return [];
 
+    if (isHeritageConstruction(selector.construction)) {
+      return HERITAGE_SNARE_BED_OPTIONS;
+    }
+
     if (isFeuzonConstruction(selector.construction)) {
       return FEUZON_SNARE_BED_OPTIONS;
     }
 
     if (isSoundLegendConstruction(selector.construction)) {
       return SOUNDLEGEND_SNARE_BED_OPTIONS;
-    }
-
-    if (isHeritageConstruction(selector.construction)) {
-      return HERITAGE_SNARE_BED_OPTIONS;
     }
 
     return getRowsForCategory(safeCalibration, 'snareBed')
@@ -925,8 +2449,62 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   if (field.source === 'snareWires') {
     if (selector.drumType !== 'Snare') return [];
 
+    if (isHeritageConstruction(selector.construction)) {
+      return ['PureSound Custom Pro Steel 20-Strand wires'];
+    }
+
+    if (isFeuzonConstruction(selector.construction)) {
+      return FEUZON_SNARE_WIRE_OPTIONS;
+    }
+
     return getRowsForCategory(safeCalibration, 'snareWires')
       .filter((row) => appliesToIncludes(row.appliesTo, 'Snare'))
+
+      .filter((row) => constructionIncludes(row, selector.construction))
+
+      .map((row) => row.option);
+  }
+
+  if (field.source === 'batterHead') {
+    if (selector.drumType !== 'Snare') return [];
+
+    if (isHeritageConstruction(selector.construction)) {
+      return HERITAGE_SNARE_BATTER_HEAD_OPTIONS;
+    }
+
+    if (isFeuzonConstruction(selector.construction)) {
+      return FEUZON_SNARE_BATTER_HEAD_OPTIONS;
+    }
+
+    if (isSoundLegendConstruction(selector.construction)) {
+      return SOUNDLEGEND_SNARE_BATTER_HEAD_OPTIONS;
+    }
+
+    return getRowsForCategory(safeCalibration, 'batterHead')
+      .filter((row) => appliesToIncludes(row.appliesTo, selector.drumType))
+
+      .filter((row) => constructionIncludes(row, selector.construction))
+
+      .map((row) => row.option);
+  }
+
+  if (field.source === 'resoHead') {
+    if (selector.drumType !== 'Snare') return [];
+
+    if (isHeritageConstruction(selector.construction)) {
+      return HERITAGE_SNARE_RESO_HEAD_OPTIONS;
+    }
+
+    if (isFeuzonConstruction(selector.construction)) {
+      return FEUZON_SNARE_RESO_HEAD_OPTIONS;
+    }
+
+    if (isSoundLegendConstruction(selector.construction)) {
+      return SOUNDLEGEND_SNARE_RESO_HEAD_OPTIONS;
+    }
+
+    return getRowsForCategory(safeCalibration, 'resoHead')
+      .filter((row) => appliesToIncludes(row.appliesTo, selector.drumType))
 
       .filter((row) => constructionIncludes(row, selector.construction))
 
@@ -971,6 +2549,12 @@ const normalizeSelectorForAvailableOptions = (selector, calibration) => {
   return next;
 };
 
+const getThicknessFallbackLabel = (option = '') => {
+  const match = String(option || '').match(/(\d+(?:\.\d+)?)mm/i);
+
+  return match ? `${match[1]}mm` : option;
+};
+
 const resolveOptionRow = (calibration, categoryKey, option, selector) => {
   if (categoryKey === 'depth') {
     return (
@@ -978,6 +2562,17 @@ const resolveOptionRow = (calibration, categoryKey, option, selector) => {
       (isSoundLegendConstruction(selector.construction)
         ? getConfigOption(calibration, 'soundLegendDepthFine', option)
         : null)
+    );
+  }
+
+  if (categoryKey === 'thickness') {
+    return (
+      getConfigOption(calibration, 'thickness', option) ||
+      getConfigOption(
+        calibration,
+        'thickness',
+        getThicknessFallbackLabel(option)
+      )
     );
   }
 
@@ -1033,7 +2628,61 @@ const buildVoicePreview = (selector, calibration) => {
 
     ['thickness', selector.thickness],
 
-    ['finish', selector.finish],
+      ['finish', selector.finish],
+
+    ['finishCoating', selector.finishCoating],
+
+    ['stainOption', selector.stainOption],
+
+    ['exteriorScorch', selector.exteriorScorch],
+
+    ['soundLegendConstructionType', selector.soundLegendConstructionType],
+
+    [
+
+      'soundLegendWoodSpeciesCount',
+
+      selector.soundLegendWoodSpeciesCount,
+
+    ],
+
+    [
+
+      'soundLegendWoodSpeciesPrimary',
+
+      selector.soundLegendWoodSpeciesPrimary,
+
+    ],
+
+    [
+
+      'soundLegendWoodSpeciesSecondary',
+
+      selector.soundLegendWoodSpeciesSecondary,
+
+    ],
+
+    [
+
+      'soundLegendWoodSpeciesTertiary',
+
+      selector.soundLegendWoodSpeciesTertiary,
+
+    ],
+
+    [
+
+      'soundLegendWoodSpeciesQuaternary',
+
+      selector.soundLegendWoodSpeciesQuaternary,
+
+    ],
+
+    ['soundLegendVeneerExterior', selector.soundLegendVeneerExterior],
+
+    ['coreStaveShell', selector.coreStaveShell],
+
+    ['steamBentExterior', selector.steamBentExterior],
 
     ['hoopType', selector.hoopType],
 
@@ -1412,7 +3061,6 @@ const getBenchmarkMeaning = ({ key, value }) => {
 };
 
 const rebalanceMasterWeightGroup = ({
-
   rows,
 
   changedNode,
@@ -1424,9 +3072,7 @@ const rebalanceMasterWeightGroup = ({
   lockedNodes = [],
 
   total = 7,
-
 }) => {
-
   const safeRows = Array.isArray(rows) ? rows.map((row) => ({ ...row })) : [];
 
   const minValue = 0.25;
@@ -1438,33 +3084,25 @@ const rebalanceMasterWeightGroup = ({
   if (!safeRows.length) return safeRows;
 
   if (lockedSet.has(changedNode)) {
-
     return safeRows;
-
   }
 
   const changedRow = safeRows.find((row) => row.node === changedNode);
 
   if (!changedRow) {
-
     return safeRows;
-
   }
 
   const lockedTotal = safeRows.reduce((sum, row) => {
-
     if (!lockedSet.has(row.node)) return sum;
 
     return sum + clamp(Number(row[weightKey] || 0), minValue, maxValue);
-
   }, 0);
 
   const otherUnlockedRows = safeRows.filter((row) => {
-
     if (row.node === changedNode) return false;
 
     return !lockedSet.has(row.node);
-
   });
 
   const minOtherTotal = otherUnlockedRows.length * minValue;
@@ -1472,161 +3110,120 @@ const rebalanceMasterWeightGroup = ({
   const maxOtherTotal = otherUnlockedRows.length * maxValue;
 
   const minChangedValue = Math.max(
-
     minValue,
 
     total - lockedTotal - maxOtherTotal
-
   );
 
   const maxChangedValue = Math.min(
-
     maxValue,
 
     total - lockedTotal - minOtherTotal
-
   );
 
   const changedValue = clamp(
-
     Number(nextValue),
 
     minChangedValue,
 
     maxChangedValue
-
   );
 
   let remainingTotal = total - lockedTotal - changedValue;
 
   const nextRows = safeRows.map((row) => {
-
     if (lockedSet.has(row.node)) {
-
       return {
-
         ...row,
 
-        [weightKey]: round(clamp(Number(row[weightKey] || 0), minValue, maxValue), 2),
-
+        [weightKey]: round(
+          clamp(Number(row[weightKey] || 0), minValue, maxValue),
+          2
+        ),
       };
-
     }
 
     if (row.node === changedNode) {
-
       return {
-
         ...row,
 
         [weightKey]: round(changedValue, 2),
-
       };
-
     }
 
     return {
-
       ...row,
 
       [weightKey]: null,
-
     };
-
   });
 
   let adjustableNodes = otherUnlockedRows.map((row) => row.node);
 
   while (adjustableNodes.length) {
-
     const evenValue = remainingTotal / adjustableNodes.length;
 
     if (evenValue < minValue) {
-
       adjustableNodes.forEach((node) => {
-
         const row = nextRows.find((item) => item.node === node);
 
         if (row) {
-
           row[weightKey] = minValue;
-
         }
-
       });
 
       remainingTotal = 0;
 
       break;
-
     }
 
     if (evenValue > maxValue) {
-
       adjustableNodes.forEach((node) => {
-
         const row = nextRows.find((item) => item.node === node);
 
         if (row) {
-
           row[weightKey] = maxValue;
-
         }
-
       });
 
       remainingTotal = 0;
 
       break;
-
     }
 
     adjustableNodes.forEach((node) => {
-
       const row = nextRows.find((item) => item.node === node);
 
       if (row) {
-
         row[weightKey] = evenValue;
-
       }
-
     });
 
     remainingTotal = 0;
 
     break;
-
   }
 
   let roundedRows = nextRows.map((row) => ({
-
     ...row,
 
     [weightKey]: round(
-
       clamp(Number(row[weightKey] || minValue), minValue, maxValue),
 
       2
-
     ),
-
   }));
 
   let roundedTotal = round(
-
     roundedRows.reduce((sum, row) => sum + Number(row[weightKey] || 0), 0),
 
     2
-
   );
 
   let correction = round(total - roundedTotal, 2);
 
   for (let pass = 0; pass < 20 && Math.abs(correction) >= 0.01; pass += 1) {
-
     const correctionTarget = roundedRows.find((row) => {
-
       if (row.node === changedNode) return false;
 
       if (lockedSet.has(row.node)) return false;
@@ -1636,45 +3233,34 @@ const rebalanceMasterWeightGroup = ({
       if (correction > 0) return value < maxValue;
 
       return value > minValue;
-
     });
 
     if (!correctionTarget) break;
 
     roundedRows = roundedRows.map((row) => {
-
       if (row.node !== correctionTarget.node) return row;
 
       return {
-
         ...row,
 
         [weightKey]: round(
-
           clamp(Number(row[weightKey] || 0) + correction, minValue, maxValue),
 
           2
-
         ),
-
       };
-
     });
 
     roundedTotal = round(
-
       roundedRows.reduce((sum, row) => sum + Number(row[weightKey] || 0), 0),
 
       2
-
     );
 
     correction = round(total - roundedTotal, 2);
-
   }
 
   return roundedRows;
-
 };
 
 const getMasterWeightInfluenceValue = (value) => {
@@ -1908,8 +3494,115 @@ const normalizeAllMasterWeightRows = (masterWeights = []) => {
   );
 };
 
+const CALIBRATION_HELPER_SECTIONS = [
+  {
+    title: 'Overview',
+
+    summary:
+      'Use this as the health check for the calibration system. It shows where the current calibration is coming from, whether there are unsaved changes, and how much of the engine is currently covered.',
+
+    useWhen:
+      'Start here when checking whether the active engine, draft, versions, and option coverage are in a healthy state.',
+  },
+
+  {
+    title: 'Voice Preview',
+
+    summary:
+      'Use this to test the live result of the calibration. Change drum type, construction, size, finish, hoop, heads, wires, and tuning to see how the engine reads the build.',
+
+    useWhen:
+      'Use this after changing Config Options, Benchmarks, or Master Weights to confirm the output feels musically correct.',
+  },
+
+  {
+    title: 'Master Weights',
+
+    summary:
+      'Use this to shape how each read layer interprets the same drum data. First Listen controls what surfaces first, Player Analysis controls the full seven-node read, and Movement controls how strongly node changes are allowed to show.',
+
+    useWhen:
+      'Use this only when a read layer feels globally biased across many builds. Do not use it to fix one specific drum configuration.',
+  },
+
+  {
+    title: 'Benchmarks',
+
+    summary:
+      'Use this to define what is normal for each drum type. These values tell the engine what a snare, rack tom, floor tom, bass drum, or concert tom should generally expect for each node.',
+
+    useWhen:
+      'Use this when a whole drum type feels off — for example, snares always reading too low in attack or floor toms reading too high in brightness.',
+  },
+
+  {
+    title: 'Config Options',
+
+    summary:
+      'Use this to tune the actual acoustic impact of each selectable build option. This is where diameter, depth, shell thickness, finish, hoop type, bearing edge, wires, heads, and other choices add or reduce attack, brightness, projection, sustain, warmth, sensitivity, and control.',
+
+    useWhen:
+      'Use this first when a specific option sounds wrong. Example: Die Cast hoops should add control and attack while reducing sustain.',
+  },
+
+  {
+    title: 'Availability',
+
+    summary:
+      'Use this to confirm selector rules and option availability. This section previews whether the right options appear for the selected drum type, construction, diameter, depth, and Ober line.',
+
+    useWhen:
+      'Use this when dropdowns are showing the wrong choices or a build path allows something it should not.',
+  },
+
+  {
+    title: 'SoundLegend Builder',
+
+    summary:
+      'Use this to manage the broad custom-build vocabulary for SoundLegend. This includes supported makers, corporate references, shell types, drum types, woods, veneers, metals, acrylics, hybrid types, and Ober line rules.',
+
+    useWhen:
+      'Use this when expanding the custom builder beyond Ober-only builds or adding reference materials for broader comparison logic.',
+  },
+
+  {
+    title: 'FEUZØN Builder',
+
+    summary:
+      'Use this to manage the FEUZØN-specific hybrid shell vocabulary, especially interior core options and steam-bent exterior options.',
+
+    useWhen:
+      'Use this when refining FEUZØN construction choices or adding/removing valid hybrid pairings.',
+  },
+
+  {
+    title: 'Visibility',
+
+    summary:
+      'Use this to control which LegacyPrint features are visible to public users, SoundLegend artists, LegacyPrint partners, and admins.',
+
+    useWhen:
+      'Use this when deciding which read layers or tools should be public, locked, partner-only, or admin-only.',
+  },
+
+  {
+    title: 'Versions',
+
+    summary:
+      'Use this to review saved calibration snapshots. Publishing active creates a timestamped version so previous calibration states can be tracked.',
+
+    useWhen:
+      'Use this before or after publishing major calibration changes so you can confirm a version snapshot exists.',
+  },
+];
+
 const AdminLegacyPrintCalibration = () => {
   const [activeTab, setActiveTab] = useState('Overview');
+
+  const [activeCalibrationToolTab, setActiveCalibrationToolTab] =
+    useState('Master Weights');
+
+  const [showCalibrationHelper, setShowCalibrationHelper] = useState(false);
 
   const [draftCalibration, setDraftCalibration] = useState(
     legacyPrintCalibrationSeed
@@ -1971,15 +3664,60 @@ const AdminLegacyPrintCalibration = () => {
 
   const [configDrumTypeFilter, setConfigDrumTypeFilter] = useState('Snare');
 
-  const PREVIEW_READ_TABS = [
-    'First Listen',
+  const [selectedNonOberMakerGroup, setSelectedNonOberMakerGroup] = useState(
+    'Corporate / Major Manufacturers'
+  );
 
-    'Player Analysis',
+  const [selectedNonOberMaker, setSelectedNonOberMaker] = useState('Pearl');
 
-    'LegacyTuning',
+  const [selectedNonOberDrumType, setSelectedNonOberDrumType] =
+    useState('Snare');
 
-    'Builder',
+  const [selectedNonOberModel, setSelectedNonOberModel] = useState('');
+
+  const ENGINE_LINE_OPTIONS = [
+    {
+      key: 'heritage',
+
+      label: 'HERITAGE',
+
+      construction: 'Ober HERITAGE Stave',
+
+      description: 'Ober stave shell reference builder.',
+    },
+
+    {
+      key: 'feuzon',
+
+      label: 'FEUZØN',
+
+      construction: 'Ober FEUZØN Hybrid',
+
+      description: 'Ober hybrid shell reference builder.',
+    },
+
+    {
+      key: 'soundlegend',
+
+      label: 'SOUNDLEGEND',
+
+      construction: 'Ober SOUNDLEGEND Custom',
+
+      description: 'Full custom Ober / artist-led builder.',
+    },
+
+    {
+      key: 'nonOber',
+
+      label: 'Non-Ober / Reference',
+
+      construction: 'Generic Ply Shell',
+
+      description: 'External reference drums, comparisons, and education.',
+    },
   ];
+
+  const PREVIEW_READ_TABS = ['First Listen', 'Player Analysis', 'LegacyTuning'];
 
   useEffect(() => {
     let isMounted = true;
@@ -2401,12 +4139,512 @@ const AdminLegacyPrintCalibration = () => {
     setShowAddConfigOption(false);
   };
 
-  const handleSelectorChange = (key, value) => {
-    setSelector((current) => ({
-      ...current,
+  const handleEngineLineChange = (lineOption) => {
+    const isNonOber = lineOption.key === 'nonOber';
 
-      [key]: value,
-    }));
+    setSelector((current) => {
+      const nextSelector = {
+        ...current,
+
+        construction: lineOption.construction,
+
+        drumType:
+          lineOption.key === 'heritage' ||
+          lineOption.key === 'feuzon' ||
+          lineOption.key === 'soundlegend'
+            ? 'Snare'
+            : current.drumType || 'Snare',
+      };
+
+      if (lineOption.key === 'soundlegend') {
+        const defaults = getDefaultBuildForDiameter(
+          lineOption.construction,
+
+          '14 in'
+        );
+
+        return {
+          ...nextSelector,
+
+          diameter: '14 in',
+
+          depth: '6.5 in',
+
+          thickness: defaults.thickness,
+
+          lugCount: defaults.lugCount,
+
+          staveCount: defaults.staveCount,
+
+                  finish: 'Natural',
+
+          finishCoating: 'Satin',
+
+          stainOption: '',
+
+          exteriorScorch: '',
+
+          soundLegendConstructionType: 'Stave',
+
+          soundLegendWoodSpeciesCount: '1 Wood Species',
+
+          soundLegendWoodSpeciesPrimary: 'Maple',
+
+          soundLegendWoodSpeciesSecondary: '',
+
+          soundLegendWoodSpeciesTertiary: '',
+
+          soundLegendWoodSpeciesQuaternary: '',
+
+          soundLegendVeneerExterior: '',
+
+          coreStaveShell: '',
+
+          steamBentExterior: '',
+
+          hoopType: 'Triple Flange 2.3mm',
+
+          bearingEdge: 'Balanced Hybrid Edge',
+
+          snareBed: 'Standard',
+
+          tension: 'Medium',
+
+          snareWires: 'PureSound Custom Pro Steel 20-Strand wires',
+
+          batterHead: 'Remo Coated Ambassador',
+
+          resoHead: 'Remo Ambassador Side',
+        };
+      }
+
+      if (lineOption.key === 'heritage') {
+        const defaults = getDefaultBuildForDiameter(
+          lineOption.construction,
+
+          '14 in'
+        );
+
+        return {
+          ...nextSelector,
+
+          diameter: '14 in',
+
+          depth: '5.0 in',
+
+          thickness: defaults.thickness,
+
+          lugCount: defaults.lugCount,
+
+          staveCount: defaults.staveCount,
+
+                  finish: 'Medium Torch',
+
+          finishCoating: '',
+
+          stainOption: '',
+
+          exteriorScorch: '',
+
+          coreStaveShell: '',
+
+          steamBentExterior: '',
+
+          hoopType: 'Triple Flange 2.3mm',
+
+          bearingEdge: '45° inner edge with softened outer roundover',
+
+          snareBed: 'Standard snare beds',
+
+          tension: 'Medium',
+
+          snareWires: 'PureSound Custom Pro Steel 20-Strand wires',
+
+          batterHead: 'Remo Coated Ambassador',
+
+          resoHead: 'Remo Ambassador Side',
+        };
+      }
+
+      if (lineOption.key === 'feuzon') {
+        const defaults = getDefaultBuildForDiameter(
+          lineOption.construction,
+
+          '14 in'
+        );
+
+        return {
+          ...nextSelector,
+
+          diameter: '14 in',
+
+          depth: '5.0 in',
+
+          thickness: defaults.thickness,
+
+          lugCount: defaults.lugCount,
+
+          staveCount: defaults.staveCount,
+
+                   finish: 'Natural',
+
+          finishCoating: 'Satin',
+
+          stainOption: '',
+
+          exteriorScorch: 'Non-Scorched',
+
+          coreStaveShell: 'Walnut + Birch',
+
+          steamBentExterior: 'Maple',
+
+          hoopType: 'Triple Flange 2.3mm',
+
+          bearingEdge: 'Balanced Hybrid Edge',
+
+          snareBed: 'Standard',
+
+          tension: 'Medium',
+
+          snareWires: 'PureSound Custom Pro Steel 20-Strand wires',
+
+          batterHead: 'Remo Coated Ambassador',
+
+          resoHead: 'Remo Ambassador Side',
+        };
+      }
+
+      return nextSelector;
+    });
+
+    if (isNonOber) {
+      setSelectedNonOberMakerGroup('Corporate / Major Manufacturers');
+
+      setSelectedNonOberMaker('Pearl');
+
+      setSelectedNonOberDrumType('Snare');
+
+      setSelectedNonOberModel('');
+    }
+
+    setActivePreviewRead('First Listen');
+  };
+
+  const handleSelectorChange = (key, value) => {
+    setSelector((current) => {
+      const next = {
+        ...current,
+
+        [key]: value,
+      };
+
+      const isOberBuildPath =
+        next.drumType === 'Snare' &&
+        (isHeritageConstruction(next.construction) ||
+          isFeuzonConstruction(next.construction) ||
+          isSoundLegendConstruction(next.construction));
+
+      if (!isOberBuildPath) {
+        return next;
+      }
+
+            if (key === 'soundLegendConstructionType') {
+
+        if (!isSoundLegendConstruction(next.construction)) {
+
+          return next;
+
+        }
+
+        const usesHybridShell = soundLegendTypeUsesHybridShell(value);
+
+        const usesVeneer = soundLegendTypeUsesVeneer(value);
+
+        return {
+
+          ...next,
+
+          coreStaveShell: usesHybridShell ? next.coreStaveShell || FEUZON_CORE_STAVE_OPTIONS[0] : '',
+
+          steamBentExterior: usesHybridShell
+
+            ? next.steamBentExterior || FEUZON_STEAMBENT_EXTERIOR_OPTIONS[0]
+
+            : '',
+
+          soundLegendVeneerExterior: usesVeneer
+
+            ? next.soundLegendVeneerExterior ||
+
+              SOUNDLEGEND_VENEER_EXTERIOR_OPTIONS[0]
+
+            : '',
+
+        };
+
+      }
+
+      if (key === 'soundLegendWoodSpeciesCount') {
+
+        if (!isSoundLegendConstruction(next.construction)) {
+
+          return next;
+
+        }
+
+        const speciesCount = getSoundLegendSpeciesCountNumber(value);
+
+        return {
+
+          ...next,
+
+          soundLegendWoodSpeciesPrimary:
+
+            next.soundLegendWoodSpeciesPrimary ||
+
+            SOUNDLEGEND_WOOD_SPECIES_OPTIONS[0],
+
+          soundLegendWoodSpeciesSecondary:
+
+            speciesCount >= 2
+
+              ? next.soundLegendWoodSpeciesSecondary ||
+
+                SOUNDLEGEND_WOOD_SPECIES_OPTIONS[1]
+
+              : '',
+
+          soundLegendWoodSpeciesTertiary:
+
+            speciesCount >= 3
+
+              ? next.soundLegendWoodSpeciesTertiary ||
+
+                SOUNDLEGEND_WOOD_SPECIES_OPTIONS[2]
+
+              : '',
+
+          soundLegendWoodSpeciesQuaternary:
+
+            speciesCount >= 4
+
+              ? next.soundLegendWoodSpeciesQuaternary ||
+
+                SOUNDLEGEND_WOOD_SPECIES_OPTIONS[3]
+
+              : '',
+
+        };
+
+      }
+
+        if (key === 'finish') {
+
+        if (
+
+          (isFeuzonConstruction(next.construction) ||
+
+            isSoundLegendConstruction(next.construction)) &&
+
+          !['Full Stain', 'Faded Stain'].includes(value)
+
+        ) {
+
+          return {
+
+            ...next,
+
+            stainOption: '',
+
+          };
+
+        }
+
+        if (
+
+          isFeuzonConstruction(next.construction) &&
+
+          ['Full Stain', 'Faded Stain'].includes(value)
+
+        ) {
+
+          const stainOptions =
+
+            FEUZON_STAIN_OPTIONS_BY_EXTERIOR[next.steamBentExterior] || [];
+
+          return {
+
+            ...next,
+
+            stainOption: stainOptions[0] || '',
+
+          };
+
+        }
+
+        return next;
+
+      }
+
+      if (key === 'steamBentExterior') {
+        if (
+          isFeuzonConstruction(next.construction) &&
+          ['Full Stain', 'Faded Stain'].includes(next.finish)
+        ) {
+          const stainOptions = FEUZON_STAIN_OPTIONS_BY_EXTERIOR[value] || [];
+
+          return {
+            ...next,
+
+            stainOption: stainOptions[0] || '',
+          };
+        }
+
+        return next;
+      }
+
+          if (key === 'diameter') {
+
+        const defaults = getDefaultBuildForDiameter(next.construction, value);
+
+        const allowedSpeciesCounts = getAllowedSoundLegendSpeciesCountOptions(
+
+          defaults.staveCount
+
+        );
+
+        const nextSpeciesCount = allowedSpeciesCounts.includes(
+
+          next.soundLegendWoodSpeciesCount
+
+        )
+
+          ? next.soundLegendWoodSpeciesCount
+
+          : allowedSpeciesCounts[0];
+
+        return {
+
+          ...next,
+
+          thickness: defaults.thickness,
+
+          staveCount: defaults.staveCount,
+
+          lugCount: defaults.lugCount,
+
+          soundLegendWoodSpeciesCount: isSoundLegendConstruction(
+
+            next.construction
+
+          )
+
+            ? nextSpeciesCount
+
+            : next.soundLegendWoodSpeciesCount,
+
+        };
+
+      }
+
+         if (key === 'thickness') {
+
+        const buildOptions = getBuildOptionsForConstruction(next.construction);
+
+        const rows = buildOptions[next.diameter]?.[value] || [];
+
+        const nextStaveCount = rows[0]?.staveCount || '';
+
+        const nextLugCount =
+
+          rows.find((row) => row.staveCount === nextStaveCount)?.lugCount || '';
+
+        const allowedSpeciesCounts =
+
+          getAllowedSoundLegendSpeciesCountOptions(nextStaveCount);
+
+        const nextSpeciesCount = allowedSpeciesCounts.includes(
+
+          next.soundLegendWoodSpeciesCount
+
+        )
+
+          ? next.soundLegendWoodSpeciesCount
+
+          : allowedSpeciesCounts[0];
+
+        return {
+
+          ...next,
+
+          staveCount: nextStaveCount,
+
+          lugCount: nextLugCount,
+
+          soundLegendWoodSpeciesCount: isSoundLegendConstruction(
+
+            next.construction
+
+          )
+
+            ? nextSpeciesCount
+
+            : next.soundLegendWoodSpeciesCount,
+
+        };
+
+      }
+
+         if (key === 'staveCount') {
+
+        const buildOptions = getBuildOptionsForConstruction(next.construction);
+
+        const rows = buildOptions[next.diameter]?.[next.thickness] || [];
+
+        const nextLugCount =
+
+          rows.find((row) => row.staveCount === value)?.lugCount || '';
+
+        const allowedSpeciesCounts =
+
+          getAllowedSoundLegendSpeciesCountOptions(value);
+
+        const nextSpeciesCount = allowedSpeciesCounts.includes(
+
+          next.soundLegendWoodSpeciesCount
+
+        )
+
+          ? next.soundLegendWoodSpeciesCount
+
+          : allowedSpeciesCounts[0];
+
+        return {
+
+          ...next,
+
+          lugCount: nextLugCount,
+
+          soundLegendWoodSpeciesCount: isSoundLegendConstruction(
+
+            next.construction
+
+          )
+
+            ? nextSpeciesCount
+
+            : next.soundLegendWoodSpeciesCount,
+
+        };
+
+      }
+
+      if (key === 'lugCount') {
+        return next;
+      }
+
+      return next;
+    });
   };
 
   const resetDraft = () => {
@@ -2576,6 +4814,255 @@ const AdminLegacyPrintCalibration = () => {
       setIsSavingCalibration(false);
     }
   };
+
+  const getEngineSelectorFields = () => {
+    const selectedLineKey = getSelectedEngineLineKey();
+
+    if (selectedLineKey === 'heritage') {
+      return SELECTOR_FIELDS.filter((field) => {
+        return ![
+          'drumType',
+
+          'construction',
+
+          'exteriorScorch',
+
+          'coreStaveShell',
+
+          'steamBentExterior',
+        ].includes(field.key);
+      });
+    }
+
+    if (selectedLineKey === 'feuzon') {
+      return SELECTOR_FIELDS.filter((field) => {
+        return !['drumType', 'construction'].includes(field.key);
+      });
+    }
+
+    if (selectedLineKey === 'soundlegend') {
+      return SELECTOR_FIELDS.filter((field) => {
+        return !['drumType', 'construction'].includes(field.key);
+      });
+    }
+
+    return SELECTOR_FIELDS;
+  };
+
+  const getSelectedEngineLineKey = () => {
+    if (isHeritageConstruction(safeSelector.construction)) return 'heritage';
+
+    if (isFeuzonConstruction(safeSelector.construction)) return 'feuzon';
+
+    if (isSoundLegendConstruction(safeSelector.construction)) {
+      return 'soundlegend';
+    }
+
+    return 'nonOber';
+  };
+
+  const getNonOberAvailableModels = () => {
+    const makerData =
+      NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[selectedNonOberMaker] ||
+      NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
+
+    return makerData[selectedNonOberDrumType] || [];
+  };
+
+  const renderNonOberReferenceBuilder = () => {
+    const selectedGroup =
+      NON_OBER_MANUFACTURER_GROUPS.find(
+        (group) => group.group === selectedNonOberMakerGroup
+      ) || NON_OBER_MANUFACTURER_GROUPS[0];
+
+    const availableModels = getNonOberAvailableModels();
+
+    return (
+      <div className="legacyprint-non-ober-builder">
+        <div className="legacyprint-preview-card-heading">
+          <p>Reference Builder</p>
+
+          <h4>Non-Ober Artisan / Manufacturer Reference</h4>
+        </div>
+
+        <p className="legacyprint-preview-description">
+          This placeholder reference path will let the LegacyPrint™ engine
+          compare or model popular non-Ober drums by maker, drum type, shell
+          family, and known reference behavior.
+        </p>
+
+        <div className="legacyprint-non-ober-stage">
+          <div className="legacyprint-non-ober-stage-heading">
+            <span>Step 1</span>
+
+            <strong>Select manufacturer group</strong>
+          </div>
+
+          <div className="legacyprint-engine-line-grid">
+            {NON_OBER_MANUFACTURER_GROUPS.map((group) => (
+              <button
+                key={group.group}
+                type="button"
+                className={`legacyprint-engine-line-card ${
+                  selectedNonOberMakerGroup === group.group ? 'active' : ''
+                }`}
+                onClick={() => {
+                  setSelectedNonOberMakerGroup(group.group);
+
+                  setSelectedNonOberMaker(group.makers[0]);
+
+                  setSelectedNonOberModel('');
+                }}
+              >
+                <strong>{group.group}</strong>
+
+                <span>{group.makers.length} makers available</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="legacyprint-non-ober-stage">
+          <div className="legacyprint-non-ober-stage-heading">
+            <span>Step 2</span>
+
+            <strong>Select manufacturer</strong>
+          </div>
+
+          <div className="legacyprint-builder-pill-grid">
+            {selectedGroup.makers.map((maker) => (
+              <button
+                key={maker}
+                type="button"
+                className={selectedNonOberMaker === maker ? 'active' : ''}
+                onClick={() => {
+                  setSelectedNonOberMaker(maker);
+
+                  setSelectedNonOberModel('');
+                }}
+              >
+                {maker}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="legacyprint-non-ober-stage">
+          <div className="legacyprint-non-ober-stage-heading">
+            <span>Step 3</span>
+
+            <strong>Select drum type</strong>
+          </div>
+
+          <div className="legacyprint-builder-pill-grid">
+            {DRUM_TYPE_FILTER_OPTIONS.map((drumType) => (
+              <button
+                key={drumType}
+                type="button"
+                className={selectedNonOberDrumType === drumType ? 'active' : ''}
+                onClick={() => {
+                  setSelectedNonOberDrumType(drumType);
+
+                  setSelectedNonOberModel('');
+
+                  handleSelectorChange('drumType', drumType);
+                }}
+              >
+                {drumType}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="legacyprint-non-ober-stage">
+          <div className="legacyprint-non-ober-stage-heading">
+            <span>Step 4</span>
+
+            <strong>Popular placeholder models</strong>
+          </div>
+
+          <div className="legacyprint-non-ober-model-grid">
+            {availableModels.map((model) => (
+              <button
+                key={model}
+                type="button"
+                className={selectedNonOberModel === model ? 'active' : ''}
+                onClick={() => setSelectedNonOberModel(model)}
+              >
+                <strong>{model}</strong>
+
+                <span>
+                  {selectedNonOberMaker} / {selectedNonOberDrumType}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {!availableModels.length && (
+            <div className="legacyprint-admin-note neutral">
+              <strong>No placeholder models yet</strong>
+
+              <span>
+                This maker does not have seeded models for this drum type yet.
+              </span>
+            </div>
+          )}
+        </div>
+
+        {selectedNonOberModel && (
+          <div className="legacyprint-admin-note">
+            <strong>Selected reference model</strong>
+
+            <span>
+              {selectedNonOberMaker} / {selectedNonOberDrumType} /{' '}
+              {selectedNonOberModel}
+            </span>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderEngineLineSelector = () => {
+    const selectedLineKey = getSelectedEngineLineKey();
+
+    return (
+      <div className="legacyprint-engine-line-selector">
+        <div className="legacyprint-engine-line-selector-heading">
+          <p className="legacyprint-admin-overline">Start Here</p>
+
+          <h4>Choose the voicing path</h4>
+
+          <span>
+            Select an Ober line or use the non-Ober reference path before
+            choosing drum size, shell details, response options, and read views.
+          </span>
+        </div>
+
+        <div className="legacyprint-engine-line-grid">
+          {ENGINE_LINE_OPTIONS.map((lineOption) => {
+            const isActive = selectedLineKey === lineOption.key;
+
+            return (
+              <button
+                key={lineOption.key}
+                type="button"
+                className={`legacyprint-engine-line-card ${
+                  isActive ? 'active' : ''
+                }`}
+                onClick={() => handleEngineLineChange(lineOption)}
+              >
+                <strong>{lineOption.label}</strong>
+
+                <span>{lineOption.description}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   const renderFirstListenTriangle = () => (
     <div className="legacyprint-admin-first-triangle-shell">
       <VoiceThreadMap
@@ -2622,7 +5109,7 @@ const AdminLegacyPrintCalibration = () => {
 
           depth: safeSelector.depth,
 
-          lugs: '',
+          lugs: safeSelector.lugCount,
 
           staveOption: safeSelector.thickness,
 
@@ -2630,7 +5117,7 @@ const AdminLegacyPrintCalibration = () => {
 
           hardwareColor: '',
 
-          scorchDepth: safeSelector.finish,
+          scorchDepth: safeSelector.finish || safeSelector.exteriorScorch || '',
         }}
         currentSpec={{
           size: safeSelector.diameter,
@@ -2638,6 +5125,10 @@ const AdminLegacyPrintCalibration = () => {
           diameter: safeSelector.diameter,
 
           depth: safeSelector.depth,
+
+          lugCount: safeSelector.lugCount,
+
+          staveCount: safeSelector.staveCount,
 
           hoopType: safeSelector.hoopType,
 
@@ -2888,13 +5379,24 @@ const AdminLegacyPrintCalibration = () => {
       </div>
 
       <p className="legacyprint-preview-description">
-        HERITAGE uses the standard selector controls for diameter, depth, shell
-        thickness, finish, hoop type, tension, wires, and heads.
+        HERITAGE is a snare-only Ober line. Use the builder controls to select
+        diameter, depth, shell thickness, finish, hoop type, tuning, wires, and
+        heads.
       </p>
     </div>
   );
 
   const renderSelectedLineBuilderPreview = () => {
+    const selectedLineKey = getSelectedEngineLineKey();
+
+    if (selectedLineKey === 'nonOber') {
+      return (
+        <div className="legacyprint-preview-card legacyprint-preview-card--builder">
+          {renderNonOberReferenceBuilder()}
+        </div>
+      );
+    }
+
     if (isSoundLegendConstruction(safeSelector.construction)) {
       return (
         <div className="legacyprint-preview-card legacyprint-preview-card--builder">
@@ -2920,48 +5422,56 @@ const AdminLegacyPrintCalibration = () => {
 
   return (
     <div className="legacyprint-admin-tool">
-      <div className="legacyprint-admin-hero">
-        <div>
-          <p className="legacyprint-admin-kicker">LegacyPrint™ Calibration</p>
+      {showCalibrationHelper && (
+        <section className="legacyprint-calibration-helper-panel">
+          <div className="legacyprint-calibration-helper-heading">
+            <div>
+              <p className="legacyprint-admin-overline">Calibration guide</p>
 
-          <h2>Voicing Engine Control Center</h2>
+              <h3>How to use the LegacyPrint™ engine builder</h3>
 
-          <p>
-            Manage calibration weights, drum-type benchmarks, construction
-            rules, SoundLegend shell options, availability logic, visibility
-            controls, and saved calibration versions.
-          </p>
-        </div>
+              <p>
+                This tool controls the calibration layer that makes the
+                LegacyPrint™ engine. Work from specific acoustic inputs first,
+                then use global weighting only when the overall read behavior
+                needs adjustment.
+              </p>
+            </div>
 
-        <div className="legacyprint-admin-hero-actions">
-          <button
-            type="button"
-            className="legacyprint-admin-button secondary"
-            onClick={resetDraft}
-            disabled={isLoadingCalibration || isSavingCalibration}
-          >
-            Reset Draft
-          </button>
+            <button
+              type="button"
+              className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+              onClick={() => setShowCalibrationHelper(false)}
+            >
+              Close
+            </button>
+          </div>
 
-          <button
-            type="button"
-            className="legacyprint-admin-button secondary"
-            onClick={saveDraft}
-            disabled={isLoadingCalibration || isSavingCalibration}
-          >
-            {isSavingCalibration ? 'Saving...' : 'Save Draft'}
-          </button>
+          <div className="legacyprint-calibration-helper-grid">
+            {CALIBRATION_HELPER_SECTIONS.map((section) => (
+              <article
+                key={section.title}
+                className="legacyprint-calibration-helper-card"
+              >
+                <h4>{section.title}</h4>
 
-          <button
-            type="button"
-            className="legacyprint-admin-button primary"
-            onClick={publishActive}
-            disabled={isLoadingCalibration || isSavingCalibration}
-          >
-            {isSavingCalibration ? 'Publishing...' : 'Publish Active'}
-          </button>
-        </div>
-      </div>
+                <p>{section.summary}</p>
+
+                <small>{section.useWhen}</small>
+              </article>
+            ))}
+          </div>
+
+          <div className="legacyprint-calibration-helper-footer">
+            <strong>Recommended workflow:</strong>
+
+            <span>
+              Config Options → Benchmarks → Voice Preview → Master Weights →
+              Save Draft → Publish Active.
+            </span>
+          </div>
+        </section>
+      )}
 
       <div className="legacyprint-admin-tabs" role="tablist">
         {LEGACYPRINT_TABS.map((tab) => (
@@ -2984,24 +5494,128 @@ const AdminLegacyPrintCalibration = () => {
             <div className="legacyprint-admin-section-heading">
               <div>
                 <p className="legacyprint-admin-overline">
-                  Calibration system status
+                  LegacyPrint™ Calibration
                 </p>
 
-                <h3>LegacyPrint™ calibration dashboard</h3>
+                <h3>Voicing Engine Control Center</h3>
 
                 <p className="legacyprint-admin-section-subcopy">
-                  Quick health check for the active calibration source, draft
-                  state, version history, and engine coverage.
+                  This is the admin control center for how the LegacyPrint™
+                  Voicing Engine interprets drum builds. Use it to test real
+                  configurations, adjust the calibration model, manage saved
+                  versions, and control which read layers are visible across the
+                  site.
                 </p>
               </div>
 
-              <span className="legacyprint-admin-status-dot">
-                {isLoadingCalibration
-                  ? 'Loading calibration...'
-                  : hasUnsavedChanges
-                    ? 'Unsaved draft changes'
+              <div className="legacyprint-admin-overview-actions">
+                <button
+                  type="button"
+                  className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+                  onClick={() =>
+                    setShowCalibrationHelper((current) => !current)
+                  }
+                >
+                  {showCalibrationHelper
+                    ? 'Hide How-To'
+                    : 'How To Use This Tool'}
+                </button>
+              </div>
+            </div>
+
+            {showCalibrationHelper && (
+              <div className="legacyprint-overview-howto-panel">
+                <div>
+                  <p className="legacyprint-admin-overline">
+                    How to use this tool
+                  </p>
+
+                  <h4>Build first. Calibrate second.</h4>
+
+                  <p>
+                    Start in Engine Builder and choose a real drum
+                    configuration. Check First Listen, Player Analysis, and
+                    LegacyTuning. If the result feels wrong, move into
+                    Calibration Tools and adjust the specific part of the model
+                    that caused the issue.
+                  </p>
+                </div>
+
+                <div className="legacyprint-overview-workflow-list">
+                  <span>
+                    <strong>1. Engine Builder</strong>
+                    Test Ober lines or non-Ober reference drums against the live
+                    engine.
+                  </span>
+
+                  <span>
+                    <strong>2. Config Options</strong>
+                    Adjust how specific choices like depth, thickness, finish,
+                    hoops, heads, wires, and edges affect the seven voice nodes.
+                  </span>
+
+                  <span>
+                    <strong>3. Benchmarks</strong>
+                    Tune the expected range for an entire drum type, like snare,
+                    rack tom, floor tom, bass drum, or concert tom.
+                  </span>
+
+                  <span>
+                    <strong>4. Master Weights</strong>
+                    Adjust global behavior only when a read layer feels broadly
+                    biased.
+                  </span>
+
+                  <span>
+                    <strong>5. Save / Publish</strong>
+                    Save Draft while testing. Publish Active only when the
+                    calibration is ready for the live engine.
+                  </span>
+                </div>
+              </div>
+            )}
+
+            <div className="legacyprint-overview-intro-grid">
+              <article className="legacyprint-overview-intro-card legacyprint-overview-intro-card--primary">
+                <p className="legacyprint-admin-overline">What this controls</p>
+
+                <h4>The seven-node voice model</h4>
+
+                <p>
+                  LegacyPrint™ reads every selected build across attack,
+                  brightness, projection, sustain, warmth, sensitivity, and
+                  control. This dashboard manages the calibration data behind
+                  those scores.
+                </p>
+              </article>
+
+              <article className="legacyprint-overview-intro-card">
+                <p className="legacyprint-admin-overline">Main workflow</p>
+
+                <h4>Use the builder as the test bench</h4>
+
+                <p>
+                  The Engine Builder is where you test real configurations.
+                  Calibration Tools are where you correct the underlying model
+                  when the read does not match the expected acoustic behavior.
+                </p>
+              </article>
+
+              <article className="legacyprint-overview-intro-card">
+                <p className="legacyprint-admin-overline">Current state</p>
+
+                <h4>
+                  {hasUnsavedChanges
+                    ? 'Draft has unsaved changes'
                     : calibrationSourceLabel}
-              </span>
+                </h4>
+
+                <p>
+                  The cards below show the active calibration source, current
+                  version, option coverage, benchmark coverage, and saved
+                  version status.
+                </p>
+              </article>
             </div>
 
             <div className="legacyprint-admin-grid">
@@ -3081,13 +5695,11 @@ const AdminLegacyPrintCalibration = () => {
 
             <div className="legacyprint-admin-overview-split">
               <div className="legacyprint-admin-note">
-                <strong>Calibration workflow</strong>
+                <strong>Recommended calibration order</strong>
 
                 <span>
-                  Adjust Master Weights, Benchmarks, and Config Options. Test
-                  the result in Voice Preview. Save Draft when you want to keep
-                  working changes. Publish Active when the calibration is ready
-                  for the live engine.
+                  Engine Builder → Config Options → Benchmarks → Master Weights
+                  → Save Draft → Publish Active.
                 </span>
               </div>
 
@@ -3130,25 +5742,53 @@ const AdminLegacyPrintCalibration = () => {
           </section>
         )}
 
-        {activeTab === 'Voice Preview' && (
+        {activeTab === 'Engine Builder' && (
           <section className="legacyprint-admin-section">
             <div className="legacyprint-admin-section-heading">
               <div>
                 <p className="legacyprint-admin-overline">
-                  Live calibration test
+                  Live voicing engine
                 </p>
 
-                <h3>Voice Preview</h3>
+                <h3>Engine Builder</h3>
               </div>
 
-              <span className="legacyprint-admin-status-dot">
-                {preview.comparisonMode?.option}
-              </span>
+              {/* <button
+
+  type="button"
+
+  className="legacyprint-admin-status-dot legacyprint-admin-status-dot--button"
+
+  onClick={() => {
+
+    handleSelectorChange(
+
+      'comparisonMode',
+
+      safeSelector.comparisonMode === 'Single Drum Type Benchmark'
+
+        ? 'All Drum Type Comparison'
+
+        : 'Single Drum Type Benchmark'
+
+    );
+
+  }}
+
+  title="Toggle comparison mode"
+
+>
+
+  {preview.comparisonMode?.option}
+
+</button> */}
             </div>
+
+            {renderEngineLineSelector()}
 
             <div className="legacyprint-preview-layout">
               <AdminLegacyPrintSelector
-                selectorFields={SELECTOR_FIELDS}
+                selectorFields={getEngineSelectorFields()}
                 calibration={draftCalibration}
                 selector={safeSelector}
                 getSelectorOptions={getSelectorOptions}
@@ -3285,1039 +5925,1183 @@ const AdminLegacyPrintCalibration = () => {
                     </div>
                   </div>
                 )}
-
-                {activePreviewRead === 'Builder' &&
-                  renderSelectedLineBuilderPreview()}
               </div>
             </div>
           </section>
         )}
 
-        {activeTab === 'Master Weights' && (
+        {activeTab === 'Calibration Tools' && (
           <section className="legacyprint-admin-section">
             <div className="legacyprint-admin-section-heading">
               <div>
-                <p className="legacyprint-admin-overline">Global multipliers</p>
+                <p className="legacyprint-admin-overline">Engine calibration</p>
 
-                <h3>Master Weights</h3>
+                <h3>Calibration Tools</h3>
 
                 <p className="legacyprint-admin-section-subcopy">
-                  Each row controls one read layer. Every row should total 7.00
-                  across the seven voice nodes. Lock any node you want to
-                  preserve, then edit another value — only the unlocked nodes in
-                  that row will rebalance.
+                  Adjust the math, benchmarks, option behavior, rule logic, and
+                  saved calibration versions that make the LegacyPrint™ engine
+                  behave correctly.
                 </p>
               </div>
-
-              <button
-                type="button"
-                className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-                onClick={() => {
-                  updateDraftCalibration((current) => ({
-                    ...current,
-
-                    masterWeights: normalizeAllMasterWeightRows(
-                      legacyPrintCalibrationSeed.masterWeights
-                    ),
-                  }));
-
-                  setLockedMasterWeights({
-                    playerAnalysisMultiplier: [],
-
-                    firstListenMultiplier: [],
-
-                    movementMultiplier: [],
-                  });
-                }}
-              >
-                Reset Master Weights
-              </button>
             </div>
 
-            <div className="legacyprint-master-display-toggle">
-              <span>Display Values</span>
-
-              <div>
+            <div className="legacyprint-subtabs" role="tablist">
+              {LEGACYPRINT_CALIBRATION_TOOL_TABS.map((tab) => (
                 <button
+                  key={tab}
                   type="button"
-                  className={
-                    masterWeightDisplayMode === 'multiplier' ? 'active' : ''
-                  }
-                  onClick={() => setMasterWeightDisplayMode('multiplier')}
+                  className={activeCalibrationToolTab === tab ? 'active' : ''}
+                  onClick={() => setActiveCalibrationToolTab(tab)}
                 >
-                  Multiplier
+                  {tab}
                 </button>
-
-                <button
-                  type="button"
-                  className={
-                    masterWeightDisplayMode === 'influence' ? 'active' : ''
-                  }
-                  onClick={() => setMasterWeightDisplayMode('influence')}
-                >
-                  Influence
-                </button>
-
-                <button
-                  type="button"
-                  className={
-                    masterWeightDisplayMode === 'share' ? 'active' : ''
-                  }
-                  onClick={() => setMasterWeightDisplayMode('share')}
-                >
-                  Share
-                </button>
-              </div>
-
-              <small>
-                Influence shows each node as a -100 to +100 bias around neutral.
-                Share shows each node as part of the row total.
-              </small>
-            </div>
-
-            <div className="legacyprint-master-matrix-wrap">
-              <table className="legacyprint-master-matrix">
-                <thead>
-                  <tr>
-                    <th>Read Layer</th>
-
-                    {LEGACYPRINT_NODE_ORDER.map((node) => (
-                      <th key={node}>
-                        <span
-                          className={`legacyprint-master-node-dot ${node}`}
-                        />
-
-                        {LEGACYPRINT_NODE_LABELS[node]}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {[
-                    'firstListenMultiplier',
-
-                    'playerAnalysisMultiplier',
-
-                    'movementMultiplier',
-                  ].map((weightKey) => {
-                    return (
-                      <tr key={weightKey}>
-                        <td className="legacyprint-master-layer-cell">
-                          <strong>{getMasterWeightLabel(weightKey)}</strong>
-
-                          <small>
-                            {weightKey === 'playerAnalysisMultiplier'
-                              ? 'Full seven-node player read'
-                              : weightKey === 'firstListenMultiplier'
-                                ? 'What surfaces first'
-                                : 'How strongly node movement is allowed to show'}
-                          </small>
-                        </td>
-
-                        {LEGACYPRINT_NODE_ORDER.map((node) => {
-                          const row = (
-                            draftCalibration.masterWeights || []
-                          ).find((item) => item.node === node);
-
-                          const value = Number(row?.[weightKey] || 0);
-
-                          const isLocked = isMasterWeightLocked({
-                            node,
-                            weightKey,
-                          });
-
-                          return (
-                            <td
-                              key={`${weightKey}-${node}`}
-                              className={
-                                isLocked
-                                  ? 'legacyprint-master-cell--locked'
-                                  : ''
-                              }
-                            >
-                              <MasterWeightKnob
-                                node={node}
-                                weightKey={weightKey}
-                                value={value}
-                                displayMode={masterWeightDisplayMode}
-                                isLocked={isLocked}
-                                onChange={(nextValue) =>
-                                  updateMasterWeightGroupValue({
-                                    node,
-
-                                    key: weightKey,
-
-                                    value: nextValue,
-                                  })
-                                }
-                                onToggleLock={() =>
-                                  toggleMasterWeightLock({
-                                    node,
-
-                                    weightKey,
-                                  })
-                                }
-                              />
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="legacyprint-master-notes-grid">
-              {(draftCalibration.masterWeights || []).map((row) => (
-                <label key={row.node} className="legacyprint-master-note-row">
-                  <span>
-                    <span
-                      className={`legacyprint-master-node-dot ${row.node}`}
-                    />
-                    {LEGACYPRINT_NODE_LABELS[row.node]} Notes
-                  </span>
-
-                  <input
-                    type="text"
-                    value={row.notes || ''}
-                    className="legacyprint-admin-notes-input"
-                    onChange={(event) =>
-                      updateMasterWeightValue({
-                        node: row.node,
-
-                        key: 'notes',
-
-                        value: event.target.value,
-                      })
-                    }
-                  />
-                </label>
               ))}
             </div>
 
-            <div className="legacyprint-admin-note neutral legacyprint-master-helper-note">
-              <strong>How this works</strong>
-
-              <span>
-                A neutral read layer would be 1.00 per node for a total of 7.00.
-                Values below 1.00 restrain a node. Values above 1.00 emphasize
-                it. Locked cells stay fixed while unlocked cells absorb the
-                rebalance.
-              </span>
-            </div>
-          </section>
-        )}
-        {activeTab === 'Benchmarks' && (
-          <section className="legacyprint-admin-section">
-            <div className="legacyprint-admin-section-heading">
-              <div>
-                <p className="legacyprint-admin-overline">
-                  Drum type calibration
-                </p>
-
-                <h3>Type Benchmarks</h3>
-
-                <p className="legacyprint-admin-section-subcopy legacyprint-admin-section-subcopy--dark">
-                  These sliders define the expected voice range for each drum
-                  type. Min, Neutral, and Max shape the Player Analysis scale.
-                  First Listen Multiplier controls how easily that node rises to
-                  the surface in the first impression.
-                </p>
-              </div>
-
-              <div className="legacyprint-admin-filter-row">
-                <label>
-                  <span>Drum Type</span>
-
-                  <select
-                    value={benchmarkDrumTypeFilter}
-                    onChange={(event) =>
-                      setBenchmarkDrumTypeFilter(event.target.value)
-                    }
-                  >
-                    {benchmarkDrumTypeOptions.map((drumType) => (
-                      <option key={drumType} value={drumType}>
-                        {drumType}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                <button
-                  type="button"
-                  className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-                  onClick={resetAllBenchmarks}
-                >
-                  Reset Benchmarks
-                </button>
-              </div>
-            </div>
-
-            <div className="legacyprint-benchmark-card-grid">
-              {filteredBenchmarkRows.map((row) => (
-                <div
-                  key={`${row.drumType}-${row.node}`}
-                  className="legacyprint-benchmark-card"
-                >
-                  <div className="legacyprint-benchmark-card-head">
+            <div className="legacyprint-calibration-tool-panel">
+              {activeCalibrationToolTab === 'Master Weights' && (
+                <section className="legacyprint-admin-section">
+                  <div className="legacyprint-admin-section-heading">
                     <div>
-                      <span className="legacyprint-admin-overline">
-                        {row.drumType}
-                      </span>
+                      <p className="legacyprint-admin-overline">
+                        Global multipliers
+                      </p>
 
-                      <h4>{LEGACYPRINT_NODE_LABELS[row.node]}</h4>
+                      <h3>Master Weights</h3>
+
+                      <p className="legacyprint-admin-section-subcopy">
+                        Each row controls one read layer. Every row should total
+                        7.00 across the seven voice nodes. Lock any node you
+                        want to preserve, then edit another value — only the
+                        unlocked nodes in that row will rebalance.
+                      </p>
                     </div>
 
                     <button
                       type="button"
                       className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-                      onClick={() =>
-                        resetBenchmarkRow({
-                          drumType: row.drumType,
+                      onClick={() => {
+                        updateDraftCalibration((current) => ({
+                          ...current,
 
-                          node: row.node,
-                        })
-                      }
+                          masterWeights: normalizeAllMasterWeightRows(
+                            legacyPrintCalibrationSeed.masterWeights
+                          ),
+                        }));
+
+                        setLockedMasterWeights({
+                          playerAnalysisMultiplier: [],
+
+                          firstListenMultiplier: [],
+
+                          movementMultiplier: [],
+                        });
+                      }}
                     >
-                      Reset Row
+                      Reset Master Weights
                     </button>
                   </div>
 
-                  <div className="legacyprint-benchmark-slider-grid">
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="benchmark"
-                      weightKey="minExpected"
-                      value={row.minExpected}
-                      min={0}
-                      max={10}
-                      step={0.1}
-                      onChange={(value) =>
-                        updateBenchmarkValue({
-                          drumType: row.drumType,
+                  <div className="legacyprint-master-display-toggle">
+                    <span>Display Values</span>
 
-                          node: row.node,
-
-                          key: 'minExpected',
-
-                          value,
-                        })
-                      }
-                    />
-
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="benchmark"
-                      weightKey="neutral"
-                      value={row.neutral}
-                      min={0}
-                      max={10}
-                      step={0.1}
-                      onChange={(value) =>
-                        updateBenchmarkValue({
-                          drumType: row.drumType,
-
-                          node: row.node,
-
-                          key: 'neutral',
-
-                          value,
-                        })
-                      }
-                    />
-
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="benchmark"
-                      weightKey="maxExpected"
-                      value={row.maxExpected}
-                      min={0}
-                      max={10}
-                      step={0.1}
-                      onChange={(value) =>
-                        updateBenchmarkValue({
-                          drumType: row.drumType,
-
-                          node: row.node,
-
-                          key: 'maxExpected',
-
-                          value,
-                        })
-                      }
-                    />
-
-                    <LegacyPrintAdminSlider
-                      node={row.node}
-                      mode="benchmark"
-                      weightKey="firstListenMultiplier"
-                      value={row.firstListenMultiplier}
-                      min={0.4}
-                      max={1.6}
-                      step={0.01}
-                      onChange={(value) =>
-                        updateBenchmarkValue({
-                          drumType: row.drumType,
-
-                          node: row.node,
-
-                          key: 'firstListenMultiplier',
-
-                          value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <div className="legacyprint-benchmark-meta">
-                    <span>
-                      {getBenchmarkMeaning({
-                        key: 'minExpected',
-
-                        value: row.minExpected,
-                      })}
-                    </span>
-
-                    <span>
-                      {getBenchmarkMeaning({
-                        key: 'neutral',
-
-                        value: row.neutral,
-                      })}
-                    </span>
-
-                    <span>
-                      {getBenchmarkMeaning({
-                        key: 'maxExpected',
-
-                        value: row.maxExpected,
-                      })}
-                    </span>
-
-                    <span>
-                      {getBenchmarkMeaning({
-                        key: 'firstListenMultiplier',
-
-                        value: row.firstListenMultiplier,
-                      })}
-                    </span>
-                  </div>
-
-                  <label className="legacyprint-master-weight-note">
-                    <span>Context</span>
-
-                    <input
-                      type="text"
-                      value={row.context || ''}
-                      className="legacyprint-admin-notes-input"
-                      onChange={(event) =>
-                        updateBenchmarkValue({
-                          drumType: row.drumType,
-
-                          node: row.node,
-
-                          key: 'context',
-
-                          value: event.target.value,
-                        })
-                      }
-                    />
-                  </label>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {activeTab === 'Config Options' && (
-          <section className="legacyprint-admin-section">
-            <div className="legacyprint-admin-section-heading">
-              <div>
-                <p className="legacyprint-admin-overline">
-                  Selector value tables
-                </p>
-
-                <h3>Config Options</h3>
-              </div>
-
-              <button
-                type="button"
-                className="legacyprint-admin-button primary"
-                onClick={() => {
-                  setNewConfigOption(
-                    buildBlankConfigOption(activeConfigCategory)
-                  );
-
-                  setShowAddConfigOption((current) => !current);
-                }}
-              >
-                {showAddConfigOption ? 'Cancel Add' : 'Add Config Option'}
-              </button>
-              <button
-                type="button"
-                className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-                onClick={resetAllConfigOptions}
-              >
-                Reset Config
-              </button>
-            </div>
-
-            <div className="legacyprint-config-shell">
-              <div className="legacyprint-config-tabs">
-                {configCategoryKeys.map((key) => (
-                  <button
-                    key={key}
-                    type="button"
-                    className={activeConfigCategory === key ? 'active' : ''}
-                    onClick={() => {
-                      setActiveConfigCategory(key);
-
-                      setNewConfigOption(buildBlankConfigOption(key));
-
-                      setShowAddConfigOption(false);
-                    }}
-                  >
-                    {CONFIG_CATEGORY_LABELS[key] || toTitleCase(key)}
-                  </button>
-                ))}
-              </div>
-
-              <div className="legacyprint-admin-config-toolbar">
-                <label>
-                  <span>Brand</span>
-
-                  <select
-                    value={configBrandFilter}
-                    onChange={(event) => {
-                      const nextBrand = event.target.value;
-
-                      setConfigBrandFilter(nextBrand);
-
-                      if (nextBrand === 'Ober Artisan') {
-                        setConfigLineFilter('Ober HERITAGE Stave');
-                        setConfigShellTypeFilter('Stave');
-                        setConfigDrumTypeFilter('Snare');
-                        setConfigHybridTypes(['Stave']);
-                      } else {
-                        setConfigLineFilter('');
-                        setConfigShellTypeFilter('All');
-                        setConfigDrumTypeFilter('Snare');
-                        setConfigHybridTypes([]);
-                      }
-                    }}
-                  >
-                    {BRAND_FILTER_OPTIONS.map((brand) => (
-                      <option key={brand} value={brand}>
-                        {brand}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                {configBrandFilter === 'Ober Artisan' && (
-                  <label>
-                    <span>Line</span>
-
-                    <select
-                      value={configLineFilter}
-                      onChange={(event) => {
-                        const nextLine = event.target.value;
-
-                        setConfigLineFilter(nextLine);
-
-                        if (nextLine === 'Ober HERITAGE Stave') {
-                          setConfigShellTypeFilter('Stave');
-                          setConfigDrumTypeFilter('Snare');
-                          setConfigHybridTypes(['Stave']);
+                    <div>
+                      <button
+                        type="button"
+                        className={
+                          masterWeightDisplayMode === 'multiplier'
+                            ? 'active'
+                            : ''
                         }
-
-                        if (nextLine === 'Ober FEUZØN Hybrid') {
-                          setConfigShellTypeFilter('Hybrid');
-                          setConfigDrumTypeFilter('Snare');
-                          setConfigHybridTypes(['Stave', 'Steam Bent']);
-                        }
-
-                        if (nextLine === 'Ober SOUNDLEGEND Custom') {
-                          setConfigShellTypeFilter('All');
-                          setConfigDrumTypeFilter('Snare');
-                          setConfigHybridTypes([]);
-                        }
-                      }}
-                    >
-                      {OBER_LINE_FILTER_OPTIONS.map((line) => (
-                        <option key={line} value={line}>
-                          {line
-                            .replace('Ober HERITAGE Stave', 'HERITAGE')
-                            .replace('Ober FEUZØN Hybrid', 'FEUZØN')
-                            .replace(
-                              'Ober SOUNDLEGEND Custom',
-                              'SOUNDLEGEND Custom'
-                            )}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                )}
-
-                {configLineFilter === 'Ober SOUNDLEGEND Custom' && (
-                  <>
-                    <label>
-                      <span>Shell Type</span>
-
-                      <select
-                        value={configShellTypeFilter}
-                        onChange={(event) => {
-                          const nextShellType = event.target.value;
-
-                          setConfigShellTypeFilter(nextShellType);
-
-                          if (nextShellType === 'Hybrid') {
-                            setConfigHybridTypes(['Stave', 'Steam Bent']);
-                          } else {
-                            setConfigHybridTypes([]);
-                          }
-                        }}
+                        onClick={() => setMasterWeightDisplayMode('multiplier')}
                       >
-                        {SHELL_TYPE_FILTER_OPTIONS.map((shellType) => (
-                          <option key={shellType} value={shellType}>
-                            {shellType}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
+                        Multiplier
+                      </button>
 
-                    {configShellTypeFilter === 'Hybrid' && (
-                      <div className="legacyprint-config-filter-group legacyprint-config-filter-group--wide">
-                        <span>Hybrid Type</span>
+                      <button
+                        type="button"
+                        className={
+                          masterWeightDisplayMode === 'influence'
+                            ? 'active'
+                            : ''
+                        }
+                        onClick={() => setMasterWeightDisplayMode('influence')}
+                      >
+                        Influence
+                      </button>
 
-                        <div className="legacyprint-config-check-row">
-                          {HYBRID_TYPE_OPTIONS.map((type) => {
-                            const isChecked = configHybridTypes.includes(type);
+                      <button
+                        type="button"
+                        className={
+                          masterWeightDisplayMode === 'share' ? 'active' : ''
+                        }
+                        onClick={() => setMasterWeightDisplayMode('share')}
+                      >
+                        Share
+                      </button>
+                    </div>
 
-                            return (
-                              <button
-                                key={type}
-                                type="button"
-                                className={`legacyprint-config-check-button ${
-                                  isChecked ? 'is-active' : ''
-                                }`}
-                                onClick={() => {
-                                  setConfigHybridTypes((current) => {
-                                    if (current.includes(type)) {
-                                      return current.filter(
-                                        (item) => item !== type
-                                      );
+                    <small>
+                      Influence shows each node as a -100 to +100 bias around
+                      neutral. Share shows each node as part of the row total.
+                    </small>
+                  </div>
+
+                  <div className="legacyprint-master-matrix-wrap">
+                    <table className="legacyprint-master-matrix">
+                      <thead>
+                        <tr>
+                          <th>Read Layer</th>
+
+                          {LEGACYPRINT_NODE_ORDER.map((node) => (
+                            <th key={node}>
+                              <span
+                                className={`legacyprint-master-node-dot ${node}`}
+                              />
+
+                              {LEGACYPRINT_NODE_LABELS[node]}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {[
+                          'firstListenMultiplier',
+
+                          'playerAnalysisMultiplier',
+
+                          'movementMultiplier',
+                        ].map((weightKey) => {
+                          return (
+                            <tr key={weightKey}>
+                              <td className="legacyprint-master-layer-cell">
+                                <strong>
+                                  {getMasterWeightLabel(weightKey)}
+                                </strong>
+
+                                <small>
+                                  {weightKey === 'playerAnalysisMultiplier'
+                                    ? 'Full seven-node player read'
+                                    : weightKey === 'firstListenMultiplier'
+                                      ? 'What surfaces first'
+                                      : 'How strongly node movement is allowed to show'}
+                                </small>
+                              </td>
+
+                              {LEGACYPRINT_NODE_ORDER.map((node) => {
+                                const row = (
+                                  draftCalibration.masterWeights || []
+                                ).find((item) => item.node === node);
+
+                                const value = Number(row?.[weightKey] || 0);
+
+                                const isLocked = isMasterWeightLocked({
+                                  node,
+                                  weightKey,
+                                });
+
+                                return (
+                                  <td
+                                    key={`${weightKey}-${node}`}
+                                    className={
+                                      isLocked
+                                        ? 'legacyprint-master-cell--locked'
+                                        : ''
                                     }
+                                  >
+                                    <MasterWeightKnob
+                                      node={node}
+                                      weightKey={weightKey}
+                                      value={value}
+                                      displayMode={masterWeightDisplayMode}
+                                      isLocked={isLocked}
+                                      onChange={(nextValue) =>
+                                        updateMasterWeightGroupValue({
+                                          node,
 
-                                    return [...current, type];
-                                  });
-                                }}
-                              >
-                                {type}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-                  </>
-                )}
+                                          key: weightKey,
 
-                <label>
-                  <span>Drum Type</span>
+                                          value: nextValue,
+                                        })
+                                      }
+                                      onToggleLock={() =>
+                                        toggleMasterWeightLock({
+                                          node,
 
-                  <select
-                    value={configDrumTypeFilter}
-                    onChange={(event) =>
-                      setConfigDrumTypeFilter(event.target.value)
-                    }
-                    disabled={isOberSnareOnlyLine(configLineFilter)}
-                  >
-                    {getAllowedDrumTypeOptionsForLine(configLineFilter).map(
-                      (drumType) => (
-                        <option key={drumType} value={drumType}>
-                          {drumType}
-                        </option>
-                      )
-                    )}
-                  </select>
-                </label>
-
-                <button
-                  type="button"
-                  className="legacyprint-admin-button secondary"
-                  onClick={() => {
-                    setConfigBrandFilter('Ober Artisan');
-                    setConfigLineFilter('Ober HERITAGE Stave');
-                    setConfigShellTypeFilter('Stave');
-                    setConfigDrumTypeFilter('Snare');
-                    setConfigHybridTypes(['Stave']);
-                  }}
-                >
-                  Reset Filters
-                </button>
-              </div>
-              {showAddConfigOption && (
-                <div className="legacyprint-admin-add-config-panel">
-                  <div className="legacyprint-admin-add-config-heading">
-                    <p className="legacyprint-admin-overline">New Option</p>
-
-                    <h4>
-                      Add to {CONFIG_CATEGORY_LABELS[activeConfigCategory]}
-                    </h4>
+                                          weightKey,
+                                        })
+                                      }
+                                    />
+                                  </td>
+                                );
+                              })}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
 
-                  <div className="legacyprint-admin-add-config-grid">
-                    <label>
-                      <span>Option Name</span>
-
-                      <input
-                        type="text"
-                        value={newConfigOption.option}
-                        onChange={(event) =>
-                          setNewConfigOption((current) => ({
-                            ...current,
-
-                            option: event.target.value,
-                          }))
-                        }
-                        placeholder="Example: Satin Black, Deep Hybrid Edge, 26-strand"
-                      />
-                    </label>
-
-                    <label>
-                      <span>Applies To Drum Type</span>
-
-                      <select
-                        value={newConfigOption.appliesTo}
-                        onChange={(event) =>
-                          setNewConfigOption((current) => ({
-                            ...current,
-
-                            appliesTo: event.target.value,
-                          }))
-                        }
+                  <div className="legacyprint-master-notes-grid">
+                    {(draftCalibration.masterWeights || []).map((row) => (
+                      <label
+                        key={row.node}
+                        className="legacyprint-master-note-row"
                       >
-                        {DRUM_TYPE_FILTER_OPTIONS_WITH_ALL.map((type) => (
-                          <option key={type} value={type}>
-                            {type}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
+                        <span>
+                          <span
+                            className={`legacyprint-master-node-dot ${row.node}`}
+                          />
+                          {LEGACYPRINT_NODE_LABELS[row.node]} Notes
+                        </span>
 
-                    <label>
-                      <span>Assigned Construction / Line</span>
+                        <input
+                          type="text"
+                          value={row.notes || ''}
+                          className="legacyprint-admin-notes-input"
+                          onChange={(event) =>
+                            updateMasterWeightValue({
+                              node: row.node,
 
-                      <select
-                        value={newConfigOption.appliesToConstructions}
-                        onChange={(event) =>
-                          setNewConfigOption((current) => ({
-                            ...current,
+                              key: 'notes',
 
-                            appliesToConstructions: event.target.value,
-                          }))
-                        }
-                      >
-                        {CONSTRUCTION_ASSIGNMENT_OPTIONS.map((construction) => (
-                          <option key={construction} value={construction}>
-                            {construction}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-
-                    <label>
-                      <span>Allowed Diameters</span>
-
-                      <input
-                        type="text"
-                        value={newConfigOption.allowedDiameters}
-                        onChange={(event) =>
-                          setNewConfigOption((current) => ({
-                            ...current,
-
-                            allowedDiameters: event.target.value,
-                          }))
-                        }
-                        placeholder="All or 12 in,13 in,14 in"
-                      />
-                    </label>
-
-                    <label>
-                      <span>Allowed Depths</span>
-
-                      <input
-                        type="text"
-                        value={newConfigOption.allowedDepths}
-                        onChange={(event) =>
-                          setNewConfigOption((current) => ({
-                            ...current,
-
-                            allowedDepths: event.target.value,
-                          }))
-                        }
-                        placeholder="All or 5.0 in,5.5 in,6.0 in"
-                      />
-                    </label>
-
-                    <label className="legacyprint-admin-add-config-notes">
-                      <span>Notes</span>
-
-                      <input
-                        type="text"
-                        value={newConfigOption.notes}
-                        onChange={(event) =>
-                          setNewConfigOption((current) => ({
-                            ...current,
-
-                            notes: event.target.value,
-                          }))
-                        }
-                        placeholder="Short internal note"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="legacyprint-admin-add-config-nodes">
-                    {LEGACYPRINT_NODE_ORDER.map((node) => (
-                      <label key={node}>
-                        <span>{LEGACYPRINT_NODE_LABELS[node]}</span>
-
-                        <AdminNumberInput
-                          value={newConfigOption[node]}
-                          onChange={(value) =>
-                            setNewConfigOption((current) => ({
-                              ...current,
-
-                              [node]: value,
-                            }))
+                              value: event.target.value,
+                            })
                           }
                         />
                       </label>
                     ))}
                   </div>
 
-                  <div className="legacyprint-admin-add-config-actions">
+                  <div className="legacyprint-admin-note neutral legacyprint-master-helper-note">
+                    <strong>How this works</strong>
+
+                    <span>
+                      A neutral read layer would be 1.00 per node for a total of
+                      7.00. Values below 1.00 restrain a node. Values above 1.00
+                      emphasize it. Locked cells stay fixed while unlocked cells
+                      absorb the rebalance.
+                    </span>
+                  </div>
+                </section>
+              )}
+              {activeCalibrationToolTab === 'Benchmarks' && (
+                <section className="legacyprint-admin-section">
+                  <div className="legacyprint-admin-section-heading">
+                    <div>
+                      <p className="legacyprint-admin-overline">
+                        Drum type calibration
+                      </p>
+
+                      <h3>Type Benchmarks</h3>
+
+                      <p className="legacyprint-admin-section-subcopy legacyprint-admin-section-subcopy--dark">
+                        These sliders define the expected voice range for each
+                        drum type. Min, Neutral, and Max shape the Player
+                        Analysis scale. First Listen Multiplier controls how
+                        easily that node rises to the surface in the first
+                        impression.
+                      </p>
+                    </div>
+
+                    <div className="legacyprint-admin-filter-row">
+                      <label>
+                        <span>Drum Type</span>
+
+                        <select
+                          value={benchmarkDrumTypeFilter}
+                          onChange={(event) =>
+                            setBenchmarkDrumTypeFilter(event.target.value)
+                          }
+                        >
+                          {benchmarkDrumTypeOptions.map((drumType) => (
+                            <option key={drumType} value={drumType}>
+                              {drumType}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+
+                      <button
+                        type="button"
+                        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+                        onClick={resetAllBenchmarks}
+                      >
+                        Reset Benchmarks
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="legacyprint-benchmark-card-grid">
+                    {filteredBenchmarkRows.map((row) => (
+                      <div
+                        key={`${row.drumType}-${row.node}`}
+                        className="legacyprint-benchmark-card"
+                      >
+                        <div className="legacyprint-benchmark-card-head">
+                          <div>
+                            <span className="legacyprint-admin-overline">
+                              {row.drumType}
+                            </span>
+
+                            <h4>{LEGACYPRINT_NODE_LABELS[row.node]}</h4>
+                          </div>
+
+                          <button
+                            type="button"
+                            className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+                            onClick={() =>
+                              resetBenchmarkRow({
+                                drumType: row.drumType,
+
+                                node: row.node,
+                              })
+                            }
+                          >
+                            Reset Row
+                          </button>
+                        </div>
+
+                        <div className="legacyprint-benchmark-slider-grid">
+                          <LegacyPrintAdminSlider
+                            node={row.node}
+                            mode="benchmark"
+                            weightKey="minExpected"
+                            value={row.minExpected}
+                            min={0}
+                            max={10}
+                            step={0.1}
+                            onChange={(value) =>
+                              updateBenchmarkValue({
+                                drumType: row.drumType,
+
+                                node: row.node,
+
+                                key: 'minExpected',
+
+                                value,
+                              })
+                            }
+                          />
+
+                          <LegacyPrintAdminSlider
+                            node={row.node}
+                            mode="benchmark"
+                            weightKey="neutral"
+                            value={row.neutral}
+                            min={0}
+                            max={10}
+                            step={0.1}
+                            onChange={(value) =>
+                              updateBenchmarkValue({
+                                drumType: row.drumType,
+
+                                node: row.node,
+
+                                key: 'neutral',
+
+                                value,
+                              })
+                            }
+                          />
+
+                          <LegacyPrintAdminSlider
+                            node={row.node}
+                            mode="benchmark"
+                            weightKey="maxExpected"
+                            value={row.maxExpected}
+                            min={0}
+                            max={10}
+                            step={0.1}
+                            onChange={(value) =>
+                              updateBenchmarkValue({
+                                drumType: row.drumType,
+
+                                node: row.node,
+
+                                key: 'maxExpected',
+
+                                value,
+                              })
+                            }
+                          />
+
+                          <LegacyPrintAdminSlider
+                            node={row.node}
+                            mode="benchmark"
+                            weightKey="firstListenMultiplier"
+                            value={row.firstListenMultiplier}
+                            min={0.4}
+                            max={1.6}
+                            step={0.01}
+                            onChange={(value) =>
+                              updateBenchmarkValue({
+                                drumType: row.drumType,
+
+                                node: row.node,
+
+                                key: 'firstListenMultiplier',
+
+                                value,
+                              })
+                            }
+                          />
+                        </div>
+
+                        <div className="legacyprint-benchmark-meta">
+                          <span>
+                            {getBenchmarkMeaning({
+                              key: 'minExpected',
+
+                              value: row.minExpected,
+                            })}
+                          </span>
+
+                          <span>
+                            {getBenchmarkMeaning({
+                              key: 'neutral',
+
+                              value: row.neutral,
+                            })}
+                          </span>
+
+                          <span>
+                            {getBenchmarkMeaning({
+                              key: 'maxExpected',
+
+                              value: row.maxExpected,
+                            })}
+                          </span>
+
+                          <span>
+                            {getBenchmarkMeaning({
+                              key: 'firstListenMultiplier',
+
+                              value: row.firstListenMultiplier,
+                            })}
+                          </span>
+                        </div>
+
+                        <label className="legacyprint-master-weight-note">
+                          <span>Context</span>
+
+                          <input
+                            type="text"
+                            value={row.context || ''}
+                            className="legacyprint-admin-notes-input"
+                            onChange={(event) =>
+                              updateBenchmarkValue({
+                                drumType: row.drumType,
+
+                                node: row.node,
+
+                                key: 'context',
+
+                                value: event.target.value,
+                              })
+                            }
+                          />
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {activeCalibrationToolTab === 'Config Options' && (
+                <section className="legacyprint-admin-section">
+                  <div className="legacyprint-admin-section-heading">
+                    <div>
+                      <p className="legacyprint-admin-overline">
+                        Selector value tables
+                      </p>
+
+                      <h3>Config Options</h3>
+                    </div>
+
                     <button
                       type="button"
-                      className="legacyprint-admin-button secondary"
+                      className="legacyprint-admin-button primary"
                       onClick={() => {
                         setNewConfigOption(
                           buildBlankConfigOption(activeConfigCategory)
                         );
 
-                        setShowAddConfigOption(false);
+                        setShowAddConfigOption((current) => !current);
                       }}
                     >
-                      Cancel
+                      {showAddConfigOption ? 'Cancel Add' : 'Add Config Option'}
                     </button>
+                    <button
+                      type="button"
+                      className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+                      onClick={resetAllConfigOptions}
+                    >
+                      Reset Config
+                    </button>
+                  </div>
+
+                  <div className="legacyprint-config-shell">
+                    <div className="legacyprint-config-tabs">
+                      {configCategoryKeys.map((key) => (
+                        <button
+                          key={key}
+                          type="button"
+                          className={
+                            activeConfigCategory === key ? 'active' : ''
+                          }
+                          onClick={() => {
+                            setActiveConfigCategory(key);
+
+                            setNewConfigOption(buildBlankConfigOption(key));
+
+                            setShowAddConfigOption(false);
+                          }}
+                        >
+                          {CONFIG_CATEGORY_LABELS[key] || toTitleCase(key)}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="legacyprint-admin-config-toolbar">
+                      <label>
+                        <span>Brand</span>
+
+                        <select
+                          value={configBrandFilter}
+                          onChange={(event) => {
+                            const nextBrand = event.target.value;
+
+                            setConfigBrandFilter(nextBrand);
+
+                            if (nextBrand === 'Ober Artisan') {
+                              setConfigLineFilter('Ober HERITAGE Stave');
+                              setConfigShellTypeFilter('Stave');
+                              setConfigDrumTypeFilter('Snare');
+                              setConfigHybridTypes(['Stave']);
+                            } else {
+                              setConfigLineFilter('');
+                              setConfigShellTypeFilter('All');
+                              setConfigDrumTypeFilter('Snare');
+                              setConfigHybridTypes([]);
+                            }
+                          }}
+                        >
+                          {BRAND_FILTER_OPTIONS.map((brand) => (
+                            <option key={brand} value={brand}>
+                              {brand}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+
+                      {configBrandFilter === 'Ober Artisan' && (
+                        <label>
+                          <span>Line</span>
+
+                          <select
+                            value={configLineFilter}
+                            onChange={(event) => {
+                              const nextLine = event.target.value;
+
+                              setConfigLineFilter(nextLine);
+
+                              if (nextLine === 'Ober HERITAGE Stave') {
+                                setConfigShellTypeFilter('Stave');
+                                setConfigDrumTypeFilter('Snare');
+                                setConfigHybridTypes(['Stave']);
+                              }
+
+                              if (nextLine === 'Ober FEUZØN Hybrid') {
+                                setConfigShellTypeFilter('Hybrid');
+                                setConfigDrumTypeFilter('Snare');
+                                setConfigHybridTypes(['Stave', 'Steam Bent']);
+                              }
+
+                              if (nextLine === 'Ober SOUNDLEGEND Custom') {
+                                setConfigShellTypeFilter('All');
+                                setConfigDrumTypeFilter('Snare');
+                                setConfigHybridTypes([]);
+                              }
+                            }}
+                          >
+                            {OBER_LINE_FILTER_OPTIONS.map((line) => (
+                              <option key={line} value={line}>
+                                {line
+                                  .replace('Ober HERITAGE Stave', 'HERITAGE')
+                                  .replace('Ober FEUZØN Hybrid', 'FEUZØN')
+                                  .replace(
+                                    'Ober SOUNDLEGEND Custom',
+                                    'SOUNDLEGEND Custom'
+                                  )}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                      )}
+
+                      {configLineFilter === 'Ober SOUNDLEGEND Custom' && (
+                        <>
+                          <label>
+                            <span>Shell Type</span>
+
+                            <select
+                              value={configShellTypeFilter}
+                              onChange={(event) => {
+                                const nextShellType = event.target.value;
+
+                                setConfigShellTypeFilter(nextShellType);
+
+                                if (nextShellType === 'Hybrid') {
+                                  setConfigHybridTypes(['Stave', 'Steam Bent']);
+                                } else {
+                                  setConfigHybridTypes([]);
+                                }
+                              }}
+                            >
+                              {SHELL_TYPE_FILTER_OPTIONS.map((shellType) => (
+                                <option key={shellType} value={shellType}>
+                                  {shellType}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+
+                          {configShellTypeFilter === 'Hybrid' && (
+                            <div className="legacyprint-config-filter-group legacyprint-config-filter-group--wide">
+                              <span>Hybrid Type</span>
+
+                              <div className="legacyprint-config-check-row">
+                                {HYBRID_TYPE_OPTIONS.map((type) => {
+                                  const isChecked =
+                                    configHybridTypes.includes(type);
+
+                                  return (
+                                    <button
+                                      key={type}
+                                      type="button"
+                                      className={`legacyprint-config-check-button ${
+                                        isChecked ? 'is-active' : ''
+                                      }`}
+                                      onClick={() => {
+                                        setConfigHybridTypes((current) => {
+                                          if (current.includes(type)) {
+                                            return current.filter(
+                                              (item) => item !== type
+                                            );
+                                          }
+
+                                          return [...current, type];
+                                        });
+                                      }}
+                                    >
+                                      {type}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </>
+                      )}
+
+                      <label>
+                        <span>Drum Type</span>
+
+                        <select
+                          value={configDrumTypeFilter}
+                          onChange={(event) =>
+                            setConfigDrumTypeFilter(event.target.value)
+                          }
+                          disabled={isOberSnareOnlyLine(configLineFilter)}
+                        >
+                          {getAllowedDrumTypeOptionsForLine(
+                            configLineFilter
+                          ).map((drumType) => (
+                            <option key={drumType} value={drumType}>
+                              {drumType}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+
+                      <button
+                        type="button"
+                        className="legacyprint-admin-button secondary"
+                        onClick={() => {
+                          setConfigBrandFilter('Ober Artisan');
+                          setConfigLineFilter('Ober HERITAGE Stave');
+                          setConfigShellTypeFilter('Stave');
+                          setConfigDrumTypeFilter('Snare');
+                          setConfigHybridTypes(['Stave']);
+                        }}
+                      >
+                        Reset Filters
+                      </button>
+                    </div>
+                    {showAddConfigOption && (
+                      <div className="legacyprint-admin-add-config-panel">
+                        <div className="legacyprint-admin-add-config-heading">
+                          <p className="legacyprint-admin-overline">
+                            New Option
+                          </p>
+
+                          <h4>
+                            Add to{' '}
+                            {CONFIG_CATEGORY_LABELS[activeConfigCategory]}
+                          </h4>
+                        </div>
+
+                        <div className="legacyprint-admin-add-config-grid">
+                          <label>
+                            <span>Option Name</span>
+
+                            <input
+                              type="text"
+                              value={newConfigOption.option}
+                              onChange={(event) =>
+                                setNewConfigOption((current) => ({
+                                  ...current,
+
+                                  option: event.target.value,
+                                }))
+                              }
+                              placeholder="Example: Satin Black, Deep Hybrid Edge, 26-strand"
+                            />
+                          </label>
+
+                          <label>
+                            <span>Applies To Drum Type</span>
+
+                            <select
+                              value={newConfigOption.appliesTo}
+                              onChange={(event) =>
+                                setNewConfigOption((current) => ({
+                                  ...current,
+
+                                  appliesTo: event.target.value,
+                                }))
+                              }
+                            >
+                              {DRUM_TYPE_FILTER_OPTIONS_WITH_ALL.map((type) => (
+                                <option key={type} value={type}>
+                                  {type}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+
+                          <label>
+                            <span>Assigned Construction / Line</span>
+
+                            <select
+                              value={newConfigOption.appliesToConstructions}
+                              onChange={(event) =>
+                                setNewConfigOption((current) => ({
+                                  ...current,
+
+                                  appliesToConstructions: event.target.value,
+                                }))
+                              }
+                            >
+                              {CONSTRUCTION_ASSIGNMENT_OPTIONS.map(
+                                (construction) => (
+                                  <option
+                                    key={construction}
+                                    value={construction}
+                                  >
+                                    {construction}
+                                  </option>
+                                )
+                              )}
+                            </select>
+                          </label>
+
+                          <label>
+                            <span>Allowed Diameters</span>
+
+                            <input
+                              type="text"
+                              value={newConfigOption.allowedDiameters}
+                              onChange={(event) =>
+                                setNewConfigOption((current) => ({
+                                  ...current,
+
+                                  allowedDiameters: event.target.value,
+                                }))
+                              }
+                              placeholder="All or 12 in,13 in,14 in"
+                            />
+                          </label>
+
+                          <label>
+                            <span>Allowed Depths</span>
+
+                            <input
+                              type="text"
+                              value={newConfigOption.allowedDepths}
+                              onChange={(event) =>
+                                setNewConfigOption((current) => ({
+                                  ...current,
+
+                                  allowedDepths: event.target.value,
+                                }))
+                              }
+                              placeholder="All or 5.0 in,5.5 in,6.0 in"
+                            />
+                          </label>
+
+                          <label className="legacyprint-admin-add-config-notes">
+                            <span>Notes</span>
+
+                            <input
+                              type="text"
+                              value={newConfigOption.notes}
+                              onChange={(event) =>
+                                setNewConfigOption((current) => ({
+                                  ...current,
+
+                                  notes: event.target.value,
+                                }))
+                              }
+                              placeholder="Short internal note"
+                            />
+                          </label>
+                        </div>
+
+                        <div className="legacyprint-admin-add-config-nodes">
+                          {LEGACYPRINT_NODE_ORDER.map((node) => (
+                            <label key={node}>
+                              <span>{LEGACYPRINT_NODE_LABELS[node]}</span>
+
+                              <AdminNumberInput
+                                value={newConfigOption[node]}
+                                onChange={(value) =>
+                                  setNewConfigOption((current) => ({
+                                    ...current,
+
+                                    [node]: value,
+                                  }))
+                                }
+                              />
+                            </label>
+                          ))}
+                        </div>
+
+                        <div className="legacyprint-admin-add-config-actions">
+                          <button
+                            type="button"
+                            className="legacyprint-admin-button secondary"
+                            onClick={() => {
+                              setNewConfigOption(
+                                buildBlankConfigOption(activeConfigCategory)
+                              );
+
+                              setShowAddConfigOption(false);
+                            }}
+                          >
+                            Cancel
+                          </button>
+
+                          <button
+                            type="button"
+                            className="legacyprint-admin-button primary"
+                            onClick={addConfigOption}
+                          >
+                            Add Option
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="legacyprint-admin-table-wrap">
+                      <table className="legacyprint-admin-table">
+                        <thead>
+                          <tr>
+                            <th>Option</th>
+
+                            <th>Applies To</th>
+
+                            <th>Assigned Line</th>
+
+                            {activeConfigCategory === 'depth' && <th>Group</th>}
+
+                            {LEGACYPRINT_NODE_ORDER.map((node) => (
+                              <th key={node}>
+                                {LEGACYPRINT_NODE_LABELS[node]}
+                              </th>
+                            ))}
+
+                            <th>Reset</th>
+
+                            <th>Notes</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {activeConfigDisplayRows.map((row) => (
+                            <tr key={`${row.__categoryKey}-${row.option}`}>
+                              <td>{row.option}</td>
+
+                              <td>
+                                <input
+                                  type="text"
+                                  value={row.appliesTo || 'All'}
+                                  className="legacyprint-admin-notes-input legacyprint-admin-small-input"
+                                  onChange={(event) =>
+                                    updateConfigOptionValue({
+                                      categoryKey: row.__categoryKey,
+
+                                      option: row.option,
+
+                                      key: 'appliesTo',
+
+                                      value: event.target.value,
+                                    })
+                                  }
+                                />
+                              </td>
+
+                              <td>
+                                <input
+                                  type="text"
+                                  value={row.appliesToConstructions || 'All'}
+                                  className="legacyprint-admin-notes-input"
+                                  onChange={(event) =>
+                                    updateConfigOptionValue({
+                                      categoryKey: row.__categoryKey,
+
+                                      option: row.option,
+
+                                      key: 'appliesToConstructions',
+
+                                      value: event.target.value,
+                                    })
+                                  }
+                                />
+                              </td>
+
+                              {activeConfigCategory === 'depth' && (
+                                <td>
+                                  {row.__displayGroup || 'Standard Depth'}
+                                </td>
+                              )}
+
+                              {LEGACYPRINT_NODE_ORDER.map((node) => (
+                                <td
+                                  key={node}
+                                  className="legacyprint-config-slider-cell"
+                                >
+                                  <LegacyPrintAdminSlider
+                                    node={node}
+                                    mode="config"
+                                    weightKey={node}
+                                    value={row[node]}
+                                    min={-1.25}
+                                    max={1.25}
+                                    step={0.01}
+                                    compact
+                                    onChange={(value) =>
+                                      updateConfigOptionValue({
+                                        categoryKey: row.__categoryKey,
+
+                                        option: row.option,
+
+                                        key: node,
+
+                                        value,
+                                      })
+                                    }
+                                  />
+
+                                  <small className="legacyprint-config-slider-meaning">
+                                    {getNodeValueMeaning({
+                                      node,
+
+                                      value: row[node],
+                                    })}
+                                  </small>
+                                </td>
+                              ))}
+
+                              <td>
+                                <button
+                                  type="button"
+                                  className="legacyprint-admin-button secondary legacyprint-admin-button--dark legacyprint-admin-table-button"
+                                  onClick={() =>
+                                    resetConfigRow({
+                                      categoryKey: row.__categoryKey,
+
+                                      option: row.option,
+                                    })
+                                  }
+                                >
+                                  Reset
+                                </button>
+                              </td>
+
+                              <td>
+                                <input
+                                  type="text"
+                                  value={row.notes || row.examples || ''}
+                                  className="legacyprint-admin-notes-input"
+                                  onChange={(event) =>
+                                    updateConfigOptionValue({
+                                      categoryKey: row.__categoryKey,
+
+                                      option: row.option,
+
+                                      key: 'notes',
+
+                                      value: event.target.value,
+                                    })
+                                  }
+                                />
+                              </td>
+                            </tr>
+                          ))}
+
+                          {!activeConfigDisplayRows.length && (
+                            <tr>
+                              <td
+                                colSpan={
+                                  activeConfigCategory === 'depth' ? 14 : 13
+                                }
+                              >
+                                No config options match the current filters.
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </section>
+              )}
+              {activeCalibrationToolTab === 'Availability' && (
+                <section className="legacyprint-admin-section">
+                  <div className="legacyprint-admin-section-heading">
+                    <div>
+                      <p className="legacyprint-admin-overline">
+                        Rules preview
+                      </p>
+
+                      <h3>Availability</h3>
+                    </div>
+                  </div>
+
+                  <div className="legacyprint-admin-note">
+                    <strong>Rule model loaded</strong>
+
+                    <span>
+                      Diameter, depth, finish, shell thickness, hoop, bearing
+                      edge, snare bed, snare wire, and construction controls now
+                      filter from the selected drum type, construction,
+                      diameter, and depth.
+                    </span>
+                  </div>
+                </section>
+              )}
+
+              {activeCalibrationToolTab === 'Versions' && (
+                <section className="legacyprint-admin-section">
+                  <div className="legacyprint-admin-section-heading">
+                    <div>
+                      <p className="legacyprint-admin-overline">Snapshots</p>
+
+                      <h3>Versions</h3>
+                    </div>
 
                     <button
                       type="button"
-                      className="legacyprint-admin-button primary"
-                      onClick={addConfigOption}
+                      className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+                      onClick={loadSavedVersions}
+                      disabled={isLoadingVersions}
                     >
-                      Add Option
+                      {isLoadingVersions
+                        ? 'Loading Versions...'
+                        : 'Refresh Versions'}
                     </button>
                   </div>
-                </div>
-              )}
 
-              <div className="legacyprint-admin-table-wrap">
-                <table className="legacyprint-admin-table">
-                  <thead>
-                    <tr>
-                      <th>Option</th>
+                  <div className="legacyprint-admin-note neutral">
+                    <strong>Saved Firestore snapshots</strong>
 
-                      <th>Applies To</th>
+                    <span>
+                      Publish Active creates timestamped version documents
+                      inside legacyprint_calibrations. Click Refresh Versions to
+                      load them here.
+                    </span>
+                  </div>
 
-                      <th>Assigned Line</th>
+                  <div className="legacyprint-admin-table-wrap">
+                    <table className="legacyprint-admin-table">
+                      <thead>
+                        <tr>
+                          <th>Version ID</th>
 
-                      {activeConfigCategory === 'depth' && <th>Group</th>}
+                          <th>Status</th>
 
-                      {LEGACYPRINT_NODE_ORDER.map((node) => (
-                        <th key={node}>{LEGACYPRINT_NODE_LABELS[node]}</th>
-                      ))}
+                          <th>Label</th>
 
-                      <th>Reset</th>
+                          <th>Updated</th>
 
-                      <th>Notes</th>
-                    </tr>
-                  </thead>
+                          <th>Source</th>
+                        </tr>
+                      </thead>
 
-                  <tbody>
-                    {activeConfigDisplayRows.map((row) => (
-                      <tr key={`${row.__categoryKey}-${row.option}`}>
-                        <td>{row.option}</td>
+                      <tbody>
+                        {savedVersions.map((version) => (
+                          <tr key={version.id}>
+                            <td>{version.id}</td>
 
-                        <td>
-                          <input
-                            type="text"
-                            value={row.appliesTo || 'All'}
-                            className="legacyprint-admin-notes-input legacyprint-admin-small-input"
-                            onChange={(event) =>
-                              updateConfigOptionValue({
-                                categoryKey: row.__categoryKey,
+                            <td>{version.status || 'version'}</td>
 
-                                option: row.option,
+                            <td>
+                              {version.calibration?.version?.label ||
+                                version.versionId}
+                            </td>
 
-                                key: 'appliesTo',
+                            <td>
+                              {version.updatedAt?.toDate
+                                ? version.updatedAt.toDate().toLocaleString()
+                                : version.calibration?.version?.updatedAt || ''}
+                            </td>
 
-                                value: event.target.value,
-                              })
-                            }
-                          />
-                        </td>
-
-                        <td>
-                          <input
-                            type="text"
-                            value={row.appliesToConstructions || 'All'}
-                            className="legacyprint-admin-notes-input"
-                            onChange={(event) =>
-                              updateConfigOptionValue({
-                                categoryKey: row.__categoryKey,
-
-                                option: row.option,
-
-                                key: 'appliesToConstructions',
-
-                                value: event.target.value,
-                              })
-                            }
-                          />
-                        </td>
-
-                        {activeConfigCategory === 'depth' && (
-                          <td>{row.__displayGroup || 'Standard Depth'}</td>
-                        )}
-
-                        {LEGACYPRINT_NODE_ORDER.map((node) => (
-                          <td
-                            key={node}
-                            className="legacyprint-config-slider-cell"
-                          >
-                            <LegacyPrintAdminSlider
-                              node={node}
-                              mode="config"
-                              weightKey={node}
-                              value={row[node]}
-                              min={-1.25}
-                              max={1.25}
-                              step={0.01}
-                              compact
-                              onChange={(value) =>
-                                updateConfigOptionValue({
-                                  categoryKey: row.__categoryKey,
-
-                                  option: row.option,
-
-                                  key: node,
-
-                                  value,
-                                })
-                              }
-                            />
-
-                            <small className="legacyprint-config-slider-meaning">
-                              {getNodeValueMeaning({
-                                node,
-
-                                value: row[node],
-                              })}
-                            </small>
-                          </td>
+                            <td>
+                              {version.calibration?.version?.source ||
+                                'Firestore'}
+                            </td>
+                          </tr>
                         ))}
 
-                        <td>
-                          <button
-                            type="button"
-                            className="legacyprint-admin-button secondary legacyprint-admin-button--dark legacyprint-admin-table-button"
-                            onClick={() =>
-                              resetConfigRow({
-                                categoryKey: row.__categoryKey,
-
-                                option: row.option,
-                              })
-                            }
-                          >
-                            Reset
-                          </button>
-                        </td>
-
-                        <td>
-                          <input
-                            type="text"
-                            value={row.notes || row.examples || ''}
-                            className="legacyprint-admin-notes-input"
-                            onChange={(event) =>
-                              updateConfigOptionValue({
-                                categoryKey: row.__categoryKey,
-
-                                option: row.option,
-
-                                key: 'notes',
-
-                                value: event.target.value,
-                              })
-                            }
-                          />
-                        </td>
-                      </tr>
-                    ))}
-
-                    {!activeConfigDisplayRows.length && (
-                      <tr>
-                        <td
-                          colSpan={activeConfigCategory === 'depth' ? 14 : 13}
-                        >
-                          No config options match the current filters.
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                        {!savedVersions.length && (
+                          <tr>
+                            <td colSpan={5}>
+                              No versions loaded yet. Click Refresh Versions.
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              )}
             </div>
           </section>
         )}
 
-        {activeTab === 'Availability' && (
+        {activeTab === 'Engine View Settings' && (
           <section className="legacyprint-admin-section">
             <div className="legacyprint-admin-section-heading">
               <div>
-                <p className="legacyprint-admin-overline">Rules preview</p>
+                <p className="legacyprint-admin-overline">
+                  Read layer visibility
+                </p>
 
-                <h3>Availability</h3>
-              </div>
-            </div>
-
-            <div className="legacyprint-admin-note">
-              <strong>Rule model loaded</strong>
-
-              <span>
-                Diameter, depth, finish, shell thickness, hoop, bearing edge,
-                snare bed, snare wire, and construction controls now filter from
-                the selected drum type, construction, diameter, and depth.
-              </span>
-            </div>
-          </section>
-        )}
-
-        {activeTab === 'SoundLegend Builder' && renderSoundLegendBuilderPanel()}
-
-        {activeTab === 'FEUZØN Builder' && renderFeuzonBuilderPanel()}
-
-        {activeTab === 'Visibility' && (
-          <section className="legacyprint-admin-section">
-            <div className="legacyprint-admin-section-heading">
-              <div>
-                <p className="legacyprint-admin-overline">Access control</p>
-
-                <h3>Visibility</h3>
+                <h3>Engine View Settings</h3>
               </div>
             </div>
 
@@ -4351,88 +7135,6 @@ const AdminLegacyPrintCalibration = () => {
                       <td>{row.admin ? 'Visible' : 'Hidden'}</td>
                     </tr>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-        )}
-
-        {activeTab === 'Versions' && (
-          <section className="legacyprint-admin-section">
-            <div className="legacyprint-admin-section-heading">
-              <div>
-                <p className="legacyprint-admin-overline">Snapshots</p>
-
-                <h3>Versions</h3>
-              </div>
-
-              <button
-                type="button"
-                className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-                onClick={loadSavedVersions}
-                disabled={isLoadingVersions}
-              >
-                {isLoadingVersions ? 'Loading Versions...' : 'Refresh Versions'}
-              </button>
-            </div>
-
-            <div className="legacyprint-admin-note neutral">
-              <strong>Saved Firestore snapshots</strong>
-
-              <span>
-                Publish Active creates timestamped version documents inside
-                legacyprint_calibrations. Click Refresh Versions to load them
-                here.
-              </span>
-            </div>
-
-            <div className="legacyprint-admin-table-wrap">
-              <table className="legacyprint-admin-table">
-                <thead>
-                  <tr>
-                    <th>Version ID</th>
-
-                    <th>Status</th>
-
-                    <th>Label</th>
-
-                    <th>Updated</th>
-
-                    <th>Source</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {savedVersions.map((version) => (
-                    <tr key={version.id}>
-                      <td>{version.id}</td>
-
-                      <td>{version.status || 'version'}</td>
-
-                      <td>
-                        {version.calibration?.version?.label ||
-                          version.versionId}
-                      </td>
-
-                      <td>
-                        {version.updatedAt?.toDate
-                          ? version.updatedAt.toDate().toLocaleString()
-                          : version.calibration?.version?.updatedAt || ''}
-                      </td>
-
-                      <td>
-                        {version.calibration?.version?.source || 'Firestore'}
-                      </td>
-                    </tr>
-                  ))}
-
-                  {!savedVersions.length && (
-                    <tr>
-                      <td colSpan={5}>
-                        No versions loaded yet. Click Refresh Versions.
-                      </td>
-                    </tr>
-                  )}
                 </tbody>
               </table>
             </div>

@@ -12,19 +12,65 @@ const SELECTOR_GROUPS = [
 
     title: 'Foundation',
 
-    fields: ['drumType', 'construction', 'diameter', 'depth', 'thickness'],
+ fields: [
+
+  'drumType',
+
+  'construction',
+
+  'diameter',
+
+  'depth',
+
+  'thickness',
+
+  'lugCount',
+
+  'staveCount',
+
+],
 
   },
 
   {
 
-    key: 'finish',
+    key: 'shellConstruction',
 
-    title: 'Finish',
+    title: 'Shell Construction',
 
-    fields: ['finish'],
+       fields: [
+
+  'soundLegendConstructionType',
+
+  'soundLegendWoodSpeciesCount',
+
+  'soundLegendWoodSpeciesPrimary',
+
+  'soundLegendWoodSpeciesSecondary',
+
+  'soundLegendWoodSpeciesTertiary',
+
+  'soundLegendWoodSpeciesQuaternary',
+
+  'coreStaveShell',
+
+  'steamBentExterior',
+
+  'soundLegendVeneerExterior',
+
+    ],
 
   },
+
+{
+
+  key: 'finish',
+
+  title: 'Finish',
+
+  fields: ['finish', 'stainOption', 'exteriorScorch', 'finishCoating'],
+
+},
 
   {
 
@@ -32,21 +78,180 @@ const SELECTOR_GROUPS = [
 
     title: 'Response',
 
-    fields: ['hoopType', 'bearingEdge', 'snareBed', 'tension', 'snareWires'],
-
+  fields: ['hoopType', 'bearingEdge', 'snareBed', 'snareWires'],
   },
 
   {
 
-    key: 'heads',
+    key: 'headsAndTuning',
 
-    title: 'Heads',
+    title: 'Heads & Tuning',
 
-    fields: ['batterHead', 'resoHead'],
+    fields: ['batterHead', 'resoHead', 'tension'],
 
   },
 
 ];
+
+const normalizeText = (value = '') => {
+
+  return String(value || '')
+
+    .toLowerCase()
+
+    .replace(/[øØ]/g, 'o')
+
+    .replace(/[^a-z0-9]+/g, ' ')
+
+    .trim();
+
+};
+
+const isHeritageConstruction = (construction = '') => {
+
+  return normalizeText(construction).includes('heritage');
+
+};
+
+const isFeuzonConstruction = (construction = '') => {
+
+  return normalizeText(construction).includes('feuzon');
+
+};
+
+const isSoundLegendConstruction = (construction = '') => {
+
+  return normalizeText(construction).includes('soundlegend');
+
+};
+
+const isHeritageOrFeuzonConstruction = (construction = '') => {
+
+  return (
+
+    isHeritageConstruction(construction) || isFeuzonConstruction(construction)
+
+  );
+
+};
+
+const soundLegendTypeUsesHybridShell = (constructionType = '') => {
+
+  return normalizeText(constructionType).includes('hybrid');
+
+};
+
+const soundLegendTypeUsesVeneer = (constructionType = '') => {
+
+  return normalizeText(constructionType).includes('veneer');
+
+};
+
+const STOCK_TEXT_ONLY_FIELDS = ['snareWires', 'batterHead', 'resoHead'];
+
+const isStockTextOnlyField = ({ selector, fieldKey, options = [] }) => {
+
+  if (!isHeritageOrFeuzonConstruction(selector?.construction)) return false;
+
+  if (!STOCK_TEXT_ONLY_FIELDS.includes(fieldKey)) return false;
+
+  return options.length === 1;
+
+};
+
+const shouldHideField = ({ selector, fieldKey, options = [] }) => {
+
+  if (!options.length) return true;
+
+  if (!isSoundLegendConstruction(selector?.construction)) {
+
+    if (
+
+      [
+
+        'soundLegendConstructionType',
+
+        'soundLegendWoodSpeciesCount',
+
+        'soundLegendWoodSpeciesPrimary',
+
+        'soundLegendWoodSpeciesSecondary',
+
+        'soundLegendWoodSpeciesTertiary',
+
+        'soundLegendWoodSpeciesQuaternary',
+
+        'soundLegendVeneerExterior',
+
+      ].includes(fieldKey)
+
+    ) {
+
+      return true;
+
+    }
+
+  }
+
+  if (isHeritageConstruction(selector?.construction)) {
+
+    return [
+
+      'exteriorScorch',
+
+      'coreStaveShell',
+
+      'steamBentExterior',
+
+      'topBearingEdge',
+
+      'bottomBearingEdge',
+
+    ].includes(fieldKey);
+
+  }
+
+  if (isFeuzonConstruction(selector?.construction)) {
+
+    return ['scorchDepth', 'topBearingEdge', 'bottomBearingEdge'].includes(
+
+      fieldKey
+
+    );
+
+  }
+
+  if (isSoundLegendConstruction(selector?.construction)) {
+
+    const usesHybridShell = soundLegendTypeUsesHybridShell(
+
+      selector?.soundLegendConstructionType
+
+    );
+
+    const usesVeneer = soundLegendTypeUsesVeneer(
+
+      selector?.soundLegendConstructionType
+
+    );
+
+    if (['coreStaveShell', 'steamBentExterior'].includes(fieldKey)) {
+
+      return !usesHybridShell;
+
+    }
+
+    if (fieldKey === 'soundLegendVeneerExterior') {
+
+      return !usesVeneer;
+
+    }
+
+  }
+
+  return false;
+
+};
 
 const formatSelectorOptionLabel = (option = '') => {
 
@@ -66,19 +271,11 @@ const formatSelectorOptionLabel = (option = '') => {
 
     .replace('Generic Metal Shell', 'Metal')
 
-    .replace('Triple Flange', 'Triple')
-
     .replace('Die Cast', 'Die-Cast')
-
-    .replace('Balanced Hybrid Edge', 'Balanced Hybrid Edge')
-
-    .replace('Warm Hybrid Edge', 'Warm Hybrid Edge')
-
-    .replace('Modern Precision Edge', 'Modern Precision Edge')
 
     .replace('45° Inner / Soft Outer Roundover', '45° Soft')
 
-    .replace('Standard', 'Standard')
+    .replace('45° inner edge with softened outer roundover', '45° inner edge with softened outer roundover')
 
     .replace('20-strand', '20')
 
@@ -87,6 +284,46 @@ const formatSelectorOptionLabel = (option = '') => {
     .replace('24-strand', '24')
 
     .replace('30-strand', '30')
+
+    .replace('PureSound Custom Pro Steel 20-Strand wires', 'PureSound Custom Pro Steel 20-Strand wires')
+
+    .replace('Remo Coated Ambassador', 'Remo Coated Ambassador')
+
+    .replace('Remo Coated Vintage Ambassador', 'Remo Vintage Ambassador')
+
+    .replace('Remo Controlled Sound Reverse Dot', 'Remo Reverse Dot')
+
+    .replace('Remo Powerstroke 3 Coated', 'Remo Powerstroke 3')
+
+    .replace('Evans HD Dry', 'Evans HD Dry')
+
+    .replace('Evans Genera Dry', 'Evans Genera Dry')
+
+    .replace('Evans UV1 Coated', 'Evans UV1')
+
+    .replace('Aquarian Texture Coated', 'Aquarian Texture')
+
+    .replace('Aquarian Hi-Energy', 'Aquarian Hi-Energy')
+
+    .replace('Remo Ambassador Snare Side', 'Remo Ambassador Side')
+
+    .replace('Remo Ambassador Hazy Snare Side', 'Remo Hazy Side')
+
+    .replace('Remo Diplomat Snare Side', 'Remo Diplomat Side')
+
+    .replace('Remo Emperor Snare Side', 'Remo Emperor Side')
+
+    .replace('Evans Snare Side 200', 'Evans Side 200')
+
+    .replace('Evans Snare Side 300', 'Evans Side 300')
+
+    .replace('Evans Snare Side 500', 'Evans Side 500')
+
+    .replace('Evans Orchestral 300', 'Evans Orch 300')
+
+    .replace('Aquarian Classic Clear Snare Side', 'Aquarian Classic Side')
+
+    .replace('Aquarian Hi-Performance Snare Side', 'Aquarian Hi-Performance')
 
     .replace('Coated 1-ply', 'Coated 1')
 
@@ -98,59 +335,167 @@ const formatSelectorOptionLabel = (option = '') => {
 
     .replace('Ober Natural Oil', 'Natural')
 
-    .replace('Ober Medium Torch', 'Medium')
+    .replace('Ober Medium Torch', 'Medium Torch')
 
-    .replace('Ober Light Torch', 'Light')
+    .replace('Ober Light Torch', 'Light Torch')
 
     .replace('Ober Blackened', 'Blackened')
 
-    .replace('Ober PolyGloss', 'PolyGloss');
+    .replace('Ober PolyGloss', 'PolyGloss')
+
+    .replace('Light Scorched', 'Light Torch')
+
+    .replace('Medium Scorched', 'Medium Torch')
+
+    .replace('Non-Scorched', 'Non-Scorched')
+
+    .replace('Natural Scorched', 'Natural Scorched');
 
 };
 
 const getGroupSummary = ({ group, selector }) => {
 
-  if (group.key === 'foundation') {
+ if (group.key === 'foundation') {
 
-    return `${formatSelectorOptionLabel(selector.construction)} · ${formatSelectorOptionLabel(
+  return [
 
-      selector.diameter
+    selector.construction,
 
-    )} × ${formatSelectorOptionLabel(selector.depth)} · ${formatSelectorOptionLabel(
+    selector.diameter && selector.depth
 
-      selector.thickness
+      ? `${selector.diameter} × ${selector.depth}`
 
-    )}`;
+      : '',
+
+    selector.thickness,
+
+    selector.lugCount,
+
+    selector.staveCount,
+
+  ]
+
+    .filter(Boolean)
+
+    .map(formatSelectorOptionLabel)
+
+    .join(' · ');
+
+}
+
+   if (group.key === 'shellConstruction') {
+
+    return [
+
+      selector.soundLegendWoodSpeciesCount,
+
+      selector.soundLegendWoodSpeciesPrimary,
+
+      selector.soundLegendWoodSpeciesSecondary,
+
+      selector.soundLegendWoodSpeciesTertiary,
+
+      selector.soundLegendWoodSpeciesQuaternary,
+
+      selector.coreStaveShell,
+
+      selector.steamBentExterior,
+
+      selector.soundLegendVeneerExterior,
+
+    ]
+
+      .filter(Boolean)
+
+      .map(formatSelectorOptionLabel)
+
+      .join(' · ');
 
   }
 
-  if (group.key === 'finish') {
+if (group.key === 'finish') {
 
-    return formatSelectorOptionLabel(selector.finish);
+  return [
 
-  }
+    selector.finish,
+
+    selector.stainOption,
+
+    selector.exteriorScorch,
+
+    selector.finishCoating,
+
+  ]
+
+    .filter(Boolean)
+
+    .map(formatSelectorOptionLabel)
+
+    .join(' · ');
+
+}
 
   if (group.key === 'response') {
 
-    return `${formatSelectorOptionLabel(selector.hoopType)} · ${formatSelectorOptionLabel(
+    const edgeLabel =
 
-      selector.bearingEdge
+      selector.bearingEdge ||
 
-    )} · ${formatSelectorOptionLabel(selector.tension)}`;
+      [selector.topBearingEdge, selector.bottomBearingEdge]
+
+        .filter(Boolean)
+
+        .join(' / ');
+
+    return [selector.hoopType, edgeLabel, selector.snareBed]
+
+      .filter(Boolean)
+
+      .map(formatSelectorOptionLabel)
+
+      .join(' · ');
 
   }
 
-  if (group.key === 'heads') {
+  if (group.key === 'headsAndTuning') {
 
-    return `${formatSelectorOptionLabel(selector.batterHead)} · ${formatSelectorOptionLabel(
+    return [selector.batterHead, selector.resoHead, selector.tension]
 
-      selector.resoHead
+      .filter(Boolean)
 
-    )}`;
+      .map(formatSelectorOptionLabel)
+
+      .join(' · ');
 
   }
 
   return '';
+
+};
+
+const FixedSpecField = ({ label, value, detail = '' }) => {
+
+  return (
+
+    <div className="lp-selector-field lp-selector-fixed-field">
+
+      <div className="lp-selector-field-header">
+
+        <span>{label}</span>
+
+      </div>
+
+      <div className="lp-selector-fixed-value">
+
+        <strong>{value}</strong>
+
+        {detail && <small>{detail}</small>}
+
+      </div>
+
+    </div>
+
+  );
 
 };
 
@@ -162,9 +507,41 @@ const SelectorButtonField = ({
 
   value,
 
+  selector,
+
   onSelectorChange,
 
 }) => {
+
+  if (
+
+    isStockTextOnlyField({
+
+      selector,
+
+      fieldKey: field.key,
+
+      options,
+
+    })
+
+  ) {
+
+    return (
+
+      <FixedSpecField
+
+        label={field.label}
+
+        value={formatSelectorOptionLabel(options[0])}
+
+        detail="Stock configuration"
+
+      />
+
+    );
+
+  }
 
   return (
 
@@ -174,21 +551,9 @@ const SelectorButtonField = ({
 
         <span>{field.label}</span>
 
-        {/* {value && <strong>{formatSelectorOptionLabel(value)}</strong>} */}
-
       </div>
 
       <div className="lp-selector-option-grid">
-
-        {!options.length && (
-
-          <button type="button" className="lp-selector-option is-disabled" disabled>
-
-            No options
-
-          </button>
-
-        )}
 
         {options.map((option) => {
 
@@ -254,17 +619,37 @@ const AdminLegacyPrintSelector = ({
 
   }, [selectorFields]);
 
-  const toggleComparisonMode = () => {
+  const getVisibleFieldsForGroup = (group) => {
 
-    const nextMode =
+    return group.fields
 
-      selector.comparisonMode === 'Single Drum Type Benchmark'
+      .map((fieldKey) => fieldsByKey[fieldKey])
 
-        ? 'All Drum Type Comparison'
+      .filter(Boolean)
 
-        : 'Single Drum Type Benchmark';
+      .filter((field) => {
 
-    onSelectorChange('comparisonMode', nextMode);
+        const options = getSelectorOptions({
+
+          calibration,
+
+          field,
+
+          selector,
+
+        });
+
+        return !shouldHideField({
+
+          selector,
+
+          fieldKey: field.key,
+
+          options,
+
+        });
+
+      });
 
   };
 
@@ -282,27 +667,15 @@ const AdminLegacyPrintSelector = ({
 
         </div>
 
-        <button
-
-          type="button"
-
-          className="lp-selector-mode-toggle"
-
-          onClick={toggleComparisonMode}
-
-          title="Toggle comparison mode"
-
-        >
-
-          {formatSelectorOptionLabel(selector.comparisonMode)}
-
-        </button>
-
       </div>
 
       <div className="lp-selector-accordion">
 
         {SELECTOR_GROUPS.map((group) => {
+
+          const visibleFields = getVisibleFieldsForGroup(group);
+
+          if (!visibleFields.length) return null;
 
           const isOpen = openGroup === group.key;
 
@@ -348,11 +721,7 @@ const AdminLegacyPrintSelector = ({
 
                   <div className="lp-selector-fields">
 
-                    {group.fields.map((fieldKey) => {
-
-                      const field = fieldsByKey[fieldKey];
-
-                      if (!field) return null;
+                    {visibleFields.map((field) => {
 
                       const options = getSelectorOptions({
 
@@ -376,6 +745,8 @@ const AdminLegacyPrintSelector = ({
 
                           value={selector[field.key] || ''}
 
+                          selector={selector}
+
                           onSelectorChange={onSelectorChange}
 
                         />
@@ -383,6 +754,48 @@ const AdminLegacyPrintSelector = ({
                       );
 
                     })}
+
+                    {group.key === 'foundation' &&
+
+                      isHeritageConstruction(selector.construction) && (
+
+                        <FixedSpecField
+
+                          label="Construction"
+
+                          value="Northern Red Oak stave shell construction"
+
+                        />
+
+                      )}
+
+                    {group.key === 'foundation' &&
+
+                      isFeuzonConstruction(selector.construction) && (
+
+                        <FixedSpecField
+
+                          label="Construction"
+
+                          value="Hybrid shell: core stave shell with paired steam-bent exterior"
+
+                        />
+
+                      )}
+
+                                  {group.key === 'foundation' &&
+
+                      isSoundLegendConstruction(selector.construction) && (
+
+                        <FixedSpecField
+
+                          label="Line"
+
+                          value="Full custom Ober / artist-led builder"
+
+                        />
+
+                      )}
 
                   </div>
 
