@@ -470,6 +470,102 @@
 
 }
 
+.lp-selector-field--bucketed {
+
+  gap: 14px;
+
+}
+
+.lp-selector-bucket-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+}
+
+.lp-selector-bucket {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 10px;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  background: rgba(255, 255, 255, 0.7);
+
+}
+
+.lp-selector-bucket-heading {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding-bottom: 6px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+}
+
+.lp-selector-bucket-heading strong {
+
+  font-size: 0.72rem;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  color: #222;
+
+}
+
+.lp-selector-bucket-heading span {
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  color: #777;
+
+}
+
+.lp-selector-option.is-upgrade-reference {
+
+  position: relative;
+
+  border-style: dashed;
+
+}
+
+.lp-selector-option.is-upgrade-reference small {
+
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 0.58rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  opacity: 0.65;
+
+}
+
 @media (max-width: 900px) {
 
   .lp-selector-fields {

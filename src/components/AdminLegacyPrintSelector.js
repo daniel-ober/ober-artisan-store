@@ -571,6 +571,7 @@ const getFieldLabel = ({ field, selector }) => {
 };
 
 const SelectorButtonField = ({
+
   field,
 
   options = [],
@@ -579,7 +580,10 @@ const SelectorButtonField = ({
 
   selector,
 
+  getOptionMeta = () => ({}),
+
   onSelectorChange,
+
 }) => {
   if (
     isStockTextOnlyField({
@@ -597,6 +601,116 @@ const SelectorButtonField = ({
         detail="Stock configuration"
       />
     );
+  }
+
+    if (field.key === 'nonOberLineName') {
+
+    const groupedOptions = options.reduce((acc, option) => {
+
+      const meta = getOptionMeta({
+
+        fieldKey: field.key,
+
+        option,
+
+        selector,
+
+      });
+
+      const bucketLabel = meta.bucketLabel || 'Unsorted References';
+
+      if (!acc[bucketLabel]) {
+
+        acc[bucketLabel] = [];
+
+      }
+
+      acc[bucketLabel].push({
+
+        option,
+
+        meta,
+
+      });
+
+      return acc;
+
+    }, {});
+
+    return (
+
+      <div className="lp-selector-field lp-selector-field--bucketed">
+
+        <div className="lp-selector-field-header">
+
+          <span>{getFieldLabel({ field, selector })}</span>
+
+        </div>
+
+        <div className="lp-selector-bucket-list">
+
+          {Object.entries(groupedOptions).map(([bucketLabel, bucketOptions]) => (
+
+            <div key={bucketLabel} className="lp-selector-bucket">
+
+              <div className="lp-selector-bucket-heading">
+
+                <strong>{bucketLabel}</strong>
+
+                <span>{bucketOptions.length}</span>
+
+              </div>
+
+              <div className="lp-selector-option-grid">
+
+                {bucketOptions.map(({ option, meta }) => {
+
+                  const isActive = value === option;
+
+                  const isUpgrade = meta.access === 'upgrade';
+
+                  return (
+
+                    <button
+
+                      key={option}
+
+                      type="button"
+
+                      className={`lp-selector-option ${
+
+                        isActive ? 'is-active' : ''
+
+                      } ${isUpgrade ? 'is-upgrade-reference' : ''}`}
+
+                      title={`${option} · ${bucketLabel}`}
+
+                      onClick={() => onSelectorChange(field.key, option)}
+
+                    >
+
+                      {formatSelectorOptionLabel(option)}
+
+                      {isUpgrade && <small>Upgrade</small>}
+
+                    </button>
+
+                  );
+
+                })}
+
+              </div>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+    );
+
   }
 
   return (
@@ -627,6 +741,7 @@ const SelectorButtonField = ({
 };
 
 const AdminLegacyPrintSelector = ({
+
   selectorFields = [],
 
   calibration,
@@ -635,7 +750,10 @@ const AdminLegacyPrintSelector = ({
 
   getSelectorOptions,
 
+  getOptionMeta = () => ({}),
+
   onSelectorChange,
+
 }) => {
   const [openGroup, setOpenGroup] = useState('foundation');
 
@@ -725,14 +843,23 @@ const AdminLegacyPrintSelector = ({
                       });
 
                       return (
-                        <SelectorButtonField
-                          key={field.key}
-                          field={field}
-                          options={options}
-                          value={selector[field.key] || ''}
-                          selector={selector}
-                          onSelectorChange={onSelectorChange}
-                        />
+                     <SelectorButtonField
+
+  key={field.key}
+
+  field={field}
+
+  options={options}
+
+  value={selector[field.key] || ''}
+
+  selector={selector}
+
+  getOptionMeta={getOptionMeta}
+
+  onSelectorChange={onSelectorChange}
+
+/>
                       );
                     })}
 

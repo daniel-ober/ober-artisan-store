@@ -1,6 +1,6 @@
 // src/data/legacyPrint/referenceDrums/referenceDrumSelectors.js
 
-import { referenceDrumSeed } from './referenceDrumSeed';
+import { referenceDrumDataset } from './generated/referenceDrumDataset';
 
 const unique = (items = []) => {
 
@@ -8,23 +8,35 @@ const unique = (items = []) => {
 
 };
 
+const isGenericBaseline = (companyType = '') => {
+
+  return companyType === 'Generic / Baseline Reference';
+
+};
+
 export const getReferenceDrumRecords = () => {
 
-  return referenceDrumSeed;
+  return referenceDrumDataset;
 
 };
 
 export const getReferenceCompanyTypes = () => {
 
-  return unique(referenceDrumSeed.map((record) => record.companyType));
+  return unique(referenceDrumDataset.map((record) => record.companyType));
 
 };
 
 export const getReferenceCompaniesByType = (companyType) => {
 
+  if (isGenericBaseline(companyType)) {
+
+    return [];
+
+  }
+
   return unique(
 
-    referenceDrumSeed
+    referenceDrumDataset
 
       .filter((record) => record.companyType === companyType)
 
@@ -38,13 +50,17 @@ export const getReferenceLines = ({ companyType, companyName = '' }) => {
 
   return unique(
 
-    referenceDrumSeed
+    referenceDrumDataset
 
       .filter((record) => {
 
         if (record.companyType !== companyType) return false;
 
-        if (companyName && record.companyName !== companyName) return false;
+        if (!isGenericBaseline(companyType) && companyName) {
+
+          return record.companyName === companyName;
+
+        }
 
         return true;
 
@@ -70,13 +86,17 @@ export const getReferenceModels = ({
 
   return unique(
 
-    referenceDrumSeed
+    referenceDrumDataset
 
       .filter((record) => {
 
         if (record.companyType !== companyType) return false;
 
-        if (companyName && record.companyName !== companyName) return false;
+        if (!isGenericBaseline(companyType) && companyName) {
+
+          if (record.companyName !== companyName) return false;
+
+        }
 
         if (lineName && record.lineName !== lineName) return false;
 
@@ -106,11 +126,15 @@ export const getReferenceRecord = ({
 
 }) => {
 
-  return referenceDrumSeed.find((record) => {
+  return referenceDrumDataset.find((record) => {
 
     if (record.companyType !== companyType) return false;
 
-    if (companyName && record.companyName !== companyName) return false;
+    if (!isGenericBaseline(companyType) && companyName) {
+
+      if (record.companyName !== companyName) return false;
+
+    }
 
     if (lineName && record.lineName !== lineName) return false;
 
@@ -127,5 +151,23 @@ export const getReferenceRecord = ({
 export const getReferenceSizes = (params) => {
 
   return getReferenceRecord(params)?.sizes || [];
+
+};
+
+export const getReferenceRecordForSelector = (selector = {}) => {
+
+  return getReferenceRecord({
+
+    companyType: selector.nonOberCompanyType,
+
+    companyName: selector.nonOberCompanyName,
+
+    lineName: selector.nonOberLineName,
+
+    modelName: selector.nonOberModelName,
+
+    drumType: selector.drumType,
+
+  });
 
 };

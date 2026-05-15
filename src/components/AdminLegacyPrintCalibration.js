@@ -15,22 +15,6 @@ import AdminLegacyPrintSelector from './AdminLegacyPrintSelector';
 import LegacyPrintAdminSlider from './LegacyPrintAdminSlider';
 
 import {
-
-  getReferenceCompanyTypes,
-
-  getReferenceCompaniesByType,
-
-  getReferenceLines,
-
-  getReferenceModels,
-
-  getReferenceRecord,
-
-  getReferenceSizes,
-
-} from '../data/legacyPrint/referenceDrums/referenceDrumSelectors';
-
-import {
   collection,
   doc,
   getDoc,
@@ -48,6 +32,20 @@ import {
   LEGACYPRINT_NODE_ORDER,
   legacyPrintCalibrationSeed,
 } from '../data/legacyPrintCalibrationSeed';
+
+import {
+  getReferenceCompanyTypes,
+  getReferenceCompaniesByType,
+  getReferenceLines,
+  getReferenceModels,
+} from '../data/legacyPrint/referenceDrums/referenceDrumSelectors';
+
+import {
+  REFERENCE_LINE_ACCESS,
+  REFERENCE_LINE_BUCKET_LABELS,
+  REFERENCE_LINE_STATUS,
+  REFERENCE_LINE_STATUS_ORDER,
+} from '../data/legacyPrint/referenceDrums/referenceLineStatus';
 
 import './AdminLegacyPrintCalibration.css';
 
@@ -131,7 +129,7 @@ const SELECTOR_FIELDS = [
   {
     key: 'nonOberModelName',
 
-    label: 'Model',
+    label: 'Model / Shell Reference',
 
     source: 'nonOberModelName',
   },
@@ -497,6 +495,839 @@ const NON_OBER_MANUFACTURER_GROUPS = [
   },
 ];
 
+const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
+
+  Tama: {
+
+    'STAR Maple': {
+
+      Snare: ['STAR Maple Snare'],
+
+      'Rack Tom': ['STAR Maple Rack Tom'],
+
+      'Floor Tom': ['STAR Maple Floor Tom'],
+
+      'Bass Drum': ['STAR Maple Bass Drum'],
+
+      'Overall Kit / Line Sound': ['STAR Maple Full Kit Reference'],
+
+    },
+
+    'STAR Walnut': {
+
+      Snare: ['STAR Walnut Snare'],
+
+      'Rack Tom': ['STAR Walnut Rack Tom'],
+
+      'Floor Tom': ['STAR Walnut Floor Tom'],
+
+      'Bass Drum': ['STAR Walnut Bass Drum'],
+
+      'Overall Kit / Line Sound': ['STAR Walnut Full Kit Reference'],
+
+    },
+
+    'STAR Bubinga': {
+
+      Snare: ['STAR Bubinga Snare'],
+
+      'Rack Tom': ['STAR Bubinga Rack Tom'],
+
+      'Floor Tom': ['STAR Bubinga Floor Tom'],
+
+      'Bass Drum': ['STAR Bubinga Bass Drum'],
+
+      'Overall Kit / Line Sound': ['STAR Bubinga Full Kit Reference'],
+
+    },
+
+    'STAR Reserve': {
+
+      Snare: ['STAR Reserve Snare'],
+
+      'Overall Kit / Line Sound': ['STAR Reserve Snare Reference'],
+
+    },
+
+    Starclassic: {
+
+      Snare: ['Starclassic General Snare Reference'],
+
+      'Rack Tom': ['Starclassic General Rack Tom Reference'],
+
+      'Floor Tom': ['Starclassic General Floor Tom Reference'],
+
+      'Bass Drum': ['Starclassic General Bass Drum Reference'],
+
+      'Overall Kit / Line Sound': ['Starclassic Full Line Reference'],
+
+    },
+
+    'Starclassic Maple': {
+
+      Snare: ['Starclassic Maple Snare'],
+
+      'Rack Tom': ['Starclassic Maple Rack Tom'],
+
+      'Floor Tom': ['Starclassic Maple Floor Tom'],
+
+      'Bass Drum': ['Starclassic Maple Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Maple Full Kit Reference'],
+
+    },
+
+    'Starclassic Walnut/Birch': {
+
+      Snare: ['Starclassic Walnut/Birch Snare'],
+
+      'Rack Tom': ['Starclassic Walnut/Birch Rack Tom'],
+
+      'Floor Tom': ['Starclassic Walnut/Birch Floor Tom'],
+
+      'Bass Drum': ['Starclassic Walnut/Birch Bass Drum'],
+
+      'Overall Kit / Line Sound': [
+
+        'Starclassic Walnut/Birch Full Kit Reference',
+
+      ],
+
+    },
+
+    'Starclassic Performer': {
+
+      Snare: ['Starclassic Performer Snare'],
+
+      'Rack Tom': ['Starclassic Performer Rack Tom'],
+
+      'Floor Tom': ['Starclassic Performer Floor Tom'],
+
+      'Bass Drum': ['Starclassic Performer Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Performer Full Kit Reference'],
+
+    },
+
+    'Starclassic Performer Birch/Bubinga': {
+
+      Snare: ['Starclassic Performer Birch/Bubinga Snare'],
+
+      'Rack Tom': ['Starclassic Performer Birch/Bubinga Rack Tom'],
+
+      'Floor Tom': ['Starclassic Performer Birch/Bubinga Floor Tom'],
+
+      'Bass Drum': ['Starclassic Performer Birch/Bubinga Bass Drum'],
+
+      'Overall Kit / Line Sound': [
+
+        'Starclassic Performer Birch/Bubinga Full Kit Reference',
+
+      ],
+
+    },
+
+    'Starclassic Bubinga': {
+
+      Snare: ['Starclassic Bubinga Snare'],
+
+      'Rack Tom': ['Starclassic Bubinga Rack Tom'],
+
+      'Floor Tom': ['Starclassic Bubinga Floor Tom'],
+
+      'Bass Drum': ['Starclassic Bubinga Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Bubinga Full Kit Reference'],
+
+    },
+
+    'Starclassic Birch': {
+
+      Snare: ['Starclassic Birch Snare'],
+
+      'Rack Tom': ['Starclassic Birch Rack Tom'],
+
+      'Floor Tom': ['Starclassic Birch Floor Tom'],
+
+      'Bass Drum': ['Starclassic Birch Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Birch Full Kit Reference'],
+
+    },
+
+    'Starclassic Birch/Bubinga': {
+
+      Snare: ['Starclassic Birch/Bubinga Snare'],
+
+      'Rack Tom': ['Starclassic Birch/Bubinga Rack Tom'],
+
+      'Floor Tom': ['Starclassic Birch/Bubinga Floor Tom'],
+
+      'Bass Drum': ['Starclassic Birch/Bubinga Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Birch/Bubinga Full Kit Reference'],
+
+    },
+
+    'Starclassic Mirage': {
+
+      Snare: ['Starclassic Mirage Acrylic Snare'],
+
+      'Rack Tom': ['Starclassic Mirage Acrylic Rack Tom'],
+
+      'Floor Tom': ['Starclassic Mirage Acrylic Floor Tom'],
+
+      'Bass Drum': ['Starclassic Mirage Acrylic Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Mirage Full Kit Reference'],
+
+    },
+
+    'Starclassic Exotix': {
+
+      Snare: ['Starclassic Exotix Snare'],
+
+      'Rack Tom': ['Starclassic Exotix Rack Tom'],
+
+      'Floor Tom': ['Starclassic Exotix Floor Tom'],
+
+      'Bass Drum': ['Starclassic Exotix Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Starclassic Exotix Full Kit Reference'],
+
+    },
+
+    Superstar: {
+
+      Snare: ['Superstar Snare'],
+
+      'Rack Tom': ['Superstar Rack Tom'],
+
+      'Floor Tom': ['Superstar Floor Tom'],
+
+      'Bass Drum': ['Superstar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Superstar Full Kit Reference'],
+
+    },
+
+    'Superstar Classic': {
+
+      Snare: ['Superstar Classic Maple Snare'],
+
+      'Rack Tom': ['Superstar Classic Maple Rack Tom'],
+
+      'Floor Tom': ['Superstar Classic Maple Floor Tom'],
+
+      'Bass Drum': ['Superstar Classic Maple Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Superstar Classic Full Kit Reference'],
+
+    },
+
+    'Superstar Hyper-Drive': {
+
+      Snare: ['Superstar Hyper-Drive Snare'],
+
+      'Rack Tom': ['Superstar Hyper-Drive Rack Tom'],
+
+      'Floor Tom': ['Superstar Hyper-Drive Floor Tom'],
+
+      'Bass Drum': ['Superstar Hyper-Drive Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Superstar Hyper-Drive Full Kit Reference'],
+
+    },
+
+    'Superstar Hyper-Drive Duo': {
+
+      Snare: ['Superstar Hyper-Drive Duo Snare'],
+
+      'Rack Tom': ['Superstar Hyper-Drive Duo Rack Tom'],
+
+      'Floor Tom': ['Superstar Hyper-Drive Duo Floor Tom'],
+
+      'Bass Drum': ['Superstar Hyper-Drive Duo Bass Drum'],
+
+      'Overall Kit / Line Sound': [
+
+        'Superstar Hyper-Drive Duo Full Kit Reference',
+
+      ],
+
+    },
+
+    'Superstar Custom': {
+
+      Snare: ['Superstar Custom Snare'],
+
+      'Rack Tom': ['Superstar Custom Rack Tom'],
+
+      'Floor Tom': ['Superstar Custom Floor Tom'],
+
+      'Bass Drum': ['Superstar Custom Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Superstar Custom Full Kit Reference'],
+
+    },
+
+    'Superstar EFX': {
+
+      Snare: ['Superstar EFX Snare'],
+
+      'Rack Tom': ['Superstar EFX Rack Tom'],
+
+      'Floor Tom': ['Superstar EFX Floor Tom'],
+
+      'Bass Drum': ['Superstar EFX Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Superstar EFX Full Kit Reference'],
+
+    },
+
+    'Superstar SK': {
+
+      Snare: ['Superstar SK Snare'],
+
+      'Rack Tom': ['Superstar SK Rack Tom'],
+
+      'Floor Tom': ['Superstar SK Floor Tom'],
+
+      'Bass Drum': ['Superstar SK Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Superstar SK Full Kit Reference'],
+
+    },
+
+    Silverstar: {
+
+      Snare: ['Silverstar Birch Snare'],
+
+      'Rack Tom': ['Silverstar Birch Rack Tom'],
+
+      'Floor Tom': ['Silverstar Birch Floor Tom'],
+
+      'Bass Drum': ['Silverstar Birch Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Silverstar Full Kit Reference'],
+
+    },
+
+    Imperialstar: {
+
+      Snare: ['Imperialstar Poplar Snare'],
+
+      'Rack Tom': ['Imperialstar Poplar Rack Tom'],
+
+      'Floor Tom': ['Imperialstar Poplar Floor Tom'],
+
+      'Bass Drum': ['Imperialstar Poplar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Imperialstar Full Kit Reference'],
+
+    },
+
+    Swingstar: {
+
+      Snare: ['Swingstar Snare'],
+
+      'Rack Tom': ['Swingstar Rack Tom'],
+
+      'Floor Tom': ['Swingstar Floor Tom'],
+
+      'Bass Drum': ['Swingstar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Swingstar Full Kit Reference'],
+
+    },
+
+    Rockstar: {
+
+      Snare: ['Rockstar Snare'],
+
+      'Rack Tom': ['Rockstar Rack Tom'],
+
+      'Floor Tom': ['Rockstar Floor Tom'],
+
+      'Bass Drum': ['Rockstar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Rockstar Full Kit Reference'],
+
+    },
+
+    'Rockstar Custom': {
+
+      Snare: ['Rockstar Custom Snare'],
+
+      'Rack Tom': ['Rockstar Custom Rack Tom'],
+
+      'Floor Tom': ['Rockstar Custom Floor Tom'],
+
+      'Bass Drum': ['Rockstar Custom Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Rockstar Custom Full Kit Reference'],
+
+    },
+
+    Artstar: {
+
+      Snare: ['Artstar Snare'],
+
+      'Rack Tom': ['Artstar Rack Tom'],
+
+      'Floor Tom': ['Artstar Floor Tom'],
+
+      'Bass Drum': ['Artstar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Artstar Full Kit Reference'],
+
+    },
+
+    'Artstar II': {
+
+      Snare: ['Artstar II Snare'],
+
+      'Rack Tom': ['Artstar II Rack Tom'],
+
+      'Floor Tom': ['Artstar II Floor Tom'],
+
+      'Bass Drum': ['Artstar II Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Artstar II Full Kit Reference'],
+
+    },
+
+    Granstar: {
+
+      Snare: ['Granstar Snare'],
+
+      'Rack Tom': ['Granstar Rack Tom'],
+
+      'Floor Tom': ['Granstar Floor Tom'],
+
+      'Bass Drum': ['Granstar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Granstar Full Kit Reference'],
+
+    },
+
+    'Granstar Custom': {
+
+      Snare: ['Granstar Custom Snare'],
+
+      'Rack Tom': ['Granstar Custom Rack Tom'],
+
+      'Floor Tom': ['Granstar Custom Floor Tom'],
+
+      'Bass Drum': ['Granstar Custom Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Granstar Custom Full Kit Reference'],
+
+    },
+
+    Crestar: {
+
+      Snare: ['Crestar Snare'],
+
+      'Rack Tom': ['Crestar Rack Tom'],
+
+      'Floor Tom': ['Crestar Floor Tom'],
+
+      'Bass Drum': ['Crestar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Crestar Full Kit Reference'],
+
+    },
+
+    Royalstar: {
+
+      Snare: ['Royalstar Snare'],
+
+      'Rack Tom': ['Royalstar Rack Tom'],
+
+      'Floor Tom': ['Royalstar Floor Tom'],
+
+      'Bass Drum': ['Royalstar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Royalstar Full Kit Reference'],
+
+    },
+
+    Stagestar: {
+
+      Snare: ['Stagestar Snare'],
+
+      'Rack Tom': ['Stagestar Rack Tom'],
+
+      'Floor Tom': ['Stagestar Floor Tom'],
+
+      'Bass Drum': ['Stagestar Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Stagestar Full Kit Reference'],
+
+    },
+
+    'Club-JAM': {
+
+      Snare: ['Club-JAM Snare'],
+
+      'Rack Tom': ['Club-JAM Rack Tom'],
+
+      'Floor Tom': ['Club-JAM Floor Tom'],
+
+      'Bass Drum': ['Club-JAM Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Club-JAM Full Kit Reference'],
+
+    },
+
+    'Club-JAM Flyer': {
+
+      Snare: ['Club-JAM Flyer Snare'],
+
+      'Rack Tom': ['Club-JAM Flyer Rack Tom'],
+
+      'Floor Tom': ['Club-JAM Flyer Floor Tom'],
+
+      'Bass Drum': ['Club-JAM Flyer Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Club-JAM Flyer Full Kit Reference'],
+
+    },
+
+    'Club-JAM Pancake': {
+
+      Snare: ['Club-JAM Pancake Snare'],
+
+      'Rack Tom': ['Club-JAM Pancake Rack Tom'],
+
+      'Floor Tom': ['Club-JAM Pancake Floor Tom'],
+
+      'Bass Drum': ['Club-JAM Pancake Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Club-JAM Pancake Full Kit Reference'],
+
+    },
+
+    'Cocktail-JAM': {
+
+      Snare: ['Cocktail-JAM Snare'],
+
+      'Rack Tom': ['Cocktail-JAM Rack Tom'],
+
+      'Floor Tom': ['Cocktail-JAM Floor Tom'],
+
+      'Bass Drum': ['Cocktail-JAM Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Cocktail-JAM Full Kit Reference'],
+
+    },
+
+    'Cocktail-JAM Mini': {
+
+      Snare: ['Cocktail-JAM Mini Snare'],
+
+      'Rack Tom': ['Cocktail-JAM Mini Rack Tom'],
+
+      'Floor Tom': ['Cocktail-JAM Mini Floor Tom'],
+
+      'Bass Drum': ['Cocktail-JAM Mini Bass Drum'],
+
+      'Overall Kit / Line Sound': ['Cocktail-JAM Mini Full Kit Reference'],
+
+    },
+
+    'S.L.P.': {
+
+      Snare: [
+
+        'S.L.P. G-Maple Snare',
+
+        'S.L.P. G-Bubinga Snare',
+
+        'S.L.P. Big Black Steel Snare',
+
+        'S.L.P. Fat Spruce Snare',
+
+        'S.L.P. Dynamic Kapur Snare',
+
+        'S.L.P. Studio Maple Snare',
+
+        'S.L.P. Vintage Steel Snare',
+
+        'S.L.P. Classic Maple Snare',
+
+        'S.L.P. Spotted Gum Snare',
+
+        'S.L.P. Sonic Steel Snare',
+
+      ],
+
+      'Overall Kit / Line Sound': ['S.L.P. Snare Line Reference'],
+
+    },
+
+    'Sound Lab Project': {
+
+      Snare: [
+
+        'S.L.P. G-Maple Snare',
+
+        'S.L.P. G-Bubinga Snare',
+
+        'S.L.P. Big Black Steel Snare',
+
+        'S.L.P. Fat Spruce Snare',
+
+        'S.L.P. Dynamic Kapur Snare',
+
+        'S.L.P. Studio Maple Snare',
+
+        'S.L.P. Vintage Steel Snare',
+
+        'S.L.P. Classic Maple Snare',
+
+        'S.L.P. Spotted Gum Snare',
+
+        'S.L.P. Sonic Steel Snare',
+
+      ],
+
+      'Overall Kit / Line Sound': ['Sound Lab Project Snare Line Reference'],
+
+    },
+
+    'S.L.P. Dynamic Kapur': {
+
+      Snare: ['S.L.P. Dynamic Kapur Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Dynamic Kapur Snare Reference'],
+
+    },
+
+    'S.L.P. G-Maple': {
+
+      Snare: ['S.L.P. G-Maple Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. G-Maple Snare Reference'],
+
+    },
+
+    'S.L.P. G-Bubinga': {
+
+      Snare: ['S.L.P. G-Bubinga Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. G-Bubinga Snare Reference'],
+
+    },
+
+    'S.L.P. Big Black Steel': {
+
+      Snare: ['S.L.P. Big Black Steel Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Big Black Steel Snare Reference'],
+
+    },
+
+    'S.L.P. Fat Spruce': {
+
+      Snare: ['S.L.P. Fat Spruce Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Fat Spruce Snare Reference'],
+
+    },
+
+    'S.L.P. Vintage Steel': {
+
+      Snare: ['S.L.P. Vintage Steel Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Vintage Steel Snare Reference'],
+
+    },
+
+    'S.L.P. Studio Maple': {
+
+      Snare: ['S.L.P. Studio Maple Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Studio Maple Snare Reference'],
+
+    },
+
+    'S.L.P. Classic Maple': {
+
+      Snare: ['S.L.P. Classic Maple Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Classic Maple Snare Reference'],
+
+    },
+
+    'S.L.P. Spotted Gum': {
+
+      Snare: ['S.L.P. Spotted Gum Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Spotted Gum Snare Reference'],
+
+    },
+
+    'S.L.P. Duo Birch': {
+
+      Snare: ['S.L.P. Duo Birch Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Duo Birch Snare Reference'],
+
+    },
+
+    'S.L.P. Sonic Steel': {
+
+      Snare: ['S.L.P. Sonic Steel Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. Sonic Steel Snare Reference'],
+
+    },
+
+    'S.L.P. LAL145': {
+
+      Snare: ['S.L.P. LAL145 Aluminum Snare'],
+
+      'Overall Kit / Line Sound': ['S.L.P. LAL145 Snare Reference'],
+
+    },
+
+    Starphonic: {
+
+      Snare: [
+
+        'Starphonic Aluminum Snare',
+
+        'Starphonic Brass Snare',
+
+        'Starphonic Steel Snare',
+
+        'Starphonic Copper Snare',
+
+        'Starphonic Maple Snare',
+
+        'Starphonic Walnut Snare',
+
+      ],
+
+      'Overall Kit / Line Sound': ['Starphonic Snare Line Reference'],
+
+    },
+
+    Metalworks: {
+
+      Snare: [
+
+        'Metalworks Steel Snare',
+
+        'Metalworks Effect Snare',
+
+        'Metalworks Black Steel Snare',
+
+      ],
+
+      'Overall Kit / Line Sound': ['Metalworks Snare Line Reference'],
+
+    },
+
+    'Bell Brass': {
+
+      Snare: ['Bell Brass Snare'],
+
+      'Overall Kit / Line Sound': ['Bell Brass Snare Reference'],
+
+    },
+
+    Warlord: {
+
+      Snare: [
+
+        'Warlord Masai Snare',
+
+        'Warlord Praetorian Snare',
+
+        'Warlord Spartan Snare',
+
+        'Warlord Valkyrie Snare',
+
+      ],
+
+      'Overall Kit / Line Sound': ['Warlord Snare Line Reference'],
+
+    },
+
+    'Signature Series': {
+
+      Snare: ['Tama Signature Series Snare Reference'],
+
+      'Overall Kit / Line Sound': ['Tama Signature Series Reference'],
+
+    },
+
+    'Simon Phillips Signature': {
+
+      Snare: ['Simon Phillips Signature Snare'],
+
+      'Overall Kit / Line Sound': ['Simon Phillips Signature Reference'],
+
+    },
+
+    'Stewart Copeland Signature': {
+
+      Snare: ['Stewart Copeland Signature Snare'],
+
+      'Overall Kit / Line Sound': ['Stewart Copeland Signature Reference'],
+
+    },
+
+    'John Tempesta Signature': {
+
+      Snare: ['John Tempesta Signature Snare'],
+
+      'Overall Kit / Line Sound': ['John Tempesta Signature Reference'],
+
+    },
+
+    'Mike Portnoy Signature': {
+
+      Snare: ['Mike Portnoy Signature Snare'],
+
+      'Overall Kit / Line Sound': ['Mike Portnoy Signature Reference'],
+
+    },
+
+    'Lars Ulrich Signature': {
+
+      Snare: ['Lars Ulrich Signature Snare'],
+
+      'Overall Kit / Line Sound': ['Lars Ulrich Signature Reference'],
+
+    },
+
+  },
+
+};
+
+const getNonOberModelOptionsForSelection = ({
+  companyName = '',
+
+  lineName = '',
+
+  drumType = '',
+}) => {
+  const companyLineData =
+    NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE[companyName] || {};
+
+  const lineData = companyLineData[lineName] || null;
+
+  if (!lineData) {
+    return [];
+  }
+
+  return lineData[drumType] || lineData['Overall Kit / Line Sound'] || [];
+};
+
 const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
   Pearl: {
     Snare: [
@@ -685,9 +1516,7 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
   },
 
   default: {
-
     Snare: [
-
       'Maple',
 
       'Birch',
@@ -709,11 +1538,9 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
       'Bronze',
 
       'Acrylic',
-
     ],
 
     'Rack Tom': [
-
       'Maple',
 
       'Birch',
@@ -729,11 +1556,9 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
       'Maple / Gum',
 
       'Acrylic',
-
     ],
 
     'Floor Tom': [
-
       'Maple',
 
       'Birch',
@@ -749,11 +1574,9 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
       'Maple / Gum',
 
       'Acrylic',
-
     ],
 
     'Bass Drum': [
-
       'Maple',
 
       'Birch',
@@ -769,11 +1592,9 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
       'Maple / Gum',
 
       'Acrylic',
-
     ],
 
     'Overall Kit / Line Sound': [
-
       'Balanced Maple Kit',
 
       'Bright Birch Kit',
@@ -785,9 +1606,7 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
       'Modern Maple / Walnut Kit',
 
       'Controlled Acrylic Kit',
-
     ],
-
   },
 };
 
@@ -914,86 +1733,1728 @@ const NON_OBER_COMPANY_OPTIONS_BY_TYPE = {
 };
 
 const NON_OBER_LINE_OPTIONS_BY_COMPANY = {
-
   Pearl: [
+    'Masterworks',
 
     'Reference',
 
+    'Reference Pure',
+
+    'Reference One',
+
+    'Masters',
+
+    'Masters Maple Reserve',
+
     'Masters Maple Complete',
 
-    'President Series',
+    'Masters Maple/Gum',
+
+    'Masters Studio',
+
+    'Masters Custom',
+
+    'Masters Custom Extra',
+
+    'Masters Premium',
+
+    'Masters Premium Legend',
+
+    'Session',
 
     'Session Studio Select',
 
-    'Sensitone',
+    'Session Select',
+
+    'Session Custom',
+
+    'Session Elite',
+
+    'President Series',
+
+    'President Series Deluxe',
+
+    'President Series Phenolic',
+
+    'President Classic',
+
+    'Crystal Beat',
+
+    'Decade Maple',
+
+    'Decade Maple Artisan',
+
+    'Export',
+
+    'Export EXX',
+
+    'Export EXL',
+
+    'Forum',
+
+    'Vision',
+
+    'Vision Birch',
+
+    'Vision Maple',
+
+    'Vision Maple Lacquer',
+
+    'Vision Birch/Basswood',
+
+    'World Series',
+
+    'Prestige Session',
+
+    'Performance Session',
+
+    'DX',
+
+    'DLX',
+
+    'MLX',
+
+    'BLX',
+
+    'CZX',
+
+    'GLX',
+
+    'Wood Fiberglass',
+
+    'Fiberglass',
+
+    'Maple Shell',
+
+    'Birch Shell',
 
     'Free Floating',
 
+    'Sensitone',
+
+    'Sensitone Heritage Alloy',
+
+    'Sensitone Premium',
+
+    'Modern Utility',
+
+    'Signature Series',
+
+    'Chad Smith Signature',
+
+    'Omar Hakim Signature',
+
+    'Joey Jordison Signature',
+
+    'Ian Paice Signature',
+
+    'Dennis Chambers Signature',
+
+    'Eric Singer Signature',
+
+    'Roadshow',
+
+    'Roadshow Jr.',
+
+    'Midtown',
+
+    'Compact Traveler',
+
+    'Rhythm Traveler',
   ],
 
   Tama: [
+    'STAR Maple',
+
+    'STAR Walnut',
+
+    'STAR Bubinga',
+
+    'STAR Reserve',
+
+    'Starclassic',
 
     'Starclassic Maple',
 
     'Starclassic Walnut/Birch',
 
-    'STAR Maple',
+    'Starclassic Performer',
 
-    'STAR Walnut',
+    'Starclassic Performer Birch/Bubinga',
+
+    'Starclassic Bubinga',
+
+    'Starclassic Birch',
+
+    'Starclassic Birch/Bubinga',
+
+    'Starclassic Mirage',
+
+    'Starclassic Exotix',
+
+    'Superstar',
+
+    'Superstar Classic',
+
+    'Superstar Hyper-Drive',
+
+    'Superstar Hyper-Drive Duo',
+
+    'Superstar Custom',
+
+    'Superstar EFX',
+
+    'Superstar SK',
+
+    'Silverstar',
+
+    'Imperialstar',
+
+    'Swingstar',
+
+    'Rockstar',
+
+    'Rockstar Custom',
+
+    'Artstar',
+
+    'Artstar II',
+
+    'Granstar',
+
+    'Granstar Custom',
+
+    'Crestar',
+
+    'Royalstar',
+
+    'Stagestar',
+
+    'Club-JAM',
+
+    'Club-JAM Flyer',
+
+    'Club-JAM Pancake',
+
+    'Cocktail-JAM',
+
+    'Cocktail-JAM Mini',
 
     'S.L.P.',
 
+    'Sound Lab Project',
+
+    'S.L.P. Dynamic Kapur',
+
+    'S.L.P. G-Maple',
+
+    'S.L.P. G-Bubinga',
+
+    'S.L.P. Big Black Steel',
+
+    'S.L.P. Fat Spruce',
+
+    'S.L.P. Vintage Steel',
+
+    'S.L.P. Studio Maple',
+
+    'S.L.P. Classic Maple',
+
+    'S.L.P. Spotted Gum',
+
+    'S.L.P. Duo Birch',
+
+    'S.L.P. Sonic Steel',
+
+    'S.L.P. LAL145',
+
     'Starphonic',
 
+    'Metalworks',
+
+    'Signature Series',
+
+    'Bell Brass',
+
+    'Warlord',
+
+    'Simon Phillips Signature',
+
+    'Stewart Copeland Signature',
+
+    'John Tempesta Signature',
+
+    'Mike Portnoy Signature',
+
+    'Lars Ulrich Signature',
   ],
 
   Yamaha: [
+    'PHX',
+
+    'Phoenix',
 
     'Recording Custom',
 
+    'Recording Custom Aluminum',
+
+    'Recording Custom Brass',
+
+    'Recording Custom Stainless Steel',
+
+    'Absolute',
+
+    'Absolute Maple',
+
+    'Absolute Birch',
+
+    'Absolute Nouveau',
+
     'Absolute Hybrid Maple',
+
+    'Maple Custom',
+
+    'Maple Custom Absolute',
+
+    'Birch Custom',
+
+    'Birch Custom Absolute',
+
+    'Oak Custom',
+
+    'Oak Custom Absolute',
+
+    'Live Custom',
+
+    'Live Custom Hybrid Oak',
 
     'Tour Custom',
 
+    'Stage Custom',
+
     'Stage Custom Birch',
 
+    'Stage Custom Advantage',
+
+    'Stage Custom Nouveau',
+
+    'Rock Tour',
+
+    'Rydeen',
+
+    'GigMaker',
+
+    'Club Custom',
+
+    'Hipgig',
+
+    'Manu Katché Hipgig',
+
+    'Junior Kit',
+
+    'Power V',
+
+    'Power Tour Custom',
+
+    '9000 Series',
+
+    '8000 Series',
+
+    '7000 Series',
+
+    '5000 Series',
+
+    'YD Series',
+
+    'Steve Gadd Signature',
+
+    'Akira Jimbo Signature',
+
+    'David Garibaldi Signature',
+
+    'Sensitive Series',
+
+    'Musashi',
+
+    'Anton Fig Signature',
+
+    'Elvin Jones Signature',
+
+    'Roy Haynes Signature',
   ],
 
   Ludwig: [
+    'Legacy Mahogany',
+
+    'Legacy Maple',
 
     'Classic Maple',
 
-    'Legacy Mahogany',
+    'Classic Oak',
+
+    'NeuSonic',
+
+    'Vistalite',
+
+    'Stainless Steel',
+
+    'Evolution',
+
+    'Breakbeats',
+
+    'Element',
+
+    'Element Evolution',
+
+    'Accent',
+
+    'Accent CS',
+
+    'Questlove Pocket Kit',
+
+    'Club Date',
+
+    'Keystone',
+
+    'Keystone X',
+
+    'Centennial',
+
+    'Epic',
+
+    'Signet 105',
+
+    'Standard',
+
+    'Super Classic',
+
+    'Hollywood',
+
+    'Downbeat',
+
+    'Jazzette',
+
+    'Fab',
+
+    'Pro Beat',
+
+    'Rocker',
+
+    'Rocker II',
+
+    'Rockers',
+
+    'Combo',
 
     'Supraphonic',
+
+    'Super Ludwig',
 
     'Black Beauty',
 
     'Acrolite',
 
+    'Super-Sensitive',
+
+    'Pioneer',
+
+    'Jazz Festival',
+
+    'Auditorium',
+
+    'School Festival',
+
+    'Coliseum',
+
+    'Bronze Phonic',
+
+    'Copper Phonic',
+
+    'Acrophonic',
+
+    'Heirloom',
+
+    'Universal',
+
+    'Raw Brass',
+
+    'Raw Copper',
+
+    'Hammered Supraphonic',
+
+    'Hammered Black Beauty',
+
+    'Carl Palmer Signature',
+
+    'Alex Van Halen Signature',
+
+    'John Bonham Signature',
+
+    'Questlove Signature',
   ],
 
   DW: [
-
     'Collector’s Series',
+
+    'Collector’s Series Maple',
+
+    'Collector’s Series Cherry',
+
+    'Collector’s Series Mahogany',
+
+    'Collector’s Series Oak',
+
+    'Collector’s Series Purpleheart',
+
+    'Collector’s Series Exotic',
+
+    'Collector’s Series Jazz',
+
+    'Collector’s Series Pure Maple',
+
+    'Collector’s Series SSC',
 
     'Performance Series',
 
     'Design Series',
 
+    'Design Series Frequent Flyer',
+
+    'Design Series Mini-Pro',
+
+    'Design Series Acrylic',
+
+    'Design Series Black Nickel over Brass',
+
+    'Design Series Steel',
+
+    'Design Series Bell Brass',
+
     'Jazz Series',
 
+    'Classics Series',
+
+    'Eco-X Project',
+
+    'Workshop Series',
+
+    'FinishPly',
+
+    'Satin Oil',
+
+    'Super Solid',
+
+    'True-Sonic',
+
+    'MFG',
+
+    'MFG True-Cast',
+
+    'Concrete',
+
+    'Edge',
+
+    'Super Solid Edge',
+
+    'Top Edge',
+
+    'Craviotto / DW Solid Shell',
+
+    'Contemporary Classic',
+
+    'Complete Workshop',
+
+    'Collector’s Metal',
+
+    'Collector’s Aluminum',
+
+    'Collector’s Brass',
+
+    'Collector’s Bronze',
+
+    'Collector’s Steel',
+
+    'Collector’s Copper',
+
+    'Neil Peart R30',
+
+    'Neil Peart Time Machine',
   ],
 
-  Gretsch: ['USA Custom', 'Brooklyn', 'Renown', 'Broadkaster'],
+  Gretsch: [
+    'USA Custom',
 
-  Mapex: ['Saturn', 'Black Panther', 'Armory', 'Meridian'],
+    'USA Custom Round Badge',
 
-  Sonor: ['SQ2', 'SQ1', 'Vintage Series', 'ProLite', 'AQ2'],
+    'Brooklyn',
+
+    'Broadkaster',
+
+    'Renown',
+
+    'Renown Maple',
+
+    'Renown RN2',
+
+    'Catalina',
+
+    'Catalina Club',
+
+    'Catalina Club Jazz',
+
+    'Catalina Maple',
+
+    'Catalina Birch',
+
+    'Catalina Ash',
+
+    'Catalina Elite',
+
+    'Energy',
+
+    'Blackhawk',
+
+    'Full Range',
+
+    'Full Range Maple',
+
+    'Full Range Walnut',
+
+    'Full Range Mahogany',
+
+    'Full Range Stave',
+
+    'Full Range Metal',
+
+    'Full Range Hammered',
+
+    'New Classic',
+
+    'Brooklyn Standard',
+
+    'Brooklyn Chrome Over Brass',
+
+    'Brooklyn Solid Steel',
+
+    'USA Bronze',
+
+    'USA Bell Brass',
+
+    'USA Solid Aluminum',
+
+    'G4160',
+
+    'G4164',
+
+    'G4169',
+
+    'G4000 Series',
+
+    'Round Badge',
+
+    'Stop Sign Badge',
+
+    'Square Badge',
+
+    'Broadkaster Vintage Build',
+
+    'Progressive Jazz',
+
+    'Name Band',
+
+    'Max Roach Signature',
+
+    'Steve Ferrone Signature',
+
+    'Keith Carlock Signature',
+  ],
+
+  Mapex: [
+    'Black Panther Design Lab',
+
+    'Black Panther',
+
+    'Black Panther Artist',
+
+    'Black Panther Blaster',
+
+    'Black Panther Velvetone',
+
+    'Black Panther Versatus',
+
+    'Black Panther Wraith',
+
+    'Black Panther Cherry Bomb',
+
+    'Black Panther Persuader',
+
+    'Black Panther Shadow',
+
+    'Black Panther Sledgehammer',
+
+    'Black Panther Predator',
+
+    'Black Panther Warbird',
+
+    'Black Panther Blade',
+
+    'Black Panther Machete',
+
+    'Black Panther Heartbreaker',
+
+    'Black Panther Phat Bob',
+
+    'Saturn',
+
+    'Saturn Pro',
+
+    'Saturn IV',
+
+    'Saturn V',
+
+    'Saturn VI',
+
+    'Saturn Evolution',
+
+    'Saturn Evolution Special Edition',
+
+    'Saturn Maple/Walnut',
+
+    'Saturn Birch/Walnut',
+
+    'Orion',
+
+    'Orion Classic',
+
+    'Armory',
+
+    'Armory Studioease',
+
+    'Armory Rock',
+
+    'Mars',
+
+    'Mars Maple',
+
+    'Mars Birch',
+
+    'Mars Pro',
+
+    'Meridian',
+
+    'Meridian Maple',
+
+    'Meridian Birch',
+
+    'MyDentity',
+
+    'Horizon',
+
+    'Horizon Birch',
+
+    'Horizon HZB',
+
+    'Pro M',
+
+    'M Series',
+
+    'M Birch',
+
+    'Q Series',
+
+    'QR',
+
+    'VX',
+
+    'Voyager',
+
+    'Venus',
+
+    'Comet',
+
+    'Tornado',
+
+    'Prodigy',
+
+    'V Series',
+
+    'MPX',
+
+    'Phosphor Bronze',
+
+    'Daisy Cutter',
+
+    'Chris Adler Signature',
+
+    'Russ Miller Signature',
+
+    'Will Calhoun Signature',
+  ],
+
+  Sonor: [
+    'SQ2',
+
+    'SQ1',
+
+    'ProLite',
+
+    'Vintage Series',
+
+    'AQ2',
+
+    'AQ1',
+
+    'AQX',
+
+    'Kompressor',
+
+    'Artist Snare',
+
+    'Signature Series',
+
+    'Designer',
+
+    'Delite',
+
+    'Delite SQ2 Predecessor',
+
+    'S Class',
+
+    'S Class Pro',
+
+    'Force',
+
+    'Force 3007',
+
+    'Force 3005',
+
+    'Force 2007',
+
+    'Force 2005',
+
+    'Force 1007',
+
+    'Force 1005',
+
+    'Force 507',
+
+    'Force 505',
+
+    'Force 3000',
+
+    'Force 2000',
+
+    'Force 1000',
+
+    'Force Maple',
+
+    'Force Birch',
+
+    'Select Force',
+
+    'Essential Force',
+
+    'Smart Force',
+
+    'Ascent',
+
+    'Safari',
+
+    'Bop',
+
+    'Jungle',
+
+    'Martini',
+
+    'Special Edition',
+
+    'Phonic',
+
+    'Phonic Plus',
+
+    'Champion',
+
+    'Performer',
+
+    'Teardrop',
+
+    'Swinger',
+
+    'Action',
+
+    'Lite',
+
+    'HLD',
+
+    'Horst Link Signature',
+
+    'Benny Greb Signature',
+
+    'Steve Smith Signature',
+
+    'Danny Carey Signature',
+
+    'Gavin Harrison Protean',
+
+    'Protean',
+
+    'Jost Nickel Signature',
+  ],
+
+  PDP: [
+    'Concept Series',
+
+    'Concept Maple',
+
+    'Concept Birch',
+
+    'Concept Classic',
+
+    'Concept Exotic',
+
+    'Concept Select',
+
+    'Concept Maple Classic',
+
+    'Concept Acrylic',
+
+    'Limited Edition',
+
+    '25th Anniversary Acrylic',
+
+    'Mainstage',
+
+    'Center Stage',
+
+    'Encore',
+
+    'New Yorker',
+
+    'Player',
+
+    'X7',
+
+    'M5',
+
+    'FS',
+
+    'FX',
+
+    'LX',
+
+    'CX',
+
+    'MX',
+
+    'Platinum',
+
+    '805',
+
+    'Z5',
+
+    'EZ',
+
+    'Pacific FS',
+
+    'Pacific CX',
+
+    'Pacific LX',
+
+    'Pacific MX',
+
+    'Woody',
+
+    'Black Wax',
+
+    'Palladium',
+
+    'Ace',
+
+    'Chad Smith Signature',
+
+    'Daru Jones Signature',
+
+    'Eric Hernandez Signature',
+  ],
+
+  Rogers: [
+    'Covington',
+
+    'Cleveland',
+
+    'PowerTone',
+
+    'Dyna-Sonic',
+
+    'Dynasonic',
+
+    'SuperTen',
+
+    'ThunderTone',
+
+    'Tower',
+
+    'Holiday',
+
+    'Parklane',
+
+    'Luxor',
+
+    'Spotlight',
+
+    'Celebrity',
+
+    'Constellation',
+
+    'Starlighter',
+
+    'Delta',
+
+    'Londoner',
+
+    'Citadel',
+
+    'Comet',
+
+    'R360',
+
+    'R380',
+
+    'XP-8',
+
+    'XP-10',
+
+    'Big R',
+
+    'Bread and Butter Lug Era',
+
+    'Beavertail Lug Era',
+
+    'Wood Dyna-Sonic',
+
+    'Chrome Over Brass Dyna-Sonic',
+  ],
+
+  Slingerland: [
+    'Radio King',
+
+    'Studio King',
+
+    'Artist Classic',
+
+    'Sound King',
+
+    'Rolling Bomber',
+
+    'Broadcaster',
+
+    'Super Gene Krupa',
+
+    'Gene Krupa Deluxe',
+
+    'Hollywood Ace',
+
+    'Student Model',
+
+    'Festival',
+
+    'Buddy Rich',
+
+    'Modern Solo',
+
+    'Modern Jazz',
+
+    'Avante',
+
+    'Cutaway',
+
+    'Magnum',
+
+    'Spitfire',
+
+    'Tempo King',
+
+    'May Bell',
+
+    'Spirit',
+
+    'Niles Badge',
+
+    'Chicago Badge',
+
+    'Cloud Badge',
+
+    'Black and Brass Badge',
+
+    'Conway Era',
+
+    'Nashville Era',
+  ],
+
+  Premier: [
+    'Genista',
+
+    'Genista Classic',
+
+    'Elite',
+
+    'Elite Maple',
+
+    'Artist',
+
+    'Artist Maple',
+
+    'Artist Birch',
+
+    'Signia',
+
+    'Signia Marquis',
+
+    'Modern Classic',
+
+    'XPK',
+
+    'APK',
+
+    'Olympic',
+
+    'Projector',
+
+    'Resonator',
+
+    'Soundwave',
+
+    'Club',
+
+    'Royal Ace',
+
+    '2000',
+
+    '2001',
+
+    'Della-Porta 100',
+
+    'Beatmaker',
+
+    'Traditional',
+
+    'Cabria',
+
+    'Cabria APK',
+
+    'Cabria XPK',
+
+    'Cabria Exclusive',
+
+    'Series Elite',
+
+    'Series 90',
+
+    'Series 70',
+
+    'Series 54',
+
+    'HTS',
+
+    'Dominion',
+
+    'One Series',
+
+    'British Collection',
+
+    'Premier Made in England',
+  ],
+
+  Natal: [
+    'Cafe Racer',
+
+    'Arcadia',
+
+    'Originals',
+
+    'Originals Maple',
+
+    'Originals Walnut',
+
+    'Originals Birch',
+
+    'Originals Ash',
+
+    'Ash',
+
+    'Walnut',
+
+    'Maple',
+
+    'Birch',
+
+    'Hand Hammered',
+
+    'Hand Hammered Steel',
+
+    'Hand Hammered Bronze',
+
+    'Hand Hammered Copper',
+
+    'Hand Hammered Brass',
+
+    'Horizon',
+
+    'Spirit',
+
+    'DNA',
+
+    'K-Mahogany',
+
+    'Tulipwood',
+
+    'Acrylic',
+
+    'Stave',
+
+    'Limited Edition',
+  ],
+
+  Canopus: [
+    'Zelkova',
+
+    'Neo Vintage',
+
+    'Neo Vintage NV60-M1',
+
+    'Neo Vintage NV60-M2',
+
+    'Neo Vintage NV60-M5',
+
+    'Neo Vintage NV50',
+
+    'Neo Vintage NV60',
+
+    'R.F.M.',
+
+    'R.F.M. Maple',
+
+    'R.F.M. Birch',
+
+    'YAIBA',
+
+    'YAIBA II',
+
+    'YAIBA Groove Kit',
+
+    'Type-R',
+
+    '1ply',
+
+    'The Maple',
+
+    'Ash',
+
+    'Birch',
+
+    'Mahogany',
+
+    'Acrylic',
+
+    'Stave Bubinga',
+
+    'Solid Brass',
+
+    'Solid Aluminum',
+
+    'Solid Steel',
+
+    'Hammered Bronze',
+
+    'Oil Finished Maple',
+
+    'Bop Kit',
+
+    'Club Kit',
+
+    'M42',
+
+    'M1',
+
+    'M5',
+
+    'MO-1455',
+
+    'BR-1455',
+  ],
+
+  Craviotto: [
+    'Custom Shop',
+
+    'Private Reserve',
+
+    'Solid Shell',
+
+    'Single-Ply Solid Shell',
+
+    'Stacked Solid',
+
+    'Stacked Solid Maple',
+
+    'Stacked Solid Cherry',
+
+    'Stacked Solid Walnut',
+
+    'Diamond Series',
+
+    'Limited Edition',
+
+    'Johnny C.',
+
+    'Center Stage',
+
+    'Lake Superior Timeless Timber',
+
+    'Timeless Timber',
+
+    'Birdseye Maple',
+
+    'Curly Maple',
+
+    'Mahogany',
+
+    'Walnut',
+
+    'Cherry',
+
+    'Maple',
+
+    'Ash',
+
+    'Poplar',
+
+    'Hybrid Shell',
+
+    'Metal Series',
+
+    'Brass',
+
+    'Copper',
+
+    'Aluminum',
+
+    'AK Drums Era',
+
+    'DW / Craviotto Era',
+  ],
+
+  'Noble & Cooley': [
+    'Solid Shell Classic',
+
+    'SS Classic',
+
+    'CD Maple',
+
+    'Horizon',
+
+    'Horizon Maple',
+
+    'Horizon Birch',
+
+    'Walnut Classic',
+
+    'Alloy Classic',
+
+    'Noble & Cooley Classic',
+
+    'Steam Bent Solid Shell',
+
+    'Single Ply Maple',
+
+    'Single Ply Walnut',
+
+    'Single Ply Cherry',
+
+    'Single Ply Tulip',
+
+    'Union Series',
+
+    'Star Series',
+  ],
+
+  Dunnett: [
+    'Classic',
+
+    '2N',
+
+    'Stainless Steel',
+
+    'Titanium',
+
+    'Monoply',
+
+    'George Way Studio',
+
+    'George Way Aero',
+
+    'Carter McLean Signature',
+
+    'R4',
+
+    'R7',
+
+    'R-Class',
+
+    'Dunnett Classic Titanium',
+
+    'Dunnett Classic Stainless',
+
+    'Dunnett Classic Bronze',
+
+    'Dunnett Classic Brass',
+
+    'Dunnett Classic Aluminum',
+  ],
+
+  'George Way': [
+    'Studio',
+
+    'Aero',
+
+    'Tradition',
+
+    'Elkhart',
+
+    'Aristocrat',
+
+    'Advance',
+
+    'Acacia',
+
+    'Walnut',
+
+    'Maple',
+
+    'Mahogany',
+
+    'Copper',
+
+    'Brass',
+
+    'Aluminum',
+
+    'George Way / Dunnett',
+  ],
+
+  Keplinger: [
+    'Black Iron',
+
+    'Stainless Steel',
+
+    'Brass',
+
+    'Copper',
+
+    'Bronze',
+
+    'Aluminum',
+
+    'Steel',
+
+    'Handmade Metal Shell',
+
+    'Keplinger Black Iron Snare',
+
+    'Keplinger Stainless Snare',
+  ],
+
+  'INDe Drum Lab': [
+    'WaFarer',
+
+    'BR Series',
+
+    'Kalamazoo',
+
+    'Maple',
+
+    'Aluminum',
+
+    'Bronze',
+
+    'Steel',
+
+    'Solid Shell',
+
+    'Stave Shell',
+
+    'Custom Series',
+  ],
+
+  Oriollo: [
+    'Phantom',
+
+    'Mangosta',
+
+    'Bellmaker',
+
+    'Bakar',
+
+    'Tron',
+
+    'Acrylic',
+
+    'Aluminum',
+
+    'Steel',
+
+    'Copper',
+
+    'Brass',
+
+    'Bronze',
+
+    'Cast Metal',
+  ],
+
+  'Q Drum Co.': [
+    'Gentleman’s Series',
+
+    'Q Gentlemen’s',
+
+    'Copper',
+
+    'Brass',
+
+    'Steel',
+
+    'Aluminum',
+
+    'Mahogany',
+
+    'Maple',
+
+    'Acrylic',
+
+    'Custom Shop',
+
+    'Limited Edition',
+  ],
+
+  'C&C Drum Co.': [
+    'Custom',
+
+    'Player Date I',
+
+    'Player Date II',
+
+    'Gladstone',
+
+    '12th & Vine',
+
+    'Mahogany',
+
+    'Maple',
+
+    'Acrylic',
+
+    'Vintage Maple',
+
+    'Big Beat',
+
+    'Super Flyer',
+
+    'Challenger',
+  ],
+
+  'Sugar Percussion': [
+    'Stave',
+
+    'Steam Bent',
+
+    'Solid Shell',
+
+    'Maple',
+
+    'Cherry',
+
+    'Walnut',
+
+    'Mahogany',
+
+    'Padauk',
+
+    'Custom Shop',
+
+    'Single-Ply',
+  ],
+
+  'A&F Drum Co.': [
+    'Raw Brass',
+
+    'Raw Steel',
+
+    'Raw Aluminum',
+
+    'Raw Copper',
+
+    'Royal',
+
+    'Club',
+
+    'Rude Boy',
+
+    'Field Drum',
+
+    'Single Tension',
+
+    'Pancake',
+
+    'Maple Club',
+
+    'Mahogany Club',
+
+    'Acrylic',
+
+    'Patina',
+  ],
+
+  'British Drum Co.': [
+    'Legend',
+
+    'Lounge',
+
+    'Live Lounge',
+
+    'Bluebird',
+
+    'Merlin',
+
+    'Big Softy',
+
+    'Maverick',
+
+    'Super 7',
+
+    'Raven',
+
+    'Palladium',
+
+    'Impression',
+
+    'Casino',
+
+    'Duke',
+  ],
+
+  'Doc Sweeney': [
+    'Classic',
+
+    'Solid Shell',
+
+    'Stave',
+
+    'Steam Bent',
+
+    'Maple',
+
+    'Cherry',
+
+    'Walnut',
+
+    'Mahogany',
+
+    'Custom',
+  ],
+
+  'Pork Pie': [
+    'USA Custom',
+
+    'Little Squealer',
+
+    'Hip Pig',
+
+    'Pig Lite',
+
+    'Patina Brass',
+
+    'Big Black Brass',
+
+    'Black Brass',
+
+    'BOB',
+
+    'Acrylic',
+
+    'Maple',
+
+    'Cherry Bubinga',
+
+    'Zebrawood',
+
+    'Brass',
+
+    'Steel',
+  ],
+
+  Spaun: [
+    'Custom',
+
+    'Acrylic',
+
+    'Maple',
+
+    'Birch',
+
+    'Hybrid',
+
+    'Vented',
+
+    'Acrylic Hybrid',
+
+    'Signature Series',
+  ],
+
+  'SJC Custom Drums': [
+    'Custom',
+
+    'Pathfinder',
+
+    'Tour Series',
+
+    'Alpha',
+
+    'Providence',
+
+    'Navigator',
+
+    'Goliath',
+
+    'Josh Dun Signature',
+
+    'Tre Cool Signature',
+
+    'Maple',
+
+    'Acrylic',
+
+    'Metal',
+  ],
+
+  'Truth Custom Drums': [
+    'Custom',
+
+    'Maple',
+
+    'Mahogany',
+
+    'Birch',
+
+    'Acrylic',
+
+    'Hybrid',
+
+    'Signature Series',
+  ],
 
   'Generic Reference': [
-
     'Ply Reference',
+
+    'Metal Reference',
 
     'Stave Reference',
 
@@ -1001,28 +3462,674 @@ const NON_OBER_LINE_OPTIONS_BY_COMPANY = {
 
     'Solid Shell Reference',
 
-    'Metal Reference',
-
     'Acrylic Reference',
-
   ],
 
   default: [
+    'Known / Documented Build',
 
-    'Known Production Line',
+    'Custom / One-Off Build',
 
-    'Custom Shop Line',
-
-    'Baseline Reference Line',
-
+    'General Builder Voice Reference',
   ],
+};
 
+const getReferenceLineStatus = ({ companyName = '', lineName = '' }) => {
+  if (!companyName || !lineName) {
+    return REFERENCE_LINE_STATUS.UNKNOWN;
+  }
+
+  const normalizedLineName = normalizeText(lineName);
+
+  if (
+    companyName === 'Generic Reference' ||
+    companyName === '' ||
+    normalizeText(companyName).includes('generic')
+  ) {
+    if (['ply reference', 'metal reference'].includes(normalizedLineName)) {
+      return REFERENCE_LINE_STATUS.CURRENT;
+    }
+
+    return REFERENCE_LINE_STATUS.UNKNOWN;
+  }
+
+  const currentLinesByCompany = {
+    Pearl: [
+      'Masterworks',
+
+      'Reference One',
+
+      'Reference Pure',
+
+      'Masters Maple Reserve',
+
+      'Masters Maple Complete',
+
+      'Session Studio Select',
+
+      'President Series Deluxe',
+
+      'Crystal Beat',
+
+      'Decade Maple',
+
+      'Export EXX',
+
+      'Export EXL',
+
+      'Roadshow',
+
+      'Midtown',
+
+      'Compact Traveler',
+
+      'Free Floating',
+
+      'Sensitone Heritage Alloy',
+
+      'Modern Utility',
+    ],
+
+    Tama: [
+      'STAR Maple',
+
+      'STAR Walnut',
+
+      'Starclassic Maple',
+
+      'Starclassic Walnut/Birch',
+
+      'Superstar Classic',
+
+      'Imperialstar',
+
+      'Club-JAM',
+
+      'Club-JAM Flyer',
+
+      'Club-JAM Pancake',
+
+      'Cocktail-JAM',
+
+      'S.L.P.',
+
+      'Starphonic',
+
+      'Metalworks',
+    ],
+
+    Yamaha: [
+      'Recording Custom',
+
+      'Absolute Hybrid Maple',
+
+      'Live Custom Hybrid Oak',
+
+      'Tour Custom',
+
+      'Stage Custom Birch',
+
+      'Rydeen',
+
+      'Junior Kit',
+    ],
+
+    Ludwig: [
+      'Legacy Mahogany',
+
+      'Legacy Maple',
+
+      'Classic Maple',
+
+      'Classic Oak',
+
+      'NeuSonic',
+
+      'Vistalite',
+
+      'Evolution',
+
+      'Breakbeats',
+
+      'Questlove Pocket Kit',
+
+      'Supraphonic',
+
+      'Black Beauty',
+
+      'Acrolite',
+
+      'Super-Sensitive',
+
+      'Bronze Phonic',
+
+      'Copper Phonic',
+
+      'Universal',
+
+      'Raw Brass',
+
+      'Raw Copper',
+    ],
+
+    DW: [
+      'Collector’s Series',
+
+      'Collector’s Series Maple',
+
+      'Collector’s Series Cherry',
+
+      'Collector’s Series Mahogany',
+
+      'Collector’s Series Oak',
+
+      'Collector’s Series Purpleheart',
+
+      'Collector’s Series Exotic',
+
+      'Performance Series',
+
+      'Design Series',
+
+      'Design Series Frequent Flyer',
+
+      'Design Series Mini-Pro',
+
+      'Design Series Acrylic',
+
+      'Classics Series',
+
+      'Jazz Series',
+
+      'Super Solid',
+
+      'True-Sonic',
+
+      'MFG',
+
+      'Edge',
+    ],
+
+    Gretsch: [
+      'USA Custom',
+
+      'Brooklyn',
+
+      'Broadkaster',
+
+      'Renown',
+
+      'Renown Maple',
+
+      'Renown RN2',
+
+      'Catalina Club',
+
+      'Catalina Club Jazz',
+
+      'Catalina Maple',
+
+      'Full Range',
+
+      'Brooklyn Standard',
+    ],
+
+    Mapex: [
+      'Black Panther Design Lab',
+
+      'Black Panther',
+
+      'Black Panther Artist',
+
+      'Saturn Evolution',
+
+      'Saturn Evolution Special Edition',
+
+      'Armory',
+
+      'Armory Studioease',
+
+      'Armory Rock',
+
+      'Mars',
+
+      'Mars Maple',
+
+      'Venus',
+
+      'Tornado',
+
+      'MPX',
+    ],
+
+    Sonor: [
+      'SQ2',
+
+      'SQ1',
+
+      'ProLite',
+
+      'Vintage Series',
+
+      'AQ2',
+
+      'AQ1',
+
+      'AQX',
+
+      'Kompressor',
+
+      'Artist Snare',
+    ],
+
+    PDP: [
+      'Concept Series',
+
+      'Concept Maple',
+
+      'Concept Birch',
+
+      'Concept Classic',
+
+      'Concept Exotic',
+
+      'Concept Select',
+
+      'Concept Maple Classic',
+
+      'Concept Acrylic',
+
+      'Limited Edition',
+
+      'Mainstage',
+
+      'Center Stage',
+
+      'New Yorker',
+    ],
+
+    Rogers: ['Covington', 'PowerTone', 'Dyna-Sonic', 'SuperTen'],
+
+    Natal: [
+      'Originals',
+
+      'Originals Maple',
+
+      'Originals Walnut',
+
+      'Originals Birch',
+
+      'Cafe Racer',
+
+      'Arcadia',
+    ],
+
+    Canopus: [
+      'Yaiba',
+
+      'Yaiba II',
+
+      'R.F.M.',
+
+      'Neo-Vintage',
+
+      'Ash',
+
+      'The Maple',
+
+      'Zelkova',
+    ],
+
+    Craviotto: [
+      'Solid Shell',
+
+      'Private Reserve',
+
+      'Diamond Series',
+
+      'Johnny C.',
+    ],
+  };
+
+  const signatureKeywords = [
+    'signature',
+    'chad smith',
+    'omar hakim',
+    'joey jordison',
+    'benny greb',
+    'steve smith',
+    'danny carey',
+    'akira jimbo',
+    'steve gadd',
+    'manu katché',
+  ];
+
+  const vintageKeywords = [
+    'teardrop',
+
+    'phonic',
+
+    'phonic plus',
+
+    'champion',
+
+    'performer',
+
+    'holiday',
+
+    'tower',
+
+    'luxor',
+
+    'spotlight',
+
+    'celebrity',
+
+    'cleveland',
+
+    'covington',
+
+    'super classic',
+
+    'downbeat',
+
+    'jazzette',
+
+    'fab',
+
+    'hollywood',
+
+    'standard',
+
+    'rocker',
+
+    'rocker ii',
+
+    'world series',
+
+    'dx',
+
+    'dlx',
+
+    'mlx',
+
+    'blx',
+
+    'czx',
+
+    'glx',
+  ];
+
+  const rareKeywords = [
+    'bell brass',
+
+    'warlord',
+
+    'edge',
+
+    'super solid edge',
+
+    'top edge',
+
+    'craviotto',
+
+    'zelkova',
+
+    'private reserve',
+
+    'diamond series',
+
+    'stainless steel',
+
+    'bronze',
+
+    'copper',
+
+    'concrete',
+  ];
+
+  const limitedKeywords = [
+    'limited',
+
+    'anniversary',
+
+    'special edition',
+
+    'exotic',
+
+    'exotix',
+
+    'reserve',
+
+    'artisan',
+  ];
+
+  const currentLines = currentLinesByCompany[companyName] || [];
+
+  if (currentLines.some((line) => normalizeText(line) === normalizedLineName)) {
+    return REFERENCE_LINE_STATUS.CURRENT;
+  }
+
+  if (
+    signatureKeywords.some((keyword) =>
+      normalizedLineName.includes(normalizeText(keyword))
+    )
+  ) {
+    return REFERENCE_LINE_STATUS.SIGNATURE;
+  }
+
+  if (
+    rareKeywords.some((keyword) =>
+      normalizedLineName.includes(normalizeText(keyword))
+    )
+  ) {
+    return REFERENCE_LINE_STATUS.RARE;
+  }
+
+  if (
+    limitedKeywords.some((keyword) =>
+      normalizedLineName.includes(normalizeText(keyword))
+    )
+  ) {
+    return REFERENCE_LINE_STATUS.LIMITED;
+  }
+
+  if (
+    vintageKeywords.some((keyword) =>
+      normalizedLineName.includes(normalizeText(keyword))
+    )
+  ) {
+    return REFERENCE_LINE_STATUS.VINTAGE;
+  }
+
+  return REFERENCE_LINE_STATUS.DISCONTINUED;
+};
+
+const getReferenceLineAccess = ({ companyName = '', lineName = '' }) => {
+  const normalizedCompanyName = normalizeText(companyName);
+
+  const normalizedLineName = normalizeText(lineName);
+
+  if (
+    normalizedCompanyName.includes('generic') ||
+    companyName === '' ||
+    companyName === 'Generic Reference'
+  ) {
+    if (['ply reference', 'metal reference'].includes(normalizedLineName)) {
+      return REFERENCE_LINE_ACCESS.FREE;
+    }
+
+    return REFERENCE_LINE_ACCESS.UPGRADE;
+  }
+
+  const status = getReferenceLineStatus({ companyName, lineName });
+
+  if (status === REFERENCE_LINE_STATUS.CURRENT) {
+    return REFERENCE_LINE_ACCESS.FREE;
+  }
+
+  return REFERENCE_LINE_ACCESS.UPGRADE;
+};
+
+const getReferenceLineStatusLabel = ({ companyName = '', lineName = '' }) => {
+  const status = getReferenceLineStatus({ companyName, lineName });
+
+  return (
+    REFERENCE_LINE_BUCKET_LABELS[status] || REFERENCE_LINE_BUCKET_LABELS.unknown
+  );
+};
+
+const userCanAccessExpandedReferenceLines = ({
+  isAdmin = true,
+
+  isLegacyPrintSubscriber = false,
+
+  isLegacyPrintPartner = false,
+} = {}) => {
+  return Boolean(isAdmin || isLegacyPrintSubscriber || isLegacyPrintPartner);
+};
+
+const filterReferenceLinesByAccess = ({
+  companyName = '',
+
+  lines = [],
+
+  isAdmin = true,
+
+  isLegacyPrintSubscriber = false,
+
+  isLegacyPrintPartner = false,
+} = {}) => {
+  const canAccessExpanded = userCanAccessExpandedReferenceLines({
+    isAdmin,
+
+    isLegacyPrintSubscriber,
+
+    isLegacyPrintPartner,
+  });
+
+  return lines.filter((lineName) => {
+    const access = getReferenceLineAccess({ companyName, lineName });
+
+    if (access === REFERENCE_LINE_ACCESS.FREE) {
+      return true;
+    }
+
+    return canAccessExpanded;
+  });
+};
+
+const sortReferenceLinesByStatus = ({ companyName = '', lines = [] }) => {
+  const normalizedCompanyName = normalizeText(companyName);
+
+  if (
+    normalizedCompanyName.includes('generic') ||
+    companyName === '' ||
+    companyName === 'Generic Reference'
+  ) {
+    const genericOrder = [
+      'Ply Reference',
+
+      'Metal Reference',
+
+      'Stave Reference',
+
+      'Steam-Bent Reference',
+
+      'Solid Shell Reference',
+
+      'Acrylic Reference',
+    ];
+
+    return [...lines].sort((a, b) => {
+      const indexA = genericOrder.indexOf(a);
+
+      const indexB = genericOrder.indexOf(b);
+
+      const safeIndexA = indexA === -1 ? 999 : indexA;
+
+      const safeIndexB = indexB === -1 ? 999 : indexB;
+
+      if (safeIndexA !== safeIndexB) {
+        return safeIndexA - safeIndexB;
+      }
+
+      return a.localeCompare(b);
+    });
+  }
+
+  return [...lines].sort((a, b) => {
+    const statusA = getReferenceLineStatus({
+      companyName,
+
+      lineName: a,
+    });
+
+    const statusB = getReferenceLineStatus({
+      companyName,
+
+      lineName: b,
+    });
+
+    const statusIndexA = REFERENCE_LINE_STATUS_ORDER.indexOf(statusA);
+
+    const statusIndexB = REFERENCE_LINE_STATUS_ORDER.indexOf(statusB);
+
+    if (statusIndexA !== statusIndexB) {
+      return statusIndexA - statusIndexB;
+    }
+
+    return a.localeCompare(b);
+  });
+};
+
+const getReferenceLineBucketLabel = ({ companyName = '', lineName = '' }) => {
+  const status = getReferenceLineStatus({ companyName, lineName });
+
+  return (
+    REFERENCE_LINE_BUCKET_LABELS[status] || REFERENCE_LINE_BUCKET_LABELS.unknown
+  );
+};
+
+const getSelectorOptionMeta = ({
+  fieldKey = '',
+  option = '',
+  selector = {},
+}) => {
+  if (fieldKey !== 'nonOberLineName') {
+    return {};
+  }
+
+  const companyName =
+    selector.nonOberCompanyType === 'Generic / Baseline Reference'
+      ? 'Generic Reference'
+      : selector.nonOberCompanyName || '';
+
+  const status = getReferenceLineStatus({
+    companyName,
+
+    lineName: option,
+  });
+
+  const access = getReferenceLineAccess({
+    companyName,
+
+    lineName: option,
+  });
+
+  return {
+    status,
+
+    access,
+
+    bucketLabel:
+      REFERENCE_LINE_BUCKET_LABELS[status] ||
+      REFERENCE_LINE_BUCKET_LABELS.unknown,
+  };
 };
 
 const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
-
   'Ply Reference': [
-
     'Maple',
 
     'Birch',
@@ -1052,11 +4159,9 @@ const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
     'Mahogany / Poplar',
 
     'Beech',
-
   ],
 
   'Stave Reference': [
-
     'Maple',
 
     'Oak',
@@ -1092,11 +4197,9 @@ const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
     'Maple / Bubinga',
 
     'Mahogany / Cherry',
-
   ],
 
   'Steam-Bent Reference': [
-
     'Maple',
 
     'Walnut',
@@ -1120,11 +4223,9 @@ const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
     'Mahogany with Reinforcement Rings',
 
     'Cherry with Reinforcement Rings',
-
   ],
 
   'Solid Shell Reference': [
-
     'Maple',
 
     'Walnut',
@@ -1148,11 +4249,9 @@ const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
     'Single-Piece Cherry',
 
     'Single-Piece Mahogany',
-
   ],
 
   'Metal Reference': [
-
     'Brass',
 
     'Steel',
@@ -1182,11 +4281,9 @@ const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
     'Seamless Aluminum',
 
     'Seamless Brass',
-
   ],
 
   'Acrylic Reference': [
-
     'Clear Acrylic',
 
     'Colored Acrylic',
@@ -1204,9 +4301,7 @@ const NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE = {
     'Transparent Acrylic',
 
     'Sparkle Acrylic',
-
   ],
-
 };
 
 const NON_OBER_BASELINE_CONSTRUCTION_OPTIONS = [
@@ -2742,119 +5837,178 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
       return [];
     }
 
-    return NON_OBER_COMPANY_TYPE_OPTIONS;
+    return Array.from(
+      new Set([...NON_OBER_COMPANY_TYPE_OPTIONS, ...getReferenceCompanyTypes()])
+    );
   }
 
   if (field.source === 'nonOberCompanyName') {
-
     if (
-
       isHeritageConstruction(selector.construction) ||
-
       isFeuzonConstruction(selector.construction) ||
-
       isSoundLegendConstruction(selector.construction)
-
     ) {
-
       return [];
-
     }
 
     if (selector.nonOberCompanyType === 'Generic / Baseline Reference') {
-
       return [];
-
     }
 
-    return (
-
-      NON_OBER_COMPANY_OPTIONS_BY_TYPE[selector.nonOberCompanyType] ||
-
-      NON_OBER_COMPANY_OPTIONS_BY_TYPE['Generic / Baseline Reference']
-
+    const datasetOptions = getReferenceCompaniesByType(
+      selector.nonOberCompanyType
     );
 
+    const fallbackOptions =
+      NON_OBER_COMPANY_OPTIONS_BY_TYPE[selector.nonOberCompanyType] || [];
+
+    return datasetOptions.length ? datasetOptions : fallbackOptions;
   }
 
   if (field.source === 'nonOberLineName') {
-
     if (
-
       isHeritageConstruction(selector.construction) ||
-
       isFeuzonConstruction(selector.construction) ||
-
       isSoundLegendConstruction(selector.construction)
-
     ) {
-
       return [];
-
     }
 
     if (selector.nonOberCompanyType === 'Generic / Baseline Reference') {
+      const datasetOptions = getReferenceLines({
+        companyType: selector.nonOberCompanyType,
 
-      return NON_OBER_LINE_OPTIONS_BY_COMPANY['Generic Reference'];
+        companyName: '',
+      });
 
+      const fallbackOptions =
+        NON_OBER_LINE_OPTIONS_BY_COMPANY['Generic Reference'] || [];
+
+      const mergedOptions = datasetOptions.length
+        ? datasetOptions
+        : fallbackOptions;
+
+      const accessFilteredOptions = filterReferenceLinesByAccess({
+        companyName: 'Generic Reference',
+
+        lines: mergedOptions,
+
+        isAdmin: true,
+
+        isLegacyPrintSubscriber: false,
+
+        isLegacyPrintPartner: false,
+      });
+
+      return sortReferenceLinesByStatus({
+        companyName: 'Generic Reference',
+
+        lines: accessFilteredOptions,
+      });
     }
 
-    return (
+    if (!selector.nonOberCompanyName) {
+      return [];
+    }
 
+    const datasetOptions = getReferenceLines({
+      companyType: selector.nonOberCompanyType,
+
+      companyName: selector.nonOberCompanyName,
+    });
+
+    const fallbackOptions =
       NON_OBER_LINE_OPTIONS_BY_COMPANY[selector.nonOberCompanyName] ||
+      NON_OBER_LINE_OPTIONS_BY_COMPANY.default ||
+      [];
 
-      NON_OBER_LINE_OPTIONS_BY_COMPANY.default
+    const mergedOptions = datasetOptions.length
+      ? datasetOptions
+      : fallbackOptions;
 
-    );
+    const accessFilteredOptions = filterReferenceLinesByAccess({
+      companyName: selector.nonOberCompanyName,
 
+      lines: mergedOptions,
+
+      // Admin calibration view should see everything.
+
+      // Later, public/subscriber UI should pass real user access here.
+
+      isAdmin: true,
+
+      isLegacyPrintSubscriber: false,
+
+      isLegacyPrintPartner: false,
+    });
+
+    return sortReferenceLinesByStatus({
+      companyName: selector.nonOberCompanyName,
+
+      lines: accessFilteredOptions,
+    });
   }
 
   if (field.source === 'nonOberModelName') {
-
     if (
-
       isHeritageConstruction(selector.construction) ||
-
       isFeuzonConstruction(selector.construction) ||
-
       isSoundLegendConstruction(selector.construction)
-
     ) {
-
       return [];
-
     }
 
     if (selector.nonOberCompanyType === 'Generic / Baseline Reference') {
+      const datasetOptions = getReferenceModels({
+        companyType: selector.nonOberCompanyType,
 
-      return (
+        companyName: '',
 
-        NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[
+        lineName: selector.nonOberLineName,
 
-          selector.nonOberLineName
+        drumType: selector.drumType,
+      });
 
-        ] ||
+      const fallbackOptions =
+        NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[selector.nonOberLineName] ||
+        [];
 
-        NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION[
+      return datasetOptions.length ? datasetOptions : fallbackOptions;
+    }
 
-          selector.nonOberBaselineConstruction
+    if (!selector.nonOberCompanyName) {
+      return [];
+    }
 
-        ] ||
+    const datasetOptions = getReferenceModels({
+      companyType: selector.nonOberCompanyType,
 
-        []
+      companyName: selector.nonOberCompanyName,
 
-      );
+      lineName: selector.nonOberLineName,
 
+      drumType: selector.drumType,
+    });
+
+    const lineSpecificOptions = getNonOberModelOptionsForSelection({
+      companyName: selector.nonOberCompanyName,
+
+      lineName: selector.nonOberLineName,
+
+      drumType: selector.drumType,
+    });
+
+    if (lineSpecificOptions.length) {
+      return lineSpecificOptions;
     }
 
     const makerData =
-
       NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[selector.nonOberCompanyName] ||
-
       NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
 
-    return makerData[selector.drumType] || [];
+    const fallbackOptions = makerData[selector.drumType] || [];
 
+    return datasetOptions.length ? datasetOptions : fallbackOptions;
   }
 
   if (field.source === 'nonOberBaselineConstruction') {
@@ -2902,29 +6056,19 @@ const getSelectorOptions = ({ calibration, field, selector }) => {
   }
 
   if (field.source === 'nonOberLineSoundFocus') {
-
     if (
-
       isHeritageConstruction(selector.construction) ||
-
       isFeuzonConstruction(selector.construction) ||
-
       isSoundLegendConstruction(selector.construction)
-
     ) {
-
       return [];
-
     }
 
     if (selector.drumType !== 'Overall Kit / Line Sound') {
-
       return [];
-
     }
 
     return NON_OBER_LINE_SOUND_FOCUS_OPTIONS;
-
   }
 
   if (field.source === 'nonOberPlyLayupStyle') {
@@ -5265,39 +8409,16 @@ const AdminLegacyPrintCalibration = () => {
 
       if (!isOberBuildPath) {
         if (key === 'nonOberCompanyType') {
-
           if (value === 'Generic / Baseline Reference') {
-
             const lineOptions =
-
-              NON_OBER_LINE_OPTIONS_BY_COMPANY['Generic Reference'];
+              NON_OBER_LINE_OPTIONS_BY_COMPANY['Generic Reference'] || [];
 
             const nextLineName = lineOptions[0] || 'Ply Reference';
 
             const materialOptions =
-
               NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[nextLineName] || [];
 
-        if (
-
-          key === 'nonOberModelName' &&
-
-          next.nonOberCompanyType === 'Generic / Baseline Reference'
-
-        ) {
-
-          return {
-
-            ...next,
-
-            nonOberMaterial: value,
-
-          };
-
-        }
-
             return {
-
               ...next,
 
               nonOberCompanyName: '',
@@ -5308,74 +8429,118 @@ const AdminLegacyPrintCalibration = () => {
 
               nonOberBaselineConstruction: 'Ply',
 
-              nonOberMaterial: 'Maple',
+              nonOberMaterial: materialOptions[0] || 'Maple',
 
               nonOberThicknessGroup: 'Medium / 6–8mm',
 
               nonOberPlyLayupStyle: NON_OBER_PLY_LAYUP_OPTIONS[0],
 
-              nonOberReinforcementRings:
-
-                NON_OBER_REINFORCEMENT_RING_OPTIONS[0],
+              nonOberReinforcementRings: NON_OBER_REINFORCEMENT_RING_OPTIONS[0],
 
               nonOberBeadedShell: '',
-
             };
-
           }
 
           const companyOptions =
-
             NON_OBER_COMPANY_OPTIONS_BY_TYPE[value] ||
-
-            NON_OBER_COMPANY_OPTIONS_BY_TYPE['Major Manufacturer'];
+            NON_OBER_COMPANY_OPTIONS_BY_TYPE['Major Manufacturer'] ||
+            [];
 
           const nextCompanyName = companyOptions[0] || '';
 
           const lineOptions =
-
             NON_OBER_LINE_OPTIONS_BY_COMPANY[nextCompanyName] ||
+            NON_OBER_LINE_OPTIONS_BY_COMPANY.default ||
+            [];
 
-            NON_OBER_LINE_OPTIONS_BY_COMPANY.default;
+          const nextLineName = lineOptions[0] || '';
+
+          const makerData =
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[nextCompanyName] ||
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
+
+          const modelOptions = makerData[next.drumType] || [];
 
           return {
-
             ...next,
 
             nonOberCompanyName: nextCompanyName,
 
-            nonOberLineName: lineOptions[0] || '',
+            nonOberLineName: nextLineName,
 
-            nonOberModelName: '',
+            nonOberModelName: modelOptions[0] || '',
 
+            nonOberBaselineConstruction: '',
+
+            nonOberMaterial: '',
+
+            nonOberThicknessGroup: '',
+
+            nonOberPlyLayupStyle: '',
+
+            nonOberReinforcementRings: '',
+
+            nonOberBeadedShell: '',
           };
-
         }
 
         if (key === 'nonOberCompanyName') {
           const lineOptions =
             NON_OBER_LINE_OPTIONS_BY_COMPANY[value] ||
-            NON_OBER_LINE_OPTIONS_BY_COMPANY.default;
+            NON_OBER_LINE_OPTIONS_BY_COMPANY.default ||
+            [];
+
+          const nextLineName = lineOptions[0] || '';
+
+          const makerData =
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[value] ||
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
+
+          const modelOptions = makerData[next.drumType] || [];
 
           return {
             ...next,
 
-            nonOberLineName: lineOptions[0] || '',
+            nonOberLineName: nextLineName,
 
-            nonOberModelName: '',
+            nonOberModelName: modelOptions[0] || '',
           };
         }
 
         if (
-
           key === 'nonOberLineName' &&
-
-          next.nonOberCompanyType === 'Generic / Baseline Reference'
-
+          next.nonOberCompanyType !== 'Generic / Baseline Reference'
         ) {
+          const lineSpecificOptions = getNonOberModelOptionsForSelection({
+            companyName: next.nonOberCompanyName,
 
+            lineName: value,
+
+            drumType: next.drumType,
+          });
+
+          const makerData =
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[next.nonOberCompanyName] ||
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
+
+          const fallbackOptions = makerData[next.drumType] || [];
+
+          const modelOptions = lineSpecificOptions.length
+            ? lineSpecificOptions
+            : fallbackOptions;
+
+          return {
+            ...next,
+
+            nonOberModelName: modelOptions[0] || '',
+          };
+        }
+
+        if (
+          key === 'nonOberLineName' &&
+          next.nonOberCompanyType === 'Generic / Baseline Reference'
+        ) {
           const constructionByLine = {
-
             'Ply Reference': 'Ply',
 
             'Stave Reference': 'Stave',
@@ -5387,25 +8552,19 @@ const AdminLegacyPrintCalibration = () => {
             'Metal Reference': 'Metal',
 
             'Acrylic Reference': 'Acrylic',
-
           };
 
           const nextConstruction = constructionByLine[value] || 'Ply';
 
           const materialOptions =
-
             NON_OBER_BASELINE_MATERIAL_OPTIONS_BY_LINE[value] ||
-
             NON_OBER_MATERIAL_OPTIONS_BY_CONSTRUCTION[nextConstruction] ||
-
             [];
 
           const thicknessOptions =
-
             NON_OBER_THICKNESS_OPTIONS_BY_CONSTRUCTION[nextConstruction] || [];
 
           return {
-
             ...next,
 
             nonOberBaselineConstruction: nextConstruction,
@@ -5415,41 +8574,27 @@ const AdminLegacyPrintCalibration = () => {
             nonOberMaterial: materialOptions[0] || '',
 
             nonOberThicknessGroup:
-
               thicknessOptions[1] || thicknessOptions[0] || '',
 
             nonOberPlyLayupStyle:
-
               nextConstruction === 'Ply' ? NON_OBER_PLY_LAYUP_OPTIONS[0] : '',
 
-            nonOberReinforcementRings: [
-
-              'Ply',
-
-              'Steam Bent',
-
-              'Solid',
-
-            ].includes(nextConstruction)
-
+            nonOberReinforcementRings: ['Ply', 'Steam Bent', 'Solid'].includes(
+              nextConstruction
+            )
               ? NON_OBER_REINFORCEMENT_RING_OPTIONS[0]
-
               : '',
 
             nonOberBeadedShell:
-
               nextConstruction === 'Metal'
-
                 ? NON_OBER_BEADED_SHELL_OPTIONS[0]
-
                 : '',
 
             staveCount:
-
-              nextConstruction === 'Stave' ? next.staveCount || '16 staves' : '',
-
+              nextConstruction === 'Stave'
+                ? next.staveCount || '16 staves'
+                : '',
           };
-
         }
 
         if (key === 'nonOberBaselineConstruction') {
@@ -5483,33 +8628,40 @@ const AdminLegacyPrintCalibration = () => {
           };
         }
 
-           if (key === 'drumType') {
+        if (key === 'drumType') {
+          const lineSpecificOptions = getNonOberModelOptionsForSelection({
+            companyName: next.nonOberCompanyName,
+
+            lineName: next.nonOberLineName,
+
+            drumType: value,
+          });
+
+          const makerData =
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER[next.nonOberCompanyName] ||
+            NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER.default;
+
+          const fallbackOptions = makerData[value] || [];
+
+          const modelOptions = lineSpecificOptions.length
+            ? lineSpecificOptions
+            : fallbackOptions;
 
           return {
-
             ...next,
 
             nonOberLineSoundFocus:
-
               value === 'Overall Kit / Line Sound'
-
                 ? next.nonOberLineSoundFocus ||
-
                   NON_OBER_LINE_SOUND_FOCUS_OPTIONS[0]
-
                 : '',
 
             nonOberModelName:
-
               value === 'Overall Kit / Line Sound'
-
-                ? 'General Full Kit Reference'
-
-                : next.nonOberModelName,
-
+                ? modelOptions[0] || 'General Full Kit Reference'
+                : modelOptions[0] || '',
           };
-
-        }     
+        }
 
         return next;
       }
@@ -6965,6 +10117,7 @@ const AdminLegacyPrintCalibration = () => {
                 calibration={draftCalibration}
                 selector={safeSelector}
                 getSelectorOptions={getSelectorOptions}
+                getOptionMeta={getSelectorOptionMeta}
                 onSelectorChange={handleSelectorChange}
               />
 
