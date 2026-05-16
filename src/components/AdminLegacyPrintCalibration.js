@@ -23,6 +23,8 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  startAfter,
+  limit,
 } from 'firebase/firestore';
 
 import { db } from '../firebaseConfig';
@@ -50,6 +52,8 @@ import {
 import './AdminLegacyPrintCalibration.css';
 
 const LEGACYPRINT_CALIBRATION_COLLECTION = 'legacyprint_calibrations';
+
+const SNARE_REFERENCE_DRUMS_COLLECTION = 'snareReferenceDrums';
 
 const LEGACYPRINT_ACTIVE_DOC_ID = 'active';
 
@@ -496,11 +500,8 @@ const NON_OBER_MANUFACTURER_GROUPS = [
 ];
 
 const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
-
   Tama: {
-
     'STAR Maple': {
-
       Snare: ['STAR Maple Snare'],
 
       'Rack Tom': ['STAR Maple Rack Tom'],
@@ -510,11 +511,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['STAR Maple Bass Drum'],
 
       'Overall Kit / Line Sound': ['STAR Maple Full Kit Reference'],
-
     },
 
     'STAR Walnut': {
-
       Snare: ['STAR Walnut Snare'],
 
       'Rack Tom': ['STAR Walnut Rack Tom'],
@@ -524,11 +523,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['STAR Walnut Bass Drum'],
 
       'Overall Kit / Line Sound': ['STAR Walnut Full Kit Reference'],
-
     },
 
     'STAR Bubinga': {
-
       Snare: ['STAR Bubinga Snare'],
 
       'Rack Tom': ['STAR Bubinga Rack Tom'],
@@ -538,19 +535,15 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['STAR Bubinga Bass Drum'],
 
       'Overall Kit / Line Sound': ['STAR Bubinga Full Kit Reference'],
-
     },
 
     'STAR Reserve': {
-
       Snare: ['STAR Reserve Snare'],
 
       'Overall Kit / Line Sound': ['STAR Reserve Snare Reference'],
-
     },
 
     Starclassic: {
-
       Snare: ['Starclassic General Snare Reference'],
 
       'Rack Tom': ['Starclassic General Rack Tom Reference'],
@@ -560,11 +553,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic General Bass Drum Reference'],
 
       'Overall Kit / Line Sound': ['Starclassic Full Line Reference'],
-
     },
 
     'Starclassic Maple': {
-
       Snare: ['Starclassic Maple Snare'],
 
       'Rack Tom': ['Starclassic Maple Rack Tom'],
@@ -574,11 +565,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Maple Bass Drum'],
 
       'Overall Kit / Line Sound': ['Starclassic Maple Full Kit Reference'],
-
     },
 
     'Starclassic Walnut/Birch': {
-
       Snare: ['Starclassic Walnut/Birch Snare'],
 
       'Rack Tom': ['Starclassic Walnut/Birch Rack Tom'],
@@ -588,15 +577,11 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Walnut/Birch Bass Drum'],
 
       'Overall Kit / Line Sound': [
-
         'Starclassic Walnut/Birch Full Kit Reference',
-
       ],
-
     },
 
     'Starclassic Performer': {
-
       Snare: ['Starclassic Performer Snare'],
 
       'Rack Tom': ['Starclassic Performer Rack Tom'],
@@ -606,11 +591,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Performer Bass Drum'],
 
       'Overall Kit / Line Sound': ['Starclassic Performer Full Kit Reference'],
-
     },
 
     'Starclassic Performer Birch/Bubinga': {
-
       Snare: ['Starclassic Performer Birch/Bubinga Snare'],
 
       'Rack Tom': ['Starclassic Performer Birch/Bubinga Rack Tom'],
@@ -620,15 +603,11 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Performer Birch/Bubinga Bass Drum'],
 
       'Overall Kit / Line Sound': [
-
         'Starclassic Performer Birch/Bubinga Full Kit Reference',
-
       ],
-
     },
 
     'Starclassic Bubinga': {
-
       Snare: ['Starclassic Bubinga Snare'],
 
       'Rack Tom': ['Starclassic Bubinga Rack Tom'],
@@ -638,11 +617,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Bubinga Bass Drum'],
 
       'Overall Kit / Line Sound': ['Starclassic Bubinga Full Kit Reference'],
-
     },
 
     'Starclassic Birch': {
-
       Snare: ['Starclassic Birch Snare'],
 
       'Rack Tom': ['Starclassic Birch Rack Tom'],
@@ -652,11 +629,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Birch Bass Drum'],
 
       'Overall Kit / Line Sound': ['Starclassic Birch Full Kit Reference'],
-
     },
 
     'Starclassic Birch/Bubinga': {
-
       Snare: ['Starclassic Birch/Bubinga Snare'],
 
       'Rack Tom': ['Starclassic Birch/Bubinga Rack Tom'],
@@ -665,12 +640,12 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
 
       'Bass Drum': ['Starclassic Birch/Bubinga Bass Drum'],
 
-      'Overall Kit / Line Sound': ['Starclassic Birch/Bubinga Full Kit Reference'],
-
+      'Overall Kit / Line Sound': [
+        'Starclassic Birch/Bubinga Full Kit Reference',
+      ],
     },
 
     'Starclassic Mirage': {
-
       Snare: ['Starclassic Mirage Acrylic Snare'],
 
       'Rack Tom': ['Starclassic Mirage Acrylic Rack Tom'],
@@ -680,11 +655,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Mirage Acrylic Bass Drum'],
 
       'Overall Kit / Line Sound': ['Starclassic Mirage Full Kit Reference'],
-
     },
 
     'Starclassic Exotix': {
-
       Snare: ['Starclassic Exotix Snare'],
 
       'Rack Tom': ['Starclassic Exotix Rack Tom'],
@@ -694,11 +667,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Starclassic Exotix Bass Drum'],
 
       'Overall Kit / Line Sound': ['Starclassic Exotix Full Kit Reference'],
-
     },
 
     Superstar: {
-
       Snare: ['Superstar Snare'],
 
       'Rack Tom': ['Superstar Rack Tom'],
@@ -708,11 +679,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Superstar Full Kit Reference'],
-
     },
 
     'Superstar Classic': {
-
       Snare: ['Superstar Classic Maple Snare'],
 
       'Rack Tom': ['Superstar Classic Maple Rack Tom'],
@@ -722,11 +691,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar Classic Maple Bass Drum'],
 
       'Overall Kit / Line Sound': ['Superstar Classic Full Kit Reference'],
-
     },
 
     'Superstar Hyper-Drive': {
-
       Snare: ['Superstar Hyper-Drive Snare'],
 
       'Rack Tom': ['Superstar Hyper-Drive Rack Tom'],
@@ -736,11 +703,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar Hyper-Drive Bass Drum'],
 
       'Overall Kit / Line Sound': ['Superstar Hyper-Drive Full Kit Reference'],
-
     },
 
     'Superstar Hyper-Drive Duo': {
-
       Snare: ['Superstar Hyper-Drive Duo Snare'],
 
       'Rack Tom': ['Superstar Hyper-Drive Duo Rack Tom'],
@@ -750,15 +715,11 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar Hyper-Drive Duo Bass Drum'],
 
       'Overall Kit / Line Sound': [
-
         'Superstar Hyper-Drive Duo Full Kit Reference',
-
       ],
-
     },
 
     'Superstar Custom': {
-
       Snare: ['Superstar Custom Snare'],
 
       'Rack Tom': ['Superstar Custom Rack Tom'],
@@ -768,11 +729,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar Custom Bass Drum'],
 
       'Overall Kit / Line Sound': ['Superstar Custom Full Kit Reference'],
-
     },
 
     'Superstar EFX': {
-
       Snare: ['Superstar EFX Snare'],
 
       'Rack Tom': ['Superstar EFX Rack Tom'],
@@ -782,11 +741,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar EFX Bass Drum'],
 
       'Overall Kit / Line Sound': ['Superstar EFX Full Kit Reference'],
-
     },
 
     'Superstar SK': {
-
       Snare: ['Superstar SK Snare'],
 
       'Rack Tom': ['Superstar SK Rack Tom'],
@@ -796,11 +753,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Superstar SK Bass Drum'],
 
       'Overall Kit / Line Sound': ['Superstar SK Full Kit Reference'],
-
     },
 
     Silverstar: {
-
       Snare: ['Silverstar Birch Snare'],
 
       'Rack Tom': ['Silverstar Birch Rack Tom'],
@@ -810,11 +765,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Silverstar Birch Bass Drum'],
 
       'Overall Kit / Line Sound': ['Silverstar Full Kit Reference'],
-
     },
 
     Imperialstar: {
-
       Snare: ['Imperialstar Poplar Snare'],
 
       'Rack Tom': ['Imperialstar Poplar Rack Tom'],
@@ -824,11 +777,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Imperialstar Poplar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Imperialstar Full Kit Reference'],
-
     },
 
     Swingstar: {
-
       Snare: ['Swingstar Snare'],
 
       'Rack Tom': ['Swingstar Rack Tom'],
@@ -838,11 +789,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Swingstar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Swingstar Full Kit Reference'],
-
     },
 
     Rockstar: {
-
       Snare: ['Rockstar Snare'],
 
       'Rack Tom': ['Rockstar Rack Tom'],
@@ -852,11 +801,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Rockstar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Rockstar Full Kit Reference'],
-
     },
 
     'Rockstar Custom': {
-
       Snare: ['Rockstar Custom Snare'],
 
       'Rack Tom': ['Rockstar Custom Rack Tom'],
@@ -866,11 +813,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Rockstar Custom Bass Drum'],
 
       'Overall Kit / Line Sound': ['Rockstar Custom Full Kit Reference'],
-
     },
 
     Artstar: {
-
       Snare: ['Artstar Snare'],
 
       'Rack Tom': ['Artstar Rack Tom'],
@@ -880,11 +825,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Artstar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Artstar Full Kit Reference'],
-
     },
 
     'Artstar II': {
-
       Snare: ['Artstar II Snare'],
 
       'Rack Tom': ['Artstar II Rack Tom'],
@@ -894,11 +837,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Artstar II Bass Drum'],
 
       'Overall Kit / Line Sound': ['Artstar II Full Kit Reference'],
-
     },
 
     Granstar: {
-
       Snare: ['Granstar Snare'],
 
       'Rack Tom': ['Granstar Rack Tom'],
@@ -908,11 +849,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Granstar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Granstar Full Kit Reference'],
-
     },
 
     'Granstar Custom': {
-
       Snare: ['Granstar Custom Snare'],
 
       'Rack Tom': ['Granstar Custom Rack Tom'],
@@ -922,11 +861,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Granstar Custom Bass Drum'],
 
       'Overall Kit / Line Sound': ['Granstar Custom Full Kit Reference'],
-
     },
 
     Crestar: {
-
       Snare: ['Crestar Snare'],
 
       'Rack Tom': ['Crestar Rack Tom'],
@@ -936,11 +873,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Crestar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Crestar Full Kit Reference'],
-
     },
 
     Royalstar: {
-
       Snare: ['Royalstar Snare'],
 
       'Rack Tom': ['Royalstar Rack Tom'],
@@ -950,11 +885,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Royalstar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Royalstar Full Kit Reference'],
-
     },
 
     Stagestar: {
-
       Snare: ['Stagestar Snare'],
 
       'Rack Tom': ['Stagestar Rack Tom'],
@@ -964,11 +897,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Stagestar Bass Drum'],
 
       'Overall Kit / Line Sound': ['Stagestar Full Kit Reference'],
-
     },
 
     'Club-JAM': {
-
       Snare: ['Club-JAM Snare'],
 
       'Rack Tom': ['Club-JAM Rack Tom'],
@@ -978,11 +909,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Club-JAM Bass Drum'],
 
       'Overall Kit / Line Sound': ['Club-JAM Full Kit Reference'],
-
     },
 
     'Club-JAM Flyer': {
-
       Snare: ['Club-JAM Flyer Snare'],
 
       'Rack Tom': ['Club-JAM Flyer Rack Tom'],
@@ -992,11 +921,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Club-JAM Flyer Bass Drum'],
 
       'Overall Kit / Line Sound': ['Club-JAM Flyer Full Kit Reference'],
-
     },
 
     'Club-JAM Pancake': {
-
       Snare: ['Club-JAM Pancake Snare'],
 
       'Rack Tom': ['Club-JAM Pancake Rack Tom'],
@@ -1006,11 +933,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Club-JAM Pancake Bass Drum'],
 
       'Overall Kit / Line Sound': ['Club-JAM Pancake Full Kit Reference'],
-
     },
 
     'Cocktail-JAM': {
-
       Snare: ['Cocktail-JAM Snare'],
 
       'Rack Tom': ['Cocktail-JAM Rack Tom'],
@@ -1020,11 +945,9 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Cocktail-JAM Bass Drum'],
 
       'Overall Kit / Line Sound': ['Cocktail-JAM Full Kit Reference'],
-
     },
 
     'Cocktail-JAM Mini': {
-
       Snare: ['Cocktail-JAM Mini Snare'],
 
       'Rack Tom': ['Cocktail-JAM Mini Rack Tom'],
@@ -1034,13 +957,10 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
       'Bass Drum': ['Cocktail-JAM Mini Bass Drum'],
 
       'Overall Kit / Line Sound': ['Cocktail-JAM Mini Full Kit Reference'],
-
     },
 
     'S.L.P.': {
-
       Snare: [
-
         'S.L.P. G-Maple Snare',
 
         'S.L.P. G-Bubinga Snare',
@@ -1060,17 +980,13 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
         'S.L.P. Spotted Gum Snare',
 
         'S.L.P. Sonic Steel Snare',
-
       ],
 
       'Overall Kit / Line Sound': ['S.L.P. Snare Line Reference'],
-
     },
 
     'Sound Lab Project': {
-
       Snare: [
-
         'S.L.P. G-Maple Snare',
 
         'S.L.P. G-Bubinga Snare',
@@ -1090,113 +1006,85 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
         'S.L.P. Spotted Gum Snare',
 
         'S.L.P. Sonic Steel Snare',
-
       ],
 
       'Overall Kit / Line Sound': ['Sound Lab Project Snare Line Reference'],
-
     },
 
     'S.L.P. Dynamic Kapur': {
-
       Snare: ['S.L.P. Dynamic Kapur Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Dynamic Kapur Snare Reference'],
-
     },
 
     'S.L.P. G-Maple': {
-
       Snare: ['S.L.P. G-Maple Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. G-Maple Snare Reference'],
-
     },
 
     'S.L.P. G-Bubinga': {
-
       Snare: ['S.L.P. G-Bubinga Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. G-Bubinga Snare Reference'],
-
     },
 
     'S.L.P. Big Black Steel': {
-
       Snare: ['S.L.P. Big Black Steel Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Big Black Steel Snare Reference'],
-
     },
 
     'S.L.P. Fat Spruce': {
-
       Snare: ['S.L.P. Fat Spruce Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Fat Spruce Snare Reference'],
-
     },
 
     'S.L.P. Vintage Steel': {
-
       Snare: ['S.L.P. Vintage Steel Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Vintage Steel Snare Reference'],
-
     },
 
     'S.L.P. Studio Maple': {
-
       Snare: ['S.L.P. Studio Maple Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Studio Maple Snare Reference'],
-
     },
 
     'S.L.P. Classic Maple': {
-
       Snare: ['S.L.P. Classic Maple Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Classic Maple Snare Reference'],
-
     },
 
     'S.L.P. Spotted Gum': {
-
       Snare: ['S.L.P. Spotted Gum Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Spotted Gum Snare Reference'],
-
     },
 
     'S.L.P. Duo Birch': {
-
       Snare: ['S.L.P. Duo Birch Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Duo Birch Snare Reference'],
-
     },
 
     'S.L.P. Sonic Steel': {
-
       Snare: ['S.L.P. Sonic Steel Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. Sonic Steel Snare Reference'],
-
     },
 
     'S.L.P. LAL145': {
-
       Snare: ['S.L.P. LAL145 Aluminum Snare'],
 
       'Overall Kit / Line Sound': ['S.L.P. LAL145 Snare Reference'],
-
     },
 
     Starphonic: {
-
       Snare: [
-
         'Starphonic Aluminum Snare',
 
         'Starphonic Brass Snare',
@@ -1208,41 +1096,31 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
         'Starphonic Maple Snare',
 
         'Starphonic Walnut Snare',
-
       ],
 
       'Overall Kit / Line Sound': ['Starphonic Snare Line Reference'],
-
     },
 
     Metalworks: {
-
       Snare: [
-
         'Metalworks Steel Snare',
 
         'Metalworks Effect Snare',
 
         'Metalworks Black Steel Snare',
-
       ],
 
       'Overall Kit / Line Sound': ['Metalworks Snare Line Reference'],
-
     },
 
     'Bell Brass': {
-
       Snare: ['Bell Brass Snare'],
 
       'Overall Kit / Line Sound': ['Bell Brass Snare Reference'],
-
     },
 
     Warlord: {
-
       Snare: [
-
         'Warlord Masai Snare',
 
         'Warlord Praetorian Snare',
@@ -1250,63 +1128,47 @@ const NON_OBER_MODEL_OPTIONS_BY_COMPANY_AND_LINE = {
         'Warlord Spartan Snare',
 
         'Warlord Valkyrie Snare',
-
       ],
 
       'Overall Kit / Line Sound': ['Warlord Snare Line Reference'],
-
     },
 
     'Signature Series': {
-
       Snare: ['Tama Signature Series Snare Reference'],
 
       'Overall Kit / Line Sound': ['Tama Signature Series Reference'],
-
     },
 
     'Simon Phillips Signature': {
-
       Snare: ['Simon Phillips Signature Snare'],
 
       'Overall Kit / Line Sound': ['Simon Phillips Signature Reference'],
-
     },
 
     'Stewart Copeland Signature': {
-
       Snare: ['Stewart Copeland Signature Snare'],
 
       'Overall Kit / Line Sound': ['Stewart Copeland Signature Reference'],
-
     },
 
     'John Tempesta Signature': {
-
       Snare: ['John Tempesta Signature Snare'],
 
       'Overall Kit / Line Sound': ['John Tempesta Signature Reference'],
-
     },
 
     'Mike Portnoy Signature': {
-
       Snare: ['Mike Portnoy Signature Snare'],
 
       'Overall Kit / Line Sound': ['Mike Portnoy Signature Reference'],
-
     },
 
     'Lars Ulrich Signature': {
-
       Snare: ['Lars Ulrich Signature Snare'],
 
       'Overall Kit / Line Sound': ['Lars Ulrich Signature Reference'],
-
     },
-
   },
-
 };
 
 const getNonOberModelOptionsForSelection = ({
@@ -1610,17 +1472,7 @@ const NON_OBER_PLACEHOLDER_DRUMS_BY_MAKER = {
   },
 };
 
-const NON_OBER_DRUM_TYPE_OPTIONS = [
-  'Snare',
-
-  'Rack Tom',
-
-  'Floor Tom',
-
-  'Bass Drum',
-
-  'Overall Kit / Line Sound',
-];
+const NON_OBER_DRUM_TYPE_OPTIONS = ['Snare'];
 
 const NON_OBER_COMPANY_TYPE_OPTIONS = [
   'Generic / Baseline Reference',
@@ -4554,17 +4406,7 @@ const HYBRID_TYPE_OPTIONS = [
 
 const OBER_SNARE_ONLY_LINES = ['Ober HERITAGE Stave', 'Ober FEUZØN Hybrid'];
 
-const DRUM_TYPE_FILTER_OPTIONS = [
-  'Snare',
-
-  'Rack Tom',
-
-  'Floor Tom',
-
-  'Bass Drum',
-
-  'Concert Tom',
-];
+const DRUM_TYPE_FILTER_OPTIONS = ['Snare'];
 
 const DRUM_TYPE_FILTER_OPTIONS_WITH_ALL = ['All', ...DRUM_TYPE_FILTER_OPTIONS];
 
@@ -6947,6 +6789,358 @@ const getNoteWindow = (hz) => {
   return 'E1–A2';
 };
 
+const getReferenceScore = (drum = {}, node) => {
+  const directKey = `overall${node.charAt(0).toUpperCase()}${node.slice(
+    1
+  )}OberScore`;
+
+  const fallbackScores = drum.scores || {};
+
+  return (
+    Number(drum[directKey]) ||
+    Number(fallbackScores[node]) ||
+    Number(drum?.legacyPrintScores?.[node]) ||
+    5
+  );
+};
+
+const getReferenceDrumMaterial = (drum = {}) => {
+
+  const directMaterial =
+
+    drum.shellMaterial1 ||
+
+    drum.shellMaterial2 ||
+
+    drum.primaryShellMaterial ||
+
+    drum.shellMaterial ||
+
+    drum.material ||
+
+    drum.shell_material ||
+
+    drum.shell_material_1 ||
+
+    drum.normalizedShellMaterial ||
+
+    drum.normalizedMaterial ||
+
+    drum.shellMaterialDescription ||
+
+    drum.shellConstructionMaterial ||
+
+    drum.wood ||
+
+    drum.shellWood ||
+
+    drum.alloy ||
+
+    drum.metal ||
+
+    '';
+
+  if (directMaterial) {
+
+    return directMaterial;
+
+  }
+
+  const searchableText = [
+
+    drum.modelName,
+
+    drum.lineSeries,
+
+    drum.notes,
+
+    drum.summary,
+
+    drum.description,
+
+    drum.shellNotes,
+
+    drum.importMeta?.rawText,
+
+    drum.importMeta?.description,
+
+    drum.importMeta?.notes,
+
+  ]
+
+    .filter(Boolean)
+
+    .join(' ')
+
+    .toLowerCase();
+
+  const materialMatches = [
+
+    ['black nickel over brass', 'Black Nickel over Brass'],
+
+    ['chrome over brass', 'Chrome over Brass'],
+
+    ['nickel over brass', 'Nickel over Brass'],
+
+    ['raw brass', 'Raw Brass'],
+
+    ['hammered brass', 'Hammered Brass'],
+
+    ['bell brass', 'Bell Brass'],
+
+    ['brass', 'Brass'],
+
+    ['bronze', 'Bronze'],
+
+    ['copper', 'Copper'],
+
+    ['aluminum', 'Aluminum'],
+
+    ['aluminium', 'Aluminum'],
+
+    ['stainless steel', 'Stainless Steel'],
+
+    ['steel', 'Steel'],
+
+    ['maple', 'Maple'],
+
+    ['walnut', 'Walnut'],
+
+    ['mahogany', 'Mahogany'],
+
+    ['oak', 'Oak'],
+
+    ['birch', 'Birch'],
+
+    ['cherry', 'Cherry'],
+
+    ['beech', 'Beech'],
+
+    ['acrylic', 'Acrylic'],
+
+    ['solid shell', 'Solid Shell'],
+
+    ['ply', 'Ply Shell'],
+
+  ];
+
+  const match = materialMatches.find(([needle]) =>
+
+    searchableText.includes(needle)
+
+  );
+
+  return match?.[1] || '';
+
+};
+
+const getReferenceDrumThickness = (drum = {}) => {
+  return (
+    drum.shellThicknessMm ||
+    drum.thicknessMm ||
+    drum.shellThickness ||
+    drum.thickness ||
+    drum.shell_thickness_mm ||
+    ''
+  );
+};
+
+const getReferenceDrumHoop = (drum = {}) => {
+  return (
+    drum.hoopRimType ||
+    drum.hoopType ||
+    drum.hoops ||
+    drum.rimType ||
+    drum.stockHoops ||
+    ''
+  );
+};
+
+const mapReferenceDrumToSelector = (drum = {}) => {
+  const diameter = drum.diameter ? `${drum.diameter} in` : '14 in';
+
+  const depth = drum.depth ? `${drum.depth} in` : '5.5 in';
+
+  return {
+    drumType: 'Snare',
+
+    nonOberCompanyType: drum.companyType || 'Major Manufacturer',
+
+    nonOberCompanyName: drum.companyName || '',
+
+    nonOberLineName: drum.lineSeries || '',
+
+    nonOberModelName: drum.modelName || '',
+
+    nonOberBaselineConstruction:
+      drum.shellConstruction || drum.normalizedShellConstruction || 'Ply',
+
+    nonOberMaterial: getReferenceDrumMaterial(drum),
+
+    nonOberThicknessGroup: getReferenceDrumThickness(drum)
+      ? `${getReferenceDrumThickness(drum)}mm`
+      : '',
+
+    nonOberPlyLayupStyle: drum.plyCountLayup || '',
+
+    nonOberReinforcementRings: drum.reinforcementRings || '',
+
+    nonOberBeadedShell: '',
+
+    diameter,
+
+    depth,
+
+    thickness: getReferenceDrumThickness(drum)
+      ? `${getReferenceDrumThickness(drum)}mm`
+      : '',
+
+    lugCount: drum.lugCount ? `${drum.lugCount} lug` : '',
+
+    staveCount: '',
+
+    finish: drum.finishType || '',
+
+    hoopType: getReferenceDrumHoop(drum),
+
+    bearingEdge: drum.bearingEdge || '',
+
+    snareBed: drum.snareBedType || '',
+
+    snareWires: drum.stockSnareWires || '',
+
+    batterHead: drum.stockBatterHead || '',
+
+    resoHead: drum.stockResoHead || '',
+
+    tension: 'Medium',
+  };
+};
+
+const buildReferencePreviewFromDrum = (drum = {}) => {
+  const playerValues = LEGACYPRINT_NODE_ORDER.reduce((acc, node) => {
+    acc[node] = round(getReferenceScore(drum, node), 2);
+
+    return acc;
+  }, {});
+
+  const topNodes = [...LEGACYPRINT_NODE_ORDER]
+
+    .sort((a, b) => playerValues[b] - playerValues[a])
+
+    .slice(0, 3);
+
+  const firstListenProfile = LEGACYPRINT_NODE_ORDER.reduce((acc, node) => {
+    acc[node] = topNodes.includes(node)
+      ? round(clamp(playerValues[node], 5.5, 9.35), 2)
+      : 3.25;
+
+    return acc;
+  }, {});
+
+  const firstListenTop = topNodes.map((node) => ({
+    node,
+
+    label: LEGACYPRINT_NODE_LABELS[node],
+
+    playerValue: playerValues[node],
+
+    neutral: 5,
+
+    rawMovement: round(Math.max(0, playerValues[node] - 5), 2),
+
+    firstListenScore: round(Math.max(0.1, playerValues[node] - 4.5), 2),
+
+    why: getFirstListenWhy(node),
+  }));
+
+  const centerHz =
+    Number.parseFloat(drum.projectedShellFundamentalPitch) ||
+    Number.parseFloat(drum.projectedShellFundamentalHz) ||
+    347;
+
+  const hzLow = Math.round(centerHz * 0.88);
+
+  const hzHigh = Math.round(centerHz * 1.18);
+
+  return {
+    comparisonMode: {
+      option: 'Firestore Reference Drum',
+    },
+
+    configDifferentialFactor: 1,
+
+    playerValues,
+
+    spiderValues: LEGACYPRINT_NODE_ORDER.map((node) => playerValues[node]),
+
+    firstListenRows: firstListenTop,
+
+    firstListenTop,
+
+    firstListenNodes: topNodes,
+
+    firstListenProfile,
+
+    firstListenThread: {
+      id: `firestore-reference-${drum.id || drum.modelName || 'drum'}`,
+
+      slotKey: 'simple',
+
+      visualMode: 'triangle',
+
+      title: firstListenTop.map((row) => row.label).join(' / '),
+
+      nodes: topNodes,
+
+      score: firstListenTop[0]?.firstListenScore || 1,
+
+      summary: `The drum is reading first as ${firstListenTop
+
+        .map((row) => row.label.toLowerCase())
+
+        .join(', ')}.`,
+    },
+
+    firstListenTitle: `${firstListenTop
+
+      .map((row) => row.label)
+
+      .join(' / ')} first impression`,
+
+    firstListenDescription:
+      drum.drumSummaryNotes ||
+      drum.summary ||
+      `This read is coming directly from the Firestore reference score for ${
+        drum.companyName || 'this maker'
+      } ${drum.modelName || 'reference snare'}.`,
+
+    playerAnalysisTitle: `${
+      LEGACYPRINT_NODE_LABELS[topNodes[0]] || 'Reference'
+    } led player feel`,
+
+    playerAnalysisDescription:
+      drum.drumSummaryNotes ||
+      `A Firestore-backed seven-node read for ${drum.companyName || ''} ${
+        drum.modelName || ''
+      }.`,
+
+    tuning: {
+      centerHz,
+
+      hzLow,
+
+      hzHigh,
+
+      noteWindow: getNoteWindow(centerHz),
+
+      rangeLabel: `Current Range ${hzLow}–${hzHigh} Hz ${getNoteWindow(
+        centerHz
+      )} nearest note window`,
+    },
+  };
+};
+
 const LegacyPrintStatCard = ({ label, value, detail }) => (
   <div className="legacyprint-admin-stat">
     <span>{label}</span>
@@ -7672,6 +7866,18 @@ const AdminLegacyPrintCalibration = () => {
 
   const [selectedNonOberModel, setSelectedNonOberModel] = useState('');
 
+  const [referenceDrums, setReferenceDrums] = useState([]);
+
+  const [isLoadingReferenceDrums, setIsLoadingReferenceDrums] = useState(false);
+
+  const [selectedReferenceDrumId, setSelectedReferenceDrumId] = useState('');
+
+  const selectedReferenceDrum = useMemo(() => {
+    return (
+      referenceDrums.find((drum) => drum.id === selectedReferenceDrumId) || null
+    );
+  }, [referenceDrums, selectedReferenceDrumId]);
+
   const ENGINE_LINE_OPTIONS = [
     {
       key: 'heritage',
@@ -7715,6 +7921,132 @@ const AdminLegacyPrintCalibration = () => {
   ];
 
   const PREVIEW_READ_TABS = ['First Listen', 'Player Analysis', 'LegacyTuning'];
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadReferenceDrums = async () => {
+      setIsLoadingReferenceDrums(true);
+
+      try {
+        console.log('LegacyPrint Firestore debug:', {
+          projectId: db.app.options.projectId,
+
+          collection: SNARE_REFERENCE_DRUMS_COLLECTION,
+        });
+
+        const pageSize = 500;
+
+        let allDocs = [];
+
+        let lastDoc = null;
+
+        let hasMore = true;
+
+        while (hasMore) {
+          const referenceQuery = lastDoc
+            ? query(
+                collection(db, SNARE_REFERENCE_DRUMS_COLLECTION),
+
+                orderBy('companyName'),
+
+                startAfter(lastDoc),
+
+                limit(pageSize)
+              )
+            : query(
+                collection(db, SNARE_REFERENCE_DRUMS_COLLECTION),
+
+                orderBy('companyName'),
+
+                limit(pageSize)
+              );
+
+          const snapshot = await getDocs(referenceQuery);
+
+          allDocs = [...allDocs, ...snapshot.docs];
+
+          lastDoc = snapshot.docs[snapshot.docs.length - 1] || null;
+
+          hasMore = snapshot.size === pageSize;
+        }
+
+        console.log('snareReferenceDrums total loaded:', allDocs.length);
+
+        allDocs.slice(0, 5).forEach((docSnap) => {
+          console.log(
+            'snareReferenceDrums sample doc:',
+
+            docSnap.id,
+
+            docSnap.data()
+          );
+        });
+
+        const rows = allDocs
+
+          .map((docSnap) => ({
+            id: docSnap.id,
+
+            ...docSnap.data(),
+          }))
+
+          .filter((drum) => {
+            const rawType = normalizeText(
+              drum.drumType || drum.type || 'snare'
+            );
+
+            return (
+              rawType === 'snare' || rawType.includes('snare') || !drum.drumType
+            );
+          })
+
+          .sort((a, b) => {
+            const companyA = String(a.companyName || '').toLowerCase();
+
+            const companyB = String(b.companyName || '').toLowerCase();
+
+            if (companyA !== companyB) {
+              return companyA.localeCompare(companyB);
+            }
+
+            return String(a.modelName || '').localeCompare(
+              String(b.modelName || '')
+            );
+          });
+
+        if (!isMounted) return;
+
+        setReferenceDrums(rows);
+
+        if (!selectedReferenceDrumId && rows[0]?.id) {
+          setSelectedReferenceDrumId(rows[0].id);
+        }
+      } catch (error) {
+        console.error('Failed loading snare reference drums:', {
+          code: error.code,
+
+          message: error.message,
+
+          fullError: error,
+        });
+
+        if (isMounted) {
+          setReferenceDrums([]);
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoadingReferenceDrums(false);
+        }
+      }
+    };
+
+    loadReferenceDrums();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -7829,9 +8161,117 @@ const AdminLegacyPrintCalibration = () => {
     }
   }, [activeTab]);
 
+  const selectedEngineLineKey = useMemo(() => {
+    if (isHeritageConstruction(safeSelector.construction)) return 'heritage';
+
+    if (isFeuzonConstruction(safeSelector.construction)) return 'feuzon';
+
+    if (isSoundLegendConstruction(safeSelector.construction)) {
+      return 'soundlegend';
+    }
+
+    return 'nonOber';
+  }, [safeSelector.construction]);
+
+  useEffect(() => {
+    if (selectedEngineLineKey !== 'nonOber') return;
+
+    if (!referenceDrums.length) return;
+
+    const companyOptions = Array.from(
+      new Set(referenceDrums.map((drum) => drum.companyName).filter(Boolean))
+    ).sort((a, b) => a.localeCompare(b));
+
+    const selectedCompanyIsValid = companyOptions.includes(
+      selector.nonOberCompanyName
+    );
+
+    const activeCompany = selectedCompanyIsValid
+      ? selector.nonOberCompanyName
+      : companyOptions[0] || '';
+
+    const companyDrums = referenceDrums.filter(
+      (drum) => drum.companyName === activeCompany
+    );
+
+    const lineOptions = Array.from(
+      new Set(companyDrums.map((drum) => drum.lineSeries).filter(Boolean))
+    ).sort((a, b) => a.localeCompare(b));
+
+    const selectedLineIsValid = lineOptions.includes(selector.nonOberLineName);
+
+    const activeLine = selectedLineIsValid
+      ? selector.nonOberLineName
+      : lineOptions[0] || '';
+
+    const matchingDrums = companyDrums.filter((drum) => {
+      if (!activeLine) return true;
+
+      return drum.lineSeries === activeLine;
+    });
+
+    const selectedDrumStillValid = matchingDrums.some(
+      (drum) => drum.id === selectedReferenceDrumId
+    );
+
+    const fallbackDrum = selectedDrumStillValid
+      ? referenceDrums.find((drum) => drum.id === selectedReferenceDrumId)
+      : matchingDrums[0] || companyDrums[0];
+
+    if (!fallbackDrum) return;
+
+    const needsCompanyOrLineSync =
+      selector.nonOberCompanyName !== activeCompany ||
+      selector.nonOberLineName !== activeLine;
+
+    const needsSelectedDrumSync = !selectedDrumStillValid;
+
+    if (needsCompanyOrLineSync || needsSelectedDrumSync) {
+      setSelector((current) => ({
+        ...current,
+
+        drumType: 'Snare',
+
+        construction: 'Generic Ply Shell',
+
+        nonOberCompanyType: fallbackDrum.companyType || 'Major Manufacturer',
+
+        nonOberCompanyName: activeCompany,
+
+        nonOberLineName: activeLine,
+
+        nonOberModelName: fallbackDrum.modelName || '',
+      }));
+
+      setSelectedReferenceDrumId(fallbackDrum.id);
+    }
+  }, [
+    selectedEngineLineKey,
+
+    referenceDrums,
+
+    selector.nonOberCompanyName,
+
+    selector.nonOberLineName,
+
+    selectedReferenceDrumId,
+  ]);
+
   const preview = useMemo(() => {
+    if (selectedEngineLineKey === 'nonOber' && selectedReferenceDrum) {
+      return buildReferencePreviewFromDrum(selectedReferenceDrum);
+    }
+
     return buildVoicePreview(safeSelector, draftCalibration);
-  }, [safeSelector, draftCalibration]);
+  }, [
+    selectedEngineLineKey,
+
+    safeSelector,
+
+    draftCalibration,
+
+    selectedReferenceDrum,
+  ]);
 
   const configOptionCount = Object.values(
     draftCalibration.configOptions || {}
@@ -9045,7 +9485,7 @@ const AdminLegacyPrintCalibration = () => {
   };
 
   const getEngineSelectorFields = () => {
-    const selectedLineKey = getSelectedEngineLineKey();
+    const selectedLineKey = selectedEngineLineKey;
 
     if (selectedLineKey === 'heritage') {
       return SELECTOR_FIELDS.filter((field) => {
@@ -9174,17 +9614,7 @@ const AdminLegacyPrintCalibration = () => {
     });
   };
 
-  const getSelectedEngineLineKey = () => {
-    if (isHeritageConstruction(safeSelector.construction)) return 'heritage';
-
-    if (isFeuzonConstruction(safeSelector.construction)) return 'feuzon';
-
-    if (isSoundLegendConstruction(safeSelector.construction)) {
-      return 'soundlegend';
-    }
-
-    return 'nonOber';
-  };
+  const getSelectedEngineLineKey = () => selectedEngineLineKey;
 
   const getNonOberAvailableModels = () => {
     const makerData =
@@ -9195,53 +9625,128 @@ const AdminLegacyPrintCalibration = () => {
   };
 
   const renderNonOberReferenceBuilder = () => {
-    const selectedGroup =
-      NON_OBER_MANUFACTURER_GROUPS.find(
-        (group) => group.group === selectedNonOberMakerGroup
-      ) || NON_OBER_MANUFACTURER_GROUPS[0];
+    const companyOptions = Array.from(
+      new Set(referenceDrums.map((drum) => drum.companyName).filter(Boolean))
+    ).sort((a, b) => a.localeCompare(b));
 
-    const availableModels = getNonOberAvailableModels();
+    const selectedCompanyIsValid = companyOptions.includes(
+      selector.nonOberCompanyName
+    );
+
+    const activeCompany = selectedCompanyIsValid
+      ? selector.nonOberCompanyName
+      : companyOptions[0] || '';
+
+    const companyDrums = referenceDrums.filter(
+      (drum) => drum.companyName === activeCompany
+    );
+
+    const lineOptions = Array.from(
+      new Set(companyDrums.map((drum) => drum.lineSeries).filter(Boolean))
+    ).sort((a, b) => a.localeCompare(b));
+
+    const selectedLineIsValid = lineOptions.includes(selector.nonOberLineName);
+
+    const activeLine = selectedLineIsValid
+      ? selector.nonOberLineName
+      : lineOptions[0] || '';
+
+    const modelOptions = companyDrums.filter((drum) => {
+      if (!activeLine) return true;
+
+      return drum.lineSeries === activeLine;
+    });
 
     return (
       <div className="legacyprint-non-ober-builder">
         <div className="legacyprint-preview-card-heading">
-          <p>Reference Builder</p>
+          <p>Firestore Reference Builder</p>
 
-          <h4>Non-Ober Artisan / Manufacturer Reference</h4>
+          <h4>Non-Ober Snare References</h4>
         </div>
 
         <p className="legacyprint-preview-description">
-          This placeholder reference path will let the LegacyPrint™ engine
-          compare or model popular non-Ober drums by maker, drum type, shell
-          family, and known reference behavior.
+          This builder is now connected to the snareReferenceDrums Firestore
+          collection. Select a company, line, and model to preview its imported
+          LegacyPrint™ score.
         </p>
+
+        <div className="legacyprint-admin-grid legacyprint-admin-grid--compact">
+          <LegacyPrintStatCard
+            label="Reference Snares"
+            value={referenceDrums.length}
+            detail={
+              isLoadingReferenceDrums
+                ? 'Loading from Firestore'
+                : 'Loaded from snareReferenceDrums'
+            }
+          />
+
+          <LegacyPrintStatCard
+            label="Companies"
+            value={companyOptions.length}
+            detail="Firestore companyName values"
+          />
+
+          <LegacyPrintStatCard
+            label="Current Company"
+            value={activeCompany || 'None'}
+            detail={`${companyDrums.length} snares`}
+          />
+
+          <LegacyPrintStatCard
+            label="Current Line"
+            value={activeLine || 'All Lines'}
+            detail={`${modelOptions.length} matching snares`}
+          />
+        </div>
 
         <div className="legacyprint-non-ober-stage">
           <div className="legacyprint-non-ober-stage-heading">
             <span>Step 1</span>
 
-            <strong>Select manufacturer group</strong>
+            <strong>Select company / builder</strong>
           </div>
 
-          <div className="legacyprint-engine-line-grid">
-            {NON_OBER_MANUFACTURER_GROUPS.map((group) => (
+          <div className="legacyprint-builder-pill-grid">
+            {companyOptions.map((companyName) => (
               <button
-                key={group.group}
+                key={companyName}
                 type="button"
-                className={`legacyprint-engine-line-card ${
-                  selectedNonOberMakerGroup === group.group ? 'active' : ''
-                }`}
+                className={activeCompany === companyName ? 'active' : ''}
                 onClick={() => {
-                  setSelectedNonOberMakerGroup(group.group);
+                  const nextCompanyDrums = referenceDrums.filter(
+                    (drum) => drum.companyName === companyName
+                  );
 
-                  setSelectedNonOberMaker(group.makers[0]);
+                  const nextLine = nextCompanyDrums[0]?.lineSeries || '';
 
-                  setSelectedNonOberModel('');
+                  const nextDrum =
+                    nextCompanyDrums.find(
+                      (drum) => drum.lineSeries === nextLine
+                    ) || nextCompanyDrums[0];
+
+                  setSelector((current) => ({
+                    ...current,
+
+                    drumType: 'Snare',
+
+                    construction: 'Generic Ply Shell',
+
+                    nonOberCompanyType:
+                      nextDrum?.companyType || 'Major Manufacturer',
+
+                    nonOberCompanyName: companyName,
+
+                    nonOberLineName: nextLine,
+
+                    nonOberModelName: nextDrum?.modelName || '',
+                  }));
+
+                  setSelectedReferenceDrumId(nextDrum?.id || '');
                 }}
               >
-                <strong>{group.group}</strong>
-
-                <span>{group.makers.length} makers available</span>
+                {companyName}
               </button>
             ))}
           </div>
@@ -9251,22 +9756,43 @@ const AdminLegacyPrintCalibration = () => {
           <div className="legacyprint-non-ober-stage-heading">
             <span>Step 2</span>
 
-            <strong>Select manufacturer</strong>
+            <strong>Select line / series</strong>
           </div>
 
           <div className="legacyprint-builder-pill-grid">
-            {selectedGroup.makers.map((maker) => (
+            {lineOptions.map((lineName) => (
               <button
-                key={maker}
+                key={lineName}
                 type="button"
-                className={selectedNonOberMaker === maker ? 'active' : ''}
+                className={activeLine === lineName ? 'active' : ''}
                 onClick={() => {
-                  setSelectedNonOberMaker(maker);
+                  const nextDrum =
+                    companyDrums.find((drum) => drum.lineSeries === lineName) ||
+                    companyDrums[0];
 
-                  setSelectedNonOberModel('');
+                  setSelector((current) => ({
+                    ...current,
+
+                    drumType: 'Snare',
+
+                    construction: 'Generic Ply Shell',
+
+                    nonOberCompanyType:
+                      nextDrum?.companyType ||
+                      current.nonOberCompanyType ||
+                      'Major Manufacturer',
+
+                    nonOberCompanyName: activeCompany,
+
+                    nonOberLineName: lineName,
+
+                    nonOberModelName: nextDrum?.modelName || '',
+                  }));
+
+                  setSelectedReferenceDrumId(nextDrum?.id || '');
                 }}
               >
-                {maker}
+                {lineName}
               </button>
             ))}
           </div>
@@ -9276,71 +9802,63 @@ const AdminLegacyPrintCalibration = () => {
           <div className="legacyprint-non-ober-stage-heading">
             <span>Step 3</span>
 
-            <strong>Select drum type</strong>
-          </div>
-
-          <div className="legacyprint-builder-pill-grid">
-            {DRUM_TYPE_FILTER_OPTIONS.map((drumType) => (
-              <button
-                key={drumType}
-                type="button"
-                className={selectedNonOberDrumType === drumType ? 'active' : ''}
-                onClick={() => {
-                  setSelectedNonOberDrumType(drumType);
-
-                  setSelectedNonOberModel('');
-
-                  handleSelectorChange('drumType', drumType);
-                }}
-              >
-                {drumType}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="legacyprint-non-ober-stage">
-          <div className="legacyprint-non-ober-stage-heading">
-            <span>Step 4</span>
-
-            <strong>Popular placeholder models</strong>
+            <strong>Select snare model</strong>
           </div>
 
           <div className="legacyprint-non-ober-model-grid">
-            {availableModels.map((model) => (
+            {modelOptions.map((drum) => (
               <button
-                key={model}
+                key={drum.id}
                 type="button"
-                className={selectedNonOberModel === model ? 'active' : ''}
-                onClick={() => setSelectedNonOberModel(model)}
-              >
-                <strong>{model}</strong>
+                className={selectedReferenceDrumId === drum.id ? 'active' : ''}
+                onClick={() => {
+                  const mapped = mapReferenceDrumToSelector(drum);
 
-                <span>
-                  {selectedNonOberMaker} / {selectedNonOberDrumType}
-                </span>
+                  setSelector((current) => ({
+                    ...current,
+
+                    ...mapped,
+
+                    construction: 'Generic Ply Shell',
+
+                    drumType: 'Snare',
+                  }));
+
+                  setSelectedReferenceDrumId(drum.id);
+                }}
+              >
+                <strong>{drum.modelName || 'Unnamed Reference Snare'}</strong>
+
+<span>
+
+  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
+
+  {getReferenceDrumMaterial(drum) || drum.lineSeries || 'Unknown material'}
+
+</span>
               </button>
             ))}
           </div>
 
-          {!availableModels.length && (
+          {!modelOptions.length && (
             <div className="legacyprint-admin-note neutral">
-              <strong>No placeholder models yet</strong>
+              <strong>No Firestore snares found</strong>
 
               <span>
-                This maker does not have seeded models for this drum type yet.
+                No snareReferenceDrums records match the current company / line.
               </span>
             </div>
           )}
         </div>
 
-        {selectedNonOberModel && (
+        {selectedReferenceDrum && (
           <div className="legacyprint-admin-note">
-            <strong>Selected reference model</strong>
+            <strong>Selected Firestore reference</strong>
 
             <span>
-              {selectedNonOberMaker} / {selectedNonOberDrumType} /{' '}
-              {selectedNonOberModel}
+              {selectedReferenceDrum.companyName} /{' '}
+              {selectedReferenceDrum.lineSeries} /{' '}
+              {selectedReferenceDrum.modelName}
             </span>
           </div>
         )}
@@ -10112,14 +10630,18 @@ const AdminLegacyPrintCalibration = () => {
             {renderEngineLineSelector()}
 
             <div className="legacyprint-preview-layout">
-              <AdminLegacyPrintSelector
-                selectorFields={getEngineSelectorFields()}
-                calibration={draftCalibration}
-                selector={safeSelector}
-                getSelectorOptions={getSelectorOptions}
-                getOptionMeta={getSelectorOptionMeta}
-                onSelectorChange={handleSelectorChange}
-              />
+              {selectedEngineLineKey !== 'nonOber' && (
+                <AdminLegacyPrintSelector
+                  selectorFields={getEngineSelectorFields()}
+                  calibration={draftCalibration}
+                  selector={safeSelector}
+                  getSelectorOptions={getSelectorOptions}
+                  getOptionMeta={getSelectorOptionMeta}
+                  onSelectorChange={handleSelectorChange}
+                />
+              )}
+
+              {renderSelectedLineBuilderPreview()}
 
               <div className="legacyprint-preview-main">
                 <div className="legacyprint-preview-read-tabs" role="tablist">
