@@ -850,19 +850,47 @@ const getDrumType = (drum = {}) => {
 };
 
 const getDrumDiameter = (drum = {}) => {
+
   return flattenReadableValue(
-    getFirstPresentValue(drum, ['diameter', 'diameterInches'])
+
+    getFirstPresentValue(drum, [
+
+      'shell.dimensions.diameterInches',
+
+      'diameter',
+
+      'diameterInches',
+
+    ])
+
   );
+
 };
 
 const getDrumDepth = (drum = {}) => {
+
   return flattenReadableValue(
-    getFirstPresentValue(drum, ['depth', 'depthInches'])
+
+    getFirstPresentValue(drum, [
+
+      'shell.dimensions.depthInches',
+
+      'depth',
+
+      'depthInches',
+
+    ])
+
   );
+
 };
 
 const getDrumShellConstruction = (drum = {}) => {
+
   const directValue = getFirstPresentValue(drum, [
+
+    'shell.construction.shellConstruction',
+
     'shell.construction',
 
     'shell.normalizedConstruction',
@@ -880,19 +908,27 @@ const getDrumShellConstruction = (drum = {}) => {
     'shellType',
 
     'shell_construction',
+
   ]);
 
   const directConstruction = canonicalizeShellConstruction(directValue, {
+
     allowLooseHybrid: true,
+
   });
 
   if (directConstruction) return directConstruction;
 
   return inferShellConstructionFromText(drum);
+
 };
 
 const getDrumShellMaterial1 = (drum = {}) => {
+
   const directValue = getFirstPresentValue(drum, [
+
+    'shell.construction.shellMaterialPrimary',
+
     'shell.material1',
 
     'shell.primaryMaterial',
@@ -918,18 +954,27 @@ const getDrumShellMaterial1 = (drum = {}) => {
     'shell_material_1',
 
     'shell_material',
+
   ]);
 
   const canonicalDirectValue = canonicalizeMaterial(directValue, {
+
     allowFallback: false,
+
   });
 
   return canonicalDirectValue || inferMaterialFromText(drum);
+
 };
 
 const getDrumShellMaterial2 = (drum = {}) => {
+
   return canonicalizeMaterial(
+
     getFirstPresentValue(drum, [
+
+      'shell.construction.shellMaterialSecondary',
+
       'shell.material2',
 
       'shell.secondaryMaterial',
@@ -941,15 +986,23 @@ const getDrumShellMaterial2 = (drum = {}) => {
       'secondaryShellMaterial',
 
       'shell_material_2',
+
     ]),
 
     { allowFallback: false }
+
   );
+
 };
 
 const getDrumShellMaterial3 = (drum = {}) => {
+
   return canonicalizeMaterial(
+
     getFirstPresentValue(drum, [
+
+      'shell.construction.shellMaterialTertiary',
+
       'shell.material3',
 
       'shell.tertiaryMaterial',
@@ -961,15 +1014,23 @@ const getDrumShellMaterial3 = (drum = {}) => {
       'tertiaryShellMaterial',
 
       'shell_material_3',
+
     ]),
 
     { allowFallback: false }
+
   );
+
 };
 
 const getDrumShellThickness = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'shell.construction.shellThicknessMm',
+
       'shell.thicknessMm',
 
       'shell.shellThicknessMm',
@@ -985,13 +1046,23 @@ const getDrumShellThickness = (drum = {}) => {
       'thickness',
 
       'shell_thickness_mm',
+
     ])
+
   );
+
 };
 
 const getDrumBearingEdge = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'shell.bearingEdges.batterSideProfile',
+
+      'shell.bearingEdges.snareSideProfile',
+
       'shell.bearingEdge',
 
       'shell.bearingEdges',
@@ -999,13 +1070,21 @@ const getDrumBearingEdge = (drum = {}) => {
       'bearingEdge',
 
       'bearingEdges',
+
     ])
+
   );
+
 };
 
 const getDrumReinforcementRings = (drum = {}) => {
+
   return canonicalizeReinforcementRings(
+
     getFirstPresentValue(drum, [
+
+      'shell.construction.reinforcementRings',
+
       'shell.reinforcementRings',
 
       'shell.reinforcementRing',
@@ -1017,13 +1096,23 @@ const getDrumReinforcementRings = (drum = {}) => {
       'reinforcementRing',
 
       'reRings',
+
     ])
+
   );
+
 };
 
 const getDrumFinishType = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'shell.finish.finishType',
+
+      'shell.finish.finishName',
+
       'shell.finishType',
 
       'shell.finish',
@@ -1035,13 +1124,23 @@ const getDrumFinishType = (drum = {}) => {
       'finish',
 
       'finishTreatment',
+
     ])
+
   );
+
 };
 
 const getDrumSnareBedType = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'shell.snareBeds.depthBucket',
+
+      'shell.snareBeds.bedStyle',
+
       'shell.snareBedType',
 
       'shell.snareBed',
@@ -1049,13 +1148,23 @@ const getDrumSnareBedType = (drum = {}) => {
       'snareBedType',
 
       'snareBed',
+
     ])
+
   );
+
 };
 
 const getDrumHoopRimType = (drum = {}) => {
+
   return canonicalizeHoop(
+
     getFirstPresentValue(drum, [
+
+      'stockHardware.hoops.batterHoopType',
+
+      'stockHardware.hoops.resonantHoopType',
+
       'hardware.hoopRimType',
 
       'hardware.hoopType',
@@ -1075,13 +1184,21 @@ const getDrumHoopRimType = (drum = {}) => {
       'rimType',
 
       'stockHoops',
+
     ])
+
   );
+
 };
 
 const getDrumLugCount = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'stockHardware.lugs.lugCount',
+
       'hardware.lugCount',
 
       'hardware.lugs',
@@ -1089,13 +1206,21 @@ const getDrumLugCount = (drum = {}) => {
       'lugCount',
 
       'lugs',
+
     ])
+
   );
+
 };
 
 const getDrumStockBatterHead = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'stockSnareSystem.heads.batterHead',
+
       'hardware.stockBatterHead',
 
       'hardware.batterHead',
@@ -1103,13 +1228,21 @@ const getDrumStockBatterHead = (drum = {}) => {
       'stockBatterHead',
 
       'batterHead',
+
     ])
+
   );
+
 };
 
 const getDrumStockResoHead = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'stockSnareSystem.heads.resonantHead',
+
       'hardware.stockResoHead',
 
       'hardware.resoHead',
@@ -1117,13 +1250,23 @@ const getDrumStockResoHead = (drum = {}) => {
       'stockResoHead',
 
       'resoHead',
+
     ])
+
   );
+
 };
 
 const getDrumStockSnareWires = (drum = {}) => {
+
   return flattenReadableValue(
+
     getFirstPresentValue(drum, [
+
+      'stockSnareSystem.snareWires.model',
+
+      'stockSnareSystem.snareWires.make',
+
       'hardware.stockSnareWires',
 
       'hardware.snareWires',
@@ -1131,13 +1274,21 @@ const getDrumStockSnareWires = (drum = {}) => {
       'stockSnareWires',
 
       'snareWires',
+
     ])
+
   );
+
 };
 
 const getDrumCurrentlyInProduction = (drum = {}) => {
+
   return canonicalizeBooleanish(
+
     getFirstPresentValue(drum, [
+
+      'identification.currentlyInProduction',
+
       'production.currentlyInProduction',
 
       'production.currentProduction',
@@ -1149,13 +1300,21 @@ const getDrumCurrentlyInProduction = (drum = {}) => {
       'currentProduction',
 
       'inProduction',
+
     ])
+
   );
+
 };
 
 const getDrumDiscontinued = (drum = {}) => {
+
   return canonicalizeBooleanish(
+
     getFirstPresentValue(drum, [
+
+      'identification.discontinued',
+
       'production.discontinued',
 
       'production.isDiscontinued',
@@ -1163,13 +1322,21 @@ const getDrumDiscontinued = (drum = {}) => {
       'discontinued',
 
       'isDiscontinued',
+
     ])
+
   );
+
 };
 
 const getDrumRareCollectible = (drum = {}) => {
+
   return canonicalizeBooleanish(
+
     getFirstPresentValue(drum, [
+
+      'identification.rareCollectible',
+
       'production.rareCollectible',
 
       'production.rare',
@@ -1181,13 +1348,21 @@ const getDrumRareCollectible = (drum = {}) => {
       'rare',
 
       'collectible',
+
     ])
+
   );
+
 };
 
 const getDrumArtistSignatureLine = (drum = {}) => {
+
   return canonicalizeBooleanish(
+
     getFirstPresentValue(drum, [
+
+      'identification.artistSignature',
+
       'production.artistSignatureLine',
 
       'production.artistSignature',
@@ -1199,8 +1374,11 @@ const getDrumArtistSignatureLine = (drum = {}) => {
       'artistSignature',
 
       'signatureLine',
+
     ])
+
   );
+
 };
 
 const getDrumVoiceConfidence = (drum = {}) => {
