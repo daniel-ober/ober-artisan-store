@@ -1,0 +1,171 @@
+
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-official-pass-1",
+
+  "researchStatus": "partial",
+
+  "notes": "Narrow Starclassic pass. Values are applied only to model groups with direct official/reputable source support. Stock heads are left blank unless source explicitly names snare batter and snare-side heads.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Walnut/Birch 14x5.5 official shell/hardware pass",
+
+      "matchModelNames": [
+
+        "Starclassic Walnut/Birch 14x5.5"
+
+      ],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 6,
+
+          "plyCountLayup": "4-ply European Birch + 2 inner ply American Black Walnut",
+
+          "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+          "reinforcementRings": "NO"
+
+        },
+
+        "hardware": {
+
+          "lugType": "MSL-SCT Starclassic Lug",
+
+          "snareThrowMakeAndModel": "MLS30A / MLS30B",
+
+          "stockSnareWires": "20-strand Super Sensitive Hi-Carbon Snare Wires"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starclassic_performer_wb_snare.html"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama Starclassic Walnut/Birch snare page supports 6mm, 4-ply European Birch + 2 inner ply American Black Walnut shell, die-cast hoops, MSL-SCT Starclassic Lug, MLS30A/MLS30B strainer and butt, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Stock batter/reso heads and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "Starclassic Walnut/Birch 14x6.5 official shell/hardware pass",
+
+      "matchModelNames": [
+
+        "Starclassic Walnut/Birch 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 6,
+
+          "plyCountLayup": "4-ply European Birch + 2 inner ply American Black Walnut",
+
+          "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+          "reinforcementRings": "NO"
+
+        },
+
+        "hardware": {
+
+          "lugType": "MSL-SCT Starclassic Lug",
+
+          "snareThrowMakeAndModel": "MLS30A / MLS30B",
+
+          "stockSnareWires": "20-strand Super Sensitive Hi-Carbon Snare Wires"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starclassic_performer_wb_snare.html"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama Starclassic Walnut/Birch snare page supports 6mm, 4-ply European Birch + 2 inner ply American Black Walnut shell, die-cast hoops, MSL-SCT Starclassic Lug, MLS30A/MLS30B strainer and butt, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Stock batter/reso heads and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "Starclassic Bubinga 14x6.5 official/reputable source pass",
+
+      "matchModelNames": [
+
+        "Starclassic Bubinga 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 7,
+
+          "plyCountLayup": "9-ply Bubinga",
+
+          "reinforcementRings": "NO",
+
+          "snareBedType": "Snappy Bed"
+
+        },
+
+        "hardware": {
+
+          "lugType": "One-piece Starclassic Lug",
+
+          "snareThrowMakeAndModel": "Linear-Drive Strainer",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100325.html",
+
+          "secondarySourceUrl": "https://www.focusproaudio.com/products/hoshino-usa-bes1465bagac-acoustic-drums-snare-drums"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Tama official Starclassic Bubinga reissue news states the reissue faithfully reproduces the original 9-ply, 6mm shell construction, with 7mm for snare and bass drums, as it was when discontinued in 2018. Reputable Hoshino USA/dealer listing supports 7mm snare shell, 9-ply original reissue design, Linear-Drive Strainer, one-piece lugs, Super Sensitive Hi-Carbon Snare Wire, and Snappy Bed. Stock batter/reso heads remain unconfirmed from official source."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
+
