@@ -1,0 +1,169 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "STARPHONIC",
+
+  "patchName": "tama-reviewed-company-patch",
+
+  "reviewedAt": "2026-05-17",
+
+  "sourcePolicy": "Only source-backed model-specific or clearly line-supported updates. No broad assumptions across eras or unrelated models.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "STARPHONIC Copper 14x7 official Tama specs",
+
+      "matchCompanyName": "Tama",
+
+      "matchLineSeries": "STARPHONIC",
+
+      "matchModelNames": ["STARPHONIC Copper 14x7"],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 1.2,
+
+          "bearingEdge": "R.S.E. / Resonant Sound Edge"
+
+        },
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "STARPHONIC strainer system",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon snare wire",
+
+          "stockBatterHead": "Unknown",
+
+          "stockResoHead": "Unknown"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/starphonic_copper.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama page confirms 1.2mm copper shell, Grooved Hoop, and Super Sensitive Hi-Carbon snare wire. STARPHONIC feature documentation supports the R.S.E. / Resonant Sound Edge bearing edge designation. Stock heads remain unknown."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Aluminum 14x6 official Tama specs",
+
+      "matchCompanyName": "Tama",
+
+      "matchLineSeries": "STARPHONIC",
+
+      "matchModelNames": ["STARPHONIC Aluminum 14x6"],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 1.2,
+
+          "bearingEdge": "R.S.E. / Resonant Sound Edge"
+
+        },
+
+        "hardware": {
+
+          "lugType": "Freedom Lug",
+
+          "snareThrowMakeAndModel": "STARPHONIC strainer system",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon snare wire",
+
+          "stockBatterHead": "Unknown",
+
+          "stockResoHead": "Unknown"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/asia/products/snare_drums/starphonic_aluminum.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama page confirms 1.2mm seamless aluminum shell, Freedom Lug, Grooved Hoop, and Super Sensitive Hi-Carbon snare wire. Stock heads remain unknown."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Steel 14x6 official Tama specs",
+
+      "matchCompanyName": "Tama",
+
+      "matchLineSeries": "STARPHONIC",
+
+      "matchModelNames": ["STARPHONIC Steel 14x6"],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 1,
+
+          "bearingEdge": "R.S.E. / Resonant Sound Edge"
+
+        },
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "STARPHONIC strainer system",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon snare wire",
+
+          "stockBatterHead": "Unknown",
+
+          "stockResoHead": "Unknown"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_steel_6.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama page confirms 1mm steel shell and STARPHONIC Super Sensitive Hi-Carbon snare wire feature. Stock heads remain unknown."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
