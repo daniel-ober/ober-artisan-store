@@ -1,69 +1,341 @@
 {
   "companyName": "Tama",
-
   "lineSeries": "Signature",
-
-  "patchName": "example-company-line-shell-pass-1",
-
+  "patchName": "tama-signature-known-shells-pass-1",
   "researchStatus": "draft",
-
   "doNotApplyAutomatically": true,
-
-  "notes": "Template for scalable company/line shell-first research patches. Use target + patch. Keep unknown values unknown/null/false. Do not include stock heads, wires, or throw-offs unless intentionally doing a later-phase patch.",
-
+  "notes": "Cleanup pass for existing Tama Signature records already in Firestore. This pass does not delete duplicate-looking records. It fills known shell thickness where supported by existing record metadata, and marks researched-but-unconfirmed shell/hardware fields as unknown so they stop blocking missing-field audits.",
   "patchGroups": [
     {
-      "groupName": "Exact model shell update",
-
+      "groupName": "Bill Bruford 14x5.5 existing brass record",
       "target": {
-        "modelName": "Example Model 14x6.5"
+        "modelName": "Bill Bruford 14x5.5"
       },
-
       "patch": {
         "shell": {
-          "thicknessMm": null,
-
-          "plyCountLayup": "unknown",
-
+          "thicknessMm": "unknown",
           "bearingEdge": "unknown",
-
-          "reinforcementRings": false,
-
-          "snareBedType": "unknown"
+          "snareBedType": "unknown",
+          "reinforcementRings": false
         },
-
-        "sources": {
-          "primarySourceUrl": "unknown",
-
-          "secondarySourceUrl": "unknown"
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
         },
-
         "notes": {
-          "scoringBasis": "Shell-first notes only. Explain exactly what the source confirms and what remains unknown."
+          "scoringBasis": "Existing Tama Signature brass record retained as a separate researched record for now. Thickness, bearing edge, snare beds, lugs, throw-off, wires, and stock heads remain unconfirmed; unknown values intentionally mark researched gaps complete."
         }
       }
     },
-
     {
-      "groupName": "Shared line/spec family shell update",
-
+      "groupName": "John Tempesta existing maple record",
       "target": {
-        "modelNameIncludesAny": ["Example Material", "Example Construction"],
-
-        "diameter": 14
+        "modelName": "John Tempesta 14x7"
       },
-
       "patch": {
         "shell": {
-          "shellConstruction": "unknown",
-
-          "thicknessMm": null,
-
-          "plyCountLayup": "unknown"
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
         },
-
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
         "notes": {
-          "scoringBasis": "Use shared updates only when the source confirms this spec applies across every matched model."
+          "scoringBasis": "Existing Tama Signature maple/lacquer 14x7 record retained for now because it differs from the added JT147 brass record. Thickness and hardware details remain unconfirmed; unknown values intentionally mark researched gaps complete."
+        }
+      }
+    },
+    {
+      "groupName": "Kaz Rodriguez existing Maple/Bubinga record",
+      "target": {
+        "modelName": "Kaz Rodriguez 14x6.5 Maple/Bubinga"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing Tama Signature Kaz Rodriguez record retained for now. Added KR1465 record contains stronger model-code data; this older record still needs later duplicate review. Unknown values intentionally mark researched gaps complete."
+        }
+      }
+    },
+    {
+      "groupName": "Kenny Aronoff KA145N Trackmaster 14x5",
+      "target": {
+        "modelName": "Kenny Aronoff KA145N Trackmaster 14x5"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing KA145N record retained. Shell material and finish are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Kenny Aronoff KA154 Super Piccolo 15x4",
+      "target": {
+        "modelName": "Kenny Aronoff KA154 Super Piccolo 15x4"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing KA154 record retained. Shell material and finish are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Lars Ulrich LU1465 14x6.5 existing diamond plate steel",
+      "target": {
+        "modelName": "Lars Ulrich LU1465 14x6.5"
+      },
+      "patch": {
+        "shell": {
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing LU1465 diamond-plate steel record retained separately from LU1465BB Bell Brass. Thickness already present. Edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Mike Portnoy Melody Master 12x5 existing steel",
+      "target": {
+        "modelName": "Mike Portnoy Melody Master 12x5"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing MP125-style steel record retained for now. Added MP125ST record contains stronger model-code data; this older record needs later duplicate review. Unknown values intentionally mark researched gaps complete."
+        }
+      }
+    },
+    {
+      "groupName": "Mike Portnoy Melody Master 14x5.5 existing hammered steel",
+      "target": {
+        "modelName": "Mike Portnoy Melody Master 14x5.5"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing MP1455-style hammered steel record retained for now. Added MP1455ST and MP1455BU records contain stronger model-code data; this older record needs later duplicate review. Unknown values intentionally mark researched gaps complete."
+        }
+      }
+    },
+    {
+      "groupName": "Peter Erskine PE106M 10x6",
+      "target": {
+        "modelName": "Peter Erskine PE106M 10x6"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing PE106M record retained. Maple shell and Mighty Hoop metadata are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Peter Erskine PE1445 14x4.5",
+      "target": {
+        "modelName": "Peter Erskine PE1445 14x4.5"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing PE1445 record retained. Maple shell and Mighty Hoop metadata are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Ronald Bruner Jr RB1455",
+      "target": {
+        "modelName": "Ronald Bruner Jr. RB1455 14x5.5"
+      },
+      "patch": {
+        "shell": {
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing RB1455 hybrid record retained. Thickness and hybrid shell metadata are present; edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Simon Phillips Gladiator 14x5.5",
+      "target": {
+        "modelName": "Simon Phillips Gladiator 14x5.5"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing SP1455 Gladiator bronze record retained. Bronze shell and die-cast hoop metadata are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Simon Phillips Monarch 14x6.5",
+      "target": {
+        "modelName": "Simon Phillips Monarch 14x6.5"
+      },
+      "patch": {
+        "shell": {
+          "thicknessMm": "unknown",
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing SP1465 Monarch maple record retained. Maple shell and die-cast hoop metadata are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
+        }
+      }
+    },
+    {
+      "groupName": "Stewart Copeland SC145",
+      "target": {
+        "modelName": "Stewart Copeland SC145 14x5"
+      },
+      "patch": {
+        "shell": {
+          "bearingEdge": "unknown",
+          "snareBedType": "unknown",
+          "reinforcementRings": false
+        },
+        "hardware": {
+          "lugType": "unknown",
+          "snareThrowMakeAndModel": "unknown",
+          "stockSnareWires": "unknown",
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown"
+        },
+        "notes": {
+          "scoringBasis": "Existing SC145 brass record retained. Thickness and hoop-side metadata are present; edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
         }
       }
     }
