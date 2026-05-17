@@ -6895,39 +6895,53 @@ const flattenReferenceValue = (value = '') => {
 
 const getReferenceDrumMaterial = (drum = {}) => {
 
-  const directMaterial = flattenReferenceValue(
+  const materialParts = [
 
-    drum.shellMaterial1 ||
+    drum.shell?.material1,
 
-      drum.primaryShellMaterial ||
+    drum.shell?.material2,
 
-      drum.shellMaterial ||
+    drum.shell?.material3,
 
-      drum.material ||
+    drum.shellMaterial1,
 
-      drum.normalizedShellMaterial ||
+    drum.shellMaterial2,
 
-      drum.normalizedMaterial ||
+    drum.shellMaterial3,
 
-      drum.shell_material_1 ||
+    drum.primaryShellMaterial,
 
-      drum.shell_material ||
+    drum.shellMaterial,
 
-      drum.shellMaterialDescription ||
+    drum.material,
 
-      drum.shellConstructionMaterial ||
+    drum.normalizedShellMaterial,
 
-      drum.wood ||
+    drum.normalizedMaterial,
 
-      drum.shellWood ||
+    drum.shell_material_1,
 
-      drum.alloy ||
+    drum.shell_material,
 
-      drum.metal ||
+    drum.shellMaterialDescription,
 
-      ''
+    drum.shellConstructionMaterial,
 
-  );
+    drum.wood,
+
+    drum.shellWood,
+
+    drum.alloy,
+
+    drum.metal,
+
+  ]
+
+    .map(flattenReferenceValue)
+
+    .filter(Boolean);
+
+  const directMaterial = Array.from(new Set(materialParts)).join(' / ');
 
   if (directMaterial) {
 
@@ -6949,11 +6963,23 @@ const getReferenceDrumMaterial = (drum = {}) => {
 
     drum.series,
 
+    drum.shell?.construction,
+
     drum.shellConstruction,
 
     drum.normalizedShellConstruction,
 
+    drum.shell?.plyCountLayup,
+
+    drum.plyCountLayup,
+
+    drum.oberScores?.scoringBasis,
+
     drum.scoringBasis,
+
+    drum.notes?.summary,
+
+    drum.notes?.missingData,
 
     drum.drumSummaryNotes,
 
@@ -6966,6 +6992,10 @@ const getReferenceDrumMaterial = (drum = {}) => {
     drum.description,
 
     drum.shellNotes,
+
+    drum.sources?.primarySourceUrl,
+
+    drum.sources?.secondarySourceUrl,
 
     drum.primarySourceUrl,
 
@@ -6995,6 +7025,8 @@ const getReferenceDrumMaterial = (drum = {}) => {
 
     ['nickel over brass', 'Nickel over Brass'],
 
+    ['cast bell brass', 'Cast Bell Brass'],
+
     ['bell brass', 'Bell Brass'],
 
     ['hammered brass', 'Hammered Brass'],
@@ -7015,11 +7047,17 @@ const getReferenceDrumMaterial = (drum = {}) => {
 
     ['stainless steel', 'Stainless Steel'],
 
+    ['raw steel', 'Raw Steel'],
+
     ['steel', 'Steel'],
 
     ['titanium', 'Titanium'],
 
     ['iron', 'Iron'],
+
+    ['northern red oak', 'Northern Red Oak'],
+
+    ['tasmanian blackwood', 'Tasmanian Blackwood'],
 
     ['maple gum', 'Maple / Gum'],
 
@@ -7048,6 +7086,12 @@ const getReferenceDrumMaterial = (drum = {}) => {
     ['maple walnut', 'Maple / Walnut'],
 
     ['maple/walnut', 'Maple / Walnut'],
+
+    ['jarrah', 'Jarrah'],
+
+    ['sheoak', 'Sheoak'],
+
+    ['blackwood', 'Blackwood'],
 
     ['maple', 'Maple'],
 
@@ -7085,40 +7129,148 @@ const getReferenceDrumMaterial = (drum = {}) => {
 
   ];
 
-  const match = materialMatches.find(([needle]) => searchableText.includes(needle));
+  const match = materialMatches.find(([needle]) =>
+
+    searchableText.includes(needle)
+
+  );
 
   return match?.[1] || '';
 
 };
 
 const getReferenceDrumThickness = (drum = {}) => {
+
   return (
+
+    drum.shell?.thicknessMm ||
+
     drum.shellThicknessMm ||
+
     drum.thicknessMm ||
+
     drum.shellThickness ||
+
     drum.thickness ||
+
     drum.shell_thickness_mm ||
+
     ''
+
   );
+
 };
 
 const getReferenceDrumHoop = (drum = {}) => {
+
   return (
+
+    drum.shell?.hoopRimType ||
+
     drum.hoopRimType ||
+
     drum.hoopType ||
+
     drum.hoops ||
+
     drum.rimType ||
+
     drum.stockHoops ||
+
     ''
+
   );
+
+};
+
+const getReferenceDrumConstruction = (drum = {}) => {
+
+  return (
+
+    drum.shell?.construction ||
+
+    drum.shellConstruction ||
+
+    drum.normalizedShellConstruction ||
+
+    ''
+
+  );
+
+};
+
+const getReferenceDrumLugCount = (drum = {}) => {
+
+  return drum.hardware?.lugCount || drum.lugCount || '';
+
+};
+
+const getReferenceDrumField = (drum = {}, nestedPath = '', flatKey = '') => {
+
+  if (nestedPath === 'shell.plyCountLayup') {
+
+    return drum.shell?.plyCountLayup || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'shell.reinforcementRings') {
+
+    return drum.shell?.reinforcementRings || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'shell.bearingEdge') {
+
+    return drum.shell?.bearingEdge || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'shell.snareBedType') {
+
+    return drum.shell?.snareBedType || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'shell.finishType') {
+
+    return drum.shell?.finishType || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'hardware.stockSnareWires') {
+
+    return drum.hardware?.stockSnareWires || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'hardware.stockBatterHead') {
+
+    return drum.hardware?.stockBatterHead || drum[flatKey] || '';
+
+  }
+
+  if (nestedPath === 'hardware.stockResoHead') {
+
+    return drum.hardware?.stockResoHead || drum[flatKey] || '';
+
+  }
+
+  return drum[flatKey] || '';
+
 };
 
 const mapReferenceDrumToSelector = (drum = {}) => {
+
   const diameter = drum.diameter ? `${drum.diameter} in` : '14 in';
 
   const depth = drum.depth ? `${drum.depth} in` : '5.5 in';
 
+  const thickness = getReferenceDrumThickness(drum);
+
+  const lugCount = getReferenceDrumLugCount(drum);
+
   return {
+
     drumType: 'Snare',
 
     nonOberCompanyType: drum.companyType || 'Major Manufacturer',
@@ -7130,17 +7282,32 @@ const mapReferenceDrumToSelector = (drum = {}) => {
     nonOberModelName: drum.modelName || '',
 
     nonOberBaselineConstruction:
-      drum.shellConstruction || drum.normalizedShellConstruction || 'Ply',
+
+      getReferenceDrumConstruction(drum) || 'Ply',
 
     nonOberMaterial: getReferenceDrumMaterial(drum),
 
-    nonOberThicknessGroup: getReferenceDrumThickness(drum)
-      ? `${getReferenceDrumThickness(drum)}mm`
-      : '',
+    nonOberThicknessGroup: thickness ? `${thickness}mm` : '',
 
-    nonOberPlyLayupStyle: drum.plyCountLayup || '',
+    nonOberPlyLayupStyle: getReferenceDrumField(
 
-    nonOberReinforcementRings: drum.reinforcementRings || '',
+      drum,
+
+      'shell.plyCountLayup',
+
+      'plyCountLayup'
+
+    ),
+
+    nonOberReinforcementRings: getReferenceDrumField(
+
+      drum,
+
+      'shell.reinforcementRings',
+
+      'reinforcementRings'
+
+    ),
 
     nonOberBeadedShell: '',
 
@@ -7148,30 +7315,70 @@ const mapReferenceDrumToSelector = (drum = {}) => {
 
     depth,
 
-    thickness: getReferenceDrumThickness(drum)
-      ? `${getReferenceDrumThickness(drum)}mm`
-      : '',
+    thickness: thickness ? `${thickness}mm` : '',
 
-    lugCount: drum.lugCount ? `${drum.lugCount} lug` : '',
+    lugCount: lugCount ? `${lugCount} lug` : '',
 
     staveCount: '',
 
-    finish: drum.finishType || '',
+    finish: getReferenceDrumField(drum, 'shell.finishType', 'finishType'),
 
     hoopType: getReferenceDrumHoop(drum),
 
-    bearingEdge: drum.bearingEdge || '',
+    bearingEdge: getReferenceDrumField(
 
-    snareBed: drum.snareBedType || '',
+      drum,
 
-    snareWires: drum.stockSnareWires || '',
+      'shell.bearingEdge',
 
-    batterHead: drum.stockBatterHead || '',
+      'bearingEdge'
 
-    resoHead: drum.stockResoHead || '',
+    ),
+
+    snareBed: getReferenceDrumField(
+
+      drum,
+
+      'shell.snareBedType',
+
+      'snareBedType'
+
+    ),
+
+    snareWires: getReferenceDrumField(
+
+      drum,
+
+      'hardware.stockSnareWires',
+
+      'stockSnareWires'
+
+    ),
+
+    batterHead: getReferenceDrumField(
+
+      drum,
+
+      'hardware.stockBatterHead',
+
+      'stockBatterHead'
+
+    ),
+
+    resoHead: getReferenceDrumField(
+
+      drum,
+
+      'hardware.stockResoHead',
+
+      'stockResoHead'
+
+    ),
 
     tension: 'Medium',
+
   };
+
 };
 
 const buildReferencePreviewFromDrum = (drum = {}) => {
@@ -10043,12 +10250,23 @@ onClick={() => selectReferenceDrum(drum)}
               >
                 <strong>{drum.modelName || 'Unnamed Reference Snare'}</strong>
 
-                <span>
-                  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
-                  {getReferenceDrumMaterial(drum) ||
-                    drum.lineSeries ||
-                    'Unknown material'}
-                </span>
+<span>
+
+  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
+
+  {getReferenceDrumConstruction(drum) || 'Unknown construction'} ·{' '}
+
+  {getReferenceDrumMaterial(drum) || 'Unknown material'} ·{' '}
+
+  {getReferenceDrumHoop(drum) || 'Unknown hoops'} ·{' '}
+
+  {getReferenceDrumLugCount(drum)
+
+    ? `${getReferenceDrumLugCount(drum)} lug`
+
+    : 'Unknown lugs'}
+
+</span>
               </button>
             ))}
           </div>
