@@ -1268,6 +1268,46 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
     sizeKey,
 
+    shellConstruction,
+
+    shellMaterial1: material1,
+
+    shellMaterial2: material2,
+
+    shellMaterial3: material3,
+
+    plyCountLayup: cleanString(rawPlyCountLayup),
+
+    shellThicknessMm: toNumber(getValue(row, "SHELL THICKNESS (in mm)")),
+
+    reinforcementRings: cleanString(getValue(row, "REINFORCEMENT RINGS")),
+
+    bearingEdge: cleanString(getValue(row, "BEARING EDGE")),
+
+    snareBedType: cleanString(getValue(row, "SNARE BED TYPE")),
+
+    finishType: cleanString(getValue(row, "FINISH TYPE")),
+
+    hoopRimType: cleanString(getValue(row, "HOOP/RIM TYPE")),
+
+    lugCount: toNumber(getValue(row, "LUG COUNT")),
+
+    lugType: cleanString(getValue(row, "LUG TYPE")),
+
+    hardwareFinish: cleanString(getValue(row, "HARDWARE FINISH")),
+
+    snareThrowMakeAndModel: cleanString(
+
+      getValue(row, "SNARE THROW MAKE AND MODEL")
+
+    ),
+
+    stockSnareWires: cleanString(getValue(row, "STOCK SNARE WIRES")),
+
+    stockBatterHead: cleanString(getValue(row, "STOCK BATTER HEAD")),
+
+    stockResoHead: cleanString(getValue(row, "STOCK RESO HEAD")),
+
     shell: {
 
       construction: shellConstruction,
