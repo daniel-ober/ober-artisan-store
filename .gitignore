@@ -103,3 +103,11 @@ snareCompanyResearchPatches/
 
 snarePatchApplyReports/
 
+
+# Generated LegacyPrint reports
+snareValidationReports/
+snarePatchApplyReports/
+missingSnareReferenceFieldsReport.json
+snareAuditBatches/
+snareCompanyResearchPlans/
+snareLineResearchPackets/
