@@ -318,9 +318,7 @@ async function gmailSend({
 const ADMIN_ALERT_EMAIL = 'support@oberartisandrums.com';
 
 function escapeHtml(value = '') {
-
   return String(value || '')
-
     .replace(/&/g, '&amp;')
 
     .replace(/</g, '&lt;')
@@ -330,37 +328,30 @@ function escapeHtml(value = '') {
     .replace(/"/g, '&quot;')
 
     .replace(/'/g, '&#039;');
-
 }
 
 function formatMoneyFromCents(cents = 0, currency = 'usd') {
-
   const amount = Number(cents || 0) / 100;
 
   try {
-
     return new Intl.NumberFormat('en-US', {
-
       style: 'currency',
 
       currency: String(currency || 'usd').toUpperCase(),
-
     }).format(amount);
-
   } catch {
-
     return `$${amount.toFixed(2)}`;
-
   }
-
 }
 
 function buildAdminAlertHtml({ title, intro, rows = [] }) {
-
   const filteredRows = rows.filter(
-
-    (row) => row && row.label && row.value !== undefined && row.value !== null && row.value !== ''
-
+    (row) =>
+      row &&
+      row.label &&
+      row.value !== undefined &&
+      row.value !== null &&
+      row.value !== ''
   );
 
   return `
@@ -369,22 +360,13 @@ function buildAdminAlertHtml({ title, intro, rows = [] }) {
 
       <h2 style="margin:0 0 12px">${escapeHtml(title)}</h2>
 
-      ${
-
-        intro
-
-          ? `<p style="margin:0 0 18px">${escapeHtml(intro)}</p>`
-
-          : ''
-
-      }
+      ${intro ? `<p style="margin:0 0 18px">${escapeHtml(intro)}</p>` : ''}
 
       <table role="presentation" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;max-width:680px">
 
         ${filteredRows
 
           .map(
-
             ({ label, value }) => `
 
               <tr>
@@ -404,7 +386,6 @@ function buildAdminAlertHtml({ title, intro, rows = [] }) {
               </tr>
 
             `
-
           )
 
           .join('')}
@@ -420,25 +401,20 @@ function buildAdminAlertHtml({ title, intro, rows = [] }) {
     </div>
 
   `;
-
 }
 
 async function sendAdminAlertEmail({ subject, title, intro, rows }) {
-
   await gmailSend({
-
     to: ADMIN_ALERT_EMAIL,
 
     subject,
 
     html: buildAdminAlertHtml({
-
       title,
 
       intro,
 
       rows,
-
     }),
 
     fromEmail: 'support@oberartisandrums.com',
@@ -446,9 +422,7 @@ async function sendAdminAlertEmail({ subject, title, intro, rows }) {
     replyTo: 'support@oberartisandrums.com',
 
     fromName: 'Ober Artisan Admin Alerts',
-
   });
-
 }
 
 function normalizeLeadEmail(email = '') {
@@ -2899,21 +2873,19 @@ function calculateHeritagePriceFromConfig(product = {}, item = {}) {
     throw new Error(`Invalid Heritage depth: ${depth} for size ${size}`);
   }
 
-const validBaseConfigs = new Set([
+  const validBaseConfigs = new Set([
+    '12|6|12|true',
 
-  '12|6|12|true',
+    '12|8|16|false',
 
-  '12|8|16|false',
+    '13|8|16|false',
 
-  '13|8|16|false',
+    '14|8|16|false',
 
-  '14|8|16|false',
+    '14|10|20|false',
 
-  '14|10|20|false',
-
-  '14|10|10|true',
-
-]);
+    '14|10|10|true',
+  ]);
 
   const configKey = `${size}|${lugQuantity}|${staveQuantity}|${reRing}`;
 
@@ -3681,7 +3653,7 @@ stripeWebhookApp.post('/', async (req, res) => {
           variant.size || cfg.sizeName || cfg.size || cfg.Sizes || '';
         variant.color =
           variant.color || cfg.colorName || cfg.color || cfg.Colors || '';
-        } else if (matched) {
+      } else if (matched) {
         const cfg = matched.config || {};
         variant = {
           ...variant,
@@ -4219,6 +4191,334 @@ const handlePrintifyProductPublished = async (productId) => {
     );
   }
 };
+
+function requireAdminCaller(request, message = 'Admin privileges required.') {
+
+  const ctx = request.auth;
+
+  const email = ctx?.token?.email || '';
+
+  const isAdmin =
+
+    ctx?.token?.admin === true || ctx?.token?.isAdmin === true;
+
+  const ALLOW = new Set([
+
+    'dan@oberartisandrums.com',
+
+    'chilldrummer@gmail.com',
+
+  ]);
+
+  if (!(ctx && (isAdmin || ALLOW.has(email)))) {
+
+    throw new HttpsError('permission-denied', message);
+
+  }
+
+  return {
+
+    uid: ctx.uid,
+
+    email,
+
+    isAdmin,
+
+  };
+
+}
+
+function getSnareResearchMissingFields(drum = {}) {
+
+  const topLevelResearchNeeds = drum.researchNeeds || {};
+
+  if (Array.isArray(topLevelResearchNeeds.missingFields)) {
+
+    return topLevelResearchNeeds.missingFields;
+
+  }
+
+  const missingFields = [];
+
+  const shell = drum.shell || {};
+
+  const hardware = drum.hardware || {};
+
+  const sources = drum.sources || {};
+
+  const checks = [
+
+    {
+
+      key: 'hoopRimType',
+
+      label: 'Hoop / Rim Type',
+
+      value: shell.hoopRimType,
+
+      reason: 'Hoop/rim type is missing or unknown.',
+
+    },
+
+    {
+
+      key: 'lugCount',
+
+      label: 'Lug Count',
+
+      value: hardware.lugCount,
+
+      reason: 'Lug count is missing or unknown.',
+
+    },
+
+    {
+
+      key: 'bearingEdge',
+
+      label: 'Bearing Edge',
+
+      value: shell.bearingEdge,
+
+      reason: 'Bearing edge information is missing or unknown.',
+
+    },
+
+    {
+
+      key: 'snareBedType',
+
+      label: 'Snare Bed Type',
+
+      value: shell.snareBedType,
+
+      reason: 'Snare bed information is missing or unknown.',
+
+    },
+
+    {
+
+      key: 'primarySourceUrl',
+
+      label: 'Primary Source URL',
+
+      value: sources.primarySourceUrl,
+
+      reason: 'Primary source URL is missing.',
+
+    },
+
+  ];
+
+  checks.forEach((field) => {
+
+    const value = field.value;
+
+    if (
+
+      value === undefined ||
+
+      value === null ||
+
+      String(value).trim() === '' ||
+
+      String(value).trim().toLowerCase() === 'unknown'
+
+    ) {
+
+      missingFields.push({
+
+        key: field.key,
+
+        label: field.label,
+
+        value: '',
+
+        reason: field.reason,
+
+      });
+
+    }
+
+  });
+
+  return missingFields;
+
+}
+
+exports.researchSnareReferenceDrum = onCall(
+
+  {
+
+    region: 'us-central1',
+
+    cors: true,
+
+    timeoutSeconds: 60,
+
+    memory: '512MiB',
+
+  },
+
+  async (request) => {
+
+    const caller = requireAdminCaller(
+
+      request,
+
+      'Only admins can start snare reference research.'
+
+    );
+
+    const drumId = String(request.data?.drumId || '').trim();
+
+    if (!drumId) {
+
+      throw new HttpsError('invalid-argument', 'drumId is required.');
+
+    }
+
+    const drumRef = db.collection('snareReferenceDrums').doc(drumId);
+
+    const drumSnap = await drumRef.get();
+
+    if (!drumSnap.exists) {
+
+      throw new HttpsError('not-found', 'Snare reference drum not found.');
+
+    }
+
+    const drum = {
+
+      id: drumSnap.id,
+
+      ...(drumSnap.data() || {}),
+
+    };
+
+    const missingFields = getSnareResearchMissingFields(drum);
+
+    const jobRef = db.collection('snareReferenceResearchJobs').doc();
+
+    const jobDoc = {
+
+      drumId,
+
+      status: 'pending',
+
+      source: 'admin_manual_research_button',
+
+      requestedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      requestedByUid: caller.uid,
+
+      requestedByEmail: caller.email,
+
+      missingFields,
+
+      missingCount: missingFields.length,
+
+      drumSnapshot: {
+
+        id: drum.id,
+
+        companyName: drum.companyName || '',
+
+        lineSeries: drum.lineSeries || '',
+
+        modelName: drum.modelName || '',
+
+        drumType: drum.drumType || '',
+
+        diameter: drum.diameter ?? null,
+
+        depth: drum.depth ?? null,
+
+        sizeKey: drum.sizeKey || '',
+
+        shell: drum.shell || {},
+
+        hardware: drum.hardware || {},
+
+        production: drum.production || {},
+
+        sources: drum.sources || {},
+
+        search: drum.search || {},
+
+        notes: drum.notes || {},
+
+        oberScores: drum.oberScores || {},
+
+        tuning: drum.tuning || {},
+
+      },
+
+      result: null,
+
+      error: null,
+
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+    };
+
+    await jobRef.set(jobDoc);
+
+    await drumRef.set(
+
+      {
+
+        research: {
+
+          latestJobId: jobRef.id,
+
+          latestJobStatus: 'pending',
+
+          latestRequestedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+          latestRequestedByUid: caller.uid,
+
+          latestRequestedByEmail: caller.email,
+
+        },
+
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      },
+
+      { merge: true }
+
+    );
+
+    logger.info('Created snare reference research job', {
+
+      jobId: jobRef.id,
+
+      drumId,
+
+      missingCount: missingFields.length,
+
+    });
+
+    return {
+
+      ok: true,
+
+      jobId: jobRef.id,
+
+      drumId,
+
+      status: 'pending',
+
+      missingFields,
+
+      missingCount: missingFields.length,
+
+    };
+
+  }
+
+);
 
 // === Claims / user admin ===
 exports.setSoundlegendClaim = onCall(
@@ -4931,7 +5231,12 @@ exports.notifySupportNewInquiry = onDocumentCreated(
         intro: 'A new support/contact inquiry was submitted.',
         rows: [
           { label: 'Doc ID', value: docId },
-          { label: 'Name', value: data.name || `${data.firstName || ''} ${data.lastName || ''}`.trim() },
+          {
+            label: 'Name',
+            value:
+              data.name ||
+              `${data.firstName || ''} ${data.lastName || ''}`.trim(),
+          },
           { label: 'Email', value: data.email || '' },
           { label: 'Phone', value: data.phone || '' },
           { label: 'Category', value: data.category || data.reason || '' },
@@ -4969,12 +5274,24 @@ exports.notifySupportNewSoundlegendSubmission = onDocumentCreated(
         intro: 'A new SoundLegend submission was received.',
         rows: [
           { label: 'Doc ID', value: docId },
-          { label: 'Name', value: data.fullName || data.name || `${data.firstName || ''} ${data.lastName || ''}`.trim() },
+          {
+            label: 'Name',
+            value:
+              data.fullName ||
+              data.name ||
+              `${data.firstName || ''} ${data.lastName || ''}`.trim(),
+          },
           { label: 'Email', value: data.email || '' },
           { label: 'Phone', value: data.phone || data.phoneE164 || '' },
-          { label: 'Status', value: data.status || data.soundlegendLeadStatus || '' },
+          {
+            label: 'Status',
+            value: data.status || data.soundlegendLeadStatus || '',
+          },
           { label: 'Questionnaire URL', value: data.questionnaireUrl || '' },
-          { label: 'Message', value: data.message || data.notes || data.additionalNotes || '' },
+          {
+            label: 'Message',
+            value: data.message || data.notes || data.additionalNotes || '',
+          },
         ],
       });
     } catch (err) {
@@ -5013,8 +5330,16 @@ exports.notifySupportNewEndorsement = onDocumentCreated(
           { label: 'Tier Interest', value: data.tierInterest || '' },
           { label: 'Instagram', value: data.instagram || '' },
           { label: 'YouTube', value: data.youtube || '' },
-          { label: 'Location', value: [data.city, data.state, data.country].filter(Boolean).join(', ') },
-          { label: 'Message', value: data.message || data.notes || data.whyOber || '' },
+          {
+            label: 'Location',
+            value: [data.city, data.state, data.country]
+              .filter(Boolean)
+              .join(', '),
+          },
+          {
+            label: 'Message',
+            value: data.message || data.notes || data.whyOber || '',
+          },
         ],
       });
     } catch (err) {
