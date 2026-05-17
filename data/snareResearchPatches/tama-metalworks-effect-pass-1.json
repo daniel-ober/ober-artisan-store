@@ -1,0 +1,387 @@
+{
+
+  "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4": {
+
+    "id": "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks Effect",
+
+    "modelName": "Metalworks \"Effect\" Series 10x3",
+
+    "patchName": "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4",
+
+    "diameter": 10,
+
+    "depth": 3,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 6,
+
+    "lugType": "Metalworks Effect / compact single-ended lugs",
+
+    "hardwareFinish": "black",
+
+    "snareThrowMakeModel": "Tama Mod-Tone system",
+
+    "stockSnareWires": "half-size snare wire",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BST103MBK",
+
+    "yearInProduction": "2020s",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8.1,
+
+    "shellScoreBrightness": 8.3,
+
+    "shellScoreProjection": 6.7,
+
+    "shellScoreSustain": 3.2,
+
+    "shellScoreWarmth": 3.2,
+
+    "shellScoreSensitivity": 7.8,
+
+    "shellScoreControl": 8.7,
+
+    "overallAttack": 8.2,
+
+    "overallBrightness": 8.4,
+
+    "overallProjection": 6.9,
+
+    "overallSustain": 2.9,
+
+    "overallWarmth": 3.1,
+
+    "overallSensitivity": 7.9,
+
+    "overallControl": 8.9,
+
+    "projectedShellFundamentalPitch": "high",
+
+    "recommendedTuningBatterHz": "310-430 Hz",
+
+    "recommendedTuningResoHz": "390-500 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+
+    "secondarySourceUrl": "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm",
+
+    "notesOnMissingData": "Exact lug count for the 10x3 version should be confirmed from direct catalog imagery or official parts data. Core series construction is confirmed as a 3-inch steel shell with half snare wire, Mod-Tone system, and MC69 attachment. 1.0mm shell thickness and triple-flanged hoop are supported by retailer specs for the series.",
+
+    "drumSummaryNotes": "Compact 10x3 steel effect snare. Should score with fast attack, bright crack, very short sustain, strong control, and more usable body/projection than the 6x3 and 8x3 versions because of the larger diameter.",
+
+    "drumType": "Snare Drum",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented steel shell, 3-inch depth, small diameter, shallow effect-snare format, half snare wire, hoop type, and compact hardware configuration. Brand prestige, price, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9": {
+
+    "id": "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks Effect",
+
+    "modelName": "Metalworks \"Effect\" Series 6x3",
+
+    "patchName": "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9",
+
+    "diameter": 6,
+
+    "depth": 3,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 4,
+
+    "lugType": "Metalworks Effect / compact single-ended lugs",
+
+    "hardwareFinish": "black",
+
+    "snareThrowMakeModel": "Tama Mod-Tone system",
+
+    "stockSnareWires": "half-size snare wire",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BST63MBK",
+
+    "yearInProduction": "2020s",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8.4,
+
+    "shellScoreBrightness": 8.8,
+
+    "shellScoreProjection": 5.5,
+
+    "shellScoreSustain": 2.4,
+
+    "shellScoreWarmth": 2.4,
+
+    "shellScoreSensitivity": 8,
+
+    "shellScoreControl": 9.2,
+
+    "overallAttack": 8.5,
+
+    "overallBrightness": 8.9,
+
+    "overallProjection": 5.7,
+
+    "overallSustain": 2.1,
+
+    "overallWarmth": 2.3,
+
+    "overallSensitivity": 8.1,
+
+    "overallControl": 9.4,
+
+    "projectedShellFundamentalPitch": "very high",
+
+    "recommendedTuningBatterHz": "380-520 Hz",
+
+    "recommendedTuningResoHz": "450-580 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+
+    "secondarySourceUrl": "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm",
+
+    "notesOnMissingData": "Series data confirms 3-inch steel shell, half snare wire, Mod-Tone system, and MC69 attachment. Retail specs identify the 6x3 model as BST63MBK with 1.0mm steel shell and triple-flanged hoop. Stock head models remain unknown.",
+
+    "drumSummaryNotes": "Tiny 6x3 steel effect snare. Should score as the brightest and most controlled of the Metalworks Effect sizes, with sharp crack, very short sustain, low warmth, high pitch, and limited body/projection.",
+
+    "drumType": "Snare Drum",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented steel shell, 3-inch depth, 6-inch diameter, 1.0mm shell thickness, half snare wire, hoop type, and compact effect-snare configuration. Brand prestige, price, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a": {
+
+    "id": "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks Effect",
+
+    "modelName": "Metalworks \"Effect\" Series 8x3",
+
+    "patchName": "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a",
+
+    "diameter": 8,
+
+    "depth": 3,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 4,
+
+    "lugType": "Metalworks Effect / compact single-ended lugs",
+
+    "hardwareFinish": "black",
+
+    "snareThrowMakeModel": "Tama Mod-Tone system",
+
+    "stockSnareWires": "half-size snare wire",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BST83MBK",
+
+    "yearInProduction": "2020s",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8.3,
+
+    "shellScoreBrightness": 8.6,
+
+    "shellScoreProjection": 6.1,
+
+    "shellScoreSustain": 2.8,
+
+    "shellScoreWarmth": 2.8,
+
+    "shellScoreSensitivity": 7.9,
+
+    "shellScoreControl": 9,
+
+    "overallAttack": 8.4,
+
+    "overallBrightness": 8.7,
+
+    "overallProjection": 6.3,
+
+    "overallSustain": 2.5,
+
+    "overallWarmth": 2.7,
+
+    "overallSensitivity": 8,
+
+    "overallControl": 9.2,
+
+    "projectedShellFundamentalPitch": "very high",
+
+    "recommendedTuningBatterHz": "340-470 Hz",
+
+    "recommendedTuningResoHz": "420-540 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+
+    "secondarySourceUrl": "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm",
+
+    "notesOnMissingData": "Exact lug count for the 8x3 version should be confirmed from direct catalog imagery or official parts data. Core series construction is confirmed as a 3-inch steel shell with half snare wire, Mod-Tone system, and MC69 attachment. 1.0mm shell thickness and triple-flanged hoop are supported by retailer specs for the series.",
+
+    "drumSummaryNotes": "Compact 8x3 steel effect snare. Should sit between the 6x3 and 10x3 versions: bright, fast, short, and controlled, with slightly more body and projection than the 6-inch model but still clearly an auxiliary effect voice.",
+
+    "drumType": "Snare Drum",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented steel shell, 3-inch depth, small diameter, shallow effect-snare format, half snare wire, hoop type, and compact hardware configuration. Brand prestige, price, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
