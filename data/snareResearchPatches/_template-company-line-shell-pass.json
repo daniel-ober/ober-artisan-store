@@ -1,0 +1,105 @@
+
+{
+
+  "companyName": "Example Company",
+
+  "lineSeries": "Example Line",
+
+  "patchName": "example-company-line-shell-pass-1",
+
+  "researchStatus": "draft",
+
+  "doNotApplyAutomatically": true,
+
+  "notes": "Template for scalable company/line shell-first research patches. Use target + patch. Keep unknown values unknown/null/false. Do not include stock heads, wires, or throw-offs unless intentionally doing a later-phase patch.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Exact model shell update",
+
+      "target": {
+
+        "modelName": "Example Model 14x6.5"
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "thicknessMm": null,
+
+          "plyCountLayup": "unknown",
+
+          "bearingEdge": "unknown",
+
+          "reinforcementRings": false,
+
+          "snareBedType": "unknown"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "unknown",
+
+          "secondarySourceUrl": "unknown"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Shell-first notes only. Explain exactly what the source confirms and what remains unknown."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "Shared line/spec family shell update",
+
+      "target": {
+
+        "modelNameIncludesAny": [
+
+          "Example Material",
+
+          "Example Construction"
+
+        ],
+
+        "diameter": 14
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "shellConstruction": "unknown",
+
+          "thicknessMm": null,
+
+          "plyCountLayup": "unknown"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Use shared updates only when the source confirms this spec applies across every matched model."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
+
