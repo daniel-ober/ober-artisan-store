@@ -1,0 +1,1061 @@
+{
+  "mode": "dry-run",
+  "importBatchId": "snare-import-2026-05-17T02-59-13-171Z",
+  "generatedAt": "2026-05-17T02:59:17.476Z",
+  "files": {
+    "allManufacturers": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "oberArtisan": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx"
+  },
+  "collections": {
+    "allManufacturers": "snareReferenceDrums",
+    "oberArtisan": "oberArtisanSnareVariants"
+  },
+  "totals": {
+    "rowsRead": 7790,
+    "docsPrepared": 7790,
+    "docsWritten": 0,
+    "validationIssues": 0,
+    "validationWarnings": 47,
+    "missingMaterials": 0,
+    "missingConstruction": 0,
+    "publicVisible": 7790,
+    "needsReview": 0,
+    "duplicates": 0,
+    "skipped": 0
+  },
+  "masterReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "sheetName": "Combined Master Dataset",
+    "availableSheets": [
+      "README + Checklist",
+      "Combined Master Dataset",
+      "Coverage Summary",
+      "Source Log",
+      "Rubric",
+      "Validation Lists",
+      "Ludwig",
+      "Tama",
+      "Pearl",
+      "Yamaha",
+      "DW   PDP",
+      "Sonor",
+      "Gretsch",
+      "Mapex",
+      "Canopus",
+      "Noble & Cooley",
+      "Craviotto",
+      "Slingerland",
+      "Rogers",
+      "Premier",
+      "Brady",
+      "Dunnett",
+      "Pork Pie",
+      "Ahead",
+      "WorldMax   OEM",
+      "Boutique Builders"
+    ],
+    "collectionName": "snareReferenceDrums",
+    "sourceWorkbookType": "all_manufacturers",
+    "rowsRead": 1538,
+    "docsPrepared": 1538,
+    "docsWritten": 0,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "validationWarnings": [
+      {
+        "rowIndex": 161,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Metal auxiliary shell"
+        ],
+        "docPreview": {
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 6x3",
+          "sizeKey": "6x3",
+          "shellConstruction": "Metal auxiliary shell",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 162,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Metal auxiliary shell"
+        ],
+        "docPreview": {
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 8x3",
+          "sizeKey": "8x3",
+          "shellConstruction": "Metal auxiliary shell",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 163,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Metal auxiliary shell"
+        ],
+        "docPreview": {
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 10x3",
+          "sizeKey": "10x3",
+          "shellConstruction": "Metal auxiliary shell",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 506,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Cast/composite shell"
+        ],
+        "docPreview": {
+          "companyName": "DW / PDP",
+          "lineSeries": "Collector's Specialty / Metal",
+          "modelName": "DW Concrete 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Cast/composite shell",
+          "shellMaterial1": "Concrete composite",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 541,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Maple shell / limited"
+        ],
+        "docPreview": {
+          "companyName": "DW / PDP",
+          "lineSeries": "PDP Limited",
+          "modelName": "PDP Ace 13x6.5",
+          "sizeKey": "13x6-5",
+          "shellConstruction": "Maple shell / limited",
+          "shellMaterial1": "Maple",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 542,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Maple shell / limited"
+        ],
+        "docPreview": {
+          "companyName": "DW / PDP",
+          "lineSeries": "PDP Limited",
+          "modelName": "PDP Woody 13x7",
+          "sizeKey": "13x7",
+          "shellConstruction": "Maple shell / limited",
+          "shellMaterial1": "Maple",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 554,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Composite shell"
+        ],
+        "docPreview": {
+          "companyName": "DW / PDP",
+          "lineSeries": "DW Historical / Discontinued",
+          "modelName": "DW Carbon Fiber 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Composite shell",
+          "shellMaterial1": "Carbon Fiber",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 698,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther",
+          "modelName": "Hydro",
+          "sizeKey": "13x7",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 699,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther",
+          "modelName": "Cyrus",
+          "sizeKey": "14x6",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 700,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Hammered metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther",
+          "modelName": "Persuader",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Hammered metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 704,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther",
+          "modelName": "Atomizer",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Aluminum",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 705,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther",
+          "modelName": "Metallion",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 772,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 12x5.5",
+          "sizeKey": "12x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 773,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 13x3.5",
+          "sizeKey": "13x3-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 774,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 13x6",
+          "sizeKey": "13x6",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 775,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x3.5",
+          "sizeKey": "14x3-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 776,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x5",
+          "sizeKey": "14x5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 777,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x5.5",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 778,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x6",
+          "sizeKey": "14x6",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 779,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 780,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x7",
+          "sizeKey": "14x7",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 781,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Stainless Steel 14x8",
+          "sizeKey": "14x8",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 782,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 10x5.5",
+          "sizeKey": "10x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 783,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 12x5.5",
+          "sizeKey": "12x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 784,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 13x3.5",
+          "sizeKey": "13x3-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 785,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 13x6",
+          "sizeKey": "13x6",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 786,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 14x3.5",
+          "sizeKey": "14x3-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 787,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 14x5",
+          "sizeKey": "14x5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 788,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 14x5.5",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 789,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "modelName": "Brass Master 14x6",
+          "sizeKey": "14x6",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 790,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Armory",
+          "modelName": "Tomahawk",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 791,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Armory",
+          "modelName": "Daisy Cutter",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 799,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "MPX",
+          "modelName": "MPX Steel 14x5.5",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 803,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Signature / Artist",
+          "modelName": "Matt Halpern Wraith",
+          "sizeKey": "14x6",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 808,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Unresolved Variant",
+          "modelName": "Unresolved Steel Variant 4",
+          "sizeKey": "12x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 809,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Seamed metal"
+        ],
+        "docPreview": {
+          "companyName": "Mapex",
+          "lineSeries": "Black Panther Archive / Unresolved Variant",
+          "modelName": "Unresolved Brass Variant 5",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Seamed metal",
+          "shellMaterial1": "Brass",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 867,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Unknown / special project shell"
+        ],
+        "docPreview": {
+          "companyName": "Canopus",
+          "lineSeries": "Signature",
+          "modelName": "Takashi Kashikura toe 25th Anniversary Model",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Unknown / special project shell",
+          "shellMaterial1": "Ash",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 868,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Unknown / special project shell"
+        ],
+        "docPreview": {
+          "companyName": "Canopus",
+          "lineSeries": "Others",
+          "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+          "sizeKey": "14x4",
+          "shellConstruction": "Unknown / special project shell",
+          "shellMaterial1": "canopus others 12top 6bottom lugs piccolo snare drum unknown special project shell unknown unknown catalog incomplete unknown bearing edge snare bed unless noted. listed in official canopus lineup or official linked type r category specs require deeper page catalog extraction. shell first score based on 14x4 unknown special project shell unknown shell unknown. listed in official canopus lineup or official linked type r category specs require deeper page catalog extraction. https canopusdrums.com en products drum products snare drum",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 869,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Unknown / special project shell"
+        ],
+        "docPreview": {
+          "companyName": "Canopus",
+          "lineSeries": "R.O.F PROJECT",
+          "modelName": "R.O.F Project Snare Drum",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Unknown / special project shell",
+          "shellMaterial1": "canopus r.o.f project r.o.f project snare drum unknown special project shell unknown unknown catalog incomplete unknown bearing edge snare bed unless noted. listed in official canopus lineup or official linked type r category specs require deeper page catalog extraction. shell first score based on 14x6.5 unknown special project shell unknown shell unknown. listed in official canopus lineup or official linked type r category specs require deeper page catalog extraction. https canopusdrums.com en products drum products snare drum",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 931,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Unknown / artist reference"
+        ],
+        "docPreview": {
+          "companyName": "Noble & Cooley",
+          "lineSeries": "Artist / Endorser Reference",
+          "modelName": "Malcolm Travis Reference Snare",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Unknown / artist reference",
+          "shellMaterial1": "noble cooley artist endorser reference malcolm travis reference snare unknown artist reference unknown unknown catalog incomplete artist page confirms noble cooley association but exact model specs need manual confirmation. included as artist reference placeholder only do not treat score as final until exact drum model is identified. https www.noblecooley.com malcolm travis https www.noblecooley.com gallery snares",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 932,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Unknown / artist reference"
+        ],
+        "docPreview": {
+          "companyName": "Noble & Cooley",
+          "lineSeries": "Artist / Endorser Reference",
+          "modelName": "Craig Pilo Reference Snare",
+          "sizeKey": "14x6-5",
+          "shellConstruction": "Unknown / artist reference",
+          "shellMaterial1": "noble cooley artist endorser reference craig pilo reference snare unknown artist reference unknown unknown catalog incomplete artist page confirms noble cooley association but exact model specs need manual confirmation. included as artist reference placeholder only do not treat score as final until exact drum model is identified. https www.noblecooley.com craig pilo https www.noblecooley.com gallery snares",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 1085,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Piccolo/thin depth Rogers shell family"
+        ],
+        "docPreview": {
+          "companyName": "Rogers",
+          "lineSeries": "Skinny Drum",
+          "modelName": "Skinny Drum 14x3.5",
+          "sizeKey": "14x3-5",
+          "shellConstruction": "Piccolo/thin depth Rogers shell family",
+          "shellMaterial1": "rogers skinny drum skinny drum 14x3.5 piccolo thin depth rogers shell family unknown unknown catalog incomplete shell material and construction need catalog extraction. shallow rogers skinny drum row score emphasizes piccolo attack brightness but low confidence. https www.vintagedrumguide.com rogers snare drums catalog pages.html https rogersdrumsusa.com resources backup",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 1086,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Marching/field snare shell"
+        ],
+        "docPreview": {
+          "companyName": "Rogers",
+          "lineSeries": "Coliseum/Marching",
+          "modelName": "Marching/Field Snare 15x12",
+          "sizeKey": "15x12",
+          "shellConstruction": "Marching/field snare shell",
+          "shellMaterial1": "Maple / Poplar",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 1091,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: LTD Custom Dyna-Sonic shell family"
+        ],
+        "docPreview": {
+          "companyName": "Rogers",
+          "lineSeries": "LTD Custom",
+          "modelName": "LTD Custom Dyna-Sonic 14x5",
+          "sizeKey": "14x5",
+          "shellConstruction": "LTD Custom Dyna-Sonic shell family",
+          "shellMaterial1": "Maple / Poplar",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 1092,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Covington kit snare shell family"
+        ],
+        "docPreview": {
+          "companyName": "Rogers",
+          "lineSeries": "Covington",
+          "modelName": "Covington Kit Snare 14x5.5",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Covington kit snare shell family",
+          "shellMaterial1": "Maple / Poplar",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 1153,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Metal/Unknown shell"
+        ],
+        "docPreview": {
+          "companyName": "Premier",
+          "lineSeries": "Marching",
+          "modelName": "12-Lug Marching Chrome Snare",
+          "sizeKey": "14x10",
+          "shellConstruction": "Metal/Unknown shell",
+          "shellMaterial1": "Steel",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      },
+      {
+        "rowIndex": 1175,
+        "issues": [],
+        "warnings": [
+          "Non-standard shellConstruction: Unknown / likely metal or wood signature build"
+        ],
+        "docPreview": {
+          "companyName": "Premier",
+          "lineSeries": "Signature / Artist",
+          "modelName": "Nicko McBrain Aces High 14x5.5 Snare",
+          "sizeKey": "14x5-5",
+          "shellConstruction": "Unknown / likely metal or wood signature build",
+          "shellMaterial1": "Wood",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true,
+          "isPublicVisible": true,
+          "needsReview": false
+        }
+      }
+    ],
+    "missingMaterials": 0,
+    "missingConstruction": 0,
+    "publicVisible": 1538,
+    "needsReview": 0,
+    "sampleDocIds": [
+      "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+      "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+      "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+      "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+      "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+      "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e"
+    ]
+  },
+  "oberReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx",
+    "sheetName": "Ober Artisan Dataset",
+    "availableSheets": [
+      "Ober Artisan Dataset",
+      "Coverage Summary",
+      "Variant Inputs",
+      "Rubric",
+      "Source Log",
+      "Validation Lists"
+    ],
+    "collectionName": "oberArtisanSnareVariants",
+    "sourceWorkbookType": "ober_artisan",
+    "rowsRead": 6252,
+    "docsPrepared": 6252,
+    "docsWritten": 0,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "validationWarnings": [],
+    "missingMaterials": 0,
+    "missingConstruction": 0,
+    "publicVisible": 6252,
+    "needsReview": 0,
+    "sampleDocIds": [
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-triple-flange_12x5_stave_northern-red-oak__5d4c26c2",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-die-cast_12x5_stave_northern-red-oak_45-in_94f20cf8",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-triple-flange_12x5_stave_northern-red-oak_525fd4b0",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-die-cast_12x5_stave_northern-red-oak_45-i_721046c5",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-triple-flange_12x5_stave_northern-red-oak_45-_2ea629ab",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-die-cast_12x5_stave_northern-red-oak_45-inner_5a939aac",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-triple-flange_12x5-5_stave_northern-red-_3387cced",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-die-cast_12x5-5_stave_northern-red-oak_4_05a473f5",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-triple-flange_12x5-5_stave_northern-red_615413c3",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-die-cast_12x5-5_stave_northern-red-oak__212c25ae"
+    ]
+  }
+}

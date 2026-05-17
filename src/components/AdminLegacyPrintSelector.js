@@ -156,16 +156,11 @@ const isStockTextOnlyField = ({ selector, fieldKey, options = [] }) => {
 const shouldHideField = ({ selector, fieldKey, options = [] }) => {
   if (!options.length) return true;
 
-    if (
-
+  if (
     selector?.nonOberCompanyType === 'Generic / Baseline Reference' &&
-
     fieldKey === 'nonOberBaselineConstruction'
-
   ) {
-
     return true;
-
   }
 
   const isNonOberReference =
@@ -571,7 +566,6 @@ const getFieldLabel = ({ field, selector }) => {
 };
 
 const SelectorButtonField = ({
-
   field,
 
   options = [],
@@ -583,7 +577,6 @@ const SelectorButtonField = ({
   getOptionMeta = () => ({}),
 
   onSelectorChange,
-
 }) => {
   if (
     isStockTextOnlyField({
@@ -603,114 +596,76 @@ const SelectorButtonField = ({
     );
   }
 
-    if (field.key === 'nonOberLineName') {
-
+  if (field.key === 'nonOberLineName') {
     const groupedOptions = options.reduce((acc, option) => {
-
       const meta = getOptionMeta({
-
         fieldKey: field.key,
 
         option,
 
         selector,
-
       });
 
       const bucketLabel = meta.bucketLabel || 'Unsorted References';
 
       if (!acc[bucketLabel]) {
-
         acc[bucketLabel] = [];
-
       }
 
       acc[bucketLabel].push({
-
         option,
 
         meta,
-
       });
 
       return acc;
-
     }, {});
 
     return (
-
       <div className="lp-selector-field lp-selector-field--bucketed">
-
         <div className="lp-selector-field-header">
-
           <span>{getFieldLabel({ field, selector })}</span>
-
         </div>
 
         <div className="lp-selector-bucket-list">
+          {Object.entries(groupedOptions).map(
+            ([bucketLabel, bucketOptions]) => (
+              <div key={bucketLabel} className="lp-selector-bucket">
+                <div className="lp-selector-bucket-heading">
+                  <strong>{bucketLabel}</strong>
 
-          {Object.entries(groupedOptions).map(([bucketLabel, bucketOptions]) => (
+                  <span>{bucketOptions.length}</span>
+                </div>
 
-            <div key={bucketLabel} className="lp-selector-bucket">
+                <div className="lp-selector-option-grid">
+                  {bucketOptions.map(({ option, meta }) => {
+                    const isActive = value === option;
 
-              <div className="lp-selector-bucket-heading">
+                    const isUpgrade = meta.access === 'upgrade';
 
-                <strong>{bucketLabel}</strong>
+                    return (
+                      <button
+                        key={option}
+                        type="button"
+                        className={`lp-selector-option ${
+                          isActive ? 'is-active' : ''
+                        } ${isUpgrade ? 'is-upgrade-reference' : ''}`}
+                        title={`${option} · ${bucketLabel}`}
+                        onClick={() => onSelectorChange(field.key, option)}
+                      >
+                        {formatSelectorOptionLabel(option)}
 
-                <span>{bucketOptions.length}</span>
-
+                        {isUpgrade && <small>Upgrade</small>}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-
-              <div className="lp-selector-option-grid">
-
-                {bucketOptions.map(({ option, meta }) => {
-
-                  const isActive = value === option;
-
-                  const isUpgrade = meta.access === 'upgrade';
-
-                  return (
-
-                    <button
-
-                      key={option}
-
-                      type="button"
-
-                      className={`lp-selector-option ${
-
-                        isActive ? 'is-active' : ''
-
-                      } ${isUpgrade ? 'is-upgrade-reference' : ''}`}
-
-                      title={`${option} · ${bucketLabel}`}
-
-                      onClick={() => onSelectorChange(field.key, option)}
-
-                    >
-
-                      {formatSelectorOptionLabel(option)}
-
-                      {isUpgrade && <small>Upgrade</small>}
-
-                    </button>
-
-                  );
-
-                })}
-
-              </div>
-
-            </div>
-
-          ))}
-
+            )
+          )}
         </div>
-
       </div>
-
     );
-
   }
 
   return (
@@ -741,7 +696,6 @@ const SelectorButtonField = ({
 };
 
 const AdminLegacyPrintSelector = ({
-
   selectorFields = [],
 
   calibration,
@@ -753,7 +707,6 @@ const AdminLegacyPrintSelector = ({
   getOptionMeta = () => ({}),
 
   onSelectorChange,
-
 }) => {
   const [openGroup, setOpenGroup] = useState('foundation');
 
@@ -843,23 +796,15 @@ const AdminLegacyPrintSelector = ({
                       });
 
                       return (
-                     <SelectorButtonField
-
-  key={field.key}
-
-  field={field}
-
-  options={options}
-
-  value={selector[field.key] || ''}
-
-  selector={selector}
-
-  getOptionMeta={getOptionMeta}
-
-  onSelectorChange={onSelectorChange}
-
-/>
+                        <SelectorButtonField
+                          key={field.key}
+                          field={field}
+                          options={options}
+                          value={selector[field.key] || ''}
+                          selector={selector}
+                          getOptionMeta={getOptionMeta}
+                          onSelectorChange={onSelectorChange}
+                        />
                       );
                     })}
 
