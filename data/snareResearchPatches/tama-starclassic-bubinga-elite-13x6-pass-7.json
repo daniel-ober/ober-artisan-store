@@ -1,0 +1,73 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-bubinga-elite-13x6-pass-7",
+
+  "researchStatus": "ready",
+
+  "doNotApplyAutomatically": false,
+
+  "notes": "Shell-first patch for the exact Tama Starclassic Bubinga Elite 13x6 record. Do not patch stock batter/reso heads because they remain unconfirmed.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Bubinga Elite 13x6 shell and hardware update",
+
+      "target": {
+
+        "modelName": "Starclassic Bubinga Elite 13x6"
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "thicknessMm": 7,
+
+          "plyCountLayup": "9-ply bubinga with outer decorative veneer",
+
+          "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+          "reinforcementRings": false,
+
+          "snareBedType": "Snappy Bed"
+
+        },
+
+        "hardware": {
+
+          "lugType": "Starclassic one-piece lug",
+
+          "snareThrowMakeAndModel": "Tama Linear-Drive Strainer",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100325.html",
+
+          "secondarySourceUrl": "https://reverb.com/item/7621664-tama-starclassic-bubinga-snare-13x6-natural-cordia"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Tama official Starclassic Bubinga reissue news supports the original Starclassic Bubinga shell family as 9-ply, 6mm shell construction with 7mm for snare and bass drums as it was when discontinued in 2018. Secondary listing confirms the 13x6 Starclassic Bubinga snare format with bubinga shell and outer cordia/decorative veneer. Applied to the exact Starclassic Bubinga Elite 13x6 record only. Used the established Starclassic Bubinga family hardware/bearing-edge/snappy-bed values already applied to the 14 inch Starclassic Bubinga records. Stock batter/reso heads remain unconfirmed."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
