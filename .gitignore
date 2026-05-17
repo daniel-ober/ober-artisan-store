@@ -89,3 +89,12 @@ missingSnareReferenceFieldsReport.json
 
 snareAuditBatches/
 
+
+# Generated snare company/line research files
+
+snareCompanyResearchPlans/
+
+snareLineResearchPackets/
+
+snareCompanyResearchPatches/
+
