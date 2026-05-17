@@ -98,3 +98,8 @@ snareLineResearchPackets/
 
 snareCompanyResearchPatches/
 
+
+# Generated snare patch apply reports
+
+snarePatchApplyReports/
+
