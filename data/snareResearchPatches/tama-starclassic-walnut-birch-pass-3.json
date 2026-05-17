@@ -1,0 +1,75 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-walnut-birch-pass-3",
+
+  "researchStatus": "draft",
+
+  "doNotApplyAutomatically": true,
+
+  "notes": "Tama Starclassic Walnut/Birch pass. Applies only to the standard modern Starclassic Walnut/Birch 14x5.5 and 14x6.5 records, not G-Walnut/Birch or special cedar outer-ply variants. This pass only normalizes supported ply layup wording, adds unknown snare bed type, adds supported MS20RL14C wire detail, and adds the secondary source URL. Existing better/specific bearing edge, lug type, and strainer values are preserved.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Walnut/Birch standard 14 inch supported cleanup",
+
+      "target": {
+
+        "modelNameIncludesAny": [
+
+          "Starclassic Walnut/Birch"
+
+        ],
+
+        "modelNameExcludesAny": [
+
+          "G-Walnut/Birch",
+
+          "Cedar"
+
+        ],
+
+        "diameter": 14
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "plyCountLayup": "6-ply: 4-ply European birch + 2 inner-ply American black walnut",
+
+          "snareBedType": "unknown"
+
+        },
+
+        "hardware": {
+
+          "stockSnareWires": "MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires"
+
+        },
+
+        "sources": {
+
+          "secondarySourceUrl": "https://www.sweetwater.com/store/detail/WBRS55TQP--tama-starclassic-walnut-birch-snare-drum-5.5-inches-by-14-inches-turquoise-pearl"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama Starclassic Walnut/Birch source already supports the core modern Starclassic Walnut/Birch shell family and existing records already contain stronger/specific values for thickness, bearing edge, lug type, strainer/butt, and die-cast hoops. Secondary retailer specs support the standard modern Starclassic Walnut/Birch shell layup wording and MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires. Applied only to standard Starclassic Walnut/Birch 14 inch records; excludes G-Walnut/Birch and cedar outer-ply special variants. Stock batter/reso heads and exact snare bed type remain unconfirmed."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
