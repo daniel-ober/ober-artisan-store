@@ -84,3 +84,8 @@ serviceAccountKey.json
 
 missingSnareReferenceFieldsReport.json
 
+
+# Generated snare audit batches
+
+snareAuditBatches/
+
