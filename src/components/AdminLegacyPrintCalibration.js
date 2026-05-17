@@ -8138,6 +8138,8 @@ const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
 
   useState(null);
 
+const [processingResearchJobId, setProcessingResearchJobId] = useState('');
+
 const functions = useMemo(() => getFunctions(), []);
 
   const selectedReferenceDrum = useMemo(() => {
@@ -9969,61 +9971,139 @@ const functions = useMemo(() => getFunctions(), []);
     setActivePreviewRead('First Listen');
   };
 
- const handleResearchReferenceDrum = async (researchTarget) => {
+  const handleResearchReferenceDrum = async (researchTarget) => {
 
-  if (!researchTarget?.id) {
+    if (!researchTarget?.id) {
 
-    console.warn('No snare research target id found:', researchTarget);
+      console.warn('No snare research target id found:', researchTarget);
 
-    return;
+      return;
 
-  }
+    }
 
-  try {
+    try {
 
-    setActiveReferenceResearchTarget(researchTarget);
+      setActiveReferenceResearchTarget(researchTarget);
 
-    const researchSnareReferenceDrum = httpsCallable(
+      const researchSnareReferenceDrum = httpsCallable(
 
-      functions,
+        functions,
 
-      'researchSnareReferenceDrum'
+        'researchSnareReferenceDrum'
 
-    );
+      );
 
-    const result = await researchSnareReferenceDrum({
+      const result = await researchSnareReferenceDrum({
 
-      drumId: researchTarget.id,
+        drumId: researchTarget.id,
 
-    });
+      });
 
-    console.log('Snare research job created:', result.data);
+      console.log('Snare research job created:', result.data);
 
-    setActiveReferenceResearchTarget({
+      setActiveReferenceResearchTarget({
 
-      ...researchTarget,
+        ...researchTarget,
 
-      researchJob: result.data,
+        researchJob: result.data,
 
-    });
+        researchJobError: '',
 
-  } catch (error) {
+      });
 
-    console.error('Failed creating snare research job:', error);
+    } catch (error) {
 
-    setActiveReferenceResearchTarget({
+      console.error('Failed creating snare research job:', error);
 
-      ...researchTarget,
+      setActiveReferenceResearchTarget({
 
-      researchJobError:
+        ...researchTarget,
 
-        error?.message || 'Failed creating snare research job.',
+        researchJobError:
 
-    });
+          error?.message || 'Failed creating snare research job.',
 
-  }
+      });
 
-};
+    }
+
+  };
+
+  const handleProcessReferenceResearchJob = async (jobId) => {
+
+    const cleanJobId = String(jobId || '').trim();
+
+    if (!cleanJobId) {
+
+      window.alert('No research job ID found for this drum yet.');
+
+      return;
+
+    }
+
+    try {
+
+      setProcessingResearchJobId(cleanJobId);
+
+      const processSnareReferenceResearchJob = httpsCallable(
+
+        functions,
+
+        'processSnareReferenceResearchJob'
+
+      );
+
+      const result = await processSnareReferenceResearchJob({
+
+        jobId: cleanJobId,
+
+      });
+
+      console.log('Snare research job processed:', result.data);
+
+      setActiveReferenceResearchTarget((current) => ({
+
+        ...(current || {}),
+
+        researchJob: {
+
+          ...((current && current.researchJob) || {}),
+
+          ...(result.data || {}),
+
+          jobId: cleanJobId,
+
+        },
+
+        researchJobError: '',
+
+      }));
+
+      window.alert('Snare research job processed. Refresh the reference list if the card does not update immediately.');
+
+    } catch (error) {
+
+      console.error('Failed processing snare research job:', error);
+
+      setActiveReferenceResearchTarget((current) => ({
+
+        ...(current || {}),
+
+        researchJobError:
+
+          error?.message || 'Failed processing snare research job.',
+
+      }));
+
+      window.alert(error?.message || 'Failed processing snare research job.');
+
+    } finally {
+
+      setProcessingResearchJobId('');
+
+    }
+
+  };
 
   const renderNonOberReferenceBuilder = () => {
     const companyOptions = Array.from(
@@ -12338,31 +12418,119 @@ const functions = useMemo(() => getFunctions(), []);
 
     </span>
 
+    {activeReferenceResearchTarget.researchJob?.jobId && (
+
+      <span>
+
+        Research job:{' '}
+
+        <strong>{activeReferenceResearchTarget.researchJob.jobId}</strong> ·{' '}
+
+        Status:{' '}
+
+        <strong>
+
+          {activeReferenceResearchTarget.researchJob.status || 'pending'}
+
+        </strong>
+
+      </span>
+
+    )}
+
+    {activeReferenceResearchTarget.researchJobError && (
+
+      <span style={{ color: '#ffb4a8' }}>
+
+        {activeReferenceResearchTarget.researchJobError}
+
+      </span>
+
+    )}
+
     <div style={{ marginTop: '12px' }}>
 
       <strong>Missing fields:</strong>
 
       <ul>
 
-        {(activeReferenceResearchTarget.researchNeeds?.missingFields || []).map(
+        {(
 
-          (field) => (
+          activeReferenceResearchTarget.researchJob?.missingFields ||
 
-            <li key={field.key}>
+          activeReferenceResearchTarget.researchNeeds?.missingFields ||
 
-              <b>{field.label}</b> — {field.reason}
+          []
 
-            </li>
+        ).map((field) => (
 
-          )
+          <li key={field.key}>
 
-        )}
+            <b>{field.label}</b> — {field.reason}
+
+          </li>
+
+        ))}
 
       </ul>
 
     </div>
 
-    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '12px' }}>
+    <div
+
+      style={{
+
+        display: 'flex',
+
+        gap: '10px',
+
+        flexWrap: 'wrap',
+
+        marginTop: '12px',
+
+      }}
+
+    >
+
+      {activeReferenceResearchTarget.researchJob?.jobId && (
+
+        <button
+
+          type="button"
+
+          className="legacyprint-admin-button secondary"
+
+          disabled={
+
+            processingResearchJobId ===
+
+            activeReferenceResearchTarget.researchJob.jobId
+
+          }
+
+          onClick={() =>
+
+            handleProcessReferenceResearchJob(
+
+              activeReferenceResearchTarget.researchJob.jobId
+
+            )
+
+          }
+
+        >
+
+          {processingResearchJobId ===
+
+          activeReferenceResearchTarget.researchJob.jobId
+
+            ? 'Processing Research…'
+
+            : 'Process Research Job'}
+
+        </button>
+
+      )}
 
       <button
 
@@ -12382,13 +12550,13 @@ const functions = useMemo(() => getFunctions(), []);
 
             activeReferenceResearchTarget.diameter &&
 
-              activeReferenceResearchTarget.depth
+            activeReferenceResearchTarget.depth
 
               ? `${activeReferenceResearchTarget.diameter}x${activeReferenceResearchTarget.depth}`
 
               : '',
 
-            'snare drum specs lug count bearing edge hoop'
+            'snare drum specs lug count bearing edge hoop',
 
           ]
 
@@ -12428,7 +12596,7 @@ const functions = useMemo(() => getFunctions(), []);
 
             activeReferenceResearchTarget.modelName,
 
-            'official'
+            'official',
 
           ]
 
