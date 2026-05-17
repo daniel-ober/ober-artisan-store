@@ -1,0 +1,1055 @@
+{
+  "tama_signature_lars-ulrich-lu1465-14x6-5_14x6-5_metal_steel_3_diamond-plate-steel_die-cast-hoops_lu1465_ae41107f": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Lars Ulrich LU1465 14x6.5",
+    "identification": {
+      "modelNumber": "LU1465",
+      "productionStatus": "current",
+      "currentlyInProduction": true,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Steel",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": "Unknown",
+        "layupDescription": "3mm diamond-plated steel shell",
+        "shellThicknessMm": 3,
+        "thicknessClass": "very thick metal",
+        "reinforcementRings": false,
+        "reinforcementRingMaterial": "none",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "folded metal bearing edge",
+        "snareSideProfile": "folded metal bearing edge",
+        "roundover": "none",
+        "evidenceLevel": "official manufacturer description confirms metal shell thickness; edge profile inferred from standard formed metal shell construction",
+        "confidence": "Medium",
+        "notes": "TAMA confirms 3mm diamond-plated steel shell; exact edge geometry not separately specified."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "formed metal snare bed",
+        "evidenceLevel": "functional snare-side bed presumed for production snare drum; exact bed depth not published",
+        "confidence": "Medium",
+        "notes": "Keep bed depth unknown until official spec/manual/source confirms exact profile."
+      },
+      "finish": {
+        "finishName": "Diamond plate steel",
+        "finishType": "Textured metal",
+        "exteriorTreatment": "diamond-plated steel exterior",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "textured/thick 3mm metal shell is physically meaningful; finish is part of shell form rather than only cosmetic lacquer",
+        "notes": "Do not treat artist association as an acoustic factor; shell material/thickness and hoops drive the voice."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Die-cast hoop",
+        "resonantHoopType": "Die-cast hoop",
+        "hoopMaterial": "Zinc",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "heavy",
+        "hoopFinish": "Chrome"
+      },
+      "lugs": {
+        "lugCount": 10,
+        "lugCountNotes": "10-lug 14-inch signature snare",
+        "lugType": "unknown",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "unknown",
+        "hardwareFinish": "Chrome"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "side-action strainer",
+        "notes": "Exact throw-off model still needs confirmation."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "unknown",
+        "material": "steel",
+        "strandCount": "unknown",
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/lu1465.html",
+      "secondarySourceUrl": "https://www.thomannmusic.com/tama_14x65_snare_lars_ulrich.htm",
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/snare_drums/lu1465.html",
+        "https://www.thomannmusic.com/tama_14x65_snare_lars_ulrich.htm"
+      ],
+      "sourceConfidence": "High",
+      "notesOnMissingData": "Exact lug model, throw-off model, stock heads, snare wire model/strand count, and snare bed depth remain unconfirmed.",
+      "conflictingSourceNotes": "No material/thickness conflict found in reviewed sources."
+    },
+    "summary": {
+      "shortDescription": "14x6.5 Lars Ulrich signature snare with a very thick 3mm diamond-plated steel shell and die-cast zinc hoops.",
+      "drumSummaryNotes": "Shell-first voice drivers are the unusually thick steel shell, 6.5-inch depth, and heavy die-cast hoops. Artist association is not used for scoring."
+    }
+  },
+  "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
+    "identification": {
+      "modelNumber": "LU1465BB",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1"
+      },
+      "construction": {
+        "shellConstruction": "Cast metal",
+        "shellMaterialPrimary": "Bell Brass",
+        "shellMaterialSecondary": "Bronze",
+        "shellMaterialTertiary": "none",
+        "plyCount": "Unknown",
+        "layupDescription": "cast bell brass / bronze-family shell",
+        "shellThicknessMm": 3,
+        "thicknessClass": "very thick metal",
+        "reinforcementRings": false,
+        "reinforcementRingMaterial": "none",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "machined metal bearing edge",
+        "snareSideProfile": "machined metal bearing edge",
+        "roundover": "none",
+        "evidenceLevel": "catalog/model-family evidence supports cast bell brass construction; exact edge wording not fully confirmed",
+        "confidence": "Medium",
+        "notes": "Keep edge profile as machined metal until exact catalog language is confirmed."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "machined metal snare bed",
+        "evidenceLevel": "functional snare-side bed presumed; exact depth not published in current reviewed sources",
+        "confidence": "Medium",
+        "notes": "Confirm bed style/depth from catalog scan, manual, or shell photos."
+      },
+      "finish": {
+        "finishName": "Bell brass",
+        "finishType": "Metal",
+        "exteriorTreatment": "natural/cast bell brass finish",
+        "interiorTreatment": "natural cast metal",
+        "acousticImpact": "shell material and 3mm cast construction are major acoustic drivers",
+        "notes": "Do not score based on rarity or association with artist; use cast bell brass shell behavior only."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Die-cast hoop",
+        "resonantHoopType": "Die-cast hoop",
+        "hoopMaterial": "unknown",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "heavy",
+        "hoopFinish": "Chrome"
+      },
+      "lugs": {
+        "lugCount": 10,
+        "lugCountNotes": "10-lug 14-inch cast bell brass signature snare",
+        "lugType": "unknown",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "unknown",
+        "hardwareFinish": "Chrome"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "side-action strainer",
+        "notes": "Exact throw-off model still needs confirmation."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "unknown",
+        "material": "steel",
+        "strandCount": "unknown",
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+      "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
+      "secondarySourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
+      ],
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": "Exact lug model, throw-off, snare wires, stock heads, and detailed bearing edge/snare bed geometry remain unconfirmed.",
+      "conflictingSourceNotes": "No current official product page found during this pass; keep source confidence at Medium."
+    },
+    "summary": {
+      "shortDescription": "14x6.5 Lars Ulrich bell brass signature snare with a thick cast bell brass/bronze-family shell.",
+      "drumSummaryNotes": "Core voice should be scored from cast 3mm bell brass shell behavior, 6.5-inch depth, and heavy hoop mass—not artist status or collectibility."
+    }
+  },
+  "tama_signature_ronald-bruner-jr-rb1455-14x5-5_14x5-5_hybrid_walnut_6_walnut-steel-hybrid_die-cast-hoops_rb1455_f8f35fdb": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Ronald Bruner Jr. RB1455 14x5.5",
+    "identification": {
+      "modelNumber": "RB1455",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7"
+      },
+      "construction": {
+        "shellConstruction": "Hybrid",
+        "shellMaterialPrimary": "American Black Walnut",
+        "shellMaterialSecondary": "Steel",
+        "shellMaterialTertiary": "none",
+        "plyCount": 6,
+        "layupDescription": "6-ply / 6mm American Black Walnut inner shell with 1.0mm steel outer shell",
+        "shellThicknessMm": 7,
+        "thicknessClass": "hybrid medium-thick",
+        "reinforcementRings": false,
+        "reinforcementRingMaterial": "none",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "shell construction confirmed by retailer/manufacturer-style product copy; exact edge profile not confirmed",
+        "confidence": "Low",
+        "notes": "Need official catalog or shell-detail source for bearing edge profile."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "functional snare bed presumed; exact bed not published in reviewed sources",
+        "confidence": "Low",
+        "notes": "Confirm snare bed depth/style before marking complete."
+      },
+      "finish": {
+        "finishName": "Orange metallic steel outer shell / walnut inner shell",
+        "finishType": "Hybrid metal/wood exterior",
+        "exteriorTreatment": "lacquered orange metallic steel outer shell",
+        "interiorTreatment": "American Black Walnut interior",
+        "acousticImpact": "steel outer shell is part of the shell structure and should be treated as acoustically meaningful",
+        "notes": "Hybrid shell should be scored as wood/metal composite, not simply walnut."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Die-cast hoop",
+        "resonantHoopType": "Die-cast hoop",
+        "hoopMaterial": "unknown",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "heavy",
+        "hoopFinish": "Matte black"
+      },
+      "lugs": {
+        "lugCount": 10,
+        "lugCountNotes": "10-lug 14-inch signature snare",
+        "lugType": "unknown",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "unknown",
+        "hardwareFinish": "Matte black"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "side-action strainer",
+        "notes": "Exact throw-off model still needs confirmation."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "unknown",
+        "material": "steel",
+        "strandCount": "unknown",
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.forksdrumcloset.com/products/tama-ronald-bruner-jr-walnut-steel-14-x5-5-sig",
+      "secondarySourceUrl": "https://www.sweetwater.com/store/detail/RB1455--tama-ronald-bruner-signature-snare-drum-5.5-inch-by-14-inch",
+      "secondarySourceUrls": [
+        "https://www.forksdrumcloset.com/products/tama-ronald-bruner-jr-walnut-steel-14-x5-5-sig",
+        "https://www.sweetwater.com/store/detail/RB1455--tama-ronald-bruner-signature-snare-drum-5.5-inch-by-14-inch"
+      ],
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": "Bearing edge, snare bed, exact lug model, throw-off model, stock heads, and snare wire model/strand count still need official confirmation.",
+      "conflictingSourceNotes": "No reviewed conflict on hybrid shell construction."
+    },
+    "summary": {
+      "shortDescription": "14x5.5 Ronald Bruner Jr. signature hybrid snare with 6mm walnut inner shell and 1.0mm steel outer shell.",
+      "drumSummaryNotes": "The major physical drivers are the walnut/steel hybrid shell, 5.5-inch depth, and heavy hoop mass. Score as a hybrid shell, not as a standard ply walnut snare."
+    }
+  },
+  "tama_signature_simon-phillips-gladiator-14x5-5_14x5-5_metal_bronze_bronze_die-cast-hoops_sp1455_6d2e74cb": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Simon Phillips Gladiator 14x5.5",
+    "identification": {
+      "modelNumber": "SP1455H",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Bronze",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": "Unknown",
+        "layupDescription": "bronze shell",
+        "shellThicknessMm": 1,
+        "thicknessClass": "medium metal",
+        "reinforcementRings": false,
+        "reinforcementRingMaterial": "none",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "folded metal bearing edge",
+        "snareSideProfile": "folded metal bearing edge",
+        "roundover": "none",
+        "evidenceLevel": "material and thickness supported by retailer spec; exact edge profile inferred from metal shell construction",
+        "confidence": "Medium",
+        "notes": "Some sources list 1.0mm bronze; one retailer-style source lists 1.2mm nickel-plated bronze. Keep conflict note."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "formed metal snare bed",
+        "evidenceLevel": "functional bed presumed; exact depth not confirmed",
+        "confidence": "Low",
+        "notes": "Confirm bed geometry from official catalog/manual."
+      },
+      "finish": {
+        "finishName": "Bronze / nickel-plated bronze",
+        "finishType": "Metal",
+        "exteriorTreatment": "bronze shell finish",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "bronze shell material is acoustically meaningful; plating/finish is secondary unless confirmed as structural",
+        "notes": "Keep thickness conflict visible until official source is found."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Brass Mighty hoop",
+        "resonantHoopType": "Brass Mighty hoop",
+        "hoopMaterial": "Brass",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "medium-heavy",
+        "hoopFinish": "Brushed nickel"
+      },
+      "lugs": {
+        "lugCount": 10,
+        "lugCountNotes": "10-hole Brass Mighty hoops",
+        "lugType": "MSL35",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "separate lug",
+        "hardwareFinish": "Brushed nickel"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "MUS80AH",
+        "style": "side-action strainer",
+        "notes": "Paired with MUS80BH butt plate per retailer spec."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "MUS80BH",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "MS20S-S",
+        "material": "steel",
+        "strandCount": 20,
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://drumcenternh.com/products/tama-signature-series-snare-drum-simon-phillips-gladiator-14x5-5",
+      "secondarySourceUrl": "https://www.riffsandlicks.com.au/tama-sp1455h-simon-phillips-snare-the-gladiator",
+      "secondarySourceUrls": [
+        "https://drumcenternh.com/products/tama-signature-series-snare-drum-simon-phillips-gladiator-14x5-5",
+        "https://www.riffsandlicks.com.au/tama-sp1455h-simon-phillips-snare-the-gladiator"
+      ],
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": "Official TAMA source still needed for final thickness, exact bearing edge, stock heads, and snare bed depth.",
+      "conflictingSourceNotes": "One reviewed retailer source lists 1mm bronze; another describes 1.2mm nickel-plated bronze. Treat thickness as Medium confidence until official source resolves it."
+    },
+    "summary": {
+      "shortDescription": "14x5.5 Simon Phillips Gladiator bronze signature snare with Brass Mighty hoops.",
+      "drumSummaryNotes": "Core scoring should emphasize bronze shell behavior, 5.5-inch depth, and brass hoop mass. Keep shell thickness confidence at Medium due to source conflict."
+    }
+  },
+  "tama_signature_simon-phillips-monarch-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_sp1465_5cb2bc67": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Simon Phillips Monarch 14x6.5",
+    "identification": {
+      "modelNumber": "SP1465",
+      "productionStatus": "current",
+      "currentlyInProduction": true,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1"
+      },
+      "construction": {
+        "shellConstruction": "Ply with reinforcement rings",
+        "shellMaterialPrimary": "Mahogany",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": 8,
+        "layupDescription": "6.0mm 8-ply mahogany shell with 6.0mm Sound Focus Rings",
+        "shellThicknessMm": 6,
+        "thicknessClass": "medium wood",
+        "reinforcementRings": true,
+        "reinforcementRingMaterial": "Mahogany",
+        "reinforcementRingThicknessMm": 6
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "official product page confirms shell and SFR; bearing edge not confirmed in reviewed source",
+        "confidence": "Low",
+        "notes": "Need official edge detail before marking complete."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "functional snare bed presumed; exact depth not confirmed",
+        "confidence": "Low",
+        "notes": "Confirm snare bed style/depth."
+      },
+      "finish": {
+        "finishName": "Lacquer",
+        "finishType": "Lacquer",
+        "exteriorTreatment": "lacquer over wood shell",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "standard lacquer likely minor compared with shell/SFR/hoops",
+        "notes": "Older Monarch references mention maple/bubinga/maple; current official SP1465 page confirms mahogany shell with SFR for this model record."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Customized Brass Mighty hoop",
+        "resonantHoopType": "Customized Brass Mighty hoop",
+        "hoopMaterial": "Brass",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "medium-heavy",
+        "hoopFinish": "unknown"
+      },
+      "lugs": {
+        "lugCount": 8,
+        "lugCountNotes": "8-hole customized Brass Mighty hoop",
+        "lugType": "MSL90S",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "separate lug",
+        "hardwareFinish": "unknown"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "MLS50A",
+        "style": "Linear-Drive strainer",
+        "notes": "MLS50A/MLS50B listed by retailer spec."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "MLS50B",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "20-strand Carbon Steel Snare Wires",
+        "material": "carbon steel",
+        "strandCount": 20,
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": true,
+        "batterHead": "Remo Ambassador",
+        "resonantHead": "Remo Ambassador snare-side"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/sp1465.html",
+      "secondarySourceUrl": "https://www.thomannmusic.com/tama_14x65_sp1465_simon_phillips.htm",
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/snare_drums/sp1465.html",
+        "https://www.thomannmusic.com/tama_14x65_sp1465_simon_phillips.htm",
+        "https://www.musicstore.com/en_US/USD/Tama-SP1465-Simon-Phillips-Snare-14-x6-5-/art-DRU0043485-000"
+      ],
+      "sourceConfidence": "High",
+      "notesOnMissingData": "Bearing edge and snare bed geometry still need confirmation.",
+      "conflictingSourceNotes": "Older/alternate Monarch listings describe maple/bubinga/maple construction; current official SP1465 page confirms 8-ply mahogany with 6mm SFR. Keep model distinction under review if dataset later splits older SP1465H vs current SP1465."
+    },
+    "summary": {
+      "shortDescription": "14x6.5 Simon Phillips Monarch signature snare with 6mm 8-ply mahogany shell, 6mm Sound Focus Rings, and Brass Mighty hoops.",
+      "drumSummaryNotes": "Score from mahogany shell, reinforcement rings, 6.5-inch depth, and brass hoops. Do not score from signature/artist prestige."
+    }
+  },
+  "tama_signature_simon-phillips-sp125-the-pageant-12x5_12x5_ply_maple": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Simon Phillips SP125 The Pageant 12x5",
+    "identification": {
+      "modelNumber": "SP125",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 12,
+        "depthInches": 5,
+        "metricDimensionsMm": "304.8 x 127"
+      },
+      "construction": {
+        "shellConstruction": "Ply with reinforcement rings",
+        "shellMaterialPrimary": "Maple",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": 7,
+        "layupDescription": "7-ply maple shell with Sound Focus Rings",
+        "shellThicknessMm": "unknown",
+        "thicknessClass": "medium wood",
+        "reinforcementRings": true,
+        "reinforcementRingMaterial": "Maple",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "retailer/reference source confirms shell family and SFR; exact edge not confirmed",
+        "confidence": "Low",
+        "notes": "Need official catalog/manual for exact bearing edge."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "functional bed presumed; exact depth not confirmed",
+        "confidence": "Low",
+        "notes": "Confirm bed style/depth."
+      },
+      "finish": {
+        "finishName": "Black figured maple",
+        "finishType": "Lacquer",
+        "exteriorTreatment": "figured maple lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "finish likely minor compared with smaller diameter, maple shell, and SFR",
+        "notes": "Finish should not materially drive score unless a structural treatment is later confirmed."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Die-cast hoop",
+        "resonantHoopType": "Die-cast hoop",
+        "hoopMaterial": "unknown",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "heavy",
+        "hoopFinish": "unknown"
+      },
+      "lugs": {
+        "lugCount": 6,
+        "lugCountNotes": "6-lug 12-inch signature snare",
+        "lugType": "unknown",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "unknown",
+        "hardwareFinish": "unknown"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "side-action strainer",
+        "notes": "Exact throw-off model still needs confirmation."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "unknown",
+        "material": "steel",
+        "strandCount": "unknown",
+        "lengthInches": 12,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.riffsandlicks.com.au/tama-sp125-simon-phillips-snare-the-pageant",
+      "secondarySourceUrl": "https://reverb.com/p/tama-sp125h-5x12-simon-phillips-pageant-signature-maple-snare-drum",
+      "secondarySourceUrls": [
+        "https://www.riffsandlicks.com.au/tama-sp125-simon-phillips-snare-the-pageant",
+        "https://reverb.com/p/tama-sp125h-5x12-simon-phillips-pageant-signature-maple-snare-drum"
+      ],
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": "Official source needed for exact shell thickness, hoop model/material, throw-off, snare wires, stock heads, bearing edge, and snare bed.",
+      "conflictingSourceNotes": "No major material conflict found; source confidence stays Medium due to non-official references."
+    },
+    "summary": {
+      "shortDescription": "12x5 Simon Phillips Pageant signature snare with maple shell and Sound Focus Rings.",
+      "drumSummaryNotes": "Score from compact 12-inch diameter, 5-inch depth, maple shell, SFR, and hoop mass. Keep incomplete hardware fields unknown until confirmed."
+    }
+  },
+  "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Stewart Copeland SC145 14x5",
+    "identification": {
+      "modelNumber": "SC145",
+      "productionStatus": "current",
+      "currentlyInProduction": true,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5,
+        "metricDimensionsMm": "355.6 x 127"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Brass",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": "Unknown",
+        "layupDescription": "1.5mm brass shell",
+        "shellThicknessMm": 1.5,
+        "thicknessClass": "medium-thick metal",
+        "reinforcementRings": false,
+        "reinforcementRingMaterial": "none",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "folded metal bearing edge",
+        "snareSideProfile": "folded metal bearing edge",
+        "roundover": "none",
+        "evidenceLevel": "official source confirms brass shell thickness; edge profile inferred from formed metal shell construction",
+        "confidence": "Medium",
+        "notes": "Exact bearing edge shape not separately published in reviewed source."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "formed metal snare bed",
+        "evidenceLevel": "functional snare bed presumed; exact depth not confirmed",
+        "confidence": "Medium",
+        "notes": "Confirm bed depth/profile from manual or shell photos."
+      },
+      "finish": {
+        "finishName": "Brass",
+        "finishType": "Metal",
+        "exteriorTreatment": "brass shell finish",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "brass shell material and 1.5mm thickness are primary acoustic drivers",
+        "notes": "Hoop asymmetry is a major physical setup driver."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Die-cast hoop",
+        "resonantHoopType": "Triple-flange / Steel Mighty hoop",
+        "hoopMaterial": "batter unknown; resonant steel",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "mixed heavy batter / medium resonant",
+        "hoopFinish": "Chrome"
+      },
+      "lugs": {
+        "lugCount": 10,
+        "lugCountNotes": "10-lug 14-inch signature snare",
+        "lugType": "unknown",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "unknown",
+        "hardwareFinish": "Chrome"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "side-action strainer",
+        "notes": "Exact throw-off model still needs confirmation."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "unknown",
+        "material": "steel",
+        "strandCount": "unknown",
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/sc145.html",
+      "secondarySourceUrl": "https://www.tama.com/usa/news/detail/20210907124420.html",
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/snare_drums/sc145.html",
+        "https://www.tama.com/usa/news/detail/20210907124420.html"
+      ],
+      "sourceConfidence": "High",
+      "notesOnMissingData": "Exact lug model, throw-off model, snare wire model/strand count, stock heads, and snare bed depth remain unconfirmed.",
+      "conflictingSourceNotes": "No conflict found on 1.5mm brass shell or die-cast batter/triple-flange resonant hoop configuration."
+    },
+    "summary": {
+      "shortDescription": "14x5 Stewart Copeland signature snare with 1.5mm brass shell, die-cast batter hoop, and triple-flange resonant hoop.",
+      "drumSummaryNotes": "Score from brass shell, 5-inch depth, and asymmetrical hoop configuration. Do not use artist/Police association as a scoring factor."
+    }
+  },
+  "tama_signature_peter-erskine-pe106m-10x6_10x6_ply_maple_lacquer_triple-flange-mighty-hoop_pe106m_e9aa7aab": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Peter Erskine PE106M 10x6",
+    "identification": {
+      "modelNumber": "PE106M",
+      "productionStatus": "current",
+      "currentlyInProduction": true,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 10,
+        "depthInches": 6,
+        "metricDimensionsMm": "254 x 152.4"
+      },
+      "construction": {
+        "shellConstruction": "Stave",
+        "shellMaterialPrimary": "Ash",
+        "shellMaterialSecondary": "Indian Rosewood",
+        "shellMaterialTertiary": "none",
+        "plyCount": "Unknown",
+        "layupDescription": "10mm 12-piece stave ash shell with Indian rosewood inlay",
+        "shellThicknessMm": 10,
+        "thicknessClass": "thick wood",
+        "reinforcementRings": false,
+        "reinforcementRingMaterial": "none",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "STAR bearing edge",
+        "snareSideProfile": "STAR bearing edge",
+        "roundover": "unknown",
+        "evidenceLevel": "retailer listing provides STAR bearing edge; official-style copy confirms stave ash shell",
+        "confidence": "Medium",
+        "notes": "Confirm edge details from official TAMA page/catalog if available."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "functional snare bed presumed; exact depth not confirmed",
+        "confidence": "Low",
+        "notes": "Confirm snare bed geometry."
+      },
+      "finish": {
+        "finishName": "Oiled Natural Ash",
+        "finishType": "Oil / natural",
+        "exteriorTreatment": "oiled natural ash",
+        "interiorTreatment": "natural ash",
+        "acousticImpact": "oil finish likely minor compared with stave ash shell and 10mm thickness",
+        "notes": "Corrects previous maple/ply classification; this model is stave ash, not ply maple."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Die-cast hoop",
+        "resonantHoopType": "Die-cast hoop",
+        "hoopMaterial": "unknown",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "heavy",
+        "hoopFinish": "unknown"
+      },
+      "lugs": {
+        "lugCount": 6,
+        "lugCountNotes": "6-hole die-cast hoops on 10-inch snare",
+        "lugType": "MSL90S",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "separate lug",
+        "hardwareFinish": "unknown"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "MLS50A",
+        "style": "Linear-Drive strainer",
+        "notes": "Retailer spec lists MLS50A/MLS50B."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "MLS50B",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "MS20SN10S",
+        "material": "steel",
+        "strandCount": 20,
+        "lengthInches": 10,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": true,
+        "batterHead": "Remo Coated Ambassador",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.musicarts.com/tama-peter-erskine-signature-snare-drum-main0292990",
+      "secondarySourceUrl": "https://reverb.com/item/37143834-tama-snare-pe106m-peter-erskine-oiled-natural",
+      "secondarySourceUrls": [
+        "https://www.musicarts.com/tama-peter-erskine-signature-snare-drum-main0292990",
+        "https://reverb.com/item/37143834-tama-snare-pe106m-peter-erskine-oiled-natural"
+      ],
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": "Official TAMA product page needed for final confirmation of edge detail, snare bed, and full stock head pair.",
+      "conflictingSourceNotes": "One Reverb listing text says size 14x6 in one specification line while title and model identify PE106M as 10x6; treat 10x6 as correct based on model/name and multiple sources."
+    },
+    "summary": {
+      "shortDescription": "10x6 Peter Erskine PE106M signature snare with 10mm 12-piece stave ash shell.",
+      "drumSummaryNotes": "This record should be scored as a compact stave ash side snare, not as ply maple. Core drivers are 10-inch diameter, 6-inch depth, 10mm stave ash shell, and die-cast hoop mass."
+    }
+  },
+  "tama_signature_peter-erskine-pe1445-14x4-5_14x4-5_ply_maple_lacquer_triple-flange-mighty-hoop_pe1445_3e707e32": {
+    "companyName": "Tama",
+    "lineSeries": "Signature",
+    "modelName": "Peter Erskine PE1445 14x4.5",
+    "identification": {
+      "modelNumber": "PE1445",
+      "productionStatus": "current",
+      "currentlyInProduction": true,
+      "artistSignature": true
+    },
+    "shell": {
+      "drumType": "Snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 4.5,
+        "metricDimensionsMm": "355.6 x 114.3"
+      },
+      "construction": {
+        "shellConstruction": "Hybrid ply with batter-side Sound Focus Ring",
+        "shellMaterialPrimary": "Maple",
+        "shellMaterialSecondary": "Spruce",
+        "shellMaterialTertiary": "none",
+        "plyCount": "Unknown",
+        "layupDescription": "hybrid Maple/Spruce shell construction with SFR on batter side only",
+        "shellThicknessMm": "unknown",
+        "thicknessClass": "medium wood",
+        "reinforcementRings": true,
+        "reinforcementRingMaterial": "unknown",
+        "reinforcementRingThicknessMm": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "official list confirms hybrid shell and batter-side SFR; exact bearing edge not confirmed",
+        "confidence": "Low",
+        "notes": "Need official edge spec before marking complete."
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "functional snare bed presumed; exact depth not confirmed",
+        "confidence": "Low",
+        "notes": "Confirm bed style/depth."
+      },
+      "finish": {
+        "finishName": "Lacquer",
+        "finishType": "Lacquer",
+        "exteriorTreatment": "lacquer over wood shell",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "standard lacquer likely minor compared with hybrid shell, shallow depth, and SFR",
+        "notes": "SFR is one-sided on batter side only and should be represented distinctly from full reinforcement-ring pairs."
+      }
+    },
+    "stockHardware": {
+      "hoops": {
+        "batterHoopType": "Triple-flange / Mighty Hoop",
+        "resonantHoopType": "Triple-flange / Mighty Hoop",
+        "hoopMaterial": "Steel",
+        "hoopThicknessMm": "unknown",
+        "hoopMassClass": "medium",
+        "hoopFinish": "unknown"
+      },
+      "lugs": {
+        "lugCount": 8,
+        "lugCountNotes": "Official copy notes 8-lug design",
+        "lugType": "unknown",
+        "lugMaterial": "unknown",
+        "lugMassClass": "medium",
+        "lugMountingStyle": "unknown",
+        "hardwareFinish": "unknown"
+      },
+      "throwOff": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "side-action strainer",
+        "notes": "Exact throw-off model still needs confirmation."
+      },
+      "buttPlate": {
+        "make": "Tama",
+        "model": "unknown",
+        "style": "standard butt plate"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "make": "Tama",
+        "model": "unknown",
+        "material": "steel",
+        "strandCount": "unknown",
+        "lengthInches": 14,
+        "stock": true
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "sources": {
+      "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/",
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
+      ],
+      "sourceConfidence": "High",
+      "notesOnMissingData": "Exact shell thickness, ply count, edge profile, snare bed depth, throw-off model, snare wire model, and stock heads remain unconfirmed.",
+      "conflictingSourceNotes": "No conflict found on 14x4.5 size, hybrid Maple/Spruce shell, batter-side-only SFR, or 8-lug design."
+    },
+    "summary": {
+      "shortDescription": "14x4.5 Peter Erskine PE1445 jazz signature snare with hybrid Maple/Spruce shell and batter-side Sound Focus Ring.",
+      "drumSummaryNotes": "Score from shallow 4.5-inch depth, hybrid Maple/Spruce shell, 8-lug layout, and one-sided SFR. Keep unknowns explicit."
+    }
+  }
+}
