@@ -3660,6 +3660,56 @@ exports.researchSnareReferenceDrum = onCall(
   }
 );
 
+function safeParseAiJson(rawText) {
+
+  try {
+
+    return JSON.parse(rawText);
+
+  } catch (firstError) {
+
+    const firstBrace = rawText.indexOf('{');
+
+    const lastBrace = rawText.lastIndexOf('}');
+
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+
+      const possibleJson = rawText.slice(firstBrace, lastBrace + 1);
+
+      try {
+
+        return JSON.parse(possibleJson);
+
+      } catch (secondError) {
+
+        return {
+
+          parseFailed: true,
+
+          parseError: secondError.message,
+
+          rawText,
+
+        };
+
+      }
+
+    }
+
+    return {
+
+      parseFailed: true,
+
+      parseError: firstError.message,
+
+      rawText,
+
+    };
+
+  }
+
+}
+
 exports.researchSnareReferenceDrumWithAI = onCall(
   {
     region: 'us-central1',
@@ -3999,17 +4049,97 @@ JSON SHAPE:
         throw new Error('OpenAI returned empty research output.');
       }
 
-      const cleaned = rawText
+const cleaned = rawText
 
-        .replace(/^```json\s*/i, '')
+  .replace(/^```json\s*/i, '')
 
-        .replace(/^```\s*/i, '')
+  .replace(/^```\s*/i, '')
 
-        .replace(/\s*```$/i, '')
+  .replace(/\s*```$/i, '')
 
-        .trim();
+  .trim();
 
-      parsed = JSON.parse(cleaned);
+parsed = safeParseAiJson(cleaned);
+
+if (parsed?.parseFailed) {
+
+  await jobRef.set(
+
+    {
+
+      status: 'needs_manual_review',
+
+      error: {
+
+        message: parsed.parseError || 'AI response was not valid JSON.',
+
+        rawText: parsed.rawText || rawText || '',
+
+      },
+
+      rawResponseText: rawText || '',
+
+      completedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+    },
+
+    { merge: true }
+
+  );
+
+  await drumRef.set(
+
+    {
+
+      research: {
+
+        ...(drum.research || {}),
+
+        latestJobId: jobRef.id,
+
+        latestJobStatus: 'needs_manual_review',
+
+        latestErrorMessage:
+
+          parsed.parseError || 'AI response was not valid JSON.',
+
+        latestRawResponseText: parsed.rawText || rawText || '',
+
+        latestCompletedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      },
+
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+    },
+
+    { merge: true }
+
+  );
+
+  return {
+
+    ok: false,
+
+    jobId: jobRef.id,
+
+    drumId,
+
+    status: 'needs_manual_review',
+
+    missingFields,
+
+    missingCount: missingFields.length,
+
+    error: parsed.parseError || 'AI response was not valid JSON.',
+
+    rawText: parsed.rawText || rawText || '',
+
+  };
+
+}
     } catch (err) {
       logger.error('researchSnareReferenceDrumWithAI failed', {
         drumId,
@@ -4139,6 +4269,280 @@ JSON SHAPE:
       result: finalResult,
     };
   }
+);
+
+exports.applySnareReferenceResearchResult = onCall(
+
+  {
+
+    region: 'us-central1',
+
+    cors: true,
+
+    timeoutSeconds: 60,
+
+    memory: '512MiB',
+
+  },
+
+  async (request) => {
+
+    const caller = requireAdminCaller(
+
+      request,
+
+      'Only admins can apply snare reference research results.'
+
+    );
+
+    const drumId = String(request.data?.drumId || '').trim();
+
+    const jobId = String(request.data?.jobId || '').trim();
+
+    const fieldsToApply = Array.isArray(request.data?.fieldsToApply)
+
+      ? request.data.fieldsToApply
+
+      : [];
+
+    if (!drumId) {
+
+      throw new HttpsError('invalid-argument', 'drumId is required.');
+
+    }
+
+    if (!jobId) {
+
+      throw new HttpsError('invalid-argument', 'jobId is required.');
+
+    }
+
+    const allowedFields = new Set([
+
+      'bearingEdge',
+
+      'snareBedType',
+
+      'hoopRimType',
+
+      'lugCount',
+
+    ]);
+
+    const selectedFields = fieldsToApply.filter((field) =>
+
+      allowedFields.has(field)
+
+    );
+
+    if (!selectedFields.length) {
+
+      throw new HttpsError(
+
+        'invalid-argument',
+
+        'At least one valid field must be selected.'
+
+      );
+
+    }
+
+    const drumRef = db.collection('snareReferenceDrums').doc(drumId);
+
+    const jobRef = db.collection('snareReferenceResearchJobs').doc(jobId);
+
+    const [drumSnap, jobSnap] = await Promise.all([
+
+      drumRef.get(),
+
+      jobRef.get(),
+
+    ]);
+
+    if (!drumSnap.exists) {
+
+      throw new HttpsError('not-found', 'Snare reference drum not found.');
+
+    }
+
+    if (!jobSnap.exists) {
+
+      throw new HttpsError('not-found', 'Research job not found.');
+
+    }
+
+    const job = jobSnap.data() || {};
+
+    const result = job.result || {};
+
+    const confirmedFields = result.confirmedFields || {};
+
+    const updates = {};
+
+    const appliedFields = [];
+
+    const applyStringField = ({ sourceKey, targetPath }) => {
+
+      if (!selectedFields.includes(sourceKey)) return;
+
+      const field = confirmedFields[sourceKey] || {};
+
+      const value = field.value;
+
+      if (
+
+        value === undefined ||
+
+        value === null ||
+
+        String(value).trim() === '' ||
+
+        String(value).trim().toLowerCase() === 'unknown' ||
+
+        String(value).trim().toLowerCase() === 'unknown / not published'
+
+      ) {
+
+        return;
+
+      }
+
+      updates[targetPath] = String(value).trim();
+
+      appliedFields.push({
+
+        key: sourceKey,
+
+        value: String(value).trim(),
+
+        confidence: field.confidence || '',
+
+        sourceUrl: field.sourceUrl || '',
+
+        sourceLabel: field.sourceLabel || '',
+
+      });
+
+    };
+
+    applyStringField({
+
+      sourceKey: 'bearingEdge',
+
+      targetPath: 'shell.bearingEdge',
+
+    });
+
+    applyStringField({
+
+      sourceKey: 'snareBedType',
+
+      targetPath: 'shell.snareBedType',
+
+    });
+
+    applyStringField({
+
+      sourceKey: 'hoopRimType',
+
+      targetPath: 'shell.hoopRimType',
+
+    });
+
+    if (selectedFields.includes('lugCount')) {
+
+      const field = confirmedFields.lugCount || {};
+
+      const value = Number(field.value);
+
+      if (Number.isFinite(value) && value > 0) {
+
+        updates['hardware.lugCount'] = value;
+
+        appliedFields.push({
+
+          key: 'lugCount',
+
+          value,
+
+          confidence: field.confidence || '',
+
+          sourceUrl: field.sourceUrl || '',
+
+          sourceLabel: field.sourceLabel || '',
+
+        });
+
+      }
+
+    }
+
+    if (!Object.keys(updates).length) {
+
+      throw new HttpsError(
+
+        'failed-precondition',
+
+        'No selected fields had usable confirmed values.'
+
+      );
+
+    }
+
+    updates['research.latestAppliedJobId'] = jobId;
+
+    updates['research.latestAppliedAt'] =
+
+      admin.firestore.FieldValue.serverTimestamp();
+
+    updates['research.latestAppliedByUid'] = caller.uid;
+
+    updates['research.latestAppliedByEmail'] = caller.email;
+
+    updates['research.latestAppliedFields'] = appliedFields;
+
+    updates.updatedAt = admin.firestore.FieldValue.serverTimestamp();
+
+    await drumRef.set(updates, { merge: true });
+
+    await jobRef.set(
+
+      {
+
+        status: 'applied',
+
+        appliedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+        appliedByUid: caller.uid,
+
+        appliedByEmail: caller.email,
+
+        appliedFields,
+
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      },
+
+      { merge: true }
+
+    );
+
+    return {
+
+      ok: true,
+
+      drumId,
+
+      jobId,
+
+      appliedFields,
+
+      appliedCount: appliedFields.length,
+
+    };
+
+  }
+
 );
 
 exports.processSnareReferenceResearchJob = onCall(

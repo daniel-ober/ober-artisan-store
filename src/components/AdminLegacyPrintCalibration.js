@@ -8137,7 +8137,33 @@ const AdminLegacyPrintCalibration = () => {
   const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
     useState(null);
 
+    const [selectedResearchApplyFields, setSelectedResearchApplyFields] = useState(
+
+  []
+
+);
+
+const [isApplyingResearchResult, setIsApplyingResearchResult] = useState(false);
+
+const [researchApplyMessage, setResearchApplyMessage] = useState('');
+
   const functions = useMemo(() => getFunctions(), []);
+
+const researchSnareReferenceDrumWithAI = useMemo(
+
+  () => httpsCallable(functions, 'researchSnareReferenceDrumWithAI'),
+
+  [functions]
+
+);
+
+const applySnareReferenceResearchResult = useMemo(
+
+  () => httpsCallable(functions, 'applySnareReferenceResearchResult'),
+
+  [functions]
+
+);
 
   const selectedReferenceDrum = useMemo(() => {
     return (
@@ -9968,53 +9994,325 @@ const AdminLegacyPrintCalibration = () => {
     setActivePreviewRead('First Listen');
   };
 
-  const handleResearchReferenceDrum = async (researchTarget) => {
-    if (!researchTarget?.id) {
-      console.warn('No snare research target id found:', researchTarget);
+  const getResearchFieldLabel = (key = '') => {
 
-      return;
-    }
+  const labels = {
 
-    try {
-      setActiveReferenceResearchTarget({
-        ...researchTarget,
+    bearingEdge: 'Bearing Edge',
 
-        researchJob: {
-          status: 'researching',
-        },
+    snareBedType: 'Snare Bed Type',
 
-        researchJobError: '',
-      });
+    hoopRimType: 'Hoop / Rim Type',
 
-      const researchSnareReferenceDrumWithAI = httpsCallable(
-        functions,
+    lugCount: 'Lug Count',
 
-        'researchSnareReferenceDrumWithAI'
-      );
-
-      const result = await researchSnareReferenceDrumWithAI({
-        drumId: researchTarget.id,
-      });
-
-      console.log('AI snare research complete:', result.data);
-
-      setActiveReferenceResearchTarget({
-        ...researchTarget,
-
-        researchJob: result.data,
-
-        researchJobError: '',
-      });
-    } catch (error) {
-      console.error('Failed running AI snare research:', error);
-
-      setActiveReferenceResearchTarget({
-        ...researchTarget,
-
-        researchJobError: error?.message || 'Failed running AI snare research.',
-      });
-    }
   };
+
+  return labels[key] || key;
+
+};
+
+const getUsableResearchFields = (result = null) => {
+
+  const confirmedFields = result?.confirmedFields || {};
+
+  return Object.entries(confirmedFields)
+
+    .map(([key, field]) => {
+
+      const rawValue = field?.value;
+
+      const normalizedValue = String(rawValue || '').trim().toLowerCase();
+
+      const isUsable =
+
+        rawValue !== undefined &&
+
+        rawValue !== null &&
+
+        normalizedValue !== '' &&
+
+        normalizedValue !== 'unknown' &&
+
+        normalizedValue !== 'unknown / not published' &&
+
+        normalizedValue !== 'not published' &&
+
+        normalizedValue !== 'null';
+
+      return {
+
+        key,
+
+        value: rawValue,
+
+        confidence: field?.confidence || '',
+
+        sourceUrl: field?.sourceUrl || '',
+
+        notes: field?.notes || '',
+
+        usable: isUsable,
+
+      };
+
+    })
+
+    .filter((field) =>
+
+      ['bearingEdge', 'snareBedType', 'hoopRimType', 'lugCount'].includes(
+
+        field.key
+
+      )
+
+    );
+
+};
+
+const toggleResearchApplyField = (fieldKey) => {
+
+  setSelectedResearchApplyFields((current) => {
+
+    if (current.includes(fieldKey)) {
+
+      return current.filter((key) => key !== fieldKey);
+
+    }
+
+    return [...current, fieldKey];
+
+  });
+
+};
+
+const handleApplyResearchResult = async () => {
+
+  const target = activeReferenceResearchTarget;
+
+  const job = target?.researchJob;
+
+  if (!target?.id) {
+
+    setResearchApplyMessage('No research target selected.');
+
+    return;
+
+  }
+
+  if (!job?.jobId) {
+
+    setResearchApplyMessage('No completed research job found.');
+
+    return;
+
+  }
+
+  if (!selectedResearchApplyFields.length) {
+
+    setResearchApplyMessage('Select at least one confirmed field to apply.');
+
+    return;
+
+  }
+
+  setIsApplyingResearchResult(true);
+
+  setResearchApplyMessage('');
+
+  try {
+
+    const result = await applySnareReferenceResearchResult({
+
+      drumId: target.id,
+
+      jobId: job.jobId,
+
+      fieldsToApply: selectedResearchApplyFields,
+
+    });
+
+    const appliedCount = result?.data?.appliedCount || 0;
+
+    setResearchApplyMessage(
+
+      `Applied ${appliedCount} confirmed field${
+
+        appliedCount === 1 ? '' : 's'
+
+      } to the snare reference record.`
+
+    );
+
+    setReferenceDrums((current) =>
+
+      current.map((drum) => {
+
+        if (drum.id !== target.id) return drum;
+
+        const confirmedFields = job?.result?.confirmedFields || {};
+
+        const nextDrum = { ...drum };
+
+        selectedResearchApplyFields.forEach((fieldKey) => {
+
+          const value = confirmedFields[fieldKey]?.value;
+
+          if (fieldKey === 'bearingEdge') {
+
+            nextDrum.bearingEdge = value;
+
+            nextDrum.shell = {
+
+              ...(nextDrum.shell || {}),
+
+              bearingEdge: value,
+
+            };
+
+          }
+
+          if (fieldKey === 'snareBedType') {
+
+            nextDrum.snareBedType = value;
+
+            nextDrum.shell = {
+
+              ...(nextDrum.shell || {}),
+
+              snareBedType: value,
+
+            };
+
+          }
+
+          if (fieldKey === 'hoopRimType') {
+
+            nextDrum.hoopRimType = value;
+
+            nextDrum.hoopType = value;
+
+            nextDrum.shell = {
+
+              ...(nextDrum.shell || {}),
+
+              hoopRimType: value,
+
+            };
+
+          }
+
+          if (fieldKey === 'lugCount') {
+
+            nextDrum.lugCount = value;
+
+            nextDrum.hardware = {
+
+              ...(nextDrum.hardware || {}),
+
+              lugCount: value,
+
+            };
+
+          }
+
+        });
+
+        return nextDrum;
+
+      })
+
+    );
+
+  } catch (error) {
+
+    console.error('Failed applying AI snare research result:', error);
+
+    setResearchApplyMessage(
+
+      error?.message || 'Failed to apply research result.'
+
+    );
+
+  } finally {
+
+    setIsApplyingResearchResult(false);
+
+  }
+
+};
+
+const handleResearchReferenceDrum = async (researchTarget) => {
+
+  if (!researchTarget?.id) {
+
+    console.warn('No snare research target id found:', researchTarget);
+
+    return;
+
+  }
+
+  try {
+
+    setSelectedResearchApplyFields([]);
+
+    setResearchApplyMessage('');
+
+    setActiveReferenceResearchTarget({
+
+      ...researchTarget,
+
+      researchJob: {
+
+        status: 'researching',
+
+      },
+
+      researchJobError: '',
+
+    });
+
+    const result = await researchSnareReferenceDrumWithAI({
+
+      drumId: researchTarget.id,
+
+    });
+
+    console.log('AI snare research complete:', result.data);
+
+    const usableFieldKeys = getUsableResearchFields(result.data?.result)
+
+      .filter((field) => field.usable)
+
+      .map((field) => field.key);
+
+    setSelectedResearchApplyFields(usableFieldKeys);
+
+    setActiveReferenceResearchTarget({
+
+      ...researchTarget,
+
+      researchJob: result.data,
+
+      researchJobError: '',
+
+    });
+
+  } catch (error) {
+
+    console.error('Failed running AI snare research:', error);
+
+    setActiveReferenceResearchTarget({
+
+      ...researchTarget,
+
+      researchJobError: error?.message || 'Failed running AI snare research.',
+
+    });
+
+  }
+
+};
 
   const renderNonOberReferenceBuilder = () => {
     const companyOptions = Array.from(
@@ -12367,38 +12665,129 @@ const AdminLegacyPrintCalibration = () => {
                         .summary || 'Research completed.'}
                     </p>
 
-                    {activeReferenceResearchTarget.researchJob.result
-                      .confirmedFields && (
-                      <ul>
-                        {Object.entries(
-                          activeReferenceResearchTarget.researchJob.result
-                            .confirmedFields
-                        )
+{activeReferenceResearchTarget.researchJob.result.confirmedFields && (
 
-                          .filter(([, field]) => field?.value)
+  <div style={{ marginTop: '12px' }}>
 
-                          .map(([key, field]) => (
-                            <li key={key}>
-                              <b>{key}</b>: {String(field.value)} · Confidence:{' '}
-                              {field.confidence || 'Unknown'}
-                              {field.sourceUrl ? (
-                                <>
-                                  {' '}
-                                  ·{' '}
-                                  <a
-                                    href={field.sourceUrl}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                  >
-                                    Source
-                                  </a>
-                                </>
-                              ) : null}
-                              {field.notes ? <> — {field.notes}</> : null}
-                            </li>
-                          ))}
-                      </ul>
-                    )}
+    <strong>Confirmed fields to apply:</strong>
+
+    <div style={{ display: 'grid', gap: '8px', marginTop: '10px' }}>
+
+      {getUsableResearchFields(
+
+        activeReferenceResearchTarget.researchJob.result
+
+      ).map((field) => (
+
+        <label
+
+          key={field.key}
+
+          style={{
+
+            display: 'grid',
+
+            gridTemplateColumns: 'auto 1fr',
+
+            gap: '10px',
+
+            alignItems: 'start',
+
+            padding: '10px',
+
+            border: '1px solid rgba(255,255,255,0.12)',
+
+            background: 'rgba(255,255,255,0.04)',
+
+            opacity: field.usable ? 1 : 0.5,
+
+          }}
+
+        >
+
+          <input
+
+            type="checkbox"
+
+            checked={selectedResearchApplyFields.includes(field.key)}
+
+            disabled={!field.usable || isApplyingResearchResult}
+
+            onChange={() => toggleResearchApplyField(field.key)}
+
+          />
+
+          <span>
+
+            <b>{getResearchFieldLabel(field.key)}</b>: {String(field.value)}
+
+            {' · '}Confidence: {field.confidence || 'Unknown'}
+
+            {field.sourceUrl ? (
+
+              <>
+
+                {' · '}
+
+                <a href={field.sourceUrl} target="_blank" rel="noreferrer">
+
+                  Source
+
+                </a>
+
+              </>
+
+            ) : null}
+
+            {field.notes ? <> — {field.notes}</> : null}
+
+          </span>
+
+        </label>
+
+      ))}
+
+    </div>
+
+    <button
+
+      type="button"
+
+      className="legacyprint-admin-button primary"
+
+      style={{ marginTop: '12px' }}
+
+      disabled={
+
+        isApplyingResearchResult || selectedResearchApplyFields.length === 0
+
+      }
+
+      onClick={handleApplyResearchResult}
+
+    >
+
+      {isApplyingResearchResult
+
+        ? 'Applying...'
+
+        : `Apply ${selectedResearchApplyFields.length} Field${
+
+            selectedResearchApplyFields.length === 1 ? '' : 's'
+
+          }`}
+
+    </button>
+
+    {researchApplyMessage && (
+
+      <p style={{ marginTop: '10px' }}>{researchApplyMessage}</p>
+
+    )}
+
+  </div>
+
+)}
 
                     {Array.isArray(
                       activeReferenceResearchTarget.researchJob.result.warnings
