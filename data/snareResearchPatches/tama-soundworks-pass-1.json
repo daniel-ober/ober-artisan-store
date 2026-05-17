@@ -1,0 +1,287 @@
+{
+
+  "tama_soundworks_soundworks-steel-dst1055m-10x5-5_10x5-5_metal_steel_steel_dst1055m_bb8c165c": {
+
+    "id": "tama_soundworks_soundworks-steel-dst1055m-10x5-5_10x5-5_metal_steel_steel_dst1055m_bb8c165c",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Soundworks",
+
+    "modelName": "Soundworks Steel DST1055M 10x5.5",
+
+    "patchName": "tama_soundworks_soundworks-steel-dst1055m-10x5-5_10x5-5_metal_steel_steel_dst1055m_bb8c165c",
+
+    "identification": {
+
+      "modelNumber": "DST1055M",
+
+      "badgeStyle": "Soundworks badge",
+
+      "productionStatus": "discontinued",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": false,
+
+      "rareCollectible": false
+
+    },
+
+    "diameter": 10,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "matte steel / steel",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 6,
+
+    "lugType": "MSL60S style lugs",
+
+    "hardwareFinish": "chrome / steel",
+
+    "snareThrowMakeModel": "Tama throw-off, exact model unknown",
+
+    "stockSnareWires": "steel snare wires, exact model unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "DST1055M",
+
+    "yearInProduction": "2010s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.2,
+
+    "shellScoreBrightness": 8.4,
+
+    "shellScoreProjection": 7.1,
+
+    "shellScoreSustain": 5.4,
+
+    "shellScoreWarmth": 3.8,
+
+    "shellScoreSensitivity": 7.4,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 8.3,
+
+    "overallBrightness": 8.5,
+
+    "overallProjection": 7.2,
+
+    "overallSustain": 5.5,
+
+    "overallWarmth": 3.7,
+
+    "overallSensitivity": 7.5,
+
+    "overallControl": 7,
+
+    "projectedShellFundamentalPitch": "high",
+
+    "recommendedTuningBatterHz": "280-380 Hz",
+
+    "recommendedTuningResoHz": "380-460 Hz",
+
+    "primarySourceUrl": "https://www.sweetwater.com/store/detail/DST1055M--tama-soundworks-steel-snare-drum-with-mc69-mount-5.5-inch-by-10-inch",
+
+    "secondarySourceUrl": "https://www.guitarcenter.com/TAMA/Soundworks-Steel-Snare-Drum-10-x-55-in-1500000004117.gc",
+
+    "notesOnMissingData": "Exact stock head models, exact throw-off model, and exact snare wire model need stronger confirmation. Retailer/spec references support 10x5.5 size, 1.2mm steel shell, triple-flanged hoops, and DST1055M model number.",
+
+    "drumSummaryNotes": "Compact 10x5.5 steel Soundworks snare. Should score with quick attack, high brightness, tight response, and limited warmth. Smaller diameter raises perceived pitch and tightens sustain compared with a full-size 14-inch steel snare.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, metal shell construction, dimensions, 1.2mm shell thickness, hoop type, and known compact auxiliary snare format. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_soundworks_soundworks-steel-dst1465-14x6-5_14x6-5_metal_steel_steel_dst1465_0556bb30": {
+
+    "id": "tama_soundworks_soundworks-steel-dst1465-14x6-5_14x6-5_metal_steel_steel_dst1465_0556bb30",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Soundworks",
+
+    "modelName": "Soundworks Steel DST1465 14x6.5",
+
+    "patchName": "tama_soundworks_soundworks-steel-dst1465-14x6-5_14x6-5_metal_steel_steel_dst1465_0556bb30",
+
+    "identification": {
+
+      "modelNumber": "DST1465",
+
+      "badgeStyle": "Soundworks badge",
+
+      "productionStatus": "discontinued",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": false,
+
+      "rareCollectible": false
+
+    },
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "steel / beaded steel",
+
+    "hoopType": "2.3mm triple-flange hoops",
+
+    "lugCount": 10,
+
+    "lugType": "MSL60S style lugs",
+
+    "hardwareFinish": "chrome / steel",
+
+    "snareThrowMakeModel": "Tama throw-off, exact model unknown",
+
+    "stockSnareWires": "steel snare wires, exact model unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "DST1465",
+
+    "yearInProduction": "2010s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.1,
+
+    "shellScoreBrightness": 8.3,
+
+    "shellScoreProjection": 8.2,
+
+    "shellScoreSustain": 6.1,
+
+    "shellScoreWarmth": 4,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 6.9,
+
+    "overallAttack": 8.2,
+
+    "overallBrightness": 8.4,
+
+    "overallProjection": 8.3,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 3.9,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 6.9,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "245-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "https://www.sweetwater.com/store/detail/DST1465--tama-soundworks-steel-snare-drum-6.5-inch-by-14-inch",
+
+    "secondarySourceUrl": "https://www.devmusical.com/Product/Tama-DST1465-Soundworks-Steel-6.5-x-14-inch-Snare-Drum/P2922/139",
+
+    "notesOnMissingData": "Exact stock head models, exact throw-off model, and exact snare wire model need stronger confirmation. Retailer/spec references support 14x6.5 size, DST1465 model number, 1.2mm beaded steel shell, and 2.3mm triple-flanged hoops.",
+
+    "drumSummaryNotes": "Full-size 14x6.5 steel Soundworks snare. Should score with bright steel attack, strong projection, crisp response, and modest warmth. The 6.5-inch depth adds body and projection compared with shallower steel snares while retaining a sharp metal-shell voice.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, metal shell construction, dimensions, 1.2mm shell thickness, beaded steel shell behavior, and hoop type. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
