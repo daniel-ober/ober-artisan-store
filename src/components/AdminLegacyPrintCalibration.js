@@ -8134,8 +8134,11 @@ const AdminLegacyPrintCalibration = () => {
 
   const [isSavingReferenceDrum, setIsSavingReferenceDrum] = useState(false);
 
-  const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
-    useState(null);
+const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
+
+  useState(null);
+
+const functions = useMemo(() => getFunctions(), []);
 
   const selectedReferenceDrum = useMemo(() => {
     return (
@@ -12524,7 +12527,5 @@ const AdminLegacyPrintCalibration = () => {
     </div>
   );
 };
-
-  const functions = getFunctions();
 
 export default AdminLegacyPrintCalibration;
