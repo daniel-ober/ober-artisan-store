@@ -1,0 +1,133 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-cleanup-pass-8",
+
+  "researchStatus": "reviewed",
+
+  "doNotApplyAutomatically": false,
+
+  "notes": "Starclassic cleanup pass for meaningful missing fields only. Stock batter and resonant heads intentionally remain unconfirmed unless directly sourced.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Modern Starclassic Maple snare bed unknown",
+
+      "target": {
+
+        "modelNameIncludesAny": [
+
+          "Starclassic Maple"
+
+        ],
+
+        "diameter": 14
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "snareBedType": "unknown"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Existing Starclassic Maple records already contain stronger confirmed shell and hardware values. Exact snare bed geometry remains unconfirmed from available sourced data, so this field is marked unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "Modern Starclassic Walnut/Birch snare bed unknown",
+
+      "target": {
+
+        "modelNameIncludesAny": [
+
+          "Starclassic Walnut/Birch"
+
+        ],
+
+        "diameter": 14
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "snareBedType": "unknown"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Existing Starclassic Walnut/Birch records already contain stronger confirmed shell and hardware values. Exact snare bed geometry remains unconfirmed from available sourced data, so this field is marked unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "Starclassic Performer unknown closure",
+
+      "target": {
+
+        "modelNameIncludesAny": [
+
+          "Starclassic Performer 14x5.5",
+
+          "Starclassic Performer 14x6.5"
+
+        ]
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "thicknessMm": null,
+
+          "bearingEdge": "unknown",
+
+          "snareBedType": "unknown"
+
+        },
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "unknown",
+
+          "stockSnareWires": "unknown"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Remaining Starclassic Performer fields could not be confirmed from the current source set. Marked as unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
