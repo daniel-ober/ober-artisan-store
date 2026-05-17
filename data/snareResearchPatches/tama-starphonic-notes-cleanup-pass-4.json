@@ -1,0 +1,41 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "STARPHONIC",
+
+  "doNotApplyAutomatically": true,
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "STARPHONIC Bubinga 14x6 notes cleanup after pass 3",
+
+      "matchModelNames": ["STARPHONIC Bubinga 14x6"],
+
+      "updates": {
+
+        "notes.scoringBasis": "Official Tama STARPHONIC Bubinga page confirms a Bubinga shell with Cordia outer ply language, Grooved Hoop, Tama bearing-edge feature language, Super Sensitive Hi-Carbon Snare Wire, and STARPHONIC feature system. Reputable dealer listings support 7mm, 8-ply Bubinga + 1 outer ply Cordia, Linear-Drive Strainer, detachable butt plate, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Stock heads and snare bed type remain unconfirmed from official source."
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Spruce 14x6 notes cleanup after pass 3",
+
+      "matchModelNames": ["STARPHONIC Spruce 14x6"],
+
+      "updates": {
+
+        "notes.scoringBasis": "Official Tama STARPHONIC Spruce page confirms an 8.0mm, 9-ply Spruce shell, Grooved Hoop, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Reputable dealer listings identify the throw-off and butt as Linear-Drive Strainer and Butt Plate, with MLS50A / MLS50B part references. Stock heads, bearing edge, and snare bed type remain unconfirmed from official source."
+
+      }
+
+    }
+
+  ]
+
+}
