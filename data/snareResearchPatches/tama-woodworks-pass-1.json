@@ -1,0 +1,387 @@
+{
+
+  "tama_woodworks_woodworks-14x5-5_14x5-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f0fdc50b": {
+
+    "id": "tama_woodworks_woodworks-14x5-5_14x5-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f0fdc50b",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Woodworks",
+
+    "modelName": "Woodworks 14x5.5",
+
+    "patchName": "tama_woodworks_woodworks-14x5-5_14x5-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f0fdc50b",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "poplar",
+
+    "shellMaterial2": "maple",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "8-ply poplar/maple",
+
+    "shellThicknessMm": 8,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "wrap",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 8,
+
+    "lugType": "Tama standard tube-style / low-mass snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 6.4,
+
+    "shellScoreBrightness": 5.8,
+
+    "shellScoreProjection": 6.2,
+
+    "shellScoreSustain": 6.1,
+
+    "shellScoreWarmth": 6.3,
+
+    "shellScoreSensitivity": 6.7,
+
+    "shellScoreControl": 6.1,
+
+    "overallAttack": 6.5,
+
+    "overallBrightness": 5.9,
+
+    "overallProjection": 6.2,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 6.2,
+
+    "overallSensitivity": 6.8,
+
+    "overallControl": 6.1,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x5.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+
+    "drumSummaryNotes": "Affordable wood-shell Woodworks model. Poplar/maple shell should score with balanced warmth, moderate projection, and friendly sensitivity. The 5.5-inch depth keeps the response quicker and slightly tighter than the deeper Woodworks variants.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": true,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_woodworks_woodworks-14x6-5_14x6-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f936ccca": {
+
+    "id": "tama_woodworks_woodworks-14x6-5_14x6-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f936ccca",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Woodworks",
+
+    "modelName": "Woodworks 14x6.5",
+
+    "patchName": "tama_woodworks_woodworks-14x6-5_14x6-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f936ccca",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "poplar",
+
+    "shellMaterial2": "maple",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "8-ply poplar/maple",
+
+    "shellThicknessMm": 8,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "wrap",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 8,
+
+    "lugType": "Tama standard tube-style / low-mass snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 6.3,
+
+    "shellScoreBrightness": 5.7,
+
+    "shellScoreProjection": 6.5,
+
+    "shellScoreSustain": 6.4,
+
+    "shellScoreWarmth": 6.6,
+
+    "shellScoreSensitivity": 6.5,
+
+    "shellScoreControl": 6.2,
+
+    "overallAttack": 6.4,
+
+    "overallBrightness": 5.8,
+
+    "overallProjection": 6.5,
+
+    "overallSustain": 6.3,
+
+    "overallWarmth": 6.5,
+
+    "overallSensitivity": 6.6,
+
+    "overallControl": 6.2,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "235-325 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x6.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+
+    "drumSummaryNotes": "Deeper Woodworks model with a balanced poplar/maple shell. Compared with the 14x5.5 version, this should add more low-mid body, projection, and sustain while slightly softening quick top-end response.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": true,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_woodworks_woodworks-14x8_14x8_ply_maple-poplar_wrap_triple-flange-mighty-hoop_0430278f": {
+
+    "id": "tama_woodworks_woodworks-14x8_14x8_ply_maple-poplar_wrap_triple-flange-mighty-hoop_0430278f",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Woodworks",
+
+    "modelName": "Woodworks 14x8",
+
+    "patchName": "tama_woodworks_woodworks-14x8_14x8_ply_maple-poplar_wrap_triple-flange-mighty-hoop_0430278f",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "poplar",
+
+    "shellMaterial2": "maple",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "8-ply poplar/maple",
+
+    "shellThicknessMm": 8,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "wrap",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 8,
+
+    "lugType": "Tama standard tube-style / low-mass snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 6.1,
+
+    "shellScoreBrightness": 5.5,
+
+    "shellScoreProjection": 6.9,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7,
+
+    "shellScoreSensitivity": 6.1,
+
+    "shellScoreControl": 6.2,
+
+    "overallAttack": 6.2,
+
+    "overallBrightness": 5.6,
+
+    "overallProjection": 6.9,
+
+    "overallSustain": 6.8,
+
+    "overallWarmth": 6.9,
+
+    "overallSensitivity": 6.2,
+
+    "overallControl": 6.2,
+
+    "projectedShellFundamentalPitch": "low-medium",
+
+    "recommendedTuningBatterHz": "210-300 Hz",
+
+    "recommendedTuningResoHz": "330-400 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x8 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+
+    "drumSummaryNotes": "Deep 14x8 Woodworks model. The poplar/maple shell should produce a warmer, deeper, more open body than the shallower Woodworks sizes, with stronger low-mid bloom and projection but less immediate sensitivity.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": true,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
