@@ -54,34 +54,6 @@ function getNestedValue(obj, dottedPath) {
 
 }
 
-function setNestedValue(obj, dottedPath, value) {
-
-  const parts = dottedPath.split('.');
-
-  let cursor = obj;
-
-  parts.forEach((part, index) => {
-
-    if (index === parts.length - 1) {
-
-      cursor[part] = value;
-
-      return;
-
-    }
-
-    if (!cursor[part] || typeof cursor[part] !== 'object' || Array.isArray(cursor[part])) {
-
-      cursor[part] = {};
-
-    }
-
-    cursor = cursor[part];
-
-  });
-
-}
-
 function normalize(value = '') {
 
   return String(value).trim().toLowerCase().replace(/\s+/g, ' ');
@@ -124,11 +96,125 @@ function initFirebase() {
 
 }
 
+function isPlainObject(value) {
+
+  return (
+
+    value &&
+
+    typeof value === 'object' &&
+
+    !Array.isArray(value) &&
+
+    !(value instanceof Date)
+
+  );
+
+}
+
+/**
+
+ * Converts nested patch updates into safe Firestore dot-path updates.
+
+ *
+
+ * Example:
+
+ * {
+
+ *   shell: { thicknessMm: 1.2, bearingEdge: "R.S.E." },
+
+ *   hardware: { stockSnareWires: "..." }
+
+ * }
+
+ *
+
+ * becomes:
+
+ * {
+
+ *   "shell.thicknessMm": 1.2,
+
+ *   "shell.bearingEdge": "R.S.E.",
+
+ *   "hardware.stockSnareWires": "..."
+
+ * }
+
+ *
+
+ * This prevents Firestore from replacing the entire shell/hardware object.
+
+ */
+
+function flattenUpdateObject(input, prefix = '', output = {}) {
+
+  Object.entries(input || {}).forEach(([key, value]) => {
+
+    const fieldPath = prefix ? `${prefix}.${key}` : key;
+
+    if (value === undefined) {
+
+      return;
+
+    }
+
+    if (isPlainObject(value)) {
+
+      flattenUpdateObject(value, fieldPath, output);
+
+      return;
+
+    }
+
+    output[fieldPath] = value;
+
+  });
+
+  return output;
+
+}
+
+function formatPreviewValue(value) {
+
+  if (value === undefined) return 'undefined';
+
+  if (value === null) return 'null';
+
+  if (isPlainObject(value) || Array.isArray(value)) {
+
+    return JSON.stringify(value, null, 2);
+
+  }
+
+  return String(value);
+
+}
+
+function valuesAreEqual(currentValue, nextValue) {
+
+  return JSON.stringify(currentValue) === JSON.stringify(nextValue);
+
+}
+
 function buildPatchTargetsFromGroups(patch) {
 
   if (!Array.isArray(patch.patchGroups)) {
 
     throw new Error('Patch does not contain patchGroups array.');
+
+  }
+
+  if (!patch.companyName) {
+
+    throw new Error('Patch is missing top-level companyName.');
+
+  }
+
+  if (!patch.lineSeries) {
+
+    throw new Error('Patch is missing top-level lineSeries.');
 
   }
 
@@ -142,11 +228,11 @@ function buildPatchTargetsFromGroups(patch) {
 
       : [];
 
-    const updates = group.updates && typeof group.updates === 'object'
+    const rawUpdates =
 
-      ? group.updates
+      group.updates && typeof group.updates === 'object' ? group.updates : {};
 
-      : {};
+    const updates = flattenUpdateObject(rawUpdates);
 
     if (!matchModelNames.length) {
 
@@ -174,6 +260,8 @@ function buildPatchTargetsFromGroups(patch) {
 
         updates,
 
+        rawUpdates,
+
         doNotUpdateYet: group.doNotUpdateYet || [],
 
       });
@@ -187,6 +275,18 @@ function buildPatchTargetsFromGroups(patch) {
 }
 
 async function findMatchingDrum(db, target) {
+
+  if (!target.companyName) {
+
+    throw new Error(`Missing companyName for target: ${target.modelName}`);
+
+  }
+
+  if (!target.lineSeries) {
+
+    throw new Error(`Missing lineSeries for target: ${target.modelName}`);
+
+  }
 
   const snapshot = await db
 
@@ -240,7 +340,7 @@ function buildUpdatePreview(existingData, updates) {
 
       nextValue,
 
-      willChange: currentValue !== nextValue,
+      willChange: !valuesAreEqual(currentValue, nextValue),
 
     });
 
@@ -252,9 +352,11 @@ function buildUpdatePreview(existingData, updates) {
 
 function buildFirestoreUpdateObject(updates) {
 
+  const flattenedUpdates = flattenUpdateObject(updates);
+
   const updateObject = {};
 
-  Object.entries(updates).forEach(([fieldPath, value]) => {
+  Object.entries(flattenedUpdates).forEach(([fieldPath, value]) => {
 
     updateObject[fieldPath] = value;
 
@@ -262,9 +364,13 @@ function buildFirestoreUpdateObject(updates) {
 
   updateObject.updatedAt = admin.firestore.FieldValue.serverTimestamp();
 
-  updateObject['researchMeta.lastPatchAppliedAt'] = admin.firestore.FieldValue.serverTimestamp();
+  updateObject['researchMeta.lastPatchAppliedAt'] =
 
-  updateObject['researchMeta.lastPatchAppliedBy'] = 'scripts/applySnareResearchPatch.js';
+    admin.firestore.FieldValue.serverTimestamp();
+
+  updateObject['researchMeta.lastPatchAppliedBy'] =
+
+    'scripts/applySnareResearchPatch.js';
 
   return updateObject;
 
@@ -422,9 +528,9 @@ async function main() {
 
       console.log(`- ${change.fieldPath}`);
 
-      console.log(`  current: ${change.currentValue === null ? 'null' : change.currentValue}`);
+      console.log(`  current: ${formatPreviewValue(change.currentValue)}`);
 
-      console.log(`  next:    ${change.nextValue}`);
+      console.log(`  next:    ${formatPreviewValue(change.nextValue)}`);
 
     });
 
@@ -450,11 +556,13 @@ async function main() {
 
   fs.mkdirSync(REPORT_DIR, { recursive: true });
 
-  const safeName = `${normalize(patch.companyName).replace(/[^a-z0-9]+/g, '-')}-${normalize(
+  const safeName = `${normalize(patch.companyName).replace(
 
-    patch.lineSeries
+    /[^a-z0-9]+/g,
 
-  ).replace(/[^a-z0-9]+/g, '-')}-${SHOULD_WRITE ? 'write' : 'dry-run'}-${Date.now()}.json`;
+    '-'
+
+  )}-${normalize(patch.lineSeries).replace(/[^a-z0-9]+/g, '-')}-${SHOULD_WRITE ? 'write' : 'dry-run'}-${Date.now()}.json`;
 
   const reportPath = path.join(REPORT_DIR, safeName);
 
@@ -478,7 +586,11 @@ async function main() {
 
     console.log('To write after reviewing the report:');
 
-    console.log(`node scripts/applySnareResearchPatch.js ${patchPathArg} --write --force`);
+    console.log(
+
+      `node scripts/applySnareResearchPatch.js ${patchPathArg} --write --force`
+
+    );
 
   }
 
