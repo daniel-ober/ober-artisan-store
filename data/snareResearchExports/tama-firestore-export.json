@@ -8249,14 +8249,6 @@
     "lineSeries": "Signature",
     "modelName": "John Tempesta 14x7",
     "patchName": "tama_signature_john-tempesta-14x7_14x7_ply_maple_lacquer_die-cast-hoops_e7cd87e6",
-    "identification": {
-      "modelNumber": "unknown",
-      "badgeStyle": "unknown",
-      "productionStatus": "unknown",
-      "currentlyInProduction": "unknown",
-      "artistSignature": true,
-      "rareCollectible": true
-    },
     "stockHardware": {
       "throwOff": {
         "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
@@ -8328,24 +8320,6 @@
       "unknown",
       "unknown"
     ],
-    "sources": {
-      "imageUrl": null,
-      "secondarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
-      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
-      "sourceConfidence": "Medium",
-      "notesOnMissingData": [
-        "Signature model source confirms model family/artist; exact shell thickness/edge/bed varies and needs catalog-page extraction unless thickness listed."
-      ],
-      "imageUrls": [],
-      "conflictingSourceNotes": [],
-      "secondarySourceUrls": [
-        "https://equipboard.com/c/snare-drums/tama"
-      ]
-    },
-    "summary": {
-      "shortDescription": "Shell-first score based on 14x7 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
-      "drumSummaryNotes": "Existing Tama Signature maple/lacquer 14x7 record retained for now because it differs from the added JT147 brass record. Thickness and hardware details remain unconfirmed; unknown values intentionally mark researched gaps complete."
-    },
     "shell": {
       "drumType": "snare",
       "dimensions": {
@@ -8396,7 +8370,35 @@
       "_seconds": 1779057313,
       "_nanoseconds": 712000000
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "summary": {
+      "shortDescription": "Unverified John Tempesta 14x7 maple/lacquer signature record requiring model identity confirmation.",
+      "drumSummaryNotes": "Treat as low-confidence until source-backed identity is confirmed. Do not merge or delete without checking original import source and Tama catalog evidence."
+    },
+    "identification": {
+      "modelNumber": "unknown",
+      "badgeStyle": "unknown",
+      "currentlyInProduction": "unknown",
+      "artistSignature": true,
+      "productionStatus": "Needs verification",
+      "discontinued": "unknown",
+      "rareCollectible": "unknown"
+    },
+    "sources": {
+      "imageUrl": null,
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+      "imageUrls": [],
+      "notesOnMissingData": "Verify whether this record is a real John Tempesta 14x7 maple signature model, a bad imported/normalized record, or a mislabeled JT147 brass record. Do not use for scoring until model identity is confirmed.",
+      "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/jt147.html",
+      "sourceConfidence": "Low",
+      "conflictingSourceNotes": "Current official Tama JT147 source identifies the John Tempesta production signature snare as a 14x7 brass model. This generic 14x7 maple/lacquer/die-cast record needs identity verification before further spec updates.",
+      "secondarySourceUrls": []
+    },
+    "researchUpdatedBy": "tama-pass-1",
+    "researchUpdatedAt": {
+      "_seconds": 1779058244,
+      "_nanoseconds": 161000000
+    }
   },
   {
     "id": "tama_signature_john-tempesta-jt147-signature-14x7_14x7_metal_brass",
@@ -8405,59 +8407,6 @@
     "lineSeries": "Signature",
     "modelName": "John Tempesta JT147 Signature 14x7",
     "patchName": "tama_signature_john-tempesta-jt147-signature-14x7_14x7_metal_brass",
-    "identification": {
-      "modelNumber": "JT147",
-      "badgeStyle": "unknown",
-      "productionStatus": "unknown",
-      "currentlyInProduction": "unknown",
-      "artistSignature": "unknown",
-      "rareCollectible": "unknown"
-    },
-    "stockHardware": {
-      "throwOff": {
-        "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
-        "model": "unknown",
-        "style": "unknown",
-        "make": "unknown"
-      },
-      "hoops": {
-        "resonantHoopType": "die-cast hoops",
-        "hoopMaterial": "unknown",
-        "hoopFinish": "unknown",
-        "batterHoopType": "die-cast hoops",
-        "hoopMassClass": "unknown",
-        "hoopThicknessMm": null
-      },
-      "lugs": {
-        "lugType": "unknown",
-        "hardwareFinish": "unknown",
-        "lugMaterial": "unknown",
-        "lugCountNotes": "unknown",
-        "lugMountingStyle": "unknown",
-        "lugCount": 10,
-        "lugMassClass": "unknown"
-      },
-      "buttPlate": {
-        "model": "unknown",
-        "style": "unknown",
-        "make": "unknown"
-      }
-    },
-    "stockSnareSystem": {
-      "snareWires": {
-        "material": "unknown",
-        "model": "42-strand snappy snare",
-        "lengthInches": 14,
-        "stock": "unknown",
-        "strandCount": null,
-        "make": "42-strand snappy snare"
-      },
-      "heads": {
-        "stockHeadsKnown": true,
-        "batterHead": "unknown",
-        "resonantHead": "unknown"
-      }
-    },
     "pricing": {
       "priceNotes": "unknown",
       "lastUpdated": "researchRequired",
@@ -8471,85 +8420,145 @@
       "originalMsrp": "researchRequired",
       "originalRetailPrice": "researchRequired"
     },
-    "collectorMetadata": {
-      "productionNotes": "unknown",
-      "yearIntroduced": "unknown",
-      "limitedRunCount": "unknown",
-      "yearDiscontinued": "unknown",
-      "limitedRun": "unknown",
-      "countryOfOrigin": "unknown"
-    },
     "snareFacts": [
       "unknown",
       "unknown",
       "unknown"
     ],
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
     "summary": {
-      "shortDescription": "unknown",
-      "drumSummaryNotes": "Official Tama JT147 source confirms 14x7 brass shell concept and 42-strand snappy snare. Exact shell thickness should be verified if not shown in accessible spec table; 2mm listed as draft pending catalog/spec confirmation."
+      "shortDescription": "14x7 John Tempesta Signature snare with 2mm brass shell, brushed black nickel finish, die-cast hoops, 10-lug layout, and 42-strand snare wire.",
+      "drumSummaryNotes": "Shell-first read should emphasize deep brass body, strong projection, wide snare response from 42 strands, and added focus/control from die-cast hoops. Artist association should not affect scoring."
+    },
+    "identification": {
+      "modelNumber": "JT147",
+      "artistSignature": true,
+      "productionStatus": "Current / active signature listing",
+      "currentlyInProduction": true,
+      "badgeStyle": "John Tempesta Signature",
+      "discontinued": false,
+      "rareCollectible": false
     },
     "sources": {
       "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/jt147.html",
-      "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
-      "notesOnMissingData": [],
       "imageUrls": [],
-      "conflictingSourceNotes": [],
+      "notesOnMissingData": "Confirm exact bearing edge geometry, snare bed depth/profile, stock head models, and country of origin if official service/catalog details become available.",
+      "secondarySourceUrl": "https://www.thomannmusic.com/tama_jt147_john_tempesta_snare.htm",
+      "sourceConfidence": "High",
+      "conflictingSourceNotes": "No major physical spec conflict found. Some retailers describe hoop material/details more specifically than the official summary page.",
       "secondarySourceUrls": [
-        "https://www.tama.com/usa/products/snare_drums/signature_snare/"
-      ],
-      "sourceConfidence": "Unknown"
+        "https://drumcenternh.com/products/tama-signature-series-snare-drum-john-tempesta-14x7",
+        "https://www.drumsetc.com/product/tama-john-tempesta-snare-drum-jt147/"
+      ]
     },
     "shell": {
-      "drumType": "snare",
       "dimensions": {
         "diameterInches": 14,
         "depthInches": 7,
         "metricDimensionsMm": "355.6 x 177.8"
+      },
+      "bearingEdges": {
+        "roundover": "unknown",
+        "notes": "Official page confirms deep 7-inch brass shell; retailer references confirm 2mm brass shell. Exact edge geometry not published.",
+        "batterSideProfile": "folded metal bearing edge",
+        "confidence": "Low",
+        "snareSideProfile": "folded metal bearing edge",
+        "evidenceLevel": "inferred from metal shell construction"
       },
       "construction": {
         "shellConstruction": "Metal",
         "shellMaterialPrimary": "Brass",
         "shellMaterialSecondary": "none",
         "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "2mm brass",
         "shellThicknessMm": 2,
-        "thicknessClass": "unknown",
         "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "unknown",
-        "finishType": "unknown",
-        "exteriorTreatment": "unknown",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
-      "bearingEdges": {
-        "batterSideProfile": "metal shell folded bearing edge",
-        "snareSideProfile": "metal shell folded bearing edge",
-        "roundover": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.",
-        "confidence": "Medium"
+        "reinforcementRingThicknessMm": null,
+        "plyCount": "Unknown",
+        "thicknessClass": "Thick metal",
+        "reinforcementRingMaterial": "none",
+        "layupDescription": "2mm brass shell"
       },
       "snareBeds": {
         "present": true,
         "depthBucket": "unknown",
         "widthBucket": "unknown",
         "bedStyle": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
-        "confidence": "Medium"
+        "notes": "Snare bed depth/profile not confirmed in available sources.",
+        "confidence": "Low",
+        "evidenceLevel": "inferred from functional snare drum design"
+      },
+      "drumType": "Snare Drum",
+      "finish": {
+        "interiorTreatment": "unknown",
+        "finishName": "Brushed black nickel",
+        "acousticImpact": "Finish should be treated as low acoustic impact; core sound is driven by the 2mm brass shell, 7-inch depth, die-cast hoops, and 42-strand snare wire.",
+        "notes": "Official Tama page describes brushed black nickel finish/hardware.",
+        "exteriorTreatment": "Brushed black nickel",
+        "finishType": "Black nickel plated metal"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "researchUpdatedBy": "tama-pass-1",
+    "stockHardware": {
+      "throwOff": {
+        "notes": "Retailer references list MUS80A/MUS80B.",
+        "model": "MUS80A / MUS80B",
+        "style": "Standard snare strainer / butt",
+        "make": "Tama"
+      },
+      "hoops": {
+        "hoopThicknessMm": null,
+        "resonantHoopType": "Die-cast",
+        "hoopMaterial": "Zinc die-cast",
+        "hoopFinish": "Black nickel",
+        "batterHoopType": "Die-cast",
+        "hoopMassClass": "Heavy"
+      },
+      "lugs": {
+        "lugMaterial": "unknown",
+        "lugCount": 10,
+        "lugType": "MSL-SCT",
+        "hardwareFinish": "Black nickel",
+        "lugCountNotes": "14-inch 10-lug die-cast hoop format listed by retailer references.",
+        "lugMountingStyle": "Separate lug casing",
+        "lugMassClass": "Medium"
+      },
+      "buttPlate": {
+        "model": "MUS80B",
+        "style": "Companion butt plate",
+        "make": "Tama"
+      }
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "lengthInches": 14,
+        "model": "MS42R14S",
+        "stock": true,
+        "strandCount": 42,
+        "make": "Tama"
+      },
+      "heads": {
+        "batterHead": "unknown",
+        "resonantHead": "unknown",
+        "stockHeadsKnown": false
+      }
+    },
+    "collectorMetadata": {
+      "countryOfOrigin": "unknown",
+      "productionNotes": "Thomann reference lists availability since September 2007; official Tama page still lists JT147.",
+      "yearIntroduced": 2007,
+      "limitedRunCount": null,
+      "yearDiscontinued": null,
+      "limitedRun": false
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779058243,
+      "_nanoseconds": 936000000
+    }
   },
   {
     "id": "tama_signature_kaz-rodriguez-14x6-5-maple-bubinga_14x6-5_ply_maple_lacquer_die-cast-hoops_c84633ed",
@@ -8558,14 +8567,6 @@
     "lineSeries": "Signature",
     "modelName": "Kaz Rodriguez 14x6.5 Maple/Bubinga",
     "patchName": "tama_signature_kaz-rodriguez-14x6-5-maple-bubinga_14x6-5_ply_maple_lacquer_die-cast-hoops_c84633ed",
-    "identification": {
-      "modelNumber": "unknown",
-      "badgeStyle": "unknown",
-      "productionStatus": "unknown",
-      "currentlyInProduction": "unknown",
-      "artistSignature": true,
-      "rareCollectible": true
-    },
     "stockHardware": {
       "throwOff": {
         "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
@@ -8637,24 +8638,6 @@
       "unknown",
       "unknown"
     ],
-    "sources": {
-      "imageUrl": null,
-      "secondarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
-      "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
-      "sourceConfidence": "Medium",
-      "notesOnMissingData": [
-        "Signature model source confirms model family/artist; exact shell thickness/edge/bed varies and needs catalog-page extraction unless thickness listed."
-      ],
-      "imageUrls": [],
-      "conflictingSourceNotes": [],
-      "secondarySourceUrls": [
-        "https://equipboard.com/c/snare-drums/tama"
-      ]
-    },
-    "summary": {
-      "shortDescription": "Shell-first score based on 14x6.5 Maple/Bubinga Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
-      "drumSummaryNotes": "Existing Tama Signature Kaz Rodriguez record retained for now. Added KR1465 record contains stronger model-code data; this older record still needs later duplicate review. Unknown values intentionally mark researched gaps complete."
-    },
     "shell": {
       "drumType": "snare",
       "dimensions": {
@@ -8705,7 +8688,35 @@
       "_seconds": 1779057313,
       "_nanoseconds": 712000000
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "summary": {
+      "shortDescription": "Possible generic/imported Kaz Rodriguez 14x6.5 Maple/Bubinga record requiring duplicate/alias verification.",
+      "drumSummaryNotes": "Treat as low-confidence because the current record lists die-cast hoops, while the source-backed KR1465 record uses 2.3mm Sound Arc hoops."
+    },
+    "identification": {
+      "modelNumber": "unknown",
+      "currentlyInProduction": "unknown",
+      "artistSignature": true,
+      "productionStatus": "Possible duplicate/model-alias candidate",
+      "badgeStyle": "Kaz Rodriguez Signature",
+      "discontinued": "unknown",
+      "rareCollectible": "unknown"
+    },
+    "sources": {
+      "imageUrl": null,
+      "imageUrls": [],
+      "notesOnMissingData": "Verify whether this generic Kaz Rodriguez 14x6.5 Maple/Bubinga record is a duplicate/imported alias of KR1465 or a separate pre-release/retailer-derived record. Existing die-cast hoop value conflicts with KR1465 references that list 2.3mm Sound Arc hoops.",
+      "secondarySourceUrl": "https://drumcenternh.com/products/tama-kaz-rodriguez-signature-snare-drum-14x6-5",
+      "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251017084651.html",
+      "sourceConfidence": "Low",
+      "conflictingSourceNotes": "Likely model-alias candidate for KR1465, but preserve separately until original import source is reviewed. Do not overwrite with full KR1465 specs or delete until duplicate policy is decided.",
+      "secondarySourceUrls": []
+    },
+    "researchUpdatedBy": "tama-pass-1",
+    "researchUpdatedAt": {
+      "_seconds": 1779058244,
+      "_nanoseconds": 631000000
+    }
   },
   {
     "id": "tama_signature_kaz-rodriguez-kr1465-signature-14x6-5-maple-bubinga_14x6-5_ply_maple",
@@ -8714,59 +8725,6 @@
     "lineSeries": "Signature",
     "modelName": "Kaz Rodriguez KR1465 Signature 14x6.5 Maple/Bubinga",
     "patchName": "tama_signature_kaz-rodriguez-kr1465-signature-14x6-5-maple-bubinga_14x6-5_ply_maple",
-    "identification": {
-      "modelNumber": "KR1465",
-      "badgeStyle": "unknown",
-      "productionStatus": "unknown",
-      "currentlyInProduction": "unknown",
-      "artistSignature": "unknown",
-      "rareCollectible": "unknown"
-    },
-    "stockHardware": {
-      "throwOff": {
-        "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
-        "model": "unknown",
-        "style": "unknown",
-        "make": "unknown"
-      },
-      "hoops": {
-        "resonantHoopType": "die-cast hoops",
-        "hoopMaterial": "unknown",
-        "hoopFinish": "unknown",
-        "batterHoopType": "die-cast hoops",
-        "hoopMassClass": "unknown",
-        "hoopThicknessMm": null
-      },
-      "lugs": {
-        "lugType": "unknown",
-        "hardwareFinish": "unknown",
-        "lugMaterial": "unknown",
-        "lugCountNotes": "unknown",
-        "lugMountingStyle": "unknown",
-        "lugCount": 10,
-        "lugMassClass": "unknown"
-      },
-      "buttPlate": {
-        "model": "unknown",
-        "style": "unknown",
-        "make": "unknown"
-      }
-    },
-    "stockSnareSystem": {
-      "snareWires": {
-        "material": "unknown",
-        "model": "unknown",
-        "lengthInches": 14,
-        "stock": "unknown",
-        "strandCount": null,
-        "make": "unknown"
-      },
-      "heads": {
-        "stockHeadsKnown": true,
-        "batterHead": "unknown",
-        "resonantHead": "unknown"
-      }
-    },
     "pricing": {
       "priceNotes": "unknown",
       "lastUpdated": "researchRequired",
@@ -8780,85 +8738,145 @@
       "originalMsrp": "researchRequired",
       "originalRetailPrice": "researchRequired"
     },
-    "collectorMetadata": {
-      "productionNotes": "unknown",
-      "yearIntroduced": "unknown",
-      "limitedRunCount": "unknown",
-      "yearDiscontinued": "unknown",
-      "limitedRun": "unknown",
-      "countryOfOrigin": "unknown"
-    },
     "snareFacts": [
       "unknown",
       "unknown",
       "unknown"
     ],
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
     "summary": {
-      "shortDescription": "unknown",
-      "drumSummaryNotes": "Current Tama Signature listing supports Kaz Rodriguez Signature family. Existing database has Kaz Rodriguez 14x6.5 Maple/Bubinga but lacks model number. Treat as existing record update candidate if same record, not necessarily a new add."
+      "shortDescription": "14x6.5 Kaz Rodriguez Signature snare with 10mm 6-ply maple + 6-ply bubinga G-Hybrid shell, Matte Metallic Gold lacquer, MTL60 tube lugs, Sound Arc hoops, and 20-strand Super Sensitive Hi-Carbon wires.",
+      "drumSummaryNotes": "Shell-first read should emphasize maple clarity, bubinga density, strong projection from the 10mm hybrid shell, and moderate hoop control from 2.3mm Sound Arc hoops. Artist association should not affect scoring."
+    },
+    "identification": {
+      "modelNumber": "KR1465",
+      "artistSignature": true,
+      "productionStatus": "Limited edition / active recent listing",
+      "currentlyInProduction": true,
+      "badgeStyle": "Kaz Rodriguez Signature",
+      "discontinued": false,
+      "rareCollectible": false
     },
     "sources": {
-      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
-      "secondarySourceUrl": "unknown",
-      "notesOnMissingData": [],
       "imageUrls": [],
-      "conflictingSourceNotes": [],
+      "notesOnMissingData": "Confirm country of origin, exact snare bed depth/profile, and whether stock resonant head is specifically Remo Ambassador snare-side or another Tama/Remo variant.",
+      "secondarySourceUrl": "https://drumcenternh.com/products/tama-kaz-rodriguez-signature-snare-drum-14x6-5",
+      "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251017084651.html",
+      "sourceConfidence": "High",
+      "conflictingSourceNotes": "No major physical spec conflicts found. Retailers supply part-number details and limited-run count; official Tama news page confirms shell composition/thickness.",
       "secondarySourceUrls": [
-        "unknown"
-      ],
-      "sourceConfidence": "Unknown"
+        "https://www.drum-tec.com/tama-kaz-rodriguez-14-x-6-5-signature-maple-bubinga-snare-drum-kr1465",
+        "https://www.chicagomusicexchange.com/products/tama-65x14-kaz-rodriguez-signature-maplebubinga-snare-2325724"
+      ]
     },
     "shell": {
-      "drumType": "snare",
       "dimensions": {
         "diameterInches": 14,
         "depthInches": 6.5,
         "metricDimensionsMm": "355.6 x 165.1"
       },
+      "bearingEdges": {
+        "roundover": "unknown",
+        "confidence": "Medium",
+        "notes": "Drum-tec lists 45° bearing edge; official Tama summary confirms shell build but not edge geometry in the visible snippet.",
+        "batterSideProfile": "45 degree bearing edge",
+        "snareSideProfile": "45 degree bearing edge",
+        "evidenceLevel": "retailer/spec reference"
+      },
       "construction": {
-        "shellConstruction": "Ply",
         "shellMaterialPrimary": "Maple",
         "shellMaterialSecondary": "Bubinga",
         "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "6-ply maple + 6-ply bubinga",
         "shellThicknessMm": 10,
-        "thicknessClass": "unknown",
         "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "unknown",
-        "finishType": "unknown",
-        "exteriorTreatment": "unknown",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
-      "bearingEdges": {
-        "batterSideProfile": "unknown",
-        "snareSideProfile": "unknown",
-        "roundover": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.",
-        "confidence": "Medium"
+        "reinforcementRingThicknessMm": null,
+        "plyCount": 12,
+        "thicknessClass": "Thick wood",
+        "reinforcementRingMaterial": "none",
+        "layupDescription": "6-ply maple + 6-ply bubinga G-Hybrid shell",
+        "shellConstruction": "Hybrid ply"
       },
       "snareBeds": {
         "present": true,
         "depthBucket": "unknown",
         "widthBucket": "unknown",
         "bedStyle": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
-        "confidence": "Medium"
+        "notes": "Snare bed depth/profile not confirmed in available sources.",
+        "confidence": "Low",
+        "evidenceLevel": "inferred from functional snare drum design"
+      },
+      "drumType": "Snare Drum",
+      "finish": {
+        "interiorTreatment": "unknown",
+        "finishName": "Matte Metallic Gold",
+        "acousticImpact": "Lacquer finish should be treated as low acoustic impact; core behavior is driven by the 10mm maple/bubinga G-Hybrid shell and hoop choice.",
+        "notes": "Official/reputable retailer references identify finish as Matte Metallic Gold / Matte Gold Lacquer.",
+        "exteriorTreatment": "Matte Metallic Gold lacquer",
+        "finishType": "Lacquer"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "researchUpdatedBy": "tama-pass-1",
+    "stockHardware": {
+      "throwOff": {
+        "notes": "Retailer references list MLS50A/MLS50B.",
+        "model": "MLS50A / MLS50B",
+        "style": "Linear-Drive strainer / butt",
+        "make": "Tama"
+      },
+      "hoops": {
+        "resonantHoopType": "Sound Arc Hoop",
+        "hoopMaterial": "Steel",
+        "hoopFinish": "Chrome",
+        "batterHoopType": "Sound Arc Hoop",
+        "hoopMassClass": "Medium",
+        "hoopThicknessMm": 2.3
+      },
+      "lugs": {
+        "lugMaterial": "unknown",
+        "lugCount": 10,
+        "lugType": "MTL60 tube lugs",
+        "hardwareFinish": "Chrome",
+        "lugCountNotes": "10-tension layout with MTL60 tube lugs confirmed by multiple retailer references.",
+        "lugMountingStyle": "Tube lug",
+        "lugMassClass": "Medium"
+      },
+      "buttPlate": {
+        "model": "MLS50B",
+        "style": "Companion butt plate",
+        "make": "Tama"
+      }
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "stockSnareSystem": {
+      "snareWires": {
+        "lengthInches": 14,
+        "material": "Hi-carbon steel",
+        "model": "MS20RL14C",
+        "stock": true,
+        "strandCount": 20,
+        "make": "Tama"
+      },
+      "heads": {
+        "stockHeadsKnown": true,
+        "batterHead": "Remo Coated Ambassador",
+        "resonantHead": "Remo Ambassador snare side"
+      }
+    },
+    "collectorMetadata": {
+      "countryOfOrigin": "unknown",
+      "productionNotes": "Limited edition Kaz Rodriguez signature model; retailer references list 50 snares.",
+      "yearIntroduced": 2025,
+      "limitedRunCount": 50,
+      "yearDiscontinued": null,
+      "limitedRun": true
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779058244,
+      "_nanoseconds": 363000000
+    }
   },
   {
     "id": "tama_signature_kenny-aronoff-ka145n-trackmaster-14x5_14x5_metal_brass_nickel-plated-brass_die-cast-hoops_ka145n_93ec0192",
@@ -8867,59 +8885,6 @@
     "lineSeries": "Signature",
     "modelName": "Kenny Aronoff KA145N Trackmaster 14x5",
     "patchName": "tama_signature_kenny-aronoff-ka145n-trackmaster-14x5_14x5_metal_brass_nickel-plated-brass_die-cast-hoops_ka145n_93ec0192",
-    "identification": {
-      "modelNumber": "KA145N",
-      "badgeStyle": "unknown",
-      "productionStatus": "unknown",
-      "currentlyInProduction": "unknown",
-      "artistSignature": true,
-      "rareCollectible": true
-    },
-    "stockHardware": {
-      "throwOff": {
-        "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
-        "model": "unknown",
-        "style": "unknown",
-        "make": "unknown"
-      },
-      "hoops": {
-        "resonantHoopType": "Die-cast hoops",
-        "hoopMaterial": "unknown",
-        "hoopFinish": "unknown",
-        "batterHoopType": "Die-cast hoops",
-        "hoopMassClass": "unknown",
-        "hoopThicknessMm": null
-      },
-      "lugs": {
-        "lugType": "unknown",
-        "hardwareFinish": "unknown",
-        "lugMaterial": "unknown",
-        "lugCountNotes": "unknown",
-        "lugMountingStyle": "unknown",
-        "lugCount": 10,
-        "lugMassClass": "unknown"
-      },
-      "buttPlate": {
-        "model": "unknown",
-        "style": "unknown",
-        "make": "unknown"
-      }
-    },
-    "stockSnareSystem": {
-      "snareWires": {
-        "material": "unknown",
-        "model": "unknown",
-        "lengthInches": 14,
-        "stock": "unknown",
-        "strandCount": null,
-        "make": "unknown"
-      },
-      "heads": {
-        "stockHeadsKnown": true,
-        "batterHead": "unknown",
-        "resonantHead": "unknown"
-      }
-    },
     "pricing": {
       "priceNotes": "unknown",
       "lastUpdated": "researchRequired",
@@ -8946,75 +8911,132 @@
       "unknown",
       "unknown"
     ],
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "summary": {
+      "shortDescription": "14x5 Kenny Aronoff KA145N Trackmaster brass snare with nickel-plated brass shell, Brass Mighty hoops, MSL35 lugs, MUS80 strainer/butt, and MS20SN14S snare wires.",
+      "drumSummaryNotes": "Shell-first read should emphasize crisp brass attack, focused 5-inch depth response, moderate sustain, and controlled rim behavior from Brass Mighty hoops. Artist association should not affect scoring."
+    },
+    "identification": {
+      "modelNumber": "KA145N",
+      "artistSignature": true,
+      "productionStatus": "Discontinued / legacy signature model",
+      "currentlyInProduction": false,
+      "badgeStyle": "Kenny Aronoff Trackmaster Signature",
+      "discontinued": true,
+      "rareCollectible": "unknown"
+    },
     "sources": {
       "imageUrl": null,
-      "secondarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
-      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
       "sourceConfidence": "Medium",
-      "notesOnMissingData": [
-        "Signature model source confirms model family/artist; exact shell thickness/edge/bed varies and needs catalog-page extraction unless thickness listed."
-      ],
       "imageUrls": [],
-      "conflictingSourceNotes": [],
+      "notesOnMissingData": "Confirm exact shell thickness, bearing edge geometry, snare bed depth/profile, stock head models, and production years from official Tama catalog/spec table.",
+      "secondarySourceUrl": "https://www.fullcompass.com/prod/276060-tama-ka145n-5-x14-kenny-aronoff-trackmaster-signature-brass-snare-drum",
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Kenny_Aronoff.pdf",
+      "conflictingSourceNotes": "Trackmaster forum references mention 1mm brass shells for some Trackmaster models, but this pass does not apply shell thickness without stronger model-specific official confirmation.",
       "secondarySourceUrls": [
-        "https://equipboard.com/c/snare-drums/tama"
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
       ]
     },
-    "summary": {
-      "shortDescription": "Shell-first score based on 14x5 Brass Metal shell with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
-      "drumSummaryNotes": "Existing KA145N record retained. Shell material and finish are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
-    },
     "shell": {
-      "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 5,
-        "metricDimensionsMm": "355.6 x 127.0"
+      "bearingEdges": {
+        "roundover": "unknown",
+        "notes": "Exact edge geometry not confirmed in available sources.",
+        "batterSideProfile": "folded metal bearing edge",
+        "confidence": "Low",
+        "snareSideProfile": "folded metal bearing edge",
+        "evidenceLevel": "inferred from metal shell construction"
       },
       "construction": {
         "shellConstruction": "Metal",
         "shellMaterialPrimary": "Brass",
         "shellMaterialSecondary": "none",
         "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
         "shellThicknessMm": "unknown",
-        "thicknessClass": "unknown",
         "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Nickel-plated brass",
-        "finishType": "Nickel-plated brass",
-        "exteriorTreatment": "Nickel-plated brass",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
-      "bearingEdges": {
-        "batterSideProfile": "unknown",
-        "snareSideProfile": "unknown",
-        "roundover": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.",
-        "confidence": "Medium"
+        "reinforcementRingThicknessMm": null,
+        "plyCount": "Unknown",
+        "thicknessClass": "Unknown metal",
+        "reinforcementRingMaterial": "none",
+        "layupDescription": "Nickel-plated brass shell"
       },
       "snareBeds": {
         "present": true,
         "depthBucket": "unknown",
         "widthBucket": "unknown",
         "bedStyle": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
-        "confidence": "Medium"
+        "notes": "Snare bed depth/profile not confirmed in available sources.",
+        "confidence": "Low",
+        "evidenceLevel": "inferred from functional snare drum design"
+      },
+      "drumType": "Snare Drum",
+      "finish": {
+        "finishName": "Nickel-plated brass",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "Finish/plating should be treated as low acoustic impact; core behavior is driven by brass shell, 14x5 dimensions, and hoop choice.",
+        "notes": "Full Compass spec confirms nickel-plated brass shell.",
+        "exteriorTreatment": "Nickel plated brass",
+        "finishType": "Nickel plated metal"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5,
+        "metricDimensionsMm": "355.6 x 127"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "researchUpdatedBy": "tama-pass-1",
+    "stockHardware": {
+      "throwOff": {
+        "notes": "Full Compass lists MUS80A/MUS80B nickel-plated strainer/butt.",
+        "model": "MUS80A / MUS80B",
+        "style": "Standard snare strainer / butt",
+        "make": "Tama"
+      },
+      "hoops": {
+        "hoopThicknessMm": null,
+        "resonantHoopType": "Brass Mighty Hoop",
+        "hoopMaterial": "Brass",
+        "hoopFinish": "Nickel plated",
+        "batterHoopType": "Brass Mighty Hoop",
+        "hoopMassClass": "Medium-heavy"
+      },
+      "lugs": {
+        "lugMaterial": "unknown",
+        "lugCount": 10,
+        "lugType": "MSL35",
+        "hardwareFinish": "Nickel plated",
+        "lugCountNotes": "Full Compass lists 10-hole hoops.",
+        "lugMountingStyle": "Separate lug casing",
+        "lugMassClass": "Medium"
+      },
+      "buttPlate": {
+        "model": "MUS80B",
+        "style": "Companion butt plate",
+        "make": "Tama"
+      }
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "lengthInches": 14,
+        "model": "MS20SN14S",
+        "stock": true,
+        "strandCount": 20,
+        "make": "Tama"
+      },
+      "heads": {
+        "batterHead": "unknown",
+        "resonantHead": "unknown",
+        "stockHeadsKnown": false
+      }
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779058244,
+      "_nanoseconds": 849000000
+    }
   },
   {
     "id": "tama_signature_kenny-aronoff-ka154-super-piccolo-15x4_15x4_metal_brass_nickel-plated-brass_die-cast-hoops_ka154_0fcd1d35",
@@ -9023,42 +9045,137 @@
     "lineSeries": "Signature",
     "modelName": "Kenny Aronoff KA154 Super Piccolo 15x4",
     "patchName": "tama_signature_kenny-aronoff-ka154-super-piccolo-15x4_15x4_metal_brass_nickel-plated-brass_die-cast-hoops_ka154_0fcd1d35",
+    "pricing": {
+      "priceNotes": "unknown",
+      "lastUpdated": "researchRequired",
+      "currentUsedPriceRange": {
+        "high": "researchRequired",
+        "low": "researchRequired",
+        "currency": "USD"
+      },
+      "pricingSources": [],
+      "currentNewPrice": "researchRequired",
+      "originalMsrp": "researchRequired",
+      "originalRetailPrice": "researchRequired"
+    },
+    "collectorMetadata": {
+      "productionNotes": "unknown",
+      "yearIntroduced": "unknown",
+      "limitedRunCount": "unknown",
+      "yearDiscontinued": "unknown",
+      "limitedRun": "unknown",
+      "countryOfOrigin": "unknown"
+    },
+    "snareFacts": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "summary": {
+      "shortDescription": "15x4 Kenny Aronoff KA154 Trackmaster Super Piccolo brass snare with engraved black nickel over brass finish and shallow/wide shell format.",
+      "drumSummaryNotes": "Shell-first read should emphasize fast shallow-shell response with more openness than a smaller-diameter piccolo due to the 15-inch diameter. Artist association should not affect scoring."
+    },
     "identification": {
       "modelNumber": "KA154",
-      "badgeStyle": "unknown",
-      "productionStatus": "unknown",
-      "currentlyInProduction": "unknown",
       "artistSignature": true,
-      "rareCollectible": true
+      "productionStatus": "Discontinued / legacy signature model",
+      "currentlyInProduction": false,
+      "badgeStyle": "Kenny Aronoff Trackmaster Super Piccolo Signature",
+      "discontinued": true,
+      "rareCollectible": "unknown"
     },
+    "sources": {
+      "imageUrl": null,
+      "sourceConfidence": "Medium",
+      "imageUrls": [],
+      "notesOnMissingData": "Confirm exact shell thickness, hoop part numbers, lug model, throw-off/butt model, stock snare wires, stock head models, bearing edge geometry, snare bed depth/profile, and production years from official Tama catalog/spec table.",
+      "secondarySourceUrl": "https://reverb.com/p/tama-4x15-ka154-kenny-aronoff-trackmaster-super-piccolo-signature-brass-snare-drum",
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Kenny_Aronoff.pdf",
+      "conflictingSourceNotes": "Some secondary references mention 1.2mm shell thickness for KA154, but this pass does not apply shell thickness without stronger official/model-specific confirmation.",
+      "secondarySourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
+      ]
+    },
+    "shell": {
+      "bearingEdges": {
+        "roundover": "unknown",
+        "notes": "Exact edge geometry not confirmed in available sources.",
+        "batterSideProfile": "folded metal bearing edge",
+        "confidence": "Low",
+        "snareSideProfile": "folded metal bearing edge",
+        "evidenceLevel": "inferred from metal shell construction"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Brass",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "shellThicknessMm": "unknown",
+        "reinforcementRings": false,
+        "reinforcementRingThicknessMm": null,
+        "plyCount": "Unknown",
+        "thicknessClass": "Unknown metal",
+        "reinforcementRingMaterial": "none",
+        "layupDescription": "Nickel-plated brass shell; engraved black nickel over brass finish referenced by Reverb product listing"
+      },
+      "snareBeds": {
+        "present": true,
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "notes": "Snare bed depth/profile not confirmed in available sources.",
+        "confidence": "Low",
+        "evidenceLevel": "inferred from functional snare drum design"
+      },
+      "drumType": "Snare Drum",
+      "finish": {
+        "interiorTreatment": "unknown",
+        "finishName": "Engraved black nickel over brass",
+        "acousticImpact": "Finish/plating should be treated as low acoustic impact; core behavior is driven by brass shell and unusual 15x4 size.",
+        "notes": "Reverb product reference identifies finish as engraved black nickel over brass.",
+        "exteriorTreatment": "Engraved black nickel over brass",
+        "finishType": "Black nickel plated / engraved metal"
+      },
+      "dimensions": {
+        "diameterInches": 15,
+        "depthInches": 4,
+        "metricDimensionsMm": "381 x 101.6"
+      }
+    },
+    "researchUpdatedBy": "tama-pass-1",
     "stockHardware": {
       "throwOff": {
-        "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
         "model": "unknown",
         "style": "unknown",
-        "make": "unknown"
+        "notes": "Throw-off part number not confirmed in available sources for KA154.",
+        "make": "Tama"
       },
       "hoops": {
-        "resonantHoopType": "Die-cast hoops",
-        "hoopMaterial": "unknown",
-        "hoopFinish": "unknown",
-        "batterHoopType": "Die-cast hoops",
-        "hoopMassClass": "unknown",
-        "hoopThicknessMm": null
+        "hoopThicknessMm": null,
+        "resonantHoopType": "Brass Mighty Hoop",
+        "hoopMaterial": "Brass",
+        "hoopFinish": "Nickel plated / black nickel",
+        "batterHoopType": "Brass Mighty Hoop",
+        "hoopMassClass": "Medium-heavy"
       },
       "lugs": {
         "lugType": "unknown",
-        "hardwareFinish": "unknown",
         "lugMaterial": "unknown",
-        "lugCountNotes": "unknown",
-        "lugMountingStyle": "unknown",
         "lugCount": 10,
-        "lugMassClass": "unknown"
+        "hardwareFinish": "Nickel plated / black nickel",
+        "lugCountNotes": "Existing record lists 10 lugs; confirm with official catalog/spec image.",
+        "lugMountingStyle": "Separate lug casing",
+        "lugMassClass": "Medium"
       },
       "buttPlate": {
         "model": "unknown",
         "style": "unknown",
-        "make": "unknown"
+        "make": "Tama"
       }
     },
     "stockSnareSystem": {
@@ -9071,106 +9188,15 @@
         "make": "unknown"
       },
       "heads": {
-        "stockHeadsKnown": true,
         "batterHead": "unknown",
-        "resonantHead": "unknown"
+        "resonantHead": "unknown",
+        "stockHeadsKnown": false
       }
     },
-    "pricing": {
-      "priceNotes": "unknown",
-      "lastUpdated": "researchRequired",
-      "currentUsedPriceRange": {
-        "high": "researchRequired",
-        "low": "researchRequired",
-        "currency": "USD"
-      },
-      "pricingSources": [],
-      "currentNewPrice": "researchRequired",
-      "originalMsrp": "researchRequired",
-      "originalRetailPrice": "researchRequired"
-    },
-    "collectorMetadata": {
-      "productionNotes": "unknown",
-      "yearIntroduced": "unknown",
-      "limitedRunCount": "unknown",
-      "yearDiscontinued": "unknown",
-      "limitedRun": "unknown",
-      "countryOfOrigin": "unknown"
-    },
-    "snareFacts": [
-      "unknown",
-      "unknown",
-      "unknown"
-    ],
-    "sources": {
-      "imageUrl": null,
-      "secondarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
-      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
-      "sourceConfidence": "Medium",
-      "notesOnMissingData": [
-        "Signature model source confirms model family/artist; exact shell thickness/edge/bed varies and needs catalog-page extraction unless thickness listed."
-      ],
-      "imageUrls": [],
-      "conflictingSourceNotes": [],
-      "secondarySourceUrls": [
-        "https://equipboard.com/c/snare-drums/tama"
-      ]
-    },
-    "summary": {
-      "shortDescription": "Shell-first score based on 15x4 Brass Metal shell with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
-      "drumSummaryNotes": "Existing KA154 record retained. Shell material and finish are present; thickness, edge, bed, lugs, throw-off, wires, and stock heads remain unconfirmed."
-    },
-    "shell": {
-      "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 15,
-        "depthInches": 4,
-        "metricDimensionsMm": "381.0 x 101.6"
-      },
-      "construction": {
-        "shellConstruction": "Metal",
-        "shellMaterialPrimary": "Brass",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": "unknown",
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Nickel-plated brass",
-        "finishType": "Nickel-plated brass",
-        "exteriorTreatment": "Nickel-plated brass",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
-      "bearingEdges": {
-        "batterSideProfile": "unknown",
-        "snareSideProfile": "unknown",
-        "roundover": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.",
-        "confidence": "Medium"
-      },
-      "snareBeds": {
-        "present": true,
-        "depthBucket": "unknown",
-        "widthBucket": "unknown",
-        "bedStyle": "unknown",
-        "evidenceLevel": "legacyFieldMigrated",
-        "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
-        "confidence": "Medium"
-      }
-    },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
-    },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedAt": {
+      "_seconds": 1779058245,
+      "_nanoseconds": 148000000
+    }
   },
   {
     "id": "tama_signature_lars-ulrich-lu1465-14x6-5_14x6-5_metal_steel_3_diamond-plate-steel_die-cast-hoops_lu1465_ae41107f",
