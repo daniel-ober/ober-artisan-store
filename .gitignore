@@ -68,3 +68,19 @@ backend/serviceAccountKey-stg.json
 functions/serviceAccountKey.json
 
 tmp/
+
+# Firebase / Google service account keys - NEVER COMMIT
+
+serviceAccountKey.json
+
+**/serviceAccountKey.json
+
+**/serviceAccountKey-*.json
+
+.firebase-keys/
+
+
+# Generated audit reports
+
+missingSnareReferenceFieldsReport.json
+
