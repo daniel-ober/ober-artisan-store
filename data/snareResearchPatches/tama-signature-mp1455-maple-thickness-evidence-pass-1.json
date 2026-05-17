@@ -1,0 +1,19 @@
+{
+  "companyName": "Tama",
+  "lineSeries": "Signature",
+  "patchGroups": [
+    {
+      "matchModelNames": [
+        "Mike Portnoy Melody Master MP1455 Maple 14x5.5"
+      ],
+      "updates": {
+        "shellMaterial1": "Maple",
+        "shellConstruction": "Ply",
+        "shellThicknessMm": "Unknown",
+        "voiceScoreConfidence": "Medium",
+        "sourceConfidence": "Medium",
+        "notesOnMissingData": "Shell material confirmed as maple. Shell thickness remains unknown unless a reliable primary or secondary source is found."
+      }
+    }
+  ]
+}

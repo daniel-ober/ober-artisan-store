@@ -1,0 +1,582 @@
+[
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+    "lineSeries": "Raw Brass / Raw Steel / Wood",
+    "sizeKey": "14x6-5",
+    "importMeta": {
+      "importedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      },
+      "sourceWorkbookType": "all_manufacturers",
+      "importBatchId": "snare-import-2026-05-17T03-15-41-507Z",
+      "updatedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      }
+    },
+    "notes": {
+      "summary": "Included as boutique-builder coverage placeholder; scoring is material/construction-first and intentionally low confidence until source-validated.",
+      "missingData": "Needs official or retailer source extraction in boutique cleanup pass."
+    },
+    "tuning": {
+      "recommendedReso": "385–445 Hz, approx G4–A4",
+      "projectedShellFundamentalPitch": "Medium shell fundamental; estimated around B2–D3",
+      "recommendedBatter": "265–325 Hz, approx C4–E4"
+    },
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": null,
+      "primarySourceUrl": null,
+      "sourceConfidence": "Low"
+    },
+    "companyType": "Boutique / Custom Builder",
+    "production": {
+      "modelNum": null,
+      "yearDiscontinued": null,
+      "currentlyInProduction": true,
+      "discontinued": false,
+      "yearInProduction": null,
+      "artistSignatureLine": false,
+      "rareCollectible": false
+    },
+    "companyName": "A&F Drum Co.",
+    "drumType": "Snare Drum",
+    "oberScores": {
+      "brightness": 5.1,
+      "scoringBasis": "Material-only estimate",
+      "warmth": 5.5,
+      "attack": 5.2,
+      "confidence": "Low",
+      "control": 5,
+      "projection": 5,
+      "sensitivity": 5.4,
+      "sustain": 5
+    },
+    "modelName": "Maple Club Snare",
+    "search": {
+      "constructionKey": "ply",
+      "lineKey": "raw-brass-raw-steel-wood",
+      "sizeKey": "14x6-5",
+      "finishKey": "unknown",
+      "hoopKey": "unknown",
+      "snareBedKey": "unknown",
+      "edgeKey": "unknown",
+      "materialKeys": [
+        "maple"
+      ],
+      "companyKey": "aandf-drum-co",
+      "modelKey": "maple-club-snare"
+    },
+    "depth": 6.5,
+    "diameter": 14,
+    "public": {
+      "needsReview": false,
+      "hasCompleteScores": true,
+      "isVisible": true
+    },
+    "shell": {
+      "bearingEdge": null,
+      "material2": null,
+      "material1": "Maple",
+      "material3": null,
+      "thicknessMm": null,
+      "snareBedType": null,
+      "construction": "Ply",
+      "plyCountLayup": null,
+      "reinforcementRings": null,
+      "hoopRimType": null,
+      "finishType": null
+    },
+    "hardware": {
+      "stockResoHead": null,
+      "lugType": null,
+      "stockSnareWires": null,
+      "snareThrowMakeAndModel": null,
+      "stockBatterHead": null,
+      "hardwareFinish": null,
+      "lugCount": null
+    },
+    "research": {
+      "latestRequestedByUid": "kUBVZnh1EDX1W6CS2c09Rfdshjw2",
+      "latestRequestedByEmail": "danober.dev@gmail.com",
+      "latestJobId": "d8m333UhPejwMWIZPV3K",
+      "latestJobStatus": "needs_manual_review",
+      "latestMissingCount": 5,
+      "latestAIResult": {
+        "summary": "Specific details regarding the bearing edge, snare bed type, hoop/rim type, and lug count for the A&F Drum Co. Maple Club Snare are not published or available from the provided sources.",
+        "sources": [],
+        "confirmedFields": {
+          "bearingEdge": {
+            "sourceUrl": null,
+            "notes": "Specific bearing edge details for the Maple Club Snare are not published.",
+            "sourceLabel": null,
+            "confidence": "Low",
+            "value": null
+          },
+          "snareBedType": {
+            "sourceUrl": null,
+            "notes": "Information regarding the snare bed type is not available.",
+            "sourceLabel": null,
+            "confidence": "Low",
+            "value": "Unknown / Not Published"
+          },
+          "hoopRimType": {
+            "sourceUrl": null,
+            "notes": "Specific hoop/rim type details are not provided.",
+            "sourceLabel": null,
+            "confidence": "Low",
+            "value": null
+          },
+          "lugCount": {
+            "sourceUrl": null,
+            "notes": "The lug count for the Maple Club Snare is not specified.",
+            "sourceLabel": null,
+            "confidence": "Low",
+            "value": null
+          }
+        },
+        "warnings": [
+          "Specific bearing edge, snare bed type, hoop/rim type, and lug count details are not published or available from the provided sources."
+        ],
+        "status": "needs_manual_review"
+      },
+      "latestCompletedAt": {
+        "_seconds": 1778998804,
+        "_nanoseconds": 884000000
+      },
+      "latestRequestedAt": {
+        "_seconds": 1778997603,
+        "_nanoseconds": 36000000
+      }
+    },
+    "updatedAt": {
+      "_seconds": 1778998804,
+      "_nanoseconds": 884000000
+    }
+  },
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+    "lineSeries": "Raw Brass / Raw Steel / Wood",
+    "sizeKey": "14x6-5",
+    "importMeta": {
+      "importedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      },
+      "sourceWorkbookType": "all_manufacturers",
+      "importBatchId": "snare-import-2026-05-17T03-15-41-507Z",
+      "updatedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      }
+    },
+    "notes": {
+      "summary": "Included as boutique-builder coverage placeholder; scoring is material/construction-first and intentionally low confidence until source-validated.",
+      "missingData": "Needs official or retailer source extraction in boutique cleanup pass."
+    },
+    "tuning": {
+      "recommendedReso": "395–455 Hz, approx G4–A#4",
+      "projectedShellFundamentalPitch": "Medium shell fundamental; estimated around B2–D3",
+      "recommendedBatter": "280–340 Hz, approx C#4–F4"
+    },
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": null,
+      "primarySourceUrl": null,
+      "sourceConfidence": "Low"
+    },
+    "companyType": "Boutique / Custom Builder",
+    "production": {
+      "modelNum": null,
+      "yearDiscontinued": null,
+      "currentlyInProduction": true,
+      "discontinued": false,
+      "yearInProduction": null,
+      "artistSignatureLine": false,
+      "rareCollectible": false
+    },
+    "companyName": "A&F Drum Co.",
+    "drumType": "Snare Drum",
+    "oberScores": {
+      "brightness": 6.7,
+      "scoringBasis": "Material-only estimate",
+      "warmth": 5.7,
+      "attack": 6.4,
+      "confidence": "Low",
+      "control": 5.4,
+      "projection": 6.5,
+      "sensitivity": 6.2,
+      "sustain": 6.1
+    },
+    "modelName": "Raw Brass 14x6.5",
+    "search": {
+      "constructionKey": "metal",
+      "lineKey": "raw-brass-raw-steel-wood",
+      "sizeKey": "14x6-5",
+      "finishKey": "unknown",
+      "hoopKey": "unknown",
+      "snareBedKey": "unknown",
+      "edgeKey": "unknown",
+      "materialKeys": [
+        "brass"
+      ],
+      "companyKey": "aandf-drum-co",
+      "modelKey": "raw-brass-14x6-5"
+    },
+    "depth": 6.5,
+    "diameter": 14,
+    "public": {
+      "needsReview": false,
+      "hasCompleteScores": true,
+      "isVisible": true
+    },
+    "shell": {
+      "bearingEdge": null,
+      "material2": null,
+      "material1": "Brass",
+      "material3": null,
+      "thicknessMm": null,
+      "snareBedType": null,
+      "construction": "Metal",
+      "plyCountLayup": null,
+      "reinforcementRings": null,
+      "hoopRimType": null,
+      "finishType": null
+    },
+    "hardware": {
+      "stockResoHead": null,
+      "lugType": null,
+      "stockSnareWires": null,
+      "snareThrowMakeAndModel": null,
+      "stockBatterHead": null,
+      "hardwareFinish": null,
+      "lugCount": null
+    },
+    "research": {
+      "latestRequestedByUid": "kUBVZnh1EDX1W6CS2c09Rfdshjw2",
+      "latestJobStatus": "pending",
+      "latestRequestedByEmail": "danober.dev@gmail.com",
+      "latestJobId": "zqjI7VOu5sGLNgEddfFo",
+      "latestRequestedAt": {
+        "_seconds": 1778996657,
+        "_nanoseconds": 814000000
+      }
+    },
+    "updatedAt": {
+      "_seconds": 1778996657,
+      "_nanoseconds": 814000000
+    }
+  },
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569",
+    "lineSeries": "Raw Brass / Raw Steel / Wood",
+    "sizeKey": "14x6-5",
+    "importMeta": {
+      "importedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      },
+      "sourceWorkbookType": "all_manufacturers",
+      "importBatchId": "snare-import-2026-05-17T03-15-41-507Z",
+      "updatedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      }
+    },
+    "notes": {
+      "summary": "Included as boutique-builder coverage placeholder; scoring is material/construction-first and intentionally low confidence until source-validated.",
+      "missingData": "Needs official or retailer source extraction in boutique cleanup pass."
+    },
+    "tuning": {
+      "recommendedReso": "410–470 Hz, approx G#4–A#4",
+      "projectedShellFundamentalPitch": "High shell fundamental; estimated around E3–G3",
+      "recommendedBatter": "300–360 Hz, approx D4–F#4"
+    },
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": null,
+      "primarySourceUrl": null,
+      "sourceConfidence": "Low"
+    },
+    "companyType": "Boutique / Custom Builder",
+    "production": {
+      "modelNum": null,
+      "yearDiscontinued": null,
+      "currentlyInProduction": true,
+      "discontinued": false,
+      "yearInProduction": null,
+      "artistSignatureLine": false,
+      "rareCollectible": false
+    },
+    "companyName": "A&F Drum Co.",
+    "drumType": "Snare Drum",
+    "oberScores": {
+      "brightness": 7.5,
+      "scoringBasis": "Material-only estimate",
+      "warmth": 3.8,
+      "attack": 7,
+      "confidence": "Low",
+      "control": 5.8,
+      "projection": 7,
+      "sensitivity": 5.3,
+      "sustain": 5.7
+    },
+    "modelName": "Raw Steel 14x6.5",
+    "search": {
+      "constructionKey": "metal",
+      "lineKey": "raw-brass-raw-steel-wood",
+      "sizeKey": "14x6-5",
+      "finishKey": "unknown",
+      "hoopKey": "unknown",
+      "snareBedKey": "unknown",
+      "edgeKey": "unknown",
+      "materialKeys": [
+        "steel"
+      ],
+      "companyKey": "aandf-drum-co",
+      "modelKey": "raw-steel-14x6-5"
+    },
+    "depth": 6.5,
+    "diameter": 14,
+    "public": {
+      "needsReview": false,
+      "hasCompleteScores": true,
+      "isVisible": true
+    },
+    "shell": {
+      "bearingEdge": null,
+      "material2": null,
+      "material1": "Steel",
+      "material3": null,
+      "thicknessMm": null,
+      "snareBedType": null,
+      "construction": "Metal",
+      "plyCountLayup": null,
+      "reinforcementRings": null,
+      "hoopRimType": null,
+      "finishType": null
+    },
+    "hardware": {
+      "stockResoHead": null,
+      "lugType": null,
+      "stockSnareWires": null,
+      "snareThrowMakeAndModel": null,
+      "stockBatterHead": null,
+      "hardwareFinish": null,
+      "lugCount": null
+    }
+  },
+  {
+    "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+    "lineSeries": "Ahead Snares",
+    "sizeKey": "14x6",
+    "importMeta": {
+      "importedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      },
+      "sourceWorkbookType": "all_manufacturers",
+      "importBatchId": "snare-import-2026-05-17T03-15-41-507Z",
+      "updatedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      }
+    },
+    "notes": {
+      "summary": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+      "missingData": "DCP listing confirms 14x6 black chrome 3mm cast bell brass with brass hardware/Trick throw-off; cross-check row for retailer source."
+    },
+    "tuning": {
+      "recommendedReso": "390–445 Hz, approx G4–A4",
+      "projectedShellFundamentalPitch": "Medium-high rigid shell fundamental; estimated around C#3–E3",
+      "recommendedBatter": "275–330 Hz, approx C#4–E4"
+    },
+    "sources": {
+      "imageUrl": "See primary source",
+      "secondarySourceUrl": null,
+      "primarySourceUrl": "https://drumcenternh.com/products/ahead-3mm-cast-bell-brass-snare-drum-14x6-black-chrome-w-brass-hw-trick-throw-off",
+      "sourceConfidence": "Medium"
+    },
+    "companyType": "Accessory / drum product manufacturer",
+    "production": {
+      "modelNum": "AS614BBB DCP",
+      "yearDiscontinued": null,
+      "currentlyInProduction": true,
+      "discontinued": false,
+      "yearInProduction": null,
+      "artistSignatureLine": false,
+      "rareCollectible": false
+    },
+    "companyName": "AHEAD",
+    "drumType": "Snare Drum",
+    "oberScores": {
+      "brightness": 6.6,
+      "scoringBasis": "Shell + hoop confirmed",
+      "warmth": 6,
+      "attack": 7.8,
+      "confidence": "Medium",
+      "control": 7.4,
+      "projection": 8.2,
+      "sensitivity": 5,
+      "sustain": 4.9
+    },
+    "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+    "search": {
+      "constructionKey": "solid-shell",
+      "lineKey": "ahead-snares",
+      "sizeKey": "14x6",
+      "finishKey": "smoke-chrome-black-chrome",
+      "hoopKey": "sh1410-s-hoop-counter-hoops",
+      "snareBedKey": "unknown",
+      "edgeKey": "unknown",
+      "materialKeys": [
+        "bell-brass"
+      ],
+      "companyKey": "ahead",
+      "modelKey": "black-chrome-bell-brass-14x6-dcp-dealer-listing"
+    },
+    "depth": 6,
+    "diameter": 14,
+    "public": {
+      "needsReview": false,
+      "hasCompleteScores": true,
+      "isVisible": true
+    },
+    "shell": {
+      "bearingEdge": null,
+      "material2": null,
+      "material1": "Bell Brass",
+      "material3": null,
+      "thicknessMm": 3,
+      "snareBedType": null,
+      "construction": "Solid Shell",
+      "plyCountLayup": null,
+      "reinforcementRings": "No",
+      "hoopRimType": "SH1410 S-Hoop counter hoops",
+      "finishType": "Smoke Chrome / Black Chrome"
+    },
+    "hardware": {
+      "stockResoHead": "Remo USA snare-side head",
+      "lugType": "Tube lugs",
+      "stockSnareWires": "Fat Cat Dual-Adjustable Snappy Snare",
+      "snareThrowMakeAndModel": "Trick throw-off",
+      "stockBatterHead": "Remo USA batter head",
+      "hardwareFinish": "Chrome / smoke chrome",
+      "lugCount": 10
+    }
+  },
+  {
+    "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+    "lineSeries": "Ahead Snares",
+    "sizeKey": "14x6",
+    "importMeta": {
+      "importedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      },
+      "sourceWorkbookType": "all_manufacturers",
+      "importBatchId": "snare-import-2026-05-17T03-15-41-507Z",
+      "updatedAt": {
+        "_seconds": 1778987777,
+        "_nanoseconds": 739000000
+      }
+    },
+    "notes": {
+      "summary": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+      "missingData": "Sweetwater confirms 6x14 bell brass black chrome listing and GS007S Trick throw-off; included as retailer cross-check row."
+    },
+    "tuning": {
+      "recommendedReso": "390–445 Hz, approx G4–A4",
+      "projectedShellFundamentalPitch": "Medium-high rigid shell fundamental; estimated around C#3–E3",
+      "recommendedBatter": "275–330 Hz, approx C#4–E4"
+    },
+    "sources": {
+      "imageUrl": "See primary source",
+      "secondarySourceUrl": null,
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/AS614BBBB--ahead-as614bbbb-6-inch-by-14-inch-bell-brass-snare-drum-black-chrome",
+      "sourceConfidence": "Medium"
+    },
+    "companyType": "Accessory / drum product manufacturer",
+    "production": {
+      "modelNum": "AS614BBBB Sweetwater",
+      "yearDiscontinued": null,
+      "currentlyInProduction": true,
+      "discontinued": false,
+      "yearInProduction": null,
+      "artistSignatureLine": false,
+      "rareCollectible": false
+    },
+    "companyName": "AHEAD",
+    "drumType": "Snare Drum",
+    "oberScores": {
+      "brightness": 6.6,
+      "scoringBasis": "Shell + hoop confirmed",
+      "warmth": 6,
+      "attack": 7.8,
+      "confidence": "Medium",
+      "control": 7.4,
+      "projection": 8.2,
+      "sensitivity": 5,
+      "sustain": 4.9
+    },
+    "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+    "search": {
+      "constructionKey": "solid-shell",
+      "lineKey": "ahead-snares",
+      "sizeKey": "14x6",
+      "finishKey": "smoke-chrome-black-chrome",
+      "hoopKey": "sh1410-s-hoop-counter-hoops",
+      "snareBedKey": "unknown",
+      "edgeKey": "unknown",
+      "materialKeys": [
+        "bell-brass"
+      ],
+      "companyKey": "ahead",
+      "modelKey": "black-chrome-bell-brass-14x6-sweetwater-listing"
+    },
+    "depth": 6,
+    "diameter": 14,
+    "public": {
+      "needsReview": false,
+      "hasCompleteScores": true,
+      "isVisible": true
+    },
+    "shell": {
+      "bearingEdge": null,
+      "material2": null,
+      "material1": "Bell Brass",
+      "material3": null,
+      "thicknessMm": 3,
+      "snareBedType": null,
+      "construction": "Solid Shell",
+      "plyCountLayup": null,
+      "reinforcementRings": "No",
+      "hoopRimType": "SH1410 S-Hoop counter hoops",
+      "finishType": "Smoke Chrome / Black Chrome"
+    },
+    "hardware": {
+      "stockResoHead": "Remo USA snare-side head",
+      "lugType": "Tube lugs",
+      "stockSnareWires": "Fat Cat Dual-Adjustable Snappy Snare",
+      "snareThrowMakeAndModel": "GS007S Trick",
+      "stockBatterHead": "Remo USA batter head",
+      "hardwareFinish": "Chrome / smoke chrome",
+      "lugCount": 10
+    },
+    "research": {
+      "latestRequestedByUid": "kUBVZnh1EDX1W6CS2c09Rfdshjw2",
+      "latestJobStatus": "pending",
+      "latestRequestedByEmail": "danober.dev@gmail.com",
+      "latestJobId": "m77qKEAFUG9kYUIBAzwW",
+      "latestRequestedAt": {
+        "_seconds": 1778995709,
+        "_nanoseconds": 443000000
+      }
+    },
+    "updatedAt": {
+      "_seconds": 1778995709,
+      "_nanoseconds": 443000000
+    }
+  }
+]
