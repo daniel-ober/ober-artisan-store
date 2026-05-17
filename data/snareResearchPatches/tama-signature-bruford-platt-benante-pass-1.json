@@ -1,0 +1,997 @@
+{
+
+  "tama_signature_bill-bruford-bb1055-signature-10x5-5_10x5-5_ply_maple": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Bruford BB1055 Signature 10x5.5",
+
+    "identification": {
+
+      "modelNumber": "BB1055",
+
+      "badgeStyle": "Bill Bruford Signature / Signature Palette",
+
+      "productionStatus": "Discontinued / legacy signature model",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": true,
+
+      "discontinued": true,
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 10,
+
+        "depthInches": 5.5,
+
+        "metricDimensionsMm": "254 x 139.7"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Ply",
+
+        "shellMaterialPrimary": "Maple",
+
+        "shellMaterialSecondary": "Birch",
+
+        "shellMaterialTertiary": "Maple",
+
+        "plyCount": 6,
+
+        "layupDescription": "2-ply maple / 2-ply birch / 2-ply maple shell",
+
+        "shellThicknessMm": 6,
+
+        "thicknessClass": "Medium",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Black metallic sandblast",
+
+        "finishType": "Textured lacquer / sandblast finish",
+
+        "exteriorTreatment": "Black metallic sandblast",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Finish should be treated as low acoustic impact unless finish thickness is later confirmed.",
+
+        "notes": "Finish naming appears consistently in retailer/listing references for the Bill Bruford Signature Palette models."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Steel Mighty Hoop",
+
+        "resonantHoopType": "Steel Mighty Hoop",
+
+        "hoopMaterial": "Steel",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Medium",
+
+        "hoopFinish": "Black chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 6,
+
+        "lugCountNotes": "Existing dataset lists 6 lugs for 10-inch model; confirm with direct catalog image/spec table if available.",
+
+        "lugType": "MSL-SCT",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Black chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MCS50A / MCS50B",
+
+        "style": "Standard snare strainer / butt",
+
+        "notes": "Retailer reference lists MCS50A/MCS50B black chrome hardware."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "MCS50B",
+
+        "style": "Companion butt plate"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "Tama",
+
+        "model": "MS20SN14S",
+
+        "material": "unknown",
+
+        "strandCount": 20,
+
+        "lengthInches": 10,
+
+        "stock": true
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
+
+      "secondarySourceUrl": "https://www.hongsengmusic.com/product/2463/",
+
+      "secondarySourceUrls": [
+
+        "https://reverb.com/item/95502747-tama-5-5x10-bill-bruford-signature-piccolo-snare-drum-bb1055-1998"
+
+      ],
+
+      "sourceConfidence": "Medium",
+
+      "notesOnMissingData": "Confirm lug count, exact bearing edge profile, snare bed depth/profile, stock head models, and production/limited-run details from an official Tama catalog/spec table.",
+
+      "conflictingSourceNotes": "This 10x5.5 BB1055 is a distinct Bill Bruford side/piccolo snare and should remain separate from BB146."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "10x5.5 Bill Bruford Signature snare with 6-ply maple/birch/maple shell, Steel Mighty hoops, black chrome hardware, and compact side-snare format.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize fast response, focused attack, compact body, and clear maple/birch articulation. Artist association should not affect scoring."
+
+    }
+
+  },
+
+  "tama_signature_bill-bruford-bb146-signature-14x6_14x6_ply_maple": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Bruford BB146 Signature 14x6",
+
+    "identification": {
+
+      "modelNumber": "BB146",
+
+      "badgeStyle": "Bill Bruford Signature / Signature Palette",
+
+      "productionStatus": "Discontinued / legacy signature model",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": true,
+
+      "discontinued": true,
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 6,
+
+        "metricDimensionsMm": "355.6 x 152.4"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Ply",
+
+        "shellMaterialPrimary": "Maple",
+
+        "shellMaterialSecondary": "Birch",
+
+        "shellMaterialTertiary": "Maple",
+
+        "plyCount": 6,
+
+        "layupDescription": "2-ply maple / 2-ply birch / 2-ply maple shell",
+
+        "shellThicknessMm": 6,
+
+        "thicknessClass": "Medium",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Black metallic sandblast",
+
+        "finishType": "Textured lacquer / sandblast finish",
+
+        "exteriorTreatment": "Black metallic sandblast",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Finish should be treated as low acoustic impact unless finish thickness is later confirmed.",
+
+        "notes": "Sweetwater and other references identify the finish as Black Metallic Sandblast."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Steel Mighty Hoop",
+
+        "resonantHoopType": "Steel Mighty Hoop",
+
+        "hoopMaterial": "Steel",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Medium",
+
+        "hoopFinish": "Black chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 10,
+
+        "lugCountNotes": "14-inch 10-lug signature snare format.",
+
+        "lugType": "MSL-SCT",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Black chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MCS50A / MCS50B",
+
+        "style": "Standard snare strainer / butt",
+
+        "notes": "Retailer reference lists MCS50A/MCS50B black chrome hardware."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "MCS50B",
+
+        "style": "Companion butt plate"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "Tama",
+
+        "model": "MS20SN14S",
+
+        "material": "unknown",
+
+        "strandCount": 20,
+
+        "lengthInches": 14,
+
+        "stock": true
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
+
+      "secondarySourceUrl": "https://www.sweetwater.com/store/detail/BB146--tama-bb146-bill-bruford-signature-snare-drum",
+
+      "secondarySourceUrls": [
+
+        "https://www.hongsengmusic.com/product/2464/",
+
+        "https://www.tama.com/eu/artists/detail/128.html",
+
+        "https://billbruford.com/equipment/"
+
+      ],
+
+      "sourceConfidence": "High",
+
+      "notesOnMissingData": "Confirm exact bearing edge profile, snare bed depth/profile, stock head models, and production/limited-run details from official Tama catalog table if available.",
+
+      "conflictingSourceNotes": "This 14x6 BB146 is distinct from BB1055 10x5.5. Bill Bruford artist/equipment pages confirm BB146 usage but should not affect acoustic scoring."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x6 Bill Bruford Signature snare with 6-ply maple/birch/maple shell, Steel Mighty hoops, black chrome hardware, and black metallic sandblast finish.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize balanced maple/birch body, articulate attack, moderate sustain, and clear projection. Artist association should not affect scoring."
+
+    }
+
+  },
+
+  "tama_signature_bill-bruford-14x5-5_14x5-5_metal_brass_brass_die-cast-hoops_5daed8b7": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Bruford 14x5.5",
+
+    "identification": {
+
+      "modelNumber": "unknown",
+
+      "badgeStyle": "unknown",
+
+      "productionStatus": "Needs verification",
+
+      "currentlyInProduction": "unknown",
+
+      "artistSignature": true,
+
+      "discontinued": "unknown",
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+
+      "secondarySourceUrl": "unknown",
+
+      "secondarySourceUrls": [],
+
+      "sourceConfidence": "Low",
+
+      "notesOnMissingData": "Verify whether this record is a real Bill Bruford 14x5.5 brass model, a bad imported/normalized record, or a mislabeled non-Bruford signature snare. Do not use for scoring until model identity is confirmed.",
+
+      "conflictingSourceNotes": "Official and artist references strongly support BB146 14x6 and BB1055 10x5.5 Bill Bruford signature models. This 14x5.5 brass Bill Bruford record needs identity verification before further spec updates."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "Unverified Bill Bruford 14x5.5 brass signature record requiring model identity confirmation.",
+
+      "drumSummaryNotes": "Treat as low-confidence until source-backed identity is confirmed. Do not merge or delete without checking original import source and Tama catalog evidence."
+
+    }
+
+  },
+
+  "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Platt BP146 Signature Bell Brass 14x6",
+
+    "identification": {
+
+      "modelNumber": "BP146",
+
+      "badgeStyle": "Bill Platt Signature / Bravura concert snare",
+
+      "productionStatus": "Current / active signature listing",
+
+      "currentlyInProduction": true,
+
+      "artistSignature": true,
+
+      "discontinued": false,
+
+      "rareCollectible": false
+
+    },
+
+    "shell": {
+
+      "drumType": "Concert Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 6,
+
+        "metricDimensionsMm": "355.6 x 152.4"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Cast metal",
+
+        "shellMaterialPrimary": "Bell Brass",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": "Unknown",
+
+        "layupDescription": "3mm bell brass shell with 3 air vents",
+
+        "shellThicknessMm": 3,
+
+        "thicknessClass": "Thick metal",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "bearingEdges": {
+
+        "batterSideProfile": "machined metal bearing edge",
+
+        "snareSideProfile": "machined metal bearing edge",
+
+        "roundover": "unknown",
+
+        "evidenceLevel": "inferred from cast/machined metal shell construction",
+
+        "confidence": "Low",
+
+        "notes": "Exact edge geometry not published in current source."
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Brushed / natural bell brass",
+
+        "finishType": "Metal shell finish",
+
+        "exteriorTreatment": "Brushed bell brass",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Core acoustic behavior should be driven primarily by the 3mm bell brass shell and grooved straight hoops.",
+
+        "notes": "Finish naming varies by retailer; shell material and thickness are the key confirmed acoustic drivers."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Grooved Straight Hoop",
+
+        "resonantHoopType": "Grooved Straight Hoop",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Medium-heavy",
+
+        "hoopFinish": "unknown"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 10,
+
+        "lugCountNotes": "Official Tama spec lists Grooved Straight Hoop with 10 tension.",
+
+        "lugType": "Freedom Lug",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Freedom lug / claw hook system",
+
+        "hardwareFinish": "unknown"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MLS50AD / MLS50BD",
+
+        "style": "Multi Snare Frame",
+
+        "notes": "Official Tama spec lists MLS50AD/MLS50BD with Multi Snare Frame."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "MLS50BD",
+
+        "style": "Multi Snare Frame companion butt"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "Tama",
+
+        "model": "MS6NW14M / MS6NCS14M / MS6UCS14M",
+
+        "material": "Nickel wound round guitar string / black nylon coated stainless steel / uncoated stainless steel",
+
+        "strandCount": 18,
+
+        "lengthInches": 14,
+
+        "stock": true
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.tama.com/usa/products/detail/bp146.html",
+
+      "secondarySourceUrl": "https://www.sweetwater.com/store/detail/BP146--tama-bill-platt-signature-concert-snare-drum-6-inch-by-14-inch",
+
+      "secondarySourceUrls": [
+
+        "https://www.percussionsource.com/tama-bill-platt-bravura-bp146-14x6-bell-brass-concert-snare-drum-219046"
+
+      ],
+
+      "sourceConfidence": "High",
+
+      "notesOnMissingData": "Confirm exact stock head models, country of origin, finish naming, and exact bearing edge/snare bed geometry if Tama publishes service/catalog details.",
+
+      "conflictingSourceNotes": "This is a concert snare with Multi Snare Frame and should be treated separately from drumset-oriented bell brass models."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x6 Bill Platt Signature concert snare with 3mm bell brass shell, three air vents, Freedom Lugs, Grooved Straight Hoops, and Tama Multi Snare Frame.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize dense bell-brass projection, broad dynamic range, strong sensitivity from the multi-wire frame, and controlled articulation from the grooved hoop system. Artist association should not affect scoring."
+
+    }
+
+  },
+
+  "tama_signature_charlie-benante-cb1465-signature-14x6-5_14x6-5_metal_stainless-steel": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Charlie Benante CB1465 Signature 14x6.5",
+
+    "identification": {
+
+      "modelNumber": "CB1465",
+
+      "badgeStyle": "Charlie Benante Signature",
+
+      "productionStatus": "Current / active signature listing",
+
+      "currentlyInProduction": true,
+
+      "artistSignature": true,
+
+      "discontinued": false,
+
+      "rareCollectible": false
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 6.5,
+
+        "metricDimensionsMm": "355.6 x 165.1"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Metal",
+
+        "shellMaterialPrimary": "Stainless Steel",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": "Unknown",
+
+        "layupDescription": "1.2mm stainless steel shell",
+
+        "shellThicknessMm": 1.2,
+
+        "thicknessClass": "Medium metal",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "bearingEdges": {
+
+        "batterSideProfile": "folded metal bearing edge",
+
+        "snareSideProfile": "folded metal bearing edge",
+
+        "roundover": "unknown",
+
+        "evidenceLevel": "inferred from metal shell construction",
+
+        "confidence": "Low",
+
+        "notes": "Exact edge geometry not listed in official page."
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Stainless steel with matte black interior",
+
+        "finishType": "Metal shell / interior treatment",
+
+        "exteriorTreatment": "Stainless steel exterior",
+
+        "interiorTreatment": "Matte black interior",
+
+        "acousticImpact": "Official Tama copy says the matte black interior tames overtones for controlled sustain; treat as a physical interior treatment modifier.",
+
+        "notes": "Official Tama current listing confirms matte black interior."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Die-cast",
+
+        "resonantHoopType": "Die-cast",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Heavy",
+
+        "hoopFinish": "Black nickel"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 10,
+
+        "lugCountNotes": "Retailer references list 10-hole die-cast format.",
+
+        "lugType": "MSL35BN",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Black nickel"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MUS80ABN / MUS80BBN",
+
+        "style": "Standard snare strainer / butt",
+
+        "notes": "Retailer reference lists MUS80ABN/MUS80BBN."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "MUS80BBN",
+
+        "style": "Companion butt plate"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "Tama",
+
+        "model": "MS20SN14S / Starclassic carbon steel",
+
+        "material": "Carbon steel",
+
+        "strandCount": 20,
+
+        "lengthInches": 14,
+
+        "stock": true
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "collectorMetadata": {
+
+      "countryOfOrigin": "unknown",
+
+      "yearIntroduced": 2015,
+
+      "yearDiscontinued": null,
+
+      "limitedRun": false,
+
+      "limitedRunCount": null,
+
+      "productionNotes": "Thomann reference lists availability since March 2015; current Tama page still lists CB1465."
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/cb1465.html",
+
+      "secondarySourceUrl": "https://www.thomannmusic.com/tama_cb1465_charlie_benante_snare.htm",
+
+      "secondarySourceUrls": [
+
+        "https://www.tama.com/usa/products/snare_drums/signature_snare/",
+
+        "https://www.musicstore.com/en_US/USD/Tama-Charlie-Benante-Snare-CB1465-14-x6-5-Signature-Series/art-DRU0020225-000"
+
+      ],
+
+      "sourceConfidence": "High",
+
+      "notesOnMissingData": "Confirm exact bearing edge geometry, snare bed depth/profile, stock head models, and country of origin if official source publishes deeper specs.",
+
+      "conflictingSourceNotes": "No major spec conflicts found in current official/retailer sources. Retailers add hardware part details not shown on official summary page."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x6.5 Charlie Benante Signature snare with 1.2mm stainless steel shell, matte black interior, black nickel hardware, die-cast hoops, and 20-strand Starclassic carbon steel wires.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize bright stainless-steel attack, high projection, crisp focus, and controlled sustain from the matte black interior and die-cast hoops. Artist association should not affect scoring."
+
+    }
+
+  }
+
+}
