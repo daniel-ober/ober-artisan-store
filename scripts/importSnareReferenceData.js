@@ -50,27 +50,55 @@ if (isDryRun && isCommit) {
 
 }
 
+const SCORE_KEYS = [
+
+  "attack",
+
+  "brightness",
+
+  "projection",
+
+  "sustain",
+
+  "warmth",
+
+  "sensitivity",
+
+  "control",
+
+];
+
+const VALID_SHELL_CONSTRUCTIONS = [
+
+  "Ply",
+
+  "Stave",
+
+  "Block",
+
+  "Steam Bent",
+
+  "Solid Shell",
+
+  "Metal",
+
+  "Acrylic",
+
+  "Carbon Fiber",
+
+  "Hybrid",
+
+  "Ply / Resonator",
+
+  "Composite",
+
+  "Other / Needs Research",
+
+];
+
 function initFirebase() {
 
   if (admin.apps.length) return;
-
-  /**
-
-   * This uses your normal Firebase Admin credentials.
-
-   *
-
-   * Best local option:
-
-   * export GOOGLE_APPLICATION_CREDENTIALS="/absolute/path/to/serviceAccountKey.json"
-
-   *
-
-   * Optional:
-
-   * export FIREBASE_PROJECT_ID="your-project-id"
-
-   */
 
   admin.initializeApp({
 
@@ -230,6 +258,780 @@ function makeDocId(parts) {
 
 }
 
+function normalizeSearchText(...values) {
+
+  return values
+
+    .flat()
+
+    .filter((value) => value !== undefined && value !== null)
+
+    .map((value) => {
+
+      if (Array.isArray(value)) return value.join(" ");
+
+      if (typeof value === "object") return Object.values(value).join(" ");
+
+      return String(value);
+
+    })
+
+    .join(" ")
+
+    .toLowerCase()
+
+    .replace(/[øØ]/g, "o")
+
+    .replace(/[^a-z0-9.]+/g, " ")
+
+    .replace(/\s+/g, " ")
+
+    .trim();
+
+}
+
+function normalizeMaterial(value) {
+
+  const rawValue = cleanString(value);
+
+  const text = normalizeSearchText(value);
+
+  if (!text) return null;
+
+  const materialMatches = [
+
+    ["black nickel over brass", "Black Nickel over Brass"],
+
+    ["chrome over brass", "Chrome over Brass"],
+
+    ["nickel over brass", "Nickel over Brass"],
+
+    ["bell brass", "Bell Brass"],
+
+    ["cast bell brass", "Cast Bell Brass"],
+
+    ["hammered brass", "Hammered Brass"],
+
+    ["raw brass", "Raw Brass"],
+
+    ["brass", "Brass"],
+
+    ["phosphor bronze", "Phosphor Bronze"],
+
+    ["bronze", "Bronze"],
+
+    ["copper", "Copper"],
+
+    ["aluminum", "Aluminum"],
+
+    ["aluminium", "Aluminum"],
+
+    ["stainless steel", "Stainless Steel"],
+
+    ["raw steel", "Raw Steel"],
+
+    ["steel", "Steel"],
+
+    ["titanium", "Titanium"],
+
+    ["iron", "Iron"],
+
+    ["carbon fiber", "Carbon Fiber"],
+
+    ["concrete composite", "Concrete Composite"],
+
+    ["maple gum", "Maple / Gum"],
+
+    ["maple/gum", "Maple / Gum"],
+
+    ["maple poplar", "Maple / Poplar"],
+
+    ["maple/poplar", "Maple / Poplar"],
+
+    ["maple mahogany", "Maple / Mahogany"],
+
+    ["maple/mahogany", "Maple / Mahogany"],
+
+    ["mahogany poplar", "Mahogany / Poplar"],
+
+    ["mahogany/poplar", "Mahogany / Poplar"],
+
+    ["birch bubinga", "Birch / Bubinga"],
+
+    ["birch/bubinga", "Birch / Bubinga"],
+
+    ["walnut birch", "Walnut / Birch"],
+
+    ["walnut/birch", "Walnut / Birch"],
+
+    ["maple walnut", "Maple / Walnut"],
+
+    ["maple/walnut", "Maple / Walnut"],
+
+    ["northern red oak", "Northern Red Oak"],
+
+    ["tasmanian blackwood", "Tasmanian Blackwood"],
+
+    ["jarrah", "Jarrah"],
+
+    ["maple", "Maple"],
+
+    ["walnut", "Walnut"],
+
+    ["mahogany", "Mahogany"],
+
+    ["oak", "Oak"],
+
+    ["birch", "Birch"],
+
+    ["cherry", "Cherry"],
+
+    ["beech", "Beech"],
+
+    ["poplar", "Poplar"],
+
+    ["bubinga", "Bubinga"],
+
+    ["kapur", "Kapur"],
+
+    ["spruce", "Spruce"],
+
+    ["sassafras", "Sassafras"],
+
+    ["ash", "Ash"],
+
+    ["rose gum", "Rose Gum"],
+
+    ["gum", "Gum"],
+
+    ["acrylic", "Acrylic"],
+
+    ["exotic hardwood", "Exotic Hardwood"],
+
+    ["wood", "Wood"],
+
+  ];
+
+  const match = materialMatches.find(([needle]) => {
+
+    return text.includes(normalizeSearchText(needle));
+
+  });
+
+  if (match?.[1]) return match[1];
+
+  /**
+
+   * Important:
+
+   * If the value is long notes/source text, do NOT save it as material.
+
+   * This prevents ugly outputs like:
+
+   * "canopus others 12top 6bottom lugs..."
+
+   */
+
+  const looksLikeNotesText =
+
+    text.length > 80 ||
+
+    text.includes("catalog incomplete") ||
+
+    text.includes("shell first score") ||
+
+    text.includes("listed in official") ||
+
+    text.includes("requires deeper") ||
+
+    text.includes("source") ||
+
+    text.includes("http") ||
+
+    text.includes("www");
+
+  if (looksLikeNotesText) return null;
+
+  return rawValue;
+
+}
+
+function inferMaterialFromDocFields({
+
+  companyName,
+
+  lineSeries,
+
+  modelName,
+
+  shellConstruction,
+
+  material1,
+
+  material2,
+
+  material3,
+
+  plyCountLayup,
+
+  scoringBasis,
+
+  notesMissingData,
+
+  notesSummary,
+
+  primarySourceUrl,
+
+  secondarySourceUrl,
+
+}) {
+
+  const directMaterial = normalizeMaterial(material1);
+
+  if (directMaterial) return directMaterial;
+
+  const text = normalizeSearchText(
+
+    companyName,
+
+    lineSeries,
+
+    modelName,
+
+    shellConstruction,
+
+    material1,
+
+    material2,
+
+    material3,
+
+    plyCountLayup,
+
+    scoringBasis,
+
+    notesMissingData,
+
+    notesSummary,
+
+    primarySourceUrl,
+
+    secondarySourceUrl
+
+  );
+
+  return normalizeMaterial(text);
+
+}
+
+function normalizeShellConstruction(value) {
+
+  const text = normalizeSearchText(value);
+
+  if (!text) return null;
+
+  const constructionMatches = [
+
+    ["ply / resonator", "Ply / Resonator"],
+
+    ["inner resonator shell", "Ply / Resonator"],
+
+    ["resonator", "Ply / Resonator"],
+
+    ["carbon fiber", "Carbon Fiber"],
+
+    ["composite shell", "Composite"],
+
+    ["cast composite", "Composite"],
+
+    ["concrete composite", "Composite"],
+
+    ["cast/composite", "Composite"],
+
+    ["steam bent", "Steam Bent"],
+
+    ["steambent", "Steam Bent"],
+
+    ["steam-bent", "Steam Bent"],
+
+    ["single ply", "Steam Bent"],
+
+    ["1 ply", "Steam Bent"],
+
+    ["one ply", "Steam Bent"],
+
+    ["solid shell", "Solid Shell"],
+
+    ["solid", "Solid Shell"],
+
+    ["one piece", "Solid Shell"],
+
+    ["single piece", "Solid Shell"],
+
+    ["block shell", "Block"],
+
+    ["block", "Block"],
+
+    ["segment", "Block"],
+
+    ["segmented", "Block"],
+
+    ["stave", "Stave"],
+
+    ["hybrid wood metal", "Hybrid"],
+
+    ["hybrid wood/metal", "Hybrid"],
+
+    ["wood metal edge", "Hybrid"],
+
+    ["wood/metal edge", "Hybrid"],
+
+    ["maple metal", "Hybrid"],
+
+    ["maple/metal", "Hybrid"],
+
+    ["top edge", "Hybrid"],
+
+    ["edge maple metal", "Hybrid"],
+
+    ["metal auxiliary shell", "Metal"],
+
+    ["metal/unknown shell", "Metal"],
+
+    ["seamed metal", "Metal"],
+
+    ["hammered metal", "Metal"],
+
+    ["bell brass", "Metal"],
+
+    ["cast bell brass", "Metal"],
+
+    ["black nickel over brass", "Metal"],
+
+    ["chrome over brass", "Metal"],
+
+    ["brass", "Metal"],
+
+    ["bronze", "Metal"],
+
+    ["copper", "Metal"],
+
+    ["aluminum", "Metal"],
+
+    ["aluminium", "Metal"],
+
+    ["steel", "Metal"],
+
+    ["stainless", "Metal"],
+
+    ["titanium", "Metal"],
+
+    ["iron", "Metal"],
+
+    ["seamless", "Metal"],
+
+    ["spun", "Metal"],
+
+    ["rolled", "Metal"],
+
+    ["cast metal", "Metal"],
+
+    ["metal shell", "Metal"],
+
+    ["acrylic", "Acrylic"],
+
+    ["plexiglass", "Acrylic"],
+
+    ["maple shell / limited", "Ply"],
+
+    ["maple shell", "Ply"],
+
+    ["wood shell", "Ply"],
+
+    ["piccolo thin depth rogers shell family", "Ply"],
+
+    ["marching field snare shell", "Ply"],
+
+    ["ltd custom dyna sonic shell family", "Ply"],
+
+    ["covington kit snare shell family", "Ply"],
+
+    ["ply shell", "Ply"],
+
+    ["ply", "Ply"],
+
+    ["plies", "Ply"],
+
+    ["laminated", "Ply"],
+
+    ["unknown special project shell", "Other / Needs Research"],
+
+    ["unknown artist reference", "Other / Needs Research"],
+
+    ["unknown likely metal or wood signature build", "Other / Needs Research"],
+
+  ];
+
+  const match = constructionMatches.find(([needle]) => {
+
+    return text.includes(normalizeSearchText(needle));
+
+  });
+
+  return match?.[1] || null;
+
+}
+
+function inferShellConstructionFromDocFields({
+
+  companyName,
+
+  lineSeries,
+
+  modelName,
+
+  shellConstruction,
+
+  material1,
+
+  material2,
+
+  material3,
+
+  plyCountLayup,
+
+  scoringBasis,
+
+  notesMissingData,
+
+  notesSummary,
+
+  primarySourceUrl,
+
+  secondarySourceUrl,
+
+}) {
+
+  const directConstruction = normalizeShellConstruction(shellConstruction);
+
+  if (directConstruction) return directConstruction;
+
+  const text = normalizeSearchText(
+
+    companyName,
+
+    lineSeries,
+
+    modelName,
+
+    shellConstruction,
+
+    material1,
+
+    material2,
+
+    material3,
+
+    plyCountLayup,
+
+    scoringBasis,
+
+    notesMissingData,
+
+    notesSummary,
+
+    primarySourceUrl,
+
+    secondarySourceUrl
+
+  );
+
+  if (!text) return null;
+
+  /**
+
+   * Specific known cleanup rules from current dry-run warnings.
+
+   */
+
+  if (text.includes("metalworks effect")) return "Metal";
+
+  if (text.includes("dw edge") || text.includes("dw top edge")) {
+
+    return "Hybrid";
+
+  }
+
+  if (text.includes("dw concrete")) return "Composite";
+
+  if (text.includes("pdp ace") || text.includes("pdp woody")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("pdp concept limited maple walnut")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("dw carbon fiber") || text.includes("carbon fiber")) {
+
+    return "Carbon Fiber";
+
+  }
+
+  if (text.includes("premier") && text.includes("resonator")) {
+
+    return "Ply / Resonator";
+
+  }
+
+  if (text.includes("brady") && text.includes("block shell")) {
+
+    return "Block";
+
+  }
+
+  if (text.includes("jarrah block") || text.includes("blackwood block")) {
+
+    return "Block";
+
+  }
+
+  if (text.includes("rogers") && text.includes("skinny drum")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("marching") && text.includes("maple poplar")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("ltd custom dyna sonic")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("covington kit snare")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("catalog era wood shell family")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("worldmax") && text.includes("wood snare")) {
+
+    return "Ply";
+
+  }
+
+  if (text.includes("joyful noise") && text.includes("personal reserve")) {
+
+    return "Steam Bent";
+
+  }
+
+  if (text.includes("canopus") && text.includes("unknown special project")) {
+
+    return "Other / Needs Research";
+
+  }
+
+  if (
+
+    text.includes("artist reference") ||
+
+    text.includes("endorser reference") ||
+
+    text.includes("exact model specs need manual confirmation")
+
+  ) {
+
+    return "Other / Needs Research";
+
+  }
+
+  if (text.includes("unknown likely metal or wood signature build")) {
+
+    return "Other / Needs Research";
+
+  }
+
+  /**
+
+   * General rules.
+
+   */
+
+  if (text.includes("steam bent") || text.includes("steambent")) {
+
+    return "Steam Bent";
+
+  }
+
+  if (text.includes("single ply") || text.includes("one ply")) {
+
+    return "Steam Bent";
+
+  }
+
+  if (text.includes("solid shell") || text.includes("one piece shell")) {
+
+    return "Solid Shell";
+
+  }
+
+  if (text.includes("block shell")) {
+
+    return "Block";
+
+  }
+
+  if (text.includes("stave")) {
+
+    return "Stave";
+
+  }
+
+  if (
+
+    text.includes("hybrid") &&
+
+    (text.includes("wood metal") ||
+
+      text.includes("wood/metal") ||
+
+      text.includes("wood and metal") ||
+
+      text.includes("feuzon") ||
+
+      text.includes("edge"))
+
+  ) {
+
+    return "Hybrid";
+
+  }
+
+  if (
+
+    text.includes("seamless") ||
+
+    text.includes("beaded") ||
+
+    text.includes("spun") ||
+
+    text.includes("rolled") ||
+
+    text.includes("cast metal") ||
+
+    text.includes("metal shell") ||
+
+    text.includes("metal auxiliary") ||
+
+    text.includes("seamed metal") ||
+
+    text.includes("hammered metal") ||
+
+    text.includes("bell brass") ||
+
+    text.includes("brass") ||
+
+    text.includes("bronze") ||
+
+    text.includes("copper") ||
+
+    text.includes("aluminum") ||
+
+    text.includes("aluminium") ||
+
+    text.includes("steel") ||
+
+    text.includes("titanium")
+
+  ) {
+
+    return "Metal";
+
+  }
+
+  if (text.includes("carbon fiber")) {
+
+    return "Carbon Fiber";
+
+  }
+
+  if (
+
+    text.includes("composite") ||
+
+    text.includes("concrete")
+
+  ) {
+
+    return "Composite";
+
+  }
+
+  if (text.includes("acrylic") || text.includes("plexiglass")) {
+
+    return "Acrylic";
+
+  }
+
+  if (
+
+    text.includes("ply") ||
+
+    text.includes("plies") ||
+
+    text.includes("laminated") ||
+
+    text.includes("wood shell") ||
+
+    text.includes("maple") ||
+
+    text.includes("birch") ||
+
+    text.includes("mahogany") ||
+
+    text.includes("poplar") ||
+
+    text.includes("walnut") ||
+
+    text.includes("oak") ||
+
+    text.includes("beech") ||
+
+    text.includes("bubinga") ||
+
+    text.includes("jarrah") ||
+
+    text.includes("blackwood") ||
+
+    text.includes("wood")
+
+  ) {
+
+    return "Ply";
+
+  }
+
+  return "Other / Needs Research";
+
+}
+
 function readSheetRows(filePath, preferredSheetNames = []) {
 
   if (!fs.existsSync(filePath)) {
@@ -290,6 +1092,18 @@ function readSheetRows(filePath, preferredSheetNames = []) {
 
 }
 
+function hasCompleteScores(oberScores = {}) {
+
+  return SCORE_KEYS.every((key) => {
+
+    const value = oberScores[key];
+
+    return value !== null && value !== undefined && Number.isFinite(Number(value));
+
+  });
+
+}
+
 function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
   const companyName = cleanString(getValue(row, "COMPANY NAME"));
@@ -300,7 +1114,7 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
   const modelName = cleanString(getValue(row, "MODEL NAME"));
 
-  const drumType = cleanString(getValue(row, "DRUM TYPE"));
+  const drumType = cleanString(getValue(row, "DRUM TYPE")) || "Snare";
 
   const diameter = toNumber(getValue(row, "DIAMETER"));
 
@@ -308,11 +1122,133 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
   const sizeKey = makeSizeKey(diameter, depth);
 
-  const material1 = cleanString(getValue(row, "SHELL MATERIAL 1"));
+  const rawShellConstruction = getValue(row, "SHELL CONSTRUCTION");
 
-  const material2 = cleanString(getValue(row, "SHELL MATERIAL 2"));
+  const rawMaterial1 = getValue(row, "SHELL MATERIAL 1");
 
-  const material3 = cleanString(getValue(row, "SHELL MATERIAL 3"));
+  const rawMaterial2 = getValue(row, "SHELL MATERIAL 2");
+
+  const rawMaterial3 = getValue(row, "SHELL MATERIAL 3");
+
+  const rawPlyCountLayup = getValue(row, "PLY COUNT / LAYUP");
+
+  const rawScoringBasis = getValue(row, "SCORING BASIS");
+
+  const rawNotesMissingData = getValue(row, "NOTES ON MISSING DATA");
+
+  const rawNotesSummary = getValue(row, "DRUM SUMMARY NOTES");
+
+  const rawPrimarySourceUrl = getValue(row, "PRIMARY SOURCE URL");
+
+  const rawSecondarySourceUrl = getValue(row, "SECONDARY SOURCE URL");
+
+  const material1 =
+
+    normalizeMaterial(rawMaterial1) ||
+
+    inferMaterialFromDocFields({
+
+      companyName,
+
+      lineSeries,
+
+      modelName,
+
+      shellConstruction: rawShellConstruction,
+
+      material1: rawMaterial1,
+
+      material2: rawMaterial2,
+
+      material3: rawMaterial3,
+
+      plyCountLayup: rawPlyCountLayup,
+
+      scoringBasis: rawScoringBasis,
+
+      notesMissingData: rawNotesMissingData,
+
+      notesSummary: rawNotesSummary,
+
+      primarySourceUrl: rawPrimarySourceUrl,
+
+      secondarySourceUrl: rawSecondarySourceUrl,
+
+    });
+
+  const material2 = normalizeMaterial(rawMaterial2);
+
+  const material3 = normalizeMaterial(rawMaterial3);
+
+  const shellConstruction = inferShellConstructionFromDocFields({
+
+    companyName,
+
+    lineSeries,
+
+    modelName,
+
+    shellConstruction: rawShellConstruction,
+
+    material1,
+
+    material2,
+
+    material3,
+
+    plyCountLayup: rawPlyCountLayup,
+
+    scoringBasis: rawScoringBasis,
+
+    notesMissingData: rawNotesMissingData,
+
+    notesSummary: rawNotesSummary,
+
+    primarySourceUrl: rawPrimarySourceUrl,
+
+    secondarySourceUrl: rawSecondarySourceUrl,
+
+  });
+
+  const oberScores = {
+
+    attack: toNumber(getValue(row, "OVERALL ATTACK OBER SCORE (1-10)")),
+
+    brightness: toNumber(
+
+      getValue(row, "OVERALL BRIGHTNESS OBER SCORE (1-10)")
+
+    ),
+
+    projection: toNumber(
+
+      getValue(row, "OVERALL PROJECTION OBER SCORE (1-10)")
+
+    ),
+
+    sustain: toNumber(getValue(row, "OVERALL SUSTAIN OBER SCORE (1-10)")),
+
+    warmth: toNumber(getValue(row, "OVERALL WARMTH OBER SCORE (1-10)")),
+
+    sensitivity: toNumber(
+
+      getValue(row, "OVERALL SENSITIVITY OBER SCORE (1-10)")
+
+    ),
+
+    control: toNumber(getValue(row, "OVERALL CONTROL OBER SCORE (1-10)")),
+
+    confidence: cleanString(getValue(row, "VOICE SCORE CONFIDENCE")),
+
+    scoringBasis: cleanString(rawScoringBasis),
+
+  };
+
+  const isPublicVisible =
+
+    hasCompleteScores(oberScores) && Boolean(material1) && Boolean(shellConstruction);
+
+  const needsReview = !isPublicVisible;
 
   const doc = {
 
@@ -334,7 +1270,7 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
     shell: {
 
-      construction: cleanString(getValue(row, "SHELL CONSTRUCTION")),
+      construction: shellConstruction,
 
       material1,
 
@@ -342,7 +1278,7 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
       material3,
 
-      plyCountLayup: cleanString(getValue(row, "PLY COUNT / LAYUP")),
+      plyCountLayup: cleanString(rawPlyCountLayup),
 
       thicknessMm: toNumber(getValue(row, "SHELL THICKNESS (in mm)")),
 
@@ -406,39 +1342,7 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
     },
 
-    oberScores: {
-
-      attack: toNumber(getValue(row, "OVERALL ATTACK OBER SCORE (1-10)")),
-
-      brightness: toNumber(
-
-        getValue(row, "OVERALL BRIGHTNESS OBER SCORE (1-10)")
-
-      ),
-
-      projection: toNumber(
-
-        getValue(row, "OVERALL PROJECTION OBER SCORE (1-10)")
-
-      ),
-
-      sustain: toNumber(getValue(row, "OVERALL SUSTAIN OBER SCORE (1-10)")),
-
-      warmth: toNumber(getValue(row, "OVERALL WARMTH OBER SCORE (1-10)")),
-
-      sensitivity: toNumber(
-
-        getValue(row, "OVERALL SENSITIVITY OBER SCORE (1-10)")
-
-      ),
-
-      control: toNumber(getValue(row, "OVERALL CONTROL OBER SCORE (1-10)")),
-
-      confidence: cleanString(getValue(row, "VOICE SCORE CONFIDENCE")),
-
-      scoringBasis: cleanString(getValue(row, "SCORING BASIS")),
-
-    },
+    oberScores,
 
     tuning: {
 
@@ -464,9 +1368,9 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
     sources: {
 
-      primarySourceUrl: cleanString(getValue(row, "PRIMARY SOURCE URL")),
+      primarySourceUrl: cleanString(rawPrimarySourceUrl),
 
-      secondarySourceUrl: cleanString(getValue(row, "SECONDARY SOURCE URL")),
+      secondarySourceUrl: cleanString(rawSecondarySourceUrl),
 
       sourceConfidence: cleanString(getValue(row, "SOURCE CONFIDENCE")),
 
@@ -476,9 +1380,19 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
     notes: {
 
-      missingData: cleanString(getValue(row, "NOTES ON MISSING DATA")),
+      missingData: cleanString(rawNotesMissingData),
 
-      summary: cleanString(getValue(row, "DRUM SUMMARY NOTES")),
+      summary: cleanString(rawNotesSummary),
+
+    },
+
+    public: {
+
+      isVisible: isPublicVisible,
+
+      needsReview,
+
+      hasCompleteScores: hasCompleteScores(oberScores),
 
     },
 
@@ -494,7 +1408,7 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
 
       materialKeys: [material1, material2, material3].filter(Boolean).map(toKey),
 
-      constructionKey: toKey(getValue(row, "SHELL CONSTRUCTION")),
+      constructionKey: toKey(shellConstruction),
 
       hoopKey: toKey(getValue(row, "HOOP/RIM TYPE")),
 
@@ -521,6 +1435,22 @@ function buildBaseDoc(row, importBatchId, sourceWorkbookType) {
   };
 
   return doc;
+
+}
+
+function inferScorchDepth(finishType, modelName) {
+
+  const text = `${finishType || ""} ${modelName || ""}`.toLowerCase();
+
+  if (text.includes("blackened")) return "Blackened";
+
+  if (text.includes("medium scorch")) return "Medium Scorch";
+
+  if (text.includes("light scorch")) return "Light Scorch";
+
+  if (text.includes("scorch")) return "Scorched";
+
+  return null;
 
 }
 
@@ -560,25 +1490,11 @@ function buildOberFields(doc) {
 
 }
 
-function inferScorchDepth(finishType, modelName) {
-
-  const text = `${finishType || ""} ${modelName || ""}`.toLowerCase();
-
-  if (text.includes("blackened")) return "Blackened";
-
-  if (text.includes("medium scorch")) return "Medium Scorch";
-
-  if (text.includes("light scorch")) return "Light Scorch";
-
-  if (text.includes("scorch")) return "Scorched";
-
-  return null;
-
-}
-
 function validateDoc(doc, rowIndex) {
 
   const issues = [];
+
+  const warnings = [];
 
   if (!doc.companyName) issues.push("Missing companyName");
 
@@ -590,31 +1506,11 @@ function validateDoc(doc, rowIndex) {
 
   if (doc.depth === null) issues.push("Missing depth");
 
-  const scores = doc.oberScores || {};
+  SCORE_KEYS.forEach((key) => {
 
-  const scoreKeys = [
+    const value = doc.oberScores?.[key];
 
-    "attack",
-
-    "brightness",
-
-    "projection",
-
-    "sustain",
-
-    "warmth",
-
-    "sensitivity",
-
-    "control",
-
-  ];
-
-  scoreKeys.forEach((key) => {
-
-    const value = scores[key];
-
-    if (value === null) {
+    if (value === null || value === undefined) {
 
       issues.push(`Missing score: ${key}`);
 
@@ -626,11 +1522,69 @@ function validateDoc(doc, rowIndex) {
 
   });
 
+  if (!doc.shell?.material1) {
+
+    warnings.push("Missing shellMaterial1");
+
+  }
+
+  if (!doc.shell?.construction) {
+
+    warnings.push("Missing shellConstruction");
+
+  }
+
+  if (
+
+    doc.shell?.construction &&
+
+    !VALID_SHELL_CONSTRUCTIONS.includes(doc.shell.construction)
+
+  ) {
+
+    warnings.push(`Non-standard shellConstruction: ${doc.shell.construction}`);
+
+  }
+
+  if (!doc.public?.isVisible) {
+
+    warnings.push("Public visibility disabled because required data is incomplete");
+
+  }
+
   return {
 
     rowIndex,
 
     issues,
+
+    warnings,
+
+    docPreview: {
+
+      companyName: doc.companyName,
+
+      lineSeries: doc.lineSeries,
+
+      modelName: doc.modelName,
+
+      sizeKey: doc.sizeKey,
+
+      shellConstruction: doc.shell?.construction,
+
+      shellMaterial1: doc.shell?.material1,
+
+      shellMaterial2: doc.shell?.material2,
+
+      shellMaterial3: doc.shell?.material3,
+
+      hasCompleteScores: doc.public?.hasCompleteScores,
+
+      isPublicVisible: doc.public?.isVisible,
+
+      needsReview: doc.public?.needsReview,
+
+    },
 
   };
 
@@ -704,7 +1658,17 @@ async function processWorkbook({
 
   const validationIssues = [];
 
+  const validationWarnings = [];
+
   const duplicateIds = new Map();
+
+  let missingMaterials = 0;
+
+  let missingConstruction = 0;
+
+  let publicVisible = 0;
+
+  let needsReview = 0;
 
   rows.forEach((row, index) => {
 
@@ -733,6 +1697,14 @@ async function processWorkbook({
       doc = buildOberFields(doc);
 
     }
+
+    if (!doc.shell?.material1) missingMaterials += 1;
+
+    if (!doc.shell?.construction) missingConstruction += 1;
+
+    if (doc.public?.isVisible) publicVisible += 1;
+
+    if (doc.public?.needsReview) needsReview += 1;
 
     const docId = makeDocId([
 
@@ -781,6 +1753,12 @@ async function processWorkbook({
     if (validation.issues.length) {
 
       validationIssues.push(validation);
+
+    }
+
+    if (validation.warnings.length) {
+
+      validationWarnings.push(validation);
 
     }
 
@@ -833,6 +1811,16 @@ async function processWorkbook({
     duplicateList,
 
     validationIssues,
+
+    validationWarnings,
+
+    missingMaterials,
+
+    missingConstruction,
+
+    publicVisible,
+
+    needsReview,
 
     sampleDocIds: docs.slice(0, 10).map((doc) => doc.docId),
 
@@ -926,41 +1914,37 @@ async function main() {
 
     totals: {
 
-      rowsRead:
+      rowsRead: masterReport.rowsRead + oberReport.rowsRead,
 
-        masterReport.rowsRead +
+      docsPrepared: masterReport.docsPrepared + oberReport.docsPrepared,
 
-        oberReport.rowsRead,
-
-      docsPrepared:
-
-        masterReport.docsPrepared +
-
-        oberReport.docsPrepared,
-
-      docsWritten:
-
-        masterReport.docsWritten +
-
-        oberReport.docsWritten,
+      docsWritten: masterReport.docsWritten + oberReport.docsWritten,
 
       validationIssues:
 
-        masterReport.validationIssues.length +
+        masterReport.validationIssues.length + oberReport.validationIssues.length,
 
-        oberReport.validationIssues.length,
+      validationWarnings:
 
-      duplicates:
+        masterReport.validationWarnings.length +
 
-        masterReport.duplicateList.length +
+        oberReport.validationWarnings.length,
 
-        oberReport.duplicateList.length,
+      missingMaterials:
 
-      skipped:
+        masterReport.missingMaterials + oberReport.missingMaterials,
 
-        masterReport.skipped.length +
+      missingConstruction:
 
-        oberReport.skipped.length,
+        masterReport.missingConstruction + oberReport.missingConstruction,
+
+      publicVisible: masterReport.publicVisible + oberReport.publicVisible,
+
+      needsReview: masterReport.needsReview + oberReport.needsReview,
+
+      duplicates: masterReport.duplicateList.length + oberReport.duplicateList.length,
+
+      skipped: masterReport.skipped.length + oberReport.skipped.length,
 
     },
 
@@ -999,6 +1983,16 @@ async function main() {
   console.log(`  Docs written: ${report.totals.docsWritten}`);
 
   console.log(`  Validation issue rows: ${report.totals.validationIssues}`);
+
+  console.log(`  Validation warning rows: ${report.totals.validationWarnings}`);
+
+  console.log(`  Missing materials: ${report.totals.missingMaterials}`);
+
+  console.log(`  Missing construction: ${report.totals.missingConstruction}`);
+
+  console.log(`  Public visible: ${report.totals.publicVisible}`);
+
+  console.log(`  Needs review: ${report.totals.needsReview}`);
 
   console.log(`  Duplicate doc IDs: ${report.totals.duplicates}`);
 

@@ -1,0 +1,469 @@
+.snare-reference-editor {
+
+  margin-top: 1rem;
+
+  border: 1px solid rgba(226, 232, 240, 0.14);
+
+  border-radius: 18px;
+
+  background:
+
+    linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(17, 24, 39, 0.94)),
+
+    rgba(15, 23, 42, 0.96);
+
+  color: #f8fafc;
+
+  overflow: hidden;
+
+}
+
+.snare-reference-editor__header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding: 1.15rem;
+
+  border-bottom: 1px solid rgba(226, 232, 240, 0.1);
+
+}
+
+.snare-reference-editor__header h4 {
+
+  margin: 0.15rem 0 0.35rem;
+
+  font-size: 1.05rem;
+
+  letter-spacing: -0.02em;
+
+}
+
+.snare-reference-editor__header span {
+
+  display: block;
+
+  max-width: 760px;
+
+  color: rgba(226, 232, 240, 0.72);
+
+  font-size: 0.86rem;
+
+  line-height: 1.45;
+
+}
+
+.snare-reference-editor__overline {
+
+  margin: 0;
+
+  color: rgba(148, 163, 184, 0.92);
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.16em;
+
+}
+
+.snare-reference-editor__actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.65rem;
+
+  flex-wrap: wrap;
+
+  justify-content: flex-end;
+
+}
+
+.snare-reference-editor__dirty {
+
+  border: 1px solid rgba(251, 191, 36, 0.34);
+
+  border-radius: 999px;
+
+  padding: 0.38rem 0.62rem;
+
+  color: #fbbf24 !important;
+
+  background: rgba(251, 191, 36, 0.1);
+
+  font-size: 0.72rem !important;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+
+}
+
+.snare-reference-editor__button {
+
+  border: 0;
+
+  border-radius: 999px;
+
+  padding: 0.68rem 0.92rem;
+
+  font-size: 0.76rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+
+  transition:
+
+    transform 140ms ease,
+
+    opacity 140ms ease,
+
+    background 140ms ease;
+
+}
+
+.snare-reference-editor__button:hover:not(:disabled) {
+
+  transform: translateY(-1px);
+
+}
+
+.snare-reference-editor__button:disabled {
+
+  cursor: not-allowed;
+
+  opacity: 0.48;
+
+}
+
+.snare-reference-editor__button.primary {
+
+  background: #f8fafc;
+
+  color: #0f172a;
+
+}
+
+.snare-reference-editor__button.secondary {
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #f8fafc;
+
+  border: 1px solid rgba(226, 232, 240, 0.16);
+
+}
+
+.snare-reference-editor__body {
+
+  padding: 1.15rem;
+
+}
+
+.snare-reference-editor__image-preview {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-bottom: 1.15rem;
+
+  padding: 0.85rem;
+
+  border: 1px solid rgba(226, 232, 240, 0.12);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+}
+
+.snare-reference-editor__image-preview img {
+
+  width: 96px;
+
+  height: 72px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+}
+
+.snare-reference-editor__image-preview strong {
+
+  display: block;
+
+  margin-bottom: 0.2rem;
+
+}
+
+.snare-reference-editor__image-preview span {
+
+  color: rgba(226, 232, 240, 0.7);
+
+  font-size: 0.84rem;
+
+}
+
+.snare-reference-editor__group {
+
+  margin-top: 1rem;
+
+  padding: 1rem;
+
+  border: 1px solid rgba(226, 232, 240, 0.1);
+
+  border-radius: 16px;
+
+  background: rgba(2, 6, 23, 0.34);
+
+}
+
+.snare-reference-editor__group-heading {
+
+  display: flex;
+
+  align-items: baseline;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 0.85rem;
+
+}
+
+.snare-reference-editor__group-heading h5 {
+
+  margin: 0;
+
+  font-size: 0.88rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.11em;
+
+}
+
+.snare-reference-editor__group-heading span {
+
+  color: rgba(226, 232, 240, 0.58);
+
+  font-size: 0.76rem;
+
+}
+
+.snare-reference-editor__grid,
+
+.snare-reference-editor__score-grid,
+
+.snare-reference-editor__textarea-grid {
+
+  display: grid;
+
+  gap: 0.8rem;
+
+}
+
+.snare-reference-editor__grid {
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+}
+
+.snare-reference-editor__score-grid {
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+}
+
+.snare-reference-editor__textarea-grid {
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+}
+
+.snare-reference-editor__field,
+
+.snare-reference-editor__score,
+
+.snare-reference-editor__textarea {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0.35rem;
+
+}
+
+.snare-reference-editor__field span,
+
+.snare-reference-editor__score span,
+
+.snare-reference-editor__textarea span {
+
+  color: rgba(226, 232, 240, 0.72);
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.08em;
+
+}
+
+.snare-reference-editor__field input,
+
+.snare-reference-editor__score input,
+
+.snare-reference-editor__textarea textarea {
+
+  width: 100%;
+
+  border: 1px solid rgba(226, 232, 240, 0.13);
+
+  border-radius: 12px;
+
+  background: rgba(15, 23, 42, 0.88);
+
+  color: #f8fafc;
+
+  font: inherit;
+
+  font-size: 0.86rem;
+
+  outline: none;
+
+}
+
+.snare-reference-editor__field input,
+
+.snare-reference-editor__score input {
+
+  min-height: 42px;
+
+  padding: 0 0.72rem;
+
+}
+
+.snare-reference-editor__textarea textarea {
+
+  resize: vertical;
+
+  min-height: 108px;
+
+  padding: 0.72rem;
+
+  line-height: 1.45;
+
+}
+
+.snare-reference-editor__field input:focus,
+
+.snare-reference-editor__score input:focus,
+
+.snare-reference-editor__textarea textarea:focus {
+
+  border-color: rgba(248, 250, 252, 0.42);
+
+  box-shadow: 0 0 0 3px rgba(248, 250, 252, 0.08);
+
+}
+
+.snare-reference-editor__footer {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 0.75rem;
+
+  margin-top: 1.15rem;
+
+  padding-top: 1rem;
+
+  border-top: 1px solid rgba(226, 232, 240, 0.1);
+
+}
+
+@media (max-width: 1100px) {
+
+  .snare-reference-editor__grid {
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  }
+
+  .snare-reference-editor__score-grid {
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  }
+
+}
+
+@media (max-width: 760px) {
+
+  .snare-reference-editor__header {
+
+    flex-direction: column;
+
+  }
+
+  .snare-reference-editor__actions,
+
+  .snare-reference-editor__footer {
+
+    width: 100%;
+
+    justify-content: stretch;
+
+  }
+
+  .snare-reference-editor__button {
+
+    flex: 1;
+
+  }
+
+  .snare-reference-editor__grid,
+
+  .snare-reference-editor__score-grid,
+
+  .snare-reference-editor__textarea-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .snare-reference-editor__image-preview {
+
+    align-items: flex-start;
+
+  }
+
+}

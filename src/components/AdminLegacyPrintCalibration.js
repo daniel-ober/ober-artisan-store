@@ -4,6 +4,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import BarChart from './BarChart';
 
+import SnareReferenceResourceManager from './SnareReferenceResourceManager';
+
+import './SnareReferenceResourceManager.css';
+
 // SpiderChart temporarily disabled here because its animation/axis-position
 
 // effect is causing a maximum update depth loop inside AdminLegacyPrintCalibration.
@@ -15,19 +19,34 @@ import AdminLegacyPrintSelector from './AdminLegacyPrintSelector';
 import LegacyPrintAdminSlider from './LegacyPrintAdminSlider';
 
 import {
+
   collection,
+
   doc,
+
   getDoc,
+
   getDocs,
+
   orderBy,
+
   query,
+
   serverTimestamp,
+
   setDoc,
+
+  updateDoc,
+
   startAfter,
+
   limit,
+
 } from 'firebase/firestore';
 
 import { db } from '../firebaseConfig';
+
+import SnareReferenceEditor from './SnareReferenceEditor';
 
 import {
   LEGACYPRINT_NODE_LABELS,
@@ -60,13 +79,17 @@ const LEGACYPRINT_ACTIVE_DOC_ID = 'active';
 const LEGACYPRINT_DRAFT_DOC_ID = 'draft';
 
 const LEGACYPRINT_TABS = [
+
   'Overview',
 
   'Engine Builder',
 
   'Calibration Tools',
 
+  'Engine Resources',
+
   'Engine View Settings',
+
 ];
 
 const LEGACYPRINT_CALIBRATION_TOOL_TABS = [
@@ -6805,49 +6828,29 @@ const getReferenceScore = (drum = {}, node) => {
 };
 
 const getReferenceDrumMaterial = (drum = {}) => {
-
   const directMaterial =
-
     drum.shellMaterial1 ||
-
     drum.shellMaterial2 ||
-
     drum.primaryShellMaterial ||
-
     drum.shellMaterial ||
-
     drum.material ||
-
     drum.shell_material ||
-
     drum.shell_material_1 ||
-
     drum.normalizedShellMaterial ||
-
     drum.normalizedMaterial ||
-
     drum.shellMaterialDescription ||
-
     drum.shellConstructionMaterial ||
-
     drum.wood ||
-
     drum.shellWood ||
-
     drum.alloy ||
-
     drum.metal ||
-
     '';
 
   if (directMaterial) {
-
     return directMaterial;
-
   }
 
   const searchableText = [
-
     drum.modelName,
 
     drum.lineSeries,
@@ -6865,7 +6868,6 @@ const getReferenceDrumMaterial = (drum = {}) => {
     drum.importMeta?.description,
 
     drum.importMeta?.notes,
-
   ]
 
     .filter(Boolean)
@@ -6875,7 +6877,6 @@ const getReferenceDrumMaterial = (drum = {}) => {
     .toLowerCase();
 
   const materialMatches = [
-
     ['black nickel over brass', 'Black Nickel over Brass'],
 
     ['chrome over brass', 'Chrome over Brass'],
@@ -6921,17 +6922,13 @@ const getReferenceDrumMaterial = (drum = {}) => {
     ['solid shell', 'Solid Shell'],
 
     ['ply', 'Ply Shell'],
-
   ];
 
   const match = materialMatches.find(([needle]) =>
-
     searchableText.includes(needle)
-
   );
 
   return match?.[1] || '';
-
 };
 
 const getReferenceDrumThickness = (drum = {}) => {
@@ -7871,6 +7868,8 @@ const AdminLegacyPrintCalibration = () => {
   const [isLoadingReferenceDrums, setIsLoadingReferenceDrums] = useState(false);
 
   const [selectedReferenceDrumId, setSelectedReferenceDrumId] = useState('');
+
+const [isSavingReferenceDrum, setIsSavingReferenceDrum] = useState(false);
 
   const selectedReferenceDrum = useMemo(() => {
     return (
@@ -9624,6 +9623,76 @@ const AdminLegacyPrintCalibration = () => {
     return makerData[selectedNonOberDrumType] || [];
   };
 
+  const handleSaveReferenceDrum = async (updatedFields = {}) => {
+
+  if (!selectedReferenceDrumId) {
+
+    window.alert('Select a snare reference drum first.');
+
+    return;
+
+  }
+
+  setIsSavingReferenceDrum(true);
+
+  try {
+
+    const referenceDrumRef = doc(
+
+      db,
+
+      SNARE_REFERENCE_DRUMS_COLLECTION,
+
+      selectedReferenceDrumId
+
+    );
+
+    const cleanPayload = {
+
+      ...updatedFields,
+
+      updatedAt: serverTimestamp(),
+
+    };
+
+    await updateDoc(referenceDrumRef, cleanPayload);
+
+    setReferenceDrums((current) =>
+
+      current.map((drum) =>
+
+        drum.id === selectedReferenceDrumId
+
+          ? {
+
+              ...drum,
+
+              ...updatedFields,
+
+            }
+
+          : drum
+
+      )
+
+    );
+
+    window.alert('Snare reference drum saved.');
+
+  } catch (error) {
+
+    console.error('Failed saving snare reference drum:', error);
+
+    window.alert('Failed saving snare reference drum. Check console.');
+
+  } finally {
+
+    setIsSavingReferenceDrum(false);
+
+  }
+
+};
+
   const renderNonOberReferenceBuilder = () => {
     const companyOptions = Array.from(
       new Set(referenceDrums.map((drum) => drum.companyName).filter(Boolean))
@@ -9829,13 +9898,12 @@ const AdminLegacyPrintCalibration = () => {
               >
                 <strong>{drum.modelName || 'Unnamed Reference Snare'}</strong>
 
-<span>
-
-  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
-
-  {getReferenceDrumMaterial(drum) || drum.lineSeries || 'Unknown material'}
-
-</span>
+                <span>
+                  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
+                  {getReferenceDrumMaterial(drum) ||
+                    drum.lineSeries ||
+                    'Unknown material'}
+                </span>
               </button>
             ))}
           </div>
@@ -9851,17 +9919,41 @@ const AdminLegacyPrintCalibration = () => {
           )}
         </div>
 
-        {selectedReferenceDrum && (
-          <div className="legacyprint-admin-note">
-            <strong>Selected Firestore reference</strong>
+     {selectedReferenceDrum && (
 
-            <span>
-              {selectedReferenceDrum.companyName} /{' '}
-              {selectedReferenceDrum.lineSeries} /{' '}
-              {selectedReferenceDrum.modelName}
-            </span>
-          </div>
-        )}
+  <>
+
+    <div className="legacyprint-admin-note">
+
+      <strong>Selected Firestore reference</strong>
+
+      <span>
+
+        {selectedReferenceDrum.companyName} /{' '}
+
+        {selectedReferenceDrum.lineSeries} /{' '}
+
+        {selectedReferenceDrum.modelName}
+
+      </span>
+
+    </div>
+
+    <SnareReferenceEditor
+
+      drum={selectedReferenceDrum}
+
+      isSaving={isSavingReferenceDrum}
+
+      onSave={handleSaveReferenceDrum}
+
+    />
+
+  </>
+
+)}
+
+
       </div>
     );
   };
@@ -11939,6 +12031,32 @@ const AdminLegacyPrintCalibration = () => {
               )}
             </div>
           </section>
+        )}
+
+                {activeTab === 'Engine Resources' && (
+
+          <section className="legacyprint-admin-section">
+
+            <SnareReferenceResourceManager
+
+              referenceDrums={referenceDrums}
+
+              isLoading={isLoadingReferenceDrums}
+
+              selectedReferenceDrumId={selectedReferenceDrumId}
+
+              onSelectReferenceDrum={setSelectedReferenceDrumId}
+
+              selectedReferenceDrum={selectedReferenceDrum}
+
+              isSavingReferenceDrum={isSavingReferenceDrum}
+
+              onSaveReferenceDrum={handleSaveReferenceDrum}
+
+            />
+
+          </section>
+
         )}
 
         {activeTab === 'Engine View Settings' && (

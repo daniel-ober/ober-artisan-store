@@ -1,0 +1,605 @@
+{
+  "mode": "dry-run",
+  "importBatchId": "snare-import-2026-05-17T02-56-27-260Z",
+  "generatedAt": "2026-05-17T02:56:30.890Z",
+  "files": {
+    "allManufacturers": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "oberArtisan": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx"
+  },
+  "collections": {
+    "allManufacturers": "snareReferenceDrums",
+    "oberArtisan": "oberArtisanSnareVariants"
+  },
+  "totals": {
+    "rowsRead": 7790,
+    "docsPrepared": 7790,
+    "docsWritten": 0,
+    "validationIssueRows": 0,
+    "validationWarningRows": 14,
+    "duplicates": 0,
+    "skipped": 0,
+    "missingMaterials": 0,
+    "missingConstruction": 14,
+    "publicVisible": 7790,
+    "needsReview": 14
+  },
+  "masterReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_ALL_MANUFACTURERS.xlsx",
+    "sheetName": "Combined Master Dataset",
+    "availableSheets": [
+      "README + Checklist",
+      "Combined Master Dataset",
+      "Coverage Summary",
+      "Source Log",
+      "Rubric",
+      "Validation Lists",
+      "Ludwig",
+      "Tama",
+      "Pearl",
+      "Yamaha",
+      "DW   PDP",
+      "Sonor",
+      "Gretsch",
+      "Mapex",
+      "Canopus",
+      "Noble & Cooley",
+      "Craviotto",
+      "Slingerland",
+      "Rogers",
+      "Premier",
+      "Brady",
+      "Dunnett",
+      "Pork Pie",
+      "Ahead",
+      "WorldMax   OEM",
+      "Boutique Builders"
+    ],
+    "collectionName": "snareReferenceDrums",
+    "sourceWorkbookType": "all_manufacturers",
+    "rowsRead": 1538,
+    "docsPrepared": 1538,
+    "docsWritten": 0,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "validationWarnings": [
+      {
+        "rowIndex": 554,
+        "docPreview": {
+          "companyName": "DW / PDP",
+          "lineSeries": "DW Historical / Discontinued",
+          "modelName": "DW Carbon Fiber 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Carbon Fiber",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 868,
+        "docPreview": {
+          "companyName": "Canopus",
+          "lineSeries": "Others",
+          "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+          "sizeKey": "14x4",
+          "shellConstruction": null,
+          "shellMaterial1": "12Top / 6Bottom Lugs Piccolo Snare Drum Others Unknown / special project shell Unknown Catalog incomplete Shell-first score based on 14x4 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction. Unknown bearing edge/snare bed unless noted. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction.",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 869,
+        "docPreview": {
+          "companyName": "Canopus",
+          "lineSeries": "R.O.F PROJECT",
+          "modelName": "R.O.F Project Snare Drum",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "R.O.F Project Snare Drum R.O.F PROJECT Unknown / special project shell Unknown Catalog incomplete Shell-first score based on 14x6.5 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction. Unknown bearing edge/snare bed unless noted. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction.",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 931,
+        "docPreview": {
+          "companyName": "Noble & Cooley",
+          "lineSeries": "Artist / Endorser Reference",
+          "modelName": "Malcolm Travis Reference Snare",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Malcolm Travis Reference Snare Artist / Endorser Reference Unknown / artist reference Unknown Catalog incomplete Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified. Artist page confirms Noble & Cooley association, but exact model/specs need manual confirmation.",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 932,
+        "docPreview": {
+          "companyName": "Noble & Cooley",
+          "lineSeries": "Artist / Endorser Reference",
+          "modelName": "Craig Pilo Reference Snare",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Craig Pilo Reference Snare Artist / Endorser Reference Unknown / artist reference Unknown Catalog incomplete Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified. Artist page confirms Noble & Cooley association, but exact model/specs need manual confirmation.",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1085,
+        "docPreview": {
+          "companyName": "Rogers",
+          "lineSeries": "Skinny Drum",
+          "modelName": "Skinny Drum 14x3.5",
+          "sizeKey": "14x3-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Skinny Drum 14x3.5 Skinny Drum Piccolo/thin depth Rogers shell family Unknown Catalog incomplete Shallow Rogers Skinny Drum row; score emphasizes piccolo attack/brightness but low confidence. Shell material and construction need catalog extraction.",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1111,
+        "docPreview": {
+          "companyName": "Rogers",
+          "lineSeries": "Catalog 1970",
+          "modelName": "Rogers 1970 Skinny Drum 14x3.5",
+          "sizeKey": "14x3-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Rogers 1970 Skinny Drum 14x3.5 Catalog 1970 Catalog-era wood shell family Catalog-era family Catalog incomplete Catalog-era Rogers Skinny Drum 14x3.5; included for completeness and later validation. Placeholder retained from catalog map; exact row needs page-level extraction.",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1138,
+        "docPreview": {
+          "companyName": "Premier",
+          "lineSeries": "Resonator",
+          "modelName": "Kenny Clare Resonator 14x5.5 Snare",
+          "sizeKey": "14x5-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Wood",
+          "shellMaterial2": "Inner resonator shell",
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1176,
+        "docPreview": {
+          "companyName": "Premier",
+          "lineSeries": "Signature / Artist",
+          "modelName": "Kenny Clare Resonator Signature 14x5.5 Snare",
+          "sizeKey": "14x5-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Wood",
+          "shellMaterial2": "Inner resonator shell",
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1180,
+        "docPreview": {
+          "companyName": "Brady Drum Company",
+          "lineSeries": "Handmade Exotic Australian Hardwood",
+          "modelName": "Jarrah Block shell 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Jarrah",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1182,
+        "docPreview": {
+          "companyName": "Brady Drum Company",
+          "lineSeries": "Handmade Exotic Australian Hardwood",
+          "modelName": "Tasmanian Blackwood Block shell 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Tasmanian Blackwood",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1468,
+        "docPreview": {
+          "companyName": "WorldMax",
+          "lineSeries": "Wood Snare Drums",
+          "modelName": "WorldMax Wood Snare Representative",
+          "sizeKey": "14x5-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Wood",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1469,
+        "docPreview": {
+          "companyName": "WorldMax",
+          "lineSeries": "Wood Snare Drums",
+          "modelName": "WorldMax Wood Snare Representative",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Wood",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      },
+      {
+        "rowIndex": 1502,
+        "docPreview": {
+          "companyName": "Joyful Noise Drum Company",
+          "lineSeries": "Custom / Reserve",
+          "modelName": "Personal Reserve Exotic Wood 14x6.5",
+          "sizeKey": "14x6-5",
+          "shellConstruction": null,
+          "shellMaterial1": "Exotic hardwood",
+          "shellMaterial2": null,
+          "shellMaterial3": null,
+          "hasCompleteScores": true
+        },
+        "issues": [],
+        "warnings": [
+          "Missing shellConstruction"
+        ]
+      }
+    ],
+    "cleanupCounts": {
+      "missingMaterials": 0,
+      "missingConstruction": 14,
+      "publicVisible": 1538,
+      "needsReview": 14
+    },
+    "constructionCounts": {
+      "Metal": 489,
+      "Ply": 720,
+      "Acrylic": 22,
+      "Hybrid": 78,
+      "Solid Shell": 30,
+      "Stave": 74,
+      "Missing": 14,
+      "Steam Bent": 111
+    },
+    "materialCounts": {
+      "Aluminum": 71,
+      "Brass": 166,
+      "Bronze": 33,
+      "Copper": 31,
+      "Mahogany": 68,
+      "Beech": 32,
+      "Cherry": 36,
+      "Walnut": 69,
+      "Maple": 376,
+      "Maple / Poplar": 73,
+      "Mahogany / Poplar": 8,
+      "Steel": 131,
+      "Acrylic": 25,
+      "Poplar": 11,
+      "Walnut / Birch": 3,
+      "Spruce": 2,
+      "Bubinga": 13,
+      "Bell Brass": 20,
+      "Birch": 110,
+      "Rosewood": 5,
+      "Cordia": 2,
+      "Ash": 13,
+      "Kapoor": 3,
+      "Phenolic": 1,
+      "Lauan": 1,
+      "Oak": 33,
+      "Kapur": 2,
+      "Purpleheart": 7,
+      "Stainless Steel": 12,
+      "Titanium": 12,
+      "Concrete composite": 1,
+      "Bamboo": 4,
+      "Carbon Fiber": 1,
+      "Cast Bronze": 2,
+      "Maple / Walnut": 13,
+      "Maple / Mahogany": 1,
+      "Zelkova": 3,
+      "Stabilized Wood": 2,
+      "12Top / 6Bottom Lugs Piccolo Snare Drum Others Unknown / special project shell Unknown Catalog incomplete Shell-first score based on 14x4 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction. Unknown bearing edge/snare bed unless noted. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction.": 1,
+      "R.O.F Project Snare Drum R.O.F PROJECT Unknown / special project shell Unknown Catalog incomplete Shell-first score based on 14x6.5 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction. Unknown bearing edge/snare bed unless noted. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction.": 1,
+      "Mappa Burl": 1,
+      "Malcolm Travis Reference Snare Artist / Endorser Reference Unknown / artist reference Unknown Catalog incomplete Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified. Artist page confirms Noble & Cooley association, but exact model/specs need manual confirmation.": 1,
+      "Craig Pilo Reference Snare Artist / Endorser Reference Unknown / artist reference Unknown Catalog incomplete Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified. Artist page confirms Noble & Cooley association, but exact model/specs need manual confirmation.": 1,
+      "Sycamore": 2,
+      "Chrome over Brass": 10,
+      "Wood": 10,
+      "Skinny Drum 14x3.5 Skinny Drum Piccolo/thin depth Rogers shell family Unknown Catalog incomplete Shallow Rogers Skinny Drum row; score emphasizes piccolo attack/brightness but low confidence. Shell material and construction need catalog extraction.": 1,
+      "Rogers 1970 Skinny Drum 14x3.5 Catalog 1970 Catalog-era wood shell family Catalog-era family Catalog incomplete Catalog-era Rogers Skinny Drum 14x3.5; included for completeness and later validation. Placeholder retained from catalog map; exact row needs page-level extraction.": 1,
+      "Unknown metal": 2,
+      "Unknown wood": 4,
+      "Nicko McBrain Aces High 14x5.5 Snare Signature / Artist Unknown / likely metal or wood signature build Unknown Catalog incomplete Artist/signature row seen in listings; exact shell specs not confirmed. Exact shell specs need source validation.": 1,
+      "Jarrah": 20,
+      "Marri": 16,
+      "Tasmanian Blackwood": 8,
+      "Wandoo": 16,
+      "Gum": 23,
+      "Sassafras": 7,
+      "Rose Gum": 7,
+      "Magnesium": 3,
+      "Exotic hardwood": 3,
+      "Hammered Brass": 1,
+      "Luan": 1,
+      "Padauk": 1
+    },
+    "sampleDocIds": [
+      "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_lm4_e84db957",
+      "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_lm400t_7e997602",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-_ffed443e",
+      "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0m_14ab2455",
+      "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_49082870",
+      "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_lm4_891b2779",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-fla_96657d69",
+      "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-_f50fce40",
+      "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_triple-flange-3-0mm_lb405_2c9ff06f",
+      "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flange-3-0mm_lb416_65e7720e"
+    ],
+    "sampleDocs": [
+      {
+        "docId": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_lm4_e84db957",
+        "companyName": "Ludwig",
+        "lineSeries": "Supraphonic",
+        "modelName": "Supraphonic 5x14 Imperial lugs",
+        "sizeKey": "14x5",
+        "shellConstruction": "Metal",
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_lm400t_7e997602",
+        "companyName": "Ludwig",
+        "lineSeries": "Supraphonic",
+        "modelName": "Supraphonic 5x14 Tube lugs",
+        "sizeKey": "14x5",
+        "shellConstruction": "Metal",
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-_ffed443e",
+        "companyName": "Ludwig",
+        "lineSeries": "Supraphonic",
+        "modelName": "Supraphonic 5x14 Hammered Imperial lugs",
+        "sizeKey": "14x5",
+        "shellConstruction": "Metal",
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0m_14ab2455",
+        "companyName": "Ludwig",
+        "lineSeries": "Supraphonic",
+        "modelName": "Supraphonic 5x14 Hammered Tube lugs",
+        "sizeKey": "14x5",
+        "shellConstruction": "Metal",
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flange-3-0mm_49082870",
+        "companyName": "Ludwig",
+        "lineSeries": "Supraphonic",
+        "modelName": "Supraphonic 6.5x14 Imperial lugs",
+        "sizeKey": "14x6-5",
+        "shellConstruction": "Metal",
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      }
+    ]
+  },
+  "oberReport": {
+    "filePath": "/Users/danober/Desktop/batch data/Ober_LegacyPrint_Master_Snare_Reference_Dataset_OBER_ARTISAN.xlsx",
+    "sheetName": "Ober Artisan Dataset",
+    "availableSheets": [
+      "Ober Artisan Dataset",
+      "Coverage Summary",
+      "Variant Inputs",
+      "Rubric",
+      "Source Log",
+      "Validation Lists"
+    ],
+    "collectionName": "oberArtisanSnareVariants",
+    "sourceWorkbookType": "ober_artisan",
+    "rowsRead": 6252,
+    "docsPrepared": 6252,
+    "docsWritten": 0,
+    "skipped": [],
+    "duplicateList": [],
+    "validationIssues": [],
+    "validationWarnings": [],
+    "cleanupCounts": {
+      "missingMaterials": 0,
+      "missingConstruction": 0,
+      "publicVisible": 6252,
+      "needsReview": 0
+    },
+    "constructionCounts": {
+      "Stave": 108,
+      "Hybrid": 6144
+    },
+    "materialCounts": {
+      "Northern Red Oak": 108,
+      "Maple": 4608,
+      "Walnut": 1536
+    },
+    "sampleDocIds": [
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-triple-flange_12x5_stave_northern-red-oak__918bb6ff",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-die-cast_12x5_stave_northern-red-oak_45-in_884ea4bd",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-triple-flange_12x5_stave_northern-red-oak_cfcbf71a",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-die-cast_12x5_stave_northern-red-oak_45-i_483a1df3",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-triple-flange_12x5_stave_northern-red-oak_45-_1bf285a8",
+      "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-die-cast_12x5_stave_northern-red-oak_45-inner_a2376c92",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-triple-flange_12x5-5_stave_northern-red-_9c17b9e6",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-light-scorch-die-cast_12x5-5_stave_northern-red-oak_4_66992a3f",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-triple-flange_12x5-5_stave_northern-red_c38840d5",
+      "ober-artisan-drums_heritage_heritage-12x5-5-northern-red-oak-stave-medium-scorch-die-cast_12x5-5_stave_northern-red-oak__f19d7cf1"
+    ],
+    "sampleDocs": [
+      {
+        "docId": "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-triple-flange_12x5_stave_northern-red-oak__918bb6ff",
+        "companyName": "Ober Artisan Drums",
+        "lineSeries": "HERITAGE",
+        "modelName": "HERITAGE 12x5 Northern Red Oak Stave — Light Scorch — Triple-flange",
+        "sizeKey": "12x5",
+        "shellConstruction": "Stave",
+        "shellMaterial1": "Northern Red Oak",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-light-scorch-die-cast_12x5_stave_northern-red-oak_45-in_884ea4bd",
+        "companyName": "Ober Artisan Drums",
+        "lineSeries": "HERITAGE",
+        "modelName": "HERITAGE 12x5 Northern Red Oak Stave — Light Scorch — Die-cast",
+        "sizeKey": "12x5",
+        "shellConstruction": "Stave",
+        "shellMaterial1": "Northern Red Oak",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-triple-flange_12x5_stave_northern-red-oak_cfcbf71a",
+        "companyName": "Ober Artisan Drums",
+        "lineSeries": "HERITAGE",
+        "modelName": "HERITAGE 12x5 Northern Red Oak Stave — Medium Scorch — Triple-flange",
+        "sizeKey": "12x5",
+        "shellConstruction": "Stave",
+        "shellMaterial1": "Northern Red Oak",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-medium-scorch-die-cast_12x5_stave_northern-red-oak_45-i_483a1df3",
+        "companyName": "Ober Artisan Drums",
+        "lineSeries": "HERITAGE",
+        "modelName": "HERITAGE 12x5 Northern Red Oak Stave — Medium Scorch — Die-cast",
+        "sizeKey": "12x5",
+        "shellConstruction": "Stave",
+        "shellMaterial1": "Northern Red Oak",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      },
+      {
+        "docId": "ober-artisan-drums_heritage_heritage-12x5-northern-red-oak-stave-blackened-triple-flange_12x5_stave_northern-red-oak_45-_1bf285a8",
+        "companyName": "Ober Artisan Drums",
+        "lineSeries": "HERITAGE",
+        "modelName": "HERITAGE 12x5 Northern Red Oak Stave — Blackened — Triple-flange",
+        "sizeKey": "12x5",
+        "shellConstruction": "Stave",
+        "shellMaterial1": "Northern Red Oak",
+        "shellMaterial2": null,
+        "shellMaterial3": null,
+        "hasCompleteScores": true,
+        "publicVisible": true,
+        "needsReview": false
+      }
+    ]
+  }
+}
