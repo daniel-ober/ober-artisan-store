@@ -1,909 +1,900 @@
-
 {
-
   "companyName": "Tama",
-
   "lineSeries": "Signature",
-
   "patchName": "tama-signature-missing-models-add-pass-1",
-
   "researchStatus": "draft",
-
   "doNotApplyAutomatically": true,
-
   "notes": "Adds missing Tama Signature / Signature Palette snare models that are not currently present in snareReferenceDrums. Do not run through applySnarePatch unless the patch tool supports record creation. This is a source-backed add batch / staging file.",
-
   "missingModelsToAdd": [
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Bill Bruford BB1055 Signature 10x5.5",
-
       "modelNumber": "BB1055",
-
       "drumType": "Snare",
-
       "diameter": 10,
-
       "depth": 5.5,
-
       "shell": {
-
         "construction": "Ply",
-
         "material1": "Maple",
-
         "material2": "Birch",
-
         "material3": "Maple",
-
         "thicknessMm": 6,
-
         "plyCountLayup": "6-ply maple/birch/maple",
-
         "reinforcementRings": false,
-
         "bearingEdge": "unknown",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "triple-flange / Mighty Hoop"
-
       },
-
       "hardware": {
-
         "lugCount": 6,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
-
         "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama Signature Palette catalog source supports BB1055 as a Bill Bruford Signature model with maple/birch/maple shell family and 10x5.5 size. Exact bearing edge, snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Bill Bruford BB146 Signature 14x6",
-
       "modelNumber": "BB146",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 6,
-
       "shell": {
-
         "construction": "Ply",
-
         "material1": "Maple",
-
         "material2": "Birch",
-
         "material3": "Maple",
-
         "thicknessMm": 6,
-
         "plyCountLayup": "6-ply maple/birch/maple",
-
         "reinforcementRings": false,
-
         "bearingEdge": "unknown",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "triple-flange / Mighty Hoop"
-
       },
-
       "hardware": {
-
         "lugCount": 10,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
-
         "secondarySourceUrl": "https://www.tama.com/eu/artists/detail/128.html"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama artist/spec references support BB146 as Bill Bruford Signature 14x6. Catalog/Sweetwater support maple/birch/maple shell family and flanged-hoop orientation. Exact bearing edge, snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Simon Phillips SP125 The Pageant 12x5",
-
       "modelNumber": "SP125",
-
       "drumType": "Snare",
-
       "diameter": 12,
-
       "depth": 5,
-
       "shell": {
-
         "construction": "Ply",
-
         "material1": "Maple",
-
         "material2": "Quilted Maple",
-
         "material3": "",
-
         "thicknessMm": 5,
-
         "plyCountLayup": "quilted maple shell",
-
         "reinforcementRings": false,
-
         "bearingEdge": "unknown",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 6,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
-
         "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama Signature Palette catalog source supports SP125 as Simon Phillips The Pageant 12x5 with quilted maple shell family. Exact bearing edge, snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Mike Portnoy Melody Master MP125ST 12x5",
-
       "modelNumber": "MP125ST",
-
       "drumType": "Snare",
-
       "diameter": 12,
-
       "depth": 5,
-
       "shell": {
-
         "construction": "Metal",
-
         "material1": "Steel",
-
         "material2": "",
-
         "material3": "",
-
         "thicknessMm": 1,
-
         "plyCountLayup": "1mm hammered steel",
-
         "reinforcementRings": false,
-
         "bearingEdge": "metal shell folded bearing edge",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 6,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
-
         "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama Signature Palette catalog source supports the Mike Portnoy 12x5 hammered steel Melody Master family. Exact snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Mike Portnoy Melody Master MP1455ST 14x5.5",
-
       "modelNumber": "MP1455ST",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 5.5,
-
       "shell": {
-
         "construction": "Metal",
-
         "material1": "Steel",
-
         "material2": "",
-
         "material3": "",
-
         "thicknessMm": 1,
-
         "plyCountLayup": "1mm hammered steel",
-
         "reinforcementRings": false,
-
         "bearingEdge": "metal shell folded bearing edge",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 8,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
-
         "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama Signature source supports MP1455ST as Mike Portnoy 14x5.5 hammered steel Melody Master family. Exact snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Mike Portnoy Melody Master MP1455BU 14x5.5",
-
       "modelNumber": "MP1455BU",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 5.5,
-
       "shell": {
-
         "construction": "Ply",
-
         "material1": "Bubinga",
-
         "material2": "",
-
         "material3": "",
-
         "thicknessMm": 8,
-
         "plyCountLayup": "9-ply bubinga",
-
         "reinforcementRings": false,
-
         "bearingEdge": "unknown",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 8,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
-
         "secondarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100451.html"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama current Signature family and MP1455BUN official news support the Portnoy bubinga Signature family. Exact MP1455BU hardware details should be confirmed separately before filling throw-off/wires."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Mike Portnoy Dream Monster MP1455BUN 14x5.5",
-
       "modelNumber": "MP1455BUN",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 5.5,
-
       "shell": {
-
         "construction": "Ply",
-
         "material1": "Bubinga",
-
         "material2": "",
-
         "material3": "",
-
         "thicknessMm": 8,
-
         "plyCountLayup": "9-ply bubinga",
-
         "reinforcementRings": false,
-
         "bearingEdge": "unknown",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops, 8-hole"
-
       },
-
       "hardware": {
-
         "lugCount": 8,
-
         "lugType": "MSL-SCT",
-
         "snareThrowMakeAndModel": "MCS100A/MCS70B",
-
         "stockSnareWires": "MS20SN14S",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100451.html",
-
         "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
-
       },
-
       "notes": {
-
         "scoringBasis": "Official Tama MP1455BUN news confirms 14x5.5 size, 8mm 9-ply bubinga shell, MSL-SCT lugs, 8-hole die-cast hoops, MCS100A/MCS70B strainer/butt, and MS20SN14S wires. Exact bearing edge, snare bed, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
-
       "modelNumber": "LU1465BB",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 6.5,
-
       "shell": {
-
         "construction": "Cast metal",
-
         "material1": "Bell Brass",
-
         "material2": "Bronze",
-
         "material3": "",
-
         "thicknessMm": 3,
-
         "plyCountLayup": "3mm bell brass",
-
         "reinforcementRings": false,
-
         "bearingEdge": "machined metal bearing edge",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 10,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
-
         "secondarySourceUrl": "https://reverb.com/p/tama-lu1465bb-lars-ulrich-signature-bell-brass-6-dot-5x14-snare-drum"
-
       },
-
       "notes": {
-
         "scoringBasis": "Tama Signature Palette catalog and secondary market references support LU1465BB as Lars Ulrich Bell Brass 14x6.5 with 3mm bell brass/bronze shell family. Exact snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "John Tempesta JT147 Signature 14x7",
-
       "modelNumber": "JT147",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 7,
-
       "shell": {
-
         "construction": "Metal",
-
         "material1": "Brass",
-
         "material2": "",
-
         "material3": "",
-
         "thicknessMm": 2,
-
         "plyCountLayup": "2mm brass",
-
         "reinforcementRings": false,
-
         "bearingEdge": "metal shell folded bearing edge",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 10,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "42-strand snappy snare",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/jt147.html",
-
         "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
-
       },
-
       "notes": {
-
         "scoringBasis": "Official Tama JT147 source confirms 14x7 brass shell concept and 42-strand snappy snare. Exact shell thickness should be verified if not shown in accessible spec table; 2mm listed as draft pending catalog/spec confirmation."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Kaz Rodriguez KR1465 Signature 14x6.5 Maple/Bubinga",
-
       "modelNumber": "KR1465",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 6.5,
-
       "shell": {
-
         "construction": "Ply",
-
         "material1": "Maple",
-
         "material2": "Bubinga",
-
         "material3": "",
-
         "thicknessMm": 10,
-
         "plyCountLayup": "6-ply maple + 6-ply bubinga",
-
         "reinforcementRings": false,
-
         "bearingEdge": "unknown",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 10,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
-
         "secondarySourceUrl": "unknown"
-
       },
-
       "notes": {
-
         "scoringBasis": "Current Tama Signature listing supports Kaz Rodriguez Signature family. Existing database has Kaz Rodriguez 14x6.5 Maple/Bubinga but lacks model number. Treat as existing record update candidate if same record, not necessarily a new add."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Charlie Benante CB1465 Signature 14x6.5",
-
       "modelNumber": "CB1465",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 6.5,
-
       "shell": {
-
         "construction": "Metal",
-
         "material1": "Stainless Steel",
-
         "material2": "",
-
         "material3": "",
-
         "thicknessMm": 1.2,
-
         "plyCountLayup": "1.2mm stainless steel",
-
         "reinforcementRings": false,
-
         "bearingEdge": "metal shell folded bearing edge",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "die-cast hoops"
-
       },
-
       "hardware": {
-
         "lugCount": 10,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "unknown",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/cb1465.html",
-
         "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
-
       },
-
       "notes": {
-
         "scoringBasis": "Official Tama CB1465 source confirms Charlie Benante Signature 14x6.5 with 1.2mm stainless steel shell. Exact snare bed, throw-off, wires, and stock heads remain unknown."
-
       }
-
     },
-
     {
-
       "companyName": "Tama",
-
       "companyType": "Major manufacturer",
-
       "lineSeries": "Signature",
-
       "modelName": "Bill Platt BP146 Signature Bell Brass 14x6",
-
       "modelNumber": "BP146",
-
       "drumType": "Snare",
-
       "diameter": 14,
-
       "depth": 6,
-
       "shell": {
-
         "construction": "Cast metal",
-
         "material1": "Bell Brass",
-
         "material2": "Bronze",
-
         "material3": "",
-
         "thicknessMm": 3,
-
         "plyCountLayup": "3mm bell brass",
-
         "reinforcementRings": false,
-
         "bearingEdge": "machined metal bearing edge",
-
         "snareBedType": "unknown",
-
         "hoopRimType": "unknown"
-
       },
-
       "hardware": {
-
         "lugCount": 10,
-
         "lugType": "unknown",
-
         "snareThrowMakeAndModel": "Multi Snare Frame system",
-
         "stockSnareWires": "unknown",
-
         "stockBatterHead": "unknown",
-
         "stockResoHead": "unknown"
-
       },
-
       "sources": {
-
         "primarySourceUrl": "https://www.tama.com/usa/products/detail/bp146.html",
-
         "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
-
       },
-
       "notes": {
-
         "scoringBasis": "Official Tama BP146 source confirms Bill Platt Signature 14x6 with 3mm bell brass shell and Multi Snare Frame system. Exact hoop type, snare bed, wires, and stock heads remain unknown."
-
       }
-
     }
-
+  ],
+  "recordsToAdd": [
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Bill Bruford BB1055 Signature 10x5.5",
+      "modelNumber": "BB1055",
+      "drumType": "Snare",
+      "diameter": 10,
+      "depth": 5.5,
+      "shell": {
+        "construction": "Ply",
+        "material1": "Maple",
+        "material2": "Birch",
+        "material3": "Maple",
+        "thicknessMm": 6,
+        "plyCountLayup": "6-ply maple/birch/maple",
+        "reinforcementRings": false,
+        "bearingEdge": "unknown",
+        "snareBedType": "unknown",
+        "hoopRimType": "triple-flange / Mighty Hoop"
+      },
+      "hardware": {
+        "lugCount": 6,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
+        "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
+      },
+      "notes": {
+        "scoringBasis": "Tama Signature Palette catalog source supports BB1055 as a Bill Bruford Signature model with maple/birch/maple shell family and 10x5.5 size. Exact bearing edge, snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Bill Bruford BB146 Signature 14x6",
+      "modelNumber": "BB146",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 6,
+      "shell": {
+        "construction": "Ply",
+        "material1": "Maple",
+        "material2": "Birch",
+        "material3": "Maple",
+        "thicknessMm": 6,
+        "plyCountLayup": "6-ply maple/birch/maple",
+        "reinforcementRings": false,
+        "bearingEdge": "unknown",
+        "snareBedType": "unknown",
+        "hoopRimType": "triple-flange / Mighty Hoop"
+      },
+      "hardware": {
+        "lugCount": 10,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
+        "secondarySourceUrl": "https://www.tama.com/eu/artists/detail/128.html"
+      },
+      "notes": {
+        "scoringBasis": "Tama artist/spec references support BB146 as Bill Bruford Signature 14x6. Catalog/Sweetwater support maple/birch/maple shell family and flanged-hoop orientation. Exact bearing edge, snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Simon Phillips SP125 The Pageant 12x5",
+      "modelNumber": "SP125",
+      "drumType": "Snare",
+      "diameter": 12,
+      "depth": 5,
+      "shell": {
+        "construction": "Ply",
+        "material1": "Maple",
+        "material2": "Quilted Maple",
+        "material3": "",
+        "thicknessMm": 5,
+        "plyCountLayup": "quilted maple shell",
+        "reinforcementRings": false,
+        "bearingEdge": "unknown",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 6,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/1999Signature.pdf",
+        "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
+      },
+      "notes": {
+        "scoringBasis": "Tama Signature Palette catalog source supports SP125 as Simon Phillips The Pageant 12x5 with quilted maple shell family. Exact bearing edge, snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Mike Portnoy Melody Master MP125ST 12x5",
+      "modelNumber": "MP125ST",
+      "drumType": "Snare",
+      "diameter": 12,
+      "depth": 5,
+      "shell": {
+        "construction": "Metal",
+        "material1": "Steel",
+        "material2": "",
+        "material3": "",
+        "thicknessMm": 1,
+        "plyCountLayup": "1mm hammered steel",
+        "reinforcementRings": false,
+        "bearingEdge": "metal shell folded bearing edge",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 6,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+        "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
+      },
+      "notes": {
+        "scoringBasis": "Tama Signature Palette catalog source supports the Mike Portnoy 12x5 hammered steel Melody Master family. Exact snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Mike Portnoy Melody Master MP1455ST 14x5.5",
+      "modelNumber": "MP1455ST",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 5.5,
+      "shell": {
+        "construction": "Metal",
+        "material1": "Steel",
+        "material2": "",
+        "material3": "",
+        "thicknessMm": 1,
+        "plyCountLayup": "1mm hammered steel",
+        "reinforcementRings": false,
+        "bearingEdge": "metal shell folded bearing edge",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 8,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
+        "secondarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf"
+      },
+      "notes": {
+        "scoringBasis": "Tama Signature source supports MP1455ST as Mike Portnoy 14x5.5 hammered steel Melody Master family. Exact snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Mike Portnoy Melody Master MP1455BU 14x5.5",
+      "modelNumber": "MP1455BU",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 5.5,
+      "shell": {
+        "construction": "Ply",
+        "material1": "Bubinga",
+        "material2": "",
+        "material3": "",
+        "thicknessMm": 8,
+        "plyCountLayup": "9-ply bubinga",
+        "reinforcementRings": false,
+        "bearingEdge": "unknown",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 8,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
+        "secondarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100451.html"
+      },
+      "notes": {
+        "scoringBasis": "Tama current Signature family and MP1455BUN official news support the Portnoy bubinga Signature family. Exact MP1455BU hardware details should be confirmed separately before filling throw-off/wires."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Mike Portnoy Dream Monster MP1455BUN 14x5.5",
+      "modelNumber": "MP1455BUN",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 5.5,
+      "shell": {
+        "construction": "Ply",
+        "material1": "Bubinga",
+        "material2": "",
+        "material3": "",
+        "thicknessMm": 8,
+        "plyCountLayup": "9-ply bubinga",
+        "reinforcementRings": false,
+        "bearingEdge": "unknown",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops, 8-hole"
+      },
+      "hardware": {
+        "lugCount": 8,
+        "lugType": "MSL-SCT",
+        "snareThrowMakeAndModel": "MCS100A/MCS70B",
+        "stockSnareWires": "MS20SN14S",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100451.html",
+        "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
+      },
+      "notes": {
+        "scoringBasis": "Official Tama MP1455BUN news confirms 14x5.5 size, 8mm 9-ply bubinga shell, MSL-SCT lugs, 8-hole die-cast hoops, MCS100A/MCS70B strainer/butt, and MS20SN14S wires. Exact bearing edge, snare bed, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
+      "modelNumber": "LU1465BB",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 6.5,
+      "shell": {
+        "construction": "Cast metal",
+        "material1": "Bell Brass",
+        "material2": "Bronze",
+        "material3": "",
+        "thicknessMm": 3,
+        "plyCountLayup": "3mm bell brass",
+        "reinforcementRings": false,
+        "bearingEdge": "machined metal bearing edge",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 10,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+        "secondarySourceUrl": "https://reverb.com/p/tama-lu1465bb-lars-ulrich-signature-bell-brass-6-dot-5x14-snare-drum"
+      },
+      "notes": {
+        "scoringBasis": "Tama Signature Palette catalog and secondary market references support LU1465BB as Lars Ulrich Bell Brass 14x6.5 with 3mm bell brass/bronze shell family. Exact snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "John Tempesta JT147 Signature 14x7",
+      "modelNumber": "JT147",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 7,
+      "shell": {
+        "construction": "Metal",
+        "material1": "Brass",
+        "material2": "",
+        "material3": "",
+        "thicknessMm": 2,
+        "plyCountLayup": "2mm brass",
+        "reinforcementRings": false,
+        "bearingEdge": "metal shell folded bearing edge",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 10,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "42-strand snappy snare",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/jt147.html",
+        "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
+      },
+      "notes": {
+        "scoringBasis": "Official Tama JT147 source confirms 14x7 brass shell concept and 42-strand snappy snare. Exact shell thickness should be verified if not shown in accessible spec table; 2mm listed as draft pending catalog/spec confirmation."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Kaz Rodriguez KR1465 Signature 14x6.5 Maple/Bubinga",
+      "modelNumber": "KR1465",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 6.5,
+      "shell": {
+        "construction": "Ply",
+        "material1": "Maple",
+        "material2": "Bubinga",
+        "material3": "",
+        "thicknessMm": 10,
+        "plyCountLayup": "6-ply maple + 6-ply bubinga",
+        "reinforcementRings": false,
+        "bearingEdge": "unknown",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 10,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/",
+        "secondarySourceUrl": "unknown"
+      },
+      "notes": {
+        "scoringBasis": "Current Tama Signature listing supports Kaz Rodriguez Signature family. Existing database has Kaz Rodriguez 14x6.5 Maple/Bubinga but lacks model number. Treat as existing record update candidate if same record, not necessarily a new add."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Charlie Benante CB1465 Signature 14x6.5",
+      "modelNumber": "CB1465",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 6.5,
+      "shell": {
+        "construction": "Metal",
+        "material1": "Stainless Steel",
+        "material2": "",
+        "material3": "",
+        "thicknessMm": 1.2,
+        "plyCountLayup": "1.2mm stainless steel",
+        "reinforcementRings": false,
+        "bearingEdge": "metal shell folded bearing edge",
+        "snareBedType": "unknown",
+        "hoopRimType": "die-cast hoops"
+      },
+      "hardware": {
+        "lugCount": 10,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "unknown",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/cb1465.html",
+        "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
+      },
+      "notes": {
+        "scoringBasis": "Official Tama CB1465 source confirms Charlie Benante Signature 14x6.5 with 1.2mm stainless steel shell. Exact snare bed, throw-off, wires, and stock heads remain unknown."
+      }
+    },
+    {
+      "companyName": "Tama",
+      "companyType": "Major manufacturer",
+      "lineSeries": "Signature",
+      "modelName": "Bill Platt BP146 Signature Bell Brass 14x6",
+      "modelNumber": "BP146",
+      "drumType": "Snare",
+      "diameter": 14,
+      "depth": 6,
+      "shell": {
+        "construction": "Cast metal",
+        "material1": "Bell Brass",
+        "material2": "Bronze",
+        "material3": "",
+        "thicknessMm": 3,
+        "plyCountLayup": "3mm bell brass",
+        "reinforcementRings": false,
+        "bearingEdge": "machined metal bearing edge",
+        "snareBedType": "unknown",
+        "hoopRimType": "unknown"
+      },
+      "hardware": {
+        "lugCount": 10,
+        "lugType": "unknown",
+        "snareThrowMakeAndModel": "Multi Snare Frame system",
+        "stockSnareWires": "unknown",
+        "stockBatterHead": "unknown",
+        "stockResoHead": "unknown"
+      },
+      "sources": {
+        "primarySourceUrl": "https://www.tama.com/usa/products/detail/bp146.html",
+        "secondarySourceUrl": "https://www.tama.com/usa/products/snare_drums/signature_snare/"
+      },
+      "notes": {
+        "scoringBasis": "Official Tama BP146 source confirms Bill Platt Signature 14x6 with 3mm bell brass shell and Multi Snare Frame system. Exact hoop type, snare bed, wires, and stock heads remain unknown."
+      }
+    }
   ]
-
 }
-
