@@ -1,0 +1,515 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "S.L.P.",
+
+  "researchStatus": "reviewed-draft",
+
+  "doNotApplyAutomatically": true,
+
+  "sourceNotes": [
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. Big Black Steel LST148 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_big_black_steel_snare_drum.html",
+
+      "supports": [
+
+        "S.L.P. Big Black Steel LST148 model identity and steel shell"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "retailer",
+
+      "sourceName": "Memphis Drum Shop - Tama 14x8 S.L.P. Big Black Steel LST148",
+
+      "supports": [
+
+        "1mm steel shell",
+
+        "45 degree bearing edges",
+
+        "10 MSL35BN lugs",
+
+        "2.3mm triple-flanged Mighty Hoops",
+
+        "MLS30ABN throw-off",
+
+        "MS20SN14S 20-strand Starclassic carbon steel snare wires",
+
+        "Evans Coated G1 batter head",
+
+        "Evans Clear snare side resonant head"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. G-Bubinga LGB146 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_g-bubinga_snare_drum.html",
+
+      "supports": [
+
+        "12-ply 10mm bubinga shell",
+
+        "2.3mm flanged hoops",
+
+        "separate low-mass lugs"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. G-Maple LGM146 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_g-maple_6x14_snare_drum.html",
+
+      "supports": [
+
+        "11mm / 13-ply maple shell with Mappa Burl outer ply",
+
+        "2.3mm steel triple-flanged hoops",
+
+        "separate low-mass lugs"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. G-Maple LGM137 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_g-maple_snare_drum.html",
+
+      "supports": [
+
+        "11-ply 10mm maple shell",
+
+        "heavy die-cast hoops"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. G-Walnut LGW1465 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_g-walnut_snare_drum.html",
+
+      "supports": [
+
+        "10-ply 9mm walnut shell"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. Fat Spruce LSP146 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_fat_spruce_snare_drum.html",
+
+      "supports": [
+
+        "8-ply spruce shell",
+
+        "8-lug die-cast hoops"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "retailer",
+
+      "sourceName": "Sweetwater - TAMA S.L.P. Fat Spruce LSP146",
+
+      "supports": [
+
+        "8-ply spruce shell",
+
+        "die-cast hoops",
+
+        "8 brass tube lugs",
+
+        "Tama by Evans heads",
+
+        "high carbon snare wires"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA S.L.P. Classic Maple LMP1455 product page",
+
+      "url": "https://www.tama.com/usa/products/snare_drums/slp_classic_maple_snare_drum.html",
+
+      "supports": [
+
+        "Super Sensitive Hi-Carbon Snare Wire",
+
+        "triple-flanged Sound Arc Hoop"
+
+      ]
+
+    }
+
+  ],
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "S.L.P. Big Black Steel LST148",
+
+      "matchModelNames": [
+
+        "S.L.P. Big Black Steel LST148 14x8"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 1,
+
+        "shell.bearingEdge": "45 degree bearing edges",
+
+        "hardware.hoopRimType": "2.3mm triple-flanged Mighty Hoops",
+
+        "hardware.lugType": "MSL35BN lugs",
+
+        "hardware.snareThrowMakeAndModel": "MLS30ABN throw-off with MLS30BBN butt plate",
+
+        "hardware.stockSnareWires": "MS20SN14S 20-strand Starclassic carbon steel snare wires",
+
+        "hardware.stockBatterHead": "Evans Coated G1 batter head with TAMA logo",
+
+        "hardware.stockResoHead": "Evans Clear snare side resonant head with TAMA logo"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.snareBedType"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "S.L.P. G-Bubinga LGB146",
+
+      "matchModelNames": [
+
+        "S.L.P. G-Bubinga LGB146 14x6"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 10,
+
+        "shell.plyCountLayup": "12-ply bubinga shell",
+
+        "hardware.hoopRimType": "2.3mm flanged hoops",
+
+        "hardware.lugType": "Separate low-mass lugs"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.bearingEdge",
+
+        "shell.snareBedType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockSnareWires",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "S.L.P. G-Maple LGM146",
+
+      "matchModelNames": [
+
+        "S.L.P. G-Maple LGM146 14x6"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 11,
+
+        "shell.plyCountLayup": "13-ply maple shell with Mappa Burl outer ply",
+
+        "hardware.hoopRimType": "2.3mm steel triple-flanged hoops",
+
+        "hardware.lugType": "Separate low-mass lugs"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.bearingEdge",
+
+        "shell.snareBedType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockSnareWires",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "S.L.P. G-Maple LGM137",
+
+      "matchModelNames": [
+
+        "S.L.P. G-Maple LGM137 13x7"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 10,
+
+        "shell.plyCountLayup": "11-ply maple shell",
+
+        "hardware.hoopRimType": "Die-cast hoops"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.bearingEdge",
+
+        "shell.snareBedType",
+
+        "hardware.lugType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockSnareWires",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "S.L.P. G-Walnut LGW1465",
+
+      "matchModelNames": [
+
+        "S.L.P. G-Walnut LGW1465 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 9,
+
+        "shell.plyCountLayup": "10-ply walnut shell"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.bearingEdge",
+
+        "shell.snareBedType",
+
+        "hardware.lugType",
+
+        "hardware.hoopRimType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockSnareWires",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "S.L.P. Fat Spruce LSP146",
+
+      "matchModelNames": [
+
+        "S.L.P. Fat Spruce LSP146 14x6"
+
+      ],
+
+      "updates": {
+
+        "shell.plyCountLayup": "8-ply spruce shell",
+
+        "hardware.hoopRimType": "Die-cast hoops",
+
+        "hardware.lugType": "Brass tube lugs",
+
+        "hardware.stockSnareWires": "High carbon snare wires",
+
+        "hardware.stockBatterHead": "Tama by Evans batter head",
+
+        "hardware.stockResoHead": "Tama by Evans resonant head"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.thicknessMm",
+
+        "shell.bearingEdge",
+
+        "shell.snareBedType",
+
+        "hardware.snareThrowMakeAndModel"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "S.L.P. Classic Maple LMP1455",
+
+      "matchModelNames": [
+
+        "S.L.P. Classic Maple LMP1455 14x5.5"
+
+      ],
+
+      "updates": {
+
+        "hardware.hoopRimType": "Triple-flanged Sound Arc Hoops",
+
+        "hardware.stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.thicknessMm",
+
+        "shell.bearingEdge",
+
+        "shell.snareBedType",
+
+        "hardware.lugType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    }
+
+  ],
+
+  "unresolvedFields": [
+
+    {
+
+      "field": "shell.snareBedType",
+
+      "reason": "Not applied broadly because the reviewed sources do not confirm model-specific snare bed geometry."
+
+    },
+
+    {
+
+      "field": "shell.bearingEdge",
+
+      "reason": "Only applied where a reviewed source explicitly confirms bearing edge."
+
+    },
+
+    {
+
+      "field": "hardware.stockBatterHead",
+
+      "reason": "Only applied where a reviewed source explicitly confirms stock batter head."
+
+    },
+
+    {
+
+      "field": "hardware.stockResoHead",
+
+      "reason": "Only applied where a reviewed source explicitly confirms stock resonant head."
+
+    },
+
+    {
+
+      "field": "hardware.snareThrowMakeAndModel",
+
+      "reason": "Only applied where a reviewed source explicitly confirms throw-off and butt plate."
+
+    }
+
+  ]
+
+}
