@@ -1,0 +1,133 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Signature",
+
+  "patchName": "tama-signature-missing-models-add-pass-2",
+
+  "researchStatus": "source-backed",
+
+  "doNotApplyAutomatically": true,
+
+  "notes": {
+
+    "summary": "Adds missing Tama Mike Portnoy Melody Master MP1455 maple snare record. MusicPlayers.com review confirms standard MP1455 is a 5.5x14 maple shell with black finish, die-cast chrome hoops, MSL-SCT chrome lugs, MCS100A three-way tension adjustable snare strainer, Remo Coated Ambassador batter, and Remo Clear Ambassador snare-side."
+
+  },
+
+  "recordsToAdd": [
+
+    {
+
+      "companyName": "Tama",
+
+      "companyType": "major manufacturer",
+
+      "lineSeries": "Signature",
+
+      "modelName": "Mike Portnoy Melody Master MP1455 Maple 14x5.5",
+
+      "modelNumber": "MP1455",
+
+      "drumType": "Snare",
+
+      "diameter": 14,
+
+      "depth": 5.5,
+
+      "shell": {
+
+        "construction": "Ply",
+
+        "shellConstruction": "Ply",
+
+        "material1": "Maple",
+
+        "material2": "",
+
+        "material3": "",
+
+        "shellMaterial": "Maple",
+
+        "thicknessMm": "unknown",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "",
+
+        "reinforcementRingThicknessMm": "",
+
+        "bearingEdge": "unknown",
+
+        "snareBedType": "unknown",
+
+        "finishType": "semi-gloss black covering",
+
+        "hoopRimType": "die-cast hoops"
+
+      },
+
+      "hardware": {
+
+        "lugCount": 8,
+
+        "lugType": "Tama MSL-SCT chrome lugs",
+
+        "hardwareFinish": "Chrome",
+
+        "hoopRimType": "die-cast chrome hoops",
+
+        "snareThrowMakeAndModel": "Tama MCS100A three-way tension adjustable snare strainer",
+
+        "stockSnareWires": "unknown",
+
+        "stockBatterHead": "Remo Coated Ambassador",
+
+        "stockResoHead": "Remo Clear Ambassador snare-side"
+
+      },
+
+      "production": {
+
+        "currentlyInProduction": "NO",
+
+        "artistSignatureLine": "YES",
+
+        "discontinued": "YES",
+
+        "rareCollectible": "YES",
+
+        "yearIntroduced": "unknown",
+
+        "yearDiscontinued": "unknown"
+
+      },
+
+      "sources": {
+
+        "primarySourceUrl": "https://www.musicplayers.com/reviews/drums/2007/0107_TamaMelodyMaster.php",
+
+        "secondarySourceUrl": "https://www.tama.com/"
+
+      },
+
+      "confidence": {
+
+        "voiceScoreConfidence": "medium",
+
+        "sourceConfidence": "medium-high"
+
+      },
+
+      "notes": {
+
+        "scoringBasis": "MusicPlayers.com review confirms MP1455 standard Melody Master is the 5.5x14 maple shell model with semi-gloss black covering, die-cast chrome hoops, Tama MSL-SCT chrome lugs, MCS100A three-way tension adjustable snare strainer, Remo Coated Ambassador batter, and Remo Clear Ambassador snare-side. Shell thickness, bearing edge, snare bed, and stock snare wires remain unconfirmed."
+
+      }
+
+    }
+
+  ]
+
+}
