@@ -62,6 +62,248 @@ const VOICE_SCORE_FIELDS = [
 
 ];
 
+const FIELD_PATHS = {
+
+  companyType: ['companyType'],
+
+  modelNum: ['production.modelNum', 'modelNum'],
+
+  imgUrl: ['sources.imageUrl', 'imgUrl'],
+
+  shellConstruction: ['shell.construction', 'shellConstruction'],
+
+  normalizedShellConstruction: [
+
+    'shell.normalizedConstruction',
+
+    'shell.normalizedShellConstruction',
+
+    'normalizedShellConstruction',
+
+  ],
+
+  shellMaterial1: ['shell.material1', 'shellMaterial1'],
+
+  shellMaterial2: ['shell.material2', 'shellMaterial2'],
+
+  shellMaterial3: ['shell.material3', 'shellMaterial3'],
+
+  plyCountLayup: ['shell.plyCountLayup', 'plyCountLayup'],
+
+  shellThicknessMm: ['shell.thicknessMm', 'shellThicknessMm'],
+
+  reinforcementRings: ['shell.reinforcementRings', 'reinforcementRings'],
+
+  bearingEdge: ['shell.bearingEdge', 'bearingEdge'],
+
+  snareBedType: ['shell.snareBedType', 'snareBedType'],
+
+  finishType: ['shell.finishType', 'finishType'],
+
+  hoopRimType: ['hardware.hoopRimType', 'shell.hoopRimType', 'hoopRimType'],
+
+  lugCount: ['hardware.lugCount', 'lugCount'],
+
+  lugType: ['hardware.lugType', 'lugType'],
+
+  hardwareFinish: ['hardware.hardwareFinish', 'hardwareFinish'],
+
+  snareThrowMakeModel: [
+
+    'hardware.snareThrowMakeAndModel',
+
+    'hardware.snareThrowMakeModel',
+
+    'snareThrowMakeAndModel',
+
+    'snareThrowMakeModel',
+
+  ],
+
+  stockSnareWires: ['hardware.stockSnareWires', 'stockSnareWires'],
+
+  stockBatterHead: ['hardware.stockBatterHead', 'stockBatterHead'],
+
+  stockResoHead: ['hardware.stockResoHead', 'stockResoHead'],
+
+  currentlyInProduction: [
+
+    'production.currentlyInProduction',
+
+    'currentlyInProduction',
+
+  ],
+
+  artistSignatureLine: ['production.artistSignatureLine', 'artistSignatureLine'],
+
+  discontinued: ['production.discontinued', 'discontinued'],
+
+  rareCollectible: ['production.rareCollectible', 'rareCollectible'],
+
+  yearInProduction: ['production.yearInProduction', 'yearInProduction'],
+
+  yearDiscontinued: ['production.yearDiscontinued', 'yearDiscontinued'],
+
+  voiceScoreConfidence: ['oberScores.confidence', 'voiceScoreConfidence'],
+
+  sourceConfidence: ['sources.sourceConfidence', 'sourceConfidence'],
+
+  primarySourceUrl: ['sources.primarySourceUrl', 'primarySourceUrl'],
+
+  secondarySourceUrl: ['sources.secondarySourceUrl', 'secondarySourceUrl'],
+
+  overallAttackOberScore: ['oberScores.attack', 'overallAttackOberScore'],
+
+  overallBrightnessOberScore: [
+
+    'oberScores.brightness',
+
+    'overallBrightnessOberScore',
+
+  ],
+
+  overallProjectionOberScore: [
+
+    'oberScores.projection',
+
+    'overallProjectionOberScore',
+
+  ],
+
+  overallSustainOberScore: ['oberScores.sustain', 'overallSustainOberScore'],
+
+  overallWarmthOberScore: ['oberScores.warmth', 'overallWarmthOberScore'],
+
+  overallSensitivityOberScore: [
+
+    'oberScores.sensitivity',
+
+    'overallSensitivityOberScore',
+
+  ],
+
+  overallControlOberScore: ['oberScores.control', 'overallControlOberScore'],
+
+  projectedShellFundamentalPitch: [
+
+    'tuning.projectedShellFundamentalPitch',
+
+    'projectedShellFundamentalPitch',
+
+  ],
+
+  projectedShellFundamentalHz: [
+
+    'tuning.projectedShellFundamentalHz',
+
+    'projectedShellFundamentalHz',
+
+  ],
+
+  recommendedBatterHz: ['tuning.recommendedBatterHz', 'recommendedBatterHz'],
+
+  recommendedBatterNote: [
+
+    'tuning.recommendedBatterNote',
+
+    'recommendedBatterNote',
+
+  ],
+
+  recommendedResoHz: ['tuning.recommendedResoHz', 'recommendedResoHz'],
+
+  recommendedResoNote: ['tuning.recommendedResoNote', 'recommendedResoNote'],
+
+  scoringBasis: ['oberScores.scoringBasis', 'scoringBasis'],
+
+  notesOnMissingData: ['notes.missingData', 'notesOnMissingData'],
+
+  drumSummaryNotes: ['notes.summary', 'drumSummaryNotes'],
+
+  description: ['description'],
+
+};
+
+const getNestedValue = (source = {}, path = '') => {
+
+  if (!path) return '';
+
+  return path.split('.').reduce((acc, key) => {
+
+    if (acc === undefined || acc === null) return '';
+
+    return acc[key];
+
+  }, source);
+
+};
+
+const getFieldValue = (source = {}, key = '') => {
+
+  const paths = FIELD_PATHS[key] || [key];
+
+  for (const path of paths) {
+
+    const value = getNestedValue(source, path);
+
+    if (value !== undefined && value !== null && value !== '') {
+
+      return value;
+
+    }
+
+  }
+
+  return '';
+
+};
+
+const setNestedValue = (target = {}, path = '', value = '') => {
+
+  const keys = path.split('.');
+
+  if (keys.length === 1) {
+
+    target[path] = value;
+
+    return;
+
+  }
+
+  let cursor = target;
+
+  keys.forEach((key, index) => {
+
+    const isLast = index === keys.length - 1;
+
+    if (isLast) {
+
+      cursor[key] = value;
+
+      return;
+
+    }
+
+    if (!cursor[key] || typeof cursor[key] !== 'object') {
+
+      cursor[key] = {};
+
+    }
+
+    cursor = cursor[key];
+
+  });
+
+};
+
+const setPayloadField = (payload = {}, key = '', value = '') => {
+
+  const primaryPath = FIELD_PATHS[key]?.[0] || key;
+
+  setNestedValue(payload, primaryPath, value);
+
+};
+
 const TEXT_FIELD_GROUPS = [
 
   {
@@ -542,7 +784,7 @@ const getInitialForm = (drum = {}) => {
 
     group.fields.forEach((field) => {
 
-      form[field.key] = drum[field.key] ?? '';
+      form[field.key] = getFieldValue(drum, field.key);
 
     });
 
@@ -550,19 +792,19 @@ const getInitialForm = (drum = {}) => {
 
   TEXTAREA_FIELDS.forEach((field) => {
 
-    form[field.key] = drum[field.key] ?? '';
+    form[field.key] = getFieldValue(drum, field.key);
 
   });
 
   TUNING_FIELDS.forEach((field) => {
 
-    form[field.key] = drum[field.key] ?? '';
+    form[field.key] = getFieldValue(drum, field.key);
 
   });
 
   VOICE_SCORE_FIELDS.forEach((field) => {
 
-    form[field.key] = drum[field.key] ?? '';
+    form[field.key] = getFieldValue(drum, field.key);
 
   });
 
@@ -644,55 +886,71 @@ const SnareReferenceEditor = ({
 
   };
 
-  const buildSavePayload = () => {
+const buildSavePayload = () => {
 
-    const payload = {};
+  const payload = {};
 
-    TEXT_FIELD_GROUPS.forEach((group) => {
+  TEXT_FIELD_GROUPS.forEach((group) => {
 
-      group.fields.forEach((field) => {
+    group.fields.forEach((field) => {
 
-        payload[field.key] = normalizeValueForSave({
+      setPayloadField(
+
+        payload,
+
+        field.key,
+
+        normalizeValueForSave({
 
           field,
 
           value: form[field.key],
 
-        });
+        })
 
-      });
-
-    });
-
-    TEXTAREA_FIELDS.forEach((field) => {
-
-      payload[field.key] = form[field.key] || '';
+      );
 
     });
 
-    TUNING_FIELDS.forEach((field) => {
+  });
 
-      payload[field.key] = normalizeValueForSave({
+  TEXTAREA_FIELDS.forEach((field) => {
+
+    setPayloadField(payload, field.key, form[field.key] || '');
+
+  });
+
+  TUNING_FIELDS.forEach((field) => {
+
+    setPayloadField(
+
+      payload,
+
+      field.key,
+
+      normalizeValueForSave({
 
         field,
 
         value: form[field.key],
 
-      });
+      })
 
-    });
+    );
 
-    VOICE_SCORE_FIELDS.forEach((field) => {
+  });
 
-      const number = Number(form[field.key]);
+  VOICE_SCORE_FIELDS.forEach((field) => {
 
-      payload[field.key] = Number.isFinite(number) ? number : '';
+    const number = Number(form[field.key]);
 
-    });
+    setPayloadField(payload, field.key, Number.isFinite(number) ? number : '');
 
-    return payload;
+  });
 
-  };
+  return payload;
+
+};
 
   const handleSave = async () => {
 
