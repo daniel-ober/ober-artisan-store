@@ -1,0 +1,61 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-maple-pass-5",
+
+  "researchStatus": "draft",
+
+  "doNotApplyAutomatically": true,
+
+  "notes": "Tama Starclassic Maple pass. Applies only to standard Starclassic Maple 14x5.5 and 14x6.5 records. This pass only fills the snare bed field as unknown so the records accurately distinguish confirmed specs from still-unconfirmed details. Stock batter and resonant heads remain unconfirmed and should not be guessed.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Maple standard 14 inch snare bed status",
+
+      "target": {
+
+        "modelNameIncludesAny": [
+
+          "Starclassic Maple"
+
+        ],
+
+        "modelNameExcludesAny": [
+
+          "G-Maple",
+
+          "Exotix"
+
+        ],
+
+        "diameter": 14
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "snareBedType": "unknown"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Existing Starclassic Maple records already contain the stronger confirmed shell/hardware values. This pass only marks the exact snare bed type as unknown because the available sourced data does not confirm shallow, medium, deep, or specific snare bed geometry. Stock batter and resonant heads remain unconfirmed."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
