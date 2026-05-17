@@ -66,13 +66,29 @@ const FIELD_PATHS = {
 
   companyType: ['companyType'],
 
-  modelNum: ['production.modelNum', 'modelNum'],
+  modelNum: ['identification.modelNumber', 'production.modelNum', 'modelNum'],
 
-  imgUrl: ['sources.imageUrl', 'imgUrl'],
+  imgUrl: ['sources.imageUrls.0.url', 'sources.imageUrl', 'imgUrl'],
 
-  shellConstruction: ['shell.construction', 'shellConstruction'],
+  drumType: ['shell.drumType', 'drumType'],
+
+  diameter: ['shell.dimensions.diameterInches', 'diameter', 'diameterInches'],
+
+  depth: ['shell.dimensions.depthInches', 'depth', 'depthInches'],
+
+  shellConstruction: [
+
+    'shell.construction.shellConstruction',
+
+    'shell.construction',
+
+    'shellConstruction',
+
+  ],
 
   normalizedShellConstruction: [
+
+    'shell.construction.shellConstruction',
 
     'shell.normalizedConstruction',
 
@@ -82,33 +98,129 @@ const FIELD_PATHS = {
 
   ],
 
-  shellMaterial1: ['shell.material1', 'shellMaterial1'],
+  shellMaterial1: [
 
-  shellMaterial2: ['shell.material2', 'shellMaterial2'],
+    'shell.construction.shellMaterialPrimary',
 
-  shellMaterial3: ['shell.material3', 'shellMaterial3'],
+    'shell.material1',
 
-  plyCountLayup: ['shell.plyCountLayup', 'plyCountLayup'],
+    'shellMaterial1',
 
-  shellThicknessMm: ['shell.thicknessMm', 'shellThicknessMm'],
+  ],
 
-  reinforcementRings: ['shell.reinforcementRings', 'reinforcementRings'],
+  shellMaterial2: [
 
-  bearingEdge: ['shell.bearingEdge', 'bearingEdge'],
+    'shell.construction.shellMaterialSecondary',
 
-  snareBedType: ['shell.snareBedType', 'snareBedType'],
+    'shell.material2',
 
-  finishType: ['shell.finishType', 'finishType'],
+    'shellMaterial2',
 
-  hoopRimType: ['hardware.hoopRimType', 'shell.hoopRimType', 'hoopRimType'],
+  ],
 
-  lugCount: ['hardware.lugCount', 'lugCount'],
+  shellMaterial3: [
 
-  lugType: ['hardware.lugType', 'lugType'],
+    'shell.construction.shellMaterialTertiary',
 
-  hardwareFinish: ['hardware.hardwareFinish', 'hardwareFinish'],
+    'shell.material3',
+
+    'shellMaterial3',
+
+  ],
+
+  plyCountLayup: [
+
+    'shell.construction.layupDescription',
+
+    'shell.plyCountLayup',
+
+    'plyCountLayup',
+
+  ],
+
+  shellThicknessMm: [
+
+    'shell.construction.shellThicknessMm',
+
+    'shell.thicknessMm',
+
+    'shellThicknessMm',
+
+  ],
+
+  reinforcementRings: [
+
+    'shell.construction.reinforcementRings',
+
+    'shell.reinforcementRings',
+
+    'reinforcementRings',
+
+  ],
+
+  bearingEdge: [
+
+    'shell.bearingEdges.batterSideProfile',
+
+    'shell.bearingEdge',
+
+    'bearingEdge',
+
+  ],
+
+  snareBedType: [
+
+    'shell.snareBeds.depthBucket',
+
+    'shell.snareBeds.bedStyle',
+
+    'shell.snareBedType',
+
+    'snareBedType',
+
+  ],
+
+  finishType: [
+
+    'shell.finish.finishType',
+
+    'shell.finishType',
+
+    'finishType',
+
+  ],
+
+  hoopRimType: [
+
+    'stockHardware.hoops.batterHoopType',
+
+    'hardware.hoopRimType',
+
+    'shell.hoopRimType',
+
+    'hoopRimType',
+
+  ],
+
+  lugCount: ['stockHardware.lugs.lugCount', 'hardware.lugCount', 'lugCount'],
+
+  lugType: ['stockHardware.lugs.lugType', 'hardware.lugType', 'lugType'],
+
+  hardwareFinish: [
+
+    'stockHardware.lugs.hardwareFinish',
+
+    'hardware.hardwareFinish',
+
+    'hardwareFinish',
+
+  ],
 
   snareThrowMakeModel: [
+
+    'stockHardware.throwOff.model',
+
+    'stockHardware.throwOff.make',
 
     'hardware.snareThrowMakeAndModel',
 
@@ -120,13 +232,41 @@ const FIELD_PATHS = {
 
   ],
 
-  stockSnareWires: ['hardware.stockSnareWires', 'stockSnareWires'],
+  stockSnareWires: [
 
-  stockBatterHead: ['hardware.stockBatterHead', 'stockBatterHead'],
+    'stockSnareSystem.snareWires.model',
 
-  stockResoHead: ['hardware.stockResoHead', 'stockResoHead'],
+    'stockSnareSystem.snareWires.make',
+
+    'hardware.stockSnareWires',
+
+    'stockSnareWires',
+
+  ],
+
+  stockBatterHead: [
+
+    'stockSnareSystem.heads.batterHead',
+
+    'hardware.stockBatterHead',
+
+    'stockBatterHead',
+
+  ],
+
+  stockResoHead: [
+
+    'stockSnareSystem.heads.resonantHead',
+
+    'hardware.stockResoHead',
+
+    'stockResoHead',
+
+  ],
 
   currentlyInProduction: [
+
+    'identification.currentlyInProduction',
 
     'production.currentlyInProduction',
 
@@ -134,23 +274,85 @@ const FIELD_PATHS = {
 
   ],
 
-  artistSignatureLine: ['production.artistSignatureLine', 'artistSignatureLine'],
+  artistSignatureLine: [
 
-  discontinued: ['production.discontinued', 'discontinued'],
+    'identification.artistSignature',
 
-  rareCollectible: ['production.rareCollectible', 'rareCollectible'],
+    'production.artistSignatureLine',
 
-  yearInProduction: ['production.yearInProduction', 'yearInProduction'],
+    'artistSignatureLine',
 
-  yearDiscontinued: ['production.yearDiscontinued', 'yearDiscontinued'],
+  ],
 
-  voiceScoreConfidence: ['oberScores.confidence', 'voiceScoreConfidence'],
+  discontinued: [
 
-  sourceConfidence: ['sources.sourceConfidence', 'sourceConfidence'],
+    'identification.discontinued',
+
+    'production.discontinued',
+
+    'discontinued',
+
+  ],
+
+  rareCollectible: [
+
+    'identification.rareCollectible',
+
+    'production.rareCollectible',
+
+    'rareCollectible',
+
+  ],
+
+  yearInProduction: [
+
+    'collectorMetadata.yearIntroduced',
+
+    'production.yearInProduction',
+
+    'yearInProduction',
+
+  ],
+
+  yearDiscontinued: [
+
+    'collectorMetadata.yearDiscontinued',
+
+    'production.yearDiscontinued',
+
+    'yearDiscontinued',
+
+  ],
+
+  voiceScoreConfidence: [
+
+    'sourceAudit.voiceScoreConfidence',
+
+    'oberScores.confidence',
+
+    'voiceScoreConfidence',
+
+  ],
+
+  sourceConfidence: [
+
+    'sources.sourceConfidence',
+
+    'sourceConfidence',
+
+  ],
 
   primarySourceUrl: ['sources.primarySourceUrl', 'primarySourceUrl'],
 
-  secondarySourceUrl: ['sources.secondarySourceUrl', 'secondarySourceUrl'],
+  secondarySourceUrl: [
+
+    'sources.secondarySourceUrls.0',
+
+    'sources.secondarySourceUrl',
+
+    'secondarySourceUrl',
+
+  ],
 
   overallAttackOberScore: ['oberScores.attack', 'overallAttackOberScore'],
 
@@ -214,11 +416,27 @@ const FIELD_PATHS = {
 
   recommendedResoNote: ['tuning.recommendedResoNote', 'recommendedResoNote'],
 
-  scoringBasis: ['oberScores.scoringBasis', 'scoringBasis'],
+  scoringBasis: [
 
-  notesOnMissingData: ['notes.missingData', 'notesOnMissingData'],
+    'summary.drumSummaryNotes',
 
-  drumSummaryNotes: ['notes.summary', 'drumSummaryNotes'],
+    'oberScores.scoringBasis',
+
+    'scoringBasis',
+
+  ],
+
+  notesOnMissingData: [
+
+    'sources.notesOnMissingData',
+
+    'notes.missingData',
+
+    'notesOnMissingData',
+
+  ],
+
+  drumSummaryNotes: ['summary.shortDescription', 'notes.summary', 'drumSummaryNotes'],
 
   description: ['description'],
 
