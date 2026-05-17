@@ -4520,6 +4520,250 @@ exports.researchSnareReferenceDrum = onCall(
 
 );
 
+exports.processSnareReferenceResearchJob = onCall(
+
+  {
+
+    region: 'us-central1',
+
+    cors: true,
+
+    timeoutSeconds: 60,
+
+    memory: '512MiB',
+
+  },
+
+  async (request) => {
+
+    const caller = requireAdminCaller(
+
+      request,
+
+      'Only admins can process snare reference research jobs.'
+
+    );
+
+    const jobId = String(request.data?.jobId || '').trim();
+
+    if (!jobId) {
+
+      throw new HttpsError('invalid-argument', 'jobId is required.');
+
+    }
+
+    const jobRef = db.collection('snareReferenceResearchJobs').doc(jobId);
+
+    const jobSnap = await jobRef.get();
+
+    if (!jobSnap.exists) {
+
+      throw new HttpsError('not-found', 'Snare reference research job not found.');
+
+    }
+
+    const job = {
+
+      id: jobSnap.id,
+
+      ...(jobSnap.data() || {}),
+
+    };
+
+    const drumId = String(job.drumId || '').trim();
+
+    if (!drumId) {
+
+      throw new HttpsError(
+
+        'failed-precondition',
+
+        'Research job is missing drumId.'
+
+      );
+
+    }
+
+    const drumRef = db.collection('snareReferenceDrums').doc(drumId);
+
+    const drumSnap = await drumRef.get();
+
+    if (!drumSnap.exists) {
+
+      throw new HttpsError('not-found', 'Linked snare reference drum not found.');
+
+    }
+
+    const drum = {
+
+      id: drumSnap.id,
+
+      ...(drumSnap.data() || {}),
+
+    };
+
+    const missingFields = getSnareResearchMissingFields(drum);
+
+    const searchTerms = [
+
+      drum.companyName,
+
+      drum.lineSeries,
+
+      drum.modelName,
+
+      drum.diameter && drum.depth ? `${drum.diameter}x${drum.depth}` : '',
+
+      'snare drum specs',
+
+      'lug count',
+
+      'bearing edge',
+
+      'hoop',
+
+      'snare bed',
+
+    ]
+
+      .filter(Boolean)
+
+      .join(' ');
+
+    const officialSourceSearchTerms = [
+
+      drum.companyName,
+
+      drum.modelName,
+
+      'official snare drum specs',
+
+    ]
+
+      .filter(Boolean)
+
+      .join(' ');
+
+    const reviewPayload = {
+
+      drumId,
+
+      jobId,
+
+      status: 'ready_for_manual_review',
+
+      searchTerms,
+
+      officialSourceSearchTerms,
+
+      missingFields,
+
+      missingCount: missingFields.length,
+
+      suggestedNextAction:
+
+        'Use the generated search terms to research missing specs, then update the snareReferenceDrums document through the admin editor.',
+
+      processedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      processedByUid: caller.uid,
+
+      processedByEmail: caller.email,
+
+    };
+
+    await jobRef.set(
+
+      {
+
+        status: 'ready_for_manual_review',
+
+        missingFields,
+
+        missingCount: missingFields.length,
+
+        result: reviewPayload,
+
+        error: null,
+
+        processedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+        processedByUid: caller.uid,
+
+        processedByEmail: caller.email,
+
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      },
+
+      { merge: true }
+
+    );
+
+    await drumRef.set(
+
+      {
+
+        research: {
+
+          ...(drum.research || {}),
+
+          latestJobId: jobId,
+
+          latestJobStatus: 'ready_for_manual_review',
+
+          latestProcessedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+          latestProcessedByUid: caller.uid,
+
+          latestProcessedByEmail: caller.email,
+
+          latestMissingCount: missingFields.length,
+
+        },
+
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      },
+
+      { merge: true }
+
+    );
+
+    logger.info('Processed snare reference research job', {
+
+      jobId,
+
+      drumId,
+
+      missingCount: missingFields.length,
+
+    });
+
+    return {
+
+      ok: true,
+
+      jobId,
+
+      drumId,
+
+      status: 'ready_for_manual_review',
+
+      missingFields,
+
+      missingCount: missingFields.length,
+
+      searchTerms,
+
+      officialSourceSearchTerms,
+
+    };
+
+  }
+
+);
+
 // === Claims / user admin ===
 exports.setSoundlegendClaim = onCall(
   { region: 'us-central1' },
