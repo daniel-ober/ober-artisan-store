@@ -8134,13 +8134,10 @@ const AdminLegacyPrintCalibration = () => {
 
   const [isSavingReferenceDrum, setIsSavingReferenceDrum] = useState(false);
 
-const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
+  const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
+    useState(null);
 
-  useState(null);
-
-const [processingResearchJobId, setProcessingResearchJobId] = useState('');
-
-const functions = useMemo(() => getFunctions(), []);
+  const functions = useMemo(() => getFunctions(), []);
 
   const selectedReferenceDrum = useMemo(() => {
     return (
@@ -9972,137 +9969,51 @@ const functions = useMemo(() => getFunctions(), []);
   };
 
   const handleResearchReferenceDrum = async (researchTarget) => {
-
     if (!researchTarget?.id) {
-
       console.warn('No snare research target id found:', researchTarget);
 
       return;
-
     }
 
     try {
+      setActiveReferenceResearchTarget({
+        ...researchTarget,
 
-      setActiveReferenceResearchTarget(researchTarget);
+        researchJob: {
+          status: 'researching',
+        },
 
-      const researchSnareReferenceDrum = httpsCallable(
-
-        functions,
-
-        'researchSnareReferenceDrum'
-
-      );
-
-      const result = await researchSnareReferenceDrum({
-
-        drumId: researchTarget.id,
-
+        researchJobError: '',
       });
 
-      console.log('Snare research job created:', result.data);
+      const researchSnareReferenceDrumWithAI = httpsCallable(
+        functions,
+
+        'researchSnareReferenceDrumWithAI'
+      );
+
+      const result = await researchSnareReferenceDrumWithAI({
+        drumId: researchTarget.id,
+      });
+
+      console.log('AI snare research complete:', result.data);
 
       setActiveReferenceResearchTarget({
-
         ...researchTarget,
 
         researchJob: result.data,
 
         researchJobError: '',
-
       });
-
     } catch (error) {
-
-      console.error('Failed creating snare research job:', error);
+      console.error('Failed running AI snare research:', error);
 
       setActiveReferenceResearchTarget({
-
         ...researchTarget,
 
-        researchJobError:
-
-          error?.message || 'Failed creating snare research job.',
-
+        researchJobError: error?.message || 'Failed running AI snare research.',
       });
-
     }
-
-  };
-
-  const handleProcessReferenceResearchJob = async (jobId) => {
-
-    const cleanJobId = String(jobId || '').trim();
-
-    if (!cleanJobId) {
-
-      window.alert('No research job ID found for this drum yet.');
-
-      return;
-
-    }
-
-    try {
-
-      setProcessingResearchJobId(cleanJobId);
-
-      const processSnareReferenceResearchJob = httpsCallable(
-
-        functions,
-
-        'processSnareReferenceResearchJob'
-
-      );
-
-      const result = await processSnareReferenceResearchJob({
-
-        jobId: cleanJobId,
-
-      });
-
-      console.log('Snare research job processed:', result.data);
-
-      setActiveReferenceResearchTarget((current) => ({
-
-        ...(current || {}),
-
-        researchJob: {
-
-          ...((current && current.researchJob) || {}),
-
-          ...(result.data || {}),
-
-          jobId: cleanJobId,
-
-        },
-
-        researchJobError: '',
-
-      }));
-
-      window.alert('Snare research job processed. Refresh the reference list if the card does not update immediately.');
-
-    } catch (error) {
-
-      console.error('Failed processing snare research job:', error);
-
-      setActiveReferenceResearchTarget((current) => ({
-
-        ...(current || {}),
-
-        researchJobError:
-
-          error?.message || 'Failed processing snare research job.',
-
-      }));
-
-      window.alert(error?.message || 'Failed processing snare research job.');
-
-    } finally {
-
-      setProcessingResearchJobId('');
-
-    }
-
   };
 
   const renderNonOberReferenceBuilder = () => {
@@ -12394,253 +12305,122 @@ const functions = useMemo(() => getFunctions(), []);
               onResearchReferenceDrum={handleResearchReferenceDrum}
             />
 
-{activeReferenceResearchTarget && (
-
-  <div className="legacyprint-admin-note neutral">
-
-    <strong>
-
-      Research target selected:{' '}
-
-      {activeReferenceResearchTarget.companyName || 'Unknown Company'} /{' '}
-
-      {activeReferenceResearchTarget.modelName || 'Unnamed Snare'}
-
-    </strong>
-
-    <span>
-
-      {activeReferenceResearchTarget.diameter || '?'}x
-
-      {activeReferenceResearchTarget.depth || '?'} ·{' '}
-
-      {activeReferenceResearchTarget.lineSeries || 'Unknown Series'}
-
-    </span>
-
-    {activeReferenceResearchTarget.researchJob?.jobId && (
-
-      <span>
-
-        Research job:{' '}
-
-        <strong>{activeReferenceResearchTarget.researchJob.jobId}</strong> ·{' '}
-
-        Status:{' '}
-
-        <strong>
-
-          {activeReferenceResearchTarget.researchJob.status || 'pending'}
-
-        </strong>
-
-      </span>
-
-    )}
-
-    {activeReferenceResearchTarget.researchJobError && (
-
-      <span style={{ color: '#ffb4a8' }}>
-
-        {activeReferenceResearchTarget.researchJobError}
-
-      </span>
-
-    )}
-
-    <div style={{ marginTop: '12px' }}>
-
-      <strong>Missing fields:</strong>
-
-      <ul>
-
-        {(
-
-          activeReferenceResearchTarget.researchJob?.missingFields ||
-
-          activeReferenceResearchTarget.researchNeeds?.missingFields ||
-
-          []
-
-        ).map((field) => (
-
-          <li key={field.key}>
-
-            <b>{field.label}</b> — {field.reason}
-
-          </li>
-
-        ))}
-
-      </ul>
-
-    </div>
-
-    <div
-
-      style={{
-
-        display: 'flex',
-
-        gap: '10px',
-
-        flexWrap: 'wrap',
-
-        marginTop: '12px',
-
-      }}
-
-    >
-
-      {activeReferenceResearchTarget.researchJob?.jobId && (
-
-        <button
-
-          type="button"
-
-          className="legacyprint-admin-button secondary"
-
-          disabled={
-
-            processingResearchJobId ===
-
-            activeReferenceResearchTarget.researchJob.jobId
-
-          }
-
-          onClick={() =>
-
-            handleProcessReferenceResearchJob(
-
-              activeReferenceResearchTarget.researchJob.jobId
-
-            )
-
-          }
-
-        >
-
-          {processingResearchJobId ===
-
-          activeReferenceResearchTarget.researchJob.jobId
-
-            ? 'Processing Research…'
-
-            : 'Process Research Job'}
-
-        </button>
-
-      )}
-
-      <button
-
-        type="button"
-
-        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-
-        onClick={() => {
-
-          const query = [
-
-            activeReferenceResearchTarget.companyName,
-
-            activeReferenceResearchTarget.lineSeries,
-
-            activeReferenceResearchTarget.modelName,
-
-            activeReferenceResearchTarget.diameter &&
-
-            activeReferenceResearchTarget.depth
-
-              ? `${activeReferenceResearchTarget.diameter}x${activeReferenceResearchTarget.depth}`
-
-              : '',
-
-            'snare drum specs lug count bearing edge hoop',
-
-          ]
-
-            .filter(Boolean)
-
-            .join(' ');
-
-          window.open(
-
-            `https://www.google.com/search?q=${encodeURIComponent(query)}`,
-
-            '_blank',
-
-            'noopener,noreferrer'
-
-          );
-
-        }}
-
-      >
-
-        Search Specs
-
-      </button>
-
-      <button
-
-        type="button"
-
-        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-
-        onClick={() => {
-
-          const query = [
-
-            activeReferenceResearchTarget.companyName,
-
-            activeReferenceResearchTarget.modelName,
-
-            'official',
-
-          ]
-
-            .filter(Boolean)
-
-            .join(' ');
-
-          window.open(
-
-            `https://www.google.com/search?q=${encodeURIComponent(query)}`,
-
-            '_blank',
-
-            'noopener,noreferrer'
-
-          );
-
-        }}
-
-      >
-
-        Search Official Source
-
-      </button>
-
-      <button
-
-        type="button"
-
-        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
-
-        onClick={() => setActiveReferenceResearchTarget(null)}
-
-      >
-
-        Clear Research Target
-
-      </button>
-
-    </div>
-
-  </div>
-
-)}
+            {activeReferenceResearchTarget && (
+              <div className="legacyprint-admin-note neutral">
+                <strong>
+                  Research target selected:{' '}
+                  {activeReferenceResearchTarget.companyName ||
+                    'Unknown Company'}{' '}
+                  / {activeReferenceResearchTarget.modelName || 'Unnamed Snare'}
+                </strong>
+
+                <span>
+                  {activeReferenceResearchTarget.diameter || '?'}x
+                  {activeReferenceResearchTarget.depth || '?'} ·{' '}
+                  {activeReferenceResearchTarget.lineSeries || 'Unknown Series'}
+                </span>
+
+                {activeReferenceResearchTarget.researchJob?.status && (
+                  <span>
+                    Research job:{' '}
+                    <strong>
+                      {activeReferenceResearchTarget.researchJob.jobId ||
+                        'Starting…'}
+                    </strong>{' '}
+                    · Status:{' '}
+                    <strong>
+                      {activeReferenceResearchTarget.researchJob.status}
+                    </strong>
+                  </span>
+                )}
+
+                {activeReferenceResearchTarget.researchJobError && (
+                  <span style={{ color: '#ffb4a8' }}>
+                    {activeReferenceResearchTarget.researchJobError}
+                  </span>
+                )}
+
+                <div style={{ marginTop: '12px' }}>
+                  <strong>Missing fields:</strong>
+
+                  <ul>
+                    {(
+                      activeReferenceResearchTarget.researchJob
+                        ?.missingFields ||
+                      activeReferenceResearchTarget.researchNeeds
+                        ?.missingFields ||
+                      []
+                    ).map((field) => (
+                      <li key={field.key}>
+                        <b>{field.label}</b> — {field.reason}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {activeReferenceResearchTarget.researchJob?.result && (
+                  <div style={{ marginTop: '12px' }}>
+                    <strong>AI Research Result</strong>
+
+                    <p style={{ marginTop: '8px' }}>
+                      {activeReferenceResearchTarget.researchJob.result
+                        .summary || 'Research completed.'}
+                    </p>
+
+                    {activeReferenceResearchTarget.researchJob.result
+                      .confirmedFields && (
+                      <ul>
+                        {Object.entries(
+                          activeReferenceResearchTarget.researchJob.result
+                            .confirmedFields
+                        )
+
+                          .filter(([, field]) => field?.value)
+
+                          .map(([key, field]) => (
+                            <li key={key}>
+                              <b>{key}</b>: {String(field.value)} · Confidence:{' '}
+                              {field.confidence || 'Unknown'}
+                              {field.sourceUrl ? (
+                                <>
+                                  {' '}
+                                  ·{' '}
+                                  <a
+                                    href={field.sourceUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    Source
+                                  </a>
+                                </>
+                              ) : null}
+                              {field.notes ? <> — {field.notes}</> : null}
+                            </li>
+                          ))}
+                      </ul>
+                    )}
+
+                    {Array.isArray(
+                      activeReferenceResearchTarget.researchJob.result.warnings
+                    ) &&
+                      activeReferenceResearchTarget.researchJob.result.warnings
+                        .length > 0 && (
+                        <div style={{ marginTop: '8px' }}>
+                          <strong>Warnings:</strong>
+
+                          <ul>
+                            {activeReferenceResearchTarget.researchJob.result.warnings.map(
+                              (warning, index) => (
+                                <li key={`${warning}-${index}`}>{warning}</li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                  </div>
+                )}
+              </div>
+            )}
           </section>
         )}
 
