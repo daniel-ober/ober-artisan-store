@@ -1,0 +1,50 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-bubinga-14x6-5-pass-4",
+
+  "researchStatus": "draft",
+
+  "doNotApplyAutomatically": true,
+
+  "notes": "Tama Starclassic Bubinga 14x6.5 focused shell-edge pass. Only updates the missing bearing edge field if the source-backed Starclassic/Bubinga edge language is acceptable. Stock batter/reso heads remain unknown unless directly sourced.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Bubinga 14x6.5 bearing edge update",
+
+      "target": {
+
+        "modelName": "Starclassic Bubinga 14x6.5",
+
+        "diameter": 14,
+
+        "depth": 6.5
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface"
+
+        },
+
+        "notes": {
+
+"scoringBasis": "Tama official Starclassic Bubinga reissue news states the reissue faithfully reproduces the original 9-ply, 6mm shell construction, with 7mm for snare and bass drums, as it was when discontinued in 2018. Reputable Hoshino USA/dealer listing supports 7mm snare shell, 9-ply original reissue design, Linear-Drive Strainer, one-piece lugs, Super Sensitive Hi-Carbon Snare Wire, and Snappy Bed. Added Starclassic rounded bearing edge profile / 2.5mm inward edge language to the Starclassic Bubinga 14x6.5 record only. Stock batter/reso heads remain unconfirmed from official source."
+        }
+
+      }
+
+    }
+
+  ]
+
+}
