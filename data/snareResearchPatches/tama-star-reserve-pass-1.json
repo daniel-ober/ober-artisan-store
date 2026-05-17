@@ -1,0 +1,453 @@
+{
+
+  "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219": {
+
+    "companyName": "Tama",
+
+    "companyType": "Major Manufacturer",
+
+    "lineSeries": "STAR Reserve",
+
+    "modelName": "STAR Reserve G-Mahogany 14x6.5",
+
+    "drumType": "Snare",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial": "African Mahogany",
+
+    "shellMaterialPrimary": "African Mahogany",
+
+    "shellMaterialSecondary": "Tineo outer ply",
+
+    "shellThicknessMm": 9,
+
+    "plyCount": 11,
+
+    "bearingEdgeShape": "Unknown",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "None",
+
+    "reinforcementRingThicknessMm": null,
+
+    "snareBeds": "Unknown",
+
+    "snareBedDepth": "Unknown",
+
+    "finishType": "Satin Natural Tineo / lacquer",
+
+    "hoopType": "2.3mm Steel Mighty Hoop / triple-flanged steel",
+
+    "lugCount": 10,
+
+    "lugType": "Unknown",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Unknown",
+
+    "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wires",
+
+    "stockBatterHead": "Unknown",
+
+    "stockResoHead": "Unknown",
+
+    "modelNumber": "TGHS1465SSNT",
+
+    "currentlyInProduction": true,
+
+    "artistSignatureLine": false,
+
+    "discontinued": false,
+
+    "rareCollectible": true,
+
+    "yearIntroduced": 2026,
+
+    "yearDiscontinued": null,
+
+    "voiceScoreConfidence": "Medium-High",
+
+    "scoringBasis": "Shell-first score based on documented 9mm/11-ply African Mahogany shell with Tineo outer ply and 2.3mm flanged steel hoops. Bearing edge and snare bed details remain unknown.",
+
+    "sourceConfidence": "High",
+
+    "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100421.html",
+
+    "secondarySourceUrl": "https://www.sweetwater.com/store/detail/TGHS1465GM--tama-star-reserve-g-mahogany-snare-drum-6.5-inches-by-14-inches-natural-tineo",
+
+    "notesOnMissingData": "Bearing edge shape, snare bed depth, throw-off model, and exact head models need stronger source confirmation.",
+
+    "shortDescription": "14x6.5 STAR Reserve G-Mahogany snare with a thick 9mm/11-ply African Mahogany shell, Tineo outer ply, and 2.3mm flanged steel hoops.",
+
+    "drumSummaryNotes": "Shell-first read should emphasize warm full-bodied mahogany tone, thicker-shell focus, and relatively open sustain from flanged steel hoops rather than die-cast hoops."
+
+  },
+
+  "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02": {
+
+    "companyName": "Tama",
+
+    "companyType": "Major Manufacturer",
+
+    "lineSeries": "STAR Reserve",
+
+    "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+
+    "drumType": "Snare",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "Metal",
+
+    "shellMaterial": "Aluminum",
+
+    "shellMaterialPrimary": "Aluminum",
+
+    "shellMaterialSecondary": "None",
+
+    "shellThicknessMm": null,
+
+    "plyCount": null,
+
+    "bearingEdgeShape": "Unknown",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "None",
+
+    "reinforcementRingThicknessMm": null,
+
+    "snareBeds": "Unknown",
+
+    "snareBedDepth": "Unknown",
+
+    "finishType": "Hand hammered aluminum",
+
+    "hoopType": "Unknown",
+
+    "lugCount": null,
+
+    "lugType": "Unknown",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Unknown",
+
+    "stockSnareWires": "Unknown",
+
+    "stockBatterHead": "Unknown",
+
+    "stockResoHead": "Unknown",
+
+    "modelNumber": "Unknown",
+
+    "currentlyInProduction": "Unknown",
+
+    "artistSignatureLine": false,
+
+    "discontinued": "Unknown",
+
+    "rareCollectible": true,
+
+    "yearIntroduced": null,
+
+    "yearDiscontinued": null,
+
+    "voiceScoreConfidence": "Medium",
+
+    "scoringBasis": "Shell-first score based on documented STAR Reserve hand-hammered aluminum identity and 14x6.5 size. Shell thickness, hoop type, and throw-off details still need stronger source confirmation.",
+
+    "sourceConfidence": "Medium",
+
+    "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_snare/",
+
+    "secondarySourceUrl": "",
+
+    "notesOnMissingData": "Need confirmed shell thickness, hoop type, lug count, throw-off, stock wires, and head models from official or retailer spec sheet.",
+
+    "shortDescription": "14x6.5 STAR Reserve hand-hammered aluminum snare with metal shell construction and hammered aluminum finish.",
+
+    "drumSummaryNotes": "Shell-first read should emphasize dry, articulate aluminum response with added complexity from hammering. Keep confidence below high until shell thickness and hoop details are verified."
+
+  },
+
+  "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68": {
+
+    "companyName": "Tama",
+
+    "companyType": "Major Manufacturer",
+
+    "lineSeries": "STAR Reserve",
+
+    "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+
+    "drumType": "Snare",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "Metal",
+
+    "shellMaterial": "Brass",
+
+    "shellMaterialPrimary": "Brass",
+
+    "shellMaterialSecondary": "None",
+
+    "shellThicknessMm": 1.5,
+
+    "plyCount": null,
+
+    "bearingEdgeShape": "Unknown",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "None",
+
+    "reinforcementRingThicknessMm": null,
+
+    "snareBeds": "Unknown",
+
+    "snareBedDepth": "Unknown",
+
+    "finishType": "Hand hammered brass",
+
+    "hoopType": "2.3mm Customized Brass Mighty Hoop / flanged brass",
+
+    "lugCount": 8,
+
+    "lugType": "MSL905C",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "MLS50A / MLS50B Linear Drive strainer and butt",
+
+    "stockSnareWires": "M520RL14C Super Sensitive Hi-Carbon 20-strand snare wires",
+
+    "stockBatterHead": "Tama logo coated Ambassador",
+
+    "stockResoHead": "Unknown",
+
+    "modelNumber": "TBRS1455H",
+
+    "currentlyInProduction": "Unknown",
+
+    "artistSignatureLine": false,
+
+    "discontinued": "Unknown",
+
+    "rareCollectible": true,
+
+    "yearIntroduced": 2020,
+
+    "yearDiscontinued": null,
+
+    "voiceScoreConfidence": "High",
+
+    "scoringBasis": "Shell-first score based on documented 1.5mm hand-hammered brass shell, 14x5.5 size, and 2.3mm brass flanged hoops. Hardware and stock wire details supported by retailer specs.",
+
+    "sourceConfidence": "High",
+
+    "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_hand_hammerd_brass.html",
+
+    "secondarySourceUrl": "https://memphisdrumshop.com/products/tama-14x55-star-reserve-hand-hammered-brass-snare-drum-tbrs1455h",
+
+    "notesOnMissingData": "Bearing edge profile, snare bed depth, and stock resonant head still need stronger confirmation.",
+
+    "shortDescription": "14x5.5 STAR Reserve hand-hammered brass snare with 1.5mm brass shell and 2.3mm customized brass flanged hoops.",
+
+    "drumSummaryNotes": "Shell-first read should emphasize brass warmth, musical projection, clear attack, and added complexity from hammering. Brass flanged hoops should preserve openness while adding bright attack."
+
+  },
+
+  "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0": {
+
+    "companyName": "Tama",
+
+    "companyType": "Major Manufacturer",
+
+    "lineSeries": "STAR Reserve",
+
+    "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+
+    "drumType": "Snare",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "Metal",
+
+    "shellMaterial": "Copper",
+
+    "shellMaterialPrimary": "Copper",
+
+    "shellMaterialSecondary": "None",
+
+    "shellThicknessMm": null,
+
+    "plyCount": null,
+
+    "bearingEdgeShape": "Unknown",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "None",
+
+    "reinforcementRingThicknessMm": null,
+
+    "snareBeds": "Unknown",
+
+    "snareBedDepth": "Unknown",
+
+    "finishType": "Hand hammered copper",
+
+    "hoopType": "Unknown",
+
+    "lugCount": null,
+
+    "lugType": "Unknown",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Unknown",
+
+    "stockSnareWires": "Unknown",
+
+    "stockBatterHead": "Unknown",
+
+    "stockResoHead": "Unknown",
+
+    "modelNumber": "Unknown",
+
+    "currentlyInProduction": "Unknown",
+
+    "artistSignatureLine": false,
+
+    "discontinued": "Unknown",
+
+    "rareCollectible": true,
+
+    "yearIntroduced": null,
+
+    "yearDiscontinued": null,
+
+    "voiceScoreConfidence": "Medium",
+
+    "scoringBasis": "Shell-first score based on documented 14x6.5 STAR Reserve hand-hammered copper shell identity. Shell thickness, hoop type, and exact hardware details still need stronger source confirmation.",
+
+    "sourceConfidence": "Medium",
+
+    "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_snare/",
+
+    "secondarySourceUrl": "",
+
+    "notesOnMissingData": "Need confirmed model number, shell thickness, hoop type, lug count, throw-off, wires, and head models from official or retailer spec sheet.",
+
+    "shortDescription": "14x6.5 STAR Reserve hand-hammered copper snare with warm copper shell character and hammered shell shaping.",
+
+    "drumSummaryNotes": "Shell-first read should emphasize warm copper body, rich resonance, and bright attack shaped by hammering. Keep confidence below high until exact shell thickness and hoop details are confirmed."
+
+  },
+
+  "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae": {
+
+    "companyName": "Tama",
+
+    "companyType": "Major Manufacturer",
+
+    "lineSeries": "STAR Reserve",
+
+    "modelName": "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5",
+
+    "drumType": "Snare",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "Solid Shell",
+
+    "shellMaterial": "Maple",
+
+    "shellMaterialPrimary": "Solid Maple",
+
+    "shellMaterialSecondary": "Maple Sound Focus Rings",
+
+    "shellThicknessMm": 8,
+
+    "plyCount": null,
+
+    "bearingEdgeShape": "Slightly sharper Starclassic bearing edge",
+
+    "reinforcementRings": true,
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThicknessMm": 8,
+
+    "snareBeds": "Unknown",
+
+    "snareBedDepth": "Unknown",
+
+    "finishType": "Hand-rubbed oil / Oiled Natural Maple",
+
+    "hoopType": "2.3mm Brass Sound Arc Hoop / brass triple-flanged rounded profile",
+
+    "lugCount": 8,
+
+    "lugType": "STAR Tube Lug with lug nut",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "MLS50A / MLS50B Linear Drive strainer and butt",
+
+    "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire for Concert",
+
+    "stockBatterHead": "Tama by Remo USA",
+
+    "stockResoHead": "Unknown",
+
+    "modelNumber": "TLM145SOMP",
+
+    "currentlyInProduction": "Unknown",
+
+    "artistSignatureLine": false,
+
+    "discontinued": "Unknown",
+
+    "rareCollectible": true,
+
+    "yearIntroduced": null,
+
+    "yearDiscontinued": null,
+
+    "voiceScoreConfidence": "High",
+
+    "scoringBasis": "Shell-first score based on documented 8mm solid maple shell with 8mm maple Sound Focus Rings, Starclassic bearing edge, 14x5 size, and 2.3mm Brass Sound Arc hoops.",
+
+    "sourceConfidence": "High",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/star_reserve_maple_shell_model.html",
+
+    "secondarySourceUrl": "https://drumcenternh.com/products/tama-star-reserve-solid-maple-snare-drum-14x5-oiled-natural-maple",
+
+    "notesOnMissingData": "Need confirmed snare bed depth and exact resonant head model.",
+
+    "shortDescription": "14x5 STAR Reserve Vol. 1 solid maple snare with 8mm solid maple shell, 8mm maple Sound Focus Rings, Starclassic bearing edge, and Brass Sound Arc hoops.",
+
+    "drumSummaryNotes": "Shell-first read should emphasize high sensitivity, clear maple attack, focused shell response from Sound Focus Rings, and bright/open articulation from Brass Sound Arc hoops."
+
+  }
+
+}
