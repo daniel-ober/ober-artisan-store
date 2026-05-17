@@ -4,71 +4,37 @@ import './SnareReferenceEditor.css';
 
 const VOICE_SCORE_FIELDS = [
 
-  {
+  { key: 'overallAttackOberScore', label: 'Attack' },
 
-    key: 'overallAttackOberScore',
+  { key: 'overallBrightnessOberScore', label: 'Brightness' },
 
-    label: 'Attack',
+  { key: 'overallProjectionOberScore', label: 'Projection' },
 
-  },
+  { key: 'overallSustainOberScore', label: 'Sustain' },
 
-  {
+  { key: 'overallWarmthOberScore', label: 'Warmth' },
 
-    key: 'overallBrightnessOberScore',
+  { key: 'overallSensitivityOberScore', label: 'Sensitivity' },
 
-    label: 'Brightness',
-
-  },
-
-  {
-
-    key: 'overallProjectionOberScore',
-
-    label: 'Projection',
-
-  },
-
-  {
-
-    key: 'overallSustainOberScore',
-
-    label: 'Sustain',
-
-  },
-
-  {
-
-    key: 'overallWarmthOberScore',
-
-    label: 'Warmth',
-
-  },
-
-  {
-
-    key: 'overallSensitivityOberScore',
-
-    label: 'Sensitivity',
-
-  },
-
-  {
-
-    key: 'overallControlOberScore',
-
-    label: 'Control',
-
-  },
+  { key: 'overallControlOberScore', label: 'Control' },
 
 ];
 
 const FIELD_PATHS = {
 
+  companyName: ['companyName'],
+
   companyType: ['companyType'],
+
+  lineSeries: ['lineSeries'],
+
+  modelName: ['modelName'],
+
+  title: ['title'],
 
   modelNum: ['identification.modelNumber', 'production.modelNum', 'modelNum'],
 
-  imgUrl: ['sources.imageUrls.0.url', 'sources.imageUrl', 'imgUrl'],
+  imgUrl: ['imgUrl', 'sources.imageUrl'],
 
   drumType: ['shell.drumType', 'drumType'],
 
@@ -180,15 +146,7 @@ const FIELD_PATHS = {
 
   ],
 
-  finishType: [
-
-    'shell.finish.finishType',
-
-    'shell.finishType',
-
-    'finishType',
-
-  ],
+  finishType: ['shell.finish.finishType', 'shell.finishType', 'finishType'],
 
   hoopRimType: [
 
@@ -334,23 +292,15 @@ const FIELD_PATHS = {
 
   ],
 
-  sourceConfidence: [
-
-    'sources.sourceConfidence',
-
-    'sourceConfidence',
-
-  ],
+  sourceConfidence: ['sources.sourceConfidence', 'sourceConfidence'],
 
   primarySourceUrl: ['sources.primarySourceUrl', 'primarySourceUrl'],
 
   secondarySourceUrl: [
 
-    'sources.secondarySourceUrls.0',
+    'secondarySourceUrl',
 
     'sources.secondarySourceUrl',
-
-    'secondarySourceUrl',
 
   ],
 
@@ -404,37 +354,15 @@ const FIELD_PATHS = {
 
   recommendedBatterHz: ['tuning.recommendedBatterHz', 'recommendedBatterHz'],
 
-  recommendedBatterNote: [
-
-    'tuning.recommendedBatterNote',
-
-    'recommendedBatterNote',
-
-  ],
+  recommendedBatterNote: ['tuning.recommendedBatterNote', 'recommendedBatterNote'],
 
   recommendedResoHz: ['tuning.recommendedResoHz', 'recommendedResoHz'],
 
   recommendedResoNote: ['tuning.recommendedResoNote', 'recommendedResoNote'],
 
-  scoringBasis: [
+  scoringBasis: ['summary.drumSummaryNotes', 'oberScores.scoringBasis', 'scoringBasis'],
 
-    'summary.drumSummaryNotes',
-
-    'oberScores.scoringBasis',
-
-    'scoringBasis',
-
-  ],
-
-  notesOnMissingData: [
-
-    'sources.notesOnMissingData',
-
-    'notes.missingData',
-
-    'notesOnMissingData',
-
-  ],
+  notesOnMissingData: ['sources.notesOnMissingData', 'notes.missingData', 'notesOnMissingData'],
 
   drumSummaryNotes: ['summary.shortDescription', 'notes.summary', 'drumSummaryNotes'],
 
@@ -466,7 +394,7 @@ const getFieldValue = (source = {}, key = '') => {
 
     if (value !== undefined && value !== null && value !== '') {
 
-      return value;
+      return Array.isArray(value) ? value.join('\n') : value;
 
     }
 
@@ -530,69 +458,21 @@ const TEXT_FIELD_GROUPS = [
 
     fields: [
 
-      {
+      { key: 'companyName', label: 'Company Name' },
 
-        key: 'companyName',
+      { key: 'companyType', label: 'Company Type' },
 
-        label: 'Company Name',
+      { key: 'lineSeries', label: 'Line / Series' },
 
-      },
+      { key: 'modelName', label: 'Model Name' },
 
-      {
+      { key: 'title', label: 'Title' },
 
-        key: 'companyType',
+      { key: 'drumType', label: 'Drum Type' },
 
-        label: 'Company Type',
+      { key: 'modelNum', label: 'Model Number' },
 
-      },
-
-      {
-
-        key: 'lineSeries',
-
-        label: 'Line / Series',
-
-      },
-
-      {
-
-        key: 'modelName',
-
-        label: 'Model Name',
-
-      },
-
-      {
-
-        key: 'title',
-
-        label: 'Title',
-
-      },
-
-      {
-
-        key: 'drumType',
-
-        label: 'Drum Type',
-
-      },
-
-      {
-
-        key: 'modelNum',
-
-        label: 'Model Number',
-
-      },
-
-      {
-
-        key: 'imgUrl',
-
-        label: 'Image URL',
-
-      },
+      { key: 'imgUrl', label: 'Image URL' },
 
     ],
 
@@ -604,121 +484,31 @@ const TEXT_FIELD_GROUPS = [
 
     fields: [
 
-      {
+      { key: 'diameter', label: 'Diameter', type: 'number', step: '0.1' },
 
-        key: 'diameter',
+      { key: 'depth', label: 'Depth', type: 'number', step: '0.1' },
 
-        label: 'Diameter',
+      { key: 'shellConstruction', label: 'Shell Construction' },
 
-        type: 'number',
+      { key: 'normalizedShellConstruction', label: 'Normalized Shell Construction' },
 
-        step: '0.1',
+      { key: 'shellMaterial1', label: 'Shell Material 1' },
 
-      },
+      { key: 'shellMaterial2', label: 'Shell Material 2' },
 
-      {
+      { key: 'shellMaterial3', label: 'Shell Material 3' },
 
-        key: 'depth',
+      { key: 'plyCountLayup', label: 'Ply Count / Layup' },
 
-        label: 'Depth',
+      { key: 'shellThicknessMm', label: 'Shell Thickness mm', type: 'number', step: '0.1' },
 
-        type: 'number',
+      { key: 'reinforcementRings', label: 'Reinforcement Rings' },
 
-        step: '0.1',
+      { key: 'bearingEdge', label: 'Bearing Edge' },
 
-      },
+      { key: 'snareBedType', label: 'Snare Bed Type' },
 
-      {
-
-        key: 'shellConstruction',
-
-        label: 'Shell Construction',
-
-      },
-
-      {
-
-        key: 'normalizedShellConstruction',
-
-        label: 'Normalized Shell Construction',
-
-      },
-
-      {
-
-        key: 'shellMaterial1',
-
-        label: 'Shell Material 1',
-
-      },
-
-      {
-
-        key: 'shellMaterial2',
-
-        label: 'Shell Material 2',
-
-      },
-
-      {
-
-        key: 'shellMaterial3',
-
-        label: 'Shell Material 3',
-
-      },
-
-      {
-
-        key: 'plyCountLayup',
-
-        label: 'Ply Count / Layup',
-
-      },
-
-      {
-
-        key: 'shellThicknessMm',
-
-        label: 'Shell Thickness mm',
-
-        type: 'number',
-
-        step: '0.1',
-
-      },
-
-      {
-
-        key: 'reinforcementRings',
-
-        label: 'Reinforcement Rings',
-
-      },
-
-      {
-
-        key: 'bearingEdge',
-
-        label: 'Bearing Edge',
-
-      },
-
-      {
-
-        key: 'snareBedType',
-
-        label: 'Snare Bed Type',
-
-      },
-
-      {
-
-        key: 'finishType',
-
-        label: 'Finish Type',
-
-      },
+      { key: 'finishType', label: 'Finish Type' },
 
     ],
 
@@ -730,73 +520,21 @@ const TEXT_FIELD_GROUPS = [
 
     fields: [
 
-      {
+      { key: 'hoopRimType', label: 'Hoop / Rim Type' },
 
-        key: 'hoopRimType',
+      { key: 'lugCount', label: 'Lug Count', type: 'number', step: '1' },
 
-        label: 'Hoop / Rim Type',
+      { key: 'lugType', label: 'Lug Type' },
 
-      },
+      { key: 'hardwareFinish', label: 'Hardware Finish' },
 
-      {
+      { key: 'snareThrowMakeModel', label: 'Snare Throw Make / Model' },
 
-        key: 'lugCount',
+      { key: 'stockSnareWires', label: 'Stock Snare Wires' },
 
-        label: 'Lug Count',
+      { key: 'stockBatterHead', label: 'Stock Batter Head' },
 
-        type: 'number',
-
-        step: '1',
-
-      },
-
-      {
-
-        key: 'lugType',
-
-        label: 'Lug Type',
-
-      },
-
-      {
-
-        key: 'hardwareFinish',
-
-        label: 'Hardware Finish',
-
-      },
-
-      {
-
-        key: 'snareThrowMakeModel',
-
-        label: 'Snare Throw Make / Model',
-
-      },
-
-      {
-
-        key: 'stockSnareWires',
-
-        label: 'Stock Snare Wires',
-
-      },
-
-      {
-
-        key: 'stockBatterHead',
-
-        label: 'Stock Batter Head',
-
-      },
-
-      {
-
-        key: 'stockResoHead',
-
-        label: 'Stock Reso Head',
-
-      },
+      { key: 'stockResoHead', label: 'Stock Reso Head' },
 
     ],
 
@@ -808,85 +546,25 @@ const TEXT_FIELD_GROUPS = [
 
     fields: [
 
-      {
+      { key: 'currentlyInProduction', label: 'Currently In Production' },
 
-        key: 'currentlyInProduction',
+      { key: 'artistSignatureLine', label: 'Artist / Signature Line' },
 
-        label: 'Currently In Production',
+      { key: 'discontinued', label: 'Discontinued' },
 
-      },
+      { key: 'rareCollectible', label: 'Rare / Collectible' },
 
-      {
+      { key: 'yearInProduction', label: 'Year In Production' },
 
-        key: 'artistSignatureLine',
+      { key: 'yearDiscontinued', label: 'Year Discontinued' },
 
-        label: 'Artist / Signature Line',
+      { key: 'voiceScoreConfidence', label: 'Voice Score Confidence' },
 
-      },
+      { key: 'sourceConfidence', label: 'Source Confidence' },
 
-      {
+      { key: 'primarySourceUrl', label: 'Primary Source URL' },
 
-        key: 'discontinued',
-
-        label: 'Discontinued',
-
-      },
-
-      {
-
-        key: 'rareCollectible',
-
-        label: 'Rare / Collectible',
-
-      },
-
-      {
-
-        key: 'yearInProduction',
-
-        label: 'Year In Production',
-
-      },
-
-      {
-
-        key: 'yearDiscontinued',
-
-        label: 'Year Discontinued',
-
-      },
-
-      {
-
-        key: 'voiceScoreConfidence',
-
-        label: 'Voice Score Confidence',
-
-      },
-
-      {
-
-        key: 'sourceConfidence',
-
-        label: 'Source Confidence',
-
-      },
-
-      {
-
-        key: 'primarySourceUrl',
-
-        label: 'Primary Source URL',
-
-      },
-
-      {
-
-        key: 'secondarySourceUrl',
-
-        label: 'Secondary Source URL',
-
-      },
+      { key: 'secondarySourceUrl', label: 'Secondary Source URL' },
 
     ],
 
@@ -896,101 +574,29 @@ const TEXT_FIELD_GROUPS = [
 
 const TEXTAREA_FIELDS = [
 
-  {
+  { key: 'description', label: 'Description' },
 
-    key: 'description',
+  { key: 'scoringBasis', label: 'Scoring Basis' },
 
-    label: 'Description',
+  { key: 'notesOnMissingData', label: 'Notes On Missing Data' },
 
-  },
-
-  {
-
-    key: 'scoringBasis',
-
-    label: 'Scoring Basis',
-
-  },
-
-  {
-
-    key: 'notesOnMissingData',
-
-    label: 'Notes On Missing Data',
-
-  },
-
-  {
-
-    key: 'drumSummaryNotes',
-
-    label: 'Drum Summary Notes',
-
-  },
+  { key: 'drumSummaryNotes', label: 'Drum Summary Notes' },
 
 ];
 
 const TUNING_FIELDS = [
 
-  {
+  { key: 'projectedShellFundamentalPitch', label: 'Projected Shell Fundamental Pitch' },
 
-    key: 'projectedShellFundamentalPitch',
+  { key: 'projectedShellFundamentalHz', label: 'Projected Shell Fundamental Hz', type: 'number', step: '1' },
 
-    label: 'Projected Shell Fundamental Pitch',
+  { key: 'recommendedBatterHz', label: 'Recommended Batter Hz', type: 'number', step: '1' },
 
-  },
+  { key: 'recommendedBatterNote', label: 'Recommended Batter Note' },
 
-  {
+  { key: 'recommendedResoHz', label: 'Recommended Reso Hz', type: 'number', step: '1' },
 
-    key: 'projectedShellFundamentalHz',
-
-    label: 'Projected Shell Fundamental Hz',
-
-    type: 'number',
-
-    step: '1',
-
-  },
-
-  {
-
-    key: 'recommendedTuningBatterHz',
-
-    label: 'Recommended Batter Hz',
-
-    type: 'number',
-
-    step: '1',
-
-  },
-
-  {
-
-    key: 'recommendedTuningBatterNote',
-
-    label: 'Recommended Batter Note',
-
-  },
-
-  {
-
-    key: 'recommendedTuningResoHz',
-
-    label: 'Recommended Reso Hz',
-
-    type: 'number',
-
-    step: '1',
-
-  },
-
-  {
-
-    key: 'recommendedTuningResoNote',
-
-    label: 'Recommended Reso Note',
-
-  },
+  { key: 'recommendedResoNote', label: 'Recommended Reso Note' },
 
 ];
 
@@ -1034,11 +640,7 @@ const normalizeValueForSave = ({ field, value }) => {
 
   if (field?.type === 'number') {
 
-    if (value === '' || value === null || value === undefined) {
-
-      return '';
-
-    }
+    if (value === '' || value === null || value === undefined) return '';
 
     const number = Number(value);
 
@@ -1084,7 +686,7 @@ const SnareReferenceEditor = ({
 
     setIsOpen(false);
 
-  }, [drum?.id]);
+  }, [drum]);
 
   const hasChanges = useMemo(() => {
 
@@ -1104,13 +706,35 @@ const SnareReferenceEditor = ({
 
   };
 
-const buildSavePayload = () => {
+  const buildSavePayload = () => {
 
-  const payload = {};
+    const payload = {};
 
-  TEXT_FIELD_GROUPS.forEach((group) => {
+    TEXT_FIELD_GROUPS.forEach((group) => {
 
-    group.fields.forEach((field) => {
+      group.fields.forEach((field) => {
+
+        setPayloadField(
+
+          payload,
+
+          field.key,
+
+          normalizeValueForSave({ field, value: form[field.key] })
+
+        );
+
+      });
+
+    });
+
+    TEXTAREA_FIELDS.forEach((field) => {
+
+      setPayloadField(payload, field.key, form[field.key] || '');
+
+    });
+
+    TUNING_FIELDS.forEach((field) => {
 
       setPayloadField(
 
@@ -1118,59 +742,27 @@ const buildSavePayload = () => {
 
         field.key,
 
-        normalizeValueForSave({
-
-          field,
-
-          value: form[field.key],
-
-        })
+        normalizeValueForSave({ field, value: form[field.key] })
 
       );
 
     });
 
-  });
+    VOICE_SCORE_FIELDS.forEach((field) => {
 
-  TEXTAREA_FIELDS.forEach((field) => {
+      const number = Number(form[field.key]);
 
-    setPayloadField(payload, field.key, form[field.key] || '');
+      setPayloadField(payload, field.key, Number.isFinite(number) ? number : '');
 
-  });
+    });
 
-  TUNING_FIELDS.forEach((field) => {
+    return payload;
 
-    setPayloadField(
-
-      payload,
-
-      field.key,
-
-      normalizeValueForSave({
-
-        field,
-
-        value: form[field.key],
-
-      })
-
-    );
-
-  });
-
-  VOICE_SCORE_FIELDS.forEach((field) => {
-
-    const number = Number(form[field.key]);
-
-    setPayloadField(payload, field.key, Number.isFinite(number) ? number : '');
-
-  });
-
-  return payload;
-
-};
+  };
 
   const handleSave = async () => {
+
+    if (!onSave) return;
 
     const payload = buildSavePayload();
 
@@ -1186,11 +778,7 @@ const buildSavePayload = () => {
 
   };
 
-  if (!drum) {
-
-    return null;
-
-  }
+  if (!drum) return null;
 
   return (
 
@@ -1200,11 +788,7 @@ const buildSavePayload = () => {
 
         <div>
 
-          <p className="snare-reference-editor__overline">
-
-            Firestore editor
-
-          </p>
+          <p className="snare-reference-editor__overline">Firestore editor</p>
 
           <h4>Edit selected snare reference</h4>
 
@@ -1230,7 +814,7 @@ const buildSavePayload = () => {
 
           )}
 
-                    {onResearch && (
+          {onResearch && (
 
             <button
 
@@ -1248,7 +832,7 @@ const buildSavePayload = () => {
 
           )}
 
-                 <button
+          <button
 
             type="button"
 
@@ -1266,7 +850,7 @@ const buildSavePayload = () => {
 
       </div>
 
-            {researchNeeds?.needsResearch && (
+      {researchNeeds?.needsResearch && (
 
         <div className="snare-reference-editor__research-panel">
 
@@ -1334,9 +918,9 @@ const buildSavePayload = () => {
 
                 <span>
 
-                  {form.companyName || 'Unknown Company'} ·{' '}
+                  {form.companyName || 'Unknown Company'} · {form.diameter || '?'}
 
-                  {form.diameter || '?'}x{form.depth || '?'}
+                  x{form.depth || '?'}
 
                 </span>
 
@@ -1348,13 +932,7 @@ const buildSavePayload = () => {
 
           {TEXT_FIELD_GROUPS.map((group) => (
 
-            <section
-
-              key={group.title}
-
-              className="snare-reference-editor__group"
-
-            >
+            <section key={group.title} className="snare-reference-editor__group">
 
               <div className="snare-reference-editor__group-heading">
 
@@ -1366,7 +944,13 @@ const buildSavePayload = () => {
 
                 {group.fields.map((field) => (
 
-                  <label key={field.key} className="snare-reference-editor__field">
+                  <label
+
+                    key={field.key}
+
+                    className="snare-reference-editor__field"
+
+                  >
 
                     <span>{field.label}</span>
 
@@ -1454,7 +1038,13 @@ const buildSavePayload = () => {
 
               {TUNING_FIELDS.map((field) => (
 
-                <label key={field.key} className="snare-reference-editor__field">
+                <label
+
+                  key={field.key}
+
+                  className="snare-reference-editor__field"
+
+                >
 
                   <span>{field.label}</span>
 
