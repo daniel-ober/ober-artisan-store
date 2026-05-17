@@ -1,0 +1,197 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "researchStatus": "reviewed-draft",
+
+  "doNotApplyAutomatically": true,
+
+  "sourceNotes": [
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA Starclassic Maple product page",
+
+      "supports": [
+
+        "Starclassic bearing edge description",
+
+        "Zinc die-cast hoops for Starclassic Maple"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA Starclassic Walnut/Birch product page",
+
+      "supports": [
+
+        "Starclassic bearing edge description"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official",
+
+      "sourceName": "TAMA Starclassic Snare Wires product page",
+
+      "supports": [
+
+        "Starclassic snare wire family",
+
+        "MS20SN14B bell brass strands"
+
+      ]
+
+    },
+
+    {
+
+      "sourceType": "official-catalog",
+
+      "sourceName": "TAMA 1996 catalog",
+
+      "supports": [
+
+        "1990s Starclassic Birch and Maple snare drums: 5mm, 9-ply shells"
+
+      ]
+
+    }
+
+  ],
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Modern Starclassic Maple",
+
+      "matchModelNames": [
+
+        "Starclassic Maple 14x5.5",
+
+        "Starclassic Maple 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "shell.bearingEdge": "TAMA Starclassic bearing edge: top edge angle set 2.5mm inside from the outer shell surface, cut to a rounded collar to follow the natural drumhead shape",
+
+        "hardware.hoopRimType": "Zinc die-cast hoops",
+
+        "hardware.stockSnareWires": "TAMA Starclassic snare wires / MS20SN14B bell brass strands for 14 inch models"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.snareBedType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "Modern Starclassic Walnut/Birch",
+
+      "matchModelNames": [
+
+        "Starclassic Walnut/Birch 14x5.5",
+
+        "Starclassic Walnut/Birch 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "shell.bearingEdge": "TAMA Starclassic bearing edge: top edge angle set 2.5mm inside from the outer shell surface, cut to a rounded collar to follow the natural drumhead shape",
+
+        "hardware.stockSnareWires": "TAMA Starclassic snare wires / MS20SN14B bell brass strands for 14 inch models"
+
+      },
+
+      "doNotUpdateYet": [
+
+        "shell.thicknessMm",
+
+        "shell.snareBedType",
+
+        "hardware.snareThrowMakeAndModel",
+
+        "hardware.stockBatterHead",
+
+        "hardware.stockResoHead"
+
+      ]
+
+    },
+
+    {
+
+      "groupName": "Older Starclassic Maple / Birch catalog-backed",
+
+      "matchModelNames": [
+
+        "Starclassic Maple 14x5.5",
+
+        "Starclassic Maple 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 5,
+
+        "shell.plyCountLayup": "9-ply maple, catalog-backed for 1990s Starclassic Maple/Birch era"
+
+      },
+
+      "warning": "Only apply if these Firestore docs are intended to represent the 1990s Starclassic Maple/Birch catalog era. Do not apply to modern 5mm Starclassic Maple docs unless already aligned."
+
+    }
+
+  ],
+
+  "unresolvedFields": [
+
+    "shell.snareBedType",
+
+    "hardware.snareThrowMakeAndModel",
+
+    "hardware.stockBatterHead",
+
+    "hardware.stockResoHead",
+
+    "Bubinga shell thickness",
+
+    "Bubinga Elite shell thickness",
+
+    "G-Maple / G-Bubinga reinforcement ring status",
+
+    "Performer Birch/Bubinga shell thickness",
+
+    "Exotix Maple shell thickness"
+
+  ]
+
+}
