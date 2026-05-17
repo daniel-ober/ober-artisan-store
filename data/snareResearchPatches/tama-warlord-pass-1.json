@@ -1,0 +1,1057 @@
+{
+  "tama_warlord_warlord-spartan-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_26a14500": {
+    "id": "tama_warlord_warlord-spartan-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_26a14500",
+    "companyName": "Tama",
+    "companyType": "major manufacturer",
+    "lineSeries": "Warlord",
+    "modelName": "Warlord Spartan Bubinga 14x6",
+    "patchName": "tama_warlord_warlord-spartan-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_26a14500",
+    "identification": {
+      "modelNumber": "unknown",
+      "badgeStyle": "unknown",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": false,
+      "rareCollectible": true
+    },
+    "stockHardware": {
+      "throwOff": {
+        "notes": "unknown",
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      },
+      "hoops": {
+        "resonantHoopType": "Die-cast hoops",
+        "hoopMaterial": "unknown",
+        "hoopFinish": "unknown",
+        "batterHoopType": "Die-cast hoops",
+        "hoopMassClass": "unknown",
+        "hoopThicknessMm": null
+      },
+      "lugs": {
+        "lugType": "unknown",
+        "hardwareFinish": "unknown",
+        "lugMaterial": "unknown",
+        "lugCountNotes": "unknown",
+        "lugMountingStyle": "unknown",
+        "lugCount": 10,
+        "lugMassClass": "unknown"
+      },
+      "buttPlate": {
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "model": "unknown",
+        "lengthInches": 14,
+        "stock": "unknown",
+        "strandCount": null,
+        "make": "unknown"
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "pricing": {
+      "priceNotes": "unknown",
+      "lastUpdated": "researchRequired",
+      "currentUsedPriceRange": {
+        "high": "researchRequired",
+        "low": "researchRequired",
+        "currency": "USD"
+      },
+      "pricingSources": [],
+      "currentNewPrice": "researchRequired",
+      "originalMsrp": "researchRequired",
+      "originalRetailPrice": "researchRequired"
+    },
+    "collectorMetadata": {
+      "productionNotes": "unknown",
+      "yearIntroduced": "unknown",
+      "limitedRunCount": "unknown",
+      "yearDiscontinued": "unknown",
+      "limitedRun": "unknown",
+      "countryOfOrigin": "unknown"
+    },
+    "snareFacts": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "primarySourceUrl": "https://drummagazine.com/tama-warlord-collection-snares/",
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": [
+        "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+      ],
+      "imageUrls": [],
+      "conflictingSourceNotes": [],
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ]
+    },
+    "summary": {
+      "shortDescription": "Shell-first score based on 14x6 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
+      "drumSummaryNotes": "Shell-first score based on 14x6 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
+    },
+    "shell": {
+      "drumType": "snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4"
+      },
+      "construction": {
+        "shellConstruction": "Ply",
+        "shellMaterialPrimary": "Bubinga",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": null,
+        "layupDescription": "unknown",
+        "shellThicknessMm": 10,
+        "thicknessClass": "unknown",
+        "reinforcementRings": "unknown",
+        "reinforcementRingMaterial": "unknown",
+        "reinforcementRingThicknessMm": null
+      },
+      "finish": {
+        "finishName": "Lacquer",
+        "finishType": "Lacquer",
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      },
+      "snareBeds": {
+        "present": "unknown",
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      }
+    },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "diameter": 14,
+    "depth": 6,
+    "shellConstruction": "ply",
+    "shellMaterial1": "bubinga",
+    "shellMaterial2": "unknown",
+    "shellMaterial3": "unknown",
+    "plyCountLayup": "10-ply bubinga",
+    "shellThicknessMm": 10,
+    "reinforcementRings": false,
+    "reRingMaterial": "N/A",
+    "reRingThicknessMm": null,
+    "bearingEdge": "45-degree / Tama wood bearing edge",
+    "snareBeds": true,
+    "snareBedType": "medium",
+    "finishType": "lacquer",
+    "hoopType": "die-cast hoops",
+    "lugCount": 10,
+    "lugType": "Warlord Collection lugs",
+    "hardwareFinish": "black nickel / antique black style",
+    "snareThrowMakeModel": "Tama MUS80A / MUS80B style strainer and butt",
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+    "stockBatterHead": "unknown",
+    "stockResoHead": "unknown",
+    "modelNumber": "unknown",
+    "yearInProduction": "2000s",
+    "yearDiscontinued": "unknown",
+    "shellScoreAttack": 7.7,
+    "shellScoreBrightness": 6.3,
+    "shellScoreProjection": 8.4,
+    "shellScoreSustain": 6.8,
+    "shellScoreWarmth": 7.7,
+    "shellScoreSensitivity": 6.6,
+    "shellScoreControl": 7.8,
+    "overallAttack": 7.9,
+    "overallBrightness": 6.4,
+    "overallProjection": 8.6,
+    "overallSustain": 6.5,
+    "overallWarmth": 7.5,
+    "overallSensitivity": 6.7,
+    "overallControl": 8.1,
+    "projectedShellFundamentalPitch": "medium-low",
+    "recommendedTuningBatterHz": "220-310 Hz",
+    "recommendedTuningResoHz": "340-410 Hz",
+    "primarySourceUrl": "unknown",
+    "secondarySourceUrl": "unknown",
+    "notesOnMissingData": "Exact model number, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Spartan Bubinga 14x6 with 10-ply bubinga, lacquer finish, and die-cast hoops.",
+    "drumSummaryNotes": "Bubinga Warlord model. Should score with strong projection, dense low-mid body, firm attack, and controlled sustain. Die-cast hoops and heavy Warlord hardware increase focus and control.",
+    "drumType": "Snare Drum",
+    "currentlyInProduction": "NO",
+    "discontinued": "YES",
+    "rareCollectible": "YES",
+    "artistSignatureLine": "NO",
+    "voiceScoreConfidence": "medium",
+    "sourceConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  "tama_warlord_warlord-athenian-hammered-brass-14x6_14x6_metal_brass_hammered-brass_die-cast-hoops_ddb2c5aa": {
+    "id": "tama_warlord_warlord-athenian-hammered-brass-14x6_14x6_metal_brass_hammered-brass_die-cast-hoops_ddb2c5aa",
+    "companyName": "Tama",
+    "companyType": "major manufacturer",
+    "lineSeries": "Warlord",
+    "modelName": "Warlord Athenian Hammered Brass 14x6",
+    "patchName": "tama_warlord_warlord-athenian-hammered-brass-14x6_14x6_metal_brass_hammered-brass_die-cast-hoops_ddb2c5aa",
+    "identification": {
+      "modelNumber": "unknown",
+      "badgeStyle": "unknown",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": false,
+      "rareCollectible": true
+    },
+    "stockHardware": {
+      "throwOff": {
+        "notes": "unknown",
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      },
+      "hoops": {
+        "resonantHoopType": "Die-cast hoops",
+        "hoopMaterial": "unknown",
+        "hoopFinish": "unknown",
+        "batterHoopType": "Die-cast hoops",
+        "hoopMassClass": "unknown",
+        "hoopThicknessMm": null
+      },
+      "lugs": {
+        "lugType": "unknown",
+        "hardwareFinish": "unknown",
+        "lugMaterial": "unknown",
+        "lugCountNotes": "unknown",
+        "lugMountingStyle": "unknown",
+        "lugCount": 10,
+        "lugMassClass": "unknown"
+      },
+      "buttPlate": {
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "model": "unknown",
+        "lengthInches": 14,
+        "stock": "unknown",
+        "strandCount": null,
+        "make": "unknown"
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "pricing": {
+      "priceNotes": "unknown",
+      "lastUpdated": "researchRequired",
+      "currentUsedPriceRange": {
+        "high": "researchRequired",
+        "low": "researchRequired",
+        "currency": "USD"
+      },
+      "pricingSources": [],
+      "currentNewPrice": "researchRequired",
+      "originalMsrp": "researchRequired",
+      "originalRetailPrice": "researchRequired"
+    },
+    "collectorMetadata": {
+      "productionNotes": "unknown",
+      "yearIntroduced": "unknown",
+      "limitedRunCount": "unknown",
+      "yearDiscontinued": "unknown",
+      "limitedRun": "unknown",
+      "countryOfOrigin": "unknown"
+    },
+    "snareFacts": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+      "sourceConfidence": "Low",
+      "notesOnMissingData": [
+        "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+      ],
+      "imageUrls": [],
+      "conflictingSourceNotes": [],
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ]
+    },
+    "summary": {
+      "shortDescription": "Shell-first score based on 14x6 Brass Hammered metal shell with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
+      "drumSummaryNotes": "Shell-first score based on 14x6 Brass Hammered metal shell with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
+    },
+    "shell": {
+      "drumType": "snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Brass",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": null,
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "thicknessClass": "unknown",
+        "reinforcementRings": "unknown",
+        "reinforcementRingMaterial": "unknown",
+        "reinforcementRingThicknessMm": null
+      },
+      "finish": {
+        "finishName": "Hammered brass",
+        "finishType": "Hammered brass",
+        "exteriorTreatment": "Hammered brass",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      },
+      "snareBeds": {
+        "present": "unknown",
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      }
+    },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "diameter": 14,
+    "depth": 6,
+    "shellConstruction": "metal",
+    "shellMaterial1": "brass",
+    "shellMaterial2": "unknown",
+    "shellMaterial3": "unknown",
+    "plyCountLayup": "N/A - metal shell",
+    "shellThicknessMm": null,
+    "reinforcementRings": false,
+    "reRingMaterial": "N/A",
+    "reRingThicknessMm": null,
+    "bearingEdge": "formed metal bearing edge",
+    "snareBeds": true,
+    "snareBedType": "medium",
+    "finishType": "hammered brass",
+    "hoopType": "die-cast hoops",
+    "lugCount": 10,
+    "lugType": "Warlord Collection lugs",
+    "hardwareFinish": "black nickel / antique black style",
+    "snareThrowMakeModel": "Tama MUS80A / MUS80B style strainer and butt",
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+    "stockBatterHead": "unknown",
+    "stockResoHead": "unknown",
+    "modelNumber": "unknown",
+    "yearInProduction": "2000s",
+    "yearDiscontinued": "unknown",
+    "shellScoreAttack": 7.5,
+    "shellScoreBrightness": 7,
+    "shellScoreProjection": 8,
+    "shellScoreSustain": 6.6,
+    "shellScoreWarmth": 6.9,
+    "shellScoreSensitivity": 7.1,
+    "shellScoreControl": 7.2,
+    "overallAttack": 7.7,
+    "overallBrightness": 7.1,
+    "overallProjection": 8.2,
+    "overallSustain": 6.3,
+    "overallWarmth": 6.8,
+    "overallSensitivity": 7.2,
+    "overallControl": 7.5,
+    "projectedShellFundamentalPitch": "medium",
+    "recommendedTuningBatterHz": "240-320 Hz",
+    "recommendedTuningResoHz": "350-420 Hz",
+    "primarySourceUrl": "unknown",
+    "secondarySourceUrl": "unknown",
+    "notesOnMissingData": "Exact shell thickness, model number, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Athenian Hammered Brass 14x6 with die-cast hoops.",
+    "drumSummaryNotes": "Hammered brass Warlord model. Should retain strong metal-shell projection and attack while adding brass warmth, body, and a slightly drier/complex response from the hammered shell surface.",
+    "drumType": "Snare Drum",
+    "currentlyInProduction": "NO",
+    "discontinued": "YES",
+    "rareCollectible": "YES",
+    "artistSignatureLine": "NO",
+    "voiceScoreConfidence": "medium",
+    "sourceConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  "tama_warlord_warlord-praetorian-cast-bell-brass-14x6_14x6_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_fa7a2480": {
+    "id": "tama_warlord_warlord-praetorian-cast-bell-brass-14x6_14x6_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_fa7a2480",
+    "companyName": "Tama",
+    "companyType": "major manufacturer",
+    "lineSeries": "Warlord",
+    "modelName": "Warlord Praetorian Cast Bell Brass 14x6",
+    "patchName": "tama_warlord_warlord-praetorian-cast-bell-brass-14x6_14x6_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_fa7a2480",
+    "identification": {
+      "modelNumber": "unknown",
+      "badgeStyle": "unknown",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": false,
+      "rareCollectible": true
+    },
+    "stockHardware": {
+      "throwOff": {
+        "notes": "unknown",
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      },
+      "hoops": {
+        "resonantHoopType": "Die-cast hoops",
+        "hoopMaterial": "unknown",
+        "hoopFinish": "unknown",
+        "batterHoopType": "Die-cast hoops",
+        "hoopMassClass": "unknown",
+        "hoopThicknessMm": null
+      },
+      "lugs": {
+        "lugType": "unknown",
+        "hardwareFinish": "unknown",
+        "lugMaterial": "unknown",
+        "lugCountNotes": "unknown",
+        "lugMountingStyle": "unknown",
+        "lugCount": 10,
+        "lugMassClass": "unknown"
+      },
+      "buttPlate": {
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "model": "unknown",
+        "lengthInches": 14,
+        "stock": "unknown",
+        "strandCount": null,
+        "make": "unknown"
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "pricing": {
+      "priceNotes": "unknown",
+      "lastUpdated": "researchRequired",
+      "currentUsedPriceRange": {
+        "high": "researchRequired",
+        "low": "researchRequired",
+        "currency": "USD"
+      },
+      "pricingSources": [],
+      "currentNewPrice": "researchRequired",
+      "originalMsrp": "researchRequired",
+      "originalRetailPrice": "researchRequired"
+    },
+    "collectorMetadata": {
+      "productionNotes": "unknown",
+      "yearIntroduced": "unknown",
+      "limitedRunCount": "unknown",
+      "yearDiscontinued": "unknown",
+      "limitedRun": "unknown",
+      "countryOfOrigin": "unknown"
+    },
+    "snareFacts": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+      "sourceConfidence": "Low",
+      "notesOnMissingData": [
+        "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+      ],
+      "imageUrls": [],
+      "conflictingSourceNotes": [],
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ]
+    },
+    "summary": {
+      "shortDescription": "Shell-first score based on 14x6 Bell Brass Cast metal with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
+      "drumSummaryNotes": "Shell-first score based on 14x6 Bell Brass Cast metal with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
+    },
+    "shell": {
+      "drumType": "snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Bell Brass",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": null,
+        "layupDescription": "unknown",
+        "shellThicknessMm": 3,
+        "thicknessClass": "unknown",
+        "reinforcementRings": "unknown",
+        "reinforcementRingMaterial": "unknown",
+        "reinforcementRingThicknessMm": null
+      },
+      "finish": {
+        "finishName": "Cast bell brass",
+        "finishType": "Cast bell brass",
+        "exteriorTreatment": "Cast bell brass",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      },
+      "snareBeds": {
+        "present": "unknown",
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      }
+    },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "diameter": 14,
+    "depth": 6,
+    "shellConstruction": "cast metal",
+    "shellMaterial1": "bell brass",
+    "shellMaterial2": "bronze",
+    "shellMaterial3": "unknown",
+    "plyCountLayup": "N/A - cast metal shell",
+    "shellThicknessMm": 3,
+    "reinforcementRings": false,
+    "reRingMaterial": "N/A",
+    "reRingThicknessMm": null,
+    "bearingEdge": "machined cast metal bearing edge",
+    "snareBeds": true,
+    "snareBedType": "medium",
+    "finishType": "cast bell brass",
+    "hoopType": "die-cast hoops",
+    "lugCount": 10,
+    "lugType": "Warlord Collection lugs",
+    "hardwareFinish": "black nickel / antique black style",
+    "snareThrowMakeModel": "Tama MUS80A / MUS80B style strainer and butt",
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+    "stockBatterHead": "unknown",
+    "stockResoHead": "unknown",
+    "modelNumber": "unknown",
+    "yearInProduction": "2000s",
+    "yearDiscontinued": "unknown",
+    "shellScoreAttack": 8.8,
+    "shellScoreBrightness": 7.8,
+    "shellScoreProjection": 9.5,
+    "shellScoreSustain": 7.5,
+    "shellScoreWarmth": 7.1,
+    "shellScoreSensitivity": 6.7,
+    "shellScoreControl": 7.9,
+    "overallAttack": 8.9,
+    "overallBrightness": 7.9,
+    "overallProjection": 9.6,
+    "overallSustain": 7.2,
+    "overallWarmth": 7,
+    "overallSensitivity": 6.8,
+    "overallControl": 8.2,
+    "projectedShellFundamentalPitch": "medium-low",
+    "recommendedTuningBatterHz": "220-310 Hz",
+    "recommendedTuningResoHz": "340-420 Hz",
+    "primarySourceUrl": "unknown",
+    "secondarySourceUrl": "unknown",
+    "notesOnMissingData": "Exact model number, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Praetorian Cast Bell Brass 14x6 with 3mm bell brass and die-cast hoops.",
+    "drumSummaryNotes": "Cast bell brass Warlord model. Should score with very high projection, strong attack, thick body, and extended sustain. Heavy cast shell and die-cast hoops create authority and focus.",
+    "drumType": "Snare Drum",
+    "currentlyInProduction": "NO",
+    "discontinued": "YES",
+    "rareCollectible": "YES",
+    "artistSignatureLine": "NO",
+    "voiceScoreConfidence": "medium",
+    "sourceConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  "tama_warlord_warlord-masai-maple-14x6_14x6_ply_maple_13_lacquer_die-cast-hoops_c2e2ae03": {
+    "id": "tama_warlord_warlord-masai-maple-14x6_14x6_ply_maple_13_lacquer_die-cast-hoops_c2e2ae03",
+    "companyName": "Tama",
+    "companyType": "major manufacturer",
+    "lineSeries": "Warlord",
+    "modelName": "Warlord Masai Maple 14x6",
+    "patchName": "tama_warlord_warlord-masai-maple-14x6_14x6_ply_maple_13_lacquer_die-cast-hoops_c2e2ae03",
+    "identification": {
+      "modelNumber": "unknown",
+      "badgeStyle": "unknown",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": false,
+      "rareCollectible": true
+    },
+    "stockHardware": {
+      "throwOff": {
+        "notes": "unknown",
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      },
+      "hoops": {
+        "resonantHoopType": "Die-cast hoops",
+        "hoopMaterial": "unknown",
+        "hoopFinish": "unknown",
+        "batterHoopType": "Die-cast hoops",
+        "hoopMassClass": "unknown",
+        "hoopThicknessMm": null
+      },
+      "lugs": {
+        "lugType": "unknown",
+        "hardwareFinish": "unknown",
+        "lugMaterial": "unknown",
+        "lugCountNotes": "unknown",
+        "lugMountingStyle": "unknown",
+        "lugCount": 10,
+        "lugMassClass": "unknown"
+      },
+      "buttPlate": {
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "model": "unknown",
+        "lengthInches": 14,
+        "stock": "unknown",
+        "strandCount": null,
+        "make": "unknown"
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "pricing": {
+      "priceNotes": "unknown",
+      "lastUpdated": "researchRequired",
+      "currentUsedPriceRange": {
+        "high": "researchRequired",
+        "low": "researchRequired",
+        "currency": "USD"
+      },
+      "pricingSources": [],
+      "currentNewPrice": "researchRequired",
+      "originalMsrp": "researchRequired",
+      "originalRetailPrice": "researchRequired"
+    },
+    "collectorMetadata": {
+      "productionNotes": "unknown",
+      "yearIntroduced": "unknown",
+      "limitedRunCount": "unknown",
+      "yearDiscontinued": "unknown",
+      "limitedRun": "unknown",
+      "countryOfOrigin": "unknown"
+    },
+    "snareFacts": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "primarySourceUrl": "https://drummagazine.com/tama-warlord-collection-snares/",
+      "sourceConfidence": "Medium",
+      "notesOnMissingData": [
+        "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+      ],
+      "imageUrls": [],
+      "conflictingSourceNotes": [],
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ]
+    },
+    "summary": {
+      "shortDescription": "Shell-first score based on 14x6 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
+      "drumSummaryNotes": "Shell-first score based on 14x6 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
+    },
+    "shell": {
+      "drumType": "snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4"
+      },
+      "construction": {
+        "shellConstruction": "Ply",
+        "shellMaterialPrimary": "Maple",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": null,
+        "layupDescription": "unknown",
+        "shellThicknessMm": 13,
+        "thicknessClass": "unknown",
+        "reinforcementRings": "unknown",
+        "reinforcementRingMaterial": "unknown",
+        "reinforcementRingThicknessMm": null
+      },
+      "finish": {
+        "finishName": "Lacquer",
+        "finishType": "Lacquer",
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      },
+      "snareBeds": {
+        "present": "unknown",
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      }
+    },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "diameter": 14,
+    "depth": 6,
+    "shellConstruction": "ply",
+    "shellMaterial1": "maple",
+    "shellMaterial2": "unknown",
+    "shellMaterial3": "unknown",
+    "plyCountLayup": "13-ply maple",
+    "shellThicknessMm": 13,
+    "reinforcementRings": false,
+    "reRingMaterial": "N/A",
+    "reRingThicknessMm": null,
+    "bearingEdge": "45-degree / Tama wood bearing edge",
+    "snareBeds": true,
+    "snareBedType": "medium",
+    "finishType": "lacquer",
+    "hoopType": "die-cast hoops",
+    "lugCount": 10,
+    "lugType": "Warlord Collection lugs",
+    "hardwareFinish": "black nickel / antique black style",
+    "snareThrowMakeModel": "Tama MUS80A / MUS80B style strainer and butt",
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+    "stockBatterHead": "unknown",
+    "stockResoHead": "unknown",
+    "modelNumber": "unknown",
+    "yearInProduction": "2000s",
+    "yearDiscontinued": "unknown",
+    "shellScoreAttack": 8,
+    "shellScoreBrightness": 7,
+    "shellScoreProjection": 8.3,
+    "shellScoreSustain": 6.5,
+    "shellScoreWarmth": 6.9,
+    "shellScoreSensitivity": 6.8,
+    "shellScoreControl": 8,
+    "overallAttack": 8.2,
+    "overallBrightness": 7.1,
+    "overallProjection": 8.5,
+    "overallSustain": 6.2,
+    "overallWarmth": 6.8,
+    "overallSensitivity": 6.9,
+    "overallControl": 8.3,
+    "projectedShellFundamentalPitch": "medium",
+    "recommendedTuningBatterHz": "235-325 Hz",
+    "recommendedTuningResoHz": "350-420 Hz",
+    "primarySourceUrl": "unknown",
+    "secondarySourceUrl": "unknown",
+    "notesOnMissingData": "Exact model number, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Masai Maple 14x6 with 13mm maple shell, lacquer finish, and die-cast hoops.",
+    "drumSummaryNotes": "Thick maple Warlord model. Should score with strong attack, clear projection, maple brightness, and controlled sustain. Compared with bubinga, it should read brighter and more immediate, with less low-mid darkness.",
+    "drumType": "Snare Drum",
+    "currentlyInProduction": "NO",
+    "discontinued": "YES",
+    "rareCollectible": "YES",
+    "artistSignatureLine": "NO",
+    "voiceScoreConfidence": "medium",
+    "sourceConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  "tama_warlord_warlord-valkyrie-stainless-steel-14x6_14x6_metal_steel_stainless-steel_die-cast-hoops_3829fe36": {
+    "id": "tama_warlord_warlord-valkyrie-stainless-steel-14x6_14x6_metal_steel_stainless-steel_die-cast-hoops_3829fe36",
+    "companyName": "Tama",
+    "companyType": "major manufacturer",
+    "lineSeries": "Warlord",
+    "modelName": "Warlord Valkyrie Stainless Steel 14x6",
+    "patchName": "tama_warlord_warlord-valkyrie-stainless-steel-14x6_14x6_metal_steel_stainless-steel_die-cast-hoops_3829fe36",
+    "identification": {
+      "modelNumber": "unknown",
+      "badgeStyle": "unknown",
+      "productionStatus": "discontinued",
+      "currentlyInProduction": false,
+      "artistSignature": false,
+      "rareCollectible": true
+    },
+    "stockHardware": {
+      "throwOff": {
+        "notes": "unknown",
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      },
+      "hoops": {
+        "resonantHoopType": "Die-cast hoops",
+        "hoopMaterial": "unknown",
+        "hoopFinish": "unknown",
+        "batterHoopType": "Die-cast hoops",
+        "hoopMassClass": "unknown",
+        "hoopThicknessMm": null
+      },
+      "lugs": {
+        "lugType": "unknown",
+        "hardwareFinish": "unknown",
+        "lugMaterial": "unknown",
+        "lugCountNotes": "unknown",
+        "lugMountingStyle": "unknown",
+        "lugCount": 10,
+        "lugMassClass": "unknown"
+      },
+      "buttPlate": {
+        "model": "unknown",
+        "style": "unknown",
+        "make": "unknown"
+      }
+    },
+    "stockSnareSystem": {
+      "snareWires": {
+        "material": "unknown",
+        "model": "unknown",
+        "lengthInches": 14,
+        "stock": "unknown",
+        "strandCount": null,
+        "make": "unknown"
+      },
+      "heads": {
+        "stockHeadsKnown": false,
+        "batterHead": "unknown",
+        "resonantHead": "unknown"
+      }
+    },
+    "pricing": {
+      "priceNotes": "unknown",
+      "lastUpdated": "researchRequired",
+      "currentUsedPriceRange": {
+        "high": "researchRequired",
+        "low": "researchRequired",
+        "currency": "USD"
+      },
+      "pricingSources": [],
+      "currentNewPrice": "researchRequired",
+      "originalMsrp": "researchRequired",
+      "originalRetailPrice": "researchRequired"
+    },
+    "collectorMetadata": {
+      "productionNotes": "unknown",
+      "yearIntroduced": "unknown",
+      "limitedRunCount": "unknown",
+      "yearDiscontinued": "unknown",
+      "limitedRun": "unknown",
+      "countryOfOrigin": "unknown"
+    },
+    "snareFacts": [
+      "unknown",
+      "unknown",
+      "unknown"
+    ],
+    "sources": {
+      "imageUrl": null,
+      "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+      "sourceConfidence": "Low",
+      "notesOnMissingData": [
+        "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+      ],
+      "imageUrls": [],
+      "conflictingSourceNotes": [],
+      "secondarySourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ]
+    },
+    "summary": {
+      "shortDescription": "Shell-first score based on 14x6 Steel Metal shell with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
+      "drumSummaryNotes": "Shell-first score based on 14x6 Steel Metal shell with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
+    },
+    "shell": {
+      "drumType": "snare",
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4"
+      },
+      "construction": {
+        "shellConstruction": "Metal",
+        "shellMaterialPrimary": "Steel",
+        "shellMaterialSecondary": "none",
+        "shellMaterialTertiary": "none",
+        "plyCount": null,
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "thicknessClass": "unknown",
+        "reinforcementRings": "unknown",
+        "reinforcementRingMaterial": "unknown",
+        "reinforcementRingThicknessMm": null
+      },
+      "finish": {
+        "finishName": "Stainless steel",
+        "finishType": "Stainless steel",
+        "exteriorTreatment": "Stainless steel",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown"
+      },
+      "bearingEdges": {
+        "batterSideProfile": "unknown",
+        "snareSideProfile": "unknown",
+        "roundover": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      },
+      "snareBeds": {
+        "present": "unknown",
+        "depthBucket": "unknown",
+        "widthBucket": "unknown",
+        "bedStyle": "unknown",
+        "evidenceLevel": "notVerified",
+        "notes": "unknown",
+        "confidence": "Low"
+      }
+    },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "diameter": 14,
+    "depth": 6,
+    "shellConstruction": "metal",
+    "shellMaterial1": "stainless steel",
+    "shellMaterial2": "unknown",
+    "shellMaterial3": "unknown",
+    "plyCountLayup": "N/A - metal shell",
+    "shellThicknessMm": null,
+    "reinforcementRings": false,
+    "reRingMaterial": "N/A",
+    "reRingThicknessMm": null,
+    "bearingEdge": "formed metal bearing edge",
+    "snareBeds": true,
+    "snareBedType": "medium",
+    "finishType": "stainless steel",
+    "hoopType": "die-cast hoops",
+    "lugCount": 10,
+    "lugType": "Warlord Collection lugs",
+    "hardwareFinish": "black nickel / antique black style",
+    "snareThrowMakeModel": "Tama MUS80A / MUS80B style strainer and butt",
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+    "stockBatterHead": "unknown",
+    "stockResoHead": "unknown",
+    "modelNumber": "unknown",
+    "yearInProduction": "2000s",
+    "yearDiscontinued": "unknown",
+    "shellScoreAttack": 8.7,
+    "shellScoreBrightness": 8.4,
+    "shellScoreProjection": 8.8,
+    "shellScoreSustain": 6.4,
+    "shellScoreWarmth": 3.8,
+    "shellScoreSensitivity": 6.9,
+    "shellScoreControl": 6.9,
+    "overallAttack": 8.8,
+    "overallBrightness": 8.5,
+    "overallProjection": 8.9,
+    "overallSustain": 6.1,
+    "overallWarmth": 3.7,
+    "overallSensitivity": 7,
+    "overallControl": 7.2,
+    "projectedShellFundamentalPitch": "medium-high",
+    "recommendedTuningBatterHz": "260-340 Hz",
+    "recommendedTuningResoHz": "360-430 Hz",
+    "primarySourceUrl": "unknown",
+    "secondarySourceUrl": "unknown",
+    "notesOnMissingData": "Exact shell thickness, model number, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Valkyrie Stainless Steel 14x6 with die-cast hoops.",
+    "drumSummaryNotes": "Stainless steel Warlord model. Should score with explosive attack, strong brightness, high projection, and comparatively low warmth. Die-cast hoops and heavy hardware add focus and control.",
+    "drumType": "Snare Drum",
+    "currentlyInProduction": "NO",
+    "discontinued": "YES",
+    "rareCollectible": "YES",
+    "artistSignatureLine": "NO",
+    "voiceScoreConfidence": "medium",
+    "sourceConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  }
+}
