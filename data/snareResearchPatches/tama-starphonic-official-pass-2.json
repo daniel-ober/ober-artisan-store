@@ -1,0 +1,207 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "STARPHONIC",
+
+  "patchName": "tama-starphonic-official-pass-2",
+
+  "reviewedAt": "2026-05-17",
+
+  "sourcePolicy": "Official Tama STARPHONIC pages only. Stock heads and snare bed type intentionally left unknown because official sources reviewed here do not clearly confirm them.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "STARPHONIC Brass 14x6 official Tama specs",
+
+      "matchModelNames": ["STARPHONIC Brass 14x6"],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 1.2
+
+        },
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "Linear-Drive Strainer / STARPHONIC strainer system with detachable butt plate",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_brass.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama STARPHONIC Brass page confirms a 1.2mm brass shell, Grooved Hoop, Super Sensitive Hi-Carbon Snare Wire, Linear-Drive Strainer, detachable butt plate, Freedom Lug, and Grooved Hoop feature system. Stock heads and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Bell Brass 14x6 official Tama feature specs",
+
+      "matchModelNames": ["STARPHONIC Bell Brass 14x6"],
+
+      "updates": {
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "Linear-Drive Strainer / STARPHONIC strainer system with detachable butt plate",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_bell_brass.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama STARPHONIC Bell Brass page confirms the Bell Brass 14x6 model and STARPHONIC feature system including Super Sensitive Hi-Carbon Snare Wire, Linear-Drive Strainer, detachable butt plate, Freedom Lug, and Grooved Hoop. Shell thickness is already present in database as 3mm; stock heads and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Bubinga 14x6 official Tama feature specs",
+
+      "matchModelNames": ["STARPHONIC Bubinga 14x6"],
+
+      "updates": {
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "Linear-Drive Strainer / STARPHONIC strainer system with detachable butt plate",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_bubinga.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama STARPHONIC Bubinga page confirms a Bubinga shell with Cordia outer ply, Grooved Hoop, Tama bearing-edge feature language, Super Sensitive Hi-Carbon Snare Wire, and STARPHONIC feature system. Exact shell thickness, stock heads, and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Spruce 14x6 official Tama specs",
+
+      "matchModelNames": ["STARPHONIC Spruce 14x6"],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 8,
+
+          "plyCountLayup": "9-ply Spruce"
+
+        },
+
+        "hardware": {
+
+          "stockSnareWires": "20-strand Super Sensitive Hi-Carbon Snare Wires"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_spruce.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama STARPHONIC Spruce page confirms an 8.0mm, 9-ply Spruce shell, Grooved Hoop, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Stock heads, throw-off exact naming, bearing edge, and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Walnut 14x7 official Tama specs",
+
+      "matchModelNames": ["STARPHONIC Walnut 14x7"],
+
+      "updates": {
+
+        "shell": {
+
+          "thicknessMm": 6,
+
+          "plyCountLayup": "6-ply American Black Walnut + 1 outer ply Black Walnut Burl"
+
+        },
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "Linear-Drive Strainer / STARPHONIC strainer system with detachable butt plate",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_walnut.html",
+
+          "sourceConfidence": "High"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Official Tama STARPHONIC Walnut page confirms a thin 6mm/7-ply Walnut shell, described in features as 6mm, 6-ply American Black Walnut shell plus 1 outer ply Black Walnut Burl. It also confirms Super Sensitive Hi-Carbon Snare Wire, Linear-Drive Strainer, Freedom Lug, and Grooved Hoop. Stock heads and snare bed type remain unconfirmed from official source."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
