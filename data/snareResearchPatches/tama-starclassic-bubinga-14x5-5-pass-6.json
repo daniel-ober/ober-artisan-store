@@ -1,0 +1,65 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-bubinga-14x5-5-pass-6",
+
+  "researchStatus": "draft",
+
+  "doNotApplyAutomatically": true,
+
+  "notes": "Tama Starclassic Bubinga 14x5.5 shell/hardware pass. Applies only to the exact Starclassic Bubinga 14x5.5 record. Uses the same sourced Starclassic Bubinga family evidence already used for the 14x6.5 record: original/reissue Starclassic Bubinga shell construction, 7mm snare shell thickness, Starclassic rounded bearing edge profile positioned 2.5mm inward, Linear-Drive Strainer, one-piece lugs, Super Sensitive Hi-Carbon Snare Wire, and Snappy Bed. Stock batter and resonant heads remain unconfirmed.",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Bubinga 14x5.5 exact shell and hardware update",
+
+      "target": {
+
+        "modelName": "Starclassic Bubinga 14x5.5"
+
+      },
+
+      "patch": {
+
+        "shell": {
+
+          "thicknessMm": 7,
+
+          "plyCountLayup": "9-ply bubinga",
+
+          "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+          "reinforcementRings": false,
+
+          "snareBedType": "Snappy Bed"
+
+        },
+
+        "hardware": {
+
+          "lugType": "Starclassic one-piece lug",
+
+          "snareThrowMakeAndModel": "Tama Linear-Drive Strainer",
+
+          "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wire"
+
+        },
+
+        "notes": {
+
+          "scoringBasis": "Tama official Starclassic Bubinga reissue news states the reissue faithfully reproduces the original 9-ply, 6mm shell construction, with 7mm for snare and bass drums, as it was when discontinued in 2018. Reputable Hoshino USA/dealer listing supports 7mm snare shell, 9-ply original reissue design, Linear-Drive Strainer, one-piece lugs, Super Sensitive Hi-Carbon Snare Wire, and Snappy Bed. Added Starclassic rounded bearing edge profile / 2.5mm inward edge language. Applied only to the exact Starclassic Bubinga 14x5.5 record. Stock batter/reso heads remain unconfirmed from official source."
+
+        }
+
+      }
+
+    }
+
+  ]
+
+}
