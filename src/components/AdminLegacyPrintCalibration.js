@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import BarChart from './BarChart';
 
+import { getFunctions, httpsCallable } from 'firebase/functions';
+
 import SnareReferenceResourceManager from './SnareReferenceResourceManager';
 
 import './SnareReferenceResourceManager.css';
@@ -9964,11 +9966,61 @@ const AdminLegacyPrintCalibration = () => {
     setActivePreviewRead('First Listen');
   };
 
-  const handleResearchReferenceDrum = (researchTarget) => {
+ const handleResearchReferenceDrum = async (researchTarget) => {
+
+  if (!researchTarget?.id) {
+
+    console.warn('No snare research target id found:', researchTarget);
+
+    return;
+
+  }
+
+  try {
+
     setActiveReferenceResearchTarget(researchTarget);
 
-    console.log('Snare reference research target:', researchTarget);
-  };
+    const researchSnareReferenceDrum = httpsCallable(
+
+      functions,
+
+      'researchSnareReferenceDrum'
+
+    );
+
+    const result = await researchSnareReferenceDrum({
+
+      drumId: researchTarget.id,
+
+    });
+
+    console.log('Snare research job created:', result.data);
+
+    setActiveReferenceResearchTarget({
+
+      ...researchTarget,
+
+      researchJob: result.data,
+
+    });
+
+  } catch (error) {
+
+    console.error('Failed creating snare research job:', error);
+
+    setActiveReferenceResearchTarget({
+
+      ...researchTarget,
+
+      researchJobError:
+
+        error?.message || 'Failed creating snare research job.',
+
+    });
+
+  }
+
+};
 
   const renderNonOberReferenceBuilder = () => {
     const companyOptions = Array.from(
@@ -12472,5 +12524,7 @@ const AdminLegacyPrintCalibration = () => {
     </div>
   );
 };
+
+  const functions = getFunctions();
 
 export default AdminLegacyPrintCalibration;
