@@ -19,29 +19,17 @@ import AdminLegacyPrintSelector from './AdminLegacyPrintSelector';
 import LegacyPrintAdminSlider from './LegacyPrintAdminSlider';
 
 import {
-
   collection,
-
   doc,
-
   getDoc,
-
   getDocs,
-
   orderBy,
-
   query,
-
   serverTimestamp,
-
   setDoc,
-
   updateDoc,
-
   startAfter,
-
   limit,
-
 } from 'firebase/firestore';
 
 import { db } from '../firebaseConfig';
@@ -79,7 +67,6 @@ const LEGACYPRINT_ACTIVE_DOC_ID = 'active';
 const LEGACYPRINT_DRAFT_DOC_ID = 'draft';
 
 const LEGACYPRINT_TABS = [
-
   'Overview',
 
   'Engine Builder',
@@ -89,7 +76,6 @@ const LEGACYPRINT_TABS = [
   'Engine Resources',
 
   'Engine View Settings',
-
 ];
 
 const LEGACYPRINT_CALIBRATION_TOOL_TABS = [
@@ -6828,19 +6814,14 @@ const getReferenceScore = (drum = {}, node) => {
 };
 
 const flattenReferenceValue = (value = '') => {
-
   if (value === undefined || value === null) return '';
 
   if (Array.isArray(value)) {
-
     return value.map(flattenReferenceValue).filter(Boolean).join(' / ');
-
   }
 
   if (typeof value === 'object') {
-
     const preferredKeys = [
-
       'label',
 
       'name',
@@ -6864,39 +6845,29 @@ const flattenReferenceValue = (value = '') => {
       'text',
 
       'description',
-
     ];
 
     for (const key of preferredKeys) {
-
       if (
-
         value[key] !== undefined &&
-
         value[key] !== null &&
-
         String(value[key]).trim() !== ''
-
       ) {
-
         return flattenReferenceValue(value[key]);
-
       }
-
     }
 
-    return Object.values(value).map(flattenReferenceValue).filter(Boolean).join(' / ');
-
+    return Object.values(value)
+      .map(flattenReferenceValue)
+      .filter(Boolean)
+      .join(' / ');
   }
 
   return String(value || '').trim();
-
 };
 
 const getReferenceDrumMaterial = (drum = {}) => {
-
   const materialParts = [
-
     drum.shell?.material1,
 
     drum.shell?.material2,
@@ -6934,7 +6905,6 @@ const getReferenceDrumMaterial = (drum = {}) => {
     drum.alloy,
 
     drum.metal,
-
   ]
 
     .map(flattenReferenceValue)
@@ -6944,13 +6914,10 @@ const getReferenceDrumMaterial = (drum = {}) => {
   const directMaterial = Array.from(new Set(materialParts)).join(' / ');
 
   if (directMaterial) {
-
     return directMaterial;
-
   }
 
   const searchableText = [
-
     drum.modelName,
 
     drum.model,
@@ -7006,7 +6973,6 @@ const getReferenceDrumMaterial = (drum = {}) => {
     drum.importMeta?.description,
 
     drum.importMeta?.notes,
-
   ]
 
     .map(flattenReferenceValue)
@@ -7018,7 +6984,6 @@ const getReferenceDrumMaterial = (drum = {}) => {
     .toLowerCase();
 
   const materialMatches = [
-
     ['black nickel over brass', 'Black Nickel over Brass'],
 
     ['chrome over brass', 'Chrome over Brass'],
@@ -7126,141 +7091,89 @@ const getReferenceDrumMaterial = (drum = {}) => {
     ['acrylic', 'Acrylic'],
 
     ['carbon fiber', 'Carbon Fiber'],
-
   ];
 
   const match = materialMatches.find(([needle]) =>
-
     searchableText.includes(needle)
-
   );
 
   return match?.[1] || '';
-
 };
 
 const getReferenceDrumThickness = (drum = {}) => {
-
   return (
-
     drum.shell?.thicknessMm ||
-
     drum.shellThicknessMm ||
-
     drum.thicknessMm ||
-
     drum.shellThickness ||
-
     drum.thickness ||
-
     drum.shell_thickness_mm ||
-
     ''
-
   );
-
 };
 
 const getReferenceDrumHoop = (drum = {}) => {
-
   return (
-
     drum.shell?.hoopRimType ||
-
     drum.hoopRimType ||
-
     drum.hoopType ||
-
     drum.hoops ||
-
     drum.rimType ||
-
     drum.stockHoops ||
-
     ''
-
   );
-
 };
 
 const getReferenceDrumConstruction = (drum = {}) => {
-
   return (
-
     drum.shell?.construction ||
-
     drum.shellConstruction ||
-
     drum.normalizedShellConstruction ||
-
     ''
-
   );
-
 };
 
 const getReferenceDrumLugCount = (drum = {}) => {
-
   return drum.hardware?.lugCount || drum.lugCount || '';
-
 };
 
 const getReferenceDrumField = (drum = {}, nestedPath = '', flatKey = '') => {
-
   if (nestedPath === 'shell.plyCountLayup') {
-
     return drum.shell?.plyCountLayup || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'shell.reinforcementRings') {
-
     return drum.shell?.reinforcementRings || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'shell.bearingEdge') {
-
     return drum.shell?.bearingEdge || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'shell.snareBedType') {
-
     return drum.shell?.snareBedType || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'shell.finishType') {
-
     return drum.shell?.finishType || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'hardware.stockSnareWires') {
-
     return drum.hardware?.stockSnareWires || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'hardware.stockBatterHead') {
-
     return drum.hardware?.stockBatterHead || drum[flatKey] || '';
-
   }
 
   if (nestedPath === 'hardware.stockResoHead') {
-
     return drum.hardware?.stockResoHead || drum[flatKey] || '';
-
   }
 
   return drum[flatKey] || '';
-
 };
 
 const mapReferenceDrumToSelector = (drum = {}) => {
-
   const diameter = drum.diameter ? `${drum.diameter} in` : '14 in';
 
   const depth = drum.depth ? `${drum.depth} in` : '5.5 in';
@@ -7270,7 +7183,6 @@ const mapReferenceDrumToSelector = (drum = {}) => {
   const lugCount = getReferenceDrumLugCount(drum);
 
   return {
-
     drumType: 'Snare',
 
     nonOberCompanyType: drum.companyType || 'Major Manufacturer',
@@ -7281,32 +7193,26 @@ const mapReferenceDrumToSelector = (drum = {}) => {
 
     nonOberModelName: drum.modelName || '',
 
-    nonOberBaselineConstruction:
-
-      getReferenceDrumConstruction(drum) || 'Ply',
+    nonOberBaselineConstruction: getReferenceDrumConstruction(drum) || 'Ply',
 
     nonOberMaterial: getReferenceDrumMaterial(drum),
 
     nonOberThicknessGroup: thickness ? `${thickness}mm` : '',
 
     nonOberPlyLayupStyle: getReferenceDrumField(
-
       drum,
 
       'shell.plyCountLayup',
 
       'plyCountLayup'
-
     ),
 
     nonOberReinforcementRings: getReferenceDrumField(
-
       drum,
 
       'shell.reinforcementRings',
 
       'reinforcementRings'
-
     ),
 
     nonOberBeadedShell: '',
@@ -7326,59 +7232,47 @@ const mapReferenceDrumToSelector = (drum = {}) => {
     hoopType: getReferenceDrumHoop(drum),
 
     bearingEdge: getReferenceDrumField(
-
       drum,
 
       'shell.bearingEdge',
 
       'bearingEdge'
-
     ),
 
     snareBed: getReferenceDrumField(
-
       drum,
 
       'shell.snareBedType',
 
       'snareBedType'
-
     ),
 
     snareWires: getReferenceDrumField(
-
       drum,
 
       'hardware.stockSnareWires',
 
       'stockSnareWires'
-
     ),
 
     batterHead: getReferenceDrumField(
-
       drum,
 
       'hardware.stockBatterHead',
 
       'stockBatterHead'
-
     ),
 
     resoHead: getReferenceDrumField(
-
       drum,
 
       'hardware.stockResoHead',
 
       'stockResoHead'
-
     ),
 
     tension: 'Medium',
-
   };
-
 };
 
 const buildReferencePreviewFromDrum = (drum = {}) => {
@@ -8236,7 +8130,10 @@ const AdminLegacyPrintCalibration = () => {
 
   const [selectedReferenceDrumId, setSelectedReferenceDrumId] = useState('');
 
-const [isSavingReferenceDrum, setIsSavingReferenceDrum] = useState(false);
+  const [isSavingReferenceDrum, setIsSavingReferenceDrum] = useState(false);
+
+  const [activeReferenceResearchTarget, setActiveReferenceResearchTarget] =
+    useState(null);
 
   const selectedReferenceDrum = useMemo(() => {
     return (
@@ -9991,106 +9888,87 @@ const [isSavingReferenceDrum, setIsSavingReferenceDrum] = useState(false);
   };
 
   const handleSaveReferenceDrum = async (updatedFields = {}) => {
+    if (!selectedReferenceDrumId) {
+      window.alert('Select a snare reference drum first.');
 
-  if (!selectedReferenceDrumId) {
+      return;
+    }
 
-    window.alert('Select a snare reference drum first.');
+    setIsSavingReferenceDrum(true);
 
-    return;
+    try {
+      const referenceDrumRef = doc(
+        db,
 
-  }
+        SNARE_REFERENCE_DRUMS_COLLECTION,
 
-  setIsSavingReferenceDrum(true);
+        selectedReferenceDrumId
+      );
 
-  try {
+      const cleanPayload = {
+        ...updatedFields,
 
-    const referenceDrumRef = doc(
+        updatedAt: serverTimestamp(),
+      };
 
-      db,
+      await updateDoc(referenceDrumRef, cleanPayload);
 
-      SNARE_REFERENCE_DRUMS_COLLECTION,
+      setReferenceDrums((current) =>
+        current.map((drum) =>
+          drum.id === selectedReferenceDrumId
+            ? {
+                ...drum,
 
-      selectedReferenceDrumId
+                ...updatedFields,
+              }
+            : drum
+        )
+      );
 
-    );
+      window.alert('Snare reference drum saved.');
+    } catch (error) {
+      console.error('Failed saving snare reference drum:', error);
 
-    const cleanPayload = {
+      window.alert('Failed saving snare reference drum. Check console.');
+    } finally {
+      setIsSavingReferenceDrum(false);
+    }
+  };
 
-      ...updatedFields,
+  const selectReferenceDrum = (drum = null) => {
+    if (!drum?.id) return;
 
-      updatedAt: serverTimestamp(),
+    const mapped = mapReferenceDrumToSelector(drum);
 
-    };
+    setSelectedReferenceDrumId(drum.id);
 
-    await updateDoc(referenceDrumRef, cleanPayload);
+    setSelector((current) => ({
+      ...current,
 
-    setReferenceDrums((current) =>
+      ...mapped,
 
-      current.map((drum) =>
+      construction: 'Generic Ply Shell',
 
-        drum.id === selectedReferenceDrumId
+      drumType: 'Snare',
 
-          ? {
+      nonOberCompanyType:
+        drum.companyType || current.nonOberCompanyType || 'Major Manufacturer',
 
-              ...drum,
+      nonOberCompanyName: drum.companyName || current.nonOberCompanyName || '',
 
-              ...updatedFields,
+      nonOberLineName: drum.lineSeries || current.nonOberLineName || '',
 
-            }
+      nonOberModelName: drum.modelName || current.nonOberModelName || '',
+    }));
 
-          : drum
+    setActivePreviewRead('First Listen');
+  };
 
-      )
+  const handleResearchReferenceDrum = (researchTarget) => {
+    setActiveReferenceResearchTarget(researchTarget);
 
-    );
-
-    window.alert('Snare reference drum saved.');
-
-  } catch (error) {
-
-    console.error('Failed saving snare reference drum:', error);
-
-    window.alert('Failed saving snare reference drum. Check console.');
-
-  } finally {
-
-    setIsSavingReferenceDrum(false);
-
-  }
-
-};
-
-const selectReferenceDrum = (drum = null) => {
-
-  if (!drum?.id) return;
-
-  const mapped = mapReferenceDrumToSelector(drum);
-
-  setSelectedReferenceDrumId(drum.id);
-
-  setSelector((current) => ({
-
-    ...current,
-
-    ...mapped,
-
-    construction: 'Generic Ply Shell',
-
-    drumType: 'Snare',
-
-    nonOberCompanyType: drum.companyType || current.nonOberCompanyType || 'Major Manufacturer',
-
-    nonOberCompanyName: drum.companyName || current.nonOberCompanyName || '',
-
-    nonOberLineName: drum.lineSeries || current.nonOberLineName || '',
-
-    nonOberModelName: drum.modelName || current.nonOberModelName || '',
-
-  }));
-
-  setActivePreviewRead('First Listen');
-
-};
+    console.log('Snare reference research target:', researchTarget);
+  };
 
   const renderNonOberReferenceBuilder = () => {
     const companyOptions = Array.from(
@@ -10182,19 +10060,15 @@ const selectReferenceDrum = (drum = null) => {
                 key={companyName}
                 type="button"
                 className={activeCompany === companyName ? 'active' : ''}
-onClick={() => {
+                onClick={() => {
+                  const nextCompanyDrums = referenceDrums.filter(
+                    (drum) => drum.companyName === companyName
+                  );
 
-  const nextCompanyDrums = referenceDrums.filter(
+                  const nextDrum = nextCompanyDrums[0];
 
-    (drum) => drum.companyName === companyName
-
-  );
-
-  const nextDrum = nextCompanyDrums[0];
-
-  selectReferenceDrum(nextDrum);
-
-}}
+                  selectReferenceDrum(nextDrum);
+                }}
               >
                 {companyName}
               </button>
@@ -10215,17 +10089,13 @@ onClick={() => {
                 key={lineName}
                 type="button"
                 className={activeLine === lineName ? 'active' : ''}
-onClick={() => {
+                onClick={() => {
+                  const nextDrum =
+                    companyDrums.find((drum) => drum.lineSeries === lineName) ||
+                    companyDrums[0];
 
-  const nextDrum =
-
-    companyDrums.find((drum) => drum.lineSeries === lineName) ||
-
-    companyDrums[0];
-
-  selectReferenceDrum(nextDrum);
-
-}}
+                  selectReferenceDrum(nextDrum);
+                }}
               >
                 {lineName}
               </button>
@@ -10246,27 +10116,19 @@ onClick={() => {
                 key={drum.id}
                 type="button"
                 className={selectedReferenceDrumId === drum.id ? 'active' : ''}
-onClick={() => selectReferenceDrum(drum)}
+                onClick={() => selectReferenceDrum(drum)}
               >
                 <strong>{drum.modelName || 'Unnamed Reference Snare'}</strong>
 
-<span>
-
-  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
-
-  {getReferenceDrumConstruction(drum) || 'Unknown construction'} ·{' '}
-
-  {getReferenceDrumMaterial(drum) || 'Unknown material'} ·{' '}
-
-  {getReferenceDrumHoop(drum) || 'Unknown hoops'} ·{' '}
-
-  {getReferenceDrumLugCount(drum)
-
-    ? `${getReferenceDrumLugCount(drum)} lug`
-
-    : 'Unknown lugs'}
-
-</span>
+                <span>
+                  {drum.diameter || '?'}x{drum.depth || '?'} ·{' '}
+                  {getReferenceDrumConstruction(drum) || 'Unknown construction'}{' '}
+                  · {getReferenceDrumMaterial(drum) || 'Unknown material'} ·{' '}
+                  {getReferenceDrumHoop(drum) || 'Unknown hoops'} ·{' '}
+                  {getReferenceDrumLugCount(drum)
+                    ? `${getReferenceDrumLugCount(drum)} lug`
+                    : 'Unknown lugs'}
+                </span>
               </button>
             ))}
           </div>
@@ -10282,41 +10144,25 @@ onClick={() => selectReferenceDrum(drum)}
           )}
         </div>
 
-     {selectedReferenceDrum && (
+        {selectedReferenceDrum && (
+          <>
+            <div className="legacyprint-admin-note">
+              <strong>Selected Firestore reference</strong>
 
-  <>
+              <span>
+                {selectedReferenceDrum.companyName} /{' '}
+                {selectedReferenceDrum.lineSeries} /{' '}
+                {selectedReferenceDrum.modelName}
+              </span>
+            </div>
 
-    <div className="legacyprint-admin-note">
-
-      <strong>Selected Firestore reference</strong>
-
-      <span>
-
-        {selectedReferenceDrum.companyName} /{' '}
-
-        {selectedReferenceDrum.lineSeries} /{' '}
-
-        {selectedReferenceDrum.modelName}
-
-      </span>
-
-    </div>
-
-    <SnareReferenceEditor
-
-      drum={selectedReferenceDrum}
-
-      isSaving={isSavingReferenceDrum}
-
-      onSave={handleSaveReferenceDrum}
-
-    />
-
-  </>
-
-)}
-
-
+            <SnareReferenceEditor
+              drum={selectedReferenceDrum}
+              isSaving={isSavingReferenceDrum}
+              onSave={handleSaveReferenceDrum}
+            />
+          </>
+        )}
       </div>
     );
   };
@@ -12396,35 +12242,183 @@ onClick={() => selectReferenceDrum(drum)}
           </section>
         )}
 
-                {activeTab === 'Engine Resources' && (
-
+        {activeTab === 'Engine Resources' && (
           <section className="legacyprint-admin-section">
-
             <SnareReferenceResourceManager
-
               referenceDrums={referenceDrums}
-
               isLoading={isLoadingReferenceDrums}
-
               selectedReferenceDrumId={selectedReferenceDrumId}
+              onSelectReferenceDrum={(drumId) => {
+                const drum = referenceDrums.find((item) => item.id === drumId);
 
-onSelectReferenceDrum={(drumId) => {
-
-  const drum = referenceDrums.find((item) => item.id === drumId);
-
-  selectReferenceDrum(drum);
-
-}}
+                selectReferenceDrum(drum);
+              }}
               selectedReferenceDrum={selectedReferenceDrum}
-
               isSavingReferenceDrum={isSavingReferenceDrum}
-
               onSaveReferenceDrum={handleSaveReferenceDrum}
-
+              onResearchReferenceDrum={handleResearchReferenceDrum}
             />
 
-          </section>
+{activeReferenceResearchTarget && (
 
+  <div className="legacyprint-admin-note neutral">
+
+    <strong>
+
+      Research target selected:{' '}
+
+      {activeReferenceResearchTarget.companyName || 'Unknown Company'} /{' '}
+
+      {activeReferenceResearchTarget.modelName || 'Unnamed Snare'}
+
+    </strong>
+
+    <span>
+
+      {activeReferenceResearchTarget.diameter || '?'}x
+
+      {activeReferenceResearchTarget.depth || '?'} ·{' '}
+
+      {activeReferenceResearchTarget.lineSeries || 'Unknown Series'}
+
+    </span>
+
+    <div style={{ marginTop: '12px' }}>
+
+      <strong>Missing fields:</strong>
+
+      <ul>
+
+        {(activeReferenceResearchTarget.researchNeeds?.missingFields || []).map(
+
+          (field) => (
+
+            <li key={field.key}>
+
+              <b>{field.label}</b> — {field.reason}
+
+            </li>
+
+          )
+
+        )}
+
+      </ul>
+
+    </div>
+
+    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '12px' }}>
+
+      <button
+
+        type="button"
+
+        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+
+        onClick={() => {
+
+          const query = [
+
+            activeReferenceResearchTarget.companyName,
+
+            activeReferenceResearchTarget.lineSeries,
+
+            activeReferenceResearchTarget.modelName,
+
+            activeReferenceResearchTarget.diameter &&
+
+              activeReferenceResearchTarget.depth
+
+              ? `${activeReferenceResearchTarget.diameter}x${activeReferenceResearchTarget.depth}`
+
+              : '',
+
+            'snare drum specs lug count bearing edge hoop'
+
+          ]
+
+            .filter(Boolean)
+
+            .join(' ');
+
+          window.open(
+
+            `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+
+            '_blank',
+
+            'noopener,noreferrer'
+
+          );
+
+        }}
+
+      >
+
+        Search Specs
+
+      </button>
+
+      <button
+
+        type="button"
+
+        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+
+        onClick={() => {
+
+          const query = [
+
+            activeReferenceResearchTarget.companyName,
+
+            activeReferenceResearchTarget.modelName,
+
+            'official'
+
+          ]
+
+            .filter(Boolean)
+
+            .join(' ');
+
+          window.open(
+
+            `https://www.google.com/search?q=${encodeURIComponent(query)}`,
+
+            '_blank',
+
+            'noopener,noreferrer'
+
+          );
+
+        }}
+
+      >
+
+        Search Official Source
+
+      </button>
+
+      <button
+
+        type="button"
+
+        className="legacyprint-admin-button secondary legacyprint-admin-button--dark"
+
+        onClick={() => setActiveReferenceResearchTarget(null)}
+
+      >
+
+        Clear Research Target
+
+      </button>
+
+    </div>
+
+  </div>
+
+)}
+          </section>
         )}
 
         {activeTab === 'Engine View Settings' && (
