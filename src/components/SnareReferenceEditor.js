@@ -590,7 +590,19 @@ const normalizeValueForSave = ({ field, value }) => {
 
 };
 
-const SnareReferenceEditor = ({ drum, isSaving = false, onSave }) => {
+const SnareReferenceEditor = ({
+
+  drum,
+
+  isSaving = false,
+
+  onSave,
+
+  onResearch,
+
+  researchNeeds = null,
+
+}) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -742,7 +754,25 @@ const SnareReferenceEditor = ({ drum, isSaving = false, onSave }) => {
 
           )}
 
-          <button
+                    {onResearch && (
+
+            <button
+
+              type="button"
+
+              className="snare-reference-editor__button research"
+
+              onClick={onResearch}
+
+            >
+
+              Research This Drum
+
+            </button>
+
+          )}
+
+                 <button
 
             type="button"
 
@@ -759,6 +789,58 @@ const SnareReferenceEditor = ({ drum, isSaving = false, onSave }) => {
         </div>
 
       </div>
+
+            {researchNeeds?.needsResearch && (
+
+        <div className="snare-reference-editor__research-panel">
+
+          <div>
+
+            <p className="snare-reference-editor__overline">
+
+              Research Needed
+
+            </p>
+
+            <strong>
+
+              {researchNeeds.missingFields?.length || 0} incomplete fields found
+
+            </strong>
+
+            <span>
+
+              This drum has missing or unknown source/spec data. Use Research
+
+              This Drum to start the confirmation workflow.
+
+            </span>
+
+          </div>
+
+          {!!researchNeeds.missingFields?.length && (
+
+            <div className="snare-reference-editor__research-list">
+
+              {researchNeeds.missingFields.map((field) => (
+
+                <span key={field.key}>
+
+                  <b>{field.label}</b>
+
+                  {field.reason}
+
+                </span>
+
+              ))}
+
+            </div>
+
+          )}
+
+        </div>
+
+      )}
 
       {isOpen && (
 
