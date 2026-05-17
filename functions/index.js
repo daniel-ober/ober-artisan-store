@@ -3423,242 +3423,317 @@ function requireAdminCaller(request, message = 'Admin privileges required.') {
   };
 }
 
+const SNARE_RESEARCH_FIELD_DEFINITIONS = [
+
+  {
+
+    key: 'shell.construction',
+
+    resultKey: 'shellConstruction',
+
+    label: 'Shell Construction',
+
+    targetPath: 'shell.construction',
+
+    type: 'string',
+
+    getValue: (drum) => drum.shell?.construction,
+
+    reason: 'Shell construction is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'shell.material1',
+
+    resultKey: 'shellMaterial1',
+
+    label: 'Shell Material 1',
+
+    targetPath: 'shell.material1',
+
+    type: 'string',
+
+    getValue: (drum) => drum.shell?.material1,
+
+    reason: 'Primary shell material is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'shell.thicknessMm',
+
+    resultKey: 'shellThicknessMm',
+
+    label: 'Shell Thickness mm',
+
+    targetPath: 'shell.thicknessMm',
+
+    type: 'number',
+
+    getValue: (drum) => drum.shell?.thicknessMm,
+
+    reason: 'Shell thickness in millimeters is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'shell.reinforcementRings',
+
+    resultKey: 'reinforcementRings',
+
+    label: 'Reinforcement Rings',
+
+    targetPath: 'shell.reinforcementRings',
+
+    type: 'string',
+
+    getValue: (drum) => drum.shell?.reinforcementRings,
+
+    reason: 'Reinforcement ring information is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'shell.bearingEdge',
+
+    resultKey: 'bearingEdge',
+
+    label: 'Bearing Edge',
+
+    targetPath: 'shell.bearingEdge',
+
+    type: 'string',
+
+    getValue: (drum) => drum.shell?.bearingEdge,
+
+    reason: 'Bearing edge information is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'shell.snareBedType',
+
+    resultKey: 'snareBedType',
+
+    label: 'Snare Bed Type',
+
+    targetPath: 'shell.snareBedType',
+
+    type: 'string',
+
+    getValue: (drum) => drum.shell?.snareBedType,
+
+    reason: 'Snare bed information is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'shell.hoopRimType',
+
+    resultKey: 'hoopRimType',
+
+    label: 'Hoop / Rim Type',
+
+    targetPath: 'shell.hoopRimType',
+
+    type: 'string',
+
+    getValue: (drum) => drum.shell?.hoopRimType,
+
+    reason: 'Hoop/rim type is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'hardware.lugCount',
+
+    resultKey: 'lugCount',
+
+    label: 'Lug Count',
+
+    targetPath: 'hardware.lugCount',
+
+    type: 'number',
+
+    getValue: (drum) => drum.hardware?.lugCount,
+
+    reason: 'Lug count is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'hardware.lugType',
+
+    resultKey: 'lugType',
+
+    label: 'Lug Type',
+
+    targetPath: 'hardware.lugType',
+
+    type: 'string',
+
+    getValue: (drum) => drum.hardware?.lugType,
+
+    reason: 'Lug type is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'hardware.snareThrowMakeAndModel',
+
+    resultKey: 'snareThrowMakeAndModel',
+
+    label: 'Throw-Off',
+
+    targetPath: 'hardware.snareThrowMakeAndModel',
+
+    type: 'string',
+
+    getValue: (drum) => drum.hardware?.snareThrowMakeAndModel,
+
+    reason: 'Throw-off make/model is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'hardware.stockSnareWires',
+
+    resultKey: 'stockSnareWires',
+
+    label: 'Stock Snare Wires',
+
+    targetPath: 'hardware.stockSnareWires',
+
+    type: 'string',
+
+    getValue: (drum) => drum.hardware?.stockSnareWires,
+
+    reason: 'Stock snare wires are missing or unknown.',
+
+  },
+
+  {
+
+    key: 'hardware.stockBatterHead',
+
+    resultKey: 'stockBatterHead',
+
+    label: 'Stock Batter Head',
+
+    targetPath: 'hardware.stockBatterHead',
+
+    type: 'string',
+
+    getValue: (drum) => drum.hardware?.stockBatterHead,
+
+    reason: 'Stock batter head is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'hardware.stockResoHead',
+
+    resultKey: 'stockResoHead',
+
+    label: 'Stock Reso Head',
+
+    targetPath: 'hardware.stockResoHead',
+
+    type: 'string',
+
+    getValue: (drum) => drum.hardware?.stockResoHead,
+
+    reason: 'Stock resonant/snare-side head is missing or unknown.',
+
+  },
+
+  {
+
+    key: 'sources.primarySourceUrl',
+
+    resultKey: 'primarySourceUrl',
+
+    label: 'Primary Source URL',
+
+    targetPath: 'sources.primarySourceUrl',
+
+    type: 'string',
+
+    getValue: (drum) => drum.sources?.primarySourceUrl,
+
+    reason: 'Primary source URL is missing.',
+
+  },
+
+];
+
+function isSnareResearchValueMissing(value) {
+
+  if (value === undefined || value === null) return true;
+
+  const text = String(value).trim().toLowerCase();
+
+  return (
+
+    text === '' ||
+
+    text === 'unknown' ||
+
+    text === 'n/a' ||
+
+    text === 'na' ||
+
+    text === 'not available' ||
+
+    text === 'not published' ||
+
+    text === 'unknown / not published'
+
+  );
+
+}
+
 function getSnareResearchMissingFields(drum = {}) {
+
   const topLevelResearchNeeds = drum.researchNeeds || {};
 
   if (Array.isArray(topLevelResearchNeeds.missingFields)) {
+
     return topLevelResearchNeeds.missingFields;
+
   }
 
-  const missingFields = [];
+  return SNARE_RESEARCH_FIELD_DEFINITIONS.filter((field) =>
 
-  const shell = drum.shell || {};
+    isSnareResearchValueMissing(field.getValue(drum))
 
-  const hardware = drum.hardware || {};
+  ).map((field) => ({
 
-  const sources = drum.sources || {};
+    key: field.key,
 
-  const checks = [
-    {
-      key: 'hoopRimType',
+    resultKey: field.resultKey,
 
-      label: 'Hoop / Rim Type',
+    label: field.label,
 
-      value: shell.hoopRimType,
+    value: '',
 
-      reason: 'Hoop/rim type is missing or unknown.',
-    },
+    reason: field.reason,
 
-    {
-      key: 'lugCount',
+  }));
 
-      label: 'Lug Count',
-
-      value: hardware.lugCount,
-
-      reason: 'Lug count is missing or unknown.',
-    },
-
-    {
-      key: 'bearingEdge',
-
-      label: 'Bearing Edge',
-
-      value: shell.bearingEdge,
-
-      reason: 'Bearing edge information is missing or unknown.',
-    },
-
-    {
-      key: 'snareBedType',
-
-      label: 'Snare Bed Type',
-
-      value: shell.snareBedType,
-
-      reason: 'Snare bed information is missing or unknown.',
-    },
-
-    {
-      key: 'primarySourceUrl',
-
-      label: 'Primary Source URL',
-
-      value: sources.primarySourceUrl,
-
-      reason: 'Primary source URL is missing.',
-    },
-  ];
-
-  checks.forEach((field) => {
-    const value = field.value;
-
-    if (
-      value === undefined ||
-      value === null ||
-      String(value).trim() === '' ||
-      String(value).trim().toLowerCase() === 'unknown'
-    ) {
-      missingFields.push({
-        key: field.key,
-
-        label: field.label,
-
-        value: '',
-
-        reason: field.reason,
-      });
-    }
-  });
-
-  return missingFields;
 }
-
-exports.researchSnareReferenceDrum = onCall(
-  {
-    region: 'us-central1',
-
-    cors: true,
-
-    timeoutSeconds: 60,
-
-    memory: '512MiB',
-  },
-
-  async (request) => {
-    const caller = requireAdminCaller(
-      request,
-
-      'Only admins can start snare reference research.'
-    );
-
-    const drumId = String(request.data?.drumId || '').trim();
-
-    if (!drumId) {
-      throw new HttpsError('invalid-argument', 'drumId is required.');
-    }
-
-    const drumRef = db.collection('snareReferenceDrums').doc(drumId);
-
-    const drumSnap = await drumRef.get();
-
-    if (!drumSnap.exists) {
-      throw new HttpsError('not-found', 'Snare reference drum not found.');
-    }
-
-    const drum = {
-      id: drumSnap.id,
-
-      ...(drumSnap.data() || {}),
-    };
-
-    const missingFields = getSnareResearchMissingFields(drum);
-
-    const jobRef = db.collection('snareReferenceResearchJobs').doc();
-
-    const jobDoc = {
-      drumId,
-
-      status: 'pending',
-
-      source: 'admin_manual_research_button',
-
-      requestedAt: admin.firestore.FieldValue.serverTimestamp(),
-
-      requestedByUid: caller.uid,
-
-      requestedByEmail: caller.email,
-
-      missingFields,
-
-      missingCount: missingFields.length,
-
-      drumSnapshot: {
-        id: drum.id,
-
-        companyName: drum.companyName || '',
-
-        lineSeries: drum.lineSeries || '',
-
-        modelName: drum.modelName || '',
-
-        drumType: drum.drumType || '',
-
-        diameter: drum.diameter ?? null,
-
-        depth: drum.depth ?? null,
-
-        sizeKey: drum.sizeKey || '',
-
-        shell: drum.shell || {},
-
-        hardware: drum.hardware || {},
-
-        production: drum.production || {},
-
-        sources: drum.sources || {},
-
-        search: drum.search || {},
-
-        notes: drum.notes || {},
-
-        oberScores: drum.oberScores || {},
-
-        tuning: drum.tuning || {},
-      },
-
-      result: null,
-
-      error: null,
-
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    };
-
-    await jobRef.set(jobDoc);
-
-    await drumRef.set(
-      {
-        research: {
-          latestJobId: jobRef.id,
-
-          latestJobStatus: 'pending',
-
-          latestRequestedAt: admin.firestore.FieldValue.serverTimestamp(),
-
-          latestRequestedByUid: caller.uid,
-
-          latestRequestedByEmail: caller.email,
-        },
-
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      },
-
-      { merge: true }
-    );
-
-    logger.info('Created snare reference research job', {
-      jobId: jobRef.id,
-
-      drumId,
-
-      missingCount: missingFields.length,
-    });
-
-    return {
-      ok: true,
-
-      jobId: jobRef.id,
-
-      drumId,
-
-      status: 'pending',
-
-      missingFields,
-
-      missingCount: missingFields.length,
-    };
-  }
-);
 
 function safeParseAiJson(rawText) {
 
@@ -3710,34 +3785,70 @@ function safeParseAiJson(rawText) {
 
 }
 
-exports.researchSnareReferenceDrumWithAI = onCall(
+function buildSnareResearchJsonShape(missingFields = []) {
+
+  const lines = missingFields.map((field) => {
+
+    const definition = SNARE_RESEARCH_FIELD_DEFINITIONS.find(
+
+      (item) => item.key === field.key || item.resultKey === field.resultKey
+
+    );
+
+    const resultKey = field.resultKey || definition?.resultKey || field.key;
+
+    const type = definition?.type === 'number' ? 'number' : 'string';
+
+       return `    "${resultKey}": {
+
+      "value": ${type} | null,
+
+      "confidence": "High" | "Medium" | "Low",
+
+      "sourceUrl": string | null,
+
+      "sourceLabel": string | null,
+
+      "notes": string
+
+    }`;
+
+  });
+
+  return lines.join(',\n');
+
+}
+
+exports.researchSnareReferenceDrum = onCall(
+
   {
+
     region: 'us-central1',
 
     cors: true,
 
-    timeoutSeconds: 120,
+    timeoutSeconds: 60,
 
-    memory: '1GiB',
+    memory: '512MiB',
 
-    secrets: [OPENAI_API_KEY],
   },
 
   async (request) => {
+
     const caller = requireAdminCaller(
+
       request,
 
-      'Only admins can run AI snare reference research.'
+      'Only admins can start snare reference research.'
+
     );
 
     const drumId = String(request.data?.drumId || '').trim();
 
     if (!drumId) {
-      throw new HttpsError('invalid-argument', 'drumId is required.');
-    }
 
-    if (!OPENAI_API_KEY.value()) {
-      throw new HttpsError('internal', 'OPENAI_API_KEY is not configured.');
+      throw new HttpsError('invalid-argument', 'drumId is required.');
+
     }
 
     const drumRef = db.collection('snareReferenceDrums').doc(drumId);
@@ -3745,13 +3856,17 @@ exports.researchSnareReferenceDrumWithAI = onCall(
     const drumSnap = await drumRef.get();
 
     if (!drumSnap.exists) {
+
       throw new HttpsError('not-found', 'Snare reference drum not found.');
+
     }
 
     const drum = {
+
       id: drumSnap.id,
 
       ...(drumSnap.data() || {}),
+
     };
 
     const missingFields = getSnareResearchMissingFields(drum);
@@ -3759,11 +3874,12 @@ exports.researchSnareReferenceDrumWithAI = onCall(
     const jobRef = db.collection('snareReferenceResearchJobs').doc();
 
     const jobDoc = {
+
       drumId,
 
-      status: 'researching',
+      status: 'pending',
 
-      source: 'admin_ai_research_button',
+      source: 'admin_manual_research_button',
 
       requestedAt: admin.firestore.FieldValue.serverTimestamp(),
 
@@ -3776,6 +3892,7 @@ exports.researchSnareReferenceDrumWithAI = onCall(
       missingCount: missingFields.length,
 
       drumSnapshot: {
+
         id: drum.id,
 
         companyName: drum.companyName || '',
@@ -3807,6 +3924,7 @@ exports.researchSnareReferenceDrumWithAI = onCall(
         oberScores: drum.oberScores || {},
 
         tuning: drum.tuning || {},
+
       },
 
       result: null,
@@ -3814,13 +3932,193 @@ exports.researchSnareReferenceDrumWithAI = onCall(
       error: null,
 
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
     };
 
     await jobRef.set(jobDoc);
 
     await drumRef.set(
+
       {
+
         research: {
+
+          ...(drum.research || {}),
+
+          latestJobId: jobRef.id,
+
+          latestJobStatus: 'pending',
+
+          latestRequestedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+          latestRequestedByUid: caller.uid,
+
+          latestRequestedByEmail: caller.email,
+
+          latestMissingCount: missingFields.length,
+
+        },
+
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      },
+
+      { merge: true }
+
+    );
+
+    return {
+
+      ok: true,
+
+      jobId: jobRef.id,
+
+      drumId,
+
+      status: 'pending',
+
+      missingFields,
+
+      missingCount: missingFields.length,
+
+    };
+
+  }
+
+);
+
+exports.researchSnareReferenceDrumWithAI = onCall(
+
+  {
+
+    region: 'us-central1',
+
+    cors: true,
+
+    timeoutSeconds: 120,
+
+    memory: '1GiB',
+
+    secrets: [OPENAI_API_KEY],
+
+  },
+
+  async (request) => {
+
+    const caller = requireAdminCaller(
+
+      request,
+
+      'Only admins can run AI snare reference research.'
+
+    );
+
+    const drumId = String(request.data?.drumId || '').trim();
+
+    if (!drumId) {
+
+      throw new HttpsError('invalid-argument', 'drumId is required.');
+
+    }
+
+    if (!OPENAI_API_KEY.value()) {
+
+      throw new HttpsError('internal', 'OPENAI_API_KEY is not configured.');
+
+    }
+
+    const drumRef = db.collection('snareReferenceDrums').doc(drumId);
+
+    const drumSnap = await drumRef.get();
+
+    if (!drumSnap.exists) {
+
+      throw new HttpsError('not-found', 'Snare reference drum not found.');
+
+    }
+
+    const drum = {
+
+      id: drumSnap.id,
+
+      ...(drumSnap.data() || {}),
+
+    };
+
+    const missingFields = getSnareResearchMissingFields(drum);
+
+    const jobRef = db.collection('snareReferenceResearchJobs').doc();
+
+    const jobDoc = {
+
+      drumId,
+
+      status: 'researching',
+
+      source: 'admin_ai_research_button',
+
+      requestedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+      requestedByUid: caller.uid,
+
+      requestedByEmail: caller.email,
+
+      missingFields,
+
+      missingCount: missingFields.length,
+
+      drumSnapshot: {
+
+        id: drum.id,
+
+        companyName: drum.companyName || '',
+
+        lineSeries: drum.lineSeries || '',
+
+        modelName: drum.modelName || '',
+
+        drumType: drum.drumType || '',
+
+        diameter: drum.diameter ?? null,
+
+        depth: drum.depth ?? null,
+
+        sizeKey: drum.sizeKey || '',
+
+        shell: drum.shell || {},
+
+        hardware: drum.hardware || {},
+
+        production: drum.production || {},
+
+        sources: drum.sources || {},
+
+        search: drum.search || {},
+
+        notes: drum.notes || {},
+
+        oberScores: drum.oberScores || {},
+
+        tuning: drum.tuning || {},
+
+      },
+
+      result: null,
+
+      error: null,
+
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
+    };
+
+    await jobRef.set(jobDoc);
+
+    await drumRef.set(
+
+      {
+
+        research: {
+
           ...(drum.research || {}),
 
           latestJobId: jobRef.id,
@@ -3832,12 +4130,17 @@ exports.researchSnareReferenceDrumWithAI = onCall(
           latestRequestedByUid: caller.uid,
 
           latestRequestedByEmail: caller.email,
+
+          latestMissingCount: missingFields.length,
+
         },
 
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
       },
 
       { merge: true }
+
     );
 
     const client = getOpenAIClient();
@@ -3847,6 +4150,8 @@ exports.researchSnareReferenceDrumWithAI = onCall(
       .map((field) => `- ${field.key}: ${field.label} — ${field.reason}`)
 
       .join('\n');
+
+    const jsonShape = buildSnareResearchJsonShape(missingFields);
 
     const prompt = `
 
@@ -3868,17 +4173,17 @@ Drum Type: ${drum.drumType || ''}
 
 Size: ${drum.diameter || '?'}x${drum.depth || '?'}
 
-Shell construction: ${drum.shell?.construction || ''}
+Known shell construction: ${drum.shell?.construction || ''}
 
-Shell material 1: ${drum.shell?.material1 || ''}
+Known shell material 1: ${drum.shell?.material1 || ''}
 
-Shell material 2: ${drum.shell?.material2 || ''}
+Known shell material 2: ${drum.shell?.material2 || ''}
 
-Shell material 3: ${drum.shell?.material3 || ''}
+Known shell material 3: ${drum.shell?.material3 || ''}
 
-Shell thickness mm: ${drum.shell?.thicknessMm ?? ''}
+Known shell thickness mm: ${drum.shell?.thicknessMm ?? ''}
 
-Reinforcement rings: ${drum.shell?.reinforcementRings || ''}
+Known reinforcement rings: ${drum.shell?.reinforcementRings || ''}
 
 Known bearing edge: ${drum.shell?.bearingEdge || ''}
 
@@ -3893,6 +4198,10 @@ Known lug type: ${drum.hardware?.lugType || ''}
 Known throw-off: ${drum.hardware?.snareThrowMakeAndModel || ''}
 
 Known wires: ${drum.hardware?.stockSnareWires || ''}
+
+Known batter head: ${drum.hardware?.stockBatterHead || ''}
+
+Known reso/snare-side head: ${drum.hardware?.stockResoHead || ''}
 
 Known primary source: ${drum.sources?.primarySourceUrl || ''}
 
@@ -3924,6 +4233,10 @@ RESEARCH RULES
 
 - Do not update values just because they are typical for the brand.
 
+- For shellThicknessMm, return a number only if source-backed. If the source gives inches, convert to mm and explain conversion in notes.
+
+- For reinforcementRings, return a clear source-backed phrase like "Yes", "No", "Maple reinforcement rings", or null.
+
 - For bearingEdge, use the published value only. If unavailable, return null.
 
 - For snareBedType, acceptable source-backed values include "Standard", "Shallow", "Deep", "Wide", "Unknown / Not Published", or a better published phrase.
@@ -3931,6 +4244,8 @@ RESEARCH RULES
 - For hoopRimType, use the published hoop/rim name if found.
 
 - For lugCount, use a number only when directly listed or visually/source-confirmed with confidence notes.
+
+- For primarySourceUrl, use the strongest source URL found.
 
 RETURN ONLY VALID JSON.
 
@@ -3944,61 +4259,7 @@ JSON SHAPE:
 
   "confirmedFields": {
 
-    "bearingEdge": {
-
-      "value": string | null,
-
-      "confidence": "High" | "Medium" | "Low",
-
-      "sourceUrl": string | null,
-
-      "sourceLabel": string | null,
-
-      "notes": string
-
-    },
-
-    "snareBedType": {
-
-      "value": string | null,
-
-      "confidence": "High" | "Medium" | "Low",
-
-      "sourceUrl": string | null,
-
-      "sourceLabel": string | null,
-
-      "notes": string
-
-    },
-
-    "hoopRimType": {
-
-      "value": string | null,
-
-      "confidence": "High" | "Medium" | "Low",
-
-      "sourceUrl": string | null,
-
-      "sourceLabel": string | null,
-
-      "notes": string
-
-    },
-
-    "lugCount": {
-
-      "value": number | null,
-
-      "confidence": "High" | "Medium" | "Low",
-
-      "sourceUrl": string | null,
-
-      "sourceLabel": string | null,
-
-      "notes": string
-
-    }
+${jsonShape}
 
   },
 
@@ -4029,119 +4290,131 @@ JSON SHAPE:
     let rawText = '';
 
     try {
+
       const response = await client.responses.create({
+
         model: 'gpt-4.1-mini',
 
         tools: [
+
           {
+
             type: 'web_search',
 
             search_context_size: 'medium',
+
           },
+
         ],
 
         input: prompt,
+
       });
 
       rawText = String(response.output_text || '').trim();
 
       if (!rawText) {
+
         throw new Error('OpenAI returned empty research output.');
+
       }
 
-const cleaned = rawText
+      const cleaned = rawText
 
-  .replace(/^```json\s*/i, '')
+        .replace(/^```json\s*/i, '')
 
-  .replace(/^```\s*/i, '')
+        .replace(/^```\s*/i, '')
 
-  .replace(/\s*```$/i, '')
+        .replace(/\s*```$/i, '')
 
-  .trim();
+        .trim();
 
-parsed = safeParseAiJson(cleaned);
+      parsed = safeParseAiJson(cleaned);
 
-if (parsed?.parseFailed) {
+      if (parsed?.parseFailed) {
 
-  await jobRef.set(
+        await jobRef.set(
 
-    {
+          {
 
-      status: 'needs_manual_review',
+            status: 'needs_manual_review',
 
-      error: {
+            error: {
 
-        message: parsed.parseError || 'AI response was not valid JSON.',
+              message: parsed.parseError || 'AI response was not valid JSON.',
 
-        rawText: parsed.rawText || rawText || '',
+              rawText: parsed.rawText || rawText || '',
 
-      },
+            },
 
-      rawResponseText: rawText || '',
+            rawResponseText: rawText || '',
 
-      completedAt: admin.firestore.FieldValue.serverTimestamp(),
+            completedAt: admin.firestore.FieldValue.serverTimestamp(),
 
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
 
-    },
+          },
 
-    { merge: true }
+          { merge: true }
 
-  );
+        );
 
-  await drumRef.set(
+        await drumRef.set(
 
-    {
+          {
 
-      research: {
+            research: {
 
-        ...(drum.research || {}),
+              ...(drum.research || {}),
 
-        latestJobId: jobRef.id,
+              latestJobId: jobRef.id,
 
-        latestJobStatus: 'needs_manual_review',
+              latestJobStatus: 'needs_manual_review',
 
-        latestErrorMessage:
+              latestErrorMessage:
 
-          parsed.parseError || 'AI response was not valid JSON.',
+                parsed.parseError || 'AI response was not valid JSON.',
 
-        latestRawResponseText: parsed.rawText || rawText || '',
+              latestRawResponseText: parsed.rawText || rawText || '',
 
-        latestCompletedAt: admin.firestore.FieldValue.serverTimestamp(),
+              latestCompletedAt: admin.firestore.FieldValue.serverTimestamp(),
 
-      },
+            },
 
-      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            updatedAt: admin.firestore.FieldValue.serverTimestamp(),
 
-    },
+          },
 
-    { merge: true }
+          { merge: true }
 
-  );
+        );
 
-  return {
+        return {
 
-    ok: false,
+          ok: false,
 
-    jobId: jobRef.id,
+          jobId: jobRef.id,
 
-    drumId,
+          drumId,
 
-    status: 'needs_manual_review',
+          status: 'needs_manual_review',
 
-    missingFields,
+          missingFields,
 
-    missingCount: missingFields.length,
+          missingCount: missingFields.length,
 
-    error: parsed.parseError || 'AI response was not valid JSON.',
+          error: parsed.parseError || 'AI response was not valid JSON.',
 
-    rawText: parsed.rawText || rawText || '',
+          rawText: parsed.rawText || rawText || '',
 
-  };
+        };
 
-}
+      }
+
     } catch (err) {
+
       logger.error('researchSnareReferenceDrumWithAI failed', {
+
         drumId,
 
         jobId: jobRef.id,
@@ -4149,29 +4422,39 @@ if (parsed?.parseFailed) {
         message: err?.message || String(err),
 
         rawTextPreview: String(rawText || '').slice(0, 3000),
+
       });
 
       await jobRef.set(
+
         {
+
           status: 'failed',
 
           error: {
+
             message: err?.message || String(err),
 
             rawText: rawText || '',
+
           },
 
           failedAt: admin.firestore.FieldValue.serverTimestamp(),
 
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
         },
 
         { merge: true }
+
       );
 
       await drumRef.set(
+
         {
+
           research: {
+
             ...(drum.research || {}),
 
             latestJobId: jobRef.id,
@@ -4179,44 +4462,63 @@ if (parsed?.parseFailed) {
             latestJobStatus: 'failed',
 
             latestErrorMessage: err?.message || String(err),
+
           },
 
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
         },
 
         { merge: true }
+
       );
 
       throw new HttpsError(
+
         'internal',
 
         err?.message || 'AI snare research failed.'
+
       );
+
     }
 
     const confirmedFields = parsed?.confirmedFields || {};
 
     const anyConfirmed = Object.values(confirmedFields).some(
+
       (field) =>
+
         field &&
+
         field.value !== null &&
+
         field.value !== undefined &&
+
         field.value !== ''
+
     );
 
     const finalStatus =
+
       parsed?.status === 'complete' && anyConfirmed
+
         ? 'complete'
+
         : 'needs_manual_review';
 
     const finalResult = {
+
       ...parsed,
 
       status: finalStatus,
+
     };
 
     await jobRef.set(
+
       {
+
         status: finalStatus,
 
         result: finalResult,
@@ -4226,14 +4528,19 @@ if (parsed?.parseFailed) {
         completedAt: admin.firestore.FieldValue.serverTimestamp(),
 
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
       },
 
       { merge: true }
+
     );
 
     await drumRef.set(
+
       {
+
         research: {
+
           ...(drum.research || {}),
 
           latestJobId: jobRef.id,
@@ -4245,15 +4552,19 @@ if (parsed?.parseFailed) {
           latestMissingCount: missingFields.length,
 
           latestAIResult: finalResult,
+
         },
 
         updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+
       },
 
       { merge: true }
+
     );
 
     return {
+
       ok: true,
 
       jobId: jobRef.id,
@@ -4267,8 +4578,11 @@ if (parsed?.parseFailed) {
       missingCount: missingFields.length,
 
       result: finalResult,
+
     };
+
   }
+
 );
 
 exports.applySnareReferenceResearchResult = onCall(
@@ -4317,17 +4631,17 @@ exports.applySnareReferenceResearchResult = onCall(
 
     }
 
-    const allowedFields = new Set([
+    const allowedFields = new Set(
 
-      'bearingEdge',
+      SNARE_RESEARCH_FIELD_DEFINITIONS.flatMap((field) => [
 
-      'snareBedType',
+        field.key,
 
-      'hoopRimType',
+        field.resultKey,
 
-      'lugCount',
+      ])
 
-    ]);
+    );
 
     const selectedFields = fieldsToApply.filter((field) =>
 
@@ -4381,25 +4695,31 @@ exports.applySnareReferenceResearchResult = onCall(
 
     const appliedFields = [];
 
-    const applyStringField = ({ sourceKey, targetPath }) => {
+    SNARE_RESEARCH_FIELD_DEFINITIONS.forEach((definition) => {
 
-      if (!selectedFields.includes(sourceKey)) return;
+      const isSelected =
 
-      const field = confirmedFields[sourceKey] || {};
+        selectedFields.includes(definition.key) ||
 
-      const value = field.value;
+        selectedFields.includes(definition.resultKey);
+
+      if (!isSelected) return;
+
+      const field = confirmedFields[definition.resultKey] || {};
+
+      const rawValue = field.value;
 
       if (
 
-        value === undefined ||
+        rawValue === undefined ||
 
-        value === null ||
+        rawValue === null ||
 
-        String(value).trim() === '' ||
+        String(rawValue).trim() === '' ||
 
-        String(value).trim().toLowerCase() === 'unknown' ||
+        String(rawValue).trim().toLowerCase() === 'unknown' ||
 
-        String(value).trim().toLowerCase() === 'unknown / not published'
+        String(rawValue).trim().toLowerCase() === 'unknown / not published'
 
       ) {
 
@@ -4407,13 +4727,33 @@ exports.applySnareReferenceResearchResult = onCall(
 
       }
 
-      updates[targetPath] = String(value).trim();
+      let valueToApply = rawValue;
+
+      if (definition.type === 'number') {
+
+        const numericValue = Number(rawValue);
+
+        if (!Number.isFinite(numericValue) || numericValue <= 0) return;
+
+        valueToApply = numericValue;
+
+      } else {
+
+        valueToApply = String(rawValue).trim();
+
+      }
+
+      updates[definition.targetPath] = valueToApply;
 
       appliedFields.push({
 
-        key: sourceKey,
+        key: definition.key,
 
-        value: String(value).trim(),
+        resultKey: definition.resultKey,
+
+        label: definition.label,
+
+        value: valueToApply,
 
         confidence: field.confidence || '',
 
@@ -4421,61 +4761,11 @@ exports.applySnareReferenceResearchResult = onCall(
 
         sourceLabel: field.sourceLabel || '',
 
+        notes: field.notes || '',
+
       });
 
-    };
-
-    applyStringField({
-
-      sourceKey: 'bearingEdge',
-
-      targetPath: 'shell.bearingEdge',
-
     });
-
-    applyStringField({
-
-      sourceKey: 'snareBedType',
-
-      targetPath: 'shell.snareBedType',
-
-    });
-
-    applyStringField({
-
-      sourceKey: 'hoopRimType',
-
-      targetPath: 'shell.hoopRimType',
-
-    });
-
-    if (selectedFields.includes('lugCount')) {
-
-      const field = confirmedFields.lugCount || {};
-
-      const value = Number(field.value);
-
-      if (Number.isFinite(value) && value > 0) {
-
-        updates['hardware.lugCount'] = value;
-
-        appliedFields.push({
-
-          key: 'lugCount',
-
-          value,
-
-          confidence: field.confidence || '',
-
-          sourceUrl: field.sourceUrl || '',
-
-          sourceLabel: field.sourceLabel || '',
-
-        });
-
-      }
-
-    }
 
     if (!Object.keys(updates).length) {
 
