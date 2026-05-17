@@ -166,23 +166,7 @@ function isMissing(value) {
 
   const text = String(value).trim().toLowerCase();
 
-  return (
-
-    text === '' ||
-
-    text === 'unknown' ||
-
-    text === 'n/a' ||
-
-    text === 'na' ||
-
-    text === 'not available' ||
-
-    text === 'not published' ||
-
-    text === 'unknown / not published'
-
-  );
+  return text === '';
 
 }
 
