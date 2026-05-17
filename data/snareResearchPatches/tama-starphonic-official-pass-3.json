@@ -1,0 +1,85 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "STARPHONIC",
+
+  "doNotApplyAutomatically": true,
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "STARPHONIC Bubinga 14x6 sourced shell and hardware completion",
+
+      "matchModelNames": [
+
+        "STARPHONIC Bubinga 14x6"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 7,
+
+        "shell.plyCountLayup": "8-ply Bubinga + 1 outer ply Cordia",
+
+        "hardware.snareThrowMakeAndModel": "Linear-Drive Strainer / STARPHONIC strainer system with detachable butt plate",
+
+        "hardware.stockSnareWires": "20-strand Super Sensitive Hi-Carbon Snare Wires",
+
+        "notes.scoringBasis": "Official Tama STARPHONIC Bubinga page confirms Bubinga shell, Cordia outer ply language, Grooved Hoop, and thinner-shell design. Reputable dealer listings support 7mm, 8-ply Bubinga + 1 outer ply Cordia, Linear-Drive Strainer, detachable butt plate, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Stock heads and snare bed type remain unconfirmed from official source."
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Maple 14x6 sourced shell and hardware completion",
+
+      "matchModelNames": [
+
+        "STARPHONIC Maple 14x6"
+
+      ],
+
+      "updates": {
+
+        "shell.thicknessMm": 6,
+
+        "shell.plyCountLayup": "6-ply Maple + 1 outer ply Mappa Burl",
+
+        "hardware.snareThrowMakeAndModel": "Linear-Drive Strainer / STARPHONIC strainer system with detachable butt plate",
+
+        "hardware.stockSnareWires": "20-strand Super Sensitive Hi-Carbon Snare Wires",
+
+        "notes.scoringBasis": "Official Tama STARPHONIC Maple page confirms the Maple model, Grooved Hoop, and Super Sensitive Hi-Carbon Snappy language. Reputable dealer listings support 6mm, 6-ply Maple + 1 outer ply Mappa Burl, Linear-Drive Strainer, detachable butt plate, and 20-strand Super Sensitive Hi-Carbon Snare Wires. Stock heads and snare bed type remain unconfirmed from official source."
+
+      }
+
+    },
+
+    {
+
+      "groupName": "STARPHONIC Spruce 14x6 sourced throw-off completion",
+
+      "matchModelNames": [
+
+        "STARPHONIC Spruce 14x6"
+
+      ],
+
+      "updates": {
+
+        "hardware.snareThrowMakeAndModel": "Linear-Drive Strainer / Butt Plate",
+
+        "notes.scoringBasis": "Official Tama STARPHONIC Spruce page confirms the Spruce model. Reputable dealer listings identify the throw-off and butt as Linear-Drive Strainer and Butt Plate, with MLS50A / MLS50B part references. Stock heads, bearing edge, and snare bed type remain unconfirmed from official source."
+
+      }
+
+    }
+
+  ]
+
+}
