@@ -13157,34 +13157,21 @@
       "shortDescription": "Shell-first score based on 14x5.5 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Tama official Starclassic Bubinga reissue news states the reissue faithfully reproduces the original 9-ply, 6mm shell construction, with 7mm for snare and bass drums, as it was when discontinued in 2018. Reputable Hoshino USA/dealer listing supports 7mm snare shell, 9-ply original reissue design, Linear-Drive Strainer, one-piece lugs, Super Sensitive Hi-Carbon Snare Wire, and Snappy Bed. Added Starclassic rounded bearing edge profile / 2.5mm inward edge language. Applied only to the exact Starclassic Bubinga 14x5.5 record. Stock batter/reso heads remain unconfirmed from official source."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 5.5,
-        "metricDimensionsMm": "355.6 x 139.7"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Bubinga",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "9-ply bubinga",
-        "shellThicknessMm": 7,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
         "snareSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
@@ -13201,13 +13188,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "9-ply bubinga",
+        "shellThicknessMm": 7,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodMediumThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "bubinga",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7",
+        "combined": "14x5.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x5.5 Tama Starclassic Bubinga snare with bubinga ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "Shell-first read should emphasize dense bubinga body, strong projection, focused attack, and increased control from die-cast hoops. Do not score based on rarity, price, or Starclassic reputation."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059629,
+      "_nanoseconds": 562000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact 14x5.5 ply count, shell thickness, bearing edge, stock heads, and snare wires not confirmed for this record.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate based on Starclassic Bubinga family, known bubinga ply-shell behavior, shell size, and die-cast hoop configuration. Exact ply count and thickness should remain unknown until confirmed for this specific catalog record.",
+      "secondarySourceUrl": "https://www.focusproaudio.com/products/hoshino-usa-bes1465bagac-acoustic-drums-snare-drums",
+      "primarySourceUrl": "https://memphisdrumshop.com/products/tama-14x6-5-starclassic-bubinga-snare-drum-figured-african-cherry-gloss",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-bubinga-14x6-5_14x6-5_ply_bubinga_lacquer_die-cast-hoops_95ab812f",
@@ -13313,34 +13357,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Tama official Starclassic Bubinga reissue news states the reissue faithfully reproduces the original 9-ply, 6mm shell construction, with 7mm for snare and bass drums, as it was when discontinued in 2018. Reputable Hoshino USA/dealer listing supports 7mm snare shell, 9-ply original reissue design, Linear-Drive Strainer, one-piece lugs, Super Sensitive Hi-Carbon Snare Wire, and Snappy Bed. Added Starclassic rounded bearing edge profile / 2.5mm inward edge language to the Starclassic Bubinga 14x6.5 record only. Stock batter/reso heads remain unconfirmed from official source."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Bubinga",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "9-ply Bubinga",
-        "shellThicknessMm": 7,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
         "snareSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
@@ -13357,13 +13388,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "9-ply Bubinga",
+        "shellThicknessMm": 7,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodMediumThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "bubinga",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic Bubinga snare with bubinga ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "Deeper 6.5-inch shell should increase body, low-mid weight, and projection compared with the 5.5-inch version while die-cast hoops keep the response focused and controlled."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059629,
+      "_nanoseconds": 780000000
+    },
+    "research": {
+      "notesOnMissingData": "Specific catalog ply count/thickness should be verified because Starclassic Bubinga references vary by edition and market.",
+      "voiceScoreConfidence": "mediumHigh",
+      "scoringBasis": "Shell-first estimate based on documented Starclassic Bubinga 14x6.5 examples with bubinga ply shells and die-cast hoops. Some sources list 7mm/8-ply or 9-ply depending edition, so exact construction remains unknown for this canonical record.",
+      "secondarySourceUrl": "https://www.focusproaudio.com/products/hoshino-usa-bes1465bagac-acoustic-drums-snare-drums",
+      "primarySourceUrl": "https://memphisdrumshop.com/products/tama-14x6-5-starclassic-bubinga-snare-drum-figured-african-cherry-gloss",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-bubinga-elite-13x6_13x6_ply_bubinga_lacquer_die-cast-hoops_1880d8e1",
@@ -13469,34 +13557,21 @@
       "shortDescription": "Shell-first score based on 13x6 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Tama official Starclassic Bubinga reissue news supports the original Starclassic Bubinga shell family as 9-ply, 6mm shell construction with 7mm for snare and bass drums as it was when discontinued in 2018. Secondary listing confirms the 13x6 Starclassic Bubinga snare format with bubinga shell and outer cordia/decorative veneer. Applied to the exact Starclassic Bubinga Elite 13x6 record only. Used the established Starclassic Bubinga family hardware/bearing-edge/snappy-bed values already applied to the 14 inch Starclassic Bubinga records. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 13,
-        "depthInches": 6,
-        "metricDimensionsMm": "330.2 x 152.4"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Bubinga",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "9-ply bubinga with outer decorative veneer",
-        "shellThicknessMm": 7,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
         "snareSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
@@ -13513,13 +13588,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "9-ply bubinga with outer decorative veneer",
+        "shellThicknessMm": 7,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodMediumThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "bubinga",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 13,
+        "depthInches": 6,
+        "metricDimensionsMm": "330.2 x 152.4",
+        "combined": "13x6"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "13x6 Tama Starclassic Bubinga Elite snare with bubinga ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "13-inch diameter should tighten pitch and response versus 14-inch Starclassic Bubinga models, while the 6-inch depth preserves body and shell weight."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059630,
+      "_nanoseconds": 1000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, shell thickness, bearing edge, lug count, and stock components not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate based on 13x6 bubinga ply format and die-cast hoop behavior. Exact Bubinga Elite construction details need confirmation.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "lowMedium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": "unknown"
+    }
   },
   {
     "id": "tama_starclassic_starclassic-exotix-maple-14x6-5_14x6-5_ply_maple_exotic-lacquer_die-cast-hoops_22bc3876",
@@ -13625,34 +13757,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 14x6.5 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": null,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Exotic lacquer",
-        "finishType": "Exotic lacquer",
-        "exteriorTreatment": "Exotic lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -13669,13 +13788,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "layup": "unknown",
+        "thicknessClass": "woodMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "exotic outer veneer",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Exotic lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "exotic lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic Exotix Maple snare with maple ply shell, exotic lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "Shell-first read should prioritize maple balance, deeper-shell body, and focused die-cast hoop control. Do not over-score exotic finish unless physical veneer/mass details are confirmed."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059630,
+      "_nanoseconds": 221000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, shell thickness, edge profile, and outer veneer species not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate based on maple ply construction, deeper 14x6.5 format, exotic lacquer/veneer category, and die-cast hoops. Exotic veneer should be treated mostly as finish/outer aesthetic unless proven to alter shell mass materially.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "lowMedium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-g-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_1ea5f819",
@@ -13781,34 +13957,21 @@
       "shortDescription": "Shell-first score based on 14x6 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 14x6 Bubinga Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6,
-        "metricDimensionsMm": "355.6 x 152.4"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Bubinga",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": 10,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -13825,13 +13988,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": 10,
+        "layup": "unknown",
+        "thicknessClass": "woodThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 10,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "bubinga",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4",
+        "combined": "14x6"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6 Tama Starclassic G-Bubinga snare with thick bubinga ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "10mm bubinga shell should read as powerful, dense, controlled, and projecting, with less open sustain than thinner bubinga shells."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059630,
+      "_nanoseconds": 461000000
+    },
+    "research": {
+      "notesOnMissingData": "Ply count, bearing edge, and stock components not confirmed.",
+      "voiceScoreConfidence": "mediumHigh",
+      "scoringBasis": "Shell-first estimate using the existing parsed 10mm thickness signal in the document id/name plus bubinga ply and die-cast hoop behavior.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-g-maple-13x7_13x7_ply_maple_10_lacquer_die-cast-hoops_a76acd11",
@@ -13937,34 +14157,21 @@
       "shortDescription": "Shell-first score based on 13x7 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 13x7 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 13,
-        "depthInches": 7,
-        "metricDimensionsMm": "330.2 x 177.8"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": 10,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -13981,13 +14188,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": 10,
+        "layup": "unknown",
+        "thicknessClass": "woodThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 10,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 13,
+        "depthInches": 7,
+        "metricDimensionsMm": "330.2 x 177.8",
+        "combined": "13x7"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "13x7 Tama Starclassic G-Maple snare with thick maple ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "13-inch diameter should tighten pitch and articulation while the 7-inch depth and 10mm maple shell add body, projection, and controlled punch."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059630,
+      "_nanoseconds": 677000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, bearing edge, lug count, and stock components not confirmed.",
+      "voiceScoreConfidence": "mediumHigh",
+      "scoringBasis": "Shell-first estimate using existing parsed 10mm thickness signal, maple ply material, 13x7 format, and die-cast hoop control.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": "unknown"
+    }
   },
   {
     "id": "tama_starclassic_starclassic-g-maple-14x6_14x6_ply_maple_10_lacquer_die-cast-hoops_1da41220",
@@ -14093,34 +14357,21 @@
       "shortDescription": "Shell-first score based on 14x6 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 14x6 Maple Ply with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6,
-        "metricDimensionsMm": "355.6 x 152.4"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": 10,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -14137,13 +14388,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": 10,
+        "layup": "unknown",
+        "thicknessClass": "woodThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 10,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6,
+        "metricDimensionsMm": "355.6 x 152.4",
+        "combined": "14x6"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6 Tama Starclassic G-Maple snare with thick maple ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "Thick maple shell should emphasize attack, projection, and controlled body more than open thin-shell bloom."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059630,
+      "_nanoseconds": 882000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, edge profile, stock heads, and snare wires not confirmed.",
+      "voiceScoreConfidence": "mediumHigh",
+      "scoringBasis": "Shell-first estimate using existing parsed 10mm thickness signal, maple ply shell, 14x6 format, and die-cast hoop control.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-g-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer_die-cast-hoops_5407a2a4",
@@ -14249,34 +14557,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Walnut/Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 14x6.5 Walnut/Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Walnut / Birch",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": null,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -14293,13 +14588,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "layup": "unknown",
+        "thicknessClass": "woodMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "walnut",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "birch",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic G-Walnut/Birch snare with walnut/birch ply shell, lacquer finish, and die-cast hoops.",
+      "drumSummaryNotes": "Walnut/birch hybrid should balance darker body and low-mid warmth from walnut with clearer attack and projection from birch."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059631,
+      "_nanoseconds": 75000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, layup order, thickness, bearing edge, and stock components not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate based on walnut/birch hybrid ply construction, 14x6.5 depth, and die-cast hoops. Exact G-series shell recipe needs confirmation.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "lowMedium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b",
@@ -14405,34 +14757,21 @@
       "shortDescription": "Shell-first score based on 14x5.5 Maple Ply with Zinc die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Existing Starclassic Maple records already contain stronger confirmed shell and hardware values. Exact snare bed geometry remains unconfirmed from available sourced data, so this field is marked unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 5.5,
-        "metricDimensionsMm": "355.6 x 139.7"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": 5,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer/Wrap",
-        "finishType": "Lacquer/Wrap",
-        "exteriorTreatment": "Lacquer/Wrap",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "TAMA Starclassic bearing edge: top edge angle set 2.5mm inside from the outer shell surface, cut to a rounded collar to follow the natural drumhead shape",
         "snareSideProfile": "TAMA Starclassic bearing edge: top edge angle set 2.5mm inside from the outer shell surface, cut to a rounded collar to follow the natural drumhead shape",
@@ -14449,13 +14788,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": 5,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodThinMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 5,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer/Wrap",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer-wrap"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7",
+        "combined": "14x5.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x5.5 Tama Starclassic Maple snare with 5mm maple ply shell, lacquer/wrap finish, and zinc die-cast hoops.",
+      "drumSummaryNotes": "Thin-to-medium maple shell should keep sensitivity and musical body present, while zinc die-cast hoops add focus, attack definition, and rim control."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059631,
+      "_nanoseconds": 276000000
+    },
+    "research": {
+      "notesOnMissingData": "Ply count, edge shape, and stock components not confirmed.",
+      "voiceScoreConfidence": "mediumHigh",
+      "scoringBasis": "Shell-first estimate using existing parsed 5mm thickness signal, maple ply shell, 14x5.5 size, and zinc die-cast hoops.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "zinc die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c",
@@ -14561,34 +14957,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Maple Ply with Zinc die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Existing Starclassic Maple records already contain stronger confirmed shell and hardware values. Exact snare bed geometry remains unconfirmed from available sourced data, so this field is marked unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": 5,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer/Wrap",
-        "finishType": "Lacquer/Wrap",
-        "exteriorTreatment": "Lacquer/Wrap",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "TAMA Starclassic bearing edge: top edge angle set 2.5mm inside from the outer shell surface, cut to a rounded collar to follow the natural drumhead shape",
         "snareSideProfile": "TAMA Starclassic bearing edge: top edge angle set 2.5mm inside from the outer shell surface, cut to a rounded collar to follow the natural drumhead shape",
@@ -14605,13 +14988,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": 5,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodThinMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 5,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer/Wrap",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer-wrap"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic Maple snare with 5mm maple ply shell, lacquer/wrap finish, and zinc die-cast hoops.",
+      "drumSummaryNotes": "Compared with the 5.5-inch version, the 6.5-inch depth should add warmth, body, and projection while preserving maple sensitivity."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059631,
+      "_nanoseconds": 485000000
+    },
+    "research": {
+      "notesOnMissingData": "Ply count, edge shape, stock heads, and snare wires not confirmed.",
+      "voiceScoreConfidence": "mediumHigh",
+      "scoringBasis": "Shell-first estimate using existing parsed 5mm thickness signal, maple ply shell, 14x6.5 depth, and zinc die-cast hoops.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "zinc die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-performer-14x5-5_14x5-5_ply_maple_lacquer-wrap_die-cast-hoops_9be528a9",
@@ -14715,34 +15155,21 @@
       "shortDescription": "Shell-first score based on 14x5.5 Maple/Bubinga Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Remaining Starclassic Performer fields could not be confirmed from the current source set. Marked as unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 5.5,
-        "metricDimensionsMm": "355.6 x 139.7"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": null,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer/Wrap",
-        "finishType": "Lacquer/Wrap",
-        "exteriorTreatment": "Lacquer/Wrap",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -14759,13 +15186,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer/Wrap",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer-wrap"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7",
+        "combined": "14x5.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x5.5 Tama Starclassic Performer snare with maple ply shell, lacquer/wrap finish, and die-cast hoops.",
+      "drumSummaryNotes": "Score as a maple Performer-family snare unless source data later confirms a hybrid shell recipe for this exact record."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059631,
+      "_nanoseconds": 700000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact shell recipe, ply count, thickness, and generation not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate from existing maple Performer record label, 14x5.5 size, and die-cast hoops. Exact generation should be verified because Starclassic Performer naming has covered multiple shell recipes over time.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "lowMedium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-performer-14x6-5_14x6-5_ply_maple_lacquer-wrap_die-cast-hoops_a7cf7794",
@@ -14869,34 +15353,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Maple/Bubinga Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Remaining Starclassic Performer fields could not be confirmed from the current source set. Marked as unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Maple",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": null,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer/Wrap",
-        "finishType": "Lacquer/Wrap",
-        "exteriorTreatment": "Lacquer/Wrap",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -14913,13 +15384,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "reinforcementRings": false,
+        "layup": "unknown",
+        "thicknessClass": "woodMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "maple",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "unknown",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer/Wrap",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer-wrap"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic Performer snare with maple ply shell, lacquer/wrap finish, and die-cast hoops.",
+      "drumSummaryNotes": "Deeper maple Performer shell should add body and projection compared with the 5.5-inch model while die-cast hoops keep the response focused."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059631,
+      "_nanoseconds": 911000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact shell recipe, ply count, thickness, and generation not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate from existing maple Performer record label, 14x6.5 size, and die-cast hoops. Exact generation should be verified because Starclassic Performer has had different shell formulas over time.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "lowMedium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-performer-birch-bubinga-14x5-5_14x5-5_ply_birch_lacquer_die-cast-hoops_fc3ed948",
@@ -15025,34 +15553,21 @@
       "shortDescription": "Shell-first score based on 14x5.5 Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 14x5.5 Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "no",
+      "discontinued": "yes",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 5.5,
-        "metricDimensionsMm": "355.6 x 139.7"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Birch",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": null,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -15069,13 +15584,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "layup": "birch outer plies with bubinga inner plies / hybrid B/B recipe",
+        "thicknessClass": "woodMediumThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 7,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "birch",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "bubinga",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": 7,
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7",
+        "combined": "14x5.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x5.5 Tama Starclassic Performer Birch/Bubinga snare with hybrid birch/bubinga ply shell and die-cast hoops.",
+      "drumSummaryNotes": "Birch/bubinga hybrid should emphasize projection, focused attack, and deeper low-mid body than straight birch, with die-cast hoops adding control and rim definition."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059632,
+      "_nanoseconds": 114000000
+    },
+    "research": {
+      "notesOnMissingData": "Bearing edge, stock heads, throw-off, and snare wires not confirmed for this exact 14x5.5 record.",
+      "voiceScoreConfidence": "high",
+      "scoringBasis": "Shell-first estimate based on Starclassic Performer B/B references describing birch/bubinga hybrid snare shells, including a 7-ply 7mm snare shell reference.",
+      "secondarySourceUrl": "https://www.guitarcenter.com/TAMA/Starclassic-Performer-Birch-and-Bubinga-Snare-Drum-Smokey-Indigo-Burst-65x14-1274115041558.gc",
+      "primarySourceUrl": "https://drummagazine.com/starclassic-performer-bb-drum-kit-test/",
+      "sourceConfidence": "mediumHigh"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-performer-birch-bubinga-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_379db69d",
@@ -15181,34 +15753,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Shell-first score based on 14x6.5 Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "no",
+      "discontinued": "yes",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Birch",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "unknown",
-        "shellThicknessMm": null,
-        "thicknessClass": "unknown",
-        "reinforcementRings": "unknown",
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer",
-        "finishType": "Lacquer",
-        "exteriorTreatment": "Lacquer",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "unknown",
         "snareSideProfile": "unknown",
@@ -15225,13 +15784,70 @@
         "evidenceLevel": "notVerified",
         "notes": "unknown",
         "confidence": "Low"
+      },
+      "construction": {
+        "layupDescription": "unknown",
+        "shellThicknessMm": null,
+        "layup": "birch outer plies with bubinga inner plies / hybrid B/B recipe",
+        "thicknessClass": "woodMediumThick",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": 7,
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "birch",
+        "bearingEdgeShape": "unknown",
+        "reinforcementRings": false,
+        "shellMaterialSecondary": "bubinga",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": 7,
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic Performer Birch/Bubinga snare with hybrid birch/bubinga ply shell and die-cast hoops.",
+      "drumSummaryNotes": "The 6.5-inch B/B shell should carry more low-mid body and projection than the 5.5-inch model while retaining birch attack clarity and bubinga density."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059632,
+      "_nanoseconds": 298000000
+    },
+    "research": {
+      "notesOnMissingData": "Bearing edge, stock heads, throw-off, and snare wires not confirmed for this exact 14x6.5 record.",
+      "voiceScoreConfidence": "high",
+      "scoringBasis": "Shell-first estimate based on documented Starclassic Performer B/B birch/bubinga hybrid shell behavior and 7-ply 7mm snare shell reference.",
+      "secondarySourceUrl": "https://www.guitarcenter.com/TAMA/Starclassic-Performer-Birch-and-Bubinga-Snare-Drum-Smokey-Indigo-Burst-65x14-1274115041558.gc",
+      "primarySourceUrl": "https://drummagazine.com/starclassic-performer-bb-drum-kit-test/",
+      "sourceConfidence": "mediumHigh"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf",
@@ -15337,34 +15953,21 @@
       "shortDescription": "Shell-first score based on 14x5.5 Walnut/Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Existing Starclassic Walnut/Birch records already contain stronger confirmed shell and hardware values. Exact snare bed geometry remains unconfirmed from available sourced data, so this field is marked unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 5.5,
-        "metricDimensionsMm": "355.6 x 139.7"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Walnut / Birch",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "6-ply: 4-ply European birch + 2 inner-ply American black walnut",
-        "shellThicknessMm": 6,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer/Wrap",
-        "finishType": "Lacquer/Wrap",
-        "exteriorTreatment": "Lacquer/Wrap",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
         "snareSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
@@ -15381,13 +15984,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "6-ply: 4-ply European birch + 2 inner-ply American black walnut",
+        "shellThicknessMm": 6,
+        "reinforcementRings": false,
+        "layup": "walnut/birch hybrid",
+        "thicknessClass": "woodMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "walnut",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "birch",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer/Wrap",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer-wrap"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 5.5,
+        "metricDimensionsMm": "355.6 x 139.7",
+        "combined": "14x5.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x5.5 Tama Starclassic Walnut/Birch snare with walnut/birch hybrid ply shell and die-cast hoops.",
+      "drumSummaryNotes": "Walnut/birch shell should balance dark low-mid body with birch attack and projection. The 5.5-inch depth should keep response quicker than the 6.5-inch version."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059632,
+      "_nanoseconds": 502000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, layup order, shell thickness, edge shape, and stock components not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate from walnut/birch hybrid construction, 14x5.5 size, lacquer/wrap finish, and die-cast hoop configuration.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3",
@@ -15493,34 +16153,21 @@
       "shortDescription": "Shell-first score based on 14x6.5 Walnut/Birch Ply hybrid with Die-cast hoops. Scores are physical-driver estimates; brand reputation and price are not used.",
       "drumSummaryNotes": "Existing Starclassic Walnut/Birch records already contain stronger confirmed shell and hardware values. Exact snare bed geometry remains unconfirmed from available sourced data, so this field is marked unknown rather than inferred. Stock batter/reso heads remain unconfirmed."
     },
+    "dataCleanupUpdatedAt": {
+      "_seconds": 1779057313,
+      "_nanoseconds": 712000000
+    },
+    "dataCleanupUpdatedBy": "cleanupTamaRecords",
+    "production": {
+      "yearIntroduced": "unknown",
+      "yearDiscontinued": "unknown",
+      "currentlyInProduction": "unknown",
+      "discontinued": "unknown",
+      "artistSignatureLine": false,
+      "rareCollectible": "unknown"
+    },
     "shell": {
       "drumType": "snare",
-      "dimensions": {
-        "diameterInches": 14,
-        "depthInches": 6.5,
-        "metricDimensionsMm": "355.6 x 165.1"
-      },
-      "construction": {
-        "shellConstruction": "Ply",
-        "shellMaterialPrimary": "Walnut / Birch",
-        "shellMaterialSecondary": "none",
-        "shellMaterialTertiary": "none",
-        "plyCount": null,
-        "layupDescription": "6-ply: 4-ply European birch + 2 inner-ply American black walnut",
-        "shellThicknessMm": 6,
-        "thicknessClass": "unknown",
-        "reinforcementRings": false,
-        "reinforcementRingMaterial": "unknown",
-        "reinforcementRingThicknessMm": null
-      },
-      "finish": {
-        "finishName": "Lacquer/Wrap",
-        "finishType": "Lacquer/Wrap",
-        "exteriorTreatment": "Lacquer/Wrap",
-        "interiorTreatment": "unknown",
-        "acousticImpact": "engineCalculated",
-        "notes": "unknown"
-      },
       "bearingEdges": {
         "batterSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
         "snareSideProfile": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
@@ -15537,13 +16184,70 @@
         "evidenceLevel": "legacyFieldMigrated",
         "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review.",
         "confidence": "Medium"
+      },
+      "construction": {
+        "layupDescription": "6-ply: 4-ply European birch + 2 inner-ply American black walnut",
+        "shellThicknessMm": 6,
+        "reinforcementRings": false,
+        "layup": "walnut/birch hybrid",
+        "thicknessClass": "woodMedium",
+        "reinforcementRingMaterial": "none",
+        "thicknessMm": "unknown",
+        "reinforcementRingThicknessMm": 0,
+        "shellMaterialPrimary": "walnut",
+        "bearingEdgeShape": "unknown",
+        "shellMaterialSecondary": "birch",
+        "shellConstruction": "ply",
+        "shellMaterialTertiary": "unknown",
+        "plyCount": "unknown",
+        "snareBedDepth": "medium",
+        "snareBeds": true
+      },
+      "finish": {
+        "exteriorTreatment": "Lacquer/Wrap",
+        "interiorTreatment": "unknown",
+        "acousticImpact": "engineCalculated",
+        "notes": "unknown",
+        "finishName": "unknown",
+        "finishType": "lacquer-wrap"
+      },
+      "dimensions": {
+        "diameterInches": 14,
+        "depthInches": 6.5,
+        "metricDimensionsMm": "355.6 x 165.1",
+        "combined": "14x6.5"
       }
     },
-    "dataCleanupUpdatedAt": {
-      "_seconds": 1779057313,
-      "_nanoseconds": 712000000
+    "display": {
+      "shortDescription": "14x6.5 Tama Starclassic Walnut/Birch snare with walnut/birch hybrid ply shell and die-cast hoops.",
+      "drumSummaryNotes": "Deeper walnut/birch shell should increase low-mid body and projection while birch keeps the attack clearer and more forward."
     },
-    "dataCleanupUpdatedBy": "cleanupTamaRecords"
+    "researchUpdatedBy": "tama-pass-1",
+    "drumType": "snare",
+    "heads": {
+      "stockResoHead": "unknown",
+      "stockBatterHead": "unknown"
+    },
+    "researchUpdatedAt": {
+      "_seconds": 1779059632,
+      "_nanoseconds": 687000000
+    },
+    "research": {
+      "notesOnMissingData": "Exact ply count, layup order, shell thickness, edge shape, and stock components not confirmed.",
+      "voiceScoreConfidence": "medium",
+      "scoringBasis": "Shell-first estimate from walnut/birch hybrid construction, 14x6.5 size, lacquer/wrap finish, and die-cast hoop configuration.",
+      "secondarySourceUrl": "unknown",
+      "primarySourceUrl": "unknown",
+      "sourceConfidence": "medium"
+    },
+    "hardware": {
+      "lugType": "Starclassic lug",
+      "throwOff": "unknown",
+      "hardwareFinish": "unknown",
+      "snareWires": "unknown",
+      "hoopType": "die-cast hoops",
+      "lugCount": 10
+    }
   },
   {
     "id": "tama_starphonic_starphonic-aluminum-14x6_14x6_metal_aluminum_lacquer-metal_grooved-hoop_pal1460_183b9d79",
