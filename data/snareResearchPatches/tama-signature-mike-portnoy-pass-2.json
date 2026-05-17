@@ -1,0 +1,325 @@
+{
+
+  "tama_signature_mike-portnoy-melody-master-12x5_12x5_metal_steel_steel_die-cast-hoops_mp125_d0e2a83b": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master 12x5",
+
+    "identification": {
+
+      "modelNumber": "MP125",
+
+      "badgeStyle": "Mike Portnoy Signature / Melody Master",
+
+      "productionStatus": "Discontinued / legacy signature model",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": true,
+
+      "discontinued": true,
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+
+      "secondarySourceUrl": "unknown",
+
+      "secondarySourceUrls": [],
+
+      "sourceConfidence": "Medium",
+
+      "notesOnMissingData": "Confirm whether this MP125 legacy normalized record maps exactly to MP125ST or represents an earlier/catalog naming variant. Confirm shell thickness, hoop hole count, lug model, throw-off part numbers, stock wires, stock heads, bearing edge, and snare bed details.",
+
+      "conflictingSourceNotes": "Possible model-alias candidate within the Mike Portnoy Melody Master 12x5 steel family. Preserve separately until MP125 vs MP125ST relationship is confirmed from Tama catalog/spec evidence."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "12x5 Mike Portnoy Melody Master steel side-snare record from legacy/catalog-based data.",
+
+      "drumSummaryNotes": "Treat as a compact steel side snare with fast attack, bright response, short sustain, and controlled focus from the smaller diameter and die-cast hoop listing. Do not merge with MP125ST until model mapping is confirmed."
+
+    }
+
+  },
+
+  "tama_signature_mike-portnoy-melody-master-14x5-5_14x5-5_metal_steel_hammered-steel_die-cast-hoops_mp1455_d425fdc5": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master 14x5.5",
+
+    "identification": {
+
+      "modelNumber": "MP1455",
+
+      "badgeStyle": "Mike Portnoy Signature / Melody Master",
+
+      "productionStatus": "Discontinued / legacy signature model",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": true,
+
+      "discontinued": true,
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+
+      "secondarySourceUrl": "unknown",
+
+      "secondarySourceUrls": [],
+
+      "sourceConfidence": "Medium",
+
+      "notesOnMissingData": "Confirm whether this MP1455 legacy normalized record maps exactly to MP1455ST or represents an earlier/catalog naming variant. Confirm shell thickness, lug model, throw-off part numbers, stock wires, stock heads, bearing edge, and snare bed details.",
+
+      "conflictingSourceNotes": "Possible model-alias candidate within the Mike Portnoy Melody Master 14x5.5 steel family. Preserve separately until MP1455 vs MP1455ST relationship is confirmed from Tama catalog/spec evidence."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x5.5 Mike Portnoy Melody Master hammered steel signature snare record from legacy/catalog-based data.",
+
+      "drumSummaryNotes": "Treat as a hammered steel snare with bright attack, strong projection, metallic cut, and extra control from die-cast hoops. Do not merge with MP1455ST until model mapping is confirmed."
+
+    }
+
+  },
+
+  "tama_signature_mike-portnoy-melody-master-mp1455-maple-14x5-5_14x5-5_ply_maple": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP1455 Maple 14x5.5",
+
+    "identification": {
+
+      "modelNumber": "MP1455",
+
+      "badgeStyle": "Mike Portnoy Signature / Melody Master",
+
+      "productionStatus": "Discontinued / legacy signature model",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": true,
+
+      "discontinued": true,
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 5.5,
+
+        "metricDimensionsMm": "355.6 x 139.7"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Ply",
+
+        "shellMaterialPrimary": "Maple",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": "Unknown",
+
+        "layupDescription": "Maple shell; exact ply count not confirmed",
+
+        "shellThicknessMm": "unknown",
+
+        "thicknessClass": "Unknown",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Semi-gloss black covering",
+
+        "finishType": "Covering / wrap",
+
+        "exteriorTreatment": "Semi-gloss black covering",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Covering/wrap may slightly reduce shell openness compared with thin lacquer, but exact effect should remain low-confidence without material thickness details.",
+
+        "notes": "Finish listed in retailer/review source; verify with official archived catalog if available."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Die-cast",
+
+        "resonantHoopType": "Die-cast",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Heavy",
+
+        "hoopFinish": "Chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 8,
+
+        "lugCountNotes": "8-lug configuration documented in existing source-backed record.",
+
+        "lugType": "Tama MSL-SCT chrome lugs",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MCS100A",
+
+        "style": "Three-way tension adjustable snare strainer",
+
+        "notes": "Existing source-backed record listed Tama MCS100A three-way tension adjustable strainer."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "unknown",
+
+        "style": "unknown"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "unknown",
+
+        "model": "unknown",
+
+        "material": "unknown",
+
+        "strandCount": null,
+
+        "lengthInches": 14,
+
+        "stock": "unknown"
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": true,
+
+        "batterHead": "Remo Coated Ambassador",
+
+        "resonantHead": "Remo Clear Ambassador snare-side"
+
+      }
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.musicplayers.com/reviews/drums/2007/0107_TamaMelodyMaster.php",
+
+      "secondarySourceUrl": "unknown",
+
+      "secondarySourceUrls": [],
+
+      "sourceConfidence": "Medium",
+
+      "notesOnMissingData": "Confirm official Tama catalog/source for maple MP1455 shell ply count, shell thickness, stock snare wire model, butt plate model, bearing edge profile, snare bed depth/profile, country of origin, and exact production years.",
+
+      "conflictingSourceNotes": "This maple-shell MP1455 record should remain separate from MP1455ST steel, MP1455BU bubinga, MP1455BUN Dream Monster, and generic MP1455 hammered-steel records."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x5.5 Mike Portnoy Melody Master maple-shell signature snare with 8-lug die-cast hoop layout, semi-gloss black covering, and Tama three-way snare strainer.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize maple body and balanced response, with added focus/control from die-cast hoops and an 8-lug layout. Artist association should not affect scoring."
+
+    }
+
+  }
+
+}
