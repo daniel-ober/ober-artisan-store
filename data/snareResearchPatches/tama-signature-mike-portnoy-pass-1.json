@@ -1,0 +1,979 @@
+{
+
+  "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP1455BU 14x5.5",
+
+    "identification": {
+
+      "modelNumber": "MP1455BU",
+
+      "badgeStyle": "Mike Portnoy Signature / Melody Master",
+
+      "productionStatus": "Discontinued / legacy signature model",
+
+      "currentlyInProduction": false,
+
+      "artistSignature": true,
+
+      "discontinued": true,
+
+      "rareCollectible": "unknown"
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 5.5,
+
+        "metricDimensionsMm": "355.6 x 139.7"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Ply",
+
+        "shellMaterialPrimary": "Bubinga",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": 9,
+
+        "layupDescription": "9-ply bubinga shell",
+
+        "shellThicknessMm": 8,
+
+        "thicknessClass": "Thick",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "bearingEdges": {
+
+        "batterSideProfile": "45 degree",
+
+        "snareSideProfile": "45 degree",
+
+        "roundover": "unknown",
+
+        "evidenceLevel": "retailer spec",
+
+        "confidence": "Medium",
+
+        "notes": "45-degree bearing edge listed by drum-tec; confirm against archived Tama documentation if available."
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Black with Mike Portnoy logo",
+
+        "finishType": "Lacquer / logo finish",
+
+        "exteriorTreatment": "Black lacquer/logo finish",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Minimal unless finish thickness is later confirmed to be unusually heavy.",
+
+        "notes": "Finish documented by retailer sources; no confirmed unusual acoustic shell treatment."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Die-cast",
+
+        "resonantHoopType": "Die-cast",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Heavy",
+
+        "hoopFinish": "Chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 8,
+
+        "lugCountNotes": "8-hole die-cast hoop / 8-lug configuration listed by retailer sources.",
+
+        "lugType": "MSL-SCT Starclassic Lug",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MCS100A / MCS70B",
+
+        "style": "Three-way tension adjustable strainer",
+
+        "notes": "Mike Portnoy three-way strainer supports off, loose, and tight positions."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "MCS70B",
+
+        "style": "Companion butt plate / snare-side component"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "Tama",
+
+        "model": "MS20SN14S",
+
+        "material": "Carbon steel",
+
+        "strandCount": 20,
+
+        "lengthInches": 14,
+
+        "stock": true
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "collectorMetadata": {
+
+      "countryOfOrigin": "unknown",
+
+      "yearIntroduced": 2012,
+
+      "yearDiscontinued": "unknown",
+
+      "limitedRun": "unknown",
+
+      "limitedRunCount": null,
+
+      "productionNotes": "Legacy Mike Portnoy Melody Master bubinga variant. Current production status should remain discontinued/legacy unless confirmed on current Tama production pages."
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/mp1455bu.html",
+
+      "secondarySourceUrl": "https://www.drum-tec.com/tama-mike-portnoy-14-x-5-5-melody-master-bubinga-signature-snare-drum-mp1455bu",
+
+      "secondarySourceUrls": [
+
+        "https://www.thomannmusic.com/tama_mp1455bu_14x55_mike_portnoy.htm"
+
+      ],
+
+      "sourceConfidence": "High",
+
+      "notesOnMissingData": "Confirm stock head models, exact shell interior treatment, hoop material, snare bed depth/profile, and original discontinuation date from archived Tama catalog if available.",
+
+      "conflictingSourceNotes": "Related Mike Portnoy Melody Master family records exist for steel, maple, bubinga, Dream Monster bubinga, and 12-inch side-snare variants. Treat these as separate model variants unless source evidence proves an exact duplicate."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x5.5 Mike Portnoy Signature Melody Master snare with 9-ply 8mm bubinga shell, 8-lug die-cast hoops, and Tama three-way snare strainer.",
+
+      "drumSummaryNotes": "Shell-first read should treat this as a dense, thick bubinga ply snare with strong projection, focused low-mid body, firm attack, and added control from die-cast hoops. Artist association should not affect scoring."
+
+    }
+
+  },
+
+  "tama_signature_mike-portnoy-dream-monster-mp1455bun-14x5-5_14x5-5_ply_bubinga": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Dream Monster MP1455BUN 14x5.5",
+
+    "identification": {
+
+      "modelNumber": "MP1455BUN",
+
+      "badgeStyle": "Mike Portnoy Signature / Dream Monster limited edition",
+
+      "productionStatus": "Limited edition / current announcement",
+
+      "currentlyInProduction": true,
+
+      "artistSignature": true,
+
+      "discontinued": false,
+
+      "rareCollectible": true
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 5.5,
+
+        "metricDimensionsMm": "355.6 x 139.7"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Ply",
+
+        "shellMaterialPrimary": "Bubinga",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": 9,
+
+        "layupDescription": "9-ply bubinga shell",
+
+        "shellThicknessMm": 8,
+
+        "thicknessClass": "Thick",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "bearingEdges": {
+
+        "batterSideProfile": "unknown",
+
+        "snareSideProfile": "unknown",
+
+        "roundover": "unknown",
+
+        "evidenceLevel": "not confirmed",
+
+        "confidence": "Low",
+
+        "notes": "Core shell spec is officially confirmed, but bearing edge profile was not listed in the Tama announcement."
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Dream Monster",
+
+        "finishType": "Lacquer / special finish",
+
+        "exteriorTreatment": "Dream Monster finish",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Minimal unless finish thickness is later confirmed to be unusually heavy.",
+
+        "notes": "Limited-edition finish matches Mike Portnoy's Dream Monster kit; scoring should not be affected beyond any confirmed physical finish treatment."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Die-cast",
+
+        "resonantHoopType": "Die-cast",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Heavy",
+
+        "hoopFinish": "Chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 8,
+
+        "lugCountNotes": "Official Tama announcement lists die-cast hoop with 8 holes.",
+
+        "lugType": "MSL-SCT",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "MCS100A / MCS70B",
+
+        "style": "Three-way tension adjustable strainer",
+
+        "notes": "Official Tama announcement lists MCS100A/MCS70B."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "MCS70B",
+
+        "style": "Companion butt plate / snare-side component"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "Tama",
+
+        "model": "MS20SN14S",
+
+        "material": "Carbon steel",
+
+        "strandCount": 20,
+
+        "lengthInches": 14,
+
+        "stock": true
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "collectorMetadata": {
+
+      "countryOfOrigin": "unknown",
+
+      "yearIntroduced": 2026,
+
+      "yearDiscontinued": null,
+
+      "limitedRun": true,
+
+      "limitedRunCount": null,
+
+      "productionNotes": "Limited-edition Dream Monster finish version retaining core MP1455BU-style bubinga construction."
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100451.html",
+
+      "secondarySourceUrl": "https://www.sweetwater.com/store/detail/MP1455BUN--tama-mike-portnoy-signature-melody-master-snare-drum-5.5-inches-by-14-inches-dream-monster",
+
+      "secondarySourceUrls": [
+
+        "https://www.soundhouse.co.jp/en/news/detail?NewsNo=22773"
+
+      ],
+
+      "sourceConfidence": "High",
+
+      "notesOnMissingData": "Confirm stock head models, bearing edge profile, snare bed depth/profile, country of origin, and exact limited-run count if Tama publishes it.",
+
+      "conflictingSourceNotes": "This is a distinct Dream Monster finish model, not a duplicate of MP1455BU, although sources describe it as retaining the core MP1455BU specifications."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x5.5 limited-edition Mike Portnoy Dream Monster snare with 9-ply 8mm bubinga shell, 8-hole die-cast hoops, and Tama three-way strainer system.",
+
+      "drumSummaryNotes": "Shell-first read should match the dense 8mm bubinga Melody Master family: focused body, strong projection, firm attack, and controlled sustain from heavy die-cast hoops. Limited finish/artist association should not affect scoring."
+
+    }
+
+  },
+
+  "tama_signature_mike-portnoy-melody-master-mp1455st-14x5-5_14x5-5_metal_steel": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP1455ST 14x5.5",
+
+    "identification": {
+
+      "modelNumber": "MP1455ST",
+
+      "badgeStyle": "Mike Portnoy Signature / Melody Master",
+
+      "productionStatus": "Current / active signature listing",
+
+      "currentlyInProduction": true,
+
+      "artistSignature": true,
+
+      "discontinued": false,
+
+      "rareCollectible": false
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 14,
+
+        "depthInches": 5.5,
+
+        "metricDimensionsMm": "355.6 x 139.7"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Metal",
+
+        "shellMaterialPrimary": "Steel",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": "Unknown",
+
+        "layupDescription": "1mm hammered steel shell",
+
+        "shellThicknessMm": 1,
+
+        "thicknessClass": "Thin metal",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "bearingEdges": {
+
+        "batterSideProfile": "folded metal bearing edge",
+
+        "snareSideProfile": "folded metal bearing edge",
+
+        "roundover": "unknown",
+
+        "evidenceLevel": "inferred from metal shell construction",
+
+        "confidence": "Low",
+
+        "notes": "Exact edge geometry not listed in available sources."
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Black with Mike Portnoy logo",
+
+        "finishType": "Hammered steel / black finish",
+
+        "exteriorTreatment": "Hammered steel shell with black finish/logo",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Hammered metal shell treatment may slightly dry and complexify overtones compared with a smooth steel shell.",
+
+        "notes": "Hammered steel shell and black finish confirmed by Tama/retailer sources."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Die-cast",
+
+        "resonantHoopType": "Die-cast",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Heavy",
+
+        "hoopFinish": "Chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 8,
+
+        "lugCountNotes": "8-hole die-cast hoops listed by retailer source.",
+
+        "lugType": "unknown",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "unknown",
+
+        "style": "Three-way tension adjustable strainer",
+
+        "notes": "Tama signature listing confirms the unique three-way snare strainer; exact part numbers not confirmed in current source."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "unknown",
+
+        "style": "unknown"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "unknown",
+
+        "model": "unknown",
+
+        "material": "unknown",
+
+        "strandCount": null,
+
+        "lengthInches": 14,
+
+        "stock": "unknown"
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/mp1455st.html",
+
+      "secondarySourceUrl": "https://www.thomannmusic.com/tama_mp1455st_14x55_mike_portnoy.htm",
+
+      "secondarySourceUrls": [],
+
+      "sourceConfidence": "High",
+
+      "notesOnMissingData": "Confirm exact strainer part numbers, lug model, stock snare wires, stock heads, country of origin, and exact bearing edge/snare bed details.",
+
+      "conflictingSourceNotes": "This is the 14x5.5 steel MP1455ST variant and should remain separate from MP1455BU bubinga, MP1455BUN Dream Monster, MP1455 maple, and MP125ST 12-inch variants."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "14x5.5 Mike Portnoy Signature Melody Master snare with 1mm hammered steel shell, 8-hole die-cast hoops, and Tama three-way snare strainer.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize fast steel attack, high projection, bright edge, and added control from hammered shell texture and die-cast hoops. Artist association should not affect scoring."
+
+    }
+
+  },
+
+  "tama_signature_mike-portnoy-melody-master-mp125st-12x5_12x5_metal_steel": {
+
+    "companyName": "Tama",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP125ST 12x5",
+
+    "identification": {
+
+      "modelNumber": "MP125ST",
+
+      "badgeStyle": "Mike Portnoy Signature / Melody Master",
+
+      "productionStatus": "Current / active signature listing",
+
+      "currentlyInProduction": true,
+
+      "artistSignature": true,
+
+      "discontinued": false,
+
+      "rareCollectible": false
+
+    },
+
+    "shell": {
+
+      "drumType": "Snare Drum",
+
+      "dimensions": {
+
+        "diameterInches": 12,
+
+        "depthInches": 5,
+
+        "metricDimensionsMm": "304.8 x 127"
+
+      },
+
+      "construction": {
+
+        "shellConstruction": "Metal",
+
+        "shellMaterialPrimary": "Steel",
+
+        "shellMaterialSecondary": "none",
+
+        "shellMaterialTertiary": "none",
+
+        "plyCount": "Unknown",
+
+        "layupDescription": "Hammered steel shell",
+
+        "shellThicknessMm": "unknown",
+
+        "thicknessClass": "Unknown",
+
+        "reinforcementRings": false,
+
+        "reinforcementRingMaterial": "none",
+
+        "reinforcementRingThicknessMm": null
+
+      },
+
+      "bearingEdges": {
+
+        "batterSideProfile": "folded metal bearing edge",
+
+        "snareSideProfile": "folded metal bearing edge",
+
+        "roundover": "unknown",
+
+        "evidenceLevel": "inferred from metal shell construction",
+
+        "confidence": "Low",
+
+        "notes": "Exact edge geometry not listed in available sources."
+
+      },
+
+      "snareBeds": {
+
+        "present": true,
+
+        "depthBucket": "unknown",
+
+        "widthBucket": "unknown",
+
+        "bedStyle": "unknown",
+
+        "evidenceLevel": "inferred from functional snare drum design",
+
+        "confidence": "Low",
+
+        "notes": "Snare bed depth/profile not confirmed in available sources."
+
+      },
+
+      "finish": {
+
+        "finishName": "Black",
+
+        "finishType": "Hammered steel / black finish",
+
+        "exteriorTreatment": "Hammered steel shell with black finish",
+
+        "interiorTreatment": "unknown",
+
+        "acousticImpact": "Hammered metal shell treatment may slightly dry and complexify overtones compared with a smooth steel shell.",
+
+        "notes": "Tama signature listing confirms small-diameter hammered steel shell for the 12-inch model."
+
+      }
+
+    },
+
+    "stockHardware": {
+
+      "hoops": {
+
+        "batterHoopType": "Die-cast",
+
+        "resonantHoopType": "Die-cast",
+
+        "hoopMaterial": "unknown",
+
+        "hoopThicknessMm": null,
+
+        "hoopMassClass": "Heavy",
+
+        "hoopFinish": "Chrome"
+
+      },
+
+      "lugs": {
+
+        "lugCount": 6,
+
+        "lugCountNotes": "Existing dataset lists 6 lugs; confirm against official spec table.",
+
+        "lugType": "unknown",
+
+        "lugMaterial": "unknown",
+
+        "lugMassClass": "Medium",
+
+        "lugMountingStyle": "Separate lug casing",
+
+        "hardwareFinish": "Chrome"
+
+      },
+
+      "throwOff": {
+
+        "make": "Tama",
+
+        "model": "unknown",
+
+        "style": "Three-way tension adjustable strainer",
+
+        "notes": "Tama signature listing confirms the Mike Portnoy three-way snare strainer; exact part numbers not confirmed in available source."
+
+      },
+
+      "buttPlate": {
+
+        "make": "Tama",
+
+        "model": "unknown",
+
+        "style": "unknown"
+
+      }
+
+    },
+
+    "stockSnareSystem": {
+
+      "snareWires": {
+
+        "make": "unknown",
+
+        "model": "unknown",
+
+        "material": "unknown",
+
+        "strandCount": null,
+
+        "lengthInches": 12,
+
+        "stock": "unknown"
+
+      },
+
+      "heads": {
+
+        "stockHeadsKnown": false,
+
+        "batterHead": "unknown",
+
+        "resonantHead": "unknown"
+
+      }
+
+    },
+
+    "sources": {
+
+      "primarySourceUrl": "https://www.tama.com/jp/products/snare_drums/signature_snare/",
+
+      "secondarySourceUrl": "https://www.sweetwater.com/store/detail/MP125ST--tama-mike-portnoy-mp125st-signature-snare-5-inch-by-12-inch",
+
+      "secondarySourceUrls": [],
+
+      "sourceConfidence": "Medium",
+
+      "notesOnMissingData": "Confirm shell thickness, exact hoop hole count, lug model/count, strainer part numbers, stock wires, stock heads, country of origin, bearing edge, and snare bed details from official spec table or archived catalog.",
+
+      "conflictingSourceNotes": "This is the 12x5 MP125ST steel side-snare variant and should remain separate from the generic MP125/12x5 record until exact model mapping is verified."
+
+    },
+
+    "summary": {
+
+      "shortDescription": "12x5 Mike Portnoy Signature Melody Master side snare with hammered steel shell, die-cast hoops, and Tama three-way strainer concept.",
+
+      "drumSummaryNotes": "Shell-first read should emphasize compact steel snap, quick response, bright attack, and controlled short-body sustain from the small diameter and heavy hoops. Artist association should not affect scoring."
+
+    }
+
+  }
+
+}
