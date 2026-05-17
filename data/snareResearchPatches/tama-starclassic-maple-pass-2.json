@@ -1,0 +1,56 @@
+{
+
+  "companyName": "Tama",
+
+  "lineSeries": "Starclassic",
+
+  "patchName": "tama-starclassic-maple-pass-2",
+
+  "doNotApplyAutomatically": true,
+
+  "researchStatus": "reviewed",
+
+  "patchGroups": [
+
+    {
+
+      "groupName": "Starclassic Maple 14x5.5 and 14x6.5 shared modern factory hardware",
+
+      "matchModelNames": [
+
+        "Starclassic Maple 14x5.5",
+
+        "Starclassic Maple 14x6.5"
+
+      ],
+
+      "updates": {
+
+        "hardware": {
+
+          "snareThrowMakeAndModel": "Tama MLS50A / MLS50B",
+
+          "stockSnareWires": "MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires"
+
+        },
+
+        "sources": {
+
+          "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/starclassic_maple_snare.html",
+
+          "secondarySourceUrl": "https://www.drum-tec.com/tama-starclassic-maple-14-x-5-5-snare-drum-mas1455bn-ssr"
+
+        },
+
+        "notes": {
+
+"scoringBasis": "Official Tama Starclassic Maple snare page supports the current Starclassic Maple snare line and zinc die-cast hoops. Secondary retailer listing for MAS1455BN-SSR supports Tama MLS50A/MLS50B strainer/butt and MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires for the modern Starclassic Maple 14x5.5 model. Applied to both modern Starclassic Maple 14x5.5 and 14x6.5 only because they are same-line/current-era paired models in this reference set; exact 14x6.5 retailer confirmation should still be treated as pending unless separately sourced. Stock batter/reso heads and snare bed type remain unconfirmed from official source."
+        }
+
+      }
+
+    }
+
+  ]
+
+}
