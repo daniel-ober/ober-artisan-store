@@ -1,0 +1,222 @@
+[
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+    "companyName": "A&F Drum Co.",
+    "lineSeries": "Raw Brass / Raw Steel / Wood",
+    "modelName": "Maple Club Snare",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+    "companyName": "A&F Drum Co.",
+    "lineSeries": "Raw Brass / Raw Steel / Wood",
+    "modelName": "Raw Brass 14x6.5",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Brass"
+  },
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569",
+    "companyName": "A&F Drum Co.",
+    "lineSeries": "Raw Brass / Raw Steel / Wood",
+    "modelName": "Raw Steel 14x6.5",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Steel"
+  },
+  {
+    "id": "gretsch_catalina-club_catalina-club-snare_14x5-5_ply_mahogany-poplar_30-degree-rounded-family-estimated_wrap_triple-flan_ad22a65d",
+    "companyName": "Gretsch",
+    "lineSeries": "Catalina Club",
+    "modelName": "Catalina Club Snare",
+    "diameterInches": 14,
+    "depthInches": 5.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Mahogany / Poplar"
+  },
+  {
+    "id": "gretsch_energy_energy-snare_14x5-5_ply_poplar_wrap_triple-flanged-hoops_49c332c4",
+    "companyName": "Gretsch",
+    "lineSeries": "Energy",
+    "modelName": "Energy Snare",
+    "diameterInches": 14,
+    "depthInches": 5.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Poplar"
+  },
+  {
+    "id": "gretsch_signature_vinnie-colaiuta-signature_14x5_ply_maple_gum_lacquer_die-cast-hoops_af23d41d",
+    "companyName": "Gretsch",
+    "lineSeries": "Signature",
+    "modelName": "Vinnie Colaiuta Signature",
+    "diameterInches": 14,
+    "depthInches": 5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "gretsch_square-badge_square-badge-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_lacquer-wrap_die-ca_979b7848",
+    "companyName": "Gretsch",
+    "lineSeries": "Square Badge",
+    "modelName": "Square Badge Snare",
+    "diameterInches": 14,
+    "depthInches": 5.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "gretsch_stop-sign-badge_stop-sign-badge-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_nitron-wrap-l_669a2eca",
+    "companyName": "Gretsch",
+    "lineSeries": "Stop Sign Badge",
+    "modelName": "Stop Sign Badge Snare",
+    "diameterInches": 14,
+    "depthInches": 5.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-aluminum_14x6-5_metal_aluminum_5432eb51",
+    "companyName": "INDe Drum Lab",
+    "lineSeries": "Kalamazoo / Custom Metal-Wood",
+    "modelName": "Kalamazoo Aluminum",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Aluminum"
+  },
+  {
+    "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-brass_14x6-5_metal_brass_b5ced32d",
+    "companyName": "INDe Drum Lab",
+    "lineSeries": "Kalamazoo / Custom Metal-Wood",
+    "modelName": "Kalamazoo Brass",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Brass"
+  },
+  {
+    "id": "inde-drum-lab_kalamazoo-custom-metal-wood_maple-custom_14x6-5_ply_maple_dbeee215",
+    "companyName": "INDe Drum Lab",
+    "lineSeries": "Kalamazoo / Custom Metal-Wood",
+    "modelName": "Maple Custom",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "keplinger_black-iron-stainless_black-iron-14x6-5_14x6-5_metal_steel_0fae9ad0",
+    "companyName": "Keplinger",
+    "lineSeries": "Black Iron / Stainless",
+    "modelName": "Black Iron 14x6.5",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Steel"
+  },
+  {
+    "id": "keplinger_black-iron-stainless_stainless-steel-14x6-5_14x6-5_metal_stainless-steel_27a10cc6",
+    "companyName": "Keplinger",
+    "lineSeries": "Black Iron / Stainless",
+    "modelName": "Stainless Steel 14x6.5",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Stainless Steel"
+  },
+  {
+    "id": "oriollo_seamless-metal_bakar-copper_14x6-5_metal_copper_7ca67e56",
+    "companyName": "Oriollo",
+    "lineSeries": "Seamless Metal",
+    "modelName": "Bakar Copper",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Copper"
+  },
+  {
+    "id": "oriollo_seamless-metal_mang-na-steel_14x6-5_metal_steel_d7afbb57",
+    "companyName": "Oriollo",
+    "lineSeries": "Seamless Metal",
+    "modelName": "Mangàna Steel",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Steel"
+  },
+  {
+    "id": "oriollo_seamless-metal_phantom-aluminum_14x6-5_metal_aluminum_3b010c0d",
+    "companyName": "Oriollo",
+    "lineSeries": "Seamless Metal",
+    "modelName": "Phantom Aluminum",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Aluminum"
+  },
+  {
+    "id": "q-drum-co_copper-steel-wood-custom_copper-shell-custom_14x6-5_metal_copper_6deb06e6",
+    "companyName": "Q Drum Co.",
+    "lineSeries": "Copper / Steel / Wood Custom",
+    "modelName": "Copper Shell Custom",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Copper"
+  },
+  {
+    "id": "q-drum-co_copper-steel-wood-custom_maple-custom_14x6-5_ply_maple_d9bd89b1",
+    "companyName": "Q Drum Co.",
+    "lineSeries": "Copper / Steel / Wood Custom",
+    "modelName": "Maple Custom",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Ply",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "q-drum-co_copper-steel-wood-custom_steel-shell-custom_14x6-5_metal_steel_15303944",
+    "companyName": "Q Drum Co.",
+    "lineSeries": "Copper / Steel / Wood Custom",
+    "modelName": "Steel Shell Custom",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Metal",
+    "shellMaterialPrimary": "Steel"
+  },
+  {
+    "id": "sugar-percussion_steam-bent-solid_cherry-steam-bent_14x6-5_steam-bent_cherry_562c2c1f",
+    "companyName": "Sugar Percussion",
+    "lineSeries": "Steam Bent / Solid",
+    "modelName": "Cherry Steam Bent",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Steam Bent",
+    "shellMaterialPrimary": "Cherry"
+  },
+  {
+    "id": "sugar-percussion_steam-bent-solid_maple-steam-bent_14x6-5_steam-bent_maple_5cec70f4",
+    "companyName": "Sugar Percussion",
+    "lineSeries": "Steam Bent / Solid",
+    "modelName": "Maple Steam Bent",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Steam Bent",
+    "shellMaterialPrimary": "Maple"
+  },
+  {
+    "id": "sugar-percussion_steam-bent-solid_walnut-steam-bent_14x6-5_steam-bent_walnut_bc9e870a",
+    "companyName": "Sugar Percussion",
+    "lineSeries": "Steam Bent / Solid",
+    "modelName": "Walnut Steam Bent",
+    "diameterInches": 14,
+    "depthInches": 6.5,
+    "shellConstruction": "Steam Bent",
+    "shellMaterialPrimary": "Walnut"
+  }
+]

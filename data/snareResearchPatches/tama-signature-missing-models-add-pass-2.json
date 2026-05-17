@@ -36,37 +36,43 @@
 
       "depth": 5.5,
 
-      "shell": {
+"shell": {
 
-        "construction": "Ply",
+  "construction": "Ply",
 
-        "shellConstruction": "Ply",
+  "shellConstruction": "Ply",
 
-        "material1": "Maple",
+  "material1": "Maple",
 
-        "material2": "",
+  "material2": "",
 
-        "material3": "",
+  "material3": "",
 
-        "shellMaterial": "Maple",
+  "shellMaterial": "Maple",
 
-        "thicknessMm": "unknown",
+  "thicknessMm": "unknown",
 
-        "reinforcementRings": false,
+  "thicknessClass": "woodThick",
 
-        "reinforcementRingMaterial": "",
+  "thicknessEvidence": "review",
 
-        "reinforcementRingThicknessMm": "",
+  "thicknessNotes": "MusicPlayers.com review describes the MP1455 as having a thick maple shell. Exact millimeter thickness is not confirmed.",
 
-        "bearingEdge": "unknown",
+  "reinforcementRings": false,
 
-        "snareBedType": "unknown",
+  "reinforcementRingMaterial": "",
 
-        "finishType": "semi-gloss black covering",
+  "reinforcementRingThicknessMm": "",
 
-        "hoopRimType": "die-cast hoops"
+  "bearingEdge": "unknown",
 
-      },
+  "snareBedType": "unknown",
+
+  "finishType": "semi-gloss black covering",
+
+  "hoopRimType": "die-cast hoops"
+
+},
 
       "hardware": {
 
@@ -122,8 +128,7 @@
 
       "notes": {
 
-        "scoringBasis": "MusicPlayers.com review confirms MP1455 standard Melody Master is the 5.5x14 maple shell model with semi-gloss black covering, die-cast chrome hoops, Tama MSL-SCT chrome lugs, MCS100A three-way tension adjustable snare strainer, Remo Coated Ambassador batter, and Remo Clear Ambassador snare-side. Shell thickness, bearing edge, snare bed, and stock snare wires remain unconfirmed."
-
+"scoringBasis": "MusicPlayers.com review confirms MP1455 standard Melody Master is the 5.5x14 maple shell model with a thick maple shell, semi-gloss black covering on the interior and exterior, die-cast chrome hoops, Tama MSL-SCT chrome lugs, MCS100A three-way tension adjustable snare strainer, Remo Coated Ambassador batter, and Remo Clear Ambassador snare-side. Exact shell thickness in millimeters, bearing edge, snare bed, and stock snare wires remain unconfirmed. Thickness class is set to woodThick based on source description, not exact measurement."
       }
 
     }
