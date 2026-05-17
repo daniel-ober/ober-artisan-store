@@ -32,339 +32,213 @@ const FIELD_PATHS = {
 
   title: ['title'],
 
-  modelNum: ['identification.modelNumber', 'production.modelNum', 'modelNum'],
+  modelNum: ['identification.modelNumber'],
 
   imgUrl: ['imgUrl', 'sources.imageUrl'],
 
-  drumType: ['shell.drumType', 'drumType'],
+  drumType: ['shell.drumType'],
 
-  diameter: ['shell.dimensions.diameterInches', 'diameter', 'diameterInches'],
+  diameter: ['shell.dimensions.diameterInches'],
 
-  depth: ['shell.dimensions.depthInches', 'depth', 'depthInches'],
+  depth: ['shell.dimensions.depthInches'],
 
-  shellConstruction: [
+  shellConstruction: ['shell.construction.shellConstruction'],
 
-    'shell.construction.shellConstruction',
+  shellMaterial1: ['shell.construction.shellMaterialPrimary'],
 
-    'shell.construction',
+  shellMaterial2: ['shell.construction.shellMaterialSecondary'],
 
-    'shellConstruction',
+  shellMaterial3: ['shell.construction.shellMaterialTertiary'],
 
-  ],
+  plyCount: ['shell.construction.plyCount'],
 
-  normalizedShellConstruction: [
+  layupDescription: ['shell.construction.layupDescription'],
 
-    'shell.construction.shellConstruction',
+  shellThicknessMm: ['shell.construction.shellThicknessMm'],
 
-    'shell.normalizedConstruction',
+  thicknessClass: ['shell.construction.thicknessClass'],
 
-    'shell.normalizedShellConstruction',
+  reinforcementRings: ['shell.construction.reinforcementRings'],
 
-    'normalizedShellConstruction',
+  reinforcementRingMaterial: ['shell.construction.reinforcementRingMaterial'],
 
-  ],
+  reinforcementRingThicknessMm: ['shell.construction.reinforcementRingThicknessMm'],
 
-  shellMaterial1: [
+  bearingEdgeBatter: ['shell.bearingEdges.batterSideProfile'],
 
-    'shell.construction.shellMaterialPrimary',
+  bearingEdgeSnare: ['shell.bearingEdges.snareSideProfile'],
 
-    'shell.material1',
+  bearingEdgeRoundover: ['shell.bearingEdges.roundover'],
 
-    'shellMaterial1',
+  bearingEdgeEvidenceLevel: ['shell.bearingEdges.evidenceLevel'],
 
-  ],
+  bearingEdgeConfidence: ['shell.bearingEdges.confidence'],
 
-  shellMaterial2: [
+  bearingEdgeNotes: ['shell.bearingEdges.notes'],
 
-    'shell.construction.shellMaterialSecondary',
+  snareBedsPresent: ['shell.snareBeds.present'],
 
-    'shell.material2',
+  snareBedDepthBucket: ['shell.snareBeds.depthBucket'],
 
-    'shellMaterial2',
+  snareBedWidthBucket: ['shell.snareBeds.widthBucket'],
 
-  ],
+  snareBedStyle: ['shell.snareBeds.bedStyle'],
 
-  shellMaterial3: [
+  snareBedEvidenceLevel: ['shell.snareBeds.evidenceLevel'],
 
-    'shell.construction.shellMaterialTertiary',
+  snareBedConfidence: ['shell.snareBeds.confidence'],
 
-    'shell.material3',
+  snareBedNotes: ['shell.snareBeds.notes'],
 
-    'shellMaterial3',
+  finishName: ['shell.finish.finishName'],
 
-  ],
+  finishType: ['shell.finish.finishType'],
 
-  plyCountLayup: [
+  exteriorTreatment: ['shell.finish.exteriorTreatment'],
 
-    'shell.construction.layupDescription',
+  interiorTreatment: ['shell.finish.interiorTreatment'],
 
-    'shell.plyCountLayup',
+  finishAcousticImpact: ['shell.finish.acousticImpact'],
 
-    'plyCountLayup',
+  finishNotes: ['shell.finish.notes'],
 
-  ],
+  batterHoopType: ['stockHardware.hoops.batterHoopType'],
 
-  shellThicknessMm: [
+  resonantHoopType: ['stockHardware.hoops.resonantHoopType'],
 
-    'shell.construction.shellThicknessMm',
+  hoopMaterial: ['stockHardware.hoops.hoopMaterial'],
 
-    'shell.thicknessMm',
+  hoopThicknessMm: ['stockHardware.hoops.hoopThicknessMm'],
 
-    'shellThicknessMm',
+  hoopMassClass: ['stockHardware.hoops.hoopMassClass'],
 
-  ],
+  hoopFinish: ['stockHardware.hoops.hoopFinish'],
 
-  reinforcementRings: [
+  lugCount: ['stockHardware.lugs.lugCount'],
 
-    'shell.construction.reinforcementRings',
+  lugType: ['stockHardware.lugs.lugType'],
 
-    'shell.reinforcementRings',
+  lugMaterial: ['stockHardware.lugs.lugMaterial'],
 
-    'reinforcementRings',
+  lugMassClass: ['stockHardware.lugs.lugMassClass'],
 
-  ],
+  lugMountingStyle: ['stockHardware.lugs.lugMountingStyle'],
 
-  bearingEdge: [
+  hardwareFinish: ['stockHardware.lugs.hardwareFinish'],
 
-    'shell.bearingEdges.batterSideProfile',
+  throwOffMake: ['stockHardware.throwOff.make'],
 
-    'shell.bearingEdge',
+  throwOffModel: ['stockHardware.throwOff.model'],
 
-    'bearingEdge',
+  throwOffStyle: ['stockHardware.throwOff.style'],
 
-  ],
+  throwOffNotes: ['stockHardware.throwOff.notes'],
 
-  snareBedType: [
+  buttPlateMake: ['stockHardware.buttPlate.make'],
 
-    'shell.snareBeds.depthBucket',
+  buttPlateModel: ['stockHardware.buttPlate.model'],
 
-    'shell.snareBeds.bedStyle',
+  buttPlateStyle: ['stockHardware.buttPlate.style'],
 
-    'shell.snareBedType',
+  snareWireMake: ['stockSnareSystem.snareWires.make'],
 
-    'snareBedType',
+  snareWireModel: ['stockSnareSystem.snareWires.model'],
 
-  ],
+  snareWireStrandCount: ['stockSnareSystem.snareWires.strandCount'],
 
-  finishType: ['shell.finish.finishType', 'shell.finishType', 'finishType'],
+  snareWireMaterial: ['stockSnareSystem.snareWires.material'],
 
-  hoopRimType: [
+  snareWireLengthInches: ['stockSnareSystem.snareWires.lengthInches'],
 
-    'stockHardware.hoops.batterHoopType',
+  snareWireStock: ['stockSnareSystem.snareWires.stock'],
 
-    'hardware.hoopRimType',
+  stockBatterHead: ['stockSnareSystem.heads.batterHead'],
 
-    'shell.hoopRimType',
+  stockResoHead: ['stockSnareSystem.heads.resonantHead'],
 
-    'hoopRimType',
+  stockHeadsKnown: ['stockSnareSystem.heads.stockHeadsKnown'],
 
-  ],
+  currentlyInProduction: ['identification.currentlyInProduction'],
 
-  lugCount: ['stockHardware.lugs.lugCount', 'hardware.lugCount', 'lugCount'],
+  artistSignatureLine: ['identification.artistSignature'],
 
-  lugType: ['stockHardware.lugs.lugType', 'hardware.lugType', 'lugType'],
+  productionStatus: ['identification.productionStatus'],
 
-  hardwareFinish: [
+  rareCollectible: ['identification.rareCollectible'],
 
-    'stockHardware.lugs.hardwareFinish',
+  badgeStyle: ['identification.badgeStyle'],
 
-    'hardware.hardwareFinish',
+  yearIntroduced: ['collectorMetadata.yearIntroduced'],
 
-    'hardwareFinish',
+  yearDiscontinued: ['collectorMetadata.yearDiscontinued'],
 
-  ],
+  limitedRun: ['collectorMetadata.limitedRun'],
 
-  snareThrowMakeModel: [
+  limitedRunCount: ['collectorMetadata.limitedRunCount'],
 
-    'stockHardware.throwOff.model',
+  countryOfOrigin: ['collectorMetadata.countryOfOrigin'],
 
-    'stockHardware.throwOff.make',
+  productionNotes: ['collectorMetadata.productionNotes'],
 
-    'hardware.snareThrowMakeAndModel',
+  sourceConfidence: ['sources.sourceConfidence'],
 
-    'hardware.snareThrowMakeModel',
+  primarySourceUrl: ['sources.primarySourceUrl'],
 
-    'snareThrowMakeAndModel',
+  secondarySourceUrl: ['sources.secondarySourceUrl'],
 
-    'snareThrowMakeModel',
+  secondarySourceUrls: ['sources.secondarySourceUrls'],
 
-  ],
+  imageUrls: ['sources.imageUrls'],
 
-  stockSnareWires: [
+  notesOnMissingData: ['sources.notesOnMissingData'],
 
-    'stockSnareSystem.snareWires.model',
+  conflictingSourceNotes: ['sources.conflictingSourceNotes'],
 
-    'stockSnareSystem.snareWires.make',
+  priceNotes: ['pricing.priceNotes'],
 
-    'hardware.stockSnareWires',
+  lastUpdated: ['pricing.lastUpdated'],
 
-    'stockSnareWires',
+  currentNewPrice: ['pricing.currentNewPrice'],
 
-  ],
+  originalMsrp: ['pricing.originalMsrp'],
 
-  stockBatterHead: [
+  originalRetailPrice: ['pricing.originalRetailPrice'],
 
-    'stockSnareSystem.heads.batterHead',
+  currentUsedPriceLow: ['pricing.currentUsedPriceRange.low'],
 
-    'hardware.stockBatterHead',
+  currentUsedPriceHigh: ['pricing.currentUsedPriceRange.high'],
 
-    'stockBatterHead',
+  currentUsedPriceCurrency: ['pricing.currentUsedPriceRange.currency'],
 
-  ],
+  overallAttackOberScore: ['oberScores.attack'],
 
-  stockResoHead: [
+  overallBrightnessOberScore: ['oberScores.brightness'],
 
-    'stockSnareSystem.heads.resonantHead',
+  overallProjectionOberScore: ['oberScores.projection'],
 
-    'hardware.stockResoHead',
+  overallSustainOberScore: ['oberScores.sustain'],
 
-    'stockResoHead',
+  overallWarmthOberScore: ['oberScores.warmth'],
 
-  ],
+  overallSensitivityOberScore: ['oberScores.sensitivity'],
 
-  currentlyInProduction: [
+  overallControlOberScore: ['oberScores.control'],
 
-    'identification.currentlyInProduction',
+  voiceScoreConfidence: ['oberScores.confidence'],
 
-    'production.currentlyInProduction',
+  scoringBasis: ['oberScores.scoringBasis'],
 
-    'currentlyInProduction',
+  projectedShellFundamentalPitch: ['tuning.projectedShellFundamentalPitch'],
 
-  ],
+  recommendedBatter: ['tuning.recommendedBatter'],
 
-  artistSignatureLine: [
+  recommendedReso: ['tuning.recommendedReso'],
 
-    'identification.artistSignature',
+  snareFacts: ['snareFacts'],
 
-    'production.artistSignatureLine',
+  shortDescription: ['summary.shortDescription'],
 
-    'artistSignatureLine',
-
-  ],
-
-  discontinued: [
-
-    'identification.discontinued',
-
-    'production.discontinued',
-
-    'discontinued',
-
-  ],
-
-  rareCollectible: [
-
-    'identification.rareCollectible',
-
-    'production.rareCollectible',
-
-    'rareCollectible',
-
-  ],
-
-  yearInProduction: [
-
-    'collectorMetadata.yearIntroduced',
-
-    'production.yearInProduction',
-
-    'yearInProduction',
-
-  ],
-
-  yearDiscontinued: [
-
-    'collectorMetadata.yearDiscontinued',
-
-    'production.yearDiscontinued',
-
-    'yearDiscontinued',
-
-  ],
-
-  voiceScoreConfidence: [
-
-    'sourceAudit.voiceScoreConfidence',
-
-    'oberScores.confidence',
-
-    'voiceScoreConfidence',
-
-  ],
-
-  sourceConfidence: ['sources.sourceConfidence', 'sourceConfidence'],
-
-  primarySourceUrl: ['sources.primarySourceUrl', 'primarySourceUrl'],
-
-  secondarySourceUrl: [
-
-    'secondarySourceUrl',
-
-    'sources.secondarySourceUrl',
-
-  ],
-
-  overallAttackOberScore: ['oberScores.attack', 'overallAttackOberScore'],
-
-  overallBrightnessOberScore: [
-
-    'oberScores.brightness',
-
-    'overallBrightnessOberScore',
-
-  ],
-
-  overallProjectionOberScore: [
-
-    'oberScores.projection',
-
-    'overallProjectionOberScore',
-
-  ],
-
-  overallSustainOberScore: ['oberScores.sustain', 'overallSustainOberScore'],
-
-  overallWarmthOberScore: ['oberScores.warmth', 'overallWarmthOberScore'],
-
-  overallSensitivityOberScore: [
-
-    'oberScores.sensitivity',
-
-    'overallSensitivityOberScore',
-
-  ],
-
-  overallControlOberScore: ['oberScores.control', 'overallControlOberScore'],
-
-  projectedShellFundamentalPitch: [
-
-    'tuning.projectedShellFundamentalPitch',
-
-    'projectedShellFundamentalPitch',
-
-  ],
-
-  projectedShellFundamentalHz: [
-
-    'tuning.projectedShellFundamentalHz',
-
-    'projectedShellFundamentalHz',
-
-  ],
-
-  recommendedBatterHz: ['tuning.recommendedBatterHz', 'recommendedBatterHz'],
-
-  recommendedBatterNote: ['tuning.recommendedBatterNote', 'recommendedBatterNote'],
-
-  recommendedResoHz: ['tuning.recommendedResoHz', 'recommendedResoHz'],
-
-  recommendedResoNote: ['tuning.recommendedResoNote', 'recommendedResoNote'],
-
-  scoringBasis: ['summary.drumSummaryNotes', 'oberScores.scoringBasis', 'scoringBasis'],
-
-  notesOnMissingData: ['sources.notesOnMissingData', 'notes.missingData', 'notesOnMissingData'],
-
-  drumSummaryNotes: ['summary.shortDescription', 'notes.summary', 'drumSummaryNotes'],
+  drumSummaryNotes: ['summary.drumSummaryNotes'],
 
   description: ['description'],
 
@@ -394,7 +268,23 @@ const getFieldValue = (source = {}, key = '') => {
 
     if (value !== undefined && value !== null && value !== '') {
 
-      return Array.isArray(value) ? value.join('\n') : value;
+      if (Array.isArray(value)) {
+
+        return value
+
+          .map((item) => {
+
+            if (typeof item === 'string') return item;
+
+            return JSON.stringify(item, null, 2);
+
+          })
+
+          .join('\n');
+
+      }
+
+      return value;
 
     }
 
@@ -430,7 +320,7 @@ const setNestedValue = (target = {}, path = '', value = '') => {
 
     }
 
-    if (!cursor[key] || typeof cursor[key] !== 'object') {
+    if (!cursor[key] || typeof cursor[key] !== 'object' || Array.isArray(cursor[key])) {
 
       cursor[key] = {};
 
@@ -447,6 +337,52 @@ const setPayloadField = (payload = {}, key = '', value = '') => {
   const primaryPath = FIELD_PATHS[key]?.[0] || key;
 
   setNestedValue(payload, primaryPath, value);
+
+};
+
+const parseTextareaArray = (value = '') => {
+
+  if (!value) return [];
+
+  return String(value)
+
+    .split('\n')
+
+    .map((line) => line.trim())
+
+    .filter(Boolean);
+
+};
+
+const normalizeValueForSave = ({ field, value }) => {
+
+  if (field?.type === 'number') {
+
+    if (value === '' || value === null || value === undefined) return null;
+
+    const number = Number(value);
+
+    return Number.isFinite(number) ? number : null;
+
+  }
+
+  if (field?.type === 'boolean') {
+
+    if (value === true || value === 'true') return true;
+
+    if (value === false || value === 'false') return false;
+
+    return 'unknown';
+
+  }
+
+  if (field?.type === 'array') {
+
+    return parseTextareaArray(value);
+
+  }
+
+  return value === '' || value === null || value === undefined ? 'unknown' : value;
 
 };
 
@@ -472,6 +408,8 @@ const TEXT_FIELD_GROUPS = [
 
       { key: 'modelNum', label: 'Model Number' },
 
+      { key: 'badgeStyle', label: 'Badge Style' },
+
       { key: 'imgUrl', label: 'Image URL' },
 
     ],
@@ -480,7 +418,7 @@ const TEXT_FIELD_GROUPS = [
 
   {
 
-    title: 'Size & Shell Specs',
+    title: 'Shell Dimensions',
 
     fields: [
 
@@ -488,27 +426,37 @@ const TEXT_FIELD_GROUPS = [
 
       { key: 'depth', label: 'Depth', type: 'number', step: '0.1' },
 
+    ],
+
+  },
+
+  {
+
+    title: 'Shell Construction',
+
+    fields: [
+
       { key: 'shellConstruction', label: 'Shell Construction' },
 
-      { key: 'normalizedShellConstruction', label: 'Normalized Shell Construction' },
+      { key: 'shellMaterial1', label: 'Shell Material Primary' },
 
-      { key: 'shellMaterial1', label: 'Shell Material 1' },
+      { key: 'shellMaterial2', label: 'Shell Material Secondary' },
 
-      { key: 'shellMaterial2', label: 'Shell Material 2' },
+      { key: 'shellMaterial3', label: 'Shell Material Tertiary' },
 
-      { key: 'shellMaterial3', label: 'Shell Material 3' },
+      { key: 'plyCount', label: 'Ply Count', type: 'number', step: '1' },
 
-      { key: 'plyCountLayup', label: 'Ply Count / Layup' },
+      { key: 'layupDescription', label: 'Layup Description' },
 
       { key: 'shellThicknessMm', label: 'Shell Thickness mm', type: 'number', step: '0.1' },
 
-      { key: 'reinforcementRings', label: 'Reinforcement Rings' },
+      { key: 'thicknessClass', label: 'Thickness Class' },
 
-      { key: 'bearingEdge', label: 'Bearing Edge' },
+      { key: 'reinforcementRings', label: 'Reinforcement Rings', type: 'boolean' },
 
-      { key: 'snareBedType', label: 'Snare Bed Type' },
+      { key: 'reinforcementRingMaterial', label: 'Re-Ring Material' },
 
-      { key: 'finishType', label: 'Finish Type' },
+      { key: 'reinforcementRingThicknessMm', label: 'Re-Ring Thickness mm', type: 'number', step: '0.1' },
 
     ],
 
@@ -516,25 +464,105 @@ const TEXT_FIELD_GROUPS = [
 
   {
 
-    title: 'Hardware & Stock Setup',
+    title: 'Bearing Edges',
 
     fields: [
 
-      { key: 'hoopRimType', label: 'Hoop / Rim Type' },
+      { key: 'bearingEdgeBatter', label: 'Batter Side Profile' },
+
+      { key: 'bearingEdgeSnare', label: 'Snare Side Profile' },
+
+      { key: 'bearingEdgeRoundover', label: 'Roundover' },
+
+      { key: 'bearingEdgeEvidenceLevel', label: 'Evidence Level' },
+
+      { key: 'bearingEdgeConfidence', label: 'Confidence' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Snare Beds',
+
+    fields: [
+
+      { key: 'snareBedsPresent', label: 'Snare Beds Present', type: 'boolean' },
+
+      { key: 'snareBedDepthBucket', label: 'Depth Bucket' },
+
+      { key: 'snareBedWidthBucket', label: 'Width Bucket' },
+
+      { key: 'snareBedStyle', label: 'Bed Style' },
+
+      { key: 'snareBedEvidenceLevel', label: 'Evidence Level' },
+
+      { key: 'snareBedConfidence', label: 'Confidence' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Finish',
+
+    fields: [
+
+      { key: 'finishName', label: 'Finish Name' },
+
+      { key: 'finishType', label: 'Finish Type' },
+
+      { key: 'exteriorTreatment', label: 'Exterior Treatment' },
+
+      { key: 'interiorTreatment', label: 'Interior Treatment' },
+
+      { key: 'finishAcousticImpact', label: 'Acoustic Impact' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Hoops',
+
+    fields: [
+
+      { key: 'batterHoopType', label: 'Batter Hoop Type' },
+
+      { key: 'resonantHoopType', label: 'Resonant Hoop Type' },
+
+      { key: 'hoopMaterial', label: 'Hoop Material' },
+
+      { key: 'hoopThicknessMm', label: 'Hoop Thickness mm', type: 'number', step: '0.1' },
+
+      { key: 'hoopMassClass', label: 'Hoop Mass Class' },
+
+      { key: 'hoopFinish', label: 'Hoop Finish' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Lugs',
+
+    fields: [
 
       { key: 'lugCount', label: 'Lug Count', type: 'number', step: '1' },
 
       { key: 'lugType', label: 'Lug Type' },
 
+      { key: 'lugMaterial', label: 'Lug Material' },
+
+      { key: 'lugMassClass', label: 'Lug Mass Class' },
+
+      { key: 'lugMountingStyle', label: 'Lug Mounting Style' },
+
       { key: 'hardwareFinish', label: 'Hardware Finish' },
-
-      { key: 'snareThrowMakeModel', label: 'Snare Throw Make / Model' },
-
-      { key: 'stockSnareWires', label: 'Stock Snare Wires' },
-
-      { key: 'stockBatterHead', label: 'Stock Batter Head' },
-
-      { key: 'stockResoHead', label: 'Stock Reso Head' },
 
     ],
 
@@ -542,23 +570,111 @@ const TEXT_FIELD_GROUPS = [
 
   {
 
-    title: 'Production / Source Metadata',
+    title: 'Throw-Off / Butt Plate',
 
     fields: [
 
-      { key: 'currentlyInProduction', label: 'Currently In Production' },
+      { key: 'throwOffMake', label: 'Throw-Off Make' },
 
-      { key: 'artistSignatureLine', label: 'Artist / Signature Line' },
+      { key: 'throwOffModel', label: 'Throw-Off Model' },
 
-      { key: 'discontinued', label: 'Discontinued' },
+      { key: 'throwOffStyle', label: 'Throw-Off Style' },
 
-      { key: 'rareCollectible', label: 'Rare / Collectible' },
+      { key: 'buttPlateMake', label: 'Butt Plate Make' },
 
-      { key: 'yearInProduction', label: 'Year In Production' },
+      { key: 'buttPlateModel', label: 'Butt Plate Model' },
+
+      { key: 'buttPlateStyle', label: 'Butt Plate Style' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Stock Snare System',
+
+    fields: [
+
+      { key: 'snareWireMake', label: 'Snare Wire Make' },
+
+      { key: 'snareWireModel', label: 'Snare Wire Model' },
+
+      { key: 'snareWireStrandCount', label: 'Strand Count', type: 'number', step: '1' },
+
+      { key: 'snareWireMaterial', label: 'Wire Material' },
+
+      { key: 'snareWireLengthInches', label: 'Wire Length Inches', type: 'number', step: '0.1' },
+
+      { key: 'snareWireStock', label: 'Stock Wire Status' },
+
+      { key: 'stockBatterHead', label: 'Stock Batter Head' },
+
+      { key: 'stockResoHead', label: 'Stock Reso Head' },
+
+      { key: 'stockHeadsKnown', label: 'Stock Heads Known', type: 'boolean' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Production / Collector Metadata',
+
+    fields: [
+
+      { key: 'productionStatus', label: 'Production Status' },
+
+      { key: 'currentlyInProduction', label: 'Currently In Production', type: 'boolean' },
+
+      { key: 'artistSignatureLine', label: 'Artist / Signature Line', type: 'boolean' },
+
+      { key: 'rareCollectible', label: 'Rare / Collectible', type: 'boolean' },
+
+      { key: 'yearIntroduced', label: 'Year Introduced' },
 
       { key: 'yearDiscontinued', label: 'Year Discontinued' },
 
-      { key: 'voiceScoreConfidence', label: 'Voice Score Confidence' },
+      { key: 'limitedRun', label: 'Limited Run' },
+
+      { key: 'limitedRunCount', label: 'Limited Run Count' },
+
+      { key: 'countryOfOrigin', label: 'Country Of Origin' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Pricing',
+
+    fields: [
+
+      { key: 'originalMsrp', label: 'Original MSRP' },
+
+      { key: 'originalRetailPrice', label: 'Original Retail Price' },
+
+      { key: 'currentNewPrice', label: 'Current New Price' },
+
+      { key: 'currentUsedPriceLow', label: 'Used Price Low' },
+
+      { key: 'currentUsedPriceHigh', label: 'Used Price High' },
+
+      { key: 'currentUsedPriceCurrency', label: 'Used Price Currency' },
+
+      { key: 'lastUpdated', label: 'Pricing Last Updated' },
+
+    ],
+
+  },
+
+  {
+
+    title: 'Sources',
+
+    fields: [
 
       { key: 'sourceConfidence', label: 'Source Confidence' },
 
@@ -574,13 +690,33 @@ const TEXT_FIELD_GROUPS = [
 
 const TEXTAREA_FIELDS = [
 
-  { key: 'description', label: 'Description' },
+  { key: 'bearingEdgeNotes', label: 'Bearing Edge Notes' },
+
+  { key: 'snareBedNotes', label: 'Snare Bed Notes' },
+
+  { key: 'finishNotes', label: 'Finish Notes' },
+
+  { key: 'throwOffNotes', label: 'Throw-Off Notes' },
+
+  { key: 'productionNotes', label: 'Production Notes' },
+
+  { key: 'priceNotes', label: 'Price Notes' },
+
+  { key: 'notesOnMissingData', label: 'Notes On Missing Data', type: 'array' },
+
+  { key: 'conflictingSourceNotes', label: 'Conflicting Source Notes', type: 'array' },
+
+  { key: 'secondarySourceUrls', label: 'Secondary Source URLs', type: 'array' },
+
+  { key: 'snareFacts', label: 'Snare Facts', type: 'array' },
 
   { key: 'scoringBasis', label: 'Scoring Basis' },
 
-  { key: 'notesOnMissingData', label: 'Notes On Missing Data' },
+  { key: 'shortDescription', label: 'Short Description' },
 
   { key: 'drumSummaryNotes', label: 'Drum Summary Notes' },
+
+  { key: 'description', label: 'Description' },
 
 ];
 
@@ -588,15 +724,9 @@ const TUNING_FIELDS = [
 
   { key: 'projectedShellFundamentalPitch', label: 'Projected Shell Fundamental Pitch' },
 
-  { key: 'projectedShellFundamentalHz', label: 'Projected Shell Fundamental Hz', type: 'number', step: '1' },
+  { key: 'recommendedBatter', label: 'Recommended Batter' },
 
-  { key: 'recommendedBatterHz', label: 'Recommended Batter Hz', type: 'number', step: '1' },
-
-  { key: 'recommendedBatterNote', label: 'Recommended Batter Note' },
-
-  { key: 'recommendedResoHz', label: 'Recommended Reso Hz', type: 'number', step: '1' },
-
-  { key: 'recommendedResoNote', label: 'Recommended Reso Note' },
+  { key: 'recommendedReso', label: 'Recommended Reso' },
 
 ];
 
@@ -636,22 +766,6 @@ const getInitialForm = (drum = {}) => {
 
 };
 
-const normalizeValueForSave = ({ field, value }) => {
-
-  if (field?.type === 'number') {
-
-    if (value === '' || value === null || value === undefined) return '';
-
-    const number = Number(value);
-
-    return Number.isFinite(number) ? number : '';
-
-  }
-
-  return value;
-
-};
-
 const SnareReferenceEditor = ({
 
   drum,
@@ -670,11 +784,7 @@ const SnareReferenceEditor = ({
 
   const [form, setForm] = useState(() => getInitialForm(drum));
 
-  const [lastSavedSnapshot, setLastSavedSnapshot] = useState(() =>
-
-    getInitialForm(drum)
-
-  );
+  const [lastSavedSnapshot, setLastSavedSnapshot] = useState(() => getInitialForm(drum));
 
   useEffect(() => {
 
@@ -730,7 +840,15 @@ const SnareReferenceEditor = ({
 
     TEXTAREA_FIELDS.forEach((field) => {
 
-      setPayloadField(payload, field.key, form[field.key] || '');
+      setPayloadField(
+
+        payload,
+
+        field.key,
+
+        normalizeValueForSave({ field, value: form[field.key] })
+
+      );
 
     });
 
@@ -752,7 +870,7 @@ const SnareReferenceEditor = ({
 
       const number = Number(form[field.key]);
 
-      setPayloadField(payload, field.key, Number.isFinite(number) ? number : '');
+      setPayloadField(payload, field.key, Number.isFinite(number) ? number : null);
 
     });
 
@@ -954,21 +1072,47 @@ const SnareReferenceEditor = ({
 
                     <span>{field.label}</span>
 
-                    <input
+                    {field.type === 'boolean' ? (
 
-                      type={field.type || 'text'}
+                      <select
 
-                      step={field.step}
+                        value={String(form[field.key] ?? 'unknown')}
 
-                      value={form[field.key] ?? ''}
+                        onChange={(event) =>
 
-                      onChange={(event) =>
+                          updateField(field.key, event.target.value)
 
-                        updateField(field.key, event.target.value)
+                        }
 
-                      }
+                      >
 
-                    />
+                        <option value="unknown">unknown</option>
+
+                        <option value="true">true</option>
+
+                        <option value="false">false</option>
+
+                      </select>
+
+                    ) : (
+
+                      <input
+
+                        type={field.type || 'text'}
+
+                        step={field.step}
+
+                        value={form[field.key] ?? ''}
+
+                        onChange={(event) =>
+
+                          updateField(field.key, event.target.value)
+
+                        }
+
+                      />
+
+                    )}
 
                   </label>
 
@@ -1076,7 +1220,7 @@ const SnareReferenceEditor = ({
 
             <div className="snare-reference-editor__group-heading">
 
-              <h5>Descriptions & Notes</h5>
+              <h5>Descriptions, Notes & Arrays</h5>
 
             </div>
 
