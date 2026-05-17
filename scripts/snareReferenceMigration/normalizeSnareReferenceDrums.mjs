@@ -6,7 +6,9 @@ const db = admin.firestore();
 
 const COLLECTION = 'snareReferenceDrums';
 
-const PREVIEW_LIMIT = 5;
+const limitArg = process.argv.find((arg) => arg.startsWith('--limit='));
+
+const PREVIEW_LIMIT = limitArg ? Number(limitArg.replace('--limit=', '')) : null;
 
 const SHOULD_WRITE = process.argv.includes('--write');
 
@@ -202,7 +204,15 @@ const normalizeSnare = (docId, drum = {}) => {
 
 async function main() {
 
-  const snapshot = await db.collection(COLLECTION).limit(PREVIEW_LIMIT).get();
+  let query = db.collection(COLLECTION);
+
+  if (PREVIEW_LIMIT) {
+
+    query = query.limit(PREVIEW_LIMIT);
+
+  }
+
+  const snapshot = await query.get();
 
   if (snapshot.empty) {
 
@@ -214,7 +224,7 @@ async function main() {
 
   if (!SHOULD_WRITE) {
 
-    console.log(`Previewing normalized schema for ${PREVIEW_LIMIT} snareReferenceDrums docs...`);
+    console.log(`Previewing normalized schema for ${snapshot.docs.length} snareReferenceDrums docs...`);
 
     console.log('No writes will be performed.');
 
@@ -232,7 +242,7 @@ async function main() {
 
     console.log('\nPreview complete. No writes performed.');
 
-    console.log('\nTo actually write later, run:');
+    console.log('\nTo actually write all docs, run:');
 
     console.log('node scripts/snareReferenceMigration/normalizeSnareReferenceDrums.mjs --write');
 
@@ -242,22 +252,37 @@ async function main() {
 
   console.log(`Writing normalized schema for ${snapshot.docs.length} docs...`);
 
-  const batch = db.batch();
+  const BATCH_SIZE = 400;
 
-  snapshot.docs.forEach((doc) => {
+  let updatedCount = 0;
 
-    batch.set(doc.ref, normalizeSnare(doc.id, doc.data()), { merge: false });
+  for (let i = 0; i < snapshot.docs.length; i += BATCH_SIZE) {
 
-  });
+    const batchDocs = snapshot.docs.slice(i, i + BATCH_SIZE);
 
-  await batch.commit();
+    const batch = db.batch();
 
-  console.log(`Write complete. Updated ${snapshot.docs.length} docs.`);
+    batchDocs.forEach((doc) => {
+
+      batch.set(doc.ref, normalizeSnare(doc.id, doc.data()), { merge: false });
+
+    });
+
+    await batch.commit();
+
+    updatedCount += batchDocs.length;
+
+    console.log(`Committed ${updatedCount}/${snapshot.docs.length} docs...`);
+
+  }
+
+  console.log(`Write complete. Updated ${updatedCount} docs.`);
 
 }
+
 main().catch((error) => {
 
-  console.error('Migration preview failed:', error);
+  console.error('Migration failed:', error);
 
   process.exit(1);
 
