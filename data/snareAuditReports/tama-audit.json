@@ -1,0 +1,13 @@
+{
+  "company": "Tama",
+  "summary": {
+    "total": 121,
+    "engineReady": 121,
+    "needsResearch": 0,
+    "missingRequiredCount": 0,
+    "invalidConfidenceCount": 0,
+    "missingScoresCount": 0,
+    "examplesNeedingWork": []
+  },
+  "badRecords": []
+}
