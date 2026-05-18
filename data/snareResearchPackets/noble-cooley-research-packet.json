@@ -1,0 +1,782 @@
+{
+  "company": "Noble & Cooley",
+  "generatedAt": "2026-05-18T06:03:43.321Z",
+  "counts": {
+    "coreRecords": 66,
+    "stockRecords": 0
+  },
+  "instructions": {
+    "goal": "Research and patch failed minimum engine fields with source-backed values only.",
+    "rules": [
+      "Unknown may remain in Firestore, but it fails minimum engine readiness.",
+      "Do not invent shell thickness, bearing edge, snare bed, or stock hardware details.",
+      "Use sourceConfidence and notesOnMissingData honestly.",
+      "Core shell fields come first; stock config fields come second."
+    ]
+  },
+  "coreRecords": [
+    {
+      "priority": "high",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Artist / Endorser Reference",
+      "modelName": "Craig Pilo Reference Snare",
+      "id": "noble-and-cooley_artist-endorser-reference_craig-pilo-reference-snare_14x6-5_other-needs-research_e9ea30de",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Artist / Endorser Reference",
+      "modelName": "Malcolm Travis Reference Snare",
+      "id": "noble-and-cooley_artist-endorser-reference_malcolm-travis-reference-snare_14x6-5_other-needs-research_03455e0b",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "modelName": "Alloy Classic Aluminum 14x4.75",
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "modelName": "Alloy Classic Aluminum 14x6",
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "modelName": "Alloy Classic Aluminum 14x6.5",
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Brass Specialty 14x5",
+      "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x5_14x5_metal_brass_raw-lacquered-metal-finish_triple-flanged_10069628",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Brass Specialty 14x6.5",
+      "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x6-5_14x6-5_metal_brass_raw-lacquered-metal-finish_triple-fla_d72eb297",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Bronze Specialty 14x5",
+      "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x5_14x5_metal_bronze_raw-lacquered-metal-finish_triple-flang_678cfd56",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Bronze Specialty 14x6.5",
+      "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x6-5_14x6-5_metal_bronze_raw-lacquered-metal-finish_triple-f_d006de9a",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 13x3.875",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-13x3-875_13x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_1069e80d",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 13x5",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-13x5_13x5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_7a3a8ce9",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 13x6.5",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-13x6-5_13x6-5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_e8867aaa",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 13x7",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-13x7_13x7_ply_maple_standard-custom-finish-options_triple-flanged-hoops_f3032d10",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 14x3.875",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-14x3-875_14x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_420638da",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 14x5",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-14x5_14x5_ply_maple_45-degree-bearing-edge_standard-custom-finish-options_trip_a1aebcc5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 14x6.5",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-14x6-5_14x6-5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_84f18e4e",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 14x7",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-14x7_14x7_ply_maple_standard-custom-finish-options_triple-flanged-hoops_2409b7de",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Copper Specialty 14x5",
+      "id": "noble-and-cooley_metal-archive-specialty_copper-specialty-14x5_14x5_metal_copper_raw-lacquered-metal-finish_triple-flang_6b40c42f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Copper Specialty 14x6.5",
+      "id": "noble-and-cooley_metal-archive-specialty_copper-specialty-14x6-5_14x6-5_metal_copper_raw-lacquered-metal-finish_triple-f_00bf4e25",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "modelName": "Historical Alloy Classic Early Production 14x6",
+      "id": "noble-and-cooley_historical-archive_historical-alloy-classic-early-production-14x6_14x6_metal_aluminum_triple-flanged-ho_f725fb73",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "modelName": "Historical CD Maple Early Production 14x5",
+      "id": "noble-and-cooley_historical-archive_historical-cd-maple-early-production-14x5_14x5_ply_maple_triple-flanged-hoops_d19fdf81",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "modelName": "Historical Horizon 1980s 14x6.5",
+      "id": "noble-and-cooley_historical-archive_historical-horizon-1980s-14x6-5_14x6-5_ply_maple_mahogany_triple-flanged-hoops_7651c730",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "modelName": "Historical SS Classic 1980s Maple 14x5",
+      "id": "noble-and-cooley_historical-archive_historical-ss-classic-1980s-maple-14x5_14x5_steam-bent_maple_triple-flanged-hoops_b0c14a05",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "modelName": "Historical SS Classic 1980s Maple 14x6.5",
+      "id": "noble-and-cooley_historical-archive_historical-ss-classic-1980s-maple-14x6-5_14x6-5_steam-bent_maple_triple-flanged-hoop_30c73d94",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "modelName": "Historical Walnut Classic 14x6.5",
+      "id": "noble-and-cooley_historical-archive_historical-walnut-classic-14x6-5_14x6-5_ply_walnut_triple-flanged-hoops_105720a2",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "modelName": "Horizon Hybrid 13x5",
+      "id": "noble-and-cooley_horizon-series_horizon-hybrid-13x5_13x5_ply_maple_mahogany_standard-custom-finish-options_triple-flange_9bc48f59",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "modelName": "Horizon Hybrid 13x6.5",
+      "id": "noble-and-cooley_horizon-series_horizon-hybrid-13x6-5_13x6-5_ply_maple_mahogany_standard-custom-finish-options_triple-fl_5a85a8ff",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "modelName": "Horizon Hybrid 13x7",
+      "id": "noble-and-cooley_horizon-series_horizon-hybrid-13x7_13x7_ply_maple_mahogany_standard-custom-finish-options_triple-flange_29d0747a",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "modelName": "Horizon Hybrid 14x5",
+      "id": "noble-and-cooley_horizon-series_horizon-hybrid-14x5_14x5_ply_maple_mahogany_standard-custom-finish-options_triple-flange_7281797b",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "modelName": "Horizon Hybrid 14x6.5",
+      "id": "noble-and-cooley_horizon-series_horizon-hybrid-14x6-5_14x6-5_ply_maple_mahogany_standard-custom-finish-options_triple-fl_04f36b78",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "modelName": "Horizon Hybrid 14x7",
+      "id": "noble-and-cooley_horizon-series_horizon-hybrid-14x7_14x7_ply_maple_mahogany_standard-custom-finish-options_triple-flange_7a12039f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Special Edition",
+      "modelName": "Mappa Burl Limited Edition 14x6.5",
+      "id": "noble-and-cooley_special-edition_mappa-burl-limited-edition-14x6-5_14x6-5_ply_mappa-burl_walnut_aqua-marine-fade_die-cas_76fb2ffc",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 13x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x5_13x5_steam-bent_beech_unknown-family-likely-45-degree_19018f02",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 13x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x6_13x6_steam-bent_beech_unknown-family-likely-45-degree_b4126b19",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 13x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x7_13x7_steam-bent_beech_unknown-family-likely-45-degree_b44604ea",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 14x4",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x4_14x4_steam-bent_beech_unknown-family-likely-45-degree_937eee62",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 14x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x5_14x5_steam-bent_beech_unknown-family-likely-45-degree_a887b2ce",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 14x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x6_14x6_steam-bent_beech_unknown-family-likely-45-degree_18ac2f96",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Beech 14x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x7_14x7_steam-bent_beech_unknown-family-likely-45-degree_f0be8fe9",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 13x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x5_13x5_steam-bent_birch_unknown-family-likely-45-degree_928e3b5c",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 13x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x6_13x6_steam-bent_birch_unknown-family-likely-45-degree_d7c418ac",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 13x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x7_13x7_steam-bent_birch_unknown-family-likely-45-degree_47ce40d4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 14x4",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x4_14x4_steam-bent_birch_unknown-family-likely-45-degree_bff34e84",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 14x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x5_14x5_steam-bent_birch_unknown-family-likely-45-degree_dd430ec1",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 14x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x6_14x6_steam-bent_birch_unknown-family-likely-45-degree_73d8ec3c",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Birch 14x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x7_14x7_steam-bent_birch_unknown-family-likely-45-degree_ca45f137",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 13x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-13x5_13x5_steam-bent_maple_unknown-family-likely-45-degree_a6faa703",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 13x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-13x6_13x6_steam-bent_maple_unknown-family-likely-45-degree_4a5f90df",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 13x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-13x7_13x7_steam-bent_maple_unknown-family-likely-45-degree_a6820194",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 14x4",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x4_14x4_steam-bent_maple_unknown-family-likely-45-degree_305492aa",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 14x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x5_14x5_steam-bent_maple_45-degree-bearing-edges_oil-lac_797b88a9",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 14x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x6_14x6_steam-bent_maple_unknown-family-likely-45-degree_171e9b3f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Maple 14x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x7_14x7_steam-bent_maple_unknown-family-likely-45-degree_785e5474",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 13x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-13x5_13x5_steam-bent_walnut_unknown-family-likely-45-degr_184f73b8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 13x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-13x6_13x6_steam-bent_walnut_unknown-family-likely-45-degr_93ba01e4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 13x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-13x7_13x7_steam-bent_walnut_unknown-family-likely-45-degr_165dcb34",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 14x4",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x4_14x4_steam-bent_walnut_unknown-family-likely-45-degr_e1c93b0a",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 14x5",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x5_14x5_steam-bent_walnut_unknown-family-likely-45-degr_804cf167",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 14x6",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x6_14x6_steam-bent_walnut_unknown-family-likely-45-degr_88f673c6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "modelName": "SS Classic Walnut 14x7",
+      "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x7_14x7_steam-bent_walnut_unknown-family-likely-45-degr_854a9693",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "modelName": "Walnut Ply 13x4.75",
+      "id": "noble-and-cooley_walnut-series_walnut-ply-13x4-75_13x4-75_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_a930efef",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "modelName": "Walnut Ply 13x6.5",
+      "id": "noble-and-cooley_walnut-series_walnut-ply-13x6-5_13x6-5_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_3e4a8798",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "modelName": "Walnut Ply 13x8",
+      "id": "noble-and-cooley_walnut-series_walnut-ply-13x8_13x8_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_8dd1001a",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "modelName": "Walnut Ply 14x4.75",
+      "id": "noble-and-cooley_walnut-series_walnut-ply-14x4-75_14x4-75_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_03634594",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "modelName": "Walnut Ply 14x6.5",
+      "id": "noble-and-cooley_walnut-series_walnut-ply-14x6-5_14x6-5_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_d0250f19",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "modelName": "Walnut Ply 14x8",
+      "id": "noble-and-cooley_walnut-series_walnut-ply-14x8_14x8_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_bad14ac5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    }
+  ],
+  "stockRecords": []
+}
