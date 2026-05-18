@@ -1,0 +1,997 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "brady-drum-company_historical-early-experimental_1984-sheoak-block-snare-14x7-with-dw-hardware_14x7_block_oak_unknown-li_da921be8",
+      "companyName": "Brady Drum Company",
+      "modelName": "1984 Sheoak Block Snare 14x7 with DW Hardware",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-10x5_10x5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_fcdeb7d0",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-12x5_12x5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_7576b11d",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-13x5-5_13x5-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_ea5be61e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-14x5-5_14x5-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_1c671eca",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-14x6-5_14x6-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_7da1e76d",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-14x8_14x8_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_ab87aef6",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-16x6-5_16x6-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_f7be8ad8",
+      "companyName": "Brady Drum Company",
+      "modelName": "Australian Rose Gum Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-10x5_10x5_ply_sassafras_45-bearing-edges_1-5mm-proper-snare-_840ae20e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-12x5_12x5_ply_sassafras_45-bearing-edges_1-5mm-proper-snare-_c2bf44a6",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-13x5-5_13x5-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_ae750c9c",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-14x5-5_14x5-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_4dada79d",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-14x6-5_14x6-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_71638253",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-14x8_14x8_ply_sassafras_45-bearing-edges_1-5mm-proper-snare-_77a2a0e7",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-16x6-5_16x6-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_45d860c1",
+      "companyName": "Brady Drum Company",
+      "modelName": "Blackheart Sassafras Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_handmade-exotic-australian-hardwood_jarrah-block-shell-14x6-5_14x6-5_block_jarrah_45-bearing-edges_1-_e1401ddf",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x5_12x5_block_jarrah_unknown-likely-brady-style-45-famil_8267b6f6",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x7_12x7_block_jarrah_unknown-likely-brady-style-45-famil_03553a4e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 12x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x5-5_13x5-5_block_jarrah_unknown-likely-brady-style-45-f_e8fbd6dc",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x7_13x7_block_jarrah_unknown-likely-brady-style-45-famil_fb297460",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x5-5_14x5-5_block_jarrah_unknown-likely-brady-style-45-f_575a3776",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x6-5_14x6-5_block_jarrah_unknown-likely-brady-style-45-f_90e38a75",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x7_14x7_block_jarrah_unknown-likely-brady-style-45-famil_44f82325",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x8_14x8_block_jarrah_unknown-likely-brady-style-45-famil_d1232fc2",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x5-5_14x5-5_solid-shell_jarrah_unknown-l_dec3eeb4",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Hollow Log / Solid-Shell Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x6-5_14x6-5_solid-shell_jarrah_unknown-l_a9157580",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Hollow Log / Solid-Shell Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x8_14x8_solid-shell_jarrah_unknown-likel_9e8e654a",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Hollow Log / Solid-Shell Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_handmade-exotic-australian-hardwood_jarrah-ply-shell-14x6-5_14x6-5_ply_jarrah_45-bearing-edges_1-5mm-_39cf6d3a",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-10x5_10x5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_a9104789",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-12x5_12x5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_c574815f",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-13x5-5_13x5-5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_7bc792e4",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-14x5-5_14x5-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_83bfb2e5",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-14x6-5_14x6-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_7ecec5b5",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-14x8_14x8_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown-mod_9ef39f45",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_jarrah-ply-snare-16x6-5_16x6-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_d9aa9874",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-_1a0e46be",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-_39ddbd88",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 12x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-st_9cfb5eaa",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x7_13x7_block_gum_unknown-likely-brady-style-_0b4d5bc8",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x5-5_14x5-5_block_gum_unknown-likely-brady-st_42af2ffd",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x6-5_14x6-5_block_gum_unknown-likely-brady-st_8bba8f08",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x7_14x7_block_gum_unknown-likely-brady-style-_5f0f4c97",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x8_14x8_block_gum_unknown-likely-brady-style-_8689bcf5",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-12x5_12x5_block_marri_unknown-likely-brady-style-45-family-_27fdfe33",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-12x7_12x7_block_marri_unknown-likely-brady-style-45-family-_c48583d7",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 12x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-13x5-5_13x5-5_block_marri_unknown-likely-brady-style-45-fam_4873cf09",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-13x7_13x7_block_marri_unknown-likely-brady-style-45-family-_057e68d9",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x5-5_14x5-5_block_marri_unknown-likely-brady-style-45-fam_4375965f",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x6-5_14x6-5_block_marri_unknown-likely-brady-style-45-fam_78757ea7",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x7_14x7_block_marri_unknown-likely-brady-style-45-family-_43617380",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x8_14x8_block_marri_unknown-likely-brady-style-45-family-_47da69ef",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Block Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_handmade-exotic-australian-hardwood_marri-ply-shell-14x6-5_14x6-5_ply_marri_45-bearing-edges_1-5mm-pr_60c0ce85",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-10x5_10x5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_8836e84c",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-12x5_12x5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_910cf005",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-13x5-5_13x5-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_6d851fd6",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-14x5-5_14x5-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_1b0af096",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-14x6-5_14x6-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_9755e9c5",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-14x8_14x8_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_9302fafc",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_marri-ply-snare-16x6-5_16x6-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_c536b9fa",
+      "companyName": "Brady Drum Company",
+      "modelName": "Marri Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_handmade-exotic-australian-hardwood_sheoak-block-shell-14x6-5_14x6-5_block_oak_45-bearing-edges_1-5mm_f07e0eb3",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-12x5_12x5_block_oak_unknown-likely-brady-style-45-family-e_66bfebff",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-12x7_12x7_block_oak_unknown-likely-brady-style-45-family-e_fad5897f",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 12x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-13x5-5_13x5-5_block_oak_unknown-likely-brady-style-45-fami_173170ee",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-13x7_13x7_block_oak_unknown-likely-brady-style-45-family-e_2934404e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x5-5_14x5-5_block_oak_unknown-likely-brady-style-45-fami_fa307476",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x6-5_14x6-5_block_oak_unknown-likely-brady-style-45-fami_8cd45326",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x7_14x7_block_oak_unknown-likely-brady-style-45-family-e_ad801c01",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x8_14x8_block_oak_unknown-likely-brady-style-45-family-e_82e38cf7",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Block Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x5-5_14x5-5_solid-shell_oak_unknown-like_46ec8f8f",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Hollow Log / Solid-Shell Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x6-5_14x6-5_solid-shell_oak_unknown-like_c43a6b80",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Hollow Log / Solid-Shell Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x8_14x8_solid-shell_oak_unknown-likely-b_7775c5ed",
+      "companyName": "Brady Drum Company",
+      "modelName": "Sheoak Hollow Log / Solid-Shell Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-45-fam_b8c26664",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-45-fam_083bd2ab",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 12x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-style-45_2194deb4",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-13x7_13x7_block_gum_unknown-likely-brady-style-45-fam_e4b2fd4c",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x5-5_14x5-5_block_gum_unknown-likely-brady-style-45_03a00cd3",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x6-5_14x6-5_block_gum_unknown-likely-brady-style-45_f441162c",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x7_14x7_block_gum_unknown-likely-brady-style-45-fam_b0011b94",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x8_14x8_block_gum_unknown-likely-brady-style-45-fam_4dde0f09",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Block Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-10x5_10x5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_ffd106bf",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-12x5_12x5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_c599cd4a",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-13x5-5_13x5-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_ea55849e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-14x5-5_14x5-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_82e834bd",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-14x6-5_14x6-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_abdd69bd",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-14x8_14x8_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_69003309",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-16x6-5_16x6-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_58a1ff6a",
+      "companyName": "Brady Drum Company",
+      "modelName": "Spotted Gum Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_handmade-exotic-australian-hardwood_tasmanian-blackwood-block-shell-14x6-5_14x6-5_block_tasmanian-bla_c6c5bfc8",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Block shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-10x5_10x5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_75b335c9",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-12x5_12x5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_75cb62d0",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-13x5-5_13x5-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_cab2f5d0",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-14x5-5_14x5-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_2bd4b854",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-14x6-5_14x6-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_bf3a1224",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-14x8_14x8_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_f977f322",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-16x6-5_16x6-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_065bbcae",
+      "companyName": "Brady Drum Company",
+      "modelName": "Tasmanian Blackwood Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_walkabout-multi-wood_wandoo-sheoak-marri-block-stave-snare-14x6-5_14x6-5_block_wandoo_oak_marri_unkno_235fa8a3",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo / Sheoak / Marri Block Stave Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-12x5_12x5_block_wandoo_unknown-likely-brady-style-45-famil_65fa3a16",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-12x7_12x7_block_wandoo_unknown-likely-brady-style-45-famil_76ba5313",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 12x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-13x5-5_13x5-5_block_wandoo_unknown-likely-brady-style-45-f_b39424bb",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-13x7_13x7_block_wandoo_unknown-likely-brady-style-45-famil_9f920af1",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x5-5_14x5-5_block_wandoo_unknown-likely-brady-style-45-f_159bd148",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x6-5_14x6-5_block_wandoo_unknown-likely-brady-style-45-f_ee114bb0",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x7_14x7_block_wandoo_unknown-likely-brady-style-45-famil_2de6450c",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x8_14x8_block_wandoo_unknown-likely-brady-style-45-famil_bbd1df09",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Block Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-10x5_10x5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_75531621",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 10x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-12x5_12x5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_a0f0a8b0",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-13x5-5_13x5-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_b2a7af96",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-14x5-5_14x5-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_9453d8ee",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-14x6-5_14x6-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_7ad888a7",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-14x8_14x8_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_ff859858",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "brady-drum-company_ply-shell_wandoo-ply-snare-16x6-5_16x6-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_a807bc1e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Wandoo Ply Snare 16x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    }
+  ],
+  "bearingEdge": [],
+  "snareBedType": [],
+  "reRingMaterial": []
+}

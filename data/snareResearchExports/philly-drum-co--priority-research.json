@@ -1,0 +1,28 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "philly-drum-co_custom-stave_tri-wood-stave-walnut-cherry-maple_14x6-5_solid-shell_walnut_cherry_maple_hand-carved-outer-_e51c5f30",
+      "companyName": "Philly Drum Co.",
+      "modelName": "Tri-Wood Stave Walnut/Cherry/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [],
+  "snareBedType": [
+    {
+      "id": "philly-drum-co_custom-stave_tri-wood-stave-walnut-cherry-maple_14x6-5_solid-shell_walnut_cherry_maple_hand-carved-outer-_e51c5f30",
+      "companyName": "Philly Drum Co.",
+      "modelName": "Tri-Wood Stave Walnut/Cherry/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "reRingMaterial": []
+}

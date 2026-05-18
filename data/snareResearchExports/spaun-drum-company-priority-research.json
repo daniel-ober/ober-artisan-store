@@ -1,0 +1,273 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_1168a4b3",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Ash 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-bubinga-14x6-5_14x6-5_solid-shell_bubinga_bbf339c4",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_72766798",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_814fe7d2",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-maple-14x6-5_14x6-5_solid-shell_maple_f97d20af",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-oak-14x6-5_14x6-5_solid-shell_oak_2b07f074",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-purpleheart-14x6-5_14x6-5_solid-shell_purpleheart_bfa1861a",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Purpleheart 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-walnut-14x6-5_14x6-5_solid-shell_walnut_ff44119f",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_1168a4b3",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Ash 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-bubinga-14x6-5_14x6-5_solid-shell_bubinga_bbf339c4",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_72766798",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_814fe7d2",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-maple-14x6-5_14x6-5_solid-shell_maple_f97d20af",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-oak-14x6-5_14x6-5_solid-shell_oak_2b07f074",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-purpleheart-14x6-5_14x6-5_solid-shell_purpleheart_bfa1861a",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Purpleheart 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-walnut-14x6-5_14x6-5_solid-shell_walnut_ff44119f",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_1168a4b3",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Ash 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-bubinga-14x6-5_14x6-5_solid-shell_bubinga_bbf339c4",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_72766798",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_814fe7d2",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-maple-14x6-5_14x6-5_solid-shell_maple_f97d20af",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-oak-14x6-5_14x6-5_solid-shell_oak_2b07f074",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-purpleheart-14x6-5_14x6-5_solid-shell_purpleheart_bfa1861a",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Purpleheart 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "spaun-drum-company_solid-stave_solid-stave-walnut-14x6-5_14x6-5_solid-shell_walnut_ff44119f",
+      "companyName": "Spaun Drum Company",
+      "modelName": "Solid Stave Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

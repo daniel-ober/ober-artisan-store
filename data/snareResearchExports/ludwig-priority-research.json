@@ -1,0 +1,2502 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-floating-head-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_bada608b",
+      "companyName": "Ludwig",
+      "modelName": "Broadway Floating Head 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
+      "companyName": "Ludwig",
+      "modelName": "Broadway New Era 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6",
+      "companyName": "Ludwig",
+      "modelName": "Buddy Rich Super Classic 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_centennial-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_ad95bbc1",
+      "companyName": "Ludwig",
+      "modelName": "Centennial Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
+      "companyName": "Ludwig",
+      "modelName": "Classic Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+      "companyName": "Ludwig",
+      "modelName": "Compacto Snare Drum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
+      "companyName": "Ludwig",
+      "modelName": "Element Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
+      "companyName": "Ludwig",
+      "modelName": "Epic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f",
+      "companyName": "Ludwig",
+      "modelName": "Questlove Breakbeats Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1",
+      "companyName": "Ludwig",
+      "modelName": "Ray McKinley Snare Drum 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a",
+      "companyName": "Ludwig",
+      "modelName": "Rocker Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
+      "companyName": "Ludwig",
+      "modelName": "The Nifty 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
+      "companyName": "Ludwig",
+      "modelName": "The Reliance 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0",
+      "companyName": "Ludwig",
+      "modelName": "The Utility 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged_lm404_914e4560",
+      "companyName": "Ludwig",
+      "modelName": "Acrolite 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-5x14_14x5_metal_brass_black-nickel-engraved-brass_single-flanged-or-_98489677",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty De Luxe 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-6-5x14_14x6-5_metal_brass_black-nickel-engraved-brass_single-flanged_5ae3d434",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty De Luxe 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3",
+      "companyName": "Ludwig",
+      "modelName": "Black Magic 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1990s-2000s-ludwig_black-magic-6-5x14_14x6-5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depen_7e603045",
+      "companyName": "Ludwig",
+      "modelName": "Black Magic 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_bronze-series-5x14_14x5_metal_bronze_bronze_triple-flanged_c6bc1a0c",
+      "companyName": "Ludwig",
+      "modelName": "Bronze Series 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_metal_brass_raw-aged-brass_triple-flanged_99c1f0ff",
+      "companyName": "Ludwig",
+      "modelName": "Jon Theodore Signature 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_2000s-ludwig_keystone-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_89955984",
+      "companyName": "Ludwig",
+      "modelName": "Keystone Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b",
+      "companyName": "Ludwig",
+      "modelName": "Metal Series 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_metal_brass_nickel-over-brass_triple-flanged_0d88b7c9",
+      "companyName": "Ludwig",
+      "modelName": "Nate Smith Signature 4.75x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
+      "companyName": "Ludwig",
+      "modelName": "Piccolo Snare 3x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-5x14_14x5_metal_brass_nob-lacquer-pearl_single-flanged-or-era-hoo_27297878",
+      "companyName": "Ludwig",
+      "modelName": "Professional Model 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-6-5x14_14x6-5_metal_brass_nob-lacquer-pearl_single-flanged-or-era_8939a4c5",
+      "companyName": "Ludwig",
+      "modelName": "Professional Model 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_super-ludwig-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_c718211b",
+      "companyName": "Ludwig",
+      "modelName": "Super Ludwig 5x14 NOB",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_super-sensitive-5x14_14x5_metal_aluminum_brass_chrome-plated_triple-flanged_f05317dd",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1930s-ludwig-and-ludwig_super-sensitive-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_552351e1",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 5x14 NOB",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_super-sensitive-6-5x14_14x6-5_metal_aluminum_brass_chrome-plated_triple-flanged_305016ee",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_353a101d",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_429e1234",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-8x14_14x8_acrylic_acrylic_transparent-acrylic_triple-flanged_4328eeda",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_vistalite-snare-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_cd29803d",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_vistalite-snare-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_786fcc62",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31",
+      "companyName": "Ludwig",
+      "modelName": "Auditorium 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_44ab7d65",
+      "companyName": "Ludwig",
+      "modelName": "Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_downbeat-4x14_14x4_ply_maple-poplar_lacquer-pearl_triple-flanged_dd90647b",
+      "companyName": "Ludwig",
+      "modelName": "DownBeat 4x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_jazz-combo-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_5ed15c1c",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Combo 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_jazz-festival-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_db65937d",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Festival 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_las-vegas-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_f13dd39e",
+      "companyName": "Ludwig",
+      "modelName": "Las Vegas 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_pioneer-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_d987b16f",
+      "companyName": "Ludwig",
+      "modelName": "Pioneer 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_porto-pak-3x13_13x3_ply_maple-poplar_lacquer-pearl_triple-flanged_c13c5e0d",
+      "companyName": "Ludwig",
+      "modelName": "Porto Pak 3x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_rock-concert-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_d30d06e3",
+      "companyName": "Ludwig",
+      "modelName": "Rock/Concert 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_s-l-snare-drum-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_d6f09d4a",
+      "companyName": "Ludwig",
+      "modelName": "S/L Snare Drum 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_school-festival-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_triple-flanged_6511b6b9",
+      "companyName": "Ludwig",
+      "modelName": "School Festival 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_slotted-coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_5f12b875",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_super-classic-snare-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl-wrap_triple-flanged_cb20063a",
+      "companyName": "Ludwig",
+      "modelName": "Super Classic Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_symphonic-snare-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_concert-hoop_837e481d",
+      "companyName": "Ludwig",
+      "modelName": "Symphonic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_hammered-bronze-5x14_14x5_metal_bronze_hammered-bronze_triple-flanged_7732000e",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Bronze 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_hammered-bronze-6-5x14_14x6-5_metal_bronze_hammered-bronze_triple-flanged_00bb458c",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Bronze 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_hammered-chrome-5x14_14x5_metal_steel_hammered-chrome_triple-flanged_a0325acc",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Chrome 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_smooth-bronze-5x14_14x5_metal_bronze_smooth-bronze_triple-flanged_cc1d672c",
+      "companyName": "Ludwig",
+      "modelName": "Smooth Bronze 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1960-ludwig_super-ludwig-metal-5x14_14x5_metal_brass_chrome-over-metal_triple-flanged_5aef5292",
+      "companyName": "Ludwig",
+      "modelName": "Super Ludwig Metal 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-floating-head-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_bada608b",
+      "companyName": "Ludwig",
+      "modelName": "Broadway Floating Head 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
+      "companyName": "Ludwig",
+      "modelName": "Broadway New Era 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6",
+      "companyName": "Ludwig",
+      "modelName": "Buddy Rich Super Classic 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_centennial-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_ad95bbc1",
+      "companyName": "Ludwig",
+      "modelName": "Centennial Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
+      "companyName": "Ludwig",
+      "modelName": "Classic Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+      "companyName": "Ludwig",
+      "modelName": "Compacto Snare Drum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
+      "companyName": "Ludwig",
+      "modelName": "Element Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
+      "companyName": "Ludwig",
+      "modelName": "Epic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f",
+      "companyName": "Ludwig",
+      "modelName": "Questlove Breakbeats Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1",
+      "companyName": "Ludwig",
+      "modelName": "Ray McKinley Snare Drum 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a",
+      "companyName": "Ludwig",
+      "modelName": "Rocker Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
+      "companyName": "Ludwig",
+      "modelName": "The Nifty 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
+      "companyName": "Ludwig",
+      "modelName": "The Reliance 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0",
+      "companyName": "Ludwig",
+      "modelName": "The Utility 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged_lm404_914e4560",
+      "companyName": "Ludwig",
+      "modelName": "Acrolite 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-5x14_14x5_metal_brass_black-nickel-engraved-brass_single-flanged-or-_98489677",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty De Luxe 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-6-5x14_14x6-5_metal_brass_black-nickel-engraved-brass_single-flanged_5ae3d434",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty De Luxe 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3",
+      "companyName": "Ludwig",
+      "modelName": "Black Magic 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1990s-2000s-ludwig_black-magic-6-5x14_14x6-5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depen_7e603045",
+      "companyName": "Ludwig",
+      "modelName": "Black Magic 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_bronze-series-5x14_14x5_metal_bronze_bronze_triple-flanged_c6bc1a0c",
+      "companyName": "Ludwig",
+      "modelName": "Bronze Series 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_metal_brass_raw-aged-brass_triple-flanged_99c1f0ff",
+      "companyName": "Ludwig",
+      "modelName": "Jon Theodore Signature 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_2000s-ludwig_keystone-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_89955984",
+      "companyName": "Ludwig",
+      "modelName": "Keystone Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b",
+      "companyName": "Ludwig",
+      "modelName": "Metal Series 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_metal_brass_nickel-over-brass_triple-flanged_0d88b7c9",
+      "companyName": "Ludwig",
+      "modelName": "Nate Smith Signature 4.75x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
+      "companyName": "Ludwig",
+      "modelName": "Piccolo Snare 3x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-5x14_14x5_metal_brass_nob-lacquer-pearl_single-flanged-or-era-hoo_27297878",
+      "companyName": "Ludwig",
+      "modelName": "Professional Model 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-6-5x14_14x6-5_metal_brass_nob-lacquer-pearl_single-flanged-or-era_8939a4c5",
+      "companyName": "Ludwig",
+      "modelName": "Professional Model 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_super-ludwig-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_c718211b",
+      "companyName": "Ludwig",
+      "modelName": "Super Ludwig 5x14 NOB",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_super-sensitive-5x14_14x5_metal_aluminum_brass_chrome-plated_triple-flanged_f05317dd",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1930s-ludwig-and-ludwig_super-sensitive-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_552351e1",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 5x14 NOB",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_super-sensitive-6-5x14_14x6-5_metal_aluminum_brass_chrome-plated_triple-flanged_305016ee",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_353a101d",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_429e1234",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-8x14_14x8_acrylic_acrylic_transparent-acrylic_triple-flanged_4328eeda",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_vistalite-snare-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_cd29803d",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_vistalite-snare-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_786fcc62",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty 5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty Super Sensitive 5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2",
+      "companyName": "Ludwig",
+      "modelName": "Carl Palmer Venus 3.7x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic LM400 5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic LM402 6.5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-floating-head-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_bada608b",
+      "companyName": "Ludwig",
+      "modelName": "Broadway Floating Head 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
+      "companyName": "Ludwig",
+      "modelName": "Broadway New Era 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6",
+      "companyName": "Ludwig",
+      "modelName": "Buddy Rich Super Classic 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_centennial-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_ad95bbc1",
+      "companyName": "Ludwig",
+      "modelName": "Centennial Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
+      "companyName": "Ludwig",
+      "modelName": "Classic Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+      "companyName": "Ludwig",
+      "modelName": "Compacto Snare Drum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
+      "companyName": "Ludwig",
+      "modelName": "Element Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
+      "companyName": "Ludwig",
+      "modelName": "Epic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f",
+      "companyName": "Ludwig",
+      "modelName": "Questlove Breakbeats Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1",
+      "companyName": "Ludwig",
+      "modelName": "Ray McKinley Snare Drum 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a",
+      "companyName": "Ludwig",
+      "modelName": "Rocker Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
+      "companyName": "Ludwig",
+      "modelName": "The Nifty 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
+      "companyName": "Ludwig",
+      "modelName": "The Reliance 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0",
+      "companyName": "Ludwig",
+      "modelName": "The Utility 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged_lm404_914e4560",
+      "companyName": "Ludwig",
+      "modelName": "Acrolite 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-5x14_14x5_metal_brass_black-nickel-engraved-brass_single-flanged-or-_98489677",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty De Luxe 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-6-5x14_14x6-5_metal_brass_black-nickel-engraved-brass_single-flanged_5ae3d434",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty De Luxe 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3",
+      "companyName": "Ludwig",
+      "modelName": "Black Magic 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1990s-2000s-ludwig_black-magic-6-5x14_14x6-5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depen_7e603045",
+      "companyName": "Ludwig",
+      "modelName": "Black Magic 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_bronze-series-5x14_14x5_metal_bronze_bronze_triple-flanged_c6bc1a0c",
+      "companyName": "Ludwig",
+      "modelName": "Bronze Series 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_metal_brass_raw-aged-brass_triple-flanged_99c1f0ff",
+      "companyName": "Ludwig",
+      "modelName": "Jon Theodore Signature 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_2000s-ludwig_keystone-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_89955984",
+      "companyName": "Ludwig",
+      "modelName": "Keystone Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b",
+      "companyName": "Ludwig",
+      "modelName": "Metal Series 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_metal_brass_nickel-over-brass_triple-flanged_0d88b7c9",
+      "companyName": "Ludwig",
+      "modelName": "Nate Smith Signature 4.75x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
+      "companyName": "Ludwig",
+      "modelName": "Piccolo Snare 3x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-5x14_14x5_metal_brass_nob-lacquer-pearl_single-flanged-or-era-hoo_27297878",
+      "companyName": "Ludwig",
+      "modelName": "Professional Model 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-6-5x14_14x6-5_metal_brass_nob-lacquer-pearl_single-flanged-or-era_8939a4c5",
+      "companyName": "Ludwig",
+      "modelName": "Professional Model 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1920s-ludwig-and-ludwig_super-ludwig-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_c718211b",
+      "companyName": "Ludwig",
+      "modelName": "Super Ludwig 5x14 NOB",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_super-sensitive-5x14_14x5_metal_aluminum_brass_chrome-plated_triple-flanged_f05317dd",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1930s-ludwig-and-ludwig_super-sensitive-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_552351e1",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 5x14 NOB",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_super-sensitive-6-5x14_14x6-5_metal_aluminum_brass_chrome-plated_triple-flanged_305016ee",
+      "companyName": "Ludwig",
+      "modelName": "Super Sensitive 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_353a101d",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_429e1234",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_vistalite_vistalite-acrylic-8x14_14x8_acrylic_acrylic_transparent-acrylic_triple-flanged_4328eeda",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Acrylic 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_vistalite-snare-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_cd29803d",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1970s-ludwig_vistalite-snare-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_786fcc62",
+      "companyName": "Ludwig",
+      "modelName": "Vistalite Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31",
+      "companyName": "Ludwig",
+      "modelName": "Auditorium 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_44ab7d65",
+      "companyName": "Ludwig",
+      "modelName": "Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_downbeat-4x14_14x4_ply_maple-poplar_lacquer-pearl_triple-flanged_dd90647b",
+      "companyName": "Ludwig",
+      "modelName": "DownBeat 4x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_jazz-combo-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_5ed15c1c",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Combo 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_jazz-festival-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_db65937d",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Festival 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_las-vegas-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_f13dd39e",
+      "companyName": "Ludwig",
+      "modelName": "Las Vegas 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_pioneer-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_d987b16f",
+      "companyName": "Ludwig",
+      "modelName": "Pioneer 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_porto-pak-3x13_13x3_ply_maple-poplar_lacquer-pearl_triple-flanged_c13c5e0d",
+      "companyName": "Ludwig",
+      "modelName": "Porto Pak 3x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_rock-concert-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_d30d06e3",
+      "companyName": "Ludwig",
+      "modelName": "Rock/Concert 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_s-l-snare-drum-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_d6f09d4a",
+      "companyName": "Ludwig",
+      "modelName": "S/L Snare Drum 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_school-festival-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_triple-flanged_6511b6b9",
+      "companyName": "Ludwig",
+      "modelName": "School Festival 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_slotted-coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_5f12b875",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_super-classic-snare-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl-wrap_triple-flanged_cb20063a",
+      "companyName": "Ludwig",
+      "modelName": "Super Classic Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_symphonic-snare-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_concert-hoop_837e481d",
+      "companyName": "Ludwig",
+      "modelName": "Symphonic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty 5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+      "companyName": "Ludwig",
+      "modelName": "Black Beauty Super Sensitive 5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2",
+      "companyName": "Ludwig",
+      "modelName": "Carl Palmer Venus 3.7x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_hammered-bronze-5x14_14x5_metal_bronze_hammered-bronze_triple-flanged_7732000e",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Bronze 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_hammered-bronze-6-5x14_14x6-5_metal_bronze_hammered-bronze_triple-flanged_00bb458c",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Bronze 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_hammered-chrome-5x14_14x5_metal_steel_hammered-chrome_triple-flanged_a0325acc",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Chrome 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1980s-ludwig_smooth-bronze-5x14_14x5_metal_bronze_smooth-bronze_triple-flanged_cc1d672c",
+      "companyName": "Ludwig",
+      "modelName": "Smooth Bronze 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1960-ludwig_super-ludwig-metal-5x14_14x5_metal_brass_chrome-over-metal_triple-flanged_5aef5292",
+      "companyName": "Ludwig",
+      "modelName": "Super Ludwig Metal 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic LM400 5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic LM402 6.5x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Brass 5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f",
+      "companyName": "Ludwig",
+      "modelName": "Hammered Brass 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+      "companyName": "Ludwig",
+      "modelName": "Raw Brass Phonic 3.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+      "companyName": "Ludwig",
+      "modelName": "Raw Brass Phonic 5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+      "companyName": "Ludwig",
+      "modelName": "Raw Brass Phonic 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb",
+      "companyName": "Ludwig",
+      "modelName": "Raw Brass Phonic 8x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+      "companyName": "Ludwig",
+      "modelName": "Supralite 4x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+      "companyName": "Ludwig",
+      "modelName": "Supralite 5.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+      "companyName": "Ludwig",
+      "modelName": "Supralite 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+      "companyName": "Ludwig",
+      "modelName": "Supralite 6x13",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3",
+      "companyName": "Ludwig",
+      "modelName": "Supralite 8x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 5x14 Imperial Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 5x14 Tube Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+      "companyName": "Ludwig",
+      "modelName": "Supraphonic 6.5x14 Tube Lugs",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6",
+      "companyName": "Ludwig",
+      "modelName": "Universal Beech 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 5.5x14 Die-cast",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 5.5x14 Triple-flanged",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 6.5x14 Die-cast",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 6.5x14 Triple-flanged",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 7x13 Die-cast",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 7x13 Triple-flanged",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 8x14 Die-cast",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4",
+      "companyName": "Ludwig",
+      "modelName": "Universal Black Brass 8x14 Triple-flanged",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7",
+      "companyName": "Ludwig",
+      "modelName": "Universal Cherry 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d",
+      "companyName": "Ludwig",
+      "modelName": "Universal Mahogany 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad",
+      "companyName": "Ludwig",
+      "modelName": "Universal Walnut 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": [
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-floating-head-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_bada608b",
+      "companyName": "Ludwig",
+      "modelName": "Broadway Floating Head 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
+      "companyName": "Ludwig",
+      "modelName": "Broadway New Era 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6",
+      "companyName": "Ludwig",
+      "modelName": "Buddy Rich Super Classic 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_centennial-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_ad95bbc1",
+      "companyName": "Ludwig",
+      "modelName": "Centennial Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
+      "companyName": "Ludwig",
+      "modelName": "Classic Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c",
+      "companyName": "Ludwig",
+      "modelName": "Club Date Reissue 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+      "companyName": "Ludwig",
+      "modelName": "Compacto Snare Drum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
+      "companyName": "Ludwig",
+      "modelName": "Element Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
+      "companyName": "Ludwig",
+      "modelName": "Epic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f",
+      "companyName": "Ludwig",
+      "modelName": "Questlove Breakbeats Snare 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1",
+      "companyName": "Ludwig",
+      "modelName": "Ray McKinley Snare Drum 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a",
+      "companyName": "Ludwig",
+      "modelName": "Rocker Series 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
+      "companyName": "Ludwig",
+      "modelName": "The Nifty 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
+      "companyName": "Ludwig",
+      "modelName": "The Reliance 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0",
+      "companyName": "Ludwig",
+      "modelName": "The Utility 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31",
+      "companyName": "Ludwig",
+      "modelName": "Auditorium 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_44ab7d65",
+      "companyName": "Ludwig",
+      "modelName": "Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_downbeat-4x14_14x4_ply_maple-poplar_lacquer-pearl_triple-flanged_dd90647b",
+      "companyName": "Ludwig",
+      "modelName": "DownBeat 4x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_jazz-combo-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_5ed15c1c",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Combo 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_jazz-festival-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_db65937d",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Festival 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_las-vegas-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_f13dd39e",
+      "companyName": "Ludwig",
+      "modelName": "Las Vegas 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_pioneer-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_d987b16f",
+      "companyName": "Ludwig",
+      "modelName": "Pioneer 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_porto-pak-3x13_13x3_ply_maple-poplar_lacquer-pearl_triple-flanged_c13c5e0d",
+      "companyName": "Ludwig",
+      "modelName": "Porto Pak 3x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_rock-concert-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_d30d06e3",
+      "companyName": "Ludwig",
+      "modelName": "Rock/Concert 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_s-l-snare-drum-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_d6f09d4a",
+      "companyName": "Ludwig",
+      "modelName": "S/L Snare Drum 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_school-festival-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_triple-flanged_6511b6b9",
+      "companyName": "Ludwig",
+      "modelName": "School Festival 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1980s-ludwig_slotted-coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_5f12b875",
+      "companyName": "Ludwig",
+      "modelName": "Slotted Coliseum 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_super-classic-snare-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl-wrap_triple-flanged_cb20063a",
+      "companyName": "Ludwig",
+      "modelName": "Super Classic Snare 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_1960-ludwig_symphonic-snare-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_concert-hoop_837e481d",
+      "companyName": "Ludwig",
+      "modelName": "Symphonic Snare 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+      "companyName": "Ludwig",
+      "modelName": "Jazz Fest Series 5.5x14",
+      "failedCoreFields": [
+        "reRingMaterial"
+      ],
+      "priorityScore": 2
+    }
+  ]
+}

@@ -1,0 +1,2222 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "mapex_signature-artist_russ-miller-versatus_14x4-625_ply_maple-mahogany_signature-finish_sonic-saver-hoops_bpml4600_303725ee",
+      "companyName": "Mapex",
+      "modelName": "Russ Miller Versatus",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "mapex_mpx_mpx-maple-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-hoops_mpml4550_834bddb1",
+      "companyName": "Mapex",
+      "modelName": "MPX Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_mpx_mpx-steel-14x5-5_14x5-5_metal_steel_chrome-plated_triple-flange-hoops_mpst4550_e61683e0",
+      "companyName": "Mapex",
+      "modelName": "MPX Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_black-panther_shadow_14x6-5_ply_walnut_dark-lacquer_sonic-saver-hoops_bpnbw4650cxn_d4b3336e",
+      "companyName": "Mapex",
+      "modelName": "Shadow",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_signature-artist_the-raven-artist-black-panther_14x5-5_ply_maple_signature-finish_2-3mm-powerhoops_bpraven_e368d14a",
+      "companyName": "Mapex",
+      "modelName": "The Raven / Artist Black Panther",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_armory_exterminator_14x6-5_ply_walnut_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_arbw4650_1b0cfe3e",
+      "companyName": "Mapex",
+      "modelName": "Exterminator",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_mars_mars-birch-snare-14x5-5_14x5-5_ply_birch_soniclear-edge_wrap-varies_2-3mm-hoops_mb4550_89a19cd8",
+      "companyName": "Mapex",
+      "modelName": "Mars Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_mars_mars-maple-snare-14x5-5_14x5-5_ply_maple_soniclear-edge_lacquer-wrap-varies_2-3mm-hoops_ma4650_36c155a8",
+      "companyName": "Mapex",
+      "modelName": "Mars Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_armory_peacemaker_14x5-5_ply_maple-walnut_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_armw4550_d3bab458",
+      "companyName": "Mapex",
+      "modelName": "Peacemaker",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_armory_sabre_14x5-5_ply_maple_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_arml4551_2883e912",
+      "companyName": "Mapex",
+      "modelName": "Sabre",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "mapex_signature-artist_russ-miller-versatus_14x4-625_ply_maple-mahogany_signature-finish_sonic-saver-hoops_bpml4600_303725ee",
+      "companyName": "Mapex",
+      "modelName": "Russ Miller Versatus",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "mapex_mpx_mpx-maple-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-hoops_mpml4550_834bddb1",
+      "companyName": "Mapex",
+      "modelName": "MPX Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_mpx_mpx-steel-14x5-5_14x5-5_metal_steel_chrome-plated_triple-flange-hoops_mpst4550_e61683e0",
+      "companyName": "Mapex",
+      "modelName": "MPX Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_black-panther_shadow_14x6-5_ply_walnut_dark-lacquer_sonic-saver-hoops_bpnbw4650cxn_d4b3336e",
+      "companyName": "Mapex",
+      "modelName": "Shadow",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_signature-artist_the-raven-artist-black-panther_14x5-5_ply_maple_signature-finish_2-3mm-powerhoops_bpraven_e368d14a",
+      "companyName": "Mapex",
+      "modelName": "The Raven / Artist Black Panther",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_8a3037b8",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_e90417d8",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-10x5-5_10x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_50190efd",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-12x5-5_12x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c3ab9bb8",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-13x3-5_13x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_8aadacfb",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-13x6_13x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__b61143bf",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x3-5_14x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_5245cedf",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x5_14x5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__28937416",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x5-5_14x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_06608ee6",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x6_14x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__6f90c3f3",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x6-5_14x6-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c000021b",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x7_14x7_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__880e2c2b",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x8_14x8_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__ceae8b7f",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+      "companyName": "Mapex",
+      "modelName": "Chris Adler Original 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+      "companyName": "Mapex",
+      "modelName": "Chris Adler Warbird",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-10x5-5_10x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_7bf51930",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-12x5-5_12x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_046f0252",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x3-5_13x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_ac6f2d45",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x6_13x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_6d456c8f",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x3-5_14x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_3b4ef804",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5_14x5_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_183813ef",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5-5_14x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_4a6c51c4",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6_14x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_20791d4c",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_fb67a806",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x7_14x7_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_a9d7b96a",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x8_14x8_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_b02c0f59",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+      "companyName": "Mapex",
+      "modelName": "Matt Halpern Wraith",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x6_13x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_9dd37cfb",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x3-5_14x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_e7b9154b",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5_14x5_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_54bc5d97",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5-5_14x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_a8efeeab",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6_14x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_a99c24ac",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6-5_14x6-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_7759db9e",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x7_14x7_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_04e1dd37",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x8_14x8_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_787f6de6",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-10x5-5_10x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_f8d6787f",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-12x5-5_12x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_144cf130",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-13x3-5_13x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_b7c3bf1b",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-13x6_13x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_0855714e",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x3-5_14x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_a7697e14",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x5_14x5_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_d8bf5a00",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x5-5_14x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_362d3ef6",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x6_14x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_cab119f9",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x6-5_14x6-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_22b9d27c",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x7_14x7_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_b522c843",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x8_14x8_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_9bd3e00c",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_930c6624",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_2c40e1f9",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_5383317a",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_5db1a4e3",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_31e5a92e",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_76a906a9",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_fb6c5486",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_df9bbe52",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_286c4353",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_d6f2947b",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_0acc3d56",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-10x5-5_10x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0ba7807b",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-12x5-5_12x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_a3b9d1ed",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-13x3-5_13x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0a4b58a0",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-13x6_13x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_3af34747",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x3-5_14x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_4304f419",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5_14x5_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_ce744bcc",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5-5_14x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_8cfdfe29",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6_14x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_a7826012",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6-5_14x6-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_36f2a461",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x7_14x7_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_6931a70f",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x8_14x8_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_cdbbbcaa",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Birch Variant 2",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Brass Variant 5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Maple Variant 1",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Steel Variant 4",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Walnut Variant 3",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "mapex_signature-artist_russ-miller-versatus_14x4-625_ply_maple-mahogany_signature-finish_sonic-saver-hoops_bpml4600_303725ee",
+      "companyName": "Mapex",
+      "modelName": "Russ Miller Versatus",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "mapex_mpx_mpx-maple-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-hoops_mpml4550_834bddb1",
+      "companyName": "Mapex",
+      "modelName": "MPX Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_mpx_mpx-steel-14x5-5_14x5-5_metal_steel_chrome-plated_triple-flange-hoops_mpst4550_e61683e0",
+      "companyName": "Mapex",
+      "modelName": "MPX Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_black-panther_shadow_14x6-5_ply_walnut_dark-lacquer_sonic-saver-hoops_bpnbw4650cxn_d4b3336e",
+      "companyName": "Mapex",
+      "modelName": "Shadow",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_signature-artist_the-raven-artist-black-panther_14x5-5_ply_maple_signature-finish_2-3mm-powerhoops_bpraven_e368d14a",
+      "companyName": "Mapex",
+      "modelName": "The Raven / Artist Black Panther",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_8a3037b8",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_e90417d8",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+      "companyName": "Mapex",
+      "modelName": "Birdseye Maple 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+      "companyName": "Mapex",
+      "modelName": "Brass Master 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-10x5-5_10x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_50190efd",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-12x5-5_12x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c3ab9bb8",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-13x3-5_13x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_8aadacfb",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-13x6_13x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__b61143bf",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x3-5_14x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_5245cedf",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x5_14x5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__28937416",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x5-5_14x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_06608ee6",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x6_14x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__6f90c3f3",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x6-5_14x6-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c000021b",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x7_14x7_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__880e2c2b",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x8_14x8_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__ceae8b7f",
+      "companyName": "Mapex",
+      "modelName": "Cherry Maple 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+      "companyName": "Mapex",
+      "modelName": "Chris Adler Original 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+      "companyName": "Mapex",
+      "modelName": "Chris Adler Warbird",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_armory_exterminator_14x6-5_ply_walnut_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_arbw4650_1b0cfe3e",
+      "companyName": "Mapex",
+      "modelName": "Exterminator",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-10x5-5_10x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_7bf51930",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-12x5-5_12x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_046f0252",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x3-5_13x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_ac6f2d45",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x6_13x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_6d456c8f",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x3-5_14x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_3b4ef804",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5_14x5_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_183813ef",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5-5_14x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_4a6c51c4",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6_14x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_20791d4c",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_fb67a806",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x7_14x7_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_a9d7b96a",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x8_14x8_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_b02c0f59",
+      "companyName": "Mapex",
+      "modelName": "Maple/Walnut Hybrid 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_mars_mars-birch-snare-14x5-5_14x5-5_ply_birch_soniclear-edge_wrap-varies_2-3mm-hoops_mb4550_89a19cd8",
+      "companyName": "Mapex",
+      "modelName": "Mars Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_mars_mars-maple-snare-14x5-5_14x5-5_ply_maple_soniclear-edge_lacquer-wrap-varies_2-3mm-hoops_ma4650_36c155a8",
+      "companyName": "Mapex",
+      "modelName": "Mars Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+      "companyName": "Mapex",
+      "modelName": "Matt Halpern Wraith",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_armory_peacemaker_14x5-5_ply_maple-walnut_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_armw4550_d3bab458",
+      "companyName": "Mapex",
+      "modelName": "Peacemaker",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_armory_sabre_14x5-5_ply_maple_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_arml4551_2883e912",
+      "companyName": "Mapex",
+      "modelName": "Sabre",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x6_13x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_9dd37cfb",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x3-5_14x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_e7b9154b",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5_14x5_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_54bc5d97",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5-5_14x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_a8efeeab",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6_14x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_a99c24ac",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6-5_14x6-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_7759db9e",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x7_14x7_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_04e1dd37",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x8_14x8_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_787f6de6",
+      "companyName": "Mapex",
+      "modelName": "Stainless Steel 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-10x5-5_10x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_f8d6787f",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-12x5-5_12x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_144cf130",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-13x3-5_13x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_b7c3bf1b",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-13x6_13x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_0855714e",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x3-5_14x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_a7697e14",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x5_14x5_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_d8bf5a00",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x5-5_14x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_362d3ef6",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x6_14x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_cab119f9",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x6-5_14x6-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_22b9d27c",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x7_14x7_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_b522c843",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x8_14x8_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_9bd3e00c",
+      "companyName": "Mapex",
+      "modelName": "Traditional Birch 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_930c6624",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_2c40e1f9",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_5383317a",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_5db1a4e3",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_31e5a92e",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_76a906a9",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_fb6c5486",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_df9bbe52",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_286c4353",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_d6f2947b",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_0acc3d56",
+      "companyName": "Mapex",
+      "modelName": "Traditional Maple 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-10x5-5_10x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0ba7807b",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 10x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-12x5-5_12x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_a3b9d1ed",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 12x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-13x3-5_13x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0a4b58a0",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 13x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-13x6_13x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_3af34747",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 13x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x3-5_14x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_4304f419",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x3.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5_14x5_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_ce744bcc",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5-5_14x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_8cfdfe29",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6_14x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_a7826012",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x6",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6-5_14x6-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_36f2a461",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x7_14x7_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_6931a70f",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x8_14x8_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_cdbbbcaa",
+      "companyName": "Mapex",
+      "modelName": "Traditional Walnut 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Birch Variant 2",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Brass Variant 5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Maple Variant 1",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Steel Variant 4",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159",
+      "companyName": "Mapex",
+      "modelName": "Unresolved Walnut Variant 3",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+      "companyName": "Mapex",
+      "modelName": "Equinox",
+      "failedCoreFields": [
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 6
+    },
+    {
+      "id": "mapex_black-panther_atomizer_14x6-5_metal_aluminum_2_45-modern-metal-edge_sonic-saver-hoops_bpnal4651cn_1353eb45",
+      "companyName": "Mapex",
+      "modelName": "Atomizer",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_black-panther_cyrus_14x6_metal_steel_1_45-modern-metal-edge_sonic-saver-hoops_bpnst4601cn_6ee04120",
+      "companyName": "Mapex",
+      "modelName": "Cyrus",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_armory_daisy-cutter_14x6-5_metal_steel_1_soniclear-modern-mapex-edge_black_2-3mm-powerhoops_arst4651ceb_f2fcc234",
+      "companyName": "Mapex",
+      "modelName": "Daisy Cutter",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_armory_dillinger_14x5-5_ply_maple_7-2_soniclear-modern-mapex-edge_natural-transparent-varies_2-3mm-powerhoops_arml_f6c00f32",
+      "companyName": "Mapex",
+      "modelName": "Dillinger",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_black-panther_hydro_13x7_metal_steel_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnst3701cn_b8ac4dd2",
+      "companyName": "Mapex",
+      "modelName": "Hydro",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_black-panther_metallion_14x5-5_metal_brass_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnbr4551cn_ad3e6526",
+      "companyName": "Mapex",
+      "modelName": "Metallion",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_black-panther_persuader_14x6-5_metal_brass_1-2_45-modern-metal-edge_hammered-brass_sonic-saver-hoops_bpnbr465hcn_ed80426a",
+      "companyName": "Mapex",
+      "modelName": "Persuader",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "mapex_armory_tomahawk_14x5-5_metal_steel_1_soniclear-modern-mapex-edge_chrome_2-3mm-powerhoops_bpnst4551cn_e2634617",
+      "companyName": "Mapex",
+      "modelName": "Tomahawk",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": [
+    {
+      "id": "mapex_signature-artist_russ-miller-versatus_14x4-625_ply_maple-mahogany_signature-finish_sonic-saver-hoops_bpml4600_303725ee",
+      "companyName": "Mapex",
+      "modelName": "Russ Miller Versatus",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+      "companyName": "Mapex",
+      "modelName": "Equinox",
+      "failedCoreFields": [
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 6
+    }
+  ]
+}

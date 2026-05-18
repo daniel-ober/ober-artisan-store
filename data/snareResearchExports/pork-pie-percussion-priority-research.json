@@ -1,0 +1,1648 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-african-mahogany_14x7_ply_mahogany_custom-lacquer-wrap-oil-varies_2-3mm-triple-flang_15cf3630",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 African Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-blue-fade-dip-snare_14x7_ply_maple_blue-fade-dip_2-3mm-triple-flanged_45ec3cad",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Blue Fade Dip Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-cherry-bubinga-snare_14x7_ply_cherry_custom-finish_2-3mm-triple-flanged_5c07431f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Cherry Bubinga Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-copper-hammered-brass-hybrid-snare_14x7_ply_copper_copper-hammered_dff4a3c5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Copper Hammered Brass Hybrid Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-maple-copper_14x7_ply_maple_maple-copper_2-3mm-triple-flanged_cd1c86e8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Maple Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-red-oak_14x7_ply_oak_custom-finish_2-3mm-triple-flanged_d2374272",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Red Oak",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_8x14-maple-oak-black-lacquer_14x8_ply_maple_black-lacquer_2-3mm-triple-flanged_430251a8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "8x14 Maple Oak Black Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-metal_8x14-patina-brass_14x8_metal_brass_patina-brass_2-3mm-triple-flanged_50e8424e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "8x14 Patina Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_african-mahogany-13x7_13x7_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_54a2d636",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "African Mahogany 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_amber-piglite-snare_13x7_acrylic_acrylic_amber-acrylic_triple-flanged-hoops_d98788be",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Amber Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_bubinga-gloss-14x7_14x7_ply_bubinga_custom-finish-varies_2-3mm-triple-flanged_2421929e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Bubinga Gloss 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_cherry-custom-14x6-5_14x6-5_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_ab6cf87c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Cherry Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_cherry-bubinga-hybrid-13x7_13x7_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_9d2cf3d3",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Cherry/Bubinga Hybrid 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_clear-piglite-snare_14x6-5_acrylic_acrylic_clear-acrylic_triple-flanged-hoops_bbc6de46",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Clear Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-specialty_frankinpork-7x14-16-ply-maple-rosewood_14x7_ply_maple_satin-oil_ef16518c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Frankinpork 7x14 16-ply Maple/Rosewood",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-black-12x5_12x5_ply_maple_satin-lacquer-wrap-varies_triple-flanged-h_c3df49fb",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Black 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-black-5-5x13_13x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_9af528a9",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Black 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-12x5_12x5_ply_maple_ebony-satin_triple-flanged-hoops_8f26b2dc",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-13x7-black_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fla_7d8d09ed",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 13x7 Black",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x5-5_14x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_f91bca59",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x6-5_14x6-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_0f8071b2",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-porcaro-blue-13x7_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fl_0bebb6eb",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Porcaro Blue 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_mahogany-custom-14x6-5_14x6-5_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_4351c38f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Mahogany Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-12x5_12x5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f36046b6",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-13x7_13x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_c4888b7b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x5-5_14x5-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9d9e5ebf",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_491d55ac",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_3e92fb6b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-deep-13x8_13x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_045802a5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Deep 13x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-deep-14x8_14x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_6065010f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Deep 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-piccolo-13x4_13x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_142255e8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Piccolo 13x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-piccolo-14x4_14x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f719bf50",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Piccolo 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-bubinga-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_5b0fb099",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Bubinga Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-mahogany-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_cccaf693",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Mahogany Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-oak-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f23c9592",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Oak Hybrid 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-rosewood-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_09f93217",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Rosewood Hybrid 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9adeb665",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Walnut Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_red-oak-13x7_13x7_ply_oak_custom-finish-varies_2-3mm-triple-flanged_300b5cd4",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Oak 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_red-oak-custom-14x6-5_14x6-5_ply_oak_custom-finish-varies_2-3mm-triple-flanged_57b9d3dc",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Oak Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_red-piglite-snare_14x6-5_acrylic_acrylic_red-acrylic_triple-flanged-hoops_11685027",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_rosewood-custom-14x6-5_14x6-5_ply_wood_custom-finish-varies_2-3mm-triple-flanged_a905d62e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Rosewood Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_rosewood-zebrawood-veneer-maple-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple_68f5f5a5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Rosewood/Zebrawood Veneer Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_solid-one-piece-exotic-14x6-5_14x6-5_solid-shell_exotic-hardwood_custom-finish-varies_2-3_0b902361",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Solid One-Piece Exotic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_stave-exotic-wood-14x6-5_14x6-5_stave_exotic-hardwood_custom-finish-varies_2-3mm-triple-f_564d4d7b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Stave Exotic Wood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_walnut-13x7_13x7_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_9110ea17",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Walnut 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_walnut-custom-14x6-5_14x6-5_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_a0634067",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Walnut Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-metal_pig-iron-6-5x14_14x6-5_metal_steel_no_folded-over-bearing-edge_rolled-in-snare-beds_f1c286c3",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Pig Iron 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "priorityScore": 10
+    },
+    {
+      "id": "pork-pie-percussion_metal-aluminum_aluminum-custom-14x6-5_14x6-5_metal_aluminum_folded-metal-bearing-edge-not-fully-spec_34119eb7",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Aluminum Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_metal-copper_copper-custom-14x6-5_14x6-5_metal_copper_folded-metal-bearing-edge-not-fully-specified__4a293849",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Copper Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_metal-brass_hammered-brass-custom-14x6-5_14x6-5_metal_hammered-brass_folded-metal-bearing-edge-not-f_d64ea2d0",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Hammered Brass Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_metal-brass_heavy-brass-porkster-13x6-5_13x6-5_metal_brass_folded-metal-bearing-edge-not-fully-speci_d3e20e1c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Heavy Brass Porkster 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_patina-brass_patina-brass-13x7_13x7_metal_brass_folded-metal-bearing-edge-not-fully-specified_unknow_f18d030d",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Patina Brass 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_patina-brass_patina-brass-14x6-5_14x6-5_metal_brass_folded-metal-bearing-edge-not-fully-specified_un_f944fe8f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Patina Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_metal-brass_plate-brass-custom-14x6-5_14x6-5_metal_brass_folded-metal-bearing-edge-not-fully-specifi_fd71ff8b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Plate Brass Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_metal-steel_steel-custom-14x6-5_14x6-5_metal_steel_folded-metal-bearing-edge-not-fully-specified_unk_c0cd549d",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Steel Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_usa-maple-14x6-5-rosewood-zebrawood-veneer_14x6-5_ply_maple_45-inner-with-roundover-count_4982e27c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "USA Maple 14x6.5 Rosewood/Zebrawood Veneer",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-african-mahogany_14x7_ply_mahogany_custom-lacquer-wrap-oil-varies_2-3mm-triple-flang_15cf3630",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 African Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-blue-fade-dip-snare_14x7_ply_maple_blue-fade-dip_2-3mm-triple-flanged_45ec3cad",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Blue Fade Dip Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-cherry-bubinga-snare_14x7_ply_cherry_custom-finish_2-3mm-triple-flanged_5c07431f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Cherry Bubinga Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-copper-hammered-brass-hybrid-snare_14x7_ply_copper_copper-hammered_dff4a3c5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Copper Hammered Brass Hybrid Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-maple-copper_14x7_ply_maple_maple-copper_2-3mm-triple-flanged_cd1c86e8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Maple Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-red-oak_14x7_ply_oak_custom-finish_2-3mm-triple-flanged_d2374272",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Red Oak",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_8x14-maple-oak-black-lacquer_14x8_ply_maple_black-lacquer_2-3mm-triple-flanged_430251a8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "8x14 Maple Oak Black Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-metal_8x14-patina-brass_14x8_metal_brass_patina-brass_2-3mm-triple-flanged_50e8424e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "8x14 Patina Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_african-mahogany-13x7_13x7_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_54a2d636",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "African Mahogany 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_amber-piglite-snare_13x7_acrylic_acrylic_amber-acrylic_triple-flanged-hoops_d98788be",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Amber Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_bubinga-gloss-14x7_14x7_ply_bubinga_custom-finish-varies_2-3mm-triple-flanged_2421929e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Bubinga Gloss 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_cherry-custom-14x6-5_14x6-5_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_ab6cf87c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Cherry Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_cherry-bubinga-hybrid-13x7_13x7_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_9d2cf3d3",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Cherry/Bubinga Hybrid 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_clear-piglite-snare_14x6-5_acrylic_acrylic_clear-acrylic_triple-flanged-hoops_bbc6de46",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Clear Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-specialty_frankinpork-7x14-16-ply-maple-rosewood_14x7_ply_maple_satin-oil_ef16518c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Frankinpork 7x14 16-ply Maple/Rosewood",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-black-12x5_12x5_ply_maple_satin-lacquer-wrap-varies_triple-flanged-h_c3df49fb",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Black 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-black-5-5x13_13x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_9af528a9",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Black 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-12x5_12x5_ply_maple_ebony-satin_triple-flanged-hoops_8f26b2dc",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-13x7-black_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fla_7d8d09ed",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 13x7 Black",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x5-5_14x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_f91bca59",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x6-5_14x6-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_0f8071b2",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-porcaro-blue-13x7_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fl_0bebb6eb",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Porcaro Blue 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_mahogany-custom-14x6-5_14x6-5_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_4351c38f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Mahogany Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-12x5_12x5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f36046b6",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-13x7_13x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_c4888b7b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x5-5_14x5-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9d9e5ebf",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_491d55ac",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_3e92fb6b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-deep-13x8_13x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_045802a5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Deep 13x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-deep-14x8_14x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_6065010f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Deep 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-piccolo-13x4_13x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_142255e8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Piccolo 13x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-piccolo-14x4_14x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f719bf50",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Piccolo 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-bubinga-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_5b0fb099",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Bubinga Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-mahogany-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_cccaf693",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Mahogany Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-oak-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f23c9592",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Oak Hybrid 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-rosewood-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_09f93217",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Rosewood Hybrid 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9adeb665",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Walnut Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_red-oak-13x7_13x7_ply_oak_custom-finish-varies_2-3mm-triple-flanged_300b5cd4",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Oak 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_red-oak-custom-14x6-5_14x6-5_ply_oak_custom-finish-varies_2-3mm-triple-flanged_57b9d3dc",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Oak Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_red-piglite-snare_14x6-5_acrylic_acrylic_red-acrylic_triple-flanged-hoops_11685027",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_rosewood-custom-14x6-5_14x6-5_ply_wood_custom-finish-varies_2-3mm-triple-flanged_a905d62e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Rosewood Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_rosewood-zebrawood-veneer-maple-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple_68f5f5a5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Rosewood/Zebrawood Veneer Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_solid-one-piece-exotic-14x6-5_14x6-5_solid-shell_exotic-hardwood_custom-finish-varies_2-3_0b902361",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Solid One-Piece Exotic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_stave-exotic-wood-14x6-5_14x6-5_stave_exotic-hardwood_custom-finish-varies_2-3mm-triple-f_564d4d7b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Stave Exotic Wood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_walnut-13x7_13x7_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_9110ea17",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Walnut 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_walnut-custom-14x6-5_14x6-5_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_a0634067",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Walnut Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-metal_pig-iron-6-5x14_14x6-5_metal_steel_no_folded-over-bearing-edge_rolled-in-snare-beds_f1c286c3",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Pig Iron 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "priorityScore": 10
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Max 7x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-african-mahogany_14x7_ply_mahogany_custom-lacquer-wrap-oil-varies_2-3mm-triple-flang_15cf3630",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 African Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-blue-fade-dip-snare_14x7_ply_maple_blue-fade-dip_2-3mm-triple-flanged_45ec3cad",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Blue Fade Dip Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-cherry-bubinga-snare_14x7_ply_cherry_custom-finish_2-3mm-triple-flanged_5c07431f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Cherry Bubinga Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-copper-hammered-brass-hybrid-snare_14x7_ply_copper_copper-hammered_dff4a3c5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Copper Hammered Brass Hybrid Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-maple-copper_14x7_ply_maple_maple-copper_2-3mm-triple-flanged_cd1c86e8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Maple Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_7x14-red-oak_14x7_ply_oak_custom-finish_2-3mm-triple-flanged_d2374272",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "7x14 Red Oak",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_8x14-maple-oak-black-lacquer_14x8_ply_maple_black-lacquer_2-3mm-triple-flanged_430251a8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "8x14 Maple Oak Black Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-metal_8x14-patina-brass_14x8_metal_brass_patina-brass_2-3mm-triple-flanged_50e8424e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "8x14 Patina Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_african-mahogany-13x7_13x7_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_54a2d636",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "African Mahogany 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_amber-piglite-snare_13x7_acrylic_acrylic_amber-acrylic_triple-flanged-hoops_d98788be",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Amber Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_bubinga-gloss-14x7_14x7_ply_bubinga_custom-finish-varies_2-3mm-triple-flanged_2421929e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Bubinga Gloss 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_cherry-custom-14x6-5_14x6-5_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_ab6cf87c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Cherry Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_cherry-bubinga-hybrid-13x7_13x7_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_9d2cf3d3",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Cherry/Bubinga Hybrid 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_clear-piglite-snare_14x6-5_acrylic_acrylic_clear-acrylic_triple-flanged-hoops_bbc6de46",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Clear Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom-specialty_frankinpork-7x14-16-ply-maple-rosewood_14x7_ply_maple_satin-oil_ef16518c",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Frankinpork 7x14 16-ply Maple/Rosewood",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-black-12x5_12x5_ply_maple_satin-lacquer-wrap-varies_triple-flanged-h_c3df49fb",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Black 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-black-5-5x13_13x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_9af528a9",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Black 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-12x5_12x5_ply_maple_ebony-satin_triple-flanged-hoops_8f26b2dc",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-13x7-black_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fla_7d8d09ed",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 13x7 Black",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x5-5_14x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_f91bca59",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x6-5_14x6-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_0f8071b2",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer_little-squealer-porcaro-blue-13x7_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fl_0bebb6eb",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Little Squealer Porcaro Blue 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_mahogany-custom-14x6-5_14x6-5_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_4351c38f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Mahogany Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-12x5_12x5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f36046b6",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-13x7_13x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_c4888b7b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x5-5_14x5-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9d9e5ebf",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_491d55ac",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-custom-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_3e92fb6b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Custom 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-deep-13x8_13x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_045802a5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Deep 13x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-deep-14x8_14x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_6065010f",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Deep 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-piccolo-13x4_13x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_142255e8",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Piccolo 13x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-piccolo-14x4_14x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f719bf50",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Piccolo 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-bubinga-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_5b0fb099",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Bubinga Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-mahogany-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_cccaf693",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Mahogany Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-oak-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f23c9592",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Oak Hybrid 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-rosewood-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_09f93217",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Rosewood Hybrid 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9adeb665",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple/Walnut Hybrid 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_red-oak-13x7_13x7_ply_oak_custom-finish-varies_2-3mm-triple-flanged_300b5cd4",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Oak 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_red-oak-custom-14x6-5_14x6-5_ply_oak_custom-finish-varies_2-3mm-triple-flanged_57b9d3dc",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Oak Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_piglite-acrylic_red-piglite-snare_14x6-5_acrylic_acrylic_red-acrylic_triple-flanged-hoops_11685027",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Red Piglite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_rosewood-custom-14x6-5_14x6-5_ply_wood_custom-finish-varies_2-3mm-triple-flanged_a905d62e",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Rosewood Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_rosewood-zebrawood-veneer-maple-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple_68f5f5a5",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Rosewood/Zebrawood Veneer Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_solid-one-piece-exotic-14x6-5_14x6-5_solid-shell_exotic-hardwood_custom-finish-varies_2-3_0b902361",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Solid One-Piece Exotic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_stave-exotic-wood-14x6-5_14x6-5_stave_exotic-hardwood_custom-finish-varies_2-3mm-triple-f_564d4d7b",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Stave Exotic Wood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_walnut-13x7_13x7_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_9110ea17",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Walnut 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_walnut-custom-14x6-5_14x6-5_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_a0634067",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Walnut Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+      "companyName": "Pork Pie Percussion",
+      "modelName": "Maple Max 7x14",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "reRingMaterial": []
+}

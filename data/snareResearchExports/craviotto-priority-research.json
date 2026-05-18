@@ -1,0 +1,966 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-la_f1d11cf6",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Ash Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-6-5x14_14x6-5_steam-bent_ash_45-bearing-edges_satin-oil-la_b447c46a",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Ash Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-5-5x14_14x5-5_steam-bent_birch_45-bearing-edges_satin-oi_7baa6ec9",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Birch Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-6-5x14_14x6-5_steam-bent_birch_45-bearing-edges_satin-oi_db7b6f8b",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Birch Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x13_13x5-5_steam-bent_cherry_45-bearing-edges_satin-_e214d01a",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-_9488cfa0",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5x12_12x5_steam-bent_cherry_45-bearing-edges_satin-oil-_a4e4c673",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-6-5x14_14x6-5_steam-bent_cherry_45-bearing-edges_satin-_bed9f21c",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-7x14_14x7_steam-bent_cherry_45-bearing-edges_satin-oil-_d6db57ea",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-8x14_14x8_steam-bent_cherry_45-bearing-edges_satin-oil-_00c24701",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x13_13x5-5_steam-bent_mahogany_45-bearing-edges_sa_a4ed5427",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_sa_b3aea877",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5x12_12x5_steam-bent_mahogany_45-bearing-edges_satin-_047b1ecb",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-6-5x14_14x6-5_steam-bent_mahogany_45-bearing-edges_sa_fca69913",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-7x14_14x7_steam-bent_mahogany_45-bearing-edges_satin-_0b462145",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-8x14_14x8_steam-bent_mahogany_45-bearing-edges_satin-_42d2a3ce",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5-5x13_13x5-5_steam-bent_maple_45-bearing-edges_satin-oi_4c49c5f2",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oi_e6ac048b",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5x12_12x5_steam-bent_maple_45-bearing-edges_satin-oil-la_196306b4",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oi_64598153",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-7x14_14x7_steam-bent_maple_45-bearing-edges_satin-oil-la_895302ac",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-8x14_14x8_steam-bent_maple_45-bearing-edges_satin-oil-la_d6af6462",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-poplar-solid-shell-5-5x14_14x5-5_steam-bent_poplar_45-bearing-edges_satin-_f405440f",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Poplar Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-poplar-solid-shell-6-5x14_14x6-5_steam-bent_poplar_45-bearing-edges_satin-_8c35ff3c",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Poplar Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5-5x13_13x5-5_steam-bent_walnut_45-bearing-edges_satin-_a708ee0a",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5-5x14_14x5-5_steam-bent_walnut_45-bearing-edges_satin-_bf102941",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5x12_12x5_steam-bent_walnut_45-bearing-edges_satin-oil-_e5cbb0fa",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-6-5x14_14x6-5_steam-bent_walnut_45-bearing-edges_satin-_40b089f6",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-7x14_14x7_steam-bent_walnut_45-bearing-edges_satin-oil-_92e77b5e",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-8x14_14x8_steam-bent_walnut_45-bearing-edges_satin-oil-_cba3228b",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-copper-5-5x14_14x5-5_solid-shell_copper_metal-bearing-edge-unkn_7896ed5b",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Series Copper 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-copper-6-5x14_14x6-5_solid-shell_copper_metal-bearing-edge-unkn_32d26cdf",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Series Copper 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-ash-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-lacquer-options_t_b5be3c99",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Ash 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-birdseye-maple-5-5x14_14x5-5_steam-bent_maple_maple_45-bearing-edges_satin-oi_11a8ee68",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Birdseye Maple 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-black-cherry-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-oil-lacqu_96e56440",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Black Cherry 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-mahogany-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_satin-oil-lacquer_b1d3fcd1",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Mahogany 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_0a38d6b4",
+      "companyName": "Craviotto",
+      "modelName": "DW Craviotto Solid Maple 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_602e146c",
+      "companyName": "Craviotto",
+      "modelName": "DW Craviotto Solid Maple 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_private-reserve_private-reserve-mappa-burl-walnut-6-5x14_14x6-5_steam-bent_walnut_mappa-burl-veneer_45-bearing_9011056d",
+      "companyName": "Craviotto",
+      "modelName": "Private Reserve Mappa Burl/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_private-reserve_private-reserve-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearing-edges__e8c2552c",
+      "companyName": "Craviotto",
+      "modelName": "Private Reserve Sycamore/Mahogany 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-ash-maple-6-5x14_14x6-5_steam-bent_ash_maple_45-bearing-edges_satin-oi_7f9daee0",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Ash/Maple 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-mahogany-6-5x14_14x6-5_steam-bent_cherry_mahogany_45-bearing-ed_006914d9",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Cherry/Mahogany 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-walnut-6-5x14_14x6-5_steam-bent_cherry_walnut_45-bearing-edges__c29fd114",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Cherry/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-mahogany-maple-6-5x14_14x6-5_steam-bent_mahogany_maple_45-bearing-edge_2f2dc60e",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Mahogany/Maple 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-maple-walnut-6-5x14_14x6-5_steam-bent_maple_walnut_45-bearing-edges_sa_f2bce3c9",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Maple/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearin_d23a87e4",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Sycamore/Mahogany 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-walnut-ash-walnut-6-5x14_14x6-5_steam-bent_walnut_ash_walnut_45-bearin_f47f02c6",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Walnut/Ash/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [],
+  "snareBedType": [
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-la_f1d11cf6",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Ash Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-6-5x14_14x6-5_steam-bent_ash_45-bearing-edges_satin-oil-la_b447c46a",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Ash Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-5-5x14_14x5-5_steam-bent_birch_45-bearing-edges_satin-oi_7baa6ec9",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Birch Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-6-5x14_14x6-5_steam-bent_birch_45-bearing-edges_satin-oi_db7b6f8b",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Birch Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x13_13x5-5_steam-bent_cherry_45-bearing-edges_satin-_e214d01a",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-_9488cfa0",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5x12_12x5_steam-bent_cherry_45-bearing-edges_satin-oil-_a4e4c673",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-6-5x14_14x6-5_steam-bent_cherry_45-bearing-edges_satin-_bed9f21c",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-7x14_14x7_steam-bent_cherry_45-bearing-edges_satin-oil-_d6db57ea",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-8x14_14x8_steam-bent_cherry_45-bearing-edges_satin-oil-_00c24701",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Cherry Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x13_13x5-5_steam-bent_mahogany_45-bearing-edges_sa_a4ed5427",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_sa_b3aea877",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5x12_12x5_steam-bent_mahogany_45-bearing-edges_satin-_047b1ecb",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-6-5x14_14x6-5_steam-bent_mahogany_45-bearing-edges_sa_fca69913",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-7x14_14x7_steam-bent_mahogany_45-bearing-edges_satin-_0b462145",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-8x14_14x8_steam-bent_mahogany_45-bearing-edges_satin-_42d2a3ce",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Mahogany Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5-5x13_13x5-5_steam-bent_maple_45-bearing-edges_satin-oi_4c49c5f2",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oi_e6ac048b",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-5x12_12x5_steam-bent_maple_45-bearing-edges_satin-oil-la_196306b4",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oi_64598153",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-7x14_14x7_steam-bent_maple_45-bearing-edges_satin-oil-la_895302ac",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-maple-solid-shell-8x14_14x8_steam-bent_maple_45-bearing-edges_satin-oil-la_d6af6462",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Maple Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-poplar-solid-shell-5-5x14_14x5-5_steam-bent_poplar_45-bearing-edges_satin-_f405440f",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Poplar Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-poplar-solid-shell-6-5x14_14x6-5_steam-bent_poplar_45-bearing-edges_satin-_8c35ff3c",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Poplar Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5-5x13_13x5-5_steam-bent_walnut_45-bearing-edges_satin-_a708ee0a",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 5.5x13",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5-5x14_14x5-5_steam-bent_walnut_45-bearing-edges_satin-_bf102941",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-5x12_12x5_steam-bent_walnut_45-bearing-edges_satin-oil-_e5cbb0fa",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 5x12",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-6-5x14_14x6-5_steam-bent_walnut_45-bearing-edges_satin-_40b089f6",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-7x14_14x7_steam-bent_walnut_45-bearing-edges_satin-oil-_92e77b5e",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 7x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-solid-shell_custom-shop-walnut-solid-shell-8x14_14x8_steam-bent_walnut_45-bearing-edges_satin-oil-_cba3228b",
+      "companyName": "Craviotto",
+      "modelName": "Custom Shop Walnut Solid Shell 8x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-copper-5-5x14_14x5-5_solid-shell_copper_metal-bearing-edge-unkn_7896ed5b",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Series Copper 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-copper-6-5x14_14x6-5_solid-shell_copper_metal-bearing-edge-unkn_32d26cdf",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Series Copper 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-ash-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-lacquer-options_t_b5be3c99",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Ash 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-birdseye-maple-5-5x14_14x5-5_steam-bent_maple_maple_45-bearing-edges_satin-oi_11a8ee68",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Birdseye Maple 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-black-cherry-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-oil-lacqu_96e56440",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Black Cherry 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_limited-edition_diamond-tube-lug-mahogany-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_satin-oil-lacquer_b1d3fcd1",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Tube Lug Mahogany 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_0a38d6b4",
+      "companyName": "Craviotto",
+      "modelName": "DW Craviotto Solid Maple 5.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_602e146c",
+      "companyName": "Craviotto",
+      "modelName": "DW Craviotto Solid Maple 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_private-reserve_private-reserve-mappa-burl-walnut-6-5x14_14x6-5_steam-bent_walnut_mappa-burl-veneer_45-bearing_9011056d",
+      "companyName": "Craviotto",
+      "modelName": "Private Reserve Mappa Burl/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_private-reserve_private-reserve-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearing-edges__e8c2552c",
+      "companyName": "Craviotto",
+      "modelName": "Private Reserve Sycamore/Mahogany 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-ash-maple-6-5x14_14x6-5_steam-bent_ash_maple_45-bearing-edges_satin-oi_7f9daee0",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Ash/Maple 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-mahogany-6-5x14_14x6-5_steam-bent_cherry_mahogany_45-bearing-ed_006914d9",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Cherry/Mahogany 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-walnut-6-5x14_14x6-5_steam-bent_cherry_walnut_45-bearing-edges__c29fd114",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Cherry/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-mahogany-maple-6-5x14_14x6-5_steam-bent_mahogany_maple_45-bearing-edge_2f2dc60e",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Mahogany/Maple 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-maple-walnut-6-5x14_14x6-5_steam-bent_maple_walnut_45-bearing-edges_sa_f2bce3c9",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Maple/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearin_d23a87e4",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Sycamore/Mahogany 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_custom-shop-stacked-solid_stacked-solid-walnut-ash-walnut-6-5x14_14x6-5_steam-bent_walnut_ash_walnut_45-bearin_f47f02c6",
+      "companyName": "Craviotto",
+      "modelName": "Stacked Solid Walnut/Ash/Walnut 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-5-5x14_14x5-5_solid-shell_brass_0-7_metal-bearing-edge-un_e55f06b6",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Series Brass 5.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-6-5x14_14x6-5_solid-shell_brass_0-7_metal-bearing-edge-un_4fe1510c",
+      "companyName": "Craviotto",
+      "modelName": "Diamond Series Brass 6.5x14",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": []
+}

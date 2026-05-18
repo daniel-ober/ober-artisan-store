@@ -1,0 +1,1538 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "slingerland_concert-marching-educational_concert-king-metal-snare_14x6-5_metal_chrome-over-brass_wrap-lacquer-or-metal-p_9092a990",
+      "companyName": "Slingerland",
+      "modelName": "Concert King Metal Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_concert-king-wood-snare_14x6-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-met_4fd878a2",
+      "companyName": "Slingerland",
+      "modelName": "Concert King Wood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_cut-a-way_cut-a-way-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-era-specific_7a661fbc",
+      "companyName": "Slingerland",
+      "modelName": "Cut-A-Way Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_field-snare-10x14_14x10_ply_wood_wrap-lacquer-or-metal-plating_marching-concert_239642ca",
+      "companyName": "Slingerland",
+      "modelName": "Field Snare 10x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_marching-snare-12x15_15x12_ply_wood_wrap-lacquer-or-metal-plating_marching-conc_1907af6f",
+      "companyName": "Slingerland",
+      "modelName": "Marching Snare 12x15",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_nashville-era_nashville-studio-king-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-_67a56475",
+      "companyName": "Slingerland",
+      "modelName": "Nashville Studio King Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_school-festival-metal-snare_14x5-5_metal_steel_wrap-lacquer-or-metal-plating_ma_9aad9862",
+      "companyName": "Slingerland",
+      "modelName": "School Festival Metal Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_school-festival-wood-snare_14x5-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-_49785e7d",
+      "companyName": "Slingerland",
+      "modelName": "School Festival Wood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_lite_slingerland-lite-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_f4a6a6bc",
+      "companyName": "Slingerland",
+      "modelName": "Slingerland Lite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_spirit_spirit-series-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_ebfd696a",
+      "companyName": "Slingerland",
+      "modelName": "Spirit Series Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_spitfire-marching-snare_14x12_ply_wood_wrap-lacquer-or-metal-plating_marching-c_ab337714",
+      "companyName": "Slingerland",
+      "modelName": "Spitfire Marching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_tdr-marching-snare_14x12_ply_wood_composite_wrap-lacquer-or-metal-plating_march_9db092db",
+      "companyName": "Slingerland",
+      "modelName": "TDR Marching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_usa-maple_usa-maple-snare_14x5-5_ply_maple_wrap-or-lacquer_stick-saver-triple-flange-era-specific_1c5ac547",
+      "companyName": "Slingerland",
+      "modelName": "USA Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wrap_3514218a",
+      "companyName": "Slingerland",
+      "modelName": "Artist Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_artist-model-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_cc2d4d5a",
+      "companyName": "Slingerland",
+      "modelName": "Artist Model 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_avante_avante-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-sa_22b43fce",
+      "companyName": "Slingerland",
+      "modelName": "Avante Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_buddy-rich-80n-concert-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-_2bc06d1e",
+      "companyName": "Slingerland",
+      "modelName": "Buddy Rich 80N Concert King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_buddy-rich-artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_b9882c77",
+      "companyName": "Slingerland",
+      "modelName": "Buddy Rich Artist Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_club-date-style-slingerland-student-snare_14x5-5_ply_mahogany_poplar_mahogany_ro_10c521b6",
+      "companyName": "Slingerland",
+      "modelName": "Club Date-style Slingerland Student Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_conway-era_conway-radio-king-reissue_14x5-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_stick-sav_6e627287",
+      "companyName": "Slingerland",
+      "modelName": "Conway Radio King Reissue",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_deluxe-student-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pe_b7fe6b7d",
+      "companyName": "Slingerland",
+      "modelName": "Deluxe Student Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_festival-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wr_10342383",
+      "companyName": "Slingerland",
+      "modelName": "Festival Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_gene-krupa-deluxe-radio-king_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_0d523a94",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Deluxe Radio King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_gene-krupa-junior_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_1bd32339",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Junior",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_gene-krupa-radio-king_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_9e9f4f19",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Radio King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5-5_metal_chrome-over-brass_rolled-metal-bearing-edge__e8b0642b",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_06baa511",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge__c4317c68",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x7_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_78f35716",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_hollywood-ace_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wra_5551455b",
+      "companyName": "Slingerland",
+      "modelName": "Hollywood Ace",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_hollywood-ace-6-lug_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_b94ddf6b",
+      "companyName": "Slingerland",
+      "modelName": "Hollywood Ace 6-Lug",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_jam-session-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_0e646c53",
+      "companyName": "Slingerland",
+      "modelName": "Jam Session Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_jet_jet-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver-tr_9f4008ac",
+      "companyName": "Slingerland",
+      "modelName": "Jet Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_magnum_magnum-snare_14x6-5_ply_maple_poplar_modern-rounded-45-hybrid-unknown_wrap-or-lacquer_stick-saver-tri_84a93c23",
+      "companyName": "Slingerland",
+      "modelName": "Magnum Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_modern-jazz-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_3f4f440f",
+      "companyName": "Slingerland",
+      "modelName": "Modern Jazz Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-solo_modern-solo-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick_e091ae50",
+      "companyName": "Slingerland",
+      "modelName": "Modern Solo Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_nashville-era_nashville-radio-king-reissue_14x6-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_sti_7c0ca413",
+      "companyName": "Slingerland",
+      "modelName": "Nashville Radio King Reissue",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_new-rock_new-rock-snare_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver_ea3c5348",
+      "companyName": "Slingerland",
+      "modelName": "New Rock Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_pop-outfit_pop-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-s_f3032cc3",
+      "companyName": "Slingerland",
+      "modelName": "Pop Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x5-5_steam-bent_mahogany_po_75c87d18",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 3-Ply Mahogany/Poplar Matching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x6-5_steam-bent_mahogany_po_de179c7e",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 3-Ply Mahogany/Poplar Matching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-3-point-strainer_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-_7c5603e5",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 3-Point Strainer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-5x14_14x5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pearl-w_5e6bc7dd",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-7x14-concert-orchestra_14x7_steam-bent_maple_rounded-vintage-edge-often-30-deg_ff2cdc0c",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 7x14 Concert/Orchestra",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-artist_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pea_2f67ab4f",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Artist",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-broadway-parallel_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_8561aa6c",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Broadway Parallel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-clamshell-strainer_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degre_a3cf0f18",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Clamshell Strainer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-professional_14x7_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_1af65b20",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Professional",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5-5_steam-bent_maple_30-degree-rounded-bearing-e_df8146db",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5_steam-bent_maple_30-degree-rounded-bearing-edg_8bcf2091",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x6-5_steam-bent_maple_30-degree-rounded-bearing-e_bd359ad0",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x7_steam-bent_maple_30-degree-rounded-bearing-edg_a73d5136",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-super_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pear_3c634aac",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Super",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_san-juan_san-juan-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stic_a838ceb8",
+      "companyName": "Slingerland",
+      "modelName": "San Juan Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_shelly-manne-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pear_d94685eb",
+      "companyName": "Slingerland",
+      "modelName": "Shelly Manne Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-aluminum_14x5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_stick_32cf90ac",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-aluminum_14x6-5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_8c3a24c1",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-black-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_plated-_3c8cd2c9",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Black Chrome-over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-black-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge_plate_890a4d18",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Black Chrome-over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-brass-lacquer_14x5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_2344c2c4",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Brass Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-brass-lacquer_14x6-5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_s_5946d2a3",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Brass Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-chrome-steel_14x5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_stic_2808c033",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Chrome Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-chrome-steel_14x6-5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_st_ac2e0277",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Chrome Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_stage-band-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-_542b9d04",
+      "companyName": "Slingerland",
+      "modelName": "Stage Band Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_duco-_4a41382a",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king-5x14_14x5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_du_d0cc2625",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_2b1bb0af",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king-de-luxe_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-ed_20943121",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King De Luxe",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "slingerland_concert-marching-educational_concert-king-metal-snare_14x6-5_metal_chrome-over-brass_wrap-lacquer-or-metal-p_9092a990",
+      "companyName": "Slingerland",
+      "modelName": "Concert King Metal Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_concert-king-wood-snare_14x6-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-met_4fd878a2",
+      "companyName": "Slingerland",
+      "modelName": "Concert King Wood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_cut-a-way_cut-a-way-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-era-specific_7a661fbc",
+      "companyName": "Slingerland",
+      "modelName": "Cut-A-Way Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_field-snare-10x14_14x10_ply_wood_wrap-lacquer-or-metal-plating_marching-concert_239642ca",
+      "companyName": "Slingerland",
+      "modelName": "Field Snare 10x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_marching-snare-12x15_15x12_ply_wood_wrap-lacquer-or-metal-plating_marching-conc_1907af6f",
+      "companyName": "Slingerland",
+      "modelName": "Marching Snare 12x15",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_nashville-era_nashville-studio-king-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-_67a56475",
+      "companyName": "Slingerland",
+      "modelName": "Nashville Studio King Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_school-festival-metal-snare_14x5-5_metal_steel_wrap-lacquer-or-metal-plating_ma_9aad9862",
+      "companyName": "Slingerland",
+      "modelName": "School Festival Metal Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_school-festival-wood-snare_14x5-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-_49785e7d",
+      "companyName": "Slingerland",
+      "modelName": "School Festival Wood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_lite_slingerland-lite-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_f4a6a6bc",
+      "companyName": "Slingerland",
+      "modelName": "Slingerland Lite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_spirit_spirit-series-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_ebfd696a",
+      "companyName": "Slingerland",
+      "modelName": "Spirit Series Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_spitfire-marching-snare_14x12_ply_wood_wrap-lacquer-or-metal-plating_marching-c_ab337714",
+      "companyName": "Slingerland",
+      "modelName": "Spitfire Marching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_tdr-marching-snare_14x12_ply_wood_composite_wrap-lacquer-or-metal-plating_march_9db092db",
+      "companyName": "Slingerland",
+      "modelName": "TDR Marching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_usa-maple_usa-maple-snare_14x5-5_ply_maple_wrap-or-lacquer_stick-saver-triple-flange-era-specific_1c5ac547",
+      "companyName": "Slingerland",
+      "modelName": "USA Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "slingerland_concert-marching-educational_concert-king-metal-snare_14x6-5_metal_chrome-over-brass_wrap-lacquer-or-metal-p_9092a990",
+      "companyName": "Slingerland",
+      "modelName": "Concert King Metal Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_concert-king-wood-snare_14x6-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-met_4fd878a2",
+      "companyName": "Slingerland",
+      "modelName": "Concert King Wood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_cut-a-way_cut-a-way-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-era-specific_7a661fbc",
+      "companyName": "Slingerland",
+      "modelName": "Cut-A-Way Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_field-snare-10x14_14x10_ply_wood_wrap-lacquer-or-metal-plating_marching-concert_239642ca",
+      "companyName": "Slingerland",
+      "modelName": "Field Snare 10x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_marching-snare-12x15_15x12_ply_wood_wrap-lacquer-or-metal-plating_marching-conc_1907af6f",
+      "companyName": "Slingerland",
+      "modelName": "Marching Snare 12x15",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_nashville-era_nashville-studio-king-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-_67a56475",
+      "companyName": "Slingerland",
+      "modelName": "Nashville Studio King Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_school-festival-metal-snare_14x5-5_metal_steel_wrap-lacquer-or-metal-plating_ma_9aad9862",
+      "companyName": "Slingerland",
+      "modelName": "School Festival Metal Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_school-festival-wood-snare_14x5-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-_49785e7d",
+      "companyName": "Slingerland",
+      "modelName": "School Festival Wood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_lite_slingerland-lite-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_f4a6a6bc",
+      "companyName": "Slingerland",
+      "modelName": "Slingerland Lite Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_spirit_spirit-series-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_ebfd696a",
+      "companyName": "Slingerland",
+      "modelName": "Spirit Series Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_spitfire-marching-snare_14x12_ply_wood_wrap-lacquer-or-metal-plating_marching-c_ab337714",
+      "companyName": "Slingerland",
+      "modelName": "Spitfire Marching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_concert-marching-educational_tdr-marching-snare_14x12_ply_wood_composite_wrap-lacquer-or-metal-plating_march_9db092db",
+      "companyName": "Slingerland",
+      "modelName": "TDR Marching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_usa-maple_usa-maple-snare_14x5-5_ply_maple_wrap-or-lacquer_stick-saver-triple-flange-era-specific_1c5ac547",
+      "companyName": "Slingerland",
+      "modelName": "USA Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wrap_3514218a",
+      "companyName": "Slingerland",
+      "modelName": "Artist Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_artist-model-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_cc2d4d5a",
+      "companyName": "Slingerland",
+      "modelName": "Artist Model 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_avante_avante-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-sa_22b43fce",
+      "companyName": "Slingerland",
+      "modelName": "Avante Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_buddy-rich-80n-concert-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-_2bc06d1e",
+      "companyName": "Slingerland",
+      "modelName": "Buddy Rich 80N Concert King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_buddy-rich-artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_b9882c77",
+      "companyName": "Slingerland",
+      "modelName": "Buddy Rich Artist Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_club-date-style-slingerland-student-snare_14x5-5_ply_mahogany_poplar_mahogany_ro_10c521b6",
+      "companyName": "Slingerland",
+      "modelName": "Club Date-style Slingerland Student Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_conway-era_conway-radio-king-reissue_14x5-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_stick-sav_6e627287",
+      "companyName": "Slingerland",
+      "modelName": "Conway Radio King Reissue",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_deluxe-student-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pe_b7fe6b7d",
+      "companyName": "Slingerland",
+      "modelName": "Deluxe Student Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_festival-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wr_10342383",
+      "companyName": "Slingerland",
+      "modelName": "Festival Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_gene-krupa-deluxe-radio-king_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_0d523a94",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Deluxe Radio King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_gene-krupa-junior_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_1bd32339",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Junior",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_gene-krupa-radio-king_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_9e9f4f19",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Radio King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5-5_metal_chrome-over-brass_rolled-metal-bearing-edge__e8b0642b",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_06baa511",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge__c4317c68",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x7_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_78f35716",
+      "companyName": "Slingerland",
+      "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_hollywood-ace_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wra_5551455b",
+      "companyName": "Slingerland",
+      "modelName": "Hollywood Ace",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_hollywood-ace-6-lug_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_b94ddf6b",
+      "companyName": "Slingerland",
+      "modelName": "Hollywood Ace 6-Lug",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_jam-session-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_0e646c53",
+      "companyName": "Slingerland",
+      "modelName": "Jam Session Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_jet_jet-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver-tr_9f4008ac",
+      "companyName": "Slingerland",
+      "modelName": "Jet Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_magnum_magnum-snare_14x6-5_ply_maple_poplar_modern-rounded-45-hybrid-unknown_wrap-or-lacquer_stick-saver-tri_84a93c23",
+      "companyName": "Slingerland",
+      "modelName": "Magnum Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_modern-jazz-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_3f4f440f",
+      "companyName": "Slingerland",
+      "modelName": "Modern Jazz Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-solo_modern-solo-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick_e091ae50",
+      "companyName": "Slingerland",
+      "modelName": "Modern Solo Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_nashville-era_nashville-radio-king-reissue_14x6-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_sti_7c0ca413",
+      "companyName": "Slingerland",
+      "modelName": "Nashville Radio King Reissue",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_new-rock_new-rock-snare_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver_ea3c5348",
+      "companyName": "Slingerland",
+      "modelName": "New Rock Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_pop-outfit_pop-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-s_f3032cc3",
+      "companyName": "Slingerland",
+      "modelName": "Pop Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x5-5_steam-bent_mahogany_po_75c87d18",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 3-Ply Mahogany/Poplar Matching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x6-5_steam-bent_mahogany_po_de179c7e",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 3-Ply Mahogany/Poplar Matching Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-3-point-strainer_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-_7c5603e5",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 3-Point Strainer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-5x14_14x5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pearl-w_5e6bc7dd",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-7x14-concert-orchestra_14x7_steam-bent_maple_rounded-vintage-edge-often-30-deg_ff2cdc0c",
+      "companyName": "Slingerland",
+      "modelName": "Radio King 7x14 Concert/Orchestra",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-artist_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pea_2f67ab4f",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Artist",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-broadway-parallel_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_8561aa6c",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Broadway Parallel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-clamshell-strainer_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degre_a3cf0f18",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Clamshell Strainer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-professional_14x7_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_1af65b20",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Professional",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5-5_steam-bent_maple_30-degree-rounded-bearing-e_df8146db",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5_steam-bent_maple_30-degree-rounded-bearing-edg_8bcf2091",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x6-5_steam-bent_maple_30-degree-rounded-bearing-e_bd359ad0",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x7_steam-bent_maple_30-degree-rounded-bearing-edg_a73d5136",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Solid Maple Limited",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-radio-king_radio-king-super_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pear_3c634aac",
+      "companyName": "Slingerland",
+      "modelName": "Radio King Super",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_san-juan_san-juan-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stic_a838ceb8",
+      "companyName": "Slingerland",
+      "modelName": "San Juan Outfit Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_shelly-manne-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pear_d94685eb",
+      "companyName": "Slingerland",
+      "modelName": "Shelly Manne Model",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-aluminum_14x5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_stick_32cf90ac",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-aluminum_14x6-5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_8c3a24c1",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-black-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_plated-_3c8cd2c9",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Black Chrome-over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-black-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge_plate_890a4d18",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Black Chrome-over-Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-brass-lacquer_14x5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_2344c2c4",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Brass Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-brass-lacquer_14x6-5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_s_5946d2a3",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Brass Lacquer",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-chrome-steel_14x5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_stic_2808c033",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Chrome Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_sound-king_sound-king-chrome-steel_14x6-5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_st_ac2e0277",
+      "companyName": "Slingerland",
+      "modelName": "Sound King Chrome Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-wood-artist-student_stage-band-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-_542b9d04",
+      "companyName": "Slingerland",
+      "modelName": "Stage Band Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_duco-_4a41382a",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king-5x14_14x5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_du_d0cc2625",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King 5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_2b1bb0af",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King 6.5x14",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "slingerland_vintage-student-radio-king_student-radio-king-de-luxe_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-ed_20943121",
+      "companyName": "Slingerland",
+      "modelName": "Student Radio King De Luxe",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "reRingMaterial": []
+}

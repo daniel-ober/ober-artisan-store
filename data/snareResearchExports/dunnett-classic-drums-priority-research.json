@@ -1,0 +1,1857 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x5-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_3960dc4b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Aluminum Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x6-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_0827ecdc",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Aluminum Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x5-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__eebbfcdf",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Brass Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x6-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__8d852c1e",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Brass Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_dreamtime_dreamtime-stainless_14x6-5_metal_stainless-steel_artist-engraved-specialty-finish_varies_c73f16a9",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dreamtime Stainless",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_dreamtime_dreamtime-titanium_14x6-5_metal_titanium_artist-engraved-specialty-finish_varies_dream-t_3a021c25",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dreamtime Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-brass_14x6-5_metal_brass_custom_varies_co-custom-brass_570ea014",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-copper_14x6-5_metal_copper_custom_varies_co-custom-cop_172eba68",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-maple_14x6-5_ply_maple_custom_varies_co-custom-maple_6a1b222f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_james-trussart-rust-o-matic_james-trussart-rust-o-matic-full-paisley-steel_14x6-5_metal_steel_rust_65b9dbbe",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "James Trussart Rust O Matic Full Paisley Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_13x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6513mg_54cb06bc",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_14x5-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_5514mg_99802b50",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_14x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6514mg_6a37e040",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_13x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_c1198bb3",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x5-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_1ddde8a3",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_b8711a5f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x7_metal_brass_chrome-over-brass_triple-flange-cold-rolle_2dbb8879",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_13x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_92eab1ce",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x5-5_metal_aluminum_brushed-polished-aluminum_triple-fla_21da78c0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_4b7ab74a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x5-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_5514k_c961e22f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x6-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_6514k_f790b353",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x7_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_714k_e0c9d550",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x5-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_551_ca12ba24",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x6-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_651_1f50a067",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x5-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_5514mp-c_69e93de6",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Cherry",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x6-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_6514mp-c_5e2cac1b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Cherry",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x5-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_6acff45d",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x6-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_be23411c",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x5-5_solid-shell_maple_oil-satin_cold-rolled-hoops_5514mp-m_d040bdc0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x6-5_solid-shell_maple_oil-satin_cold-rolled-hoops_6514mp-m_50b232a5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_13x7_solid-shell_walnut_oil-satin_cold-rolled-hoops_713mp-w_12e1f800",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x5-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_5514mp-w_5757e2ad",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x6-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_6514mp-w_e5de85a5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_13x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_a83f1d2a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x4_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_b6720126",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x5-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_bb4adfeb",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x6-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_a0c4f6ae",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_8040ae7a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x5-5_metal_stainless-steel_natural-raw-custom_triple-flang_ade2dc82",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x6-5_metal_stainless-steel_natural-raw-custom_triple-flang_6b7e9e82",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x5-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_dfd9b072",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Mahogany/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x6-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_3abf2f3b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Mahogany/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x5-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_8a4d7133",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x6-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_220f99b5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x5-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_9445ad1c",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x6-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_09612fed",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_13x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_e62de174",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Walnut/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_14x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_c50f30b8",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Walnut/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_12x5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_51_11b0a56e",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_13x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_e6e58a5f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x5-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__6eed2604",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x6-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__262af3a0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_633fedaa",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium-hammered_14x5-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_ecf3c5e5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium-hammered_14x6-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_48df1dc0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x5-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_3960dc4b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Aluminum Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x6-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_0827ecdc",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Aluminum Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x5-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__eebbfcdf",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Brass Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x6-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__8d852c1e",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Brass Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_dreamtime_dreamtime-stainless_14x6-5_metal_stainless-steel_artist-engraved-specialty-finish_varies_c73f16a9",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dreamtime Stainless",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_dreamtime_dreamtime-titanium_14x6-5_metal_titanium_artist-engraved-specialty-finish_varies_dream-t_3a021c25",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dreamtime Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-brass_14x6-5_metal_brass_custom_varies_co-custom-brass_570ea014",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-copper_14x6-5_metal_copper_custom_varies_co-custom-cop_172eba68",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-maple_14x6-5_ply_maple_custom_varies_co-custom-maple_6a1b222f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_james-trussart-rust-o-matic_james-trussart-rust-o-matic-full-paisley-steel_14x6-5_metal_steel_rust_65b9dbbe",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "James Trussart Rust O Matic Full Paisley Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_13x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6513mg_54cb06bc",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_14x5-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_5514mg_99802b50",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_14x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6514mg_6a37e040",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_13x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_c1198bb3",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x5-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_1ddde8a3",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_b8711a5f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x7_metal_brass_chrome-over-brass_triple-flange-cold-rolle_2dbb8879",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_13x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_92eab1ce",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x5-5_metal_aluminum_brushed-polished-aluminum_triple-fla_21da78c0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_4b7ab74a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x5-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_5514k_c961e22f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x6-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_6514k_f790b353",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x7_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_714k_e0c9d550",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x5-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_551_ca12ba24",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x6-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_651_1f50a067",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x5-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_5514mp-c_69e93de6",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Cherry",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x6-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_6514mp-c_5e2cac1b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Cherry",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x5-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_6acff45d",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x6-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_be23411c",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x5-5_solid-shell_maple_oil-satin_cold-rolled-hoops_5514mp-m_d040bdc0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x6-5_solid-shell_maple_oil-satin_cold-rolled-hoops_6514mp-m_50b232a5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_13x7_solid-shell_walnut_oil-satin_cold-rolled-hoops_713mp-w_12e1f800",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x5-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_5514mp-w_5757e2ad",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x6-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_6514mp-w_e5de85a5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_13x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_a83f1d2a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x4_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_b6720126",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x5-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_bb4adfeb",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x6-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_a0c4f6ae",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_8040ae7a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x5-5_metal_stainless-steel_natural-raw-custom_triple-flang_ade2dc82",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x6-5_metal_stainless-steel_natural-raw-custom_triple-flang_6b7e9e82",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x5-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_dfd9b072",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Mahogany/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x6-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_3abf2f3b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Mahogany/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x5-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_8a4d7133",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x6-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_220f99b5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x5-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_9445ad1c",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x6-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_09612fed",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_13x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_e62de174",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Walnut/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_14x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_c50f30b8",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Walnut/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_12x5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_51_11b0a56e",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_13x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_e6e58a5f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x5-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__6eed2604",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x6-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__262af3a0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_633fedaa",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium-hammered_14x5-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_ecf3c5e5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium-hammered_14x6-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_48df1dc0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x5-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_3960dc4b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Aluminum Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x6-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_0827ecdc",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Aluminum Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x5-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__eebbfcdf",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Brass Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x6-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__8d852c1e",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Brass Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_dreamtime_dreamtime-stainless_14x6-5_metal_stainless-steel_artist-engraved-specialty-finish_varies_c73f16a9",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dreamtime Stainless",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_dreamtime_dreamtime-titanium_14x6-5_metal_titanium_artist-engraved-specialty-finish_varies_dream-t_3a021c25",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dreamtime Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-brass_14x6-5_metal_brass_custom_varies_co-custom-brass_570ea014",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-copper_14x6-5_metal_copper_custom_varies_co-custom-cop_172eba68",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_components-custom_dunnett-components-custom-maple_14x6-5_ply_maple_custom_varies_co-custom-maple_6a1b222f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Dunnett Components Custom Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_james-trussart-rust-o-matic_james-trussart-rust-o-matic-full-paisley-steel_14x6-5_metal_steel_rust_65b9dbbe",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "James Trussart Rust O Matic Full Paisley Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_13x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6513mg_54cb06bc",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_14x5-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_5514mg_99802b50",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mg-magnesium_magnesium_14x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6514mg_6a37e040",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Magnesium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_13x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_c1198bb3",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x5-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_1ddde8a3",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_b8711a5f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x7_metal_brass_chrome-over-brass_triple-flange-cold-rolle_2dbb8879",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Chrome Over Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_13x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_92eab1ce",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x5-5_metal_aluminum_brushed-polished-aluminum_triple-fla_21da78c0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_4b7ab74a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model 2N Modelling Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x5-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_5514k_c961e22f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x6-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_6514k_f790b353",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_k-model-k_model-k_14x7_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_714k_e0c9d550",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Model K",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x5-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_551_ca12ba24",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x6-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_651_1f50a067",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x5-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_5514mp-c_69e93de6",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Cherry",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x6-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_6514mp-c_5e2cac1b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Cherry",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x5-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_6acff45d",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x6-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_be23411c",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x5-5_solid-shell_maple_oil-satin_cold-rolled-hoops_5514mp-m_d040bdc0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x6-5_solid-shell_maple_oil-satin_cold-rolled-hoops_6514mp-m_50b232a5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_13x7_solid-shell_walnut_oil-satin_cold-rolled-hoops_713mp-w_12e1f800",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x5-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_5514mp-w_5757e2ad",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x6-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_6514mp-w_e5de85a5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Monoply Solid Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_13x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_a83f1d2a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x4_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_b6720126",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x5-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_bb4adfeb",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x6-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_a0c4f6ae",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel_14x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_8040ae7a",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x5-5_metal_stainless-steel_natural-raw-custom_triple-flang_ade2dc82",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x6-5_metal_stainless-steel_natural-raw-custom_triple-flang_6b7e9e82",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stainless Steel Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x5-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_dfd9b072",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Mahogany/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x6-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_3abf2f3b",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Mahogany/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x5-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_8a4d7133",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x6-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_220f99b5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Bamboo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x5-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_9445ad1c",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x6-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_09612fed",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_13x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_e62de174",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Walnut/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_14x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_c50f30b8",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Stereoply Walnut/Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_12x5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_51_11b0a56e",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_13x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_e6e58a5f",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x5-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__6eed2604",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x6-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__262af3a0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium_14x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_633fedaa",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium-hammered_14x5-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_ecf3c5e5",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dunnett-classic-drums_ti-titanium_titanium-hammered_14x6-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_48df1dc0",
+      "companyName": "Dunnett Classic Drums",
+      "modelName": "Titanium Hammered",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

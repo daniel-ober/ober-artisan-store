@@ -1,0 +1,108 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_copper-shell-custom_14x6-5_metal_copper_6deb06e6",
+      "companyName": "Q Drum Co.",
+      "modelName": "Copper Shell Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_maple-custom_14x6-5_ply_maple_d9bd89b1",
+      "companyName": "Q Drum Co.",
+      "modelName": "Maple Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_steel-shell-custom_14x6-5_metal_steel_15303944",
+      "companyName": "Q Drum Co.",
+      "modelName": "Steel Shell Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_copper-shell-custom_14x6-5_metal_copper_6deb06e6",
+      "companyName": "Q Drum Co.",
+      "modelName": "Copper Shell Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_maple-custom_14x6-5_ply_maple_d9bd89b1",
+      "companyName": "Q Drum Co.",
+      "modelName": "Maple Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_steel-shell-custom_14x6-5_metal_steel_15303944",
+      "companyName": "Q Drum Co.",
+      "modelName": "Steel Shell Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_copper-shell-custom_14x6-5_metal_copper_6deb06e6",
+      "companyName": "Q Drum Co.",
+      "modelName": "Copper Shell Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_maple-custom_14x6-5_ply_maple_d9bd89b1",
+      "companyName": "Q Drum Co.",
+      "modelName": "Maple Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "q-drum-co_copper-steel-wood-custom_steel-shell-custom_14x6-5_metal_steel_15303944",
+      "companyName": "Q Drum Co.",
+      "modelName": "Steel Shell Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

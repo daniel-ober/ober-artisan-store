@@ -1,0 +1,3444 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_19065de4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_7fe4d7ae",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_35d43bfc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fla_8c54ad7e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x5-5_14x5-5_solid-shell_maple_lacquer-natural-varies_tri_2023d543",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x6-5_14x6-5_solid-shell_maple_lacquer-natural-varies_tri_a282f4ef",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-craviotto-solid-cherry-14x6-5_14x6-5_solid-shell_cherry_lacquer-natural-varies_trip_3d7e1442",
+      "companyName": "DW / PDP",
+      "modelName": "DW/Craviotto Solid Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_pdp-signature_chad-smith-signature-14x5_14x5_metal_steel_triple-flanged_0d314dee",
+      "companyName": "DW / PDP",
+      "modelName": "Chad Smith Signature 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-13x5-5_13x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_6cdafd5b",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x5-5_14x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_dd12f9a9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x6-5_14x6-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_57e64c81",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x8_14x8_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-flange_ceb97f2e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-13x5-5_13x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_fb0b24a8",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x5-5_14x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_0ccae8d5",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x6-5_14x6-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_23f2053c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x8_14x8_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-flan_5f96d676",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_2f96fd8f",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b5c6eb34",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_d8ef42bd",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_277f15ad",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-13x5-5_13x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_ad0d8f1e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x5-5_14x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_900c3645",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x6-5_14x6-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_0d11d75c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x8_14x8_ply_maple_mahogany_lacquer-oil-natural-configurable_true-_284f6c4c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b0be3338",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_a6b7a863",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_7f7722fe",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_7ebac9a9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_ff2962c1",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_2b2a9590",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_b83b0f9e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_1bdd971d",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-13x5-5_13x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_3df711dc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x5-5_14x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_bf5eeecb",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x6-5_14x6-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_05574206",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x8_14x8_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flanged_b2a58dd2",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-13x5-5_13x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_064f73c9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x5-5_14x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_bcfa4329",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x6-5_14x6-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_c0bbc665",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x8_14x8_ply_purpleheart_lacquer-oil-natural-configurable_true-hoop-t_a24ce298",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-13x5-5_13x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_73ccbdcd",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x5-5_14x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_9f41b8c7",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x6-5_14x6-5_ply_aluminum_maple_lacquer-oil-natural-confi_116aa797",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x8_14x8_ply_aluminum_maple_lacquer-oil-natural-configura_b7ee6b5e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-13x5-5_13x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_d80949bb",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x5-5_14x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_824a346f",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x6-5_14x6-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_9e72c6c9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x8_14x8_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-flan_6d7a70c4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-colored-acrylic_triple-flanged_dca3397f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-colored-acrylic_acrylic-hoops_ab2304e9",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x8_14x8_acrylic_acrylic_clear-colored-acrylic_triple-flanged_cf275f56",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-10x6_10x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_68441786",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 10x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-12x6_12x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_aa986b89",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 12x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x5-5_13x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_2f6ee285",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x7_13x7_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_1e1a026b",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x5-5_14x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_9b008a0c",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x6-5_14x6-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_185f847d",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x8_14x8_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_0cdf5cd6",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_24bdf5bb",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_d2ed25f9",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x8_14x8_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_c1a3471b",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-black-nickel-over-brass-14x6-5_14x6-5_metal_brass_black-nickel-over-brass_true-hoop-t_ecf624f0",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Black Nickel over Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_brushed-aluminum_true-hoop-triple-flang_823f1ea9",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Brushed Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-steel-14x6-5_14x6-5_metal_steel_steel_true-hoop-triple-flanged_5d6bf97f",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-aluminum-14x6-5_14x6-5_metal_aluminum_varies_true-hoop-triple-flanged_609a0827",
+      "companyName": "DW / PDP",
+      "modelName": "DW Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x5-5_14x5-5_metal_brass_varies_true-hoop-triple-flanged_1e9dde9b",
+      "companyName": "DW / PDP",
+      "modelName": "DW Brass 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x6-5_14x6-5_metal_brass_varies_true-hoop-triple-flanged_b770c9bb",
+      "companyName": "DW / PDP",
+      "modelName": "DW Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-bronze-14x6-5_14x6-5_metal_bronze_varies_true-hoop-triple-flanged_9fb017b1",
+      "companyName": "DW / PDP",
+      "modelName": "DW Bronze 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-carbon-fiber-14x6-5_14x6-5_composite_carbon-fiber_lacquer-natural-varies_triple-fla_152a2abd",
+      "companyName": "DW / PDP",
+      "modelName": "DW Carbon Fiber 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-concrete-14x6-5_14x6-5_composite_concrete-composite_varies_true-hoop-triple-flange_eed680e3",
+      "companyName": "DW / PDP",
+      "modelName": "DW Concrete 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-copper-14x6-5_14x6-5_metal_copper_varies_true-hoop-triple-flanged_4b211db1",
+      "companyName": "DW / PDP",
+      "modelName": "DW Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x5-5_14x5-5_ply_bamboo_lacquer-natural-varies_triple-flanged_afc92df0",
+      "companyName": "DW / PDP",
+      "modelName": "DW Eco-X Bamboo/Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x6-5_14x6-5_ply_bamboo_lacquer-natural-varies_triple-flanged_6a8057b4",
+      "companyName": "DW / PDP",
+      "modelName": "DW Eco-X Bamboo/Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-edge-maple-metal-14x6_14x6_hybrid_maple_varies_true-hoop-triple-flanged_375984f2",
+      "companyName": "DW / PDP",
+      "modelName": "DW Edge Maple/Metal 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-maple-10-6-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_31bca584",
+      "companyName": "DW / PDP",
+      "modelName": "DW Maple 10+6 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-neil-peart-r40-icon-snare-14x6-5_14x6-5_ply_maple_lacquer-natural-varies_triple-fla_caab5483",
+      "companyName": "DW / PDP",
+      "modelName": "DW Neil Peart R40 Icon Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-triple-flange_7c064417",
+      "companyName": "DW / PDP",
+      "modelName": "DW Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x5-5_14x5-5_solid-shell_maple_varies_true-hoop-triple-flanged_021e6484",
+      "companyName": "DW / PDP",
+      "modelName": "DW Super Solid Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x6-5_14x6-5_solid-shell_maple_varies_true-hoop-triple-flanged_8cda9d93",
+      "companyName": "DW / PDP",
+      "modelName": "DW Super Solid Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-titanium-14x6-5_14x6-5_metal_titanium_varies_true-hoop-triple-flanged_5c73d450",
+      "companyName": "DW / PDP",
+      "modelName": "DW Titanium 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-top-edge-maple-metal-14x5-5_14x5-5_hybrid_maple_varies_true-hoop-triple-flanged_a1266429",
+      "companyName": "DW / PDP",
+      "modelName": "DW Top Edge Maple/Metal 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x5_14x5_metal_stainless-steel_varies_true-hoop-triple_a1ae903f",
+      "companyName": "DW / PDP",
+      "modelName": "DW True Sonic Stainless Steel 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-tr_a925b00a",
+      "companyName": "DW / PDP",
+      "modelName": "DW True Sonic Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-workshop-series-maple-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_9c1dcfb5",
+      "companyName": "DW / PDP",
+      "modelName": "DW Workshop Series Maple 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-signature_eric-hernandez-signature-concept-maple-14x4_14x4_ply_maple_triple-flanged_e301abd5",
+      "companyName": "DW / PDP",
+      "modelName": "Eric Hernandez Signature Concept Maple 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-ace-13x6-5_13x6-5_ply_maple_triple-flanged_f52c9b71",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Ace 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-bubinga-14x6-5_14x6-5_ply_bubinga_triple-flanged_b0f83cc0",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-maple-walnut-14x6-5_14x6-5_ply_maple_walnut_triple-flanged_f850de7b",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Maple/Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-walnut-14x6-5_14x6-5_ply_walnut_walnut_triple-flanged_5691be79",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-woody-13x7_13x7_ply_maple_triple-flanged_3845357d",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Woody 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x5-5_14x5-5_ply_maple_lacquer_true-hoop-triple-flanged_ee472298",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x6-5_14x6-5_ply_maple_lacquer_true-hoop-triple-flanged_7b3b34bc",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x8_14x8_ply_maple_lacquer_true-hoop-triple-flanged_33783f76",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-jazz-series-maple-gum-14x5-5_14x5-5_ply_maple_roundover-vintage-style-estimated_lac_aa3ea5b8",
+      "companyName": "DW / PDP",
+      "modelName": "DW Jazz Series Maple/Gum 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x5-5_14x5-5_metal_steel_flanged-45-degree-edge-estimated-from_8dbbee2f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Nickel over Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x6-5_14x6-5_metal_steel_flanged-45-degree-edge-estimated-from_30641c17",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Nickel over Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-brass-14x6-5_14x6-5_metal_brass_flanged-45-degree-edge-estimated-from-review-listing_br_51c51e3f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x5_14x5_metal_aluminum_flanged-45-degree-edge-estimated-from-review-_94509787",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Brushed Aluminum 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_flanged-45-degree-edge-estimated-from-rev_104a3567",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Brushed Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-copper-14x6-5_14x6-5_metal_copper_flanged-45-degree-edge-estimated-from-review-listing__3716c84f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_19065de4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_7fe4d7ae",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_35d43bfc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fla_8c54ad7e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x5-5_14x5-5_solid-shell_maple_lacquer-natural-varies_tri_2023d543",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x6-5_14x6-5_solid-shell_maple_lacquer-natural-varies_tri_a282f4ef",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-craviotto-solid-cherry-14x6-5_14x6-5_solid-shell_cherry_lacquer-natural-varies_trip_3d7e1442",
+      "companyName": "DW / PDP",
+      "modelName": "DW/Craviotto Solid Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_pdp-signature_chad-smith-signature-14x5_14x5_metal_steel_triple-flanged_0d314dee",
+      "companyName": "DW / PDP",
+      "modelName": "Chad Smith Signature 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-13x5-5_13x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_6cdafd5b",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x5-5_14x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_dd12f9a9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x6-5_14x6-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_57e64c81",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x8_14x8_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-flange_ceb97f2e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-13x5-5_13x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_fb0b24a8",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x5-5_14x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_0ccae8d5",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x6-5_14x6-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_23f2053c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x8_14x8_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-flan_5f96d676",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_2f96fd8f",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b5c6eb34",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_d8ef42bd",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_277f15ad",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-13x5-5_13x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_ad0d8f1e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x5-5_14x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_900c3645",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x6-5_14x6-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_0d11d75c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x8_14x8_ply_maple_mahogany_lacquer-oil-natural-configurable_true-_284f6c4c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b0be3338",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_a6b7a863",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_7f7722fe",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_7ebac9a9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_ff2962c1",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_2b2a9590",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_b83b0f9e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_1bdd971d",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-13x5-5_13x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_3df711dc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x5-5_14x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_bf5eeecb",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x6-5_14x6-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_05574206",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x8_14x8_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flanged_b2a58dd2",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-13x5-5_13x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_064f73c9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x5-5_14x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_bcfa4329",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x6-5_14x6-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_c0bbc665",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x8_14x8_ply_purpleheart_lacquer-oil-natural-configurable_true-hoop-t_a24ce298",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-13x5-5_13x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_73ccbdcd",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x5-5_14x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_9f41b8c7",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x6-5_14x6-5_ply_aluminum_maple_lacquer-oil-natural-confi_116aa797",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x8_14x8_ply_aluminum_maple_lacquer-oil-natural-configura_b7ee6b5e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-13x5-5_13x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_d80949bb",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x5-5_14x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_824a346f",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x6-5_14x6-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_9e72c6c9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x8_14x8_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-flan_6d7a70c4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-colored-acrylic_triple-flanged_dca3397f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-colored-acrylic_acrylic-hoops_ab2304e9",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x8_14x8_acrylic_acrylic_clear-colored-acrylic_triple-flanged_cf275f56",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-10x6_10x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_68441786",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 10x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-12x6_12x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_aa986b89",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 12x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x5-5_13x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_2f6ee285",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x7_13x7_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_1e1a026b",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x5-5_14x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_9b008a0c",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x6-5_14x6-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_185f847d",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x8_14x8_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_0cdf5cd6",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_24bdf5bb",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_d2ed25f9",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x8_14x8_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_c1a3471b",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-black-nickel-over-brass-14x6-5_14x6-5_metal_brass_black-nickel-over-brass_true-hoop-t_ecf624f0",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Black Nickel over Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_brushed-aluminum_true-hoop-triple-flang_823f1ea9",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Brushed Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-steel-14x6-5_14x6-5_metal_steel_steel_true-hoop-triple-flanged_5d6bf97f",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-aluminum-14x6-5_14x6-5_metal_aluminum_varies_true-hoop-triple-flanged_609a0827",
+      "companyName": "DW / PDP",
+      "modelName": "DW Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x5-5_14x5-5_metal_brass_varies_true-hoop-triple-flanged_1e9dde9b",
+      "companyName": "DW / PDP",
+      "modelName": "DW Brass 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x6-5_14x6-5_metal_brass_varies_true-hoop-triple-flanged_b770c9bb",
+      "companyName": "DW / PDP",
+      "modelName": "DW Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-bronze-14x6-5_14x6-5_metal_bronze_varies_true-hoop-triple-flanged_9fb017b1",
+      "companyName": "DW / PDP",
+      "modelName": "DW Bronze 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-carbon-fiber-14x6-5_14x6-5_composite_carbon-fiber_lacquer-natural-varies_triple-fla_152a2abd",
+      "companyName": "DW / PDP",
+      "modelName": "DW Carbon Fiber 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-concrete-14x6-5_14x6-5_composite_concrete-composite_varies_true-hoop-triple-flange_eed680e3",
+      "companyName": "DW / PDP",
+      "modelName": "DW Concrete 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-copper-14x6-5_14x6-5_metal_copper_varies_true-hoop-triple-flanged_4b211db1",
+      "companyName": "DW / PDP",
+      "modelName": "DW Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x5-5_14x5-5_ply_bamboo_lacquer-natural-varies_triple-flanged_afc92df0",
+      "companyName": "DW / PDP",
+      "modelName": "DW Eco-X Bamboo/Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x6-5_14x6-5_ply_bamboo_lacquer-natural-varies_triple-flanged_6a8057b4",
+      "companyName": "DW / PDP",
+      "modelName": "DW Eco-X Bamboo/Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-edge-maple-metal-14x6_14x6_hybrid_maple_varies_true-hoop-triple-flanged_375984f2",
+      "companyName": "DW / PDP",
+      "modelName": "DW Edge Maple/Metal 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-maple-10-6-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_31bca584",
+      "companyName": "DW / PDP",
+      "modelName": "DW Maple 10+6 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-neil-peart-r40-icon-snare-14x6-5_14x6-5_ply_maple_lacquer-natural-varies_triple-fla_caab5483",
+      "companyName": "DW / PDP",
+      "modelName": "DW Neil Peart R40 Icon Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-triple-flange_7c064417",
+      "companyName": "DW / PDP",
+      "modelName": "DW Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x5-5_14x5-5_solid-shell_maple_varies_true-hoop-triple-flanged_021e6484",
+      "companyName": "DW / PDP",
+      "modelName": "DW Super Solid Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x6-5_14x6-5_solid-shell_maple_varies_true-hoop-triple-flanged_8cda9d93",
+      "companyName": "DW / PDP",
+      "modelName": "DW Super Solid Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-titanium-14x6-5_14x6-5_metal_titanium_varies_true-hoop-triple-flanged_5c73d450",
+      "companyName": "DW / PDP",
+      "modelName": "DW Titanium 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-top-edge-maple-metal-14x5-5_14x5-5_hybrid_maple_varies_true-hoop-triple-flanged_a1266429",
+      "companyName": "DW / PDP",
+      "modelName": "DW Top Edge Maple/Metal 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x5_14x5_metal_stainless-steel_varies_true-hoop-triple_a1ae903f",
+      "companyName": "DW / PDP",
+      "modelName": "DW True Sonic Stainless Steel 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-tr_a925b00a",
+      "companyName": "DW / PDP",
+      "modelName": "DW True Sonic Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-workshop-series-maple-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_9c1dcfb5",
+      "companyName": "DW / PDP",
+      "modelName": "DW Workshop Series Maple 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-signature_eric-hernandez-signature-concept-maple-14x4_14x4_ply_maple_triple-flanged_e301abd5",
+      "companyName": "DW / PDP",
+      "modelName": "Eric Hernandez Signature Concept Maple 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-ace-13x6-5_13x6-5_ply_maple_triple-flanged_f52c9b71",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Ace 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-bubinga-14x6-5_14x6-5_ply_bubinga_triple-flanged_b0f83cc0",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-maple-walnut-14x6-5_14x6-5_ply_maple_walnut_triple-flanged_f850de7b",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Maple/Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-walnut-14x6-5_14x6-5_ply_walnut_walnut_triple-flanged_5691be79",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-woody-13x7_13x7_ply_maple_triple-flanged_3845357d",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Woody 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x5-5_14x5-5_ply_maple_lacquer_true-hoop-triple-flanged_ee472298",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x6-5_14x6-5_ply_maple_lacquer_true-hoop-triple-flanged_7b3b34bc",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x8_14x8_ply_maple_lacquer_true-hoop-triple-flanged_33783f76",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x4",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_19065de4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_7fe4d7ae",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_35d43bfc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fla_8c54ad7e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x5-5_14x5-5_solid-shell_maple_lacquer-natural-varies_tri_2023d543",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x6-5_14x6-5_solid-shell_maple_lacquer-natural-varies_tri_a282f4ef",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-craviotto-solid-cherry-14x6-5_14x6-5_solid-shell_cherry_lacquer-natural-varies_trip_3d7e1442",
+      "companyName": "DW / PDP",
+      "modelName": "DW/Craviotto Solid Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_pdp-signature_chad-smith-signature-14x5_14x5_metal_steel_triple-flanged_0d314dee",
+      "companyName": "DW / PDP",
+      "modelName": "Chad Smith Signature 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-13x5-5_13x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_6cdafd5b",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x5-5_14x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_dd12f9a9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x6-5_14x6-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_57e64c81",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-birch-14x8_14x8_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-flange_ceb97f2e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Birch 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-13x5-5_13x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_fb0b24a8",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x5-5_14x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_0ccae8d5",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x6-5_14x6-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_23f2053c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-cherry-14x8_14x8_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-flan_5f96d676",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Cherry 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_2f96fd8f",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b5c6eb34",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_d8ef42bd",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-hvx-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_277f15ad",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple HVX 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-13x5-5_13x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_ad0d8f1e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x5-5_14x5-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_900c3645",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x6-5_14x6-5_ply_maple_mahogany_lacquer-oil-natural-configurable_t_0d11d75c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-mahogany-14x8_14x8_ply_maple_mahogany_lacquer-oil-natural-configurable_true-_284f6c4c",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple Mahogany 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_b0be3338",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_a6b7a863",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_7f7722fe",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-vlt-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fl_7ebac9a9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple VLT 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_ff2962c1",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_2b2a9590",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-t_b83b0f9e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-maple-x-shell-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-tripl_1bdd971d",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Maple X-Shell 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-13x5-5_13x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_3df711dc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x5-5_14x5-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_bf5eeecb",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x6-5_14x6-5_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flange_05574206",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-oak-14x8_14x8_ply_oak_lacquer-oil-natural-configurable_true-hoop-triple-flanged_b2a58dd2",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Oak 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-13x5-5_13x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_064f73c9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x5-5_14x5-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_bcfa4329",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x6-5_14x6-5_ply_purpleheart_lacquer-oil-natural-configurable_true-ho_c0bbc665",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-purpleheart-14x8_14x8_ply_purpleheart_lacquer-oil-natural-configurable_true-hoop-t_a24ce298",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Purpleheart 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-13x5-5_13x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_73ccbdcd",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x5-5_14x5-5_ply_aluminum_maple_lacquer-oil-natural-confi_9f41b8c7",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x6-5_14x6-5_ply_aluminum_maple_lacquer-oil-natural-confi_116aa797",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-sonicply-aluminum-maple-14x8_14x8_ply_aluminum_maple_lacquer-oil-natural-configura_b7ee6b5e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's SonicPly Aluminum/Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-13x5-5_13x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_d80949bb",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x5-5_14x5-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_824a346f",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x6-5_14x6-5_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-_9e72c6c9",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-walnut-14x8_14x8_ply_walnut_lacquer-oil-natural-configurable_true-hoop-triple-flan_6d7a70c4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Walnut 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-colored-acrylic_triple-flanged_dca3397f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-colored-acrylic_acrylic-hoops_ab2304e9",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x8_14x8_acrylic_acrylic_clear-colored-acrylic_triple-flanged_cf275f56",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Acrylic 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-10x6_10x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_68441786",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 10x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-12x6_12x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_aa986b89",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 12x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x5-5_13x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_2f6ee285",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x7_13x7_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_1e1a026b",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x5-5_14x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_9b008a0c",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x6-5_14x6-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_185f847d",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x8_14x8_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_0cdf5cd6",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Wax Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_24bdf5bb",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_d2ed25f9",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-acrylic-14x8_14x8_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_c1a3471b",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Acrylic 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-black-nickel-over-brass-14x6-5_14x6-5_metal_brass_black-nickel-over-brass_true-hoop-t_ecf624f0",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Black Nickel over Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_brushed-aluminum_true-hoop-triple-flang_823f1ea9",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Brushed Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-steel-14x6-5_14x6-5_metal_steel_steel_true-hoop-triple-flanged_5d6bf97f",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-aluminum-14x6-5_14x6-5_metal_aluminum_varies_true-hoop-triple-flanged_609a0827",
+      "companyName": "DW / PDP",
+      "modelName": "DW Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x5-5_14x5-5_metal_brass_varies_true-hoop-triple-flanged_1e9dde9b",
+      "companyName": "DW / PDP",
+      "modelName": "DW Brass 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-brass-14x6-5_14x6-5_metal_brass_varies_true-hoop-triple-flanged_b770c9bb",
+      "companyName": "DW / PDP",
+      "modelName": "DW Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-bronze-14x6-5_14x6-5_metal_bronze_varies_true-hoop-triple-flanged_9fb017b1",
+      "companyName": "DW / PDP",
+      "modelName": "DW Bronze 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-carbon-fiber-14x6-5_14x6-5_composite_carbon-fiber_lacquer-natural-varies_triple-fla_152a2abd",
+      "companyName": "DW / PDP",
+      "modelName": "DW Carbon Fiber 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-concrete-14x6-5_14x6-5_composite_concrete-composite_varies_true-hoop-triple-flange_eed680e3",
+      "companyName": "DW / PDP",
+      "modelName": "DW Concrete 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-copper-14x6-5_14x6-5_metal_copper_varies_true-hoop-triple-flanged_4b211db1",
+      "companyName": "DW / PDP",
+      "modelName": "DW Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x5-5_14x5-5_ply_bamboo_lacquer-natural-varies_triple-flanged_afc92df0",
+      "companyName": "DW / PDP",
+      "modelName": "DW Eco-X Bamboo/Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x6-5_14x6-5_ply_bamboo_lacquer-natural-varies_triple-flanged_6a8057b4",
+      "companyName": "DW / PDP",
+      "modelName": "DW Eco-X Bamboo/Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-edge-maple-metal-14x6_14x6_hybrid_maple_varies_true-hoop-triple-flanged_375984f2",
+      "companyName": "DW / PDP",
+      "modelName": "DW Edge Maple/Metal 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-maple-10-6-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_31bca584",
+      "companyName": "DW / PDP",
+      "modelName": "DW Maple 10+6 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-neil-peart-r40-icon-snare-14x6-5_14x6-5_ply_maple_lacquer-natural-varies_triple-fla_caab5483",
+      "companyName": "DW / PDP",
+      "modelName": "DW Neil Peart R40 Icon Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-triple-flange_7c064417",
+      "companyName": "DW / PDP",
+      "modelName": "DW Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x5-5_14x5-5_solid-shell_maple_varies_true-hoop-triple-flanged_021e6484",
+      "companyName": "DW / PDP",
+      "modelName": "DW Super Solid Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x6-5_14x6-5_solid-shell_maple_varies_true-hoop-triple-flanged_8cda9d93",
+      "companyName": "DW / PDP",
+      "modelName": "DW Super Solid Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-titanium-14x6-5_14x6-5_metal_titanium_varies_true-hoop-triple-flanged_5c73d450",
+      "companyName": "DW / PDP",
+      "modelName": "DW Titanium 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-top-edge-maple-metal-14x5-5_14x5-5_hybrid_maple_varies_true-hoop-triple-flanged_a1266429",
+      "companyName": "DW / PDP",
+      "modelName": "DW Top Edge Maple/Metal 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x5_14x5_metal_stainless-steel_varies_true-hoop-triple_a1ae903f",
+      "companyName": "DW / PDP",
+      "modelName": "DW True Sonic Stainless Steel 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-tr_a925b00a",
+      "companyName": "DW / PDP",
+      "modelName": "DW True Sonic Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-workshop-series-maple-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_9c1dcfb5",
+      "companyName": "DW / PDP",
+      "modelName": "DW Workshop Series Maple 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-signature_eric-hernandez-signature-concept-maple-14x4_14x4_ply_maple_triple-flanged_e301abd5",
+      "companyName": "DW / PDP",
+      "modelName": "Eric Hernandez Signature Concept Maple 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-ace-13x6-5_13x6-5_ply_maple_triple-flanged_f52c9b71",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Ace 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-bubinga-14x6-5_14x6-5_ply_bubinga_triple-flanged_b0f83cc0",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-maple-walnut-14x6-5_14x6-5_ply_maple_walnut_triple-flanged_f850de7b",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Maple/Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-concept-limited-walnut-14x6-5_14x6-5_ply_walnut_walnut_triple-flanged_5691be79",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Concept Limited Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_pdp-limited_pdp-woody-13x7_13x7_ply_maple_triple-flanged_3845357d",
+      "companyName": "DW / PDP",
+      "modelName": "PDP Woody 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x5-5_14x5-5_ply_maple_lacquer_true-hoop-triple-flanged_ee472298",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x6-5_14x6-5_ply_maple_lacquer_true-hoop-triple-flanged_7b3b34bc",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_performance-series_performance-series-hvx-maple-14x8_14x8_ply_maple_lacquer_true-hoop-triple-flanged_33783f76",
+      "companyName": "DW / PDP",
+      "modelName": "Performance Series HVX Maple 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-jazz-series-maple-gum-14x5-5_14x5-5_ply_maple_roundover-vintage-style-estimated_lac_aa3ea5b8",
+      "companyName": "DW / PDP",
+      "modelName": "DW Jazz Series Maple/Gum 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x5-5_14x5-5_metal_steel_flanged-45-degree-edge-estimated-from_8dbbee2f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Nickel over Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x6-5_14x6-5_metal_steel_flanged-45-degree-edge-estimated-from_30641c17",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Black Nickel over Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-brass-14x6-5_14x6-5_metal_brass_flanged-45-degree-edge-estimated-from-review-listing_br_51c51e3f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x5_14x5_metal_aluminum_flanged-45-degree-edge-estimated-from-review-_94509787",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Brushed Aluminum 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_flanged-45-degree-edge-estimated-from-rev_104a3567",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Brushed Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_pdp-concept-metal_concept-copper-14x6-5_14x6-5_metal_copper_flanged-45-degree-edge-estimated-from-review-listing__3716c84f",
+      "companyName": "DW / PDP",
+      "modelName": "Concept Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x4",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+      "companyName": "DW / PDP",
+      "modelName": "MFG True-Cast Bell Bronze 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Maple 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Maple 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1",
+      "companyName": "DW / PDP",
+      "modelName": "Design Series Maple 14x8",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": [
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_19065de4",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 13x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_7fe4d7ae",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_35d43bfc",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_collector-s-series_collector-s-classics-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fla_8c54ad7e",
+      "companyName": "DW / PDP",
+      "modelName": "Collector's Classics 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x5-5_14x5-5_solid-shell_maple_lacquer-natural-varies_tri_2023d543",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x6-5_14x6-5_solid-shell_maple_lacquer-natural-varies_tri_a282f4ef",
+      "companyName": "DW / PDP",
+      "modelName": "Craviotto Solid Maple by DW 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-craviotto-solid-cherry-14x6-5_14x6-5_solid-shell_cherry_lacquer-natural-varies_trip_3d7e1442",
+      "companyName": "DW / PDP",
+      "modelName": "DW/Craviotto Solid Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 16
+    },
+    {
+      "id": "dw-pdp_dw-historical-discontinued_dw-jazz-series-maple-gum-14x5-5_14x5-5_ply_maple_roundover-vintage-style-estimated_lac_aa3ea5b8",
+      "companyName": "DW / PDP",
+      "modelName": "DW Jazz Series Maple/Gum 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType",
+        "reRingMaterial"
+      ],
+      "priorityScore": 11
+    }
+  ]
+}

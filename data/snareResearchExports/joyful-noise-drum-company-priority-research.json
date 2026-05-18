@@ -1,0 +1,273 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_aluminum-14x6-5_14x6-5_metal_aluminum_ec1790e0",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_beacon-bronze-14x6-5_14x6-5_metal_bronze_b21d31a4",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Beacon Bronze 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_conquered-copper-14x6-5_14x6-5_metal_copper_d6278474",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Conquered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_core-model-brass-14x6-5_14x6-5_metal_brass_95fcecfc",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Core Model Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_knight-hawk-ferromanganese-steel-14x6-5_14x6-5_metal_steel_b99a6c28",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Knight Hawk Ferromanganese Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_legacy-mahogany-14x6-5_14x6-5_ply_mahogany_787bf0db",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Legacy Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_personal-reserve-exotic-wood-14x6-5_14x6-5_ply_exotic-hardwood_7710c3d1",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Personal Reserve Exotic Wood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_tko-brass-14x6-5_14x6-5_metal_brass_20583d5f",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "TKO Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_aluminum-14x6-5_14x6-5_metal_aluminum_ec1790e0",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_beacon-bronze-14x6-5_14x6-5_metal_bronze_b21d31a4",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Beacon Bronze 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_conquered-copper-14x6-5_14x6-5_metal_copper_d6278474",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Conquered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_core-model-brass-14x6-5_14x6-5_metal_brass_95fcecfc",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Core Model Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_knight-hawk-ferromanganese-steel-14x6-5_14x6-5_metal_steel_b99a6c28",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Knight Hawk Ferromanganese Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_legacy-mahogany-14x6-5_14x6-5_ply_mahogany_787bf0db",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Legacy Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_personal-reserve-exotic-wood-14x6-5_14x6-5_ply_exotic-hardwood_7710c3d1",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Personal Reserve Exotic Wood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_tko-brass-14x6-5_14x6-5_metal_brass_20583d5f",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "TKO Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_aluminum-14x6-5_14x6-5_metal_aluminum_ec1790e0",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_beacon-bronze-14x6-5_14x6-5_metal_bronze_b21d31a4",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Beacon Bronze 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_conquered-copper-14x6-5_14x6-5_metal_copper_d6278474",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Conquered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_core-model-brass-14x6-5_14x6-5_metal_brass_95fcecfc",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Core Model Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_knight-hawk-ferromanganese-steel-14x6-5_14x6-5_metal_steel_b99a6c28",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Knight Hawk Ferromanganese Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_legacy-mahogany-14x6-5_14x6-5_ply_mahogany_787bf0db",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Legacy Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_personal-reserve-exotic-wood-14x6-5_14x6-5_ply_exotic-hardwood_7710c3d1",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "Personal Reserve Exotic Wood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "joyful-noise-drum-company_custom-reserve_tko-brass-14x6-5_14x6-5_metal_brass_20583d5f",
+      "companyName": "Joyful Noise Drum Company",
+      "modelName": "TKO Brass 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}
