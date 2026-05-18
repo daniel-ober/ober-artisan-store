@@ -17,7 +17,7 @@ const fixturePath = path.resolve(
 
   __dirname,
 
-'../../data/fixtures/legacyPrint/sampleVoiceProfileQueue.json'
+'../../data/fixtures/legacyPrint/tamaSc145a40VoiceProfileQueue.json'
 );
 
 function loadFixtureQueue() {
