@@ -1,0 +1,268 @@
+{
+  "patchName": "canopus-core-batch-1-minimum-engine-research",
+  "createdAt": "2026-05-18T06:02:32.289Z",
+  "patchType": "source-backed-core-shell-research",
+  "records": [
+    {
+      "id": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_r-o-f-project_r-o-f-project-snare-drum_14x6-5_other-needs-research_0c72185e",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x5-5_14x5-5_steam-bent_maple_cd277bcc",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x6-5_14x6-5_steam-bent_maple_172ecd37",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_ash_ash-snare-14x5-5_14x5-5_ply_ash_6063989f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_ash_ash-snare-14x6-5_14x6-5_ply_ash_9873ec99",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    },
+    {
+      "id": "canopus_birch_birch-snare-14x5-5_14x5-5_ply_birch_a4ab4332",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "patch": {
+        "shellMaterial1": "RESEARCH_REQUIRED",
+        "shellMaterial2": "unknown",
+        "shellMaterial3": "unknown",
+        "shellThicknessMm": "RESEARCH_REQUIRED",
+        "bearingEdge": "RESEARCH_REQUIRED",
+        "reinforcementRings": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "reRingMaterial": "unknown",
+        "reRingThicknessMm": null,
+        "snareBeds": "RESEARCH_REQUIRED_TRUE_OR_FALSE",
+        "snareBedType": "RESEARCH_REQUIRED_BUCKET",
+        "sourceConfidence": "low",
+        "voiceScoreConfidence": "low",
+        "primarySourceUrl": "RESEARCH_REQUIRED",
+        "secondarySourceUrl": "unknown",
+        "notesOnMissingData": "Research required before this record can pass core shell minimum readiness.",
+        "researchUpdatedBy": "canopus-core-batch-1"
+      }
+    }
+  ]
+}
