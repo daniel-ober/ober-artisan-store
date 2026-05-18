@@ -25,33 +25,21 @@ const targets = Array.isArray(raw)
 
     : [];
 
-function normalizeFamilyName(model) {
+function normalizeFamilyName(value) {
 
-  return (model || '')
+  return (value || '')
 
     .toLowerCase()
 
-    // sizes
-
     .replace(/\d+x\d+(\.\d+)?/gi, '')
-
-    // ply counts
 
     .replace(/\b\d+[- ]ply\b/gi, '')
 
-    // material words
-
-    .replace(/\b(maple|birch|mahogany|walnut|oak|beech|poplar|brass|bronze|copper|aluminum|aluminium|steel|bell brass|acrylic|chrome over brass|chrome over steel)\b/gi, '')
-
-    // finish descriptors
+    .replace(/\b(maple|birch|mahogany|walnut|oak|beech|poplar|brass|bronze|copper|aluminum|aluminium|steel|bell brass|acrylic)\b/gi, '')
 
     .replace(/\b(hand hammered|hammered|satin|gloss|natural|lacquer|wrap|burst|fade|matte)\b/gi, '')
 
-    // generic descriptors
-
     .replace(/\b(snare drum|snare|drum)\b/gi, '')
-
-    // punctuation cleanup
 
     .replace(/[-_/]/g, ' ')
 
@@ -65,9 +53,17 @@ const grouped = {};
 
 for (const row of targets) {
 
-  const family = normalizeFamilyName(row.modelName);
+  const source =
 
-  if (!family || family.length < 3) continue;
+    row.lineSeries ||
+
+    row.modelName ||
+
+    '';
+
+  const family = normalizeFamilyName(source);
+
+  if (!family || family.length < 2) continue;
 
   const key = `${row.companyName}__${family}`;
 
@@ -78,6 +74,8 @@ for (const row of targets) {
       company: row.companyName,
 
       family,
+
+      lineSeries: row.lineSeries || '',
 
       count: 0,
 
@@ -131,11 +129,13 @@ console.log(`Built ${output.length} family inference candidates.`);
 
 console.table(
 
-  output.slice(0, 40).map((f) => ({
+  output.slice(0, 50).map((f) => ({
 
     company: f.company,
 
     family: f.family,
+
+    lineSeries: f.lineSeries,
 
     count: f.count,
 
