@@ -103,7 +103,9 @@
     "heritage:compare": "node scripts/compare-heritage-configs.mjs",
     "legacyprint:migrate:snares:dry": "node scripts/legacyPrint/migrateSnareReferences.mjs --dry-run",
     "legacyprint:migrate:snares:test": "node scripts/legacyPrint/migrateSnareReferences.mjs --limit=5",
-    "legacyprint:migrate:snares": "node scripts/legacyPrint/migrateSnareReferences.mjs"
+    "legacyprint:migrate:snares": "node scripts/legacyPrint/migrateSnareReferences.mjs",
+    "legacyprint:rebuild:voice-profiles": "node scripts/legacyPrint/rebuildVoiceProfiles.mjs",
+    "legacyprint:rebuild:voice-profiles:dry": "node scripts/legacyPrint/rebuildVoiceProfiles.mjs --dry-run"
   },
   "eslintConfig": {
     "extends": [
