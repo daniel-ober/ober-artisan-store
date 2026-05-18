@@ -1,3 +1,4 @@
+
 import { MODIFIER_REGISTRY, UNKNOWN_MODIFIER_FALLBACK } from './modifierRegistry.js';
 
 const normalize = (value = "") =>
@@ -11,6 +12,10 @@ const normalize = (value = "") =>
     .replace(/\s+/g, " ")
 
     .trim();
+
+const getCandidates = (record) =>
+
+  [record.label, record.id, ...(record.aliases || [])].map(normalize);
 
 export function resolveModifier(category, rawValue) {
 
@@ -34,13 +39,31 @@ export function resolveModifier(category, rawValue) {
 
   const records = MODIFIER_REGISTRY[category] || [];
 
-  const match = records.find((record) => {
+  const exactMatch = records.find((record) =>
 
-    const candidates = [record.label, record.id, ...(record.aliases || [])].map(normalize);
+    getCandidates(record).some((candidate) => candidate === normalizedValue)
 
-    return candidates.some((candidate) => candidate === normalizedValue || normalizedValue.includes(candidate));
+  );
 
-  });
+  const partialMatch =
+
+    exactMatch ||
+
+    records.find((record) =>
+
+      getCandidates(record).some(
+
+        (candidate) =>
+
+          candidate.length > 3 &&
+
+          normalizedValue.includes(candidate)
+
+      )
+
+    );
+
+  const match = exactMatch || partialMatch;
 
   if (!match) {
 
