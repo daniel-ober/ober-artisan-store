@@ -1,0 +1,1521 @@
+{
+  "totalDocs": 1551,
+  "summary": {
+    "coreShellReady": 118,
+    "stockConfigReady": 0,
+    "modifierReady": 118,
+    "needsCoreResearch": 1433,
+    "needsStockResearch": 1551
+  },
+  "coreFieldCounts": {
+    "shellThicknessMm": 1085,
+    "bearingEdge": 770,
+    "snareBedType": 1186,
+    "shellMaterial1": 5,
+    "reRingMaterial": 56,
+    "reinforcementRings": 6,
+    "snareBeds": 5
+  },
+  "stockFieldCounts": {
+    "coreShellReady required first": 1433,
+    "hoopType": 166,
+    "hoopMaterial": 1540,
+    "snareWireMaterial": 1537,
+    "snareWireStrandCount": 1539,
+    "stockBatterHead": 961,
+    "stockResoHead": 1073,
+    "snareThrow": 573,
+    "lugCount": 252,
+    "lugType": 270
+  },
+  "byCompanyCore": {
+    "A&F Drum Co.": {
+      "shellThicknessMm": 3,
+      "bearingEdge": 3,
+      "snareBedType": 3
+    },
+    "AHEAD": {
+      "bearingEdge": 33,
+      "snareBedType": 18
+    },
+    "Brady Drum Company": {
+      "shellThicknessMm": 110
+    },
+    "Brooks Drum Co.": {
+      "shellThicknessMm": 12,
+      "bearingEdge": 12,
+      "snareBedType": 12
+    },
+    "C&C Drums USA": {
+      "snareBedType": 9,
+      "shellThicknessMm": 6
+    },
+    "Canopus": {
+      "shellThicknessMm": 45,
+      "bearingEdge": 54,
+      "snareBedType": 63,
+      "shellMaterial1": 2
+    },
+    "Craviotto": {
+      "shellThicknessMm": 47,
+      "snareBedType": 49
+    },
+    "Dunnett Classic Drums": {
+      "shellThicknessMm": 56,
+      "bearingEdge": 56,
+      "snareBedType": 56
+    },
+    "DW / PDP": {
+      "shellThicknessMm": 100,
+      "bearingEdge": 97,
+      "snareBedType": 107,
+      "reRingMaterial": 8
+    },
+    "Gretsch": {
+      "shellThicknessMm": 37,
+      "snareBedType": 44,
+      "reRingMaterial": 1,
+      "bearingEdge": 17
+    },
+    "Hendrix Drums": {
+      "shellThicknessMm": 8,
+      "bearingEdge": 8,
+      "snareBedType": 8
+    },
+    "INDe Drum Lab": {
+      "shellThicknessMm": 3,
+      "bearingEdge": 3,
+      "snareBedType": 3
+    },
+    "Joyful Noise Drum Company": {
+      "shellThicknessMm": 8,
+      "bearingEdge": 8,
+      "snareBedType": 8
+    },
+    "Keplinger": {
+      "shellThicknessMm": 2,
+      "bearingEdge": 2,
+      "snareBedType": 2
+    },
+    "Ludwig": {
+      "shellThicknessMm": 58,
+      "bearingEdge": 44,
+      "snareBedType": 94,
+      "reRingMaterial": 32
+    },
+    "Mapex": {
+      "snareBedType": 111,
+      "shellThicknessMm": 10,
+      "bearingEdge": 97,
+      "reRingMaterial": 2
+    },
+    "Noble & Cooley": {
+      "shellThicknessMm": 66,
+      "snareBedType": 66,
+      "shellMaterial1": 2,
+      "bearingEdge": 34
+    },
+    "Oriollo": {
+      "shellThicknessMm": 3,
+      "bearingEdge": 3,
+      "snareBedType": 3
+    },
+    "Pearl": {
+      "shellThicknessMm": 87,
+      "bearingEdge": 128,
+      "snareBedType": 128
+    },
+    "Philly Drum Co.": {
+      "shellThicknessMm": 1,
+      "snareBedType": 1
+    },
+    "Pork Pie Percussion": {
+      "shellThicknessMm": 56,
+      "bearingEdge": 48,
+      "snareBedType": 47
+    },
+    "Premier": {
+      "shellThicknessMm": 51,
+      "bearingEdge": 24,
+      "snareBedType": 46
+    },
+    "Q Drum Co.": {
+      "shellThicknessMm": 3,
+      "bearingEdge": 3,
+      "snareBedType": 3
+    },
+    "Rogers": {
+      "shellThicknessMm": 61,
+      "snareBedType": 29,
+      "bearingEdge": 6,
+      "reRingMaterial": 12,
+      "shellMaterial1": 1
+    },
+    "Seven Six Drum Company": {
+      "shellThicknessMm": 3,
+      "bearingEdge": 3,
+      "snareBedType": 3
+    },
+    "Slingerland": {
+      "shellThicknessMm": 68,
+      "snareBedType": 68,
+      "bearingEdge": 13
+    },
+    "SONOR": {
+      "shellThicknessMm": 41,
+      "snareBedType": 98,
+      "bearingEdge": 22
+    },
+    "Spaun Drum Company": {
+      "shellThicknessMm": 8,
+      "bearingEdge": 8,
+      "snareBedType": 8
+    },
+    "Sugar Percussion": {
+      "shellThicknessMm": 3,
+      "bearingEdge": 3,
+      "snareBedType": 3
+    },
+    "Tama": {
+      "shellThicknessMm": 36,
+      "reinforcementRings": 6,
+      "bearingEdge": 5,
+      "snareBeds": 5,
+      "snareBedType": 14,
+      "reRingMaterial": 1
+    },
+    "WorldMax": {
+      "shellThicknessMm": 29
+    },
+    "Yamaha": {
+      "shellThicknessMm": 64,
+      "snareBedType": 82,
+      "bearingEdge": 36
+    }
+  },
+  "byCompanyStock": {
+    "A&F Drum Co.": {
+      "coreShellReady required first": 3,
+      "hoopType": 3,
+      "hoopMaterial": 3,
+      "snareWireMaterial": 3,
+      "snareWireStrandCount": 3,
+      "stockBatterHead": 3,
+      "stockResoHead": 3,
+      "snareThrow": 3,
+      "lugCount": 3,
+      "lugType": 3
+    },
+    "AHEAD": {
+      "coreShellReady required first": 33,
+      "hoopMaterial": 33,
+      "snareWireMaterial": 33,
+      "snareWireStrandCount": 33
+    },
+    "Brady Drum Company": {
+      "coreShellReady required first": 110,
+      "hoopMaterial": 110,
+      "snareWireMaterial": 110,
+      "snareWireStrandCount": 110
+    },
+    "Brooks Drum Co.": {
+      "coreShellReady required first": 12,
+      "hoopType": 12,
+      "hoopMaterial": 12,
+      "snareWireMaterial": 12,
+      "snareWireStrandCount": 12,
+      "stockBatterHead": 12,
+      "stockResoHead": 12,
+      "lugCount": 12,
+      "lugType": 12
+    },
+    "C&C Drums USA": {
+      "coreShellReady required first": 9,
+      "hoopMaterial": 9,
+      "snareWireMaterial": 9,
+      "snareWireStrandCount": 9,
+      "stockBatterHead": 9,
+      "stockResoHead": 9,
+      "hoopType": 6,
+      "snareThrow": 6,
+      "lugCount": 6,
+      "lugType": 6
+    },
+    "Canopus": {
+      "coreShellReady required first": 63,
+      "hoopType": 44,
+      "hoopMaterial": 63,
+      "snareWireMaterial": 63,
+      "snareWireStrandCount": 63,
+      "stockBatterHead": 58,
+      "stockResoHead": 63,
+      "snareThrow": 63,
+      "lugCount": 46,
+      "lugType": 44
+    },
+    "Craviotto": {
+      "coreShellReady required first": 49,
+      "hoopMaterial": 49,
+      "snareWireMaterial": 49,
+      "snareWireStrandCount": 49,
+      "stockBatterHead": 4,
+      "stockResoHead": 4
+    },
+    "Dunnett Classic Drums": {
+      "coreShellReady required first": 56,
+      "hoopMaterial": 56,
+      "snareWireMaterial": 56,
+      "snareWireStrandCount": 56,
+      "stockBatterHead": 56,
+      "stockResoHead": 56
+    },
+    "DW / PDP": {
+      "coreShellReady required first": 107,
+      "hoopMaterial": 107,
+      "snareWireMaterial": 107,
+      "snareWireStrandCount": 107,
+      "stockBatterHead": 30,
+      "stockResoHead": 30,
+      "snareThrow": 10
+    },
+    "Gretsch": {
+      "coreShellReady required first": 44,
+      "hoopMaterial": 44,
+      "snareWireMaterial": 44,
+      "snareWireStrandCount": 44,
+      "stockResoHead": 17,
+      "stockBatterHead": 16,
+      "hoopType": 4,
+      "snareThrow": 2
+    },
+    "Hendrix Drums": {
+      "coreShellReady required first": 8,
+      "hoopType": 8,
+      "hoopMaterial": 8,
+      "snareWireMaterial": 8,
+      "snareWireStrandCount": 8,
+      "stockBatterHead": 8,
+      "stockResoHead": 8,
+      "snareThrow": 8,
+      "lugCount": 8,
+      "lugType": 8
+    },
+    "INDe Drum Lab": {
+      "coreShellReady required first": 3,
+      "hoopType": 3,
+      "hoopMaterial": 3,
+      "snareWireMaterial": 3,
+      "snareWireStrandCount": 3,
+      "stockBatterHead": 3,
+      "stockResoHead": 3,
+      "snareThrow": 3,
+      "lugCount": 3,
+      "lugType": 3
+    },
+    "Joyful Noise Drum Company": {
+      "coreShellReady required first": 8,
+      "hoopType": 8,
+      "hoopMaterial": 8,
+      "snareWireMaterial": 8,
+      "snareWireStrandCount": 8,
+      "stockBatterHead": 8,
+      "stockResoHead": 8,
+      "lugCount": 8,
+      "lugType": 8
+    },
+    "Keplinger": {
+      "coreShellReady required first": 2,
+      "hoopType": 2,
+      "hoopMaterial": 2,
+      "snareWireMaterial": 2,
+      "snareWireStrandCount": 2,
+      "stockBatterHead": 2,
+      "stockResoHead": 2,
+      "snareThrow": 2,
+      "lugCount": 2,
+      "lugType": 2
+    },
+    "Ludwig": {
+      "coreShellReady required first": 95,
+      "hoopMaterial": 127,
+      "snareWireMaterial": 127,
+      "snareWireStrandCount": 127,
+      "stockBatterHead": 97,
+      "stockResoHead": 97,
+      "snareThrow": 63,
+      "lugCount": 22
+    },
+    "Mapex": {
+      "coreShellReady required first": 111,
+      "hoopMaterial": 112,
+      "snareWireMaterial": 112,
+      "snareWireStrandCount": 112,
+      "stockResoHead": 110,
+      "snareThrow": 14,
+      "stockBatterHead": 11,
+      "lugCount": 5
+    },
+    "Noble & Cooley": {
+      "coreShellReady required first": 66,
+      "hoopMaterial": 66,
+      "snareWireMaterial": 66,
+      "snareWireStrandCount": 66,
+      "stockBatterHead": 65,
+      "stockResoHead": 65,
+      "hoopType": 2,
+      "snareThrow": 2,
+      "lugType": 8
+    },
+    "Oriollo": {
+      "coreShellReady required first": 3,
+      "hoopType": 3,
+      "hoopMaterial": 3,
+      "snareWireMaterial": 3,
+      "snareWireStrandCount": 3,
+      "stockBatterHead": 3,
+      "stockResoHead": 3,
+      "snareThrow": 3,
+      "lugCount": 3,
+      "lugType": 3
+    },
+    "Pearl": {
+      "coreShellReady required first": 128,
+      "hoopMaterial": 128,
+      "snareWireMaterial": 128,
+      "snareWireStrandCount": 128,
+      "stockBatterHead": 128,
+      "stockResoHead": 128,
+      "snareThrow": 122,
+      "lugCount": 22,
+      "lugType": 118,
+      "hoopType": 9
+    },
+    "Philly Drum Co.": {
+      "coreShellReady required first": 1,
+      "hoopMaterial": 1,
+      "snareWireMaterial": 1,
+      "snareWireStrandCount": 1,
+      "lugCount": 1
+    },
+    "Pork Pie Percussion": {
+      "hoopMaterial": 58,
+      "snareWireMaterial": 58,
+      "snareWireStrandCount": 58,
+      "coreShellReady required first": 57,
+      "lugCount": 48,
+      "lugType": 15,
+      "snareThrow": 1
+    },
+    "Premier": {
+      "coreShellReady required first": 61,
+      "hoopType": 37,
+      "hoopMaterial": 61,
+      "snareWireMaterial": 61,
+      "snareWireStrandCount": 61,
+      "stockBatterHead": 57,
+      "stockResoHead": 61,
+      "snareThrow": 57,
+      "lugCount": 36,
+      "lugType": 16
+    },
+    "Q Drum Co.": {
+      "coreShellReady required first": 3,
+      "hoopType": 3,
+      "hoopMaterial": 3,
+      "snareWireMaterial": 3,
+      "snareWireStrandCount": 3,
+      "stockBatterHead": 3,
+      "stockResoHead": 3,
+      "snareThrow": 3,
+      "lugCount": 3,
+      "lugType": 3
+    },
+    "Rogers": {
+      "coreShellReady required first": 61,
+      "hoopMaterial": 61,
+      "snareWireMaterial": 61,
+      "snareWireStrandCount": 61
+    },
+    "Seven Six Drum Company": {
+      "coreShellReady required first": 3,
+      "hoopType": 3,
+      "hoopMaterial": 3,
+      "snareWireMaterial": 3,
+      "snareWireStrandCount": 3,
+      "stockBatterHead": 3,
+      "stockResoHead": 3,
+      "snareThrow": 3,
+      "lugCount": 3,
+      "lugType": 3
+    },
+    "Slingerland": {
+      "coreShellReady required first": 68,
+      "hoopMaterial": 68,
+      "snareWireMaterial": 68,
+      "snareWireStrandCount": 68,
+      "stockBatterHead": 64,
+      "stockResoHead": 64,
+      "lugCount": 8
+    },
+    "SONOR": {
+      "coreShellReady required first": 98,
+      "hoopMaterial": 98,
+      "snareWireMaterial": 98,
+      "snareWireStrandCount": 98,
+      "stockBatterHead": 98,
+      "stockResoHead": 98,
+      "snareThrow": 98
+    },
+    "Spaun Drum Company": {
+      "coreShellReady required first": 8,
+      "hoopType": 8,
+      "hoopMaterial": 8,
+      "snareWireMaterial": 8,
+      "snareWireStrandCount": 8,
+      "stockBatterHead": 8,
+      "stockResoHead": 8,
+      "snareThrow": 8,
+      "lugCount": 8,
+      "lugType": 8
+    },
+    "Sugar Percussion": {
+      "coreShellReady required first": 3,
+      "hoopType": 3,
+      "hoopMaterial": 3,
+      "snareWireMaterial": 3,
+      "snareWireStrandCount": 3,
+      "stockBatterHead": 3,
+      "stockResoHead": 3,
+      "snareThrow": 3,
+      "lugCount": 3,
+      "lugType": 3
+    },
+    "Tama": {
+      "hoopMaterial": 110,
+      "snareWireMaterial": 107,
+      "snareWireStrandCount": 109,
+      "stockBatterHead": 95,
+      "stockResoHead": 98,
+      "coreShellReady required first": 49,
+      "hoopType": 8,
+      "snareThrow": 15,
+      "lugType": 3,
+      "lugCount": 2
+    },
+    "WorldMax": {
+      "hoopMaterial": 39,
+      "snareWireMaterial": 39,
+      "snareWireStrandCount": 39,
+      "stockBatterHead": 36,
+      "stockResoHead": 36,
+      "coreShellReady required first": 29,
+      "snareThrow": 7,
+      "lugType": 4
+    },
+    "Yamaha": {
+      "coreShellReady required first": 82,
+      "hoopMaterial": 84,
+      "snareWireMaterial": 84,
+      "snareWireStrandCount": 84,
+      "stockBatterHead": 81,
+      "stockResoHead": 81,
+      "snareThrow": 77
+    }
+  },
+  "first50CoreFailures": [
+    {
+      "id": "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+      "companyName": "A&F Drum Co.",
+      "modelName": "Maple Club Snare",
+      "missingCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+      "companyName": "A&F Drum Co.",
+      "modelName": "Raw Brass 14x6.5",
+      "missingCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569",
+      "companyName": "A&F Drum Co.",
+      "modelName": "Raw Steel 14x6.5",
+      "missingCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x4-piccolo_14x4_metal_brass_1_smoke-chrome_sh1410-s-hoop-counter-hoops_as414_07617ee1",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 14x4 Piccolo",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-dunnett-throw-off-option_14x6_metal_brass_1_minimal-shallow-snare-beds_smo_f95fc0e2",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-trick-throw-off-option_14x6_metal_brass_1_smoke-chrome-black-chrome_sh1410_8581ca8f",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-piccolo-snare-drum-14x4_14x4_metal_brass_1_minimal-shallow-snare-beds_smoke-chr_2b056559",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_03f82188",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass Snare Drum 13x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_65f4f28c",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass Snare Drum 14x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-13x6-brunson-lug-prototype-planned-variant_13x6_metal_brass_1_black-chrome_sh138-s-hoo_6f6b2e23",
+      "companyName": "AHEAD",
+      "modelName": "Black on Brass 13x6 Brunson Lug Prototype/Planned Variant",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-brunson-lug-edition_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_a_da443290",
+      "companyName": "AHEAD",
+      "modelName": "Black on Brass 14x6 Brunson Lug Edition",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_as6_f42b5819",
+      "companyName": "AHEAD",
+      "modelName": "Black on Brass 14x6 Tube Lug Original",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished 3mm Bell Brass 13x6",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished 3mm Bell Brass 14x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished Bell Brass Snare Drum 13x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished Bell Brass Snare Drum 14x6",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-13x6-tube-lug-original_13x6_metal_brass_1_chrome_sh138-s-hoop-counter-hoops_asc613_7dac1d72",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass 13x6 Tube Lug Original",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614_bcd52f08",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass 14x6 Tube Lug Original",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_chrome_sh138-s-hoop-cou_2d68cd61",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass Snare Drum 13x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614-inferred_0adcb07a",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass Snare Drum 14x6",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+      "companyName": "AHEAD",
+      "modelName": "Polished Bell Brass Snare Drum 14x6",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-engraved-shell_14x6_metal_titanium_1_engraved-titanium_sh1410-s-hoop-counter-hoops_tita_3a7640dd",
+      "companyName": "AHEAD",
+      "modelName": "Titanium 14x6 Engraved Shell",
+      "missingCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-studio-dry-variant_14x6_metal_titanium_1_minimal-shallow-snare-beds_engraved-titanium_s_e5a32ae7",
+      "companyName": "AHEAD",
+      "modelName": "Titanium 14x6 Studio Dry Variant",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-snare-drum-14x6-with-chrome-trick-throw-off_14x6_metal_titanium_1_minimal-shallow-snare-beds_bc64363e",
+      "companyName": "AHEAD",
+      "modelName": "Titanium Snare Drum 14x6 with Chrome Trick Throw Off",
+      "missingCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x5_12x5_block_jarrah_unknown-likely-brady-style-45-famil_8267b6f6",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 12x5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x7_12x7_block_jarrah_unknown-likely-brady-style-45-famil_03553a4e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 12x7",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x5-5_13x5-5_block_jarrah_unknown-likely-brady-style-45-f_e8fbd6dc",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 13x5.5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x7_13x7_block_jarrah_unknown-likely-brady-style-45-famil_fb297460",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 13x7",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x5-5_14x5-5_block_jarrah_unknown-likely-brady-style-45-f_575a3776",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x5.5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x6-5_14x6-5_block_jarrah_unknown-likely-brady-style-45-f_90e38a75",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x6.5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x7_14x7_block_jarrah_unknown-likely-brady-style-45-famil_44f82325",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x7",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x8_14x8_block_jarrah_unknown-likely-brady-style-45-famil_d1232fc2",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x8",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-_1a0e46be",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 12x5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-_39ddbd88",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 12x7",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-st_9cfb5eaa",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 13x5.5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x7_13x7_block_gum_unknown-likely-brady-style-_0b4d5bc8",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 13x7",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x5-5_14x5-5_block_gum_unknown-likely-brady-st_42af2ffd",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x5.5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x6-5_14x6-5_block_gum_unknown-likely-brady-st_8bba8f08",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x6.5",
+      "missingCoreFields": [
+        "shellThicknessMm"
+      ]
+    }
+  ],
+  "first50StockFailures": [
+    {
+      "id": "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+      "companyName": "A&F Drum Co.",
+      "modelName": "Maple Club Snare",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopType",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount",
+        "stockBatterHead",
+        "stockResoHead",
+        "snareThrow",
+        "lugCount",
+        "lugType"
+      ]
+    },
+    {
+      "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+      "companyName": "A&F Drum Co.",
+      "modelName": "Raw Brass 14x6.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopType",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount",
+        "stockBatterHead",
+        "stockResoHead",
+        "snareThrow",
+        "lugCount",
+        "lugType"
+      ]
+    },
+    {
+      "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569",
+      "companyName": "A&F Drum Co.",
+      "modelName": "Raw Steel 14x6.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopType",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount",
+        "stockBatterHead",
+        "stockResoHead",
+        "snareThrow",
+        "lugCount",
+        "lugType"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x4-piccolo_14x4_metal_brass_1_smoke-chrome_sh1410-s-hoop-counter-hoops_as414_07617ee1",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 14x4 Piccolo",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-dunnett-throw-off-option_14x6_metal_brass_1_minimal-shallow-snare-beds_smo_f95fc0e2",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-trick-throw-off-option_14x6_metal_brass_1_smoke-chrome-black-chrome_sh1410_8581ca8f",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-piccolo-snare-drum-14x4_14x4_metal_brass_1_minimal-shallow-snare-beds_smoke-chr_2b056559",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_03f82188",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass Snare Drum 13x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_65f4f28c",
+      "companyName": "AHEAD",
+      "modelName": "Black Chrome on Brass Snare Drum 14x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-13x6-brunson-lug-prototype-planned-variant_13x6_metal_brass_1_black-chrome_sh138-s-hoo_6f6b2e23",
+      "companyName": "AHEAD",
+      "modelName": "Black on Brass 13x6 Brunson Lug Prototype/Planned Variant",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-brunson-lug-edition_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_a_da443290",
+      "companyName": "AHEAD",
+      "modelName": "Black on Brass 14x6 Brunson Lug Edition",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_as6_f42b5819",
+      "companyName": "AHEAD",
+      "modelName": "Black on Brass 14x6 Tube Lug Original",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished 3mm Bell Brass 13x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished 3mm Bell Brass 14x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished Bell Brass Snare Drum 13x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+      "companyName": "AHEAD",
+      "modelName": "Bright Polished Bell Brass Snare Drum 14x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-13x6-tube-lug-original_13x6_metal_brass_1_chrome_sh138-s-hoop-counter-hoops_asc613_7dac1d72",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass 13x6 Tube Lug Original",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614_bcd52f08",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass 14x6 Tube Lug Original",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_chrome_sh138-s-hoop-cou_2d68cd61",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass Snare Drum 13x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614-inferred_0adcb07a",
+      "companyName": "AHEAD",
+      "modelName": "Chrome on Brass Snare Drum 14x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+      "companyName": "AHEAD",
+      "modelName": "Polished Bell Brass Snare Drum 14x6",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-engraved-shell_14x6_metal_titanium_1_engraved-titanium_sh1410-s-hoop-counter-hoops_tita_3a7640dd",
+      "companyName": "AHEAD",
+      "modelName": "Titanium 14x6 Engraved Shell",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-studio-dry-variant_14x6_metal_titanium_1_minimal-shallow-snare-beds_engraved-titanium_s_e5a32ae7",
+      "companyName": "AHEAD",
+      "modelName": "Titanium 14x6 Studio Dry Variant",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-snare-drum-14x6-with-chrome-trick-throw-off_14x6_metal_titanium_1_minimal-shallow-snare-beds_bc64363e",
+      "companyName": "AHEAD",
+      "modelName": "Titanium Snare Drum 14x6 with Chrome Trick Throw Off",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x5_12x5_block_jarrah_unknown-likely-brady-style-45-famil_8267b6f6",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 12x5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x7_12x7_block_jarrah_unknown-likely-brady-style-45-famil_03553a4e",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 12x7",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x5-5_13x5-5_block_jarrah_unknown-likely-brady-style-45-f_e8fbd6dc",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 13x5.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x7_13x7_block_jarrah_unknown-likely-brady-style-45-famil_fb297460",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 13x7",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x5-5_14x5-5_block_jarrah_unknown-likely-brady-style-45-f_575a3776",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x5.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x6-5_14x6-5_block_jarrah_unknown-likely-brady-style-45-f_90e38a75",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x6.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x7_14x7_block_jarrah_unknown-likely-brady-style-45-famil_44f82325",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x7",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x8_14x8_block_jarrah_unknown-likely-brady-style-45-famil_d1232fc2",
+      "companyName": "Brady Drum Company",
+      "modelName": "Jarrah Block Snare 14x8",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-_1a0e46be",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 12x5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-_39ddbd88",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 12x7",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-st_9cfb5eaa",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 13x5.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x7_13x7_block_gum_unknown-likely-brady-style-_0b4d5bc8",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 13x7",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x5-5_14x5-5_block_gum_unknown-likely-brady-st_42af2ffd",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x5.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    },
+    {
+      "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x6-5_14x6-5_block_gum_unknown-likely-brady-st_8bba8f08",
+      "companyName": "Brady Drum Company",
+      "modelName": "Lemon Scented Gum Block Snare 14x6.5",
+      "missingStockFields": [
+        "coreShellReady required first",
+        "hoopMaterial",
+        "snareWireMaterial",
+        "snareWireStrandCount"
+      ]
+    }
+  ]
+}
