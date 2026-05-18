@@ -1,0 +1,1539 @@
+{
+
+  "tama_acrylic_mirage-acrylic-14x6-5_14x6-5_acrylic_acrylic_acrylic_42919b23": {
+
+    "id": "tama_acrylic_mirage-acrylic-14x6-5_14x6-5_acrylic_acrylic_acrylic_42919b23",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Acrylic",
+
+    "modelName": "Mirage / Acrylic 14x6.5",
+
+    "patchName": "tama_acrylic_mirage-acrylic-14x6-5_14x6-5_acrylic_acrylic_acrylic_42919b23",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "acrylic",
+
+    "shellMaterial1": "acrylic",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "seamless / molded acrylic shell",
+
+    "shellThicknessMm": 5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "acrylic bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "clear acrylic",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Starclassic-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.4,
+
+    "shellScoreBrightness": 7.2,
+
+    "shellScoreProjection": 7.3,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 4.5,
+
+    "shellScoreSensitivity": 6.4,
+
+    "shellScoreControl": 6.1,
+
+    "overallAttack": 7.5,
+
+    "overallBrightness": 7.3,
+
+    "overallProjection": 7.4,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 4.4,
+
+    "overallSensitivity": 6.5,
+
+    "overallControl": 6.2,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact Tama catalog source URL, production years, acrylic shell thickness, stock heads, and hardware details need stronger confirmation. 5mm shell thickness is a conservative estimated bucket for typical acrylic snare shells and should be updated if a catalog source confirms the exact value.",
+
+    "drumSummaryNotes": "Tama acrylic snare in 14x6.5 format. Acrylic construction should produce a bright, fast, projecting voice with strong attack and less natural warmth than comparable wood shells. Scores are shell-first and based on acrylic material behavior, 14x6.5 dimensions, and die-cast-style hardware assumptions.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_artstar_artstar-cordia-14x6-5_14x6-5_ply_cordia_lacquer_die-cast-hoops_559e6b64": {
+
+    "id": "tama_artstar_artstar-cordia-14x6-5_14x6-5_ply_cordia_lacquer_die-cast-hoops_559e6b64",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Artstar",
+
+    "modelName": "Artstar Cordia 14x6.5",
+
+    "patchName": "tama_artstar_artstar-cordia-14x6-5_14x6-5_ply_cordia_lacquer_die-cast-hoops_559e6b64",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "cordia",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply cordia shell",
+
+    "shellThicknessMm": 7,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension / Artstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.7,
+
+    "shellScoreBrightness": 6.1,
+
+    "shellScoreProjection": 6.8,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 6.7,
+
+    "shellScoreSensitivity": 6.3,
+
+    "shellScoreControl": 6.5,
+
+    "overallAttack": 6.9,
+
+    "overallBrightness": 6.2,
+
+    "overallProjection": 6.9,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 6.6,
+
+    "overallSensitivity": 6.4,
+
+    "overallControl": 6.6,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, catalog model number, production years, stock heads, and authoritative Tama source URL need stronger confirmation. Shell thickness is placed in a conservative 7mm legacy wood-shell bucket until a catalog source confirms the exact value.",
+
+    "drumSummaryNotes": "Artstar Cordia 14x6.5 legacy wood snare. Cordia should sit in a warm, dense, slightly darker wood voice with good projection and controlled sustain, especially with die-cast hoops.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_artstar_artstar-maple-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_389d297f": {
+
+    "id": "tama_artstar_artstar-maple-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_389d297f",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Artstar",
+
+    "modelName": "Artstar Maple 14x6.5",
+
+    "patchName": "tama_artstar_artstar-maple-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_389d297f",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply maple shell",
+
+    "shellThicknessMm": 7,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension / Artstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.8,
+
+    "shellScoreBrightness": 6.4,
+
+    "shellScoreProjection": 6.7,
+
+    "shellScoreSustain": 6.5,
+
+    "shellScoreWarmth": 6.6,
+
+    "shellScoreSensitivity": 6.5,
+
+    "shellScoreControl": 6.4,
+
+    "overallAttack": 7,
+
+    "overallBrightness": 6.5,
+
+    "overallProjection": 6.8,
+
+    "overallSustain": 6.4,
+
+    "overallWarmth": 6.5,
+
+    "overallSensitivity": 6.6,
+
+    "overallControl": 6.5,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "235-325 Hz",
+
+    "recommendedTuningResoHz": "350-425 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, catalog model number, production years, stock heads, and authoritative Tama source URL need stronger confirmation. Shell thickness is placed in a conservative 7mm legacy wood-shell bucket until a catalog source confirms the exact value.",
+
+    "drumSummaryNotes": "Artstar Maple 14x6.5 legacy wood snare. Maple shell behavior should give a balanced, full-range voice with strong attack, useful warmth, and controlled sustain from the die-cast hoop setup.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_granstar_granstar-birch-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_9536e2bd": {
+
+    "id": "tama_granstar_granstar-birch-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_9536e2bd",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Granstar",
+
+    "modelName": "Granstar Birch 14x6.5",
+
+    "patchName": "tama_granstar_granstar-birch-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_9536e2bd",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "birch",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply birch shell",
+
+    "shellThicknessMm": 7,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Granstar / high-tension style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 6.8,
+
+    "shellScoreProjection": 7,
+
+    "shellScoreSustain": 6.1,
+
+    "shellScoreWarmth": 5.8,
+
+    "shellScoreSensitivity": 6.4,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.2,
+
+    "overallBrightness": 6.9,
+
+    "overallProjection": 7.1,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 5.7,
+
+    "overallSensitivity": 6.5,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "235-325 Hz",
+
+    "recommendedTuningResoHz": "350-425 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, catalog model number, production years, stock heads, and authoritative Tama source URL need stronger confirmation. Shell thickness is placed in a conservative 7mm legacy birch-shell bucket until a catalog source confirms the exact value.",
+
+    "drumSummaryNotes": "Granstar Birch 14x6.5 legacy snare. Birch construction should emphasize attack, brightness, projection, and control, with less low-mid warmth than maple or walnut variants.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_rockstar_rockstar-steel-14x5-5_14x5-5_metal_steel_chrome-black_730c2843": {
+
+    "id": "tama_rockstar_rockstar-steel-14x5-5_14x5-5_metal_steel_chrome-black_730c2843",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Rockstar",
+
+    "modelName": "Rockstar Steel 14x5.5",
+
+    "patchName": "tama_rockstar_rockstar-steel-14x5-5_14x5-5_metal_steel_chrome-black_730c2843",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "rolled steel shell",
+
+    "shellThicknessMm": 1,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "rolled / flanged metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "chrome / black",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 8,
+
+    "lugType": "Tama Rockstar-style snare lug",
+
+    "hardwareFinish": "chrome / black",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 6.9,
+
+    "shellScoreSustain": 6,
+
+    "shellScoreWarmth": 4.6,
+
+    "shellScoreSensitivity": 6.6,
+
+    "shellScoreControl": 5.9,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 6.9,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 4.5,
+
+    "overallSensitivity": 6.7,
+
+    "overallControl": 5.9,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, production years, stock heads, hoop model, and authoritative Tama source URL need stronger confirmation. 1mm is a practical steel-shell reference bucket until exact catalog data is confirmed.",
+
+    "drumSummaryNotes": "Rockstar steel snare in 14x5.5 format. Steel shell behavior should emphasize crisp attack, brightness, projection, and sensitivity, with less warmth than wood Rockstar variants.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_rockstar_rockstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_3d4698f7": {
+
+    "id": "tama_rockstar_rockstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_3d4698f7",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Rockstar",
+
+    "modelName": "Rockstar Wood 14x5.5",
+
+    "patchName": "tama_rockstar_rockstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_3d4698f7",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "poplar",
+
+    "shellMaterial2": "maple",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply maple/poplar shell",
+
+    "shellThicknessMm": 7.5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "wrap",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 8,
+
+    "lugType": "Tama Rockstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.3,
+
+    "shellScoreBrightness": 5.8,
+
+    "shellScoreProjection": 6.1,
+
+    "shellScoreSustain": 5.9,
+
+    "shellScoreWarmth": 6.1,
+
+    "shellScoreSensitivity": 6.4,
+
+    "shellScoreControl": 6.1,
+
+    "overallAttack": 6.4,
+
+    "overallBrightness": 5.9,
+
+    "overallProjection": 6.1,
+
+    "overallSustain": 5.9,
+
+    "overallWarmth": 6,
+
+    "overallSensitivity": 6.5,
+
+    "overallControl": 6.1,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, production years, stock heads, hoop model, and authoritative Tama source URL need stronger confirmation. 7.5mm is a conservative intermediate wood-shell bucket for this line until exact catalog data is confirmed.",
+
+    "drumSummaryNotes": "Rockstar wood snare in 14x5.5 format. Maple/poplar construction should produce a balanced, accessible wood-shell voice with moderate warmth, quick response, and controlled sustain.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_rosewood-cordia_cordia-14x6-5_14x6-5_ply_cordia_lacquer_72022529": {
+
+    "id": "tama_rosewood-cordia_cordia-14x6-5_14x6-5_ply_cordia_lacquer_72022529",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Rosewood/Cordia",
+
+    "modelName": "Cordia 14x6.5",
+
+    "patchName": "tama_rosewood-cordia_cordia-14x6-5_14x6-5_ply_cordia_lacquer_72022529",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "cordia",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply cordia shell",
+
+    "shellThicknessMm": 7,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.6,
+
+    "shellScoreBrightness": 6,
+
+    "shellScoreProjection": 6.7,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 6.8,
+
+    "shellScoreSensitivity": 6.3,
+
+    "shellScoreControl": 6.4,
+
+    "overallAttack": 6.8,
+
+    "overallBrightness": 6.1,
+
+    "overallProjection": 6.8,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 6.7,
+
+    "overallSensitivity": 6.4,
+
+    "overallControl": 6.5,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, catalog model number, production years, stock heads, and authoritative Tama source URL need stronger confirmation. Shell thickness is placed in a conservative 7mm legacy wood-shell bucket until catalog data confirms the exact value.",
+
+    "drumSummaryNotes": "Cordia 14x6.5 legacy Tama snare. Cordia should read as a dense, warm, controlled wood voice with good low-mid body and moderate upper bite.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_rosewood-cordia_rosewood-14x6-5_14x6-5_ply_wood_lacquer_b8d9f654": {
+
+    "id": "tama_rosewood-cordia_rosewood-14x6-5_14x6-5_ply_wood_lacquer_b8d9f654",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Rosewood/Cordia",
+
+    "modelName": "Rosewood 14x6.5",
+
+    "patchName": "tama_rosewood-cordia_rosewood-14x6-5_14x6-5_ply_wood_lacquer_b8d9f654",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "rosewood",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply rosewood shell",
+
+    "shellThicknessMm": 7,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.4,
+
+    "shellScoreBrightness": 5.7,
+
+    "shellScoreProjection": 6.7,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 6.1,
+
+    "shellScoreControl": 6.3,
+
+    "overallAttack": 6.6,
+
+    "overallBrightness": 5.8,
+
+    "overallProjection": 6.8,
+
+    "overallSustain": 6.7,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 6.2,
+
+    "overallControl": 6.4,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "225-315 Hz",
+
+    "recommendedTuningResoHz": "345-415 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Existing record used generic wood material; updated to rosewood based on model identity. Exact shell thickness, ply count, catalog model number, production years, stock heads, and authoritative Tama source URL need stronger confirmation. Shell thickness is placed in a conservative 7mm legacy wood-shell bucket until catalog data confirms the exact value.",
+
+    "drumSummaryNotes": "Rosewood 14x6.5 legacy Tama snare. Rosewood should score warm, dense, sustaining, and full-bodied with a slightly darker top-end than maple or birch.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_royalstar_royalstar-steel-14x5_14x5_metal_steel_chrome_1aa8ca86": {
+
+    "id": "tama_royalstar_royalstar-steel-14x5_14x5_metal_steel_chrome_1aa8ca86",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Royalstar",
+
+    "modelName": "Royalstar Steel 14x5",
+
+    "patchName": "tama_royalstar_royalstar-steel-14x5_14x5_metal_steel_chrome_1aa8ca86",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "rolled steel shell",
+
+    "shellThicknessMm": 1,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "rolled / flanged metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "chrome",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 8,
+
+    "lugType": "Tama Royalstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.3,
+
+    "shellScoreBrightness": 7.2,
+
+    "shellScoreProjection": 6.8,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 4.4,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 5.9,
+
+    "overallAttack": 7.4,
+
+    "overallBrightness": 7.3,
+
+    "overallProjection": 6.8,
+
+    "overallSustain": 5.8,
+
+    "overallWarmth": 4.3,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 5.9,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-350 Hz",
+
+    "recommendedTuningResoHz": "370-440 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, production years, model number, stock heads, hoop model, and authoritative Tama source URL need stronger confirmation. 1mm is a practical steel-shell reference bucket until exact catalog data is confirmed.",
+
+    "drumSummaryNotes": "Royalstar steel 14x5 snare. Shallower steel construction should give a crisp, bright, quick response with strong attack and less warmth than wood-shell Royalstar models.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_royalstar_royalstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_49eeb53b": {
+
+    "id": "tama_royalstar_royalstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_49eeb53b",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Royalstar",
+
+    "modelName": "Royalstar Wood 14x5.5",
+
+    "patchName": "tama_royalstar_royalstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_49eeb53b",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "poplar",
+
+    "shellMaterial2": "maple",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply maple/poplar shell",
+
+    "shellThicknessMm": 7.5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "wrap",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 8,
+
+    "lugType": "Tama Royalstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.2,
+
+    "shellScoreBrightness": 5.7,
+
+    "shellScoreProjection": 6,
+
+    "shellScoreSustain": 5.9,
+
+    "shellScoreWarmth": 6.1,
+
+    "shellScoreSensitivity": 6.4,
+
+    "shellScoreControl": 6.1,
+
+    "overallAttack": 6.3,
+
+    "overallBrightness": 5.8,
+
+    "overallProjection": 6,
+
+    "overallSustain": 5.9,
+
+    "overallWarmth": 6,
+
+    "overallSensitivity": 6.5,
+
+    "overallControl": 6.1,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, production years, model number, stock heads, hoop model, and authoritative Tama source URL need stronger confirmation. 7.5mm is a conservative intermediate wood-shell bucket until exact catalog data is confirmed.",
+
+    "drumSummaryNotes": "Royalstar wood 14x5.5 snare. Maple/poplar construction should provide a balanced, approachable wood-shell voice with moderate warmth, quick response, and controlled sustain.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_swingstar_swingstar-steel-14x5_14x5_metal_steel_chrome_5a0d5668": {
+
+    "id": "tama_swingstar_swingstar-steel-14x5_14x5_metal_steel_chrome_5a0d5668",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Swingstar",
+
+    "modelName": "Swingstar Steel 14x5",
+
+    "patchName": "tama_swingstar_swingstar-steel-14x5_14x5_metal_steel_chrome_5a0d5668",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "rolled steel shell",
+
+    "shellThicknessMm": 1,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "rolled / flanged metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "chrome",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 8,
+
+    "lugType": "Tama Swingstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 6.7,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 4.4,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 5.9,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 6.7,
+
+    "overallSustain": 5.8,
+
+    "overallWarmth": 4.3,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 5.9,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-350 Hz",
+
+    "recommendedTuningResoHz": "370-440 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, production years, model number, stock heads, hoop model, and authoritative Tama source URL need stronger confirmation. 1mm is a practical steel-shell reference bucket until exact catalog data is confirmed.",
+
+    "drumSummaryNotes": "Swingstar steel 14x5 snare. Steel construction and shallower depth should produce a bright, crisp, quick voice with strong attack and relatively low warmth.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_swingstar_swingstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_8c6726b1": {
+
+    "id": "tama_swingstar_swingstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_8c6726b1",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Swingstar",
+
+    "modelName": "Swingstar Wood 14x5.5",
+
+    "patchName": "tama_swingstar_swingstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_8c6726b1",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "poplar",
+
+    "shellMaterial2": "maple",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply maple/poplar shell",
+
+    "shellThicknessMm": 7.5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "wrap",
+
+    "hoopType": "triple-flange hoops",
+
+    "lugCount": 8,
+
+    "lugType": "Tama Swingstar-style snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.2,
+
+    "shellScoreBrightness": 5.7,
+
+    "shellScoreProjection": 6,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 6,
+
+    "shellScoreSensitivity": 6.4,
+
+    "shellScoreControl": 6.1,
+
+    "overallAttack": 6.3,
+
+    "overallBrightness": 5.8,
+
+    "overallProjection": 6,
+
+    "overallSustain": 5.8,
+
+    "overallWarmth": 5.9,
+
+    "overallSensitivity": 6.5,
+
+    "overallControl": 6.1,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, production years, model number, stock heads, hoop model, and authoritative Tama source URL need stronger confirmation. 7.5mm is a conservative intermediate wood-shell bucket until exact catalog data is confirmed.",
+
+    "drumSummaryNotes": "Swingstar wood 14x5.5 snare. Maple/poplar construction should create a balanced budget-era wood-shell voice with moderate warmth, quick response, and controlled sustain.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
