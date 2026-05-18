@@ -1,0 +1,1155 @@
+{
+
+  "tama_signature_bill-bruford-14x5-5_14x5-5_metal_brass_brass_die-cast-hoops_5daed8b7": {
+
+    "id": "tama_signature_bill-bruford-14x5-5_14x5-5_metal_brass_brass_die-cast-hoops_5daed8b7",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Bruford 14x5.5",
+
+    "patchName": "tama_signature_bill-bruford-14x5-5_14x5-5_metal_brass_brass_die-cast-hoops_5daed8b7",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "brass",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.3,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 7.8,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 7.1,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.5,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 8,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 7.2,
+
+    "overallControl": 7.4,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-325 Hz",
+
+    "recommendedTuningResoHz": "350-425 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell thickness, production years, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Bill Bruford 14x5.5 brass shell with die-cast hoops.",
+
+    "drumSummaryNotes": "Bill Bruford brass signature model. Shell-first scoring should read as articulate, bright, and projecting, with brass warmth and a controlled die-cast hoop response. Rarity, artist association, and collector value are excluded from scoring.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_bill-bruford-bb1055-signature-10x5-5_10x5-5_ply_maple": {
+
+    "id": "tama_signature_bill-bruford-bb1055-signature-10x5-5_10x5-5_ply_maple",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Bruford BB1055 Signature 10x5.5",
+
+    "patchName": "tama_signature_bill-bruford-bb1055-signature-10x5-5_10x5-5_ply_maple",
+
+    "diameter": 10,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 6,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BB1055",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.6,
+
+    "shellScoreBrightness": 7.4,
+
+    "shellScoreProjection": 6.2,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 5.8,
+
+    "shellScoreSensitivity": 7.6,
+
+    "shellScoreControl": 7,
+
+    "overallAttack": 7.7,
+
+    "overallBrightness": 7.5,
+
+    "overallProjection": 6.2,
+
+    "overallSustain": 5.8,
+
+    "overallWarmth": 5.7,
+
+    "overallSensitivity": 7.7,
+
+    "overallControl": 7,
+
+    "projectedShellFundamentalPitch": "high",
+
+    "recommendedTuningBatterHz": "300-390 Hz",
+
+    "recommendedTuningResoHz": "390-470 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Bill Bruford BB1055 Signature 10x5.5 maple ply snare.",
+
+    "drumSummaryNotes": "Small-format Bill Bruford maple signature snare. The 10-inch diameter should produce high pitch, quick attack, bright articulation, and strong sensitivity, with less low-end body and projection than the 14-inch Bill Bruford models.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_bill-bruford-bb146-signature-14x6_14x6_ply_maple": {
+
+    "id": "tama_signature_bill-bruford-bb146-signature-14x6_14x6_ply_maple",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Bruford BB146 Signature 14x6",
+
+    "patchName": "tama_signature_bill-bruford-bb146-signature-14x6_14x6_ply_maple",
+
+    "diameter": 14,
+
+    "depth": 6,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BB146",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.9,
+
+    "shellScoreBrightness": 6.6,
+
+    "shellScoreProjection": 7,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 7,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7,
+
+    "overallBrightness": 6.7,
+
+    "overallProjection": 7,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 6.9,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "345-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Bill Bruford BB146 Signature 14x6 maple ply snare.",
+
+    "drumSummaryNotes": "Full-size Bill Bruford maple signature snare. The 14x6 format should read balanced and articulate with maple clarity, usable warmth, and more body than the smaller BB1055 while remaining responsive.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass": {
+
+    "id": "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Bill Platt BP146 Signature Bell Brass 14x6",
+
+    "patchName": "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass",
+
+    "diameter": 14,
+
+    "depth": 6,
+
+    "shellConstruction": "cast metal",
+
+    "shellMaterial1": "bell brass",
+
+    "shellMaterial2": "bronze",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - cast metal shell",
+
+    "shellThicknessMm": 3,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "machined cast metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "bell brass",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BP146",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.8,
+
+    "shellScoreBrightness": 7.8,
+
+    "shellScoreProjection": 9.5,
+
+    "shellScoreSustain": 7.5,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.9,
+
+    "overallAttack": 8.9,
+
+    "overallBrightness": 7.9,
+
+    "overallProjection": 9.6,
+
+    "overallSustain": 7.2,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 8.2,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "220-310 Hz",
+
+    "recommendedTuningResoHz": "340-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact catalog source, stock head models, and production years need stronger confirmation. Existing Firestore identity confirms Bill Platt BP146 Signature Bell Brass 14x6 cast-metal bell brass shell.",
+
+    "drumSummaryNotes": "Bill Platt bell brass signature model. The heavy cast bell brass shell should score with very high projection, strong attack, extended sustain, and thick metallic body. Die-cast hoops increase focus and control.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_charlie-benante-cb1465-signature-14x6-5_14x6-5_metal_stainless-steel": {
+
+    "id": "tama_signature_charlie-benante-cb1465-signature-14x6-5_14x6-5_metal_stainless-steel",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Charlie Benante CB1465 Signature 14x6.5",
+
+    "patchName": "tama_signature_charlie-benante-cb1465-signature-14x6-5_14x6-5_metal_stainless-steel",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "stainless steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "stainless steel",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "black nickel / chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "CB1465",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.6,
+
+    "shellScoreBrightness": 8.4,
+
+    "shellScoreProjection": 8.8,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 3.9,
+
+    "shellScoreSensitivity": 6.9,
+
+    "shellScoreControl": 6.9,
+
+    "overallAttack": 8.8,
+
+    "overallBrightness": 8.5,
+
+    "overallProjection": 9,
+
+    "overallSustain": 6.3,
+
+    "overallWarmth": 3.8,
+
+    "overallSensitivity": 7,
+
+    "overallControl": 7.2,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-330 Hz",
+
+    "recommendedTuningResoHz": "350-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, hoop model, stock head models, finish details, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Charlie Benante CB1465 Signature 14x6.5 stainless-steel shell.",
+
+    "drumSummaryNotes": "Charlie Benante stainless-steel signature model. Shell-first scoring should emphasize aggressive attack, high brightness, strong projection, and comparatively low warmth, with the 6.5-inch depth adding body and push.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_john-tempesta-14x7_14x7_ply_maple_lacquer_die-cast-hoops_e7cd87e6": {
+
+    "id": "tama_signature_john-tempesta-14x7_14x7_ply_maple_lacquer_die-cast-hoops_e7cd87e6",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "John Tempesta 14x7",
+
+    "patchName": "tama_signature_john-tempesta-14x7_14x7_ply_maple_lacquer_die-cast-hoops_e7cd87e6",
+
+    "diameter": 14,
+
+    "depth": 7,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 6.5,
+
+    "shellScoreProjection": 7.6,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 6.7,
+
+    "shellScoreControl": 7.2,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 6.6,
+
+    "overallProjection": 7.8,
+
+    "overallSustain": 6.6,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 6.8,
+
+    "overallControl": 7.5,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "215-305 Hz",
+
+    "recommendedTuningResoHz": "335-410 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell thickness, ply count, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms John Tempesta 14x7 maple shell with lacquer finish and die-cast hoops.",
+
+    "drumSummaryNotes": "John Tempesta 14x7 maple signature model. The deeper maple shell should emphasize body, projection, and controlled power while retaining maple clarity. Die-cast hoops add focus and reduce excess ring.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_john-tempesta-jt147-signature-14x7_14x7_metal_brass": {
+
+    "id": "tama_signature_john-tempesta-jt147-signature-14x7_14x7_metal_brass",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "John Tempesta JT147 Signature 14x7",
+
+    "patchName": "tama_signature_john-tempesta-jt147-signature-14x7_14x7_metal_brass",
+
+    "diameter": 14,
+
+    "depth": 7,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "brass",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "JT147",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.5,
+
+    "shellScoreBrightness": 7,
+
+    "shellScoreProjection": 8.3,
+
+    "shellScoreSustain": 7.1,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 6.9,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.7,
+
+    "overallBrightness": 7.1,
+
+    "overallProjection": 8.5,
+
+    "overallSustain": 6.8,
+
+    "overallWarmth": 7.1,
+
+    "overallSensitivity": 7,
+
+    "overallControl": 7.4,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "215-305 Hz",
+
+    "recommendedTuningResoHz": "335-410 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms John Tempesta JT147 Signature 14x7 brass shell.",
+
+    "drumSummaryNotes": "John Tempesta 14x7 brass signature model. Compared with the maple Tempesta version, this should read more metallic, louder, and brighter, with brass warmth and a deeper 7-inch body.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_kaz-rodriguez-14x6-5-maple-bubinga_14x6-5_ply_maple_lacquer_die-cast-hoops_c84633ed": {
+
+    "id": "tama_signature_kaz-rodriguez-14x6-5-maple-bubinga_14x6-5_ply_maple_lacquer_die-cast-hoops_c84633ed",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Kaz Rodriguez 14x6.5 Maple/Bubinga",
+
+    "patchName": "tama_signature_kaz-rodriguez-14x6-5-maple-bubinga_14x6-5_ply_maple_lacquer_die-cast-hoops_c84633ed",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "bubinga",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple/bubinga ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.5,
+
+    "shellScoreBrightness": 6.6,
+
+    "shellScoreProjection": 8,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.5,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.5,
+
+    "overallAttack": 7.7,
+
+    "overallBrightness": 6.7,
+
+    "overallProjection": 8.2,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 7.3,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 7.8,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "225-315 Hz",
+
+    "recommendedTuningResoHz": "340-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell thickness, ply count/layup, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Kaz Rodriguez 14x6.5 Maple/Bubinga with lacquer finish and die-cast hoops.",
+
+    "drumSummaryNotes": "Kaz Rodriguez maple/bubinga signature model. The hybrid wood shell should combine maple attack and clarity with bubinga density, low-mid weight, and projection. Die-cast hoops add focus and control.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_kaz-rodriguez-kr1465-signature-14x6-5-maple-bubinga_14x6-5_ply_maple": {
+
+    "id": "tama_signature_kaz-rodriguez-kr1465-signature-14x6-5-maple-bubinga_14x6-5_ply_maple",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Kaz Rodriguez KR1465 Signature 14x6.5 Maple/Bubinga",
+
+    "patchName": "tama_signature_kaz-rodriguez-kr1465-signature-14x6-5-maple-bubinga_14x6-5_ply_maple",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "bubinga",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple/bubinga ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature snare lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama standard signature-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "KR1465",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.5,
+
+    "shellScoreBrightness": 6.6,
+
+    "shellScoreProjection": 8,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.5,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.5,
+
+    "overallAttack": 7.7,
+
+    "overallBrightness": 6.7,
+
+    "overallProjection": 8.2,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 7.3,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 7.8,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "225-315 Hz",
+
+    "recommendedTuningResoHz": "340-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, full ply count/layup, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms Kaz Rodriguez KR1465 Signature 14x6.5 Maple/Bubinga.",
+
+    "drumSummaryNotes": "Kaz Rodriguez KR1465 maple/bubinga signature model. This should score similarly to the related Kaz Rodriguez 14x6.5 Maple/Bubinga entry: focused, dense, and projecting, with maple articulation supported by bubinga low-mid authority.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, artist association, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
