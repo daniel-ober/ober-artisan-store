@@ -1,4 +1,4 @@
-import { MODIFIER_REGISTRY, UNKNOWN_MODIFIER_FALLBACK } from "./modifierRegistry";
+import { MODIFIER_REGISTRY, UNKNOWN_MODIFIER_FALLBACK } from './modifierRegistry.js';
 
 const normalize = (value = "") =>
 
@@ -71,3 +71,4 @@ export function resolveModifier(category, rawValue) {
   };
 
 }
+

@@ -1,29 +1,18 @@
-
 import { NODE_KEYS } from './nodeKeys.js';
 
 import { STOCK_CONFIG_WEIGHTS, clampScore } from './scoringConstants.js';
 
-import { PHYSICAL_PROPERTY_NODE_MAP } from './physicalPropertyNodeMap.js';
+import { resolveModifier } from './resolveModifier.js';
 
-const normalize = (value) =>
+const MODIFIER_CATEGORY_BY_FIELD = {
 
-  String(value || '')
+  stockBatterHead: 'batterHeads',
 
-    .trim()
+  stockResoHead: 'resoHeads',
 
-    .toLowerCase()
+  stockSnareWires: 'snareWires',
 
-    .replace(/\s+/g, '-');
-
-const findMappedImpact = (field, value) => {
-
-  const fieldMap = PHYSICAL_PROPERTY_NODE_MAP[field];
-
-  if (!fieldMap || value == null) return null;
-
-  const normalized = normalize(value);
-
-  return Object.entries(fieldMap).find(([key]) => normalized.includes(key))?.[1] || null;
+  hoopType: 'hoops',
 
 };
 
@@ -54,6 +43,68 @@ const finalizeScores = (scores) =>
     return finalScores;
 
   }, {});
+
+const buildResolvedModifierDriver = ({ field, value, weight }) => {
+
+  const category = MODIFIER_CATEGORY_BY_FIELD[field];
+
+  if (!category) return null;
+
+  const resolved = resolveModifier(category, value);
+
+  if (!resolved?.matched) {
+
+    return {
+
+      matched: false,
+
+      field,
+
+      value,
+
+      category,
+
+      resolvedId: resolved?.id || 'unknown_modifier',
+
+      reason: 'no-registry-match',
+
+      confidence: resolved?.confidence || {
+
+        matchConfidence: 'unknown',
+
+        deltaConfidence: 'unknown',
+
+        physicalConfidence: 'unknown',
+
+      },
+
+    };
+
+  }
+
+  return {
+
+    matched: true,
+
+    field,
+
+    value,
+
+    category,
+
+    resolvedId: resolved.id,
+
+    label: resolved.label,
+
+    weight,
+
+    impact: resolved.nodeDeltas,
+
+    confidence: resolved.confidence,
+
+  };
+
+};
 
 export function computeStockConfigProfile(record = {}, bareShell = {}) {
 
@@ -95,7 +146,35 @@ export function computeStockConfigProfile(record = {}, bareShell = {}) {
 
         workingScores = applyImpact(workingScores, impact, weight);
 
-        appliedDrivers.push({ field, value, weight, impact });
+        appliedDrivers.push({
+
+          matched: true,
+
+          field,
+
+          value,
+
+          category: 'hardwareFactor',
+
+          resolvedId: 'hardware_lug_count_physical_factor',
+
+          label: 'Lug count physical factor',
+
+          weight,
+
+          impact,
+
+          confidence: {
+
+            matchConfidence: 'high',
+
+            deltaConfidence: 'medium',
+
+            physicalConfidence: 'high',
+
+          },
+
+        });
 
       } else {
 
@@ -107,19 +186,27 @@ export function computeStockConfigProfile(record = {}, bareShell = {}) {
 
     }
 
-    const impact = findMappedImpact(field, value);
+    const modifierDriver = buildResolvedModifierDriver({ field, value, weight });
 
-    if (!impact) {
+    if (!modifierDriver?.matched) {
 
-      unknownComponents.push({ field, value, reason: 'no-mapped-impact' });
+      unknownComponents.push(modifierDriver || {
+
+        field,
+
+        value,
+
+        reason: 'no-supported-modifier-category',
+
+      });
 
       return;
 
     }
 
-    workingScores = applyImpact(workingScores, impact, weight);
+    workingScores = applyImpact(workingScores, modifierDriver.impact, weight);
 
-    appliedDrivers.push({ field, value, weight, impact });
+    appliedDrivers.push(modifierDriver);
 
   });
 
@@ -131,9 +218,8 @@ export function computeStockConfigProfile(record = {}, bareShell = {}) {
 
     unknownComponents,
 
-    scoringBasis: 'computed-stock-config-physical-fields-v1',
+    scoringBasis: 'computed-stock-config-modifier-registry-v1',
 
   };
 
 }
-
