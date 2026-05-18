@@ -1,0 +1,1155 @@
+{
+
+  "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga": {
+
+    "id": "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP1455BU 14x5.5",
+
+    "patchName": "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "bubinga",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "9-ply bubinga",
+
+    "shellThicknessMm": 8,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension / signature lug",
+
+    "hardwareFinish": "black nickel / chrome style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "MP1455BU",
+
+    "yearInProduction": "2000s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.5,
+
+    "shellScoreBrightness": 6.2,
+
+    "shellScoreProjection": 8.1,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 7.5,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.6,
+
+    "overallAttack": 7.7,
+
+    "overallBrightness": 6.3,
+
+    "overallProjection": 8.3,
+
+    "overallSustain": 6.3,
+
+    "overallWarmth": 7.3,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 7.9,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "235-325 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact production years, stock head models, bearing edge detail, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms MP1455BU 14x5.5 bubinga signature model.",
+
+    "drumSummaryNotes": "Bubinga Mike Portnoy Melody Master model. Should score with strong projection, dense body, controlled sustain, and firm attack. Compared with the steel version, it should read warmer and less bright while retaining focused response.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_mike-portnoy-melody-master-mp1455st-14x5-5_14x5-5_metal_steel": {
+
+    "id": "tama_signature_mike-portnoy-melody-master-mp1455st-14x5-5_14x5-5_metal_steel",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP1455ST 14x5.5",
+
+    "patchName": "tama_signature_mike-portnoy-melody-master-mp1455st-14x5-5_14x5-5_metal_steel",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "steel",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension / signature lug",
+
+    "hardwareFinish": "black nickel / chrome style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "MP1455ST",
+
+    "yearInProduction": "2000s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.4,
+
+    "shellScoreBrightness": 8.2,
+
+    "shellScoreProjection": 8.5,
+
+    "shellScoreSustain": 6.3,
+
+    "shellScoreWarmth": 4.1,
+
+    "shellScoreSensitivity": 7.1,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 8.5,
+
+    "overallBrightness": 8.3,
+
+    "overallProjection": 8.6,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 4,
+
+    "overallSensitivity": 7.2,
+
+    "overallControl": 7.4,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-345 Hz",
+
+    "recommendedTuningResoHz": "365-435 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, production years, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms MP1455ST 14x5.5 steel signature model.",
+
+    "drumSummaryNotes": "Steel Mike Portnoy Melody Master model. Should score with high attack, brightness, and projection, with tighter low-end body than the bubinga version. Die-cast hoops increase focus and control.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_peter-erskine-pe106m-10x6_10x6_ply_maple_lacquer_triple-flange-mighty-hoop_pe106m_e9aa7aab": {
+
+    "id": "tama_signature_peter-erskine-pe106m-10x6_10x6_ply_maple_lacquer_triple-flange-mighty-hoop_pe106m_e9aa7aab",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Peter Erskine PE106M 10x6",
+
+    "patchName": "tama_signature_peter-erskine-pe106m-10x6_10x6_ply_maple_lacquer_triple-flange-mighty-hoop_pe106m_e9aa7aab",
+
+    "diameter": 10,
+
+    "depth": 6,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 6,
+
+    "lugType": "Tama low-mass / signature lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "PE106M",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 7.2,
+
+    "shellScoreProjection": 6.2,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 5.9,
+
+    "shellScoreSensitivity": 7.8,
+
+    "shellScoreControl": 6.8,
+
+    "overallAttack": 7.1,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 6.2,
+
+    "overallSustain": 5.9,
+
+    "overallWarmth": 5.8,
+
+    "overallSensitivity": 7.9,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "high",
+
+    "recommendedTuningBatterHz": "300-390 Hz",
+
+    "recommendedTuningResoHz": "390-470 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, production years, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms PE106M 10x6 maple signature model with Mighty Hoop style hoops.",
+
+    "drumSummaryNotes": "Compact 10x6 maple Peter Erskine signature model. Small diameter should raise pitch and sensitivity while limiting broad projection and low-end body. Maple shell keeps the response clear and musical rather than overly thin.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_peter-erskine-pe1445-14x4-5_14x4-5_ply_maple_lacquer_triple-flange-mighty-hoop_pe1445_3e707e32": {
+
+    "id": "tama_signature_peter-erskine-pe1445-14x4-5_14x4-5_ply_maple_lacquer_triple-flange-mighty-hoop_pe1445_3e707e32",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Peter Erskine PE1445 14x4.5",
+
+    "patchName": "tama_signature_peter-erskine-pe1445-14x4-5_14x4-5_ply_maple_lacquer_triple-flange-mighty-hoop_pe1445_3e707e32",
+
+    "diameter": 14,
+
+    "depth": 4.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama low-mass / signature lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "PE1445",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 6.8,
+
+    "shellScoreProjection": 6.7,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 6.2,
+
+    "shellScoreSensitivity": 7.9,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.2,
+
+    "overallBrightness": 6.8,
+
+    "overallProjection": 6.7,
+
+    "overallSustain": 5.8,
+
+    "overallWarmth": 6.1,
+
+    "overallSensitivity": 8,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "270-355 Hz",
+
+    "recommendedTuningResoHz": "370-445 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, production years, stock head models, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms PE1445 14x4.5 maple signature model with Mighty Hoop style hoops.",
+
+    "drumSummaryNotes": "Shallow 14x4.5 maple Peter Erskine signature model. Should emphasize sensitivity, quick response, and articulate attack while keeping moderate warmth from the maple shell.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_ronald-bruner-jr-rb1455-14x5-5_14x5-5_hybrid_walnut_6_walnut-steel-hybrid_die-cast-hoops_rb1455_f8f35fdb": {
+
+    "id": "tama_signature_ronald-bruner-jr-rb1455-14x5-5_14x5-5_hybrid_walnut_6_walnut-steel-hybrid_die-cast-hoops_rb1455_f8f35fdb",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Ronald Bruner Jr. RB1455 14x5.5",
+
+    "patchName": "tama_signature_ronald-bruner-jr-rb1455-14x5-5_14x5-5_hybrid_walnut_6_walnut-steel-hybrid_die-cast-hoops_rb1455_f8f35fdb",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "hybrid",
+
+    "shellMaterial1": "walnut",
+
+    "shellMaterial2": "steel",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "walnut/steel hybrid shell",
+
+    "shellThicknessMm": 6,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama hybrid shell bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "walnut / steel hybrid",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "black nickel / chrome style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "RB1455",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.1,
+
+    "shellScoreBrightness": 7.4,
+
+    "shellScoreProjection": 8.2,
+
+    "shellScoreSustain": 6.3,
+
+    "shellScoreWarmth": 6.3,
+
+    "shellScoreSensitivity": 7.3,
+
+    "shellScoreControl": 7.7,
+
+    "overallAttack": 8.2,
+
+    "overallBrightness": 7.5,
+
+    "overallProjection": 8.4,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 6.1,
+
+    "overallSensitivity": 7.4,
+
+    "overallControl": 8,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "245-330 Hz",
+
+    "recommendedTuningResoHz": "355-425 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact hybrid layup, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms RB1455 14x5.5 walnut/steel hybrid with die-cast hoops.",
+
+    "drumSummaryNotes": "Ronald Bruner Jr. hybrid walnut/steel signature model. Should combine metal-shell attack and projection with walnut body and warmth. Die-cast hoops increase focus, control, and rimshot authority.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_simon-phillips-gladiator-14x5-5_14x5-5_metal_bronze_bronze_die-cast-hoops_sp1455_6d2e74cb": {
+
+    "id": "tama_signature_simon-phillips-gladiator-14x5-5_14x5-5_metal_bronze_bronze_die-cast-hoops_sp1455_6d2e74cb",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Simon Phillips Gladiator 14x5.5",
+
+    "patchName": "tama_signature_simon-phillips-gladiator-14x5-5_14x5-5_metal_bronze_bronze_die-cast-hoops_sp1455_6d2e74cb",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "bronze",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "bronze",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "chrome / nickel style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "SP1455",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8,
+
+    "shellScoreBrightness": 7.2,
+
+    "shellScoreProjection": 8.5,
+
+    "shellScoreSustain": 7,
+
+    "shellScoreWarmth": 6.8,
+
+    "shellScoreSensitivity": 7.1,
+
+    "shellScoreControl": 7.4,
+
+    "overallAttack": 8.1,
+
+    "overallBrightness": 7.3,
+
+    "overallProjection": 8.7,
+
+    "overallSustain": 6.7,
+
+    "overallWarmth": 6.7,
+
+    "overallSensitivity": 7.2,
+
+    "overallControl": 7.7,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-325 Hz",
+
+    "recommendedTuningResoHz": "350-425 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms SP1455 Gladiator 14x5.5 bronze signature model with die-cast hoops.",
+
+    "drumSummaryNotes": "Simon Phillips Gladiator bronze signature model. Bronze shell should score with strong projection, firm attack, complex sustain, and more warmth/body than steel while staying brighter and more explosive than most wood shells.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_simon-phillips-monarch-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_sp1465_5cb2bc67": {
+
+    "id": "tama_signature_simon-phillips-monarch-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_sp1465_5cb2bc67",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Simon Phillips Monarch 14x6.5",
+
+    "patchName": "tama_signature_simon-phillips-monarch-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_sp1465_5cb2bc67",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "chrome / nickel style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "SP1465",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 6.6,
+
+    "shellScoreProjection": 7.5,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.2,
+
+    "overallAttack": 7.4,
+
+    "overallBrightness": 6.7,
+
+    "overallProjection": 7.7,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 7.5,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "345-415 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, stock head models, production years, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms SP1465 Monarch 14x6.5 maple signature model with die-cast hoops.",
+
+    "drumSummaryNotes": "Simon Phillips Monarch maple signature model. Deeper 14x6.5 maple shell should deliver balanced warmth, projection, and body, with die-cast hoops adding a focused and controlled response.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_simon-phillips-sp125-the-pageant-12x5_12x5_ply_maple": {
+
+    "id": "tama_signature_simon-phillips-sp125-the-pageant-12x5_12x5_ply_maple",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Simon Phillips SP125 The Pageant 12x5",
+
+    "patchName": "tama_signature_simon-phillips-sp125-the-pageant-12x5_12x5_ply_maple",
+
+    "diameter": 12,
+
+    "depth": 5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 6,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "chrome / nickel style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "SP125",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.3,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 6.4,
+
+    "shellScoreSustain": 5.9,
+
+    "shellScoreWarmth": 6.1,
+
+    "shellScoreSensitivity": 7.7,
+
+    "shellScoreControl": 6.8,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 7.1,
+
+    "overallProjection": 6.4,
+
+    "overallSustain": 5.9,
+
+    "overallWarmth": 6,
+
+    "overallSensitivity": 7.8,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "high-medium",
+
+    "recommendedTuningBatterHz": "290-375 Hz",
+
+    "recommendedTuningResoHz": "385-460 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, stock head models, production years, hoop model, and original catalog source URL need stronger confirmation. Existing Firestore identity confirms SP125 The Pageant 12x5 maple signature model.",
+
+    "drumSummaryNotes": "Compact Simon Phillips The Pageant 12x5 maple signature model. Smaller diameter should create higher pitch, articulate attack, and strong sensitivity, while maple keeps the tone rounder than a metal piccolo-style snare.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0": {
+
+    "id": "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Stewart Copeland SC145 14x5",
+
+    "patchName": "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "brass",
+
+    "hoopType": "die-cast batter / steel Mighty Hoop snare side",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon Snappy Snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "SC145",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 8.2,
+
+    "shellScoreBrightness": 7.8,
+
+    "shellScoreProjection": 8.1,
+
+    "shellScoreSustain": 6.5,
+
+    "shellScoreWarmth": 6.4,
+
+    "shellScoreSensitivity": 7.5,
+
+    "shellScoreControl": 7.3,
+
+    "overallAttack": 8.4,
+
+    "overallBrightness": 7.9,
+
+    "overallProjection": 8.3,
+
+    "overallSustain": 6.2,
+
+    "overallWarmth": 6.2,
+
+    "overallSensitivity": 7.6,
+
+    "overallControl": 7.6,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-345 Hz",
+
+    "recommendedTuningResoHz": "365-435 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Stock head models and complete current source URL need stronger confirmation. Existing Firestore identity confirms SC145 14x5 brass shell, 1.5mm thickness, die-cast batter hoop, and steel Mighty Hoop snare-side configuration.",
+
+    "drumSummaryNotes": "Stewart Copeland 14x5 brass signature model. Brass shell should provide strong attack, brightness, projection, and musical body. Mixed hoop configuration keeps the batter-side attack focused while preserving snare-side response.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Artist association, brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
