@@ -1,0 +1,2095 @@
+{
+  "generatedAt": "2026-05-18T06:04:31.944Z",
+  "sourcePacket": "data/snareResearchPackets/noble-cooley-core-batch-1.json",
+  "docs": [
+    {
+      "id": "noble-and-cooley_artist-endorser-reference_craig-pilo-reference-snare_14x6-5_other-needs-research_e9ea30de",
+      "exists": true,
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Artist / Endorser Reference",
+        "modelName": "Craig Pilo Reference Snare",
+        "patchName": "noble-and-cooley_artist-endorser-reference_craig-pilo-reference-snare_14x6-5_other-needs-research_e9ea30de",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": true,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Other / Needs Research",
+            "shellMaterialPrimary": "unknown",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/gallery-snares",
+          "primarySourceUrl": "https://www.noblecooley.com/craig-pilo",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Artist page confirms Noble & Cooley association, but exact model/specs need manual confirmation."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/gallery-snares"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified.",
+          "drumSummaryNotes": "Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.8,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.7,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.1,
+        "overallControl": 6.5,
+        "shellScoreAttack": 6.8,
+        "shellScoreProjection": 7.1,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 6.8,
+        "overallWarmth": 6.7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "unknown",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.1,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.7,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Other / Needs Research",
+        "lugCount": 10,
+        "shellMaterial1": "unknown",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082675,
+          "_nanoseconds": 552000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "noble-and-cooley_artist-endorser-reference_malcolm-travis-reference-snare_14x6-5_other-needs-research_03455e0b",
+      "exists": true,
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Artist / Endorser Reference",
+        "modelName": "Malcolm Travis Reference Snare",
+        "patchName": "noble-and-cooley_artist-endorser-reference_malcolm-travis-reference-snare_14x6-5_other-needs-research_03455e0b",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": true,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Other / Needs Research",
+            "shellMaterialPrimary": "unknown",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/gallery-snares",
+          "primarySourceUrl": "https://www.noblecooley.com/malcolm-travis",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Artist page confirms Noble & Cooley association, but exact model/specs need manual confirmation."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/gallery-snares"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified.",
+          "drumSummaryNotes": "Included as artist/reference placeholder only; do not treat score as final until exact drum model is identified."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.8,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.7,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.1,
+        "overallControl": 6.5,
+        "shellScoreAttack": 6.8,
+        "shellScoreProjection": 7.1,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 6.8,
+        "overallWarmth": 6.7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "unknown",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.1,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.7,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Other / Needs Research",
+        "lugCount": 10,
+        "shellMaterial1": "unknown",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082675,
+          "_nanoseconds": 640000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Alloy Classic",
+        "modelName": "Alloy Classic Aluminum 14x4.75",
+        "patchName": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 4.75,
+            "metricDimensionsMm": "355.6 x 120.6"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Aluminum",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Cast aluminum shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Machined bearing edge / tight tolerance",
+            "snareSideProfile": "Machined bearing edge / tight tolerance",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw or black alloy finish",
+            "finishType": "Raw or black alloy finish",
+            "exteriorTreatment": "Raw or black alloy finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black chrome",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Brass lugs / N&C hardware",
+            "hardwareFinish": "Chrome or black chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "primarySourceUrl": "https://www.noblecooley.com/alloy",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Official source confirms machined cast alloy shell concept; Sweetwater confirms 14x6 aluminum with triple-flanged hoops; thickness and snare bed not listed."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Alloy Classic score emphasizes aluminum sensitivity/control with cast-shell focus and a drier, cleaner metal response.",
+          "drumSummaryNotes": "Alloy Classic score emphasizes aluminum sensitivity/control with cast-shell focus and a drier, cleaner metal response."
+        },
+        "overallBrightness": 6.9,
+        "reRingThicknessMm": null,
+        "lugType": "Brass lugs / N&C hardware",
+        "shellScoreSustain": 5.6,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.8,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.4,
+        "overallControl": 7.2,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 7.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.8,
+        "overallSustain": 5.6,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 6,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.4,
+        "shellScoreBrightness": 6.9,
+        "shellScoreControl": 7.2,
+        "bearingEdge": "Machined bearing edge / tight tolerance",
+        "shellScoreWarmth": 6,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6,
+        "shellMaterial3": "none",
+        "control": 7.2,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": "none",
+        "brightness": 6.9,
+        "depth": 4.75,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082675,
+          "_nanoseconds": 251000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.8,
+        "sustain": 5.6
+      }
+    },
+    {
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Alloy Classic",
+        "modelName": "Alloy Classic Aluminum 14x6",
+        "patchName": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Aluminum",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Cast aluminum shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Machined bearing edge / tight tolerance",
+            "snareSideProfile": "Machined bearing edge / tight tolerance",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw or black alloy finish",
+            "finishType": "Raw or black alloy finish",
+            "exteriorTreatment": "Raw or black alloy finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black chrome",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Brass lugs / N&C hardware",
+            "hardwareFinish": "Chrome or black chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "primarySourceUrl": "https://www.noblecooley.com/alloy",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Official source confirms machined cast alloy shell concept; Sweetwater confirms 14x6 aluminum with triple-flanged hoops; thickness and snare bed not listed."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Alloy Classic score emphasizes aluminum sensitivity/control with cast-shell focus and a drier, cleaner metal response.",
+          "drumSummaryNotes": "Alloy Classic score emphasizes aluminum sensitivity/control with cast-shell focus and a drier, cleaner metal response."
+        },
+        "overallBrightness": 6.9,
+        "reRingThicknessMm": null,
+        "lugType": "Brass lugs / N&C hardware",
+        "shellScoreSustain": 5.8,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.5,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.6,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.4,
+        "overallControl": 7.2,
+        "shellScoreAttack": 7.5,
+        "shellScoreProjection": 7.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.6,
+        "overallSustain": 5.8,
+        "diameter": 14,
+        "attack": 7.5,
+        "overallWarmth": 6.1,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.4,
+        "shellScoreBrightness": 6.9,
+        "shellScoreControl": 7.2,
+        "bearingEdge": "Machined bearing edge / tight tolerance",
+        "shellScoreWarmth": 6.1,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.1,
+        "shellMaterial3": "none",
+        "control": 7.2,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": "none",
+        "brightness": 6.9,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082675,
+          "_nanoseconds": 458000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.6,
+        "sustain": 5.8
+      }
+    },
+    {
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Alloy Classic",
+        "modelName": "Alloy Classic Aluminum 14x6.5",
+        "patchName": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Aluminum",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Cast aluminum shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Machined bearing edge / tight tolerance",
+            "snareSideProfile": "Machined bearing edge / tight tolerance",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw or black alloy finish",
+            "finishType": "Raw or black alloy finish",
+            "exteriorTreatment": "Raw or black alloy finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black chrome",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Brass lugs / N&C hardware",
+            "hardwareFinish": "Chrome or black chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "primarySourceUrl": "https://www.noblecooley.com/alloy",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Official source confirms machined cast alloy shell concept; Sweetwater confirms 14x6 aluminum with triple-flanged hoops; thickness and snare bed not listed."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Alloy Classic score emphasizes aluminum sensitivity/control with cast-shell focus and a drier, cleaner metal response.",
+          "drumSummaryNotes": "Alloy Classic score emphasizes aluminum sensitivity/control with cast-shell focus and a drier, cleaner metal response."
+        },
+        "overallBrightness": 6.9,
+        "reRingThicknessMm": null,
+        "lugType": "Brass lugs / N&C hardware",
+        "shellScoreSustain": 6,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.5,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.5,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.6,
+        "overallControl": 7.2,
+        "shellScoreAttack": 7.5,
+        "shellScoreProjection": 7.6,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.5,
+        "overallSustain": 6,
+        "diameter": 14,
+        "attack": 7.5,
+        "overallWarmth": 6.3,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.6,
+        "shellScoreBrightness": 6.9,
+        "shellScoreControl": 7.2,
+        "bearingEdge": "Machined bearing edge / tight tolerance",
+        "shellScoreWarmth": 6.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.3,
+        "shellMaterial3": "none",
+        "control": 7.2,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": "none",
+        "brightness": 6.9,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082675,
+          "_nanoseconds": 345000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.5,
+        "sustain": 6
+      }
+    },
+    {
+      "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x5_14x5_metal_brass_raw-lacquered-metal-finish_triple-flanged_10069628",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Metal / Archive Specialty",
+        "modelName": "Brass Specialty 14x5",
+        "patchName": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x5_14x5_metal_brass_raw-lacquered-metal-finish_triple-flanged_10069628",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown metal shell construction",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw/lacquered metal finish",
+            "finishType": "Raw/lacquered metal finish",
+            "exteriorTreatment": "Raw/lacquered metal finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "N&C hardware",
+            "hardwareFinish": "Chrome or black",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/alloy",
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Included as archive/specialty placeholder; requires official/catalog confirmation before high-confidence use."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/alloy"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Brass specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed.",
+          "drumSummaryNotes": "Brass specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed."
+        },
+        "overallBrightness": 7.5,
+        "reRingThicknessMm": null,
+        "lugType": "N&C hardware",
+        "shellScoreSustain": 6.9,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8.2,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.3,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.5,
+        "overallControl": 6.3,
+        "shellScoreAttack": 8.2,
+        "shellScoreProjection": 8.5,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.3,
+        "overallSustain": 6.9,
+        "diameter": 14,
+        "attack": 8.2,
+        "overallWarmth": 6.7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.5,
+        "shellScoreBrightness": 7.5,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.7,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.5,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082677,
+          "_nanoseconds": 568000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.3,
+        "sustain": 6.9
+      }
+    },
+    {
+      "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x6-5_14x6-5_metal_brass_raw-lacquered-metal-finish_triple-fla_d72eb297",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Metal / Archive Specialty",
+        "modelName": "Brass Specialty 14x6.5",
+        "patchName": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x6-5_14x6-5_metal_brass_raw-lacquered-metal-finish_triple-fla_d72eb297",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown metal shell construction",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw/lacquered metal finish",
+            "finishType": "Raw/lacquered metal finish",
+            "exteriorTreatment": "Raw/lacquered metal finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "N&C hardware",
+            "hardwareFinish": "Chrome or black",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/alloy",
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Included as archive/specialty placeholder; requires official/catalog confirmation before high-confidence use."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/alloy"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Brass specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed.",
+          "drumSummaryNotes": "Brass specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed."
+        },
+        "overallBrightness": 7.5,
+        "reRingThicknessMm": null,
+        "lugType": "N&C hardware",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.7,
+        "overallControl": 6.3,
+        "shellScoreAttack": 8,
+        "shellScoreProjection": 8.7,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 8,
+        "overallWarmth": 7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.7,
+        "shellScoreBrightness": 7.5,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.5,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082677,
+          "_nanoseconds": 663000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x5_14x5_metal_bronze_raw-lacquered-metal-finish_triple-flang_678cfd56",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Metal / Archive Specialty",
+        "modelName": "Bronze Specialty 14x5",
+        "patchName": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x5_14x5_metal_bronze_raw-lacquered-metal-finish_triple-flang_678cfd56",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Bronze",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown metal shell construction",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw/lacquered metal finish",
+            "finishType": "Raw/lacquered metal finish",
+            "exteriorTreatment": "Raw/lacquered metal finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "N&C hardware",
+            "hardwareFinish": "Chrome or black",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/alloy",
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Included as archive/specialty placeholder; requires official/catalog confirmation before high-confidence use."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/alloy"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Bronze specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed.",
+          "drumSummaryNotes": "Bronze specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed."
+        },
+        "overallBrightness": 7.2,
+        "reRingThicknessMm": null,
+        "lugType": "N&C hardware",
+        "shellScoreSustain": 7.1,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.4,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.4,
+        "shellScoreAttack": 8,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.4,
+        "overallSustain": 7.1,
+        "diameter": 14,
+        "attack": 8,
+        "overallWarmth": 7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.2,
+        "shellScoreControl": 6.4,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7,
+        "shellMaterial3": "none",
+        "control": 6.4,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Bronze",
+        "shellMaterial2": "none",
+        "brightness": 7.2,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082677,
+          "_nanoseconds": 757000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.4,
+        "sustain": 7.1
+      }
+    },
+    {
+      "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x6-5_14x6-5_metal_bronze_raw-lacquered-metal-finish_triple-f_d006de9a",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "Metal / Archive Specialty",
+        "modelName": "Bronze Specialty 14x6.5",
+        "patchName": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x6-5_14x6-5_metal_bronze_raw-lacquered-metal-finish_triple-f_d006de9a",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Bronze",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown metal shell construction",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Raw/lacquered metal finish",
+            "finishType": "Raw/lacquered metal finish",
+            "exteriorTreatment": "Raw/lacquered metal finish",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "N&C hardware",
+            "hardwareFinish": "Chrome or black",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/alloy",
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Included as archive/specialty placeholder; requires official/catalog confirmation before high-confidence use."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/alloy"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Bronze specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed.",
+          "drumSummaryNotes": "Bronze specialty placeholder scored from material behavior only until construction/thickness/edge are confirmed."
+        },
+        "overallBrightness": 7.2,
+        "reRingThicknessMm": null,
+        "lugType": "N&C hardware",
+        "shellScoreSustain": 7.4,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.8,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.6,
+        "overallControl": 6.4,
+        "shellScoreAttack": 7.8,
+        "shellScoreProjection": 8.6,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.4,
+        "diameter": 14,
+        "attack": 7.8,
+        "overallWarmth": 7.3,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.6,
+        "shellScoreBrightness": 7.2,
+        "shellScoreControl": 6.4,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.3,
+        "shellMaterial3": "none",
+        "control": 6.4,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Bronze",
+        "shellMaterial2": "none",
+        "brightness": 7.2,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082677,
+          "_nanoseconds": 854000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.1,
+        "sustain": 7.4
+      }
+    },
+    {
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-13x3-875_13x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_1069e80d",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Noble & Cooley",
+        "companyType": "Boutique / custom drum builder",
+        "lineSeries": "CD Maple Series",
+        "modelName": "CD Maple 13x3.875",
+        "patchName": "noble-and-cooley_cd-maple-series_cd-maple-13x3-875_13x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_1069e80d",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 13,
+            "depthInches": 3.875,
+            "metricDimensionsMm": "330.2 x 98.4"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Maple ply shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Standard/custom finish options",
+            "finishType": "Standard/custom finish options",
+            "exteriorTreatment": "Standard/custom finish options",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Noble & Cooley throw-off",
+            "style": "unknown",
+            "make": "Noble & Cooley throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome or black",
+            "batterHoopType": "Triple-flanged hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "N&C cast lugs",
+            "hardwareFinish": "Chrome or black",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 13,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.noblecooley.com/cd-maple-series",
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Official CD page confirms size family and standard triple-flanged hoops; shell thickness and snare bed not listed."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.noblecooley.com/cd-maple-series"
+          ]
+        },
+        "summary": {
+          "shortDescription": "CD Maple ply-shell score: balanced maple voice, standard triple-flanged openness, 3.875\" depth controls warmth/projection.",
+          "drumSummaryNotes": "CD Maple ply-shell score: balanced maple voice, standard triple-flanged openness, 3.875\" depth controls warmth/projection."
+        },
+        "overallBrightness": 6.7,
+        "reRingThicknessMm": null,
+        "lugType": "N&C cast lugs",
+        "shellScoreSustain": 6.2,
+        "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.4,
+        "hoopType": "Triple-flanged hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.3,
+        "engineReadinessNotes": "Noble & Cooley record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7,
+        "overallControl": 6.7,
+        "shellScoreAttack": 7.4,
+        "shellScoreProjection": 7,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.3,
+        "overallSustain": 6.2,
+        "diameter": 13,
+        "attack": 7.4,
+        "overallWarmth": 6.8,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome or black",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7,
+        "shellScoreBrightness": 6.7,
+        "shellScoreControl": 6.7,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.8,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.8,
+        "shellMaterial3": "none",
+        "control": 6.7,
+        "shellConstruction": "Ply",
+        "lugCount": 8,
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "none",
+        "brightness": 6.7,
+        "depth": 3.875,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082675,
+          "_nanoseconds": 734000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.3,
+        "sustain": 6.2
+      }
+    }
+  ]
+}

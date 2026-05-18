@@ -1,0 +1,113 @@
+{
+  "company": "AHEAD",
+  "generatedAt": "2026-05-18T06:04:35.611Z",
+  "batch": "ahead-core-batch-1",
+  "records": [
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    }
+  ]
+}
