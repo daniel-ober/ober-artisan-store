@@ -1,0 +1,1593 @@
+[
+
+  {
+
+    "id": "sonor_vintage-series_vt-14x5-75-sdw_14x5-75_ply_beech_6_rounded-bearing-edge_superprofil-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Vintage Series",
+
+    "modelName": "VT 14x5.75 SDW",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 5.75,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Beech",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "9-ply German beech",
+
+    "bearingEdge": "Rounded bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Delmar wrap / semi-gloss veneer variants",
+
+    "hoopType": "Superprofil hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Teardrop lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Super 50 Throw-Off System",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "15910029 / 15910030 / 15910032 / 15910033 / 15910048 / 15910049 / 15910050",
+
+    "attack": 5.3,
+
+    "brightness": 4.8,
+
+    "projection": 5.2,
+
+    "sustain": 5.8,
+
+    "warmth": 6.8,
+
+    "sensitivity": 5.8,
+
+    "control": 5.5,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor Vintage Series specs: 14x5.75, 9-ply 6mm German beech shell, rounded bearing edge, CLTF/OSM shell manufacturing, Superprofil hoops, and Super 50 throw-off.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "240-285 Hz",
+
+    "recommendedTuningResoHz": "360-410 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/vt-14x575-sdw",
+
+    "secondarySourceUrl": "https://www.sonor.com/drums/instruments/vintage-series",
+
+    "sourceConfidenceNotes": "Official Sonor product and series pages confirm core shell, edge, hoop, lug, throw-off, and construction data. Snare bed depth and stock heads/wires are not published on the product page.",
+
+    "drumSummaryNotes": "Modern Sonor Vintage snare with 9-ply 6mm German beech shell and rounded bearing edges. Scored as warm, resonant, moderately controlled, and more rounded than sharper 45-degree Sonor designs.",
+
+    "notesOnMissingData": [
+
+      "Snare bed depth is not published on the official product page.",
+
+      "Stock snare wire model and stock head models need confirmation."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_vintage-series_vt-14x5-75-sdw_14x5-75_ply_beech_6_rounded-bearing-edge_superprofil-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Vintage Series",
+
+      "modelName": "VT 14x5.75 SDW",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 5.75,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Beech",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 6,
+
+      "plyCountLayup": "9-ply German beech",
+
+      "bearingEdge": "Rounded bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "Superprofil hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor product data confirms 14x5.75 beech shell, 9-ply 6mm layup, rounded bearing edge, CLTF/OSM construction, and Superprofil hoops.",
+
+      "drumSummaryNotes": "Warm, resonant, medium-depth German beech Sonor Vintage snare with rounded edge response.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth and stock wires/heads are not published."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_vintage-series_vt-14x6-5-sdw_14x6-5_ply_beech_6_rounded-bearing-edge_superprofil-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Vintage Series",
+
+    "modelName": "VT 14x6.5 SDW",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Beech",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "9-ply German beech",
+
+    "bearingEdge": "Rounded bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Delmar wrap / semi-gloss veneer variants",
+
+    "hoopType": "Superprofil hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Teardrop lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Super 50 Throw-Off System",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "15910129 / 15910130 / 15910132 / 15910133 / 15910148 / 15910149 / 15910150",
+
+    "attack": 5.2,
+
+    "brightness": 4.7,
+
+    "projection": 5.4,
+
+    "sustain": 6.1,
+
+    "warmth": 7.0,
+
+    "sensitivity": 5.6,
+
+    "control": 5.6,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor Vintage 14x6.5 product data: 9-ply 6mm beech shell, rounded edge, CLTF/OSM construction, Superprofil hoops, and Super 50 throw-off.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "220-265 Hz",
+
+    "recommendedTuningResoHz": "340-390 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/vt-1465-sdw-vpl",
+
+    "secondarySourceUrl": "https://www.sonor.com/drums/instruments/vintage-series",
+
+    "sourceConfidenceNotes": "Official Sonor page confirms the shell size, beech material, 9-ply 6mm layup, rounded edge, Superprofil hoops, CLTF/OSM construction, TuneSafe, and Super 50 throw-off.",
+
+    "drumSummaryNotes": "Deeper Vintage Series beech snare with rounded edges and Superprofil hoops. Scored with more warmth, body, and sustain than the 14x5.75 version.",
+
+    "notesOnMissingData": [
+
+      "Snare bed depth is not published on the official product page.",
+
+      "Stock snare wire model and stock head models need confirmation."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_vintage-series_vt-14x6-5-sdw_14x6-5_ply_beech_6_rounded-bearing-edge_superprofil-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Vintage Series",
+
+      "modelName": "VT 14x6.5 SDW",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 6.5,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Beech",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 6,
+
+      "plyCountLayup": "9-ply German beech",
+
+      "bearingEdge": "Rounded bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "Superprofil hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor product data confirms 14x6.5 beech shell, 9-ply 6mm layup, rounded bearing edge, CLTF/OSM construction, and Superprofil hoops.",
+
+      "drumSummaryNotes": "Deeper warm German beech Vintage snare with rounded bearing edge response and stronger body than the 14x5.75 version.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth and stock wires/heads are not published."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_kompressor_ks-1406-sdw_14x6_ply_beech_8_45-degree_2-3mm-power-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Kompressor",
+
+    "modelName": "KS 1406 SDW Beech",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Beech",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 8,
+
+    "plyCountLayup": "12-ply heavy beech",
+
+    "bearingEdge": "45-degree bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Natural beech semi-gloss",
+
+    "hoopType": "2.3mm steel Power Hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor double lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Standard Snare Throw-Off",
+
+    "stockSnareWires": "Sonor standard snare wires",
+
+    "stockBatterHead": "Remo USA / Sonor coated medium batter",
+
+    "stockResoHead": "Remo USA / Sonor clear medium resonance snare side",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "2023",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "KS-1406-SDW-NAB",
+
+    "attack": 6.5,
+
+    "brightness": 5.6,
+
+    "projection": 6.7,
+
+    "sustain": 5.0,
+
+    "warmth": 6.3,
+
+    "sensitivity": 5.6,
+
+    "control": 6.4,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor Kompressor series data confirming 12-ply 8mm heavy beech shell, CLTF, OSM, 2.3mm Power Hoops, Remo USA heads, and standard throw-off. Retailer data confirms 14x6 model-specific 45-degree edge and stock wire/head details.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "220-270 Hz",
+
+    "recommendedTuningResoHz": "350-400 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+
+    "secondarySourceUrl": "https://memphisdrumshop.com/products/sonor-14x6-kompressor-series-beech-snare-drum-ks-1406-sdw-nab",
+
+    "sourceConfidenceNotes": "Official Sonor series page confirms the wood-shell construction family; retailer source fills model-specific size and common stock hardware details.",
+
+    "drumSummaryNotes": "Heavy 12-ply beech Kompressor snare. Scored as punchy, controlled, projecting, and more focused than the thinner Vintage beech models.",
+
+    "notesOnMissingData": [
+
+      "Official Sonor series page confirms shell family but not every individual SKU spec in the captured text.",
+
+      "Snare bed depth is not published."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_kompressor_ks-1406-sdw_14x6_ply_beech_8_45-degree_2-3mm-power-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Kompressor",
+
+      "modelName": "KS 1406 SDW Beech",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 6,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Beech",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 8,
+
+      "plyCountLayup": "12-ply heavy beech",
+
+      "bearingEdge": "45-degree bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "2.3mm steel Power Hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor Kompressor data confirms 12-ply 8mm heavy beech shell, CLTF/OSM, 2.3mm Power Hoops, Remo USA heads, and standard throw-off; retailer data confirms 14x6 model specifics.",
+
+      "drumSummaryNotes": "Focused, heavy beech 14x6 Sonor Kompressor snare with strong projection and controlled sustain.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth is not published."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_kompressor_ks-140575-sds_14x5-75_metal_steel_1_45-degree_2-3mm-power-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Kompressor",
+
+    "modelName": "KS 14x5.75 SDS Steel",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 5.75,
+
+    "shellConstruction": "Metal",
+
+    "shellMaterial1": "Steel",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "none",
+
+    "bearingEdge": "45-degree formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Chrome plated steel",
+
+    "hoopType": "2.3mm steel Power Hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor double lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Standard Snare Throw-Off",
+
+    "stockSnareWires": "Sonor standard 20-strand snare wires",
+
+    "stockBatterHead": "Sonor white medium batter by Remo",
+
+    "stockResoHead": "Sonor medium resonance snare side by Remo",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "2023",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "KS-140575-SDS",
+
+    "attack": 7.0,
+
+    "brightness": 7.0,
+
+    "projection": 6.9,
+
+    "sustain": 4.7,
+
+    "warmth": 4.2,
+
+    "sensitivity": 5.7,
+
+    "control": 6.2,
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "scoringBasis": "Shell-first scoring based on retailer model data for the 14x5.75 Kompressor steel snare: beaded 1mm chrome-plated steel shell, 45-degree edge, 2.3mm Power Hoops, standard Sonor throw-off, and Remo-made Sonor heads. Official Sonor Kompressor page supports shared series hardware/features.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "240-295 Hz",
+
+    "recommendedTuningResoHz": "370-425 Hz",
+
+    "primarySourceUrl": "https://memphisdrumshop.com/products/sonor-14x575-kompressor-series-chrome-plated-steel-snare-drum-ks-140575-sds",
+
+    "secondarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+
+    "sourceConfidenceNotes": "Model-specific specs come from retailer source; official Sonor page confirms shared Kompressor series hardware/features but captured official text does not list this metal SKU directly.",
+
+    "drumSummaryNotes": "Beaded steel Kompressor snare scored as bright, crisp, projecting, and controlled with less warmth than wood and brass variants.",
+
+    "notesOnMissingData": [
+
+      "Official model page should be captured later if available.",
+
+      "Snare bed depth is not published."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_kompressor_ks-140575-sds_14x5-75_metal_steel_1_45-degree_2-3mm-power-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Kompressor",
+
+      "modelName": "KS 14x5.75 SDS Steel",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 5.75,
+
+      "shellConstruction": "Metal",
+
+      "shellMaterial1": "Steel",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 1,
+
+      "bearingEdge": "45-degree formed metal bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "2.3mm steel Power Hoops",
+
+      "sourceConfidence": "medium",
+
+      "voiceScoreConfidence": "medium",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Retailer model data confirms 14x5.75 beaded 1mm chrome-plated steel shell with 45-degree edge and 2.3mm Power Hoops; official Sonor page supports shared Kompressor features.",
+
+      "drumSummaryNotes": "Bright, crisp, controlled beaded steel Kompressor snare.",
+
+      "notesOnMissingData": [
+
+        "Official model page and snare bed depth still need confirmation."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_kompressor_ks-14x5-75-sdb_14x5-75_metal_brass_unknown_45-degree_2-3mm-power-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Kompressor",
+
+    "modelName": "KS 14x5.75 SDB Brass",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 5.75,
+
+    "shellConstruction": "Metal",
+
+    "shellMaterial1": "Brass",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": null,
+
+    "plyCountLayup": "none",
+
+    "bearingEdge": "45-degree formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Black brushed brass",
+
+    "hoopType": "2.3mm Power Hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "AQ2 / Sonor standard throw-off",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "2023",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "KS-140575-SDB",
+
+    "attack": 6.7,
+
+    "brightness": 6.8,
+
+    "projection": 7.0,
+
+    "sustain": 5.3,
+
+    "warmth": 5.5,
+
+    "sensitivity": 5.8,
+
+    "control": 6.0,
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "scoringBasis": "Shell-first scoring based on Sonor Kompressor product listing and retailer specs for 14x5.75 beaded brass shell, 2.3mm Power Hoops, TuneSafe lugs, and standard/AQ2 throw-off. Shell thickness remains unknown, so confidence is medium.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "235-285 Hz",
+
+    "recommendedTuningResoHz": "365-415 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/ks-14x575-sdb",
+
+    "secondarySourceUrl": "https://www.steveweissmusic.com/products/sonor-kompressor-series-brass-snare-drum",
+
+    "sourceConfidenceNotes": "Official Sonor product URL exists and confirms Kompressor model context; retailer page provides clear public listing details. Shell thickness not captured in available official text.",
+
+    "drumSummaryNotes": "Brass Kompressor snare scored as bright, projecting, and somewhat warmer than steel, with focused modern hoop response.",
+
+    "notesOnMissingData": [
+
+      "Exact shell thickness needs official confirmation.",
+
+      "Snare bed depth and stock heads/wires need confirmation."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_kompressor_ks-14x5-75-sdb_14x5-75_metal_brass_unknown_45-degree_2-3mm-power-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Kompressor",
+
+      "modelName": "KS 14x5.75 SDB Brass",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 5.75,
+
+      "shellConstruction": "Metal",
+
+      "shellMaterial1": "Brass",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": null,
+
+      "bearingEdge": "45-degree formed metal bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "2.3mm Power Hoops",
+
+      "sourceConfidence": "medium",
+
+      "voiceScoreConfidence": "medium",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Source-backed brass Kompressor row; model size/material/features are supported but shell thickness remains unpublished in captured text.",
+
+      "drumSummaryNotes": "Bright and projecting brass Kompressor voice with moderate warmth.",
+
+      "notesOnMissingData": [
+
+        "Exact shell thickness, snare bed depth, and stock heads/wires need confirmation."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_aq2_aq2-1406-sdw_14x6_ply_maple_5-8_45-degree_2-3mm-power-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "AQ2 Series",
+
+    "modelName": "AQ2 1406 SDW",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 5.8,
+
+    "plyCountLayup": "7-ply Canadian/Chinese maple",
+
+    "bearingEdge": "45-degree bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Lacquer / wrap variants",
+
+    "hoopType": "2.3mm Power Hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor AQ double lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Standard Throw-Off",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "17612622 / 17612635 / 17612640 / 17612664",
+
+    "attack": 5.9,
+
+    "brightness": 5.7,
+
+    "projection": 5.9,
+
+    "sustain": 5.3,
+
+    "warmth": 5.7,
+
+    "sensitivity": 5.6,
+
+    "control": 5.5,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor AQ2 product data: 14x6, 7-ply 5.8mm Canadian/Chinese maple shell, 45-degree bearing edge, 2.3mm Power Hoops, TuneSafe, and standard throw-off.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "225-275 Hz",
+
+    "recommendedTuningResoHz": "350-405 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/aq2-1406-sdw",
+
+    "secondarySourceUrl": "",
+
+    "sourceConfidenceNotes": "Official Sonor product page confirms the required core shell and hardware fields. Snare bed depth and stock heads/wires are not published in captured text.",
+
+    "drumSummaryNotes": "AQ2 14x6 maple snare with moderate shell thickness and 45-degree edge. Scored as balanced, articulate, and moderately warm with modern Power Hoop focus.",
+
+    "notesOnMissingData": [
+
+      "Snare bed depth and stock heads/wires are not published."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_aq2_aq2-1406-sdw_14x6_ply_maple_5-8_45-degree_2-3mm-power-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "AQ2 Series",
+
+      "modelName": "AQ2 1406 SDW",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 6,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Maple",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 5.8,
+
+      "plyCountLayup": "7-ply Canadian/Chinese maple",
+
+      "bearingEdge": "45-degree bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "2.3mm Power Hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor AQ2 page confirms size, shell material, 7-ply 5.8mm layup, 45-degree edge, 2.3mm Power Hoops, and standard throw-off.",
+
+      "drumSummaryNotes": "Balanced modern maple Sonor AQ2 snare.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth and stock wires/heads are not published."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_sq1_sq1-1465-sdw_14x6-5_ply_birch_7_45-degree_2-3mm-power-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "SQ1 Series",
+
+    "modelName": "SQ1 1465 SDW",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Birch",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 7,
+
+    "plyCountLayup": "7-ply European birch",
+
+    "bearingEdge": "45-degree bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Matte lacquer variants",
+
+    "hoopType": "2.3mm Power Hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor double lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Dual Glide Snare Strainer",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "modelNumber": "16110034 / 16110035 / 16110036 / 16110037 / 16110040",
+
+    "attack": 6.6,
+
+    "brightness": 6.4,
+
+    "projection": 6.3,
+
+    "sustain": 5.1,
+
+    "warmth": 5.0,
+
+    "sensitivity": 5.7,
+
+    "control": 6.2,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor SQ1 product data: 14x6.5, 7-ply 7mm birch shell, 45-degree edge, CLTF/OSM construction, 2.3mm Power Hoops, TuneSafe, and Dual Glide strainer.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "225-275 Hz",
+
+    "recommendedTuningResoHz": "350-405 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/sq1-1465-sdw",
+
+    "secondarySourceUrl": "",
+
+    "sourceConfidenceNotes": "Official Sonor product page marks SQ1 as discontinued and confirms size, birch material, shell layup/thickness, edge, hoops, lugs, manufacturing, and strainer.",
+
+    "drumSummaryNotes": "SQ1 birch snare scored as articulate, clear, controlled, and projecting with less warmth than beech/maple Sonor models.",
+
+    "notesOnMissingData": [
+
+      "Snare bed depth and stock heads/wires are not published."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_sq1_sq1-1465-sdw_14x6-5_ply_birch_7_45-degree_2-3mm-power-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "SQ1 Series",
+
+      "modelName": "SQ1 1465 SDW",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 6.5,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Birch",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 7,
+
+      "plyCountLayup": "7-ply European birch",
+
+      "bearingEdge": "45-degree bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "2.3mm Power Hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor SQ1 page confirms size, 7-ply 7mm birch shell, 45-degree edge, 2.3mm Power Hoops, CLTF/OSM construction, and Dual Glide strainer.",
+
+      "drumSummaryNotes": "Articulate and controlled 14x6.5 birch SQ1 snare.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth and stock wires/heads are not published."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_momentum_mt-maple-14x6-5-sdw_14x6-5_ply_maple_6_45-degree_2-3mm-power-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Momentum",
+
+    "modelName": "MT Maple 14x6.5 SDW",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "9-ply maple",
+
+    "bearingEdge": "45-degree bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Solid matte lacquer",
+
+    "hoopType": "2.3mm Power Hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor double lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Dual Glide Snare Strainer",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "2025",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "16274540",
+
+    "attack": 5.9,
+
+    "brightness": 5.6,
+
+    "projection": 6.0,
+
+    "sustain": 5.6,
+
+    "warmth": 6.1,
+
+    "sensitivity": 5.7,
+
+    "control": 5.7,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor Momentum product data: 14x6.5, 9-ply 6mm maple shell, 45-degree bearing edge, CLTF/OSM construction, 2.3mm Power Hoops, TuneSafe, and Dual Glide strainer.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "220-270 Hz",
+
+    "recommendedTuningResoHz": "345-395 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/mt-maple-14x65-sdw-spw",
+
+    "secondarySourceUrl": "",
+
+    "sourceConfidenceNotes": "Official Sonor product page confirms all key shell and hardware fields except snare bed depth and stock heads/wires.",
+
+    "drumSummaryNotes": "Momentum maple snare scored as balanced, warm, and modern, with a clearer 45-degree edge response than Vintage rounded-edge models.",
+
+    "notesOnMissingData": [
+
+      "Snare bed depth and stock heads/wires are not published."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_momentum_mt-maple-14x6-5-sdw_14x6-5_ply_maple_6_45-degree_2-3mm-power-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Momentum",
+
+      "modelName": "MT Maple 14x6.5 SDW",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 6.5,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Maple",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 6,
+
+      "plyCountLayup": "9-ply maple",
+
+      "bearingEdge": "45-degree bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "2.3mm Power Hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor Momentum page confirms 14x6.5 maple shell, 9-ply 6mm layup, 45-degree edge, 2.3mm Power Hoops, CLTF/OSM, and Dual Glide strainer.",
+
+      "drumSummaryNotes": "Modern 14x6.5 maple Momentum snare with balanced warmth and projection.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth and stock wires/heads are not published."
+
+      ]
+
+    }
+
+  },
+
+  {
+
+    "id": "sonor_artist-series_as-1406-cm-sdwd-cottonwood_14x6_ply_maple_6_45-degree_die-cast-hoops",
+
+    "companyName": "Sonor",
+
+    "lineSeries": "Artist Series",
+
+    "modelName": "AS 1406 CM SDWD Cottonwood",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6,
+
+    "shellConstruction": "Ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "none",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "9-ply maple",
+
+    "bearingEdge": "45-degree bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": null,
+
+    "finishType": "Cottonwood semi-gloss lacquer",
+
+    "hoopType": "Die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Sonor single lugs with TuneSafe",
+
+    "hardwareFinish": "Chrome",
+
+    "snareThrowMakeModel": "Sonor Dual Glide Snare Strainer",
+
+    "stockSnareWires": "unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "currentlyInProduction": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "none",
+
+    "modelNumber": "11176345",
+
+    "attack": 6.3,
+
+    "brightness": 5.8,
+
+    "projection": 6.4,
+
+    "sustain": 5.1,
+
+    "warmth": 5.9,
+
+    "sensitivity": 5.8,
+
+    "control": 6.5,
+
+    "sourceConfidence": "high",
+
+    "voiceScoreConfidence": "high",
+
+    "scoringBasis": "Shell-first scoring based on official Sonor Artist Series product data: 14x6 maple medium shell, 9-ply 6mm layup, 45-degree edge, die-cast hoops, CLTF/OSM construction, TuneSafe, and Dual Glide strainer.",
+
+    "needsResearch": false,
+
+    "engineReady": true,
+
+    "missingRequired": [],
+
+    "missingScores": [],
+
+    "conflicts": [],
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "225-275 Hz",
+
+    "recommendedTuningResoHz": "350-405 Hz",
+
+    "primarySourceUrl": "https://www.sonor.com/drums/instruments/products/as-1406-cm-sdwd",
+
+    "secondarySourceUrl": "",
+
+    "sourceConfidenceNotes": "Official Sonor product page confirms core shell, edge, hoop, lug, throw-off, and manufacturing fields. Snare bed depth and stock heads/wires are not published.",
+
+    "drumSummaryNotes": "Artist Series Cottonwood maple snare with die-cast hoops. Scored as controlled, focused, and projecting with balanced maple warmth.",
+
+    "notesOnMissingData": [
+
+      "Snare bed depth and stock heads/wires are not published."
+
+    ],
+
+    "resolvedCore": {
+
+      "id": "sonor_artist-series_as-1406-cm-sdwd-cottonwood_14x6_ply_maple_6_45-degree_die-cast-hoops",
+
+      "companyName": "Sonor",
+
+      "lineSeries": "Artist Series",
+
+      "modelName": "AS 1406 CM SDWD Cottonwood",
+
+      "drumType": "snare",
+
+      "diameter": 14,
+
+      "depth": 6,
+
+      "shellConstruction": "Ply",
+
+      "shellMaterial1": "Maple",
+
+      "shellMaterial2": "none",
+
+      "shellThicknessMm": 6,
+
+      "plyCountLayup": "9-ply maple",
+
+      "bearingEdge": "45-degree bearing edge",
+
+      "snareBeds": true,
+
+      "snareBedDepth": "unknown",
+
+      "reinforcementRings": false,
+
+      "hoopType": "Die-cast hoops",
+
+      "sourceConfidence": "high",
+
+      "voiceScoreConfidence": "high",
+
+      "needsResearch": false,
+
+      "scoringBasis": "Official Sonor Artist page confirms 14x6 maple shell, 9-ply 6mm layup, 45-degree edge, die-cast hoops, CLTF/OSM, and Dual Glide strainer.",
+
+      "drumSummaryNotes": "Focused maple Artist Series snare with die-cast control.",
+
+      "notesOnMissingData": [
+
+        "Snare bed depth and stock wires/heads are not published."
+
+      ]
+
+    }
+
+  }
+
+]
