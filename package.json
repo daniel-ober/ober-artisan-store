@@ -100,7 +100,10 @@
     "sl:bands:all": "node updateSoundLegendBands.js --all",
     "sl:bands:write": "node updateSoundLegendBands.js --all --write",
     "heritage:threads:audit": "node scripts/audit-heritage-voice-threads.mjs",
-    "heritage:compare": "node scripts/compare-heritage-configs.mjs"
+    "heritage:compare": "node scripts/compare-heritage-configs.mjs",
+    "legacyprint:migrate:snares:dry": "node scripts/legacyPrint/migrateSnareReferences.mjs --dry-run",
+    "legacyprint:migrate:snares:test": "node scripts/legacyPrint/migrateSnareReferences.mjs --limit=5",
+    "legacyprint:migrate:snares": "node scripts/legacyPrint/migrateSnareReferences.mjs"
   },
   "eslintConfig": {
     "extends": [

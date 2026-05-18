@@ -20,6 +20,8 @@ import AdminLegacyPrintSelector from './AdminLegacyPrintSelector';
 
 import LegacyPrintAdminSlider from './LegacyPrintAdminSlider';
 
+import { VoicePlayground } from '../legacyPrint/ui/VoicePlayground.js';
+
 import {
   collection,
   doc,
@@ -69,15 +71,19 @@ const LEGACYPRINT_ACTIVE_DOC_ID = 'active';
 const LEGACYPRINT_DRAFT_DOC_ID = 'draft';
 
 const LEGACYPRINT_TABS = [
+
   'Overview',
 
   'Engine Builder',
+
+  'Voice Playground',
 
   'Calibration Tools',
 
   'Engine Resources',
 
   'Engine View Settings',
+
 ];
 
 const LEGACYPRINT_CALIBRATION_TOOL_TABS = [
@@ -11421,6 +11427,90 @@ const handleResearchReferenceDrum = async (researchTarget) => {
               </div>
             </div>
           </section>
+        )}
+
+                {activeTab === 'Voice Playground' && (
+
+          <section className="legacyprint-admin-section">
+
+            <div className="legacyprint-admin-section-heading">
+
+              <div>
+
+                <p className="legacyprint-admin-overline">
+
+                  Live sound-space lab
+
+                </p>
+
+                <h3>Voice Playground</h3>
+
+                <p className="legacyprint-admin-section-subcopy">
+
+                  Explore drum voices as an interactive sound field. Audition
+
+                  reference voices, set A/B comparison points, and watch the
+
+                  LegacyPrint™ voice shape morph in real time.
+
+                </p>
+
+              </div>
+
+            </div>
+
+            <VoicePlayground
+
+  firestore={{
+
+    collection: (collectionName) => ({
+
+      get: async () => {
+
+        try {
+
+          const snapshot = await getDocs(collection(db, collectionName));
+
+          return {
+
+            docs: snapshot.docs.map((docSnap) => ({
+
+              id: docSnap.id,
+
+              data: () => docSnap.data(),
+
+            })),
+
+          };
+
+        } catch (error) {
+
+          console.warn(
+
+            `[VoicePlayground] Could not read ${collectionName}:`,
+
+            error
+
+          );
+
+          return {
+
+            docs: [],
+
+          };
+
+        }
+
+      },
+
+    }),
+
+  }}
+
+/>
+
+          </section>
+
         )}
 
         {activeTab === 'Calibration Tools' && (
