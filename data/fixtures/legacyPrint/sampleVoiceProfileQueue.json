@@ -1,0 +1,59 @@
+[
+
+  {
+
+    "id": "fixture_maple_stave_14x6_10lug_diecast",
+
+    "schemaVersion": "legacyprint-snare-v1",
+
+    "companyName": "Fixture",
+
+    "lineSeries": "LegacyPrint Test Fixture",
+
+    "modelName": "Maple Stave 14x6 Test",
+
+    "drumType": "snare",
+
+    "diameter": 14,
+
+    "depth": 6,
+
+    "shellConstruction": "stave",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "none",
+
+    "shellMaterial3": "none",
+
+    "shellThicknessMm": 8,
+
+    "plyCount": null,
+
+    "reinforcementRings": "none",
+
+    "bearingEdge": "double45",
+
+    "snareBedType": "standard",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast",
+
+    "lugCount": 10,
+
+    "stockBatterHead": "coated",
+
+    "stockResoHead": "clear snare side",
+
+    "stockSnareWires": "20",
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "scoringBasis": "fixture-controlled-test-record"
+
+  }
+
+]

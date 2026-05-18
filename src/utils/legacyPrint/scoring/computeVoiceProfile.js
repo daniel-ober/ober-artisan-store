@@ -1,12 +1,12 @@
 // computeVoiceProfile.js
 
-import { computeBareShellProfile } from './computeBareShellProfile';
+import { computeBareShellProfile } from './computeBareShellProfile.js';
 
-import { computeStockConfigProfile } from './computeStockConfigProfile';
+import { computeStockConfigProfile } from './computeStockConfigProfile.js';
 
-import { computeModifiedConfigProfile } from './computeModifiedConfigProfile';
+import { computeModifiedConfigProfile } from './computeModifiedConfigProfile.js';
 
-import { resolveVoiceConfidence } from './confidenceResolver';
+import { resolveVoiceConfidence } from './confidenceResolver.js';
 
 export function computeVoiceProfile(snareRecord, options = {}) {
 

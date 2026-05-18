@@ -1,10 +1,10 @@
 // src/utils/legacyPrint/scoring/computeBareShellProfile.js
 
-import { NODE_KEYS, createNeutralNodeProfile } from './nodeKeys';
+import { NODE_KEYS, createNeutralNodeProfile } from './nodeKeys.js';
 
-import { SHELL_FIELD_WEIGHTS, SCORE_NEUTRAL, clampScore } from './scoringConstants';
+import { SHELL_FIELD_WEIGHTS, SCORE_NEUTRAL, clampScore } from './scoringConstants.js';
 
-import { PHYSICAL_PROPERTY_NODE_MAP } from './physicalPropertyNodeMap';
+import { PHYSICAL_PROPERTY_NODE_MAP } from './physicalPropertyNodeMap.js';
 
 const normalize = (value) =>
 
