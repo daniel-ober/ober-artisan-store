@@ -1,0 +1,387 @@
+{
+
+  "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass": {
+
+    "id": "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
+
+    "patchName": "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "cast metal",
+
+    "shellMaterial1": "bell brass",
+
+    "shellMaterial2": "bronze",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - cast metal shell",
+
+    "shellThicknessMm": 3,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "machined cast metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "bell brass",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama high-tension signature lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "LU1465BB",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.9,
+
+    "shellScoreBrightness": 7.8,
+
+    "shellScoreProjection": 9.6,
+
+    "shellScoreSustain": 7.6,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 8.0,
+
+    "overallAttack": 9.0,
+
+    "overallBrightness": 7.9,
+
+    "overallProjection": 9.7,
+
+    "overallSustain": 7.3,
+
+    "overallWarmth": 7.1,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 8.3,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "220-310 Hz",
+
+    "recommendedTuningResoHz": "340-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact production years, stock hardware model numbers, stock head models, and authoritative Tama catalog source URL still need confirmation. Existing Firestore identity supports LU1465BB Bell Brass 14x6.5 with cast-metal bell brass construction.",
+
+    "drumSummaryNotes": "Bell brass Lars Ulrich signature variant. Should score with extreme projection, strong attack, dense body, and longer sustain than the steel LU1465. Scores are based on physical cast bell-brass shell behavior and die-cast hardware, not artist association.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, collectibility, and artist association are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_mike-portnoy-dream-monster-mp1455bun-14x5-5_14x5-5_ply_bubinga": {
+
+    "id": "tama_signature_mike-portnoy-dream-monster-mp1455bun-14x5-5_14x5-5_ply_bubinga",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Dream Monster MP1455BUN 14x5.5",
+
+    "patchName": "tama_signature_mike-portnoy-dream-monster-mp1455bun-14x5-5_14x5-5_ply_bubinga",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "bubinga",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "bubinga ply shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "black nickel / dark chrome style",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "MP1455BUN",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.4,
+
+    "shellScoreBrightness": 6.1,
+
+    "shellScoreProjection": 8.1,
+
+    "shellScoreSustain": 6.7,
+
+    "shellScoreWarmth": 7.8,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.3,
+
+    "overallAttack": 7.6,
+
+    "overallBrightness": 6.2,
+
+    "overallProjection": 8.3,
+
+    "overallSustain": 6.4,
+
+    "overallWarmth": 7.6,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 7.6,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "225-315 Hz",
+
+    "recommendedTuningResoHz": "340-415 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, finish name, stock heads, production years, and authoritative catalog source URL need stronger confirmation. Existing Firestore identity supports MP1455BUN Dream Monster 14x5.5 bubinga model.",
+
+    "drumSummaryNotes": "Bubinga Mike Portnoy Dream Monster model. Should score with darker low-mid body, strong projection, and focused attack. Bubinga shell behavior keeps warmth and density high while the signature snare system adds practical response/control flexibility.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, collectibility, and artist association are excluded from Ober node scoring."
+
+  },
+
+  "tama_signature_mike-portnoy-melody-master-mp1455-maple-14x5-5_14x5-5_ply_maple": {
+
+    "id": "tama_signature_mike-portnoy-melody-master-mp1455-maple-14x5-5_14x5-5_ply_maple",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Signature",
+
+    "modelName": "Mike Portnoy Melody Master MP1455 Maple 14x5.5",
+
+    "patchName": "tama_signature_mike-portnoy-melody-master-mp1455-maple-14x5-5_14x5-5_ply_maple",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "maple ply shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama signature lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama signature strainer and butt",
+
+    "stockSnareWires": "Tama Hi-Carbon snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "MP1455",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 6.7,
+
+    "shellScoreProjection": 7.5,
+
+    "shellScoreSustain": 6.4,
+
+    "shellScoreWarmth": 7.0,
+
+    "shellScoreSensitivity": 7.2,
+
+    "shellScoreControl": 7.0,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 6.8,
+
+    "overallProjection": 7.7,
+
+    "overallSustain": 6.1,
+
+    "overallWarmth": 6.9,
+
+    "overallSensitivity": 7.3,
+
+    "overallControl": 7.3,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-325 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, production years, stock head models, finish name, and authoritative Tama catalog source URL need stronger confirmation. Existing Firestore identity supports MP1455 Maple 14x5.5 model.",
+
+    "drumSummaryNotes": "Maple Melody Master variant. Should sit warmer and rounder than the steel MP1455ST while retaining good attack and sensitivity from the 14x5.5 format and die-cast hoop setup. Scores reflect shell behavior, not artist association.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "YES",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, collectibility, and artist association are excluded from Ober node scoring."
+
+  }
+
+}
