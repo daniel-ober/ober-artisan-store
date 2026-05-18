@@ -58,6 +58,142 @@ export const MODIFIER_REGISTRY = {
 
     {
 
+  id: 'head_batter_clear_two_ply_open',
+
+  type: 'head',
+
+  category: 'batterHead',
+
+  label: 'Clear two-ply open batter head',
+
+  aliases: ['clear two ply', 'two ply clear', 'emperor clear', 'g2 clear'],
+
+  nodeDeltas: {
+
+    attack: 0.2,
+
+    brightness: 0.05,
+
+    projection: 0.15,
+
+    sustain: -0.15,
+
+    warmth: 0.05,
+
+    sensitivity: -0.15,
+
+    control: 0.2,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+{
+
+  id: 'head_batter_center_dot_controlled',
+
+  type: 'head',
+
+  category: 'batterHead',
+
+  label: 'Center-dot controlled batter head',
+
+  aliases: ['dot', 'center dot', 'black dot', 'controlled sound', 'cs coated', 'cs clear'],
+
+  nodeDeltas: {
+
+    attack: 0.25,
+
+    brightness: 0,
+
+    projection: 0.1,
+
+    sustain: -0.25,
+
+    warmth: 0,
+
+    sensitivity: -0.1,
+
+    control: 0.35,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+{
+
+  id: 'head_batter_hydraulic_dead_control',
+
+  type: 'head',
+
+  category: 'batterHead',
+
+  label: 'Hydraulic/dead-control batter head',
+
+  aliases: ['hydraulic', 'evans hydraulic', 'dead control', 'oil filled'],
+
+  nodeDeltas: {
+
+    attack: 0.1,
+
+    brightness: -0.35,
+
+    projection: -0.1,
+
+    sustain: -0.6,
+
+    warmth: 0.25,
+
+    sensitivity: -0.35,
+
+    control: 0.55,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+{
+
+  id: 'head_batter_dry_vented_controlled',
+
+  type: 'head',
+
+  category: 'batterHead',
+
+  label: 'Dry/vented controlled batter head',
+
+  aliases: ['dry', 'vented', 'hd dry', 'genera dry', 'powerstroke dry'],
+
+  nodeDeltas: {
+
+    attack: 0.2,
+
+    brightness: -0.1,
+
+    projection: 0,
+
+    sustain: -0.45,
+
+    warmth: 0.05,
+
+    sensitivity: -0.2,
+
+    control: 0.5,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+    {
+
       id: 'head_batter_coated_single_ply_medium',
 
       type: 'head',
@@ -234,6 +370,40 @@ export const MODIFIER_REGISTRY = {
 
     {
 
+  id: 'head_reso_heavy_snare_side_controlled',
+
+  type: 'head',
+
+  category: 'resoHead',
+
+  label: 'Heavy controlled snare-side head',
+
+  aliases: ['heavy snare side', 'hazy 500', 'evans hazy 500', 'emperor snare side'],
+
+  nodeDeltas: {
+
+    attack: 0,
+
+    brightness: 0.05,
+
+    projection: 0.05,
+
+    sustain: -0.1,
+
+    warmth: 0,
+
+    sensitivity: -0.25,
+
+    control: 0.25,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+    {
+
       id: 'head_reso_thin_snare_side_sensitive',
 
       type: 'head',
@@ -345,6 +515,74 @@ export const MODIFIER_REGISTRY = {
       },
 
     },
+
+    {
+
+  id: 'wires_30_plus_wide_high_contact',
+
+  type: 'snareWire',
+
+  category: 'snareWires',
+
+  label: '30+ strand wide high-contact snare wires',
+
+  aliases: ['30', '30 strand', '30-strand', '42', '42 strand', '42-strand', 'wide wires'],
+
+  nodeDeltas: {
+
+    attack: 0.15,
+
+    brightness: 0.2,
+
+    projection: 0.05,
+
+    sustain: -0.3,
+
+    warmth: -0.15,
+
+    sensitivity: 0.25,
+
+    control: 0.25,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+{
+
+  id: 'wires_brass_dark_response',
+
+  type: 'snareWire',
+
+  category: 'snareWires',
+
+  label: 'Brass/darker-response snare wires',
+
+  aliases: ['brass wires', 'brass snare wires', 'dark wires', 'warmer wires'],
+
+  nodeDeltas: {
+
+    attack: -0.05,
+
+    brightness: -0.15,
+
+    projection: 0,
+
+    sustain: 0,
+
+    warmth: 0.15,
+
+    sensitivity: 0.1,
+
+    control: 0.05,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
 
     {
 
@@ -563,6 +801,74 @@ export const MODIFIER_REGISTRY = {
       },
 
     },
+
+    {
+
+  id: 'hoop_single_flanged_clip',
+
+  type: 'hoop',
+
+  category: 'hoopType',
+
+  label: 'Single-flanged hoops with clips',
+
+  aliases: ['single flanged', 'single-flanged', 'single flange', 'clip hoops'],
+
+  nodeDeltas: {
+
+    attack: -0.05,
+
+    brightness: -0.05,
+
+    projection: -0.05,
+
+    sustain: 0.25,
+
+    warmth: 0.1,
+
+    sensitivity: 0.15,
+
+    control: -0.2,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
+
+{
+
+  id: 'hoop_inward_flange_controlled',
+
+  type: 'hoop',
+
+  category: 'hoopType',
+
+  label: 'Inward-flanged controlled steel hoops',
+
+  aliases: ['s hoop', 's-hoop', 'safe hoop', 'inward flange', 'inward-flanged'],
+
+  nodeDeltas: {
+
+    attack: 0.1,
+
+    brightness: 0.05,
+
+    projection: 0.05,
+
+    sustain: 0,
+
+    warmth: 0,
+
+    sensitivity: 0.05,
+
+    control: 0.15,
+
+  },
+
+  confidence: { matchConfidence: 'medium', deltaConfidence: 'medium', physicalConfidence: 'medium' },
+
+},
 
     {
 
