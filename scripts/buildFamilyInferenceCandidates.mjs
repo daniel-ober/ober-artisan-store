@@ -15,31 +15,45 @@ if (!fs.existsSync(targetsPath)) {
 
 const raw = JSON.parse(fs.readFileSync(targetsPath, 'utf8'));
 
-const targets = Array.isArray(raw)
+const targets =
 
-  ? raw
+  Array.isArray(raw)
 
-  : Array.isArray(raw.targets)
+    ? raw
 
-    ? raw.targets
+    : Array.isArray(raw.targets)
 
-    : [];
+      ? raw.targets
 
-function normalizeFamilyName(value) {
+      : [];
 
-  return (value || '')
+function clean(value = '') {
+
+  return value
 
     .toLowerCase()
 
+    // dimensions
+
     .replace(/\d+x\d+(\.\d+)?/gi, '')
+
+    // ply counts
 
     .replace(/\b\d+[- ]ply\b/gi, '')
 
+    // materials
+
     .replace(/\b(maple|birch|mahogany|walnut|oak|beech|poplar|brass|bronze|copper|aluminum|aluminium|steel|bell brass|acrylic)\b/gi, '')
 
-    .replace(/\b(hand hammered|hammered|satin|gloss|natural|lacquer|wrap|burst|fade|matte)\b/gi, '')
+    // descriptors
 
-    .replace(/\b(snare drum|snare|drum)\b/gi, '')
+    .replace(/\b(hand hammered|hammered|solid shell|solid|stave|steam bent|ply|single ply|shell bank|custom|vintage|reissue)\b/gi, '')
+
+    // generic words
+
+    .replace(/\b(snare drum|snare|drum|series|edition|model)\b/gi, '')
+
+    // punctuation cleanup
 
     .replace(/[-_/]/g, ' ')
 
@@ -53,15 +67,21 @@ const grouped = {};
 
 for (const row of targets) {
 
-  const source =
+  const familySource = [
 
-    row.lineSeries ||
+    row.companyName,
 
-    row.modelName ||
+    row.lineSeries,
 
-    '';
+    row.modelName
 
-  const family = normalizeFamilyName(source);
+  ]
+
+    .filter(Boolean)
+
+    .join(' ');
+
+  const family = clean(familySource);
 
   if (!family || family.length < 2) continue;
 
@@ -74,8 +94,6 @@ for (const row of targets) {
       company: row.companyName,
 
       family,
-
-      lineSeries: row.lineSeries || '',
 
       count: 0,
 
@@ -100,6 +118,8 @@ for (const row of targets) {
   grouped[key].records.push({
 
     id: row.id,
+
+    lineSeries: row.lineSeries,
 
     modelName: row.modelName,
 
@@ -129,17 +149,15 @@ console.log(`Built ${output.length} family inference candidates.`);
 
 console.table(
 
-  output.slice(0, 50).map((f) => ({
+  output.slice(0, 50).map(group => ({
 
-    company: f.company,
+    company: group.company,
 
-    family: f.family,
+    family: group.family,
 
-    lineSeries: f.lineSeries,
+    count: group.count,
 
-    count: f.count,
-
-    failedFields: Object.keys(f.failedFields).join(', ')
+    failedFields: Object.keys(group.failedFields).join(', ')
 
   }))
 
