@@ -17,8 +17,7 @@ const fixturePath = path.resolve(
 
   __dirname,
 
-  '../../data/fixtures/legacyPrint/sampleVoiceProfileQueue.json'
-
+'../../data/fixtures/legacyPrint/sampleVoiceProfileQueue.json'
 );
 
 function loadFixtureQueue() {
@@ -71,7 +70,15 @@ function printProfilePreview(record, profile) {
 
     modelName: record.modelName,
 
-    sourceSchemaVersion: record.schemaVersion,
+   sourceSchemaVersion:
+
+  profile.sourceSchemaVersion ||
+
+  record.sourceSchemaVersion ||
+
+  record.schemaVersion ||
+
+  'unknown',
 
     profileSchemaVersion: profile.schemaVersion,
 
