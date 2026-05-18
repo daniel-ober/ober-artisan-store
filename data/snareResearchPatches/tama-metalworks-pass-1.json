@@ -1,0 +1,507 @@
+{
+
+  "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538": {
+
+    "id": "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks",
+
+    "modelName": "METALWORKS 10x5.5",
+
+    "patchName": "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+
+    "diameter": 10,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 6,
+
+    "lugType": "Tama low-mass single-ended lug",
+
+    "hardwareFinish": "black nickel / black hardware",
+
+    "snareThrowMakeModel": "Tama throw-off / butt plate, exact model unknown",
+
+    "stockSnareWires": "Tama snare wires, exact model unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8.1,
+
+    "shellScoreBrightness": 8.2,
+
+    "shellScoreProjection": 7.2,
+
+    "shellScoreSustain": 5.8,
+
+    "shellScoreWarmth": 3.8,
+
+    "shellScoreSensitivity": 7.2,
+
+    "shellScoreControl": 7.3,
+
+    "overallAttack": 8.2,
+
+    "overallBrightness": 8.3,
+
+    "overallProjection": 7.1,
+
+    "overallSustain": 5.6,
+
+    "overallWarmth": 3.7,
+
+    "overallSensitivity": 7.3,
+
+    "overallControl": 7.4,
+
+    "projectedShellFundamentalPitch": "high",
+
+    "recommendedTuningBatterHz": "280-380 Hz",
+
+    "recommendedTuningResoHz": "380-460 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact model number, shell thickness, stock heads, snare wire model, and original catalog URL need stronger confirmation. Existing Firestore identity confirms 10x5.5 steel shell, black steel finish, and triple-flange/Mighty Hoop configuration.",
+
+    "drumSummaryNotes": "Compact steel Metalworks snare. Should score with high attack, bright tone, quick response, and controlled sustain. Smaller 10-inch diameter raises pitch and tightens projection compared with 14-inch Metalworks models.",
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, hoop type, and known hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3": {
+
+    "id": "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks",
+
+    "modelName": "METALWORKS 13x4",
+
+    "patchName": "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+
+    "diameter": 13,
+
+    "depth": 4,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 8,
+
+    "lugType": "Tama low-mass single-ended lug",
+
+    "hardwareFinish": "black nickel / black hardware",
+
+    "snareThrowMakeModel": "Tama throw-off / butt plate, exact model unknown",
+
+    "stockSnareWires": "Tama snare wires, exact model unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8.3,
+
+    "shellScoreBrightness": 8.1,
+
+    "shellScoreProjection": 7.5,
+
+    "shellScoreSustain": 5.4,
+
+    "shellScoreWarmth": 3.9,
+
+    "shellScoreSensitivity": 7.8,
+
+    "shellScoreControl": 7.4,
+
+    "overallAttack": 8.4,
+
+    "overallBrightness": 8.2,
+
+    "overallProjection": 7.4,
+
+    "overallSustain": 5.2,
+
+    "overallWarmth": 3.8,
+
+    "overallSensitivity": 7.9,
+
+    "overallControl": 7.5,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "270-360 Hz",
+
+    "recommendedTuningResoHz": "370-450 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact model number, shell thickness, stock heads, snare wire model, and original catalog URL need stronger confirmation. Existing Firestore identity confirms 13x4 steel shell, black steel finish, and triple-flange/Mighty Hoop configuration.",
+
+    "drumSummaryNotes": "Shallow 13-inch steel Metalworks snare. Should score with fast attack, bright crack, strong sensitivity, and short controlled sustain. The 4-inch depth keeps the response quick and articulate.",
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, hoop type, and known hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2": {
+
+    "id": "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks",
+
+    "modelName": "METALWORKS 14x5.5",
+
+    "patchName": "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama low-mass single-ended lug",
+
+    "hardwareFinish": "black nickel / black hardware",
+
+    "snareThrowMakeModel": "Tama throw-off / butt plate, exact model unknown",
+
+    "stockSnareWires": "Tama snare wires, exact model unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8.2,
+
+    "shellScoreBrightness": 8,
+
+    "shellScoreProjection": 8,
+
+    "shellScoreSustain": 6.1,
+
+    "shellScoreWarmth": 4,
+
+    "shellScoreSensitivity": 7.2,
+
+    "shellScoreControl": 7,
+
+    "overallAttack": 8.3,
+
+    "overallBrightness": 8.1,
+
+    "overallProjection": 8,
+
+    "overallSustain": 5.9,
+
+    "overallWarmth": 3.9,
+
+    "overallSensitivity": 7.3,
+
+    "overallControl": 7.1,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact model number, shell thickness, stock heads, snare wire model, and original catalog URL need stronger confirmation. Existing Firestore identity confirms 14x5.5 steel shell, black steel finish, and triple-flange/Mighty Hoop configuration.",
+
+    "drumSummaryNotes": "Standard-depth 14-inch steel Metalworks snare. Should score with bright attack, strong projection, crisp metal-shell response, and moderate sustain. Triple-flange hoops keep it more open than die-cast steel models.",
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, hoop type, and known hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c": {
+
+    "id": "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Metalworks",
+
+    "modelName": "METALWORKS 14x6.5",
+
+    "patchName": "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "black steel",
+
+    "hoopType": "triple-flange / Mighty Hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama low-mass single-ended lug",
+
+    "hardwareFinish": "black nickel / black hardware",
+
+    "snareThrowMakeModel": "Tama throw-off / butt plate, exact model unknown",
+
+    "stockSnareWires": "Tama snare wires, exact model unknown",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "unknown",
+
+    "yearDiscontinued": "unknown",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "shellScoreAttack": 8,
+
+    "shellScoreBrightness": 7.8,
+
+    "shellScoreProjection": 8.3,
+
+    "shellScoreSustain": 6.5,
+
+    "shellScoreWarmth": 4.2,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 6.9,
+
+    "overallAttack": 8.1,
+
+    "overallBrightness": 7.9,
+
+    "overallProjection": 8.3,
+
+    "overallSustain": 6.3,
+
+    "overallWarmth": 4.1,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 7,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "235-325 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact model number, shell thickness, stock heads, snare wire model, and original catalog URL need stronger confirmation. Existing Firestore identity confirms 14x6.5 steel shell, black steel finish, and triple-flange/Mighty Hoop configuration.",
+
+    "drumSummaryNotes": "Deeper 14-inch steel Metalworks snare. Should score with strong projection, bright steel attack, added low-mid body compared with the 14x5.5, and slightly longer sustain.",
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, hoop type, and known hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
