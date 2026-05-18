@@ -6,6 +6,8 @@ import { validateDrumReference } from '../validators/validateDrumReference.js';
 
 import { createAuditLogEntry } from '../audit/createAuditLogEntry.js';
 
+import { createRebuildQueueEntry } from '../rebuild/createRebuildQueueEntry.js';
+
 export function approveResearchPatch({
 
   baseDocument,
@@ -14,7 +16,11 @@ export function approveResearchPatch({
 
   performedBy = 'system',
 
-  reason = 'Approved research patch'
+  reason = 'Approved research patch',
+
+  engineVersion = '0.1.0',
+
+  calibrationProfileId = 'snare_default_v1'
 
 }) {
 
@@ -34,29 +40,29 @@ export function approveResearchPatch({
 
   }
 
-const patchedDocument = applyResearchPatch(
+  const patchedDocument = applyResearchPatch(
 
-  baseDocument,
+    baseDocument,
 
-  researchPatch
+    researchPatch
 
-);
+  );
 
-const updatedValidation =
+  const updatedValidation =
 
-  validateDrumReference(patchedDocument);
+    validateDrumReference(patchedDocument);
 
-const updatedDocument = {
+  const updatedDocument = {
 
-  ...patchedDocument,
+    ...patchedDocument,
 
-  engineReady: updatedValidation.engineReady,
+    engineReady: updatedValidation.engineReady,
 
-  missingFields: updatedValidation.missingRequiredFields,
+    missingFields: updatedValidation.missingRequiredFields,
 
-  updatedAt: new Date().toISOString()
+    updatedAt: new Date().toISOString()
 
-};
+  };
 
   if (!updatedValidation.engineReady) {
 
@@ -92,6 +98,20 @@ const updatedDocument = {
 
   });
 
+  const rebuildQueueEntry = createRebuildQueueEntry({
+
+    targetDrumReferenceId: updatedDocument.id,
+
+    rebuildReason: 'canonicalReferenceUpdated',
+
+    engineVersion,
+
+    calibrationProfileId,
+
+    requestedBy: performedBy
+
+  });
+
   return {
 
     success: true,
@@ -100,7 +120,9 @@ const updatedDocument = {
 
     validation: updatedValidation,
 
-    auditLogEntry
+    auditLogEntry,
+
+    rebuildQueueEntry
 
   };
 
