@@ -1507,7 +1507,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Broadway Floating Head 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Broadway Floating Head 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Leedy & Ludwig catalog-era record. Exact shell layup, edge profile, snare bed depth, and hoop specification should remain conservatively treated unless stronger primary catalog/spec evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing catalog-era identity, 5.5x14 size, ply maple-poplar-style construction, vintage lacquer/pearl finish context, era hoop designation, and conservative vintage snare assumptions. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071108,
+      "_nanoseconds": 389000000
+    },
+    "drumSummaryNotes": "1950s Leedy & Ludwig Broadway Floating Head 5.5x14. Shell-first read should stay in a warm, rounded vintage wood-snare lane with moderate projection, softer attack, and controlled-to-medium sustain."
   },
   {
     "id": "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
@@ -1658,7 +1669,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Broadway New Era 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Broadway New Era 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Leedy & Ludwig catalog-era record. Exact shell layup, edge profile, snare bed depth, and hoop specification should remain conservatively treated unless stronger primary catalog/spec evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing catalog-era identity, 5.5x14 size, ply maple-poplar-style construction, vintage finish context, era hoop designation, and conservative vintage snare assumptions. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071108,
+      "_nanoseconds": 616000000
+    },
+    "drumSummaryNotes": "1950s Leedy & Ludwig Broadway New Era 5.5x14. Expected to sit in a warm vintage wood-snare lane with rounded attack, moderate body, and less aggressive top-end than later modern maple snares."
   },
   {
     "id": "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
@@ -1809,7 +1831,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for The Nifty 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for The Nifty 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Leedy & Ludwig catalog-era record. Exact shell layup, edge profile, snare bed depth, and hoop specification should remain conservatively treated unless stronger primary catalog/spec evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing catalog-era identity, 5x14 size, ply maple-poplar-style construction, vintage finish context, era hoop designation, and conservative vintage snare assumptions. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071108,
+      "_nanoseconds": 826000000
+    },
+    "drumSummaryNotes": "The Nifty 5x14 should read as a compact vintage wood snare with quicker response than the 5.5-inch Leedy & Ludwig models, moderate warmth, and controlled sustain."
   },
   {
     "id": "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
@@ -1960,7 +1993,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for The Reliance 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for The Reliance 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Leedy & Ludwig catalog-era record. Exact shell layup, edge profile, snare bed depth, and hoop specification should remain conservatively treated unless stronger primary catalog/spec evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing catalog-era identity, 5x14 size, ply maple-poplar-style construction, vintage finish context, era hoop designation, and conservative vintage snare assumptions. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071109,
+      "_nanoseconds": 33000000
+    },
+    "drumSummaryNotes": "The Reliance 5x14 should sit in a compact, practical vintage wood-snare range with balanced warmth, moderate sensitivity, and controlled projection."
   },
   {
     "id": "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0",
@@ -2111,7 +2155,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for The Utility 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for The Utility 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Leedy & Ludwig catalog-era record. Exact shell layup, edge profile, snare bed depth, and hoop specification should remain conservatively treated unless stronger primary catalog/spec evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing catalog-era identity, 5x14 size, ply maple-poplar-style construction, vintage finish context, era hoop designation, and conservative vintage snare assumptions. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071109,
+      "_nanoseconds": 229000000
+    },
+    "drumSummaryNotes": "The Utility 5x14 should read as a straightforward compact vintage wood snare with rounded attack, moderate body, and controlled sustain."
   },
   {
     "id": "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31",
@@ -4308,7 +4363,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Acrolite 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Acrolite 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Historical Acrolite-era record. Exact shell thickness, badge-period details, and hardware variation should remain conservative unless tied to a specific year/version.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5x14 aluminum Acrolite identity, brushed aluminum shell, formed metal bearing edge behavior, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071109,
+      "_nanoseconds": 429000000
+    },
+    "drumSummaryNotes": "Vintage Acrolite 5x14 should read as a dry, articulate aluminum snare with fast response, clean attack, controlled sustain, and moderate brightness."
   },
   {
     "id": "ludwig_1963-1970s-ludwig_super-sensitive-5x14_14x5_metal_aluminum_brass_chrome-plated_triple-flanged_f05317dd",
@@ -4459,7 +4525,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Super Sensitive 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Super Sensitive 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Historical Super Sensitive-era record. Existing material identity includes aluminum/brass/chrome-plated context; exact shell alloy, strainer variant, and year-specific hardware should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5x14 metal Super Sensitive identity, chrome-plated metal shell context, snare mechanism behavior, formed bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071109,
+      "_nanoseconds": 637000000
+    },
+    "drumSummaryNotes": "Super Sensitive 5x14 should read as a crisp, articulate metal snare with high sensitivity from the extended snare mechanism, quick response, and controlled sustain."
   },
   {
     "id": "ludwig_1963-1970s-ludwig_super-sensitive-6-5x14_14x6-5_metal_aluminum_brass_chrome-plated_triple-flanged_305016ee",
@@ -4610,7 +4687,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Super Sensitive 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Super Sensitive 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Historical Super Sensitive-era record. Existing material identity includes aluminum/brass/chrome-plated context; exact shell alloy, strainer variant, and year-specific hardware should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 metal Super Sensitive identity, chrome-plated metal shell context, deeper shell size, snare mechanism behavior, formed bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071109,
+      "_nanoseconds": 844000000
+    },
+    "drumSummaryNotes": "Super Sensitive 6.5x14 should retain the crisp sensitive response of the mechanism while adding more body, depth, and projection than the 5-inch version."
   },
   {
     "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
@@ -4761,7 +4849,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Supraphonic LM400 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Supraphonic LM400 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Supraphonic LM400 record. Existing record includes aluminum shell and 1.7mm thickness; year-specific alloy, badge, muffler, and hardware variations should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5x14 aluminum Supraphonic LM400 identity, 1.7mm chrome-plated aluminum shell, formed metal bearing edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071110,
+      "_nanoseconds": 131000000
+    },
+    "drumSummaryNotes": "Supraphonic LM400 5x14 should read as a crisp, highly responsive aluminum snare with strong attack, balanced brightness, medium projection, and controlled sustain."
   },
   {
     "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
@@ -4912,7 +5011,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Supraphonic LM402 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Supraphonic LM402 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Vintage Supraphonic LM402 record. Existing record includes aluminum shell and 1.7mm thickness; year-specific alloy, badge, muffler, and hardware variations should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 aluminum Supraphonic LM402 identity, 1.7mm chrome-plated aluminum shell, formed metal bearing edge, snare bed presence, deeper shell size, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071110,
+      "_nanoseconds": 344000000
+    },
+    "drumSummaryNotes": "Supraphonic LM402 6.5x14 should read as a deeper aluminum snare with more projection and body than the LM400, while keeping crisp attack and controlled sustain."
   },
   {
     "id": "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
@@ -7306,7 +7416,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Bronze Series 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Bronze Series 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Late 1980s/early 1990s catalog-era bronze record. Exact shell thickness, model number, throw-off, and stock head/wire details should remain conservative unless stronger catalog evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5x14 bronze metal shell identity, formed metal bearing edge behavior, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071110,
+      "_nanoseconds": 543000000
+    },
+    "drumSummaryNotes": "Bronze Series 5x14 should read as warmer and darker than aluminum or steel metal snares, with strong body, rounded metallic response, and controlled-to-medium sustain."
   },
   {
     "id": "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
@@ -7457,7 +7578,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Classic Series 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Classic Series 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Late 1980s/early 1990s catalog-era wood record. Exact ply layup, shell thickness, bearing edge profile, snare bed depth, and stock hardware should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5.5x14 ply maple-poplar identity, lacquer/wrap finish context, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071110,
+      "_nanoseconds": 749000000
+    },
+    "drumSummaryNotes": "Classic Series 5.5x14 should read as a balanced wood snare with moderate warmth, moderate attack, and a familiar mid-depth response."
   },
   {
     "id": "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b",
@@ -7608,7 +7740,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Metal Series 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Metal Series 5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Record groups a generic Metal Series identity with steel/aluminum material ambiguity. This should be revisited with specific model-number or catalog evidence before high-confidence scoring.",
+    "needsResearch": true,
+    "voiceScoreConfidence": "low",
+    "scoringBasis": "Temporary shell-first scoring based on existing 5x14 metal-series identity, ambiguous steel/aluminum material field, formed metal bearing edge behavior, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "low",
+    "researchUpdatedAt": {
+      "_seconds": 1779071110,
+      "_nanoseconds": 934000000
+    },
+    "drumSummaryNotes": "Generic Metal Series 5x14 should remain conservatively scored as a bright, quick-response metal snare until exact shell material and model identity are confirmed."
   },
   {
     "id": "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a",
@@ -7759,7 +7902,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Rocker Series 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Rocker Series 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "Late 1980s/early 1990s Rocker-era wood record. Exact shell layup, edge profile, shell thickness, and stock hardware should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5.5x14 ply maple identity, wrap finish context, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071111,
+      "_nanoseconds": 200000000
+    },
+    "drumSummaryNotes": "Rocker Series 5.5x14 should read as a practical mid-depth wood snare with moderate projection, balanced attack, and controlled sustain."
   },
   {
     "id": "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3",
@@ -8212,7 +8366,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Centennial Snare 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Centennial Snare 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "2000s production-era record. Exact ply count, shell thickness, bearing edge profile, snare bed depth, and stock hardware should remain conservative unless stronger product-page/catalog evidence is added.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 ply maple identity, lacquer/wrap finish context, snare bed presence, deeper shell size, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071111,
+      "_nanoseconds": 414000000
+    },
+    "drumSummaryNotes": "Centennial Snare 6.5x14 should read as a deeper maple wood snare with good projection, balanced brightness, and moderate warmth."
   },
   {
     "id": "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
@@ -8363,7 +8528,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Element Snare 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Element Snare 5.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "2000s production-era record. Exact shell thickness, ply count, edge profile, snare bed depth, and stock hardware should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5.5x14 ply poplar identity, wrap finish context, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071111,
+      "_nanoseconds": 610000000
+    },
+    "drumSummaryNotes": "Element Snare 5.5x14 should read as a poplar wood snare with softer attack, moderate warmth, and less projection than comparable maple models."
   },
   {
     "id": "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
@@ -8514,7 +8690,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Epic Snare 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Epic Snare 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "2000s production-era record. Exact shell layup, shell thickness, bearing edge profile, snare bed depth, and stock hardware should remain conservative.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 ply maple identity, lacquer/wrap finish context, snare bed presence, deeper shell size, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071111,
+      "_nanoseconds": 817000000
+    },
+    "drumSummaryNotes": "Epic Snare 6.5x14 should read as a deeper maple wood snare with solid projection, balanced top-end, and moderate sustain."
   },
   {
     "id": "ludwig_2000s-ludwig_keystone-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_89955984",
@@ -8665,7 +8852,18 @@
     "summary": {
       "shortDescription": "Historical Ludwig catalog row for Keystone Snare 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured.",
       "drumSummaryNotes": "Historical Ludwig catalog row for Keystone Snare 6.5x14. Included to lock the model into the master list; scoring remains shell-family based until exact catalog specs are captured."
-    }
+    },
+    "notesOnMissingData": "2000s production-era record. Exact Keystone shell layup details, thickness, edge profile, snare bed depth, and stock hardware should be source-confirmed in a later pass.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 ply maple identity, lacquer/wrap finish context, snare bed presence, deeper shell size, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "researchUpdatedAt": {
+      "_seconds": 1779071112,
+      "_nanoseconds": 12000000
+    },
+    "drumSummaryNotes": "Keystone Snare 6.5x14 should read as a deeper wood snare with strong projection, firm attack, and balanced warmth."
   },
   {
     "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
@@ -9240,7 +9438,19 @@
     "summary": {
       "shortDescription": "Carl Palmer Venus 3.7x14 signature/limited row. Included because it is acoustically distinct or catalog-visible.",
       "drumSummaryNotes": "Carl Palmer Venus 3.7x14 signature/limited row. Included because it is acoustically distinct or catalog-visible."
-    }
+    },
+    "notesOnMissingData": "Artist/signature record. Exact shell thickness and model-specific hoop configuration should remain conservative because existing record allows die-cast or model-specific hoop treatment.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing shallow 3.7x14 brass shell identity, 1.2mm brass thickness field, shallow depth, formed metal bearing edge behavior, snare bed presence, and model-specific hoop uncertainty. Artist association is captured only as metadata and is excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "artistSignatureLine": "YES",
+    "researchUpdatedAt": {
+      "_seconds": 1779071112,
+      "_nanoseconds": 213000000
+    },
+    "drumSummaryNotes": "Carl Palmer Venus 3.7x14 should read as a shallow brass snare with fast response, strong articulation, high brightness, and reduced low-end body compared with deeper brass models."
   },
   {
     "id": "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_metal_brass_raw-aged-brass_triple-flanged_99c1f0ff",
@@ -9391,7 +9601,19 @@
     "summary": {
       "shortDescription": "Jon Theodore Signature 6.5x14 signature/limited row. Included because it is acoustically distinct or catalog-visible.",
       "drumSummaryNotes": "Jon Theodore Signature 6.5x14 signature/limited row. Included because it is acoustically distinct or catalog-visible."
-    }
+    },
+    "notesOnMissingData": "Artist/signature record. Exact shell thickness, throw-off, wire, and stock head details should remain conservative unless verified from product-page/catalog sources.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 brass shell identity, raw aged brass finish context, formed metal bearing edge behavior, snare bed presence, deeper shell size, and triple-flanged hoops. Artist association is captured only as metadata and is excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "artistSignatureLine": "YES",
+    "researchUpdatedAt": {
+      "_seconds": 1779071112,
+      "_nanoseconds": 408000000
+    },
+    "drumSummaryNotes": "Jon Theodore Signature 6.5x14 should read as a raw/aged brass snare with strong warmth, projection, and low-mid body while retaining brass attack and presence."
   },
   {
     "id": "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_metal_brass_nickel-over-brass_triple-flanged_0d88b7c9",
@@ -9542,7 +9764,19 @@
     "summary": {
       "shortDescription": "Nate Smith Signature 4.75x14 signature/limited row. Included because it is acoustically distinct or catalog-visible.",
       "drumSummaryNotes": "Nate Smith Signature 4.75x14 signature/limited row. Included because it is acoustically distinct or catalog-visible."
-    }
+    },
+    "notesOnMissingData": "Artist/signature record. Exact shell thickness, stock wires, stock heads, and throw-off details should remain conservative unless verified from product-page/catalog sources.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 4.75x14 brass shell identity, nickel-over-brass finish context, shallow-to-mid depth, formed metal bearing edge behavior, snare bed presence, and triple-flanged hoops. Artist association is captured only as metadata and is excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "artistSignatureLine": "YES",
+    "researchUpdatedAt": {
+      "_seconds": 1779071112,
+      "_nanoseconds": 619000000
+    },
+    "drumSummaryNotes": "Nate Smith Signature 4.75x14 should read as a responsive nickel-over-brass snare with quick articulation, balanced brightness, and slightly less body than deeper brass models."
   },
   {
     "id": "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f",
@@ -9693,7 +9927,19 @@
     "summary": {
       "shortDescription": "Questlove Breakbeats Snare 5x14 signature/limited row. Included because it is acoustically distinct or catalog-visible.",
       "drumSummaryNotes": "Questlove Breakbeats Snare 5x14 signature/limited row. Included because it is acoustically distinct or catalog-visible."
-    }
+    },
+    "notesOnMissingData": "Artist/signature record. Exact ply count, thickness, bearing edge, snare bed depth, and stock hardware should remain conservative unless verified from product-page/catalog sources.",
+    "needsResearch": false,
+    "voiceScoreConfidence": "medium",
+    "scoringBasis": "Shell-first scoring based on existing 5x14 ply poplar identity, wrap finish context, snare bed presence, compact depth, and triple-flanged hoops. Artist association is captured only as metadata and is excluded from Ober node scoring.",
+    "researchUpdatedBy": "tama-pass-1",
+    "sourceConfidence": "medium",
+    "artistSignatureLine": "YES",
+    "researchUpdatedAt": {
+      "_seconds": 1779071112,
+      "_nanoseconds": 844000000
+    },
+    "drumSummaryNotes": "Questlove Breakbeats Snare 5x14 should read as a compact poplar snare with softer attack, moderate control, and less projection than full-size maple or metal Ludwig models."
   },
   {
     "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
