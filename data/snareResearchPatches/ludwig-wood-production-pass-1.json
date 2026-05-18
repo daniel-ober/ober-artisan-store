@@ -1,0 +1,1037 @@
+
+{
+
+  "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352": {
+
+    "modelName": "Classic Maple 5.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "7-ply maple; 2-ply inner panel, 3-ply maple core, 2-ply outer panel",
+
+    "bearingEdge": "45-degree edge within 1/16 inch from outside edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6mm. Snare bed depth is bucketed as medium because Ludwig confirms snare bed presence through production snare construction, but does not publish exact bed depth.",
+
+    "drumSummaryNotes": "Classic Maple 5.5x14 uses Ludwig's 7-ply 6mm all-maple shell with 45-degree bearing edges. Shell-first read should emphasize balanced attack, brightness, projection, and sustain without the extra low-end extension of deeper models.",
+
+    "scoringBasis": "Shell-first scoring based on documented 7-ply 6mm maple shell, 5.5-inch depth, 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa": {
+
+    "modelName": "Classic Maple 5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "7-ply maple; 2-ply inner panel, 3-ply maple core, 2-ply outer panel",
+
+    "bearingEdge": "45-degree edge within 1/16 inch from outside edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6mm. Snare bed depth is bucketed as medium because exact bed depth is not published.",
+
+    "drumSummaryNotes": "Classic Maple 5x14 should read as quick, articulate, bright, and versatile, with slightly less body and sustain than the 6.5-inch and 8-inch depths.",
+
+    "scoringBasis": "Shell-first scoring based on documented 7-ply 6mm maple shell, 5-inch depth, 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c": {
+
+    "modelName": "Classic Maple 6.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "7-ply maple; 2-ply inner panel, 3-ply maple core, 2-ply outer panel",
+
+    "bearingEdge": "45-degree edge within 1/16 inch from outside edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6mm. Snare bed depth is bucketed as medium because exact bed depth is not published.",
+
+    "drumSummaryNotes": "Classic Maple 6.5x14 adds more body, projection, and sustain than the 5-inch model while retaining the bright attack and versatility of the 7-ply maple shell.",
+
+    "scoringBasis": "Shell-first scoring based on documented 7-ply 6mm maple shell, 6.5-inch depth, 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17": {
+
+    "modelName": "Classic Maple 8x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 6,
+
+    "plyCountLayup": "7-ply maple; 2-ply inner panel, 3-ply maple core, 2-ply outer panel",
+
+    "bearingEdge": "45-degree edge within 1/16 inch from outside edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6mm. Snare bed depth is bucketed as medium because exact bed depth is not published.",
+
+    "drumSummaryNotes": "Classic Maple 8x14 should read with the biggest body, sustain, and projection in this Classic Maple snare group, while retaining maple clarity and attack.",
+
+    "scoringBasis": "Shell-first scoring based on documented 7-ply 6mm maple shell, 8-inch depth, 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837": {
+
+    "modelName": "Classic Oak 5.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Oak",
+
+    "shellMaterial2": "Maple",
+
+    "shellThicknessMm": 6.5,
+
+    "plyCountLayup": "5-ply crossover shell; exterior oak ply, 3-ply maple core, interior oak ply",
+
+    "bearingEdge": "dual 45-degree bearing edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6.5mm. Exact snare bed depth is not published, so bed depth is bucketed as medium.",
+
+    "drumSummaryNotes": "Classic Oak 5.5x14 uses a 6.5mm oak/maple crossover shell. Compared with Classic Maple, it should read darker, more focused, more controlled, and more aggressive in attack.",
+
+    "scoringBasis": "Shell-first scoring based on documented 5-ply 6.5mm oak/maple shell, 5.5-inch depth, dual 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f": {
+
+    "modelName": "Classic Oak 5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Oak",
+
+    "shellMaterial2": "Maple",
+
+    "shellThicknessMm": 6.5,
+
+    "plyCountLayup": "5-ply crossover shell; exterior oak ply, 3-ply maple core, interior oak ply",
+
+    "bearingEdge": "dual 45-degree bearing edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6.5mm. Exact snare bed depth is not published, so bed depth is bucketed as medium.",
+
+    "drumSummaryNotes": "Classic Oak 5x14 should read as fast, focused, darker than maple, and controlled, with a strong attack-to-body ratio from the shallow depth.",
+
+    "scoringBasis": "Shell-first scoring based on documented 5-ply 6.5mm oak/maple shell, 5-inch depth, dual 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079": {
+
+    "modelName": "Classic Oak 6.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Oak",
+
+    "shellMaterial2": "Maple",
+
+    "shellThicknessMm": 6.5,
+
+    "plyCountLayup": "5-ply crossover shell; exterior oak ply, 3-ply maple core, interior oak ply",
+
+    "bearingEdge": "dual 45-degree bearing edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6.5mm. Exact snare bed depth is not published, so bed depth is bucketed as medium.",
+
+    "drumSummaryNotes": "Classic Oak 6.5x14 should carry more body and projection than the shallower Classic Oak snares, while retaining the darker, focused attack of the oak/maple crossover shell.",
+
+    "scoringBasis": "Shell-first scoring based on documented 5-ply 6.5mm oak/maple shell, 6.5-inch depth, dual 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8": {
+
+    "modelName": "Classic Oak 8x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Oak",
+
+    "shellMaterial2": "Maple",
+
+    "shellThicknessMm": 6.5,
+
+    "plyCountLayup": "5-ply crossover shell; exterior oak ply, 3-ply maple core, interior oak ply",
+
+    "bearingEdge": "dual 45-degree bearing edge",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product",
+
+    "notesOnMissingData": "Shell thickness is source-backed as 6.5mm. Exact snare bed depth is not published, so bed depth is bucketed as medium.",
+
+    "drumSummaryNotes": "Classic Oak 8x14 should be the largest and most forceful Classic Oak snare here, with strong low-mid body, projection, darker attack, and controlled sustain.",
+
+    "scoringBasis": "Shell-first scoring based on documented 5-ply 6.5mm oak/maple shell, 8-inch depth, dual 45-degree bearing edge, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c": {
+
+    "modelName": "Legacy Mahogany 5.5x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply mahogany/poplar/mahogany",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Mahogany 5.5x14 should read warmer, rounder, and softer-edged than Classic Maple, with reinforcement rings adding focus and stability while the mahogany/poplar shell keeps the voice deep and vintage-leaning.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply mahogany/poplar/mahogany shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a": {
+
+    "modelName": "Legacy Mahogany 5x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply mahogany/poplar/mahogany",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Mahogany 5x14 should read dry-warm, rounded, and quick, with less low-end extension than the deeper Legacy Mahogany sizes but strong vintage body for its depth.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply mahogany/poplar/mahogany shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368": {
+
+    "modelName": "Legacy Mahogany 6.5x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply mahogany/poplar/mahogany",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Mahogany 6.5x14 should read with strong warmth, rounded attack, broad low-mid body, and a vintage-centered bloom while reinforcement rings keep the response focused.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply mahogany/poplar/mahogany shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0": {
+
+    "modelName": "Legacy Mahogany 8x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply mahogany/poplar/mahogany",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Mahogany 8x14 should be the deepest and warmest voice in this group, with the strongest low-mid body, darker bloom, and vintage roundness.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply mahogany/poplar/mahogany shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500": {
+
+    "modelName": "Legacy Maple 5.5x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply maple/poplar/maple",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Maple 5.5x14 should read as rounder and more vintage-focused than Classic Maple, with maple clarity balanced by poplar warmth and reinforcement-ring focus.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply maple/poplar/maple shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a": {
+
+    "modelName": "Legacy Maple 5x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply maple/poplar/maple",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Maple 5x14 should read as quick and warm with a rounder attack than Classic Maple, retaining poplar-centered vintage focus.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply maple/poplar/maple shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442": {
+
+    "modelName": "Legacy Maple 6.5x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply maple/poplar/maple",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Maple 6.5x14 should read with rounded maple clarity, stronger body than the 5-inch model, and focused vintage sustain from the reinforcement rings.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply maple/poplar/maple shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7": {
+
+    "modelName": "Legacy Maple 8x14",
+
+    "shellConstruction": "ply with reinforcement rings",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellThicknessMm": 6.35,
+
+    "plyCountLayup": "3-ply maple/poplar/maple",
+
+    "bearingEdge": "Legacy rounded bearing edge; 30-degree inner cut with roundover",
+
+    "reinforcementRings": true,
+
+    "reRingMaterial": "Maple",
+
+    "reRingThicknessMm": 6.35,
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple",
+
+    "notesOnMissingData": "Shell thickness is calculated from Ludwig's published ply stack: 1/16 inch + 1/8 inch + 1/16 inch = approximately 6.35mm. Reinforcement rings are source-backed as 1/4 inch maple.",
+
+    "drumSummaryNotes": "Legacy Maple 8x14 should read with the strongest body and low-mid extension in the Legacy Maple group, while keeping the rounder, reinforced vintage response of the 3-ply shell.",
+
+    "scoringBasis": "Shell-first scoring based on documented 3-ply maple/poplar/maple shell, calculated 6.35mm shell thickness, 1/4-inch maple reinforcement rings, rounded Legacy edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6": {
+
+    "modelName": "Universal Beech 6.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Beech",
+
+    "shellMaterial2": "Sapele",
+
+    "shellThicknessMm": 7.5,
+
+    "plyCountLayup": "ply shell with beech primary voice and sapele/exotic outer veneer treatment",
+
+    "bearingEdge": "formed wood bearing edge; exact profile not published",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Existing Firestore identity provides 7.5mm shell thickness and Universal Beech construction. Exact ply count, bearing edge profile, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "Universal Beech 6.5x14 should read as balanced and focused, with beech providing a strong middle voice between maple clarity and warmer darker woods.",
+
+    "scoringBasis": "Shell-first scoring based on current documented 7.5mm beech/sapele Universal Wood shell, 6.5-inch depth, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7": {
+
+    "modelName": "Universal Cherry 6.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Cherry",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 7.5,
+
+    "plyCountLayup": "ply shell; exact ply count not published in available source data",
+
+    "bearingEdge": "formed wood bearing edge; exact profile not published",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Existing Firestore identity provides 7.5mm shell thickness and Universal Cherry construction. Exact ply count, bearing edge profile, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "Universal Cherry 6.5x14 should read with a slightly warmer and smoother wood voice than maple, with controlled projection and a rounded midrange.",
+
+    "scoringBasis": "Shell-first scoring based on current documented 7.5mm cherry Universal Wood shell, 6.5-inch depth, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d": {
+
+    "modelName": "Universal Mahogany 6.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Maple",
+
+    "shellThicknessMm": 7.5,
+
+    "plyCountLayup": "ply shell with mahogany/maple construction; exact ply count not published in available source data",
+
+    "bearingEdge": "formed wood bearing edge; exact profile not published",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Existing Firestore identity provides 7.5mm shell thickness and Universal Mahogany/Maple construction. Exact ply count, bearing edge profile, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "Universal Mahogany 6.5x14 should read warmer and darker than the Beech and Cherry Universal Wood models, with added maple support for projection and definition.",
+
+    "scoringBasis": "Shell-first scoring based on current documented 7.5mm mahogany/maple Universal Wood shell, 6.5-inch depth, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad": {
+
+    "modelName": "Universal Walnut 6.5x14",
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Walnut",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 7.5,
+
+    "plyCountLayup": "ply shell; exact ply count not published in available source data",
+
+    "bearingEdge": "formed wood bearing edge; exact profile not published",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "none",
+
+    "reRingThicknessMm": "none",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "hoopType": "triple-flanged steel",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Existing Firestore identity provides 7.5mm shell thickness and Universal Walnut construction. Exact ply count, bearing edge profile, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "Universal Walnut 6.5x14 should read as the darkest and warmest Universal Wood model in this group, with strong low-mid body, softer top-end edge, and controlled sustain.",
+
+    "scoringBasis": "Shell-first scoring based on current documented 7.5mm walnut Universal Wood shell, 6.5-inch depth, snare bed presence, no reinforcement rings, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
+
