@@ -1,0 +1,13 @@
+{
+  "company": "Yamaha",
+  "summary": {
+    "total": 84,
+    "engineReady": 84,
+    "needsResearch": 0,
+    "missingRequiredCount": 0,
+    "invalidConfidenceCount": 0,
+    "missingScoresCount": 0,
+    "examplesNeedingWork": []
+  },
+  "badRecords": []
+}
