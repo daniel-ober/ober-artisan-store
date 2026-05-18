@@ -1,0 +1,1027 @@
+{
+
+  "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b": {
+
+    "id": "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Maple 14x5.5",
+
+    "patchName": "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "6-ply maple",
+
+    "shellThicknessMm": 5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer-wrap",
+
+    "hoopType": "zinc die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "MSL-SCT Starclassic Lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama MLS30A / MLS30B strainer and butt",
+
+    "stockSnareWires": "Tama MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current/modern Starclassic family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 6.8,
+
+    "shellScoreProjection": 7.3,
+
+    "shellScoreSustain": 6.7,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 7.4,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 6.9,
+
+    "overallProjection": 7.5,
+
+    "overallSustain": 6.4,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 7.5,
+
+    "overallControl": 7.4,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "245-335 Hz",
+
+    "recommendedTuningResoHz": "355-430 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/starclassic_maple_snare.html",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact finish-specific SKU/model number and stock head models need stronger confirmation. Tama Starclassic Maple references support thin maple shell construction, Starclassic edge language, die-cast hoop configuration, Starclassic lugs, and Super Sensitive Hi-Carbon snare wire family.",
+
+    "drumSummaryNotes": "Thin maple Starclassic snare. The 14x5.5 format should read quick, articulate, and balanced, with maple warmth and brightness supported by strong die-cast focus and Starclassic hardware control.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c": {
+
+    "id": "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Maple 14x6.5",
+
+    "patchName": "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "6-ply maple",
+
+    "shellThicknessMm": 5,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer-wrap",
+
+    "hoopType": "zinc die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "MSL-SCT Starclassic Lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama MLS30A / MLS30B strainer and butt",
+
+    "stockSnareWires": "Tama MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current/modern Starclassic family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.9,
+
+    "shellScoreBrightness": 6.6,
+
+    "shellScoreProjection": 7.6,
+
+    "shellScoreSustain": 7,
+
+    "shellScoreWarmth": 7.4,
+
+    "shellScoreSensitivity": 7.1,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.1,
+
+    "overallBrightness": 6.7,
+
+    "overallProjection": 7.8,
+
+    "overallSustain": 6.7,
+
+    "overallWarmth": 7.3,
+
+    "overallSensitivity": 7.2,
+
+    "overallControl": 7.4,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "345-420 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/starclassic_maple_snare.html",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact finish-specific SKU/model number and stock head models need stronger confirmation. Tama Starclassic Maple references support thin maple shell construction, Starclassic edge language, die-cast hoop configuration, Starclassic lugs, and Super Sensitive Hi-Carbon snare wire family.",
+
+    "drumSummaryNotes": "Deeper thin maple Starclassic snare. Compared with the 14x5.5 version, this should add more body, projection, and sustain while retaining a balanced maple attack and controlled die-cast focus.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-performer-14x5-5_14x5-5_ply_maple_lacquer-wrap_die-cast-hoops_9be528a9": {
+
+    "id": "tama_starclassic_starclassic-performer-14x5-5_14x5-5_ply_maple_lacquer-wrap_die-cast-hoops_9be528a9",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Performer 14x5.5",
+
+    "patchName": "tama_starclassic_starclassic-performer-14x5-5_14x5-5_ply_maple_lacquer-wrap_die-cast-hoops_9be528a9",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "unknown maple shell",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer-wrap",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Starclassic lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama Starclassic strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued/legacy Starclassic Performer family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7,
+
+    "shellScoreBrightness": 6.7,
+
+    "shellScoreProjection": 7.2,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 7,
+
+    "shellScoreSensitivity": 7.3,
+
+    "shellScoreControl": 7,
+
+    "overallAttack": 7.2,
+
+    "overallBrightness": 6.8,
+
+    "overallProjection": 7.4,
+
+    "overallSustain": 6.3,
+
+    "overallWarmth": 6.9,
+
+    "overallSensitivity": 7.4,
+
+    "overallControl": 7.3,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "245-335 Hz",
+
+    "recommendedTuningResoHz": "355-430 Hz",
+
+    "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, finish-specific model number, and stock head models need stronger confirmation. Existing Firestore identity supports Starclassic Performer 14x5.5 maple configuration with die-cast hoops.",
+
+    "drumSummaryNotes": "Starclassic Performer maple snare. The 14x5.5 format should provide quick response, moderate maple warmth, clear attack, and controlled focus from the die-cast hoop setup.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-performer-14x6-5_14x6-5_ply_maple_lacquer-wrap_die-cast-hoops_a7cf7794": {
+
+    "id": "tama_starclassic_starclassic-performer-14x6-5_14x6-5_ply_maple_lacquer-wrap_die-cast-hoops_a7cf7794",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Performer 14x6.5",
+
+    "patchName": "tama_starclassic_starclassic-performer-14x6-5_14x6-5_ply_maple_lacquer-wrap_die-cast-hoops_a7cf7794",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "unknown maple shell",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer-wrap",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Starclassic lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama Starclassic strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued/legacy Starclassic Performer family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.8,
+
+    "shellScoreBrightness": 6.5,
+
+    "shellScoreProjection": 7.5,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7.3,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 7,
+
+    "overallAttack": 7,
+
+    "overallBrightness": 6.6,
+
+    "overallProjection": 7.7,
+
+    "overallSustain": 6.6,
+
+    "overallWarmth": 7.2,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 7.3,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "345-420 Hz",
+
+    "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact shell thickness, ply count, finish-specific model number, and stock head models need stronger confirmation. Existing Firestore identity supports Starclassic Performer 14x6.5 maple configuration with die-cast hoops.",
+
+    "drumSummaryNotes": "Deeper Starclassic Performer maple snare. Compared with the 14x5.5 version, this should bring more body, projection, and low-mid bloom while keeping Starclassic-style control from die-cast hoops.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-performer-birch-bubinga-14x5-5_14x5-5_ply_birch_lacquer_die-cast-hoops_fc3ed948": {
+
+    "id": "tama_starclassic_starclassic-performer-birch-bubinga-14x5-5_14x5-5_ply_birch_lacquer_die-cast-hoops_fc3ed948",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Performer Birch/Bubinga 14x5.5",
+
+    "patchName": "tama_starclassic_starclassic-performer-birch-bubinga-14x5-5_14x5-5_ply_birch_lacquer_die-cast-hoops_fc3ed948",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "birch",
+
+    "shellMaterial2": "bubinga",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "birch/bubinga ply shell",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Starclassic lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama Starclassic strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued/legacy Starclassic Performer Birch/Bubinga family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.4,
+
+    "shellScoreBrightness": 7,
+
+    "shellScoreProjection": 7.7,
+
+    "shellScoreSustain": 6.5,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 7.3,
+
+    "overallAttack": 7.6,
+
+    "overallBrightness": 7.1,
+
+    "overallProjection": 7.9,
+
+    "overallSustain": 6.2,
+
+    "overallWarmth": 7.1,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 7.6,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "245-335 Hz",
+
+    "recommendedTuningResoHz": "355-430 Hz",
+
+    "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact shell thickness, ply layup, finish-specific model number, and stock head models need stronger confirmation. Existing Firestore identity supports Starclassic Performer Birch/Bubinga 14x5.5 with die-cast hoops.",
+
+    "drumSummaryNotes": "Birch/bubinga Starclassic Performer snare. Birch should add attack and clarity while bubinga adds darker low-mid density. In 14x5.5 format, this should feel focused, punchy, and articulate.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-performer-birch-bubinga-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_379db69d": {
+
+    "id": "tama_starclassic_starclassic-performer-birch-bubinga-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_379db69d",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Performer Birch/Bubinga 14x6.5",
+
+    "patchName": "tama_starclassic_starclassic-performer-birch-bubinga-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_379db69d",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "birch",
+
+    "shellMaterial2": "bubinga",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "birch/bubinga ply shell",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Starclassic lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama Starclassic strainer and butt",
+
+    "stockSnareWires": "Tama 20-strand snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "discontinued/legacy Starclassic Performer Birch/Bubinga family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 6.8,
+
+    "shellScoreProjection": 8,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.5,
+
+    "shellScoreSensitivity": 6.7,
+
+    "shellScoreControl": 7.3,
+
+    "overallAttack": 7.4,
+
+    "overallBrightness": 6.9,
+
+    "overallProjection": 8.2,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 7.4,
+
+    "overallSensitivity": 6.8,
+
+    "overallControl": 7.6,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "345-420 Hz",
+
+    "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact shell thickness, ply layup, finish-specific model number, and stock head models need stronger confirmation. Existing Firestore identity supports Starclassic Performer Birch/Bubinga 14x6.5 with die-cast hoops.",
+
+    "drumSummaryNotes": "Deeper birch/bubinga Starclassic Performer snare. This should combine birch attack and clarity with bubinga density, adding more low-mid weight and projection than the 14x5.5 version.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf": {
+
+    "id": "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Walnut/Birch 14x5.5",
+
+    "patchName": "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "walnut",
+
+    "shellMaterial2": "birch",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "walnut/birch ply shell",
+
+    "shellThicknessMm": 6,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer-wrap",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "MSL-SCT Starclassic Lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama MLS30A / MLS30B strainer and butt",
+
+    "stockSnareWires": "Tama MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current/modern Starclassic Performer Walnut/Birch family",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 6.5,
+
+    "shellScoreProjection": 7.4,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 7.6,
+
+    "shellScoreSensitivity": 7.1,
+
+    "shellScoreControl": 7.2,
+
+    "overallAttack": 7.4,
+
+    "overallBrightness": 6.6,
+
+    "overallProjection": 7.6,
+
+    "overallSustain": 6.3,
+
+    "overallWarmth": 7.5,
+
+    "overallSensitivity": 7.2,
+
+    "overallControl": 7.5,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "245-335 Hz",
+
+    "recommendedTuningResoHz": "355-430 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/starclassic_performer_wb_snare.html",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact finish-specific SKU/model number and stock head models need stronger confirmation. Tama references support walnut/birch shell construction, 6mm shell thickness, Starclassic edge language, Starclassic lugs, MLS30A/MLS30B strainer system, and MS20RL14C snare wires.",
+
+    "drumSummaryNotes": "Modern walnut/birch Starclassic Performer snare. Walnut contributes warmth and darker body while birch adds attack and clarity. The 14x5.5 depth keeps the drum articulate and responsive with focused die-cast control.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3": {
+
+    "id": "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Starclassic",
+
+    "modelName": "Starclassic Walnut/Birch 14x6.5",
+
+    "patchName": "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "walnut",
+
+    "shellMaterial2": "birch",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "walnut/birch ply shell",
+
+    "shellThicknessMm": 6,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer-wrap",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "MSL-SCT Starclassic Lug",
+
+    "hardwareFinish": "chrome / finish varies by model",
+
+    "snareThrowMakeModel": "Tama MLS30A / MLS30B strainer and butt",
+
+    "stockSnareWires": "Tama MS20RL14C 20-strand Super Sensitive Hi-Carbon Snare Wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current/modern Starclassic Performer Walnut/Birch family",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7,
+
+    "shellScoreBrightness": 6.3,
+
+    "shellScoreProjection": 7.7,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7.9,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.2,
+
+    "overallAttack": 7.2,
+
+    "overallBrightness": 6.4,
+
+    "overallProjection": 7.9,
+
+    "overallSustain": 6.6,
+
+    "overallWarmth": 7.8,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 7.5,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "230-320 Hz",
+
+    "recommendedTuningResoHz": "345-420 Hz",
+
+    "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/starclassic_performer_wb_snare.html",
+
+    "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+
+    "notesOnMissingData": "Exact finish-specific SKU/model number and stock head models need stronger confirmation. Tama references support walnut/birch shell construction, 6mm shell thickness, Starclassic edge language, Starclassic lugs, MLS30A/MLS30B strainer system, and MS20RL14C snare wires.",
+
+    "drumSummaryNotes": "Deeper walnut/birch Starclassic Performer snare. Compared with the 14x5.5 version, this should add more low-mid warmth, projection, and body while retaining birch-informed attack and die-cast focus.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
