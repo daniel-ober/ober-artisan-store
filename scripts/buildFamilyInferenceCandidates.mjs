@@ -1,16 +1,19 @@
+
 import fs from 'fs';
 
-const raw = JSON.parse(
+const targetsPath =
 
-  fs.readFileSync(
+  'data/snareAuditReports/core-shell-research-targets.json';
 
-    'data/snareAuditReports/core-shell-research-targets.json',
+if (!fs.existsSync(targetsPath)) {
 
-    'utf8'
+  console.error(`Missing file: ${targetsPath}`);
 
-  )
+  process.exit(1);
 
-);
+}
+
+const raw = JSON.parse(fs.readFileSync(targetsPath, 'utf8'));
 
 const targets = Array.isArray(raw)
 
@@ -24,13 +27,33 @@ const targets = Array.isArray(raw)
 
 function normalizeFamilyName(model) {
 
-  return model
+  return (model || '')
+
+    .toLowerCase()
+
+    // sizes
 
     .replace(/\d+x\d+(\.\d+)?/gi, '')
 
-    .replace(/14x5\.5|14x6\.5|13x7|12x5/gi, '')
+    // ply counts
 
     .replace(/\b\d+[- ]ply\b/gi, '')
+
+    // material words
+
+    .replace(/\b(maple|birch|mahogany|walnut|oak|beech|poplar|brass|bronze|copper|aluminum|aluminium|steel|bell brass|acrylic|chrome over brass|chrome over steel)\b/gi, '')
+
+    // finish descriptors
+
+    .replace(/\b(hand hammered|hammered|satin|gloss|natural|lacquer|wrap|burst|fade|matte)\b/gi, '')
+
+    // generic descriptors
+
+    .replace(/\b(snare drum|snare|drum)\b/gi, '')
+
+    // punctuation cleanup
+
+    .replace(/[-_/]/g, ' ')
 
     .replace(/\s+/g, ' ')
 
@@ -38,17 +61,19 @@ function normalizeFamilyName(model) {
 
 }
 
-const families = {};
+const grouped = {};
 
 for (const row of targets) {
 
   const family = normalizeFamilyName(row.modelName);
 
+  if (!family || family.length < 3) continue;
+
   const key = `${row.companyName}__${family}`;
 
-  if (!families[key]) {
+  if (!grouped[key]) {
 
-    families[key] = {
+    grouped[key] = {
 
       company: row.companyName,
 
@@ -58,37 +83,41 @@ for (const row of targets) {
 
       failedFields: {},
 
-      models: []
+      records: []
 
     };
 
   }
 
-  families[key].count++;
+  grouped[key].count += 1;
 
   for (const field of row.failedCoreFields || []) {
 
-    families[key].failedFields[field] =
+    grouped[key].failedFields[field] =
 
-      (families[key].failedFields[field] || 0) + 1;
+      (grouped[key].failedFields[field] || 0) + 1;
 
   }
 
-  families[key].models.push({
+  grouped[key].records.push({
 
-    model: row.modelName,
+    id: row.id,
 
-    failed: row.failedCoreFields
+    modelName: row.modelName,
+
+    failedCoreFields: row.failedCoreFields || []
 
   });
 
 }
 
-const output = Object.values(families)
+const output = Object.values(grouped)
 
-  .filter((f) => f.count >= 2)
+  .filter(group => group.count >= 2)
 
   .sort((a, b) => b.count - a.count);
+
+fs.mkdirSync('data/snareAuditReports', { recursive: true });
 
 fs.writeFileSync(
 
@@ -115,3 +144,4 @@ console.table(
   }))
 
 );
+
