@@ -1,0 +1,389 @@
+
+{
+
+  "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-5x14_14x5_metal_brass_nob-lacquer-pearl_single-flanged-or-era-hoo_27297878": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Early Ludwig & Ludwig Professional Model identity is based on catalog-era naming and existing Firestore shell identity. Exact shell gauge, hoop variant, snare mechanism details, and finish-specific configuration should remain historically contextual.",
+
+    "drumSummaryNotes": "Professional Model 5x14 should read as a bright, articulate early nickel-over-brass snare with quick response, controlled depth, and period-correct metallic focus.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, nickel-over-brass / lacquer-pearl era finish context, shallow 5-inch depth, snare bed presence, and single-flanged or era-correct hoop behavior. Historical value, rarity, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-6-5x14_14x6-5_metal_brass_nob-lacquer-pearl_single-flanged-or-era_8939a4c5": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Early Ludwig & Ludwig Professional Model identity is based on catalog-era naming and existing Firestore shell identity. Exact shell gauge, hoop variant, snare mechanism details, and finish-specific configuration should remain historically contextual.",
+
+    "drumSummaryNotes": "Professional Model 6.5x14 should read as a deeper early brass snare with stronger body, longer bloom, and more low-mid presence than the 5-inch version.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 brass shell identity, nickel-over-brass / lacquer-pearl era finish context, deeper shell depth, snare bed presence, and single-flanged or era-correct hoop behavior. Historical value, rarity, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-5x14_14x5_metal_brass_black-nickel-engraved-brass_single-flanged-or-_98489677": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Black Beauty De Luxe identity is historically well established, but exact shell gauge, engraving variant, hoop configuration, and individual hardware details vary by era and specimen.",
+
+    "drumSummaryNotes": "Black Beauty De Luxe 5x14 should read as an articulate black-nickel-over-brass snare with crisp attack, strong sensitivity, bright brass focus, and compact sustain.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, black nickel over engraved brass finish, shallow 5-inch depth, snare bed presence, and single-flanged or era-correct hoop behavior. Collector status and decorative engraving are excluded from Ober node scoring except where finish mass may slightly affect shell response."
+
+  },
+
+  "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-6-5x14_14x6-5_metal_brass_black-nickel-engraved-brass_single-flanged_5ae3d434": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Black Beauty De Luxe identity is historically well established, but exact shell gauge, engraving variant, hoop configuration, and individual hardware details vary by era and specimen.",
+
+    "drumSummaryNotes": "Black Beauty De Luxe 6.5x14 should read as a deeper black-nickel-over-brass snare with strong body, broad brass projection, and more bloom than the 5-inch model.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 brass shell identity, black nickel over engraved brass finish, deeper shell depth, snare bed presence, and single-flanged or era-correct hoop behavior. Collector status and decorative engraving are excluded from Ober node scoring except where finish mass may slightly affect shell response."
+
+  },
+
+  "ludwig_1920s-ludwig-and-ludwig_super-ludwig-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_c718211b": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Super Ludwig NOB identity is historically established, but exact shell gauge, strainer version, hoop configuration, and specimen-specific details vary across production years.",
+
+    "drumSummaryNotes": "Super Ludwig 5x14 NOB should read as a crisp nickel-over-brass snare with clear attack, responsive sensitivity, bright upper-mid character, and controlled 5-inch depth.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, nickel-over-brass finish, shallow depth, snare bed presence, and single-flanged or era-correct hoop behavior. Rarity, age, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1930s-ludwig-and-ludwig_super-sensitive-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_552351e1": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "1930s Super Sensitive NOB identity is historically plausible from existing Firestore identity, but exact snare mechanism variant, shell gauge, and hoop details should remain era-contextual.",
+
+    "drumSummaryNotes": "Super Sensitive 5x14 NOB should read as a crisp brass snare with heightened wire response, strong articulation, and compact metallic sustain.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, nickel-over-brass finish, shallow depth, snare bed presence, sensitive snare mechanism context, and single-flanged or era-correct hoop behavior. Historical value and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "WFL Buddy Rich Super Classic identity is based on catalog-era naming and existing Firestore shell identity. Exact ply recipe, bearing edge detail, hoop version, and finish variant should remain historically contextual.",
+
+    "drumSummaryNotes": "Buddy Rich Super Classic 5.5x14 should read as a warm, responsive maple/poplar era snare with balanced attack, rounded body, and moderate control.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5.5x14 maple/poplar ply identity, lacquer or pearl finish context, snare bed presence, and triple-flanged or era-correct hoop behavior. Artist association is metadata only and excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5": {
+
+    "sourceConfidence": "low",
+
+    "voiceScoreConfidence": "low",
+
+    "needsResearch": true,
+
+    "notesOnMissingData": "Compacto Snare Drum record has conflicting shell fields: shell construction is marked metal while material reads maple-poplar. This needs follow-up research before high-confidence shell scoring.",
+
+    "drumSummaryNotes": "Compacto Snare Drum should remain conservatively scored as a shallow, quick-response specialty snare until shell material and construction are confirmed.",
+
+    "scoringBasis": "Temporary shell-first scoring based on existing 14x3.5 identity, shallow depth, era-hoop context, and unresolved metal versus maple-poplar shell data. This record should be revisited with stronger source evidence."
+
+  },
+
+  "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Ray McKinley Snare Drum identity is based on catalog-era naming and existing Firestore shell identity. Exact ply recipe, bearing edge detail, hoop version, and finish variant should remain historically contextual.",
+
+    "drumSummaryNotes": "Ray McKinley Snare Drum 6.5x14 should read as a deeper maple/poplar era snare with warm body, rounded projection, and more bloom than shallower WFL models.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 maple/poplar ply identity, lacquer or pearl finish context, deeper shell depth, snare bed presence, and era-correct hoop behavior. Artist association is metadata only and excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09": {
+
+    "sourceConfidence": "low",
+
+    "voiceScoreConfidence": "low",
+
+    "needsResearch": true,
+
+    "notesOnMissingData": "Piccolo Snare 3x13 record has conflicting construction/material fields: shell construction is marked ply while material reads steel. This needs source confirmation before high-confidence scoring.",
+
+    "drumSummaryNotes": "Piccolo Snare 3x13 should remain conservatively scored as a shallow, high-attack piccolo snare with quick decay until shell construction is confirmed.",
+
+    "scoringBasis": "Temporary shell-first scoring based on existing 13x3 piccolo identity, shallow depth, steel material field, chrome/lacquer finish context, and triple-flanged hoops. This record should be revisited with stronger model-specific evidence."
+
+  },
+
+  "ludwig_1970s-ludwig_vistalite-snare-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_cd29803d": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Vistalite acrylic identity is clear from existing Firestore fields. Exact shell thickness and era-specific hardware details may vary and should remain noted as historically contextual.",
+
+    "drumSummaryNotes": "Vistalite Snare 5x14 should read as a bright, focused acrylic snare with quick attack, clean projection, and less woody warmth than ply Ludwig models.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 acrylic shell identity, transparent acrylic finish, snare bed presence, and triple-flanged hoop configuration. Rarity, visual appeal, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1970s-ludwig_vistalite-snare-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_786fcc62": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Vistalite acrylic identity is clear from existing Firestore fields. Exact shell thickness and era-specific hardware details may vary and should remain noted as historically contextual.",
+
+    "drumSummaryNotes": "Vistalite Snare 6.5x14 should read as a deeper acrylic snare with stronger projection, sharper shell focus, and more body than the 5-inch model.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 acrylic shell identity, transparent acrylic finish, deeper shell depth, snare bed presence, and triple-flanged hoop configuration. Rarity, visual appeal, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "1977 Black Beauty identity is historically tied to reintroduced black nickel over brass models. Exact catalog configuration, shell gauge, and hardware details may vary by specimen.",
+
+    "drumSummaryNotes": "1977 Black Beauty 5x14 should read as a crisp black-nickel-over-brass snare with bright articulation, strong sensitivity, and controlled 5-inch body.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, 1.2mm black nickel over brass context, snare bed presence, and triple-flanged hoops. Collectibility and vintage desirability are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "1977 Black Beauty Super Sensitive identity is historically plausible from existing Firestore fields. Exact throw-off / snare mechanism variant and shell gauge should remain era-contextual.",
+
+    "drumSummaryNotes": "Black Beauty Super Sensitive 5x14 should read as a crisp brass snare with heightened wire response, bright articulation, and compact controlled sustain.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, 1.2mm black nickel over brass context, sensitive snare mechanism behavior, snare bed presence, and triple-flanged hoops. Collectibility and vintage desirability are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b": {
+
+    "sourceConfidence": "low",
+
+    "voiceScoreConfidence": "low",
+
+    "needsResearch": true,
+
+    "notesOnMissingData": "Record groups a generic Metal Series identity with steel/aluminum material ambiguity. This should be revisited with specific model-number or catalog evidence before high-confidence scoring.",
+
+    "drumSummaryNotes": "Generic Metal Series 5x14 should remain conservatively scored as a bright, quick-response metal snare until exact shell material and model identity are confirmed.",
+
+    "scoringBasis": "Temporary shell-first scoring based on existing 5x14 metal-series identity, ambiguous steel/aluminum material field, formed metal bearing edge behavior, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Black Magic model identity is clear from existing Firestore fields, but hoop configuration may vary by specific version or production run and should stay model-dependent.",
+
+    "drumSummaryNotes": "Black Magic 5x14 should read as a crisp black-nickel-over-brass snare with focused attack, bright upper-mid response, and moderate brass body.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 brass shell identity, black nickel over brass finish, snare bed presence, and die-cast or triple-flanged hoop behavior depending on model configuration. Price tier and market positioning are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1990s-2000s-ludwig_black-magic-6-5x14_14x6-5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depen_7e603045": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Black Magic model identity is clear from existing Firestore fields, but hoop configuration may vary by specific version or production run and should stay model-dependent.",
+
+    "drumSummaryNotes": "Black Magic 6.5x14 should read as a deeper black-nickel-over-brass snare with stronger body, more projection, and longer bloom than the 5-inch version.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 brass shell identity, black nickel over brass finish, deeper shell depth, snare bed presence, and die-cast or triple-flanged hoop behavior depending on model configuration. Price tier and market positioning are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Slotted Coliseum identity is based on existing Firestore shell identity. Exact shell thickness, slot construction details, and production-year hardware should remain historically contextual.",
+
+    "drumSummaryNotes": "Slotted Coliseum 8x14 should read as a large, deep maple snare with strong projection, big body, and controlled attack from the deeper shell format.",
+
+    "scoringBasis": "Shell-first scoring based on existing 8x14 maple ply identity, lacquer or wrap finish context, snare bed presence, and triple-flanged hoop configuration. Rarity and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Jazz Fest Series identity is clear from existing Firestore fields, but exact bearing edge profile and snare bed depth are not fully specified and should remain catalog-dependent.",
+
+    "drumSummaryNotes": "Jazz Fest Series 5.5x14 should read as a warm mahogany/poplar snare with rounded attack, woody midrange, and softer top-end than maple or metal Ludwig models.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5.5x14 6-ply mahogany/poplar identity, snare bed presence, unspecified Ludwig USA bearing edge context, and hoop configuration from existing record. Nostalgia, rarity, and artist association are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Club Date Reissue identity is clear from existing Firestore fields, but exact ply recipe and bearing edge details should remain model-specific unless stronger source confirmation is added.",
+
+    "drumSummaryNotes": "Club Date Reissue 5x14 should read as a compact maple/poplar snare with rounded warmth, moderate attack, and controlled sustain.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 maple/poplar ply identity, lacquer/wrap finish context, snare bed presence, and triple-flanged hoop configuration. Retro styling and market positioning are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Club Date Reissue identity is clear from existing Firestore fields, but exact ply recipe and bearing edge details should remain model-specific unless stronger source confirmation is added.",
+
+    "drumSummaryNotes": "Club Date Reissue 6.5x14 should read as a deeper maple/poplar snare with warmer body, more bloom, and stronger low-mid push than the 5-inch version.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 maple/poplar ply identity, lacquer/wrap finish context, deeper shell depth, snare bed presence, and triple-flanged hoop configuration. Retro styling and market positioning are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_vistalite_vistalite-acrylic-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_353a101d": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Vistalite acrylic identity is clear from existing Firestore fields. Exact shell thickness and hardware variation may depend on production era or reissue status.",
+
+    "drumSummaryNotes": "Vistalite Acrylic 5x14 should read as a bright, focused acrylic snare with clean attack, quick response, and less organic warmth than wood shells.",
+
+    "scoringBasis": "Shell-first scoring based on existing 5x14 acrylic shell identity, transparent acrylic finish, snare bed presence, and triple-flanged hoop configuration. Visual appeal and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_vistalite_vistalite-acrylic-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_429e1234": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Vistalite acrylic identity is clear from existing Firestore fields. Exact shell thickness and hardware variation may depend on production era or reissue status.",
+
+    "drumSummaryNotes": "Vistalite Acrylic 6.5x14 should read as a deeper acrylic snare with stronger projection, more body, and a focused, glassy attack.",
+
+    "scoringBasis": "Shell-first scoring based on existing 6.5x14 acrylic shell identity, transparent acrylic finish, deeper shell depth, snare bed presence, and triple-flanged hoop configuration. Visual appeal and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_vistalite_vistalite-acrylic-8x14_14x8_acrylic_acrylic_transparent-acrylic_triple-flanged_4328eeda": {
+
+    "sourceConfidence": "medium",
+
+    "voiceScoreConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Vistalite acrylic identity is clear from existing Firestore fields. Exact shell thickness and hardware variation may depend on production era or reissue status.",
+
+    "drumSummaryNotes": "Vistalite Acrylic 8x14 should read as a large acrylic snare with big projection, strong focused shell tone, extended body, and controlled warmth.",
+
+    "scoringBasis": "Shell-first scoring based on existing 8x14 acrylic shell identity, transparent acrylic finish, deep shell depth, snare bed presence, and triple-flanged hoop configuration. Visual appeal and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
+
