@@ -1,11 +1,11 @@
 
 import fs from 'fs';
 
-const audit = JSON.parse(
+const queue = JSON.parse(
 
   fs.readFileSync(
 
-    'data/snareAuditReports/snare-model-readiness-strict.json',
+    'data/snareAuditReports/snare-research-queue.json',
 
     'utf8'
 
@@ -15,7 +15,7 @@ const audit = JSON.parse(
 
 const targets = [];
 
-for (const record of audit.failedCoreRecords || []) {
+for (const record of queue.coreQueue || []) {
 
   const failed = record.failedCoreFields || [];
 
@@ -81,7 +81,7 @@ fs.writeFileSync(
 
 console.log(`Built ${targets.length} core-shell research targets.`);
 
-console.log(
+console.table(
 
   Object.entries(grouped)
 
