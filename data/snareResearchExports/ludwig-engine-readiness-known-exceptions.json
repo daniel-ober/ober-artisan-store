@@ -1,0 +1,37 @@
+
+[
+
+  {
+
+    "id": "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1940s WFL",
+
+    "modelName": "Compacto Snare Drum",
+
+    "exceptionReason": "Known unresolved shell construction/material conflict: record says metal construction but maple/poplar material. Keep needsResearch=true until source-confirmed.",
+
+    "engineReadinessStatus": "knownResearchException"
+
+  },
+
+  {
+
+    "id": "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1970s Ludwig",
+
+    "modelName": "Piccolo Snare 3x13",
+
+    "exceptionReason": "Known unresolved shell construction/material conflict: record says ply construction but steel material. Keep needsResearch=true until source-confirmed.",
+
+    "engineReadinessStatus": "knownResearchException"
+
+  }
+
+]
+
