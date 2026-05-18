@@ -1,0 +1,13 @@
+{
+  "company": "Mapex",
+  "summary": {
+    "total": 112,
+    "engineReady": 112,
+    "needsResearch": 0,
+    "missingRequiredCount": 0,
+    "invalidConfidenceCount": 0,
+    "missingScoresCount": 0,
+    "examplesNeedingWork": []
+  },
+  "badRecords": []
+}
