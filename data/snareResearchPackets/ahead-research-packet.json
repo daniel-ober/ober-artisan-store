@@ -1,0 +1,368 @@
+{
+  "company": "AHEAD",
+  "generatedAt": "2026-05-18T06:03:43.432Z",
+  "counts": {
+    "coreRecords": 33,
+    "stockRecords": 0
+  },
+  "instructions": {
+    "goal": "Research and patch failed minimum engine fields with source-backed values only.",
+    "rules": [
+      "Unknown may remain in Firestore, but it fails minimum engine readiness.",
+      "Do not invent shell thickness, bearing edge, snare bed, or stock hardware details.",
+      "Use sourceConfidence and notesOnMissingData honestly.",
+      "Core shell fields come first; stock config fields come second."
+    ]
+  },
+  "coreRecords": [
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 14x4 Piccolo",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x4-piccolo_14x4_metal_brass_1_smoke-chrome_sh1410-s-hoop-counter-hoops_as414_07617ee1",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-dunnett-throw-off-option_14x6_metal_brass_1_minimal-shallow-snare-beds_smo_f95fc0e2",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-trick-throw-off-option_14x6_metal_brass_1_smoke-chrome-black-chrome_sh1410_8581ca8f",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-piccolo-snare-drum-14x4_14x4_metal_brass_1_minimal-shallow-snare-beds_smoke-chr_2b056559",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass Snare Drum 13x6",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_03f82188",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass Snare Drum 14x6",
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_65f4f28c",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black on Brass 13x6 Brunson Lug Prototype/Planned Variant",
+      "id": "ahead_ahead-snares_black-on-brass-13x6-brunson-lug-prototype-planned-variant_13x6_metal_brass_1_black-chrome_sh138-s-hoo_6f6b2e23",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black on Brass 14x6 Brunson Lug Edition",
+      "id": "ahead_ahead-snares_black-on-brass-14x6-brunson-lug-edition_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_a_da443290",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black on Brass 14x6 Tube Lug Original",
+      "id": "ahead_ahead-snares_black-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_as6_f42b5819",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished 3mm Bell Brass 13x6",
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished 3mm Bell Brass 14x6",
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished Bell Brass Snare Drum 13x6",
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished Bell Brass Snare Drum 14x6",
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass 13x6 Tube Lug Original",
+      "id": "ahead_ahead-snares_chrome-on-brass-13x6-tube-lug-original_13x6_metal_brass_1_chrome_sh138-s-hoop-counter-hoops_asc613_7dac1d72",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass 14x6 Tube Lug Original",
+      "id": "ahead_ahead-snares_chrome-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614_bcd52f08",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass Snare Drum 13x6",
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_chrome_sh138-s-hoop-cou_2d68cd61",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass Snare Drum 14x6",
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614-inferred_0adcb07a",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Polished Bell Brass Snare Drum 14x6",
+      "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Titanium 14x6 Engraved Shell",
+      "id": "ahead_ahead-snares_titanium-14x6-engraved-shell_14x6_metal_titanium_1_engraved-titanium_sh1410-s-hoop-counter-hoops_tita_3a7640dd",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Titanium 14x6 Studio Dry Variant",
+      "id": "ahead_ahead-snares_titanium-14x6-studio-dry-variant_14x6_metal_titanium_1_minimal-shallow-snare-beds_engraved-titanium_s_e5a32ae7",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Titanium Snare Drum 14x6 with Chrome Trick Throw Off",
+      "id": "ahead_ahead-snares_titanium-snare-drum-14x6-with-chrome-trick-throw-off_14x6_metal_titanium_1_minimal-shallow-snare-beds_bc64363e",
+      "failedCoreFields": [
+        "bearingEdge"
+      ]
+    }
+  ],
+  "stockRecords": []
+}
