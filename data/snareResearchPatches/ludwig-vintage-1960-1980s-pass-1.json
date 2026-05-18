@@ -1,0 +1,1333 @@
+{
+
+  "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Auditorium 6.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar/maple or mahogany/poplar/maple era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Deep 6.5x14 1960 Ludwig wood-shell snare. Expected to emphasize warmer body, rounder attack, and longer bloom than the shallower student/jazz models from the same catalog era.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, 6.5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_downbeat-4x14_14x4_ply_maple-poplar_lacquer-pearl_triple-flanged_dd90647b": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "DownBeat 4x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 4,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Shallow 4x14 DownBeat-style vintage Ludwig wood snare. Expected to read quicker, drier, and more articulate than deeper 5.5x14 and 6.5x14 1960 catalog models.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, shallow 4-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_jazz-combo-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_5ed15c1c": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Jazz Combo 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Compact 5x14 1960 Ludwig wood-shell snare. Expected to balance vintage warmth with moderate attack and quicker decay than 5.5x14 and 6.5x14 catalog models.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, 5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_jazz-festival-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_db65937d": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Jazz Festival 5.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Maple",
+
+    "plyCountLayup": "3-ply mahogany/poplar/maple vintage Ludwig shell",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer or pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "8",
+
+    "lugType": "Ludwig bowtie lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness, exact bearing edge geometry, snare bed depth, and throw-off model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Classic 5.5x14 Jazz Festival wood snare profile. Expected to emphasize rounded vintage warmth, responsive midrange, moderate projection, and controlled open bloom.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig 3-ply mahogany/poplar/maple shell, 5.5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_las-vegas-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_f13dd39e": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Las Vegas 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "5x14 vintage Ludwig Las Vegas wood snare. Expected to sit between shallow quick-response models and the fuller 5.5x14 Jazz Festival/Super Classic family.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, 5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_pioneer-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_d987b16f": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Pioneer 5.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Mahogany",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Maple",
+
+    "plyCountLayup": "3-ply mahogany/poplar/maple vintage Ludwig shell",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer or pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "6",
+
+    "lugType": "Ludwig bowtie lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness, exact bearing edge geometry, snare bed depth, and throw-off model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Student-line 5.5x14 Pioneer wood snare with 6-lug configuration. Expected to retain vintage warmth while reading slightly more open and less focused than comparable 8-lug Jazz Festival models.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig 3-ply mahogany/poplar/maple shell, 5.5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, 6-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_porto-pak-3x13_13x3_ply_maple-poplar_lacquer-pearl_triple-flanged_c13c5e0d": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Porto Pak 3x13",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 13,
+
+    "depth": 3,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Very shallow 13x3 Porto Pak snare. Expected to produce the quickest, driest, highest-control response in this 1960 group, with reduced warmth and sustain compared with 14-inch deeper models.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, compact 13-inch diameter, very shallow 3-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_school-festival-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_triple-flanged_6511b6b9": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "School Festival 5.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "5.5x14 School Festival wood snare from the 1960 Ludwig catalog era. Expected to deliver balanced vintage warmth, moderate sensitivity, and controlled sustain suitable for school/concert use.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, 5.5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_super-classic-snare-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl-wrap_triple-flanged_cb20063a": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Super Classic Snare 5.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer or pearl wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, and snare throw model need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "5.5x14 Super Classic wood snare. Expected to offer a fuller vintage wood response than shallow models, with balanced warmth, body, and medium-open sustain.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, 5.5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_super-ludwig-metal-5x14_14x5_metal_brass_chrome-over-metal_triple-flanged_5aef5292": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Super Ludwig Metal 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "Brass",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Formed metal bearing edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Chrome over brass / chrome over metal",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Ludwig imperial lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact shell thickness and catalog-era transition details need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "5x14 Super Ludwig metal snare. Expected to read brighter, more projecting, and more immediate than the 1960 wood-shell models, with brass-like warmth under the chrome-plated attack.",
+
+    "scoringBasis": "Shell-first scoring based on metal brass shell identity, 5-inch depth, formed metal bearing edge, snare bed presence, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1960-ludwig_symphonic-snare-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_concert-hoop_837e481d": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1960 Ludwig",
+
+    "modelName": "Symphonic Snare 6.5x14",
+
+    "drumType": "Concert Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "3-ply maple/poplar era construction; exact layup needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "YES",
+
+    "reinforcementRingMaterial": "Maple",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / pearl wrap",
+
+    "hoopType": "Concert hoop",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig vintage concert/snare lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply layup, shell thickness, lug count, concert strainer details, and snare mechanism need stronger model-specific confirmation.",
+
+    "drumSummaryNotes": "Deep 6.5x14 Symphonic snare with concert-oriented hoop/setup. Expected to emphasize body, controlled articulation, and formal concert sensitivity rather than open drumset-style ring.",
+
+    "scoringBasis": "Shell-first scoring based on vintage Ludwig ply wood shell, 6.5-inch depth, reinforcement rings, rounded vintage bearing edge, snare bed presence, and concert hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_44ab7d65": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Coliseum 8x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "Multi-ply maple shell; exact ply count needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Ludwig large classic / 1980s snare lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply count, shell thickness, bearing edge profile, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "Deep 8x14 Coliseum maple snare. Expected to deliver large body, strong projection, extended low-mid weight, and a slower/deeper response than standard 5x14 and 6.5x14 models.",
+
+    "scoringBasis": "Shell-first scoring based on maple ply shell, 8-inch depth, snare bed presence, no reinforcement rings, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_hammered-bronze-5x14_14x5_metal_bronze_hammered-bronze_triple-flanged_7732000e": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Hammered Bronze 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "Bronze",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Formed metal bearing edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Hammered bronze",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Ludwig imperial lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact shell thickness and detailed throw-off/wire configuration need stronger confirmation.",
+
+    "drumSummaryNotes": "5x14 hammered bronze Ludwig snare. Expected to blend metal-shell projection with darker bronze warmth and extra control from hammered shell texture.",
+
+    "scoringBasis": "Shell-first scoring based on bronze metal shell, hammered surface treatment, 5-inch depth, formed metal bearing edge, snare bed presence, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_hammered-bronze-6-5x14_14x6-5_metal_bronze_hammered-bronze_triple-flanged_00bb458c": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Hammered Bronze 6.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "Bronze",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Formed metal bearing edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Hammered bronze",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Ludwig imperial lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact shell thickness and detailed throw-off/wire configuration need stronger confirmation.",
+
+    "drumSummaryNotes": "6.5x14 hammered bronze Ludwig snare. Expected to add more body, warmth, and projection than the 5x14 version while retaining hammered-shell control.",
+
+    "scoringBasis": "Shell-first scoring based on bronze metal shell, hammered surface treatment, 6.5-inch depth, formed metal bearing edge, snare bed presence, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_hammered-chrome-5x14_14x5_metal_steel_hammered-chrome_triple-flanged_a0325acc": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Hammered Chrome 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "Steel",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Formed metal bearing edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Hammered chrome",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Ludwig imperial lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact base metal and shell thickness need stronger confirmation; current identity indicates steel/chrome hammered metal.",
+
+    "drumSummaryNotes": "5x14 hammered chrome metal snare. Expected to read bright and cutting with added control from hammered shell texture.",
+
+    "scoringBasis": "Shell-first scoring based on steel/chrome metal shell identity, hammered surface treatment, 5-inch depth, formed metal bearing edge, snare bed presence, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_rock-concert-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_d30d06e3": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Rock/Concert 6.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "Multi-ply maple shell; exact ply count needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig 1980s snare lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply count, shell thickness, lug count, bearing edge profile, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "6.5x14 Rock/Concert maple snare. Expected to favor projection, body, and stronger backbeat weight compared with shallower 5x14 wood models.",
+
+    "scoringBasis": "Shell-first scoring based on maple ply shell, 6.5-inch depth, snare bed presence, no reinforcement rings, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_s-l-snare-drum-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_d6f09d4a": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "S/L Snare Drum 5.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Poplar",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "Maple/poplar ply shell; exact ply count needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "unknown",
+
+    "reinforcementRingMaterial": "unknown",
+
+    "reinforcementRingThickness": "unknown",
+
+    "bearingEdge": "Ludwig wood bearing edge; exact profile needs confirmation",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "unknown",
+
+    "lugType": "Ludwig 1980s snare lug configuration; exact lug model needs confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply count, shell thickness, reinforcement ring status, bearing edge profile, lug count, and snare bed depth need stronger source confirmation.",
+
+    "drumSummaryNotes": "5.5x14 S/L wood snare. Expected to provide a balanced mid-depth wood response with moderate warmth, projection, and sustain.",
+
+    "scoringBasis": "Shell-first scoring based on maple/poplar ply shell identity, 5.5-inch depth, snare bed presence, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_slotted-coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_5f12b875": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Slotted Coliseum 8x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "Maple",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "Multi-ply maple shell; exact ply count needs stronger model-specific confirmation",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Lacquer / wrap",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Slotted Coliseum lug/casing configuration; exact hardware details need confirmation",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact ply count, shell thickness, bearing edge profile, and slotted-shell construction details need stronger source confirmation.",
+
+    "drumSummaryNotes": "Slotted 8x14 Coliseum maple snare. Expected to keep the large depth and projection of the Coliseum while adding extra air movement/venting behavior from the slotted design.",
+
+    "scoringBasis": "Shell-first scoring based on maple ply shell, 8-inch depth, slotted/vented shell behavior, snare bed presence, no reinforcement rings, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_1980s-ludwig_smooth-bronze-5x14_14x5_metal_bronze_smooth-bronze_triple-flanged_cc1d672c": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "1980s Ludwig",
+
+    "modelName": "Smooth Bronze 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "Bronze",
+
+    "shellMaterial2": "Unknown",
+
+    "shellMaterial3": "Unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": "unknown",
+
+    "reinforcementRings": "NO",
+
+    "reinforcementRingMaterial": "N/A",
+
+    "reinforcementRingThickness": "N/A",
+
+    "bearingEdge": "Formed metal bearing edge",
+
+    "snareBeds": "YES",
+
+    "snareBedDepth": "medium",
+
+    "finishType": "Smooth bronze",
+
+    "hoopType": "Triple-flanged",
+
+    "lugCount": "10",
+
+    "lugType": "Ludwig imperial lugs",
+
+    "hardwareFinish": "Chrome",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Exact shell thickness and detailed throw-off/wire configuration need stronger confirmation.",
+
+    "drumSummaryNotes": "5x14 smooth bronze Ludwig snare. Expected to be more open and ringing than hammered bronze, with strong bronze warmth, clear metal-shell projection, and less surface-treatment control.",
+
+    "scoringBasis": "Shell-first scoring based on bronze metal shell, smooth surface treatment, 5-inch depth, formed metal bearing edge, snare bed presence, 10-lug architecture, and triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
