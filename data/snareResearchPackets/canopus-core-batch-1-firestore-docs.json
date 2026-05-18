@@ -1,0 +1,2077 @@
+{
+  "generatedAt": "2026-05-18T06:01:21.179Z",
+  "sourcePacket": "data/snareResearchPackets/canopus-core-batch-1.json",
+  "docs": [
+    {
+      "id": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+      "exists": true,
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "Others",
+        "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+        "patchName": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 4,
+            "metricDimensionsMm": "355.6 x 101.6"
+          },
+          "construction": {
+            "shellConstruction": "Other / Needs Research",
+            "shellMaterialPrimary": "unknown",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x4 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x4 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.2,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.8,
+        "overallControl": 6.5,
+        "shellScoreAttack": 7.2,
+        "shellScoreProjection": 6.8,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 6,
+        "diameter": 14,
+        "attack": 7.2,
+        "overallWarmth": 6.3,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.8,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.3,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Other / Needs Research",
+        "lugCount": null,
+        "shellMaterial1": "unknown",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 4,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082647,
+          "_nanoseconds": 990000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.1,
+        "sustain": 6
+      }
+    },
+    {
+      "id": "canopus_r-o-f-project_r-o-f-project-snare-drum_14x6-5_other-needs-research_0c72185e",
+      "exists": true,
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "R.O.F PROJECT",
+        "modelName": "R.O.F Project Snare Drum",
+        "patchName": "canopus_r-o-f-project_r-o-f-project-snare-drum_14x6-5_other-needs-research_0c72185e",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Other / Needs Research",
+            "shellMaterialPrimary": "unknown",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Unknown / special project shell Unknown shell, Unknown. Listed in official Canopus lineup or official-linked Type-R category; specs require deeper page/catalog extraction."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.8,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.7,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.1,
+        "overallControl": 6.5,
+        "shellScoreAttack": 6.8,
+        "shellScoreProjection": 7.1,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 6.8,
+        "overallWarmth": 6.7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.1,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.7,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Other / Needs Research",
+        "lugCount": null,
+        "shellMaterial1": "unknown",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082648,
+          "_nanoseconds": 345000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "1ply Oak",
+        "modelName": "1ply Oak 14x5.5",
+        "patchName": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Steam Bent",
+            "shellMaterialPrimary": "Oak",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "1-ply",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists 1ply Oak; model-level spec details need extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 1-ply solid shell Oak shell, 1-ply. Official lineup lists 1ply Oak; model-level spec details need extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 1-ply solid shell Oak shell, 1-ply. Official lineup lists 1ply Oak; model-level spec details need extraction."
+        },
+        "overallBrightness": 7,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.6,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.5,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.8,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8,
+        "overallControl": 6.5,
+        "shellScoreAttack": 7.5,
+        "shellScoreProjection": 8,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.8,
+        "overallSustain": 6.6,
+        "diameter": 14,
+        "attack": 7.5,
+        "overallWarmth": 6.6,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8,
+        "shellScoreBrightness": 7,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.6,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.6,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Steam Bent",
+        "lugCount": null,
+        "shellMaterial1": "Oak",
+        "shellMaterial2": "none",
+        "brightness": 7,
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 138000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.8,
+        "sustain": 6.6
+      }
+    },
+    {
+      "id": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "1ply Oak",
+        "modelName": "1ply Oak 14x6.5",
+        "patchName": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Steam Bent",
+            "shellMaterialPrimary": "Oak",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "1-ply",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists 1ply Oak; model-level spec details need extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 1-ply solid shell Oak shell, 1-ply. Official lineup lists 1ply Oak; model-level spec details need extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 1-ply solid shell Oak shell, 1-ply. Official lineup lists 1ply Oak; model-level spec details need extraction."
+        },
+        "overallBrightness": 7,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.8,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.5,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.7,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.3,
+        "overallControl": 6.5,
+        "shellScoreAttack": 7.5,
+        "shellScoreProjection": 8.3,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.7,
+        "overallSustain": 6.8,
+        "diameter": 14,
+        "attack": 7.5,
+        "overallWarmth": 6.8,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.3,
+        "shellScoreBrightness": 7,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.8,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.8,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Steam Bent",
+        "lugCount": null,
+        "shellMaterial1": "Oak",
+        "shellMaterial2": "none",
+        "brightness": 7,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 231000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.7,
+        "sustain": 6.8
+      }
+    },
+    {
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x5-5_14x5-5_steam-bent_maple_cd277bcc",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "1ply Soft Maple",
+        "modelName": "1ply Soft Maple 14x5.5",
+        "patchName": "canopus_1ply-soft-maple_1ply-soft-maple-14x5-5_14x5-5_steam-bent_maple_cd277bcc",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Steam Bent",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "1-ply",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists 1ply Soft Maple; model-level spec details need extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 1-ply solid shell Soft Maple shell, 1-ply. Official lineup lists 1ply Soft Maple; model-level spec details need extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 1-ply solid shell Soft Maple shell, 1-ply. Official lineup lists 1ply Soft Maple; model-level spec details need extraction."
+        },
+        "overallBrightness": 6.7,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7,
+        "overallControl": 6.7,
+        "shellScoreAttack": 7,
+        "shellScoreProjection": 7,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 7,
+        "overallWarmth": 7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7,
+        "shellScoreBrightness": 6.7,
+        "shellScoreControl": 6.7,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7,
+        "shellMaterial3": "none",
+        "control": 6.7,
+        "shellConstruction": "Steam Bent",
+        "lugCount": null,
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "none",
+        "brightness": 6.7,
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 327000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x6-5_14x6-5_steam-bent_maple_172ecd37",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "1ply Soft Maple",
+        "modelName": "1ply Soft Maple 14x6.5",
+        "patchName": "canopus_1ply-soft-maple_1ply-soft-maple-14x6-5_14x6-5_steam-bent_maple_172ecd37",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Steam Bent",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "1-ply",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists 1ply Soft Maple; model-level spec details need extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 1-ply solid shell Soft Maple shell, 1-ply. Official lineup lists 1ply Soft Maple; model-level spec details need extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 1-ply solid shell Soft Maple shell, 1-ply. Official lineup lists 1ply Soft Maple; model-level spec details need extraction."
+        },
+        "overallBrightness": 6.7,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.6,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.9,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.3,
+        "overallControl": 6.7,
+        "shellScoreAttack": 7,
+        "shellScoreProjection": 7.3,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.9,
+        "overallSustain": 6.6,
+        "diameter": 14,
+        "attack": 7,
+        "overallWarmth": 7.2,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.3,
+        "shellScoreBrightness": 6.7,
+        "shellScoreControl": 6.7,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.7,
+        "shellConstruction": "Steam Bent",
+        "lugCount": null,
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "none",
+        "brightness": 6.7,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 439000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.9,
+        "sustain": 6.6
+      }
+    },
+    {
+      "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "Aluminum Alloy",
+        "modelName": "Aluminum Alloy 14x6",
+        "patchName": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+        "identification": {
+          "modelNumber": "AA-1460",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Aluminum",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "1mm aluminum alloy",
+            "shellThicknessMm": 1,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Matte black coat",
+            "finishType": "Matte black coat",
+            "exteriorTreatment": "Matte black coat",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "Steel 1.6mm 10H",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "Steel 1.6mm 10H",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Die Cast Lug",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "CPSL-14NP",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "CPSL-14NP"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "REMO Hazy Coated 1ply/SA",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/product/aluminum-alloy-snaredrum/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official page confirms 1mm aluminum alloy shell, 18mm lapel/flanged edge, 1.6mm steel 10H hoops, CPSL-14NP wire, and inner muffler."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6 Metal shell with center bead/lapel Aluminum Alloy shell, 1mm aluminum alloy, 1mm thickness, Steel 1.6mm 10H. Official page confirms 1mm aluminum alloy shell, 18mm lapel/flanged edge, 1.6mm steel 10H hoops, CPSL-14NP wire, and inner muffler.",
+          "drumSummaryNotes": "Shell-first score based on 14x6 Metal shell with center bead/lapel Aluminum Alloy shell, 1mm aluminum alloy, 1mm thickness, Steel 1.6mm 10H. Official page confirms 1mm aluminum alloy shell, 18mm lapel/flanged edge, 1.6mm steel 10H hoops, CPSL-14NP wire, and inner muffler."
+        },
+        "overallBrightness": 6.9,
+        "reRingThicknessMm": null,
+        "lugType": "Die Cast Lug",
+        "shellScoreSustain": 5.8,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.5,
+        "hoopType": "Steel 1.6mm 10H",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.6,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.4,
+        "overallControl": 7.2,
+        "shellScoreAttack": 7.5,
+        "shellScoreProjection": 7.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.6,
+        "overallSustain": 5.8,
+        "diameter": 14,
+        "attack": 7.5,
+        "overallWarmth": 6.1,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.4,
+        "shellScoreBrightness": 6.9,
+        "shellScoreControl": 7.2,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.1,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.1,
+        "shellMaterial3": "none",
+        "control": 7.2,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": "none",
+        "brightness": 6.9,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 546000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 1,
+        "sensitivity": 7.6,
+        "sustain": 5.8
+      }
+    },
+    {
+      "id": "canopus_ash_ash-snare-14x5-5_14x5-5_ply_ash_6063989f",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "Ash",
+        "modelName": "Ash Snare 14x5.5",
+        "patchName": "canopus_ash_ash-snare-14x5-5_14x5-5_ply_ash_6063989f",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Ash",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown ply ash",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists Ash; exact shell thickness/hoop/edge needs page-level extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 Ply shell Ash shell, Unknown ply ash. Official lineup lists Ash; exact shell thickness/hoop/edge needs page-level extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 Ply shell Ash shell, Unknown ply ash. Official lineup lists Ash; exact shell thickness/hoop/edge needs page-level extraction."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.2,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.8,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.8,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.8,
+        "overallControl": 6.5,
+        "shellScoreAttack": 6.8,
+        "shellScoreProjection": 6.8,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.8,
+        "overallSustain": 6.2,
+        "diameter": 14,
+        "attack": 6.8,
+        "overallWarmth": 6.5,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.8,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.5,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.5,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Ply",
+        "lugCount": null,
+        "shellMaterial1": "Ash",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 642000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.8,
+        "sustain": 6.2
+      }
+    },
+    {
+      "id": "canopus_ash_ash-snare-14x6-5_14x6-5_ply_ash_9873ec99",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "Ash",
+        "modelName": "Ash Snare 14x6.5",
+        "patchName": "canopus_ash_ash-snare-14x6-5_14x6-5_ply_ash_9873ec99",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Ash",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown ply ash",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists Ash; exact shell thickness/hoop/edge needs page-level extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Ply shell Ash shell, Unknown ply ash. Official lineup lists Ash; exact shell thickness/hoop/edge needs page-level extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Ply shell Ash shell, Unknown ply ash. Official lineup lists Ash; exact shell thickness/hoop/edge needs page-level extraction."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.8,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.7,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.1,
+        "overallControl": 6.5,
+        "shellScoreAttack": 6.8,
+        "shellScoreProjection": 7.1,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 6.8,
+        "overallWarmth": 6.7,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.1,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.7,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Ply",
+        "lugCount": null,
+        "shellMaterial1": "Ash",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 738000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "canopus_birch_birch-snare-14x5-5_14x5-5_ply_birch_a4ab4332",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Canopus",
+        "companyType": "Boutique / Specialty Manufacturer",
+        "lineSeries": "Birch",
+        "modelName": "Birch Snare 14x5.5",
+        "patchName": "canopus_birch_birch-snare-14x5-5_14x5-5_ply_birch_a4ab4332",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Birch",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Unknown ply birch",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "unknown",
+            "finishType": "unknown",
+            "exteriorTreatment": "unknown",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": null,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Vintage Snare Wire",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Vintage Snare Wire"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Unknown bearing edge/snare bed unless noted. Official lineup lists Birch; exact shell thickness/hoop/edge needs page-level extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 Ply shell Birch shell, Unknown ply birch. Official lineup lists Birch; exact shell thickness/hoop/edge needs page-level extraction.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 Ply shell Birch shell, Unknown ply birch. Official lineup lists Birch; exact shell thickness/hoop/edge needs page-level extraction."
+        },
+        "overallBrightness": 7.2,
+        "reRingThicknessMm": null,
+        "lugType": "unknown",
+        "shellScoreSustain": 6.1,
+        "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.4,
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Canopus record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.5,
+        "overallControl": 6.8,
+        "shellScoreAttack": 7.4,
+        "shellScoreProjection": 7.5,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 6.1,
+        "diameter": 14,
+        "attack": 7.4,
+        "overallWarmth": 6.1,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.5,
+        "shellScoreBrightness": 7.2,
+        "shellScoreControl": 6.8,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.1,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.1,
+        "shellMaterial3": "none",
+        "control": 6.8,
+        "shellConstruction": "Ply",
+        "lugCount": null,
+        "shellMaterial1": "Birch",
+        "shellMaterial2": "none",
+        "brightness": 7.2,
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082645,
+          "_nanoseconds": 833000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 6.1
+      }
+    }
+  ]
+}
