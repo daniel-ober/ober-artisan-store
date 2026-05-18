@@ -1,0 +1,751 @@
+{
+  "company": "Canopus",
+  "generatedAt": "2026-05-18T05:59:57.035Z",
+  "counts": {
+    "coreRecords": 63,
+    "stockRecords": 0
+  },
+  "instructions": {
+    "goal": "Research and patch failed minimum engine fields with source-backed values only.",
+    "rules": [
+      "Unknown may remain in Firestore, but it fails minimum engine readiness.",
+      "Do not invent shell thickness, bearing edge, snare bed, or stock hardware details.",
+      "Use sourceConfidence and notesOnMissingData honestly.",
+      "Core shell fields come first; stock config fields come second."
+    ]
+  },
+  "coreRecords": [
+    {
+      "priority": "high",
+      "companyName": "Canopus",
+      "lineSeries": "Others",
+      "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+      "id": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Canopus",
+      "lineSeries": "R.O.F PROJECT",
+      "modelName": "R.O.F Project Snare Drum",
+      "id": "canopus_r-o-f-project_r-o-f-project-snare-drum_14x6-5_other-needs-research_0c72185e",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Oak",
+      "modelName": "1ply Oak 14x5.5",
+      "id": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Oak",
+      "modelName": "1ply Oak 14x6.5",
+      "id": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Soft Maple",
+      "modelName": "1ply Soft Maple 14x5.5",
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x5-5_14x5-5_steam-bent_maple_cd277bcc",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Soft Maple",
+      "modelName": "1ply Soft Maple 14x6.5",
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x6-5_14x6-5_steam-bent_maple_172ecd37",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Aluminum Alloy",
+      "modelName": "Aluminum Alloy 14x6",
+      "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Ash",
+      "modelName": "Ash Snare 14x5.5",
+      "id": "canopus_ash_ash-snare-14x5-5_14x5-5_ply_ash_6063989f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Ash",
+      "modelName": "Ash Snare 14x6.5",
+      "id": "canopus_ash_ash-snare-14x6-5_14x6-5_ply_ash_9873ec99",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Birch",
+      "modelName": "Birch Snare 14x5.5",
+      "id": "canopus_birch_birch-snare-14x5-5_14x5-5_ply_birch_a4ab4332",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Birch",
+      "modelName": "Birch Snare 14x6.5",
+      "id": "canopus_birch_birch-snare-14x6-5_14x6-5_ply_birch_cf57c977",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Black Nickel Brass II",
+      "modelName": "Black Nickel Brass II 14x5.5",
+      "id": "canopus_black-nickel-brass-ii_black-nickel-brass-ii-14x5-5_14x5-5_metal_brass_a81d3d2e",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Black Nickel Brass II",
+      "modelName": "Black Nickel Brass II 14x6.5",
+      "id": "canopus_black-nickel-brass-ii_black-nickel-brass-ii-14x6-5_14x6-5_metal_brass_8191fdcd",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Hammered Bronze",
+      "modelName": "Hammered Bronze 14x5.5",
+      "id": "canopus_hammered-bronze_hammered-bronze-14x5-5_14x5-5_metal_bronze_dc26ad3e",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Hammered Bronze",
+      "modelName": "Hammered Bronze 14x6.5",
+      "id": "canopus_hammered-bronze_hammered-bronze-14x6-5_14x6-5_metal_bronze_6125d9a7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Signature",
+      "modelName": "Harvey Mason Signature Snare Drum",
+      "id": "canopus_signature_harvey-mason-signature-snare-drum_14x5-5_ply_maple_a6caf1da",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Signature",
+      "modelName": "Jonathan Pinson Signature Snare Drum",
+      "id": "canopus_signature_jonathan-pinson-signature-snare-drum_14x6-5_ply_maple_8f7c0ea1",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Mahogany",
+      "modelName": "Mahogany Snare 14x5.5",
+      "id": "canopus_mahogany_mahogany-snare-14x5-5_14x5-5_ply_mahogany_5110ce16",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Mahogany",
+      "modelName": "Mahogany Snare 14x6.5",
+      "id": "canopus_mahogany_mahogany-snare-14x6-5_14x6-5_ply_mahogany_f72beece",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Maize Yellow Birch",
+      "modelName": "Maize Yellow Birch Snare 14x5.5",
+      "id": "canopus_maize-yellow-birch_maize-yellow-birch-snare-14x5-5_14x5-5_ply_birch_d3439fff",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Maize Yellow Birch",
+      "modelName": "Maize Yellow Birch Snare 14x6.5",
+      "id": "canopus_maize-yellow-birch_maize-yellow-birch-snare-14x6-5_14x6-5_ply_birch_069826d6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Manganese Steel",
+      "modelName": "Manganese Steel 14x5.5",
+      "id": "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Manganese Steel",
+      "modelName": "Manganese Steel 14x6.5",
+      "id": "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Signature",
+      "modelName": "Mel Taylor Snare Drum",
+      "id": "canopus_signature_mel-taylor-snare-drum_14x5-5_ply_maple_3c0d763d",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "modelName": "MO Snare 14x5.5",
+      "id": "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "modelName": "MO Snare 14x6.5",
+      "id": "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV50-M1 14x5.5",
+      "id": "canopus_neo-vintage_nv50-m1-14x5-5_14x5-5_ply_maple-poplar_nv50-m1_6e21ff45",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV50-M1 14x6.5",
+      "id": "canopus_neo-vintage_nv50-m1-14x6-5_14x6-5_ply_maple-poplar_nv50-m1_c010d5d8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV60-M1 14x5.5",
+      "id": "canopus_neo-vintage_nv60-m1-14x5-5_14x5-5_ply_maple-poplar_nv60-m1_3a47e2f0",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV60-M1 14x6.5",
+      "id": "canopus_neo-vintage_nv60-m1-14x6-5_14x6-5_ply_maple-poplar_nv60-m1_c63d4e1c",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV60-M2 14x5.5",
+      "id": "canopus_neo-vintage_nv60-m2-14x5-5_14x5-5_ply_maple-poplar_nv60-m2_c11658ef",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV60-M2 14x6.5",
+      "id": "canopus_neo-vintage_nv60-m2-14x6-5_14x6-5_ply_maple-poplar_nv60-m2_389e834e",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV60-M5 14x5.5",
+      "id": "canopus_neo-vintage_nv60-m5-14x5-5_14x5-5_ply_maple-poplar_nv60-m5_d0279b86",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "modelName": "NV60-M5 14x6.5",
+      "id": "canopus_neo-vintage_nv60-m5-14x6-5_14x6-5_ply_maple-poplar_nv60-m5_a2eb0c7c",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Patina Solid Brass",
+      "modelName": "Patina Solid Brass 14x5.5",
+      "id": "canopus_patina-solid-brass_patina-solid-brass-14x5-5_14x5-5_metal_brass_3022a08c",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Patina Solid Brass",
+      "modelName": "Patina Solid Brass 14x6.5",
+      "id": "canopus_patina-solid-brass_patina-solid-brass-14x6-5_14x6-5_metal_brass_1a7cfa6c",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Piccolo Bronze",
+      "modelName": "Piccolo Bronze 14x4",
+      "id": "canopus_piccolo-bronze_piccolo-bronze-14x4_14x4_metal_bronze_08f088c9",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "modelName": "Session Superior Maple 14x5.5",
+      "id": "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "modelName": "Session Superior Maple 14x6.5",
+      "id": "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Solid Bronze",
+      "modelName": "Solid Bronze 14x5.5",
+      "id": "canopus_solid-bronze_solid-bronze-14x5-5_14x5-5_metal_bronze_21c94d73",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Solid Bronze",
+      "modelName": "Solid Bronze 14x6.5",
+      "id": "canopus_solid-bronze_solid-bronze-14x6-5_14x6-5_metal_bronze_ab4e7546",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Stabilized Wood",
+      "modelName": "Stabilized Wood Snare 14x5.5",
+      "id": "canopus_stabilized-wood_stabilized-wood-snare-14x5-5_14x5-5_ply_wood_adbd59b0",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Stabilized Wood",
+      "modelName": "Stabilized Wood Snare 14x6.5",
+      "id": "canopus_stabilized-wood_stabilized-wood-snare-14x6-5_14x6-5_ply_wood_f0cc67f8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Stave Bubinga",
+      "modelName": "Stave Bubinga 14x5.5",
+      "id": "canopus_stave-bubinga_stave-bubinga-14x5-5_14x5-5_stave_bubinga_e06f32e4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Stave Bubinga",
+      "modelName": "Stave Bubinga 14x6.5",
+      "id": "canopus_stave-bubinga_stave-bubinga-14x6-5_14x6-5_stave_bubinga_6965d978",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Signature",
+      "modelName": "Takashi Kashikura toe 25th Anniversary Model",
+      "id": "canopus_signature_takashi-kashikura-toe-25th-anniversary-model_14x6-5_other-needs-research_ash_4fda59d5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 10x6",
+      "id": "canopus_the-maple_the-maple-10x6_10x6_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-hoop-_ca646a7e",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 12x6.5",
+      "id": "canopus_the-maple_the-maple-12x6-5_12x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-h_625807fe",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 13x6.5",
+      "id": "canopus_the-maple_the-maple-13x6-5_13x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_c5d6734d",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x4",
+      "id": "canopus_the-maple_the-maple-14x4_14x4_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_264edc8c",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x5.5",
+      "id": "canopus_the-maple_the-maple-14x5-5_14x5-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_8ad3dcc0",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x6.5",
+      "id": "canopus_the-maple_the-maple-14x6-5_14x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_a60ce85c",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x8",
+      "id": "canopus_the-maple_the-maple-14x8_14x8_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_e7f518b8",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Type-R",
+      "modelName": "Type-R 3mm Brass Magnum 14x6.5",
+      "id": "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Type-R",
+      "modelName": "Type-R Maple 14x5.5",
+      "id": "canopus_type-r_type-r-maple-14x5-5_14x5-5_ply_maple_1f9bcdc4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Type-R",
+      "modelName": "Type-R Maple 14x6.5",
+      "id": "canopus_type-r_type-r-maple-14x6-5_14x6-5_ply_maple_74141835",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "YAIBA II Birch",
+      "modelName": "YAIBA II Birch 14x5.5",
+      "id": "canopus_yaiba-ii-birch_yaiba-ii-birch-14x5-5_14x5-5_ply_birch_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsb-1455_ea39a253",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "YAIBA II Birch",
+      "modelName": "YAIBA II Birch 14x6.5",
+      "id": "canopus_yaiba-ii-birch_yaiba-ii-birch-14x6-5_14x6-5_ply_birch_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsb-1465_74386dba",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "YAIBA II Maple",
+      "modelName": "YAIBA II Maple 14x5.5",
+      "id": "canopus_yaiba-ii-maple_yaiba-ii-maple-14x5-5_14x5-5_ply_maple_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsm-1455_19d8ea83",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "YAIBA II Maple",
+      "modelName": "YAIBA II Maple 14x6.5",
+      "id": "canopus_yaiba-ii-maple_yaiba-ii-maple-14x6-5_14x6-5_ply_maple_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsm-1465_a9c3478f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova",
+      "modelName": "Zelkova 14x5",
+      "id": "canopus_zelkova_zelkova-14x5_14x5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1450_edd9ca5c",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova",
+      "modelName": "Zelkova 14x6.5",
+      "id": "canopus_zelkova_zelkova-14x6-5_14x6-5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1465_b4533a82",
+      "failedCoreFields": [
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "modelName": "Zelkova GINRAN",
+      "id": "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    }
+  ],
+  "stockRecords": []
+}
