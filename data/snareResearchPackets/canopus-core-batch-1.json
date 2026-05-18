@@ -1,0 +1,128 @@
+{
+  "company": "Canopus",
+  "generatedAt": "2026-05-18T06:00:37.371Z",
+  "batch": "canopus-core-batch-1",
+  "records": [
+    {
+      "priority": "high",
+      "companyName": "Canopus",
+      "lineSeries": "Others",
+      "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+      "id": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Canopus",
+      "lineSeries": "R.O.F PROJECT",
+      "modelName": "R.O.F Project Snare Drum",
+      "id": "canopus_r-o-f-project_r-o-f-project-snare-drum_14x6-5_other-needs-research_0c72185e",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Oak",
+      "modelName": "1ply Oak 14x5.5",
+      "id": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Oak",
+      "modelName": "1ply Oak 14x6.5",
+      "id": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Soft Maple",
+      "modelName": "1ply Soft Maple 14x5.5",
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x5-5_14x5-5_steam-bent_maple_cd277bcc",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "1ply Soft Maple",
+      "modelName": "1ply Soft Maple 14x6.5",
+      "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x6-5_14x6-5_steam-bent_maple_172ecd37",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Aluminum Alloy",
+      "modelName": "Aluminum Alloy 14x6",
+      "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Ash",
+      "modelName": "Ash Snare 14x5.5",
+      "id": "canopus_ash_ash-snare-14x5-5_14x5-5_ply_ash_6063989f",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Ash",
+      "modelName": "Ash Snare 14x6.5",
+      "id": "canopus_ash_ash-snare-14x6-5_14x6-5_ply_ash_9873ec99",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Canopus",
+      "lineSeries": "Birch",
+      "modelName": "Birch Snare 14x5.5",
+      "id": "canopus_birch_birch-snare-14x5-5_14x5-5_ply_birch_a4ab4332",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    }
+  ]
+}
