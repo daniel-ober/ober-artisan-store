@@ -1,0 +1,405 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x5-5_14x5-5_steam-bent_ash_3b033b85",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Ash 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x6-5_14x6-5_steam-bent_ash_5cc2ff34",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Ash 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x5-5_14x5-5_steam-bent_cherry_13d41aa3",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Cherry 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x6-5_14x6-5_steam-bent_cherry_f14ec73e",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-mahogany-14x5-5_14x5-5_steam-bent_mahogany_43aede89",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-mahogany-14x6-5_14x6-5_steam-bent_mahogany_20e476c7",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-maple-14x5-5_14x5-5_steam-bent_maple_1b8cc0aa",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-maple-14x6-5_14x6-5_steam-bent_maple_cb66f81f",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-oak-14x5-5_14x5-5_steam-bent_oak_3c99065c",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Oak 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-oak-14x6-5_14x6-5_steam-bent_oak_95cd944b",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-walnut-14x5-5_14x5-5_steam-bent_walnut_c241c44b",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Walnut 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-walnut-14x6-5_14x6-5_steam-bent_walnut_72c87ee3",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x5-5_14x5-5_steam-bent_ash_3b033b85",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Ash 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x6-5_14x6-5_steam-bent_ash_5cc2ff34",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Ash 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x5-5_14x5-5_steam-bent_cherry_13d41aa3",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Cherry 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x6-5_14x6-5_steam-bent_cherry_f14ec73e",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-mahogany-14x5-5_14x5-5_steam-bent_mahogany_43aede89",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-mahogany-14x6-5_14x6-5_steam-bent_mahogany_20e476c7",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-maple-14x5-5_14x5-5_steam-bent_maple_1b8cc0aa",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-maple-14x6-5_14x6-5_steam-bent_maple_cb66f81f",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-oak-14x5-5_14x5-5_steam-bent_oak_3c99065c",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Oak 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-oak-14x6-5_14x6-5_steam-bent_oak_95cd944b",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-walnut-14x5-5_14x5-5_steam-bent_walnut_c241c44b",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Walnut 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-walnut-14x6-5_14x6-5_steam-bent_walnut_72c87ee3",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x5-5_14x5-5_steam-bent_ash_3b033b85",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Ash 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x6-5_14x6-5_steam-bent_ash_5cc2ff34",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Ash 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x5-5_14x5-5_steam-bent_cherry_13d41aa3",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Cherry 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x6-5_14x6-5_steam-bent_cherry_f14ec73e",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Cherry 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-mahogany-14x5-5_14x5-5_steam-bent_mahogany_43aede89",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-mahogany-14x6-5_14x6-5_steam-bent_mahogany_20e476c7",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-maple-14x5-5_14x5-5_steam-bent_maple_1b8cc0aa",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-maple-14x6-5_14x6-5_steam-bent_maple_cb66f81f",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-oak-14x5-5_14x5-5_steam-bent_oak_3c99065c",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Oak 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-oak-14x6-5_14x6-5_steam-bent_oak_95cd944b",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-walnut-14x5-5_14x5-5_steam-bent_walnut_c241c44b",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Walnut 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-walnut-14x6-5_14x6-5_steam-bent_walnut_72c87ee3",
+      "companyName": "Brooks Drum Co.",
+      "modelName": "Steam-Bent Solid Shell Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

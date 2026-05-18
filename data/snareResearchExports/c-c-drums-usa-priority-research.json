@@ -1,0 +1,155 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "candc-drums-usa_custom-drums_custom-7-ply-mahogany-14x6-5_14x6-5_acrylic_mahogany_customer-selected-bearing-edge_861b3e9b",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom 7 Ply Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-7-ply-maple-14x6-5_14x6-5_acrylic_maple_customer-selected-bearing-edge_d88bc2ee",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom 7 Ply Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-acrylic-14x6-5_14x6-5_acrylic_acrylic_customer-selected-bearing-edge_f58e8692",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-luan-6-and-6-14x6-5_14x6-5_acrylic_luan_customer-selected-bearing-edge_ca8709ec",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Luan 6 & 6 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-maple-mahogany-maple-14x6-5_14x6-5_acrylic_maple_mahogany_maple_customer-selected-be_7c224be2",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Maple/Mahogany/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-maple-poplar-maple-14x6-5_14x6-5_acrylic_maple_poplar_maple_customer-selected-bearin_e339300b",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Maple/Poplar/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [],
+  "snareBedType": [
+    {
+      "id": "candc-drums-usa_custom-drums_custom-7-ply-mahogany-14x6-5_14x6-5_acrylic_mahogany_customer-selected-bearing-edge_861b3e9b",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom 7 Ply Mahogany 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-7-ply-maple-14x6-5_14x6-5_acrylic_maple_customer-selected-bearing-edge_d88bc2ee",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom 7 Ply Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-acrylic-14x6-5_14x6-5_acrylic_acrylic_customer-selected-bearing-edge_f58e8692",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Acrylic 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-luan-6-and-6-14x6-5_14x6-5_acrylic_luan_customer-selected-bearing-edge_ca8709ec",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Luan 6 & 6 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-maple-mahogany-maple-14x6-5_14x6-5_acrylic_maple_mahogany_maple_customer-selected-be_7c224be2",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Maple/Mahogany/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_custom-drums_custom-maple-poplar-maple-14x6-5_14x6-5_acrylic_maple_poplar_maple_customer-selected-bearin_e339300b",
+      "companyName": "C&C Drums USA",
+      "modelName": "Custom Maple/Poplar/Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-mahogany-poplar-mahogany-14x6-5_14x6-5_ply_mahogany_poplar_mahogany_6_los-an_b47d879c",
+      "companyName": "C&C Drums USA",
+      "modelName": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+      "companyName": "C&C Drums USA",
+      "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-walnut-poplar-walnut-14x6-5_14x6-5_ply_walnut_poplar_walnut_6_los-angeles-be_e6594653",
+      "companyName": "C&C Drums USA",
+      "modelName": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": []
+}

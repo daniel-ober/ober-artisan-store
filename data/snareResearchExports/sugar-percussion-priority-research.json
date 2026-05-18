@@ -1,0 +1,108 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "sugar-percussion_steam-bent-solid_cherry-steam-bent_14x6-5_steam-bent_cherry_562c2c1f",
+      "companyName": "Sugar Percussion",
+      "modelName": "Cherry Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sugar-percussion_steam-bent-solid_maple-steam-bent_14x6-5_steam-bent_maple_5cec70f4",
+      "companyName": "Sugar Percussion",
+      "modelName": "Maple Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sugar-percussion_steam-bent-solid_walnut-steam-bent_14x6-5_steam-bent_walnut_bc9e870a",
+      "companyName": "Sugar Percussion",
+      "modelName": "Walnut Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "sugar-percussion_steam-bent-solid_cherry-steam-bent_14x6-5_steam-bent_cherry_562c2c1f",
+      "companyName": "Sugar Percussion",
+      "modelName": "Cherry Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sugar-percussion_steam-bent-solid_maple-steam-bent_14x6-5_steam-bent_maple_5cec70f4",
+      "companyName": "Sugar Percussion",
+      "modelName": "Maple Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sugar-percussion_steam-bent-solid_walnut-steam-bent_14x6-5_steam-bent_walnut_bc9e870a",
+      "companyName": "Sugar Percussion",
+      "modelName": "Walnut Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "sugar-percussion_steam-bent-solid_cherry-steam-bent_14x6-5_steam-bent_cherry_562c2c1f",
+      "companyName": "Sugar Percussion",
+      "modelName": "Cherry Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sugar-percussion_steam-bent-solid_maple-steam-bent_14x6-5_steam-bent_maple_5cec70f4",
+      "companyName": "Sugar Percussion",
+      "modelName": "Maple Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sugar-percussion_steam-bent-solid_walnut-steam-bent_14x6-5_steam-bent_walnut_bc9e870a",
+      "companyName": "Sugar Percussion",
+      "modelName": "Walnut Steam Bent",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

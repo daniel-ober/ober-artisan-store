@@ -1,0 +1,75 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "keplinger_black-iron-stainless_black-iron-14x6-5_14x6-5_metal_steel_0fae9ad0",
+      "companyName": "Keplinger",
+      "modelName": "Black Iron 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "keplinger_black-iron-stainless_stainless-steel-14x6-5_14x6-5_metal_stainless-steel_27a10cc6",
+      "companyName": "Keplinger",
+      "modelName": "Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "keplinger_black-iron-stainless_black-iron-14x6-5_14x6-5_metal_steel_0fae9ad0",
+      "companyName": "Keplinger",
+      "modelName": "Black Iron 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "keplinger_black-iron-stainless_stainless-steel-14x6-5_14x6-5_metal_stainless-steel_27a10cc6",
+      "companyName": "Keplinger",
+      "modelName": "Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "keplinger_black-iron-stainless_black-iron-14x6-5_14x6-5_metal_steel_0fae9ad0",
+      "companyName": "Keplinger",
+      "modelName": "Black Iron 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "keplinger_black-iron-stainless_stainless-steel-14x6-5_14x6-5_metal_stainless-steel_27a10cc6",
+      "companyName": "Keplinger",
+      "modelName": "Stainless Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

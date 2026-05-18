@@ -1,0 +1,1262 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "premier_apk_apk-birch-eucalyptus-birch-14x5-5-snare_14x5-5_ply_birch_eucalyptus_birch_wrap-lacquer_5cba73e2",
+      "companyName": "Premier",
+      "modelName": "APK Birch/Eucalyptus/Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_cabria-exclusive_cabria-exclusive-snare-14x5-5_14x5-5_ply_wood_lacquer_6e484bed",
+      "companyName": "Premier",
+      "modelName": "Cabria Exclusive Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_cabria_cabria-wood-snare-14x5-5_14x5-5_ply_wood_wrap-lacquer_628ec0b8",
+      "companyName": "Premier",
+      "modelName": "Cabria Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_elite_elite-maple-wood-snare-14x5-5_14x5-5_ply_maple_lacquer_ad49371a",
+      "companyName": "Premier",
+      "modelName": "Elite Maple/Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_genista-original_genista-birch-14x5-5-snare_14x5-5_ply_birch_lacquer_1f4fff06",
+      "companyName": "Premier",
+      "modelName": "Genista Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_genista-original_genista-birch-14x6-5-snare_14x6-5_ply_birch_lacquer_e7648a9a",
+      "companyName": "Premier",
+      "modelName": "Genista Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_hr9_heavy-rock-9-hr9-brass-wood-hybrid-snare_14x8_metal_brass_wood_hr9_bac9b53f",
+      "companyName": "Premier",
+      "modelName": "Heavy Rock 9 HR9 Brass/Wood Hybrid Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_hi-fi_hi-fi-wood-snare-14x5-5_14x5-5_ply_birch_wrap-lacquer_hi-fi_998068ce",
+      "companyName": "Premier",
+      "modelName": "Hi-Fi Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_resonator_kenny-clare-resonator-14x5-5-snare_14x5-5_ply-resonator_wood_inner-resonator-shell_lacquer-wrap_2b73ef27",
+      "companyName": "Premier",
+      "modelName": "Kenny Clare Resonator 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signature-artist_kenny-clare-resonator-signature-14x5-5-snare_14x5-5_ply-resonator_wood_inner-resonator-shell_la_3ed334f2",
+      "companyName": "Premier",
+      "modelName": "Kenny Clare Resonator Signature 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_modern-classic_modern-classic-maple-13x7-snare_13x7_ply_maple_aa81bf5f",
+      "companyName": "Premier",
+      "modelName": "Modern Classic Maple 13x7 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_modern-classic_modern-classic-maple-14x4-snare_14x4_ply_maple_2653_d2e5c930",
+      "companyName": "Premier",
+      "modelName": "Modern Classic Maple 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signature-artist_nicko-mcbrain-aces-high-14x5-5-snare_14x5-5_other-needs-research_wood_graphic-wrap-aces-high_ad8cccef",
+      "companyName": "Premier",
+      "modelName": "Nicko McBrain Aces High 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_olympic_olympic-by-premier-wood-snare-14x5-5_14x5-5_ply_wood_wrap_olympic_9fc7635f",
+      "companyName": "Premier",
+      "modelName": "Olympic by Premier Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_limited-centenary_premier-100th-anniversary-snare-14x5-5_14x5-5_ply_birch_centenary-finish_f7dc9183",
+      "companyName": "Premier",
+      "modelName": "Premier 100th Anniversary Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_premier-series_premier-series-maple-snare-14x5-5_14x5-5_ply_maple_lacquer_1f12a044",
+      "companyName": "Premier",
+      "modelName": "Premier Series Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_projector_projector-birch-14x6-5-snare_14x6-5_ply_birch_lacquer_20573130",
+      "companyName": "Premier",
+      "modelName": "Projector Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_revolution_revolution-snare-14x5-5_14x5-5_ply_poplar_wrap_97f7758e",
+      "companyName": "Premier",
+      "modelName": "Revolution Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signia_signia-maple-14x5-5-snare_14x5-5_ply_maple_lacquer_d4a2bf3f",
+      "companyName": "Premier",
+      "modelName": "Signia Maple 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signia_signia-marquis-maple-14x5-5-snare_14x5-5_ply_maple_lacquer_c8f41934",
+      "companyName": "Premier",
+      "modelName": "Signia Marquis Maple 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_club-student_student-wood-snare-14x5-5_14x5-5_ply_wood_wrap_d818ea90",
+      "companyName": "Premier",
+      "modelName": "Student Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_xpk_xpk-birch-eucalyptus-birch-14x6-5-snare_14x6-5_ply_birch_eucalyptus_birch_lacquer_2065_2238fe85",
+      "companyName": "Premier",
+      "modelName": "XPK Birch/Eucalyptus/Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_marching_12-lug-marching-chrome-snare_14x10_metal_steel_marching-snare-bed-unknown_chrome_marching-hoops-unknown_4f7db6c3",
+      "companyName": "Premier",
+      "modelName": "12-Lug Marching Chrome Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "priorityScore": 10
+    },
+    {
+      "id": "premier_concert-orchestral_concert-wood-snare-14x5-5_14x5-5_ply_birch_orchestral-snare-bed-unknown_wrap-lacquer_8d878219",
+      "companyName": "Premier",
+      "modelName": "Concert Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "priorityScore": 10
+    },
+    {
+      "id": "premier_model-35_35-wood-snare-14x5-5_14x5-5_ply_birch_vintage-rounded-unknown_wrap_35_6e9cfee7",
+      "companyName": "Premier",
+      "modelName": "35 Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_artist_artist-brushed-aluminium-14x5-5-snare_14x5-5_metal_aluminum_formed-metal-bearing-edge_brushed-aluminium_1_d94806c8",
+      "companyName": "Premier",
+      "modelName": "Artist Brushed Aluminium 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_artist_artist-chrome-over-steel-14x5-5-snare_14x5-5_metal_steel_formed-metal-bearing-edge_chrome-over-steel_1-5m_bcb8f89d",
+      "companyName": "Premier",
+      "modelName": "Artist Chrome over Steel 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_dominion-ace_dominion-ace-wood-14x5-5_14x5-5_ply_birch_vintage-rounded-unknown_wrap_dominion-ace_ee25c13a",
+      "companyName": "Premier",
+      "modelName": "Dominion Ace Wood 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_gen-x_gen-x-hybrid-maple-birch-14x5-5-snare_14x5-5_ply_maple_birch_45-degree-unknown_lacquer_530683c6",
+      "companyName": "Premier",
+      "modelName": "Gen-X Hybrid Maple/Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_gen-x_gen-x-hybrid-maple-birch-14x6-5-snare_14x6-5_ply_maple_birch_45-degree-unknown_lacquer_5bfef194",
+      "companyName": "Premier",
+      "modelName": "Gen-X Hybrid Maple/Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_dominion-ace_premier-dominion-ace-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_domini_2241895e",
+      "companyName": "Premier",
+      "modelName": "Premier Dominion Ace Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_dominion-ace_premier-dominion-ace-piccolo-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_dominio_faafaaea",
+      "companyName": "Premier",
+      "modelName": "Premier Dominion Ace Piccolo 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_hi-fi_premier-hi-fi-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_hi-fi-deep_c12624b6",
+      "companyName": "Premier",
+      "modelName": "Premier Hi-Fi Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_hi-fi_premier-hi-fi-piccolo-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_hi-fi-piccolo_5034b614",
+      "companyName": "Premier",
+      "modelName": "Premier Hi-Fi Piccolo 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_royal-ace_premier-royal-ace-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_royal-ace-de_59cc4761",
+      "companyName": "Premier",
+      "modelName": "Premier Royal Ace Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_royal-ace_premier-royal-ace-piccolo-concert-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_royal_69413039",
+      "companyName": "Premier",
+      "modelName": "Premier Royal Ace Piccolo/Concert 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_super-ace_premier-super-ace-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_super-ace-de_dbcd04a5",
+      "companyName": "Premier",
+      "modelName": "Premier Super Ace Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_super-ace_premier-super-ace-piccolo-concert-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_super_d7be39c8",
+      "companyName": "Premier",
+      "modelName": "Premier Super Ace Piccolo/Concert 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_model-2000_2000-chrome-over-aluminium-14x5-snare_14x5_metal_aluminum_formed-metal-edge_parallel-snare-mechanism-_dbfa28b5",
+      "companyName": "Premier",
+      "modelName": "2000 Chrome over Aluminium 14x5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000_2000-chrome-over-aluminium-14x5-5-snare_14x5-5_metal_aluminum_formed-metal-edge_parallel-snare-mechan_bbbd8a5b",
+      "companyName": "Premier",
+      "modelName": "2000 Chrome over Aluminium 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2001_2001-chrome-over-brass-metal-14x5-snare_14x5_metal_brass_formed-metal-edge_parallel-snare-mechanism_c_21f444e1",
+      "companyName": "Premier",
+      "modelName": "2001 Chrome over Brass/Metal 14x5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2002_2002-metal-snare-14x6-5_14x6-5_metal_unknown-metal_formed-metal-edge_parallel-snare-mechanism_chrome__63372f54",
+      "companyName": "Premier",
+      "modelName": "2002 Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2003_2003-metal-snare-14x8_14x8_metal_unknown-metal_formed-metal-edge_parallel-snare-mechanism_chrome_2003_f7876d21",
+      "companyName": "Premier",
+      "modelName": "2003 Metal Snare 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000-metal-variants_premier-chrome-over-brass-14x5-snare_14x5_metal_chrome-over-brass_formed-metal-edge_un_562d6820",
+      "companyName": "Premier",
+      "modelName": "Premier Chrome over Brass 14x5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000-metal-variants_premier-chrome-over-brass-14x5-5-snare_14x5-5_metal_chrome-over-brass_formed-metal-edg_cd252d7c",
+      "companyName": "Premier",
+      "modelName": "Premier Chrome over Brass 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000-metal-variants_premier-chrome-over-brass-14x6-5-snare_14x6-5_metal_chrome-over-brass_formed-metal-edg_73c99e59",
+      "companyName": "Premier",
+      "modelName": "Premier Chrome over Brass 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000-metal-variants_premier-chrome-over-steel-14x5-snare_14x5_metal_steel_formed-metal-edge_unknown-parall_29039f96",
+      "companyName": "Premier",
+      "modelName": "Premier Chrome over Steel 14x5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000-metal-variants_premier-chrome-over-steel-14x5-5-snare_14x5-5_metal_steel_formed-metal-edge_unknown-pa_389f121f",
+      "companyName": "Premier",
+      "modelName": "Premier Chrome over Steel 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_model-2000-metal-variants_premier-chrome-over-steel-14x6-5-snare_14x6-5_metal_steel_formed-metal-edge_unknown-pa_fc6c18e4",
+      "companyName": "Premier",
+      "modelName": "Premier Chrome over Steel 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_royal-ace_royal-ace-wood-14x5-5-snare_14x5-5_ply_birch_beech_unknown-vintage-rounded_parallel-snare-bed-system_w_73d92569",
+      "companyName": "Premier",
+      "modelName": "Royal Ace Wood 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "premier_super-ace_super-ace-wood-14x5-5-snare_14x5-5_ply_birch_beech_unknown-vintage-rounded_parallel-snare-bed-system_w_ffd6b8b4",
+      "companyName": "Premier",
+      "modelName": "Super Ace Wood 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "premier_apk_apk-birch-eucalyptus-birch-14x5-5-snare_14x5-5_ply_birch_eucalyptus_birch_wrap-lacquer_5cba73e2",
+      "companyName": "Premier",
+      "modelName": "APK Birch/Eucalyptus/Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_cabria-exclusive_cabria-exclusive-snare-14x5-5_14x5-5_ply_wood_lacquer_6e484bed",
+      "companyName": "Premier",
+      "modelName": "Cabria Exclusive Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_cabria_cabria-wood-snare-14x5-5_14x5-5_ply_wood_wrap-lacquer_628ec0b8",
+      "companyName": "Premier",
+      "modelName": "Cabria Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_elite_elite-maple-wood-snare-14x5-5_14x5-5_ply_maple_lacquer_ad49371a",
+      "companyName": "Premier",
+      "modelName": "Elite Maple/Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_genista-original_genista-birch-14x5-5-snare_14x5-5_ply_birch_lacquer_1f4fff06",
+      "companyName": "Premier",
+      "modelName": "Genista Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_genista-original_genista-birch-14x6-5-snare_14x6-5_ply_birch_lacquer_e7648a9a",
+      "companyName": "Premier",
+      "modelName": "Genista Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_hr9_heavy-rock-9-hr9-brass-wood-hybrid-snare_14x8_metal_brass_wood_hr9_bac9b53f",
+      "companyName": "Premier",
+      "modelName": "Heavy Rock 9 HR9 Brass/Wood Hybrid Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_hi-fi_hi-fi-wood-snare-14x5-5_14x5-5_ply_birch_wrap-lacquer_hi-fi_998068ce",
+      "companyName": "Premier",
+      "modelName": "Hi-Fi Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_resonator_kenny-clare-resonator-14x5-5-snare_14x5-5_ply-resonator_wood_inner-resonator-shell_lacquer-wrap_2b73ef27",
+      "companyName": "Premier",
+      "modelName": "Kenny Clare Resonator 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signature-artist_kenny-clare-resonator-signature-14x5-5-snare_14x5-5_ply-resonator_wood_inner-resonator-shell_la_3ed334f2",
+      "companyName": "Premier",
+      "modelName": "Kenny Clare Resonator Signature 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_modern-classic_modern-classic-maple-13x7-snare_13x7_ply_maple_aa81bf5f",
+      "companyName": "Premier",
+      "modelName": "Modern Classic Maple 13x7 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_modern-classic_modern-classic-maple-14x4-snare_14x4_ply_maple_2653_d2e5c930",
+      "companyName": "Premier",
+      "modelName": "Modern Classic Maple 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signature-artist_nicko-mcbrain-aces-high-14x5-5-snare_14x5-5_other-needs-research_wood_graphic-wrap-aces-high_ad8cccef",
+      "companyName": "Premier",
+      "modelName": "Nicko McBrain Aces High 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_olympic_olympic-by-premier-wood-snare-14x5-5_14x5-5_ply_wood_wrap_olympic_9fc7635f",
+      "companyName": "Premier",
+      "modelName": "Olympic by Premier Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_limited-centenary_premier-100th-anniversary-snare-14x5-5_14x5-5_ply_birch_centenary-finish_f7dc9183",
+      "companyName": "Premier",
+      "modelName": "Premier 100th Anniversary Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_premier-series_premier-series-maple-snare-14x5-5_14x5-5_ply_maple_lacquer_1f12a044",
+      "companyName": "Premier",
+      "modelName": "Premier Series Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_projector_projector-birch-14x6-5-snare_14x6-5_ply_birch_lacquer_20573130",
+      "companyName": "Premier",
+      "modelName": "Projector Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_revolution_revolution-snare-14x5-5_14x5-5_ply_poplar_wrap_97f7758e",
+      "companyName": "Premier",
+      "modelName": "Revolution Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signia_signia-maple-14x5-5-snare_14x5-5_ply_maple_lacquer_d4a2bf3f",
+      "companyName": "Premier",
+      "modelName": "Signia Maple 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signia_signia-marquis-maple-14x5-5-snare_14x5-5_ply_maple_lacquer_c8f41934",
+      "companyName": "Premier",
+      "modelName": "Signia Marquis Maple 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_club-student_student-wood-snare-14x5-5_14x5-5_ply_wood_wrap_d818ea90",
+      "companyName": "Premier",
+      "modelName": "Student Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_xpk_xpk-birch-eucalyptus-birch-14x6-5-snare_14x6-5_ply_birch_eucalyptus_birch_lacquer_2065_2238fe85",
+      "companyName": "Premier",
+      "modelName": "XPK Birch/Eucalyptus/Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_marching_12-lug-marching-chrome-snare_14x10_metal_steel_marching-snare-bed-unknown_chrome_marching-hoops-unknown_4f7db6c3",
+      "companyName": "Premier",
+      "modelName": "12-Lug Marching Chrome Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "priorityScore": 10
+    },
+    {
+      "id": "premier_concert-orchestral_concert-wood-snare-14x5-5_14x5-5_ply_birch_orchestral-snare-bed-unknown_wrap-lacquer_8d878219",
+      "companyName": "Premier",
+      "modelName": "Concert Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "priorityScore": 10
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "premier_apk_apk-birch-eucalyptus-birch-14x5-5-snare_14x5-5_ply_birch_eucalyptus_birch_wrap-lacquer_5cba73e2",
+      "companyName": "Premier",
+      "modelName": "APK Birch/Eucalyptus/Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_cabria-exclusive_cabria-exclusive-snare-14x5-5_14x5-5_ply_wood_lacquer_6e484bed",
+      "companyName": "Premier",
+      "modelName": "Cabria Exclusive Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_cabria_cabria-wood-snare-14x5-5_14x5-5_ply_wood_wrap-lacquer_628ec0b8",
+      "companyName": "Premier",
+      "modelName": "Cabria Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_elite_elite-maple-wood-snare-14x5-5_14x5-5_ply_maple_lacquer_ad49371a",
+      "companyName": "Premier",
+      "modelName": "Elite Maple/Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_genista-original_genista-birch-14x5-5-snare_14x5-5_ply_birch_lacquer_1f4fff06",
+      "companyName": "Premier",
+      "modelName": "Genista Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_genista-original_genista-birch-14x6-5-snare_14x6-5_ply_birch_lacquer_e7648a9a",
+      "companyName": "Premier",
+      "modelName": "Genista Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_hr9_heavy-rock-9-hr9-brass-wood-hybrid-snare_14x8_metal_brass_wood_hr9_bac9b53f",
+      "companyName": "Premier",
+      "modelName": "Heavy Rock 9 HR9 Brass/Wood Hybrid Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_hi-fi_hi-fi-wood-snare-14x5-5_14x5-5_ply_birch_wrap-lacquer_hi-fi_998068ce",
+      "companyName": "Premier",
+      "modelName": "Hi-Fi Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_resonator_kenny-clare-resonator-14x5-5-snare_14x5-5_ply-resonator_wood_inner-resonator-shell_lacquer-wrap_2b73ef27",
+      "companyName": "Premier",
+      "modelName": "Kenny Clare Resonator 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signature-artist_kenny-clare-resonator-signature-14x5-5-snare_14x5-5_ply-resonator_wood_inner-resonator-shell_la_3ed334f2",
+      "companyName": "Premier",
+      "modelName": "Kenny Clare Resonator Signature 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_modern-classic_modern-classic-maple-13x7-snare_13x7_ply_maple_aa81bf5f",
+      "companyName": "Premier",
+      "modelName": "Modern Classic Maple 13x7 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_modern-classic_modern-classic-maple-14x4-snare_14x4_ply_maple_2653_d2e5c930",
+      "companyName": "Premier",
+      "modelName": "Modern Classic Maple 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signature-artist_nicko-mcbrain-aces-high-14x5-5-snare_14x5-5_other-needs-research_wood_graphic-wrap-aces-high_ad8cccef",
+      "companyName": "Premier",
+      "modelName": "Nicko McBrain Aces High 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_olympic_olympic-by-premier-wood-snare-14x5-5_14x5-5_ply_wood_wrap_olympic_9fc7635f",
+      "companyName": "Premier",
+      "modelName": "Olympic by Premier Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_limited-centenary_premier-100th-anniversary-snare-14x5-5_14x5-5_ply_birch_centenary-finish_f7dc9183",
+      "companyName": "Premier",
+      "modelName": "Premier 100th Anniversary Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_premier-series_premier-series-maple-snare-14x5-5_14x5-5_ply_maple_lacquer_1f12a044",
+      "companyName": "Premier",
+      "modelName": "Premier Series Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_projector_projector-birch-14x6-5-snare_14x6-5_ply_birch_lacquer_20573130",
+      "companyName": "Premier",
+      "modelName": "Projector Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_revolution_revolution-snare-14x5-5_14x5-5_ply_poplar_wrap_97f7758e",
+      "companyName": "Premier",
+      "modelName": "Revolution Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signia_signia-maple-14x5-5-snare_14x5-5_ply_maple_lacquer_d4a2bf3f",
+      "companyName": "Premier",
+      "modelName": "Signia Maple 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_signia_signia-marquis-maple-14x5-5-snare_14x5-5_ply_maple_lacquer_c8f41934",
+      "companyName": "Premier",
+      "modelName": "Signia Marquis Maple 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_club-student_student-wood-snare-14x5-5_14x5-5_ply_wood_wrap_d818ea90",
+      "companyName": "Premier",
+      "modelName": "Student Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_xpk_xpk-birch-eucalyptus-birch-14x6-5-snare_14x6-5_ply_birch_eucalyptus_birch_lacquer_2065_2238fe85",
+      "companyName": "Premier",
+      "modelName": "XPK Birch/Eucalyptus/Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "premier_model-35_35-wood-snare-14x5-5_14x5-5_ply_birch_vintage-rounded-unknown_wrap_35_6e9cfee7",
+      "companyName": "Premier",
+      "modelName": "35 Wood Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_artist_artist-brushed-aluminium-14x5-5-snare_14x5-5_metal_aluminum_formed-metal-bearing-edge_brushed-aluminium_1_d94806c8",
+      "companyName": "Premier",
+      "modelName": "Artist Brushed Aluminium 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_artist_artist-chrome-over-steel-14x5-5-snare_14x5-5_metal_steel_formed-metal-bearing-edge_chrome-over-steel_1-5m_bcb8f89d",
+      "companyName": "Premier",
+      "modelName": "Artist Chrome over Steel 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_dominion-ace_dominion-ace-wood-14x5-5_14x5-5_ply_birch_vintage-rounded-unknown_wrap_dominion-ace_ee25c13a",
+      "companyName": "Premier",
+      "modelName": "Dominion Ace Wood 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_gen-x_gen-x-hybrid-maple-birch-14x5-5-snare_14x5-5_ply_maple_birch_45-degree-unknown_lacquer_530683c6",
+      "companyName": "Premier",
+      "modelName": "Gen-X Hybrid Maple/Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_gen-x_gen-x-hybrid-maple-birch-14x6-5-snare_14x6-5_ply_maple_birch_45-degree-unknown_lacquer_5bfef194",
+      "companyName": "Premier",
+      "modelName": "Gen-X Hybrid Maple/Birch 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_dominion-ace_premier-dominion-ace-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_domini_2241895e",
+      "companyName": "Premier",
+      "modelName": "Premier Dominion Ace Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_dominion-ace_premier-dominion-ace-piccolo-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_dominio_faafaaea",
+      "companyName": "Premier",
+      "modelName": "Premier Dominion Ace Piccolo 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_hi-fi_premier-hi-fi-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_hi-fi-deep_c12624b6",
+      "companyName": "Premier",
+      "modelName": "Premier Hi-Fi Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_hi-fi_premier-hi-fi-piccolo-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_hi-fi-piccolo_5034b614",
+      "companyName": "Premier",
+      "modelName": "Premier Hi-Fi Piccolo 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_royal-ace_premier-royal-ace-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_royal-ace-de_59cc4761",
+      "companyName": "Premier",
+      "modelName": "Premier Royal Ace Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_royal-ace_premier-royal-ace-piccolo-concert-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_royal_69413039",
+      "companyName": "Premier",
+      "modelName": "Premier Royal Ace Piccolo/Concert 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_super-ace_premier-super-ace-deep-14x6-5-snare_14x6-5_ply_birch_vintage-rounded-unknown_wrap-lacquer_super-ace-de_dbcd04a5",
+      "companyName": "Premier",
+      "modelName": "Premier Super Ace Deep 14x6.5 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_super-ace_premier-super-ace-piccolo-concert-14x4-snare_14x4_ply_birch_vintage-rounded-unknown_wrap-lacquer_super_d7be39c8",
+      "companyName": "Premier",
+      "modelName": "Premier Super Ace Piccolo/Concert 14x4 Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-10x5-snare_10x5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_eaf4e752",
+      "companyName": "Premier",
+      "modelName": "Artist Birch/Ash 10x5 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-12x5-snare_12x5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_fef7b125",
+      "companyName": "Premier",
+      "modelName": "Artist Birch/Ash 12x5 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-13x6-snare_13x6_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_f142840d",
+      "companyName": "Premier",
+      "modelName": "Artist Birch/Ash 13x6 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x5-5-snare_14x5-5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_cafd8e48",
+      "companyName": "Premier",
+      "modelName": "Artist Birch/Ash 14x5.5 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x6-5-snare_14x6-5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_3c97fcf8",
+      "companyName": "Premier",
+      "modelName": "Artist Birch/Ash 14x6.5 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x8-snare_14x8_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_19bc5d91",
+      "companyName": "Premier",
+      "modelName": "Artist Birch/Ash 14x8 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_centenary-limited_della-porta-100-walnut-14x6-5-snare_14x6-5_ply_walnut_beech_5_30-degree-round-over_centenary-f_cb595ab7",
+      "companyName": "Premier",
+      "modelName": "Della-Porta 100 Walnut 14x6.5 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-100se-birch-14x5-5-snare_14x5-5_ply_birch_5-6_45-degree-precision-cut_tri-band-l_53591100",
+      "companyName": "Premier",
+      "modelName": "Genista Classic 100SE Birch 14x5.5 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-birch-5-5x14-snare_14x5-5_ply_birch_5-6_45-degree-precision-cut_lacquer-sparkle-_4f6da1e7",
+      "companyName": "Premier",
+      "modelName": "Genista Classic Birch 5.5x14 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-birch-6-5x14-snare_14x6-5_ply_birch_5-6_45-degree-precision-cut_lacquer-sparkle-_0d12aecb",
+      "companyName": "Premier",
+      "modelName": "Genista Classic Birch 6.5x14 Snare",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": []
+}

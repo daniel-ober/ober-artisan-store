@@ -1,0 +1,1624 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "sonor_artist-signature_benny-greb-signature-brass-13x5-75_13x5-75_metal_brass_2-3mm-triple-flanged-hoops_a540bf3a",
+      "companyName": "SONOR",
+      "modelName": "Benny Greb Signature Brass 13x5.75",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_champion_champion-rosewood-14x5_14x5_ply_wood_die-cast-hoops_c5c3435a",
+      "companyName": "SONOR",
+      "modelName": "Champion Rosewood 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_champion_champion-rosewood-14x6-5_14x6-5_ply_wood_die-cast-hoops_209eeae7",
+      "companyName": "SONOR",
+      "modelName": "Champion Rosewood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_danny-carey-signature-bronze-14x8_14x8_metal_bronze_die-cast-hoops_0c8eaf0a",
+      "companyName": "SONOR",
+      "modelName": "Danny Carey Signature Bronze 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_force-1007_force-1007-basswood-poplar-14x5-5_14x5-5_ply_poplar_triple-flanged-hoops_8877d818",
+      "companyName": "SONOR",
+      "modelName": "Force 1007 Basswood/Poplar 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_steel-snare_force-steel-14x5-5_14x5-5_metal_steel_triple-flanged-hoops_e5561f76",
+      "companyName": "SONOR",
+      "modelName": "Force Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_steel-snare_force-steel-14x6-5_14x6-5_metal_steel_triple-flanged-hoops_74beb1c4",
+      "companyName": "SONOR",
+      "modelName": "Force Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_gavin-harrison-protean-12x5_12x5_ply_birch_die-cast-hoops_60b976d7",
+      "companyName": "SONOR",
+      "modelName": "Gavin Harrison Protean 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_gavin-harrison-protean-14x5-25_14x5-25_ply_birch_die-cast-hoops_f831b819",
+      "companyName": "SONOR",
+      "modelName": "Gavin Harrison Protean 14x5.25",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_horst-link-signature-ferromanganese-14x6-5_14x6-5_metal_steel_die-cast-hoops_192fa06f",
+      "companyName": "SONOR",
+      "modelName": "Horst Link Signature Ferromanganese 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_jojo-mayer-signature-13x7_13x7_ply_maple_die-cast-hoops_63e2a739",
+      "companyName": "SONOR",
+      "modelName": "Jojo Mayer Signature 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_special-edition_jungle-snare-10x2_10x2_ply_maple_triple-flanged-hoops_1dc8783c",
+      "companyName": "SONOR",
+      "modelName": "Jungle Snare 10x2",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_special-edition_jungle-snare-12x5_12x5_ply_maple_triple-flanged-hoops_35d21d92",
+      "companyName": "SONOR",
+      "modelName": "Jungle Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_phil-rudd-signature-14x5_14x5_ply_beech_die-cast-hoops_514f2458",
+      "companyName": "SONOR",
+      "modelName": "Phil Rudd Signature 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic_phonic-beech-d-505-14x5_14x5_ply_beech_die-cast-hoops_d-505_8106959e",
+      "companyName": "SONOR",
+      "modelName": "Phonic Beech D-505 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic_phonic-beech-d-506-14x6-5_14x6-5_ply_beech_die-cast-hoops_d-506_fa4fd99c",
+      "companyName": "SONOR",
+      "modelName": "Phonic Beech D-506 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic-plus_phonic-plus-beech-14x8_14x8_ply_beech_die-cast-hoops_8ef965ae",
+      "companyName": "SONOR",
+      "modelName": "Phonic Plus Beech 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-582-ferromanganese-14x6-5_14x6-5_metal_steel_die-cast-hoops_hld-582_dc6896d8",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 582 Ferromanganese 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-588-beech-14x8_14x8_ply_beech_die-cast-hoops_hld-588_c19d8827",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 588 Beech 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_steve-smith-signature-14x5-5_14x5-5_ply_maple_die-cast-hoops_6b1599b7",
+      "companyName": "SONOR",
+      "modelName": "Steve Smith Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_aq1_aq1-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_aq1-1405_537ef02e",
+      "companyName": "SONOR",
+      "modelName": "AQ1 Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_delite_delite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_dl-1405_7a8db104",
+      "companyName": "SONOR",
+      "modelName": "Delite Maple 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_delite_delite-maple-14x6_14x6_ply_maple_45-bearing-edge_die-cast-hoops_dl-1406_9c2c56db",
+      "companyName": "SONOR",
+      "modelName": "Delite Maple 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_delite_delite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_dl-14065_41388ded",
+      "companyName": "SONOR",
+      "modelName": "Delite Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_designer_designer-maple-heavy-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-mh_b35252c4",
+      "companyName": "SONOR",
+      "modelName": "Designer Maple Heavy 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_designer_designer-maple-light-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1405-ml_cd502414",
+      "companyName": "SONOR",
+      "modelName": "Designer Maple Light 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_designer_designer-maple-light-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-ml_1a7a0f66",
+      "companyName": "SONOR",
+      "modelName": "Designer Maple Light 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_essential-force_essential-force-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_455cf7ea",
+      "companyName": "SONOR",
+      "modelName": "Essential Force Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-2005_force-2005-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_49d52773",
+      "companyName": "SONOR",
+      "modelName": "Force 2005 Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-2007_force-2007-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_d558f0e8",
+      "companyName": "SONOR",
+      "modelName": "Force 2007 Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-3005_force-3005-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_e6254a81",
+      "companyName": "SONOR",
+      "modelName": "Force 3005 Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-3007_force-3007-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_3dccb9b3",
+      "companyName": "SONOR",
+      "modelName": "Force 3007 Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_hilite_hilite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_67b0ea10",
+      "companyName": "SONOR",
+      "modelName": "HiLite Maple 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_hilite_hilite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_63990c6e",
+      "companyName": "SONOR",
+      "modelName": "HiLite Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-class-pro_s-class-pro-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_49cde88b",
+      "companyName": "SONOR",
+      "modelName": "S Class Pro Maple 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-class-pro_s-class-pro-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_d5ee0f37",
+      "companyName": "SONOR",
+      "modelName": "S Class Pro Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-classix_s-classix-birch-14x5_14x5_ply_birch_45-bearing-edge_die-cast-hoops_b60f49d8",
+      "companyName": "SONOR",
+      "modelName": "S-Classix Birch 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-classix_s-classix-birch-14x6-5_14x6-5_ply_birch_45-bearing-edge_die-cast-hoops_ce873095",
+      "companyName": "SONOR",
+      "modelName": "S-Classix Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_select-force_select-force-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_c147c955",
+      "companyName": "SONOR",
+      "modelName": "Select Force Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_teardrop_teardrop-beech-14x5_14x5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_4d70aa9d",
+      "companyName": "SONOR",
+      "modelName": "Teardrop Beech 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_teardrop_teardrop-beech-14x6-5_14x6-5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_c087e502",
+      "companyName": "SONOR",
+      "modelName": "Teardrop Beech 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "sonor_artist-signature_benny-greb-signature-brass-13x5-75_13x5-75_metal_brass_2-3mm-triple-flanged-hoops_a540bf3a",
+      "companyName": "SONOR",
+      "modelName": "Benny Greb Signature Brass 13x5.75",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_champion_champion-rosewood-14x5_14x5_ply_wood_die-cast-hoops_c5c3435a",
+      "companyName": "SONOR",
+      "modelName": "Champion Rosewood 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_champion_champion-rosewood-14x6-5_14x6-5_ply_wood_die-cast-hoops_209eeae7",
+      "companyName": "SONOR",
+      "modelName": "Champion Rosewood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_danny-carey-signature-bronze-14x8_14x8_metal_bronze_die-cast-hoops_0c8eaf0a",
+      "companyName": "SONOR",
+      "modelName": "Danny Carey Signature Bronze 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_force-1007_force-1007-basswood-poplar-14x5-5_14x5-5_ply_poplar_triple-flanged-hoops_8877d818",
+      "companyName": "SONOR",
+      "modelName": "Force 1007 Basswood/Poplar 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_steel-snare_force-steel-14x5-5_14x5-5_metal_steel_triple-flanged-hoops_e5561f76",
+      "companyName": "SONOR",
+      "modelName": "Force Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_steel-snare_force-steel-14x6-5_14x6-5_metal_steel_triple-flanged-hoops_74beb1c4",
+      "companyName": "SONOR",
+      "modelName": "Force Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_gavin-harrison-protean-12x5_12x5_ply_birch_die-cast-hoops_60b976d7",
+      "companyName": "SONOR",
+      "modelName": "Gavin Harrison Protean 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_gavin-harrison-protean-14x5-25_14x5-25_ply_birch_die-cast-hoops_f831b819",
+      "companyName": "SONOR",
+      "modelName": "Gavin Harrison Protean 14x5.25",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_horst-link-signature-ferromanganese-14x6-5_14x6-5_metal_steel_die-cast-hoops_192fa06f",
+      "companyName": "SONOR",
+      "modelName": "Horst Link Signature Ferromanganese 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_jojo-mayer-signature-13x7_13x7_ply_maple_die-cast-hoops_63e2a739",
+      "companyName": "SONOR",
+      "modelName": "Jojo Mayer Signature 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_special-edition_jungle-snare-10x2_10x2_ply_maple_triple-flanged-hoops_1dc8783c",
+      "companyName": "SONOR",
+      "modelName": "Jungle Snare 10x2",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_special-edition_jungle-snare-12x5_12x5_ply_maple_triple-flanged-hoops_35d21d92",
+      "companyName": "SONOR",
+      "modelName": "Jungle Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_phil-rudd-signature-14x5_14x5_ply_beech_die-cast-hoops_514f2458",
+      "companyName": "SONOR",
+      "modelName": "Phil Rudd Signature 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic_phonic-beech-d-505-14x5_14x5_ply_beech_die-cast-hoops_d-505_8106959e",
+      "companyName": "SONOR",
+      "modelName": "Phonic Beech D-505 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic_phonic-beech-d-506-14x6-5_14x6-5_ply_beech_die-cast-hoops_d-506_fa4fd99c",
+      "companyName": "SONOR",
+      "modelName": "Phonic Beech D-506 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic-plus_phonic-plus-beech-14x8_14x8_ply_beech_die-cast-hoops_8ef965ae",
+      "companyName": "SONOR",
+      "modelName": "Phonic Plus Beech 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-582-ferromanganese-14x6-5_14x6-5_metal_steel_die-cast-hoops_hld-582_dc6896d8",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 582 Ferromanganese 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-588-beech-14x8_14x8_ply_beech_die-cast-hoops_hld-588_c19d8827",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 588 Beech 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_steve-smith-signature-14x5-5_14x5-5_ply_maple_die-cast-hoops_6b1599b7",
+      "companyName": "SONOR",
+      "modelName": "Steve Smith Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 590 Cast Bronze 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "sonor_artist-signature_benny-greb-signature-brass-13x5-75_13x5-75_metal_brass_2-3mm-triple-flanged-hoops_a540bf3a",
+      "companyName": "SONOR",
+      "modelName": "Benny Greb Signature Brass 13x5.75",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_champion_champion-rosewood-14x5_14x5_ply_wood_die-cast-hoops_c5c3435a",
+      "companyName": "SONOR",
+      "modelName": "Champion Rosewood 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_champion_champion-rosewood-14x6-5_14x6-5_ply_wood_die-cast-hoops_209eeae7",
+      "companyName": "SONOR",
+      "modelName": "Champion Rosewood 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_danny-carey-signature-bronze-14x8_14x8_metal_bronze_die-cast-hoops_0c8eaf0a",
+      "companyName": "SONOR",
+      "modelName": "Danny Carey Signature Bronze 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_force-1007_force-1007-basswood-poplar-14x5-5_14x5-5_ply_poplar_triple-flanged-hoops_8877d818",
+      "companyName": "SONOR",
+      "modelName": "Force 1007 Basswood/Poplar 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_steel-snare_force-steel-14x5-5_14x5-5_metal_steel_triple-flanged-hoops_e5561f76",
+      "companyName": "SONOR",
+      "modelName": "Force Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_steel-snare_force-steel-14x6-5_14x6-5_metal_steel_triple-flanged-hoops_74beb1c4",
+      "companyName": "SONOR",
+      "modelName": "Force Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_gavin-harrison-protean-12x5_12x5_ply_birch_die-cast-hoops_60b976d7",
+      "companyName": "SONOR",
+      "modelName": "Gavin Harrison Protean 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_gavin-harrison-protean-14x5-25_14x5-25_ply_birch_die-cast-hoops_f831b819",
+      "companyName": "SONOR",
+      "modelName": "Gavin Harrison Protean 14x5.25",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_horst-link-signature-ferromanganese-14x6-5_14x6-5_metal_steel_die-cast-hoops_192fa06f",
+      "companyName": "SONOR",
+      "modelName": "Horst Link Signature Ferromanganese 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_jojo-mayer-signature-13x7_13x7_ply_maple_die-cast-hoops_63e2a739",
+      "companyName": "SONOR",
+      "modelName": "Jojo Mayer Signature 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_special-edition_jungle-snare-10x2_10x2_ply_maple_triple-flanged-hoops_1dc8783c",
+      "companyName": "SONOR",
+      "modelName": "Jungle Snare 10x2",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_special-edition_jungle-snare-12x5_12x5_ply_maple_triple-flanged-hoops_35d21d92",
+      "companyName": "SONOR",
+      "modelName": "Jungle Snare 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_phil-rudd-signature-14x5_14x5_ply_beech_die-cast-hoops_514f2458",
+      "companyName": "SONOR",
+      "modelName": "Phil Rudd Signature 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic_phonic-beech-d-505-14x5_14x5_ply_beech_die-cast-hoops_d-505_8106959e",
+      "companyName": "SONOR",
+      "modelName": "Phonic Beech D-505 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic_phonic-beech-d-506-14x6-5_14x6-5_ply_beech_die-cast-hoops_d-506_fa4fd99c",
+      "companyName": "SONOR",
+      "modelName": "Phonic Beech D-506 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_phonic-plus_phonic-plus-beech-14x8_14x8_ply_beech_die-cast-hoops_8ef965ae",
+      "companyName": "SONOR",
+      "modelName": "Phonic Plus Beech 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-582-ferromanganese-14x6-5_14x6-5_metal_steel_die-cast-hoops_hld-582_dc6896d8",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 582 Ferromanganese 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-588-beech-14x8_14x8_ply_beech_die-cast-hoops_hld-588_c19d8827",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 588 Beech 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_artist-signature_steve-smith-signature-14x5-5_14x5-5_ply_maple_die-cast-hoops_6b1599b7",
+      "companyName": "SONOR",
+      "modelName": "Steve Smith Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "sonor_aq1_aq1-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_aq1-1405_537ef02e",
+      "companyName": "SONOR",
+      "modelName": "AQ1 Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_delite_delite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_dl-1405_7a8db104",
+      "companyName": "SONOR",
+      "modelName": "Delite Maple 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_delite_delite-maple-14x6_14x6_ply_maple_45-bearing-edge_die-cast-hoops_dl-1406_9c2c56db",
+      "companyName": "SONOR",
+      "modelName": "Delite Maple 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_delite_delite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_dl-14065_41388ded",
+      "companyName": "SONOR",
+      "modelName": "Delite Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_designer_designer-maple-heavy-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-mh_b35252c4",
+      "companyName": "SONOR",
+      "modelName": "Designer Maple Heavy 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_designer_designer-maple-light-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1405-ml_cd502414",
+      "companyName": "SONOR",
+      "modelName": "Designer Maple Light 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_designer_designer-maple-light-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-ml_1a7a0f66",
+      "companyName": "SONOR",
+      "modelName": "Designer Maple Light 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_essential-force_essential-force-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_455cf7ea",
+      "companyName": "SONOR",
+      "modelName": "Essential Force Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-2005_force-2005-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_49d52773",
+      "companyName": "SONOR",
+      "modelName": "Force 2005 Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-2007_force-2007-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_d558f0e8",
+      "companyName": "SONOR",
+      "modelName": "Force 2007 Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-3005_force-3005-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_e6254a81",
+      "companyName": "SONOR",
+      "modelName": "Force 3005 Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_force-3007_force-3007-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_3dccb9b3",
+      "companyName": "SONOR",
+      "modelName": "Force 3007 Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_hilite_hilite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_67b0ea10",
+      "companyName": "SONOR",
+      "modelName": "HiLite Maple 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_hilite_hilite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_63990c6e",
+      "companyName": "SONOR",
+      "modelName": "HiLite Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-class-pro_s-class-pro-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_49cde88b",
+      "companyName": "SONOR",
+      "modelName": "S Class Pro Maple 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-class-pro_s-class-pro-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_d5ee0f37",
+      "companyName": "SONOR",
+      "modelName": "S Class Pro Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-classix_s-classix-birch-14x5_14x5_ply_birch_45-bearing-edge_die-cast-hoops_b60f49d8",
+      "companyName": "SONOR",
+      "modelName": "S-Classix Birch 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_s-classix_s-classix-birch-14x6-5_14x6-5_ply_birch_45-bearing-edge_die-cast-hoops_ce873095",
+      "companyName": "SONOR",
+      "modelName": "S-Classix Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_select-force_select-force-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_c147c955",
+      "companyName": "SONOR",
+      "modelName": "Select Force Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+      "companyName": "SONOR",
+      "modelName": "Signature HLD 590 Cast Bronze 14x8",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_teardrop_teardrop-beech-14x5_14x5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_4d70aa9d",
+      "companyName": "SONOR",
+      "modelName": "Teardrop Beech 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_teardrop_teardrop-beech-14x6-5_14x6-5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_c087e502",
+      "companyName": "SONOR",
+      "modelName": "Teardrop Beech 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "sonor_aq2_aq2-maple-14x5-5_14x5-5_ply_maple_7-2_45-bearing-edge_triple-flanged-hoops_aq2-1405_b10c6d2d",
+      "companyName": "SONOR",
+      "modelName": "AQ2 Maple 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-13x7_13x7_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_f7714692",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Aluminum 13x7",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x5-75_14x5-75_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-fla_28cafbb5",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Aluminum 14x5.75",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x6-5_14x6-5_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flang_2d7ba40c",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Aluminum 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x8_14x8_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_38fe8f02",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Aluminum 14x8",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-13x7_13x7_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_d51a0981",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Beech 13x7",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x5-75_14x5-75_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-_62ac1b7f",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Beech 14x5.75",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x6_14x6_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_671ce638",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Beech 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-se_0fef9e59",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Beech 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x8_14x8_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_eb25e3d0",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Beech 14x8",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-13x7_13x7_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_552bc64f",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Brass 13x7",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x5-75_14x5-75_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_d11788c6",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Brass 14x5.75",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x6-5_14x6-5_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_0c11b4b7",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Brass 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x8_14x8_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_a0aff72c",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Brass 14x8",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-13x7_13x7_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_22a027d3",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Steel 13x7",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x5-75_14x5-75_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_2a7b4cc7",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Steel 14x5.75",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x6-5_14x6-5_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel_2e90fd2c",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Steel 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x8_14x8_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_3d48d2d8",
+      "companyName": "SONOR",
+      "modelName": "Kompressor Steel 14x8",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x5_14x5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_2f773d8f",
+      "companyName": "SONOR",
+      "modelName": "ProLite Maple 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6_14x6_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_1d204c34",
+      "companyName": "SONOR",
+      "modelName": "ProLite Maple 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_3b479737",
+      "companyName": "SONOR",
+      "modelName": "ProLite Maple 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x5_14x5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cast-or_0b97bd0d",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Heavy ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x6-5_14x6-5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cas_21ad5efa",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Heavy ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x5_14x5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-cast-o_4db16066",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Medium ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x6-5_14x6-5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-ca_4d9e09bd",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Medium ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-or-_452968ae",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Thin ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast_95092478",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Thin ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-_7f1959d6",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Vintage ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-c_d1668db1",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Acrylic Vintage ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x5_14x5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or-tri_31511fb0",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Heavy ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or_edb76d98",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Heavy ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x5_14x5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-or-tr_baa918a0",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Medium ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x6-5_14x6-5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-o_70a9a905",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Medium ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-trip_30806671",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Thin ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-_a9885d3a",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Thin ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-t_f791587a",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Vintage ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-_5140185b",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Beech Vintage ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x5_14x5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or-tri_5921b78e",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Heavy ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x6-5_14x6-5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or_1a9169e2",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Heavy ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x5_14x5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-or-tr_9e471931",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Medium ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x6-5_14x6-5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-o_1dd66c37",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Medium ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-trip_4e0636ca",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Thin ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-_df3d98db",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Thin ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-t_f52dcc8d",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Vintage ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-_8e2aee88",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Birch Vintage ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x5_14x5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or-tri_03d79bb2",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x6-5_14x6-5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or_d1b32daa",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x5_14x5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-or-tr_3b0fc99a",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x6-5_14x6-5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-o_af3f3e9a",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-trip_59f4810f",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-_c6584fef",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-t_faf56e68",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-_803b9ab2",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_vintage-series_vintage-series-beech-14x5-75_14x5-75_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-_491ef3e1",
+      "companyName": "SONOR",
+      "modelName": "Vintage Series Beech 14x5.75",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "sonor_vintage-series_vintage-series-beech-14x6-5_14x6-5_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-ho_996270a5",
+      "companyName": "SONOR",
+      "modelName": "Vintage Series Beech 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": []
+}

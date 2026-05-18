@@ -1,0 +1,550 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "tama_artwood_artwood-birch-14x5-5_14x5-5_ply_birch_lacquer_444f452b",
+      "companyName": "Tama",
+      "modelName": "Artwood Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_artwood_artwood-birch-14x6-5_14x6-5_ply_birch_lacquer_c8fcf233",
+      "companyName": "Tama",
+      "modelName": "Artwood Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_artwood_artwood-birds-eye-maple-14x6-5_14x6-5_ply_maple_lacquer_f2bcbb59",
+      "companyName": "Tama",
+      "modelName": "Artwood Birds Eye Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_artwood_artwood-maple-14x5-5_14x5-5_ply_maple_lacquer_3540966b",
+      "companyName": "Tama",
+      "modelName": "Artwood Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_artwood_artwood-maple-14x6-5_14x6-5_ply_maple_lacquer_942d70cd",
+      "companyName": "Tama",
+      "modelName": "Artwood Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_artwood_artwood-walnut-14x6-5_14x6-5_ply_walnut_lacquer_caccd985",
+      "companyName": "Tama",
+      "modelName": "Artwood Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_bill-bruford-14x5-5_14x5-5_metal_brass_brass_die-cast-hoops_5daed8b7",
+      "companyName": "Tama",
+      "modelName": "Bill Bruford 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_bill-bruford-bb1055-signature-10x5-5_10x5-5_ply_maple",
+      "companyName": "Tama",
+      "modelName": "Bill Bruford BB1055 Signature 10x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_bill-bruford-bb146-signature-14x6_14x6_ply_maple",
+      "companyName": "Tama",
+      "modelName": "Bill Bruford BB146 Signature 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_charlie-benante-cb1465-signature-14x6-5_14x6-5_metal_stainless-steel",
+      "companyName": "Tama",
+      "modelName": "Charlie Benante CB1465 Signature 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_john-tempesta-14x7_14x7_ply_maple_lacquer_die-cast-hoops_e7cd87e6",
+      "companyName": "Tama",
+      "modelName": "John Tempesta 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_john-tempesta-jt147-signature-14x7_14x7_metal_brass",
+      "companyName": "Tama",
+      "modelName": "John Tempesta JT147 Signature 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_kaz-rodriguez-14x6-5-maple-bubinga_14x6-5_ply_maple_lacquer_die-cast-hoops_c84633ed",
+      "companyName": "Tama",
+      "modelName": "Kaz Rodriguez 14x6.5 Maple/Bubinga",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_kaz-rodriguez-kr1465-signature-14x6-5-maple-bubinga_14x6-5_ply_maple",
+      "companyName": "Tama",
+      "modelName": "Kaz Rodriguez KR1465 Signature 14x6.5 Maple/Bubinga",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_kenny-aronoff-ka145n-trackmaster-14x5_14x5_metal_brass_nickel-plated-brass_die-cast-hoops_ka145n_93ec0192",
+      "companyName": "Tama",
+      "modelName": "Kenny Aronoff KA145N Trackmaster 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_kenny-aronoff-ka154-super-piccolo-15x4_15x4_metal_brass_nickel-plated-brass_die-cast-hoops_ka154_0fcd1d35",
+      "companyName": "Tama",
+      "modelName": "Kenny Aronoff KA154 Super Piccolo 15x4",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-maple-14x5-5_14x5-5_ply_maple_lacquer_95a9e838",
+      "companyName": "Tama",
+      "modelName": "Mastercraft Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-maple-14x6-5_14x6-5_ply_maple_lacquer_416e7135",
+      "companyName": "Tama",
+      "modelName": "Mastercraft Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-steel-14x5_14x5_metal_steel_chrome_c94509d8",
+      "companyName": "Tama",
+      "modelName": "Mastercraft Steel 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-steel-14x6-5_14x6-5_metal_steel_chrome_45fb38d0",
+      "companyName": "Tama",
+      "modelName": "Mastercraft Steel 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_mike-portnoy-dream-monster-mp1455bun-14x5-5_14x5-5_ply_bubinga",
+      "companyName": "Tama",
+      "modelName": "Mike Portnoy Dream Monster MP1455BUN 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-mp1455-maple-14x5-5_14x5-5_ply_maple",
+      "companyName": "Tama",
+      "modelName": "Mike Portnoy Melody Master MP1455 Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-mp1455st-14x5-5_14x5-5_metal_steel",
+      "companyName": "Tama",
+      "modelName": "Mike Portnoy Melody Master MP1455ST 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_peter-erskine-pe106m-10x6_10x6_ply_maple_lacquer_triple-flange-mighty-hoop_pe106m_e9aa7aab",
+      "companyName": "Tama",
+      "modelName": "Peter Erskine PE106M 10x6",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_peter-erskine-pe1445-14x4-5_14x4-5_ply_maple_lacquer_triple-flange-mighty-hoop_pe1445_3e707e32",
+      "companyName": "Tama",
+      "modelName": "Peter Erskine PE1445 14x4.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_simon-phillips-gladiator-14x5-5_14x5-5_metal_bronze_bronze_die-cast-hoops_sp1455_6d2e74cb",
+      "companyName": "Tama",
+      "modelName": "Simon Phillips Gladiator 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_simon-phillips-monarch-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_sp1465_5cb2bc67",
+      "companyName": "Tama",
+      "modelName": "Simon Phillips Monarch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_signature_simon-phillips-sp125-the-pageant-12x5_12x5_ply_maple",
+      "companyName": "Tama",
+      "modelName": "Simon Phillips SP125 The Pageant 12x5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_starclassic_starclassic-performer-14x5-5_14x5-5_ply_maple_lacquer-wrap_die-cast-hoops_9be528a9",
+      "companyName": "Tama",
+      "modelName": "Starclassic Performer 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_starclassic_starclassic-performer-14x6-5_14x6-5_ply_maple_lacquer-wrap_die-cast-hoops_a7cf7794",
+      "companyName": "Tama",
+      "modelName": "Starclassic Performer 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_starclassic_starclassic-performer-birch-bubinga-14x5-5_14x5-5_ply_birch_lacquer_die-cast-hoops_fc3ed948",
+      "companyName": "Tama",
+      "modelName": "Starclassic Performer Birch/Bubinga 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_starclassic_starclassic-performer-birch-bubinga-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_379db69d",
+      "companyName": "Tama",
+      "modelName": "Starclassic Performer Birch/Bubinga 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_warlord_warlord-athenian-hammered-brass-14x6_14x6_metal_brass_hammered-brass_die-cast-hoops_ddb2c5aa",
+      "companyName": "Tama",
+      "modelName": "Warlord Athenian Hammered Brass 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "tama_warlord_warlord-valkyrie-stainless-steel-14x6_14x6_metal_steel_stainless-steel_die-cast-hoops_3829fe36",
+      "companyName": "Tama",
+      "modelName": "Warlord Valkyrie Stainless Steel 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve G-Mahogany 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+      "companyName": "Tama",
+      "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+      "failedCoreFields": [
+        "bearingEdge"
+      ],
+      "priorityScore": 5
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve G-Mahogany 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5",
+      "failedCoreFields": [
+        "snareBedType",
+        "snareBeds",
+        "reRingMaterial"
+      ],
+      "priorityScore": 6
+    },
+    {
+      "id": "tama_starphonic_starphonic-aluminum-14x6_14x6_metal_aluminum_lacquer-metal_grooved-hoop_pal1460_183b9d79",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Aluminum 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-bell-brass-14x6_14x6_metal_bell-brass_3_lacquer-metal_grooved-hoop_pbe1460_2bd426e8",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Bell Brass 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-brass-14x6_14x6_metal_brass_lacquer-metal_grooved-hoop_pbr1460_8af74600",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Brass 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-bubinga-14x6_14x6_ply_bubinga_lacquer-metal_grooved-hoop_pbu1460_0439fe79",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Bubinga 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-copper-14x7_14x7_metal_copper_lacquer-metal_grooved-hoop_pco1470_6cc1e266",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Copper 14x7",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-maple-14x6_14x6_ply_maple_lacquer-metal_grooved-hoop_pma1460_b7d3d196",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Maple 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-spruce-14x6_14x6_ply_spruce_lacquer-metal_grooved-hoop_psp1460_c4fbd3b5",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Spruce 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-steel-14x6_14x6_metal_steel_lacquer-metal_grooved-hoop_pst1460_64f27fbb",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Steel 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "tama_starphonic_starphonic-walnut-14x7_14x7_ply_walnut_lacquer-metal_grooved-hoop_pwa1470_62bb8678",
+      "companyName": "Tama",
+      "modelName": "STARPHONIC Walnut 14x7",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": [
+    {
+      "id": "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5",
+      "failedCoreFields": [
+        "snareBedType",
+        "snareBeds",
+        "reRingMaterial"
+      ],
+      "priorityScore": 6
+    }
+  ]
+}

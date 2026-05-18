@@ -1,0 +1,108 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "oriollo_seamless-metal_bakar-copper_14x6-5_metal_copper_7ca67e56",
+      "companyName": "Oriollo",
+      "modelName": "Bakar Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "oriollo_seamless-metal_mang-na-steel_14x6-5_metal_steel_d7afbb57",
+      "companyName": "Oriollo",
+      "modelName": "Mangàna Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "oriollo_seamless-metal_phantom-aluminum_14x6-5_metal_aluminum_3b010c0d",
+      "companyName": "Oriollo",
+      "modelName": "Phantom Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "oriollo_seamless-metal_bakar-copper_14x6-5_metal_copper_7ca67e56",
+      "companyName": "Oriollo",
+      "modelName": "Bakar Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "oriollo_seamless-metal_mang-na-steel_14x6-5_metal_steel_d7afbb57",
+      "companyName": "Oriollo",
+      "modelName": "Mangàna Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "oriollo_seamless-metal_phantom-aluminum_14x6-5_metal_aluminum_3b010c0d",
+      "companyName": "Oriollo",
+      "modelName": "Phantom Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "oriollo_seamless-metal_bakar-copper_14x6-5_metal_copper_7ca67e56",
+      "companyName": "Oriollo",
+      "modelName": "Bakar Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "oriollo_seamless-metal_mang-na-steel_14x6-5_metal_steel_d7afbb57",
+      "companyName": "Oriollo",
+      "modelName": "Mangàna Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "oriollo_seamless-metal_phantom-aluminum_14x6-5_metal_aluminum_3b010c0d",
+      "companyName": "Oriollo",
+      "modelName": "Phantom Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

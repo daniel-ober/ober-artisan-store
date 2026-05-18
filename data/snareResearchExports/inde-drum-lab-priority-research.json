@@ -1,0 +1,108 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-aluminum_14x6-5_metal_aluminum_5432eb51",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Kalamazoo Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-brass_14x6-5_metal_brass_b5ced32d",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Kalamazoo Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_maple-custom_14x6-5_ply_maple_dbeee215",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Maple Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-aluminum_14x6-5_metal_aluminum_5432eb51",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Kalamazoo Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-brass_14x6-5_metal_brass_b5ced32d",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Kalamazoo Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_maple-custom_14x6-5_ply_maple_dbeee215",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Maple Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-aluminum_14x6-5_metal_aluminum_5432eb51",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Kalamazoo Aluminum",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-brass_14x6-5_metal_brass_b5ced32d",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Kalamazoo Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "inde-drum-lab_kalamazoo-custom-metal-wood_maple-custom_14x6-5_ply_maple_dbeee215",
+      "companyName": "INDe Drum Lab",
+      "modelName": "Maple Custom",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

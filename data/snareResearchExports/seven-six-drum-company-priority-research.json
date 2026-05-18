@@ -1,0 +1,108 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "seven-six-drum-company_custom_bolivian-rosewood-morado-vii-solid-stave_14x6-5_solid-shell_wood_37e99be6",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Bolivian Rosewood Morado VII Solid Stave",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "seven-six-drum-company_custom_purpleheart-solid-stave_14x6-5_solid-shell_purpleheart_7c755fdc",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Purpleheart Solid Stave",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "seven-six-drum-company_custom_steam-bent-solid-shell-walnut_14x6-5_steam-bent_walnut_a5b46dd4",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Steam-Bent Solid Shell Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "seven-six-drum-company_custom_bolivian-rosewood-morado-vii-solid-stave_14x6-5_solid-shell_wood_37e99be6",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Bolivian Rosewood Morado VII Solid Stave",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "seven-six-drum-company_custom_purpleheart-solid-stave_14x6-5_solid-shell_purpleheart_7c755fdc",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Purpleheart Solid Stave",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "seven-six-drum-company_custom_steam-bent-solid-shell-walnut_14x6-5_steam-bent_walnut_a5b46dd4",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Steam-Bent Solid Shell Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "seven-six-drum-company_custom_bolivian-rosewood-morado-vii-solid-stave_14x6-5_solid-shell_wood_37e99be6",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Bolivian Rosewood Morado VII Solid Stave",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "seven-six-drum-company_custom_purpleheart-solid-stave_14x6-5_solid-shell_purpleheart_7c755fdc",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Purpleheart Solid Stave",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "seven-six-drum-company_custom_steam-bent-solid-shell-walnut_14x6-5_steam-bent_walnut_a5b46dd4",
+      "companyName": "Seven Six Drum Company",
+      "modelName": "Steam-Bent Solid Shell Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "reRingMaterial": []
+}

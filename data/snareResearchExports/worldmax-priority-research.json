@@ -1,0 +1,268 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-where-conf_e61d1279",
+      "companyName": "WorldMax",
+      "modelName": "Aluminum Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed-where-co_d3b659a7",
+      "companyName": "WorldMax",
+      "modelName": "Aluminum Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_13x7_metal_brass_rolled-flange-45-lis_214343f1",
+      "companyName": "WorldMax",
+      "modelName": "Black Hawg / Black Dawg Brass Undrilled Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_14x5_metal_brass_rolled-flange-45-lis_d6db1985",
+      "companyName": "WorldMax",
+      "modelName": "Black Hawg / Black Dawg Brass Undrilled Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_14x6-5_metal_brass_rolled-flange-45-l_c4b19e1c",
+      "companyName": "WorldMax",
+      "modelName": "Black Hawg / Black Dawg Brass Undrilled Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_bronze-shell_14x5_metal_bronze_rolled-flange-45-listed-where-confirme_661f3978",
+      "companyName": "WorldMax",
+      "modelName": "Bronze Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_bronze-shell_14x6-5_metal_bronze_rolled-flange-45-listed-where-confir_63531491",
+      "companyName": "WorldMax",
+      "modelName": "Bronze Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_chrome-steel-shell_14x5-5_metal_steel_rolled-flange-45-listed-where-c_982c019f",
+      "companyName": "WorldMax",
+      "modelName": "Chrome Steel Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_chrome-steel-shell_14x6-5_metal_steel_rolled-flange-45-listed-where-c_c91f51db",
+      "companyName": "WorldMax",
+      "modelName": "Chrome Steel Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_copper-shell_14x5_metal_copper_rolled-flange-45-listed-where-confirme_3032f6b4",
+      "companyName": "WorldMax",
+      "modelName": "Copper Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_copper-shell_14x6-5_metal_copper_rolled-flange-45-listed-where-confir_d8d25318",
+      "companyName": "WorldMax",
+      "modelName": "Copper Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-w_20d1dfe0",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Aluminum Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed_4f83dfec",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Aluminum Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-bronze-shell_14x5_metal_bronze_rolled-flange-45-listed-where_3dddbaf5",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Bronze Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-bronze-shell_14x6-5_metal_bronze_rolled-flange-45-listed-whe_79cae2f5",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Bronze Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-copper-shell_14x5_metal_copper_rolled-flange-45-listed-where_564cc7f6",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Copper Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-copper-shell_14x6-5_metal_copper_rolled-flange-45-listed-whe_cec7014d",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Copper Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-steel-shell_14x5-5_metal_steel_rolled-flange-45-listed-where_1f335e05",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Steel Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-steel-shell_14x6-5_metal_steel_rolled-flange-45-listed-where_6dcf446f",
+      "companyName": "WorldMax",
+      "modelName": "Hammered Steel Shell",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_jade-tiger-steel_14x5-5_metal_steel_rolled-flange-45-listed-where-con_0fb96c4b",
+      "companyName": "WorldMax",
+      "modelName": "Jade Tiger Steel",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_worldmax-metal-snares-retailer-documented_jade-tiger-steel_14x6-5_metal_steel_rolled-flange-45-listed-where-con_1295deae",
+      "companyName": "WorldMax",
+      "modelName": "Jade Tiger Steel",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_7e0ca6cf",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_cdb2254b",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_dfb3e115",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_f67f5e38",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x5-5_ply_maple_rolled-flange-45-listed-where-confirmed_mi_0a5c134b",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Wood Snare Representative",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x5-5_ply_wood_rolled-flange-45-listed-where-confirmed_min_cd72aaa3",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Wood Snare Representative",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x6-5_ply_maple_rolled-flange-45-listed-where-confirmed_mi_da70b06a",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Wood Snare Representative",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    },
+    {
+      "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x6-5_ply_wood_rolled-flange-45-listed-where-confirmed_min_0214d121",
+      "companyName": "WorldMax",
+      "modelName": "WorldMax Wood Snare Representative",
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "priorityScore": 5
+    }
+  ],
+  "bearingEdge": [],
+  "snareBedType": [],
+  "reRingMaterial": []
+}

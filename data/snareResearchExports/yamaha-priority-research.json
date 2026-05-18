@@ -1,0 +1,1919 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "yamaha_signature_akira-jimbo-signature-13x7_13x7_ply_maple_lacquer-signature-finish_triple-flange-yamaha-hoop_akira-jimb_3bc8b032",
+      "companyName": "Yamaha",
+      "modelName": "Akira Jimbo Signature 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_andre-ceccarelli-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_msd1455ac_07b379cc",
+      "companyName": "Yamaha",
+      "modelName": "Andre Ceccarelli Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_anton-fig-signature-14x6_14x6_ply_maple_solid-black_19-ply-vintage-wood-hoop_msd14af_57e9e5fb",
+      "companyName": "Yamaha",
+      "modelName": "Anton Fig Signature 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_beech-custom_beech-custom-beech-snare-14x5-5_14x5-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_7efb5e42",
+      "companyName": "Yamaha",
+      "modelName": "Beech Custom Beech Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_beech-custom_beech-custom-beech-snare-14x6-5_14x6-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_40e6aec4",
+      "companyName": "Yamaha",
+      "modelName": "Beech Custom Beech Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_billy-cobham-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_billy-cobham-_1f58e7fb",
+      "companyName": "Yamaha",
+      "modelName": "Billy Cobham Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_birch-custom_birch-custom-birch-snare-14x5-5_14x5-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_f2ebec1c",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_birch-custom_birch-custom-birch-snare-14x6-5_14x6-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_35a7d45e",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Birch Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_club-custom_club-custom-kapur-snare-14x5-5_14x5-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_85502a35",
+      "companyName": "Yamaha",
+      "modelName": "Club Custom Kapur Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_club-custom_club-custom-kapur-snare-14x6-5_14x6-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_b1bb8e06",
+      "companyName": "Yamaha",
+      "modelName": "Club Custom Kapur Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x5-5_14x5-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x5-5_377a1aa0",
+      "companyName": "Yamaha",
+      "modelName": "CSM-A II Concert Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x6-5_14x6-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x6-5_f7bfeacc",
+      "companyName": "Yamaha",
+      "modelName": "CSM-A II Concert Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_dave-weckl-signature-maple-14x5-5_14x5-5_ply_maple_signature-lacquer_triple-flange-yamaha-hoop_msd1455d_7daae3e7",
+      "companyName": "Yamaha",
+      "modelName": "Dave Weckl Signature Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_yd-early-yamaha_early-yamaha-wood-snare-14x5_14x5_ply_mahogany_wrap-lacquer_triple-flange-vintage-hoop_early-yd-w_19cc75aa",
+      "companyName": "Yamaha",
+      "modelName": "Early Yamaha Wood Snare 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_elvin-jones-signature-14x7_14x7_ply_maple_natural-signature-finish_wood-hoop-vintage-hoop_elvin-jones-s_81963be9",
+      "companyName": "Yamaha",
+      "modelName": "Elvin Jones Signature 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x5-5_14x5-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_6ad06c17",
+      "companyName": "Yamaha",
+      "modelName": "Live Custom Hybrid Oak Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x6-5_14x6-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_90128483",
+      "companyName": "Yamaha",
+      "modelName": "Live Custom Hybrid Oak Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_manu-katch-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_manu-katch-sign_dad25ca9",
+      "companyName": "Yamaha",
+      "modelName": "Manu Katché Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_maple-custom_maple-custom-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_9289f705",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_maple-custom_maple-custom-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_d9fb315a",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Maple Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-12x6_12x6_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1260-musashi_dbd140fe",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 12x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-13x6-5_13x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1365-musashi_3414cf8f",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1465-musashi_d4a70025",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_oak-custom_oak-custom-14x5-5_14x5-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1455_0ad0dea3",
+      "companyName": "Yamaha",
+      "modelName": "Oak Custom 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_oak-custom_oak-custom-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1465_3f6130ae",
+      "companyName": "Yamaha",
+      "modelName": "Oak Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x5-5_14x5-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1455_1d0b5502",
+      "companyName": "Yamaha",
+      "modelName": "OSM Series Maple Concert 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x6-5_14x6-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1465_38a8b72a",
+      "companyName": "Yamaha",
+      "modelName": "OSM Series Maple Concert 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_peter-erskine-signature-10x4_10x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-10_31693f36",
+      "companyName": "Yamaha",
+      "modelName": "Peter Erskine Signature 10x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_peter-erskine-signature-12x4_12x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-12_845f020f",
+      "companyName": "Yamaha",
+      "modelName": "Peter Erskine Signature 12x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_7b7f661a",
+      "companyName": "Yamaha",
+      "modelName": "PHX Phoenix Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_5de26838",
+      "companyName": "Yamaha",
+      "modelName": "PHX Phoenix Maple Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_power-recording-9000_power-recording-birch-14x8_14x8_ply_birch_lacquer_triple-flange-yamaha-hoop_power-recording-_216a2436",
+      "companyName": "Yamaha",
+      "modelName": "Power Recording Birch 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x5-5_14x5-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0bf7d6d1",
+      "companyName": "Yamaha",
+      "modelName": "Recording Series Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x6-5_14x6-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0ff83600",
+      "companyName": "Yamaha",
+      "modelName": "Recording Series Birch Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_rock-tour_rock-tour-ash-14x6_14x6_ply_ash_textured-ash-matte-finish_triple-flange-yamaha-hoop_rts1460_fc332589",
+      "companyName": "Yamaha",
+      "modelName": "Rock Tour Ash 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_8000-tour-custom_tour-custom-birch-mahogany-14x5-5_14x5-5_ply_birch_mahogany_lacquer_triple-flange-yamaha-hoop_80_a960452d",
+      "companyName": "Yamaha",
+      "modelName": "Tour Custom Birch/Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_5000-series_5000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_5000-s_ceef7d3b",
+      "companyName": "Yamaha",
+      "modelName": "5000 Series Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_7000-series_7000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_7000-s_5c0a7d93",
+      "companyName": "Yamaha",
+      "modelName": "7000 Series Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_birch-custom-absolute_birch-custom-absolute-14x5-5_14x5-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_09b7376e",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Absolute 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_birch-custom-absolute_birch-custom-absolute-14x6-5_14x6-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_098b9023",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Absolute 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_dave-weckl-signature-aluminum-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_signature-finish_triple-fl_fd0141b3",
+      "companyName": "Yamaha",
+      "modelName": "Dave Weckl Signature Aluminum 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_david-garibaldi-signature-14x3-5-brass-piccolo_14x3-5_metal_brass_rolled-metal-edge_black-brass-finish__4fac3007",
+      "companyName": "Yamaha",
+      "modelName": "David Garibaldi Signature 14x3.5 Brass Piccolo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_yd-early-yamaha_early-yamaha-steel-snare-14x5_14x5_metal_steel_rolled-metal-edge_chrome_triple-flange-vintage-hoo_60c52d00",
+      "companyName": "Yamaha",
+      "modelName": "Early Yamaha Steel Snare 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_jimmy-chamberlin-signature-14x5-5-steel_14x5-5_metal_steel_rolled-metal-edge_chrome-signature-finish_tr_7be59974",
+      "companyName": "Yamaha",
+      "modelName": "Jimmy Chamberlin Signature 14x5.5 Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x4_14x4_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-cast_74c940f3",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Absolute 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x5-5_14x5-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_ace8201a",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Absolute 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x6-5_14x6-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_35898c18",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Absolute 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_sensitive-series_maple-sensitive-14x5-5_14x5-5_ply_maple_45-degree-sensitive-family_lacquer_triple-flange-yamaha-_7f8ab87f",
+      "companyName": "Yamaha",
+      "modelName": "Maple Sensitive 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_sensitive-series_maple-vintage-14x5-5_14x5-5_ply_maple_vintage-rounded-estimated_lacquer_triple-flange-yamaha-hoo_76655cd4",
+      "companyName": "Yamaha",
+      "modelName": "Maple Vintage 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_power-v-rock-tour-custom_power-v-steel-snare-14x6-5_14x6-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yam_d547f526",
+      "companyName": "Yamaha",
+      "modelName": "Power V Steel Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_recording-custom_recording-custom-birch-14x5-5_14x5-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__92828120",
+      "companyName": "Yamaha",
+      "modelName": "Recording Custom Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_recording-custom_recording-custom-birch-14x6-5_14x6-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__eaec2e70",
+      "companyName": "Yamaha",
+      "modelName": "Recording Custom Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_roy-haynes-signature-14x5-5-copper_14x5-5_metal_copper_rolled-metal-edge_copper-finish_triple-flange-ya_98b89288",
+      "companyName": "Yamaha",
+      "modelName": "Roy Haynes Signature 14x5.5 Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_shinya-signature-copper-14x5-5_14x5-5_metal_copper_rolled-metal-edge_copper-signature-artwork_triple-fl_89f8e83e",
+      "companyName": "Yamaha",
+      "modelName": "Shinya Signature Copper 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x3-5_14x3-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_61f12875",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x4_14x4_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finish_tr_bf0360ec",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_f67b6b69",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x6-5_14x6-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_46e4e453",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x3-5_14x3-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_e064b0a6",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Bronze Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x5-5_14x5-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_4c7fa2c3",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Bronze Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x6-5_14x6-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_1b177f3e",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Bronze Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x3-5_14x3-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_d16df9c1",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Copper Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x5-5_14x5-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_84e5e7b4",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Copper Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x6-5_14x6-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_76ff6b36",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Copper Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "yamaha_signature_akira-jimbo-signature-13x7_13x7_ply_maple_lacquer-signature-finish_triple-flange-yamaha-hoop_akira-jimb_3bc8b032",
+      "companyName": "Yamaha",
+      "modelName": "Akira Jimbo Signature 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_andre-ceccarelli-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_msd1455ac_07b379cc",
+      "companyName": "Yamaha",
+      "modelName": "Andre Ceccarelli Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_anton-fig-signature-14x6_14x6_ply_maple_solid-black_19-ply-vintage-wood-hoop_msd14af_57e9e5fb",
+      "companyName": "Yamaha",
+      "modelName": "Anton Fig Signature 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_beech-custom_beech-custom-beech-snare-14x5-5_14x5-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_7efb5e42",
+      "companyName": "Yamaha",
+      "modelName": "Beech Custom Beech Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_beech-custom_beech-custom-beech-snare-14x6-5_14x6-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_40e6aec4",
+      "companyName": "Yamaha",
+      "modelName": "Beech Custom Beech Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_billy-cobham-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_billy-cobham-_1f58e7fb",
+      "companyName": "Yamaha",
+      "modelName": "Billy Cobham Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_birch-custom_birch-custom-birch-snare-14x5-5_14x5-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_f2ebec1c",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_birch-custom_birch-custom-birch-snare-14x6-5_14x6-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_35a7d45e",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Birch Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_club-custom_club-custom-kapur-snare-14x5-5_14x5-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_85502a35",
+      "companyName": "Yamaha",
+      "modelName": "Club Custom Kapur Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_club-custom_club-custom-kapur-snare-14x6-5_14x6-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_b1bb8e06",
+      "companyName": "Yamaha",
+      "modelName": "Club Custom Kapur Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x5-5_14x5-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x5-5_377a1aa0",
+      "companyName": "Yamaha",
+      "modelName": "CSM-A II Concert Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x6-5_14x6-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x6-5_f7bfeacc",
+      "companyName": "Yamaha",
+      "modelName": "CSM-A II Concert Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_dave-weckl-signature-maple-14x5-5_14x5-5_ply_maple_signature-lacquer_triple-flange-yamaha-hoop_msd1455d_7daae3e7",
+      "companyName": "Yamaha",
+      "modelName": "Dave Weckl Signature Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_yd-early-yamaha_early-yamaha-wood-snare-14x5_14x5_ply_mahogany_wrap-lacquer_triple-flange-vintage-hoop_early-yd-w_19cc75aa",
+      "companyName": "Yamaha",
+      "modelName": "Early Yamaha Wood Snare 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_elvin-jones-signature-14x7_14x7_ply_maple_natural-signature-finish_wood-hoop-vintage-hoop_elvin-jones-s_81963be9",
+      "companyName": "Yamaha",
+      "modelName": "Elvin Jones Signature 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x5-5_14x5-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_6ad06c17",
+      "companyName": "Yamaha",
+      "modelName": "Live Custom Hybrid Oak Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x6-5_14x6-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_90128483",
+      "companyName": "Yamaha",
+      "modelName": "Live Custom Hybrid Oak Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_manu-katch-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_manu-katch-sign_dad25ca9",
+      "companyName": "Yamaha",
+      "modelName": "Manu Katché Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_maple-custom_maple-custom-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_9289f705",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_maple-custom_maple-custom-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_d9fb315a",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Maple Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-12x6_12x6_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1260-musashi_dbd140fe",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 12x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-13x6-5_13x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1365-musashi_3414cf8f",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1465-musashi_d4a70025",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_oak-custom_oak-custom-14x5-5_14x5-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1455_0ad0dea3",
+      "companyName": "Yamaha",
+      "modelName": "Oak Custom 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_oak-custom_oak-custom-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1465_3f6130ae",
+      "companyName": "Yamaha",
+      "modelName": "Oak Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x5-5_14x5-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1455_1d0b5502",
+      "companyName": "Yamaha",
+      "modelName": "OSM Series Maple Concert 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x6-5_14x6-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1465_38a8b72a",
+      "companyName": "Yamaha",
+      "modelName": "OSM Series Maple Concert 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_peter-erskine-signature-10x4_10x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-10_31693f36",
+      "companyName": "Yamaha",
+      "modelName": "Peter Erskine Signature 10x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_peter-erskine-signature-12x4_12x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-12_845f020f",
+      "companyName": "Yamaha",
+      "modelName": "Peter Erskine Signature 12x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_7b7f661a",
+      "companyName": "Yamaha",
+      "modelName": "PHX Phoenix Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_5de26838",
+      "companyName": "Yamaha",
+      "modelName": "PHX Phoenix Maple Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_power-recording-9000_power-recording-birch-14x8_14x8_ply_birch_lacquer_triple-flange-yamaha-hoop_power-recording-_216a2436",
+      "companyName": "Yamaha",
+      "modelName": "Power Recording Birch 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x5-5_14x5-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0bf7d6d1",
+      "companyName": "Yamaha",
+      "modelName": "Recording Series Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x6-5_14x6-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0ff83600",
+      "companyName": "Yamaha",
+      "modelName": "Recording Series Birch Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_rock-tour_rock-tour-ash-14x6_14x6_ply_ash_textured-ash-matte-finish_triple-flange-yamaha-hoop_rts1460_fc332589",
+      "companyName": "Yamaha",
+      "modelName": "Rock Tour Ash 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_8000-tour-custom_tour-custom-birch-mahogany-14x5-5_14x5-5_ply_birch_mahogany_lacquer_triple-flange-yamaha-hoop_80_a960452d",
+      "companyName": "Yamaha",
+      "modelName": "Tour Custom Birch/Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "yamaha_signature_akira-jimbo-signature-13x7_13x7_ply_maple_lacquer-signature-finish_triple-flange-yamaha-hoop_akira-jimb_3bc8b032",
+      "companyName": "Yamaha",
+      "modelName": "Akira Jimbo Signature 13x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_andre-ceccarelli-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_msd1455ac_07b379cc",
+      "companyName": "Yamaha",
+      "modelName": "Andre Ceccarelli Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_anton-fig-signature-14x6_14x6_ply_maple_solid-black_19-ply-vintage-wood-hoop_msd14af_57e9e5fb",
+      "companyName": "Yamaha",
+      "modelName": "Anton Fig Signature 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_beech-custom_beech-custom-beech-snare-14x5-5_14x5-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_7efb5e42",
+      "companyName": "Yamaha",
+      "modelName": "Beech Custom Beech Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_beech-custom_beech-custom-beech-snare-14x6-5_14x6-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_40e6aec4",
+      "companyName": "Yamaha",
+      "modelName": "Beech Custom Beech Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_billy-cobham-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_billy-cobham-_1f58e7fb",
+      "companyName": "Yamaha",
+      "modelName": "Billy Cobham Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_birch-custom_birch-custom-birch-snare-14x5-5_14x5-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_f2ebec1c",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_birch-custom_birch-custom-birch-snare-14x6-5_14x6-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_35a7d45e",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Birch Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_club-custom_club-custom-kapur-snare-14x5-5_14x5-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_85502a35",
+      "companyName": "Yamaha",
+      "modelName": "Club Custom Kapur Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_club-custom_club-custom-kapur-snare-14x6-5_14x6-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_b1bb8e06",
+      "companyName": "Yamaha",
+      "modelName": "Club Custom Kapur Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x5-5_14x5-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x5-5_377a1aa0",
+      "companyName": "Yamaha",
+      "modelName": "CSM-A II Concert Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x6-5_14x6-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x6-5_f7bfeacc",
+      "companyName": "Yamaha",
+      "modelName": "CSM-A II Concert Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_dave-weckl-signature-maple-14x5-5_14x5-5_ply_maple_signature-lacquer_triple-flange-yamaha-hoop_msd1455d_7daae3e7",
+      "companyName": "Yamaha",
+      "modelName": "Dave Weckl Signature Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_yd-early-yamaha_early-yamaha-wood-snare-14x5_14x5_ply_mahogany_wrap-lacquer_triple-flange-vintage-hoop_early-yd-w_19cc75aa",
+      "companyName": "Yamaha",
+      "modelName": "Early Yamaha Wood Snare 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_elvin-jones-signature-14x7_14x7_ply_maple_natural-signature-finish_wood-hoop-vintage-hoop_elvin-jones-s_81963be9",
+      "companyName": "Yamaha",
+      "modelName": "Elvin Jones Signature 14x7",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x5-5_14x5-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_6ad06c17",
+      "companyName": "Yamaha",
+      "modelName": "Live Custom Hybrid Oak Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x6-5_14x6-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_90128483",
+      "companyName": "Yamaha",
+      "modelName": "Live Custom Hybrid Oak Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_manu-katch-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_manu-katch-sign_dad25ca9",
+      "companyName": "Yamaha",
+      "modelName": "Manu Katché Signature 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_maple-custom_maple-custom-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_9289f705",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_maple-custom_maple-custom-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_d9fb315a",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Maple Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-12x6_12x6_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1260-musashi_dbd140fe",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 12x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-13x6-5_13x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1365-musashi_3414cf8f",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 13x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_musashi_musashi-oak-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1465-musashi_d4a70025",
+      "companyName": "Yamaha",
+      "modelName": "Musashi Oak 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_oak-custom_oak-custom-14x5-5_14x5-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1455_0ad0dea3",
+      "companyName": "Yamaha",
+      "modelName": "Oak Custom 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_oak-custom_oak-custom-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1465_3f6130ae",
+      "companyName": "Yamaha",
+      "modelName": "Oak Custom 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x5-5_14x5-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1455_1d0b5502",
+      "companyName": "Yamaha",
+      "modelName": "OSM Series Maple Concert 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x6-5_14x6-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1465_38a8b72a",
+      "companyName": "Yamaha",
+      "modelName": "OSM Series Maple Concert 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_peter-erskine-signature-10x4_10x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-10_31693f36",
+      "companyName": "Yamaha",
+      "modelName": "Peter Erskine Signature 10x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_signature_peter-erskine-signature-12x4_12x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-12_845f020f",
+      "companyName": "Yamaha",
+      "modelName": "Peter Erskine Signature 12x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_7b7f661a",
+      "companyName": "Yamaha",
+      "modelName": "PHX Phoenix Maple Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_5de26838",
+      "companyName": "Yamaha",
+      "modelName": "PHX Phoenix Maple Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_power-recording-9000_power-recording-birch-14x8_14x8_ply_birch_lacquer_triple-flange-yamaha-hoop_power-recording-_216a2436",
+      "companyName": "Yamaha",
+      "modelName": "Power Recording Birch 14x8",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x5-5_14x5-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0bf7d6d1",
+      "companyName": "Yamaha",
+      "modelName": "Recording Series Birch Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x6-5_14x6-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0ff83600",
+      "companyName": "Yamaha",
+      "modelName": "Recording Series Birch Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_rock-tour_rock-tour-ash-14x6_14x6_ply_ash_textured-ash-matte-finish_triple-flange-yamaha-hoop_rts1460_fc332589",
+      "companyName": "Yamaha",
+      "modelName": "Rock Tour Ash 14x6",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_8000-tour-custom_tour-custom-birch-mahogany-14x5-5_14x5-5_ply_birch_mahogany_lacquer_triple-flange-yamaha-hoop_80_a960452d",
+      "companyName": "Yamaha",
+      "modelName": "Tour Custom Birch/Mahogany 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "yamaha_5000-series_5000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_5000-s_ceef7d3b",
+      "companyName": "Yamaha",
+      "modelName": "5000 Series Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_7000-series_7000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_7000-s_5c0a7d93",
+      "companyName": "Yamaha",
+      "modelName": "7000 Series Steel 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_birch-custom-absolute_birch-custom-absolute-14x5-5_14x5-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_09b7376e",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Absolute 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_birch-custom-absolute_birch-custom-absolute-14x6-5_14x6-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_098b9023",
+      "companyName": "Yamaha",
+      "modelName": "Birch Custom Absolute 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_dave-weckl-signature-aluminum-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_signature-finish_triple-fl_fd0141b3",
+      "companyName": "Yamaha",
+      "modelName": "Dave Weckl Signature Aluminum 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_david-garibaldi-signature-14x3-5-brass-piccolo_14x3-5_metal_brass_rolled-metal-edge_black-brass-finish__4fac3007",
+      "companyName": "Yamaha",
+      "modelName": "David Garibaldi Signature 14x3.5 Brass Piccolo",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_yd-early-yamaha_early-yamaha-steel-snare-14x5_14x5_metal_steel_rolled-metal-edge_chrome_triple-flange-vintage-hoo_60c52d00",
+      "companyName": "Yamaha",
+      "modelName": "Early Yamaha Steel Snare 14x5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_jimmy-chamberlin-signature-14x5-5-steel_14x5-5_metal_steel_rolled-metal-edge_chrome-signature-finish_tr_7be59974",
+      "companyName": "Yamaha",
+      "modelName": "Jimmy Chamberlin Signature 14x5.5 Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x4_14x4_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-cast_74c940f3",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Absolute 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x5-5_14x5-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_ace8201a",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Absolute 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x6-5_14x6-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_35898c18",
+      "companyName": "Yamaha",
+      "modelName": "Maple Custom Absolute 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_sensitive-series_maple-sensitive-14x5-5_14x5-5_ply_maple_45-degree-sensitive-family_lacquer_triple-flange-yamaha-_7f8ab87f",
+      "companyName": "Yamaha",
+      "modelName": "Maple Sensitive 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_sensitive-series_maple-vintage-14x5-5_14x5-5_ply_maple_vintage-rounded-estimated_lacquer_triple-flange-yamaha-hoo_76655cd4",
+      "companyName": "Yamaha",
+      "modelName": "Maple Vintage 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_power-v-rock-tour-custom_power-v-steel-snare-14x6-5_14x6-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yam_d547f526",
+      "companyName": "Yamaha",
+      "modelName": "Power V Steel Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_recording-custom_recording-custom-birch-14x5-5_14x5-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__92828120",
+      "companyName": "Yamaha",
+      "modelName": "Recording Custom Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_recording-custom_recording-custom-birch-14x6-5_14x6-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__eaec2e70",
+      "companyName": "Yamaha",
+      "modelName": "Recording Custom Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_roy-haynes-signature-14x5-5-copper_14x5-5_metal_copper_rolled-metal-edge_copper-finish_triple-flange-ya_98b89288",
+      "companyName": "Yamaha",
+      "modelName": "Roy Haynes Signature 14x5.5 Copper",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_signature_shinya-signature-copper-14x5-5_14x5-5_metal_copper_rolled-metal-edge_copper-signature-artwork_triple-fl_89f8e83e",
+      "companyName": "Yamaha",
+      "modelName": "Shinya Signature Copper 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x3-5_14x3-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_61f12875",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x4_14x4_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finish_tr_bf0360ec",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x4",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_f67b6b69",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x6-5_14x6-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_46e4e453",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Aluminum Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x3-5_14x3-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_e064b0a6",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Bronze Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x5-5_14x5-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_4c7fa2c3",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Bronze Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x6-5_14x6-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_1b177f3e",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Bronze Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x3-5_14x3-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_d16df9c1",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Copper Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x5-5_14x5-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_84e5e7b4",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Copper Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x6-5_14x6-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_76ff6b36",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Copper Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "yamaha_absolute-hybrid-maple_absolute-hybrid-maple-14x6_14x6_ply_maple_wenge_maple_6-2_45-degree-r1-5_vintage-natural-la_7d03d57c",
+      "companyName": "Yamaha",
+      "modelName": "Absolute Hybrid Maple 14x6",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc",
+      "companyName": "Yamaha",
+      "modelName": "Gigmaker / Entry Steel Steel Snare 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+      "companyName": "Yamaha",
+      "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002",
+      "companyName": "Yamaha",
+      "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+      "companyName": "Yamaha",
+      "modelName": "Stage Custom Advantage Steel 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+      "companyName": "Yamaha",
+      "modelName": "Stage Custom Birch Steel Snare 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+      "companyName": "Yamaha",
+      "modelName": "Stage Custom Standard Steel 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+      "companyName": "Yamaha",
+      "modelName": "Steve Gadd Recording Custom Brass 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+      "companyName": "Yamaha",
+      "modelName": "Steve Gadd Recording Custom Brass 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+      "companyName": "Yamaha",
+      "modelName": "Steve Gadd Steel 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Brass Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Brass Metal Snare 14x4",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Brass Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Brass Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Steel Metal Snare 14x3.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Steel Metal Snare 14x4",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Steel Metal Snare 14x5.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e",
+      "companyName": "Yamaha",
+      "modelName": "Yamaha Steel Metal Snare 14x6.5",
+      "failedCoreFields": [
+        "snareBedType"
+      ],
+      "priorityScore": 4
+    }
+  ],
+  "reRingMaterial": []
+}

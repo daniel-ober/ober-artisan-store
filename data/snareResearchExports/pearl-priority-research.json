@@ -1,0 +1,3700 @@
+{
+  "shellThicknessMm": [
+    {
+      "id": "pearl_crystal-beat_crystal-beat-acrylic-snare_14x5-5_metal_acrylic_triple-flanged_3f90727c",
+      "companyName": "Pearl",
+      "modelName": "Crystal Beat Acrylic Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_dennis-chambers-signature_14x6-5_ply_maple_die-cast-mastercast_dc-1465_7e0e36a8",
+      "companyName": "Pearl",
+      "modelName": "Dennis Chambers Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-mahogany_14x6-5_ply_maple_mahogany_2a215002",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-poplar_14x6-5_ply_maple_poplar_3953e1f7",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Poplar",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-walnut_14x6-5_ply_maple_walnut_87fd989f",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_eric-singer-signature_14x6-5_ply_maple_die-cast-mastercast_es-1465_c18265f6",
+      "companyName": "Pearl",
+      "modelName": "Eric Singer Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-mahogany-poplar-snare_14x5-5_ply_mahogany_poplar_triple-flanged_99de96b6",
+      "companyName": "Pearl",
+      "modelName": "Export Mahogany/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-mahogany-poplar-snare_14x6-5_ply_mahogany_poplar_triple-flanged_1447bdcd",
+      "companyName": "Pearl",
+      "modelName": "Export Mahogany/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-maple-poplar-snare_14x5-5_ply_maple_poplar_triple-flanged_fbdc871c",
+      "companyName": "Pearl",
+      "modelName": "Export Maple/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-maple-poplar-snare_14x6-5_ply_maple_poplar_triple-flanged_4e5e12e4",
+      "companyName": "Pearl",
+      "modelName": "Export Maple/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-poplar-snare_14x5-5_ply_poplar_triple-flanged_22bd7492",
+      "companyName": "Pearl",
+      "modelName": "Export Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-poplar-snare_14x6-5_ply_poplar_triple-flanged_e1a06659",
+      "companyName": "Pearl",
+      "modelName": "Export Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_firecracker_firecracker-poplar_10x5_ply_poplar_triple-flanged_a910d21c",
+      "companyName": "Pearl",
+      "modelName": "Firecracker Poplar",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_firecracker_firecracker-steel_10x5_metal_steel_triple-flanged_321fb4ff",
+      "companyName": "Pearl",
+      "modelName": "Firecracker Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_forum_forum-poplar-snare_14x5-5_ply_poplar_triple-flanged_c31166dc",
+      "companyName": "Pearl",
+      "modelName": "Forum Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x3-5_ply_birch_die-cast-mastercast-on-many-catalog-versions_11b93a12",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x5_ply_birch_die-cast-mastercast-on-many-catalog-versions_0dcdda4b",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x6-5_ply_birch_die-cast-mastercast-on-many-catalog-versions_3ea513cd",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x8_ply_birch_die-cast-mastercast-on-many-catalog-versions_271c043c",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x3-5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_6db3e3e9",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_f3d4910e",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x6-5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_4ea98192",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x8_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_0092607b",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x3-5_ply_maple_die-cast-mastercast-on-many-catalog-versions_4e43e67d",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x5_ply_maple_die-cast-mastercast-on-many-catalog-versions_ef8980f5",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x6-5_ply_maple_die-cast-mastercast-on-many-catalog-versions_daf09575",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x8_ply_maple_die-cast-mastercast-on-many-catalog-versions_ee66baf4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-kapoor-fiberglass_14x6-5_ply_kapoor_fiberglass_b959114e",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Kapoor/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-mahogany-fiberglass_14x6-5_ply_mahogany_fiberglass_fb7512cf",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Mahogany/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-maple-fiberglass_14x6-5_ply_maple_fiberglass_ec4a5481",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Maple/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_ian-paice-signature_14x6-5_metal_steel_superhoop-ii_ip-1465_be7938c0",
+      "companyName": "Pearl",
+      "modelName": "Ian Paice Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_joey-jordison-signature_13x6-5_metal_steel_superhoop-ii_jj-1365_6c28caeb",
+      "companyName": "Pearl",
+      "modelName": "Joey Jordison Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_joey-kramer-signature_14x5-5_ply_maple_die-cast-mastercast_jd-1455_39973ef8",
+      "companyName": "Pearl",
+      "modelName": "Joey Kramer Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_m80_m80-maple-popcorn_10x4_ply_maple_triple-flanged_7e82673e",
+      "companyName": "Pearl",
+      "modelName": "M80 Maple Popcorn",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-birch-snare_14x5-5_ply_birch_die-cast-mastercast_8b28241b",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-birch-snare_14x6-5_ply_birch_die-cast-mastercast_0a6d1032",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x5-5_ply_mahogany_die-cast-mastercast_3014c555",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Mahogany Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x6-5_ply_mahogany_die-cast-mastercast_714abe0a",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Mahogany Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x5-5_ply_maple_die-cast-mastercast_a8374171",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x6-5_ply_maple_die-cast-mastercast_639005e7",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-birch-snare_14x5-5_ply_birch_die-cast-mastercast_28b7e6ed",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-birch-snare_14x6-5_ply_birch_die-cast-mastercast_4bf7a8b6",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-maple-snare_14x5-5_ply_maple_die-cast-mastercast_0612ae7e",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-maple-snare_14x6-5_ply_maple_die-cast-mastercast_311567b9",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_mike-mangini-signature_10x6-2_ply_birch_die-cast-mastercast_mm-1062_1ce28eba",
+      "companyName": "Pearl",
+      "modelName": "Mike Mangini Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_morgan-rose-signature_14x5_metal_steel_superhoop-ii_mr-1450_a9791ec6",
+      "companyName": "Pearl",
+      "modelName": "Morgan Rose Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x5_solid-shell_mahogany_triple-flanged-superhoop-styl_651ad3c2",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x6-5_solid-shell_mahogany_triple-flanged-superhoop-st_b0dfe373",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x8_solid-shell_mahogany_triple-flanged-superhoop-styl_a0975815",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x5_solid-shell_maple_triple-flanged-superhoop-style_34a819d2",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x6-5_solid-shell_maple_triple-flanged-superhoop-style_bae92604",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x8_solid-shell_maple_triple-flanged-superhoop-style_d414d909",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x5_solid-shell_walnut_triple-flanged-superhoop-style_b454a490",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x6-5_solid-shell_walnut_triple-flanged-superhoop-style_c5d8b16d",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x8_solid-shell_walnut_triple-flanged-superhoop-style_9095f6d0",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_omar-hakim-signature_13x5_ply_mahogany_superhoop-ii_oh-1350_1df97299",
+      "companyName": "Pearl",
+      "modelName": "Omar Hakim Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_piccolo_piccolo-maple_13x3_ply_maple_triple-flanged_f0821620",
+      "companyName": "Pearl",
+      "modelName": "Piccolo Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_piccolo_piccolo-steel_13x3_metal_steel_triple-flanged_56279896",
+      "companyName": "Pearl",
+      "modelName": "Piccolo Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_president-deluxe_president-deluxe-lauan-snare_14x5-5_ply_lauan_mahogany_triple-flanged_75293c04",
+      "companyName": "Pearl",
+      "modelName": "President Deluxe Lauan Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_president_president-phenolic-snare_14x5-5_ply_phenolic_mahogany_triple-flanged_c7f8cefb",
+      "companyName": "Pearl",
+      "modelName": "President Phenolic Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-brass_13x7_metal_brass_2-3mm-triple-flanged_b0f92a39",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-brass_14x6-5_metal_brass_2-3mm-triple-flanged_0dddb0a9",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-maple_13x7_ply_maple_2-3mm-triple-flanged_41d9d76b",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-maple_14x6-5_ply_maple_2-3mm-triple-flanged_d78b1683",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-steel_13x7_metal_steel_2-3mm-triple-flanged_7f3f1a76",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-steel_14x6-5_metal_steel_2-3mm-triple-flanged_f61d3e43",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_13x6-5_ply_maple_birch_die-cast-mastercast_8d0319c0",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x5_ply_maple_birch_die-cast-mastercast_675e9060",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x6-5_ply_maple_birch_die-cast-mastercast_61a547e9",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_13x6-5_ply_maple_birch_mastercast-die-cast_a8eee25c",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x5_ply_maple_birch_mastercast-die-cast_b9f8afd6",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x6-5_ply_maple_birch_mastercast-die-cast_8a092209",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x8_ply_maple_birch_mastercast-die-cast_05cb933d",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-birch-maple-snare_14x5-5_ply_birch_maple_superhoop-ii_4f825eac",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Birch/Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-birch-maple-snare_14x6-5_ply_birch_maple_superhoop-ii_67a45122",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Birch/Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-kapoor-birch-snare_14x5-5_ply_kapoor_birch_superhoop-ii_d6fd8818",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Kapoor/Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-kapoor-birch-snare_14x6-5_ply_kapoor_birch_superhoop-ii_7f1b10ec",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Kapoor/Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_effects_soprano-maple_12x7_ply_maple_triple-flanged_c7dedcbf",
+      "companyName": "Pearl",
+      "modelName": "Soprano Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_effects_soprano-steel_12x7_metal_steel_triple-flanged_56e410a2",
+      "companyName": "Pearl",
+      "modelName": "Soprano Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-ash_14x6-5_stave_ash_6c64a560",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Ash",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-maple_14x6-5_stave_maple_2c452b4e",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-walnut_14x6-5_stave_walnut_c1b8c1fd",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_steve-ferrone-signature-brass_14x6-5_metal_brass_die-cast-mastercast_2fce67b5",
+      "companyName": "Pearl",
+      "modelName": "Steve Ferrone Signature Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_tico-torres-signature_14x6-5_metal_brass_die-cast-mastercast_tr-1465_0184ae86",
+      "companyName": "Pearl",
+      "modelName": "Tico Torres Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_virgil-donati-signature_14x5_ply_maple_die-cast-mastercast_vg-1450_b761413c",
+      "companyName": "Pearl",
+      "modelName": "Virgil Donati Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_vision_vision-birch-snare_14x5-5_ply_birch_triple-flanged_85dcbc15",
+      "companyName": "Pearl",
+      "modelName": "Vision Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_vision_vision-birch-basswood-snare_14x5-5_ply_birch_wood_triple-flanged_efe64e2e",
+      "companyName": "Pearl",
+      "modelName": "Vision Birch/Basswood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    }
+  ],
+  "bearingEdge": [
+    {
+      "id": "pearl_crystal-beat_crystal-beat-acrylic-snare_14x5-5_metal_acrylic_triple-flanged_3f90727c",
+      "companyName": "Pearl",
+      "modelName": "Crystal Beat Acrylic Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_dennis-chambers-signature_14x6-5_ply_maple_die-cast-mastercast_dc-1465_7e0e36a8",
+      "companyName": "Pearl",
+      "modelName": "Dennis Chambers Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-mahogany_14x6-5_ply_maple_mahogany_2a215002",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-poplar_14x6-5_ply_maple_poplar_3953e1f7",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Poplar",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-walnut_14x6-5_ply_maple_walnut_87fd989f",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_eric-singer-signature_14x6-5_ply_maple_die-cast-mastercast_es-1465_c18265f6",
+      "companyName": "Pearl",
+      "modelName": "Eric Singer Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-mahogany-poplar-snare_14x5-5_ply_mahogany_poplar_triple-flanged_99de96b6",
+      "companyName": "Pearl",
+      "modelName": "Export Mahogany/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-mahogany-poplar-snare_14x6-5_ply_mahogany_poplar_triple-flanged_1447bdcd",
+      "companyName": "Pearl",
+      "modelName": "Export Mahogany/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-maple-poplar-snare_14x5-5_ply_maple_poplar_triple-flanged_fbdc871c",
+      "companyName": "Pearl",
+      "modelName": "Export Maple/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-maple-poplar-snare_14x6-5_ply_maple_poplar_triple-flanged_4e5e12e4",
+      "companyName": "Pearl",
+      "modelName": "Export Maple/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-poplar-snare_14x5-5_ply_poplar_triple-flanged_22bd7492",
+      "companyName": "Pearl",
+      "modelName": "Export Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-poplar-snare_14x6-5_ply_poplar_triple-flanged_e1a06659",
+      "companyName": "Pearl",
+      "modelName": "Export Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_firecracker_firecracker-poplar_10x5_ply_poplar_triple-flanged_a910d21c",
+      "companyName": "Pearl",
+      "modelName": "Firecracker Poplar",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_firecracker_firecracker-steel_10x5_metal_steel_triple-flanged_321fb4ff",
+      "companyName": "Pearl",
+      "modelName": "Firecracker Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_forum_forum-poplar-snare_14x5-5_ply_poplar_triple-flanged_c31166dc",
+      "companyName": "Pearl",
+      "modelName": "Forum Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x3-5_ply_birch_die-cast-mastercast-on-many-catalog-versions_11b93a12",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x5_ply_birch_die-cast-mastercast-on-many-catalog-versions_0dcdda4b",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x6-5_ply_birch_die-cast-mastercast-on-many-catalog-versions_3ea513cd",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x8_ply_birch_die-cast-mastercast-on-many-catalog-versions_271c043c",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x3-5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_6db3e3e9",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_f3d4910e",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x6-5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_4ea98192",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x8_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_0092607b",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x3-5_ply_maple_die-cast-mastercast-on-many-catalog-versions_4e43e67d",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x5_ply_maple_die-cast-mastercast-on-many-catalog-versions_ef8980f5",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x6-5_ply_maple_die-cast-mastercast-on-many-catalog-versions_daf09575",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x8_ply_maple_die-cast-mastercast-on-many-catalog-versions_ee66baf4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-kapoor-fiberglass_14x6-5_ply_kapoor_fiberglass_b959114e",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Kapoor/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-mahogany-fiberglass_14x6-5_ply_mahogany_fiberglass_fb7512cf",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Mahogany/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-maple-fiberglass_14x6-5_ply_maple_fiberglass_ec4a5481",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Maple/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_ian-paice-signature_14x6-5_metal_steel_superhoop-ii_ip-1465_be7938c0",
+      "companyName": "Pearl",
+      "modelName": "Ian Paice Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_joey-jordison-signature_13x6-5_metal_steel_superhoop-ii_jj-1365_6c28caeb",
+      "companyName": "Pearl",
+      "modelName": "Joey Jordison Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_joey-kramer-signature_14x5-5_ply_maple_die-cast-mastercast_jd-1455_39973ef8",
+      "companyName": "Pearl",
+      "modelName": "Joey Kramer Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_m80_m80-maple-popcorn_10x4_ply_maple_triple-flanged_7e82673e",
+      "companyName": "Pearl",
+      "modelName": "M80 Maple Popcorn",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-birch-snare_14x5-5_ply_birch_die-cast-mastercast_8b28241b",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-birch-snare_14x6-5_ply_birch_die-cast-mastercast_0a6d1032",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x5-5_ply_mahogany_die-cast-mastercast_3014c555",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Mahogany Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x6-5_ply_mahogany_die-cast-mastercast_714abe0a",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Mahogany Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x5-5_ply_maple_die-cast-mastercast_a8374171",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x6-5_ply_maple_die-cast-mastercast_639005e7",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-birch-snare_14x5-5_ply_birch_die-cast-mastercast_28b7e6ed",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-birch-snare_14x6-5_ply_birch_die-cast-mastercast_4bf7a8b6",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-maple-snare_14x5-5_ply_maple_die-cast-mastercast_0612ae7e",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-maple-snare_14x6-5_ply_maple_die-cast-mastercast_311567b9",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_mike-mangini-signature_10x6-2_ply_birch_die-cast-mastercast_mm-1062_1ce28eba",
+      "companyName": "Pearl",
+      "modelName": "Mike Mangini Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_morgan-rose-signature_14x5_metal_steel_superhoop-ii_mr-1450_a9791ec6",
+      "companyName": "Pearl",
+      "modelName": "Morgan Rose Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x5_solid-shell_mahogany_triple-flanged-superhoop-styl_651ad3c2",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x6-5_solid-shell_mahogany_triple-flanged-superhoop-st_b0dfe373",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x8_solid-shell_mahogany_triple-flanged-superhoop-styl_a0975815",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x5_solid-shell_maple_triple-flanged-superhoop-style_34a819d2",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x6-5_solid-shell_maple_triple-flanged-superhoop-style_bae92604",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x8_solid-shell_maple_triple-flanged-superhoop-style_d414d909",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x5_solid-shell_walnut_triple-flanged-superhoop-style_b454a490",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x6-5_solid-shell_walnut_triple-flanged-superhoop-style_c5d8b16d",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x8_solid-shell_walnut_triple-flanged-superhoop-style_9095f6d0",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_omar-hakim-signature_13x5_ply_mahogany_superhoop-ii_oh-1350_1df97299",
+      "companyName": "Pearl",
+      "modelName": "Omar Hakim Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_piccolo_piccolo-maple_13x3_ply_maple_triple-flanged_f0821620",
+      "companyName": "Pearl",
+      "modelName": "Piccolo Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_piccolo_piccolo-steel_13x3_metal_steel_triple-flanged_56279896",
+      "companyName": "Pearl",
+      "modelName": "Piccolo Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_president-deluxe_president-deluxe-lauan-snare_14x5-5_ply_lauan_mahogany_triple-flanged_75293c04",
+      "companyName": "Pearl",
+      "modelName": "President Deluxe Lauan Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_president_president-phenolic-snare_14x5-5_ply_phenolic_mahogany_triple-flanged_c7f8cefb",
+      "companyName": "Pearl",
+      "modelName": "President Phenolic Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-brass_13x7_metal_brass_2-3mm-triple-flanged_b0f92a39",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-brass_14x6-5_metal_brass_2-3mm-triple-flanged_0dddb0a9",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-maple_13x7_ply_maple_2-3mm-triple-flanged_41d9d76b",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-maple_14x6-5_ply_maple_2-3mm-triple-flanged_d78b1683",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-steel_13x7_metal_steel_2-3mm-triple-flanged_7f3f1a76",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-steel_14x6-5_metal_steel_2-3mm-triple-flanged_f61d3e43",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_13x6-5_ply_maple_birch_die-cast-mastercast_8d0319c0",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x5_ply_maple_birch_die-cast-mastercast_675e9060",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x6-5_ply_maple_birch_die-cast-mastercast_61a547e9",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_13x6-5_ply_maple_birch_mastercast-die-cast_a8eee25c",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x5_ply_maple_birch_mastercast-die-cast_b9f8afd6",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x6-5_ply_maple_birch_mastercast-die-cast_8a092209",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x8_ply_maple_birch_mastercast-die-cast_05cb933d",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-birch-maple-snare_14x5-5_ply_birch_maple_superhoop-ii_4f825eac",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Birch/Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-birch-maple-snare_14x6-5_ply_birch_maple_superhoop-ii_67a45122",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Birch/Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-kapoor-birch-snare_14x5-5_ply_kapoor_birch_superhoop-ii_d6fd8818",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Kapoor/Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-kapoor-birch-snare_14x6-5_ply_kapoor_birch_superhoop-ii_7f1b10ec",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Kapoor/Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_effects_soprano-maple_12x7_ply_maple_triple-flanged_c7dedcbf",
+      "companyName": "Pearl",
+      "modelName": "Soprano Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_effects_soprano-steel_12x7_metal_steel_triple-flanged_56e410a2",
+      "companyName": "Pearl",
+      "modelName": "Soprano Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-ash_14x6-5_stave_ash_6c64a560",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Ash",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-maple_14x6-5_stave_maple_2c452b4e",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-walnut_14x6-5_stave_walnut_c1b8c1fd",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_steve-ferrone-signature-brass_14x6-5_metal_brass_die-cast-mastercast_2fce67b5",
+      "companyName": "Pearl",
+      "modelName": "Steve Ferrone Signature Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_tico-torres-signature_14x6-5_metal_brass_die-cast-mastercast_tr-1465_0184ae86",
+      "companyName": "Pearl",
+      "modelName": "Tico Torres Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_virgil-donati-signature_14x5_ply_maple_die-cast-mastercast_vg-1450_b761413c",
+      "companyName": "Pearl",
+      "modelName": "Virgil Donati Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_vision_vision-birch-snare_14x5-5_ply_birch_triple-flanged_85dcbc15",
+      "companyName": "Pearl",
+      "modelName": "Vision Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_vision_vision-birch-basswood-snare_14x5-5_ply_birch_wood_triple-flanged_efe64e2e",
+      "companyName": "Pearl",
+      "modelName": "Vision Birch/Basswood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+      "companyName": "Pearl",
+      "modelName": "Chad Smith Signature",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+      "companyName": "Pearl",
+      "modelName": "Decade Maple Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+      "companyName": "Pearl",
+      "modelName": "Decade Maple Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x6-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_2eb75db4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x8_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_3cea84d6",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x3-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_f9aae6e5",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_6af96288",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x6-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bc4caad",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x8_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bed3a7f",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+      "companyName": "Pearl",
+      "modelName": "Masters Maple Complete Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+      "companyName": "Pearl",
+      "modelName": "Masters Maple Complete Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+      "companyName": "Pearl",
+      "modelName": "Reference Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+      "companyName": "Pearl",
+      "modelName": "Reference Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+      "companyName": "Pearl",
+      "modelName": "Reference Cast Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+      "companyName": "Pearl",
+      "modelName": "Reference Cast Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Aluminum Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Aluminum Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Brass Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Brass Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Steel Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Steel Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+      "companyName": "Pearl",
+      "modelName": "Ultracast Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+      "companyName": "Pearl",
+      "modelName": "Ultracast Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "snareBedType": [
+    {
+      "id": "pearl_crystal-beat_crystal-beat-acrylic-snare_14x5-5_metal_acrylic_triple-flanged_3f90727c",
+      "companyName": "Pearl",
+      "modelName": "Crystal Beat Acrylic Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_dennis-chambers-signature_14x6-5_ply_maple_die-cast-mastercast_dc-1465_7e0e36a8",
+      "companyName": "Pearl",
+      "modelName": "Dennis Chambers Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-mahogany_14x6-5_ply_maple_mahogany_2a215002",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-poplar_14x6-5_ply_maple_poplar_3953e1f7",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Poplar",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_duoluxe_duoluxe-maple-walnut_14x6-5_ply_maple_walnut_87fd989f",
+      "companyName": "Pearl",
+      "modelName": "Duoluxe Maple/Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_eric-singer-signature_14x6-5_ply_maple_die-cast-mastercast_es-1465_c18265f6",
+      "companyName": "Pearl",
+      "modelName": "Eric Singer Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-mahogany-poplar-snare_14x5-5_ply_mahogany_poplar_triple-flanged_99de96b6",
+      "companyName": "Pearl",
+      "modelName": "Export Mahogany/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-mahogany-poplar-snare_14x6-5_ply_mahogany_poplar_triple-flanged_1447bdcd",
+      "companyName": "Pearl",
+      "modelName": "Export Mahogany/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-maple-poplar-snare_14x5-5_ply_maple_poplar_triple-flanged_fbdc871c",
+      "companyName": "Pearl",
+      "modelName": "Export Maple/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-maple-poplar-snare_14x6-5_ply_maple_poplar_triple-flanged_4e5e12e4",
+      "companyName": "Pearl",
+      "modelName": "Export Maple/Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-poplar-snare_14x5-5_ply_poplar_triple-flanged_22bd7492",
+      "companyName": "Pearl",
+      "modelName": "Export Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_export_export-poplar-snare_14x6-5_ply_poplar_triple-flanged_e1a06659",
+      "companyName": "Pearl",
+      "modelName": "Export Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_firecracker_firecracker-poplar_10x5_ply_poplar_triple-flanged_a910d21c",
+      "companyName": "Pearl",
+      "modelName": "Firecracker Poplar",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_firecracker_firecracker-steel_10x5_metal_steel_triple-flanged_321fb4ff",
+      "companyName": "Pearl",
+      "modelName": "Firecracker Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_forum_forum-poplar-snare_14x5-5_ply_poplar_triple-flanged_c31166dc",
+      "companyName": "Pearl",
+      "modelName": "Forum Poplar Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x3-5_ply_birch_die-cast-mastercast-on-many-catalog-versions_11b93a12",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x5_ply_birch_die-cast-mastercast-on-many-catalog-versions_0dcdda4b",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x6-5_ply_birch_die-cast-mastercast-on-many-catalog-versions_3ea513cd",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-birch_14x8_ply_birch_die-cast-mastercast-on-many-catalog-versions_271c043c",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x3-5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_6db3e3e9",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_f3d4910e",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x6-5_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_4ea98192",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-mahogany_14x8_ply_mahogany_die-cast-mastercast-on-many-catalog-versions_0092607b",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x3-5_ply_maple_die-cast-mastercast-on-many-catalog-versions_4e43e67d",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x5_ply_maple_die-cast-mastercast-on-many-catalog-versions_ef8980f5",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x6-5_ply_maple_die-cast-mastercast-on-many-catalog-versions_daf09575",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_free-floating_free-floating-maple_14x8_ply_maple_die-cast-mastercast-on-many-catalog-versions_ee66baf4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-kapoor-fiberglass_14x6-5_ply_kapoor_fiberglass_b959114e",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Kapoor/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-mahogany-fiberglass_14x6-5_ply_mahogany_fiberglass_fb7512cf",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Mahogany/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_hybrid-exotic_hybrid-exotic-maple-fiberglass_14x6-5_ply_maple_fiberglass_ec4a5481",
+      "companyName": "Pearl",
+      "modelName": "Hybrid Exotic Maple/Fiberglass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_ian-paice-signature_14x6-5_metal_steel_superhoop-ii_ip-1465_be7938c0",
+      "companyName": "Pearl",
+      "modelName": "Ian Paice Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_joey-jordison-signature_13x6-5_metal_steel_superhoop-ii_jj-1365_6c28caeb",
+      "companyName": "Pearl",
+      "modelName": "Joey Jordison Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_joey-kramer-signature_14x5-5_ply_maple_die-cast-mastercast_jd-1455_39973ef8",
+      "companyName": "Pearl",
+      "modelName": "Joey Kramer Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_m80_m80-maple-popcorn_10x4_ply_maple_triple-flanged_7e82673e",
+      "companyName": "Pearl",
+      "modelName": "M80 Maple Popcorn",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-birch-snare_14x5-5_ply_birch_die-cast-mastercast_8b28241b",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-birch-snare_14x6-5_ply_birch_die-cast-mastercast_0a6d1032",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x5-5_ply_mahogany_die-cast-mastercast_3014c555",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Mahogany Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x6-5_ply_mahogany_die-cast-mastercast_714abe0a",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Mahogany Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x5-5_ply_maple_die-cast-mastercast_a8374171",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x6-5_ply_maple_die-cast-mastercast_639005e7",
+      "companyName": "Pearl",
+      "modelName": "Masters Custom Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-birch-snare_14x5-5_ply_birch_die-cast-mastercast_28b7e6ed",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-birch-snare_14x6-5_ply_birch_die-cast-mastercast_4bf7a8b6",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-maple-snare_14x5-5_ply_maple_die-cast-mastercast_0612ae7e",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_masters-premium_masters-premium-maple-snare_14x6-5_ply_maple_die-cast-mastercast_311567b9",
+      "companyName": "Pearl",
+      "modelName": "Masters Premium Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_mike-mangini-signature_10x6-2_ply_birch_die-cast-mastercast_mm-1062_1ce28eba",
+      "companyName": "Pearl",
+      "modelName": "Mike Mangini Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_morgan-rose-signature_14x5_metal_steel_superhoop-ii_mr-1450_a9791ec6",
+      "companyName": "Pearl",
+      "modelName": "Morgan Rose Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x5_solid-shell_mahogany_triple-flanged-superhoop-styl_651ad3c2",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x6-5_solid-shell_mahogany_triple-flanged-superhoop-st_b0dfe373",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-mahogany_14x8_solid-shell_mahogany_triple-flanged-superhoop-styl_a0975815",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Mahogany",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x5_solid-shell_maple_triple-flanged-superhoop-style_34a819d2",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x6-5_solid-shell_maple_triple-flanged-superhoop-style_bae92604",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-maple_14x8_solid-shell_maple_triple-flanged-superhoop-style_d414d909",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x5_solid-shell_walnut_triple-flanged-superhoop-style_b454a490",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x6-5_solid-shell_walnut_triple-flanged-superhoop-style_c5d8b16d",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_music-city-custom_music-city-custom-free-floating-walnut_14x8_solid-shell_walnut_triple-flanged-superhoop-style_9095f6d0",
+      "companyName": "Pearl",
+      "modelName": "Music City Custom Free Floating Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_omar-hakim-signature_13x5_ply_mahogany_superhoop-ii_oh-1350_1df97299",
+      "companyName": "Pearl",
+      "modelName": "Omar Hakim Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_piccolo_piccolo-maple_13x3_ply_maple_triple-flanged_f0821620",
+      "companyName": "Pearl",
+      "modelName": "Piccolo Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_piccolo_piccolo-steel_13x3_metal_steel_triple-flanged_56279896",
+      "companyName": "Pearl",
+      "modelName": "Piccolo Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_president-deluxe_president-deluxe-lauan-snare_14x5-5_ply_lauan_mahogany_triple-flanged_75293c04",
+      "companyName": "Pearl",
+      "modelName": "President Deluxe Lauan Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_president_president-phenolic-snare_14x5-5_ply_phenolic_mahogany_triple-flanged_c7f8cefb",
+      "companyName": "Pearl",
+      "modelName": "President Phenolic Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-brass_13x7_metal_brass_2-3mm-triple-flanged_b0f92a39",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-brass_14x6-5_metal_brass_2-3mm-triple-flanged_0dddb0a9",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-maple_13x7_ply_maple_2-3mm-triple-flanged_41d9d76b",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-maple_14x6-5_ply_maple_2-3mm-triple-flanged_d78b1683",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-steel_13x7_metal_steel_2-3mm-triple-flanged_7f3f1a76",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_primal-snare-collective_primal-snare-collective-steel_14x6-5_metal_steel_2-3mm-triple-flanged_f61d3e43",
+      "companyName": "Pearl",
+      "modelName": "Primal Snare Collective Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_13x6-5_ply_maple_birch_die-cast-mastercast_8d0319c0",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x5_ply_maple_birch_die-cast-mastercast_675e9060",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x6-5_ply_maple_birch_die-cast-mastercast_61a547e9",
+      "companyName": "Pearl",
+      "modelName": "Reference 20-ply Maple/Birch",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_13x6-5_ply_maple_birch_mastercast-die-cast_a8eee25c",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x5_ply_maple_birch_mastercast-die-cast_b9f8afd6",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x6-5_ply_maple_birch_mastercast-die-cast_8a092209",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x8_ply_maple_birch_mastercast-die-cast_05cb933d",
+      "companyName": "Pearl",
+      "modelName": "Reference One Maple/Birch 20-ply",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-birch-maple-snare_14x5-5_ply_birch_maple_superhoop-ii_4f825eac",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Birch/Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-birch-maple-snare_14x6-5_ply_birch_maple_superhoop-ii_67a45122",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Birch/Maple Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-kapoor-birch-snare_14x5-5_ply_kapoor_birch_superhoop-ii_d6fd8818",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Kapoor/Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_session-studio_session-studio-kapoor-birch-snare_14x6-5_ply_kapoor_birch_superhoop-ii_7f1b10ec",
+      "companyName": "Pearl",
+      "modelName": "Session Studio Kapoor/Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_effects_soprano-maple_12x7_ply_maple_triple-flanged_c7dedcbf",
+      "companyName": "Pearl",
+      "modelName": "Soprano Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_effects_soprano-steel_12x7_metal_steel_triple-flanged_56e410a2",
+      "companyName": "Pearl",
+      "modelName": "Soprano Steel",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-ash_14x6-5_stave_ash_6c64a560",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Ash",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-maple_14x6-5_stave_maple_2c452b4e",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Maple",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_stave-craft_stave-craft-walnut_14x6-5_stave_walnut_c1b8c1fd",
+      "companyName": "Pearl",
+      "modelName": "Stave Craft Walnut",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_steve-ferrone-signature-brass_14x6-5_metal_brass_die-cast-mastercast_2fce67b5",
+      "companyName": "Pearl",
+      "modelName": "Steve Ferrone Signature Brass",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_tico-torres-signature_14x6-5_metal_brass_die-cast-mastercast_tr-1465_0184ae86",
+      "companyName": "Pearl",
+      "modelName": "Tico Torres Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_virgil-donati-signature_14x5_ply_maple_die-cast-mastercast_vg-1450_b761413c",
+      "companyName": "Pearl",
+      "modelName": "Virgil Donati Signature",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_vision_vision-birch-snare_14x5-5_ply_birch_triple-flanged_85dcbc15",
+      "companyName": "Pearl",
+      "modelName": "Vision Birch Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_vision_vision-birch-basswood-snare_14x5-5_ply_birch_wood_triple-flanged_efe64e2e",
+      "companyName": "Pearl",
+      "modelName": "Vision Birch/Basswood Snare",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 14
+    },
+    {
+      "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+      "companyName": "Pearl",
+      "modelName": "Chad Smith Signature",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+      "companyName": "Pearl",
+      "modelName": "Decade Maple Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+      "companyName": "Pearl",
+      "modelName": "Decade Maple Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x6-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_2eb75db4",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x8_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_3cea84d6",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Copper",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x3-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_f9aae6e5",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_6af96288",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x6-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bc4caad",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x8_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bed3a7f",
+      "companyName": "Pearl",
+      "modelName": "Free Floating Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+      "companyName": "Pearl",
+      "modelName": "Masters Maple Complete Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+      "companyName": "Pearl",
+      "modelName": "Masters Maple Complete Maple Snare",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Maple",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+      "companyName": "Pearl",
+      "modelName": "Modern Utility Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+      "companyName": "Pearl",
+      "modelName": "Reference Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+      "companyName": "Pearl",
+      "modelName": "Reference Brass",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+      "companyName": "Pearl",
+      "modelName": "Reference Cast Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+      "companyName": "Pearl",
+      "modelName": "Reference Cast Steel",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Aluminum Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Aluminum Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Brass Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Brass Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Steel Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+      "companyName": "Pearl",
+      "modelName": "Sensitone Heritage Steel Alloy",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+      "companyName": "Pearl",
+      "modelName": "Ultracast Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+      "companyName": "Pearl",
+      "modelName": "Ultracast Aluminum",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "priorityScore": 9
+    }
+  ],
+  "reRingMaterial": []
+}
