@@ -12,7 +12,7 @@ function getNestedValue(object, path) {
 
 function isMissingValue(value) {
 
-  return value === undefined || value === null || value === '';
+  return value === undefined || value === '';
 
 }
 
