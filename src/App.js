@@ -126,6 +126,8 @@ import HulaGiftPage from './components/HulaGiftPage.js';
 
 import AttachUserResourcesTool from './components/AttachUserResourcesTool';
 
+import { VoicePlayground } from './legacyPrint/ui/VoicePlayground.js';
+
 import SoundLegendPortal from './components/SoundLegendPortal/SoundLegendPortal.js';
 
 import ArtisanPortalResetPassword from './components/ArtisanPortalResetPassword.js';
@@ -137,31 +139,20 @@ import './App.css';
 /** Temporary placeholders */
 
 function LegacyBrowse() {
-
   return (
-
     <div style={{ padding: 20 }}>
-
       Browse legacy artists / filters (placeholder)
-
     </div>
-
   );
-
 }
 
 function LegacyTuningLearn() {
-
   return (
-
     <div style={{ padding: 20 }}>What is Legacy Tuning™ (placeholder)</div>
-
   );
-
 }
 
 function App() {
-
   const { user, isAdmin } = useAuth();
 
   const [navbarLinks, setNavbarLinks] = useState([]);
@@ -169,17 +160,13 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   const [isDarkMode, setIsDarkMode] = useState(
-
     () => localStorage.getItem('darkMode') === 'true'
-
   );
 
   const location = useLocation();
 
   const routeToTabMap = useMemo(
-
     () => ({
-
       '/': 'Home',
 
       '/about': 'About',
@@ -221,23 +208,18 @@ function App() {
       '/artisan-shop/soundlegend': 'SoundLegend',
 
       '/soundlegend-questionnaire': 'SoundLegendQuestionnaire',
-
     }),
 
     []
-
   );
 
   useEffect(() => {
-
     document.body.classList.toggle('light', !isDarkMode);
 
     document.body.classList.toggle('dark', isDarkMode);
-
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
-
     const newMode = !isDarkMode;
 
     setIsDarkMode(newMode);
@@ -247,17 +229,12 @@ function App() {
     document.body.classList.toggle('dark', newMode);
 
     document.body.classList.toggle('light', !newMode);
-
   };
 
   useEffect(() => {
-
     const fetchSettings = async () => {
-
       try {
-
         const navbarLinksCollection = collection(
-
           db,
 
           'settings',
@@ -265,7 +242,6 @@ function App() {
           'site',
 
           'navbarLinks'
-
         );
 
         const snapshot = await getDocs(navbarLinksCollection);
@@ -277,31 +253,22 @@ function App() {
           .sort((a, b) => (a.order || 0) - (b.order || 0));
 
         const ourCraftLink = links.find(
-
           (l) => (l.name || '').toLowerCase() === 'our-craft'
-
         );
 
         const foundersBatchLink = links.find(
-
           (l) => (l.name || '').toLowerCase() === 'founders-batch'
-
         );
 
         const existingArtisanShopLink = links.find(
-
           (l) => (l.name || '').toLowerCase() === 'artisan-shop'
-
         );
 
         const merchLink = links.find(
-
           (l) => (l.name || '').toLowerCase() === 'merch'
-
         );
 
         const ourCollectionReplacement = {
-
           id: 'nav-our-collection-replacement',
 
           name: 'our-collection',
@@ -313,21 +280,14 @@ function App() {
           access: ['public', 'admin', 'soundlegend'],
 
           order:
-
             typeof foundersBatchLink?.order === 'number'
-
               ? foundersBatchLink.order
-
               : typeof ourCraftLink?.order === 'number'
-
                 ? ourCraftLink.order + 1
-
                 : 3,
-
         };
 
         const artisanShopReplacement = {
-
           id: 'nav-artisan-shop-replacement',
 
           name: 'artisan-shop',
@@ -339,35 +299,23 @@ function App() {
           access: ['public', 'admin', 'soundlegend'],
 
           order:
-
             typeof existingArtisanShopLink?.order === 'number'
-
               ? existingArtisanShopLink.order
-
               : typeof merchLink?.order === 'number'
-
                 ? merchLink.order - 1
-
                 : 4,
-
         };
 
         const transformed = links
 
           .filter((l) => {
-
             const lower = (l.name || '').toLowerCase();
 
             return (
-
               lower !== 'artisan-shop' &&
-
               lower !== 'founders-batch' &&
-
               lower !== 'founders-toast'
-
             );
-
           })
 
           .concat(ourCollectionReplacement, artisanShopReplacement)
@@ -375,29 +323,51 @@ function App() {
           .sort((a, b) => (a.order || 0) - (b.order || 0));
 
         setNavbarLinks(transformed);
-
       } catch (err) {
-
         console.error('❌ Error fetching navbar links:', err);
-
       } finally {
-
         setLoading(false);
-
       }
-
     };
 
     fetchSettings();
-
   }, []);
 
+  const voicePlaygroundFirestoreAdapter = useMemo(
+    () => ({
+      collection: (collectionName) => ({
+        get: async () => {
+          try {
+            const snapshot = await getDocs(collection(db, collectionName));
+
+            return {
+              docs: snapshot.docs.map((docSnap) => ({
+                id: docSnap.id,
+
+                data: () => docSnap.data(),
+              })),
+            };
+          } catch (error) {
+            console.warn(
+              `[VoicePlayground] Could not read ${collectionName}:`,
+
+              error
+            );
+
+            return {
+              docs: [],
+            };
+          }
+        },
+      }),
+    }),
+
+    []
+  );
+
   const isLinkEnabled = (linkName) => {
-
     const link = navbarLinks.find(
-
       (l) => l.name?.toLowerCase() === linkName.toLowerCase()
-
     );
 
     if (!link) return false;
@@ -409,57 +379,41 @@ function App() {
     if (user && link.access?.includes('soundlegend')) return true;
 
     return false;
-
   };
 
   if (loading) return <div>Loading...</div>;
 
   return (
-
     <DarkModeProvider>
-
       <ImpersonationProvider>
-
         <ScrollToTop />
 
         <Toaster position="bottom-center" />
 
         <div className="app-container">
-
           <NavBar
-
             navbarLinks={navbarLinks}
-
             isDarkMode={isDarkMode}
-
             toggleDarkMode={toggleDarkMode}
-
           />
 
           <HomeBackground />
 
           <Routes>
-
             <Route path="/" element={<Home />} />
 
             <Route path="/our-craft" element={<OurCraft />} />
 
             <Route
-
               path="/our-collection"
-
               element={<ArtisanDrums isDarkMode={isDarkMode} />}
-
             />
 
             <Route path="/legacyprint" element={<LegacyPrintEnginePage />} />
 
             <Route
-
               path="/founders-batch"
-
               element={<Navigate to="/our-collection" replace />}
-
             />
 
             <Route path="/cart" element={<Cart />} />
@@ -475,297 +429,209 @@ function App() {
             <Route path="/terms-of-service" element={<TermsOfService />} />
 
             <Route
-
               path="/custom-drum-builder"
-
               element={<CustomDrumBuilder />}
-
             />
 
             <Route
-
               path="/legacy"
-
               element={
-
                 <PrivateRoute element={<SoundLegendPortal />} soundlegendOnly />
-
               }
-
             />
 
             <Route
-
               path="/artisan-portal/signin"
-
               element={<SoundlegendSignin />}
-
             />
 
             <Route
-
               path="/artisan-portal/reset-password"
-
               element={<ArtisanPortalResetPassword />}
-
             />
 
             <Route
-
               path="/soundlegends/signin"
-
               element={<Navigate to="/artisan-portal/signin" replace />}
-
             />
 
             <Route
-
               path="/original-artisan-shop"
-
               element={
-
                 isLinkEnabled('artisan-shop') ? (
-
                   <OriginalArtisanShop />
-
                 ) : (
-
                   <NotFound />
-
                 )
-
               }
-
             />
 
             <Route
-
               path="/gallery"
-
               element={isLinkEnabled('gallery') ? <Gallery /> : <NotFound />}
-
             />
 
             <Route
-
               path="/admin/artisan-tools/stave-calculator"
-
               element={<PrivateRoute element={<StaveCalculator />} adminOnly />}
-
             />
 
             <Route
+              path="/admin/legacyprint/playground"
+              element={
+                <PrivateRoute
+                  adminOnly
+                  element={
+                    <div
+                      style={{
+                        minHeight: '100vh',
 
+                        padding: 24,
+
+                        background: '#050814',
+
+                        position: 'relative',
+
+                        zIndex: 5,
+                      }}
+                    >
+                      <VoicePlayground
+                        firestore={voicePlaygroundFirestoreAdapter}
+                      />
+                    </div>
+                  }
+                />
+              }
+            />
+
+            <Route
               path="/custom-shop"
-
               element={
-
                 isLinkEnabled('custom-shop') ? <CustomShop /> : <NotFound />
-
               }
-
             />
 
             <Route
-
               path="/products"
-
               element={
-
                 isLinkEnabled('products') || isAdmin ? (
-
                   <Products />
-
                 ) : (
-
                   <NotFound />
-
                 )
-
               }
-
             />
 
             <Route path="/merch" element={<Products isMerchPage={true} />} />
 
             <Route
-
               path="/artisan-shop"
-
               element={
-
                 <PreOrderPage isAdmin={isAdmin} isDarkMode={isDarkMode} />
-
               }
-
             />
 
             <Route path="/drum-selector" element={<DrumSelector />} />
 
             <Route
-
               path="/projects/:projectId"
-
               element={<ProjectRoute element={ProjectDetailPage} />}
-
             />
 
             <Route
-
               path="/artisan-shop/heritage"
-
               element={<HeritageProductDetail />}
-
             />
 
             <Route
-
               path="/artisan-shop/feuzon"
-
               element={<FeuzonProductDetail />}
-
             />
 
             <Route
-
               path="/artisan-shop/soundlegend"
-
               element={<SoundlegendProductDetail />}
-
             />
 
             <Route
-
               path="/soundlegend-questionnaire/:token"
-
               element={<SoundLegendQuestionnaire />}
-
             />
 
             <Route path="/hula" element={<HulaGiftPage />} />
 
             <Route
-
               path="/artisan-shop/soundlegend/vault"
-
               element={<LegacyVaultHome />}
-
             />
 
             <Route
-
               path="/artisan-shop/soundlegend/vault/browse"
-
               element={<LegacyBrowse />}
-
             />
 
             <Route
-
               path="/artisan-shop/soundlegend/vault/learn/legacy-tuning"
-
               element={<LegacyTuningLearn />}
-
             />
 
             <Route
-
               path="/artisan-shop/founders-toast"
-
               element={<FoundersToastProductDetail />}
-
             />
 
             <Route
-
               path="/admin/artisan-tools/inventory-tracker"
-
               element={
-
                 <PrivateRoute element={<InventoryTracker />} adminOnly />
-
               }
-
             />
 
             <Route
-
               path="/admin/tools/attach-user-resources"
-
               element={
-
                 <PrivateRoute element={<AttachUserResourcesTool />} adminOnly />
-
               }
-
             />
 
             <Route
-
               path="/artisan-shop/:productId"
-
               element={<ProductDetail key={location.pathname} />}
-
             />
 
             <Route
-
               path="/merch/:productId"
-
               element={<ProductDetail key={location.pathname} />}
-
             />
 
             <Route
-
               path="/artisanseries/:productId"
-
               element={
-
                 <Navigate
-
                   to={`/artisan-shop/${window.location.pathname.split('/').pop()}`}
-
                   replace
-
                 />
-
               }
-
             />
 
             <Route
-
               path="/products/:productId"
-
               element={
-
                 <Navigate
-
                   to={`/merch/${location.pathname.split('/').pop()}`}
-
                   replace
-
                 />
-
               }
-
             />
 
             <Route
-
               path="/account"
-
               element={<PrivateRoute element={<AccountPage />} />}
-
             />
 
             <Route
-
               path="/admin"
-
               element={<PrivateRoute element={<AdminDashboard />} adminOnly />}
-
             />
 
             <Route path="/admin-signin" element={<AdminSignin />} />
@@ -779,11 +645,8 @@ function App() {
             <Route path="/verify/:serial" element={<VerifyDrumBySerial />} />
 
             <Route
-
               path="/artisan-shop/soundlegend/:serial"
-
               element={<SoundLegendShowroom />}
-
             />
 
             <Route path="/endorsements" element={<Endorsements />} />
@@ -791,39 +654,25 @@ function App() {
             <Route path="/endorsements/apply" element={<EndorsementForm />} />
 
             <Route
-
               path="/admin/soundlegend-vault"
-
               element={
-
                 <PrivateRoute element={<SoundLegendVaultCreator />} adminOnly />
-
               }
-
             />
 
             <Route
-
               path="/admin/artisan-tools/resin-accent-generator"
-
               element={<ResinAccentGenerator />}
-
             />
 
             <Route path="*" element={<Navigate to="/" replace />} />
-
           </Routes>
 
           <Footer navbarLinks={navbarLinks} />
-
         </div>
-
       </ImpersonationProvider>
-
     </DarkModeProvider>
-
   );
-
 }
 
 export default App;
