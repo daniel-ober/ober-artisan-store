@@ -1,0 +1,771 @@
+{
+
+  "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5": {
+
+    "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Mastercraft",
+
+    "modelName": "Mastercraft Bell Brass 1980s 14x6.5",
+
+    "patchName": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "cast metal",
+
+    "shellMaterial1": "bell brass",
+
+    "shellMaterial2": "bronze",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - cast metal shell",
+
+    "shellThicknessMm": 3,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "machined cast metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "cast bell brass",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Mastercraft / Imperialstar-era high-tension lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama roller-action / Mastercraft-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "PL565N / BB1",
+
+    "yearInProduction": "1980s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.9,
+
+    "shellScoreBrightness": 7.8,
+
+    "shellScoreProjection": 9.6,
+
+    "shellScoreSustain": 7.8,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.9,
+
+    "overallAttack": 9,
+
+    "overallBrightness": 7.9,
+
+    "overallProjection": 9.7,
+
+    "overallSustain": 7.5,
+
+    "overallWarmth": 7.1,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 8.2,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "220-310 Hz",
+
+    "recommendedTuningResoHz": "340-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact catalog page, stock head models, precise production years, and complete throw-off model name need stronger confirmation. Existing Firestore identity supports 1980s Mastercraft Bell Brass 14x6.5 with 3mm cast bell brass shell and die-cast hoops.",
+
+    "drumSummaryNotes": "Classic Tama cast bell brass Mastercraft model. Should score with extremely high projection, powerful attack, dense body, and long authoritative sustain. Scores are based on physical shell construction, cast metal thickness, depth, and die-cast hoop behavior, not collectibility or resale value.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_mastercraft_mastercraft-maple-14x5-5_14x5-5_ply_maple_lacquer_95a9e838": {
+
+    "id": "tama_mastercraft_mastercraft-maple-14x5-5_14x5-5_ply_maple_lacquer_95a9e838",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Mastercraft",
+
+    "modelName": "Mastercraft Maple 14x5.5",
+
+    "patchName": "tama_mastercraft_mastercraft-maple-14x5-5_14x5-5_ply_maple_lacquer_95a9e838",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply maple",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Tama steel hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Mastercraft / Imperialstar-era high-tension lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama Mastercraft-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "1980s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.8,
+
+    "shellScoreBrightness": 6.5,
+
+    "shellScoreProjection": 6.9,
+
+    "shellScoreSustain": 6.4,
+
+    "shellScoreWarmth": 6.8,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 6.5,
+
+    "overallAttack": 6.9,
+
+    "overallBrightness": 6.6,
+
+    "overallProjection": 7,
+
+    "overallSustain": 6.2,
+
+    "overallWarmth": 6.7,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 6.6,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "250-340 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell ply count, shell thickness, stock head models, hoop model, and authoritative Tama catalog source URL need stronger confirmation. Existing Firestore identity supports Mastercraft Maple 14x5.5 with lacquer finish.",
+
+    "drumSummaryNotes": "Vintage Mastercraft maple model. The 14x5.5 size should read with balanced maple warmth, clear attack, good sensitivity, and moderate projection. Scoring stays shell-first and does not factor vintage desirability.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_mastercraft_mastercraft-maple-14x6-5_14x6-5_ply_maple_lacquer_416e7135": {
+
+    "id": "tama_mastercraft_mastercraft-maple-14x6-5_14x6-5_ply_maple_lacquer_416e7135",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Mastercraft",
+
+    "modelName": "Mastercraft Maple 14x6.5",
+
+    "patchName": "tama_mastercraft_mastercraft-maple-14x6-5_14x6-5_ply_maple_lacquer_416e7135",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "ply",
+
+    "shellMaterial1": "maple",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "multi-ply maple",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "Tama wood bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "lacquer",
+
+    "hoopType": "triple-flange / Tama steel hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Mastercraft / Imperialstar-era high-tension lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama Mastercraft-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "1980s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.7,
+
+    "shellScoreBrightness": 6.3,
+
+    "shellScoreProjection": 7.3,
+
+    "shellScoreSustain": 6.8,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 6.7,
+
+    "shellScoreControl": 6.6,
+
+    "overallAttack": 6.8,
+
+    "overallBrightness": 6.4,
+
+    "overallProjection": 7.4,
+
+    "overallSustain": 6.6,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 6.8,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "235-325 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell ply count, shell thickness, stock head models, hoop model, and authoritative Tama catalog source URL need stronger confirmation. Existing Firestore identity supports Mastercraft Maple 14x6.5 with lacquer finish.",
+
+    "drumSummaryNotes": "Deeper vintage Mastercraft maple model. Compared with the 14x5.5 version, the 6.5-inch depth should add more low-mid warmth, projection, and shell bloom while slightly reducing immediate sensitivity.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_mastercraft_mastercraft-steel-14x5_14x5_metal_steel_chrome_c94509d8": {
+
+    "id": "tama_mastercraft_mastercraft-steel-14x5_14x5_metal_steel_chrome_c94509d8",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Mastercraft",
+
+    "modelName": "Mastercraft Steel 14x5",
+
+    "patchName": "tama_mastercraft_mastercraft-steel-14x5_14x5_metal_steel_chrome_c94509d8",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "chrome",
+
+    "hoopType": "triple-flange / Tama steel hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Mastercraft / Imperialstar-era high-tension lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama Mastercraft-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "1980s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8,
+
+    "shellScoreBrightness": 8.1,
+
+    "shellScoreProjection": 8.1,
+
+    "shellScoreSustain": 6.2,
+
+    "shellScoreWarmth": 4.1,
+
+    "shellScoreSensitivity": 7.4,
+
+    "shellScoreControl": 6.8,
+
+    "overallAttack": 8.1,
+
+    "overallBrightness": 8.2,
+
+    "overallProjection": 8.2,
+
+    "overallSustain": 6,
+
+    "overallWarmth": 4,
+
+    "overallSensitivity": 7.5,
+
+    "overallControl": 6.9,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "270-350 Hz",
+
+    "recommendedTuningResoHz": "370-440 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell thickness, stock head models, hoop model, and authoritative Tama catalog source URL need stronger confirmation. Existing Firestore identity supports Mastercraft Steel 14x5 with chrome steel shell.",
+
+    "drumSummaryNotes": "Vintage Mastercraft steel model. The 14x5 format should score with bright attack, high projection, quick response, and comparatively low warmth. Scores are based on metal-shell behavior and size, not vintage status.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_mastercraft_mastercraft-steel-14x6-5_14x6-5_metal_steel_chrome_45fb38d0": {
+
+    "id": "tama_mastercraft_mastercraft-steel-14x6-5_14x6-5_metal_steel_chrome_45fb38d0",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Mastercraft",
+
+    "modelName": "Mastercraft Steel 14x6.5",
+
+    "patchName": "tama_mastercraft_mastercraft-steel-14x6-5_14x6-5_metal_steel_chrome_45fb38d0",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - metal shell",
+
+    "shellThicknessMm": null,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "chrome",
+
+    "hoopType": "triple-flange / Tama steel hoop",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Mastercraft / Imperialstar-era high-tension lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama Mastercraft-era strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "1980s",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.1,
+
+    "shellScoreBrightness": 8,
+
+    "shellScoreProjection": 8.5,
+
+    "shellScoreSustain": 6.7,
+
+    "shellScoreWarmth": 4.4,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 8.2,
+
+    "overallBrightness": 8.1,
+
+    "overallProjection": 8.6,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 4.3,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-325 Hz",
+
+    "recommendedTuningResoHz": "350-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Exact model number, shell thickness, stock head models, hoop model, and authoritative Tama catalog source URL need stronger confirmation. Existing Firestore identity supports Mastercraft Steel 14x6.5 with chrome steel shell.",
+
+    "drumSummaryNotes": "Deeper Mastercraft steel model. Compared with the 14x5 steel version, this should add more projection and body while retaining bright attack and lower warmth typical of steel shells.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc": {
+
+    "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+
+    "companyName": "Tama",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Mastercraft",
+
+    "modelName": "The Bell Brass 50th Anniversary Reissue BB-156",
+
+    "patchName": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "cast metal",
+
+    "shellMaterial1": "bell brass",
+
+    "shellMaterial2": "bronze",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A - cast metal shell",
+
+    "shellThicknessMm": 3,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "machined cast metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "medium",
+
+    "finishType": "natural brass patina",
+
+    "hoopType": "die-cast hoops",
+
+    "lugCount": 10,
+
+    "lugType": "Tama Bell Brass / Mastercraft-style lug",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Tama Linear-Drive / modern Bell Brass strainer and butt",
+
+    "stockSnareWires": "Tama snappy snare wires",
+
+    "stockBatterHead": "unknown",
+
+    "stockResoHead": "unknown",
+
+    "modelNumber": "BB-156",
+
+    "yearInProduction": "2024",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 8.9,
+
+    "shellScoreBrightness": 7.8,
+
+    "shellScoreProjection": 9.6,
+
+    "shellScoreSustain": 7.8,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 6.8,
+
+    "shellScoreControl": 7.9,
+
+    "overallAttack": 9,
+
+    "overallBrightness": 7.9,
+
+    "overallProjection": 9.7,
+
+    "overallSustain": 7.5,
+
+    "overallWarmth": 7.1,
+
+    "overallSensitivity": 6.9,
+
+    "overallControl": 8.2,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "220-310 Hz",
+
+    "recommendedTuningResoHz": "340-420 Hz",
+
+    "primarySourceUrl": "unknown",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Stock head models, exact snare wire model, and authoritative Tama product/archive URL should be confirmed. Existing Firestore identity supports BB-156 50th Anniversary Reissue as a 14x6.5 3mm bell brass model with natural brass patina and die-cast hoops.",
+
+    "drumSummaryNotes": "50th Anniversary Bell Brass reissue. Acoustically this should align closely with the classic 3mm cast bell brass 14x6.5 voice: huge projection, dense attack, strong sustain, and focused authority. Scoring does not factor anniversary status or collectibility.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "NO",
+
+    "discontinued": "YES",
+
+    "rareCollectible": "YES",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
