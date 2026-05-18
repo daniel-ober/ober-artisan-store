@@ -21193,14 +21193,12 @@
     "recommendedTuningResoHz": "360-430 Hz",
     "bearingEdge": "Tama wood bearing edge",
     "shellScoreWarmth": 6.3,
-    "needsResearch": true,
     "reRingMaterial": "N/A",
     "stockSnareWires": "Tama 20-strand snappy snare wires",
     "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
     "recommendedTuningBatterHz": "250-340 Hz",
     "plyCountLayup": "8-ply poplar/maple",
     "drumSummaryNotes": "Affordable wood-shell Woodworks model. Poplar/maple shell should score with balanced warmth, moderate projection, and friendly sensitivity. The 5.5-inch depth keeps the response quicker and slightly tighter than the deeper Woodworks variants.",
-    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x5.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
     "snareBeds": true,
     "yearInProduction": "current",
     "overallBrightness": 5.9,
@@ -21235,9 +21233,11 @@
     "shellThicknessMm": 8,
     "snareThrowMakeModel": "Tama standard strainer and butt",
     "artistSignatureLine": "NO",
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry remain unknown, but the core shell record is sufficient for current engine use. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x5.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+    "needsResearch": false,
     "researchUpdatedAt": {
-      "_seconds": 1779061921,
-      "_nanoseconds": 49000000
+      "_seconds": 1779062693,
+      "_nanoseconds": 519000000
     }
   },
   {
@@ -21408,14 +21408,12 @@
     "recommendedTuningResoHz": "350-420 Hz",
     "bearingEdge": "Tama wood bearing edge",
     "shellScoreWarmth": 6.6,
-    "needsResearch": true,
     "reRingMaterial": "N/A",
     "stockSnareWires": "Tama 20-strand snappy snare wires",
     "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
     "recommendedTuningBatterHz": "235-325 Hz",
     "plyCountLayup": "8-ply poplar/maple",
     "drumSummaryNotes": "Deeper Woodworks model with a balanced poplar/maple shell. Compared with the 14x5.5 version, this should add more low-mid body, projection, and sustain while slightly softening quick top-end response.",
-    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x6.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
     "snareBeds": true,
     "yearInProduction": "current",
     "overallBrightness": 5.8,
@@ -21450,9 +21448,11 @@
     "shellThicknessMm": 8,
     "snareThrowMakeModel": "Tama standard strainer and butt",
     "artistSignatureLine": "NO",
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry remain unknown, but the core shell record is sufficient for current engine use. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x6.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+    "needsResearch": false,
     "researchUpdatedAt": {
-      "_seconds": 1779061921,
-      "_nanoseconds": 351000000
+      "_seconds": 1779062693,
+      "_nanoseconds": 776000000
     }
   },
   {
@@ -21623,14 +21623,12 @@
     "recommendedTuningResoHz": "330-400 Hz",
     "bearingEdge": "Tama wood bearing edge",
     "shellScoreWarmth": 7,
-    "needsResearch": true,
     "reRingMaterial": "N/A",
     "stockSnareWires": "Tama 20-strand snappy snare wires",
     "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
     "recommendedTuningBatterHz": "210-300 Hz",
     "plyCountLayup": "8-ply poplar/maple",
     "drumSummaryNotes": "Deep 14x8 Woodworks model. The poplar/maple shell should produce a warmer, deeper, more open body than the shallower Woodworks sizes, with stronger low-mid bloom and projection but less immediate sensitivity.",
-    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x8 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
     "snareBeds": true,
     "yearInProduction": "current",
     "overallBrightness": 5.6,
@@ -21665,9 +21663,11 @@
     "shellThicknessMm": 8,
     "snareThrowMakeModel": "Tama standard strainer and butt",
     "artistSignatureLine": "NO",
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry remain unknown, but the core shell record is sufficient for current engine use. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x8 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+    "needsResearch": false,
     "researchUpdatedAt": {
-      "_seconds": 1779061921,
-      "_nanoseconds": 573000000
+      "_seconds": 1779062694,
+      "_nanoseconds": 158000000
     }
   }
 ]

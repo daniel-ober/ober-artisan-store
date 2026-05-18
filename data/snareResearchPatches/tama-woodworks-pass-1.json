@@ -104,7 +104,7 @@
 
     "secondarySourceUrl": "unknown",
 
-    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x5.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry remain unknown, but the core shell record is sufficient for current engine use. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x5.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
 
     "drumSummaryNotes": "Affordable wood-shell Woodworks model. Poplar/maple shell should score with balanced warmth, moderate projection, and friendly sensitivity. The 5.5-inch depth keeps the response quicker and slightly tighter than the deeper Woodworks variants.",
 
@@ -122,7 +122,7 @@
 
     "sourceConfidence": "medium",
 
-    "needsResearch": true,
+    "needsResearch": false,
 
     "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
 
@@ -232,7 +232,7 @@
 
     "secondarySourceUrl": "unknown",
 
-    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x6.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry remain unknown, but the core shell record is sufficient for current engine use. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x6.5 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
 
     "drumSummaryNotes": "Deeper Woodworks model with a balanced poplar/maple shell. Compared with the 14x5.5 version, this should add more low-mid body, projection, and sustain while slightly softening quick top-end response.",
 
@@ -250,7 +250,7 @@
 
     "sourceConfidence": "medium",
 
-    "needsResearch": true,
+    "needsResearch": false,
 
     "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
 
@@ -360,7 +360,7 @@
 
     "secondarySourceUrl": "unknown",
 
-    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry need stronger confirmation. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x8 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
+    "notesOnMissingData": "Exact current model number, stock head models, bearing edge detail, and snare bed geometry remain unknown, but the core shell record is sufficient for current engine use. Current Tama listings confirm Woodworks snare sizing family and poplar/maple shell construction; existing Firestore identity confirms 14x8 format with wrap finish and triple-flange/Mighty Hoop style hoops.",
 
     "drumSummaryNotes": "Deep 14x8 Woodworks model. The poplar/maple shell should produce a warmer, deeper, more open body than the shallower Woodworks sizes, with stronger low-mid bloom and projection but less immediate sensitivity.",
 
@@ -378,7 +378,7 @@
 
     "sourceConfidence": "medium",
 
-    "needsResearch": true,
+    "needsResearch": false,
 
     "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
 
