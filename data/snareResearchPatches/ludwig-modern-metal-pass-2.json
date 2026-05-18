@@ -1,0 +1,1703 @@
+
+{
+
+  "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Hammered Brass",
+
+    "modelName": "Hammered Brass 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.2,
+
+    "plyCountLayup": "single-piece brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over hammered brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is treated as 1.2mm by association with Ludwig's modern brass shell family. Direct model-specific manufacturer thickness confirmation should still be preferred if found.",
+
+    "drumSummaryNotes": "Hammered brass Ludwig shell with black nickel finish. Compared with smooth brass, the hammered shell should slightly tighten overtones while preserving brass warmth, body, sensitivity, and wide tuning range.",
+
+    "scoringBasis": "Shell-first scoring based on metal shell material, brass shell thickness, hammered shell treatment, dimensions, hoop type, and known hardware family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Hammered Brass",
+
+    "modelName": "Hammered Brass 6.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.2,
+
+    "plyCountLayup": "single-piece brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over hammered brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is treated as 1.2mm by association with Ludwig's modern brass shell family. Direct model-specific manufacturer thickness confirmation should still be preferred if found.",
+
+    "drumSummaryNotes": "Deeper hammered brass Ludwig shell. Should keep the classic brass warmth and sensitivity while adding more low-mid body, projection, and bloom than the 5x14 version.",
+
+    "scoringBasis": "Shell-first scoring based on metal shell material, brass shell thickness, hammered shell treatment, dimensions, hoop type, and known hardware family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Raw Brass Phonic",
+
+    "modelName": "Raw Brass Phonic 3.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 3.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.2,
+
+    "plyCountLayup": "single-piece brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "raw brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LB405",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Raw Brass Phonic shell thickness is treated as 1.2mm by Ludwig brass-shell family convention. Direct model-specific manufacturer confirmation should be preferred if found.",
+
+    "drumSummaryNotes": "Shallow raw brass shell. Should emphasize fast response, crisp attack, and dry brass color with less low-end bloom than deeper Raw Brass Phonic models.",
+
+    "scoringBasis": "Shell-first scoring based on brass shell material, shell thickness, shallow depth, raw brass finish, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Raw Brass Phonic",
+
+    "modelName": "Raw Brass Phonic 5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.2,
+
+    "plyCountLayup": "single-piece brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "raw brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LB416",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Raw Brass Phonic shell thickness is treated as 1.2mm by Ludwig brass-shell family convention. Direct model-specific manufacturer confirmation should be preferred if found.",
+
+    "drumSummaryNotes": "Standard-depth raw brass shell. Should provide warm brass body, responsive articulation, and a slightly drier/rawer overtone character than plated brass models.",
+
+    "scoringBasis": "Shell-first scoring based on brass shell material, shell thickness, depth, raw brass finish, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Raw Brass Phonic",
+
+    "modelName": "Raw Brass Phonic 6.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.2,
+
+    "plyCountLayup": "single-piece brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "raw brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LB417",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Raw Brass Phonic shell thickness is treated as 1.2mm by Ludwig brass-shell family convention. Direct model-specific manufacturer confirmation should be preferred if found.",
+
+    "drumSummaryNotes": "Deeper raw brass shell. Should score with stronger warmth, projection, and sustain than the 5x14 version while retaining brass sensitivity and a dry/raw finish character.",
+
+    "scoringBasis": "Shell-first scoring based on brass shell material, shell thickness, deeper shell depth, raw brass finish, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Raw Brass Phonic",
+
+    "modelName": "Raw Brass Phonic 8x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.2,
+
+    "plyCountLayup": "single-piece brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "raw brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LB418",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Raw Brass Phonic shell thickness is treated as 1.2mm by Ludwig brass-shell family convention. Direct model-specific manufacturer confirmation should be preferred if found.",
+
+    "drumSummaryNotes": "Deep 8x14 raw brass shell. Should emphasize low-mid weight, projection, bloom, and strong shell body, with slightly reduced quickness compared with shallower brass models.",
+
+    "scoringBasis": "Shell-first scoring based on brass shell material, shell thickness, 8-inch shell depth, raw brass finish, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supralite",
+
+    "modelName": "Supralite 4x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 4,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm beaded steel shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated / mirror-polished steel",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Model-specific shell thickness is source-backed as 1mm beaded steel.",
+
+    "drumSummaryNotes": "Shallow Supralite steel shell. Should score bright, fast, crisp, and controlled, with quick response and less low-end bloom than deeper Supralite sizes.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm beaded steel shell, shallow depth, formed metal bearing edge, snare bed presence, and 2.3mm triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supralite",
+
+    "modelName": "Supralite 5.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm beaded steel shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated / mirror-polished steel",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Model-specific shell thickness is source-backed as 1mm beaded steel.",
+
+    "drumSummaryNotes": "Mid-depth Supralite steel shell. Should score with bright attack, strong projection, moderate sustain, and versatile tuning response.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm beaded steel shell, shell depth, formed metal bearing edge, snare bed presence, and 2.3mm triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supralite",
+
+    "modelName": "Supralite 6.5x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm beaded steel shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated / mirror-polished steel",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Model-specific shell thickness is source-backed as 1mm beaded steel.",
+
+    "drumSummaryNotes": "Deeper Supralite steel shell. Should score with bright steel attack, increased body and projection, and more sustain than the 5.5x14 model.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm beaded steel shell, deeper shell depth, formed metal bearing edge, snare bed presence, and 2.3mm triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supralite",
+
+    "modelName": "Supralite 6x13",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 13,
+
+    "depth": 6,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm beaded steel shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated / mirror-polished steel",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Model-specific shell thickness is source-backed as 1mm beaded steel.",
+
+    "drumSummaryNotes": "13-inch Supralite steel shell. Should score quicker and slightly higher-pitched than 14-inch Supralite models, with focused brightness and strong attack.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm beaded steel shell, 13-inch diameter, shell depth, formed metal bearing edge, snare bed presence, and 2.3mm triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supralite",
+
+    "modelName": "Supralite 8x14",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "steel",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm beaded steel shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated / mirror-polished steel",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Model-specific shell thickness is source-backed as 1mm beaded steel.",
+
+    "drumSummaryNotes": "Deep 8x14 Supralite steel shell. Should score with strong projection, bright attack, deeper body, and greater sustain than shallower Supralite sizes.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm beaded steel shell, 8-inch shell depth, formed metal bearing edge, snare bed presence, and 2.3mm triple-flanged hoops. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated hammered aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Hammered 5x14 Supraphonic aluminum shell with Imperial lugs. Should score dry, articulate, sensitive, and controlled, with slightly more overtone management than smooth aluminum versions.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, hammered shell treatment, depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated hammered aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Hammered 5x14 Supraphonic aluminum shell with tube lugs. Tube lugs should slightly reduce lug mass versus Imperial lugs, supporting a touch more open response while the hammered shell keeps overtones controlled.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, hammered shell treatment, depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 5x14 Imperial Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Classic 5x14 Supraphonic aluminum shell with Imperial lugs. Should score highly for sensitivity, balanced attack, controlled brightness, and studio-friendly versatility.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 5x14 Tube Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "5x14 Supraphonic aluminum shell with tube lugs. Should remain crisp, sensitive, and controlled, with slightly more open shell behavior than the Imperial lug version.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated hammered aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Deeper hammered Supraphonic aluminum shell with Imperial lugs. Should add body and projection over 5x14 versions while the hammered shell keeps brightness and overtone spread controlled.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, hammered shell treatment, deeper shell depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated hammered aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Deeper hammered Supraphonic aluminum shell with tube lugs. Should balance added 6.5-inch body with slightly more open response from reduced lug mass.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, hammered shell treatment, deeper shell depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Classic deeper Supraphonic aluminum shell with Imperial lugs. Should score with strong projection, controlled brightness, high sensitivity, and greater body than the 5x14 version.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, deeper shell depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Supraphonic",
+
+    "modelName": "Supraphonic 6.5x14 Tube Lugs",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1.7,
+
+    "plyCountLayup": "seamless spun aluminum shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "chrome-plated aluminum",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness follows the existing Ludwig Supraphonic aluminum dataset value of 1.7mm. Direct manufacturer page confirmation should be used if available.",
+
+    "drumSummaryNotes": "Deeper Supraphonic aluminum shell with tube lugs. Should combine 6.5-inch body and projection with a slightly more open response than the Imperial lug version.",
+
+    "scoringBasis": "Shell-first scoring based on seamless aluminum shell, shell thickness, deeper shell depth, hoop type, and lug family. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 5.5x14 Die-cast",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "die-cast",
+
+    "modelNumber": "LU5514",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "Universal Black Brass with die-cast hoops. Should score warm and articulate with added control, focus, and attack from the die-cast hoop configuration.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, depth, formed metal bearing edge, snare bed presence, and die-cast hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 5.5x14 Triple-flanged",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 5.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LU5514C",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "Universal Black Brass with triple-flanged hoops. Should sound more open and lively than the die-cast version, with slightly more sustain and shell bloom.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, depth, formed metal bearing edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 6.5x14 Die-cast",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "die-cast",
+
+    "modelNumber": "LU6514",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "Deeper Universal Black Brass with die-cast hoops. Should add body and projection while the die-cast hoops increase focus, attack, and control.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, 6.5-inch depth, formed metal bearing edge, snare bed presence, and die-cast hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 6.5x14 Triple-flanged",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LU6514C",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "Deeper Universal Black Brass with triple-flanged hoops. Should provide warm brass body, open sustain, and broader bloom than the die-cast version.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, 6.5-inch depth, formed metal bearing edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 7x13 Die-cast",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 13,
+
+    "depth": 7,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "die-cast",
+
+    "modelNumber": "LU0713",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "13x7 Universal Black Brass with die-cast hoops. Should combine quicker 13-inch focus with deeper shell body, plus added control and attack from die-cast hoops.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, 13-inch diameter, 7-inch depth, formed metal bearing edge, snare bed presence, and die-cast hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 7x13 Triple-flanged",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 13,
+
+    "depth": 7,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LU0713C",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "13x7 Universal Black Brass with triple-flanged hoops. Should be quick and focused from diameter, with deeper shell body and more open sustain than the die-cast version.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, 13-inch diameter, 7-inch depth, formed metal bearing edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 8x14 Die-cast",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "die-cast",
+
+    "modelNumber": "LU0814",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "Deep 8x14 Universal Black Brass with die-cast hoops. Should emphasize powerful projection, low-mid body, controlled sustain, and focused attack.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, 8-inch depth, formed metal bearing edge, snare bed presence, and die-cast hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4": {
+
+    "companyName": "Ludwig",
+
+    "lineSeries": "Universal Metal",
+
+    "modelName": "Universal Black Brass 8x14 Triple-flanged",
+
+    "drumType": "Snare Drum",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "unknown",
+
+    "shellThicknessMm": 1,
+
+    "plyCountLayup": "1mm brass shell",
+
+    "reinforcementRings": false,
+
+    "reinforcementRingMaterial": "none",
+
+    "reinforcementRingThicknessMm": 0,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedDepth": "medium",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "modelNumber": "LU0814C",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "notesOnMissingData": "Shell thickness is source-backed as 1mm brass for Universal Black Brass models.",
+
+    "drumSummaryNotes": "Deep 8x14 Universal Black Brass with triple-flanged hoops. Should provide the most open and blooming Universal Black Brass response, with strong body, warmth, and projection.",
+
+    "scoringBasis": "Shell-first scoring based on documented 1mm brass shell, 8-inch depth, formed metal bearing edge, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
+
