@@ -14,7 +14,15 @@ export function computeVoiceProfile(snareRecord, options = {}) {
 
   const stockConfig = computeStockConfigProfile(snareRecord, bareShell);
 
-  const modifiedConfig = computeModifiedConfigProfile(snareRecord, stockConfig, options.modifiedConfig);
+  const modifiedConfig = computeModifiedConfigProfile(
+
+    snareRecord,
+
+    stockConfig,
+
+    options.modifiedConfig
+
+  );
 
   return {
 

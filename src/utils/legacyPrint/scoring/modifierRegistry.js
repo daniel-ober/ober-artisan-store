@@ -4,15 +4,27 @@ export const MODIFIER_REGISTRY = {
 
     {
 
-      id: "head_batter_clear_single_ply_medium",
+      id: 'head_batter_clear_single_ply_medium',
 
-      type: "head",
+      type: 'head',
 
-      category: "batterHead",
+      category: 'batterHead',
 
-      label: "Clear single-ply batter head",
+      label: 'Clear single-ply batter head',
 
-      aliases: ["clear single ply", "single ply clear", "remo ambassador clear", "evans g1 clear"],
+      aliases: [
+
+        'clear',
+
+        'clear single ply',
+
+        'single ply clear',
+
+        'remo ambassador clear',
+
+        'evans g1 clear',
+
+      ],
 
       nodeDeltas: {
 
@@ -32,21 +44,41 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "head_batter_coated_single_ply_medium",
+      id: 'head_batter_coated_single_ply_medium',
 
-      type: "head",
+      type: 'head',
 
-      category: "batterHead",
+      category: 'batterHead',
 
-      label: "Coated single-ply batter head",
+      label: 'Coated single-ply batter head',
 
-      aliases: ["coated single ply", "single ply coated", "remo ambassador coated", "evans g1 coated"],
+      aliases: [
+
+        'coated',
+
+        'coated single ply',
+
+        'single ply coated',
+
+        'remo ambassador coated',
+
+        'evans g1 coated',
+
+      ],
 
       nodeDeltas: {
 
@@ -66,21 +98,47 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "head_batter_coated_two_ply_controlled",
+      id: 'head_batter_coated_two_ply_controlled',
 
-      type: "head",
+      type: 'head',
 
-      category: "batterHead",
+      category: 'batterHead',
 
-      label: "Coated two-ply controlled batter head",
+      label: 'Coated two-ply controlled batter head',
 
-      aliases: ["coated two ply", "two ply coated", "remo emperor coated", "evans g2 coated"],
+      aliases: [
+
+        'controlled',
+
+        'controlled sound',
+
+        'coated controlled',
+
+        'coated two ply',
+
+        'two ply coated',
+
+        'remo controlled sound',
+
+        'remo emperor coated',
+
+        'evans g2 coated',
+
+      ],
 
       nodeDeltas: {
 
@@ -100,7 +158,15 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
@@ -110,15 +176,31 @@ export const MODIFIER_REGISTRY = {
 
     {
 
-      id: "head_reso_clear_snare_side_standard",
+      id: 'head_reso_clear_snare_side_standard',
 
-      type: "head",
+      type: 'head',
 
-      category: "resoHead",
+      category: 'resoHead',
 
-      label: "Standard clear snare-side head",
+      label: 'Standard clear snare-side head',
 
-      aliases: ["clear snare side", "snare side", "ambassador snare side", "evans hazy 300", "hazy 300"],
+      aliases: [
+
+        'clear snare side',
+
+        'snare side',
+
+        'standard snare side',
+
+        'ambassador snare side',
+
+        'remo ambassador snare side',
+
+        'evans hazy 300',
+
+        'hazy 300',
+
+      ],
 
       nodeDeltas: {
 
@@ -138,21 +220,41 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "head_reso_thin_snare_side_sensitive",
+      id: 'head_reso_thin_snare_side_sensitive',
 
-      type: "head",
+      type: 'head',
 
-      category: "resoHead",
+      category: 'resoHead',
 
-      label: "Thin sensitive snare-side head",
+      label: 'Thin sensitive snare-side head',
 
-      aliases: ["thin snare side", "hazy 200", "remo diplomat snare side"],
+      aliases: [
+
+        'thin snare side',
+
+        'thin clear snare side',
+
+        'remo diplomat snare side',
+
+        'evans hazy 200',
+
+        'hazy 200',
+
+      ],
 
       nodeDeltas: {
 
@@ -172,7 +274,15 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
@@ -182,15 +292,29 @@ export const MODIFIER_REGISTRY = {
 
     {
 
-      id: "wires_20_strand_standard_steel",
+      id: 'wires_20_strand_standard_steel',
 
-      type: "snareWire",
+      type: 'snareWire',
 
-      category: "snareWires",
+      category: 'snareWires',
 
-      label: "20-strand standard steel snare wires",
+      label: '20-strand standard steel snare wires',
 
-      aliases: ["20 strand", "20-strand", "standard wires", "steel 20"],
+      aliases: [
+
+        '20',
+
+        '20 strand',
+
+        '20-strand',
+
+        '20 strand steel',
+
+        'standard wires',
+
+        'steel 20',
+
+      ],
 
       nodeDeltas: {
 
@@ -210,21 +334,41 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "wires_24_strand_wide_response",
+      id: 'wires_24_strand_wide_response',
 
-      type: "snareWire",
+      type: 'snareWire',
 
-      category: "snareWires",
+      category: 'snareWires',
 
-      label: "24-strand wider-response snare wires",
+      label: '24-strand wider-response snare wires',
 
-      aliases: ["24 strand", "24-strand"],
+      aliases: [
+
+        '24',
+
+        '24 strand',
+
+        '24-strand',
+
+        '24 strand steel',
+
+        'wide response',
+
+      ],
 
       nodeDeltas: {
 
@@ -244,21 +388,41 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "wires_16_strand_open_response",
+      id: 'wires_16_strand_open_response',
 
-      type: "snareWire",
+      type: 'snareWire',
 
-      category: "snareWires",
+      category: 'snareWires',
 
-      label: "16-strand open-response snare wires",
+      label: '16-strand open-response snare wires',
 
-      aliases: ["16 strand", "16-strand"],
+      aliases: [
+
+        '16',
+
+        '16 strand',
+
+        '16-strand',
+
+        '16 strand steel',
+
+        'open response',
+
+      ],
 
       nodeDeltas: {
 
@@ -278,7 +442,15 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
@@ -288,15 +460,25 @@ export const MODIFIER_REGISTRY = {
 
     {
 
-      id: "hoop_triple_flanged_steel",
+      id: 'hoop_triple_flanged_steel',
 
-      type: "hoop",
+      type: 'hoop',
 
-      category: "hoopType",
+      category: 'hoopType',
 
-      label: "Triple-flanged steel hoops",
+      label: 'Triple-flanged steel hoops',
 
-      aliases: ["triple flanged", "triple-flanged", "steel triple flange"],
+      aliases: [
+
+        'triple flanged',
+
+        'triple-flanged',
+
+        'triple flange',
+
+        'steel triple flange',
+
+      ],
 
       nodeDeltas: {
 
@@ -316,21 +498,41 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "hoop_die_cast",
+      id: 'hoop_die_cast',
 
-      type: "hoop",
+      type: 'hoop',
 
-      category: "hoopType",
+      category: 'hoopType',
 
-      label: "Die-cast hoops",
+      label: 'Die-cast hoops',
 
-      aliases: ["die cast", "die-cast", "diecast"],
+      aliases: [
+
+        'die cast',
+
+        'die-cast',
+
+        'diecast',
+
+        'die cast hoops',
+
+        'die-cast hoops',
+
+      ],
 
       nodeDeltas: {
 
@@ -350,21 +552,41 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
     {
 
-      id: "hoop_wood",
+      id: 'hoop_wood',
 
-      type: "hoop",
+      type: 'hoop',
 
-      category: "hoopType",
+      category: 'hoopType',
 
-      label: "Wood hoops",
+      label: 'Wood hoops',
 
-      aliases: ["wood hoop", "wood hoops", "maple hoop"],
+      aliases: [
+
+        'wood',
+
+        'wood hoop',
+
+        'wood hoops',
+
+        'maple hoop',
+
+        'maple hoops',
+
+      ],
 
       nodeDeltas: {
 
@@ -384,10 +606,52 @@ export const MODIFIER_REGISTRY = {
 
       },
 
-      confidence: { matchConfidence: "medium", deltaConfidence: "medium", physicalConfidence: "medium" },
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'medium',
+
+        physicalConfidence: 'medium',
+
+      },
 
     },
 
   ],
+
+};
+
+export const UNKNOWN_MODIFIER_FALLBACK = {
+
+  id: 'unknown_modifier',
+
+  nodeDeltas: {
+
+    attack: 0,
+
+    brightness: 0,
+
+    projection: 0,
+
+    sustain: 0,
+
+    warmth: 0,
+
+    sensitivity: 0,
+
+    control: 0,
+
+  },
+
+  confidence: {
+
+    matchConfidence: 'unknown',
+
+    deltaConfidence: 'unknown',
+
+    physicalConfidence: 'unknown',
+
+  },
 
 };
