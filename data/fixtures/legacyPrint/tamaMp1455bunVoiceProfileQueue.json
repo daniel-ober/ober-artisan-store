@@ -1,101 +1,54 @@
 [
-
   {
-
     "id": "tama_signature_mp1455bun_mike-portnoy-bubinga_14x5-5",
-
     "modelName": "Mike Portnoy Melody Master Bubinga Limited Edition",
-
     "sourceSchemaVersion": "legacyprint-snare-v1",
-
     "sourceConfidence": "high",
-
     "voiceScoreConfidence": "medium",
-
     "baseConfigSource": "stock",
-
     "shellConstruction": "ply",
-
     "shellMaterial1": "bubinga",
-
     "shellThicknessMm": 8,
-
     "bearingEdge": "unknown",
-
     "snareBedType": "unknown",
-
     "diameter": 14,
-
     "depth": 5.5,
-
     "plyCount": 9,
-
     "reinforcementRings": null,
-
     "hoopType": "die-cast",
-
     "lugCount": 8,
-
     "stockBatterHead": "coated",
-
     "stockResoHead": "snare side",
-
     "stockSnareWires": "20",
-
     "modifiedConfig": {
-
       "hoopType": "triple-flanged",
-
       "batterHead": "controlled",
-
       "resoHead": "clear snare side",
-
       "snareWires": "24"
-
     },
-
     "metadata": {
-
       "companyName": "Tama",
-
       "lineSeries": "Signature",
-
       "modelNumber": "MP1455BUN",
-
       "lugType": "MSL-SCT",
-
       "throwOff": "MCS100A",
-
       "buttPlate": "MCS70B",
-
       "sources": [
-
         {
-
           "type": "primary",
-
           "label": "Tama official product/news page",
-
           "url": "https://www.tama.com/usa/news/detail/20251128100451.html"
-
         },
-
         {
-
           "type": "secondary",
-
           "label": "MMR Magazine release/spec summary",
-
           "url": "https://mmrmagazine.com/tama-new-signature-mike-portnoy-snare/"
-
         }
-
       ],
-
-      "unknownFields": ["bearingEdge", "snareBedType"]
-
+      "unknownFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
     }
-
   }
-
 ]
