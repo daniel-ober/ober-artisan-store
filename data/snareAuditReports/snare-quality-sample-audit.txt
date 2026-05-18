@@ -1,0 +1,2145 @@
+?
+==============================
+A&F Drum Co.
+Total: 3
+[
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+    "modelName": "Maple Club Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7.2,
+      "sensitivity": 6.9,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested A&F Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+    "modelName": "Raw Brass 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8,
+      "brightness": 7.5,
+      "projection": 8.7,
+      "sustain": 7.2,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested A&F Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569",
+    "modelName": "Raw Steel 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.6,
+      "sustain": 6.7,
+      "warmth": 5.6,
+      "sensitivity": 6.9,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested A&F Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+AHEAD
+Total: 33
+[
+  {
+    "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+    "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Bell Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 3,
+    "hoopType": "SH1410 S-Hoop counter hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 7.3,
+      "projection": 8.4,
+      "sustain": 7.2,
+      "warmth": 7.2,
+      "sensitivity": 7.1,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+    "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Bell Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 3,
+    "hoopType": "SH1410 S-Hoop counter hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 7.3,
+      "projection": 8.4,
+      "sustain": 7.2,
+      "warmth": 7.2,
+      "sensitivity": 7.1,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+    "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Bell Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 3,
+    "hoopType": "SH138 S-Hoop counter hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 7.3,
+      "projection": 8.4,
+      "sustain": 7.2,
+      "warmth": 7.2,
+      "sensitivity": 7.1,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Brady Drum Company
+Total: 110
+[
+  {
+    "id": "brady-drum-company_historical-early-experimental_1984-sheoak-block-snare-14x7-with-dw-hardware_14x7_block_oak_unknown-li_da921be8",
+    "modelName": "1984 Sheoak Block Snare 14x7 with DW Hardware",
+    "shellConstruction": "Block",
+    "shellMaterial1": "Oak",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm Super Hoop / rigid triple-flange style",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 7,
+      "projection": 8.3,
+      "sustain": 6.8,
+      "warmth": 6.8,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Brady Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-10x5_10x5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_fcdeb7d0",
+    "modelName": "Australian Rose Gum Ply Snare 10x5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Rose Gum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm Super Hoop / rigid triple-flange style",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.5,
+      "projection": 6.8,
+      "sustain": 6.1,
+      "warmth": 6.4,
+      "sensitivity": 7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Brady Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-12x5_12x5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_7576b11d",
+    "modelName": "Australian Rose Gum Ply Snare 12x5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Rose Gum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm Super Hoop / rigid triple-flange style",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.5,
+      "projection": 6.8,
+      "sustain": 6.1,
+      "warmth": 6.4,
+      "sensitivity": 7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Brady Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Brooks Drum Co.
+Total: 12
+[
+  {
+    "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x5-5_14x5-5_steam-bent_ash_3b033b85",
+    "modelName": "Steam-Bent Solid Shell Ash 14x5.5",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Ash",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 6.8,
+      "sustain": 6.2,
+      "warmth": 6.5,
+      "sensitivity": 6.8,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Brooks Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-ash-14x6-5_14x6-5_steam-bent_ash_5cc2ff34",
+    "modelName": "Steam-Bent Solid Shell Ash 14x6.5",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Ash",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.1,
+      "sustain": 6.4,
+      "warmth": 6.7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Brooks Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "brooks-drum-co_steam-bent-solid-shell_steam-bent-solid-shell-cherry-14x5-5_14x5-5_steam-bent_cherry_13d41aa3",
+    "modelName": "Steam-Bent Solid Shell Cherry 14x5.5",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Cherry",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 6.8,
+      "sustain": 6.2,
+      "warmth": 6.5,
+      "sensitivity": 6.8,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Brooks Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+C&C Drums USA
+Total: 9
+[
+  {
+    "id": "candc-drums-usa_12th-and-vine_12th-and-vine-mahogany-poplar-mahogany-14x6-5_14x6-5_ply_mahogany_poplar_mahogany_6_los-an_b47d879c",
+    "modelName": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Mahogany",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": 6,
+    "hoopType": "2.3mm triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.3,
+      "brightness": 5.8,
+      "projection": 6.8,
+      "sustain": 6.8,
+      "warmth": 7.8,
+      "sensitivity": 6.5,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested C&C Drums USA shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+    "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": 6,
+    "hoopType": "2.3mm triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.7,
+      "brightness": 6.1,
+      "projection": 6.9,
+      "sustain": 6.7,
+      "warmth": 7.6,
+      "sensitivity": 6.7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested C&C Drums USA shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "candc-drums-usa_12th-and-vine_12th-and-vine-walnut-poplar-walnut-14x6-5_14x6-5_ply_walnut_poplar_walnut_6_los-angeles-be_e6594653",
+    "modelName": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Walnut",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": 6,
+    "hoopType": "2.3mm triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.3,
+      "projection": 7.3,
+      "sustain": 7,
+      "warmth": 7.7,
+      "sensitivity": 6.7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested C&C Drums USA shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Canopus
+Total: 63
+[
+  {
+    "id": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+    "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+    "shellConstruction": "Other / Needs Research",
+    "shellMaterial1": "unknown",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.2,
+      "brightness": 6.5,
+      "projection": 6.8,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.1,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+    "modelName": "1ply Oak 14x5.5",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Oak",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 7,
+      "projection": 8,
+      "sustain": 6.6,
+      "warmth": 6.6,
+      "sensitivity": 6.8,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+    "modelName": "1ply Oak 14x6.5",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Oak",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 7,
+      "projection": 8.3,
+      "sustain": 6.8,
+      "warmth": 6.8,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Canopus shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Craviotto
+Total: 49
+[
+  {
+    "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-la_f1d11cf6",
+    "modelName": "Custom Shop Ash Solid Shell 5.5x14",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Ash",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-Flanged Hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 6.8,
+      "sustain": 6.2,
+      "warmth": 6.5,
+      "sensitivity": 6.8,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Craviotto shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-6-5x14_14x6-5_steam-bent_ash_45-bearing-edges_satin-oil-la_b447c46a",
+    "modelName": "Custom Shop Ash Solid Shell 6.5x14",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Ash",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-Flanged Hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.1,
+      "sustain": 6.4,
+      "warmth": 6.7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Craviotto shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-5-5x14_14x5-5_steam-bent_birch_45-bearing-edges_satin-oi_7baa6ec9",
+    "modelName": "Custom Shop Birch Solid Shell 5.5x14",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Birch",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-Flanged Hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 7.2,
+      "projection": 7.5,
+      "sustain": 6.1,
+      "warmth": 6.1,
+      "sensitivity": 7,
+      "control": 6.8
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Craviotto shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+DW / PDP
+Total: 107
+[
+  {
+    "id": "dw-pdp_pdp-signature_chad-smith-signature-14x5_14x5_metal_steel_triple-flanged_0d314dee",
+    "modelName": "Chad Smith Signature 14x5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.4,
+      "brightness": 8.2,
+      "projection": 8.4,
+      "sustain": 6.4,
+      "warmth": 5.4,
+      "sensitivity": 7.2,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested DW/PDP shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "dw-pdp_collector-s-series_collector-s-birch-13x5-5_13x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_6cdafd5b",
+    "modelName": "Collector's Birch 13x5.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Birch",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "True Hoop / triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 7.2,
+      "projection": 7.5,
+      "sustain": 6.1,
+      "warmth": 6.1,
+      "sensitivity": 7,
+      "control": 6.8
+    },
+    "scoringBasis": "Shell-first scoring generated from nested DW/PDP shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "dw-pdp_collector-s-series_collector-s-birch-14x5-5_14x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_dd12f9a9",
+    "modelName": "Collector's Birch 14x5.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Birch",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "True Hoop / triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 7.2,
+      "projection": 7.5,
+      "sustain": 6.1,
+      "warmth": 6.1,
+      "sensitivity": 7,
+      "control": 6.8
+    },
+    "scoringBasis": "Shell-first scoring generated from nested DW/PDP shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  }
+]
+
+==============================
+Dunnett Classic Drums
+Total: 56
+[
+  {
+    "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x5-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_3960dc4b",
+    "modelName": "Aluminum Hammered",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flange / cold-rolled varies",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.8,
+      "warmth": 6.1,
+      "sensitivity": 7.6,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Dunnett Classic Drums shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x6-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_0827ecdc",
+    "modelName": "Aluminum Hammered",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flange / cold-rolled varies",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Dunnett Classic Drums shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "dunnett-classic-drums_2n-model-2n_brass-hammered_14x5-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__eebbfcdf",
+    "modelName": "Brass Hammered",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flange / cold-rolled varies",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8,
+      "brightness": 7.5,
+      "projection": 8.5,
+      "sustain": 7,
+      "warmth": 6.8,
+      "sensitivity": 7.1,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Dunnett Classic Drums shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Gretsch
+Total: 44
+[
+  {
+    "id": "gretsch_broadkaster-vintage_broadkaster-name-band-snare_14x5-5_ply_maple_poplar_maple_roundover-vintage-edge-estimated_p_874a429a",
+    "modelName": "Broadkaster Name Band Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Stick Chopper / single-flange estimated",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.7,
+      "brightness": 6.1,
+      "projection": 6.6,
+      "sustain": 6.4,
+      "warmth": 7.4,
+      "sensitivity": 6.7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Gretsch shell/reference fields: dimensions, shell construction, shell materials, bearing edge family, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "gretsch_broadkaster_broadkaster-snare_14x5-5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-la_2cedbed7",
+    "modelName": "Broadkaster Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Gretsch 302 3mm double-flanged steel hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.7,
+      "brightness": 6.1,
+      "projection": 6.6,
+      "sustain": 6.4,
+      "warmth": 7.4,
+      "sensitivity": 6.7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Gretsch shell/reference fields: dimensions, shell construction, shell materials, bearing edge family, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "gretsch_broadkaster_broadkaster-snare_14x5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-lacq_95e4fa0e",
+    "modelName": "Broadkaster Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Gretsch 302 3mm double-flanged steel hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.9,
+      "brightness": 6.1,
+      "projection": 6.6,
+      "sustain": 6.3,
+      "warmth": 7.3,
+      "sensitivity": 6.9,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Gretsch shell/reference fields: dimensions, shell construction, shell materials, bearing edge family, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  }
+]
+
+==============================
+Hendrix Drums
+Total: 8
+[
+  {
+    "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_4f56ee15",
+    "modelName": "Archetype Solid Stave Ash 14x6.5",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Ash",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Hendrix Drums shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_78d01a71",
+    "modelName": "Archetype Solid Stave Cherry 14x6.5",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Cherry",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Hendrix Drums shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_42afb1b7",
+    "modelName": "Archetype Solid Stave Mahogany 14x6.5",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Mahogany",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.2,
+      "brightness": 5.7,
+      "projection": 6.9,
+      "sustain": 7.1,
+      "warmth": 8.3,
+      "sensitivity": 6.5,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Hendrix Drums shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+INDe Drum Lab
+Total: 3
+[
+  {
+    "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-aluminum_14x6-5_metal_aluminum_5432eb51",
+    "modelName": "Kalamazoo Aluminum",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested INDe Drum Lab shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-brass_14x6-5_metal_brass_b5ced32d",
+    "modelName": "Kalamazoo Brass",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8,
+      "brightness": 7.5,
+      "projection": 8.7,
+      "sustain": 7.2,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested INDe Drum Lab shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "inde-drum-lab_kalamazoo-custom-metal-wood_maple-custom_14x6-5_ply_maple_dbeee215",
+    "modelName": "Maple Custom",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7.2,
+      "sensitivity": 6.9,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested INDe Drum Lab shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Joyful Noise Drum Company
+Total: 8
+[
+  {
+    "id": "joyful-noise-drum-company_custom-reserve_aluminum-14x6-5_14x6-5_metal_aluminum_ec1790e0",
+    "modelName": "Aluminum 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Joyful Noise Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "joyful-noise-drum-company_custom-reserve_beacon-bronze-14x6-5_14x6-5_metal_bronze_b21d31a4",
+    "modelName": "Beacon Bronze 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Bronze",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.8,
+      "brightness": 7.2,
+      "projection": 8.6,
+      "sustain": 7.4,
+      "warmth": 7.3,
+      "sensitivity": 7.1,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Joyful Noise Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "joyful-noise-drum-company_custom-reserve_conquered-copper-14x6-5_14x6-5_metal_copper_d6278474",
+    "modelName": "Conquered Copper 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Copper",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 6.6,
+      "projection": 8,
+      "sustain": 7.1,
+      "warmth": 7.6,
+      "sensitivity": 7.1,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Joyful Noise Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Keplinger
+Total: 2
+[
+  {
+    "id": "keplinger_black-iron-stainless_black-iron-14x6-5_14x6-5_metal_steel_0fae9ad0",
+    "modelName": "Black Iron 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.6,
+      "sustain": 6.7,
+      "warmth": 5.6,
+      "sensitivity": 6.9,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Keplinger shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "keplinger_black-iron-stainless_stainless-steel-14x6-5_14x6-5_metal_stainless-steel_27a10cc6",
+    "modelName": "Stainless Steel 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Stainless Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.6,
+      "sustain": 6.7,
+      "warmth": 5.6,
+      "sensitivity": 6.9,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Keplinger shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Ludwig
+Total: 127
+[
+  {
+    "id": "ludwig_1963-1970s-ludwig_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged_lm404_914e4560",
+    "modelName": "Acrolite 5x14",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.6,
+      "warmth": 6,
+      "sensitivity": 7.8,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring based on existing 5x14 aluminum Acrolite identity, brushed aluminum shell, formed metal bearing edge behavior, snare bed presence, and triple-flanged hoop configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  {
+    "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+    "modelName": "Acrolite 5x14",
+    "shellConstruction": "metal",
+    "shellMaterial1": "aluminum",
+    "shellMaterial2": "unknown",
+    "shellThicknessMm": 1.6,
+    "hoopType": "triple-flanged steel",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.6,
+      "warmth": 6,
+      "sensitivity": 7.8,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  {
+    "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+    "modelName": "Acrolite 6.5x14",
+    "shellConstruction": "metal",
+    "shellMaterial1": "aluminum",
+    "shellMaterial2": "unknown",
+    "shellThicknessMm": 1.6,
+    "hoopType": "triple-flanged steel",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  }
+]
+
+==============================
+Mapex
+Total: 112
+[
+  {
+    "id": "mapex_black-panther_atomizer_14x6-5_metal_aluminum_2_45-modern-metal-edge_sonic-saver-hoops_bpnal4651cn_1353eb45",
+    "modelName": "Atomizer",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 2,
+    "hoopType": "Sonic Saver Hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Mapex shell/reference fields: dimensions, shell construction, shell materials, bearing edge family where available, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+    "modelName": "Birdseye Maple 10x5.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 5.1,
+    "hoopType": "Die-cast hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7,
+      "sustain": 6.4,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Mapex shell/reference fields: dimensions, shell construction, shell materials, bearing edge family where available, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+    "modelName": "Birdseye Maple 12x5.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 5.1,
+    "hoopType": "2.3mm Powerhoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7,
+      "sustain": 6.4,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Mapex shell/reference fields: dimensions, shell construction, shell materials, bearing edge family where available, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  }
+]
+
+==============================
+Noble & Cooley
+Total: 66
+[
+  {
+    "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+    "modelName": "Alloy Classic Aluminum 14x4.75",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.6,
+      "warmth": 6,
+      "sensitivity": 7.8,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db",
+    "modelName": "Alloy Classic Aluminum 14x6",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.8,
+      "warmth": 6.1,
+      "sensitivity": 7.6,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+    "modelName": "Alloy Classic Aluminum 14x6.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Noble & Cooley shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Oriollo
+Total: 3
+[
+  {
+    "id": "oriollo_seamless-metal_bakar-copper_14x6-5_metal_copper_7ca67e56",
+    "modelName": "Bakar Copper",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Copper",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 6.6,
+      "projection": 8,
+      "sustain": 7.1,
+      "warmth": 7.6,
+      "sensitivity": 7.1,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Oriollo shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "oriollo_seamless-metal_mang-na-steel_14x6-5_metal_steel_d7afbb57",
+    "modelName": "Mangàna Steel",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.6,
+      "sustain": 6.7,
+      "warmth": 5.6,
+      "sensitivity": 6.9,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Oriollo shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "oriollo_seamless-metal_phantom-aluminum_14x6-5_metal_aluminum_3b010c0d",
+    "modelName": "Phantom Aluminum",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Oriollo shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Pearl
+Total: 128
+[
+  {
+    "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+    "modelName": "Chad Smith Signature",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 1,
+    "hoopType": "SuperHoop II",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.4,
+      "brightness": 8.2,
+      "projection": 8.4,
+      "sustain": 6.4,
+      "warmth": 5.4,
+      "sensitivity": 7.2,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Pearl shell/reference fields: dimensions, shell construction, shell materials, bearing edge family where available, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "pearl_crystal-beat_crystal-beat-acrylic-snare_14x5-5_metal_acrylic_triple-flanged_3f90727c",
+    "modelName": "Crystal Beat Acrylic Snare",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Acrylic",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-Flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.8,
+      "brightness": 7.5,
+      "projection": 8.2,
+      "sustain": 7.1,
+      "warmth": 5.6,
+      "sensitivity": 6.8,
+      "control": 6.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Pearl shell/reference fields: dimensions, shell construction, shell materials, bearing edge family where available, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+    "modelName": "Decade Maple Maple Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 5.4,
+    "hoopType": "Triple-Flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7,
+      "sustain": 6.4,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Pearl shell/reference fields: dimensions, shell construction, shell materials, bearing edge family where available, reinforcement rings, snare bed availability, and hoop type. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  }
+]
+
+==============================
+Philly Drum Co.
+Total: 1
+[
+  {
+    "id": "philly-drum-co_custom-stave_tri-wood-stave-walnut-cherry-maple_14x6-5_solid-shell_walnut_cherry_maple_hand-carved-outer-_e51c5f30",
+    "modelName": "Tri-Wood Stave Walnut/Cherry/Maple",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Walnut",
+    "shellMaterial2": "Cherry",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Stick Saver hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.9,
+      "brightness": 6.4,
+      "projection": 7.6,
+      "sustain": 7.3,
+      "warmth": 7.9,
+      "sensitivity": 6.8,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Philly Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Pork Pie Percussion
+Total: 58
+[
+  {
+    "id": "pork-pie-percussion_usa-custom_7x14-african-mahogany_14x7_ply_mahogany_custom-lacquer-wrap-oil-varies_2-3mm-triple-flang_15cf3630",
+    "modelName": "7x14 African Mahogany",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Mahogany",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.2,
+      "brightness": 5.7,
+      "projection": 6.7,
+      "sustain": 6.9,
+      "warmth": 8,
+      "sensitivity": 6.5,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Pork Pie Percussion shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "pork-pie-percussion_usa-custom_7x14-blue-fade-dip-snare_14x7_ply_maple_blue-fade-dip_2-3mm-triple-flanged_45ec3cad",
+    "modelName": "7x14 Blue Fade Dip Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7.2,
+      "sensitivity": 6.9,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Pork Pie Percussion shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "pork-pie-percussion_usa-custom_7x14-cherry-bubinga-snare_14x7_ply_cherry_custom-finish_2-3mm-triple-flanged_5c07431f",
+    "modelName": "7x14 Cherry Bubinga Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Cherry",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.1,
+      "sustain": 6.4,
+      "warmth": 6.7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Pork Pie Percussion shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Premier
+Total: 61
+[
+  {
+    "id": "premier_marching_12-lug-marching-chrome-snare_14x10_metal_steel_marching-snare-bed-unknown_chrome_marching-hoops-unknown_4f7db6c3",
+    "modelName": "12-Lug Marching Chrome Snare",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Marching hoops / unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 9,
+      "sustain": 7,
+      "warmth": 5.9,
+      "sensitivity": 6.7,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Premier shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "premier_model-2000_2000-chrome-over-aluminium-14x5-snare_14x5_metal_aluminum_formed-metal-edge_parallel-snare-mechanism-_dbfa28b5",
+    "modelName": "2000 Chrome over Aluminium 14x5 Snare",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Die-cast / stick saver style hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.6,
+      "warmth": 6,
+      "sensitivity": 7.8,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Premier shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "premier_model-2000_2000-chrome-over-aluminium-14x5-5-snare_14x5-5_metal_aluminum_formed-metal-edge_parallel-snare-mechan_bbbd8a5b",
+    "modelName": "2000 Chrome over Aluminium 14x5.5 Snare",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Die-cast / stick saver style hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.8,
+      "warmth": 6.1,
+      "sensitivity": 7.6,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Premier shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Q Drum Co.
+Total: 3
+[
+  {
+    "id": "q-drum-co_copper-steel-wood-custom_copper-shell-custom_14x6-5_metal_copper_6deb06e6",
+    "modelName": "Copper Shell Custom",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Copper",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 6.6,
+      "projection": 8,
+      "sustain": 7.1,
+      "warmth": 7.6,
+      "sensitivity": 7.1,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Q Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "q-drum-co_copper-steel-wood-custom_maple-custom_14x6-5_ply_maple_d9bd89b1",
+    "modelName": "Maple Custom",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7.2,
+      "sensitivity": 6.9,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Q Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "q-drum-co_copper-steel-wood-custom_steel-shell-custom_14x6-5_metal_steel_15303944",
+    "modelName": "Steel Shell Custom",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.6,
+      "sustain": 6.7,
+      "warmth": 5.6,
+      "sensitivity": 6.9,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Q Drum Co. shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Rogers
+Total: 61
+[
+  {
+    "id": "rogers_dyna-sonic-reissue_bandb-dyna-sonic-reissue-14x5_14x5_metal_maple-poplar_dyna-sonic-frame-system_lacquer-wrap_tri_0d9ff887",
+    "modelName": "B&B Dyna-Sonic Reissue 14x5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Maple / Poplar",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.2,
+      "brightness": 6.3,
+      "projection": 7,
+      "sustain": 6.4,
+      "warmth": 7.2,
+      "sensitivity": 7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "rogers_banner_banner-wood-14x5_14x5_ply_maple-poplar_unknown-vintage-edge_wrap-lacquer_triple-flanged_banner-snare_a45fb241",
+    "modelName": "Banner Wood 14x5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple / Poplar",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.9,
+      "brightness": 6.1,
+      "projection": 6.6,
+      "sustain": 6.4,
+      "warmth": 7.3,
+      "sensitivity": 7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "rogers_century_century-wood-14x5_14x5_ply_maple-poplar_unknown-vintage-edge_wrap-lacquer_triple-flanged_century-snare_c5ec924d",
+    "modelName": "Century Wood 14x5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple / Poplar",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.9,
+      "brightness": 6.1,
+      "projection": 6.6,
+      "sustain": 6.4,
+      "warmth": 7.3,
+      "sensitivity": 7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+SONOR
+Total: 98
+[
+  {
+    "id": "sonor_aq1_aq1-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_aq1-1405_537ef02e",
+    "modelName": "AQ1 Birch 14x5.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Birch",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flanged hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.4,
+      "brightness": 7.2,
+      "projection": 7.5,
+      "sustain": 6.1,
+      "warmth": 6.1,
+      "sensitivity": 7,
+      "control": 6.8
+    },
+    "scoringBasis": "Shell-first scoring generated from nested SONOR shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "sonor_aq2_aq2-maple-14x5-5_14x5-5_ply_maple_7-2_45-bearing-edge_triple-flanged-hoops_aq2-1405_b10c6d2d",
+    "modelName": "AQ2 Maple 14x5.5",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 7.2,
+    "hoopType": "Triple-flanged hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7,
+      "sustain": 6.4,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested SONOR shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "sonor_artist-signature_benny-greb-signature-brass-13x5-75_13x5-75_metal_brass_2-3mm-triple-flanged-hoops_a540bf3a",
+    "modelName": "Benny Greb Signature Brass 13x5.75",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm triple-flanged hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8,
+      "brightness": 7.5,
+      "projection": 8.5,
+      "sustain": 7,
+      "warmth": 6.8,
+      "sensitivity": 7.1,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested SONOR shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  }
+]
+
+==============================
+Seven Six Drum Company
+Total: 3
+[
+  {
+    "id": "seven-six-drum-company_custom_bolivian-rosewood-morado-vii-solid-stave_14x6-5_solid-shell_wood_37e99be6",
+    "modelName": "Bolivian Rosewood Morado VII Solid Stave",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Wood",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Seven Six Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "seven-six-drum-company_custom_purpleheart-solid-stave_14x6-5_solid-shell_purpleheart_7c755fdc",
+    "modelName": "Purpleheart Solid Stave",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Purpleheart",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Seven Six Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "seven-six-drum-company_custom_steam-bent-solid-shell-walnut_14x6-5_steam-bent_walnut_a5b46dd4",
+    "modelName": "Steam-Bent Solid Shell Walnut",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Walnut",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.3,
+      "projection": 7.3,
+      "sustain": 7,
+      "warmth": 7.7,
+      "sensitivity": 6.7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Seven Six Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Slingerland
+Total: 68
+[
+  {
+    "id": "slingerland_vintage-wood-artist-student_artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wrap_3514218a",
+    "modelName": "Artist Model",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Mahogany",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Stick Saver / era-specific hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.3,
+      "brightness": 5.8,
+      "projection": 6.5,
+      "sustain": 6.6,
+      "warmth": 7.6,
+      "sensitivity": 6.6,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Slingerland shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "slingerland_vintage-wood-artist-student_artist-model-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_cc2d4d5a",
+    "modelName": "Artist Model 6.5x14",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Mahogany",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Stick Saver / era-specific hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.3,
+      "brightness": 5.8,
+      "projection": 6.8,
+      "sustain": 6.8,
+      "warmth": 7.8,
+      "sensitivity": 6.5,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Slingerland shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "slingerland_avante_avante-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-sa_22b43fce",
+    "modelName": "Avante Outfit Snare",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Mahogany",
+    "shellMaterial2": "Poplar",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Stick Saver / triple-flange / era-specific",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.3,
+      "brightness": 5.8,
+      "projection": 6.5,
+      "sustain": 6.6,
+      "warmth": 7.6,
+      "sensitivity": 6.6,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Slingerland shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Spaun Drum Company
+Total: 8
+[
+  {
+    "id": "spaun-drum-company_solid-stave_solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_1168a4b3",
+    "modelName": "Solid Stave Ash 14x6.5",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Ash",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Spaun Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "spaun-drum-company_solid-stave_solid-stave-bubinga-14x6-5_14x6-5_solid-shell_bubinga_bbf339c4",
+    "modelName": "Solid Stave Bubinga 14x6.5",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Bubinga",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Spaun Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "spaun-drum-company_solid-stave_solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_72766798",
+    "modelName": "Solid Stave Cherry 14x6.5",
+    "shellConstruction": "Solid Shell",
+    "shellMaterial1": "Cherry",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Spaun Drum Company shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Sugar Percussion
+Total: 3
+[
+  {
+    "id": "sugar-percussion_steam-bent-solid_cherry-steam-bent_14x6-5_steam-bent_cherry_562c2c1f",
+    "modelName": "Cherry Steam Bent",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Cherry",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.5,
+      "projection": 7.1,
+      "sustain": 6.4,
+      "warmth": 6.7,
+      "sensitivity": 6.7,
+      "control": 6.5
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Sugar Percussion shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "sugar-percussion_steam-bent-solid_maple-steam-bent_14x6-5_steam-bent_maple_5cec70f4",
+    "modelName": "Maple Steam Bent",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7.3,
+      "sustain": 6.6,
+      "warmth": 7.2,
+      "sensitivity": 6.9,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Sugar Percussion shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "sugar-percussion_steam-bent-solid_walnut-steam-bent_14x6-5_steam-bent_walnut_bc9e870a",
+    "modelName": "Walnut Steam Bent",
+    "shellConstruction": "Steam Bent",
+    "shellMaterial1": "Walnut",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "unknown",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 6.8,
+      "brightness": 6.3,
+      "projection": 7.3,
+      "sustain": 7,
+      "warmth": 7.7,
+      "sensitivity": 6.7,
+      "control": 6.6
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Sugar Percussion shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Tama
+Total: 121
+[
+  {
+    "id": "tama_artwood_50th-limited-mastercraft-artwood-14x5_14x5_ply_maple_lacquer_87db5728",
+    "modelName": "50th Limited Mastercraft Artwood 14x5",
+    "shellConstruction": "ply",
+    "shellMaterial1": "birch",
+    "shellMaterial2": "unknown",
+    "shellThicknessMm": 9,
+    "hoopType": "die-cast hoops",
+    "sourceConfidence": "high",
+    "voiceScoreConfidence": "high",
+    "scores": {
+      "attack": 8.1,
+      "brightness": 7.45,
+      "projection": 7.95,
+      "sustain": 5.55,
+      "warmth": 5.8,
+      "sensitivity": 7.15,
+      "control": 7.7
+    },
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  {
+    "id": "tama_artwood_50th-limited-mastercraft-artwood-14x6-5_14x6-5_ply_maple_lacquer_ff5b9c40",
+    "modelName": "50th Limited Mastercraft Artwood 14x6.5",
+    "shellConstruction": "ply",
+    "shellMaterial1": "birch",
+    "shellMaterial2": "unknown",
+    "shellThicknessMm": 9,
+    "hoopType": "die-cast hoops",
+    "sourceConfidence": "high",
+    "voiceScoreConfidence": "high",
+    "scores": {
+      "attack": 7.65,
+      "brightness": 7.2,
+      "projection": 8.3,
+      "sustain": 6.2,
+      "warmth": 6.25,
+      "sensitivity": 6.8,
+      "control": 7.55
+    },
+    "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  },
+  {
+    "id": "tama_artstar_artstar-cordia-14x6-5_14x6-5_ply_cordia_lacquer_die-cast-hoops_559e6b64",
+    "modelName": "Artstar Cordia 14x6.5",
+    "shellConstruction": "ply",
+    "shellMaterial1": "cordia",
+    "shellMaterial2": "unknown",
+    "shellThicknessMm": 7,
+    "hoopType": "die-cast hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.05,
+      "brightness": 6.4,
+      "projection": 7.8,
+      "sustain": 6.8,
+      "warmth": 7.45,
+      "sensitivity": 6.6,
+      "control": 7.25
+    },
+    "scoringBasis": "Shell-first scoring based on documented or strongly inferred shell material, construction, dimensions, shell thickness bucket, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+  }
+]
+
+==============================
+WorldMax
+Total: 39
+[
+  {
+    "id": "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-where-conf_e61d1279",
+    "modelName": "Aluminum Shell",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm Triple Flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.7,
+      "brightness": 6.9,
+      "projection": 7.4,
+      "sustain": 5.6,
+      "warmth": 6,
+      "sensitivity": 7.8,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested WorldMax shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed-where-co_d3b659a7",
+    "modelName": "Aluminum Shell",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Aluminum",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "2.3mm Triple Flanged",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7.5,
+      "brightness": 6.9,
+      "projection": 7.6,
+      "sustain": 6,
+      "warmth": 6.3,
+      "sensitivity": 7.5,
+      "control": 7.2
+    },
+    "scoringBasis": "Shell-first scoring generated from nested WorldMax shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  },
+  {
+    "id": "worldmax_black-dawg-series_black-deep-guppi-black-plated-brass_13x7_metal_brass_1-3_rolled-flange-45-listed-where-confir_b84199f5",
+    "modelName": "Black Deep Guppi Black Plated Brass",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Brass",
+    "shellMaterial2": "none",
+    "shellThicknessMm": 1.3,
+    "hoopType": "Die Cast Hoops",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8,
+      "brightness": 7.5,
+      "projection": 8.7,
+      "sustain": 7.2,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.3
+    },
+    "scoringBasis": "Shell-first scoring generated from nested WorldMax shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded."
+  }
+]
+
+==============================
+Yamaha
+Total: 84
+[
+  {
+    "id": "yamaha_5000-series_5000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_5000-s_ceef7d3b",
+    "modelName": "5000 Series Steel 14x5.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flange / Yamaha hoop",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.4,
+      "sustain": 6.5,
+      "warmth": 5.4,
+      "sensitivity": 7,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Yamaha shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "yamaha_7000-series_7000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_7000-s_5c0a7d93",
+    "modelName": "7000 Series Steel 14x5.5",
+    "shellConstruction": "Metal",
+    "shellMaterial1": "Steel",
+    "shellMaterial2": "none",
+    "shellThicknessMm": "unknown",
+    "hoopType": "Triple-flange / Yamaha hoop",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 8.2,
+      "brightness": 8.2,
+      "projection": 8.4,
+      "sustain": 6.5,
+      "warmth": 5.4,
+      "sensitivity": 7,
+      "control": 6.4
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Yamaha shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  },
+  {
+    "id": "yamaha_absolute-hybrid-maple_absolute-hybrid-maple-14x6_14x6_ply_maple_wenge_maple_6-2_45-degree-r1-5_vintage-natural-la_7d03d57c",
+    "modelName": "Absolute Hybrid Maple 14x6",
+    "shellConstruction": "Ply",
+    "shellMaterial1": "Maple",
+    "shellMaterial2": "Wenge",
+    "shellThicknessMm": 6.2,
+    "hoopType": "3.0mm die-cast aluminum hoop",
+    "sourceConfidence": "medium",
+    "voiceScoreConfidence": "medium",
+    "scores": {
+      "attack": 7,
+      "brightness": 6.7,
+      "projection": 7,
+      "sustain": 6.4,
+      "warmth": 7,
+      "sensitivity": 7,
+      "control": 6.7
+    },
+    "scoringBasis": "Shell-first scoring generated from nested Yamaha shell/reference fields. Brand prestige, rarity, resale value, collectibility, and artist association are excluded."
+  }
+]
