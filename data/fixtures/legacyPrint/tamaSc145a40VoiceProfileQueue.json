@@ -1,0 +1,41 @@
+[
+  {
+    "id": "tama_signature_sc145a40_stewart-copeland-brass_14x5",
+    "modelName": "Stewart Copeland 40th Anniversary Signature Brass",
+    "sourceSchemaVersion": "legacyprint-snare-v1",
+    "sourceConfidence": "high",
+    "voiceScoreConfidence": "medium",
+    "baseConfigSource": "stock",
+    "shellConstruction": "metal",
+    "shellMaterial1": "brass",
+    "shellThicknessMm": 1.5,
+    "bearingEdge": "unknown",
+    "snareBedType": "unknown",
+    "diameter": 14,
+    "depth": 5,
+    "plyCount": null,
+    "reinforcementRings": null,
+    "hoopType": "die-cast",
+    "lugCount": 10,
+    "stockBatterHead": "coated",
+    "stockResoHead": "snare side",
+    "stockSnareWires": "20",
+    "metadata": {
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelNumber": "SC145A40",
+      "relatedModelNumber": "SC145",
+      "lugType": "MSL35",
+      "throwOff": "MLS50A",
+      "buttPlate": "MLS50B",
+      "hoopDetail": "Die-Cast Hoop 10-hole batter side / Steel Mighty Hoop 10-hole snare side",
+      "stockBatterHeadDetail": "REMO Coated Ambassador",
+      "stockResoHeadDetail": "REMO Snare Side",
+      "stockSnareWiresDetail": "20-strand Starclassic Carbon Steel Snare Wires MS20SN14S",
+      "unknownFields": [
+        "bearingEdge",
+        "snareBedType"
+      ]
+    }
+  }
+]
