@@ -1,0 +1,2051 @@
+{
+
+  "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46": {
+
+    "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Acrolite",
+
+    "modelName": "Acrolite 5x14",
+
+    "patchName": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.6,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "brushed aluminum",
+
+    "hoopType": "triple-flanged steel",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig bowtie / twin snare lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88 / P86-style strainer depending on production era",
+
+    "stockSnareWires": "Ludwig 20-strand snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LM404 / LM404C10",
+
+    "yearInProduction": "1963-current with production gaps/reissues",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 7.2,
+
+    "shellScoreProjection": 6.6,
+
+    "shellScoreSustain": 5.7,
+
+    "shellScoreWarmth": 5.1,
+
+    "shellScoreSensitivity": 7.4,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.2,
+
+    "overallBrightness": 7.3,
+
+    "overallProjection": 6.7,
+
+    "overallSustain": 5.6,
+
+    "overallWarmth": 5,
+
+    "overallSensitivity": 7.5,
+
+    "overallControl": 7.2,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-360 Hz",
+
+    "recommendedTuningResoHz": "380-450 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/acrolite",
+
+    "secondarySourceUrl": "https://memphisdrumshop.com/products/ludwig-14x5-acrolite-classic-snare-drum-lm404c10",
+
+    "notesOnMissingData": "Official Ludwig Acrolite page confirms seamless beaded brushed-aluminum shell but does not clearly expose shell thickness in the scraped product text. 1.6mm thickness is supported by current retailer specs for LM404C10 and should remain medium confidence unless verified directly from Ludwig catalog documentation.",
+
+    "drumSummaryNotes": "Classic dry aluminum Acrolite in 14x5 format. The seamless aluminum shell gives quick attack, crisp articulation, controlled sustain, and strong sensitivity without the denser metallic ring of brass or steel.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197": {
+
+    "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Acrolite",
+
+    "modelName": "Acrolite 6.5x14",
+
+    "patchName": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "aluminum",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.6,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "brushed aluminum",
+
+    "hoopType": "triple-flanged steel",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig bowtie / twin snare lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88 / P86-style strainer depending on production era",
+
+    "stockSnareWires": "Ludwig 20-strand snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LM405 / LM405C",
+
+    "yearInProduction": "modern reissue/current family",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 6.9,
+
+    "shellScoreSustain": 6,
+
+    "shellScoreWarmth": 5.3,
+
+    "shellScoreSensitivity": 7.2,
+
+    "shellScoreControl": 7,
+
+    "overallAttack": 7.1,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 7,
+
+    "overallSustain": 5.9,
+
+    "overallWarmth": 5.2,
+
+    "overallSensitivity": 7.3,
+
+    "overallControl": 7.1,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-335 Hz",
+
+    "recommendedTuningResoHz": "360-430 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/acrolite",
+
+    "secondarySourceUrl": "https://drumcenternh.com/collections/ludwig-acrolite-snare-drums",
+
+    "notesOnMissingData": "Official Ludwig page confirms the current Acrolite family construction but scraped text does not clearly expose the 6.5x14 shell thickness. 1.6mm is retained from current Acrolite retailer/spec references and should remain medium confidence unless verified directly from Ludwig catalog documentation.",
+
+    "drumSummaryNotes": "Deeper 6.5x14 Acrolite with the same dry seamless aluminum identity as the 5x14 version, adding more body, lower midrange push, and projection while preserving fast response and control.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51": {
+
+    "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Black Beauty",
+
+    "modelName": "Black Beauty 3.5x14",
+
+    "patchName": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+
+    "diameter": 14,
+
+    "depth": 3.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "black nickel over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube or Imperial lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB405",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.6,
+
+    "shellScoreBrightness": 7.4,
+
+    "shellScoreProjection": 7.2,
+
+    "shellScoreSustain": 6.2,
+
+    "shellScoreWarmth": 6.6,
+
+    "shellScoreSensitivity": 7.8,
+
+    "shellScoreControl": 6.8,
+
+    "overallAttack": 7.7,
+
+    "overallBrightness": 7.5,
+
+    "overallProjection": 7.2,
+
+    "overallSustain": 6.1,
+
+    "overallWarmth": 6.5,
+
+    "overallSensitivity": 7.9,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "high",
+
+    "recommendedTuningBatterHz": "285-390 Hz",
+
+    "recommendedTuningResoHz": "390-470 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Black Beauty page confirms 1.2mm seamless brass shell, black nickel plating, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs. Exact lug option for this specific shallow model should be verified by model configuration if needed.",
+
+    "drumSummaryNotes": "Shallow 3.5x14 Black Beauty. The 1.2mm seamless brass shell provides articulate brass warmth with very fast response, strong crack, and less low-end body than deeper Black Beauty variants.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e": {
+
+    "id": "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Black Beauty",
+
+    "modelName": "Black Beauty 5x14",
+
+    "patchName": "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "black nickel over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB416",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.4,
+
+    "shellScoreBrightness": 7.2,
+
+    "shellScoreProjection": 7.4,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 6.9,
+
+    "shellScoreSensitivity": 7.5,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.5,
+
+    "overallBrightness": 7.3,
+
+    "overallProjection": 7.4,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 6.8,
+
+    "overallSensitivity": 7.6,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-365 Hz",
+
+    "recommendedTuningResoHz": "375-450 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Black Beauty page confirms 1.2mm seamless brass shell, black nickel plating, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs.",
+
+    "drumSummaryNotes": "Core 5x14 Black Beauty configuration. The 1.2mm seamless brass shell gives a warm metallic center, strong crack, and controlled open tone with excellent sensitivity.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_black-beauty_black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb417_17e1d094": {
+
+    "id": "ludwig_black-beauty_black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb417_17e1d094",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Black Beauty",
+
+    "modelName": "Black Beauty 6.5x14",
+
+    "patchName": "ludwig_black-beauty_black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb417_17e1d094",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "black nickel over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB417",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.3,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 7.7,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7.2,
+
+    "shellScoreSensitivity": 7.3,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.4,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 7.7,
+
+    "overallSustain": 6.8,
+
+    "overallWarmth": 7.1,
+
+    "overallSensitivity": 7.4,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-345 Hz",
+
+    "recommendedTuningResoHz": "360-435 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Black Beauty page confirms 1.2mm seamless brass shell, black nickel plating, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs.",
+
+    "drumSummaryNotes": "Deeper 6.5x14 Black Beauty. Adds low-mid authority, projection, and bloom to the classic 1.2mm seamless brass voice while retaining strong articulation and sensitivity.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_black-beauty_black-beauty-8x14_14x8_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb418_58e49a16": {
+
+    "id": "ludwig_black-beauty_black-beauty-8x14_14x8_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb418_58e49a16",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Black Beauty",
+
+    "modelName": "Black Beauty 8x14",
+
+    "patchName": "ludwig_black-beauty_black-beauty-8x14_14x8_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb418_58e49a16",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "black nickel over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB418",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.1,
+
+    "shellScoreBrightness": 6.9,
+
+    "shellScoreProjection": 8,
+
+    "shellScoreSustain": 7.3,
+
+    "shellScoreWarmth": 7.5,
+
+    "shellScoreSensitivity": 6.9,
+
+    "shellScoreControl": 6.6,
+
+    "overallAttack": 7.2,
+
+    "overallBrightness": 7,
+
+    "overallProjection": 8,
+
+    "overallSustain": 7.2,
+
+    "overallWarmth": 7.4,
+
+    "overallSensitivity": 7,
+
+    "overallControl": 6.6,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "215-315 Hz",
+
+    "recommendedTuningResoHz": "340-415 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Black Beauty page confirms 1.2mm seamless brass shell, black nickel plating, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs.",
+
+    "drumSummaryNotes": "Deep 8x14 Black Beauty. The 1.2mm seamless brass shell keeps the classic Black Beauty warmth and articulation while the 8-inch depth adds greater body, projection, and sustain.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8": {
+
+    "id": "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Black Beauty",
+
+    "modelName": "Hammered Black Beauty 5x14",
+
+    "patchName": "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "black nickel over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "hammered black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB416K / hammered Black Beauty variant",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.5,
+
+    "shellScoreBrightness": 7.1,
+
+    "shellScoreProjection": 7.4,
+
+    "shellScoreSustain": 6.3,
+
+    "shellScoreWarmth": 6.8,
+
+    "shellScoreSensitivity": 7.4,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.6,
+
+    "overallBrightness": 7.2,
+
+    "overallProjection": 7.4,
+
+    "overallSustain": 6.2,
+
+    "overallWarmth": 6.7,
+
+    "overallSensitivity": 7.5,
+
+    "overallControl": 7.1,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-365 Hz",
+
+    "recommendedTuningResoHz": "375-450 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/hammered-brass",
+
+    "notesOnMissingData": "Official Ludwig Black Beauty page confirms the 1.2mm seamless brass Black Beauty shell family. Hammered brass page confirms Ludwig hammered brass shell behavior and hardware pattern. Exact model number suffix should be verified against current catalog options.",
+
+    "drumSummaryNotes": "Hammered 5x14 Black Beauty variant. The hammered 1.2mm brass shell keeps the brass warmth and crack but adds dryness and control by breaking up overtones compared with the smooth shell version.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_black-beauty_hammered-black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flang_53151aab": {
+
+    "id": "ludwig_black-beauty_hammered-black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flang_53151aab",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Black Beauty",
+
+    "modelName": "Hammered Black Beauty 6.5x14",
+
+    "patchName": "ludwig_black-beauty_hammered-black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flang_53151aab",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "black nickel over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "hammered black nickel over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB417K / hammered Black Beauty variant",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.4,
+
+    "shellScoreBrightness": 7,
+
+    "shellScoreProjection": 7.7,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 7.2,
+
+    "shellScoreControl": 7.1,
+
+    "overallAttack": 7.5,
+
+    "overallBrightness": 7.1,
+
+    "overallProjection": 7.7,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 7.3,
+
+    "overallControl": 7.1,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-345 Hz",
+
+    "recommendedTuningResoHz": "360-435 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/hammered-brass",
+
+    "notesOnMissingData": "Official Ludwig Black Beauty page confirms the 1.2mm seamless brass Black Beauty shell family. Hammered brass page confirms Ludwig hammered brass shell behavior and hardware pattern. Exact model number suffix should be verified against current catalog options.",
+
+    "drumSummaryNotes": "Hammered 6.5x14 Black Beauty variant. Compared with the smooth 6.5x14 shell, the hammered shell should reduce overtone spread and increase perceived control while preserving brass body and projection.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_bronze-phonic_bronze-phonic-5x14_14x5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_bd46a8a2": {
+
+    "id": "ludwig_bronze-phonic_bronze-phonic-5x14_14x5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_bd46a8a2",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Bronze Phonic",
+
+    "modelName": "Bronze Phonic 5x14",
+
+    "patchName": "ludwig_bronze-phonic_bronze-phonic-5x14_14x5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_bd46a8a2",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "bronze",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "bronze finish",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.3,
+
+    "shellScoreBrightness": 6.8,
+
+    "shellScoreProjection": 7.5,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7.3,
+
+    "shellScoreSensitivity": 7.2,
+
+    "shellScoreControl": 6.8,
+
+    "overallAttack": 7.4,
+
+    "overallBrightness": 6.9,
+
+    "overallProjection": 7.5,
+
+    "overallSustain": 6.8,
+
+    "overallWarmth": 7.2,
+
+    "overallSensitivity": 7.3,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "255-355 Hz",
+
+    "recommendedTuningResoHz": "370-445 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/bronz-phonic",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Bronze Phonic page confirms 1.2mm seamless bronze shell, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs. Exact model number should be verified.",
+
+    "drumSummaryNotes": "5x14 Bronze Phonic. The 1.2mm seamless bronze shell should sit between brass and copper: warmer and denser than aluminum or steel, with strong projection and a complex metallic body.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_bronze-phonic_bronze-phonic-6-5x14_14x6-5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a871a9a6": {
+
+    "id": "ludwig_bronze-phonic_bronze-phonic-6-5x14_14x6-5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a871a9a6",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Bronze Phonic",
+
+    "modelName": "Bronze Phonic 6.5x14",
+
+    "patchName": "ludwig_bronze-phonic_bronze-phonic-6-5x14_14x6-5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a871a9a6",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "bronze",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "bronze finish",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7.2,
+
+    "shellScoreBrightness": 6.7,
+
+    "shellScoreProjection": 7.8,
+
+    "shellScoreSustain": 7.2,
+
+    "shellScoreWarmth": 7.6,
+
+    "shellScoreSensitivity": 7,
+
+    "shellScoreControl": 6.8,
+
+    "overallAttack": 7.3,
+
+    "overallBrightness": 6.8,
+
+    "overallProjection": 7.8,
+
+    "overallSustain": 7.1,
+
+    "overallWarmth": 7.5,
+
+    "overallSensitivity": 7.1,
+
+    "overallControl": 6.8,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "235-335 Hz",
+
+    "recommendedTuningResoHz": "355-430 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/bronz-phonic",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Bronze Phonic page confirms 1.2mm seamless bronze shell, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs. Exact model number should be verified.",
+
+    "drumSummaryNotes": "6.5x14 Bronze Phonic. The deeper bronze shell adds lower body, projection, and sustain compared with the 5x14 while retaining strong bronze density and metallic complexity.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_bronze-phonic_bronze-phonic-8x14_14x8_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a6213f26": {
+
+    "id": "ludwig_bronze-phonic_bronze-phonic-8x14_14x8_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a6213f26",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Bronze Phonic",
+
+    "modelName": "Bronze Phonic 8x14",
+
+    "patchName": "ludwig_bronze-phonic_bronze-phonic-8x14_14x8_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a6213f26",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "bronze",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "bronze finish",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current",
+
+    "yearDiscontinued": "N/A",
+
+    "shellScoreAttack": 7,
+
+    "shellScoreBrightness": 6.5,
+
+    "shellScoreProjection": 8.1,
+
+    "shellScoreSustain": 7.6,
+
+    "shellScoreWarmth": 7.9,
+
+    "shellScoreSensitivity": 6.7,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.1,
+
+    "overallBrightness": 6.6,
+
+    "overallProjection": 8.1,
+
+    "overallSustain": 7.5,
+
+    "overallWarmth": 7.8,
+
+    "overallSensitivity": 6.8,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "210-310 Hz",
+
+    "recommendedTuningResoHz": "335-410 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/bronz-phonic",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Official Ludwig Bronze Phonic page confirms 1.2mm seamless bronze shell, 2.3mm steel triple-flanged hoops, P88AC/P35P hardware, and 10 lugs. Exact model number should be verified.",
+
+    "drumSummaryNotes": "8x14 Bronze Phonic. The deepest Bronze Phonic option should emphasize dense low-mid body, projection, and long metallic sustain, with slightly slower response than the 5x14 and 6.5x14 versions.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "YES",
+
+    "discontinued": "NO",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "high",
+
+    "sourceConfidence": "high",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c": {
+
+    "id": "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Chrome-Over-Brass",
+
+    "modelName": "Chrome-Over-Brass 5x14",
+
+    "patchName": "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "chrome over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "chrome over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB416 / chrome-over-brass variant",
+
+    "yearInProduction": "current or modern catalog family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.5,
+
+    "shellScoreBrightness": 7.5,
+
+    "shellScoreProjection": 7.5,
+
+    "shellScoreSustain": 6.6,
+
+    "shellScoreWarmth": 6.8,
+
+    "shellScoreSensitivity": 7.5,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.6,
+
+    "overallBrightness": 7.6,
+
+    "overallProjection": 7.5,
+
+    "overallSustain": 6.5,
+
+    "overallWarmth": 6.7,
+
+    "overallSensitivity": 7.6,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "260-365 Hz",
+
+    "recommendedTuningResoHz": "375-450 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Chrome-over-brass model is treated as the same 1.2mm seamless brass shell family as Ludwig brass/Black Beauty variants, but the exact current Ludwig product page for this chrome-over-brass SKU should be verified. Keep source confidence medium until direct SKU documentation is attached.",
+
+    "drumSummaryNotes": "Chrome-over-brass 5x14 Ludwig brass shell. Similar shell response to the 5x14 Black Beauty but with a chrome-plated finish that reads slightly brighter and more reflective than black nickel.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "unknown",
+
+    "discontinued": "unknown",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_chrome-over-brass_chrome-over-brass-6-5x14_14x6-5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb_9a7efd45": {
+
+    "id": "ludwig_chrome-over-brass_chrome-over-brass-6-5x14_14x6-5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb_9a7efd45",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Chrome-Over-Brass",
+
+    "modelName": "Chrome-Over-Brass 6.5x14",
+
+    "patchName": "ludwig_chrome-over-brass_chrome-over-brass-6-5x14_14x6-5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb_9a7efd45",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "brass",
+
+    "shellMaterial2": "chrome over brass",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "chrome over brass",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig Imperial or tube lugs depending on model option",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "LB417 / chrome-over-brass variant",
+
+    "yearInProduction": "current or modern catalog family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7.4,
+
+    "shellScoreBrightness": 7.4,
+
+    "shellScoreProjection": 7.8,
+
+    "shellScoreSustain": 6.9,
+
+    "shellScoreWarmth": 7.1,
+
+    "shellScoreSensitivity": 7.3,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.5,
+
+    "overallBrightness": 7.5,
+
+    "overallProjection": 7.8,
+
+    "overallSustain": 6.8,
+
+    "overallWarmth": 7,
+
+    "overallSensitivity": 7.4,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "240-345 Hz",
+
+    "recommendedTuningResoHz": "360-435 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Chrome-over-brass model is treated as the same 1.2mm seamless brass shell family as Ludwig brass/Black Beauty variants, but the exact current Ludwig product page for this chrome-over-brass SKU should be verified. Keep source confidence medium until direct SKU documentation is attached.",
+
+    "drumSummaryNotes": "Chrome-over-brass 6.5x14 Ludwig brass shell. Compared with the 5x14 version, the deeper shell adds more low-mid body, projection, and sustain while retaining a bright chrome-over-brass edge.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "unknown",
+
+    "discontinued": "unknown",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91": {
+
+    "id": "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Copper Phonic",
+
+    "modelName": "Copper Phonic 5x14",
+
+    "patchName": "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91",
+
+    "diameter": 14,
+
+    "depth": 5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "copper",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "copper finish",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current or modern catalog family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 7,
+
+    "shellScoreBrightness": 6.4,
+
+    "shellScoreProjection": 7.3,
+
+    "shellScoreSustain": 7,
+
+    "shellScoreWarmth": 7.8,
+
+    "shellScoreSensitivity": 7.1,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7.1,
+
+    "overallBrightness": 6.5,
+
+    "overallProjection": 7.3,
+
+    "overallSustain": 6.9,
+
+    "overallWarmth": 7.7,
+
+    "overallSensitivity": 7.2,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium-high",
+
+    "recommendedTuningBatterHz": "250-350 Hz",
+
+    "recommendedTuningResoHz": "365-440 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/copper-phonic",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Copper Phonic specs should be directly verified against the current Ludwig product page. 1.2mm seamless copper is retained as the known Copper Phonic family construction, but source confidence stays medium until the exact source text is attached.",
+
+    "drumSummaryNotes": "5x14 Copper Phonic. Copper should emphasize warmth, darker metallic body, and a softer top-end than brass or bronze while still offering strong projection and sensitivity.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "unknown",
+
+    "discontinued": "unknown",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_copper-phonic_copper-phonic-6-5x14_14x6-5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_86ad9b07": {
+
+    "id": "ludwig_copper-phonic_copper-phonic-6-5x14_14x6-5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_86ad9b07",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Copper Phonic",
+
+    "modelName": "Copper Phonic 6.5x14",
+
+    "patchName": "ludwig_copper-phonic_copper-phonic-6-5x14_14x6-5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_86ad9b07",
+
+    "diameter": 14,
+
+    "depth": 6.5,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "copper",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "copper finish",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current or modern catalog family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.9,
+
+    "shellScoreBrightness": 6.3,
+
+    "shellScoreProjection": 7.6,
+
+    "shellScoreSustain": 7.3,
+
+    "shellScoreWarmth": 8.1,
+
+    "shellScoreSensitivity": 6.9,
+
+    "shellScoreControl": 6.7,
+
+    "overallAttack": 7,
+
+    "overallBrightness": 6.4,
+
+    "overallProjection": 7.6,
+
+    "overallSustain": 7.2,
+
+    "overallWarmth": 8,
+
+    "overallSensitivity": 7,
+
+    "overallControl": 6.7,
+
+    "projectedShellFundamentalPitch": "medium",
+
+    "recommendedTuningBatterHz": "230-330 Hz",
+
+    "recommendedTuningResoHz": "350-425 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/copper-phonic",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Copper Phonic specs should be directly verified against the current Ludwig product page. 1.2mm seamless copper is retained as the known Copper Phonic family construction, but source confidence stays medium until the exact source text is attached.",
+
+    "drumSummaryNotes": "6.5x14 Copper Phonic. Deeper copper shell increases low-mid warmth, body, and sustain while keeping a rounder, darker attack than brass or steel.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "unknown",
+
+    "discontinued": "unknown",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  },
+
+  "ludwig_copper-phonic_copper-phonic-8x14_14x8_metal_copper_copper-finish_2-3mm-steel-triple-flanged_6aaa8788": {
+
+    "id": "ludwig_copper-phonic_copper-phonic-8x14_14x8_metal_copper_copper-finish_2-3mm-steel-triple-flanged_6aaa8788",
+
+    "companyName": "Ludwig",
+
+    "companyType": "major manufacturer",
+
+    "lineSeries": "Copper Phonic",
+
+    "modelName": "Copper Phonic 8x14",
+
+    "patchName": "ludwig_copper-phonic_copper-phonic-8x14_14x8_metal_copper_copper-finish_2-3mm-steel-triple-flanged_6aaa8788",
+
+    "diameter": 14,
+
+    "depth": 8,
+
+    "shellConstruction": "metal",
+
+    "shellMaterial1": "copper",
+
+    "shellMaterial2": "unknown",
+
+    "shellMaterial3": "unknown",
+
+    "plyCountLayup": "N/A",
+
+    "shellThicknessMm": 1.2,
+
+    "reinforcementRings": false,
+
+    "reRingMaterial": "N/A",
+
+    "reRingThicknessMm": null,
+
+    "bearingEdge": "formed metal bearing edge",
+
+    "snareBeds": true,
+
+    "snareBedType": "shallow",
+
+    "finishType": "copper finish",
+
+    "hoopType": "2.3mm steel triple-flanged",
+
+    "lugCount": 10,
+
+    "lugType": "Ludwig tube lugs",
+
+    "hardwareFinish": "chrome",
+
+    "snareThrowMakeModel": "Ludwig P88AC throw off / P35P butt plate",
+
+    "stockSnareWires": "Ludwig snare wires",
+
+    "stockBatterHead": "Ludwig Weather Master Medium Coated",
+
+    "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+
+    "modelNumber": "unknown",
+
+    "yearInProduction": "current or modern catalog family",
+
+    "yearDiscontinued": "unknown",
+
+    "shellScoreAttack": 6.7,
+
+    "shellScoreBrightness": 6.1,
+
+    "shellScoreProjection": 7.9,
+
+    "shellScoreSustain": 7.7,
+
+    "shellScoreWarmth": 8.4,
+
+    "shellScoreSensitivity": 6.6,
+
+    "shellScoreControl": 6.6,
+
+    "overallAttack": 6.8,
+
+    "overallBrightness": 6.2,
+
+    "overallProjection": 7.9,
+
+    "overallSustain": 7.6,
+
+    "overallWarmth": 8.3,
+
+    "overallSensitivity": 6.7,
+
+    "overallControl": 6.6,
+
+    "projectedShellFundamentalPitch": "medium-low",
+
+    "recommendedTuningBatterHz": "205-305 Hz",
+
+    "recommendedTuningResoHz": "330-405 Hz",
+
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/copper-phonic",
+
+    "secondarySourceUrl": "unknown",
+
+    "notesOnMissingData": "Copper Phonic specs should be directly verified against the current Ludwig product page. 1.2mm seamless copper is retained as the known Copper Phonic family construction, but source confidence stays medium until the exact source text is attached.",
+
+    "drumSummaryNotes": "8x14 Copper Phonic. Deep copper shell emphasizes maximum warmth, lower body, bloom, and darker sustain, with less immediate snap than shallower Copper Phonic sizes.",
+
+    "drumType": "Snare Drum",
+
+    "currentlyInProduction": "unknown",
+
+    "discontinued": "unknown",
+
+    "rareCollectible": "NO",
+
+    "artistSignatureLine": "NO",
+
+    "voiceScoreConfidence": "medium",
+
+    "sourceConfidence": "medium",
+
+    "needsResearch": false,
+
+    "scoringBasis": "Shell-first scoring based on documented shell material, dimensions, shell thickness where known, bearing edge type, snare beds, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring."
+
+  }
+
+}
