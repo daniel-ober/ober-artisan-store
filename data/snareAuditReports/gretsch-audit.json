@@ -1,0 +1,13 @@
+{
+  "company": "Gretsch",
+  "summary": {
+    "total": 44,
+    "engineReady": 44,
+    "needsResearch": 0,
+    "missingRequiredCount": 0,
+    "invalidConfidenceCount": 0,
+    "missingScoresCount": 0,
+    "examplesNeedingWork": []
+  },
+  "badRecords": []
+}
