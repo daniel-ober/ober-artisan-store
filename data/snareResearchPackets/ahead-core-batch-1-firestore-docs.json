@@ -1,0 +1,2066 @@
+{
+  "generatedAt": "2026-05-18T06:04:37.373Z",
+  "sourcePacket": "data/snareResearchPackets/ahead-core-batch-1.json",
+  "docs": [
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+        "patchName": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+        "identification": {
+          "modelNumber": "AS614BBB DCP",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Trick throw-off",
+            "style": "unknown",
+            "make": "Trick throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://drumcenternh.com/products/ahead-3mm-cast-bell-brass-snare-drum-14x6-black-chrome-w-brass-hw-trick-throw-off",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "DCP listing confirms 14x6 black chrome 3mm cast bell brass with brass hardware/Trick throw-off; cross-check row for retailer source."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH1410 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 10,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082626,
+          "_nanoseconds": 941000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+        "patchName": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+        "identification": {
+          "modelNumber": "AS614BBBB Sweetwater",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "GS007S Trick",
+            "style": "unknown",
+            "make": "GS007S Trick"
+          },
+          "hoops": {
+            "resonantHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/AS614BBBB--ahead-as614bbbb-6-inch-by-14-inch-bell-brass-snare-drum-black-chrome",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Sweetwater confirms 6x14 bell brass black chrome listing and GS007S Trick throw-off; included as retailer cross-check row."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH1410 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 10,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 57000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+        "patchName": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+        "identification": {
+          "modelNumber": "AS613BBB",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 13,
+            "depthInches": 6,
+            "metricDimensionsMm": "330.2 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "GS007S Trick",
+            "style": "unknown",
+            "make": "GS007S Trick"
+          },
+          "hoops": {
+            "resonantHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 13,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "BigBang lists 6x13 and 6x14 style options; 13-inch lug count inferred from Ahead 13-inch metal family."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x13 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x13 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH138 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 13,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 8,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 167000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+        "patchName": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+        "identification": {
+          "modelNumber": "AS614BBBB",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Trick throw-off",
+            "style": "unknown",
+            "make": "Trick throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://bentleysdrumshop.com/collections/snare-drums/brand_ahead",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Bentley's listing confirms AS614BBBB 6x14 black chrome on 3mm bell brass with Trick strainer and brass hardware."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH1410 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 10,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 275000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+        "patchName": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+        "identification": {
+          "modelNumber": "AS614BBB",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "GS007S Trick",
+            "style": "unknown",
+            "make": "GS007S Trick"
+          },
+          "hoops": {
+            "resonantHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "BigBang confirms 6x14 3.00mm cast bell brass, 10-lug S-Hoop setup, Remo heads, Fat Cat wires."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and GS007S Trick. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH1410 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 10,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 370000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+        "patchName": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+        "identification": {
+          "modelNumber": "AS614BBBB variant",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Minimal shallow snare beds",
+            "widthBucket": "unknown",
+            "bedStyle": "Minimal shallow snare beds",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Black Trick throw-off",
+            "style": "unknown",
+            "make": "Black Trick throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": "https://bentleysdrumshop.com/collections/snare-drums/brand_ahead",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum-with-black-trick-throw-off/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Shell family and 6x14 size confirmed; black Trick throw-off variant changes hardware but not shell score materially."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://bentleysdrumshop.com/collections/snare-drums/brand_ahead"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Black Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Black Trick throw-off. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH1410 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "Minimal shallow snare beds",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 10,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 463000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+        "patchName": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+        "identification": {
+          "modelNumber": "AS613BBB / size option",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 13,
+            "depthInches": 6,
+            "metricDimensionsMm": "330.2 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Minimal shallow snare beds",
+            "widthBucket": "unknown",
+            "bedStyle": "Minimal shallow snare beds",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "GS007S Chrome Trick throw-off",
+            "style": "unknown",
+            "make": "GS007S Chrome Trick throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 13,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "BigBang page lists 6x13 and 6x14 style options but technical table visible in..."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x13 3.0mm Cast Bell Brass shell, S-Hoop counter h...",
+          "drumSummaryNotes": "Shell-first score based on 6x13 3.0mm Cast Bell Brass shell, S-Hoop counter h..."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH138 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 13,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "Minimal shallow snare beds",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 8,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 582000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+        "patchName": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+        "identification": {
+          "modelNumber": "UPC 753283100799",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6,
+            "metricDimensionsMm": "355.6 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Solid Shell",
+            "shellMaterialPrimary": "Bell Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 3,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Minimal shallow snare beds",
+            "widthBucket": "unknown",
+            "bedStyle": "Minimal shallow snare beds",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "GS007S Chrome Trick throw-off",
+            "style": "unknown",
+            "make": "GS007S Chrome Trick throw-off"
+          },
+          "hoops": {
+            "resonantHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH1410 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": "https://www.sweetwater.com/store/detail/AS614BBBB--ahead-as614bbbb-6-inch-by-...",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Unknown bearing edge geometry; minimal shallow snare beds confirmed where sou..."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.sweetwater.com/store/detail/AS614BBBB--ahead-as614bbbb-6-inch-by-..."
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter h...",
+          "drumSummaryNotes": "Shell-first score based on 6x14 3.0mm Cast Bell Brass shell, S-Hoop counter h..."
+        },
+        "overallBrightness": 7.3,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "SH1410 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.4,
+        "overallControl": 6.3,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 8.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 7.2,
+        "snareBedType": "Minimal shallow snare beds",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.4,
+        "shellScoreBrightness": 7.3,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Solid Shell",
+        "lugCount": 10,
+        "shellMaterial1": "Bell Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.3,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 687000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 3,
+        "sensitivity": 7.1,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+        "patchName": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+        "identification": {
+          "modelNumber": "AS613 Dunnett option",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 13,
+            "depthInches": 6,
+            "metricDimensionsMm": "330.2 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 1,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Minimal shallow snare beds",
+            "widthBucket": "unknown",
+            "bedStyle": "Minimal shallow snare beds",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Dunnett R4/R5",
+            "style": "unknown",
+            "make": "Dunnett R4/R5"
+          },
+          "hoops": {
+            "resonantHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 13,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-13-black-chrome-on-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Style option lists Dunnett or Trick throw-off; shell family confirmed."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x13 1.0mm Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Dunnett R4/R5. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x13 1.0mm Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Dunnett R4/R5. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.5,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8,
+        "hoopType": "SH138 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.5,
+        "overallControl": 6.3,
+        "shellScoreAttack": 8,
+        "shellScoreProjection": 8.5,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7,
+        "diameter": 13,
+        "attack": 8,
+        "overallWarmth": 6.8,
+        "snareBedType": "Minimal shallow snare beds",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.5,
+        "shellScoreBrightness": 7.5,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.8,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.8,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Metal",
+        "lugCount": 8,
+        "shellMaterial1": "Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.5,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 814000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 1,
+        "sensitivity": 7.1,
+        "sustain": 7
+      }
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "AHEAD",
+        "companyType": "Accessory / drum product manufacturer",
+        "lineSeries": "Ahead Snares",
+        "modelName": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+        "patchName": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+        "identification": {
+          "modelNumber": "AS613 Trick option",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 13,
+            "depthInches": 6,
+            "metricDimensionsMm": "330.2 x 152.4"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": 1,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Smoke Chrome / Black Chrome",
+            "finishType": "Smoke Chrome / Black Chrome",
+            "exteriorTreatment": "Smoke Chrome / Black Chrome",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Trick throw-off option",
+            "style": "unknown",
+            "make": "Trick throw-off option"
+          },
+          "hoops": {
+            "resonantHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / smoke chrome",
+            "batterHoopType": "SH138 S-Hoop counter hoops",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Tube lugs",
+            "hardwareFinish": "Chrome / smoke chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Fat Cat Dual-Adjustable Snappy Snare",
+            "lengthInches": 13,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Fat Cat Dual-Adjustable Snappy Snare"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Remo USA batter head",
+            "resonantHead": "Remo USA snare-side head"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": "See primary source",
+          "secondarySourceUrl": null,
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-13-black-chrome-on-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "notesOnMissingData": [
+            "Style option lists Dunnett or Trick throw-off; hardware variation does not materially alter shell score."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": []
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 6x13 1.0mm Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off option. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material.",
+          "drumSummaryNotes": "Shell-first score based on 6x13 1.0mm Brass shell, S-Hoop counter hoops, minimal shallow snare beds where documented, Fat Cat wires, and Trick throw-off option. Scores reflect physical construction only; finish color is not treated as a major acoustic driver unless shell coating is material."
+        },
+        "overallBrightness": 7.5,
+        "reRingThicknessMm": null,
+        "lugType": "Tube lugs",
+        "shellScoreSustain": 7,
+        "scoringBasis": "Shell-first scoring generated from nested AHEAD shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8,
+        "hoopType": "SH138 S-Hoop counter hoops",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "AHEAD record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.5,
+        "overallControl": 6.3,
+        "shellScoreAttack": 8,
+        "shellScoreProjection": 8.5,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 7,
+        "diameter": 13,
+        "attack": 8,
+        "overallWarmth": 6.8,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / smoke chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.5,
+        "shellScoreBrightness": 7.5,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.8,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.8,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Metal",
+        "lugCount": 8,
+        "shellMaterial1": "Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.5,
+        "depth": 6,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082627,
+          "_nanoseconds": 924000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": 1,
+        "sensitivity": 7.1,
+        "sustain": 7
+      }
+    }
+  ]
+}

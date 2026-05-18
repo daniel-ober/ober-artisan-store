@@ -1,0 +1,123 @@
+{
+  "company": "Tama",
+  "generatedAt": "2026-05-18T06:04:33.851Z",
+  "batch": "tama-core-batch-1",
+  "records": [
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "modelName": "Artwood Birch 14x5.5",
+      "id": "tama_artwood_artwood-birch-14x5-5_14x5-5_ply_birch_lacquer_444f452b",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "modelName": "Artwood Birch 14x6.5",
+      "id": "tama_artwood_artwood-birch-14x6-5_14x6-5_ply_birch_lacquer_c8fcf233",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "modelName": "Artwood Birds Eye Maple 14x6.5",
+      "id": "tama_artwood_artwood-birds-eye-maple-14x6-5_14x6-5_ply_maple_lacquer_f2bcbb59",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "modelName": "Artwood Maple 14x5.5",
+      "id": "tama_artwood_artwood-maple-14x5-5_14x5-5_ply_maple_lacquer_3540966b",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "modelName": "Artwood Maple 14x6.5",
+      "id": "tama_artwood_artwood-maple-14x6-5_14x6-5_ply_maple_lacquer_942d70cd",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "modelName": "Artwood Walnut 14x6.5",
+      "id": "tama_artwood_artwood-walnut-14x6-5_14x6-5_ply_walnut_lacquer_caccd985",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "modelName": "STAR Reserve G-Mahogany 14x6.5",
+      "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+      "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+      "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ]
+    }
+  ]
+}

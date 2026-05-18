@@ -1,0 +1,2085 @@
+{
+  "generatedAt": "2026-05-18T06:04:33.769Z",
+  "sourcePacket": "data/snareResearchPackets/rogers-core-batch-1.json",
+  "docs": [
+    {
+      "id": "rogers_skinny-drum_skinny-drum-14x3-5_14x3-5_ply_wrap-lacquer_triple-flanged_skinny-drum_73735def",
+      "exists": true,
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Skinny Drum",
+        "modelName": "Skinny Drum 14x3.5",
+        "patchName": "rogers_skinny-drum_skinny-drum-14x3-5_14x3-5_ply_wrap-lacquer_triple-flanged_skinny-drum_73735def",
+        "identification": {
+          "modelNumber": "Skinny Drum",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 3.5,
+            "metricDimensionsMm": "355.6 x 88.9"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "unknown",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Wrap/lacquer",
+            "finishType": "Wrap/lacquer",
+            "exteriorTreatment": "Wrap/lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Rogers strainer",
+            "style": "unknown",
+            "make": "Rogers strainer"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Rogers lugs",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Standard wires",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Standard wires"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "1970s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "1970s",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/resources-backup/",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Shell material and construction need catalog extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/resources-backup/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shallow Rogers Skinny Drum row; score emphasizes piccolo attack/brightness but low confidence.",
+          "drumSummaryNotes": "Shallow Rogers Skinny Drum row; score emphasizes piccolo attack/brightness but low confidence."
+        },
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "Rogers lugs",
+        "shellScoreSustain": 6,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.2,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.1,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.8,
+        "overallControl": 6.5,
+        "shellScoreAttack": 7.2,
+        "shellScoreProjection": 6.8,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.1,
+        "overallSustain": 6,
+        "diameter": 14,
+        "attack": 7.2,
+        "overallWarmth": 6.3,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.8,
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.5,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.3,
+        "shellMaterial3": "none",
+        "control": 6.5,
+        "shellConstruction": "Ply",
+        "lugCount": 8,
+        "shellMaterial1": "unknown",
+        "shellMaterial2": "none",
+        "brightness": 6.5,
+        "depth": 3.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082699,
+          "_nanoseconds": 93000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.1,
+        "sustain": 6
+      }
+    },
+    {
+      "id": "rogers_dyna-sonic-reissue_bandb-dyna-sonic-reissue-14x5_14x5_metal_maple-poplar_dyna-sonic-frame-system_lacquer-wrap_tri_0d9ff887",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Dyna-Sonic Reissue",
+        "modelName": "B&B Dyna-Sonic Reissue 14x5",
+        "patchName": "rogers_dyna-sonic-reissue_bandb-dyna-sonic-reissue-14x5_14x5_metal_maple-poplar_dyna-sonic-frame-system_lacquer-wrap_tri_0d9ff887",
+        "identification": {
+          "modelNumber": "B&B Dyna-Sonic",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Maple / Poplar",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Rogers reissue family",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Dyna-Sonic frame system",
+            "widthBucket": "unknown",
+            "bedStyle": "Dyna-Sonic frame system",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Lacquer/wrap",
+            "finishType": "Lacquer/wrap",
+            "exteriorTreatment": "Lacquer/wrap",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Dyna-Sonic frame/throw system",
+            "style": "unknown",
+            "make": "Dyna-Sonic frame/throw system"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Bread & Butter style",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Dyna-Sonic wires/frame",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Dyna-Sonic wires/frame"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "2020s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/",
+          "primarySourceUrl": "https://rogersdrumsusa.com/bb-dyna-sonic/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Official page confirms B&B Dyna-Sonic concept but exact shell specs need extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "B&B-styled Dyna-Sonic reissue row for coverage.",
+          "drumSummaryNotes": "B&B-styled Dyna-Sonic reissue row for coverage."
+        },
+        "overallBrightness": 6.3,
+        "reRingThicknessMm": null,
+        "lugType": "Bread & Butter style",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.2,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7,
+        "overallControl": 6.6,
+        "shellScoreAttack": 7.2,
+        "shellScoreProjection": 7,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 7.2,
+        "overallWarmth": 7.2,
+        "snareBedType": "Dyna-Sonic frame system",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7,
+        "shellScoreBrightness": 6.3,
+        "shellScoreControl": 6.6,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.2,
+        "shellMaterial3": "none",
+        "control": 6.6,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Maple / Poplar",
+        "shellMaterial2": "none",
+        "brightness": 6.3,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082697,
+          "_nanoseconds": 71000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "rogers_banner_banner-wood-14x5_14x5_ply_maple-poplar_unknown-vintage-edge_wrap-lacquer_triple-flanged_banner-snare_a45fb241",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Banner",
+        "modelName": "Banner Wood 14x5",
+        "patchName": "rogers_banner_banner-wood-14x5_14x5_ply_maple-poplar_unknown-vintage-edge_wrap-lacquer_triple-flanged_banner-snare_a45fb241",
+        "identification": {
+          "modelNumber": "Banner snare",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple / Poplar",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Rogers wood shell family",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Unknown vintage edge",
+            "snareSideProfile": "Unknown vintage edge",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Wrap/lacquer",
+            "finishType": "Wrap/lacquer",
+            "exteriorTreatment": "Wrap/lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Rogers strainer",
+            "style": "unknown",
+            "make": "Rogers strainer"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Rogers lugs",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 6,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Standard wires",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Standard wires"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "1960s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "1970s",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/resources-backup/",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Specs not extracted yet."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/resources-backup/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Banner catalog row kept for future catalog detail.",
+          "drumSummaryNotes": "Banner catalog row kept for future catalog detail."
+        },
+        "overallBrightness": 6.1,
+        "reRingThicknessMm": null,
+        "lugType": "Rogers lugs",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.9,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.6,
+        "overallControl": 6.6,
+        "shellScoreAttack": 6.9,
+        "shellScoreProjection": 6.6,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 6.9,
+        "overallWarmth": 7.3,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.6,
+        "shellScoreBrightness": 6.1,
+        "shellScoreControl": 6.6,
+        "bearingEdge": "Unknown vintage edge",
+        "shellScoreWarmth": 7.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.3,
+        "shellMaterial3": "none",
+        "control": 6.6,
+        "shellConstruction": "Ply",
+        "lugCount": 6,
+        "shellMaterial1": "Maple / Poplar",
+        "shellMaterial2": "none",
+        "brightness": 6.1,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082694,
+          "_nanoseconds": 255000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "rogers_century_century-wood-14x5_14x5_ply_maple-poplar_unknown-vintage-edge_wrap-lacquer_triple-flanged_century-snare_c5ec924d",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Century",
+        "modelName": "Century Wood 14x5",
+        "patchName": "rogers_century_century-wood-14x5_14x5_ply_maple-poplar_unknown-vintage-edge_wrap-lacquer_triple-flanged_century-snare_c5ec924d",
+        "identification": {
+          "modelNumber": "Century snare",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple / Poplar",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Rogers wood shell family",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Unknown vintage edge",
+            "snareSideProfile": "Unknown vintage edge",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Wrap/lacquer",
+            "finishType": "Wrap/lacquer",
+            "exteriorTreatment": "Wrap/lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Rogers strainer",
+            "style": "unknown",
+            "make": "Rogers strainer"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Beavertail",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Standard wires",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Standard wires"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "1960s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "1970s",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/resources-backup/",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Shell construction and specs need catalog extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/resources-backup/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Century catalog-era snare row retained for completeness; score is family-estimated.",
+          "drumSummaryNotes": "Century catalog-era snare row retained for completeness; score is family-estimated."
+        },
+        "overallBrightness": 6.1,
+        "reRingThicknessMm": null,
+        "lugType": "Beavertail",
+        "shellScoreSustain": 6.4,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.9,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.6,
+        "overallControl": 6.6,
+        "shellScoreAttack": 6.9,
+        "shellScoreProjection": 6.6,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 6.4,
+        "diameter": 14,
+        "attack": 6.9,
+        "overallWarmth": 7.3,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.6,
+        "shellScoreBrightness": 6.1,
+        "shellScoreControl": 6.6,
+        "bearingEdge": "Unknown vintage edge",
+        "shellScoreWarmth": 7.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.3,
+        "shellMaterial3": "none",
+        "control": 6.6,
+        "shellConstruction": "Ply",
+        "lugCount": 8,
+        "shellMaterial1": "Maple / Poplar",
+        "shellMaterial2": "none",
+        "brightness": 6.1,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082696,
+          "_nanoseconds": 614000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 6.4
+      }
+    },
+    {
+      "id": "rogers_classmate_classmate-wood-14x5_14x5_ply_maple_wrap-lacquer_triple-flanged_classmate_434d2eb5",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Classmate",
+        "modelName": "Classmate Wood 14x5",
+        "patchName": "rogers_classmate_classmate-wood-14x5_14x5_ply_maple_wrap-lacquer_triple-flanged_classmate_434d2eb5",
+        "identification": {
+          "modelNumber": "Classmate",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Student/catalog wood shell family",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "finish": {
+            "finishName": "Wrap/lacquer",
+            "finishType": "Wrap/lacquer",
+            "exteriorTreatment": "Wrap/lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Student strainer",
+            "style": "unknown",
+            "make": "Student strainer"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Rogers lugs",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 6,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Standard wires",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Standard wires"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "1960s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "1970s",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/resources-backup/",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Specs mostly unknown."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/resources-backup/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Student/education Rogers snare row retained for master list completeness.",
+          "drumSummaryNotes": "Student/education Rogers snare row retained for master list completeness."
+        },
+        "overallBrightness": 6.7,
+        "reRingThicknessMm": null,
+        "lugType": "Rogers lugs",
+        "shellScoreSustain": 6.3,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.2,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.2,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7,
+        "overallControl": 6.7,
+        "shellScoreAttack": 7.2,
+        "shellScoreProjection": 7,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.2,
+        "overallSustain": 6.3,
+        "diameter": 14,
+        "attack": 7.2,
+        "overallWarmth": 6.9,
+        "snareBedType": "unknown",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7,
+        "shellScoreBrightness": 6.7,
+        "shellScoreControl": 6.7,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 6.9,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.9,
+        "shellMaterial3": "none",
+        "control": 6.7,
+        "shellConstruction": "Ply",
+        "lugCount": 6,
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "none",
+        "brightness": 6.7,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082696,
+          "_nanoseconds": 708000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.2,
+        "sustain": 6.3
+      }
+    },
+    {
+      "id": "rogers_concert_concert-wood-14x6-5_14x6-5_ply_maple-poplar_rounded-concert-edge-likely-exact-unknown_concert-bed-straine_c410a72e",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Concert",
+        "modelName": "Concert Wood 14x6.5",
+        "patchName": "rogers_concert_concert-wood-14x6-5_14x6-5_ply_maple-poplar_rounded-concert-edge-likely-exact-unknown_concert-bed-straine_c410a72e",
+        "identification": {
+          "modelNumber": "Concert snare",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple / Poplar",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Rogers wood shell family",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Rounded/concert edge likely; exact unknown",
+            "snareSideProfile": "Rounded/concert edge likely; exact unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Concert bed/strainer detail unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "Concert bed/strainer detail unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Wrap/lacquer",
+            "finishType": "Wrap/lacquer",
+            "exteriorTreatment": "Wrap/lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Rogers concert strainer",
+            "style": "unknown",
+            "make": "Rogers concert strainer"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Rogers lugs",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Concert wires/standard",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Concert wires/standard"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "1960s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "1970s",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/resources-backup/",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Concert-specific specs need catalog extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/resources-backup/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Deeper concert-family snare; scored as warm/projecting wood shell estimate.",
+          "drumSummaryNotes": "Deeper concert-family snare; scored as warm/projecting wood shell estimate."
+        },
+        "overallBrightness": 6.1,
+        "reRingThicknessMm": null,
+        "lugType": "Rogers lugs",
+        "shellScoreSustain": 6.7,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.7,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.7,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.9,
+        "overallControl": 6.6,
+        "shellScoreAttack": 6.7,
+        "shellScoreProjection": 6.9,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.7,
+        "overallSustain": 6.7,
+        "diameter": 14,
+        "attack": 6.7,
+        "overallWarmth": 7.6,
+        "snareBedType": "Concert bed/strainer detail unknown",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.9,
+        "shellScoreBrightness": 6.1,
+        "shellScoreControl": 6.6,
+        "bearingEdge": "Rounded/concert edge likely; exact unknown",
+        "shellScoreWarmth": 7.6,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.6,
+        "shellMaterial3": "none",
+        "control": 6.6,
+        "shellConstruction": "Ply",
+        "lugCount": 8,
+        "shellMaterial1": "Maple / Poplar",
+        "shellMaterial2": "none",
+        "brightness": 6.1,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082696,
+          "_nanoseconds": 883000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.7,
+        "sustain": 6.7
+      }
+    },
+    {
+      "id": "rogers_covington_covington-kit-snare-14x5-5_14x5-5_ply_maple-poplar_standard-bed_wrap-lacquer_triple-flanged_covington-s_d01a6cfc",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Covington",
+        "modelName": "Covington Kit Snare 14x5.5",
+        "patchName": "rogers_covington_covington-kit-snare-14x5-5_14x5-5_ply_maple-poplar_standard-bed_wrap-lacquer_triple-flanged_covington-s_d01a6cfc",
+        "identification": {
+          "modelNumber": "Covington Snare",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple / Poplar",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Rogers modern wood shell family",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "confidence": "low",
+            "notes": "unknown"
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Standard bed",
+            "widthBucket": "unknown",
+            "bedStyle": "Standard bed",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Wrap/lacquer",
+            "finishType": "Wrap/lacquer",
+            "exteriorTreatment": "Wrap/lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Rogers throw",
+            "style": "unknown",
+            "make": "Rogers throw"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Beavertail",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 8,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Standard wires",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Standard wires"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "2020s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/resources-backup/",
+          "primarySourceUrl": "https://rogersdrumsusa.com/",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Exact Covington snare shell specs need extraction."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/resources-backup/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Modern Rogers kit snare row retained for current-family coverage.",
+          "drumSummaryNotes": "Modern Rogers kit snare row retained for current-family coverage."
+        },
+        "overallBrightness": 6.1,
+        "reRingThicknessMm": null,
+        "lugType": "Beavertail",
+        "shellScoreSustain": 6.5,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 6.7,
+        "hoopType": "Triple-flanged",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 6.8,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 6.6,
+        "overallControl": 6.6,
+        "shellScoreAttack": 6.7,
+        "shellScoreProjection": 6.6,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 6.8,
+        "overallSustain": 6.5,
+        "diameter": 14,
+        "attack": 6.7,
+        "overallWarmth": 7.4,
+        "snareBedType": "Standard bed",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 6.6,
+        "shellScoreBrightness": 6.1,
+        "shellScoreControl": 6.6,
+        "bearingEdge": "unknown",
+        "shellScoreWarmth": 7.4,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7.4,
+        "shellMaterial3": "none",
+        "control": 6.6,
+        "shellConstruction": "Ply",
+        "lugCount": 8,
+        "shellMaterial1": "Maple / Poplar",
+        "shellMaterial2": "none",
+        "brightness": 6.1,
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082696,
+          "_nanoseconds": 980000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 6.8,
+        "sustain": 6.5
+      }
+    },
+    {
+      "id": "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x5_14x5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_dyn_73791f71",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Dyna-Sonic Reissue",
+        "modelName": "Dyna-Sonic 7-Line Brass 14x5",
+        "patchName": "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x5_14x5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_dyn_73791f71",
+        "identification": {
+          "modelNumber": "36BN",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Seamless/rolled metal shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Modern Rogers edge; exact geometry not listed",
+            "snareSideProfile": "Modern Rogers edge; exact geometry not listed",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Dyna-Sonic shallow bed / floating frame system",
+            "widthBucket": "unknown",
+            "bedStyle": "Dyna-Sonic shallow bed / floating frame system",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Chrome over brass",
+            "finishType": "Chrome over brass",
+            "exteriorTreatment": "Chrome over brass",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Dyna-Sonic frame/throw system",
+            "style": "unknown",
+            "make": "Dyna-Sonic frame/throw system"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged / 2.3mm style",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "Triple-flanged / 2.3mm style",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Beavertail",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Dyna-Sonic extended wires / frame",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Dyna-Sonic extended wires / frame"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "2020s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Exact shell thickness/edge not found in official current page."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Modern Dyna-Sonic brass row; scoring emphasizes brass brightness, projection and sensitivity plus Dyna-Sonic frame response.",
+          "drumSummaryNotes": "Modern Dyna-Sonic brass row; scoring emphasizes brass brightness, projection and sensitivity plus Dyna-Sonic frame response."
+        },
+        "overallBrightness": 7.5,
+        "reRingThicknessMm": null,
+        "lugType": "Beavertail",
+        "shellScoreSustain": 6.9,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8.2,
+        "hoopType": "Triple-flanged / 2.3mm style",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.3,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.5,
+        "overallControl": 6.3,
+        "shellScoreAttack": 8.2,
+        "shellScoreProjection": 8.5,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.3,
+        "overallSustain": 6.9,
+        "diameter": 14,
+        "attack": 8.2,
+        "overallWarmth": 6.7,
+        "snareBedType": "Dyna-Sonic shallow bed / floating frame system",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.5,
+        "shellScoreBrightness": 7.5,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "Modern Rogers edge; exact geometry not listed",
+        "shellScoreWarmth": 6.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6.7,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.5,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082697,
+          "_nanoseconds": 170000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.3,
+        "sustain": 6.9
+      }
+    },
+    {
+      "id": "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x6-5_14x6-5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_697f4d0f",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Dyna-Sonic Reissue",
+        "modelName": "Dyna-Sonic 7-Line Brass 14x6.5",
+        "patchName": "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x6-5_14x6-5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_697f4d0f",
+        "identification": {
+          "modelNumber": "37BN",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Seamless/rolled metal shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Modern Rogers edge; exact geometry not listed",
+            "snareSideProfile": "Modern Rogers edge; exact geometry not listed",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Dyna-Sonic shallow bed / floating frame system",
+            "widthBucket": "unknown",
+            "bedStyle": "Dyna-Sonic shallow bed / floating frame system",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Chrome over brass",
+            "finishType": "Chrome over brass",
+            "exteriorTreatment": "Chrome over brass",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Dyna-Sonic frame/throw system",
+            "style": "unknown",
+            "make": "Dyna-Sonic frame/throw system"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged / 2.3mm style",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome",
+            "batterHoopType": "Triple-flanged / 2.3mm style",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Beavertail",
+            "hardwareFinish": "Chrome",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Dyna-Sonic extended wires / frame",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Dyna-Sonic extended wires / frame"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "2020s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Exact shell thickness/edge not found in official current page."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Deeper brass Dyna-Sonic voice with more body/projection than 5-inch version.",
+          "drumSummaryNotes": "Deeper brass Dyna-Sonic voice with more body/projection than 5-inch version."
+        },
+        "overallBrightness": 7.5,
+        "reRingThicknessMm": null,
+        "lugType": "Beavertail",
+        "shellScoreSustain": 7.2,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 8,
+        "hoopType": "Triple-flanged / 2.3mm style",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 8.7,
+        "overallControl": 6.3,
+        "shellScoreAttack": 8,
+        "shellScoreProjection": 8.7,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7,
+        "overallSustain": 7.2,
+        "diameter": 14,
+        "attack": 8,
+        "overallWarmth": 7,
+        "snareBedType": "Dyna-Sonic shallow bed / floating frame system",
+        "hardwareFinish": "Chrome",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 8.7,
+        "shellScoreBrightness": 7.5,
+        "shellScoreControl": 6.3,
+        "bearingEdge": "Modern Rogers edge; exact geometry not listed",
+        "shellScoreWarmth": 7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 7,
+        "shellMaterial3": "none",
+        "control": 6.3,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Brass",
+        "shellMaterial2": "none",
+        "brightness": 7.5,
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082697,
+          "_nanoseconds": 261000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7,
+        "sustain": 7.2
+      }
+    },
+    {
+      "id": "rogers_dyna-sonic-reissue_dyna-sonic-aluminum-a7-14x5_14x5_metal_aluminum_modern-edge-exact-geometry-not-listed_dyna-son_f895027d",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm"
+      ],
+      "data": {
+        "companyName": "Rogers",
+        "companyType": "Major manufacturer / vintage American brand",
+        "lineSeries": "Dyna-Sonic Reissue",
+        "modelName": "Dyna-Sonic Aluminum A7 14x5",
+        "patchName": "rogers_dyna-sonic-reissue_dyna-sonic-aluminum-a7-14x5_14x5_metal_aluminum_modern-edge-exact-geometry-not-listed_dyna-son_f895027d",
+        "identification": {
+          "modelNumber": "A7 5x14",
+          "badgeStyle": "unknown",
+          "productionStatus": "current",
+          "currentlyInProduction": true,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5,
+            "metricDimensionsMm": "355.6 x 127.0"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Aluminum",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "Metal shell",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": false,
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "bearingEdges": {
+            "batterSideProfile": "Modern edge; exact geometry not listed",
+            "snareSideProfile": "Modern edge; exact geometry not listed",
+            "roundover": "unknown",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review."
+          },
+          "snareBeds": {
+            "present": true,
+            "depthBucket": "Dyna-Sonic frame system",
+            "widthBucket": "unknown",
+            "bedStyle": "Dyna-Sonic frame system",
+            "evidenceLevel": "legacyFieldMigrated",
+            "confidence": "medium",
+            "notes": "Migrated from legacy shell.snareBedType field; depth/width/style needs review."
+          },
+          "finish": {
+            "finishName": "Aluminum / plated hardware",
+            "finishType": "Aluminum / plated hardware",
+            "exteriorTreatment": "Aluminum / plated hardware",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          }
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "Migrated from legacy hardware.snareThrowMakeAndModel field.",
+            "model": "Dyna-Sonic frame/throw system",
+            "style": "unknown",
+            "make": "Dyna-Sonic frame/throw system"
+          },
+          "hoops": {
+            "resonantHoopType": "Triple-flanged / 2.3mm style",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "Chrome / era-specific",
+            "batterHoopType": "Triple-flanged / 2.3mm style",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "Beavertail",
+            "hardwareFinish": "Chrome / era-specific",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "Dyna-Sonic wires/frame",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "Dyna-Sonic wires/frame"
+          },
+          "heads": {
+            "stockHeadsKnown": true,
+            "batterHead": "Unknown / era-specific",
+            "resonantHead": "Unknown / era-specific"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "2020s",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://rogersdrumsusa.com/",
+          "primarySourceUrl": "https://bigbangdist.com/product/rogers-drums-dyna-sonic-aluminum-shell-snare-drum/",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Exact shell thickness not found."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://rogersdrumsusa.com/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Aluminum Dyna-Sonic modern row; dry, articulate, sensitive and controlled shell-first voice.",
+          "drumSummaryNotes": "Aluminum Dyna-Sonic modern row; dry, articulate, sensitive and controlled shell-first voice."
+        },
+        "overallBrightness": 6.9,
+        "reRingThicknessMm": null,
+        "lugType": "Beavertail",
+        "shellScoreSustain": 5.6,
+        "scoringBasis": "Shell-first scoring generated from nested Rogers shell/reference fields. Brand prestige, rarity, resale value, collectibility, country of origin, price, and artist association are excluded.",
+        "overallAttack": 7.7,
+        "hoopType": "Triple-flanged / 2.3mm style",
+        "sourceConfidence": "medium",
+        "drumType": "Snare Drum",
+        "reinforcementRings": false,
+        "overallSensitivity": 7.8,
+        "engineReadinessNotes": "Rogers record normalized from existing nested shell, stock hardware, and stock snare system data. Unknown values are preserved where source confirmation is not available.",
+        "overallProjection": 7.4,
+        "overallControl": 7.2,
+        "shellScoreAttack": 7.7,
+        "shellScoreProjection": 7.4,
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "shellScoreSensitivity": 7.8,
+        "overallSustain": 5.6,
+        "diameter": 14,
+        "attack": 7.7,
+        "overallWarmth": 6,
+        "snareBedType": "Dyna-Sonic frame system",
+        "hardwareFinish": "Chrome / era-specific",
+        "dataCleanupUpdatedBy": "normalizeAllRemainingSnareCompanies",
+        "projection": 7.4,
+        "shellScoreBrightness": 6.9,
+        "shellScoreControl": 7.2,
+        "bearingEdge": "Modern edge; exact geometry not listed",
+        "shellScoreWarmth": 6,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "warmth": 6,
+        "shellMaterial3": "none",
+        "control": 7.2,
+        "shellConstruction": "Metal",
+        "lugCount": 10,
+        "shellMaterial1": "Aluminum",
+        "shellMaterial2": "none",
+        "brightness": 6.9,
+        "depth": 5,
+        "voiceScoreConfidence": "medium",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779082697,
+          "_nanoseconds": 351000000
+        },
+        "snareBeds": true,
+        "shellThicknessMm": "unknown",
+        "sensitivity": 7.8,
+        "sustain": 5.6
+      }
+    }
+  ]
+}

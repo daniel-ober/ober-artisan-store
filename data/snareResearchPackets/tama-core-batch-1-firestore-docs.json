@@ -1,0 +1,2306 @@
+{
+  "generatedAt": "2026-05-18T06:04:35.529Z",
+  "sourcePacket": "data/snareResearchPackets/tama-core-batch-1.json",
+  "docs": [
+    {
+      "id": "tama_artwood_artwood-birch-14x5-5_14x5-5_ply_birch_lacquer_444f452b",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "Artwood",
+        "modelName": "Artwood Birch 14x5.5",
+        "patchName": "tama_artwood_artwood-birch-14x5-5_14x5-5_ply_birch_lacquer_444f452b",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 Birch Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 Birch Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Birch",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "shellScoreSustain": 6.3,
+        "stockBatterHead": "unknown",
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "overallSensitivity": 6.9,
+        "shellScoreAttack": 7,
+        "shellScoreProjection": 7.1,
+        "overallSustain": 6.2,
+        "diameter": 14,
+        "snareBedType": "medium",
+        "researchUpdatedBy": "tama-pass-1",
+        "id": "tama_artwood_artwood-birch-14x5-5_14x5-5_ply_birch_lacquer_444f452b",
+        "shellScoreBrightness": 7,
+        "shellScoreControl": 6.8,
+        "recommendedTuningResoHz": "360-430 Hz",
+        "bearingEdge": "Tama wood bearing edge",
+        "shellScoreWarmth": 6,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "stockSnareWires": "unknown",
+        "primarySourceUrl": "unknown",
+        "recommendedTuningBatterHz": "250-340 Hz",
+        "plyCountLayup": "unknown birch ply layup",
+        "drumSummaryNotes": "Birch Artwood model in a standard 14x5.5 format. Birch shell behavior should emphasize clear attack, brightness, and projection with a controlled sustain profile. Scores remain medium confidence until exact shell thickness and hardware are confirmed.",
+        "notesOnMissingData": "Exact model number, production years, shell thickness, ply count, hoop type, stock heads, and original catalog source URL need stronger confirmation. Existing Firestore identity supports Artwood Birch 14x5.5 with lacquer finish.",
+        "snareBeds": true,
+        "yearInProduction": "unknown",
+        "overallBrightness": 7,
+        "reRingThicknessMm": null,
+        "lugType": "Tama Artwood / period snare lug",
+        "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+        "overallAttack": 7.1,
+        "drumType": "Snare Drum",
+        "reinforcementRings": "unknown",
+        "overallProjection": 7.2,
+        "finishType": "lacquer",
+        "overallControl": 6.9,
+        "shellScoreSensitivity": 6.8,
+        "overallWarmth": 5.9,
+        "hardwareFinish": "chrome",
+        "projectedShellFundamentalPitch": "medium",
+        "companyType": "major manufacturer",
+        "secondarySourceUrl": "unknown",
+        "shellMaterial3": "unknown",
+        "currentlyInProduction": "NO",
+        "discontinued": "YES",
+        "rareCollectible": "NO",
+        "shellConstruction": "ply",
+        "lugCount": 10,
+        "shellMaterial1": "birch",
+        "shellMaterial2": "unknown",
+        "stockResoHead": "unknown",
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "yearDiscontinued": "unknown",
+        "modelNumber": "unknown",
+        "snareThrowMakeModel": "Tama strainer and butt",
+        "artistSignatureLine": "NO",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 7.2,
+        "warmth": 6,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "attack": 7.4,
+        "control": 7.1,
+        "projection": 7.7,
+        "sensitivity": 6.9,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "sustain": 6.2,
+        "researchUpdatedAt": {
+          "_seconds": 1779072575,
+          "_nanoseconds": 805000000
+        },
+        "shellThicknessMm": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081066,
+          "_nanoseconds": 2000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_artwood_artwood-birch-14x6-5_14x6-5_ply_birch_lacquer_c8fcf233",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "Artwood",
+        "modelName": "Artwood Birch 14x6.5",
+        "patchName": "tama_artwood_artwood-birch-14x6-5_14x6-5_ply_birch_lacquer_c8fcf233",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Birch Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Birch Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Birch",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "shellScoreSustain": 6.7,
+        "stockBatterHead": "unknown",
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "overallSensitivity": 6.7,
+        "shellScoreAttack": 6.9,
+        "shellScoreProjection": 7.5,
+        "overallSustain": 6.6,
+        "diameter": 14,
+        "snareBedType": "medium",
+        "researchUpdatedBy": "tama-pass-1",
+        "id": "tama_artwood_artwood-birch-14x6-5_14x6-5_ply_birch_lacquer_c8fcf233",
+        "shellScoreBrightness": 6.9,
+        "shellScoreControl": 6.8,
+        "recommendedTuningResoHz": "350-420 Hz",
+        "bearingEdge": "Tama wood bearing edge",
+        "shellScoreWarmth": 6.3,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "stockSnareWires": "unknown",
+        "primarySourceUrl": "unknown",
+        "recommendedTuningBatterHz": "235-325 Hz",
+        "plyCountLayup": "unknown birch ply layup",
+        "drumSummaryNotes": "Deeper Artwood Birch model. Compared with the 14x5.5 version, the 6.5-inch depth should add projection, low-mid body, and sustain while preserving birch clarity and attack.",
+        "notesOnMissingData": "Exact model number, production years, shell thickness, ply count, hoop type, stock heads, and original catalog source URL need stronger confirmation. Existing Firestore identity supports Artwood Birch 14x6.5 with lacquer finish.",
+        "snareBeds": true,
+        "yearInProduction": "unknown",
+        "overallBrightness": 6.9,
+        "reRingThicknessMm": null,
+        "lugType": "Tama Artwood / period snare lug",
+        "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+        "overallAttack": 7,
+        "drumType": "Snare Drum",
+        "reinforcementRings": "unknown",
+        "overallProjection": 7.6,
+        "finishType": "lacquer",
+        "overallControl": 6.9,
+        "shellScoreSensitivity": 6.6,
+        "overallWarmth": 6.2,
+        "hardwareFinish": "chrome",
+        "projectedShellFundamentalPitch": "medium-low",
+        "companyType": "major manufacturer",
+        "secondarySourceUrl": "unknown",
+        "shellMaterial3": "unknown",
+        "currentlyInProduction": "NO",
+        "discontinued": "YES",
+        "rareCollectible": "NO",
+        "shellConstruction": "ply",
+        "lugCount": 10,
+        "shellMaterial1": "birch",
+        "shellMaterial2": "unknown",
+        "stockResoHead": "unknown",
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "yearDiscontinued": "unknown",
+        "modelNumber": "unknown",
+        "snareThrowMakeModel": "Tama strainer and butt",
+        "artistSignatureLine": "NO",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 7.2,
+        "warmth": 6.25,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "attack": 7.3,
+        "control": 7.1,
+        "projection": 8.05,
+        "sensitivity": 6.8,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "sustain": 6.5,
+        "researchUpdatedAt": {
+          "_seconds": 1779072575,
+          "_nanoseconds": 998000000
+        },
+        "shellThicknessMm": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081066,
+          "_nanoseconds": 232000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_artwood_artwood-birds-eye-maple-14x6-5_14x6-5_ply_maple_lacquer_f2bcbb59",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "Artwood",
+        "modelName": "Artwood Birds Eye Maple 14x6.5",
+        "patchName": "tama_artwood_artwood-birds-eye-maple-14x6-5_14x6-5_ply_maple_lacquer_f2bcbb59",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Maple Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Maple Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "shellScoreSustain": 6.9,
+        "stockBatterHead": "unknown",
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "overallSensitivity": 6.9,
+        "shellScoreAttack": 6.8,
+        "shellScoreProjection": 7,
+        "overallSustain": 6.8,
+        "diameter": 14,
+        "snareBedType": "medium",
+        "researchUpdatedBy": "tama-pass-1",
+        "id": "tama_artwood_artwood-birds-eye-maple-14x6-5_14x6-5_ply_maple_lacquer_f2bcbb59",
+        "shellScoreBrightness": 6.6,
+        "shellScoreControl": 6.5,
+        "recommendedTuningResoHz": "350-420 Hz",
+        "bearingEdge": "Tama wood bearing edge",
+        "shellScoreWarmth": 7.1,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "stockSnareWires": "unknown",
+        "primarySourceUrl": "unknown",
+        "recommendedTuningBatterHz": "235-325 Hz",
+        "plyCountLayup": "unknown maple ply layup with birdseye maple outer veneer",
+        "drumSummaryNotes": "Birds Eye Maple Artwood model. Maple shell behavior should provide rounded attack, balanced brightness, good sustain, and warmer body than birch Artwood variants. The birdseye maple designation is treated primarily as veneer/finish unless stronger construction evidence indicates otherwise.",
+        "notesOnMissingData": "Exact model number, production years, shell thickness, ply count, hoop type, stock heads, and original catalog source URL need stronger confirmation. Existing Firestore identity supports Artwood Birds Eye Maple 14x6.5 with lacquer finish.",
+        "snareBeds": true,
+        "yearInProduction": "unknown",
+        "overallBrightness": 6.7,
+        "reRingThicknessMm": null,
+        "lugType": "Tama Artwood / period snare lug",
+        "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+        "overallAttack": 6.9,
+        "drumType": "Snare Drum",
+        "reinforcementRings": "unknown",
+        "overallProjection": 7.1,
+        "finishType": "lacquer",
+        "overallControl": 6.6,
+        "shellScoreSensitivity": 6.8,
+        "overallWarmth": 7,
+        "hardwareFinish": "chrome",
+        "projectedShellFundamentalPitch": "medium-low",
+        "companyType": "major manufacturer",
+        "secondarySourceUrl": "unknown",
+        "shellMaterial3": "unknown",
+        "currentlyInProduction": "NO",
+        "discontinued": "YES",
+        "rareCollectible": "NO",
+        "shellConstruction": "ply",
+        "lugCount": 10,
+        "shellMaterial1": "maple",
+        "shellMaterial2": "birdseye maple outer veneer",
+        "stockResoHead": "unknown",
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "yearDiscontinued": "unknown",
+        "modelNumber": "unknown",
+        "snareThrowMakeModel": "Tama strainer and butt",
+        "artistSignatureLine": "NO",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 6.8,
+        "warmth": 7.35,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "attack": 6.9,
+        "control": 6.8,
+        "projection": 7.55,
+        "sensitivity": 7,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "sustain": 7.1,
+        "researchUpdatedAt": {
+          "_seconds": 1779072576,
+          "_nanoseconds": 199000000
+        },
+        "shellThicknessMm": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081066,
+          "_nanoseconds": 345000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_artwood_artwood-maple-14x5-5_14x5-5_ply_maple_lacquer_3540966b",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "Artwood",
+        "modelName": "Artwood Maple 14x5.5",
+        "patchName": "tama_artwood_artwood-maple-14x5-5_14x5-5_ply_maple_lacquer_3540966b",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 Maple Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 Maple Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "shellScoreSustain": 6.6,
+        "stockBatterHead": "unknown",
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "overallSensitivity": 7.1,
+        "shellScoreAttack": 6.7,
+        "shellScoreProjection": 6.7,
+        "overallSustain": 6.5,
+        "diameter": 14,
+        "snareBedType": "medium",
+        "researchUpdatedBy": "tama-pass-1",
+        "id": "tama_artwood_artwood-maple-14x5-5_14x5-5_ply_maple_lacquer_3540966b",
+        "shellScoreBrightness": 6.5,
+        "shellScoreControl": 6.4,
+        "recommendedTuningResoHz": "360-430 Hz",
+        "bearingEdge": "Tama wood bearing edge",
+        "shellScoreWarmth": 6.9,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "stockSnareWires": "unknown",
+        "primarySourceUrl": "unknown",
+        "recommendedTuningBatterHz": "250-340 Hz",
+        "plyCountLayup": "unknown maple ply layup",
+        "drumSummaryNotes": "Maple Artwood model in 14x5.5 format. Should provide a balanced maple voice with moderate warmth, good sensitivity, and a quicker response than the 14x6.5 maple variant.",
+        "notesOnMissingData": "Exact model number, production years, shell thickness, ply count, hoop type, stock heads, and original catalog source URL need stronger confirmation. Existing Firestore identity supports Artwood Maple 14x5.5 with lacquer finish.",
+        "snareBeds": true,
+        "yearInProduction": "unknown",
+        "overallBrightness": 6.6,
+        "reRingThicknessMm": null,
+        "lugType": "Tama Artwood / period snare lug",
+        "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+        "overallAttack": 6.8,
+        "drumType": "Snare Drum",
+        "reinforcementRings": "unknown",
+        "overallProjection": 6.8,
+        "finishType": "lacquer",
+        "overallControl": 6.5,
+        "shellScoreSensitivity": 7,
+        "overallWarmth": 6.8,
+        "hardwareFinish": "chrome",
+        "projectedShellFundamentalPitch": "medium",
+        "companyType": "major manufacturer",
+        "secondarySourceUrl": "unknown",
+        "shellMaterial3": "unknown",
+        "currentlyInProduction": "NO",
+        "discontinued": "YES",
+        "rareCollectible": "NO",
+        "shellConstruction": "ply",
+        "lugCount": 10,
+        "shellMaterial1": "maple",
+        "shellMaterial2": "unknown",
+        "stockResoHead": "unknown",
+        "depth": 5.5,
+        "voiceScoreConfidence": "medium",
+        "yearDiscontinued": "unknown",
+        "modelNumber": "unknown",
+        "snareThrowMakeModel": "Tama strainer and butt",
+        "artistSignatureLine": "NO",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 6.8,
+        "warmth": 7.1,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "attack": 7,
+        "control": 6.8,
+        "projection": 7.2,
+        "sensitivity": 7.1,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "sustain": 6.8,
+        "researchUpdatedAt": {
+          "_seconds": 1779072576,
+          "_nanoseconds": 392000000
+        },
+        "shellThicknessMm": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081066,
+          "_nanoseconds": 469000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_artwood_artwood-maple-14x6-5_14x6-5_ply_maple_lacquer_942d70cd",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "Artwood",
+        "modelName": "Artwood Maple 14x6.5",
+        "patchName": "tama_artwood_artwood-maple-14x6-5_14x6-5_ply_maple_lacquer_942d70cd",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Maple Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Maple Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Maple",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "shellScoreSustain": 7,
+        "stockBatterHead": "unknown",
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "overallSensitivity": 6.8,
+        "shellScoreAttack": 6.6,
+        "shellScoreProjection": 7.1,
+        "overallSustain": 6.9,
+        "diameter": 14,
+        "snareBedType": "medium",
+        "researchUpdatedBy": "tama-pass-1",
+        "id": "tama_artwood_artwood-maple-14x6-5_14x6-5_ply_maple_lacquer_942d70cd",
+        "shellScoreBrightness": 6.4,
+        "shellScoreControl": 6.5,
+        "recommendedTuningResoHz": "350-420 Hz",
+        "bearingEdge": "Tama wood bearing edge",
+        "shellScoreWarmth": 7.2,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "stockSnareWires": "unknown",
+        "primarySourceUrl": "unknown",
+        "recommendedTuningBatterHz": "235-325 Hz",
+        "plyCountLayup": "unknown maple ply layup",
+        "drumSummaryNotes": "Deeper maple Artwood model. Should emphasize warmer body, longer sustain, and stronger low-mid projection than the 14x5.5 version while retaining a balanced maple attack.",
+        "notesOnMissingData": "Exact model number, production years, shell thickness, ply count, hoop type, stock heads, and original catalog source URL need stronger confirmation. Existing Firestore identity supports Artwood Maple 14x6.5 with lacquer finish.",
+        "snareBeds": true,
+        "yearInProduction": "unknown",
+        "overallBrightness": 6.5,
+        "reRingThicknessMm": null,
+        "lugType": "Tama Artwood / period snare lug",
+        "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+        "overallAttack": 6.7,
+        "drumType": "Snare Drum",
+        "reinforcementRings": "unknown",
+        "overallProjection": 7.2,
+        "finishType": "lacquer",
+        "overallControl": 6.6,
+        "shellScoreSensitivity": 6.7,
+        "overallWarmth": 7.1,
+        "hardwareFinish": "chrome",
+        "projectedShellFundamentalPitch": "medium-low",
+        "companyType": "major manufacturer",
+        "secondarySourceUrl": "unknown",
+        "shellMaterial3": "unknown",
+        "currentlyInProduction": "NO",
+        "discontinued": "YES",
+        "rareCollectible": "NO",
+        "shellConstruction": "ply",
+        "lugCount": 10,
+        "shellMaterial1": "maple",
+        "shellMaterial2": "unknown",
+        "stockResoHead": "unknown",
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "yearDiscontinued": "unknown",
+        "modelNumber": "unknown",
+        "snareThrowMakeModel": "Tama strainer and butt",
+        "artistSignatureLine": "NO",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 6.8,
+        "warmth": 7.35,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "attack": 6.9,
+        "control": 6.8,
+        "projection": 7.55,
+        "sensitivity": 7,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "sustain": 7.1,
+        "researchUpdatedAt": {
+          "_seconds": 1779072576,
+          "_nanoseconds": 594000000
+        },
+        "shellThicknessMm": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081066,
+          "_nanoseconds": 562000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_artwood_artwood-walnut-14x6-5_14x6-5_ply_walnut_lacquer_caccd985",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "Artwood",
+        "modelName": "Artwood Walnut 14x6.5",
+        "patchName": "tama_artwood_artwood-walnut-14x6-5_14x6-5_ply_walnut_lacquer_caccd985",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Walnut Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Walnut Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Walnut",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "shellScoreSustain": 7,
+        "stockBatterHead": "unknown",
+        "hoopType": "unknown",
+        "sourceConfidence": "medium",
+        "overallSensitivity": 6.6,
+        "shellScoreAttack": 6.4,
+        "shellScoreProjection": 6.8,
+        "overallSustain": 6.9,
+        "diameter": 14,
+        "snareBedType": "medium",
+        "researchUpdatedBy": "tama-pass-1",
+        "id": "tama_artwood_artwood-walnut-14x6-5_14x6-5_ply_walnut_lacquer_caccd985",
+        "shellScoreBrightness": 5.8,
+        "shellScoreControl": 6.6,
+        "recommendedTuningResoHz": "340-410 Hz",
+        "bearingEdge": "Tama wood bearing edge",
+        "shellScoreWarmth": 7.7,
+        "needsResearch": false,
+        "reRingMaterial": "unknown",
+        "stockSnareWires": "unknown",
+        "primarySourceUrl": "unknown",
+        "recommendedTuningBatterHz": "220-310 Hz",
+        "plyCountLayup": "unknown walnut ply layup",
+        "drumSummaryNotes": "Walnut Artwood model in 14x6.5 format. Should score warmer and darker than the maple and birch Artwood variants, with stronger low-mid body and a softer top-end edge.",
+        "notesOnMissingData": "Exact model number, production years, shell thickness, ply count, hoop type, stock heads, and original catalog source URL need stronger confirmation. Existing Firestore identity supports Artwood Walnut 14x6.5 with lacquer finish.",
+        "snareBeds": true,
+        "yearInProduction": "unknown",
+        "overallBrightness": 5.9,
+        "reRingThicknessMm": null,
+        "lugType": "Tama Artwood / period snare lug",
+        "scoringBasis": "Shell-first scoring based on documented shell material, construction, dimensions, shell thickness where known, hoop type, and hardware configuration. Brand prestige, rarity, resale value, and collectibility are excluded from Ober node scoring.",
+        "overallAttack": 6.5,
+        "drumType": "Snare Drum",
+        "reinforcementRings": "unknown",
+        "overallProjection": 6.9,
+        "finishType": "lacquer",
+        "overallControl": 6.7,
+        "shellScoreSensitivity": 6.5,
+        "overallWarmth": 7.6,
+        "hardwareFinish": "chrome",
+        "projectedShellFundamentalPitch": "low-medium",
+        "companyType": "major manufacturer",
+        "secondarySourceUrl": "unknown",
+        "shellMaterial3": "unknown",
+        "currentlyInProduction": "NO",
+        "discontinued": "YES",
+        "rareCollectible": "NO",
+        "shellConstruction": "ply",
+        "lugCount": 10,
+        "shellMaterial1": "walnut",
+        "shellMaterial2": "unknown",
+        "stockResoHead": "unknown",
+        "depth": 6.5,
+        "voiceScoreConfidence": "medium",
+        "yearDiscontinued": "unknown",
+        "modelNumber": "unknown",
+        "snareThrowMakeModel": "Tama strainer and butt",
+        "artistSignatureLine": "NO",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 6,
+        "warmth": 8.25,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "attack": 6.7,
+        "control": 7,
+        "projection": 7.45,
+        "sensitivity": 6.6,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "sustain": 7.2,
+        "researchUpdatedAt": {
+          "_seconds": 1779072576,
+          "_nanoseconds": 806000000
+        },
+        "shellThicknessMm": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081066,
+          "_nanoseconds": 662000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "STAR Reserve",
+        "modelName": "STAR Reserve G-Mahogany 14x6.5",
+        "patchName": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": false
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceConfidence": "Medium",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Mahogany Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Mahogany Ply with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Ply",
+            "shellMaterialPrimary": "Mahogany",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Lacquer",
+            "finishType": "Lacquer",
+            "exteriorTreatment": "Lacquer",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "lugType": "Unknown",
+        "scoringBasis": "Shell-first score based on documented 9mm/11-ply African Mahogany shell with Tineo outer ply and 2.3mm flanged steel hoops. Bearing edge and snare bed details remain unknown.",
+        "stockBatterHead": "Unknown",
+        "hoopType": "2.3mm Steel Mighty Hoop / triple-flanged steel",
+        "shellMaterialPrimary": "African Mahogany",
+        "drumType": "Snare",
+        "bearingEdgeShape": "Unknown",
+        "reinforcementRings": false,
+        "finishType": "Satin Natural Tineo / lacquer",
+        "plyCount": 11,
+        "diameter": 14,
+        "hardwareFinish": "Chrome",
+        "researchUpdatedBy": "tama-pass-1",
+        "reinforcementRingMaterial": "None",
+        "companyType": "Major Manufacturer",
+        "stockSnareWires": "Super Sensitive Hi-Carbon Snare Wires",
+        "reinforcementRingThicknessMm": null,
+        "secondarySourceUrl": "https://www.sweetwater.com/store/detail/TGHS1465GM--tama-star-reserve-g-mahogany-snare-drum-6.5-inches-by-14-inches-natural-tineo",
+        "currentlyInProduction": true,
+        "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100421.html",
+        "discontinued": false,
+        "shellMaterialSecondary": "Tineo outer ply",
+        "shortDescription": "14x6.5 STAR Reserve G-Mahogany snare with a thick 9mm/11-ply African Mahogany shell, Tineo outer ply, and 2.3mm flanged steel hoops.",
+        "rareCollectible": true,
+        "shellConstruction": "Ply",
+        "drumSummaryNotes": "Shell-first read should emphasize warm full-bodied mahogany tone, thicker-shell focus, and relatively open sustain from flanged steel hoops rather than die-cast hoops.",
+        "lugCount": 10,
+        "notesOnMissingData": "Bearing edge shape, snare bed depth, throw-off model, and exact head models need stronger source confirmation.",
+        "stockResoHead": "Unknown",
+        "depth": 6.5,
+        "yearIntroduced": 2026,
+        "yearDiscontinued": null,
+        "snareBedDepth": "Unknown",
+        "snareBeds": "Unknown",
+        "modelNumber": "TGHS1465SSNT",
+        "shellThicknessMm": 9,
+        "snareThrowMakeModel": "Unknown",
+        "artistSignatureLine": false,
+        "shellMaterial": "African Mahogany",
+        "bearingEdge": "Unknown",
+        "needsResearch": false,
+        "warmth": 8.65,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "control": 6.7,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "shellMaterial1": "African Mahogany",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 5.6,
+        "attack": 6.2,
+        "projection": 6.95,
+        "sensitivity": 6.6,
+        "sustain": 7.5,
+        "researchUpdatedAt": {
+          "_seconds": 1779072588,
+          "_nanoseconds": 930000000
+        },
+        "sourceConfidence": "high",
+        "voiceScoreConfidence": "high",
+        "snareBedType": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081075,
+          "_nanoseconds": 765000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "STAR Reserve",
+        "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+        "patchName": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Aluminum Hammered metal shell with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Aluminum Hammered metal shell with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Aluminum",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Hammered aluminum",
+            "finishType": "Hammered aluminum",
+            "exteriorTreatment": "Hammered aluminum",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "lugType": "Unknown",
+        "scoringBasis": "Shell-first score based on documented STAR Reserve hand-hammered aluminum identity and 14x6.5 size. Shell thickness, hoop type, and throw-off details still need stronger source confirmation.",
+        "stockBatterHead": "Unknown",
+        "hoopType": "Unknown",
+        "shellMaterialPrimary": "Aluminum",
+        "drumType": "Snare",
+        "bearingEdgeShape": "Unknown",
+        "reinforcementRings": false,
+        "finishType": "Hand hammered aluminum",
+        "plyCount": null,
+        "diameter": 14,
+        "hardwareFinish": "Chrome",
+        "researchUpdatedBy": "tama-pass-1",
+        "reinforcementRingMaterial": "None",
+        "companyType": "Major Manufacturer",
+        "stockSnareWires": "Unknown",
+        "reinforcementRingThicknessMm": null,
+        "secondarySourceUrl": "",
+        "currentlyInProduction": "Unknown",
+        "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_snare/",
+        "discontinued": "Unknown",
+        "shellMaterialSecondary": "None",
+        "shortDescription": "14x6.5 STAR Reserve hand-hammered aluminum snare with metal shell construction and hammered aluminum finish.",
+        "rareCollectible": true,
+        "shellConstruction": "Metal",
+        "drumSummaryNotes": "Shell-first read should emphasize dry, articulate aluminum response with added complexity from hammering. Keep confidence below high until shell thickness and hoop details are verified.",
+        "lugCount": null,
+        "notesOnMissingData": "Need confirmed shell thickness, hoop type, lug count, throw-off, stock wires, and head models from official or retailer spec sheet.",
+        "stockResoHead": "Unknown",
+        "depth": 6.5,
+        "yearIntroduced": null,
+        "yearDiscontinued": null,
+        "snareBedDepth": "Unknown",
+        "snareBeds": "Unknown",
+        "modelNumber": "Unknown",
+        "snareThrowMakeModel": "Unknown",
+        "artistSignatureLine": false,
+        "shellMaterial": "Aluminum",
+        "bearingEdge": "Unknown",
+        "needsResearch": false,
+        "warmth": 6.05,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "control": 7.2,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "shellMaterial1": "Aluminum",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 7.3,
+        "attack": 7.3,
+        "projection": 7.55,
+        "sensitivity": 7.8,
+        "sustain": 6.5,
+        "researchUpdatedAt": {
+          "_seconds": 1779072589,
+          "_nanoseconds": 91000000
+        },
+        "voiceScoreConfidence": "medium",
+        "sourceConfidence": "medium",
+        "shellThicknessMm": "unknown",
+        "snareBedType": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081075,
+          "_nanoseconds": 869000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "exists": true,
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "STAR Reserve",
+        "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+        "patchName": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x5.5 Brass Hammered metal shell with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x5.5 Brass Hammered metal shell with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 5.5,
+            "metricDimensionsMm": "355.6 x 139.7"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Brass",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Hammered brass",
+            "finishType": "Hammered brass",
+            "exteriorTreatment": "Hammered brass",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "lugType": "MSL905C",
+        "scoringBasis": "Shell-first score based on documented 1.5mm hand-hammered brass shell, 14x5.5 size, and 2.3mm brass flanged hoops. Hardware and stock wire details supported by retailer specs.",
+        "stockBatterHead": "Tama logo coated Ambassador",
+        "hoopType": "2.3mm Customized Brass Mighty Hoop / flanged brass",
+        "shellMaterialPrimary": "Brass",
+        "drumType": "Snare",
+        "bearingEdgeShape": "Unknown",
+        "reinforcementRings": false,
+        "finishType": "Hand hammered brass",
+        "plyCount": null,
+        "diameter": 14,
+        "hardwareFinish": "Chrome",
+        "researchUpdatedBy": "tama-pass-1",
+        "reinforcementRingMaterial": "None",
+        "companyType": "Major Manufacturer",
+        "stockSnareWires": "M520RL14C Super Sensitive Hi-Carbon 20-strand snare wires",
+        "reinforcementRingThicknessMm": null,
+        "secondarySourceUrl": "https://memphisdrumshop.com/products/tama-14x55-star-reserve-hand-hammered-brass-snare-drum-tbrs1455h",
+        "currentlyInProduction": "Unknown",
+        "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_hand_hammerd_brass.html",
+        "discontinued": "Unknown",
+        "shellMaterialSecondary": "None",
+        "shortDescription": "14x5.5 STAR Reserve hand-hammered brass snare with 1.5mm brass shell and 2.3mm customized brass flanged hoops.",
+        "rareCollectible": true,
+        "shellConstruction": "Metal",
+        "drumSummaryNotes": "Shell-first read should emphasize brass warmth, musical projection, clear attack, and added complexity from hammering. Brass flanged hoops should preserve openness while adding bright attack.",
+        "lugCount": 8,
+        "notesOnMissingData": "Bearing edge profile, snare bed depth, and stock resonant head still need stronger confirmation.",
+        "stockResoHead": "Unknown",
+        "depth": 5.5,
+        "yearIntroduced": 2020,
+        "yearDiscontinued": null,
+        "snareBedDepth": "Unknown",
+        "snareBeds": "Unknown",
+        "modelNumber": "TBRS1455H",
+        "shellThicknessMm": 1.5,
+        "snareThrowMakeModel": "MLS50A / MLS50B Linear Drive strainer and butt",
+        "artistSignatureLine": false,
+        "shellMaterial": "Brass",
+        "bearingEdge": "Unknown",
+        "needsResearch": false,
+        "warmth": 6.95,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "control": 6.4,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "shellMaterial1": "Brass",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 7.5,
+        "attack": 7.8,
+        "projection": 7.95,
+        "sensitivity": 7.4,
+        "sustain": 7.45,
+        "researchUpdatedAt": {
+          "_seconds": 1779072589,
+          "_nanoseconds": 258000000
+        },
+        "voiceScoreConfidence": "high",
+        "sourceConfidence": "high",
+        "snareBedType": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081075,
+          "_nanoseconds": 972000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+      "exists": true,
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "data": {
+        "companyName": "Tama",
+        "lineSeries": "STAR Reserve",
+        "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+        "patchName": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+        "identification": {
+          "modelNumber": "unknown",
+          "badgeStyle": "unknown",
+          "productionStatus": "discontinued",
+          "currentlyInProduction": false,
+          "artistSignature": false,
+          "rareCollectible": true
+        },
+        "stockHardware": {
+          "throwOff": {
+            "notes": "unknown",
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          },
+          "hoops": {
+            "resonantHoopType": "unknown",
+            "hoopMaterial": "unknown",
+            "hoopFinish": "unknown",
+            "batterHoopType": "unknown",
+            "hoopMassClass": "unknown",
+            "hoopThicknessMm": null
+          },
+          "lugs": {
+            "lugType": "unknown",
+            "hardwareFinish": "unknown",
+            "lugMaterial": "unknown",
+            "lugCountNotes": "unknown",
+            "lugMountingStyle": "unknown",
+            "lugCount": 10,
+            "lugMassClass": "unknown"
+          },
+          "buttPlate": {
+            "model": "unknown",
+            "style": "unknown",
+            "make": "unknown"
+          }
+        },
+        "stockSnareSystem": {
+          "snareWires": {
+            "material": "unknown",
+            "model": "unknown",
+            "lengthInches": 14,
+            "stock": "unknown",
+            "strandCount": null,
+            "make": "unknown"
+          },
+          "heads": {
+            "stockHeadsKnown": false,
+            "batterHead": "unknown",
+            "resonantHead": "unknown"
+          }
+        },
+        "pricing": {
+          "priceNotes": "unknown",
+          "lastUpdated": "researchRequired",
+          "currentUsedPriceRange": {
+            "high": "researchRequired",
+            "low": "researchRequired",
+            "currency": "USD"
+          },
+          "pricingSources": [],
+          "currentNewPrice": "researchRequired",
+          "originalMsrp": "researchRequired",
+          "originalRetailPrice": "researchRequired"
+        },
+        "collectorMetadata": {
+          "productionNotes": "unknown",
+          "yearIntroduced": "unknown",
+          "limitedRunCount": "unknown",
+          "yearDiscontinued": "unknown",
+          "limitedRun": "unknown",
+          "countryOfOrigin": "unknown"
+        },
+        "snareFacts": [
+          "unknown",
+          "unknown",
+          "unknown"
+        ],
+        "sources": {
+          "imageUrl": null,
+          "secondarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low",
+          "notesOnMissingData": [
+            "Discontinued/limited row included to preserve model coverage; exact catalog page extraction still needed for final confidence."
+          ],
+          "imageUrls": [],
+          "conflictingSourceNotes": [],
+          "secondarySourceUrls": [
+            "https://www.tama.com/usa/products/search/snare_drums/list/"
+          ]
+        },
+        "summary": {
+          "shortDescription": "Shell-first score based on 14x6.5 Copper Hammered metal shell with Unknown. Scores are physical-driver estimates; brand reputation and price are not used.",
+          "drumSummaryNotes": "Shell-first score based on 14x6.5 Copper Hammered metal shell with Unknown. Scores are physical-driver estimates; brand reputation and price are not used."
+        },
+        "shell": {
+          "drumType": "snare",
+          "dimensions": {
+            "diameterInches": 14,
+            "depthInches": 6.5,
+            "metricDimensionsMm": "355.6 x 165.1"
+          },
+          "construction": {
+            "shellConstruction": "Metal",
+            "shellMaterialPrimary": "Copper",
+            "shellMaterialSecondary": "none",
+            "shellMaterialTertiary": "none",
+            "plyCount": null,
+            "layupDescription": "unknown",
+            "shellThicknessMm": null,
+            "thicknessClass": "unknown",
+            "reinforcementRings": "unknown",
+            "reinforcementRingMaterial": "unknown",
+            "reinforcementRingThicknessMm": null
+          },
+          "finish": {
+            "finishName": "Hammered copper",
+            "finishType": "Hammered copper",
+            "exteriorTreatment": "Hammered copper",
+            "interiorTreatment": "unknown",
+            "acousticImpact": "engineCalculated",
+            "notes": "unknown"
+          },
+          "bearingEdges": {
+            "batterSideProfile": "unknown",
+            "snareSideProfile": "unknown",
+            "roundover": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          },
+          "snareBeds": {
+            "present": "unknown",
+            "depthBucket": "unknown",
+            "widthBucket": "unknown",
+            "bedStyle": "unknown",
+            "evidenceLevel": "notVerified",
+            "notes": "unknown",
+            "confidence": "Low"
+          }
+        },
+        "lugType": "Unknown",
+        "scoringBasis": "Shell-first score based on documented 14x6.5 STAR Reserve hand-hammered copper shell identity. Shell thickness, hoop type, and exact hardware details still need stronger source confirmation.",
+        "stockBatterHead": "Unknown",
+        "hoopType": "Unknown",
+        "shellMaterialPrimary": "Copper",
+        "drumType": "Snare",
+        "bearingEdgeShape": "Unknown",
+        "reinforcementRings": false,
+        "finishType": "Hand hammered copper",
+        "plyCount": null,
+        "diameter": 14,
+        "hardwareFinish": "Chrome",
+        "researchUpdatedBy": "tama-pass-1",
+        "reinforcementRingMaterial": "None",
+        "companyType": "Major Manufacturer",
+        "stockSnareWires": "Unknown",
+        "reinforcementRingThicknessMm": null,
+        "secondarySourceUrl": "",
+        "currentlyInProduction": "Unknown",
+        "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_snare/",
+        "discontinued": "Unknown",
+        "shellMaterialSecondary": "None",
+        "shortDescription": "14x6.5 STAR Reserve hand-hammered copper snare with warm copper shell character and hammered shell shaping.",
+        "rareCollectible": true,
+        "shellConstruction": "Metal",
+        "drumSummaryNotes": "Shell-first read should emphasize warm copper body, rich resonance, and bright attack shaped by hammering. Keep confidence below high until exact shell thickness and hoop details are confirmed.",
+        "lugCount": null,
+        "notesOnMissingData": "Need confirmed model number, shell thickness, hoop type, lug count, throw-off, wires, and head models from official or retailer spec sheet.",
+        "stockResoHead": "Unknown",
+        "depth": 6.5,
+        "yearIntroduced": null,
+        "yearDiscontinued": null,
+        "snareBedDepth": "Unknown",
+        "snareBeds": "Unknown",
+        "modelNumber": "Unknown",
+        "snareThrowMakeModel": "Unknown",
+        "artistSignatureLine": false,
+        "shellMaterial": "Copper",
+        "bearingEdge": "Unknown",
+        "needsResearch": false,
+        "warmth": 8.45,
+        "engineReadinessUpdatedBy": "generateTamaEngineReadyPatch",
+        "control": 6.1,
+        "engineReadinessNotes": "Ober 7-node scores generated from existing shell-first physical fields: material, construction, dimensions, thickness, hoops, bearing edge availability, and known stock configuration. Brand prestige, price, rarity, and artist association are excluded.",
+        "shellMaterial1": "Copper",
+        "scoreSource": "generated-shell-first-heuristic-v1",
+        "brightness": 6.2,
+        "attack": 6.7,
+        "projection": 7.45,
+        "sensitivity": 6.6,
+        "sustain": 7.8,
+        "researchUpdatedAt": {
+          "_seconds": 1779072589,
+          "_nanoseconds": 429000000
+        },
+        "voiceScoreConfidence": "medium",
+        "sourceConfidence": "medium",
+        "shellThicknessMm": "unknown",
+        "snareBedType": "unknown",
+        "dataCleanupUpdatedAt": {
+          "_seconds": 1779081076,
+          "_nanoseconds": 81000000
+        },
+        "dataCleanupUpdatedBy": "fixTamaFinalAuditFields"
+      }
+    }
+  ]
+}

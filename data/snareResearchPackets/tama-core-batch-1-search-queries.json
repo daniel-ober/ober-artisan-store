@@ -1,0 +1,151 @@
+{
+  "generatedAt": "2026-05-18T06:04:33.883Z",
+  "queries": [
+    {
+      "id": "tama_artwood_artwood-birch-14x5-5_14x5-5_ply_birch_lacquer_444f452b",
+      "companyName": "Tama",
+      "modelName": "Artwood Birch 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "queries": [
+        "\"Tama\" \"Artwood Birch 14x5.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"Artwood Birch 14x5.5\" shell material thickness",
+        "\"Tama\" \"Artwood Birch 14x5.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_artwood_artwood-birch-14x6-5_14x6-5_ply_birch_lacquer_c8fcf233",
+      "companyName": "Tama",
+      "modelName": "Artwood Birch 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "queries": [
+        "\"Tama\" \"Artwood Birch 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"Artwood Birch 14x6.5\" shell material thickness",
+        "\"Tama\" \"Artwood Birch 14x6.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_artwood_artwood-birds-eye-maple-14x6-5_14x6-5_ply_maple_lacquer_f2bcbb59",
+      "companyName": "Tama",
+      "modelName": "Artwood Birds Eye Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "queries": [
+        "\"Tama\" \"Artwood Birds Eye Maple 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"Artwood Birds Eye Maple 14x6.5\" shell material thickness",
+        "\"Tama\" \"Artwood Birds Eye Maple 14x6.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_artwood_artwood-maple-14x5-5_14x5-5_ply_maple_lacquer_3540966b",
+      "companyName": "Tama",
+      "modelName": "Artwood Maple 14x5.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "queries": [
+        "\"Tama\" \"Artwood Maple 14x5.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"Artwood Maple 14x5.5\" shell material thickness",
+        "\"Tama\" \"Artwood Maple 14x5.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_artwood_artwood-maple-14x6-5_14x6-5_ply_maple_lacquer_942d70cd",
+      "companyName": "Tama",
+      "modelName": "Artwood Maple 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "queries": [
+        "\"Tama\" \"Artwood Maple 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"Artwood Maple 14x6.5\" shell material thickness",
+        "\"Tama\" \"Artwood Maple 14x6.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_artwood_artwood-walnut-14x6-5_14x6-5_ply_walnut_lacquer_caccd985",
+      "companyName": "Tama",
+      "modelName": "Artwood Walnut 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "reinforcementRings"
+      ],
+      "queries": [
+        "\"Tama\" \"Artwood Walnut 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"Artwood Walnut 14x6.5\" shell material thickness",
+        "\"Tama\" \"Artwood Walnut 14x6.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve G-Mahogany 14x6.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "queries": [
+        "\"Tama\" \"STAR Reserve G-Mahogany 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"STAR Reserve G-Mahogany 14x6.5\" shell material thickness",
+        "\"Tama\" \"STAR Reserve G-Mahogany 14x6.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "queries": [
+        "\"Tama\" \"STAR Reserve Hand Hammered Aluminum 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"STAR Reserve Hand Hammered Aluminum 14x6.5\" shell material thickness",
+        "\"Tama\" \"STAR Reserve Hand Hammered Aluminum 14x6.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+      "failedCoreFields": [
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "queries": [
+        "\"Tama\" \"STAR Reserve Hand Hammered Brass 14x5.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"STAR Reserve Hand Hammered Brass 14x5.5\" shell material thickness",
+        "\"Tama\" \"STAR Reserve Hand Hammered Brass 14x5.5\" snare drum specs"
+      ]
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+      "companyName": "Tama",
+      "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType",
+        "snareBeds"
+      ],
+      "queries": [
+        "\"Tama\" \"STAR Reserve Hand Hammered Copper 14x6.5\" snare shell thickness bearing edge snare beds",
+        "\"Tama\" \"STAR Reserve Hand Hammered Copper 14x6.5\" shell material thickness",
+        "\"Tama\" \"STAR Reserve Hand Hammered Copper 14x6.5\" snare drum specs"
+      ]
+    }
+  ]
+}

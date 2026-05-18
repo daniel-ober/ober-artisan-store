@@ -1,0 +1,126 @@
+{
+  "company": "Noble & Cooley",
+  "generatedAt": "2026-05-18T06:04:30.100Z",
+  "batch": "noble-cooley-core-batch-1",
+  "records": [
+    {
+      "priority": "high",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Artist / Endorser Reference",
+      "modelName": "Craig Pilo Reference Snare",
+      "id": "noble-and-cooley_artist-endorser-reference_craig-pilo-reference-snare_14x6-5_other-needs-research_e9ea30de",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "high",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Artist / Endorser Reference",
+      "modelName": "Malcolm Travis Reference Snare",
+      "id": "noble-and-cooley_artist-endorser-reference_malcolm-travis-reference-snare_14x6-5_other-needs-research_03455e0b",
+      "failedCoreFields": [
+        "shellMaterial1",
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "modelName": "Alloy Classic Aluminum 14x4.75",
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "modelName": "Alloy Classic Aluminum 14x6",
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "modelName": "Alloy Classic Aluminum 14x6.5",
+      "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Brass Specialty 14x5",
+      "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x5_14x5_metal_brass_raw-lacquered-metal-finish_triple-flanged_10069628",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Brass Specialty 14x6.5",
+      "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x6-5_14x6-5_metal_brass_raw-lacquered-metal-finish_triple-fla_d72eb297",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Bronze Specialty 14x5",
+      "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x5_14x5_metal_bronze_raw-lacquered-metal-finish_triple-flang_678cfd56",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "modelName": "Bronze Specialty 14x6.5",
+      "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x6-5_14x6-5_metal_bronze_raw-lacquered-metal-finish_triple-f_d006de9a",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    },
+    {
+      "priority": "medium",
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "modelName": "CD Maple 13x3.875",
+      "id": "noble-and-cooley_cd-maple-series_cd-maple-13x3-875_13x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_1069e80d",
+      "failedCoreFields": [
+        "shellThicknessMm",
+        "bearingEdge",
+        "snareBedType"
+      ]
+    }
+  ]
+}
