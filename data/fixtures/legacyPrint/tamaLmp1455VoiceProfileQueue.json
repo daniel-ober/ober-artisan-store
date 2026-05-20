@@ -1,0 +1,40 @@
+[
+  {
+    "id": "tama_slp_lmp1455_classic-maple_14x5-5",
+    "modelName": "S.L.P. Classic Maple LMP1455",
+    "sourceSchemaVersion": "legacyprint-snare-v1",
+    "sourceConfidence": "medium-high",
+    "voiceScoreConfidence": "medium",
+    "baseConfigSource": "stock",
+    "shellConstruction": "ply",
+    "shellMaterial1": "maple",
+    "shellThicknessMm": 7,
+    "bearingEdge": "unknown",
+    "snareBedType": "unknown",
+    "diameter": 14,
+    "depth": 5.5,
+    "plyCount": 8,
+    "reinforcementRings": null,
+    "hoopType": "sound arc",
+    "lugCount": 10,
+    "stockBatterHead": "unknown",
+    "stockResoHead": "unknown",
+    "stockSnareWires": "20",
+    "metadata": {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "modelNumber": "LMP1455",
+      "lugType": "MTL50",
+      "throwOff": "MLS50A",
+      "buttPlate": "MLS50B",
+      "hoopDetail": "Sound Arc Hoop, 10-hole",
+      "stockSnareWiresDetail": "MS20RL14C / 20-strand Hi-Carbon snare wires",
+      "unknownFields": [
+        "bearingEdge",
+        "snareBedType",
+        "stockBatterHead",
+        "stockResoHead"
+      ]
+    }
+  }
+]

@@ -924,6 +924,62 @@ export const MODIFIER_REGISTRY = {
 
     },
 
+        {
+
+      id: 'sound-arc-hoops',
+
+      type: 'hoop',
+
+      category: 'hoopType',
+
+      label: 'Sound Arc Hoops',
+
+      aliases: [
+
+        'sound arc',
+
+        'sound arc hoops',
+
+        'soundarc',
+
+        'soundarc hoops',
+
+        'tama sound arc',
+
+        'tama sound arc hoops',
+
+      ],
+
+      nodeDeltas: {
+
+        attack: 0,
+
+        brightness: 0,
+
+        projection: 0,
+
+        sustain: 0,
+
+        warmth: 0,
+
+        sensitivity: 0,
+
+        control: 0,
+
+      },
+
+      confidence: {
+
+        matchConfidence: 'medium',
+
+        deltaConfidence: 'low',
+
+        physicalConfidence: 'medium',
+
+      },
+
+    },
+
   ],
 
 };
