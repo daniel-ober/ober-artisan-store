@@ -1,6 +1,8 @@
 // src/legacyPrint/ui/VoicePlayground.js
 
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+
+import { Zap, SunMedium, Volume2, Waves, Flame, Feather, Crosshair } from 'lucide-react';
 
 import { useVoicePlayground } from './useVoicePlayground.js';
 
@@ -10,44 +12,225 @@ import { VoiceBlob } from '../visual/VoiceBlob.js';
 
 import { morphVoice } from '../morph/morphVoice.js';
 
-import { useVoiceField } from '../voiceField/useVoiceField.js';
-
-import { useAnimatedVoiceField } from '../voiceField/useAnimatedVoiceField.js';
+import VoiceConstellationMap from './VoiceConstellationMap.js';
 
 import './VoicePlayground.css';
 
-const VOICE_NODES = [
+const WORKFLOW_MODES = [
+  {
+    key: 'reference',
 
-  { key: 'sustain', label: 'Sustain', icon: '≋', color: '#ff6d4a', x: 50, y: 9 },
+    label: 'Reference',
 
-  { key: 'warmth', label: 'Warmth', icon: '♨', color: '#ffd84a', x: 82, y: 28 },
+    eyebrow: 'Compare known drums',
 
-  { key: 'control', label: 'Control', icon: '◉', color: '#ffb02e', x: 87, y: 62 },
+    title: 'Reference Match',
 
-  { key: 'attack', label: 'Attack', icon: 'ϟ', color: '#3f7bff', x: 62, y: 88 },
-
-  { key: 'brightness', label: 'Brightness', icon: '☼', color: '#27d8ff', x: 32, y: 88 },
-
-  { key: 'projection', label: 'Projection', icon: '⌖', color: '#4fffe2', x: 14, y: 61 },
-
-  { key: 'sensitivity', label: 'Sensitivity', icon: '♧', color: '#b15cff', x: 18, y: 28 },
-
-];
-
-const MOCK_MATCHES = [
+    description: 'Anchor the map to a reference voice and explore nearby matches.',
+  },
 
   {
+    key: 'shape',
 
-    id: 'mock-1',
+    label: 'Shape',
 
-    companyName: 'Ober Artisan',
+    eyebrow: 'Sculpt by ear',
 
-    modelName: 'Heritage 14x6 Torch',
+    title: 'Shape Your Voice',
 
-    modelDetail: 'Stave maple/oak reference',
+    description: 'Adjust the voice characteristics to find matching drums.',
+  },
 
-    voiceProfile: {
+  {
+    key: 'build',
 
+    label: 'Build',
+
+    eyebrow: 'Choose physical traits',
+
+    title: 'Build Your Voice',
+
+    description: 'Start with drum construction choices and let the voice map respond.',
+  },
+];
+
+const READ_MODES = [
+  {
+    key: 'firstListen',
+
+    label: 'First Listen',
+
+    kicker: 'First Tell',
+  },
+
+  {
+    key: 'playerAnalysis',
+
+    label: 'Player Analysis',
+
+    kicker: 'Seven-Node Read',
+  },
+
+  {
+    key: 'legacyprint',
+
+    label: 'LegacyPrint Identity',
+
+    kicker: 'Identity',
+  },
+];
+
+const VOICE_NODES = [
+  {
+    key: 'attack',
+
+    label: 'Attack',
+
+    shortLabel: 'Strike',
+
+    Icon: Zap,
+
+    color: '#ff7448',
+
+    description: 'Initial stick contact, immediacy, and front-edge definition.',
+  },
+
+  {
+    key: 'brightness',
+
+    label: 'Brightness',
+
+    shortLabel: 'Clarity',
+
+    Icon: SunMedium,
+
+    color: '#e7d98f',
+
+    description: 'Upper harmonic clarity, shimmer, and perceived crispness.',
+  },
+
+  {
+    key: 'projection',
+
+    label: 'Projection',
+
+    shortLabel: 'Carry',
+
+    Icon: Volume2,
+
+    color: '#ffb53a',
+
+    description: 'How strongly the voice carries through the room or mix.',
+  },
+
+  {
+    key: 'sustain',
+
+    label: 'Sustain',
+
+    shortLabel: 'Bloom',
+
+    Icon: Waves,
+
+    color: '#4d86ff',
+
+    description: 'How long the note blooms after the initial strike.',
+  },
+
+  {
+    key: 'warmth',
+
+    label: 'Warmth',
+
+    shortLabel: 'Body',
+
+    Icon: Flame,
+
+    color: '#c1682e',
+
+    description: 'Low-mid body, roundness, and perceived fullness.',
+  },
+
+  {
+    key: 'sensitivity',
+
+    label: 'Sensitivity',
+
+    shortLabel: 'Touch',
+
+    Icon: Feather,
+
+    color: '#68d9df',
+
+    description: 'Response to light touch, ghost notes, and dynamic nuance.',
+  },
+
+  {
+    key: 'control',
+
+    label: 'Control',
+
+    shortLabel: 'Focus',
+
+    Icon: Crosshair,
+
+    color: '#9e8bff',
+
+    description: 'Focus, containment, dryness, and ease of placement.',
+  },
+];
+
+const BUILD_OPTIONS = [
+  {
+    key: 'shell',
+
+    label: 'Shell',
+
+    value: 'Stave Maple',
+
+    note: 'Open, direct, responsive',
+  },
+
+  {
+    key: 'depth',
+
+    label: 'Depth',
+
+    value: '14 × 6.5',
+
+    note: 'Balanced body and articulation',
+  },
+
+  {
+    key: 'edge',
+
+    label: 'Bearing Edge',
+
+    value: '45° / Roundover',
+
+    note: 'Attack with softened warmth',
+  },
+
+  {
+    key: 'hoops',
+
+    label: 'Hoops',
+
+    value: 'Die Cast',
+
+    note: 'Focused control and punch',
+  },
+];
+
+const REFERENCE_OPTIONS = [
+  {
+    key: 'heritage',
+
+    label: 'Ober Heritage',
+
+    detail: '14x6 Torch / Stave Maple',
+
+    voice: {
       attack: 0.72,
 
       brightness: 0.66,
@@ -61,23 +244,17 @@ const MOCK_MATCHES = [
       sensitivity: 0.7,
 
       control: 0.72,
-
     },
-
   },
 
   {
+    key: 'black-beauty',
 
-    id: 'mock-2',
+    label: 'Ludwig Black Beauty',
 
-    companyName: 'Ludwig',
+    detail: '14x6.5 Brass',
 
-    modelName: 'Black Beauty',
-
-    modelDetail: '14x6.5 Brass',
-
-    voiceProfile: {
-
+    voice: {
       attack: 0.78,
 
       brightness: 0.82,
@@ -91,23 +268,17 @@ const MOCK_MATCHES = [
       sensitivity: 0.74,
 
       control: 0.6,
-
     },
-
   },
 
   {
+    key: 'brooklyn',
 
-    id: 'mock-3',
+    label: 'Gretsch Brooklyn',
 
-    companyName: 'Gretsch',
+    detail: '14x6.5 Metal',
 
-    modelName: 'Brooklyn',
-
-    modelDetail: '14x6.5 Metal',
-
-    voiceProfile: {
-
+    voice: {
       attack: 0.76,
 
       brightness: 0.72,
@@ -121,13 +292,90 @@ const MOCK_MATCHES = [
       sensitivity: 0.66,
 
       control: 0.68,
-
     },
+  },
+];
 
+const MOCK_MATCHES = [
+  {
+    id: 'mock-1',
+
+    companyName: 'Ober Artisan',
+
+    modelName: 'Classic',
+
+    modelDetail: 'Maple Series',
+
+    voiceProfile: {
+      attack: 0.72,
+
+      brightness: 0.66,
+
+      projection: 0.84,
+
+      sustain: 0.58,
+
+      warmth: 0.74,
+
+      sensitivity: 0.7,
+
+      control: 0.72,
+    },
   },
 
   {
+    id: 'mock-2',
 
+    companyName: 'Ludwig',
+
+    modelName: 'Black Beauty',
+
+    modelDetail: '14x6.5 Brass',
+
+    voiceProfile: {
+      attack: 0.78,
+
+      brightness: 0.82,
+
+      projection: 0.86,
+
+      sustain: 0.62,
+
+      warmth: 0.55,
+
+      sensitivity: 0.74,
+
+      control: 0.6,
+    },
+  },
+
+  {
+    id: 'mock-3',
+
+    companyName: 'Gretsch',
+
+    modelName: 'Brooklyn',
+
+    modelDetail: '14x6.5 Metal',
+
+    voiceProfile: {
+      attack: 0.76,
+
+      brightness: 0.72,
+
+      projection: 0.78,
+
+      sustain: 0.54,
+
+      warmth: 0.5,
+
+      sensitivity: 0.66,
+
+      control: 0.68,
+    },
+  },
+
+  {
     id: 'mock-4',
 
     companyName: 'Sonor',
@@ -137,7 +385,6 @@ const MOCK_MATCHES = [
     modelDetail: '14x6.5 Maple',
 
     voiceProfile: {
-
       attack: 0.6,
 
       brightness: 0.56,
@@ -151,13 +398,10 @@ const MOCK_MATCHES = [
       sensitivity: 0.64,
 
       control: 0.7,
-
     },
-
   },
 
   {
-
     id: 'mock-5',
 
     companyName: 'DW',
@@ -167,7 +411,6 @@ const MOCK_MATCHES = [
     modelDetail: '14x6.5 Maple',
 
     voiceProfile: {
-
       attack: 0.58,
 
       brightness: 0.52,
@@ -181,13 +424,10 @@ const MOCK_MATCHES = [
       sensitivity: 0.58,
 
       control: 0.62,
-
     },
-
   },
 
   {
-
     id: 'mock-6',
 
     companyName: 'Yamaha',
@@ -197,7 +437,6 @@ const MOCK_MATCHES = [
     modelDetail: '14x5.5 Brass',
 
     voiceProfile: {
-
       attack: 0.82,
 
       brightness: 0.8,
@@ -211,13 +450,10 @@ const MOCK_MATCHES = [
       sensitivity: 0.7,
 
       control: 0.74,
-
     },
-
   },
 
   {
-
     id: 'mock-7',
 
     companyName: 'Tama',
@@ -227,7 +463,6 @@ const MOCK_MATCHES = [
     modelDetail: '14x6.5 Maple',
 
     voiceProfile: {
-
       attack: 0.66,
 
       brightness: 0.62,
@@ -241,13 +476,10 @@ const MOCK_MATCHES = [
       sensitivity: 0.62,
 
       control: 0.66,
-
     },
-
   },
 
   {
-
     id: 'mock-8',
 
     companyName: 'Pearl',
@@ -257,7 +489,6 @@ const MOCK_MATCHES = [
     modelDetail: '14x6.5 Maple',
 
     voiceProfile: {
-
       attack: 0.7,
 
       brightness: 0.6,
@@ -271,276 +502,200 @@ const MOCK_MATCHES = [
       sensitivity: 0.56,
 
       control: 0.78,
-
     },
-
   },
-
 ];
 
 const clamp01 = (value, fallback = 0.5) => {
-
   const number = Number(value);
 
   if (!Number.isFinite(number)) return fallback;
 
   return Math.max(0, Math.min(1, number));
-
 };
 
 const getVoiceValue = (voice, key) => clamp01(voice?.[key], 0.5);
 
 const getResultVoice = (result) =>
-
   result?.voice || result?.legacyPrintVoice || result?.voiceProfile || {};
 
 const getResultId = (result, index) =>
-
   result?.drumId || result?.id || `${result?.companyName || 'voice'}-${index}`;
 
 const scoreVoiceSimilarity = (sourceVoice = {}, targetVoice = {}) => {
-
   const totalDifference = VOICE_NODES.reduce((sum, node) => {
-
     return (
-
-      sum +
-
-      Math.abs(getVoiceValue(sourceVoice, node.key) - getVoiceValue(targetVoice, node.key))
-
+      sum + Math.abs(getVoiceValue(sourceVoice, node.key) - getVoiceValue(targetVoice, node.key))
     );
-
   }, 0);
 
   return clamp01(1 - totalDifference / VOICE_NODES.length);
-
 };
 
 const getMatchPercent = (result) =>
-
   Math.round(clamp01(result?.similarityScore ?? result?.matchScore ?? 0.5) * 100);
 
-function VoiceNetwork({ voice, onNodeClick }) {
+const buildModeVoice = (baseVoice, mode, selectedReference) => {
+  const sourceVoice = selectedReference?.voice || baseVoice || {};
 
-  const polygonPoints = VOICE_NODES.map((node) => `${node.x},${node.y}`).join(' ');
+  if (mode === 'reference') {
+    return sourceVoice;
+  }
 
-  const center = { x: 50, y: 52 };
+  if (mode === 'build') {
+    return {
+      attack: clamp01(getVoiceValue(baseVoice, 'attack') + 0.05),
 
-    return (
+      brightness: clamp01(getVoiceValue(baseVoice, 'brightness') - 0.02),
 
-    <div className="vp-network">
+      projection: clamp01(getVoiceValue(baseVoice, 'projection') + 0.08),
 
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="vp-network-svg">
+      sustain: clamp01(getVoiceValue(baseVoice, 'sustain') + 0.04),
 
-        <defs>
+      warmth: clamp01(getVoiceValue(baseVoice, 'warmth') + 0.08),
 
-          <filter id="legacyprintLineGlow" x="-60%" y="-60%" width="220%" height="220%">
+      sensitivity: clamp01(getVoiceValue(baseVoice, 'sensitivity') + 0.03),
 
-            <feGaussianBlur stdDeviation="0.8" result="blur" />
+      control: clamp01(getVoiceValue(baseVoice, 'control') + 0.06),
+    };
+  }
 
-            <feMerge>
+  return baseVoice || {};
+};
 
-              <feMergeNode in="blur" />
+const getTopNodes = (voice, count = 3) =>
+  [...VOICE_NODES]
 
-              <feMergeNode in="SourceGraphic" />
+    .map((node) => ({
+      ...node,
 
-            </feMerge>
+      value: getVoiceValue(voice, node.key),
+    }))
 
-          </filter>
+    .sort((a, b) => b.value - a.value)
 
-        </defs>
+    .slice(0, count);
 
-        <polygon
+function WorkflowRail({ workflowMode, setWorkflowMode }) {
+  return (
+    <div className="vp-workflow-rail" aria-label="Voice workflow mode">
+      {WORKFLOW_MODES.map((item) => (
+        <button
+          key={item.key}
+          type="button"
+          className={workflowMode === item.key ? 'is-active' : ''}
+          onClick={() => setWorkflowMode(item.key)}
+        >
+          <span>{item.eyebrow}</span>
 
-          points={polygonPoints}
+          <strong>{item.label}</strong>
+        </button>
+      ))}
+    </div>
+  );
+}
 
-          fill="rgba(100,140,255,0.035)"
+function BuildPanel() {
+  return (
+    <div className="vp-mode-content">
+      <div className="vp-build-stack">
+        {BUILD_OPTIONS.map((option) => (
+          <button key={option.key} type="button" className="vp-build-card">
+            <span>{option.label}</span>
 
-          stroke="rgba(150,170,255,0.2)"
+            <strong>{option.value}</strong>
 
-          strokeWidth="0.22"
-
-        />
-
-        {VOICE_NODES.map((fromNode, fromIndex) =>
-
-          VOICE_NODES.slice(fromIndex + 1).map((toNode) => (
-
-            <line
-
-              key={`${fromNode.key}-${toNode.key}`}
-
-              x1={fromNode.x}
-
-              y1={fromNode.y}
-
-              x2={toNode.x}
-
-              y2={toNode.y}
-
-              stroke="rgba(120,140,200,0.13)"
-
-              strokeWidth="0.12"
-
-            />
-
-          ))
-
-        )}
-
-        {VOICE_NODES.map((node, index) => {
-
-          const nextNode = VOICE_NODES[(index + 1) % VOICE_NODES.length];
-
-          const value = getVoiceValue(voice, node.key);
-
-          return (
-
-            <line
-
-              key={`${node.key}-outer`}
-
-              x1={node.x}
-
-              y1={node.y}
-
-              x2={nextNode.x}
-
-              y2={nextNode.y}
-
-              stroke={node.color}
-
-              strokeOpacity={0.48 + value * 0.5}
-
-              strokeWidth={0.55 + value * 1.25}
-
-              filter="url(#legacyprintLineGlow)"
-
-            />
-
-          );
-
-        })}
-
-        {VOICE_NODES.map((node) => {
-
-          const value = getVoiceValue(voice, node.key);
-
-          const innerX = center.x + (node.x - center.x) * value;
-
-          const innerY = center.y + (node.y - center.y) * value;
-
-          return (
-
-            <line
-
-              key={`${node.key}-active`}
-
-              x1={center.x}
-
-              y1={center.y}
-
-              x2={innerX}
-
-              y2={innerY}
-
-              stroke={node.color}
-
-              strokeOpacity={0.22 + value * 0.64}
-
-              strokeWidth={0.35 + value * 0.82}
-
-              filter="url(#legacyprintLineGlow)"
-
-            />
-
-          );
-
-        })}
-
-        <circle
-
-          cx={center.x}
-
-          cy={center.y}
-
-          r="16"
-
-          fill="rgba(190,80,255,0.065)"
-
-          stroke="rgba(215,126,255,0.38)"
-
-          strokeWidth="0.24"
-
-          strokeDasharray="1.2 1"
-
-        />
-
-      </svg>
-
-      <div className="vp-center-blob">
-
-        <VoiceBlob voice={voice} size={240} />
-
+            <em>{option.note}</em>
+          </button>
+        ))}
       </div>
 
-      {VOICE_NODES.map((node) => {
+      <div className="vp-helper-card">
+        <strong>Build Mode</strong>
 
-        const value = getVoiceValue(voice, node.key);
-
-        return (
-
-          <button
-
-            key={node.key}
-
-            type="button"
-
-            className="vp-node-button"
-
-            onClick={() => onNodeClick?.(node.key)}
-
-            title={`${node.label}: ${value.toFixed(2)}`}
-
-            style={{
-
-              left: `${node.x}%`,
-
-              top: `${node.y}%`,
-
-              borderColor: node.color,
-
-              color: node.color,
-
-              boxShadow: `0 0 ${18 + value * 34}px ${node.color}, inset 0 0 22px ${node.color}33`,
-
-              background: `radial-gradient(circle, rgba(255,255,255,0.18), ${node.color}28 44%, rgba(8,12,24,0.96) 72%)`,
-
-            }}
-
-          >
-
-            <span className="vp-node-icon">{node.icon}</span>
-
-            <span className="vp-node-label">{node.label}</span>
-
-          </button>
-
-        );
-
-      })}
-
+        <p>
+          This is still mock-only. Later, these choices should feed the universal voicing engine
+          directly.
+        </p>
+      </div>
     </div>
-
   );
+}
 
+function ShapePanel({ voice, updateVoice }) {
+  return (
+    <div className="vp-mode-content">
+      <div className="vp-slider-stack">
+        {VOICE_NODES.map((node) => {
+          const value = getVoiceValue(voice, node.key);
+
+          return (
+            <label key={node.key} className="vp-slider-row">
+              <div className="vp-slider-meta">
+                <span className="vp-slider-icon" style={{ color: node.color }}>
+                  {node.Icon && <node.Icon size={14} strokeWidth={2.25} aria-hidden="true" />}
+                </span>
+
+                <span className="vp-slider-label">{node.label}</span>
+
+                <span className="vp-slider-value">{value.toFixed(2)}</span>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={value}
+                onChange={(event) => updateVoice(node.key, parseFloat(event.target.value))}
+                style={{ accentColor: node.color }}
+              />
+            </label>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ReferencePanel({ selectedReferenceId, setSelectedReferenceId }) {
+  return (
+    <div className="vp-mode-content">
+      <div className="vp-reference-stack">
+        {REFERENCE_OPTIONS.map((reference) => (
+          <button
+            key={reference.key}
+            type="button"
+            className={
+              selectedReferenceId === reference.key
+                ? 'vp-reference-card is-active'
+                : 'vp-reference-card'
+            }
+            onClick={() => setSelectedReferenceId(reference.key)}
+          >
+            <strong>{reference.label}</strong>
+
+            <span>{reference.detail}</span>
+          </button>
+        ))}
+      </div>
+
+      <div className="vp-helper-card">
+        <strong>Reference Mode</strong>
+
+        <p>Select a known voice to anchor the center map and re-rank similar drums around it.</p>
+      </div>
+    </div>
+  );
 }
 
 export function VoicePlayground({ firestore }) {
-
   const { query, setQuery, voice, updateVoice, results, loading, setAsAnchor } =
-
     useVoicePlayground(firestore);
+
+  const [workflowMode, setWorkflowMode] = useState('reference');
+
+  const [readMode, setReadMode] = useState('firstListen');
 
   const [compareA, setCompareA] = useState(null);
 
@@ -548,354 +703,240 @@ export function VoicePlayground({ firestore }) {
 
   const [morphAmount, setMorphAmount] = useState(0.5);
 
-  const [activeNodeId, setActiveNodeId] = useState(null);
+  const [selectedReferenceId, setSelectedReferenceId] = useState('heritage');
 
-  const [hoveredNodeId, setHoveredNodeId] = useState(null);
+  const selectedMode =
+    WORKFLOW_MODES.find((item) => item.key === workflowMode) || WORKFLOW_MODES[0];
+
+  const selectedReference =
+    REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
 
   const rawResults = results.length ? results : MOCK_MATCHES;
 
-  const activeVoice = useMemo(() => {
+  const modeVoice = useMemo(() => {
+    return buildModeVoice(voice || {}, workflowMode, selectedReference);
+  }, [voice, workflowMode, selectedReference]);
 
-    if (!compareA || !compareB) return voice || {};
+  const activeVoice = useMemo(() => {
+    if (!compareA || !compareB) return modeVoice || {};
 
     return morphVoice(getResultVoice(compareA), getResultVoice(compareB), morphAmount);
+  }, [compareA, compareB, morphAmount, modeVoice]);
 
-  }, [compareA, compareB, morphAmount, voice]);
+  const compareVoice = useMemo(() => {
+    if (readMode !== 'playerAnalysis') return null;
+
+    if (compareA && compareB) {
+      return getResultVoice(compareB);
+    }
+
+    return null;
+  }, [readMode, compareA, compareB]);
 
   const displayResults = useMemo(() => {
-
     return rawResults
 
       .map((result) => {
-
         const resultVoice = getResultVoice(result);
 
         const similarityScore = scoreVoiceSimilarity(activeVoice, resultVoice);
 
         return {
-
           ...result,
 
           similarityScore,
-
         };
-
       })
 
       .sort((a, b) => b.similarityScore - a.similarityScore);
-
   }, [rawResults, activeVoice]);
 
-  const voiceField = useVoiceField(activeVoice, displayResults);
+  const topNodes = useMemo(() => getTopNodes(activeVoice, 3), [activeVoice]);
 
-  const animatedVoiceField = useAnimatedVoiceField({
+  const firstListenKeys = useMemo(() => topNodes.map((node) => node.key), [topNodes]);
 
-    nodes: voiceField,
-
-    activeNodeId,
-
-    hoveredNodeId,
-
-    enabled: true,
-
-  });
-
-  const handleAudition = (result, fallbackIndex = 0) => {
-
-    const id = getResultId(result, fallbackIndex);
-
-    setActiveNodeId(id);
-
+  const handleAudition = (result) => {
     setAsAnchor(result);
+  };
 
+  const handleReset = () => {
+    setCompareA(null);
+
+    setCompareB(null);
+
+    setMorphAmount(0.5);
+
+    setReadMode('firstListen');
+
+    setWorkflowMode('reference');
+
+    setSelectedReferenceId('heritage');
   };
 
   return (
-
     <div className="vp-shell">
-
       <div className="vp-header">
+        <div className="vp-title-group">
+          <div className="vp-brand-mark">≋</div>
 
-        <div className="vp-brand-mark">≋</div>
+          <div className="vp-header-copy">
+            <h2>Voice Playground</h2>
 
-        <div className="vp-header-copy">
-
-          <h2>Voice Playground</h2>
-
-          <p>Explore • Shape • Discover</p>
-
+            <p>Explore · Shape · Discover</p>
+          </div>
         </div>
 
         <div className="vp-header-actions">
+          <button type="button" onClick={handleReset}>
+            <span>↻</span>
+            Reset
+          </button>
 
-          <button type="button">Reset</button>
-
-          <button type="button">Save Voice</button>
-
+          <button type="button">
+            <span>☆</span>
+            Save Voice
+          </button>
         </div>
-
       </div>
 
       <div className="vp-grid">
-
         <aside className="vp-panel vp-left-panel">
+          <WorkflowRail workflowMode={workflowMode} setWorkflowMode={setWorkflowMode} />
 
           <div className="vp-panel-header">
-
             <span>≋</span>
 
             <div>
+              <small>{selectedMode.eyebrow}</small>
 
-              <h3>Shape Your Voice</h3>
+              <h3>{selectedMode.title}</h3>
 
-              <p>Adjust the voice characteristics to find matching drums.</p>
-
+              <p>{selectedMode.description}</p>
             </div>
-
           </div>
 
           <input
-
             className="vp-search-input"
-
             value={query}
-
             onChange={(event) => setQuery(event.target.value)}
-
             placeholder="Search sound..."
-
           />
 
-          <div className="vp-slider-stack">
+          {workflowMode === 'build' && <BuildPanel />}
 
-            {VOICE_NODES.map((node) => {
+          {workflowMode === 'shape' && <ShapePanel voice={voice} updateVoice={updateVoice} />}
 
-              const value = getVoiceValue(voice, node.key);
-
-              return (
-
-                <label key={node.key} className="vp-slider-row">
-
-                  <div className="vp-slider-meta">
-
-                    <span className="vp-slider-icon" style={{ color: node.color }}>
-
-                      {node.icon}
-
-                    </span>
-
-                    <span className="vp-slider-label">{node.label}</span>
-
-                    <span className="vp-slider-value">{value.toFixed(2)}</span>
-
-                  </div>
-
-                  <input
-
-                    type="range"
-
-                    min="0"
-
-                    max="1"
-
-                    step="0.01"
-
-                    value={value}
-
-                    onChange={(event) => updateVoice(node.key, parseFloat(event.target.value))}
-
-                    style={{ accentColor: node.color }}
-
-                  />
-
-                </label>
-
-              );
-
-            })}
-
-          </div>
+          {workflowMode === 'reference' && (
+            <ReferencePanel
+              selectedReferenceId={selectedReferenceId}
+              setSelectedReferenceId={setSelectedReferenceId}
+            />
+          )}
 
           <div className="vp-mini-blob-card">
+            <div className="vp-mini-blob-head">
+              <h4>Voice Shape</h4>
 
-            <h4>Voice Shape</h4>
+              <span>{topNodes[0]?.label || 'Profile'}</span>
+            </div>
 
-            <VoiceBlob voice={activeVoice} size={210} />
+            <div className="vp-mini-blob-wrap">
+              <VoiceBlob voice={activeVoice} size={190} />
+            </div>
 
-            <p>This shape represents the tonal fingerprint of your voice.</p>
-
+            <p>This shape represents the current tonal fingerprint.</p>
           </div>
 
           <button type="button" className="vp-primary-button">
-
+            <span>⌕</span>
             Find Similar Drums
-
           </button>
 
-          <button type="button" className="vp-reset-button">
-
+          <button type="button" className="vp-reset-button" onClick={handleReset}>
+            <span>↻</span>
             Reset Filters
-
           </button>
-
         </aside>
 
         <main className="vp-stage">
+          <div className="vp-stage-topline">
+            <span>{selectedMode.label} Mode</span>
 
-          <div className="vp-field-motion-layer">
-
-            {animatedVoiceField.map((node, index) => {
-
-              const color = VOICE_NODES[index % VOICE_NODES.length].color;
-
-              return (
-
-                <button
-
-                  key={node.drumId}
-
-                  type="button"
-
-                  className="vp-field-motion-node"
-
-                  onClick={() => handleAudition(node.raw, index)}
-
-                  onMouseEnter={() => setHoveredNodeId(node.drumId)}
-
-                  onMouseLeave={() => setHoveredNodeId(null)}
-
-                  title={`${node.companyName} — ${node.modelName}`}
-
-                  style={{
-
-                    left: `${node.x * 100}%`,
-
-                    top: `${node.y * 100}%`,
-
-                    width: node.size * node.motionScale,
-
-                    height: node.size * node.motionScale,
-
-                    opacity: node.motionOpacity,
-
-                    borderColor: color,
-
-                    boxShadow: `0 0 ${node.isHovered || node.isActive ? 26 : 14}px ${color}`,
-
-                    background: node.isActive
-
-                      ? color
-
-                      : `radial-gradient(circle, rgba(255,255,255,0.75), ${color}88 45%, transparent 72%)`,
-
-                  }}
-
-                />
-
-              );
-
-            })}
-
+            <strong>
+              {workflowMode === 'reference'
+                ? selectedReference.label
+                : compareA && compareB
+                  ? 'A/B Morph Active'
+                  : 'Live Voice Map'}
+            </strong>
           </div>
 
-          <VoiceNetwork
-
+          <VoiceConstellationMap
             voice={activeVoice}
-
-            onNodeClick={(key) =>
-
-              updateVoice(key, Math.min(1, getVoiceValue(voice, key) + 0.08))
-
-            }
-
+            compareVoice={compareVoice}
+            readMode={readMode}
+            firstListenKeys={firstListenKeys}
+            onNodeClick={(key) => updateVoice(key, Math.min(1, getVoiceValue(voice, key) + 0.08))}
           />
 
-          <div className="vp-field-legend">
+          <div className="vp-read-mode-dock" aria-label="Read view">
+            {READ_MODES.map((item) => (
+              <button
+                key={item.key}
+                type="button"
+                className={readMode === item.key ? 'is-active' : ''}
+                onClick={() => setReadMode(item.key)}
+              >
+                <span>{item.kicker}</span>
 
-            <span>Low</span>
-
-            <div>
-
-              <p>Similarity</p>
-
-              <div className="vp-legend-bar" />
-
-            </div>
-
-            <span>High</span>
-
+                <strong>{item.label}</strong>
+              </button>
+            ))}
           </div>
 
           {compareA && compareB && (
-
             <div className="vp-morph-panel">
-
               <div className="vp-morph-header">
-
                 <div>
-
                   <p>A/B Morph</p>
 
                   <strong>
-
                     {compareA.companyName || 'A'} → {compareB.companyName || 'B'}
-
                   </strong>
-
                 </div>
 
                 <label>
-
                   <span>{Math.round(morphAmount * 100)}%</span>
 
                   <input
-
                     type="range"
-
                     min="0"
-
                     max="1"
-
                     step="0.01"
-
                     value={morphAmount}
-
                     onChange={(event) => setMorphAmount(parseFloat(event.target.value))}
-
                   />
-
                 </label>
-
               </div>
 
               <VoiceMorphPanel drumA={compareA} drumB={compareB} />
-
             </div>
-
           )}
-
         </main>
 
         <aside className="vp-panel vp-right-panel">
-
           <div className="vp-panel-header">
-
             <span>⌬</span>
 
             <div>
-
               <h3>Similar Voice Matches</h3>
 
               <p>{loading ? 'Reshaping sound space...' : 'Drums ranked by voice similarity'}</p>
-
             </div>
-
           </div>
 
           <div className="vp-result-list">
-
             {displayResults.map((result, index) => {
-
               const id = getResultId(result, index);
 
               const percent = getMatchPercent(result);
@@ -903,97 +944,72 @@ export function VoicePlayground({ firestore }) {
               const node = VOICE_NODES[index % VOICE_NODES.length];
 
               return (
-
                 <div key={id} className="vp-result-card">
-
                   <div
-
                     className="vp-result-badge"
-
                     style={{
-
                       borderColor: node.color,
 
-                      boxShadow: `0 0 16px ${node.color}`,
-
+                      boxShadow: `0 0 14px ${node.color}`,
                     }}
-
                   />
 
                   <div className="vp-result-body">
-
                     <strong>
-
-                      {result.companyName || result.company || 'Unknown'} —{' '}
-
+                      {result.companyName || result.company || 'Unknown'}{' '}
                       {result.modelName || result.model || 'Untitled Voice'}
-
                     </strong>
 
                     <span>{result.modelDetail || id}</span>
 
                     <div className="vp-result-actions">
-
-                      <button type="button" onClick={() => handleAudition(result, index)}>
-
+                      <button type="button" onClick={() => handleAudition(result)}>
                         Audition
-
                       </button>
 
                       <button
-
                         type="button"
-
                         className={compareA === result ? 'active' : ''}
+                        onClick={() => {
+                          setCompareA(result);
 
-                        onClick={() => setCompareA(result)}
-
+                          setReadMode('playerAnalysis');
+                        }}
                       >
-
                         Set A
-
                       </button>
 
                       <button
-
                         type="button"
-
                         className={compareB === result ? 'active' : ''}
+                        onClick={() => {
+                          setCompareB(result);
 
-                        onClick={() => setCompareB(result)}
-
+                          setReadMode('playerAnalysis');
+                        }}
                       >
-
                         Set B
-
                       </button>
-
                     </div>
-
                   </div>
 
                   <div className="vp-match-score" style={{ color: node.color }}>
-
-                    {percent}%
-
-                    <span>match</span>
-
+                    {percent}%<span>match</span>
                   </div>
-
                 </div>
-
               );
-
             })}
-
           </div>
 
+          <button type="button" className="vp-view-all-button">
+            <span>☷</span>
+            View All Results
+            <span>›</span>
+          </button>
         </aside>
-
       </div>
-
     </div>
-
   );
-
 }
+
+export default VoicePlayground;

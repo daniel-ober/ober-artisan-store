@@ -217,3 +217,33 @@ describe('stock and modified registry integration smoke tests', () => {
 
 });
 
+
+
+it('resolves Sound Arc hoop alias', () => {
+
+  const resolved = resolveModifier(
+
+    "hoops",
+
+    "Sound Arc"
+
+  );
+
+  expect(resolved?.id).toBe("sound-arc-hoops");
+
+});
+
+it('resolves Tama Sound Arc hoop alias', () => {
+
+  const resolved = resolveModifier(
+
+    "hoops",
+
+    "Tama Sound Arc Hoops"
+
+  );
+
+  expect(resolved?.id).toBe("sound-arc-hoops");
+
+});
+
