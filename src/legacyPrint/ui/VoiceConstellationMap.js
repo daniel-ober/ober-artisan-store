@@ -1,4 +1,3 @@
-// src/legacyPrint/ui/VoiceConstellationMap.js
 
 import React, { useMemo } from 'react';
 
@@ -7,22 +6,25 @@ import VoiceThreadMap from '../../components/VoiceThreadMap.js';
 import './VoiceConstellationMap.css';
 
 const DEFAULT_VOICE = {
-  attack: 0.58,
 
-  brightness: 0.61,
+  attack: 0.5,
 
-  projection: 0.48,
+  brightness: 0.5,
 
-  sustain: 0.72,
+  projection: 0.5,
 
-  warmth: 0.65,
+  sustain: 0.5,
 
-  sensitivity: 0.48,
+  warmth: 0.5,
 
-  control: 0.58,
+  sensitivity: 0.5,
+
+  control: 0.5,
+
 };
 
 const VOICE_NODE_ORDER = [
+
   'attack',
 
   'brightness',
@@ -36,9 +38,11 @@ const VOICE_NODE_ORDER = [
   'sensitivity',
 
   'control',
+
 ];
 
 const NODE_LABELS = {
+
   attack: 'Attack',
 
   brightness: 'Brightness',
@@ -52,9 +56,11 @@ const NODE_LABELS = {
   sensitivity: 'Sensitivity',
 
   control: 'Control',
+
 };
 
 const NODE_SHORT_LABELS = {
+
   attack: 'Strike',
 
   brightness: 'Clarity',
@@ -67,154 +73,158 @@ const NODE_SHORT_LABELS = {
 
   sensitivity: 'Touch',
 
-  control: 'Focus',
+  control: 'Refinement',
+
 };
 
 const READ_MODE_COPY = {
+
   legacyprint: {
+
     label: 'LegacyPrint',
 
     title: 'Voice Identity',
 
-    description: 'The organic fingerprint of this drum voice.',
+    description:
+
+      'The organic fingerprint of the selected voice profile.',
+
   },
 
   firstListen: {
+
     label: 'First Listen',
 
     title: 'First Audible Impression',
 
-    description: 'The first three traits most likely to reach the ear.',
+    description:
+
+      'The first three traits most likely to reach the ear before the full profile settles.',
+
   },
 
   playerAnalysis: {
+
     label: 'Player Analysis',
 
     title: 'Seven-Node Player Read',
 
-    description: 'The full profile of how this drum responds under the hand.',
+    description:
+
+      'The full profile across attack, brightness, projection, sustain, warmth, sensitivity, and control.',
+
   },
+
 };
 
 const clamp01 = (value, fallback = 0.5) => {
+
   const number = Number(value);
 
   if (!Number.isFinite(number)) return fallback;
 
   return Math.max(0, Math.min(1, number));
+
 };
 
-const getVoiceValue = (voice = {}, nodeKey) => {
-  return clamp01(voice?.[nodeKey], DEFAULT_VOICE[nodeKey] ?? 0.5);
-};
+const normalizeVoice = (voice = {}) =>
 
-const voiceToLegacyProfile = (voice = {}) => {
-  return VOICE_NODE_ORDER.reduce((profile, nodeKey) => {
-    profile[nodeKey] = Number((getVoiceValue(voice, nodeKey) * 10).toFixed(2));
+  VOICE_NODE_ORDER.reduce((acc, key) => {
 
-    return profile;
+    acc[key] = clamp01(voice?.[key] ?? DEFAULT_VOICE[key], DEFAULT_VOICE[key]);
+
+    return acc;
+
   }, {});
-};
 
-const normalizeNodeKeys = (keys = []) => {
-  if (!Array.isArray(keys)) return [];
+const voiceToLegacyProfile = (voice = {}) =>
 
-  return keys
+  VOICE_NODE_ORDER.reduce((acc, key) => {
 
-    .filter((key, index, arr) => {
-      return VOICE_NODE_ORDER.includes(key) && arr.indexOf(key) === index;
-    })
+    acc[key] = Math.round(clamp01(voice[key]) * 100) / 10;
 
-    .slice(0, 3);
-};
+    return acc;
 
-const getFallbackFirstListenKeys = (voice = {}) => {
-  return [...VOICE_NODE_ORDER]
-
-    .map((nodeKey) => ({
-      nodeKey,
-
-      value: getVoiceValue(voice, nodeKey),
-    }))
-
-    .sort((a, b) => b.value - a.value)
-
-    .slice(0, 3)
-
-    .map((item) => item.nodeKey);
-};
-
-const getResolvedFirstListenKeys = (voice = {}, firstListenKeys = []) => {
-  const cleanKeys = normalizeNodeKeys(firstListenKeys);
-
-  if (cleanKeys.length >= 3) return cleanKeys;
-
-  const fallbackKeys = getFallbackFirstListenKeys(voice);
-
-  const mergedKeys = [...cleanKeys];
-
-  fallbackKeys.forEach((nodeKey) => {
-    if (!mergedKeys.includes(nodeKey)) {
-      mergedKeys.push(nodeKey);
-    }
-  });
-
-  return mergedKeys.slice(0, 3);
-};
+  }, {});
 
 const getReadVariant = (readMode) => {
+
   if (readMode === 'firstListen') return 'firstTell';
 
   if (readMode === 'playerAnalysis') return 'player';
 
   return 'legacyprint';
+
 };
 
-const buildActiveThread = ({ readMode, firstListenKeys }) => {
-  const readVariant = getReadVariant(readMode);
+const getVisualMode = (readMode) => {
 
-  if (readVariant === 'firstTell') {
-    return {
-      id: `voice-playground-first-tell-${firstListenKeys.join('-')}`,
+  if (readMode === 'firstListen') return 'triangle';
 
-      title: 'First Audible Impression',
+  if (readMode === 'playerAnalysis') return 'player';
 
-      slotKey: 'shaped',
+  return 'legacyprint';
 
-      visualMode: 'triangle',
+};
 
-      nodes: firstListenKeys,
-    };
-  }
+const getTopNodes = (voice, count = 3) =>
 
-  if (readVariant === 'player') {
-    return {
-      id: 'voice-playground-player-analysis',
+  VOICE_NODE_ORDER.map((key) => ({
 
-      title: 'Seven-Node Player Read',
+    key,
 
-      slotKey: 'complex',
+    value: clamp01(voice[key]),
 
-      visualMode: 'player',
+    movement: Math.abs(clamp01(voice[key]) - 0.5),
 
-      nodes: VOICE_NODE_ORDER,
-    };
-  }
+  }))
+
+    .sort((a, b) => {
+
+      if (b.movement !== a.movement) return b.movement - a.movement;
+
+      return b.value - a.value;
+
+    })
+
+    .slice(0, count)
+
+    .map((item) => item.key);
+
+const buildActiveThread = ({ readMode, voice, firstListenKeys }) => {
+
+  const topNodes =
+
+    Array.isArray(firstListenKeys) && firstListenKeys.length
+
+      ? firstListenKeys.slice(0, 3)
+
+      : getTopNodes(voice, 3);
 
   return {
-    id: 'voice-playground-legacyprint',
 
-    title: 'Voice Identity',
+    id: `voice-playground-${readMode}`,
 
-    slotKey: 'complex',
+    title: READ_MODE_COPY[readMode]?.title || 'Voice Map',
 
-    visualMode: 'legacyprint',
+    summary: READ_MODE_COPY[readMode]?.description || '',
 
-    nodes: firstListenKeys.length ? firstListenKeys : ['attack', 'warmth', 'control'],
+    nodes: topNodes,
+
+    nodeKeys: topNodes,
+
+    firstTellKeys: topNodes,
+
+    dominantNodes: topNodes,
+
+    visualMode: getVisualMode(readMode),
+
   };
+
 };
 
 export default function VoiceConstellationMap({
+
   voice = DEFAULT_VOICE,
 
   compareVoice = null,
@@ -223,50 +233,102 @@ export default function VoiceConstellationMap({
 
   firstListenKeys = [],
 
+  showFieldDots = false,
+
   onNodeClick,
 
-  showFieldDots = true,
-
   className = '',
+
 }) {
+
   const safeReadMode = READ_MODE_COPY[readMode] ? readMode : 'legacyprint';
+
+  const normalizedVoice = useMemo(() => normalizeVoice(voice), [voice]);
+
+  const normalizedCompareVoice = useMemo(
+
+    () => (compareVoice ? normalizeVoice(compareVoice) : null),
+
+    [compareVoice]
+
+  );
+
+  const profile = useMemo(
+
+    () => voiceToLegacyProfile(normalizedVoice),
+
+    [normalizedVoice]
+
+  );
+
+  const compareProfile = useMemo(
+
+    () =>
+
+      normalizedCompareVoice
+
+        ? voiceToLegacyProfile(normalizedCompareVoice)
+
+        : null,
+
+    [normalizedCompareVoice]
+
+  );
+
+  const resolvedFirstListenKeys = useMemo(() => {
+
+    if (Array.isArray(firstListenKeys) && firstListenKeys.length) {
+
+      return firstListenKeys.slice(0, 3);
+
+    }
+
+    return getTopNodes(normalizedVoice, 3);
+
+  }, [firstListenKeys, normalizedVoice]);
+
+  const activeThread = useMemo(
+
+    () =>
+
+      buildActiveThread({
+
+        readMode: safeReadMode,
+
+        voice: normalizedVoice,
+
+        firstListenKeys: resolvedFirstListenKeys,
+
+      }),
+
+    [safeReadMode, normalizedVoice, resolvedFirstListenKeys]
+
+  );
+
+  const readVariant = getReadVariant(safeReadMode);
 
   const modeCopy = READ_MODE_COPY[safeReadMode];
 
-  const profile = useMemo(() => {
-    return voiceToLegacyProfile(voice);
-  }, [voice]);
+  const mapClassName = [
 
-  const compareProfile = useMemo(() => {
-    if (!compareVoice) return null;
+    'vcm-shell',
 
-    return voiceToLegacyProfile(compareVoice);
-  }, [compareVoice]);
+    'vcm-shell--threadmap',
 
-  const resolvedFirstListenKeys = useMemo(() => {
-    return getResolvedFirstListenKeys(voice, firstListenKeys);
-  }, [voice, firstListenKeys]);
+    `vcm-mode-${safeReadMode}`,
 
-  const activeThread = useMemo(() => {
-    return buildActiveThread({
-      readMode: safeReadMode,
+    className,
 
-      firstListenKeys: resolvedFirstListenKeys,
-    });
-  }, [safeReadMode, resolvedFirstListenKeys]);
-
-  const readVariant = useMemo(() => {
-    return getReadVariant(safeReadMode);
-  }, [safeReadMode]);
-
-  const mapClassName = ['vcm-shell', 'vcm-shell--threadmap', `vcm-mode-${safeReadMode}`, className]
+  ]
 
     .filter(Boolean)
 
     .join(' ');
 
   return (
+
     <section className={mapClassName} aria-label={`${modeCopy.label} voice map`}>
+
       <div className="vcm-ambient vcm-ambient-purple" />
 
       <div className="vcm-ambient vcm-ambient-cyan" />
@@ -274,40 +336,70 @@ export default function VoiceConstellationMap({
       <div className="vcm-ambient vcm-ambient-gold" />
 
       <div className="vcm-read-badge">
+
         <span>{modeCopy.label}</span>
 
         <strong>{modeCopy.title}</strong>
 
         <p>{modeCopy.description}</p>
+
       </div>
 
       <div className="vcm-map-frame">
+
         <VoiceThreadMap
+
           activeThread={activeThread}
+
           compact={false}
+
           strengthScore={1}
+
           profile={profile}
+
           input={{}}
+
           currentSpec={{}}
+
           displayMode="VoiceMapping"
+
           readVariant={readVariant}
+
           firstTellKeys={resolvedFirstListenKeys}
+
           compareProfile={compareProfile}
+
           showFieldDots={showFieldDots}
+
         />
 
         <div className="vcm-node-click-layer" aria-hidden="true">
+
           {VOICE_NODE_ORDER.map((nodeKey) => (
+
             <button
+
               key={nodeKey}
+
               type="button"
+
               className="vcm-node-click-target"
+
               onClick={() => onNodeClick?.(nodeKey)}
+
               title={`${NODE_LABELS[nodeKey]} / ${NODE_SHORT_LABELS[nodeKey]}`}
+
             />
+
           ))}
+
         </div>
+
       </div>
+
     </section>
+
   );
+
 }
+

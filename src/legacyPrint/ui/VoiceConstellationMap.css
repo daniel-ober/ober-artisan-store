@@ -1,104 +1,47 @@
 /* src/legacyPrint/ui/VoiceConstellationMap.css */
 
 .vcm-shell {
+
   position: relative;
 
   width: 100%;
 
-  min-height: 650px;
+  min-height: 545px;
 
   overflow: visible;
 
   isolation: isolate;
 
   box-sizing: border-box;
+
 }
 
-.vcm-read-badge {
-  position: absolute;
+.vcm-shell--playground {
 
-  z-index: 12;
+  display: grid;
 
-  left: 50%;
+  place-items: center;
 
-  top: 8px;
-
-  width: min(360px, 84%);
-
-  transform: translateX(-50%);
-
-  text-align: center;
-
-  pointer-events: none;
-}
-
-.vcm-read-badge span {
-  display: block;
-
-  margin-bottom: 6px;
-
-  color: rgba(235, 226, 255, 0.48);
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.24em;
-
-  font-size: 9px;
-
-  font-weight: 800;
-}
-
-.vcm-read-badge strong {
-  display: block;
-
-  color: rgba(255, 249, 255, 0.9);
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.18em;
-
-  font-size: 12px;
-
-  font-weight: 900;
-}
-
-.vcm-read-badge p {
-  margin: 7px 0 0;
-
-  color: rgba(235, 226, 255, 0.5);
-
-  font-size: 11px;
-
-  line-height: 1.35;
 }
 
 .vcm-map-frame {
+
   position: relative;
 
-  width: min(880px, 100%);
+  z-index: 2;
 
-  height: 590px;
+  width: min(100%, 720px);
+
+  height: 545px;
 
   margin: 0 auto;
 
   overflow: visible;
-}
 
-.vcm-svg {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 3;
-
-  width: 100%;
-
-  height: 100%;
-
-  overflow: visible;
 }
 
 .vcm-ambient {
+
   position: absolute;
 
   z-index: 0;
@@ -107,14 +50,16 @@
 
   border-radius: 999px;
 
-  filter: blur(42px);
+  filter: blur(46px);
 
   opacity: 0.18;
 
   transform: translate(-50%, -50%);
+
 }
 
 .vcm-ambient-purple {
+
   left: 50%;
 
   top: 48%;
@@ -123,10 +68,12 @@
 
   height: 250px;
 
-  background: rgba(178, 66, 255, 0.62);
+  background: rgba(178, 66, 255, 0.52);
+
 }
 
 .vcm-ambient-cyan {
+
   left: 27%;
 
   top: 66%;
@@ -135,10 +82,12 @@
 
   height: 230px;
 
-  background: rgba(45, 230, 221, 0.32);
+  background: rgba(45, 230, 221, 0.28);
+
 }
 
 .vcm-ambient-gold {
+
   left: 75%;
 
   top: 36%;
@@ -147,1715 +96,168 @@
 
   height: 240px;
 
-  background: rgba(255, 222, 54, 0.24);
+  background: rgba(255, 222, 54, 0.2);
+
 }
 
-.vcm-orbit-rings ellipse {
-  fill: none;
+/* Playground owns the read tabs. Do not let hidden adapter layers interfere. */
 
-  stroke: rgba(175, 160, 255, 0.085);
+.vcm-node-click-layer,
 
-  stroke-width: 0.11;
+.vcm-node-click-layer *,
+
+.vcm-node-click-target,
+
+.vcm-similarity,
+
+.vcm-similarity *,
+
+.vcm-first-listen-card,
+
+.vcm-read-badge,
+
+.vcm-read-badge * {
+
+  display: none !important;
+
+  opacity: 0 !important;
+
+  visibility: hidden !important;
+
+  pointer-events: none !important;
+
 }
 
-.vcm-outer-web-fill {
-  fill: rgba(95, 112, 255, 0.018);
+/* First Listen + Player Analysis use the existing Heritage VoiceThreadMap. */
 
-  stroke: rgba(190, 176, 255, 0.18);
+.vcm-mode-firstListen .heritage-voice-thread-map,
 
-  stroke-width: 0.14;
+.vcm-mode-playerAnalysis .heritage-voice-thread-map {
+
+  width: 545px !important;
+
+  max-width: 545px !important;
+
+  height: 545px !important;
+
+  aspect-ratio: 1 / 1 !important;
+
+  margin: 0 auto !important;
+
+  transform: translateY(-14px) scale(1) !important;
+
+  transform-origin: center top !important;
+
+  overflow: visible !important;
+
 }
 
-.vcm-web-line {
-  stroke: rgba(205, 212, 255, var(--vcm-line-opacity));
+.vcm-mode-firstListen .heritage-voice-thread-svg,
 
-  stroke-width: var(--vcm-line-width);
+.vcm-mode-playerAnalysis .heritage-voice-thread-svg {
 
-  stroke-linecap: round;
+  width: 100% !important;
+
+  height: 100% !important;
+
+  overflow: visible !important;
+
 }
 
-.vcm-web-line.is-primary {
-  stroke: rgba(232, 225, 255, var(--vcm-line-opacity));
+/* LegacyPrint Identity uses the new fluid canvas visual only. */
+
+.vcm-mode-legacyprint .vcm-map-frame {
+
+  width: min(100%, 760px);
+
+  height: 545px;
+
 }
 
-.vcm-active-edge,
-.vcm-spoke {
-  stroke-linecap: round;
+.vcm-mode-legacyprint .voice-playground-visual {
+
+  width: 100%;
+
+  height: 100%;
+
 }
 
-.vcm-spoke {
-  opacity: 0.9;
-}
+/* Medium desktop */
 
-.vcm-voice-polygon {
-  fill: url('#vcmCoreFill');
+@media (max-width: 1320px) {
 
-  stroke: url('#vcmVoiceStroke');
-
-  stroke-width: 0.26;
-
-  opacity: 0.82;
-
-  transform-origin: center;
-
-  animation: vcmVoiceBreath 5.4s ease-in-out infinite;
-}
-
-.vcm-compare-polygon {
-  fill: rgba(255, 255, 255, 0.018);
-
-  stroke: rgba(255, 255, 255, 0.48);
-
-  stroke-width: 0.18;
-
-  stroke-dasharray: 1.2 1.1;
-
-  opacity: 0.62;
-}
-
-.vcm-first-listen-triangle {
-  fill: url('#vcmTriangleFill');
-
-  stroke: url('#vcmFirstListenStroke');
-
-  stroke-width: 0.52;
-
-  stroke-linejoin: round;
-
-  opacity: 0.92;
-
-  transform-origin: center;
-
-  animation: vcmTrianglePulse 3.8s ease-in-out infinite;
-}
-
-.vcm-first-listen-ray {
-  stroke-width: 0.22;
-
-  stroke-linecap: round;
-
-  stroke-opacity: 0.48;
-
-  filter: drop-shadow(0 0 6px currentColor);
-}
-
-.vcm-first-listen-point {
-  stroke-width: 0.38;
-
-  stroke-opacity: 0.85;
-
-  filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 14px currentColor);
-}
-
-.vcm-dash-ring {
-  fill: rgba(186, 72, 255, 0.025);
-
-  stroke: rgba(217, 94, 255, 0.32);
-
-  stroke-width: 0.2;
-
-  stroke-dasharray: 1.15 1;
-
-  transform-origin: 50% 52%;
-
-  animation: vcmSpin 22s linear infinite;
-}
-
-.vcm-inner-ring {
-  fill: none;
-
-  stroke: rgba(255, 255, 255, 0.13);
-
-  stroke-width: 0.14;
-}
-
-.vcm-field-dot {
-  filter: drop-shadow(0 0 3px currentColor);
-
-  animation: vcmFieldDrift 5.4s ease-in-out infinite;
-}
-
-.vcm-field-dot:nth-of-type(2n) {
-  animation-delay: -1.2s;
-}
-
-.vcm-field-dot:nth-of-type(3n) {
-  animation-delay: -2.4s;
-}
-
-.vcm-center-blob-wrap {
-  position: absolute;
-
-  z-index: 5;
-
-  left: 50%;
-
-  top: 52%;
-
-  width: calc(142px + (var(--vcm-bloom) * 38px));
-
-  height: calc(120px + (var(--vcm-energy) * 34px));
-
-  transform: translate(-50%, -50%) rotate(calc((var(--vcm-precision) - 0.5) * 14deg));
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 46% 54% 55% 45% / 46% 43% 57% 54%;
-
-  animation:
-    vcmBlobPulse calc(5.8s - (var(--vcm-energy) * 0.9s)) ease-in-out infinite,
-    vcmBlobShape 10s ease-in-out infinite;
-}
-
-.vcm-center-blob-glow {
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: inherit;
-
-  background:
-    radial-gradient(circle at 40% 34%, rgba(255, 255, 255, 0.28), transparent 22%),
-    radial-gradient(
-      circle at 50% 52%,
-
-      rgba(217, 87, 255, 0.58),
-      rgba(104, 54, 255, 0.2) 52%,
-
-      transparent 76%
-    );
-
-  filter: drop-shadow(0 0 24px rgba(203, 78, 255, 0.58))
-    drop-shadow(0 0 54px rgba(88, 68, 255, 0.3));
-
-  opacity: 0.92;
-}
-
-.vcm-center-blob {
-  position: relative;
-
-  z-index: 2;
-
-  opacity: 0.5;
-
-  transform: scale(calc(0.46 + (var(--vcm-bloom) * 0.12)));
-
-  mix-blend-mode: screen;
-
-  filter: drop-shadow(0 0 16px rgba(221, 101, 255, 0.45));
-}
-
-.vcm-first-listen-card {
-  position: absolute;
-
-  z-index: 9;
-
-  left: 50%;
-
-  top: 52%;
-
-  width: 170px;
-
-  transform: translate(-50%, -50%);
-
-  padding: 16px 18px;
-
-  text-align: center;
-
-  border: 1px solid rgba(148, 229, 255, 0.18);
-
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 62%),
-    rgba(5, 8, 18, 0.72);
-
-  box-shadow:
-    0 0 24px rgba(45, 220, 255, 0.12),
-    0 0 42px rgba(180, 92, 255, 0.16);
-
-  backdrop-filter: blur(14px);
-}
-
-.vcm-first-listen-card span {
-  display: block;
-
-  margin-bottom: 7px;
-
-  color: rgba(245, 239, 255, 0.46);
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.22em;
-
-  font-size: 9px;
-
-  font-weight: 800;
-}
-
-.vcm-first-listen-card strong {
-  display: block;
-
-  color: #fff;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.14em;
-
-  font-size: 14px;
-
-  font-weight: 900;
-}
-
-.vcm-first-listen-card p {
-  margin: 8px 0 0;
-
-  color: rgba(245, 239, 255, 0.62);
-
-  font-size: 11px;
-}
-
-.vcm-node {
-  position: absolute;
-
-  z-index: 7;
-
-  width: calc(54px + (var(--vcm-node-value) * 7px));
-
-  height: calc(54px + (var(--vcm-node-value) * 7px));
-
-  transform: translate(-50%, -50%);
-
-  display: grid;
-
-  place-items: center;
-
-  padding: 0;
-
-  border: 1.25px solid var(--vcm-node-color);
-
-  border-radius: 999px;
-
-  color: var(--vcm-node-color);
-
-  background:
-    radial-gradient(circle at 44% 34%, rgba(255, 255, 255, 0.18), transparent 22%),
-    radial-gradient(
-      circle,
-      color-mix(in srgb, var(--vcm-node-color) 20%, transparent),
-      rgba(7, 10, 22, 0.97) 72%
-    );
-
-  box-shadow:
-    0 0 18px color-mix(in srgb, var(--vcm-node-glow) 62%, transparent),
-    0 0 38px color-mix(in srgb, var(--vcm-node-glow) 22%, transparent),
-    inset 0 0 20px color-mix(in srgb, var(--vcm-node-color) 18%, transparent);
-
-  cursor: pointer;
-
-  transition:
-    transform 160ms ease,
-    box-shadow 160ms ease,
-    border-color 160ms ease,
-    opacity 160ms ease;
-}
-
-.vcm-node::before {
-  content: '';
-
-  position: absolute;
-
-  inset: -6px;
-
-  border: 1px solid color-mix(in srgb, var(--vcm-node-color) 28%, transparent);
-
-  border-radius: inherit;
-
-  opacity: 0.34;
-
-  animation: vcmNodeHalo 4s ease-in-out infinite;
-}
-
-.vcm-node:hover,
-.vcm-node.is-first-listen-node {
-  transform: translate(-50%, -50%) scale(1.06);
-
-  box-shadow:
-    0 0 24px color-mix(in srgb, var(--vcm-node-glow) 82%, transparent),
-    0 0 62px color-mix(in srgb, var(--vcm-node-glow) 34%, transparent),
-    inset 0 0 23px color-mix(in srgb, var(--vcm-node-color) 24%, transparent);
-}
-
-.vcm-node.is-first-listen-node::before {
-  opacity: 0.68;
-}
-
-.vcm-node-icon {
-  position: relative;
-
-  z-index: 2;
-
-  font-size: 22px;
-
-  line-height: 1;
-
-  text-shadow: 0 0 12px currentColor;
-}
-
-.vcm-node-label {
-  position: absolute;
-
-  z-index: 8;
-
-  pointer-events: none;
-
-  transform: translate(-50%, -50%);
-
-  color: #fff;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.13em;
-
-  font-size: 10px;
-
-  font-weight: 900;
-
-  white-space: nowrap;
-}
-
-.vcm-node-label span,
-.vcm-node-label em {
-  display: block;
-}
-
-.vcm-node-label em {
-  margin-top: 4px;
-
-  color: rgba(245, 239, 255, 0.38);
-
-  font-size: 8px;
-
-  font-style: normal;
-
-  letter-spacing: 0.16em;
-}
-
-.vcm-label-left {
-  text-align: left;
-
-  transform: translate(0, -50%);
-}
-
-.vcm-label-right {
-  text-align: right;
-
-  transform: translate(-100%, -50%);
-}
-
-.vcm-label-center {
-  text-align: center;
-
-  transform: translate(-50%, -50%);
-}
-
-.vcm-similarity {
-  position: relative;
-
-  z-index: 9;
-
-  width: min(390px, 70%);
-
-  margin: -24px auto 0;
-
-  display: grid;
-
-  grid-template-columns: auto 1fr auto;
-
-  gap: 13px;
-
-  align-items: end;
-
-  color: rgba(245, 239, 255, 0.42);
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.11em;
-
-  font-size: 10px;
-
-  font-weight: 700;
-}
-
-.vcm-similarity-center {
-  display: grid;
-
-  gap: 8px;
-
-  justify-items: center;
-}
-
-.vcm-similarity-center strong {
-  color: rgba(245, 239, 255, 0.72);
-
-  font-size: 10px;
-
-  letter-spacing: 0.16em;
-}
-
-.vcm-similarity-bar {
-  width: 310px;
-
-  max-width: 100%;
-
-  height: 4px;
-
-  border-radius: 999px;
-
-  background: linear-gradient(90deg, #ff495f, #ff9c24, #f4e84a, #32eadc, #4384ff, #ba4cff);
-
-  box-shadow:
-    0 0 14px rgba(188, 80, 255, 0.18),
-    0 0 22px rgba(42, 220, 255, 0.08);
-}
-
-.vcm-mode-legacyprint .vcm-spoke,
-.vcm-mode-legacyprint .vcm-active-edge {
-  opacity: 0;
-}
-
-.vcm-mode-firstListen .vcm-voice-polygon {
-  opacity: 0;
-}
-
-.vcm-mode-firstListen .vcm-dash-ring {
-  stroke: rgba(41, 220, 255, 0.44);
-}
-
-.vcm-mode-playerAnalysis .vcm-center-blob-wrap {
-  display: none;
-}
-
-@keyframes vcmSpin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes vcmVoiceBreath {
-  0%,
-  100% {
-    opacity: 0.66;
-
-    transform: scale(0.988);
-  }
-
-  50% {
-    opacity: 0.88;
-
-    transform: scale(1.018);
-  }
-}
-
-@keyframes vcmTrianglePulse {
-  0%,
-  100% {
-    opacity: 0.72;
-
-    transform: scale(0.985);
-  }
-
-  50% {
-    opacity: 0.96;
-
-    transform: scale(1.018);
-  }
-}
-
-@keyframes vcmFieldDrift {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-0.6px);
-  }
-}
-
-@keyframes vcmBlobPulse {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) rotate(calc((var(--vcm-precision) - 0.5) * 14deg)) scale(0.97);
-  }
-
-  50% {
-    transform: translate(-50%, -50%) rotate(calc((var(--vcm-precision) - 0.5) * -18deg))
-      scale(calc(1.01 + (var(--vcm-energy) * 0.04)));
-  }
-}
-
-@keyframes vcmBlobShape {
-  0%,
-  100% {
-    border-radius: 46% 54% 55% 45% / 46% 43% 57% 54%;
-  }
-
-  33% {
-    border-radius: 56% 44% 47% 53% / 51% 44% 56% 49%;
-  }
-
-  66% {
-    border-radius: 49% 51% 59% 41% / 42% 56% 44% 58%;
-  }
-}
-
-@keyframes vcmNodeHalo {
-  0%,
-  100% {
-    transform: scale(0.94);
-
-    opacity: 0.2;
-  }
-
-  50% {
-    transform: scale(1.1);
-
-    opacity: 0.58;
-  }
-}
-
-@media (max-width: 900px) {
   .vcm-shell {
+
     min-height: 520px;
+
   }
 
   .vcm-map-frame {
-    height: 470px;
+
+    width: min(100%, 660px);
+
+    height: 520px;
+
   }
 
-  .vcm-read-badge {
-    top: -2px;
+  .vcm-mode-firstListen .heritage-voice-thread-map,
+
+  .vcm-mode-playerAnalysis .heritage-voice-thread-map {
+
+    width: 510px !important;
+
+    max-width: 510px !important;
+
+    height: 510px !important;
+
+    transform: translateY(-10px) scale(1) !important;
+
   }
 
-  .vcm-read-badge p {
-    display: none;
+  .vcm-mode-legacyprint .vcm-map-frame {
+
+    width: min(100%, 680px);
+
+    height: 520px;
+
   }
 
-  .vcm-node {
-    width: 50px;
+}
 
-    height: 50px;
+/* Mobile/tablet fallback */
+
+@media (max-width: 900px) {
+
+  .vcm-shell {
+
+    min-height: 430px;
+
   }
 
-  .vcm-node-icon {
-    font-size: 20px;
+  .vcm-map-frame {
+
+    width: min(100%, 560px);
+
+    height: 430px;
+
   }
 
-  .vcm-node-label {
-    font-size: 9px;
-  }
+  .vcm-mode-firstListen .heritage-voice-thread-map,
 
-  .vcm-node-label em {
-    display: none;
-  }
+  .vcm-mode-playerAnalysis .heritage-voice-thread-map {
 
-  .vcm-similarity {
-    margin-top: -10px;
+    width: 430px !important;
 
-    width: 84%;
-  }
-}
-/* =========================================================
+    max-width: 430px !important;
 
-   VOICE CONSTELLATION MAP — FIRST LISTEN HERITAGE NEON PASS
-
-   Adopts the Heritage product detail First Listen visual language.
-
-   ========================================================= */
-
-/* First Listen mode should feel like a special read, not a normal spider map */
-
-.vcm-shell[data-read-mode='firstListen'],
-.vcm-shell.is-first-listen,
-.vcm-shell.vcm-mode-first-listen {
-  --vcm-first-gold: rgba(214, 178, 119, 0.96);
-
-  --vcm-first-gold-soft: rgba(214, 178, 119, 0.34);
-
-  --vcm-first-gold-faint: rgba(214, 178, 119, 0.11);
-
-  --vcm-first-warm: rgba(255, 116, 72, 0.42);
-
-  --vcm-first-cyan: rgba(104, 217, 223, 0.22);
-}
-
-/* Support both class-based and attribute-based mode hooks */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-map-frame,
-.vcm-shell.is-first-listen .vcm-map-frame,
-.vcm-shell.vcm-mode-first-listen .vcm-map-frame,
-.vcm-map-frame[data-read-mode='firstListen'],
-.vcm-map-frame.is-first-listen,
-.vcm-map-frame.vcm-mode-first-listen {
-  border-color: rgba(214, 178, 119, 0.16) !important;
-
-  background:
-    radial-gradient(circle at 50% 42%, rgba(214, 178, 119, 0.105), transparent 28%),
-    radial-gradient(circle at 35% 44%, rgba(255, 116, 72, 0.07), transparent 26%),
-    radial-gradient(circle at 68% 56%, rgba(104, 217, 223, 0.045), transparent 30%),
-    radial-gradient(circle at 50% 58%, rgba(123, 72, 255, 0.055), transparent 38%),
-    linear-gradient(180deg, rgba(5, 6, 9, 0.96), rgba(2, 3, 6, 0.995)) !important;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.024),
-    inset 0 18px 60px rgba(255, 255, 255, 0.014),
-    0 0 0 1px rgba(214, 178, 119, 0.045),
-    0 22px 58px rgba(0, 0, 0, 0.36) !important;
-}
-
-/* Subtle grid / scan texture */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-map-frame::before,
-.vcm-shell.is-first-listen .vcm-map-frame::before,
-.vcm-shell.vcm-mode-first-listen .vcm-map-frame::before,
-.vcm-map-frame[data-read-mode='firstListen']::before,
-.vcm-map-frame.is-first-listen::before,
-.vcm-map-frame.vcm-mode-first-listen::before {
-  content: '' !important;
-
-  position: absolute !important;
-
-  inset: 0 !important;
-
-  pointer-events: none !important;
-
-  opacity: 0.13 !important;
-
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) !important;
-
-  background-size: 42px 42px !important;
-
-  mask-image: radial-gradient(circle at center, #000 0%, #000 42%, transparent 78%) !important;
-}
-
-/* Bottom editorial horizon line */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-map-frame::after,
-.vcm-shell.is-first-listen .vcm-map-frame::after,
-.vcm-shell.vcm-mode-first-listen .vcm-map-frame::after,
-.vcm-map-frame[data-read-mode='firstListen']::after,
-.vcm-map-frame.is-first-listen::after,
-.vcm-map-frame.vcm-mode-first-listen::after {
-  content: '' !important;
-
-  position: absolute !important;
-
-  left: 22px !important;
-
-  right: 22px !important;
-
-  bottom: 18px !important;
-
-  height: 1px !important;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(214, 178, 119, 0.32),
-    rgba(255, 116, 72, 0.16),
-    transparent
-  ) !important;
-
-  opacity: 0.54 !important;
-
-  pointer-events: none !important;
-}
-
-/* Make First Listen graph larger and more centered */
-
-.vcm-shell[data-read-mode='firstListen'] svg,
-.vcm-shell.is-first-listen svg,
-.vcm-shell.vcm-mode-first-listen svg,
-.vcm-map-frame[data-read-mode='firstListen'] svg,
-.vcm-map-frame.is-first-listen svg,
-.vcm-map-frame.vcm-mode-first-listen svg {
-  transform: scale(1.08);
-
-  transform-origin: center center;
-
-  overflow: visible !important;
-}
-
-/* De-emphasize non-essential web lines in First Listen */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-grid-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-base-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-reference-line,
-.vcm-shell.is-first-listen .vcm-grid-line,
-.vcm-shell.is-first-listen .vcm-base-line,
-.vcm-shell.is-first-listen .vcm-reference-line,
-.vcm-shell.vcm-mode-first-listen .vcm-grid-line,
-.vcm-shell.vcm-mode-first-listen .vcm-base-line,
-.vcm-shell.vcm-mode-first-listen .vcm-reference-line {
-  stroke: rgba(214, 178, 119, 0.13) !important;
-
-  stroke-width: 1 !important;
-
-  opacity: 0.62 !important;
-
-  filter: none !important;
-}
-
-/* First Listen triangle fill */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-first-listen-fill,
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-fill,
-.vcm-shell[data-read-mode='firstListen'] .vcm-shape-fill,
-.vcm-shell.is-first-listen .vcm-first-listen-fill,
-.vcm-shell.is-first-listen .vcm-active-fill,
-.vcm-shell.is-first-listen .vcm-shape-fill,
-.vcm-shell.vcm-mode-first-listen .vcm-first-listen-fill,
-.vcm-shell.vcm-mode-first-listen .vcm-active-fill,
-.vcm-shell.vcm-mode-first-listen .vcm-shape-fill {
-  fill: rgba(214, 178, 119, 0.09) !important;
-
-  stroke: rgba(214, 178, 119, 0.74) !important;
-
-  stroke-width: 1.7 !important;
-
-  opacity: 0.98 !important;
-
-  filter: drop-shadow(0 0 6px rgba(214, 178, 119, 0.22))
-    drop-shadow(0 0 18px rgba(214, 178, 119, 0.1)) !important;
-}
-
-/* Generic polygon fallback if current JS only uses polygon/path classes */
-
-.vcm-shell[data-read-mode='firstListen'] polygon,
-.vcm-shell[data-read-mode='firstListen'] path.vcm-active-shape,
-.vcm-shell[data-read-mode='firstListen'] path.vcm-profile-shape,
-.vcm-shell.is-first-listen polygon,
-.vcm-shell.is-first-listen path.vcm-active-shape,
-.vcm-shell.is-first-listen path.vcm-profile-shape,
-.vcm-shell.vcm-mode-first-listen polygon,
-.vcm-shell.vcm-mode-first-listen path.vcm-active-shape,
-.vcm-shell.vcm-mode-first-listen path.vcm-profile-shape {
-  filter: drop-shadow(0 0 7px rgba(214, 178, 119, 0.18))
-    drop-shadow(0 0 18px rgba(214, 178, 119, 0.08));
-}
-
-/* Active triangle connection lines */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-first-listen-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-thread-line,
-.vcm-shell.is-first-listen .vcm-active-line,
-.vcm-shell.is-first-listen .vcm-first-listen-line,
-.vcm-shell.is-first-listen .vcm-thread-line,
-.vcm-shell.vcm-mode-first-listen .vcm-active-line,
-.vcm-shell.vcm-mode-first-listen .vcm-first-listen-line,
-.vcm-shell.vcm-mode-first-listen .vcm-thread-line {
-  stroke: rgba(214, 178, 119, 0.92) !important;
-
-  stroke-width: 3.4 !important;
-
-  opacity: 0.94 !important;
-
-  stroke-linecap: round !important;
-
-  stroke-linejoin: round !important;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.3))
-    drop-shadow(0 0 14px rgba(214, 178, 119, 0.14)) !important;
-}
-
-/* Glow version if current component renders a separate glow line */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-line-glow,
-.vcm-shell[data-read-mode='firstListen'] .vcm-first-listen-line-glow,
-.vcm-shell.is-first-listen .vcm-active-line-glow,
-.vcm-shell.is-first-listen .vcm-first-listen-line-glow,
-.vcm-shell.vcm-mode-first-listen .vcm-active-line-glow,
-.vcm-shell.vcm-mode-first-listen .vcm-first-listen-line-glow {
-  stroke: rgba(214, 178, 119, 0.78) !important;
-
-  stroke-width: 8 !important;
-
-  opacity: 0.18 !important;
-
-  filter: drop-shadow(0 0 10px rgba(214, 178, 119, 0.22))
-    drop-shadow(0 0 24px rgba(214, 178, 119, 0.1)) !important;
-
-  animation: vcmFirstListenPulse 2.8s ease-in-out infinite;
-}
-
-/* First Listen nodes: gold dominant, color only as secondary identity */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node,
-.vcm-shell.is-first-listen .vcm-node,
-.vcm-shell.vcm-mode-first-listen .vcm-node {
-  opacity: 0.58 !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-active,
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-first-listen,
-.vcm-shell.is-first-listen .vcm-node.is-active,
-.vcm-shell.is-first-listen .vcm-node.is-first-listen,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-active,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-first-listen {
-  opacity: 1 !important;
-}
-
-/* Circle/dot fallback */
-
-.vcm-shell[data-read-mode='firstListen'] circle,
-.vcm-shell.is-first-listen circle,
-.vcm-shell.vcm-mode-first-listen circle {
-  filter: drop-shadow(0 0 5px currentColor) drop-shadow(0 0 12px rgba(214, 178, 119, 0.1));
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node-dot,
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-dot,
-.vcm-shell.is-first-listen .vcm-node-dot,
-.vcm-shell.is-first-listen .vcm-active-dot,
-.vcm-shell.vcm-mode-first-listen .vcm-node-dot,
-.vcm-shell.vcm-mode-first-listen .vcm-active-dot {
-  fill: rgba(214, 178, 119, 0.94) !important;
-
-  stroke: rgba(255, 244, 220, 0.58) !important;
-
-  stroke-width: 0.9 !important;
-
-  opacity: 0.95 !important;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.36))
-    drop-shadow(0 0 12px rgba(214, 178, 119, 0.14)) !important;
-}
-
-/* Icons around the map should be quieter in First Listen */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node-icon,
-.vcm-shell[data-read-mode='firstListen'] .vcm-axis-icon,
-.vcm-shell.is-first-listen .vcm-node-icon,
-.vcm-shell.is-first-listen .vcm-axis-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-node-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-axis-icon {
-  color: rgba(214, 178, 119, 0.62) !important;
-
-  opacity: 0.68 !important;
-
-  filter: drop-shadow(0 0 4px rgba(214, 178, 119, 0.16)) !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-active .vcm-node-icon,
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-first-listen .vcm-node-icon,
-.vcm-shell.is-first-listen .vcm-node.is-active .vcm-node-icon,
-.vcm-shell.is-first-listen .vcm-node.is-first-listen .vcm-node-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-active .vcm-node-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-first-listen .vcm-node-icon {
-  color: rgba(214, 178, 119, 0.96) !important;
-
-  opacity: 1 !important;
-
-  transform: scale(1.04) !important;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.34))
-    drop-shadow(0 0 14px rgba(214, 178, 119, 0.14)) !important;
-}
-
-/* Center read badge: make it editorial, smaller, and gold */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge,
-.vcm-shell.is-first-listen .vcm-read-badge,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge {
-  border-color: rgba(214, 178, 119, 0.18) !important;
-
-  background:
-    radial-gradient(circle at top, rgba(214, 178, 119, 0.105), transparent 72%),
-    linear-gradient(180deg, rgba(10, 11, 15, 0.96), rgba(4, 5, 8, 0.98)) !important;
-
-  box-shadow:
-    0 0 0 1px rgba(214, 178, 119, 0.045),
-    0 16px 36px rgba(0, 0, 0, 0.34),
-    0 0 22px rgba(214, 178, 119, 0.09) !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge span,
-.vcm-shell.is-first-listen .vcm-read-badge span,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge span {
-  color: rgba(214, 178, 119, 0.82) !important;
-
-  letter-spacing: 0.22em !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge strong,
-.vcm-shell.is-first-listen .vcm-read-badge strong,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge strong {
-  color: #fff8ed !important;
-
-  letter-spacing: -0.045em !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge p,
-.vcm-shell.is-first-listen .vcm-read-badge p,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge p {
-  color: rgba(245, 241, 232, 0.58) !important;
-}
-
-/* Summary below map should read like the Heritage First Listen note */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-summary,
-.vcm-shell.is-first-listen .vcm-read-summary,
-.vcm-shell.vcm-mode-first-listen .vcm-read-summary {
-  border-color: rgba(214, 178, 119, 0.12) !important;
-
-  background:
-    linear-gradient(90deg, rgba(214, 178, 119, 0.065), rgba(255, 255, 255, 0.018), transparent),
-    rgba(4, 5, 8, 0.42) !important;
-
-  box-shadow: none !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-summary strong,
-.vcm-shell.is-first-listen .vcm-read-summary strong,
-.vcm-shell.vcm-mode-first-listen .vcm-read-summary strong {
-  color: rgba(255, 248, 235, 0.94) !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-summary p,
-.vcm-shell.is-first-listen .vcm-read-summary p,
-.vcm-shell.vcm-mode-first-listen .vcm-read-summary p {
-  color: rgba(245, 243, 238, 0.62) !important;
-}
-
-/* Similarity scale should not overpower First Listen */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-similarity,
-.vcm-shell.is-first-listen .vcm-similarity,
-.vcm-shell.vcm-mode-first-listen .vcm-similarity {
-  opacity: 0.76 !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-similarity-track,
-.vcm-shell.is-first-listen .vcm-similarity-track,
-.vcm-shell.vcm-mode-first-listen .vcm-similarity-track {
-  background: linear-gradient(
-    90deg,
-    rgba(104, 217, 223, 0.62),
-    rgba(214, 178, 119, 0.88),
-    rgba(255, 116, 72, 0.62)
-  ) !important;
-
-  box-shadow:
-    0 0 12px rgba(214, 178, 119, 0.1),
-    0 0 18px rgba(104, 217, 223, 0.055) !important;
-}
-
-/* Animation */
-
-@keyframes vcmFirstListenPulse {
-  0%,
-  100% {
-    opacity: 0.13;
-  }
-
-  50% {
-    opacity: 0.28;
-  }
-}
-
-/* =========================================================
-
-   VOICE CONSTELLATION MAP — FIRST LISTEN HERITAGE NEON PASS
-
-   Adopts the Heritage product detail First Listen visual language.
-
-   ========================================================= */
-
-/* First Listen mode should feel like a special read, not a normal spider map */
-
-.vcm-shell[data-read-mode='firstListen'],
-.vcm-shell.is-first-listen,
-.vcm-shell.vcm-mode-first-listen {
-  --vcm-first-gold: rgba(214, 178, 119, 0.96);
-
-  --vcm-first-gold-soft: rgba(214, 178, 119, 0.34);
-
-  --vcm-first-gold-faint: rgba(214, 178, 119, 0.11);
-
-  --vcm-first-warm: rgba(255, 116, 72, 0.42);
-
-  --vcm-first-cyan: rgba(104, 217, 223, 0.22);
-}
-
-/* Support both class-based and attribute-based mode hooks */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-map-frame,
-.vcm-shell.is-first-listen .vcm-map-frame,
-.vcm-shell.vcm-mode-first-listen .vcm-map-frame,
-.vcm-map-frame[data-read-mode='firstListen'],
-.vcm-map-frame.is-first-listen,
-.vcm-map-frame.vcm-mode-first-listen {
-  border-color: rgba(214, 178, 119, 0.16) !important;
-
-  background:
-    radial-gradient(circle at 50% 42%, rgba(214, 178, 119, 0.105), transparent 28%),
-    radial-gradient(circle at 35% 44%, rgba(255, 116, 72, 0.07), transparent 26%),
-    radial-gradient(circle at 68% 56%, rgba(104, 217, 223, 0.045), transparent 30%),
-    radial-gradient(circle at 50% 58%, rgba(123, 72, 255, 0.055), transparent 38%),
-    linear-gradient(180deg, rgba(5, 6, 9, 0.96), rgba(2, 3, 6, 0.995)) !important;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.024),
-    inset 0 18px 60px rgba(255, 255, 255, 0.014),
-    0 0 0 1px rgba(214, 178, 119, 0.045),
-    0 22px 58px rgba(0, 0, 0, 0.36) !important;
-}
-
-/* Subtle grid / scan texture */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-map-frame::before,
-.vcm-shell.is-first-listen .vcm-map-frame::before,
-.vcm-shell.vcm-mode-first-listen .vcm-map-frame::before,
-.vcm-map-frame[data-read-mode='firstListen']::before,
-.vcm-map-frame.is-first-listen::before,
-.vcm-map-frame.vcm-mode-first-listen::before {
-  content: '' !important;
-
-  position: absolute !important;
-
-  inset: 0 !important;
-
-  pointer-events: none !important;
-
-  opacity: 0.13 !important;
-
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) !important;
-
-  background-size: 42px 42px !important;
-
-  mask-image: radial-gradient(circle at center, #000 0%, #000 42%, transparent 78%) !important;
-}
-
-/* Bottom editorial horizon line */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-map-frame::after,
-.vcm-shell.is-first-listen .vcm-map-frame::after,
-.vcm-shell.vcm-mode-first-listen .vcm-map-frame::after,
-.vcm-map-frame[data-read-mode='firstListen']::after,
-.vcm-map-frame.is-first-listen::after,
-.vcm-map-frame.vcm-mode-first-listen::after {
-  content: '' !important;
-
-  position: absolute !important;
-
-  left: 22px !important;
-
-  right: 22px !important;
-
-  bottom: 18px !important;
-
-  height: 1px !important;
-
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(214, 178, 119, 0.32),
-    rgba(255, 116, 72, 0.16),
-    transparent
-  ) !important;
-
-  opacity: 0.54 !important;
-
-  pointer-events: none !important;
-}
-
-/* Make First Listen graph larger and more centered */
-
-.vcm-shell[data-read-mode='firstListen'] svg,
-.vcm-shell.is-first-listen svg,
-.vcm-shell.vcm-mode-first-listen svg,
-.vcm-map-frame[data-read-mode='firstListen'] svg,
-.vcm-map-frame.is-first-listen svg,
-.vcm-map-frame.vcm-mode-first-listen svg {
-  transform: scale(1.08);
-
-  transform-origin: center center;
-
-  overflow: visible !important;
-}
-
-/* De-emphasize non-essential web lines in First Listen */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-grid-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-base-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-reference-line,
-.vcm-shell.is-first-listen .vcm-grid-line,
-.vcm-shell.is-first-listen .vcm-base-line,
-.vcm-shell.is-first-listen .vcm-reference-line,
-.vcm-shell.vcm-mode-first-listen .vcm-grid-line,
-.vcm-shell.vcm-mode-first-listen .vcm-base-line,
-.vcm-shell.vcm-mode-first-listen .vcm-reference-line {
-  stroke: rgba(214, 178, 119, 0.13) !important;
-
-  stroke-width: 1 !important;
-
-  opacity: 0.62 !important;
-
-  filter: none !important;
-}
-
-/* First Listen triangle fill */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-first-listen-fill,
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-fill,
-.vcm-shell[data-read-mode='firstListen'] .vcm-shape-fill,
-.vcm-shell.is-first-listen .vcm-first-listen-fill,
-.vcm-shell.is-first-listen .vcm-active-fill,
-.vcm-shell.is-first-listen .vcm-shape-fill,
-.vcm-shell.vcm-mode-first-listen .vcm-first-listen-fill,
-.vcm-shell.vcm-mode-first-listen .vcm-active-fill,
-.vcm-shell.vcm-mode-first-listen .vcm-shape-fill {
-  fill: rgba(214, 178, 119, 0.09) !important;
-
-  stroke: rgba(214, 178, 119, 0.74) !important;
-
-  stroke-width: 1.7 !important;
-
-  opacity: 0.98 !important;
-
-  filter: drop-shadow(0 0 6px rgba(214, 178, 119, 0.22))
-    drop-shadow(0 0 18px rgba(214, 178, 119, 0.1)) !important;
-}
-
-/* Generic polygon fallback if current JS only uses polygon/path classes */
-
-.vcm-shell[data-read-mode='firstListen'] polygon,
-.vcm-shell[data-read-mode='firstListen'] path.vcm-active-shape,
-.vcm-shell[data-read-mode='firstListen'] path.vcm-profile-shape,
-.vcm-shell.is-first-listen polygon,
-.vcm-shell.is-first-listen path.vcm-active-shape,
-.vcm-shell.is-first-listen path.vcm-profile-shape,
-.vcm-shell.vcm-mode-first-listen polygon,
-.vcm-shell.vcm-mode-first-listen path.vcm-active-shape,
-.vcm-shell.vcm-mode-first-listen path.vcm-profile-shape {
-  filter: drop-shadow(0 0 7px rgba(214, 178, 119, 0.18))
-    drop-shadow(0 0 18px rgba(214, 178, 119, 0.08));
-}
-
-/* Active triangle connection lines */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-first-listen-line,
-.vcm-shell[data-read-mode='firstListen'] .vcm-thread-line,
-.vcm-shell.is-first-listen .vcm-active-line,
-.vcm-shell.is-first-listen .vcm-first-listen-line,
-.vcm-shell.is-first-listen .vcm-thread-line,
-.vcm-shell.vcm-mode-first-listen .vcm-active-line,
-.vcm-shell.vcm-mode-first-listen .vcm-first-listen-line,
-.vcm-shell.vcm-mode-first-listen .vcm-thread-line {
-  stroke: rgba(214, 178, 119, 0.92) !important;
-
-  stroke-width: 3.4 !important;
-
-  opacity: 0.94 !important;
-
-  stroke-linecap: round !important;
-
-  stroke-linejoin: round !important;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.3))
-    drop-shadow(0 0 14px rgba(214, 178, 119, 0.14)) !important;
-}
-
-/* Glow version if current component renders a separate glow line */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-line-glow,
-.vcm-shell[data-read-mode='firstListen'] .vcm-first-listen-line-glow,
-.vcm-shell.is-first-listen .vcm-active-line-glow,
-.vcm-shell.is-first-listen .vcm-first-listen-line-glow,
-.vcm-shell.vcm-mode-first-listen .vcm-active-line-glow,
-.vcm-shell.vcm-mode-first-listen .vcm-first-listen-line-glow {
-  stroke: rgba(214, 178, 119, 0.78) !important;
-
-  stroke-width: 8 !important;
-
-  opacity: 0.18 !important;
-
-  filter: drop-shadow(0 0 10px rgba(214, 178, 119, 0.22))
-    drop-shadow(0 0 24px rgba(214, 178, 119, 0.1)) !important;
-
-  animation: vcmFirstListenPulse 2.8s ease-in-out infinite;
-}
-
-/* First Listen nodes: gold dominant, color only as secondary identity */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node,
-.vcm-shell.is-first-listen .vcm-node,
-.vcm-shell.vcm-mode-first-listen .vcm-node {
-  opacity: 0.58 !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-active,
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-first-listen,
-.vcm-shell.is-first-listen .vcm-node.is-active,
-.vcm-shell.is-first-listen .vcm-node.is-first-listen,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-active,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-first-listen {
-  opacity: 1 !important;
-}
-
-/* Circle/dot fallback */
-
-.vcm-shell[data-read-mode='firstListen'] circle,
-.vcm-shell.is-first-listen circle,
-.vcm-shell.vcm-mode-first-listen circle {
-  filter: drop-shadow(0 0 5px currentColor) drop-shadow(0 0 12px rgba(214, 178, 119, 0.1));
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node-dot,
-.vcm-shell[data-read-mode='firstListen'] .vcm-active-dot,
-.vcm-shell.is-first-listen .vcm-node-dot,
-.vcm-shell.is-first-listen .vcm-active-dot,
-.vcm-shell.vcm-mode-first-listen .vcm-node-dot,
-.vcm-shell.vcm-mode-first-listen .vcm-active-dot {
-  fill: rgba(214, 178, 119, 0.94) !important;
-
-  stroke: rgba(255, 244, 220, 0.58) !important;
-
-  stroke-width: 0.9 !important;
-
-  opacity: 0.95 !important;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.36))
-    drop-shadow(0 0 12px rgba(214, 178, 119, 0.14)) !important;
-}
-
-/* Icons around the map should be quieter in First Listen */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node-icon,
-.vcm-shell[data-read-mode='firstListen'] .vcm-axis-icon,
-.vcm-shell.is-first-listen .vcm-node-icon,
-.vcm-shell.is-first-listen .vcm-axis-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-node-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-axis-icon {
-  color: rgba(214, 178, 119, 0.62) !important;
-
-  opacity: 0.68 !important;
-
-  filter: drop-shadow(0 0 4px rgba(214, 178, 119, 0.16)) !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-active .vcm-node-icon,
-.vcm-shell[data-read-mode='firstListen'] .vcm-node.is-first-listen .vcm-node-icon,
-.vcm-shell.is-first-listen .vcm-node.is-active .vcm-node-icon,
-.vcm-shell.is-first-listen .vcm-node.is-first-listen .vcm-node-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-active .vcm-node-icon,
-.vcm-shell.vcm-mode-first-listen .vcm-node.is-first-listen .vcm-node-icon {
-  color: rgba(214, 178, 119, 0.96) !important;
-
-  opacity: 1 !important;
-
-  transform: scale(1.04) !important;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.34))
-    drop-shadow(0 0 14px rgba(214, 178, 119, 0.14)) !important;
-}
-
-/* Center read badge: make it editorial, smaller, and gold */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge,
-.vcm-shell.is-first-listen .vcm-read-badge,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge {
-  border-color: rgba(214, 178, 119, 0.18) !important;
-
-  background:
-    radial-gradient(circle at top, rgba(214, 178, 119, 0.105), transparent 72%),
-    linear-gradient(180deg, rgba(10, 11, 15, 0.96), rgba(4, 5, 8, 0.98)) !important;
-
-  box-shadow:
-    0 0 0 1px rgba(214, 178, 119, 0.045),
-    0 16px 36px rgba(0, 0, 0, 0.34),
-    0 0 22px rgba(214, 178, 119, 0.09) !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge span,
-.vcm-shell.is-first-listen .vcm-read-badge span,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge span {
-  color: rgba(214, 178, 119, 0.82) !important;
-
-  letter-spacing: 0.22em !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge strong,
-.vcm-shell.is-first-listen .vcm-read-badge strong,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge strong {
-  color: #fff8ed !important;
-
-  letter-spacing: -0.045em !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-badge p,
-.vcm-shell.is-first-listen .vcm-read-badge p,
-.vcm-shell.vcm-mode-first-listen .vcm-read-badge p {
-  color: rgba(245, 241, 232, 0.58) !important;
-}
-
-/* Summary below map should read like the Heritage First Listen note */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-summary,
-.vcm-shell.is-first-listen .vcm-read-summary,
-.vcm-shell.vcm-mode-first-listen .vcm-read-summary {
-  border-color: rgba(214, 178, 119, 0.12) !important;
-
-  background:
-    linear-gradient(90deg, rgba(214, 178, 119, 0.065), rgba(255, 255, 255, 0.018), transparent),
-    rgba(4, 5, 8, 0.42) !important;
-
-  box-shadow: none !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-summary strong,
-.vcm-shell.is-first-listen .vcm-read-summary strong,
-.vcm-shell.vcm-mode-first-listen .vcm-read-summary strong {
-  color: rgba(255, 248, 235, 0.94) !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-read-summary p,
-.vcm-shell.is-first-listen .vcm-read-summary p,
-.vcm-shell.vcm-mode-first-listen .vcm-read-summary p {
-  color: rgba(245, 243, 238, 0.62) !important;
-}
-
-/* Similarity scale should not overpower First Listen */
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-similarity,
-.vcm-shell.is-first-listen .vcm-similarity,
-.vcm-shell.vcm-mode-first-listen .vcm-similarity {
-  opacity: 0.76 !important;
-}
-
-.vcm-shell[data-read-mode='firstListen'] .vcm-similarity-track,
-.vcm-shell.is-first-listen .vcm-similarity-track,
-.vcm-shell.vcm-mode-first-listen .vcm-similarity-track {
-  background: linear-gradient(
-    90deg,
-    rgba(104, 217, 223, 0.62),
-    rgba(214, 178, 119, 0.88),
-    rgba(255, 116, 72, 0.62)
-  ) !important;
-
-  box-shadow:
-    0 0 12px rgba(214, 178, 119, 0.1),
-    0 0 18px rgba(104, 217, 223, 0.055) !important;
-}
-
-/* Animation */
-
-@keyframes vcmFirstListenPulse {
-  0%,
-  100% {
-    opacity: 0.13;
-  }
-
-  50% {
-    opacity: 0.28;
-  }
-}
-
-/* =========================================================
-
-   VOICE PLAYGROUND — HIDE STRAY SIMILARITY / DASH MARKS
-
-   ========================================================= */
-
-.vcm-similarity,
-.vcm-similarity *,
-.vcm-similarity-center,
-.vcm-similarity-bar {
-  display: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-
-  pointer-events: none !important;
-}
-
-/* Extra safety: hide any leftover decorative dash artifacts */
-
-.vcm-shell .vcm-dash-strip,
-.vcm-shell .vcm-dash-line,
-.vcm-shell .vcm-map-dashes,
-.vcm-shell .vcm-similarity::before,
-.vcm-shell .vcm-similarity::after,
-.vcm-shell .vcm-map-frame::before,
-.vcm-shell .vcm-map-frame::after {
-  display: none !important;
-
-  content: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-}
-
-/* =========================================================
-
-   VOICE PLAYGROUND — REMOVE STRAY CLICK TARGET DASHES
-
-   ========================================================= */
-
-.vcm-node-click-layer,
-.vcm-node-click-layer *,
-.vcm-node-click-target {
-  display: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-
-  pointer-events: none !important;
-
-  appearance: none !important;
-
-  border: 0 !important;
-
-  background: transparent !important;
-
-  box-shadow: none !important;
-}
-
-/* =========================================================
-
-   VOICE PLAYGROUND — THREADMAP OVERLAY CLEANUP
-
-   Keep the Heritage/VoiceThreadMap visual, but remove duplicate
-
-   top/bottom copy layers inside the Playground adapter.
-
-   ========================================================= */
-
-/* The imported VoiceThreadMap already carries read-context copy.
-
-   Hide the extra adapter badge so the top title area stops doubling. */
-
-.vcm-shell--threadmap .vcm-read-badge {
-  display: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-
-  pointer-events: none !important;
-}
-
-/* Reclaim the space the hidden badge was visually occupying. */
-
-.vcm-shell--threadmap {
-  min-height: 510px !important;
-
-  overflow: visible !important;
-}
-
-.vcm-shell--threadmap .vcm-map-frame {
-  height: 455px !important;
-
-  margin: 0 auto !important;
-
-  overflow: hidden !important;
-}
-
-/* Center the imported Heritage/VoiceThreadMap visual in the available frame. */
-
-.vcm-shell--threadmap .heritage-voice-thread-map {
-  width: 100% !important;
-
-  max-width: 650px !important;
-
-  margin: 0 auto !important;
-
-  transform: translateY(-18px) scale(0.96) !important;
-
-  transform-origin: center top !important;
-}
-
-/* Hide text-only read/caption blocks INSIDE the imported VoiceThreadMap.
-
-   This preserves the triangle/spider/blob + icons, but removes the duplicate
-
-   "FIRST LISTEN / PROJECTION → ..." and description text that was colliding
-
-   with the Playground summary and tabs. */
-
-.vcm-shell--threadmap .heritage-voice-thread-map h1,
-.vcm-shell--threadmap .heritage-voice-thread-map h2,
-.vcm-shell--threadmap .heritage-voice-thread-map h3,
-.vcm-shell--threadmap .heritage-voice-thread-map h4,
-.vcm-shell--threadmap .heritage-voice-thread-map p,
-.vcm-shell--threadmap .heritage-voice-thread-map small,
-.vcm-shell--threadmap .heritage-voice-thread-map figcaption,
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='caption'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='summary'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='description'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='eyebrow'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='headline'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='title'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='copy'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='readout'] {
-  display: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-
-  pointer-events: none !important;
-}
-
-/* Keep SVG/icons/canvas layers visible even if their parents use generic words. */
-
-.vcm-shell--threadmap .heritage-voice-thread-map svg,
-.vcm-shell--threadmap .heritage-voice-thread-map path,
-.vcm-shell--threadmap .heritage-voice-thread-map polygon,
-.vcm-shell--threadmap .heritage-voice-thread-map line,
-.vcm-shell--threadmap .heritage-voice-thread-map circle,
-.vcm-shell--threadmap .heritage-voice-thread-map button,
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='node'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='icon'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='shape'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='thread'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='map'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='graph'],
-.vcm-shell--threadmap .heritage-voice-thread-map [class*='svg'] {
-  visibility: visible !important;
-}
-
-/* The click target layer is not needed here and can create stray invisible hit zones. */
-
-.vcm-shell--threadmap .vcm-node-click-layer,
-.vcm-shell--threadmap .vcm-node-click-layer *,
-.vcm-shell--threadmap .vcm-node-click-target {
-  display: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-
-  pointer-events: none !important;
-}
-
-/* Remove old similarity artifacts. */
-
-.vcm-shell--threadmap .vcm-similarity,
-.vcm-shell--threadmap .vcm-similarity *,
-.vcm-shell--threadmap .vcm-first-listen-card {
-  display: none !important;
-
-  opacity: 0 !important;
-
-  visibility: hidden !important;
-
-  pointer-events: none !important;
-}
-
-/* Playground owns the bottom read summary/tabs. Keep them above the map cleanly. */
-
-.vp-stage .vp-read-summary {
-  position: relative !important;
-
-  z-index: 40 !important;
-
-  margin: -34px auto 0 !important;
-}
-
-.vp-stage .vp-read-mode-dock {
-  position: relative !important;
-
-  z-index: 41 !important;
-
-  margin-top: 10px !important;
-}
-
-/* Add a soft fade behind the Playground-owned lower read section so the graph
-
-   doesn't visually collide with the tabs. */
-
-.vp-stage .vp-read-summary::before {
-  content: '' !important;
-
-  position: absolute !important;
-
-  z-index: -1 !important;
-
-  left: -42px !important;
-
-  right: -42px !important;
-
-  top: -22px !important;
-
-  bottom: -18px !important;
-
-  pointer-events: none !important;
-
-  background: radial-gradient(
-    ellipse at center,
-
-    rgba(3, 5, 12, 0.86),
-    rgba(3, 5, 12, 0.48) 52%,
-
-    transparent 76%
-  ) !important;
-}
-
-/* Medium desktop tuning */
-
-@media (max-width: 1320px) {
-  .vcm-shell--threadmap {
-    min-height: 490px !important;
-  }
-
-  .vcm-shell--threadmap .vcm-map-frame {
     height: 430px !important;
+
   }
 
-  .vcm-shell--threadmap .heritage-voice-thread-map {
-    max-width: 610px !important;
+  .vcm-mode-legacyprint .vcm-map-frame {
 
-    transform: translateY(-14px) scale(0.94) !important;
+    height: 430px;
+
   }
 
-  .vp-stage .vp-read-summary {
-    margin-top: -38px !important;
-  }
-}
-
-/* Large desktop tuning */
-
-@media (min-width: 1500px) {
-  .vcm-shell--threadmap {
-    min-height: 530px !important;
-  }
-
-  .vcm-shell--threadmap .vcm-map-frame {
-    height: 475px !important;
-  }
-
-  .vcm-shell--threadmap .heritage-voice-thread-map {
-    max-width: 690px !important;
-
-    transform: translateY(-20px) scale(0.98) !important;
-  }
-
-  .vp-stage .vp-read-summary {
-    margin-top: -36px !important;
-  }
 }
