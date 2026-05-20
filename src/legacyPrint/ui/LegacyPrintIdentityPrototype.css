@@ -1,0 +1,631 @@
+.legacyprint-identity-prototype {
+
+  position: relative;
+
+  width: 100%;
+
+  min-height: 100%;
+
+  display: grid;
+
+  grid-template-rows: auto minmax(0, 1fr) auto;
+
+  align-items: center;
+
+  justify-items: center;
+
+  overflow: visible;
+
+  isolation: isolate;
+
+  color: rgba(255, 246, 218, 0.9);
+
+}
+
+.lp-id-header {
+
+  position: relative;
+
+  z-index: 4;
+
+  display: grid;
+
+  justify-items: center;
+
+  gap: 5px;
+
+  margin: 0 auto -10px;
+
+  pointer-events: none;
+
+  text-align: center;
+
+}
+
+.lp-id-header span {
+
+  color: rgba(255, 246, 218, 0.34);
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.22em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.lp-id-header strong {
+
+  color: rgba(255, 246, 218, 0.74);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.2em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.lp-id-header p {
+
+  margin: 0;
+
+  color: rgba(255, 246, 218, 0.34);
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.lp-id-canvas-wrap {
+
+  position: relative;
+
+  width: min(100%, 620px);
+
+  height: min(58vh, 460px);
+
+  min-height: 340px;
+
+  display: grid;
+
+  place-items: center;
+
+  overflow: visible;
+
+  isolation: isolate;
+
+}
+
+.lp-id-canvas-wrap::before {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 10% 4% 4%;
+
+  pointer-events: none;
+
+  background:
+
+    radial-gradient(circle at 45% 45%, rgba(255, 116, 72, 0.08), transparent 24%),
+
+    radial-gradient(circle at 62% 50%, rgba(77, 134, 255, 0.075), transparent 28%),
+
+    radial-gradient(circle at 32% 58%, rgba(104, 217, 223, 0.045), transparent 32%);
+
+  filter: blur(18px);
+
+  opacity: 0.9;
+
+}
+
+.lp-id-canvas-wrap::after {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 9% 12% 8%;
+
+  pointer-events: none;
+
+  border-radius: 999px;
+
+  background:
+
+    radial-gradient(circle at 50% 50%, rgba(255, 246, 218, 0.045), transparent 14%),
+
+    radial-gradient(circle at 50% 50%, transparent 52%, rgba(255, 246, 218, 0.045) 53%, transparent 57%),
+
+    radial-gradient(circle at 50% 50%, transparent 66%, rgba(104, 217, 223, 0.026) 67%, transparent 71%);
+
+  opacity: 0.65;
+
+  mix-blend-mode: screen;
+
+}
+
+.lp-id-canvas {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  overflow: visible;
+
+  filter:
+
+    drop-shadow(0 0 18px rgba(255, 116, 72, 0.09))
+
+    drop-shadow(0 0 38px rgba(77, 134, 255, 0.065))
+
+    drop-shadow(0 0 64px rgba(104, 217, 223, 0.04));
+
+}
+
+.lp-id-axis-readout {
+
+  position: relative;
+
+  z-index: 5;
+
+  width: min(100%, 520px);
+
+  display: grid;
+
+  gap: 5px;
+
+  margin: -22px auto 0;
+
+  padding: 0 18px;
+
+  opacity: 0.95;
+
+}
+
+.lp-id-axis-row {
+
+  display: grid;
+
+  grid-template-columns: 16px 78px 1fr 30px minmax(124px, 1.2fr);
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 18px;
+
+  color: rgba(255, 246, 218, 0.46);
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+}
+
+.lp-id-axis-row svg {
+
+  color: var(--axis-color);
+
+  filter: drop-shadow(0 0 5px var(--axis-color));
+
+  opacity: 0.86;
+
+}
+
+.lp-id-axis-row span {
+
+  color: rgba(255, 246, 218, 0.58);
+
+}
+
+.lp-id-axis-row i {
+
+  position: relative;
+
+  height: 1px;
+
+  background: rgba(255, 246, 218, 0.11);
+
+  overflow: hidden;
+
+}
+
+.lp-id-axis-row i::before {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 0 auto 0 0;
+
+  width: calc(var(--axis-value) * 100%);
+
+  background: linear-gradient(90deg, transparent, var(--axis-color));
+
+  box-shadow: 0 0 10px var(--axis-color);
+
+}
+
+.lp-id-axis-row strong {
+
+  color: var(--axis-color);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  text-align: right;
+
+  filter: drop-shadow(0 0 4px var(--axis-color));
+
+}
+
+.lp-id-axis-row em {
+
+  color: rgba(255, 246, 218, 0.38);
+
+  font-style: normal;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+}
+
+.legacyprint-identity-prototype--compact .lp-id-header,
+
+.legacyprint-identity-prototype--compact .lp-id-axis-readout {
+
+  display: none;
+
+}
+
+.legacyprint-identity-prototype--compact .lp-id-canvas-wrap {
+
+  width: 100%;
+
+  height: 100%;
+
+  min-height: 260px;
+
+}
+
+@media (max-width: 1320px) {
+
+  .lp-id-canvas-wrap {
+
+    width: min(100%, 560px);
+
+    height: min(54vh, 410px);
+
+    min-height: 320px;
+
+  }
+
+  .lp-id-axis-readout {
+
+    width: min(100%, 480px);
+
+    margin-top: -20px;
+
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .lp-id-canvas-wrap {
+
+    width: min(100%, 500px);
+
+    height: 370px;
+
+    min-height: 310px;
+
+  }
+
+  .lp-id-axis-readout {
+
+    width: min(100%, 430px);
+
+    margin-top: -12px;
+
+  }
+
+  .lp-id-axis-row {
+
+    grid-template-columns: 16px 70px 1fr 28px;
+
+  }
+
+  .lp-id-axis-row em {
+
+    display: none;
+
+  }
+
+}
+
+/* =========================================================
+
+   LEGACYPRINT IDENTITY — HERO VISUAL PASS
+
+   Push toward mockup: larger, darker, more atmospheric
+
+   ========================================================= */
+
+.vp-stage .legacyprint-identity-prototype {
+
+  width: 100%;
+
+  height: 100%;
+
+  min-height: 520px;
+
+  display: grid;
+
+  grid-template-rows: auto 1fr auto;
+
+  align-items: center;
+
+  justify-items: center;
+
+  padding: 0;
+
+}
+
+/* Hide the tiny top label for now. It is making the visual feel small. */
+
+.vp-stage .legacyprint-identity-prototype .lp-id-header {
+
+  opacity: 0.36;
+
+  transform: translateY(8px);
+
+  margin-bottom: -46px;
+
+  z-index: 8;
+
+}
+
+.vp-stage .legacyprint-identity-prototype .lp-id-header span,
+
+.vp-stage .legacyprint-identity-prototype .lp-id-header strong,
+
+.vp-stage .legacyprint-identity-prototype .lp-id-header p {
+
+  font-size: 6px;
+
+  letter-spacing: 0.18em;
+
+}
+
+/* This is the important part: make the actual acoustic body huge. */
+
+.vp-stage .legacyprint-identity-prototype .lp-id-canvas-wrap {
+
+  width: min(100%, 780px);
+
+  height: 560px;
+
+  min-height: 560px;
+
+  margin: -34px auto -74px;
+
+  transform: scale(1.12);
+
+  transform-origin: center center;
+
+}
+
+.vp-stage .legacyprint-identity-prototype .lp-id-canvas-wrap::before {
+
+  inset: 0 -8% -4%;
+
+  background:
+
+    radial-gradient(circle at 43% 46%, rgba(255, 116, 72, 0.13), transparent 22%),
+
+    radial-gradient(circle at 62% 49%, rgba(77, 134, 255, 0.12), transparent 30%),
+
+    radial-gradient(circle at 34% 58%, rgba(104, 217, 223, 0.09), transparent 36%),
+
+    radial-gradient(circle at 50% 50%, rgba(255, 246, 218, 0.035), transparent 46%);
+
+  filter: blur(22px);
+
+  opacity: 1;
+
+}
+
+.vp-stage .legacyprint-identity-prototype .lp-id-canvas-wrap::after {
+
+  inset: 3% 3% 1%;
+
+  opacity: 0.74;
+
+  background:
+
+    radial-gradient(circle at 50% 50%, rgba(255, 246, 218, 0.055), transparent 12%),
+
+    radial-gradient(circle at 50% 50%, transparent 49%, rgba(255, 246, 218, 0.055) 50%, transparent 54%),
+
+    radial-gradient(circle at 50% 50%, transparent 62%, rgba(104, 217, 223, 0.04) 63%, transparent 68%),
+
+    radial-gradient(circle at 50% 50%, transparent 76%, rgba(158, 139, 255, 0.03) 77%, transparent 82%);
+
+}
+
+.vp-stage .legacyprint-identity-prototype .lp-id-canvas {
+
+  filter:
+
+    drop-shadow(0 0 24px rgba(255, 116, 72, 0.16))
+
+    drop-shadow(0 0 54px rgba(77, 134, 255, 0.11))
+
+    drop-shadow(0 0 84px rgba(104, 217, 223, 0.075));
+
+}
+
+/* Hide axis readout temporarily. It is flattening the whole thing. */
+
+.vp-stage .legacyprint-identity-prototype .lp-id-axis-readout {
+
+  display: none;
+
+}
+
+/* Pull read-mode dock up under the larger visual. */
+
+.vp-stage .vp-read-mode-dock {
+
+  margin-top: -18px !important;
+
+  position: relative;
+
+  z-index: 20;
+
+}
+
+/* Medium desktop */
+
+@media (max-width: 1320px) {
+
+  .vp-stage .legacyprint-identity-prototype {
+
+    min-height: 500px;
+
+  }
+
+  .vp-stage .legacyprint-identity-prototype .lp-id-canvas-wrap {
+
+    width: min(100%, 700px);
+
+    height: 520px;
+
+    min-height: 520px;
+
+    margin: -34px auto -70px;
+
+    transform: scale(1.12);
+
+  }
+
+}
+
+/* Large desktop */
+
+@media (min-width: 1500px) {
+
+  .vp-stage .legacyprint-identity-prototype {
+
+    min-height: 580px;
+
+  }
+
+  .vp-stage .legacyprint-identity-prototype .lp-id-canvas-wrap {
+
+    width: min(100%, 860px);
+
+    height: 620px;
+
+    min-height: 620px;
+
+    margin: -46px auto -92px;
+
+    transform: scale(1.16);
+
+  }
+
+}
+
+/* =========================================================
+
+   EMERGENCY FIX — PREVENT IDENTITY VISUAL FROM BLOCKING UI
+
+   ========================================================= */
+
+.vp-stage .legacyprint-identity-prototype,
+
+.vp-stage .legacyprint-identity-prototype *,
+
+.vp-stage .lp-id-canvas-wrap,
+
+.vp-stage .lp-id-canvas {
+
+  pointer-events: none !important;
+
+}
+
+.vp-left-panel,
+
+.vp-left-panel *,
+
+.vp-slider-stack,
+
+.vp-slider-row,
+
+.vp-slider-row input,
+
+.vp-read-mode-dock,
+
+.vp-read-mode-dock * {
+
+  pointer-events: auto !important;
+
+}
+
+.vp-stage .legacyprint-identity-prototype {
+
+  min-height: 460px !important;
+
+}
+
+.vp-stage .legacyprint-identity-prototype .lp-id-canvas-wrap {
+
+  width: min(100%, 640px) !important;
+
+  height: 460px !important;
+
+  min-height: 460px !important;
+
+  margin: -18px auto -42px !important;
+
+  transform: scale(1) !important;
+
+}

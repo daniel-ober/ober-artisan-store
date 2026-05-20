@@ -22,6 +22,8 @@
 
   --tertiary-thread-color: #68d9df;
 
+  --legacyprint-motion-strength: 0;
+
 }
 
 .heritage-voice-thread-map--compact {
@@ -198,16 +200,6 @@
 
 }
 
-/* Ranking:
-
-   rank-0 = primary / eye first
-
-   rank-1 = support
-
-   rank-2 = tertiary
-
-*/
-
 .heritage-voice-thread-segment--rank-0 .heritage-voice-thread-shape-halo {
 
   opacity: 0.27;
@@ -352,79 +344,813 @@
 
    ========================================================= */
 
+.heritage-player-read-map-key {
+
+  position: absolute;
+
+  top: -8px;
+
+  left: 18px;
+
+  right: 18px;
+
+  z-index: 4;
+
+  display: grid;
+
+  justify-content: center;
+
+  justify-items: center;
+
+  gap: 5px;
+
+  pointer-events: none;
+
+  color: rgba(255, 246, 218, 0.58);
+
+  font-size: 8px;
+
+  line-height: 1.15;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+}
+
+.heritage-player-read-map-key__item {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  white-space: nowrap;
+
+}
+
+.heritage-player-read-map-key__line {
+
+  display: inline-block;
+
+  width: 22px;
+
+  height: 0;
+
+  border-top: 1px solid rgba(255, 246, 218, 0.58);
+
+}
+
+.heritage-player-read-map-key__line--reference {
+
+  border-top-style: dashed;
+
+  opacity: 0.72;
+
+}
+
+.heritage-player-read-map-key__line--selected {
+
+  border-top-style: solid;
+
+  box-shadow: 0 0 4px rgba(214, 178, 119, 0.18);
+
+}
+
+.heritage-voice-thread-map--read-player::before {
+
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
+
+  opacity: 1;
+
+}
+
 .heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
 
-  opacity: 0.06;
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-grid-ring {
+
+  fill: none;
+
+  stroke: rgba(214, 178, 119, 0.34) !important;
+
+  stroke-width: 0.85 !important;
+
+  vector-effect: non-scaling-stroke;
+
+  opacity: 0.52 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--1,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--2,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--3 {
+
+  opacity: 0.34 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--4,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--5,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--6,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--7 {
+
+  opacity: 0.5 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--8,
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--9 {
+
+  opacity: 0.64 !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-spider-grid-ring--10 {
+
+  stroke: rgba(214, 178, 119, 0.46) !important;
+
+  stroke-width: 1.15 !important;
+
+  opacity: 0.82 !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
+
+  opacity: 0.62 !important;
+
+  stroke-width: 1.05 !important;
+
+  stroke-linecap: round !important;
+
+  vector-effect: non-scaling-stroke !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen !important;
 
 }
 
 .heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
 
-  opacity: 0.1;
+  opacity: 0.32 !important;
+
+  stroke-width: 1.1 !important;
+
+  filter: none !important;
+
+  mix-blend-mode: normal !important;
 
 }
 
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
+.heritage-player-read-reference-line {
+
+  stroke: rgba(255, 246, 218, 0.58) !important;
+
+  stroke-width: 1.2 !important;
+
+  stroke-dasharray: 3 5 !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  vector-effect: non-scaling-stroke !important;
+
+  opacity: 0.82 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-player-read-reference-dot {
+
+  fill: rgba(255, 246, 218, 0.82) !important;
+
+  opacity: 0.9 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-player-read-polygon-layer,
+
+.heritage-player-read-polygon-segment {
+
+  pointer-events: none;
+
+}
+
+.heritage-player-read-polygon-soft,
+
+.heritage-player-read-polygon-core {
+
+  fill: none;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  pointer-events: none;
+
+}
+
+.heritage-player-read-polygon-soft {
+
+  stroke-width: 9px !important;
+
+  opacity: 0.12 !important;
+
+  filter: drop-shadow(0 0 4px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-player-read-polygon-core {
+
+  stroke-width: 3.9px !important;
+
+  opacity: 0.94 !important;
 
   filter:
 
-    drop-shadow(0 0 5px rgba(255, 246, 218, 0.12))
+    drop-shadow(0 0 2px rgba(255, 246, 218, 0.1))
 
-    drop-shadow(0 0 16px rgba(255, 255, 255, 0.065));
+    drop-shadow(0 0 5px currentColor) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-player-read-value-dot {
+
+  opacity: 0.96 !important;
+
+  filter:
+
+    drop-shadow(0 0 2px currentColor)
+
+    drop-shadow(0 0 5px currentColor) !important;
+
+  pointer-events: none !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.9 !important;
+
+  filter: drop-shadow(0 0 3px currentColor) !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
+
+  color: var(--node-color) !important;
+
+  opacity: 0.9 !important;
+
+  filter: drop-shadow(0 0 3px currentColor) !important;
+
+}
+
+.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon svg {
+
+  color: var(--node-color) !important;
+
+  stroke: currentColor !important;
+
+}
+
+.heritage-voice-thread-map--read-player
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 1 !important;
 
 }
 
 /* =========================================================
 
-   LEGACYPRINT™ / COMPLEX
+   LEGACYPRINT™ IDENTITY BLOB
 
    ========================================================= */
 
-.heritage-voice-thread-complex-fill {
+.heritage-voice-thread-map--read-legacyprint {
 
-  opacity: 0.72;
-
-  mix-blend-mode: screen;
-
-  filter: blur(0.5px);
+  --legacyprint-breath-scale: calc(1 + (var(--legacyprint-motion-strength, 0) * 0.018));
 
 }
 
-.heritage-voice-thread-complex-sheen {
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-line--base,
 
-  opacity: 0.22;
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-spider-line {
+
+  display: none !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-outer-line {
+
+  opacity: 0.08 !important;
+
+  stroke-width: 0.82 !important;
+
+  filter: none !important;
+
+}
+
+.heritage-legacyprint-influence-field,
+
+.heritage-legacyprint-influence,
+
+.heritage-legacyprint-contour-points {
+
+  pointer-events: none;
+
+}
+
+.heritage-legacyprint-center-breath {
+
+  fill: rgba(255, 246, 218, 0.018);
+
+  stroke: rgba(255, 246, 218, 0.08);
+
+  stroke-width: 1;
+
+  filter:
+
+    drop-shadow(0 0 18px rgba(214, 178, 119, 0.16))
+
+    drop-shadow(0 0 34px color-mix(in srgb, var(--dominant-thread-color) 14%, transparent));
+
+  animation: heritageLegacyPrintCenterBreath 5800ms ease-in-out infinite;
+
+  transform-box: fill-box;
+
+  transform-origin: center;
+
+}
+
+.heritage-legacyprint-influence-trail {
+
+  stroke-width: calc(0.45px + (var(--influence-strength, 0.5) * 1.15px));
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  opacity: calc(0.045 + (var(--influence-strength, 0.5) * 0.12));
 
   mix-blend-mode: screen;
 
-  filter: blur(0.25px);
+  filter:
+
+    drop-shadow(0 0 4px color-mix(in srgb, var(--node-color) 32%, transparent))
+
+    drop-shadow(0 0 13px color-mix(in srgb, var(--node-color) 16%, transparent));
+
+  animation: heritageLegacyPrintInfluencePulse 4600ms ease-in-out infinite;
+
+  animation-delay: var(--pulse-delay, 0ms);
+
+}
+
+.heritage-legacyprint-influence-node {
+
+  opacity: calc(0.1 + (var(--influence-strength, 0.5) * 0.22));
+
+  filter:
+
+    drop-shadow(0 0 4px var(--node-color))
+
+    drop-shadow(0 0 12px color-mix(in srgb, var(--node-color) 52%, transparent));
+
+  animation: heritageLegacyPrintNodePulse 4200ms ease-in-out infinite;
+
+  animation-delay: var(--pulse-delay, 0ms);
+
+  transform-box: fill-box;
+
+  transform-origin: center;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-active-shape {
+
+  animation: heritageLegacyPrintBlobBreath 6400ms ease-in-out infinite;
+
+  transform-box: view-box;
+
+  transform-origin: center;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
 
-  opacity: 0.16;
+  opacity: 0.34 !important;
+
+  filter: blur(0.35px) !important;
+
+  mix-blend-mode: screen !important;
+
+  animation: heritageLegacyPrintFillBloom 5600ms ease-in-out infinite;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.2;
+  opacity: 0.22 !important;
+
+  filter: blur(0.15px) !important;
+
+  mix-blend-mode: screen !important;
+
+  animation: heritageLegacyPrintSheenDrift 7200ms ease-in-out infinite;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
+
+  opacity: 0.18 !important;
+
+  filter:
+
+    drop-shadow(0 0 8px color-mix(in srgb, var(--dominant-thread-color) 26%, transparent))
+
+    drop-shadow(0 0 20px color-mix(in srgb, var(--secondary-thread-color) 18%, transparent)) !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
+
+  opacity: 0.5 !important;
+
+  filter:
+
+    drop-shadow(0 0 7px color-mix(in srgb, var(--dominant-thread-color) 36%, transparent))
+
+    drop-shadow(0 0 18px color-mix(in srgb, var(--secondary-thread-color) 22%, transparent)) !important;
+
+  mix-blend-mode: screen !important;
+
+  animation: heritageLegacyPrintEdgeCurrent 5200ms ease-in-out infinite;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-core {
+
+  opacity: 0.98 !important;
+
+  stroke-width: 3.95px !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  filter:
+
+    drop-shadow(0 0 4px rgba(255, 246, 218, 0.16))
+
+    drop-shadow(0 0 9px color-mix(in srgb, var(--dominant-thread-color) 44%, transparent))
+
+    drop-shadow(0 0 18px color-mix(in srgb, var(--secondary-thread-color) 18%, transparent)) !important;
+
+  mix-blend-mode: screen !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-hotline {
 
-  opacity: 0.22;
+  opacity: 0.28 !important;
+
+  stroke-width: 0.9px !important;
+
+  stroke-linecap: round !important;
+
+  stroke-linejoin: round !important;
+
+  filter: none !important;
+
+  mix-blend-mode: screen !important;
 
 }
 
-.heritage-voice-thread-map--complex .heritage-voice-thread-shape-core {
+.heritage-legacyprint-contour-point {
+
+  opacity: calc(0.18 + (var(--contour-motion, 0) * 0.36));
 
   filter:
 
-    drop-shadow(0 0 7px rgba(255, 246, 218, 0.11))
+    drop-shadow(0 0 3px var(--node-color))
 
-    drop-shadow(0 0 18px rgba(214, 178, 119, 0.09));
+    drop-shadow(0 0 10px color-mix(in srgb, var(--node-color) 46%, transparent));
+
+  mix-blend-mode: screen;
+
+  animation: heritageLegacyPrintContourPulse 3800ms ease-in-out infinite;
+
+  animation-delay: var(--pulse-delay, 0ms);
+
+  transform-box: fill-box;
+
+  transform-origin: center;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.6 !important;
+
+  filter:
+
+    drop-shadow(0 0 4px currentColor)
+
+    drop-shadow(0 0 10px currentColor) !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-node-icon {
+
+  opacity: calc(0.46 + (var(--node-motion, 0) * 0.42)) !important;
+
+  filter:
+
+    drop-shadow(0 0 4px currentColor)
+
+    drop-shadow(0 0 10px color-mix(in srgb, currentColor 42%, transparent)) !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 1 !important;
+
+  animation: heritageLegacyPrintIconPulse 4200ms ease-in-out infinite;
+
+  animation-delay: var(--pulse-delay, 0ms);
+
+}
+
+.heritage-voice-thread-map--legacyprint-compactCut .heritage-voice-thread-shape-core,
+
+.heritage-voice-thread-map--legacyprint-dryShard .heritage-voice-thread-shape-core {
+
+  stroke-width: 3.55px !important;
+
+}
+
+.heritage-voice-thread-map--legacyprint-wideShelf .heritage-voice-thread-shape-glow,
+
+.heritage-voice-thread-map--legacyprint-deepDrop .heritage-voice-thread-shape-glow {
+
+  opacity: 0.56 !important;
+
+}
+
+.heritage-voice-thread-map--legacyprint-focusedSeat .heritage-voice-thread-shape-core {
+
+  stroke-width: 4.35px !important;
+
+}
+
+@keyframes heritageLegacyPrintBlobBreath {
+
+  0%,
+
+  100% {
+
+    transform: scale(1) rotate(0deg);
+
+  }
+
+  45% {
+
+    transform: scale(var(--legacyprint-breath-scale, 1.012)) rotate(0.22deg);
+
+  }
+
+  70% {
+
+    transform: scale(calc(1 - (var(--legacyprint-motion-strength, 0) * 0.006))) rotate(-0.16deg);
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintCenterBreath {
+
+  0%,
+
+  100% {
+
+    opacity: 0.34;
+
+    transform: scale(0.92);
+
+  }
+
+  50% {
+
+    opacity: 0.7;
+
+    transform: scale(1.18);
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintInfluencePulse {
+
+  0%,
+
+  100% {
+
+    opacity: calc(0.08 + (var(--influence-strength, 0.5) * 0.2));
+
+    stroke-width: calc(0.7px + (var(--influence-strength, 0.5) * 1.7px));
+
+  }
+
+  48% {
+
+    opacity: calc(0.16 + (var(--influence-strength, 0.5) * 0.38));
+
+    stroke-width: calc(1px + (var(--influence-strength, 0.5) * 2.7px));
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintNodePulse {
+
+  0%,
+
+  100% {
+
+    opacity: calc(0.16 + (var(--influence-strength, 0.5) * 0.28));
+
+    transform: scale(0.9);
+
+  }
+
+  52% {
+
+    opacity: calc(0.32 + (var(--influence-strength, 0.5) * 0.48));
+
+    transform: scale(calc(1.02 + (var(--influence-motion, 0.5) * 0.32)));
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintContourPulse {
+
+  0%,
+
+  100% {
+
+    opacity: calc(0.18 + (var(--contour-motion, 0) * 0.4));
+
+    transform: scale(0.82);
+
+  }
+
+  50% {
+
+    opacity: calc(0.34 + (var(--contour-motion, 0) * 0.58));
+
+    transform: scale(calc(1 + (var(--contour-motion, 0) * 0.46)));
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintFillBloom {
+
+  0%,
+
+  100% {
+
+    opacity: 0.28;
+
+  }
+
+  50% {
+
+    opacity: 0.4;
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintSheenDrift {
+
+  0%,
+
+  100% {
+
+    opacity: 0.14;
+
+  }
+
+  42% {
+
+    opacity: 0.27;
+
+  }
+
+  70% {
+
+    opacity: 0.18;
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintEdgeCurrent {
+
+  0%,
+
+  100% {
+
+    opacity: 0.42;
+
+  }
+
+  50% {
+
+    opacity: 0.58;
+
+  }
+
+}
+
+@keyframes heritageLegacyPrintIconPulse {
+
+  0%,
+
+  100% {
+
+    transform: scale(1);
+
+  }
+
+  52% {
+
+    transform: scale(calc(1.02 + (var(--node-motion, 0) * 0.18)));
+
+  }
 
 }
 
@@ -764,9 +1490,7 @@
 
 }
 
-.heritage-thread-card:not(.is-active):hover
-
-  .heritage-voice-thread-shape-core {
+.heritage-thread-card:not(.is-active):hover .heritage-voice-thread-shape-core {
 
   opacity: 0.9;
 
@@ -792,81 +1516,15 @@
 
 }
 
-.heritage-thread-card.is-active
-
-  .heritage-voice-thread-complex-fill {
+.heritage-thread-card.is-active .heritage-voice-thread-complex-fill {
 
   opacity: 0.2;
 
 }
 
-.heritage-thread-card.is-active
-
-  .heritage-voice-thread-complex-sheen {
+.heritage-thread-card.is-active .heritage-voice-thread-complex-sheen {
 
   opacity: 0.24;
-
-}
-
-/* =========================================================
-
-   CARD-SPECIFIC MINI MAP OVERRIDES
-
-   ========================================================= */
-
-.heritage-thread-card .heritage-voice-thread-line--base {
-
-  opacity: 0.055 !important;
-
-  stroke-width: 0.66 !important;
-
-}
-
-.heritage-thread-card.is-active .heritage-voice-thread-line--base {
-
-  opacity: 0.075 !important;
-
-}
-
-.heritage-thread-card .heritage-voice-thread-outer-line {
-
-  opacity: 0.095 !important;
-
-  stroke-width: 0.86 !important;
-
-}
-
-.heritage-thread-card.is-active .heritage-voice-thread-outer-line {
-
-  opacity: 0.13 !important;
-
-  stroke-width: 0.95 !important;
-
-}
-
-.heritage-thread-card .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.34 !important;
-
-}
-
-.heritage-thread-card
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.54 !important;
-
-}
-
-.heritage-thread-card
-
-  .heritage-voice-thread-node--rank-0
-
-  .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.84 !important;
 
 }
 
@@ -1036,1723 +1694,177 @@
 
   .heritage-voice-thread-anchor-dot,
 
-  .heritage-thread-card .heritage-voice-thread-map {
+  .heritage-thread-card .heritage-voice-thread-map,
 
-    transition: none;
+  .heritage-legacyprint-center-breath,
+
+  .heritage-legacyprint-influence-trail,
+
+  .heritage-legacyprint-influence-node,
+
+  .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-active-shape,
+
+  .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill,
+
+  .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen,
+
+  .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow,
+
+  .heritage-legacyprint-contour-point,
+
+  .heritage-voice-thread-map--read-legacyprint
+
+    .heritage-voice-thread-node.is-active
+
+    .heritage-voice-thread-node-icon {
+
+    animation: none !important;
+
+    transition: none !important;
 
   }
-
-}
-
-/* =========================================================
-
-   OBER FINAL — Voice Thread / Player Read Spider Spokes
-
-   Clean colored spider lines from center to each voice node
-
-   ========================================================= */
-
-.heritage-voice-thread-spoke-layer {
-
-  pointer-events: none !important;
-
-}
-
-.heritage-voice-thread-spoke {
-
-  vector-effect: non-scaling-stroke !important;
-
-  stroke-linecap: round !important;
-
-  stroke-linejoin: round !important;
-
-  fill: none !important;
-
-}
-
-.heritage-voice-thread-spoke--base {
-
-  stroke-width: 0.9 !important;
-
-  opacity: 0.18 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-spoke--active {
-
-  stroke-width: 1.35 !important;
-
-  opacity: 0.54 !important;
-
-  filter:
-
-    drop-shadow(0 0 4px currentColor)
-
-    drop-shadow(0 0 10px currentColor) !important;
-
-}
-
-.heritage-thread-single-read-visual .heritage-voice-thread-spoke--base,
-
-.heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--base {
-
-  opacity: 0.2 !important;
-
-  stroke-width: 0.95 !important;
-
-}
-
-.heritage-thread-single-read-visual .heritage-voice-thread-spoke--active,
-
-.heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--active {
-
-  opacity: 0.62 !important;
-
-  stroke-width: 1.45 !important;
-
-}
-
-/* Keep First Tell triangle cleaner / less busy */
-
-.heritage-voice-thread-map--simple .heritage-voice-thread-spoke--base {
-
-  opacity: 0.11 !important;
-
-  stroke-width: 0.75 !important;
-
-}
-
-.heritage-voice-thread-map--simple .heritage-voice-thread-spoke--active {
-
-  opacity: 0.34 !important;
-
-  stroke-width: 1.05 !important;
-
-}
-
-/* Player Read should show the full spider framework clearly */
-
-.heritage-voice-thread-map--player .heritage-voice-thread-spoke--base,
-
-.heritage-voice-thread-active-shape--read-player
-
-  ~ .heritage-voice-thread-node-layer
-
-  .heritage-voice-thread-spoke--base {
-
-  opacity: 0.22 !important;
-
-}
-
-/* LegacyPrint fingerprint stays moodier */
-
-.heritage-voice-thread-map--legacyprint .heritage-voice-thread-spoke--base {
-
-  opacity: 0.14 !important;
-
-}
-
-.heritage-voice-thread-map--compact .heritage-voice-thread-spoke--base {
-
-  opacity: 0.1 !important;
-
-  stroke-width: 0.7 !important;
-
-}
-
-.heritage-voice-thread-map--compact .heritage-voice-thread-spoke--active {
-
-  opacity: 0.26 !important;
-
-  stroke-width: 0.95 !important;
 
 }
 
 @media (max-width: 768px) {
 
-  .heritage-thread-single-read-visual .heritage-voice-thread-spoke--base,
+  .heritage-legacyprint-read-key {
 
-  .heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--base {
+    top: -16px;
 
-    opacity: 0.15 !important;
-
-    stroke-width: 0.75 !important;
+    gap: 5px;
 
   }
 
-  .heritage-thread-single-read-visual .heritage-voice-thread-spoke--active,
+  .heritage-legacyprint-read-key__item {
 
-  .heritage-VoiceMapping-read-visual .heritage-voice-thread-spoke--active {
+    padding: 3px 6px;
 
-    opacity: 0.44 !important;
+    font-size: 6.5px;
 
-    stroke-width: 1.1 !important;
+    letter-spacing: 0.11em;
+
+  }
+
+  .heritage-player-read-map-key {
+
+    top: -8px;
+
+    font-size: 7px;
 
   }
 
 }
 
-.heritage-voice-thread-spider-line {
-
-  stroke: rgba(214, 178, 119, 0.18);
-
-  stroke-width: 1.15;
-
-  stroke-linecap: round;
-
-  vector-effect: non-scaling-stroke;
-
-  filter: drop-shadow(0 0 8px rgba(214, 178, 119, 0.16));
-
-}
-
-.heritage-VoiceMapping-relationship-graph-shell--player
-
-  .heritage-voice-thread-spider-line {
-
-  opacity: 1;
-
-}
-
-.heritage-VoiceMapping-relationship-graph-shell--firstTell
-
-  .heritage-voice-thread-spider-line,
-
-.heritage-VoiceMapping-relationship-graph-shell--legacyprint
-
-  .heritage-voice-thread-spider-line {
-
-  opacity: 0;
-
-}
-
-.heritage-voice-thread-spider-grid {
-
-  pointer-events: none;
-
-}
-
-.heritage-voice-thread-spider-grid-ring {
-
-  fill: none;
-
-  stroke: rgba(214, 178, 119, 0.16);
-
-  stroke-width: 0.75;
-
-  vector-effect: non-scaling-stroke;
-
-}
-
-.heritage-voice-thread-spider-grid-ring--1,
-
-.heritage-voice-thread-spider-grid-ring--2,
-
-.heritage-voice-thread-spider-grid-ring--3 {
-
-  stroke-opacity: 0.28;
-
-}
-
-.heritage-voice-thread-spider-grid-ring--4,
-
-.heritage-voice-thread-spider-grid-ring--5,
-
-.heritage-voice-thread-spider-grid-ring--6,
-
-.heritage-voice-thread-spider-grid-ring--7 {
-
-  stroke-opacity: 0.42;
-
-}
-
-.heritage-voice-thread-spider-grid-ring--8,
-
-.heritage-voice-thread-spider-grid-ring--9 {
-
-  stroke-opacity: 0.58;
-
-}
-
-.heritage-voice-thread-spider-grid-ring--10 {
-
-  stroke: rgba(214, 178, 119, 0.28);
-
-  stroke-width: 1.05;
-
-  stroke-opacity: 0.8;
-
-}
-
 /* =========================================================
 
-   PLAYER READ — COLORED SPIDER MAP POLISH
+   LEGACYPRINT™ IDENTITY — DISTINCT SHAPE PASS
 
    ========================================================= */
 
-.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
-
-  opacity: 1;
-
-}
-
-/* Outer polygon edges */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
-
-  opacity: 0.42;
-
-  stroke-width: 1.45;
-
-  filter: drop-shadow(0 0 5px rgba(214, 178, 119, 0.16));
-
-}
-
-/* Center-to-node radial lines */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
-
-  opacity: 0.32;
-
-  stroke-width: 1.05;
-
-  stroke-linecap: round;
-
-  mix-blend-mode: screen;
-
-  filter: drop-shadow(0 0 5px currentColor);
-
-}
-
-/* Hide the all-to-all background connector web in Player Read */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-line--base {
-
-  display: none;
-
-}
-
-/* Anchor dots around the polygon */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.9;
-
-  filter: drop-shadow(0 0 8px currentColor);
-
-}
-
-/* Node icons — bring back node color presence */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  opacity: 0.9;
-
-  filter:
-
-    drop-shadow(0 0 7px currentColor)
-
-    drop-shadow(0 0 18px currentColor);
-
-}
-
-/* Non-active icons stay present but quieter */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node:not(.is-active)
-
-  .heritage-voice-thread-node-icon {
-
-  opacity: 0.54;
-
-}
-
-/* Active node icons pop more */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-node-icon {
-
-  opacity: 1;
-
-}
-
-/* Active shape halo — bigger colored aura */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
-
-  opacity: 0.24 !important;
-
-  mix-blend-mode: screen;
-
-}
-
-/* Active shape glow — main colored body */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
-
-  opacity: 0.72 !important;
-
-  mix-blend-mode: screen;
-
-}
-
-/* Active shape core — cleaner bright read line */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
-
-  opacity: 0.98 !important;
-
-  stroke-width: 5.8;
-
-}
-
-/* Thin highlight line */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
-
-  opacity: 0.36 !important;
-
-  stroke: rgba(255, 244, 210, 0.72);
-
-}
-
-/* Let each segment's node colors show more strongly */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-segment {
-
-  mix-blend-mode: screen;
-
-}
-
-/* Make Player Read feel alive, but not as aggressive as First Tell */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-segment--rank-0
-
-  .heritage-voice-thread-shape-glow {
-
-  opacity: 0.82 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-segment--rank-1
-
-  .heritage-voice-thread-shape-glow {
-
-  opacity: 0.68 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-segment--rank-2
-
-  .heritage-voice-thread-shape-glow {
-
-  opacity: 0.56 !important;
-
-}
-
-/* Keep the chart centered and contained visually */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-svg {
-
-  overflow: visible;
-
-}
-
-.heritage-voice-thread-map--read-player {
-
-  --player-map-vignette: radial-gradient(
-
-    circle at 50% 50%,
-
-    rgba(214, 178, 119, 0.055),
-
-    rgba(0, 0, 0, 0) 58%
-
-  );
-
-}
-
-.heritage-voice-thread-map--read-player::before {
-
-  content: '';
-
-  position: absolute;
-
-  inset: 0;
-
-  pointer-events: none;
-
-  background: var(--player-map-vignette);
-
-  opacity: 0.9;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — MULTICOLOR, NO HEAVY GLOW
-
-   ========================================================= */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
-
-  opacity: 1;
-
-}
-
-/* Hide all-to-all background web in Player Read */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-line--base {
-
-  display: none;
-
-}
-
-/* Outer polygon */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
-
-  opacity: 0.34;
-
-  stroke-width: 1.25;
-
-  filter: none;
-
-}
-
-/* Center/radial spider slices */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
-
-  opacity: 0.2;
-
-  stroke-width: 0.9;
-
-  stroke-linecap: round;
-
-  filter: none;
-
-}
-
-/* Node anchor dots */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.76;
-
-  filter: none;
-
-}
-
-/* Node icons: colored, but not glowing */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  opacity: 0.72;
-
-  filter: none;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-node-icon {
-
-  opacity: 0.95;
-
-}
-
-/* Kill the oversized gold aura */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
-
-  opacity: 0.08 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: normal;
-
-}
-
-/* Keep colored body, but soft */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
-
-  opacity: 0.22 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: normal;
-
-}
-
-/* Main colored outline */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
-
-  opacity: 0.94 !important;
-
-  stroke-width: 4.6;
-
-  filter: none !important;
-
-}
-
-/* Small cream highlight, not dominant */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
-
-  opacity: 0.14 !important;
-
-  stroke-width: 0.9;
-
-  filter: none !important;
-
-}
-
-/* Segment group stays normal so gradients show naturally */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-segment {
-
-  mix-blend-mode: normal;
-
-}
-
-/* No extra map vignette */
-
-.heritage-voice-thread-map--read-player::before {
-
-  display: none;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — FINAL CLEAN MULTICOLOR SPIDER MAP
-
-   ========================================================= */
-
-.heritage-voice-thread-map--read-player {
-
-  --player-grid-color: rgba(214, 178, 119, 0.18);
-
-}
-
-.heritage-voice-thread-map--read-player::before {
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-read-key {
 
   display: none !important;
 
 }
 
-.heritage-voice-thread-map--read-player .heritage-voice-thread-network {
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-active-shape {
 
-  opacity: 1;
-
-}
-
-/* Hide all-to-all thread web for Player Read only */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
-
-  display: none !important;
-
-}
-
-/* 10 internal spider rings */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-grid-ring {
-
-  fill: none;
-
-  stroke: rgba(214, 178, 119, 0.16);
-
-  stroke-width: 0.75;
-
-  vector-effect: non-scaling-stroke;
-
-  opacity: 0.42;
-
-  filter: none;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--1,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--2,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--3 {
-
-  opacity: 0.22;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--4,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--5,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--6,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--7 {
-
-  opacity: 0.34;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--8,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--9 {
-
-  opacity: 0.46;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--10 {
-
-  stroke: rgba(214, 178, 119, 0.26);
-
-  stroke-width: 1.05;
-
-  opacity: 0.62;
-
-}
-
-/* 7 center-to-node slices */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
-
-  opacity: 0.24;
-
-  stroke-width: 0.85;
-
-  stroke-linecap: round;
-
-  vector-effect: non-scaling-stroke;
-
-  filter: none !important;
-
-  mix-blend-mode: normal;
-
-}
-
-/* Outer polygon edge */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
-
-  opacity: 0.32;
-
-  stroke-width: 1.15;
-
-  filter: none !important;
-
-  mix-blend-mode: normal;
-
-}
-
-/* Anchor dots */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.72;
-
-  filter: none !important;
-
-}
-
-/* Icons: colored but controlled */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  opacity: 0.62;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-node-icon {
-
-  opacity: 0.9;
-
-}
-
-/* Kill the big muddy aura */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-halo {
-
-  opacity: 0 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: normal !important;
-
-}
-
-/* Keep very light color body */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-glow {
-
-  opacity: 0.18 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-/* Main multicolor read line */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-core {
-
-  opacity: 0.96 !important;
-
-  stroke-width: 4.9 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-/* Thin cream highlight */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-shape-hotline {
-
-  opacity: 0.12 !important;
-
-  stroke-width: 0.85 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: normal !important;
-
-}
-
-/* Segment gradients should show color naturally */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-segment {
-
-  mix-blend-mode: normal !important;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — ISOLATED MULTICOLOR POLYGON LAYER
-
-   ========================================================= */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-line--base {
-
-  display: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
-
-  opacity: 0.24 !important;
-
-  stroke-width: 0.85 !important;
-
-  stroke-linecap: round;
-
-  vector-effect: non-scaling-stroke;
-
-  filter: none !important;
-
-  mix-blend-mode: normal !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-outer-line {
-
-  opacity: 0.32 !important;
-
-  stroke-width: 1.1 !important;
-
-  filter: none !important;
-
-  mix-blend-mode: normal !important;
-
-}
-
-.heritage-player-read-polygon-layer,
-
-.heritage-player-read-polygon-segment {
-
-  pointer-events: none;
-
-}
-
-.heritage-player-read-polygon-soft,
-
-.heritage-player-read-polygon-core {
-
-  fill: none;
-
-  stroke-linecap: round;
-
-  stroke-linejoin: round;
-
-  vector-effect: non-scaling-stroke;
-
-  pointer-events: none;
-
-}
-
-.heritage-player-read-polygon-soft {
-
-  stroke-width: 11px;
-
-  opacity: 0.14;
-
-  filter: none;
-
-  mix-blend-mode: screen;
-
-}
-
-.heritage-player-read-polygon-core {
-
-  stroke-width: 4.2px;
-
-  opacity: 0.94;
-
-  filter: none;
-
-  mix-blend-mode: screen;
-
-}
-
-.heritage-player-read-value-dot {
-
-  opacity: 0.96;
-
-  filter: none;
-
-  pointer-events: none;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.72 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  opacity: 0.68 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-node-icon {
-
-  opacity: 0.92 !important;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — NODE ICON COLOR OVERRIDE
-
-   ========================================================= */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  color: var(--node-color) !important;
-
-  opacity: 0.86 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon svg {
-
-  color: var(--node-color) !important;
-
-  stroke: currentColor !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-node-icon {
-
-  color: var(--node-color) !important;
-
-  opacity: 1 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.86 !important;
-
-  filter: none !important;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — SPIDER GRID VISIBILITY
-
-   ========================================================= */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring {
-
-  stroke: rgba(214, 178, 119, 0.26) !important;
-
-  stroke-width: 0.78 !important;
-
-  opacity: 0.46 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--1,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--2,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--3 {
-
-  opacity: 0.28 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--4,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--5,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--6,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--7 {
-
-  opacity: 0.42 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--8,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--9 {
-
-  opacity: 0.56 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--10 {
-
-  stroke: rgba(214, 178, 119, 0.36) !important;
-
-  stroke-width: 1.05 !important;
-
-  opacity: 0.72 !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
-
-  opacity: 0.54 !important;
-
-  stroke-width: 0.9 !important;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — HERITAGE REFERENCE BASELINE
-
-   ========================================================= */
-
-.heritage-player-read-reference-line {
-
-  stroke: rgba(255, 246, 218, 0.48);
-
-  stroke-width: 1.15;
-
-  stroke-dasharray: 3 5;
-
-  stroke-linecap: round;
-
-  stroke-linejoin: round;
-
-  vector-effect: non-scaling-stroke;
-
-  opacity: 0.7;
-
-  filter: none;
-
-}
-
-.heritage-player-read-reference-dot {
-
-  fill: rgba(255, 246, 218, 0.72);
-
-  opacity: 0.78;
-
-  filter: none;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — FINAL VISUAL TUNING
-
-   ========================================================= */
-
-.heritage-player-read-map-key {
-
-  position: absolute;
-
-  top: 16px;
-
-  left: 18px;
-
-  right: 18px;
-
-  z-index: 4;
-
-  display: flex;
-
-  justify-content: center;
-
-  gap: 14px;
-
-  flex-wrap: wrap;
-
-  pointer-events: none;
-
-  color: rgba(255, 246, 218, 0.66);
-
-  font-size: 9px;
-
-  line-height: 1.2;
-
-  letter-spacing: 0.12em;
-
-  text-transform: uppercase;
-
-}
-
-.heritage-player-read-map-key__item {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  white-space: nowrap;
-
-}
-
-.heritage-player-read-map-key__line {
-
-  display: inline-block;
-
-  width: 24px;
-
-  height: 0;
-
-  border-top: 1px solid rgba(255, 246, 218, 0.7);
-
-}
-
-.heritage-player-read-map-key__line--reference {
-
-  border-top-style: dashed;
-
-  opacity: 0.8;
-
-}
-
-.heritage-player-read-map-key__line--selected {
-
-  border-top-style: solid;
-
-  box-shadow: 0 0 8px rgba(214, 178, 119, 0.34);
-
-}
-
-/* Make the 10 spider rings easier to read */
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring {
-
-  stroke: rgba(214, 178, 119, 0.34) !important;
-
-  stroke-width: 0.85 !important;
-
-  opacity: 0.52 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--1,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--2,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--3 {
-
-  opacity: 0.34 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--4,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--5,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--6,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--7 {
-
-  opacity: 0.5 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--8,
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--9 {
-
-  opacity: 0.64 !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-spider-grid-ring--10 {
-
-  stroke: rgba(214, 178, 119, 0.46) !important;
-
-  stroke-width: 1.15 !important;
-
-  opacity: 0.82 !important;
-
-}
-
-/* Make the 7 center-to-node spider lines readable */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-spider-line {
-
-  opacity: 0.62 !important;
-
-  stroke-width: 1.05 !important;
-
-  stroke-linecap: round !important;
-
-  vector-effect: non-scaling-stroke !important;
-
-  filter: none !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-/* Reference 5.0 baseline */
-
-.heritage-player-read-reference-line {
-
-  stroke: rgba(255, 246, 218, 0.58) !important;
-
-  stroke-width: 1.2 !important;
-
-  stroke-dasharray: 3 5 !important;
-
-  stroke-linecap: round !important;
-
-  stroke-linejoin: round !important;
-
-  vector-effect: non-scaling-stroke !important;
-
-  opacity: 0.82 !important;
-
-  filter: none !important;
-
-}
-
-.heritage-player-read-reference-dot {
-
-  fill: rgba(255, 246, 218, 0.82) !important;
-
-  opacity: 0.9 !important;
-
-  filter: none !important;
-
-}
-
-/* Selected build polygon — slightly more glow */
-
-.heritage-player-read-polygon-soft {
-
-  stroke-width: 13px !important;
-
-  opacity: 0.22 !important;
-
-  filter: drop-shadow(0 0 8px currentColor) !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-.heritage-player-read-polygon-core {
-
-  stroke-width: 4.35px !important;
-
-  opacity: 0.98 !important;
-
-  filter:
-
-    drop-shadow(0 0 4px rgba(255, 246, 218, 0.16))
-
-    drop-shadow(0 0 9px currentColor) !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-.heritage-player-read-value-dot {
-
-  opacity: 1 !important;
-
-  r: 4.8;
-
-  filter:
-
-    drop-shadow(0 0 4px currentColor)
-
-    drop-shadow(0 0 9px currentColor) !important;
-
-  pointer-events: none !important;
-
-}
-
-/* Node icons must stay their axis color */
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  color: var(--node-color) !important;
-
-  opacity: 0.9 !important;
-
-  filter: drop-shadow(0 0 5px currentColor) !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon svg {
-
-  color: var(--node-color) !important;
-
-  stroke: currentColor !important;
-
-}
-
-.heritage-voice-thread-map--read-player
-
-  .heritage-voice-thread-node.is-active
-
-  .heritage-voice-thread-node-icon {
-
-  opacity: 1 !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  opacity: 0.9 !important;
-
-  filter: drop-shadow(0 0 5px currentColor) !important;
-
-}
-
-/* =========================================================
-
-   PLAYER READ — FINAL GLOW REDUCTION
-
-   ========================================================= */
-
-.heritage-player-read-polygon-soft {
-
-  stroke-width: 9px !important;
-
-  opacity: 0.12 !important;
-
-  filter: drop-shadow(0 0 4px currentColor) !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-.heritage-player-read-polygon-core {
-
-  stroke-width: 3.9px !important;
-
-  opacity: 0.94 !important;
-
-  filter:
-
-    drop-shadow(0 0 2px rgba(255, 246, 218, 0.1))
-
-    drop-shadow(0 0 5px currentColor) !important;
-
-  mix-blend-mode: screen !important;
-
-}
-
-.heritage-player-read-value-dot {
-
-  opacity: 0.96 !important;
-
-  filter:
-
-    drop-shadow(0 0 2px currentColor)
-
-    drop-shadow(0 0 5px currentColor) !important;
-
-  pointer-events: none !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-node-icon {
-
-  filter: drop-shadow(0 0 3px currentColor) !important;
-
-}
-
-.heritage-voice-thread-map--read-player .heritage-voice-thread-anchor-dot {
-
-  filter: drop-shadow(0 0 3px currentColor) !important;
-
-
-
-}
-
-.heritage-player-read-map-key {
-
-  position: absolute;
-
-  top: -4px;
-
-  left: 18px;
-
-  right: 18px;
-
-  z-index: 4;
-
-  display: grid;
-
-  justify-content: center;
-
-  justify-items: center;
-
-  gap: 5px;
-
-  pointer-events: none;
-
-  color: rgba(255, 246, 218, 0.62);
-
-  font-size: 8px;
-
-  line-height: 1.15;
-
-  letter-spacing: 0.14em;
-
-  text-transform: uppercase;
-
-}
-
-.heritage-player-read-map-key__item {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  white-space: nowrap;
-
-}
-
-.heritage-player-read-map-key__line {
-
-  display: inline-block;
-
-  width: 22px;
-
-  height: 0;
-
-  border-top: 1px solid rgba(255, 246, 218, 0.62);
-
-}
-
-.heritage-player-read-map-key__line--reference {
-
-  border-top-style: dashed;
-
-  opacity: 0.72;
-
-}
-
-.heritage-player-read-map-key__line--selected {
-
-  border-top-style: solid;
-
-  box-shadow: 0 0 5px rgba(214, 178, 119, 0.22);
-
-}
-
-.heritage-player-read-map-key {
-
-  position: absolute;
-
-  top: -8px;
-
-  left: 18px;
-
-  right: 18px;
-
-  z-index: 4;
-
-  display: grid;
-
-  justify-content: center;
-
-  justify-items: center;
-
-  gap: 5px;
-
-  pointer-events: none;
-
-  color: rgba(255, 246, 218, 0.58);
-
-  font-size: 8px;
-
-  line-height: 1.15;
-
-  letter-spacing: 0.14em;
-
-  text-transform: uppercase;
-
-}
-
-.heritage-player-read-map-key__item {
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  white-space: nowrap;
-
-}
-
-.heritage-player-read-map-key__line {
-
-  display: inline-block;
-
-  width: 22px;
-
-  height: 0;
-
-  border-top: 1px solid rgba(255, 246, 218, 0.58);
-
-}
-
-.heritage-player-read-map-key__line--reference {
-
-  border-top-style: dashed;
-
-  opacity: 0.72;
-
-}
-
-.heritage-player-read-map-key__line--selected {
-
-  border-top-style: solid;
-
-  box-shadow: 0 0 4px rgba(214, 178, 119, 0.18);
-
-}
-
-/* =========================================================
-
-   LEGACYPRINT™ IDENTITY MARK OVERRIDES
-
-   ========================================================= */
-
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-line--base {
-
-  display: none;
-
-}
-
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
-
-  opacity: 0.12;
-
-  mix-blend-mode: screen;
-
-}
-
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
-
-  opacity: 0.46;
-
-  mix-blend-mode: screen;
+  animation: heritageLegacyPrintBlobBreath 8200ms ease-in-out infinite;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-core {
 
-  opacity: 0.96;
-
-  stroke-linecap: round;
-
-  stroke-linejoin: round;
+  stroke-width: 3.35px !important;
 
 }
 
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-hotline {
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
 
-  opacity: 0.18;
+  opacity: 0.36 !important;
 
-  stroke-linecap: round;
+}
 
-  stroke-linejoin: round;
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
+
+  opacity: 0.1 !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
 
-  opacity: 0.72;
+  opacity: 0.24 !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.38;
+  opacity: 0.14 !important;
 
 }
 
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-outer-line {
+.heritage-voice-thread-map--legacyprint-dryShard .heritage-voice-thread-shape-core,
 
-  opacity: 0.14;
+.heritage-voice-thread-map--legacyprint-torchCrown .heritage-voice-thread-shape-core,
+
+.heritage-voice-thread-map--legacyprint-compactCut .heritage-voice-thread-shape-core {
+
+  stroke-width: 3.05px !important;
 
 }
 
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-anchor-dot {
+.heritage-voice-thread-map--legacyprint-wideShelf .heritage-voice-thread-shape-core,
 
-  opacity: 0.72;
+.heritage-voice-thread-map--legacyprint-deepDrop .heritage-voice-thread-shape-core {
+
+  stroke-width: 3.75px !important;
+
+}
+
+.heritage-legacyprint-influence-trail {
+
+  opacity: calc(0.035 + (var(--influence-strength, 0.5) * 0.09)) !important;
+
+  stroke-width: calc(0.4px + (var(--influence-strength, 0.5) * 0.9px)) !important;
+
+}
+
+.heritage-legacyprint-influence-node {
+
+  opacity: calc(0.08 + (var(--influence-strength, 0.5) * 0.16)) !important;
+
+}
+
+.heritage-legacyprint-contour-point {
+
+  opacity: calc(0.12 + (var(--contour-motion, 0) * 0.24)) !important;
 
 }
 
 /* =========================================================
 
-   LEGACYPRINT™ IDENTITY MARK — FINAL OVERRIDE
+   LEGACYPRINT™ IDENTITY — ACOUSTIC BODY RESET
 
    ========================================================= */
 
-.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-line--base {
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-read-key,
+
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-influence-field,
+
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-contour-points,
+
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-center-breath,
+
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-influence,
+
+.heritage-voice-thread-map--read-legacyprint .heritage-legacyprint-contour-point {
 
   display: none !important;
 
 }
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-line--base,
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-spider-line {
 
@@ -2760,41 +1872,69 @@
 
 }
 
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-network {
+
+  opacity: 0.72 !important;
+
+}
+
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-outer-line {
 
-  opacity: 0.11 !important;
+  opacity: 0.12 !important;
 
-  stroke-width: 0.9 !important;
+  stroke-width: 0.85 !important;
 
   filter: none !important;
+
+  mix-blend-mode: screen !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-active-shape {
+
+  animation: heritageLegacyPrintAcousticBodyBreath 7800ms ease-in-out infinite !important;
+
+  transform-box: view-box;
+
+  transform-origin: center;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-fill {
 
-  opacity: 0.28 !important;
+  opacity: 0.22 !important;
 
-  filter: blur(0.2px) !important;
+  filter: blur(0.18px) !important;
 
   mix-blend-mode: screen !important;
+
+  animation: none !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-complex-sheen {
 
-  opacity: 0.16 !important;
+  opacity: 0.13 !important;
 
-  filter: blur(0.15px) !important;
+  filter: blur(0.12px) !important;
 
   mix-blend-mode: screen !important;
+
+  animation: none !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-halo {
 
-  opacity: 0.16 !important;
+  opacity: 0.1 !important;
 
-  filter: none !important;
+  stroke-width: 16px !important;
+
+  filter:
+
+    drop-shadow(0 0 10px color-mix(in srgb, var(--dominant-thread-color) 22%, transparent))
+
+    drop-shadow(0 0 18px color-mix(in srgb, var(--secondary-thread-color) 12%, transparent)) !important;
 
   mix-blend-mode: screen !important;
 
@@ -2802,11 +1942,19 @@
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-glow {
 
-  opacity: 0.42 !important;
+  opacity: 0.28 !important;
 
-  filter: drop-shadow(0 0 8px currentColor) !important;
+  stroke-width: 7.5px !important;
+
+  filter:
+
+    drop-shadow(0 0 6px color-mix(in srgb, var(--dominant-thread-color) 32%, transparent))
+
+    drop-shadow(0 0 14px color-mix(in srgb, var(--secondary-thread-color) 14%, transparent)) !important;
 
   mix-blend-mode: screen !important;
+
+  animation: none !important;
 
 }
 
@@ -2814,7 +1962,7 @@
 
   opacity: 0.98 !important;
 
-  stroke-width: 4.4px !important;
+  stroke-width: 3.05px !important;
 
   stroke-linecap: round !important;
 
@@ -2822,9 +1970,9 @@
 
   filter:
 
-    drop-shadow(0 0 4px rgba(255, 246, 218, 0.12))
+    drop-shadow(0 0 3px rgba(255, 246, 218, 0.16))
 
-    drop-shadow(0 0 10px currentColor) !important;
+    drop-shadow(0 0 7px color-mix(in srgb, var(--dominant-thread-color) 34%, transparent)) !important;
 
   mix-blend-mode: screen !important;
 
@@ -2832,30 +1980,64 @@
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-shape-hotline {
 
-  opacity: 0.18 !important;
+  opacity: 0.16 !important;
 
-  stroke-width: 0.8px !important;
-
-  stroke-linecap: round !important;
-
-  stroke-linejoin: round !important;
+  stroke-width: 0.75px !important;
 
   filter: none !important;
+
+  mix-blend-mode: screen !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-anchor-dot {
 
-  opacity: 0.52 !important;
+  opacity: 0.46 !important;
 
-  filter: none !important;
+  filter: drop-shadow(0 0 4px currentColor) !important;
 
 }
 
 .heritage-voice-thread-map--read-legacyprint .heritage-voice-thread-node-icon {
 
-  opacity: 0.5 !important;
+  opacity: calc(0.34 + (var(--node-motion, 0) * 0.42)) !important;
 
-  filter: drop-shadow(0 0 4px currentColor) !important;
+  filter: drop-shadow(0 0 5px currentColor) !important;
+
+}
+
+.heritage-voice-thread-map--read-legacyprint
+
+  .heritage-voice-thread-node.is-active
+
+  .heritage-voice-thread-node-icon {
+
+  opacity: 0.95 !important;
+
+  animation: none !important;
+
+}
+
+@keyframes heritageLegacyPrintAcousticBodyBreath {
+
+  0%,
+
+  100% {
+
+    transform: scale(1) rotate(0deg);
+
+  }
+
+  48% {
+
+    transform: scale(calc(1 + (var(--legacyprint-motion-strength, 0) * 0.012))) rotate(0.12deg);
+
+  }
+
+  72% {
+
+    transform: scale(calc(1 - (var(--legacyprint-motion-strength, 0) * 0.004))) rotate(-0.08deg);
+
+  }
 
 }

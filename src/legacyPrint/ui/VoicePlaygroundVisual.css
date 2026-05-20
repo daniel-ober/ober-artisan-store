@@ -1,0 +1,527 @@
+
+.vpv-shell {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 100%;
+
+  min-height: 500px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: visible;
+
+  isolation: isolate;
+
+}
+
+.vpv-read-header {
+
+  position: absolute;
+
+  top: 14px;
+
+  left: 50%;
+
+  z-index: 5;
+
+  transform: translateX(-50%);
+
+  display: grid;
+
+  justify-items: center;
+
+  gap: 2px;
+
+  text-align: center;
+
+  pointer-events: none;
+
+}
+
+.vpv-read-header span,
+
+.vpv-read-header em {
+
+  font-size: 0.46rem;
+
+  line-height: 1;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+
+  color: rgba(232, 224, 255, 0.46);
+
+  font-style: normal;
+
+  white-space: nowrap;
+
+}
+
+.vpv-read-header strong {
+
+  font-size: 0.56rem;
+
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  color: rgba(255, 248, 230, 0.74);
+
+  white-space: nowrap;
+
+}
+
+.vpv-map {
+
+  position: relative;
+
+  width: 480px;
+
+  height: 430px;
+
+  overflow: visible;
+
+}
+
+.vpv-map svg {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  overflow: visible;
+
+}
+
+.vpv-grid-ring {
+
+  fill: none;
+
+  stroke: rgba(222, 207, 255, 0.105);
+
+  stroke-width: 0.85;
+
+  vector-effect: non-scaling-stroke;
+
+}
+
+.vpv-grid-spoke {
+
+  stroke: rgba(222, 207, 255, 0.115);
+
+  stroke-width: 0.8;
+
+  vector-effect: non-scaling-stroke;
+
+}
+
+.vpv-first-fill {
+
+  fill: rgba(214, 178, 119, 0.04);
+
+}
+
+.vpv-first-halo {
+
+  fill: none;
+
+  stroke: rgba(255, 187, 89, 0.2);
+
+  stroke-width: 17;
+
+  stroke-linejoin: round;
+
+  filter: url(#vpv-heavy-glow);
+
+}
+
+.vpv-first-glow {
+
+  fill: none;
+
+  stroke: url(#vpv-player-gradient);
+
+  stroke-width: 8.5;
+
+  stroke-linejoin: round;
+
+  filter: url(#vpv-heavy-glow);
+
+  opacity: 0.84;
+
+}
+
+.vpv-first-core {
+
+  fill: none;
+
+  stroke: rgba(255, 238, 183, 0.92);
+
+  stroke-width: 2.4;
+
+  stroke-linejoin: round;
+
+  filter: url(#vpv-soft-glow);
+
+}
+
+.vpv-player-fill {
+
+  fill: rgba(104, 90, 255, 0.065);
+
+}
+
+.vpv-player-halo {
+
+  fill: none;
+
+  stroke: url(#vpv-player-gradient);
+
+  stroke-width: 14;
+
+  stroke-linejoin: round;
+
+  opacity: 0.22;
+
+  filter: url(#vpv-heavy-glow);
+
+}
+
+.vpv-player-glow {
+
+  fill: none;
+
+  stroke: url(#vpv-player-gradient);
+
+  stroke-width: 6;
+
+  stroke-linejoin: round;
+
+  opacity: 0.76;
+
+  filter: url(#vpv-soft-glow);
+
+}
+
+.vpv-player-core {
+
+  fill: none;
+
+  stroke: rgba(255, 244, 209, 0.88);
+
+  stroke-width: 1.65;
+
+  stroke-linejoin: round;
+
+  opacity: 0.86;
+
+}
+
+.vpv-player-hotline {
+
+  fill: none;
+
+  stroke: rgba(255, 255, 255, 0.22);
+
+  stroke-width: 0.85;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+}
+
+.vpv-player-anchor {
+
+  fill: transparent !important;
+
+  stroke: transparent !important;
+
+  opacity: 0 !important;
+
+}
+
+.vpv-identity-room {
+
+  fill: rgba(117, 74, 255, 0.045);
+
+  stroke: rgba(104, 217, 220, 0.08);
+
+  stroke-width: 1;
+
+  filter: url(#vpv-heavy-glow);
+
+}
+
+.vpv-identity-shadow {
+
+  fill: rgba(0, 0, 0, 0.42);
+
+  transform: translate(0, 13px);
+
+  opacity: 0.46;
+
+}
+
+.vpv-identity-fill {
+
+  fill: url(#vpv-identity-fill);
+
+  opacity: 0.86;
+
+  filter: url(#vpv-soft-glow);
+
+}
+
+.vpv-identity-color {
+
+  fill: rgba(168, 88, 255, 0.16);
+
+  mix-blend-mode: screen;
+
+}
+
+.vpv-identity-halo {
+
+  fill: none;
+
+  stroke: url(#vpv-player-gradient);
+
+  stroke-width: 18;
+
+  stroke-linejoin: round;
+
+  opacity: 0.16;
+
+  filter: url(#vpv-heavy-glow);
+
+}
+
+.vpv-identity-glow {
+
+  fill: none;
+
+  stroke: url(#vpv-player-gradient);
+
+  stroke-width: 7.5;
+
+  stroke-linejoin: round;
+
+  opacity: 0.42;
+
+  filter: url(#vpv-soft-glow);
+
+}
+
+.vpv-identity-core {
+
+  fill: none;
+
+  stroke: rgba(255, 226, 161, 0.72);
+
+  stroke-width: 1.3;
+
+  stroke-linejoin: round;
+
+}
+
+.vpv-identity-spark {
+
+  fill: rgba(255, 239, 188, 0.74);
+
+  filter: url(#vpv-soft-glow);
+
+}
+
+.vpv-node-icon-wrap {
+
+  overflow: visible;
+
+}
+
+.vpv-node-icon {
+
+  width: 38px;
+
+  height: 38px;
+
+  border: 0;
+
+  padding: 0;
+
+  margin: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  color: var(--node-color);
+
+  background: transparent;
+
+  opacity: var(--node-opacity);
+
+  filter:
+
+    drop-shadow(0 0 5px color-mix(in srgb, var(--node-color) 50%, transparent))
+
+    drop-shadow(0 0 14px color-mix(in srgb, var(--node-color) 30%, transparent));
+
+  cursor: pointer;
+
+}
+
+.vpv-node-icon svg {
+
+  display: block;
+
+}
+
+.vpv-node-icon:not(.is-active) {
+
+  color: rgba(150, 151, 168, 0.52);
+
+  filter: none;
+
+}
+
+.vpv-read-list {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 6px;
+
+  width: 332px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 5px 18px;
+
+  transform: translateX(-50%);
+
+  opacity: 0.78;
+
+}
+
+.vpv-read-row {
+
+  display: grid;
+
+  grid-template-columns: 76px 18px 1fr;
+
+  align-items: center;
+
+  gap: 6px;
+
+  min-width: 0;
+
+}
+
+.vpv-read-row span {
+
+  font-size: 0.46rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+}
+
+.vpv-read-row b {
+
+  font-size: 0.48rem;
+
+  color: rgba(255, 245, 224, 0.58);
+
+  font-weight: 700;
+
+  text-align: right;
+
+}
+
+.vpv-read-row i {
+
+  position: relative;
+
+  height: 1px;
+
+  display: block;
+
+  background: rgba(255, 255, 255, 0.11);
+
+  overflow: hidden;
+
+}
+
+.vpv-read-row i em {
+
+  position: absolute;
+
+  inset: 0 auto 0 0;
+
+  display: block;
+
+  height: 100%;
+
+  opacity: 0.78;
+
+  box-shadow: 0 0 9px currentColor;
+
+}
+
+.vpv-mode-firstListen .vpv-read-list {
+
+  display: none;
+
+}
+
+@media (max-width: 1320px) {
+
+  .vpv-shell {
+
+    min-height: 468px;
+
+  }
+
+  .vpv-map {
+
+    width: 448px;
+
+    height: 404px;
+
+  }
+
+  .vpv-read-header {
+
+    top: 10px;
+
+  }
+
+  .vpv-read-list {
+
+    bottom: 0;
+
+    width: 314px;
+
+  }
+
+}
+
