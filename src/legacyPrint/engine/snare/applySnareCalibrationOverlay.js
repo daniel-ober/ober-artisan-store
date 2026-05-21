@@ -163,6 +163,8 @@ const applySnareCalibrationOverlay = (scoredRecord, overlay = {}) => {
 
       applied: false,
 
+      appliedChanges: [],
+
       reason: 'No enabled calibration overlay supplied.'
 
     };
@@ -359,7 +361,7 @@ const applySnareCalibrationOverlay = (scoredRecord, overlay = {}) => {
 
     overlayVersion: overlay.version || 'unversioned-overlay',
 
-    applied
+    appliedChanges: applied
 
   };
 

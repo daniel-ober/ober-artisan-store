@@ -1,6 +1,6 @@
 {
   "status": "SNARE_CALIBRATION_OVERLAY_PREVIEW_V01_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T10:49:09.793Z",
+  "generatedAt": "2026-05-21T10:52:36.440Z",
   "firestoreWrites": 0,
   "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
   "examples": [
@@ -941,7 +941,9 @@
           "firestoreScoringWritesAllowed": false
         },
         "calibrationOverlay": {
-          "applied": [
+          "applied": true,
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+          "appliedChanges": [
             {
               "type": "materialFamilyDeltas",
               "family": "aluminum",
@@ -959,8 +961,7 @@
                 "control": 0.04
               }
             }
-          ],
-          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+          ]
         }
       },
       "deltas": {
@@ -2241,7 +2242,9 @@
           "firestoreScoringWritesAllowed": false
         },
         "calibrationOverlay": {
-          "applied": [
+          "applied": true,
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+          "appliedChanges": [
             {
               "type": "materialFamilyDeltas",
               "family": "brass",
@@ -2249,8 +2252,7 @@
                 "sustain": 0.01
               }
             }
-          ],
-          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+          ]
         }
       },
       "deltas": {
@@ -3458,8 +3460,9 @@
           "firestoreScoringWritesAllowed": false
         },
         "calibrationOverlay": {
-          "applied": [],
-          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+          "applied": false,
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+          "appliedChanges": []
         }
       },
       "deltas": {},
@@ -4703,7 +4706,9 @@
           "firestoreScoringWritesAllowed": false
         },
         "calibrationOverlay": {
-          "applied": [
+          "applied": true,
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+          "appliedChanges": [
             {
               "type": "hoopFamilyDeltas",
               "family": "dieCast",
@@ -4712,8 +4717,7 @@
                 "control": 0.03
               }
             }
-          ],
-          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+          ]
         }
       },
       "deltas": {

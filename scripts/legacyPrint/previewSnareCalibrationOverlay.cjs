@@ -163,7 +163,7 @@ const md = [
 
     '|---|---|',
 
-    ...example.after.calibrationOverlay.applied.map(item =>
+    ...(example.after.calibrationOverlay.appliedChanges || []).map(item =>
 
       `| ${item.type} | ${item.family || item.id || JSON.stringify(item.deltas)} |`
 
