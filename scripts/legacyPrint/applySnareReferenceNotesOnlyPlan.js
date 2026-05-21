@@ -354,7 +354,7 @@ async function main() {
 
     console.log('\nTo verify records exist without writing:');
 
-    console.log(`node ${process.argv[1]} --verifyFirestore --serviceAccount=backend/serviceAccountKey-stg.json`);
+    console.log(`node ${process.argv[1]} --verifyFirestore --serviceAccount=backend/serviceAccountKey-prod.json`);
 
     process.exit(0);
 
@@ -394,7 +394,7 @@ async function main() {
 
     console.log('\nTo apply notes only:');
 
-    console.log(`node ${process.argv[1]} --apply --serviceAccount=backend/serviceAccountKey-stg.json --confirm=${REQUIRED_CONFIRM}`);
+    console.log(`node ${process.argv[1]} --apply --serviceAccount=backend/serviceAccountKey-prod.json --confirm=${REQUIRED_CONFIRM}`);
 
     process.exit(0);
 
