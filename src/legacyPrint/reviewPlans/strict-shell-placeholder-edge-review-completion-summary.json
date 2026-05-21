@@ -1,6 +1,6 @@
 {
   "status": "STRICT_SHELL_PLACEHOLDER_EDGE_REVIEW_COMPLETION_SUMMARY_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T09:02:06.088Z",
+  "generatedAt": "2026-05-21T09:02:39.062Z",
   "sourceFiles": [
     "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-ahead-review-decisions.json",
@@ -11,6 +11,7 @@
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-ludwig-review-decisions.json",
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-mapex-review-decisions.json",
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-pearl-review-decisions.json",
+    "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-pork-pie-percussion-review-decisions.json",
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-sonor-review-decisions.json",
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-tama-review-decisions.json",
     "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-yamaha-review-decisions.json"
@@ -20,15 +21,15 @@
   "summary": {
     "queueCandidateCount": 216,
     "queueCompanyCount": 12,
-    "coveredCompanyCount": 11,
-    "coveredCandidateCount": 215,
-    "coveredLineGroupCount": 37,
+    "coveredCompanyCount": 12,
+    "coveredCandidateCount": 216,
+    "coveredLineGroupCount": 38,
     "approvedLineGroupCount": 0,
-    "blockedLineGroupCount": 37,
+    "blockedLineGroupCount": 38,
     "approvedFirestorePatchPlanCount": 0,
     "firestoreWrites": 0,
-    "uncoveredCompanyCount": 1,
-    "decision": "Placeholder-edge review packets and decisions are complete for covered companies, with zero approved promotions and zero Firestore writes."
+    "uncoveredCompanyCount": 0,
+    "decision": "Placeholder-edge review packets and decisions are complete for all queued companies, with zero approved promotions and zero Firestore writes."
   },
   "coveredCompanies": [
     {
@@ -140,15 +141,19 @@
       "blockedLineGroupCount": 1,
       "approvedFirestorePatchPlanCount": 0,
       "firestoreWrites": 0
-    }
-  ],
-  "uncoveredCompanies": [
+    },
     {
+      "file": "strict-shell-placeholder-edge-pork-pie-percussion-review-decisions.json",
       "companyName": "Pork Pie Percussion",
       "candidateCount": 1,
-      "lineGroupCount": 1
+      "lineGroupCount": 1,
+      "approvedLineGroupCount": 0,
+      "blockedLineGroupCount": 1,
+      "approvedFirestorePatchPlanCount": 0,
+      "firestoreWrites": 0
     }
   ],
+  "uncoveredCompanies": [],
   "lockedRules": [
     "No source-confirmed bearing-edge promotions are approved from this review phase.",
     "No Firestore patch plans are approved from this review phase.",
@@ -157,7 +162,7 @@
     "Metal-edge fallback remains separate from source-confirmed meaningful bearing edge."
   ],
   "nextRecommendedStep": {
-    "task": "Return to the strict-shell audit and move to the next improvement queue: records with meaningful edge but missing/invalid shell thickness.",
+    "task": "Move to the next strict-shell improvement queue: records with meaningful edge but missing/invalid shell thickness.",
     "constraint": "Create queue/review packets only. No Firestore writes."
   }
 }
