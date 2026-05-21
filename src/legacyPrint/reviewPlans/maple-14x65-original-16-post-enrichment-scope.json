@@ -1,0 +1,674 @@
+{
+  "status": "MAPLE_14X65_ORIGINAL_16_POST_ENRICHMENT_SCOPE_NO_WRITES",
+  "generatedAt": "2026-05-21T13:25:42.099Z",
+  "sourceComparisonFile": "maple-14x65-post-enrichment-engine-comparison.json",
+  "sourcePlanFile": "maple-14x65-source-enrichment-plan.json",
+  "summary": {
+    "originalPlanRecords": 16,
+    "matchedScopedRecords": 16,
+    "enrichedRecords": 2,
+    "remainingUnenrichedRecords": 14
+  },
+  "rows": [
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+      "companyName": "C&C Drums USA",
+      "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5",
+      "plyCount": 5,
+      "shellLayup": "Maple/Poplar/Maple",
+      "reinforcementRings": "7-ply maple reinforcement rings",
+      "bearingEdgeDetail": "Los Angeles bearing edge",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "maple_14x65_first_source_enrichment",
+      "voiceProfile": {
+        "attack": 6.1,
+        "brightness": 5.54,
+        "projection": 5.91,
+        "sustain": 6.22,
+        "warmth": 6.62,
+        "sensitivity": 6.11,
+        "control": 5.71
+      },
+      "firstListen": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "shellConstruction:ply",
+        "shellThickness:6mm",
+        "hoopType:tripleFlanged",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter",
+        "snareBed:mediumSnareBed"
+      ],
+      "nextResearchTargets": [
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x6-5_14x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_a60ce85c",
+      "companyName": "Canopus",
+      "modelName": "The Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.69,
+        "brightness": 5.76,
+        "projection": 6.01,
+        "sustain": 6.14,
+        "warmth": 6.59,
+        "sensitivity": 6.55,
+        "control": 6.46
+      },
+      "firstListen": [
+        "attack",
+        "warmth",
+        "sensitivity"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "hoopType:dieCast",
+        "bearingEdge:canopusPrecisionEdge",
+        "shellConstruction:ply",
+        "shellThickness:5mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x6-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_1c0dea43",
+      "companyName": "Gretsch",
+      "modelName": "Brooklyn Snare",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.27,
+        "brightness": 5.33,
+        "projection": 5.88,
+        "sustain": 6.6,
+        "warmth": 7.23,
+        "sensitivity": 6.43,
+        "control": 6.09
+      },
+      "firstListen": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:rounder30Degree",
+        "shellConstruction:ply",
+        "shellThickness:5.6mm",
+        "hoopType:gretsch302",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+      "companyName": "Ludwig",
+      "modelName": "Classic Maple 6.5x14",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.52,
+        "brightness": 5.69,
+        "projection": 5.92,
+        "sustain": 6.58,
+        "warmth": 6.75,
+        "sensitivity": 6.57,
+        "control": 5.82
+      },
+      "firstListen": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:rounded45Degree",
+        "shellConstruction:ply",
+        "shellThickness:6mm",
+        "hoopType:tripleFlanged",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+      "companyName": "Ludwig",
+      "modelName": "Legacy Maple 6.5x14",
+      "plyCount": 3,
+      "shellLayup": "Maple/Poplar/Maple",
+      "reinforcementRings": "1/4 inch solid maple reinforcement rings",
+      "bearingEdgeDetail": "30-degree inner cut with 1/4 inch radius roundover",
+      "shellTreatment": "cross-laminated 3-ply shell with reinforcement rings",
+      "coreFieldEnrichmentBatch": "maple_14x65_first_source_enrichment",
+      "voiceProfile": {
+        "attack": 6.19,
+        "brightness": 5.3,
+        "projection": 5.91,
+        "sustain": 6.87,
+        "warmth": 7.47,
+        "sensitivity": 6.24,
+        "control": 5.9
+      },
+      "firstListen": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:rounder30Degree",
+        "shellConstruction:plyWithReinforcementRings",
+        "shellThickness:6.35mm",
+        "hoopType:tripleFlanged",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": []
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_3b479737",
+      "companyName": "SONOR",
+      "modelName": "ProLite Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.97,
+        "brightness": 5.95,
+        "projection": 5.92,
+        "sustain": 6.12,
+        "warmth": 6.16,
+        "sensitivity": 6.73,
+        "control": 6.37
+      },
+      "firstListen": [
+        "attack",
+        "sensitivity",
+        "warmth"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "hoopType:dieCast",
+        "shellConstruction:ply",
+        "shellThickness:4mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x6-5_14x6-5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or_d1b32daa",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 7.11,
+        "brightness": 5.91,
+        "projection": 6.18,
+        "sustain": 5.87,
+        "warmth": 6.12,
+        "sensitivity": 6.32,
+        "control": 6.74
+      },
+      "firstListen": [
+        "attack",
+        "control",
+        "sensitivity"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "hoopType:dieCast",
+        "shellThickness:8mm",
+        "shellConstruction:ply",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x6-5_14x6-5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-o_af3f3e9a",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 7.03,
+        "brightness": 5.94,
+        "projection": 6.05,
+        "sustain": 6,
+        "warmth": 6.21,
+        "sensitivity": 6.51,
+        "control": 6.54
+      },
+      "firstListen": [
+        "attack",
+        "sensitivity",
+        "control"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "hoopType:dieCast",
+        "shellConstruction:ply",
+        "shellThickness:6mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-_c6584fef",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.97,
+        "brightness": 5.95,
+        "projection": 5.92,
+        "sustain": 6.12,
+        "warmth": 6.16,
+        "sensitivity": 6.73,
+        "control": 6.37
+      },
+      "firstListen": [
+        "attack",
+        "sensitivity",
+        "warmth"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "hoopType:dieCast",
+        "shellConstruction:ply",
+        "shellThickness:4mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-_803b9ab2",
+      "companyName": "SONOR",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.97,
+        "brightness": 5.95,
+        "projection": 5.92,
+        "sustain": 6.12,
+        "warmth": 6.16,
+        "sensitivity": 6.73,
+        "control": 6.37
+      },
+      "firstListen": [
+        "attack",
+        "sensitivity",
+        "warmth"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "hoopType:dieCast",
+        "shellConstruction:ply",
+        "shellThickness:4mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "tama_artstar_artstar-maple-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_389d297f",
+      "companyName": "Tama",
+      "modelName": "Artstar Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.81,
+        "brightness": 5.84,
+        "projection": 6.08,
+        "sustain": 5.93,
+        "warmth": 6.47,
+        "sensitivity": 6.25,
+        "control": 6.61
+      },
+      "firstListen": [
+        "attack",
+        "control",
+        "warmth"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "hoopType:dieCast",
+        "bearingEdge:tamaWoodEdge",
+        "shellConstruction:ply",
+        "shellThickness:7mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+      "companyName": "Tama",
+      "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5",
+      "plyCount": 6,
+      "shellLayup": "",
+      "reinforcementRings": true,
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.48,
+        "brightness": 5.51,
+        "projection": 5.87,
+        "sustain": 6.62,
+        "warmth": 6.83,
+        "sensitivity": 6.73,
+        "control": 5.93
+      },
+      "firstListen": [
+        "warmth",
+        "sensitivity",
+        "sustain"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "hoopType:woodHoop",
+        "shellConstruction:ply",
+        "shellThickness:5mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "shellLayup",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "tama_starclassic_starclassic-exotix-maple-14x6-5_14x6-5_ply_maple_exotic-lacquer_die-cast-hoops_22bc3876",
+      "companyName": "Tama",
+      "modelName": "Starclassic Exotix Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.92,
+        "brightness": 5.91,
+        "projection": 6.1,
+        "sustain": 5.86,
+        "warmth": 6.4,
+        "sensitivity": 6.25,
+        "control": 6.76
+      },
+      "firstListen": [
+        "attack",
+        "control",
+        "warmth"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "hoopType:dieCast",
+        "bearingEdge:tamaStarclassicEdge",
+        "shellConstruction:ply",
+        "shellThickness:5mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c",
+      "companyName": "Tama",
+      "modelName": "Starclassic Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.36,
+        "brightness": 5.4,
+        "projection": 5.96,
+        "sustain": 6.26,
+        "warmth": 7.07,
+        "sensitivity": 6.1,
+        "control": 6.44
+      },
+      "firstListen": [
+        "warmth",
+        "control",
+        "sustain"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "hoopType:dieCast",
+        "bearingEdge:roundedVintage",
+        "shellConstruction:ply",
+        "shellThickness:5mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "tama_superstar_superstar-maple-14x6-5_14x6-5_ply_maple_lacquer_410ef47d",
+      "companyName": "Tama",
+      "modelName": "Superstar Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.52,
+        "brightness": 5.74,
+        "projection": 5.98,
+        "sustain": 6.44,
+        "warmth": 6.7,
+        "sensitivity": 6.54,
+        "control": 5.93
+      },
+      "firstListen": [
+        "warmth",
+        "sensitivity",
+        "attack"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:tamaWoodEdge",
+        "shellConstruction:ply",
+        "shellThickness:7mm",
+        "hoopType:tripleFlanged",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    },
+    {
+      "id": "yamaha_tour-custom_tour-custom-maple-14x6-5_14x6-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_eac794a7",
+      "companyName": "Yamaha",
+      "modelName": "Tour Custom Maple 14x6.5",
+      "plyCount": "",
+      "shellLayup": "",
+      "reinforcementRings": "",
+      "bearingEdgeDetail": "",
+      "shellTreatment": "",
+      "coreFieldEnrichmentBatch": "",
+      "voiceProfile": {
+        "attack": 6.61,
+        "brightness": 5.73,
+        "projection": 5.93,
+        "sustain": 6.27,
+        "warmth": 6.33,
+        "sensitivity": 6.65,
+        "control": 5.83
+      },
+      "firstListen": [
+        "sensitivity",
+        "attack",
+        "warmth"
+      ],
+      "topDrivers": [
+        "shellMaterial:maple",
+        "bearingEdge:sharper45Degree",
+        "shellConstruction:ply",
+        "shellThickness:5.6mm",
+        "depth:6.5",
+        "diameter:14",
+        "batterHead:defaultCoatedSinglePlyBatter",
+        "snareBed:measuredMediumSnareBed"
+      ],
+      "nextResearchTargets": [
+        "plyCount",
+        "shellLayup",
+        "reinforcementRings",
+        "bearingEdgeDetail",
+        "shellTreatment/finishTreatment"
+      ]
+    }
+  ]
+}
