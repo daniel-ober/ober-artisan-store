@@ -1,0 +1,32 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_REMAINING_COMPANY_PRIORITY_PACKET_NO_FIRESTORE_WRITES",
+  "createdAt": "2026-05-21T08:48:18.959Z",
+  "reviewScope": "Lane B stock-head fallback company/OEM pattern review, excluding Ludwig and Pearl because those decisions are already complete.",
+  "noFirestoreWrites": true,
+  "excludesAlreadyReviewedCompanies": [
+    "Ludwig",
+    "Pearl"
+  ],
+  "policyPosition": "conservative",
+  "approvalThreshold": {
+    "requiredEvidence": [
+      "Official manufacturer page, catalog, manual, archived manufacturer page, or OEM-confirmed source",
+      "Stock batter head model",
+      "Stock resonant/snare-side head model",
+      "Clear applicability to the target company, line, model family, or exact model records"
+    ],
+    "blockedWhen": [
+      "Only third-party retailer/spec evidence is available",
+      "Only batter head is confirmed",
+      "Only resonant/snare-side head is confirmed",
+      "Evidence applies to a different era, line, or model family",
+      "Evidence is company-wide but stock heads vary materially by line or era"
+    ]
+  },
+  "summary": {
+    "candidateCount": 0,
+    "companyCount": 0,
+    "noFirestoreWrites": true
+  },
+  "companyPriority": []
+}
