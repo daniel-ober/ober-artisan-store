@@ -1,0 +1,1308 @@
+{
+  "generatedAt": "2026-05-21T07:58:17.110Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-b-high-value-shell-thickness-review-packet.json",
+  "status": "LANE_B_SLINGERLAND_SHELL_THICKNESS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Slingerland",
+    "candidateCount": 54,
+    "groupCount": 18,
+    "sourceUrls": [
+      "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "https://www.vintagedrumguide.com/radio_king_history.html",
+      "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so...",
+      "https://www.slingerland.com/drums/drum-sets/radio-king-outfit/",
+      "https://www.slingerland.com/products/slrkltd0514-radio-king-limited-snare-5x14/"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "Vintage Wood / Artist / Student",
+        "shellMaterial": "Mahogany",
+        "count": 14,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Vintage Radio King",
+        "shellMaterial": "Maple",
+        "count": 10,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html"
+      },
+      {
+        "lineSeries": "Sound King",
+        "shellMaterial": "Chrome over Brass",
+        "count": 6,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Vintage Student Radio King",
+        "shellMaterial": "Mahogany",
+        "count": 4,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html"
+      },
+      {
+        "lineSeries": "Modern Radio King Limited",
+        "shellMaterial": "Maple",
+        "count": 3,
+        "primarySourceUrl": "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so..."
+      },
+      {
+        "lineSeries": "Modern Radio King Outfit Snare",
+        "shellMaterial": "Mahogany",
+        "count": 2,
+        "primarySourceUrl": "https://www.slingerland.com/drums/drum-sets/radio-king-outfit/"
+      },
+      {
+        "lineSeries": "Sound King",
+        "shellMaterial": "Aluminum",
+        "count": 2,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Sound King",
+        "shellMaterial": "Brass",
+        "count": 2,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Sound King",
+        "shellMaterial": "Steel",
+        "count": 2,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Modern Radio King Limited",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.slingerland.com/products/slrkltd0514-radio-king-limited-snare-5x14/"
+      },
+      {
+        "lineSeries": "Conway Era",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Nashville Era",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Avante",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Jet",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Modern Solo",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "New Rock",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "Pop Outfit",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      },
+      {
+        "lineSeries": "San Juan",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Wood / Artist / Student",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "count": 14,
+      "models": [
+        "Artist Model",
+        "Artist Model 6.5x14",
+        "Buddy Rich 80N Concert King",
+        "Buddy Rich Artist Model",
+        "Club Date-style Slingerland Student Snare",
+        "Deluxe Student Model",
+        "Festival Model",
+        "Gene Krupa Junior",
+        "Hollywood Ace",
+        "Hollywood Ace 6-Lug",
+        "Jam Session Snare",
+        "Modern Jazz Outfit Snare",
+        "Shelly Manne Model",
+        "Stage Band Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_vintage-wood-artist-student_artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wrap_3514218a",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Artist Model — 14x5.5",
+          "modelName": "Artist Model",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_artist-model-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_cc2d4d5a",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Artist Model 6.5x14 — 14x6.5",
+          "modelName": "Artist Model 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_buddy-rich-80n-concert-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-_2bc06d1e",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Buddy Rich 80N Concert King — 14x5.5",
+          "modelName": "Buddy Rich 80N Concert King",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_buddy-rich-artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_b9882c77",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Buddy Rich Artist Model — 14x5.5",
+          "modelName": "Buddy Rich Artist Model",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_club-date-style-slingerland-student-snare_14x5-5_ply_mahogany_poplar_mahogany_ro_10c521b6",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Club Date-style Slingerland Student Snare — 14x5.5",
+          "modelName": "Club Date-style Slingerland Student Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_deluxe-student-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pe_b7fe6b7d",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Deluxe Student Model — 14x5.5",
+          "modelName": "Deluxe Student Model",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_festival-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wr_10342383",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Festival Model — 14x5.5",
+          "modelName": "Festival Model",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_gene-krupa-junior_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_1bd32339",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Gene Krupa Junior — 14x5.5",
+          "modelName": "Gene Krupa Junior",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_hollywood-ace_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wra_5551455b",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Hollywood Ace — 14x5.5",
+          "modelName": "Hollywood Ace",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_hollywood-ace-6-lug_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_b94ddf6b",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Hollywood Ace 6-Lug — 14x5.5",
+          "modelName": "Hollywood Ace 6-Lug",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_jam-session-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_0e646c53",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Jam Session Snare — 14x5.5",
+          "modelName": "Jam Session Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_modern-jazz-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_3f4f440f",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Modern Jazz Outfit Snare — 14x5.5",
+          "modelName": "Modern Jazz Outfit Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_shelly-manne-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pear_d94685eb",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Shelly Manne Model — 14x5.5",
+          "modelName": "Shelly Manne Model",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-wood-artist-student_stage-band-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-_542b9d04",
+          "label": "Slingerland — Vintage Wood / Artist / Student — Stage Band Snare — 14x5.5",
+          "modelName": "Stage Band Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Vintage 3-ply layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Radio King",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+      "sourceConfidence": "Medium",
+      "count": 10,
+      "models": [
+        "Gene Krupa Deluxe Radio King",
+        "Gene Krupa Radio King",
+        "Radio King 3-Point Strainer",
+        "Radio King 5x14",
+        "Radio King 7x14 Concert/Orchestra",
+        "Radio King Artist",
+        "Radio King Broadway Parallel",
+        "Radio King Clamshell Strainer",
+        "Radio King Professional",
+        "Radio King Super"
+      ],
+      "records": [
+        {
+          "id": "slingerland_vintage-radio-king_gene-krupa-deluxe-radio-king_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_0d523a94",
+          "label": "Slingerland — Vintage Radio King — Gene Krupa Deluxe Radio King — 14x6.5",
+          "modelName": "Gene Krupa Deluxe Radio King",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_gene-krupa-radio-king_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_9e9f4f19",
+          "label": "Slingerland — Vintage Radio King — Gene Krupa Radio King — 14x5.5",
+          "modelName": "Gene Krupa Radio King",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-3-point-strainer_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-_7c5603e5",
+          "label": "Slingerland — Vintage Radio King — Radio King 3-Point Strainer — 14x5.5",
+          "modelName": "Radio King 3-Point Strainer",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-5x14_14x5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pearl-w_5e6bc7dd",
+          "label": "Slingerland — Vintage Radio King — Radio King 5x14 — 14x5",
+          "modelName": "Radio King 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-7x14-concert-orchestra_14x7_steam-bent_maple_rounded-vintage-edge-often-30-deg_ff2cdc0c",
+          "label": "Slingerland — Vintage Radio King — Radio King 7x14 Concert/Orchestra — 14x7",
+          "modelName": "Radio King 7x14 Concert/Orchestra",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-artist_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pea_2f67ab4f",
+          "label": "Slingerland — Vintage Radio King — Radio King Artist — 14x5.5",
+          "modelName": "Radio King Artist",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-broadway-parallel_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_8561aa6c",
+          "label": "Slingerland — Vintage Radio King — Radio King Broadway Parallel — 14x6.5",
+          "modelName": "Radio King Broadway Parallel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-clamshell-strainer_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degre_a3cf0f18",
+          "label": "Slingerland — Vintage Radio King — Radio King Clamshell Strainer — 14x6.5",
+          "modelName": "Radio King Clamshell Strainer",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-professional_14x7_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_1af65b20",
+          "label": "Slingerland — Vintage Radio King — Radio King Professional — 14x7",
+          "modelName": "Radio King Professional",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-radio-king_radio-king-super_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pear_3c634aac",
+          "label": "Slingerland — Vintage Radio King — Radio King Super — 14x6.5",
+          "modelName": "Radio King Super",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"snareSideProfile\":\"Rounded / vintage edge, often 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Sound King",
+      "shellMaterial": "Chrome over Brass",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 6,
+      "models": [
+        "Gene Krupa Sound King Chrome-Over-Brass",
+        "Sound King Black Chrome-over-Brass"
+      ],
+      "records": [
+        {
+          "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5-5_metal_chrome-over-brass_rolled-metal-bearing-edge__e8b0642b",
+          "label": "Slingerland — Sound King — Gene Krupa Sound King Chrome-Over-Brass — 14x5.5",
+          "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_06baa511",
+          "label": "Slingerland — Sound King — Gene Krupa Sound King Chrome-Over-Brass — 14x5",
+          "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge__c4317c68",
+          "label": "Slingerland — Sound King — Gene Krupa Sound King Chrome-Over-Brass — 14x6.5",
+          "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x7_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_78f35716",
+          "label": "Slingerland — Sound King — Gene Krupa Sound King Chrome-Over-Brass — 14x7",
+          "modelName": "Gene Krupa Sound King Chrome-Over-Brass",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_sound-king-black-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_plated-_3c8cd2c9",
+          "label": "Slingerland — Sound King — Sound King Black Chrome-over-Brass — 14x5",
+          "modelName": "Sound King Black Chrome-over-Brass",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_sound-king-black-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge_plate_890a4d18",
+          "label": "Slingerland — Sound King — Sound King Black Chrome-over-Brass — 14x6.5",
+          "modelName": "Sound King Black Chrome-over-Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Student Radio King",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Student Radio King",
+        "Student Radio King 5x14",
+        "Student Radio King 6.5x14",
+        "Student Radio King De Luxe"
+      ],
+      "records": [
+        {
+          "id": "slingerland_vintage-student-radio-king_student-radio-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_duco-_4a41382a",
+          "label": "Slingerland — Vintage Student Radio King — Student Radio King — 14x5.5",
+          "modelName": "Student Radio King",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-student-radio-king_student-radio-king-5x14_14x5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_du_d0cc2625",
+          "label": "Slingerland — Vintage Student Radio King — Student Radio King 5x14 — 14x5",
+          "modelName": "Student Radio King 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-student-radio-king_student-radio-king-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_2b1bb0af",
+          "label": "Slingerland — Vintage Student Radio King — Student Radio King 6.5x14 — 14x6.5",
+          "modelName": "Student Radio King 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_vintage-student-radio-king_student-radio-king-de-luxe_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-ed_20943121",
+          "label": "Slingerland — Vintage Student Radio King — Student Radio King De Luxe — 14x5.5",
+          "modelName": "Student Radio King De Luxe",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Radio King Limited",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so...",
+      "sourceConfidence": "High",
+      "count": 3,
+      "models": [
+        "Radio King Solid Maple Limited"
+      ],
+      "records": [
+        {
+          "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5-5_steam-bent_maple_30-degree-rounded-bearing-e_df8146db",
+          "label": "Slingerland — Modern Radio King Limited — Radio King Solid Maple Limited — 14x5.5",
+          "modelName": "Radio King Solid Maple Limited",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent with maple reinforcement rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree rounded bearing edge\",\"snareSideProfile\":\"30-degree rounded bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so...",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x6-5_steam-bent_maple_30-degree-rounded-bearing-e_bd359ad0",
+          "label": "Slingerland — Modern Radio King Limited — Radio King Solid Maple Limited — 14x6.5",
+          "modelName": "Radio King Solid Maple Limited",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent with maple reinforcement rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree rounded bearing edge\",\"snareSideProfile\":\"30-degree rounded bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so...",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x7_steam-bent_maple_30-degree-rounded-bearing-edg_a73d5136",
+          "label": "Slingerland — Modern Radio King Limited — Radio King Solid Maple Limited — 14x7",
+          "modelName": "Radio King Solid Maple Limited",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent with maple reinforcement rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree rounded bearing edge\",\"snareSideProfile\":\"30-degree rounded bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so...",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Radio King Outfit Snare",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.slingerland.com/drums/drum-sets/radio-king-outfit/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Radio King 3-Ply Mahogany/Poplar Matching Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x5-5_steam-bent_mahogany_po_75c87d18",
+          "label": "Slingerland — Modern Radio King Outfit Snare — Radio King 3-Ply Mahogany/Poplar Matching Snare — 14x5.5",
+          "modelName": "Radio King 3-Ply Mahogany/Poplar Matching Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Mahogany-Poplar-Mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree rounded bearing edge\",\"snareSideProfile\":\"30-degree rounded bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.slingerland.com/drums/drum-sets/radio-king-outfit/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x6-5_steam-bent_mahogany_po_de179c7e",
+          "label": "Slingerland — Modern Radio King Outfit Snare — Radio King 3-Ply Mahogany/Poplar Matching Snare — 14x6.5",
+          "modelName": "Radio King 3-Ply Mahogany/Poplar Matching Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Mahogany-Poplar-Mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree rounded bearing edge\",\"snareSideProfile\":\"30-degree rounded bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.slingerland.com/drums/drum-sets/radio-king-outfit/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Sound King",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Sound King Aluminum"
+      ],
+      "records": [
+        {
+          "id": "slingerland_sound-king_sound-king-aluminum_14x5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_stick_32cf90ac",
+          "label": "Slingerland — Sound King — Sound King Aluminum — 14x5",
+          "modelName": "Sound King Aluminum",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_sound-king-aluminum_14x6-5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_8c3a24c1",
+          "label": "Slingerland — Sound King — Sound King Aluminum — 14x6.5",
+          "modelName": "Sound King Aluminum",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Sound King",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Sound King Brass Lacquer"
+      ],
+      "records": [
+        {
+          "id": "slingerland_sound-king_sound-king-brass-lacquer_14x5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_2344c2c4",
+          "label": "Slingerland — Sound King — Sound King Brass Lacquer — 14x5",
+          "modelName": "Sound King Brass Lacquer",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_sound-king-brass-lacquer_14x6-5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_s_5946d2a3",
+          "label": "Slingerland — Sound King — Sound King Brass Lacquer — 14x6.5",
+          "modelName": "Sound King Brass Lacquer",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Sound King",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Sound King Chrome Steel"
+      ],
+      "records": [
+        {
+          "id": "slingerland_sound-king_sound-king-chrome-steel_14x5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_stic_2808c033",
+          "label": "Slingerland — Sound King — Sound King Chrome Steel — 14x5",
+          "modelName": "Sound King Chrome Steel",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "slingerland_sound-king_sound-king-chrome-steel_14x6-5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_st_ac2e0277",
+          "label": "Slingerland — Sound King — Sound King Chrome Steel — 14x6.5",
+          "modelName": "Sound King Chrome Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled metal bearing edge\",\"snareSideProfile\":\"Rolled metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Radio King Limited",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.slingerland.com/products/slrkltd0514-radio-king-limited-snare-5x14/",
+      "sourceConfidence": "High",
+      "count": 1,
+      "models": [
+        "Radio King Solid Maple Limited"
+      ],
+      "records": [
+        {
+          "id": "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5_steam-bent_maple_30-degree-rounded-bearing-edg_8bcf2091",
+          "label": "Slingerland — Modern Radio King Limited — Radio King Solid Maple Limited — 14x5",
+          "modelName": "Radio King Solid Maple Limited",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply solid steam-bent with maple reinforcement rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree rounded bearing edge\",\"snareSideProfile\":\"30-degree rounded bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.slingerland.com/products/slrkltd0514-radio-king-limited-snare-5x14/",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Conway Era",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Conway Radio King Reissue"
+      ],
+      "records": [
+        {
+          "id": "slingerland_conway-era_conway-radio-king-reissue_14x5-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_stick-sav_6e627287",
+          "label": "Slingerland — Conway Era — Conway Radio King Reissue — 14x5.5",
+          "modelName": "Conway Radio King Reissue",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Solid maple family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Nashville Era",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Nashville Radio King Reissue"
+      ],
+      "records": [
+        {
+          "id": "slingerland_nashville-era_nashville-radio-king-reissue_14x6-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_sti_7c0ca413",
+          "label": "Slingerland — Nashville Era — Nashville Radio King Reissue — 14x6.5",
+          "modelName": "Nashville Radio King Reissue",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown/reissue family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Avante",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Avante Outfit Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_avante_avante-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-sa_22b43fce",
+          "label": "Slingerland — Avante — Avante Outfit Snare — 14x5.5",
+          "modelName": "Avante Outfit Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Jet",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Jet Outfit Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_jet_jet-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver-tr_9f4008ac",
+          "label": "Slingerland — Jet — Jet Outfit Snare — 14x5.5",
+          "modelName": "Jet Outfit Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Solo",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Modern Solo Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_modern-solo_modern-solo-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick_e091ae50",
+          "label": "Slingerland — Modern Solo — Modern Solo Snare — 14x5.5",
+          "modelName": "Modern Solo Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "New Rock",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "New Rock Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_new-rock_new-rock-snare_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver_ea3c5348",
+          "label": "Slingerland — New Rock — New Rock Snare — 14x6.5",
+          "modelName": "New Rock Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Pop Outfit",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Pop Outfit Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_pop-outfit_pop-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-s_f3032cc3",
+          "label": "Slingerland — Pop Outfit — Pop Outfit Snare — 14x5.5",
+          "modelName": "Pop Outfit Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "San Juan",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "San Juan Outfit Snare"
+      ],
+      "records": [
+        {
+          "id": "slingerland_san-juan_san-juan-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stic_a838ceb8",
+          "label": "Slingerland — San Juan — San Juan Outfit Snare — 14x5.5",
+          "modelName": "San Juan Outfit Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"3-ply vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Slingerland shell thickness by era/line/material. Do not create Firestore update plan until thickness values are explicitly confirmed or a controlled vintage Slingerland shell-thickness fallback policy is approved."
+}
