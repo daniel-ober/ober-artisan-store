@@ -1,0 +1,32 @@
+{
+  "generatedAt": "2026-05-21T07:38:40.885Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/pearl-masters-maple-complete-bearing-edge-review-packet.json",
+  "status": "PEARL_MASTERS_MAPLE_COMPLETE_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 2,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 2,
+    "groupCount": 1
+  },
+  "officialSourceConfirmedGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Masters Maple Complete",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Masters Maple Complete Maple Snare",
+        "Masters Maple Complete Maple Snare"
+      ],
+      "recordIds": [
+        "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+        "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8"
+      ],
+      "skipReason": "No exact official Pearl Masters Maple Complete bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Pearl source language confirms bearing-edge geometry for Masters Maple Complete snare drums."
+}
