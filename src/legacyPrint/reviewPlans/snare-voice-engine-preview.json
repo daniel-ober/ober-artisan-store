@@ -1,8 +1,8 @@
 {
   "status": "SNARE_VOICE_ENGINE_PREVIEW_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T13:46:54.485Z",
+  "generatedAt": "2026-05-21T13:49:58.696Z",
   "firestoreWrites": 0,
-  "promotedRecordsScored": 366,
+  "promotedRecordsScored": 359,
   "doctrine": {
     "stockHeadsBlockPromotion": false,
     "stockSnareWiresBlockPromotion": false,
@@ -26,78 +26,77 @@
     "brand": 0
   },
   "topNodeCounts": {
-    "attack": 339,
-    "sustain": 228,
+    "attack": 340,
+    "sustain": 212,
     "brightness": 149,
-    "control": 112,
-    "warmth": 101,
+    "control": 121,
     "projection": 90,
+    "warmth": 86,
     "sensitivity": 79
   },
   "familyCounts": {
-    "batterHead:defaultCoatedSinglePlyBatter": 358,
-    "reinforcementRings:otherRings": 354,
-    "plyCount:unknownPlyCount": 354,
-    "resoHead:defaultClearSnareSideReso": 326,
-    "snareWires:defaultTwentyStrandSteelWires": 316,
-    "shellLayup:otherLayup": 296,
-    "finishTreatment:unknownFinishTreatment": 256,
-    "shellConstruction:metal": 196,
-    "snareBed:minimalSnareBed": 177,
-    "hoopType:tripleFlanged": 158,
-    "snareBed:mediumSnareBed": 145,
-    "shellConstruction:plyWithReinforcementRings": 138,
-    "hoopType:dieCast": 122,
+    "reinforcementRings:otherRings": 355,
+    "batterHead:defaultCoatedSinglePlyBatter": 350,
+    "plyCount:unknownPlyCount": 348,
+    "resoHead:defaultClearSnareSideReso": 310,
+    "snareWires:defaultTwentyStrandSteelWires": 309,
+    "shellLayup:otherLayup": 304,
+    "finishTreatment:unknownFinishTreatment": 242,
+    "shellConstruction:metal": 204,
+    "snareBed:minimalSnareBed": 185,
+    "hoopType:tripleFlanged": 150,
+    "snareBed:mediumSnareBed": 146,
+    "shellConstruction:plyWithReinforcementRings": 123,
+    "hoopType:dieCast": 123,
     "bearingEdge:machinedMetal": 109,
-    "bearingEdge:rolledOrFormedMetal": 92,
+    "bearingEdge:rolledOrFormedMetal": 100,
     "shellMaterial:brass": 88,
-    "bearingEdge:sharper45Degree": 83,
+    "bearingEdge:sharper45Degree": 84,
     "shellMaterial:steel": 75,
-    "finishTreatment:otherFinishTreatment": 61,
+    "finishTreatment:otherFinishTreatment": 68,
+    "resoHead:clearSnareSideReso": 49,
     "snareWires:twentyStrandSteelWires": 49,
-    "shellMaterial:maple": 47,
-    "shellLayup:allMapleLayup": 47,
     "hoopType:inwardFlangedControlHoop": 43,
-    "resoHead:clearSnareSideReso": 40,
+    "shellMaterial:maple": 40,
+    "shellLayup:allMapleLayup": 40,
     "finishTreatment:lacquerOrUrethaneFinish": 37,
+    "shellMaterial:aluminum": 28,
     "shellMaterial:birch": 25,
     "hoopType:otherHoop": 24,
     "snareBed:shallowSnareBed": 23,
     "shellMaterial:bellBrass": 21,
     "bearingEdge:tamaWoodEdge": 21,
     "shellConstruction:solidShell": 20,
-    "shellMaterial:aluminum": 20,
-    "snareBed:otherSnareBed": 18,
-    "shellMaterial:maplePoplar": 17,
-    "shellLayup:maplePoplarMapleLayup": 17,
     "shellMaterial:beech": 17,
-    "bearingEdge:rounder30Degree": 13,
-    "reinforcementRings:reinforcementRings": 11,
+    "shellMaterial:maplePoplar": 13,
+    "shellLayup:maplePoplarMapleLayup": 13,
     "bearingEdge:otherBearingEdge": 9,
     "bearingEdge:canopusPrecisionEdge": 9,
     "shellMaterial:bronze": 9,
-    "bearingEdge:rounded45Degree": 9,
     "shellMaterial:acrylic": 9,
+    "batterHead:coatedSinglePlyBatter": 9,
     "shellMaterial:bubinga": 9,
     "hoopType:tamaGroovedHoop": 9,
     "shellMaterial:copper": 8,
-    "batterHead:coatedSinglePlyBatter": 8,
     "bearingEdge:tamaStarclassicEdge": 8,
     "hoopType:gretsch302": 7,
     "bearingEdge:roundedVintage": 7,
-    "shellMaterial:mahoganyPoplar": 6,
-    "shellLayup:mahoganyPoplarMahoganyLayup": 6,
     "shellConstruction:castMetal": 6,
     "finishTreatment:sealedDecorativeFinish": 6,
+    "bearingEdge:rounder30Degree": 5,
     "finishTreatment:lightNaturalFinish": 5,
     "plyCount:eightToTenPly": 5,
     "shellMaterial:walnut": 4,
     "shellMaterial:titanium": 3,
+    "reinforcementRings:reinforcementRings": 3,
     "bearingEdge:mapexSonicClear": 3,
     "snareBed:measuredMediumSnareBed": 3,
     "plyCount:elevenPlusPly": 3,
+    "shellMaterial:mahoganyPoplar": 2,
+    "shellLayup:mahoganyPoplarMahoganyLayup": 2,
     "shellMaterial:zelkova": 2,
     "hoopType:brassHoop": 2,
+    "snareBed:otherSnareBed": 2,
     "shellMaterial:cordia": 2,
     "shellMaterial:spruce": 2,
     "plyCount:sixToSevenPly": 2,
@@ -105,8 +104,8 @@
     "shellConstruction:beadedMetal": 2,
     "plyCount:fourToFivePly": 1,
     "bearingEdge:ludwigFamilyEdge": 1,
-    "plyCount:threePlyOrLess": 1,
     "shellMaterial:cherry": 1,
+    "bearingEdge:rounded45Degree": 1,
     "shellConstruction:acrylic": 1,
     "bearingEdge:acrylicEdge": 1,
     "shellConstruction:hybrid": 1,
@@ -5151,582 +5150,6 @@
       "readinessTier": "PROMOTE_NOW_FULL_REFERENCE_READY"
     },
     {
-      "id": "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
-      "company": "Ludwig",
-      "model": "Classic Maple 5.5x14",
-      "lineSeries": "Classic Maple",
-      "size": "14x5.5",
-      "shellMaterialRaw": "maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Maple snare specs confirm 45 Degree Bearing Edge. Ludwig Classic Maple family page further describes the bearing edge as cut to a 45-degree angle within 1/16 inch from the outside edge.",
-        "batterSideProfile": "45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "45-degree bearing edge",
-        "roundover": "lightly sanded / smooth even surface",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.57,
-        "brightness": 5.69,
-        "projection": 5.8,
-        "sustain": 6.63,
-        "warmth": 6.87,
-        "sensitivity": 6.49,
-        "control": 5.94
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 6.87
-        },
-        {
-          "key": "sustain",
-          "value": 6.63
-        },
-        {
-          "key": "attack",
-          "value": 6.57
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
-      "company": "Ludwig",
-      "model": "Classic Maple 5x14",
-      "lineSeries": "Classic Maple",
-      "size": "14x5",
-      "shellMaterialRaw": "maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Maple snare specs confirm 45 Degree Bearing Edge. Ludwig Classic Maple family page further describes the bearing edge as cut to a 45-degree angle within 1/16 inch from the outside edge.",
-        "batterSideProfile": "45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "45-degree bearing edge",
-        "roundover": "lightly sanded / smooth even surface",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.57,
-        "brightness": 5.69,
-        "projection": 5.8,
-        "sustain": 6.63,
-        "warmth": 6.87,
-        "sensitivity": 6.49,
-        "control": 5.94
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 6.87
-        },
-        {
-          "key": "sustain",
-          "value": 6.63
-        },
-        {
-          "key": "attack",
-          "value": 6.57
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
-      "company": "Ludwig",
-      "model": "Classic Maple 6.5x14",
-      "lineSeries": "Classic Maple",
-      "size": "14x6.5",
-      "shellMaterialRaw": "maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Maple snare specs confirm 45 Degree Bearing Edge. Ludwig Classic Maple family page further describes the bearing edge as cut to a 45-degree angle within 1/16 inch from the outside edge.",
-        "batterSideProfile": "45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "45-degree bearing edge",
-        "roundover": "lightly sanded / smooth even surface",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.52,
-        "brightness": 5.63,
-        "projection": 5.96,
-        "sustain": 6.78,
-        "warmth": 7.07,
-        "sensitivity": 6.4,
-        "control": 5.96
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.07
-        },
-        {
-          "key": "sustain",
-          "value": 6.78
-        },
-        {
-          "key": "attack",
-          "value": 6.52
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17",
-      "company": "Ludwig",
-      "model": "Classic Maple 8x14",
-      "lineSeries": "Classic Maple",
-      "size": "14x8",
-      "shellMaterialRaw": "maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Maple snare specs confirm 45 Degree Bearing Edge. Ludwig Classic Maple family page further describes the bearing edge as cut to a 45-degree angle within 1/16 inch from the outside edge.",
-        "batterSideProfile": "45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "45-degree bearing edge",
-        "roundover": "lightly sanded / smooth even surface",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.44,
-        "brightness": 5.59,
-        "projection": 6.03,
-        "sustain": 6.94,
-        "warmth": 7.27,
-        "sensitivity": 6.33,
-        "control": 5.92
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.27
-        },
-        {
-          "key": "sustain",
-          "value": 6.94
-        },
-        {
-          "key": "attack",
-          "value": 6.44
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
-      "company": "Ludwig",
-      "model": "Classic Oak 5.5x14",
-      "lineSeries": "Classic Oak",
-      "size": "14x5.5",
-      "shellMaterialRaw": "oak maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Oak source confirms dual 45-degree bearing edge for added focus, attack, and tuning control.",
-        "batterSideProfile": "dual 45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "dual 45-degree bearing edge",
-        "roundover": "unknown",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.5,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.57,
-        "brightness": 5.69,
-        "projection": 5.8,
-        "sustain": 6.63,
-        "warmth": 6.87,
-        "sensitivity": 6.49,
-        "control": 5.94
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 6.87
-        },
-        {
-          "key": "sustain",
-          "value": 6.63
-        },
-        {
-          "key": "attack",
-          "value": 6.57
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
-      "company": "Ludwig",
-      "model": "Classic Oak 5x14",
-      "lineSeries": "Classic Oak",
-      "size": "14x5",
-      "shellMaterialRaw": "oak maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Oak source confirms dual 45-degree bearing edge for added focus, attack, and tuning control.",
-        "batterSideProfile": "dual 45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "dual 45-degree bearing edge",
-        "roundover": "unknown",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.5,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.57,
-        "brightness": 5.69,
-        "projection": 5.8,
-        "sustain": 6.63,
-        "warmth": 6.87,
-        "sensitivity": 6.49,
-        "control": 5.94
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 6.87
-        },
-        {
-          "key": "sustain",
-          "value": 6.63
-        },
-        {
-          "key": "attack",
-          "value": 6.57
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
-      "company": "Ludwig",
-      "model": "Classic Oak 6.5x14",
-      "lineSeries": "Classic Oak",
-      "size": "14x6.5",
-      "shellMaterialRaw": "oak maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Oak source confirms dual 45-degree bearing edge for added focus, attack, and tuning control.",
-        "batterSideProfile": "dual 45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "dual 45-degree bearing edge",
-        "roundover": "unknown",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.5,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.52,
-        "brightness": 5.63,
-        "projection": 5.96,
-        "sustain": 6.78,
-        "warmth": 7.07,
-        "sensitivity": 6.4,
-        "control": 5.96
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.07
-        },
-        {
-          "key": "sustain",
-          "value": 6.78
-        },
-        {
-          "key": "attack",
-          "value": 6.52
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8",
-      "company": "Ludwig",
-      "model": "Classic Oak 8x14",
-      "lineSeries": "Classic Oak",
-      "size": "14x8",
-      "shellMaterialRaw": "oak maple",
-      "shellConstructionRaw": "ply",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": "",
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Classic Oak source confirms dual 45-degree bearing edge for added focus, attack, and tuning control.",
-        "batterSideProfile": "dual 45-degree bearing edge",
-        "confidence": "high",
-        "snareSideProfile": "dual 45-degree bearing edge",
-        "roundover": "unknown",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.5,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "maple",
-        "shellLayup": "allMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "otherRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounded45Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:otherRings",
-          "totalMovement": 0.094
-        },
-        {
-          "source": "shellLayup:allMapleLayup",
-          "totalMovement": 0.091
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.44,
-        "brightness": 5.59,
-        "projection": 6.03,
-        "sustain": 6.94,
-        "warmth": 7.27,
-        "sensitivity": 6.33,
-        "control": 5.92
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.27
-        },
-        {
-          "key": "sustain",
-          "value": 6.94
-        },
-        {
-          "key": "attack",
-          "value": 6.44
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
       "id": "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91",
       "company": "Ludwig",
       "model": "Copper Phonic 5x14",
@@ -6217,586 +5640,6 @@
         }
       ],
       "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
-    },
-    {
-      "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
-      "company": "Ludwig",
-      "model": "Legacy Mahogany 5.5x14",
-      "lineSeries": "Legacy Mahogany",
-      "size": "14x5.5",
-      "shellMaterialRaw": "mahogany poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Mahogany source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "mahoganyPoplar",
-        "shellLayup": "mahoganyPoplarMahoganyLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:mahoganyPoplarMahoganyLayup",
-          "totalMovement": 0.245
-        }
-      ],
-      "voiceProfile": {
-        "attack": 5.84,
-        "brightness": 4.77,
-        "projection": 5.53,
-        "sustain": 7.05,
-        "warmth": 8.09,
-        "sensitivity": 6.23,
-        "control": 5.77
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 8.09
-        },
-        {
-          "key": "sustain",
-          "value": 7.05
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.23
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
-      "company": "Ludwig",
-      "model": "Legacy Mahogany 5x14",
-      "lineSeries": "Legacy Mahogany",
-      "size": "14x5",
-      "shellMaterialRaw": "mahogany poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Mahogany source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "mahoganyPoplar",
-        "shellLayup": "mahoganyPoplarMahoganyLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:mahoganyPoplarMahoganyLayup",
-          "totalMovement": 0.245
-        }
-      ],
-      "voiceProfile": {
-        "attack": 5.84,
-        "brightness": 4.77,
-        "projection": 5.53,
-        "sustain": 7.05,
-        "warmth": 8.09,
-        "sensitivity": 6.23,
-        "control": 5.77
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 8.09
-        },
-        {
-          "key": "sustain",
-          "value": 7.05
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.23
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
-      "company": "Ludwig",
-      "model": "Legacy Mahogany 6.5x14",
-      "lineSeries": "Legacy Mahogany",
-      "size": "14x6.5",
-      "shellMaterialRaw": "mahogany poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Mahogany source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "mahoganyPoplar",
-        "shellLayup": "mahoganyPoplarMahoganyLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:mahoganyPoplarMahoganyLayup",
-          "totalMovement": 0.245
-        }
-      ],
-      "voiceProfile": {
-        "attack": 5.78,
-        "brightness": 4.7,
-        "projection": 5.68,
-        "sustain": 7.2,
-        "warmth": 8.28,
-        "sensitivity": 6.15,
-        "control": 5.78
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 8.28
-        },
-        {
-          "key": "sustain",
-          "value": 7.2
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.15
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
-      "company": "Ludwig",
-      "model": "Legacy Mahogany 8x14",
-      "lineSeries": "Legacy Mahogany",
-      "size": "14x8",
-      "shellMaterialRaw": "mahogany poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Mahogany source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "mahoganyPoplar",
-        "shellLayup": "mahoganyPoplarMahoganyLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:mahoganyPoplarMahoganyLayup",
-          "totalMovement": 0.245
-        }
-      ],
-      "voiceProfile": {
-        "attack": 5.7,
-        "brightness": 4.66,
-        "projection": 5.75,
-        "sustain": 7.36,
-        "warmth": 8.48,
-        "sensitivity": 6.07,
-        "control": 5.74
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 8.48
-        },
-        {
-          "key": "sustain",
-          "value": 7.36
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.07
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
-      "company": "Ludwig",
-      "model": "Legacy Maple 5.5x14",
-      "lineSeries": "Legacy Maple",
-      "size": "14x5.5",
-      "shellMaterialRaw": "maple poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Maple source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "maplePoplar",
-        "shellLayup": "maplePoplarMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:maplePoplarMapleLayup",
-          "totalMovement": 0.187
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.07,
-        "brightness": 5.16,
-        "projection": 5.66,
-        "sustain": 6.95,
-        "warmth": 7.58,
-        "sensitivity": 6.28,
-        "control": 5.91
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.58
-        },
-        {
-          "key": "sustain",
-          "value": 6.95
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.28
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
-      "company": "Ludwig",
-      "model": "Legacy Maple 5x14",
-      "lineSeries": "Legacy Maple",
-      "size": "14x5",
-      "shellMaterialRaw": "maple poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Maple source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 8,
-      "families": {
-        "shellMaterial": "maplePoplar",
-        "shellLayup": "maplePoplarMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:maplePoplarMapleLayup",
-          "totalMovement": 0.187
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6.07,
-        "brightness": 5.16,
-        "projection": 5.66,
-        "sustain": 6.95,
-        "warmth": 7.58,
-        "sensitivity": 6.28,
-        "control": 5.91
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.58
-        },
-        {
-          "key": "sustain",
-          "value": 6.95
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.28
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
-      "company": "Ludwig",
-      "model": "Legacy Maple 6.5x14",
-      "lineSeries": "Legacy Maple",
-      "size": "14x6.5",
-      "shellMaterialRaw": "maple poplar maple maple/poplar/maple",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "Maple/Poplar/Maple",
-      "reinforcementRingsRaw": "1/4 inch solid maple reinforcement rings",
-      "finishTreatmentRaw": "cross-laminated 3-ply shell with reinforcement rings",
-      "plyCountRaw": 3,
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Maple source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "maplePoplar",
-        "shellLayup": "maplePoplarMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "otherFinishTreatment",
-        "plyCount": "threePlyOrLess",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:maplePoplarMapleLayup",
-          "totalMovement": 0.187
-        },
-        {
-          "source": "plyCount:3",
-          "totalMovement": 0.176
-        }
-      ],
-      "voiceProfile": {
-        "attack": 6,
-        "brightness": 5.07,
-        "projection": 5.82,
-        "sustain": 7.15,
-        "warmth": 7.85,
-        "sensitivity": 6.21,
-        "control": 5.92
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.85
-        },
-        {
-          "key": "sustain",
-          "value": 7.15
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.21
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
-    },
-    {
-      "id": "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7",
-      "company": "Ludwig",
-      "model": "Legacy Maple 8x14",
-      "lineSeries": "Legacy Maple",
-      "size": "14x8",
-      "shellMaterialRaw": "maple poplar",
-      "shellConstructionRaw": "ply with reinforcement rings",
-      "shellLayupRaw": "",
-      "reinforcementRingsRaw": true,
-      "finishTreatmentRaw": "",
-      "plyCountRaw": "",
-      "bearingEdgeRaw": {
-        "notes": "Ludwig Legacy Maple source confirms 30 degree inner cut with a 1/4 inch radius round over.",
-        "batterSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "confidence": "high",
-        "snareSideProfile": "30-degree inner cut with 1/4-inch radius round over",
-        "roundover": "1/4-inch radius round over",
-        "evidenceLevel": "sourceConfirmed"
-      },
-      "hoopRaw": "triple-flanged steel",
-      "shellThicknessMm": 6.35,
-      "lugCount": 10,
-      "families": {
-        "shellMaterial": "maplePoplar",
-        "shellLayup": "maplePoplarMapleLayup",
-        "shellConstruction": "plyWithReinforcementRings",
-        "reinforcementRings": "reinforcementRings",
-        "finishTreatment": "unknownFinishTreatment",
-        "plyCount": "unknownPlyCount",
-        "bearingEdge": "rounder30Degree",
-        "hoopType": "tripleFlanged",
-        "snareBed": "otherSnareBed",
-        "batterHead": "defaultCoatedSinglePlyBatter",
-        "resoHead": "defaultClearSnareSideReso",
-        "snareWires": "defaultTwentyStrandSteelWires"
-      },
-      "secondaryCoreDrivers": [
-        {
-          "source": "reinforcementRings:reinforcementRings",
-          "totalMovement": 0.25
-        },
-        {
-          "source": "shellLayup:maplePoplarMapleLayup",
-          "totalMovement": 0.187
-        }
-      ],
-      "voiceProfile": {
-        "attack": 5.93,
-        "brightness": 5.05,
-        "projection": 5.89,
-        "sustain": 7.26,
-        "warmth": 7.98,
-        "sensitivity": 6.12,
-        "control": 5.89
-      },
-      "topNodes": [
-        {
-          "key": "warmth",
-          "value": 7.98
-        },
-        {
-          "key": "sustain",
-          "value": 7.26
-        },
-        {
-          "key": "sensitivity",
-          "value": 6.12
-        }
-      ],
-      "readinessTier": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
     },
     {
       "id": "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
@@ -7346,6 +6189,494 @@
         }
       ],
       "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+      "company": "Ludwig",
+      "model": "Supraphonic 5x14 Hammered Imperial Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated hammered aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.7,
+        "brightness": 6.14,
+        "projection": 5.76,
+        "sustain": 5.73,
+        "warmth": 5.29,
+        "sensitivity": 6.36,
+        "control": 6.51
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.7
+        },
+        {
+          "key": "control",
+          "value": 6.51
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.36
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+      "company": "Ludwig",
+      "model": "Supraphonic 5x14 Hammered Tube Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated hammered aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.7,
+        "brightness": 6.14,
+        "projection": 5.76,
+        "sustain": 5.73,
+        "warmth": 5.29,
+        "sensitivity": 6.36,
+        "control": 6.51
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.7
+        },
+        {
+          "key": "control",
+          "value": 6.51
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.36
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+      "company": "Ludwig",
+      "model": "Supraphonic 5x14 Imperial Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.7,
+        "brightness": 6.14,
+        "projection": 5.76,
+        "sustain": 5.73,
+        "warmth": 5.29,
+        "sensitivity": 6.36,
+        "control": 6.51
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.7
+        },
+        {
+          "key": "control",
+          "value": 6.51
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.36
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+      "company": "Ludwig",
+      "model": "Supraphonic 5x14 Tube Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.7,
+        "brightness": 6.14,
+        "projection": 5.76,
+        "sustain": 5.73,
+        "warmth": 5.29,
+        "sensitivity": 6.36,
+        "control": 6.51
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.7
+        },
+        {
+          "key": "control",
+          "value": 6.51
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.36
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+      "company": "Ludwig",
+      "model": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x6.5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated hammered aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.62,
+        "brightness": 6.08,
+        "projection": 5.91,
+        "sustain": 5.9,
+        "warmth": 5.48,
+        "sensitivity": 6.26,
+        "control": 6.46
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.62
+        },
+        {
+          "key": "control",
+          "value": 6.46
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.26
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+      "company": "Ludwig",
+      "model": "Supraphonic 6.5x14 Hammered Tube Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x6.5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated hammered aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.62,
+        "brightness": 6.08,
+        "projection": 5.91,
+        "sustain": 5.9,
+        "warmth": 5.48,
+        "sensitivity": 6.26,
+        "control": 6.46
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.62
+        },
+        {
+          "key": "control",
+          "value": 6.46
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.26
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+      "company": "Ludwig",
+      "model": "Supraphonic 6.5x14 Imperial Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x6.5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.62,
+        "brightness": 6.08,
+        "projection": 5.91,
+        "sustain": 5.9,
+        "warmth": 5.48,
+        "sensitivity": 6.26,
+        "control": 6.46
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.62
+        },
+        {
+          "key": "control",
+          "value": 6.46
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.26
+        }
+      ],
+      "readinessTier": ""
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+      "company": "Ludwig",
+      "model": "Supraphonic 6.5x14 Tube Lugs",
+      "lineSeries": "Supraphonic",
+      "size": "14x6.5",
+      "shellMaterialRaw": "aluminum",
+      "shellConstructionRaw": "metal",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "chrome-plated aluminum",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "formed metal bearing edge",
+      "hoopRaw": "2.3mm steel triple-flanged",
+      "shellThicknessMm": 1.7,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "aluminum",
+        "shellLayup": "otherLayup",
+        "shellConstruction": "metal",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "otherFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "rolledOrFormedMetal",
+        "hoopType": "tripleFlanged",
+        "snareBed": "minimalSnareBed",
+        "batterHead": "defaultCoatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.62,
+        "brightness": 6.08,
+        "projection": 5.91,
+        "sustain": 5.9,
+        "warmth": 5.48,
+        "sensitivity": 6.26,
+        "control": 6.46
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.62
+        },
+        {
+          "key": "control",
+          "value": 6.46
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.26
+        }
+      ],
+      "readinessTier": ""
     },
     {
       "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
@@ -22392,6 +21723,67 @@
         }
       ],
       "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_absolute-hybrid-maple_absolute-hybrid-maple-14x6_14x6_ply_maple_wenge_maple_6-2_45-degree-r1-5_vintage-natural-la_7d03d57c",
+      "company": "Yamaha",
+      "model": "Absolute Hybrid Maple 14x6",
+      "lineSeries": "Absolute Hybrid Maple",
+      "size": "14x6",
+      "shellMaterialRaw": "maple wenge maple",
+      "shellConstructionRaw": "Ply",
+      "shellLayupRaw": "",
+      "reinforcementRingsRaw": "",
+      "finishTreatmentRaw": "",
+      "plyCountRaw": "",
+      "bearingEdgeRaw": "45-degree/R1.5",
+      "hoopRaw": "3.0mm die-cast aluminum hoop",
+      "shellThicknessMm": 6.2,
+      "lugCount": 10,
+      "families": {
+        "shellMaterial": "maple",
+        "shellLayup": "allMapleLayup",
+        "shellConstruction": "plyWithReinforcementRings",
+        "reinforcementRings": "otherRings",
+        "finishTreatment": "unknownFinishTreatment",
+        "plyCount": "unknownPlyCount",
+        "bearingEdge": "sharper45Degree",
+        "hoopType": "dieCast",
+        "snareBed": "mediumSnareBed",
+        "batterHead": "coatedSinglePlyBatter",
+        "resoHead": "clearSnareSideReso",
+        "snareWires": "defaultTwentyStrandSteelWires"
+      },
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 7.02,
+        "brightness": 5.87,
+        "projection": 6.09,
+        "sustain": 6.22,
+        "warmth": 6.53,
+        "sensitivity": 6.35,
+        "control": 6.65
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 7.02
+        },
+        {
+          "key": "control",
+          "value": 6.65
+        },
+        {
+          "key": "warmth",
+          "value": 6.53
+        }
+      ],
+      "readinessTier": ""
     },
     {
       "id": "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc",

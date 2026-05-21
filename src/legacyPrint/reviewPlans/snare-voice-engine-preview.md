@@ -1,10 +1,10 @@
 # LegacyPrint Snare Voice Engine Preview
 
-Generated: 2026-05-21T13:46:54.485Z
+Generated: 2026-05-21T13:49:58.696Z
 
 ## Summary
 
-- Promoted records scored: 366
+- Promoted records scored: 359
 - Firestore writes: 0
 - Stock heads and snare wires are not scoring blockers in this preview.
 - Brand is not used as a primary scoring driver.
@@ -13,12 +13,12 @@ Generated: 2026-05-21T13:46:54.485Z
 
 | Node | Top-3 Appearances |
 |---|---:|
-| attack | 339 |
-| sustain | 228 |
+| attack | 340 |
+| sustain | 212 |
 | brightness | 149 |
-| control | 112 |
-| warmth | 101 |
+| control | 121 |
 | projection | 90 |
+| warmth | 86 |
 | sensitivity | 79 |
 
 ## First 80 Scored Records
@@ -101,7 +101,7 @@ Generated: 2026-05-21T13:46:54.485Z
 | Ludwig | Carl Palmer Venus 3.7x14 | 14x3.7 | brass | metal | otherLayup | otherRings | unknownPlyCount | unknownFinishTreatment | reinforcementRings:otherRings (0.094) | 7.68 | 6.9 | 6.39 | 6.26 | 5.27 | 5.81 | 6.63 | attack, brightness, control |
 | Ludwig | Chrome-Over-Brass 5x14 | 14x5 | brass | metal | otherLayup | otherRings | unknownPlyCount | otherFinishTreatment | reinforcementRings:otherRings (0.094) | 6.99 | 6.55 | 6.41 | 6.96 | 5.78 | 5.93 | 5.75 | attack, sustain, brightness |
 | Ludwig | Chrome-Over-Brass 6.5x14 | 14x6.5 | brass | metal | otherLayup | otherRings | unknownPlyCount | otherFinishTreatment | reinforcementRings:otherRings (0.094) | 6.91 | 6.49 | 6.55 | 7.13 | 5.98 | 5.83 | 5.7 | sustain, attack, projection |
-| Ludwig | Classic Maple 5.5x14 | 14x5.5 | maple | plyWithReinforcementRings | allMapleLayup | otherRings | unknownPlyCount | unknownFinishTreatment | reinforcementRings:otherRings (0.094), shellLayup:allMapleLayup (0.091) | 6.57 | 5.69 | 5.8 | 6.63 | 6.87 | 6.49 | 5.94 | warmth, sustain, attack |
-| Ludwig | Classic Maple 5x14 | 14x5 | maple | plyWithReinforcementRings | allMapleLayup | otherRings | unknownPlyCount | unknownFinishTreatment | reinforcementRings:otherRings (0.094), shellLayup:allMapleLayup (0.091) | 6.57 | 5.69 | 5.8 | 6.63 | 6.87 | 6.49 | 5.94 | warmth, sustain, attack |
-| Ludwig | Classic Maple 6.5x14 | 14x6.5 | maple | plyWithReinforcementRings | allMapleLayup | otherRings | unknownPlyCount | unknownFinishTreatment | reinforcementRings:otherRings (0.094), shellLayup:allMapleLayup (0.091) | 6.52 | 5.63 | 5.96 | 6.78 | 7.07 | 6.4 | 5.96 | warmth, sustain, attack |
-| Ludwig | Classic Maple 8x14 | 14x8 | maple | plyWithReinforcementRings | allMapleLayup | otherRings | unknownPlyCount | unknownFinishTreatment | reinforcementRings:otherRings (0.094), shellLayup:allMapleLayup (0.091) | 6.44 | 5.59 | 6.03 | 6.94 | 7.27 | 6.33 | 5.92 | warmth, sustain, attack |
+| Ludwig | Copper Phonic 5x14 | 14x5 | copper | metal | otherLayup | otherRings | unknownPlyCount | otherFinishTreatment | reinforcementRings:otherRings (0.094) | 6.56 | 5.97 | 6.04 | 6.86 | 6.3 | 5.99 | 5.73 | sustain, attack, warmth |
+| Ludwig | Copper Phonic 6.5x14 | 14x6.5 | copper | metal | otherLayup | otherRings | unknownPlyCount | otherFinishTreatment | reinforcementRings:otherRings (0.094) | 6.48 | 5.91 | 6.18 | 7.03 | 6.5 | 5.89 | 5.68 | sustain, warmth, attack |
+| Ludwig | Copper Phonic 8x14 | 14x8 | copper | metal | otherLayup | otherRings | unknownPlyCount | otherFinishTreatment | reinforcementRings:otherRings (0.094) | 6.4 | 5.87 | 6.25 | 7.19 | 6.69 | 5.82 | 5.64 | sustain, warmth, attack |
+| Ludwig | Hammered Black Beauty 5x14 | 14x5 | brass | metal | otherLayup | otherRings | unknownPlyCount | otherFinishTreatment | reinforcementRings:otherRings (0.094) | 6.99 | 6.55 | 6.41 | 6.96 | 5.78 | 5.93 | 5.75 | attack, sustain, brightness |
