@@ -81,9 +81,23 @@ const buildSnareVoicePacket = (rawRecord, options = {}) => {
 
     : baseScore;
 
-  const explanation = explainSnareVoice(calibratedScore);
+  const scoredRecordForReadouts = {
 
-  const readoutMaps = resolveSnareReadoutMaps(calibratedScore);
+    ...calibratedScore,
+
+    drivers: calibratedScore.drivers || baseScore.drivers || {
+
+      strongestSources: [],
+
+      byNode: {}
+
+    }
+
+  };
+
+  const explanation = explainSnareVoice(scoredRecordForReadouts);
+
+  const readoutMaps = resolveSnareReadoutMaps(scoredRecordForReadouts);
 
   const calibration = buildCalibrationSummary({ baseScore, calibratedScore });
 
@@ -155,9 +169,9 @@ const buildSnareVoicePacket = (rawRecord, options = {}) => {
 
     physicalDrivers: {
 
-      strongest: calibratedScore.drivers?.strongestSources || [],
+      strongest: scoredRecordForReadouts.drivers?.strongestSources || [],
 
-      byNode: calibratedScore.drivers?.byNode || {}
+      byNode: scoredRecordForReadouts.drivers?.byNode || {}
 
     },
 
