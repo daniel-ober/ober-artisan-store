@@ -221,7 +221,7 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
 
           firestore,
 
-          limit: 120,
+          limit: 500,
 
         });
 
