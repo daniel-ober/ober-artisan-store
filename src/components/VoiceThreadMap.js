@@ -2065,20 +2065,39 @@ const getThreadShapePoints = ({
 
       const movement = getAxisMovement(profile, nodeKey);
 
-      const signed = clamp(rawDelta / 0.95, -1, 1);
+      const signed = clamp(rawDelta / 2.25, -1, 1);
 
-      const rankBasePull = index === 0 ? 0.78 : index === 1 ? 0.68 : 0.6;
+      /*
 
-      const movementPull =
-        index === 0 ? movement * 0.28 : index === 1 ? movement * 0.24 : movement * 0.2;
+       * First Listen should read as a literal three-node fingerprint:
 
-      const signedPull = signed * 0.12;
+       * selected node angle + actual score radius. Do not normalize all
 
-      const rankPull = clamp(rankBasePull + movementPull + signedPull, 0.36, 1.04);
+       * triangles into the same balanced shape.
 
-      const xJitter = getSeededSignedValue(seed, `first-tell-x-${nodeKey}-${index}`) * 9;
+       */
 
-      const yJitter = getSeededSignedValue(seed, `first-tell-y-${nodeKey}-${index}`) * 9;
+      const scoreRadius = clamp(0.42 + ((rawValue - 5) / 5) * 0.72, 0.36, 1.12);
+
+      const rankPush = index === 0 ? 0.16 : index === 1 ? 0.08 : 0;
+
+      const movementPush = movement * (index === 0 ? 0.18 : index === 1 ? 0.13 : 0.1);
+
+      const signedPull = signed * 0.16;
+
+      const rankPull = clamp(scoreRadius + rankPush + movementPush + signedPull, 0.38, 1.16);
+
+      const xJitter =
+
+        getSeededSignedValue(seed, `first-tell-x-${nodeKey}-${index}`) *
+
+        (8 + Math.abs(rawDelta) * 4);
+
+      const yJitter =
+
+        getSeededSignedValue(seed, `first-tell-y-${nodeKey}-${index}`) *
+
+        (8 + Math.abs(rawDelta) * 4);
 
       return {
         nodeKey,
@@ -2091,7 +2110,7 @@ const getThreadShapePoints = ({
       };
     });
 
-    return widenFirstTellTriangle(triangleItems);
+    return triangleItems;
   }
 
   if (resolvedReadVariant === 'player') {
