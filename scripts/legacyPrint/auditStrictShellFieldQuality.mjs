@@ -1516,6 +1516,20 @@ function findNonCriticalStockMissing(fields) {
 
 }
 
+function hasAuditableMetalEdgeFallback(fields) {
+
+  return (
+
+    fields.fieldQualityTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    fields.coreShellTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    fields.engineAssumptions?.bearingEdgeFallbackApplied === true
+
+  );
+
+}
+
 function classifyShellFieldQuality(fields, thicknessCheck, edgeCheck, sourceCheck, criticalIssues) {
 
   const hasCoreIdentity =
@@ -1532,13 +1546,7 @@ function classifyShellFieldQuality(fields, thicknessCheck, edgeCheck, sourceChec
 
     isPresent(fields.shellConstruction);
 
-  const hasMetalEdgeFallback =
-
-    fields.fieldQualityTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
-
-    fields.coreShellTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
-
-    fields.engineAssumptions?.bearingEdgeFallbackApplied === true;
+  const hasMetalEdgeFallback = hasAuditableMetalEdgeFallback(fields);
 
   if (criticalIssues.length > 0 || isTrueish(fields.duplicateConflict)) {
 

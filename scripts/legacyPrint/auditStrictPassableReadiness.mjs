@@ -298,6 +298,14 @@ function getCanonicalFields(doc) {
 
     id: doc.__id,
 
+    coreShellTier: doc.coreShellTier,
+
+    fieldQualityTier: doc.fieldQualityTier,
+
+    engineAssumptions: doc.engineAssumptions || {},
+
+    bearingEdgeNeedsVerification: doc.bearingEdgeNeedsVerification,
+
     companyName: firstNonEmpty(doc.companyName, doc['COMPANY NAME']),
 
     companyType: firstNonEmpty(doc.companyType, doc['COMPANY TYPE']),
@@ -848,6 +856,20 @@ function findCriticalNumericIssues(fields) {
 
 }
 
+function hasAuditableMetalEdgeFallback(fields) {
+
+  return (
+
+    fields.fieldQualityTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    fields.coreShellTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    fields.engineAssumptions?.bearingEdgeFallbackApplied === true
+
+  );
+
+}
+
 function findCoreShellMissingStrict(fields) {
 
   const missing = [];
@@ -870,7 +892,7 @@ function findCoreShellMissingStrict(fields) {
 
   }
 
-  if (!isPresent(fields.bearingEdge)) {
+  if (!isPresent(fields.bearingEdge) && !hasAuditableMetalEdgeFallback(fields)) {
 
     missing.push('bearing edge shape/detail');
 
@@ -1026,6 +1048,34 @@ function classifyCoreShellStrict(fields) {
 
   }
 
+  if (hasAuditableMetalEdgeFallback(fields) && missing.length === 0) {
+
+    return {
+
+      tier: 'PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK',
+
+      passable: true,
+
+      missing,
+
+      confidenceWarnings: [
+
+        ...confidenceWarnings,
+
+        'bearing edge uses auditable metal-shell fallback and still needs verification',
+
+      ],
+
+      criticalIssues,
+
+      reason:
+
+        'has required shell facts with auditable metal-shell bearing-edge fallback; bearing edge is not source-confirmed',
+
+    };
+
+  }
+
   if (missing.length === 0 && confidenceWarnings.length === 0) {
 
     return {
@@ -1132,11 +1182,27 @@ function classifyStockStrict(fields) {
 
   }
 
-  if (missing.length === 0 && core.tier === 'PASSABLE_CORE_SHELL_WITH_CONFIDENCE_WARNINGS') {
+  if (
+
+    missing.length === 0 &&
+
+    (
+
+      core.tier === 'PASSABLE_CORE_SHELL_WITH_CONFIDENCE_WARNINGS' ||
+
+      core.tier === 'PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK'
+
+    )
+
+  ) {
 
     return {
 
-      tier: 'PASSABLE_STOCK_WITH_CORE_CONFIDENCE_WARNINGS',
+      tier: core.tier === 'PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK'
+
+        ? 'PASSABLE_STOCK_WITH_METAL_EDGE_FALLBACK'
+
+        : 'PASSABLE_STOCK_WITH_CORE_CONFIDENCE_WARNINGS',
 
       passable: true,
 
@@ -1144,7 +1210,11 @@ function classifyStockStrict(fields) {
 
       criticalIssues,
 
-      reason: 'stock configuration complete, but core shell confidence needs review',
+      reason: core.tier === 'PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK'
+
+        ? 'stock configuration complete, but core shell uses auditable metal-edge fallback'
+
+        : 'stock configuration complete, but core shell confidence needs review',
 
     };
 
@@ -1332,6 +1402,8 @@ function priorityScore(row) {
 
   if (row.coreShellTier === 'PASSABLE_CORE_SHELL_WITH_CONFIDENCE_WARNINGS') score += 220;
 
+  if (row.coreShellTier === 'PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK') score += 210;
+
   score -= (row.missingForStock || []).length * 12;
 
   score -= (row.missingForCoreShell || []).length * 25;
@@ -1454,6 +1526,8 @@ function buildReport(rows) {
 
         PASSABLE_STOCK_WITH_CORE_CONFIDENCE_WARNINGS: 0,
 
+        PASSABLE_STOCK_WITH_METAL_EDGE_FALLBACK: 0,
+
         NEARLY_PASSABLE_STOCK: 0,
 
         CORE_PASSABLE_STOCK_NEEDS_RESEARCH: 0,
@@ -1465,6 +1539,8 @@ function buildReport(rows) {
         PASSABLE_CORE_SHELL_STRICT: 0,
 
         PASSABLE_CORE_SHELL_WITH_CONFIDENCE_WARNINGS: 0,
+
+        PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK: 0,
 
         CORE_SHELL_NEEDS_RESEARCH: 0,
 
@@ -1563,6 +1639,10 @@ function buildReport(rows) {
       PASSABLE_CORE_SHELL_WITH_CONFIDENCE_WARNINGS:
 
         coreShellTierCounts.PASSABLE_CORE_SHELL_WITH_CONFIDENCE_WARNINGS || 0,
+
+      PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK:
+
+        coreShellTierCounts.PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK || 0,
 
       CORE_SHELL_NEEDS_RESEARCH: coreShellTierCounts.CORE_SHELL_NEEDS_RESEARCH || 0,
 
