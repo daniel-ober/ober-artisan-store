@@ -138,6 +138,66 @@ function main() {
 
   });
 
+  const unmatchedByCompanyLineMap = new Map();
+
+  for (const row of unmatched) {
+
+    const key = `${row.companyName || 'Unknown'} || ${row.lineSeries || 'Unknown'}`;
+
+    if (!unmatchedByCompanyLineMap.has(key)) {
+
+      unmatchedByCompanyLineMap.set(key, {
+
+        companyName: row.companyName || 'Unknown',
+
+        lineSeries: row.lineSeries || 'Unknown',
+
+        count: 0,
+
+        sourceUrls: new Set(),
+
+        models: []
+
+      });
+
+    }
+
+    const group = unmatchedByCompanyLineMap.get(key);
+
+    group.count += 1;
+
+    if (row.primarySourceUrl) {
+
+      group.sourceUrls.add(row.primarySourceUrl);
+
+    }
+
+    if (row.modelName && group.models.length < 12) {
+
+      group.models.push(row.modelName);
+
+    }
+
+  }
+
+  const unmatchedByCompanyLine = [...unmatchedByCompanyLineMap.values()]
+
+    .map((group) => ({
+
+      companyName: group.companyName,
+
+      lineSeries: group.lineSeries,
+
+      count: group.count,
+
+      sourceUrls: [...group.sourceUrls].slice(0, 8),
+
+      models: group.models
+
+    }))
+
+    .sort((a, b) => b.count - a.count || a.companyName.localeCompare(b.companyName));
+
   const output = {
 
     reportName: 'OBER LEGACYPRINT™ STOCK HEAD FALLBACK RULE COVERAGE',
@@ -167,6 +227,8 @@ function main() {
     },
 
     byRule,
+
+    unmatchedByCompanyLine,
 
     unmatched,
 
