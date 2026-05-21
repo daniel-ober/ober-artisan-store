@@ -19,6 +19,8 @@ const DEFAULT_SNARE_CALIBRATION_OVERLAY = {
 
         'Preview overlay: aluminum snares should preserve dry control and touch response compared with brass.',
 
+      confidence: 'adminPreview',
+
       deltas: {
 
         control: 0.03,
@@ -36,6 +38,8 @@ const DEFAULT_SNARE_CALIBRATION_OVERLAY = {
       reason:
 
         'Preview overlay: brass snares keep a touch more musical sustain after benchmark calibration.',
+
+      confidence: 'adminPreview',
 
       deltas: {
 
@@ -56,6 +60,8 @@ const DEFAULT_SNARE_CALIBRATION_OVERLAY = {
       reason:
 
         'Preview overlay: die-cast hoops slightly emphasize focus/control and slightly reduce open ring.',
+
+      confidence: 'adminPreview',
 
       deltas: {
 
