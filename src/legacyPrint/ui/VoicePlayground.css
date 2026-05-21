@@ -5072,3 +5072,152 @@
 
 }
 
+
+/* =========================================================
+
+   VOICE PLAYGROUND — DISCOVERY SECTION SUMMARY
+
+   ========================================================= */
+
+.vp-discovery-section-summary {
+
+  margin: 0 0 10px;
+
+  padding: 9px 10px;
+
+  border-left: 1px solid rgba(214, 178, 119, 0.42);
+
+  background:
+
+    linear-gradient(90deg, rgba(214, 178, 119, 0.07), transparent 78%),
+
+    rgba(255, 255, 255, 0.014);
+
+  flex: 0 0 auto;
+
+}
+
+.vp-discovery-section-summary strong {
+
+  display: block;
+
+  color: rgba(248, 239, 255, 0.84);
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+}
+
+.vp-discovery-section-summary p {
+
+  margin: 5px 0 0;
+
+  color: rgba(245, 239, 255, 0.52);
+
+  font-size: 10px;
+
+  line-height: 1.35;
+
+}
+
+
+/* =========================================================
+
+   LEGACYPRINT ENGINE — READOUT SUMMARY
+
+   ========================================================= */
+
+.vp-header-copy h2 {
+
+  max-width: 720px;
+
+}
+
+.vp-readout-summary {
+
+  width: min(100%, 520px);
+
+  margin: -2px auto 12px;
+
+  padding: 11px 14px;
+
+  border: 1px solid rgba(170, 143, 255, 0.12);
+
+  border-radius: 10px;
+
+  background:
+
+    radial-gradient(circle at 18% 0%, rgba(214, 178, 119, 0.09), transparent 62%),
+
+    rgba(255, 255, 255, 0.018);
+
+  text-align: center;
+
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.018);
+
+}
+
+.vp-readout-summary span {
+
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: rgba(214, 178, 119, 0.72);
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+}
+
+.vp-readout-summary strong {
+
+  display: block;
+
+  color: rgba(248, 239, 255, 0.9);
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+}
+
+.vp-readout-summary p {
+
+  max-width: 430px;
+
+  margin: 6px auto 0;
+
+  color: rgba(245, 239, 255, 0.54);
+
+  font-size: 10.5px;
+
+  line-height: 1.45;
+
+}
+
+@media (max-width: 760px) {
+
+  .vp-readout-summary {
+
+    width: 100%;
+
+    margin: 4px auto 12px;
+
+  }
+
+}

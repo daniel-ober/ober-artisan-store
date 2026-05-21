@@ -70,6 +70,10 @@ const READ_MODES = [
 
     kicker: 'First Tell',
 
+    description:
+
+      'The fastest audible impression: the traits a drummer is most likely to notice first when the drum speaks.',
+
   },
 
   {
@@ -80,6 +84,10 @@ const READ_MODES = [
 
     kicker: 'Seven-Node Read',
 
+    description:
+
+      'A practical seven-node read of how the drum behaves under the stick across attack, brightness, projection, sustain, warmth, sensitivity, and control.',
+
   },
 
   {
@@ -89,6 +97,10 @@ const READ_MODES = [
     label: 'LegacyPrint Identity',
 
     kicker: 'Identity',
+
+    description:
+
+      'The one-of-one voice fingerprint: how this drum’s traits combine into a recognizable acoustic identity.',
 
   },
 
@@ -984,6 +996,10 @@ export function VoicePlayground({ firestore }) {
 
     REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
 
+  const selectedReadMode =
+
+    READ_MODES.find((item) => item.key === readMode) || READ_MODES[0];
+
   const discoverySections = useMemo(() => {
 
     return (discoveryViewModel?.recommendedSections || []).filter(
@@ -1132,9 +1148,9 @@ export function VoicePlayground({ firestore }) {
 
           <div className="vp-header-copy">
 
-            <h2>Voice Playground</h2>
+            <h2>LegacyPrint™ Drum Voicing Engine</h2>
 
-            <p>Explore · Shape · Discover</p>
+            <p>Select · Read · Compare · Discover</p>
 
           </div>
 
@@ -1267,6 +1283,16 @@ export function VoicePlayground({ firestore }) {
 
           />
 
+          <div className="vp-readout-summary">
+
+            <span>{selectedReadMode.kicker}</span>
+
+            <strong>{selectedReadMode.label}</strong>
+
+            <p>{selectedReadMode.description}</p>
+
+          </div>
+
           <div className="vp-read-mode-dock" aria-label="Read view">
 
             {READ_MODES.map((item) => (
@@ -1373,31 +1399,47 @@ export function VoicePlayground({ firestore }) {
 
           {discoverySections.length > 0 && (
 
-            <div className="vp-discovery-section-tabs" aria-label="Discovery match sections">
+            <>
 
-              {discoverySections.map((section) => (
+              <div className="vp-discovery-section-tabs" aria-label="Discovery match sections">
 
-                <button
+                {discoverySections.map((section) => (
 
-                  key={section.key}
+                  <button
 
-                  type="button"
+                    key={section.key}
 
-                  className={selectedDiscoverySection?.key === section.key ? 'is-active' : ''}
+                    type="button"
 
-                  onClick={() => setSelectedDiscoverySectionKey(section.key)}
+                    className={selectedDiscoverySection?.key === section.key ? 'is-active' : ''}
 
-                >
+                    onClick={() => setSelectedDiscoverySectionKey(section.key)}
 
-                  <span>{section.label}</span>
+                  >
 
-                  <em>{section.matches.length}</em>
+                    <span>{section.label}</span>
 
-                </button>
+                    <em>{section.matches.length}</em>
 
-              ))}
+                  </button>
 
-            </div>
+                ))}
+
+              </div>
+
+              {selectedDiscoverySection?.description && (
+
+                <div className="vp-discovery-section-summary">
+
+                  <strong>{selectedDiscoverySection.label}</strong>
+
+                  <p>{selectedDiscoverySection.description}</p>
+
+                </div>
+
+              )}
+
+            </>
 
           )}
 
