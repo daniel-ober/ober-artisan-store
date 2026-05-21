@@ -1,0 +1,4271 @@
+{
+  "generatedAt": "2026-05-21T06:51:45.663Z",
+  "mode": "PLAN_ONLY_NO_FIRESTORE_WRITES",
+  "candidatePath": "tmp/legacyPrint-audits/stock-head-fallback-candidates-2026-05-21T06-45-46-788Z.json",
+  "rulesPath": "src/legacyPrint/reviewPlans/stock-head-fallback-rules-draft.json",
+  "summary": {
+    "candidatesChecked": 219,
+    "totalRules": 35,
+    "approvedRules": 0,
+    "draftRules": 35,
+    "plannedUpdates": 0,
+    "skippedDraftCandidates": 219,
+    "unmatchedApprovedCandidates": 0
+  },
+  "updates": [],
+  "skippedDraftCandidates": [
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "label": "AHEAD — Ahead Snares — Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass 14x6 with Black Trick Throw Off — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum-with-black-trick-throw-off/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass Snare Drum 13x6 — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass Snare Drum 14x6 — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+      "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass 13x6 — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished 3mm Bell Brass 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+      "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass Piccolo 14x4 — 14x4",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-piccolo-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+      "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Piccolo Snare Drum 14x4 — 14x4",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-piccolo-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+      "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Snare Drum 13x6 — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished Bell Brass Snare Drum 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+      "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Snare Drum 14x6 — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished Bell Brass Snare Drum 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+      "label": "AHEAD — Ahead Snares — Polished Bell Brass Snare Drum 14x6 — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Polished Bell Brass Snare Drum 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-polished-bell-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1705,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass",
+      "label": "Tama — Signature — Bill Platt BP146 Signature Bell Brass 14x6 — 14x6",
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelName": "Bill Platt BP146 Signature Bell Brass 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/usa/products/detail/bp146.html",
+      "sourceConfidence": "High",
+      "priorityScore": 1680,
+      "matchedDraftRuleKey": "tama-signature-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "label": "AHEAD — Ahead Snares — Black Chrome Bell Brass 14x6 DCP Dealer Listing — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://drumcenternh.com/products/ahead-3mm-cast-bell-brass-snare-drum-14x6-black-chrome-w-brass-hw-trick-throw-off",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1655,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "label": "AHEAD — Ahead Snares — Black Chrome Bell Brass 14x6 Sweetwater Listing — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/AS614BBBB--ahead-as614bbbb-6-inch-by-14-inch-bell-brass-snare-drum-black-chrome",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1655,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "label": "AHEAD — Ahead Snares — Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1655,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "label": "AHEAD — Ahead Snares — Black Chrome on 3mm Bell Brass 14x6 Brass Hardware — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bentleysdrumshop.com/collections/snare-drums/brand_ahead",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1655,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+      "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass 14x6 — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Bright Polished 3mm Bell Brass 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1655,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass",
+      "label": "Tama — Signature — Lars Ulrich LU1465BB Bell Brass 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelName": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2001Signature.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1630,
+      "matchedDraftRuleKey": "tama-signature-stock-heads-draft"
+    },
+    {
+      "id": "yamaha_tour-custom_tour-custom-maple-14x5-5_14x5-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_b3bf7f1d",
+      "label": "Yamaha — Tour Custom — Tour Custom Maple 14x5.5 — 14x5.5",
+      "companyName": "Yamaha",
+      "lineSeries": "Tour Custom",
+      "modelName": "Tour Custom Maple 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/tour-custom/specs.html",
+      "sourceConfidence": "High",
+      "priorityScore": 1610,
+      "matchedDraftRuleKey": "yamaha-tour-custom-stock-heads-draft"
+    },
+    {
+      "id": "yamaha_tour-custom_tour-custom-maple-14x6-5_14x6-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_eac794a7",
+      "label": "Yamaha — Tour Custom — Tour Custom Maple 14x6.5 — 14x6.5",
+      "companyName": "Yamaha",
+      "lineSeries": "Tour Custom",
+      "modelName": "Tour Custom Maple 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/tour-custom/specs.html",
+      "sourceConfidence": "High",
+      "priorityScore": 1610,
+      "matchedDraftRuleKey": "yamaha-tour-custom-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-13x7_13x7_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_f7714692",
+      "label": "SONOR — Kompressor — Kompressor Aluminum 13x7 — 13x7",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Aluminum 13x7",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x5-75_14x5-75_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-fla_28cafbb5",
+      "label": "SONOR — Kompressor — Kompressor Aluminum 14x5.75 — 14x5.75",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Aluminum 14x5.75",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x6-5_14x6-5_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flang_2d7ba40c",
+      "label": "SONOR — Kompressor — Kompressor Aluminum 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Aluminum 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x8_14x8_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_38fe8f02",
+      "label": "SONOR — Kompressor — Kompressor Aluminum 14x8 — 14x8",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Aluminum 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-13x7_13x7_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_d51a0981",
+      "label": "SONOR — Kompressor — Kompressor Beech 13x7 — 13x7",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Beech 13x7",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x5-75_14x5-75_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-_62ac1b7f",
+      "label": "SONOR — Kompressor — Kompressor Beech 14x5.75 — 14x5.75",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Beech 14x5.75",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-se_0fef9e59",
+      "label": "SONOR — Kompressor — Kompressor Beech 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Beech 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x6_14x6_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_671ce638",
+      "label": "SONOR — Kompressor — Kompressor Beech 14x6 — 14x6",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Beech 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x8_14x8_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_eb25e3d0",
+      "label": "SONOR — Kompressor — Kompressor Beech 14x8 — 14x8",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Beech 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-13x7_13x7_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_552bc64f",
+      "label": "SONOR — Kompressor — Kompressor Brass 13x7 — 13x7",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Brass 13x7",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x5-75_14x5-75_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_d11788c6",
+      "label": "SONOR — Kompressor — Kompressor Brass 14x5.75 — 14x5.75",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Brass 14x5.75",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x6-5_14x6-5_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_0c11b4b7",
+      "label": "SONOR — Kompressor — Kompressor Brass 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Brass 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x8_14x8_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_a0aff72c",
+      "label": "SONOR — Kompressor — Kompressor Brass 14x8 — 14x8",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Brass 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-13x7_13x7_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_22a027d3",
+      "label": "SONOR — Kompressor — Kompressor Steel 13x7 — 13x7",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Steel 13x7",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x5-75_14x5-75_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_2a7b4cc7",
+      "label": "SONOR — Kompressor — Kompressor Steel 14x5.75 — 14x5.75",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Steel 14x5.75",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x6-5_14x6-5_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel_2e90fd2c",
+      "label": "SONOR — Kompressor — Kompressor Steel 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Steel 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x8_14x8_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_3d48d2d8",
+      "label": "SONOR — Kompressor — Kompressor Steel 14x8 — 14x8",
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "modelName": "Kompressor Steel 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "High",
+      "priorityScore": 1550,
+      "matchedDraftRuleKey": "sonor-kompressor-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-10x6_10x6_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-hoop-_ca646a7e",
+      "label": "Canopus — The Maple — The Maple 10x6 — 10x6",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 10x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-12x6-5_12x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-h_625807fe",
+      "label": "Canopus — The Maple — The Maple 12x6.5 — 12x6.5",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 12x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-13x6-5_13x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_c5d6734d",
+      "label": "Canopus — The Maple — The Maple 13x6.5 — 13x6.5",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 13x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x4_14x4_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_264edc8c",
+      "label": "Canopus — The Maple — The Maple 14x4 — 14x4",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x4",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x5-5_14x5-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_8ad3dcc0",
+      "label": "Canopus — The Maple — The Maple 14x5.5 — 14x5.5",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x6-5_14x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_a60ce85c",
+      "label": "Canopus — The Maple — The Maple 14x6.5 — 14x6.5",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x8_14x8_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_e7f518b8",
+      "label": "Canopus — The Maple — The Maple 14x8 — 14x8",
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "modelName": "The Maple 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_zelkova_zelkova-14x5_14x5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1450_edd9ca5c",
+      "label": "Canopus — Zelkova — Zelkova 14x5 — 14x5",
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova",
+      "modelName": "Zelkova 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/zelkova-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "canopus_zelkova_zelkova-14x6-5_14x6-5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1465_b4533a82",
+      "label": "Canopus — Zelkova — Zelkova 14x6.5 — 14x6.5",
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova",
+      "modelName": "Zelkova 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/zelkova-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 1470,
+      "matchedDraftRuleKey": "canopus-stock-heads-draft"
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+      "label": "Ludwig — 1963-1970s Ludwig — Supraphonic LM400 5x14 — 14x5",
+      "companyName": "Ludwig",
+      "lineSeries": "1963-1970s Ludwig",
+      "modelName": "Supraphonic LM400 5x14",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1275,
+      "matchedDraftRuleKey": "ludwig-1963-1970s-stock-heads-draft"
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+      "label": "Ludwig — 1963-1970s Ludwig — Supraphonic LM402 6.5x14 — 14x6.5",
+      "companyName": "Ludwig",
+      "lineSeries": "1963-1970s Ludwig",
+      "modelName": "Supraphonic LM402 6.5x14",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1275,
+      "matchedDraftRuleKey": "ludwig-1963-1970s-stock-heads-draft"
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+      "label": "Ludwig — 1977 Ludwig — Black Beauty 5x14 — 14x5",
+      "companyName": "Ludwig",
+      "lineSeries": "1977 Ludwig",
+      "modelName": "Black Beauty 5x14",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1255,
+      "matchedDraftRuleKey": "ludwig-1977-stock-heads-draft"
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+      "label": "Ludwig — 1977 Ludwig — Black Beauty Super Sensitive 5x14 — 14x5",
+      "companyName": "Ludwig",
+      "lineSeries": "1977 Ludwig",
+      "modelName": "Black Beauty Super Sensitive 5x14",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 1255,
+      "matchedDraftRuleKey": "ludwig-1977-stock-heads-draft"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+      "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "modelName": "Sensitone Heritage Aluminum Alloy",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "Medium",
+      "priorityScore": 995,
+      "matchedDraftRuleKey": "pearl-sensitone-stock-heads-draft"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+      "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "modelName": "Sensitone Heritage Aluminum Alloy",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "Medium",
+      "priorityScore": 995,
+      "matchedDraftRuleKey": "pearl-sensitone-stock-heads-draft"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+      "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "modelName": "Sensitone Heritage Brass Alloy",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "Medium",
+      "priorityScore": 995,
+      "matchedDraftRuleKey": "pearl-sensitone-stock-heads-draft"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+      "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "modelName": "Sensitone Heritage Brass Alloy",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "Medium",
+      "priorityScore": 995,
+      "matchedDraftRuleKey": "pearl-sensitone-stock-heads-draft"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+      "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "modelName": "Sensitone Heritage Steel Alloy",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "Medium",
+      "priorityScore": 995,
+      "matchedDraftRuleKey": "pearl-sensitone-stock-heads-draft"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+      "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "modelName": "Sensitone Heritage Steel Alloy",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "Medium",
+      "priorityScore": 995,
+      "matchedDraftRuleKey": "pearl-sensitone-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+      "label": "Pearl — Free Floating — Free Floating Aluminum — 14x3.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Aluminum",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+      "label": "Pearl — Free Floating — Free Floating Aluminum — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Aluminum",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+      "label": "Pearl — Free Floating — Free Floating Aluminum — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Aluminum",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+      "label": "Pearl — Free Floating — Free Floating Aluminum — 14x8",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Aluminum",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+      "label": "Pearl — Free Floating — Free Floating Brass — 14x3.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+      "label": "Pearl — Free Floating — Free Floating Brass — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+      "label": "Pearl — Free Floating — Free Floating Brass — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+      "label": "Pearl — Free Floating — Free Floating Brass — 14x8",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+      "label": "Pearl — Free Floating — Free Floating Copper — 14x3.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Copper",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+      "label": "Pearl — Free Floating — Free Floating Copper — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Copper",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x6-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_2eb75db4",
+      "label": "Pearl — Free Floating — Free Floating Copper — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Copper",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x8_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_3cea84d6",
+      "label": "Pearl — Free Floating — Free Floating Copper — 14x8",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Copper",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x3-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_f9aae6e5",
+      "label": "Pearl — Free Floating — Free Floating Steel — 14x3.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_6af96288",
+      "label": "Pearl — Free Floating — Free Floating Steel — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x6-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bc4caad",
+      "label": "Pearl — Free Floating — Free Floating Steel — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x8_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bed3a7f",
+      "label": "Pearl — Free Floating — Free Floating Steel — 14x8",
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "modelName": "Free Floating Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 975,
+      "matchedDraftRuleKey": "pearl-free-floating-stock-heads-draft"
+    },
+    {
+      "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+      "label": "Canopus — Aluminum Alloy — Aluminum Alloy 14x6 — 14x6",
+      "companyName": "Canopus",
+      "lineSeries": "Aluminum Alloy",
+      "modelName": "Aluminum Alloy 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/aluminum-alloy-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 925,
+      "matchedDraftRuleKey": "canopus-aluminum-alloy-stock-heads-draft"
+    },
+    {
+      "id": "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+      "label": "Canopus — Manganese Steel — Manganese Steel 14x5.5 — 14x5.5",
+      "companyName": "Canopus",
+      "lineSeries": "Manganese Steel",
+      "modelName": "Manganese Steel 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 925,
+      "matchedDraftRuleKey": "canopus-manganese-steel-stock-heads-draft"
+    },
+    {
+      "id": "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973",
+      "label": "Canopus — Manganese Steel — Manganese Steel 14x6.5 — 14x6.5",
+      "companyName": "Canopus",
+      "lineSeries": "Manganese Steel",
+      "modelName": "Manganese Steel 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+      "sourceConfidence": "High",
+      "priorityScore": 925,
+      "matchedDraftRuleKey": "canopus-manganese-steel-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass 13x6 Dunnett Throw-Off Option — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-13-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass 13x6 Trick Throw-Off Option — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-13-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x4-piccolo_14x4_metal_brass_1_smoke-chrome_sh1410-s-hoop-counter-hoops_as414_07617ee1",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass 14x4 Piccolo — 14x4",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 14x4 Piccolo",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-dunnett-throw-off-option_14x6_metal_brass_1_minimal-shallow-snare-beds_smo_f95fc0e2",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass 14x6 Dunnett Throw-Off Option — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-14-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-trick-throw-off-option_14x6_metal_brass_1_smoke-chrome-black-chrome_sh1410_8581ca8f",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass 14x6 Trick Throw-Off Option — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-14-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-piccolo-snare-drum-14x4_14x4_metal_brass_1_minimal-shallow-snare-beds_smoke-chr_2b056559",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass Piccolo Snare Drum 14x4 — 14x4",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_03f82188",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass Snare Drum 13x6 — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass Snare Drum 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-13-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_65f4f28c",
+      "label": "AHEAD — Ahead Snares — Black Chrome on Brass Snare Drum 14x6 — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black Chrome on Brass Snare Drum 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-6-x-14-black-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-13x6-tube-lug-original_13x6_metal_brass_1_chrome_sh138-s-hoop-counter-hoops_asc613_7dac1d72",
+      "label": "AHEAD — Ahead Snares — Chrome on Brass 13x6 Tube Lug Original — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass 13x6 Tube Lug Original",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_chrome_sh138-s-hoop-cou_2d68cd61",
+      "label": "AHEAD — Ahead Snares — Chrome on Brass Snare Drum 13x6 — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass Snare Drum 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-engraved-shell_14x6_metal_titanium_1_engraved-titanium_sh1410-s-hoop-counter-hoops_tita_3a7640dd",
+      "label": "AHEAD — Ahead Snares — Titanium 14x6 Engraved Shell — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Titanium 14x6 Engraved Shell",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-titanium-snare-drum-with-chrome-trick-throw-off/",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-snare-drum-14x6-with-chrome-trick-throw-off_14x6_metal_titanium_1_minimal-shallow-snare-beds_bc64363e",
+      "label": "AHEAD — Ahead Snares — Titanium Snare Drum 14x6 with Chrome Trick Throw Off — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Titanium Snare Drum 14x6 with Chrome Trick Throw Off",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-titanium-snare-drum-with-chrome-trick-t...",
+      "sourceConfidence": "High",
+      "priorityScore": 905,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "tama_signature_lars-ulrich-lu1465-14x6-5_14x6-5_metal_steel_3_diamond-plate-steel_die-cast-hoops_lu1465_ae41107f",
+      "label": "Tama — Signature — Lars Ulrich LU1465 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelName": "Lars Ulrich LU1465 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/lu1465.html",
+      "sourceConfidence": "High",
+      "priorityScore": 880,
+      "matchedDraftRuleKey": "tama-signature-stock-heads-draft"
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga",
+      "label": "Tama — Signature — Mike Portnoy Melody Master MP1455BU 14x5.5 — 14x5.5",
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelName": "Mike Portnoy Melody Master MP1455BU 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/mp1455bu.html",
+      "sourceConfidence": "High",
+      "priorityScore": 880,
+      "matchedDraftRuleKey": "tama-signature-stock-heads-draft"
+    },
+    {
+      "id": "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0",
+      "label": "Tama — Signature — Stewart Copeland SC145 14x5 — 14x5",
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelName": "Stewart Copeland SC145 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/usa/products/snare_drums/sc145.html",
+      "sourceConfidence": "High",
+      "priorityScore": 880,
+      "matchedDraftRuleKey": "tama-signature-stock-heads-draft"
+    },
+    {
+      "id": "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf",
+      "label": "Canopus — Type-R — Type-R 3mm Brass Magnum 14x6.5 — 14x6.5",
+      "companyName": "Canopus",
+      "lineSeries": "Type-R",
+      "modelName": "Type-R 3mm Brass Magnum 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 875,
+      "matchedDraftRuleKey": "canopus-type-r-stock-heads-draft"
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-mahogany-poplar-mahogany-14x6-5_14x6-5_ply_mahogany_poplar_mahogany_6_los-an_b47d879c",
+      "label": "C&C Drums USA — 12th & Vine — 12th & Vine Mahogany/Poplar/Mahogany 14x6.5 — 14x6.5",
+      "companyName": "C&C Drums USA",
+      "lineSeries": "12th & Vine",
+      "modelName": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.candcdrumsusa.com/12th-and-vine",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "candc-12th-and-vine-stock-heads-draft"
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+      "label": "C&C Drums USA — 12th & Vine — 12th & Vine Maple/Poplar/Maple 14x6.5 — 14x6.5",
+      "companyName": "C&C Drums USA",
+      "lineSeries": "12th & Vine",
+      "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.candcdrumsusa.com/12th-and-vine",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "candc-12th-and-vine-stock-heads-draft"
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-walnut-poplar-walnut-14x6-5_14x6-5_ply_walnut_poplar_walnut_6_los-angeles-be_e6594653",
+      "label": "C&C Drums USA — 12th & Vine — 12th & Vine Walnut/Poplar/Walnut 14x6.5 — 14x6.5",
+      "companyName": "C&C Drums USA",
+      "lineSeries": "12th & Vine",
+      "modelName": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.candcdrumsusa.com/12th-and-vine",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "candc-12th-and-vine-stock-heads-draft"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x5-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_f5cb0d30",
+      "label": "Gretsch — Brooklyn — Brooklyn Snare — 14x5.5",
+      "companyName": "Gretsch",
+      "lineSeries": "Brooklyn",
+      "modelName": "Brooklyn Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "gretsch-brooklyn-stock-heads-draft"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_3fecbb47",
+      "label": "Gretsch — Brooklyn — Brooklyn Snare — 14x5",
+      "companyName": "Gretsch",
+      "lineSeries": "Brooklyn",
+      "modelName": "Brooklyn Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "gretsch-brooklyn-stock-heads-draft"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x6-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_1c0dea43",
+      "label": "Gretsch — Brooklyn — Brooklyn Snare — 14x6.5",
+      "companyName": "Gretsch",
+      "lineSeries": "Brooklyn",
+      "modelName": "Brooklyn Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "gretsch-brooklyn-stock-heads-draft"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x8_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_8060da8c",
+      "label": "Gretsch — Brooklyn — Brooklyn Snare — 14x8",
+      "companyName": "Gretsch",
+      "lineSeries": "Brooklyn",
+      "modelName": "Brooklyn Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "gretsch-brooklyn-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther_persuader_14x6-5_metal_brass_1-2_45-modern-metal-edge_hammered-brass_sonic-saver-hoops_bpnbr465hcn_ed80426a",
+      "label": "Mapex — Black Panther — Persuader — 14x6.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "modelName": "Persuader",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther/persuader",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther_solidus_14x7_ply_maple_11_rounded-45-batter-edge-with-3-8-counter-cut_2-7mm-snare-bed-5-5-width_soni_b8a7cb6b",
+      "label": "Mapex — Black Panther — Solidus — 14x7",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "modelName": "Solidus",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther/solidus",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer-metal_big-black-brass-bob_14x6-5_metal_brass_1_folded-metal-bearing-edge-not-fully-s_5e641a76",
+      "label": "Pork Pie Percussion — Little Squealer / Metal — Big Black Brass / BOB — 14x6.5",
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Little Squealer / Metal",
+      "modelName": "Big Black Brass / BOB",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://porkpiedrums.com/prod/big-black-brass/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "pork-pie-little-squealer-metal-stock-heads-draft"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-10x5-snare_10x5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_eaf4e752",
+      "label": "Premier — Artist — Artist Birch/Ash 10x5 Snare — 10x5",
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "modelName": "Artist Birch/Ash 10x5 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-artist-stock-heads-draft"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-12x5-snare_12x5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_fef7b125",
+      "label": "Premier — Artist — Artist Birch/Ash 12x5 Snare — 12x5",
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "modelName": "Artist Birch/Ash 12x5 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-artist-stock-heads-draft"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-13x6-snare_13x6_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_f142840d",
+      "label": "Premier — Artist — Artist Birch/Ash 13x6 Snare — 13x6",
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "modelName": "Artist Birch/Ash 13x6 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-artist-stock-heads-draft"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x5-5-snare_14x5-5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_cafd8e48",
+      "label": "Premier — Artist — Artist Birch/Ash 14x5.5 Snare — 14x5.5",
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "modelName": "Artist Birch/Ash 14x5.5 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-artist-stock-heads-draft"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x6-5-snare_14x6-5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_3c97fcf8",
+      "label": "Premier — Artist — Artist Birch/Ash 14x6.5 Snare — 14x6.5",
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "modelName": "Artist Birch/Ash 14x6.5 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-artist-stock-heads-draft"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x8-snare_14x8_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_19bc5d91",
+      "label": "Premier — Artist — Artist Birch/Ash 14x8 Snare — 14x8",
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "modelName": "Artist Birch/Ash 14x8 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-artist-stock-heads-draft"
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-100se-birch-14x5-5-snare_14x5-5_ply_birch_5-6_45-degree-precision-cut_tri-band-l_53591100",
+      "label": "Premier — Genista Classic — Genista Classic 100SE Birch 14x5.5 Snare — 14x5.5",
+      "companyName": "Premier",
+      "lineSeries": "Genista Classic",
+      "modelName": "Genista Classic 100SE Birch 14x5.5 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/news/premier-drums-100-anniversary-new-ranges-kits-snare-drums",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-genista-classic-stock-heads-draft"
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-birch-5-5x14-snare_14x5-5_ply_birch_5-6_45-degree-precision-cut_lacquer-sparkle-_4f6da1e7",
+      "label": "Premier — Genista Classic — Genista Classic Birch 5.5x14 Snare — 14x5.5",
+      "companyName": "Premier",
+      "lineSeries": "Genista Classic",
+      "modelName": "Genista Classic Birch 5.5x14 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/genista-classic-snares/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-genista-classic-stock-heads-draft"
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-birch-6-5x14-snare_14x6-5_ply_birch_5-6_45-degree-precision-cut_lacquer-sparkle-_0d12aecb",
+      "label": "Premier — Genista Classic — Genista Classic Birch 6.5x14 Snare — 14x6.5",
+      "companyName": "Premier",
+      "lineSeries": "Genista Classic",
+      "modelName": "Genista Classic Birch 6.5x14 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.premier-percussion.com/product/genista-classic-snares/",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "premier-genista-classic-stock-heads-draft"
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x5_14x5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_2f773d8f",
+      "label": "SONOR — ProLite — ProLite Maple 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "ProLite",
+      "modelName": "ProLite Maple 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/prolite-series",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "sonor-prolite-stock-heads-draft"
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_3b479737",
+      "label": "SONOR — ProLite — ProLite Maple 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "ProLite",
+      "modelName": "ProLite Maple 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/prolite-series",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "sonor-prolite-stock-heads-draft"
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6_14x6_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_1d204c34",
+      "label": "SONOR — ProLite — ProLite Maple 14x6 — 14x6",
+      "companyName": "SONOR",
+      "lineSeries": "ProLite",
+      "modelName": "ProLite Maple 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/prolite-series",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "sonor-prolite-stock-heads-draft"
+    },
+    {
+      "id": "sonor_vintage-series_vintage-series-beech-14x5-75_14x5-75_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-_491ef3e1",
+      "label": "SONOR — Vintage Series — Vintage Series Beech 14x5.75 — 14x5.75",
+      "companyName": "SONOR",
+      "lineSeries": "Vintage Series",
+      "modelName": "Vintage Series Beech 14x5.75",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/vintage-series",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "sonor-vintage-series-stock-heads-draft"
+    },
+    {
+      "id": "sonor_vintage-series_vintage-series-beech-14x6-5_14x6-5_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-ho_996270a5",
+      "label": "SONOR — Vintage Series — Vintage Series Beech 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "Vintage Series",
+      "modelName": "Vintage Series Beech 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/vintage-series",
+      "sourceConfidence": "High",
+      "priorityScore": 870,
+      "matchedDraftRuleKey": "sonor-vintage-series-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-brunson-lug-edition_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_a_da443290",
+      "label": "AHEAD — Ahead Snares — Black on Brass 14x6 Brunson Lug Edition — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black on Brass 14x6 Brunson Lug Edition",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/reviews/drums/ahead-brass-snare-drum-235387",
+      "sourceConfidence": "Medium",
+      "priorityScore": 855,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_as6_f42b5819",
+      "label": "AHEAD — Ahead Snares — Black on Brass 14x6 Tube Lug Original — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black on Brass 14x6 Tube Lug Original",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/AS614--ahead-as614-6-inch-by-14-inch-brass-snare-drum-black-chrome",
+      "sourceConfidence": "Medium",
+      "priorityScore": 855,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614_bcd52f08",
+      "label": "AHEAD — Ahead Snares — Chrome on Brass 14x6 Tube Lug Original — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass 14x6 Tube Lug Original",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 855,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614-inferred_0adcb07a",
+      "label": "AHEAD — Ahead Snares — Chrome on Brass Snare Drum 14x6 — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Chrome on Brass Snare Drum 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-chrome-on-brass-snare-drum/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 855,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-studio-dry-variant_14x6_metal_titanium_1_minimal-shallow-snare-beds_engraved-titanium_s_e5a32ae7",
+      "label": "AHEAD — Ahead Snares — Titanium 14x6 Studio Dry Variant — 14x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Titanium 14x6 Studio Dry Variant",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://bigbangdist.com/product/ahead-titanium-snare-drum-with-chrome-trick-throw-off/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 855,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-mp125st-12x5_12x5_metal_steel",
+      "label": "Tama — Signature — Mike Portnoy Melody Master MP125ST 12x5 — 12x5",
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "modelName": "Mike Portnoy Melody Master MP125ST 12x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/jp/products/snare_drums/signature_snare/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 830,
+      "matchedDraftRuleKey": "tama-signature-stock-heads-draft"
+    },
+    {
+      "id": "tama_starclassic_starclassic-bubinga-14x5-5_14x5-5_ply_bubinga_lacquer_die-cast-hoops_d3450b86",
+      "label": "Tama — Starclassic — Starclassic Bubinga 14x5.5 — 14x5.5",
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "modelName": "Starclassic Bubinga 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 830,
+      "matchedDraftRuleKey": "tama-starclassic-stock-heads-draft"
+    },
+    {
+      "id": "tama_starclassic_starclassic-bubinga-14x6-5_14x6-5_ply_bubinga_lacquer_die-cast-hoops_95ab812f",
+      "label": "Tama — Starclassic — Starclassic Bubinga 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "modelName": "Starclassic Bubinga 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100325.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 830,
+      "matchedDraftRuleKey": "tama-starclassic-stock-heads-draft"
+    },
+    {
+      "id": "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf",
+      "label": "Tama — Starclassic — Starclassic Walnut/Birch 14x5.5 — 14x5.5",
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "modelName": "Starclassic Walnut/Birch 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starclassic_performer_wb_snare.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 830,
+      "matchedDraftRuleKey": "tama-starclassic-stock-heads-draft"
+    },
+    {
+      "id": "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3",
+      "label": "Tama — Starclassic — Starclassic Walnut/Birch 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "modelName": "Starclassic Walnut/Birch 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starclassic_performer_wb_snare.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 830,
+      "matchedDraftRuleKey": "tama-starclassic-stock-heads-draft"
+    },
+    {
+      "id": "gretsch_signature_keith-carlock-signature_14x5-5_ply_maple_poplar_5-6_45-degree-bearing-edge_satin-black-metallic_gretsc_c2f28098",
+      "label": "Gretsch — Signature — Keith Carlock Signature — 14x5.5",
+      "companyName": "Gretsch",
+      "lineSeries": "Signature",
+      "modelName": "Keith Carlock Signature",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.guitarcenter.com/Gretsch-Drums/Brooklyn-Standard-Snare-Drum-14-x-55-in-Satin-Black-Metallic-1500000305607.gc",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "gretsch-signature-stock-heads-draft"
+    },
+    {
+      "id": "mapex_armory_daisy-cutter_14x6-5_metal_steel_1_soniclear-modern-mapex-edge_black_2-3mm-powerhoops_arst4651ceb_f2fcc234",
+      "label": "Mapex — Armory — Daisy Cutter — 14x6.5",
+      "companyName": "Mapex",
+      "lineSeries": "Armory",
+      "modelName": "Daisy Cutter",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_armory_dillinger_14x5-5_ply_maple_7-2_soniclear-modern-mapex-edge_natural-transparent-varies_2-3mm-powerhoops_arml_f6c00f32",
+      "label": "Mapex — Armory — Dillinger — 14x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Armory",
+      "modelName": "Dillinger",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_armory_tomahawk_14x5-5_metal_steel_1_soniclear-modern-mapex-edge_chrome_2-3mm-powerhoops_bpnst4551cn_e2634617",
+      "label": "Mapex — Armory — Tomahawk — 14x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Armory",
+      "modelName": "Tomahawk",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther_atomizer_14x6-5_metal_aluminum_2_45-modern-metal-edge_sonic-saver-hoops_bpnal4651cn_1353eb45",
+      "label": "Mapex — Black Panther — Atomizer — 14x6.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "modelName": "Atomizer",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexdrums.com/files/file_pool/1/0n311240182594817766/black%20panther%20snare%20drum%20brochure%202023.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther_cyrus_14x6_metal_steel_1_45-modern-metal-edge_sonic-saver-hoops_bpnst4601cn_6ee04120",
+      "label": "Mapex — Black Panther — Cyrus — 14x6",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "modelName": "Cyrus",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther_hydro_13x7_metal_steel_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnst3701cn_b8ac4dd2",
+      "label": "Mapex — Black Panther — Hydro — 13x7",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "modelName": "Hydro",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther_metallion_14x5-5_metal_brass_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnbr4551cn_ad3e6526",
+      "label": "Mapex — Black Panther — Metallion — 14x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "modelName": "Metallion",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexdrums.com/files/file_pool/1/0n311240182594817766/black%20panther%20snare%20drum%20brochure%202023.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "premier_centenary-limited_della-porta-100-walnut-14x6-5-snare_14x6-5_ply_walnut_beech_5_30-degree-round-over_centenary-f_cb595ab7",
+      "label": "Premier — Centenary / Limited — Della-Porta 100 Walnut 14x6.5 Snare — 14x6.5",
+      "companyName": "Premier",
+      "lineSeries": "Centenary / Limited",
+      "modelName": "Della-Porta 100 Walnut 14x6.5 Snare",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://en.wikipedia.org/wiki/Premier_Percussion",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "premier-centenary-limited-stock-heads-draft"
+    },
+    {
+      "id": "sonor_aq2_aq2-maple-14x5-5_14x5-5_ply_maple_7-2_45-bearing-edge_triple-flanged-hoops_aq2-1405_b10c6d2d",
+      "label": "SONOR — AQ2 — AQ2 Maple 14x5.5 — 14x5.5",
+      "companyName": "SONOR",
+      "lineSeries": "AQ2",
+      "modelName": "AQ2 Maple 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonormuseum.com/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-aq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x5_14x5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cast-or_0b97bd0d",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x6-5_14x6-5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cas_21ad5efa",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x5_14x5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-cast-o_4db16066",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x6-5_14x6-5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-ca_4d9e09bd",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-or-_452968ae",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast_95092478",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-_7f1959d6",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-c_d1668db1",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x5_14x5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or-tri_31511fb0",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or_edb76d98",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x5_14x5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-or-tr_baa918a0",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x6-5_14x6-5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-o_70a9a905",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-trip_30806671",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-_a9885d3a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-t_f791587a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-_5140185b",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x5_14x5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or-tri_5921b78e",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x6-5_14x6-5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or_1a9169e2",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x5_14x5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-or-tr_9e471931",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x6-5_14x6-5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-o_1dd66c37",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-trip_4e0636ca",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-_df3d98db",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-t_f52dcc8d",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-_8e2aee88",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x5_14x5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or-tri_03d79bb2",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x6-5_14x6-5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or_d1b32daa",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x5_14x5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-or-tr_3b0fc99a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x6-5_14x6-5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-o_af3f3e9a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-trip_59f4810f",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-_c6584fef",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-t_faf56e68",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-_803b9ab2",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "sonor-sq2-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-deep-guppi-black-plated-brass_13x7_metal_brass_1-3_rolled-flange-45-listed-where-confir_b84199f5",
+      "label": "WorldMax — Black Dawg Series — Black Deep Guppi Black Plated Brass — 13x7",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Black Deep Guppi Black Plated Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product/bk-7013dhbx/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x4_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-_f80fd0d3",
+      "label": "WorldMax — Black Dawg Series — Black Nickel Over Brass — 14x4",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Black Nickel Over Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-_51c45960",
+      "label": "WorldMax — Black Dawg Series — Black Nickel Over Brass — 14x5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Black Nickel Over Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x6-5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minima_2aa506f4",
+      "label": "WorldMax — Black Dawg Series — Black Nickel Over Brass — 14x6.5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Black Nickel Over Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tamtampercusion.com/en/metalics-snares/159210-worldmax-bk-6514sh-black-dawg-brass-14x65-3701070004062.html",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_brushed-red-copper-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal_40af6209",
+      "label": "WorldMax — Black Dawg Series — Brushed Red Copper Brass — 14x5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Brushed Red Copper Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_brushed-red-copper-brass_14x6-5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minim_966c8f32",
+      "label": "WorldMax — Black Dawg Series — Brushed Red Copper Brass — 14x6.5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Brushed Red Copper Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-black-plated-brass-with-reddish-tint_14x5_metal_brass_1-3_rolled-flange-45-listed-wh_49f6dbe5",
+      "label": "WorldMax — Black Dawg Series — Hammered Black Plated Brass with Reddish Tint — 14x5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Hammered Black Plated Brass with Reddish Tint",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product/bkrh-5014dhbx/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-black-plated-brass-with-reddish-tint_14x6-5_metal_brass_1-3_rolled-flange-45-listed-_1bd479fe",
+      "label": "WorldMax — Black Dawg Series — Hammered Black Plated Brass with Reddish Tint — 14x6.5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Hammered Black Plated Brass with Reddish Tint",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-shallow-u_f16a9137",
+      "label": "WorldMax — Black Dawg Series — Hammered Brass — 14x5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Hammered Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-brass_14x6-5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-shallow_16214d6d",
+      "label": "WorldMax — Black Dawg Series — Hammered Brass — 14x6.5",
+      "companyName": "WorldMax",
+      "lineSeries": "Black Dawg Series",
+      "modelName": "Hammered Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "worldmax-black-dawg-stock-heads-draft"
+    },
+    {
+      "id": "yamaha_absolute-hybrid-maple_absolute-hybrid-maple-14x6_14x6_ply_maple_wenge_maple_6-2_45-degree-r1-5_vintage-natural-la_7d03d57c",
+      "label": "Yamaha — Absolute Hybrid Maple — Absolute Hybrid Maple 14x6 — 14x6",
+      "companyName": "Yamaha",
+      "lineSeries": "Absolute Hybrid Maple",
+      "modelName": "Absolute Hybrid Maple 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://memphisdrumshop.com/products/yamaha-14x6-absolute-hybrid-maple-snare-drum-vintage-natural-ams1460vn",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820,
+      "matchedDraftRuleKey": "yamaha-absolute-hybrid-maple-stock-heads-draft"
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-13x6-brunson-lug-prototype-planned-variant_13x6_metal_brass_1_black-chrome_sh138-s-hoo_6f6b2e23",
+      "label": "AHEAD — Ahead Snares — Black on Brass 13x6 Brunson Lug Prototype/Planned Variant — 13x6",
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "modelName": "Black on Brass 13x6 Brunson Lug Prototype/Planned Variant",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/reviews/drums/ahead-brass-snare-drum-235387",
+      "sourceConfidence": "Low",
+      "priorityScore": 805,
+      "matchedDraftRuleKey": "ahead-snares-stock-heads-draft"
+    },
+    {
+      "id": "tama_starclassic_starclassic-bubinga-elite-13x6_13x6_ply_bubinga_lacquer_die-cast-hoops_1880d8e1",
+      "label": "Tama — Starclassic — Starclassic Bubinga Elite 13x6 — 13x6",
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "modelName": "Starclassic Bubinga Elite 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.tama.com/usa/news/detail/20251128100325.html",
+      "sourceConfidence": "Low",
+      "priorityScore": 780,
+      "matchedDraftRuleKey": "tama-starclassic-stock-heads-draft"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+      "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x4 — 14x4",
+      "companyName": "DW / PDP",
+      "lineSeries": "DW MFG / True-Cast",
+      "modelName": "MFG True-Cast Bell Bronze 14x4",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "dw-pdp-true-cast-stock-heads-draft"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+      "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x5.5 — 14x5.5",
+      "companyName": "DW / PDP",
+      "lineSeries": "DW MFG / True-Cast",
+      "modelName": "MFG True-Cast Bell Bronze 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "dw-pdp-true-cast-stock-heads-draft"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+      "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x6.5 — 14x6.5",
+      "companyName": "DW / PDP",
+      "lineSeries": "DW MFG / True-Cast",
+      "modelName": "MFG True-Cast Bell Bronze 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "dw-pdp-true-cast-stock-heads-draft"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+      "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x8 — 14x8",
+      "companyName": "DW / PDP",
+      "lineSeries": "DW MFG / True-Cast",
+      "modelName": "MFG True-Cast Bell Bronze 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "dw-pdp-true-cast-stock-heads-draft"
+    },
+    {
+      "id": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2",
+      "label": "Ludwig — Artist / Signature — Carl Palmer Venus 3.7x14 — 14x3.7",
+      "companyName": "Ludwig",
+      "lineSeries": "Artist / Signature",
+      "modelName": "Carl Palmer Venus 3.7x14",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "ludwig-artist-signature-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 12x5.5 — 12x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 12x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 13x3.5 — 13x3.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 13x3.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 13x6 — 13x6",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 14x5.5 — 14x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 14x5 — 14x5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 14x6 — 14x6",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 12x5.5 — 12x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 12x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 13x3.5 — 13x3.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 13x3.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x3-5_14x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_e7b9154b",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x3.5 — 14x3.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x3.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5-5_14x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_a8efeeab",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x5.5 — 14x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5_14x5_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_54bc5d97",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x5 — 14x5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6-5_14x6-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_7759db9e",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x6.5 — 14x6.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x7_14x7_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_04e1dd37",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x7 — 14x7",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x7",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x8_14x8_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_787f6de6",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x8 — 14x8",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+      "label": "Mapex — Signature / Artist — Matt Halpern Wraith — 14x6",
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "modelName": "Matt Halpern Wraith",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+      "label": "Pearl — Modern Utility — Modern Utility Steel — 13x7",
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "modelName": "Modern Utility Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-modern-utility-stock-heads-draft"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+      "label": "Pearl — Modern Utility — Modern Utility Steel — 14x5.5",
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "modelName": "Modern Utility Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-modern-utility-stock-heads-draft"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+      "label": "Pearl — Modern Utility — Modern Utility Steel — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "modelName": "Modern Utility Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-modern-utility-stock-heads-draft"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+      "label": "Pearl — Modern Utility — Modern Utility Steel — 14x8",
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "modelName": "Modern Utility Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-modern-utility-stock-heads-draft"
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+      "label": "Pearl — Reference — Reference Brass — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Reference",
+      "modelName": "Reference Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-reference-stock-heads-draft"
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+      "label": "Pearl — Reference — Reference Brass — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Reference",
+      "modelName": "Reference Brass",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-reference-stock-heads-draft"
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+      "label": "Pearl — Reference — Reference Cast Steel — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Reference",
+      "modelName": "Reference Cast Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-reference-stock-heads-draft"
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+      "label": "Pearl — Reference — Reference Cast Steel — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Reference",
+      "modelName": "Reference Cast Steel",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-reference-stock-heads-draft"
+    },
+    {
+      "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+      "label": "Pearl — Signature — Chad Smith Signature — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Signature",
+      "modelName": "Chad Smith Signature",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-signature-stock-heads-draft"
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+      "label": "Pearl — Ultracast — Ultracast Aluminum — 14x5",
+      "companyName": "Pearl",
+      "lineSeries": "Ultracast",
+      "modelName": "Ultracast Aluminum",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-ultracast-stock-heads-draft"
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+      "label": "Pearl — Ultracast — Ultracast Aluminum — 14x6.5",
+      "companyName": "Pearl",
+      "lineSeries": "Ultracast",
+      "modelName": "Ultracast Aluminum",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "priorityScore": 275,
+      "matchedDraftRuleKey": "pearl-ultracast-stock-heads-draft"
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Brass 14x5.5 — 14x5.5",
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "Tama logo coated Ambassador",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+      "sourceConfidence": "Low",
+      "priorityScore": 235,
+      "matchedDraftRuleKey": "tama-star-reserve-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 10x5.5 — 10x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 10x5.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 14x3.5 — 14x3.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Brass Master 14x3.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x6_13x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_9dd37cfb",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 13x6 — 13x6",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 13x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6_14x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_a99c24ac",
+      "label": "Mapex — Black Panther Archive / Catalog Era — Stainless Steel 14x6 — 14x6",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "modelName": "Stainless Steel 14x6",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+      "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Brass Variant 5 — 14x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "modelName": "Unresolved Brass Variant 5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+      "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Steel Variant 4 — 12x5.5",
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "modelName": "Unresolved Steel Variant 4",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "mapex-stock-heads-draft"
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+      "label": "SONOR — Signature Series — Signature HLD 580 Cast Bronze 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "Signature Series",
+      "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonormuseum.com/",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "sonor-signature-series-stock-heads-draft"
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+      "label": "SONOR — Signature Series — Signature HLD 590 Cast Bronze 14x8 — 14x8",
+      "companyName": "SONOR",
+      "lineSeries": "Signature Series",
+      "modelName": "Signature HLD 590 Cast Bronze 14x8",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+      "missingForStock": [
+        "meaningful bearing edge shape/detail",
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonormuseum.com/",
+      "sourceConfidence": "Low",
+      "priorityScore": 225,
+      "matchedDraftRuleKey": "sonor-signature-series-stock-heads-draft"
+    }
+  ],
+  "unmatchedApprovedCandidates": []
+}
