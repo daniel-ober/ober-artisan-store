@@ -1,0 +1,5080 @@
+{
+  "status": "SNARE_CALIBRATION_OVERLAY_PREVIEW_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:49:09.793Z",
+  "firestoreWrites": 0,
+  "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+  "examples": [
+    {
+      "targetId": "ludwig-acrolite",
+      "before": {
+        "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+        "company": "Ludwig",
+        "model": "Acrolite 5x14",
+        "lineSeries": "Acrolite",
+        "size": "14x5",
+        "raw": {
+          "shellMaterial": "aluminum",
+          "shellConstruction": "metal",
+          "bearingEdge": "formed metal bearing edge",
+          "hoopType": "triple-flanged steel",
+          "snareBed": "shallow",
+          "diameter": 14,
+          "depth": 5,
+          "shellThickness": 1.6,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 5,
+          "shellThicknessMm": 1.6,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "aluminum",
+          "shellConstruction": "metal",
+          "bearingEdge": "rolledOrFormedMetal",
+          "hoopType": "tripleFlanged",
+          "snareBed": "shallowSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 6.61,
+          "brightness": 6.07,
+          "projection": 5.76,
+          "sustain": 5.67,
+          "warmth": 5.22,
+          "sensitivity": 6.31,
+          "control": 6.42
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "value": 6.61
+          },
+          {
+            "key": "control",
+            "value": 6.42
+          },
+          {
+            "key": "sensitivity",
+            "value": 6.31
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.5704,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:metal",
+                "delta": 0.4056,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.3024,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1276,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "depth:5",
+                "delta": 0.0792,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.2024,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.1152,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:5",
+                "delta": 0.0528,
+                "direction": "up"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.23,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:1.6mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:aluminum",
+                "delta": -0.414,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:metal",
+                "delta": 0.273,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.2448,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.2436,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.2016,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:5",
+                "delta": 0.0528,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellConstruction:metal",
+                "delta": -0.1404,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.0736,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:5",
+                "delta": 0.0528,
+                "direction": "up"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.506,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1624,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:5",
+                "delta": 0.066,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:metal",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.019,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.9384,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:metal",
+                "delta": 0.156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:1.6mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "control",
+                "source": "depth:5",
+                "delta": 0.033,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:aluminum",
+              "totalMovement": 2.935
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.6mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        }
+      },
+      "after": {
+        "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+        "company": "Ludwig",
+        "model": "Acrolite 5x14",
+        "lineSeries": "Acrolite",
+        "size": "14x5",
+        "raw": {
+          "shellMaterial": "aluminum",
+          "shellConstruction": "metal",
+          "bearingEdge": "formed metal bearing edge",
+          "hoopType": "triple-flanged steel",
+          "snareBed": "shallow",
+          "diameter": 14,
+          "depth": 5,
+          "shellThickness": 1.6,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 5,
+          "shellThicknessMm": 1.6,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "aluminum",
+          "shellConstruction": "metal",
+          "bearingEdge": "rolledOrFormedMetal",
+          "hoopType": "tripleFlanged",
+          "snareBed": "shallowSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 6.61,
+          "brightness": 6.07,
+          "projection": 5.76,
+          "sustain": 5.62,
+          "warmth": 5.22,
+          "sensitivity": 6.33,
+          "control": 6.49
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "value": 6.61
+          },
+          {
+            "key": "control",
+            "value": 6.49
+          },
+          {
+            "key": "sensitivity",
+            "value": 6.33
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.5704,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:metal",
+                "delta": 0.4056,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.3024,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1276,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "depth:5",
+                "delta": 0.0792,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.2024,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.1152,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:5",
+                "delta": 0.0528,
+                "direction": "up"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.23,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:1.6mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:aluminum",
+                "delta": -0.414,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:metal",
+                "delta": 0.273,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.2448,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.2436,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.2016,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:5",
+                "delta": 0.0528,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "calibration:material:aluminum",
+                "delta": -0.02,
+                "direction": "down",
+                "reason": "Preview overlay: aluminum snares should preserve dry control and touch response compared with brass.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              },
+              {
+                "node": "sustain",
+                "source": "calibration:knownDrum:ludwig-acrolite-family-preview",
+                "delta": -0.03,
+                "direction": "down",
+                "reason": "Preview known-drum overlay: Acrolite family retains dry controlled aluminum identity.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellConstruction:metal",
+                "delta": -0.1404,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.0736,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:5",
+                "delta": 0.0528,
+                "direction": "up"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.506,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:1.6mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1624,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:5",
+                "delta": 0.066,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:metal",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.019,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "calibration:material:aluminum",
+                "delta": 0.02,
+                "direction": "up",
+                "reason": "Preview overlay: aluminum snares should preserve dry control and touch response compared with brass.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "shellMaterial:aluminum",
+                "delta": 0.9384,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:metal",
+                "delta": 0.156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:1.6mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "control",
+                "source": "depth:5",
+                "delta": 0.033,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "calibration:material:aluminum",
+                "delta": 0.03,
+                "direction": "up",
+                "reason": "Preview overlay: aluminum snares should preserve dry control and touch response compared with brass.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              },
+              {
+                "node": "control",
+                "source": "calibration:knownDrum:ludwig-acrolite-family-preview",
+                "delta": 0.04,
+                "direction": "up",
+                "reason": "Preview known-drum overlay: Acrolite family retains dry controlled aluminum identity.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:aluminum",
+              "totalMovement": 2.935
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.6mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "calibration:material:aluminum",
+              "totalMovement": 0.07,
+              "calibrationOverlay": true
+            },
+            {
+              "source": "calibration:knownDrum:ludwig-acrolite-family-preview",
+              "totalMovement": 0.07,
+              "calibrationOverlay": true
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        },
+        "calibrationOverlay": {
+          "applied": [
+            {
+              "type": "materialFamilyDeltas",
+              "family": "aluminum",
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            },
+            {
+              "type": "knownDrumDeltas",
+              "id": "ludwig-acrolite-family-preview",
+              "deltas": {
+                "sustain": -0.03,
+                "control": 0.04
+              }
+            }
+          ],
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+        }
+      },
+      "deltas": {
+        "sustain": -0.05,
+        "sensitivity": 0.02,
+        "control": 0.07
+      },
+      "readoutMaps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "firstListenScore": 0.7664
+            },
+            {
+              "node": "control",
+              "value": 6.49,
+              "rank": 2,
+              "normalized": 0.61,
+              "driverStrength": 0.9666,
+              "firstListenScore": 0.7308
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.33,
+              "rank": 3,
+              "normalized": 0.5922,
+              "driverStrength": 0.8991,
+              "firstListenScore": 0.6869
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "firstListenScore": 0.7664
+            },
+            {
+              "node": "control",
+              "value": 6.49,
+              "rank": 2,
+              "normalized": 0.61,
+              "driverStrength": 0.9666,
+              "firstListenScore": 0.7308
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.33,
+              "rank": 3,
+              "normalized": 0.5922,
+              "driverStrength": 0.8991,
+              "firstListenScore": 0.6869
+            },
+            {
+              "node": "sustain",
+              "value": 5.62,
+              "rank": 6,
+              "normalized": 0.5133,
+              "driverStrength": 0.9694,
+              "firstListenScore": 0.6077
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "firstListenScore": 0.5819
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "firstListenScore": 0.5037
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "firstListenScore": 0.4153
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "playerScore": 0.7715
+            },
+            {
+              "node": "control",
+              "value": 6.49,
+              "rank": 2,
+              "normalized": 0.61,
+              "driverStrength": 0.9666,
+              "playerScore": 0.7565
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.33,
+              "rank": 3,
+              "normalized": 0.5922,
+              "driverStrength": 0.8991,
+              "playerScore": 0.7413
+            },
+            {
+              "node": "sustain",
+              "value": 5.62,
+              "rank": 6,
+              "normalized": 0.5133,
+              "driverStrength": 0.9694,
+              "playerScore": 0.651
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "playerScore": 0.6158
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "playerScore": 0.5437
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "playerScore": 0.5197
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "playerScore": 0.7715
+            },
+            {
+              "node": "control",
+              "value": 6.49,
+              "rank": 2,
+              "normalized": 0.61,
+              "driverStrength": 0.9666,
+              "playerScore": 0.7565
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.33,
+              "rank": 3,
+              "normalized": 0.5922,
+              "driverStrength": 0.8991,
+              "playerScore": 0.7413
+            },
+            {
+              "node": "sustain",
+              "value": 5.62,
+              "rank": 6,
+              "normalized": 0.5133,
+              "driverStrength": 0.9694,
+              "playerScore": 0.651
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "playerScore": 0.6158
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "playerScore": 0.5437
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "playerScore": 0.5197
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "identityScore": 0.7877
+            },
+            {
+              "node": "control",
+              "value": 6.49,
+              "rank": 2,
+              "normalized": 0.61,
+              "driverStrength": 0.9666,
+              "identityScore": 0.7744
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.33,
+              "rank": 3,
+              "normalized": 0.5922,
+              "driverStrength": 0.8991,
+              "identityScore": 0.7362
+            },
+            {
+              "node": "sustain",
+              "value": 5.62,
+              "rank": 6,
+              "normalized": 0.5133,
+              "driverStrength": 0.9694,
+              "identityScore": 0.7302
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "identityScore": 0.7877
+            },
+            {
+              "node": "control",
+              "value": 6.49,
+              "rank": 2,
+              "normalized": 0.61,
+              "driverStrength": 0.9666,
+              "identityScore": 0.7744
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.33,
+              "rank": 3,
+              "normalized": 0.5922,
+              "driverStrength": 0.8991,
+              "identityScore": 0.7362
+            },
+            {
+              "node": "sustain",
+              "value": 5.62,
+              "rank": 6,
+              "normalized": 0.5133,
+              "driverStrength": 0.9694,
+              "identityScore": 0.7302
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "identityScore": 0.6275
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "identityScore": 0.5638
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "identityScore": 0.5158
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:aluminum",
+              "totalMovement": 2.935
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.6mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "calibration:material:aluminum",
+              "totalMovement": 0.07,
+              "calibrationOverlay": true
+            },
+            {
+              "source": "calibration:knownDrum:ludwig-acrolite-family-preview",
+              "totalMovement": 0.07,
+              "calibrationOverlay": true
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ludwig-black-beauty",
+      "before": {
+        "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+        "company": "Ludwig",
+        "model": "Black Beauty 3.5x14",
+        "lineSeries": "Black Beauty",
+        "size": "14x3.5",
+        "raw": {
+          "shellMaterial": "brass",
+          "shellConstruction": "metal",
+          "bearingEdge": "formed metal bearing edge",
+          "hoopType": "2.3mm steel triple-flanged",
+          "snareBed": "shallow",
+          "diameter": 14,
+          "depth": 3.5,
+          "shellThickness": 1.2,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 3.5,
+          "shellThicknessMm": 1.2,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "brass",
+          "shellConstruction": "metal",
+          "bearingEdge": "rolledOrFormedMetal",
+          "hoopType": "tripleFlanged",
+          "snareBed": "shallowSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 7.14,
+          "brightness": 6.66,
+          "projection": 6.22,
+          "sustain": 6.61,
+          "warmth": 5.43,
+          "sensitivity": 5.98,
+          "control": 5.83
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "value": 7.14
+          },
+          {
+            "key": "brightness",
+            "value": 6.66
+          },
+          {
+            "key": "sustain",
+            "value": 6.61
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:brass",
+                "delta": 0.874,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:metal",
+                "delta": 0.4056,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.3024,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "depth:3.5",
+                "delta": 0.297,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1276,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellMaterial:brass",
+                "delta": 0.6256,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:3.5",
+                "delta": 0.2244,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.1152,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellMaterial:brass",
+                "delta": 0.874,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "depth:3.5",
+                "delta": -0.1848,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:1.2mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:brass",
+                "delta": 0.8188,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:metal",
+                "delta": 0.273,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.2448,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.2436,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:3.5",
+                "delta": -0.231,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.2016,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellMaterial:brass",
+                "delta": 0.5704,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:3.5",
+                "delta": -0.231,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "shellConstruction:metal",
+                "delta": -0.1404,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:3.5",
+                "delta": 0.2244,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1624,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:metal",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.019,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:brass",
+                "delta": 0.0184,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellMaterial:brass",
+                "delta": 0.2024,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "depth:3.5",
+                "delta": 0.1848,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:metal",
+                "delta": 0.156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:1.2mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "control",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:brass",
+              "totalMovement": 3.984
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "depth:3.5",
+              "totalMovement": 1.577
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.2mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        }
+      },
+      "after": {
+        "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+        "company": "Ludwig",
+        "model": "Black Beauty 3.5x14",
+        "lineSeries": "Black Beauty",
+        "size": "14x3.5",
+        "raw": {
+          "shellMaterial": "brass",
+          "shellConstruction": "metal",
+          "bearingEdge": "formed metal bearing edge",
+          "hoopType": "2.3mm steel triple-flanged",
+          "snareBed": "shallow",
+          "diameter": 14,
+          "depth": 3.5,
+          "shellThickness": 1.2,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 3.5,
+          "shellThicknessMm": 1.2,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "brass",
+          "shellConstruction": "metal",
+          "bearingEdge": "rolledOrFormedMetal",
+          "hoopType": "tripleFlanged",
+          "snareBed": "shallowSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 7.14,
+          "brightness": 6.66,
+          "projection": 6.22,
+          "sustain": 6.62,
+          "warmth": 5.43,
+          "sensitivity": 5.98,
+          "control": 5.83
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "value": 7.14
+          },
+          {
+            "key": "brightness",
+            "value": 6.66
+          },
+          {
+            "key": "sustain",
+            "value": 6.62
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:brass",
+                "delta": 0.874,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:metal",
+                "delta": 0.4056,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.3024,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "depth:3.5",
+                "delta": 0.297,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1276,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellMaterial:brass",
+                "delta": 0.6256,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:3.5",
+                "delta": 0.2244,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.1152,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellMaterial:brass",
+                "delta": 0.874,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "depth:3.5",
+                "delta": -0.1848,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:1.2mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:brass",
+                "delta": 0.8188,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:metal",
+                "delta": 0.273,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.2448,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.2436,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:3.5",
+                "delta": -0.231,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.2016,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "calibration:material:brass",
+                "delta": 0.01,
+                "direction": "up",
+                "reason": "Preview overlay: brass snares keep a touch more musical sustain after benchmark calibration.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellMaterial:brass",
+                "delta": 0.5704,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:3.5",
+                "delta": -0.231,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "shellConstruction:metal",
+                "delta": -0.1404,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.0864,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:1.2mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:3.5",
+                "delta": 0.2244,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.1624,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:metal",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.019,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:brass",
+                "delta": 0.0184,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "bearingEdge:rolledOrFormedMetal",
+                "delta": 0.216,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellMaterial:brass",
+                "delta": 0.2024,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "depth:3.5",
+                "delta": 0.1848,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:metal",
+                "delta": 0.156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:1.2mm",
+                "delta": -0.036,
+                "direction": "down"
+              },
+              {
+                "node": "control",
+                "source": "hoopType:tripleFlanged",
+                "delta": 0.029,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "snareBed:shallowSnareBed",
+                "delta": 0.0152,
+                "direction": "up"
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:brass",
+              "totalMovement": 3.984
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "depth:3.5",
+              "totalMovement": 1.577
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.2mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            },
+            {
+              "source": "calibration:material:brass",
+              "totalMovement": 0.01,
+              "calibrationOverlay": true
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        },
+        "calibrationOverlay": {
+          "applied": [
+            {
+              "type": "materialFamilyDeltas",
+              "family": "brass",
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          ],
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+        }
+      },
+      "deltas": {
+        "sustain": 0.01
+      },
+      "readoutMaps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+          "company": "Ludwig",
+          "model": "Black Beauty 3.5x14",
+          "size": "14x3.5"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "firstListenScore": 0.803
+            },
+            {
+              "node": "sustain",
+              "value": 6.62,
+              "rank": 3,
+              "normalized": 0.6244,
+              "driverStrength": 0.987,
+              "firstListenScore": 0.7315
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "firstListenScore": 0.6895
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "firstListenScore": 0.803
+            },
+            {
+              "node": "sustain",
+              "value": 6.62,
+              "rank": 3,
+              "normalized": 0.6244,
+              "driverStrength": 0.987,
+              "firstListenScore": 0.7315
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "firstListenScore": 0.6895
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "firstListenScore": 0.6249
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "firstListenScore": 0.5196
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "firstListenScore": 0.4922
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "firstListenScore": 0.4696
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "playerScore": 0.8057
+            },
+            {
+              "node": "sustain",
+              "value": 6.62,
+              "rank": 3,
+              "normalized": 0.6244,
+              "driverStrength": 0.987,
+              "playerScore": 0.7193
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "playerScore": 0.6797
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "playerScore": 0.6345
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "playerScore": 0.6311
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "playerScore": 0.5947
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "playerScore": 0.5823
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "playerScore": 0.8057
+            },
+            {
+              "node": "sustain",
+              "value": 6.62,
+              "rank": 3,
+              "normalized": 0.6244,
+              "driverStrength": 0.987,
+              "playerScore": 0.7193
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "playerScore": 0.6797
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "playerScore": 0.6345
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "playerScore": 0.6311
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "playerScore": 0.5947
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "playerScore": 0.5823
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "identityScore": 0.8171
+            },
+            {
+              "node": "sustain",
+              "value": 6.62,
+              "rank": 3,
+              "normalized": 0.6244,
+              "driverStrength": 0.987,
+              "identityScore": 0.7918
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "identityScore": 0.7003
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "identityScore": 0.6787
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "identityScore": 0.8171
+            },
+            {
+              "node": "sustain",
+              "value": 6.62,
+              "rank": 3,
+              "normalized": 0.6244,
+              "driverStrength": 0.987,
+              "identityScore": 0.7918
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "identityScore": 0.7003
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "identityScore": 0.6787
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "identityScore": 0.6033
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "identityScore": 0.5866
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "identityScore": 0.5534
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:brass",
+              "totalMovement": 3.984
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "depth:3.5",
+              "totalMovement": 1.577
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.2mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            },
+            {
+              "source": "calibration:material:brass",
+              "totalMovement": 0.01,
+              "calibrationOverlay": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ahead-bell-brass",
+      "before": {
+        "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+        "company": "AHEAD",
+        "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+        "lineSeries": "Ahead Snares",
+        "size": "14x6",
+        "raw": {
+          "shellMaterial": "Bell Brass",
+          "shellConstruction": "Solid Shell",
+          "bearingEdge": {
+            "batterSideProfile": "machined metal bearing edge",
+            "snareSideProfile": "machined metal bearing edge",
+            "roundover": "unknown",
+            "confidence": "fallback",
+            "evidenceLevel": "metalShellFallback",
+            "needsVerification": true,
+            "notes": "Exact published bearing-edge geometry was not found. Generic machined metal bearing edge fallback applied under LegacyPrint metal-shell readiness rule."
+          },
+          "hoopType": "SH1410 S-Hoop counter hoops",
+          "snareBed": "",
+          "diameter": 14,
+          "depth": 6,
+          "shellThickness": 3,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 6,
+          "shellThicknessMm": 3,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "bellBrass",
+          "shellConstruction": "solidShell",
+          "bearingEdge": "machinedMetal",
+          "hoopType": "inwardFlangedControlHoop",
+          "snareBed": "unknownSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 7.26,
+          "brightness": 6.4,
+          "projection": 6.98,
+          "sustain": 7.45,
+          "warmth": 6.86,
+          "sensitivity": 5.73,
+          "control": 6.42
+        },
+        "topNodes": [
+          {
+            "key": "sustain",
+            "value": 7.45
+          },
+          {
+            "key": "attack",
+            "value": 7.26
+          },
+          {
+            "key": "projection",
+            "value": 6.98
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:bellBrass",
+                "delta": 1.15,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.468,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.2436,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:3mm",
+                "delta": 0.2016,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.1716,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellMaterial:bellBrass",
+                "delta": 0.966,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:3mm",
+                "delta": 0.1296,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellConstruction:solidShell",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:6",
+                "delta": -0.0132,
+                "direction": "down"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellMaterial:bellBrass",
+                "delta": 1.242,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.195,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "depth:6",
+                "delta": 0.1452,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:3mm",
+                "delta": 0.1008,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.0696,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:bellBrass",
+                "delta": 1.15,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.6084,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:6",
+                "delta": 0.2244,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:3mm",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": -0.029,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.8424,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellMaterial:bellBrass",
+                "delta": 0.598,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:6",
+                "delta": 0.2508,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:3mm",
+                "delta": 0.1296,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:machinedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:3mm",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2304,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:bellBrass",
+                "delta": -0.138,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:6",
+                "delta": -0.033,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.0116,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.5336,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellMaterial:bellBrass",
+                "delta": 0.414,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:3mm",
+                "delta": 0.1296,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.0156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "depth:6",
+                "delta": -0.0132,
+                "direction": "down"
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:bellBrass",
+              "totalMovement": 5.658
+            },
+            {
+              "source": "shellConstruction:solidShell",
+              "totalMovement": 2.27
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "shellThickness:3mm",
+              "totalMovement": 1.123
+            },
+            {
+              "source": "hoopType:inwardFlangedControlHoop",
+              "totalMovement": 0.992
+            },
+            {
+              "source": "depth:6",
+              "totalMovement": 0.68
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        }
+      },
+      "after": {
+        "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+        "company": "AHEAD",
+        "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+        "lineSeries": "Ahead Snares",
+        "size": "14x6",
+        "raw": {
+          "shellMaterial": "Bell Brass",
+          "shellConstruction": "Solid Shell",
+          "bearingEdge": {
+            "batterSideProfile": "machined metal bearing edge",
+            "snareSideProfile": "machined metal bearing edge",
+            "roundover": "unknown",
+            "confidence": "fallback",
+            "evidenceLevel": "metalShellFallback",
+            "needsVerification": true,
+            "notes": "Exact published bearing-edge geometry was not found. Generic machined metal bearing edge fallback applied under LegacyPrint metal-shell readiness rule."
+          },
+          "hoopType": "SH1410 S-Hoop counter hoops",
+          "snareBed": "",
+          "diameter": 14,
+          "depth": 6,
+          "shellThickness": 3,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 6,
+          "shellThicknessMm": 3,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "bellBrass",
+          "shellConstruction": "solidShell",
+          "bearingEdge": "machinedMetal",
+          "hoopType": "inwardFlangedControlHoop",
+          "snareBed": "unknownSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 7.26,
+          "brightness": 6.4,
+          "projection": 6.98,
+          "sustain": 7.45,
+          "warmth": 6.86,
+          "sensitivity": 5.73,
+          "control": 6.42
+        },
+        "topNodes": [
+          {
+            "key": "sustain",
+            "value": 7.45
+          },
+          {
+            "key": "attack",
+            "value": 7.26
+          },
+          {
+            "key": "projection",
+            "value": 6.98
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:bellBrass",
+                "delta": 1.15,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.468,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.2436,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:3mm",
+                "delta": 0.2016,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.1716,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellMaterial:bellBrass",
+                "delta": 0.966,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:3mm",
+                "delta": 0.1296,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.1044,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellConstruction:solidShell",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:6",
+                "delta": -0.0132,
+                "direction": "down"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellMaterial:bellBrass",
+                "delta": 1.242,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.195,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "depth:6",
+                "delta": 0.1452,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:3mm",
+                "delta": 0.1008,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.0696,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:bellBrass",
+                "delta": 1.15,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.6084,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:6",
+                "delta": 0.2244,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:3mm",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": -0.029,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.8424,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellMaterial:bellBrass",
+                "delta": 0.598,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:6",
+                "delta": 0.2508,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:3mm",
+                "delta": 0.1296,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:machinedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:3mm",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2304,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:bellBrass",
+                "delta": -0.138,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:6",
+                "delta": -0.033,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.0116,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "hoopType:inwardFlangedControlHoop",
+                "delta": 0.5336,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellMaterial:bellBrass",
+                "delta": 0.414,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:3mm",
+                "delta": 0.1296,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:solidShell",
+                "delta": 0.0156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "depth:6",
+                "delta": -0.0132,
+                "direction": "down"
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:bellBrass",
+              "totalMovement": 5.658
+            },
+            {
+              "source": "shellConstruction:solidShell",
+              "totalMovement": 2.27
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "shellThickness:3mm",
+              "totalMovement": 1.123
+            },
+            {
+              "source": "hoopType:inwardFlangedControlHoop",
+              "totalMovement": 0.992
+            },
+            {
+              "source": "depth:6",
+              "totalMovement": 0.68
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        },
+        "calibrationOverlay": {
+          "applied": [],
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+        }
+      },
+      "deltas": {},
+      "readoutMaps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "firstListenScore": 0.8244
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "firstListenScore": 0.7638
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "firstListenScore": 0.6996
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "firstListenScore": 0.8244
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "firstListenScore": 0.7638
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "firstListenScore": 0.6996
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "firstListenScore": 0.6706
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "firstListenScore": 0.5655
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "firstListenScore": 0.5615
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "firstListenScore": 0.4626
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "playerScore": 0.7903
+            },
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "playerScore": 0.7757
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "playerScore": 0.7136
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "playerScore": 0.6819
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "playerScore": 0.6651
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "playerScore": 0.6268
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "playerScore": 0.5981
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "playerScore": 0.7903
+            },
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "playerScore": 0.7757
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "playerScore": 0.7136
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "playerScore": 0.6819
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "playerScore": 0.6651
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "playerScore": 0.6268
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "playerScore": 0.5981
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "identityScore": 0.8424
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "identityScore": 0.788
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "identityScore": 0.7434
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "identityScore": 0.7237
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "identityScore": 0.8424
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "identityScore": 0.788
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "identityScore": 0.7434
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "identityScore": 0.7237
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "identityScore": 0.6364
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "identityScore": 0.6299
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "identityScore": 0.5413
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:bellBrass",
+              "totalMovement": 5.658
+            },
+            {
+              "source": "shellConstruction:solidShell",
+              "totalMovement": 2.27
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "shellThickness:3mm",
+              "totalMovement": 1.123
+            },
+            {
+              "source": "hoopType:inwardFlangedControlHoop",
+              "totalMovement": 0.992
+            },
+            {
+              "source": "depth:6",
+              "totalMovement": 0.68
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "dw-true-cast-bronze",
+      "before": {
+        "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+        "company": "DW / PDP",
+        "model": "MFG True-Cast Bell Bronze 14x4",
+        "lineSeries": "DW MFG / True-Cast",
+        "size": "14x4",
+        "raw": {
+          "shellMaterial": "Bronze",
+          "shellConstruction": "Metal",
+          "bearingEdge": {
+            "batterSideProfile": "machined metal bearing edge",
+            "snareSideProfile": "machined metal bearing edge",
+            "roundover": "unknown",
+            "confidence": "fallback",
+            "evidenceLevel": "metalShellFallback",
+            "needsVerification": true,
+            "notes": "Exact published bearing-edge geometry was not found. Generic machined metal bearing edge fallback applied under LegacyPrint metal-shell readiness rule."
+          },
+          "hoopType": "True-Cast hoops",
+          "snareBed": "",
+          "diameter": 14,
+          "depth": 4,
+          "shellThickness": 35,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 4,
+          "shellThicknessMm": 35,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "bronze",
+          "shellConstruction": "metal",
+          "bearingEdge": "machinedMetal",
+          "hoopType": "dieCast",
+          "snareBed": "unknownSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 7.73,
+          "brightness": 6.4,
+          "projection": 6.95,
+          "sustain": 5.96,
+          "warmth": 5.54,
+          "sensitivity": 4.96,
+          "control": 7.22
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "value": 7.73
+          },
+          {
+            "key": "control",
+            "value": 7.22
+          },
+          {
+            "key": "projection",
+            "value": 6.95
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:bronze",
+                "delta": 0.7544,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.468,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:35mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:dieCast",
+                "delta": 0.4176,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:metal",
+                "delta": 0.4056,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "depth:4",
+                "delta": 0.2112,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellMaterial:bronze",
+                "delta": 0.3496,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:dieCast",
+                "delta": 0.203,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:4",
+                "delta": 0.1452,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:35mm",
+                "delta": 0.0576,
+                "direction": "up"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellMaterial:bronze",
+                "delta": 0.8464,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:35mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:dieCast",
+                "delta": 0.1276,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "depth:4",
+                "delta": -0.0792,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:bronze",
+                "delta": 0.874,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:metal",
+                "delta": 0.273,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:dieCast",
+                "delta": -0.2436,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:35mm",
+                "delta": -0.1584,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:4",
+                "delta": -0.1188,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellMaterial:bronze",
+                "delta": 0.828,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellConstruction:metal",
+                "delta": -0.1404,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "hoopType:dieCast",
+                "delta": -0.1276,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:4",
+                "delta": -0.1188,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:35mm",
+                "delta": 0.0576,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:machinedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:35mm",
+                "delta": -0.2304,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2304,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:4",
+                "delta": 0.165,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:dieCast",
+                "delta": -0.1276,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:metal",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:bronze",
+                "delta": -0.0276,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "hoopType:dieCast",
+                "delta": 0.6844,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:35mm",
+                "delta": 0.648,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellMaterial:bronze",
+                "delta": 0.2576,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:metal",
+                "delta": 0.156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "depth:4",
+                "delta": 0.132,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:bronze",
+              "totalMovement": 3.938
+            },
+            {
+              "source": "shellThickness:35mm",
+              "totalMovement": 2.045
+            },
+            {
+              "source": "hoopType:dieCast",
+              "totalMovement": 1.931
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "depth:4",
+              "totalMovement": 0.97
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        }
+      },
+      "after": {
+        "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+        "company": "DW / PDP",
+        "model": "MFG True-Cast Bell Bronze 14x4",
+        "lineSeries": "DW MFG / True-Cast",
+        "size": "14x4",
+        "raw": {
+          "shellMaterial": "Bronze",
+          "shellConstruction": "Metal",
+          "bearingEdge": {
+            "batterSideProfile": "machined metal bearing edge",
+            "snareSideProfile": "machined metal bearing edge",
+            "roundover": "unknown",
+            "confidence": "fallback",
+            "evidenceLevel": "metalShellFallback",
+            "needsVerification": true,
+            "notes": "Exact published bearing-edge geometry was not found. Generic machined metal bearing edge fallback applied under LegacyPrint metal-shell readiness rule."
+          },
+          "hoopType": "True-Cast hoops",
+          "snareBed": "",
+          "diameter": 14,
+          "depth": 4,
+          "shellThickness": 35,
+          "lugCount": 10
+        },
+        "numeric": {
+          "diameter": 14,
+          "depth": 4,
+          "shellThicknessMm": 35,
+          "lugCount": 10
+        },
+        "families": {
+          "shellMaterial": "bronze",
+          "shellConstruction": "metal",
+          "bearingEdge": "machinedMetal",
+          "hoopType": "dieCast",
+          "snareBed": "unknownSnareBed"
+        },
+        "voiceProfile": {
+          "attack": 7.73,
+          "brightness": 6.4,
+          "projection": 6.95,
+          "sustain": 5.94,
+          "warmth": 5.54,
+          "sensitivity": 4.96,
+          "control": 7.25
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "value": 7.73
+          },
+          {
+            "key": "control",
+            "value": 7.25
+          },
+          {
+            "key": "projection",
+            "value": 6.95
+          }
+        ],
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "drivers": {
+          "byNode": {
+            "attack": [
+              {
+                "node": "attack",
+                "source": "shellMaterial:bronze",
+                "delta": 0.7544,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.468,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellThickness:35mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "hoopType:dieCast",
+                "delta": 0.4176,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "shellConstruction:metal",
+                "delta": 0.4056,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "depth:4",
+                "delta": 0.2112,
+                "direction": "up"
+              },
+              {
+                "node": "attack",
+                "source": "lugCount:10",
+                "delta": 0.028,
+                "direction": "up"
+              }
+            ],
+            "brightness": [
+              {
+                "node": "brightness",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellMaterial:bronze",
+                "delta": 0.3496,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "hoopType:dieCast",
+                "delta": 0.203,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "depth:4",
+                "delta": 0.1452,
+                "direction": "up"
+              },
+              {
+                "node": "brightness",
+                "source": "shellThickness:35mm",
+                "delta": 0.0576,
+                "direction": "up"
+              }
+            ],
+            "projection": [
+              {
+                "node": "projection",
+                "source": "shellMaterial:bronze",
+                "delta": 0.8464,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellThickness:35mm",
+                "delta": 0.4464,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "shellConstruction:metal",
+                "delta": 0.3744,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.1584,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "hoopType:dieCast",
+                "delta": 0.1276,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "depth:4",
+                "delta": -0.0792,
+                "direction": "down"
+              },
+              {
+                "node": "projection",
+                "source": "diameter:14",
+                "delta": 0.062,
+                "direction": "up"
+              },
+              {
+                "node": "projection",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "sustain": [
+              {
+                "node": "sustain",
+                "source": "shellMaterial:bronze",
+                "delta": 0.874,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "shellConstruction:metal",
+                "delta": 0.273,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "hoopType:dieCast",
+                "delta": -0.2436,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "shellThickness:35mm",
+                "delta": -0.1584,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "depth:4",
+                "delta": -0.1188,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "diameter:14",
+                "delta": 0.0744,
+                "direction": "up"
+              },
+              {
+                "node": "sustain",
+                "source": "lugCount:10",
+                "delta": -0.0112,
+                "direction": "down"
+              },
+              {
+                "node": "sustain",
+                "source": "calibration:hoop:dieCast",
+                "delta": -0.02,
+                "direction": "down",
+                "reason": "Preview overlay: die-cast hoops slightly emphasize focus/control and slightly reduce open ring.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              }
+            ],
+            "warmth": [
+              {
+                "node": "warmth",
+                "source": "shellMaterial:bronze",
+                "delta": 0.828,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellConstruction:metal",
+                "delta": -0.1404,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "hoopType:dieCast",
+                "delta": -0.1276,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "depth:4",
+                "delta": -0.1188,
+                "direction": "down"
+              },
+              {
+                "node": "warmth",
+                "source": "diameter:14",
+                "delta": 0.0992,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "shellThickness:35mm",
+                "delta": 0.0576,
+                "direction": "up"
+              },
+              {
+                "node": "warmth",
+                "source": "bearingEdge:machinedMetal",
+                "delta": -0.0576,
+                "direction": "down"
+              }
+            ],
+            "sensitivity": [
+              {
+                "node": "sensitivity",
+                "source": "shellThickness:35mm",
+                "delta": -0.2304,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2304,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "depth:4",
+                "delta": 0.165,
+                "direction": "up"
+              },
+              {
+                "node": "sensitivity",
+                "source": "hoopType:dieCast",
+                "delta": -0.1276,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellConstruction:metal",
+                "delta": -0.0624,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "shellMaterial:bronze",
+                "delta": -0.0276,
+                "direction": "down"
+              },
+              {
+                "node": "sensitivity",
+                "source": "lugCount:10",
+                "delta": 0.0112,
+                "direction": "up"
+              }
+            ],
+            "control": [
+              {
+                "node": "control",
+                "source": "hoopType:dieCast",
+                "delta": 0.6844,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellThickness:35mm",
+                "delta": 0.648,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "bearingEdge:machinedMetal",
+                "delta": 0.2736,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellMaterial:bronze",
+                "delta": 0.2576,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "shellConstruction:metal",
+                "delta": 0.156,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "depth:4",
+                "delta": 0.132,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "lugCount:10",
+                "delta": 0.0672,
+                "direction": "up"
+              },
+              {
+                "node": "control",
+                "source": "calibration:hoop:dieCast",
+                "delta": 0.03,
+                "direction": "up",
+                "reason": "Preview overlay: die-cast hoops slightly emphasize focus/control and slightly reduce open ring.",
+                "confidence": "adminPreview",
+                "calibrationOverlay": true
+              }
+            ]
+          },
+          "strongestSources": [
+            {
+              "source": "shellMaterial:bronze",
+              "totalMovement": 3.938
+            },
+            {
+              "source": "shellThickness:35mm",
+              "totalMovement": 2.045
+            },
+            {
+              "source": "hoopType:dieCast",
+              "totalMovement": 1.931
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "depth:4",
+              "totalMovement": 0.97
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "calibration:hoop:dieCast",
+              "totalMovement": 0.05,
+              "calibrationOverlay": true
+            }
+          ]
+        },
+        "doctrine": {
+          "version": "legacyprint-snare-engine-v0.1",
+          "scoreMode": "snareRelativePhysicalModel",
+          "universalDrumCalibration": "planned",
+          "brandPrestigeScoring": false,
+          "pricePrestigeScoring": false,
+          "collectibilityScoring": false,
+          "stockHeadsBlockPromotion": false,
+          "stockSnareWiresBlockPromotion": false,
+          "productionStatusBlocksPromotion": false,
+          "brandMultiplierPolicy": "Brand multipliers are allowed only when they represent documented physical build behavior: shell layup, construction method, edge geometry, hardware mass, or other measurable acoustic factors.",
+          "firestoreScoringWritesAllowed": false
+        },
+        "calibrationOverlay": {
+          "applied": [
+            {
+              "type": "hoopFamilyDeltas",
+              "family": "dieCast",
+              "deltas": {
+                "sustain": -0.02,
+                "control": 0.03
+              }
+            }
+          ],
+          "overlayVersion": "snare-calibration-overlay-v0.1-local-preview"
+        }
+      },
+      "deltas": {
+        "sustain": -0.02,
+        "control": 0.03
+      },
+      "readoutMaps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "firstListenScore": 0.8436
+            },
+            {
+              "node": "control",
+              "value": 7.25,
+              "rank": 2,
+              "normalized": 0.6944,
+              "driverStrength": 0.8234,
+              "firstListenScore": 0.7431
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "firstListenScore": 0.6937
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "firstListenScore": 0.8436
+            },
+            {
+              "node": "control",
+              "value": 7.25,
+              "rank": 2,
+              "normalized": 0.6944,
+              "driverStrength": 0.8234,
+              "firstListenScore": 0.7431
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "firstListenScore": 0.6937
+            },
+            {
+              "node": "sustain",
+              "value": 5.94,
+              "rank": 5,
+              "normalized": 0.5489,
+              "driverStrength": 0.7495,
+              "firstListenScore": 0.5822
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "firstListenScore": 0.5639
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "firstListenScore": 0.4773
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "firstListenScore": 0.3784
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "playerScore": 0.8437
+            },
+            {
+              "node": "control",
+              "value": 7.25,
+              "rank": 2,
+              "normalized": 0.6944,
+              "driverStrength": 0.8234,
+              "playerScore": 0.7739
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "playerScore": 0.677
+            },
+            {
+              "node": "sustain",
+              "value": 5.94,
+              "rank": 5,
+              "normalized": 0.5489,
+              "driverStrength": 0.7495,
+              "playerScore": 0.6233
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "playerScore": 0.605
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "playerScore": 0.5717
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "playerScore": 0.524
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "playerScore": 0.8437
+            },
+            {
+              "node": "control",
+              "value": 7.25,
+              "rank": 2,
+              "normalized": 0.6944,
+              "driverStrength": 0.8234,
+              "playerScore": 0.7739
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "playerScore": 0.677
+            },
+            {
+              "node": "sustain",
+              "value": 5.94,
+              "rank": 5,
+              "normalized": 0.5489,
+              "driverStrength": 0.7495,
+              "playerScore": 0.6233
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "playerScore": 0.605
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "playerScore": 0.5717
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "playerScore": 0.524
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "identityScore": 0.8499
+            },
+            {
+              "node": "control",
+              "value": 7.25,
+              "rank": 2,
+              "normalized": 0.6944,
+              "driverStrength": 0.8234,
+              "identityScore": 0.768
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "identityScore": 0.7175
+            },
+            {
+              "node": "sustain",
+              "value": 5.94,
+              "rank": 5,
+              "normalized": 0.5489,
+              "driverStrength": 0.7495,
+              "identityScore": 0.6733
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "identityScore": 0.8499
+            },
+            {
+              "node": "control",
+              "value": 7.25,
+              "rank": 2,
+              "normalized": 0.6944,
+              "driverStrength": 0.8234,
+              "identityScore": 0.768
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "identityScore": 0.7175
+            },
+            {
+              "node": "sustain",
+              "value": 5.94,
+              "rank": 5,
+              "normalized": 0.5489,
+              "driverStrength": 0.7495,
+              "identityScore": 0.6733
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "identityScore": 0.5963
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "identityScore": 0.5821
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "identityScore": 0.4608
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:bronze",
+              "totalMovement": 3.938
+            },
+            {
+              "source": "shellThickness:35mm",
+              "totalMovement": 2.045
+            },
+            {
+              "source": "hoopType:dieCast",
+              "totalMovement": 1.931
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "depth:4",
+              "totalMovement": 0.97
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "calibration:hoop:dieCast",
+              "totalMovement": 0.05,
+              "calibrationOverlay": true
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
