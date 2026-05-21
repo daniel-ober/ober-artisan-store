@@ -1,0 +1,1816 @@
+{
+  "status": "SNARE_TAXONOMY_PREVIEW_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:24:04.401Z",
+  "firestoreWrites": 0,
+  "summary": {
+    "totalFirestoreRecords": 1551,
+    "enginePromotedRecords": 366
+  },
+  "promotedTaxonomy": {
+    "shellMaterialFamilies": {
+      "grouped": {
+        "brass": 88,
+        "steel": 74,
+        "maple": 52,
+        "birch": 22,
+        "bellBrass": 21,
+        "aluminum": 20,
+        "beech": 16,
+        "walnut": 9,
+        "bronze": 9,
+        "acrylic": 9,
+        "bubinga": 9,
+        "copper": 8,
+        "poplar": 7,
+        "mahogany": 6,
+        "oak": 4,
+        "titanium": 3,
+        "zelkova": 2,
+        "cordia": 2,
+        "spruce": 2,
+        "mahoganyPoplar": 1,
+        "cherry": 1,
+        "rosewood": 1
+      },
+      "examples": {
+        "bellBrass": [
+          {
+            "raw": "Bell Brass",
+            "count": 16
+          },
+          {
+            "raw": "bell brass",
+            "count": 5
+          }
+        ],
+        "brass": [
+          {
+            "raw": "Brass",
+            "count": 65
+          },
+          {
+            "raw": "brass",
+            "count": 23
+          }
+        ],
+        "titanium": [
+          {
+            "raw": "Titanium",
+            "count": 3
+          }
+        ],
+        "mahogany": [
+          {
+            "raw": "Mahogany",
+            "count": 6
+          }
+        ],
+        "maple": [
+          {
+            "raw": "Maple",
+            "count": 42
+          },
+          {
+            "raw": "maple",
+            "count": 9
+          },
+          {
+            "raw": "Solid Maple",
+            "count": 1
+          }
+        ],
+        "walnut": [
+          {
+            "raw": "Walnut",
+            "count": 5
+          },
+          {
+            "raw": "walnut",
+            "count": 4
+          }
+        ],
+        "aluminum": [
+          {
+            "raw": "Aluminum",
+            "count": 18
+          },
+          {
+            "raw": "aluminum",
+            "count": 2
+          }
+        ],
+        "steel": [
+          {
+            "raw": "Steel",
+            "count": 50
+          },
+          {
+            "raw": "steel",
+            "count": 24
+          }
+        ],
+        "zelkova": [
+          {
+            "raw": "Zelkova",
+            "count": 2
+          }
+        ],
+        "bronze": [
+          {
+            "raw": "Bronze",
+            "count": 6
+          },
+          {
+            "raw": "bronze",
+            "count": 3
+          }
+        ],
+        "oak": [
+          {
+            "raw": "Oak",
+            "count": 4
+          }
+        ],
+        "copper": [
+          {
+            "raw": "Copper",
+            "count": 5
+          },
+          {
+            "raw": "copper",
+            "count": 3
+          }
+        ],
+        "mahoganyPoplar": [
+          {
+            "raw": "Mahogany / Poplar",
+            "count": 1
+          }
+        ],
+        "beech": [
+          {
+            "raw": "Beech",
+            "count": 16
+          }
+        ],
+        "cherry": [
+          {
+            "raw": "Cherry",
+            "count": 1
+          }
+        ],
+        "birch": [
+          {
+            "raw": "Birch",
+            "count": 17
+          },
+          {
+            "raw": "birch",
+            "count": 5
+          }
+        ],
+        "acrylic": [
+          {
+            "raw": "Acrylic",
+            "count": 8
+          },
+          {
+            "raw": "acrylic",
+            "count": 1
+          }
+        ],
+        "cordia": [
+          {
+            "raw": "cordia",
+            "count": 2
+          }
+        ],
+        "poplar": [
+          {
+            "raw": "poplar",
+            "count": 7
+          }
+        ],
+        "rosewood": [
+          {
+            "raw": "rosewood",
+            "count": 1
+          }
+        ],
+        "spruce": [
+          {
+            "raw": "Spruce",
+            "count": 2
+          }
+        ],
+        "bubinga": [
+          {
+            "raw": "bubinga",
+            "count": 6
+          },
+          {
+            "raw": "Bubinga",
+            "count": 3
+          }
+        ]
+      }
+    },
+    "shellConstructionFamilies": {
+      "grouped": {
+        "metal": 196,
+        "ply": 130,
+        "solidShell": 20,
+        "plyWithReinforcementRings": 8,
+        "castMetal": 6,
+        "seamlessMetal": 2,
+        "beadedMetal": 2,
+        "acrylic": 1,
+        "hybrid": 1
+      },
+      "examples": {
+        "solidShell": [
+          {
+            "raw": "Solid Shell",
+            "count": 20
+          }
+        ],
+        "metal": [
+          {
+            "raw": "Metal",
+            "count": 141
+          },
+          {
+            "raw": "metal",
+            "count": 55
+          }
+        ],
+        "ply": [
+          {
+            "raw": "Ply",
+            "count": 81
+          },
+          {
+            "raw": "ply",
+            "count": 45
+          },
+          {
+            "raw": "Ply shell",
+            "count": 4
+          }
+        ],
+        "plyWithReinforcementRings": [
+          {
+            "raw": "ply with reinforcement rings",
+            "count": 8
+          }
+        ],
+        "acrylic": [
+          {
+            "raw": "acrylic",
+            "count": 1
+          }
+        ],
+        "castMetal": [
+          {
+            "raw": "cast metal",
+            "count": 5
+          },
+          {
+            "raw": "Cast metal shell",
+            "count": 1
+          }
+        ],
+        "hybrid": [
+          {
+            "raw": "hybrid",
+            "count": 1
+          }
+        ],
+        "seamlessMetal": [
+          {
+            "raw": "Seamless metal shell",
+            "count": 2
+          }
+        ],
+        "beadedMetal": [
+          {
+            "raw": "Beaded metal shell",
+            "count": 2
+          }
+        ]
+      }
+    },
+    "bearingEdgeFamilies": {
+      "grouped": {
+        "objectBearingEdgeNeedsFlattening": 119,
+        "rolledOrFormedMetal": 92,
+        "sharper45Degree": 84,
+        "tamaWoodEdge": 21,
+        "otherBearingEdge": 9,
+        "canopusPrecisionEdge": 9,
+        "tamaStarclassicEdge": 8,
+        "roundedVintage": 7,
+        "machinedMetal": 6,
+        "rounder30Degree": 5,
+        "mapexSonicClear": 3,
+        "ludwigFamilyEdge": 1,
+        "acrylicEdge": 1,
+        "rolledCollar": 1
+      },
+      "examples": {
+        "objectBearingEdgeNeedsFlattening": [
+          {
+            "raw": "[object Object]",
+            "count": 119
+          }
+        ],
+        "otherBearingEdge": [
+          {
+            "raw": "formed wood bearing edge; exact profile not published",
+            "count": 4
+          },
+          {
+            "raw": "Los Angeles bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "Metal bearing edge / unknown exact profile",
+            "count": 2
+          }
+        ],
+        "canopusPrecisionEdge": [
+          {
+            "raw": "Delicate/precise Canopus bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "Custom sharp Canopus Zelkova edge",
+            "count": 2
+          }
+        ],
+        "rolledOrFormedMetal": [
+          {
+            "raw": "formed metal bearing edge",
+            "count": 51
+          },
+          {
+            "raw": "Rolled metal edge",
+            "count": 19
+          },
+          {
+            "raw": "Rolled flange / 45° listed where confirmed",
+            "count": 10
+          },
+          {
+            "raw": "Rolled / flanged metal bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "rolled / flanged metal bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "Folded / metal bearing edge (not fully specified)",
+            "count": 1
+          },
+          {
+            "raw": "45-degree / rolled metal bearing edge",
+            "count": 1
+          }
+        ],
+        "rounder30Degree": [
+          {
+            "raw": "30-degree bearing edge",
+            "count": 4
+          },
+          {
+            "raw": "30-degree round-over",
+            "count": 1
+          }
+        ],
+        "sharper45Degree": [
+          {
+            "raw": "45° bearing edge",
+            "count": 41
+          },
+          {
+            "raw": "45-degree",
+            "count": 16
+          },
+          {
+            "raw": "45° bearing edge / OSM series edge",
+            "count": 12
+          },
+          {
+            "raw": "45° / modern metal edge",
+            "count": 5
+          },
+          {
+            "raw": "45-degree bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "45-degree precision cut",
+            "count": 3
+          },
+          {
+            "raw": "45-degree / Tama wood bearing edge",
+            "count": 2
+          },
+          {
+            "raw": "Rounded 45° batter edge with 3/8\" counter-cut",
+            "count": 1
+          },
+          {
+            "raw": "45-degree / formed steel bearing edge",
+            "count": 1
+          }
+        ],
+        "ludwigFamilyEdge": [
+          {
+            "raw": "Ludwig USA bearing edge / not specified",
+            "count": 1
+          }
+        ],
+        "mapexSonicClear": [
+          {
+            "raw": "SONIClear / modern Mapex edge",
+            "count": 3
+          }
+        ],
+        "roundedVintage": [
+          {
+            "raw": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+            "count": 5
+          },
+          {
+            "raw": "Rounded vintage bearing edge",
+            "count": 2
+          }
+        ],
+        "acrylicEdge": [
+          {
+            "raw": "acrylic bearing edge",
+            "count": 1
+          }
+        ],
+        "tamaWoodEdge": [
+          {
+            "raw": "Tama wood bearing edge",
+            "count": 17
+          },
+          {
+            "raw": "Tama shaped wood bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "Tama hybrid shell bearing edge",
+            "count": 1
+          }
+        ],
+        "machinedMetal": [
+          {
+            "raw": "machined cast metal bearing edge",
+            "count": 5
+          },
+          {
+            "raw": "Machined metal bearing edge",
+            "count": 1
+          }
+        ],
+        "tamaStarclassicEdge": [
+          {
+            "raw": "Starclassic wood bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "Slightly sharper Starclassic bearing edge",
+            "count": 1
+          }
+        ],
+        "rolledCollar": [
+          {
+            "raw": "Tama Rolled Collar bearing edge",
+            "count": 1
+          }
+        ]
+      }
+    },
+    "hoopFamilies": {
+      "grouped": {
+        "tripleFlanged": 157,
+        "dieCast": 122,
+        "inwardFlangedControlHoop": 43,
+        "otherHoop": 24,
+        "tamaGroovedHoop": 9,
+        "gretsch302": 7,
+        "brassHoop": 2,
+        "unknownHoop": 1,
+        "woodHoop": 1
+      },
+      "examples": {
+        "inwardFlangedControlHoop": [
+          {
+            "raw": "SH1410 S-Hoop counter hoops",
+            "count": 23
+          },
+          {
+            "raw": "SH138 S-Hoop counter hoops",
+            "count": 10
+          },
+          {
+            "raw": "Sonic Saver Hoops",
+            "count": 7
+          },
+          {
+            "raw": "Sound Arc Hoop",
+            "count": 2
+          },
+          {
+            "raw": "2.3mm Brass Sound Arc Hoop / brass triple-flanged rounded profile",
+            "count": 1
+          }
+        ],
+        "tripleFlanged": [
+          {
+            "raw": "2.3mm steel triple-flanged",
+            "count": 29
+          },
+          {
+            "raw": "triple-flanged steel",
+            "count": 22
+          },
+          {
+            "raw": "2.3mm triple-flanged Steel Power Hoops",
+            "count": 17
+          },
+          {
+            "raw": "triple-flange hoops",
+            "count": 15
+          },
+          {
+            "raw": "Triple-flange / Yamaha hoop",
+            "count": 11
+          },
+          {
+            "raw": "triple-flange / Mighty Hoop",
+            "count": 10
+          },
+          {
+            "raw": "2.3mm Triple Flanged",
+            "count": 7
+          },
+          {
+            "raw": "2.3mm Triple-Flanged / SuperHoop-style",
+            "count": 6
+          },
+          {
+            "raw": "1.5mm triple-flange steel",
+            "count": 6
+          },
+          {
+            "raw": "Triple-flange steel hoop",
+            "count": 6
+          },
+          {
+            "raw": "Triple-flanged",
+            "count": 4
+          },
+          {
+            "raw": "Triple-Flanged / SuperHoop-style",
+            "count": 4
+          }
+        ],
+        "otherHoop": [
+          {
+            "raw": "2.3mm Powerhoops",
+            "count": 17
+          },
+          {
+            "raw": "Steel 2.4mm 8H",
+            "count": 2
+          },
+          {
+            "raw": "2.3mm Inverse DynaHoop (10 hole)",
+            "count": 2
+          },
+          {
+            "raw": "Steel 1.6mm 10H",
+            "count": 1
+          },
+          {
+            "raw": "2.3mm hoops",
+            "count": 1
+          },
+          {
+            "raw": "Single-flange steel with vintage claw hooks",
+            "count": 1
+          }
+        ],
+        "dieCast": [
+          {
+            "raw": "Configurable / usually die-cast or triple-flanged",
+            "count": 32
+          },
+          {
+            "raw": "die-cast hoops",
+            "count": 30
+          },
+          {
+            "raw": "Die-Cast / MasterCast on many catalog versions",
+            "count": 16
+          },
+          {
+            "raw": "Die-cast hoops",
+            "count": 11
+          },
+          {
+            "raw": "Die-Cast / MasterCast",
+            "count": 6
+          },
+          {
+            "raw": "Diecast Hoop / 8",
+            "count": 5
+          },
+          {
+            "raw": "True-Cast hoops",
+            "count": 4
+          },
+          {
+            "raw": "die-cast",
+            "count": 4
+          },
+          {
+            "raw": "Die-cast Hoop",
+            "count": 4
+          },
+          {
+            "raw": "Die Cast Hoops",
+            "count": 3
+          },
+          {
+            "raw": "Die-Cast / 8",
+            "count": 2
+          },
+          {
+            "raw": "zinc die-cast hoops",
+            "count": 2
+          }
+        ],
+        "unknownHoop": [
+          {
+            "raw": "UNKNOWN_OR_MISSING",
+            "count": 1
+          }
+        ],
+        "brassHoop": [
+          {
+            "raw": "Nickel-over-brass hoops",
+            "count": 2
+          }
+        ],
+        "gretsch302": [
+          {
+            "raw": "Gretsch 302 3mm double-flanged steel hoops",
+            "count": 4
+          },
+          {
+            "raw": "Gretsch 302 3mm double-flanged hoops",
+            "count": 2
+          },
+          {
+            "raw": "Gretsch 302 double-flanged hoops",
+            "count": 1
+          }
+        ],
+        "woodHoop": [
+          {
+            "raw": "Maple wood hoop",
+            "count": 1
+          }
+        ],
+        "tamaGroovedHoop": [
+          {
+            "raw": "Tama Grooved Hoop",
+            "count": 9
+          }
+        ]
+      }
+    }
+  },
+  "allRecordTaxonomy": {
+    "shellMaterialFamilies": {
+      "grouped": {
+        "maple": 389,
+        "brass": 178,
+        "steel": 132,
+        "birch": 112,
+        "mahogany": 74,
+        "walnut": 72,
+        "aluminum": 71,
+        "maplePoplar": 53,
+        "otherMaterial": 41,
+        "oak": 37,
+        "cherry": 36,
+        "bronze": 35,
+        "beech": 32,
+        "copper": 31,
+        "gum": 30,
+        "acrylic": 25,
+        "bellBrass": 22,
+        "genericWood": 22,
+        "jarrah": 20,
+        "poplar": 18,
+        "marri": 16,
+        "wandoo": 16,
+        "bubinga": 15,
+        "stainlessSteel": 14,
+        "ash": 13,
+        "mapleWalnut": 13,
+        "titanium": 12,
+        "purpleheart": 7,
+        "unknownMaterial": 5,
+        "zelkova": 3,
+        "mahoganyPoplar": 2,
+        "cordia": 2,
+        "spruce": 2,
+        "rosewood": 1
+      },
+      "examples": {
+        "maple": [
+          {
+            "raw": "Maple",
+            "count": 361
+          },
+          {
+            "raw": "maple",
+            "count": 26
+          },
+          {
+            "raw": "Maple / Mahogany",
+            "count": 1
+          },
+          {
+            "raw": "Solid Maple",
+            "count": 1
+          }
+        ],
+        "brass": [
+          {
+            "raw": "Brass",
+            "count": 139
+          },
+          {
+            "raw": "brass",
+            "count": 28
+          },
+          {
+            "raw": "Chrome over Brass",
+            "count": 10
+          },
+          {
+            "raw": "Hammered Brass",
+            "count": 1
+          }
+        ],
+        "steel": [
+          {
+            "raw": "Steel",
+            "count": 105
+          },
+          {
+            "raw": "steel",
+            "count": 27
+          }
+        ],
+        "bellBrass": [
+          {
+            "raw": "Bell Brass",
+            "count": 17
+          },
+          {
+            "raw": "bell brass",
+            "count": 5
+          }
+        ],
+        "titanium": [
+          {
+            "raw": "Titanium",
+            "count": 12
+          }
+        ],
+        "jarrah": [
+          {
+            "raw": "Jarrah",
+            "count": 20
+          }
+        ],
+        "gum": [
+          {
+            "raw": "Gum",
+            "count": 23
+          },
+          {
+            "raw": "Rose Gum",
+            "count": 7
+          }
+        ],
+        "marri": [
+          {
+            "raw": "Marri",
+            "count": 16
+          }
+        ],
+        "oak": [
+          {
+            "raw": "Oak",
+            "count": 37
+          }
+        ],
+        "wandoo": [
+          {
+            "raw": "Wandoo",
+            "count": 16
+          }
+        ],
+        "otherMaterial": [
+          {
+            "raw": "Tasmanian Blackwood",
+            "count": 8
+          },
+          {
+            "raw": "Sassafras",
+            "count": 7
+          },
+          {
+            "raw": "Bamboo",
+            "count": 4
+          },
+          {
+            "raw": "Magnesium",
+            "count": 3
+          },
+          {
+            "raw": "Exotic Hardwood",
+            "count": 3
+          },
+          {
+            "raw": "Kapoor",
+            "count": 3
+          },
+          {
+            "raw": "Sycamore",
+            "count": 2
+          },
+          {
+            "raw": "Unknown metal",
+            "count": 2
+          },
+          {
+            "raw": "Kapur",
+            "count": 2
+          },
+          {
+            "raw": "Luan",
+            "count": 1
+          },
+          {
+            "raw": "Concrete Composite",
+            "count": 1
+          },
+          {
+            "raw": "Carbon Fiber",
+            "count": 1
+          }
+        ],
+        "ash": [
+          {
+            "raw": "Ash",
+            "count": 13
+          }
+        ],
+        "cherry": [
+          {
+            "raw": "Cherry",
+            "count": 36
+          }
+        ],
+        "mahogany": [
+          {
+            "raw": "Mahogany",
+            "count": 73
+          },
+          {
+            "raw": "African Mahogany",
+            "count": 1
+          }
+        ],
+        "walnut": [
+          {
+            "raw": "Walnut",
+            "count": 67
+          },
+          {
+            "raw": "walnut",
+            "count": 5
+          }
+        ],
+        "acrylic": [
+          {
+            "raw": "Acrylic",
+            "count": 24
+          },
+          {
+            "raw": "acrylic",
+            "count": 1
+          }
+        ],
+        "aluminum": [
+          {
+            "raw": "Aluminum",
+            "count": 61
+          },
+          {
+            "raw": "aluminum",
+            "count": 10
+          }
+        ],
+        "birch": [
+          {
+            "raw": "Birch",
+            "count": 103
+          },
+          {
+            "raw": "birch",
+            "count": 9
+          }
+        ],
+        "bronze": [
+          {
+            "raw": "Bronze",
+            "count": 31
+          },
+          {
+            "raw": "bronze",
+            "count": 4
+          }
+        ],
+        "maplePoplar": [
+          {
+            "raw": "Maple / Poplar",
+            "count": 53
+          }
+        ],
+        "unknownMaterial": [
+          {
+            "raw": "UNKNOWN_OR_MISSING",
+            "count": 5
+          }
+        ],
+        "genericWood": [
+          {
+            "raw": "Wood",
+            "count": 22
+          }
+        ],
+        "bubinga": [
+          {
+            "raw": "Bubinga",
+            "count": 8
+          },
+          {
+            "raw": "bubinga",
+            "count": 7
+          }
+        ],
+        "zelkova": [
+          {
+            "raw": "Zelkova",
+            "count": 3
+          }
+        ],
+        "poplar": [
+          {
+            "raw": "Poplar",
+            "count": 11
+          },
+          {
+            "raw": "poplar",
+            "count": 7
+          }
+        ],
+        "copper": [
+          {
+            "raw": "Copper",
+            "count": 28
+          },
+          {
+            "raw": "copper",
+            "count": 3
+          }
+        ],
+        "stainlessSteel": [
+          {
+            "raw": "Stainless Steel",
+            "count": 12
+          },
+          {
+            "raw": "stainless steel",
+            "count": 2
+          }
+        ],
+        "purpleheart": [
+          {
+            "raw": "Purpleheart",
+            "count": 7
+          }
+        ],
+        "mahoganyPoplar": [
+          {
+            "raw": "Mahogany / Poplar",
+            "count": 2
+          }
+        ],
+        "beech": [
+          {
+            "raw": "Beech",
+            "count": 32
+          }
+        ],
+        "mapleWalnut": [
+          {
+            "raw": "Maple / Walnut",
+            "count": 13
+          }
+        ],
+        "cordia": [
+          {
+            "raw": "cordia",
+            "count": 2
+          }
+        ],
+        "rosewood": [
+          {
+            "raw": "rosewood",
+            "count": 1
+          }
+        ],
+        "spruce": [
+          {
+            "raw": "Spruce",
+            "count": 2
+          }
+        ]
+      }
+    },
+    "shellConstructionFamilies": {
+      "grouped": {
+        "ply": 785,
+        "metal": 467,
+        "steamBent": 111,
+        "solidShell": 77,
+        "block": 53,
+        "acrylic": 21,
+        "plyWithReinforcementRings": 8,
+        "otherConstruction": 6,
+        "stave": 6,
+        "castMetal": 6,
+        "hybrid": 3,
+        "composite": 2,
+        "plyResonator": 2,
+        "seamlessMetal": 2,
+        "beadedMetal": 2
+      },
+      "examples": {
+        "ply": [
+          {
+            "raw": "Ply",
+            "count": 699
+          },
+          {
+            "raw": "ply",
+            "count": 82
+          },
+          {
+            "raw": "Ply shell",
+            "count": 4
+          }
+        ],
+        "metal": [
+          {
+            "raw": "Metal",
+            "count": 388
+          },
+          {
+            "raw": "metal",
+            "count": 79
+          }
+        ],
+        "solidShell": [
+          {
+            "raw": "Solid Shell",
+            "count": 77
+          }
+        ],
+        "block": [
+          {
+            "raw": "Block",
+            "count": 53
+          }
+        ],
+        "steamBent": [
+          {
+            "raw": "Steam Bent",
+            "count": 111
+          }
+        ],
+        "acrylic": [
+          {
+            "raw": "Acrylic",
+            "count": 20
+          },
+          {
+            "raw": "acrylic",
+            "count": 1
+          }
+        ],
+        "otherConstruction": [
+          {
+            "raw": "Other / Needs Research",
+            "count": 6
+          }
+        ],
+        "stave": [
+          {
+            "raw": "Stave",
+            "count": 6
+          }
+        ],
+        "composite": [
+          {
+            "raw": "Composite",
+            "count": 2
+          }
+        ],
+        "hybrid": [
+          {
+            "raw": "Hybrid",
+            "count": 2
+          },
+          {
+            "raw": "hybrid",
+            "count": 1
+          }
+        ],
+        "plyWithReinforcementRings": [
+          {
+            "raw": "ply with reinforcement rings",
+            "count": 8
+          }
+        ],
+        "plyResonator": [
+          {
+            "raw": "Ply / Resonator",
+            "count": 2
+          }
+        ],
+        "castMetal": [
+          {
+            "raw": "cast metal",
+            "count": 5
+          },
+          {
+            "raw": "Cast metal shell",
+            "count": 1
+          }
+        ],
+        "seamlessMetal": [
+          {
+            "raw": "Seamless metal shell",
+            "count": 2
+          }
+        ],
+        "beadedMetal": [
+          {
+            "raw": "Beaded metal shell",
+            "count": 2
+          }
+        ]
+      }
+    },
+    "bearingEdgeFamilies": {
+      "grouped": {
+        "unknownBearingEdge": 667,
+        "sharper45Degree": 298,
+        "rolledOrFormedMetal": 205,
+        "objectBearingEdgeNeedsFlattening": 119,
+        "roundedVintage": 72,
+        "otherBearingEdge": 66,
+        "rounder30Degree": 40,
+        "tamaWoodEdge": 40,
+        "canopusPrecisionEdge": 9,
+        "mapexSonicClear": 8,
+        "tamaStarclassicEdge": 8,
+        "customerSelectedEdge": 6,
+        "machinedMetal": 6,
+        "ludwigFamilyEdge": 5,
+        "acrylicEdge": 1,
+        "rolledCollar": 1
+      },
+      "examples": {
+        "unknownBearingEdge": [
+          {
+            "raw": "UNKNOWN_OR_MISSING",
+            "count": 667
+          }
+        ],
+        "objectBearingEdgeNeedsFlattening": [
+          {
+            "raw": "[object Object]",
+            "count": 119
+          }
+        ],
+        "sharper45Degree": [
+          {
+            "raw": "45° bearing edges",
+            "count": 95
+          },
+          {
+            "raw": "Unknown / likely Brady-style 45° family edge",
+            "count": 60
+          },
+          {
+            "raw": "45° bearing edge",
+            "count": 60
+          },
+          {
+            "raw": "Unknown / family likely 45 degree",
+            "count": 27
+          },
+          {
+            "raw": "45-degree",
+            "count": 16
+          },
+          {
+            "raw": "45° bearing edge / OSM series edge",
+            "count": 12
+          },
+          {
+            "raw": "45° / modern metal edge",
+            "count": 5
+          },
+          {
+            "raw": "45-degree / Yamaha Absolute family",
+            "count": 5
+          },
+          {
+            "raw": "45-degree bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "45-degree precision cut",
+            "count": 3
+          },
+          {
+            "raw": "45-degree / unknown",
+            "count": 2
+          },
+          {
+            "raw": "45-degree / Tama wood bearing edge",
+            "count": 2
+          }
+        ],
+        "otherBearingEdge": [
+          {
+            "raw": "Catalog edge unknown",
+            "count": 24
+          },
+          {
+            "raw": "Metal bearing edge / unknown exact profile",
+            "count": 4
+          },
+          {
+            "raw": "formed wood bearing edge; exact profile not published",
+            "count": 4
+          },
+          {
+            "raw": "Modern Rogers edge; exact geometry not listed",
+            "count": 4
+          },
+          {
+            "raw": "Modern-for-era edge; exact geometry unknown",
+            "count": 4
+          },
+          {
+            "raw": "Modern Rogers edge; exact geometry unknown",
+            "count": 4
+          },
+          {
+            "raw": "Los Angeles bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "60-degree snare edge",
+            "count": 3
+          },
+          {
+            "raw": "Machined bearing edge / tight tolerance",
+            "count": 3
+          },
+          {
+            "raw": "Unknown vintage edge",
+            "count": 3
+          },
+          {
+            "raw": "Modern edge; exact geometry not listed",
+            "count": 2
+          },
+          {
+            "raw": "Vintage Rogers edge; exact geometry varies",
+            "count": 2
+          }
+        ],
+        "customerSelectedEdge": [
+          {
+            "raw": "Customer-selected bearing edge",
+            "count": 6
+          }
+        ],
+        "canopusPrecisionEdge": [
+          {
+            "raw": "Delicate/precise Canopus bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "Custom sharp Canopus Zelkova edge",
+            "count": 2
+          }
+        ],
+        "rolledOrFormedMetal": [
+          {
+            "raw": "formed metal bearing edge",
+            "count": 70
+          },
+          {
+            "raw": "Rolled metal edge",
+            "count": 40
+          },
+          {
+            "raw": "Rolled flange / 45° listed where confirmed",
+            "count": 39
+          },
+          {
+            "raw": "Rolled metal bearing edge",
+            "count": 12
+          },
+          {
+            "raw": "Formed metal edge",
+            "count": 11
+          },
+          {
+            "raw": "Folded / metal bearing edge, not fully specified",
+            "count": 8
+          },
+          {
+            "raw": "Formed metal bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "Rolled / flanged metal bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "Flanged 45-degree edge estimated from review/listing",
+            "count": 6
+          },
+          {
+            "raw": "rolled / flanged metal bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "Folded / metal bearing edge (not fully specified)",
+            "count": 1
+          },
+          {
+            "raw": "45-degree / rolled metal bearing edge",
+            "count": 1
+          }
+        ],
+        "rounder30Degree": [
+          {
+            "raw": "30-degree bearing edge",
+            "count": 12
+          },
+          {
+            "raw": "Rounded / vintage edge, often 30-degree family",
+            "count": 10
+          },
+          {
+            "raw": "30-degree rounded bearing edge",
+            "count": 6
+          },
+          {
+            "raw": "Reverse roundover / 30-degree family",
+            "count": 4
+          },
+          {
+            "raw": "30-degree bearing edge estimated",
+            "count": 4
+          },
+          {
+            "raw": "30-degree / modern Recording Custom family",
+            "count": 2
+          },
+          {
+            "raw": "30-degree / rounded family estimated",
+            "count": 1
+          },
+          {
+            "raw": "30-degree round-over",
+            "count": 1
+          }
+        ],
+        "roundedVintage": [
+          {
+            "raw": "Rounded vintage edge",
+            "count": 28
+          },
+          {
+            "raw": "Vintage Ludwig rounded-over bearing edge / baseball-bat era edge",
+            "count": 10
+          },
+          {
+            "raw": "Vintage rounded / unknown",
+            "count": 10
+          },
+          {
+            "raw": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+            "count": 9
+          },
+          {
+            "raw": "Rounded/modern Rogers-style edge; exact geometry not listed",
+            "count": 5
+          },
+          {
+            "raw": "Unknown / vintage rounded",
+            "count": 2
+          },
+          {
+            "raw": "Rounded Rogers edge; exact geometry era-dependent",
+            "count": 2
+          },
+          {
+            "raw": "Rounded vintage bearing edge",
+            "count": 2
+          },
+          {
+            "raw": "Rounded/concert edge likely; exact unknown",
+            "count": 1
+          },
+          {
+            "raw": "Rounded vintage Rogers edge",
+            "count": 1
+          },
+          {
+            "raw": "Modern rounded/45 hybrid unknown",
+            "count": 1
+          },
+          {
+            "raw": "Vintage rounded / estimated",
+            "count": 1
+          }
+        ],
+        "ludwigFamilyEdge": [
+          {
+            "raw": "Modern Ludwig wood bearing edge; exact profile needs confirmation",
+            "count": 3
+          },
+          {
+            "raw": "Ludwig wood bearing edge; exact profile needs confirmation",
+            "count": 1
+          },
+          {
+            "raw": "Ludwig USA bearing edge / not specified",
+            "count": 1
+          }
+        ],
+        "mapexSonicClear": [
+          {
+            "raw": "SONIClear / modern Mapex edge",
+            "count": 6
+          },
+          {
+            "raw": "SONIClear edge",
+            "count": 2
+          }
+        ],
+        "acrylicEdge": [
+          {
+            "raw": "acrylic bearing edge",
+            "count": 1
+          }
+        ],
+        "tamaWoodEdge": [
+          {
+            "raw": "Tama wood bearing edge",
+            "count": 36
+          },
+          {
+            "raw": "Tama shaped wood bearing edge",
+            "count": 3
+          },
+          {
+            "raw": "Tama hybrid shell bearing edge",
+            "count": 1
+          }
+        ],
+        "machinedMetal": [
+          {
+            "raw": "machined cast metal bearing edge",
+            "count": 5
+          },
+          {
+            "raw": "Machined metal bearing edge",
+            "count": 1
+          }
+        ],
+        "tamaStarclassicEdge": [
+          {
+            "raw": "Starclassic wood bearing edge",
+            "count": 7
+          },
+          {
+            "raw": "Slightly sharper Starclassic bearing edge",
+            "count": 1
+          }
+        ],
+        "rolledCollar": [
+          {
+            "raw": "Tama Rolled Collar bearing edge",
+            "count": 1
+          }
+        ]
+      }
+    },
+    "hoopFamilies": {
+      "grouped": {
+        "tripleFlanged": 869,
+        "dieCast": 272,
+        "unknownHoop": 166,
+        "otherHoop": 133,
+        "inwardFlangedControlHoop": 46,
+        "vintageFlangedHoop": 36,
+        "gretsch302": 15,
+        "tamaGroovedHoop": 9,
+        "woodHoop": 3,
+        "brassHoop": 2
+      },
+      "examples": {
+        "unknownHoop": [
+          {
+            "raw": "UNKNOWN_OR_MISSING",
+            "count": 166
+          }
+        ],
+        "inwardFlangedControlHoop": [
+          {
+            "raw": "SH1410 S-Hoop counter hoops",
+            "count": 23
+          },
+          {
+            "raw": "SH138 S-Hoop counter hoops",
+            "count": 10
+          },
+          {
+            "raw": "Sonic Saver Hoops",
+            "count": 9
+          },
+          {
+            "raw": "Sound Arc Hoop",
+            "count": 3
+          },
+          {
+            "raw": "2.3mm Brass Sound Arc Hoop / brass triple-flanged rounded profile",
+            "count": 1
+          }
+        ],
+        "tripleFlanged": [
+          {
+            "raw": "Triple-flanged",
+            "count": 123
+          },
+          {
+            "raw": "2.3mm Super Hoop / rigid triple-flange style",
+            "count": 110
+          },
+          {
+            "raw": "True Hoop / triple-flanged",
+            "count": 70
+          },
+          {
+            "raw": "Triple-flanged hoops",
+            "count": 63
+          },
+          {
+            "raw": "Triple-flange / Yamaha hoop",
+            "count": 58
+          },
+          {
+            "raw": "2.3mm triple-flanged",
+            "count": 48
+          },
+          {
+            "raw": "Triple-Flanged Hoops",
+            "count": 45
+          },
+          {
+            "raw": "Triple-flange / cold-rolled varies",
+            "count": 39
+          },
+          {
+            "raw": "2.3mm steel triple-flanged",
+            "count": 37
+          },
+          {
+            "raw": "2.3mm triple-flanged hoops",
+            "count": 31
+          },
+          {
+            "raw": "2.3mm Triple Flanged",
+            "count": 29
+          },
+          {
+            "raw": "triple-flanged steel",
+            "count": 22
+          }
+        ],
+        "otherHoop": [
+          {
+            "raw": "2.3mm Powerhoops",
+            "count": 70
+          },
+          {
+            "raw": "Cold-rolled hoops",
+            "count": 11
+          },
+          {
+            "raw": "Marching/concert hoops or era-specific",
+            "count": 8
+          },
+          {
+            "raw": "Era hoop",
+            "count": 7
+          },
+          {
+            "raw": "Single-flanged or era hoop",
+            "count": 6
+          },
+          {
+            "raw": "Varies",
+            "count": 5
+          },
+          {
+            "raw": "Concert hoop",
+            "count": 3
+          },
+          {
+            "raw": "2.3mm hoops",
+            "count": 3
+          },
+          {
+            "raw": "Shell only",
+            "count": 3
+          },
+          {
+            "raw": "Steel 2.4mm 8H",
+            "count": 2
+          },
+          {
+            "raw": "Steel 2mm 8H",
+            "count": 2
+          },
+          {
+            "raw": "2.3mm Inverse DynaHoop (10 hole)",
+            "count": 2
+          }
+        ],
+        "dieCast": [
+          {
+            "raw": "Die-cast hoops",
+            "count": 73
+          },
+          {
+            "raw": "die-cast hoops",
+            "count": 48
+          },
+          {
+            "raw": "Configurable / usually die-cast or triple-flanged",
+            "count": 32
+          },
+          {
+            "raw": "Die-Cast / MasterCast on many catalog versions",
+            "count": 28
+          },
+          {
+            "raw": "Die-Cast / MasterCast",
+            "count": 26
+          },
+          {
+            "raw": "Die-cast aluminum hoop",
+            "count": 7
+          },
+          {
+            "raw": "MasterCast Die-Cast",
+            "count": 6
+          },
+          {
+            "raw": "Unknown / die-cast or stick saver depending era",
+            "count": 6
+          },
+          {
+            "raw": "Diecast Hoop / 8",
+            "count": 5
+          },
+          {
+            "raw": "True-Cast hoops",
+            "count": 4
+          },
+          {
+            "raw": "Die-cast hoops or Gretsch 302 depending configuration",
+            "count": 4
+          },
+          {
+            "raw": "die-cast",
+            "count": 4
+          }
+        ],
+        "brassHoop": [
+          {
+            "raw": "Nickel-over-brass hoops",
+            "count": 2
+          }
+        ],
+        "vintageFlangedHoop": [
+          {
+            "raw": "Stick Saver / era-specific hoops",
+            "count": 18
+          },
+          {
+            "raw": "Stick Chopper / Stick Saver family or era-specific hoops",
+            "count": 10
+          },
+          {
+            "raw": "Steel Stick Chopper / Stick Saver-style hoops",
+            "count": 4
+          },
+          {
+            "raw": "Nickel-plated Stick Saver hoops",
+            "count": 2
+          },
+          {
+            "raw": "Stick Chopper / single-flange estimated",
+            "count": 1
+          },
+          {
+            "raw": "Stick Saver hoops",
+            "count": 1
+          }
+        ],
+        "gretsch302": [
+          {
+            "raw": "Gretsch 302 3mm double-flanged steel hoops",
+            "count": 8
+          },
+          {
+            "raw": "Gretsch 302 3mm double-flanged hoops",
+            "count": 4
+          },
+          {
+            "raw": "Gretsch 302 double-flanged hoops",
+            "count": 3
+          }
+        ],
+        "woodHoop": [
+          {
+            "raw": "Maple wood hoop",
+            "count": 1
+          },
+          {
+            "raw": "19-ply vintage wood hoop",
+            "count": 1
+          },
+          {
+            "raw": "Wood hoop / vintage hoop",
+            "count": 1
+          }
+        ],
+        "tamaGroovedHoop": [
+          {
+            "raw": "Tama Grooved Hoop",
+            "count": 9
+          }
+        ]
+      }
+    }
+  }
+}
