@@ -1,0 +1,749 @@
+{
+  "generatedAt": "2026-05-21T08:35:00.981Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-a-usable-url-source-review-packet.json",
+  "status": "STOCK_HEAD_FALLBACK_LANE_A_MANUAL_SOURCE_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "summary": {
+    "sourceGroupCount": 12,
+    "recordCount": 28,
+    "companies": [
+      "Ludwig",
+      "Tama"
+    ],
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Approve explicit stock head values only when the source page lists the stock batter and/or reso head.",
+    "Approve fallback values only when the source supports a company, era, or line-level OEM pattern.",
+    "Do not count fallback-head records as source-confirmed full stock pass.",
+    "Do not infer heads from unrelated aftermarket demo listings unless clearly described as stock/original.",
+    "Leave uncertain groups unapproved."
+  ],
+  "reviewGroups": [
+    {
+      "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple",
+      "recordCount": 4,
+      "companies": [
+        "Ludwig"
+      ],
+      "records": [
+        {
+          "id": "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 5.5x14",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple"
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple"
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple"
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 8x14",
+          "diameter": 14,
+          "depth": 8,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/classic-maple"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product",
+      "recordCount": 4,
+      "companies": [
+        "Ludwig"
+      ],
+      "records": [
+        {
+          "id": "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 5.5x14",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8",
+          "companyName": "Ludwig",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 8x14",
+          "diameter": 14,
+          "depth": 8,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/blog/2024-new-product"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany",
+      "recordCount": 4,
+      "companies": [
+        "Ludwig"
+      ],
+      "records": [
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 5.5x14",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 8x14",
+          "diameter": 14,
+          "depth": 8,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-mahogany"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple",
+      "recordCount": 4,
+      "companies": [
+        "Ludwig"
+      ],
+      "records": [
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 5.5x14",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7",
+          "companyName": "Ludwig",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 8x14",
+          "diameter": 14,
+          "depth": 8,
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.ludwig-drums.com/en-us/ludwig/products/drumkits/legacy-maple"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+      "recordCount": 3,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4",
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 10x3",
+          "diameter": 10,
+          "depth": 3,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+            "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm"
+          ]
+        },
+        {
+          "id": "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9",
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 6x3",
+          "diameter": 6,
+          "depth": 3,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+            "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm"
+          ]
+        },
+        {
+          "id": "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a",
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 8x3",
+          "diameter": 8,
+          "depth": 3,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+            "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm",
+      "recordCount": 3,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4",
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 10x3",
+          "diameter": 10,
+          "depth": 3,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+            "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm"
+          ]
+        },
+        {
+          "id": "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9",
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 6x3",
+          "diameter": 6,
+          "depth": 3,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+            "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm"
+          ]
+        },
+        {
+          "id": "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a",
+          "companyName": "Tama",
+          "lineSeries": "Metalworks Effect",
+          "modelName": "Metalworks \"Effect\" Series 8x3",
+          "diameter": 8,
+          "depth": 3,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/metalworks36.html",
+            "https://www.thomannmusic.com/tama_6_x3_metalworks_effect_snare.htm"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.tama.com/usa/products/snare_drums/mp125st.html",
+      "recordCount": 1,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_signature_mike-portnoy-melody-master-12x5_12x5_metal_steel_steel_die-cast-hoops_mp125_d0e2a83b",
+          "companyName": "Tama",
+          "lineSeries": "Signature",
+          "modelName": "Mike Portnoy Melody Master 12x5",
+          "diameter": 12,
+          "depth": 5,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/usa/products/snare_drums/mp125st.html",
+            "https://mfg.ziv.mybluehost.me/2007/01/tama-mike-portnoy-melody-master-signature-snare-drums/"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://mfg.ziv.mybluehost.me/2007/01/tama-mike-portnoy-melody-master-signature-snare-drums/",
+      "recordCount": 1,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_signature_mike-portnoy-melody-master-12x5_12x5_metal_steel_steel_die-cast-hoops_mp125_d0e2a83b",
+          "companyName": "Tama",
+          "lineSeries": "Signature",
+          "modelName": "Mike Portnoy Melody Master 12x5",
+          "diameter": 12,
+          "depth": 5,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/usa/products/snare_drums/mp125st.html",
+            "https://mfg.ziv.mybluehost.me/2007/01/tama-mike-portnoy-melody-master-signature-snare-drums/"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.tama.com/usa/products/snare_drums/mp1455st.html",
+      "recordCount": 1,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_signature_mike-portnoy-melody-master-14x5-5_14x5-5_metal_steel_hammered-steel_die-cast-hoops_mp1455_d425fdc5",
+          "companyName": "Tama",
+          "lineSeries": "Signature",
+          "modelName": "Mike Portnoy Melody Master 14x5.5",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/usa/products/snare_drums/mp1455st.html",
+            "https://www.thomannmusic.com/tama_mp1455st_14x55_mike_portnoy.htm"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.thomannmusic.com/tama_mp1455st_14x55_mike_portnoy.htm",
+      "recordCount": 1,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_signature_mike-portnoy-melody-master-14x5-5_14x5-5_metal_steel_hammered-steel_die-cast-hoops_mp1455_d425fdc5",
+          "companyName": "Tama",
+          "lineSeries": "Signature",
+          "modelName": "Mike Portnoy Melody Master 14x5.5",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/usa/products/snare_drums/mp1455st.html",
+            "https://www.thomannmusic.com/tama_mp1455st_14x55_mike_portnoy.htm"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://www.tama.com/eu/products/snare_drums/star_reserve_hand_hammerd_brass.html",
+      "recordCount": 1,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+          "companyName": "Tama",
+          "lineSeries": "STAR Reserve",
+          "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "Tama logo coated Ambassador",
+          "stockResoHead": "Unknown",
+          "missingStockHeadFields": [
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/star_reserve_hand_hammerd_brass.html",
+            "https://memphisdrumshop.com/products/tama-14x55-star-reserve-hand-hammered-brass-snare-drum-tbrs1455h"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    },
+    {
+      "sourceUrl": "https://memphisdrumshop.com/products/tama-14x55-star-reserve-hand-hammered-brass-snare-drum-tbrs1455h",
+      "recordCount": 1,
+      "companies": [
+        "Tama"
+      ],
+      "records": [
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+          "companyName": "Tama",
+          "lineSeries": "STAR Reserve",
+          "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+          "diameter": 14,
+          "depth": 5.5,
+          "stockBatterHead": "Tama logo coated Ambassador",
+          "stockResoHead": "Unknown",
+          "missingStockHeadFields": [
+            "stock reso head"
+          ],
+          "sourceUrls": [
+            "https://www.tama.com/eu/products/snare_drums/star_reserve_hand_hammerd_brass.html",
+            "https://memphisdrumshop.com/products/tama-14x55-star-reserve-hand-hammered-brass-snare-drum-tbrs1455h"
+          ]
+        }
+      ],
+      "reviewDecision": {
+        "reviewed": false,
+        "sourceExplicitlyListsStockBatterHead": false,
+        "sourceExplicitlyListsStockResoHead": false,
+        "sourceSupportsCompanyOrLineFallback": false,
+        "approvedFallbackKey": "",
+        "approvedBatterHeadFallback": "",
+        "approvedResoHeadFallback": "",
+        "fallbackConfidence": "",
+        "reviewerNotes": ""
+      }
+    }
+  ]
+}
