@@ -39,12 +39,12 @@
       "lineSeriesIncludes": [
         "SQ2 Drum System"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "configurable-line-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
-      "sourceConfidence": "needsVerification",
-      "notes": "Largest unmatched group. SQ2 is configurable, so confirm whether SONOR publishes a consistent stock snare batter/reso head default before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "SONOR SQ2 source confirms the configurable SQ2 drum system, but current source evidence does not confirm one consistent stock snare batter/reso head setup across SQ2 snare records. Keep DRAFT until exact stock batter head and exact stock reso/snare-side head are source-confirmed, or split by model/material if stock heads vary. Do not approve from SQ2 system-level source alone."
     },
     {
       "ruleKey": "sonor-prolite-stock-heads-draft",
