@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.079Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "YAMAHA_RYDEEN_GIGMAKER_KIT_SNARE_STEEL_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 2,
+    "companyName": "Yamaha",
+    "lineSeries": "Rydeen / Gigmaker Kit Snare",
+    "shellMaterial": "Steel",
+    "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+    "sourceConfidence": "Low"
+  },
+  "group": {
+    "companyName": "Yamaha",
+    "lineSeries": "Rydeen / Gigmaker Kit Snare",
+    "shellMaterial": "Steel",
+    "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+    "sourceConfidence": "Low",
+    "count": 2,
+    "models": [
+      "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+      "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5"
+    ],
+    "records": [
+      {
+        "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+        "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5 — 14x5.5",
+        "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "1",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Rolled metal edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+        "sourceConfidence": "Low"
+      },
+      {
+        "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002",
+        "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5 — 14x6.5",
+        "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "1",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Rolled metal edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+        "sourceConfidence": "Low"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Yamaha Rydeen / Gigmaker Kit Snare bearing-edge geometry before creating any promotion plan."
+}

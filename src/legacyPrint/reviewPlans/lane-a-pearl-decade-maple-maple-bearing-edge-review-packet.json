@@ -1,0 +1,61 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.079Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "PEARL_DECADE_MAPLE_MAPLE_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 2,
+    "companyName": "Pearl",
+    "lineSeries": "Decade Maple",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Pearl",
+    "lineSeries": "Decade Maple",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+    "sourceConfidence": "Medium",
+    "count": 2,
+    "models": [
+      "Decade Maple Maple Snare"
+    ],
+    "records": [
+      {
+        "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+        "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x5.5",
+        "modelName": "Decade Maple Maple Snare",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "5.4",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+        "sourceConfidence": "Medium"
+      },
+      {
+        "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+        "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x6.5",
+        "modelName": "Decade Maple Maple Snare",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "5.4",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Pearl Decade Maple bearing-edge geometry before creating any promotion plan."
+}

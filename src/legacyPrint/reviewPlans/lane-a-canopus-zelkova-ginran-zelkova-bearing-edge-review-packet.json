@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.079Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "CANOPUS_ZELKOVA_GINRAN_ZELKOVA_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "companyName": "Canopus",
+    "lineSeries": "Zelkova GINRAN",
+    "shellMaterial": "Zelkova",
+    "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Canopus",
+    "lineSeries": "Zelkova GINRAN",
+    "shellMaterial": "Zelkova",
+    "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+    "sourceConfidence": "Medium",
+    "count": 1,
+    "models": [
+      "Zelkova GINRAN"
+    ],
+    "records": [
+      {
+        "id": "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a",
+        "label": "Canopus — Zelkova GINRAN — Zelkova GINRAN — 14x6.5",
+        "modelName": "Zelkova GINRAN",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Zelkova\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"One-piece hollowed\",\"shellThicknessMm\":14,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "14",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Canopus Zelkova GINRAN bearing-edge geometry before creating any promotion plan."
+}
