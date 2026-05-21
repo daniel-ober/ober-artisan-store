@@ -1052,9 +1052,109 @@ function ReferencePanel({
 
   const modelOptions = useMemo(() => {
 
+    const seen = new Set();
+
     return referenceOptions
 
       .filter((reference) => referenceCompanyMatchesBrand(reference, brandFilter))
+
+      .filter((reference) => {
+
+        const raw = getReferenceRawRecord(reference) || {};
+
+        const company = normalizeBrandValue(
+
+          reference.companyName ||
+
+          reference.company ||
+
+          raw.companyName ||
+
+          raw.company ||
+
+          ''
+
+        );
+
+        const model = String(
+
+          reference.modelName ||
+
+          reference.model ||
+
+          raw.modelName ||
+
+          raw.model ||
+
+          reference.label ||
+
+          ''
+
+        ).trim();
+
+        const material = String(
+
+          reference.shellMaterial ||
+
+          raw.shellMaterial ||
+
+          raw.shellMaterial1 ||
+
+          ''
+
+        ).trim();
+
+        const construction = String(
+
+          reference.shellConstruction ||
+
+          raw.shellConstruction ||
+
+          ''
+
+        ).trim();
+
+        const size =
+
+          reference.diameter && reference.depth
+
+            ? `${reference.diameter}x${reference.depth}`
+
+            : raw.diameter && raw.depth
+
+              ? `${raw.diameter}x${raw.depth}`
+
+              : '';
+
+        const dedupeKey = [
+
+          company,
+
+          model,
+
+          material,
+
+          construction,
+
+          size,
+
+        ]
+
+          .filter(Boolean)
+
+          .join(' | ')
+
+          .toLowerCase();
+
+        if (!dedupeKey) return true;
+
+        if (seen.has(dedupeKey)) return false;
+
+        seen.add(dedupeKey);
+
+        return true;
+
+      })
 
       .slice()
 
@@ -1146,7 +1246,13 @@ function ReferencePanel({
 
         {modelOptions.map((reference) => (
 
-          <option key={reference.key} value={reference.key}>
+          <option
+
+            key={reference.snareReferenceId || reference.id || reference.key}
+
+            value={reference.snareReferenceId || reference.id || reference.key || reference.label}
+
+          >
 
             {reference.modelOptionLabel || `${reference.modelName || reference.label || 'Unknown Model'} • ${reference.shellMaterial || 'Material unknown'} • ${reference.diameter && reference.depth ? `${reference.diameter}x${reference.depth}` : 'Size unknown'}`}
 
@@ -1249,19 +1355,427 @@ export function VoicePlayground({ firestore }) {
 
   );
 
-  const visibleReferenceOptions =
+  const rawVisibleReferenceOptions =
 
     referenceOptions?.length ? referenceOptions : REFERENCE_OPTIONS;
 
-  const selectedReference =
+  const normalizeReferenceMatchValue = value =>
 
-    visibleReferenceOptions.find((item) => item.key === selectedReferenceId) ||
+    String(value || '')
 
-    visibleReferenceOptions.find((item) => item.snareReferenceId === selectedReferenceId) ||
+      .toLowerCase()
 
-    visibleReferenceOptions[0] ||
+      .replace(/[·•]/g, ' ')
 
-    REFERENCE_OPTIONS[0];
+      .replace(/["'’‘“”]/g, '')
+
+      .replace(/[^a-z0-9.]+/g, ' ')
+
+      .replace(/\b14 x 8\b/g, '14x8')
+
+      .replace(/\b14 x 6.5\b/g, '14x6.5')
+
+      .replace(/\b14 x 6\b/g, '14x6')
+
+      .replace(/\b14 x 5.5\b/g, '14x5.5')
+
+      .replace(/\b14 x 5\b/g, '14x5')
+
+      .replace(/\b13 x 7\b/g, '13x7')
+
+      .replace(/\b13 x 6.5\b/g, '13x6.5')
+
+      .replace(/\b13 x 6\b/g, '13x6')
+
+      .replace(/\s+/g, ' ')
+
+      .trim();
+
+  const getReferenceRaw = item =>
+
+    item?.rawRecord || item?.raw || item?.record || item || {};
+
+  const getReferenceField = (item, keys) => {
+
+    const raw = getReferenceRaw(item);
+
+    for (const key of keys) {
+
+      if (item?.[key] !== undefined && item?.[key] !== null && item?.[key] !== '') return item[key];
+
+      if (raw?.[key] !== undefined && raw?.[key] !== null && raw?.[key] !== '') return raw[key];
+
+    }
+
+    return '';
+
+  };
+
+  const getReferenceSize = item => {
+
+    const raw = getReferenceRaw(item);
+
+    const direct =
+
+      item?.size ||
+
+      item?.drumSize ||
+
+      raw?.size ||
+
+      raw?.drumSize ||
+
+      raw?.SIZE ||
+
+      raw?.['SIZE'];
+
+    if (direct) return direct;
+
+    const diameter =
+
+      item?.diameter ??
+
+      raw?.diameter ??
+
+      raw?.DIAMETER ??
+
+      raw?.['DIAMETER'];
+
+    const depth =
+
+      item?.depth ??
+
+      raw?.depth ??
+
+      raw?.DEPTH ??
+
+      raw?.['DEPTH'];
+
+    return diameter && depth ? `${diameter}x${depth}` : '';
+
+  };
+
+  const getReferenceMatchValues = item => {
+
+    const raw = getReferenceRaw(item);
+
+    const company = getReferenceField(item, [
+
+      'companyName',
+
+      'company',
+
+      'COMPANY_NAME',
+
+      'COMPANY NAME',
+
+    ]);
+
+    const line = getReferenceField(item, [
+
+      'lineSeries',
+
+      'line',
+
+      'series',
+
+      'LINE_SERIES',
+
+      'LINE/SERIES',
+
+      'LINE / SERIES',
+
+    ]);
+
+    const model = getReferenceField(item, [
+
+      'modelName',
+
+      'model',
+
+      'MODEL_NAME',
+
+      'MODEL NAME',
+
+    ]);
+
+    const material = getReferenceField(item, [
+
+      'shellMaterial',
+
+      'shellMaterial1',
+
+      'material',
+
+      'SHELL_MATERIAL_1',
+
+      'SHELL MATERIAL 1',
+
+      'SHELL MATERIAL',
+
+    ]);
+
+    const construction = getReferenceField(item, [
+
+      'shellConstruction',
+
+      'construction',
+
+      'SHELL_CONSTRUCTION',
+
+      'SHELL CONSTRUCTION',
+
+    ]);
+
+    const size = getReferenceSize(item);
+
+    return [
+
+      item?.key,
+
+      item?.id,
+
+      item?.value,
+
+      item?.snareReferenceId,
+
+      item?.referenceId,
+
+      item?.label,
+
+      item?.displayLabel,
+
+      item?.optionLabel,
+
+      raw?.id,
+
+      raw?.key,
+
+      raw?.value,
+
+      raw?.snareReferenceId,
+
+      raw?.referenceId,
+
+      raw?.label,
+
+      raw?.displayLabel,
+
+      raw?.optionLabel,
+
+      raw?.firestoreId,
+
+      company,
+
+      line,
+
+      model,
+
+      material,
+
+      construction,
+
+      size,
+
+      [company, line, model, size].filter(Boolean).join(' '),
+
+      [model, material, size].filter(Boolean).join(' '),
+
+      [model, construction, material, size].filter(Boolean).join(' '),
+
+      [company, model, material, size].filter(Boolean).join(' '),
+
+      [company, line, model, material, size].filter(Boolean).join(' '),
+
+    ].filter(Boolean);
+
+  };
+
+  const getReferenceTokenScore = (selectedValue, item) => {
+
+    const selected = normalizeReferenceMatchValue(selectedValue);
+
+    if (!selected) return 0;
+
+    const selectedTokens = Array.from(new Set(selected.split(' ').filter(Boolean)));
+
+    return getReferenceMatchValues(item).reduce((bestScore, value) => {
+
+      const candidate = normalizeReferenceMatchValue(value);
+
+      if (!candidate) return bestScore;
+
+      if (candidate === selected) return Math.max(bestScore, 10000);
+
+      if (candidate.includes(selected)) return Math.max(bestScore, 9000);
+
+      if (selected.includes(candidate) && candidate.length > 6) return Math.max(bestScore, 8000);
+
+      const candidateTokens = new Set(candidate.split(' ').filter(Boolean));
+
+      const matchedTokens = selectedTokens.filter(token => candidateTokens.has(token));
+
+      const hasSizeToken = selectedTokens.some(token => /\d+x\d/.test(token));
+
+      const sizeMatched = !hasSizeToken || selectedTokens.some(token => /\d+x\d/.test(token) && candidateTokens.has(token));
+
+      if (!sizeMatched) return bestScore;
+
+      const score =
+
+        matchedTokens.length * 100 +
+
+        (candidateTokens.has(selectedTokens[0]) ? 25 : 0) -
+
+        Math.abs(candidateTokens.size - selectedTokens.length);
+
+      return Math.max(bestScore, score);
+
+    }, 0);
+
+  };
+
+  const visibleReferenceOptions = (() => {
+
+    const seen = new Set();
+
+    return rawVisibleReferenceOptions.filter((item) => {
+
+      const raw = getReferenceRaw(item);
+
+      const company = getReferenceField(item, [
+
+        'companyName',
+
+        'company',
+
+        'COMPANY_NAME',
+
+        'COMPANY NAME',
+
+      ]);
+
+      const model = getReferenceField(item, [
+
+        'modelName',
+
+        'model',
+
+        'MODEL_NAME',
+
+        'MODEL NAME',
+
+      ]);
+
+      const material = getReferenceField(item, [
+
+        'shellMaterial',
+
+        'shellMaterial1',
+
+        'material',
+
+        'SHELL_MATERIAL_1',
+
+        'SHELL MATERIAL 1',
+
+        'SHELL MATERIAL',
+
+      ]);
+
+      const construction = getReferenceField(item, [
+
+        'shellConstruction',
+
+        'construction',
+
+        'SHELL_CONSTRUCTION',
+
+        'SHELL CONSTRUCTION',
+
+      ]);
+
+      const size = getReferenceSize(item);
+
+      const dedupeKey = normalizeReferenceMatchValue(
+
+        [
+
+          company,
+
+          model,
+
+          construction,
+
+          material,
+
+          size,
+
+        ].filter(Boolean).join(' ')
+
+      ) || normalizeReferenceMatchValue(item?.label || item?.displayLabel || item?.optionLabel || raw?.label || raw?.id || item?.key);
+
+      if (!dedupeKey) return true;
+
+      if (seen.has(dedupeKey)) return false;
+
+      seen.add(dedupeKey);
+
+      return true;
+
+    });
+
+  })();
+
+  const selectedReference = (() => {
+
+    const selectedKey = normalizeReferenceMatchValue(selectedReferenceId);
+
+    const allCandidates = [
+
+      ...(referenceOptions || []),
+
+      ...(visibleReferenceOptions || []),
+
+      ...REFERENCE_OPTIONS,
+
+    ].filter(Boolean);
+
+    if (!selectedKey) {
+
+      return visibleReferenceOptions[0] || allCandidates[0] || REFERENCE_OPTIONS[0];
+
+    }
+
+    const exactMatch = allCandidates.find(item =>
+
+      getReferenceMatchValues(item).some(value =>
+
+        normalizeReferenceMatchValue(value) === selectedKey
+
+      )
+
+    );
+
+    if (exactMatch) return exactMatch;
+
+    const scoredMatches = allCandidates
+
+      .map(item => ({
+
+        item,
+
+        score: getReferenceTokenScore(selectedReferenceId, item),
+
+      }))
+
+      .filter(entry => entry.score > 0)
+
+      .sort((a, b) => b.score - a.score);
+
+    return scoredMatches[0]?.item || visibleReferenceOptions[0] || allCandidates[0] || REFERENCE_OPTIONS[0];
+
+  })();
 
   const selectedMode =
 
