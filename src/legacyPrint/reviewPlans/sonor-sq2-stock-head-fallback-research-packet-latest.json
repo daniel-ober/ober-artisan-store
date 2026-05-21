@@ -1,0 +1,596 @@
+{
+  "packetName": "SONOR_SQ2_STOCK_HEAD_FALLBACK_APPROVAL_RESEARCH_PACKET",
+  "generatedAt": "2026-05-21T06:58:55.289Z",
+  "ruleKey": "sonor-sq2-stock-heads-draft",
+  "sourceApplyPlan": "src/legacyPrint/reviewPlans/stock-head-fallback-apply-plan-latest.json",
+  "purpose": "Review SONOR SQ2 stock batter/reso head evidence before approving or splitting the stock-head fallback rule.",
+  "requiredBeforeApproval": [
+    "Confirm exact stock batter head model.",
+    "Confirm exact stock reso/snare-side head model.",
+    "Confirm whether SQ2 uses a consistent stock snare head setup despite being configurable.",
+    "Split by material/model if SQ2 stock heads vary.",
+    "Do not approve from generic head-brand wording alone."
+  ],
+  "candidateCount": 32,
+  "sourceUrls": [
+    "https://www.sonor.com/drums/instruments/sq2-drum-system"
+  ],
+  "records": [
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x5_14x5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cast-or_0b97bd0d",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x6-5_14x6-5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cas_21ad5efa",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x5_14x5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-cast-o_4db16066",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x6-5_14x6-5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-ca_4d9e09bd",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-or-_452968ae",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast_95092478",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-_7f1959d6",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-c_d1668db1",
+      "label": "SONOR — SQ2 Drum System — SQ2 Acrylic Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Acrylic Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x5_14x5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or-tri_31511fb0",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or_edb76d98",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x5_14x5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-or-tr_baa918a0",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x6-5_14x6-5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-o_70a9a905",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-trip_30806671",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-_a9885d3a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-t_f791587a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-_5140185b",
+      "label": "SONOR — SQ2 Drum System — SQ2 Beech Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Beech Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x5_14x5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or-tri_5921b78e",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x6-5_14x6-5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or_1a9169e2",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x5_14x5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-or-tr_9e471931",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x6-5_14x6-5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-o_1dd66c37",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-trip_4e0636ca",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-_df3d98db",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-t_f52dcc8d",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-_8e2aee88",
+      "label": "SONOR — SQ2 Drum System — SQ2 Birch Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Birch Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x5_14x5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or-tri_03d79bb2",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Heavy ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x6-5_14x6-5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or_d1b32daa",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Heavy ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Heavy ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x5_14x5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-or-tr_3b0fc99a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Medium ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x6-5_14x6-5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-o_af3f3e9a",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Medium ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Medium ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-trip_59f4810f",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Thin ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-_c6584fef",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Thin ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Thin ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-t_faf56e68",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Vintage ply SQ2 14x5 — 14x5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-_803b9ab2",
+      "label": "SONOR — SQ2 Drum System — SQ2 Maple Vintage ply SQ2 14x6.5 — 14x6.5",
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "modelName": "SQ2 Maple Vintage ply SQ2 14x6.5",
+      "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS",
+      "missingForStock": [
+        "stock batter head",
+        "stock reso head",
+        "production status"
+      ],
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "primarySourceUrl": "https://www.sonor.com/drums/instruments/sq2-drum-system",
+      "sourceConfidence": "Medium",
+      "priorityScore": 820
+    }
+  ]
+}
