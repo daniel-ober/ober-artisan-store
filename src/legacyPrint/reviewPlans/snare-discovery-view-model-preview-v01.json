@@ -1,6 +1,6 @@
 {
   "status": "SNARE_DISCOVERY_VIEW_MODEL_PREVIEW_V01_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T11:02:57.051Z",
+  "generatedAt": "2026-05-21T11:03:34.751Z",
   "firestoreWrites": 0,
   "sourcePreview": "src/legacyPrint/reviewPlans/snare-discovery-packet-api-preview-v01.json",
   "examples": [
