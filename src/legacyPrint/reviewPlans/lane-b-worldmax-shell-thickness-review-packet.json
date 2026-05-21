@@ -1,0 +1,670 @@
+{
+  "generatedAt": "2026-05-21T07:56:51.050Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-b-high-value-shell-thickness-review-packet.json",
+  "status": "LANE_B_WORLDMAX_SHELL_THICKNESS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "WorldMax",
+    "candidateCount": 29,
+    "groupCount": 8,
+    "sourceUrls": [
+      "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "https://worldmaxusa.com/prices-and-specs/",
+      "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+        "shellMaterial": "Steel",
+        "count": 6,
+        "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+      },
+      {
+        "lineSeries": "OEM Configurations",
+        "shellMaterial": "Brass",
+        "count": 4,
+        "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/"
+      },
+      {
+        "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+        "shellMaterial": "Aluminum",
+        "count": 4,
+        "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+      },
+      {
+        "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+        "shellMaterial": "Bronze",
+        "count": 4,
+        "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+      },
+      {
+        "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+        "shellMaterial": "Copper",
+        "count": 4,
+        "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+      },
+      {
+        "lineSeries": "WorldMax Shells / OEM Reference",
+        "shellMaterial": "Brass",
+        "count": 3,
+        "primarySourceUrl": "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index"
+      },
+      {
+        "lineSeries": "Wood Snare Drums",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/"
+      },
+      {
+        "lineSeries": "Wood Snare Drums",
+        "shellMaterial": "Wood",
+        "count": 2,
+        "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "sourceConfidence": "Low",
+      "count": 6,
+      "models": [
+        "Chrome Steel Shell",
+        "Hammered Steel Shell",
+        "Jade Tiger Steel"
+      ],
+      "records": [
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_chrome-steel-shell_14x5-5_metal_steel_rolled-flange-45-listed-where-c_982c019f",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Chrome Steel Shell — 14x5.5",
+          "modelName": "Chrome Steel Shell",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_chrome-steel-shell_14x6-5_metal_steel_rolled-flange-45-listed-where-c_c91f51db",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Chrome Steel Shell — 14x6.5",
+          "modelName": "Chrome Steel Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-steel-shell_14x5-5_metal_steel_rolled-flange-45-listed-where_1f335e05",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Steel Shell — 14x5.5",
+          "modelName": "Hammered Steel Shell",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-steel-shell_14x6-5_metal_steel_rolled-flange-45-listed-where_6dcf446f",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Steel Shell — 14x6.5",
+          "modelName": "Hammered Steel Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_jade-tiger-steel_14x5-5_metal_steel_rolled-flange-45-listed-where-con_0fb96c4b",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Jade Tiger Steel — 14x5.5",
+          "modelName": "Jade Tiger Steel",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_jade-tiger-steel_14x6-5_metal_steel_rolled-flange-45-listed-where-con_1295deae",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Jade Tiger Steel — 14x6.5",
+          "modelName": "Jade Tiger Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "OEM Configurations",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+      "sourceConfidence": "Low",
+      "count": 4,
+      "models": [
+        "WorldMax Brass Shell / Alternate Hoop Configuration"
+      ],
+      "records": [
+        {
+          "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_7e0ca6cf",
+          "label": "WorldMax — OEM Configurations — WorldMax Brass Shell / Alternate Hoop Configuration — 14x6.5",
+          "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_cdb2254b",
+          "label": "WorldMax — OEM Configurations — WorldMax Brass Shell / Alternate Hoop Configuration — 14x6.5",
+          "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_dfb3e115",
+          "label": "WorldMax — OEM Configurations — WorldMax Brass Shell / Alternate Hoop Configuration — 14x6.5",
+          "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_f67f5e38",
+          "label": "WorldMax — OEM Configurations — WorldMax Brass Shell / Alternate Hoop Configuration — 14x6.5",
+          "modelName": "WorldMax Brass Shell / Alternate Hoop Configuration",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "sourceConfidence": "Low",
+      "count": 4,
+      "models": [
+        "Aluminum Shell",
+        "Hammered Aluminum Shell"
+      ],
+      "records": [
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-where-conf_e61d1279",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Aluminum Shell — 14x5",
+          "modelName": "Aluminum Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed-where-co_d3b659a7",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Aluminum Shell — 14x6.5",
+          "modelName": "Aluminum Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-w_20d1dfe0",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Aluminum Shell — 14x5",
+          "modelName": "Hammered Aluminum Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed_4f83dfec",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Aluminum Shell — 14x6.5",
+          "modelName": "Hammered Aluminum Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Bronze",
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "sourceConfidence": "Low",
+      "count": 4,
+      "models": [
+        "Bronze Shell",
+        "Hammered Bronze Shell"
+      ],
+      "records": [
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_bronze-shell_14x5_metal_bronze_rolled-flange-45-listed-where-confirme_661f3978",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Bronze Shell — 14x5",
+          "modelName": "Bronze Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_bronze-shell_14x6-5_metal_bronze_rolled-flange-45-listed-where-confir_63531491",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Bronze Shell — 14x6.5",
+          "modelName": "Bronze Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-bronze-shell_14x5_metal_bronze_rolled-flange-45-listed-where_3dddbaf5",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Bronze Shell — 14x5",
+          "modelName": "Hammered Bronze Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-bronze-shell_14x6-5_metal_bronze_rolled-flange-45-listed-whe_79cae2f5",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Bronze Shell — 14x6.5",
+          "modelName": "Hammered Bronze Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Copper",
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+      "sourceConfidence": "Low",
+      "count": 4,
+      "models": [
+        "Copper Shell",
+        "Hammered Copper Shell"
+      ],
+      "records": [
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_copper-shell_14x5_metal_copper_rolled-flange-45-listed-where-confirme_3032f6b4",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Copper Shell — 14x5",
+          "modelName": "Copper Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_copper-shell_14x6-5_metal_copper_rolled-flange-45-listed-where-confir_d8d25318",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Copper Shell — 14x6.5",
+          "modelName": "Copper Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-copper-shell_14x5_metal_copper_rolled-flange-45-listed-where_564cc7f6",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Copper Shell — 14x5",
+          "modelName": "Hammered Copper Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_worldmax-metal-snares-retailer-documented_hammered-copper-shell_14x6-5_metal_copper_rolled-flange-45-listed-whe_cec7014d",
+          "label": "WorldMax — WorldMax Metal Snares / Retailer-Documented — Hammered Copper Shell — 14x6.5",
+          "modelName": "Hammered Copper Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Shells / OEM Reference",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index",
+      "sourceConfidence": "Medium",
+      "count": 3,
+      "models": [
+        "Black Hawg / Black Dawg Brass Undrilled Shell"
+      ],
+      "records": [
+        {
+          "id": "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_13x7_metal_brass_rolled-flange-45-lis_214343f1",
+          "label": "WorldMax — WorldMax Shells / OEM Reference — Black Hawg / Black Dawg Brass Undrilled Shell — 13x7",
+          "modelName": "Black Hawg / Black Dawg Brass Undrilled Shell",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_14x5_metal_brass_rolled-flange-45-lis_d6db1985",
+          "label": "WorldMax — WorldMax Shells / OEM Reference — Black Hawg / Black Dawg Brass Undrilled Shell — 14x5",
+          "modelName": "Black Hawg / Black Dawg Brass Undrilled Shell",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_14x6-5_metal_brass_rolled-flange-45-l_c4b19e1c",
+          "label": "WorldMax — WorldMax Shells / OEM Reference — Black Hawg / Black Dawg Brass Undrilled Shell — 14x6.5",
+          "modelName": "Black Hawg / Black Dawg Brass Undrilled Shell",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "Wood Snare Drums",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "WorldMax Wood Snare Representative"
+      ],
+      "records": [
+        {
+          "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x5-5_ply_maple_rolled-flange-45-listed-where-confirmed_mi_0a5c134b",
+          "label": "WorldMax — Wood Snare Drums — WorldMax Wood Snare Representative — 14x5.5",
+          "modelName": "WorldMax Wood Snare Representative",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x6-5_ply_maple_rolled-flange-45-listed-where-confirmed_mi_da70b06a",
+          "label": "WorldMax — Wood Snare Drums — WorldMax Wood Snare Representative — 14x6.5",
+          "modelName": "WorldMax Wood Snare Representative",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "Wood Snare Drums",
+      "shellMaterial": "Wood",
+      "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "WorldMax Wood Snare Representative"
+      ],
+      "records": [
+        {
+          "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x5-5_ply_wood_rolled-flange-45-listed-where-confirmed_min_cd72aaa3",
+          "label": "WorldMax — Wood Snare Drums — WorldMax Wood Snare Representative — 14x5.5",
+          "modelName": "WorldMax Wood Snare Representative",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x6-5_ply_wood_rolled-flange-45-listed-where-confirmed_min_0214d121",
+          "label": "WorldMax — Wood Snare Drums — WorldMax Wood Snare Representative — 14x6.5",
+          "modelName": "WorldMax Wood Snare Representative",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"snareSideProfile\":\"Rolled flange / 45° listed where confirmed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed WorldMax shell thickness by shell material/configuration. Do not create Firestore update plan until thickness values are explicitly confirmed or a controlled WorldMax shell-thickness fallback policy is approved."
+}
