@@ -1,0 +1,163 @@
+{
+  "generatedAt": "2026-05-21T07:25:11.950Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups.json",
+  "status": "LUDWIG_WOOD_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "groupCount": 9,
+    "candidateCount": 21,
+    "sourceUrls": [
+      "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+      "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Maple",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Classic Maple 5.5x14",
+        "Classic Maple 5x14",
+        "Classic Maple 6.5x14",
+        "Classic Maple 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Oak",
+      "shellMaterial": "Oak",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Classic Oak 5.5x14",
+        "Classic Oak 5x14",
+        "Classic Oak 6.5x14",
+        "Classic Oak 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Mahogany",
+      "shellMaterial": "Mahogany",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Legacy Mahogany 5.5x14",
+        "Legacy Mahogany 5x14",
+        "Legacy Mahogany 6.5x14",
+        "Legacy Mahogany 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Maple",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Legacy Maple 5.5x14",
+        "Legacy Maple 5x14",
+        "Legacy Maple 6.5x14",
+        "Legacy Maple 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Beech",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Beech 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Cherry",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Cherry 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Mahogany",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Mahogany 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Walnut 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Jazz Fest Series",
+      "shellMaterial": "Mahogany / Poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Jazz Fest Series 5.5x14"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review official Ludwig family pages/specs for exact wood-shell bearing-edge language before creating any promotion/apply plan. Do not infer cross-family wood-shell bearing edges without source-backed language."
+}
