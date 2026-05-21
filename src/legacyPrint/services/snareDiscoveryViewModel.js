@@ -35,6 +35,22 @@ const formatNodeList = nodes => {
 
 };
 
+const getSectionMatches = section => {
+
+  if (!section) return [];
+
+  if (Array.isArray(section.matches)) return section.matches;
+
+  if (Array.isArray(section.items)) return section.items;
+
+  if (Array.isArray(section.records)) return section.records;
+
+  if (Array.isArray(section.results)) return section.results;
+
+  return [];
+
+};
+
 const mapMatchForUi = match => ({
 
   id: match.id || match.referenceId || null,
@@ -123,7 +139,7 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
     description: section.description,
 
-    matches: (section.matches || []).map(mapMatchForUi)
+    matches: getSectionMatches(section).map(mapMatchForUi)
 
   }));
 
@@ -135,7 +151,7 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
     description: mode.description,
 
-    matches: (mode.matches || []).map(mapMatchForUi)
+    matches: getSectionMatches(mode).map(mapMatchForUi)
 
   }));
 
@@ -192,6 +208,8 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 module.exports = {
 
   buildSnareDiscoveryViewModel,
+
+  getSectionMatches,
 
   mapMatchForUi,
 
