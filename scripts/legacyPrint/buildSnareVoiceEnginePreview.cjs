@@ -3,6 +3,8 @@ const fs = require('fs');
 
 const admin = require('firebase-admin');
 
+const { scoreSnareVoice } = require('../../src/legacyPrint/engine/snare/scoreSnareVoice');
+
 const CONTRIBUTION_JSON = 'src/legacyPrint/reviewPlans/snare-physical-contribution-map.json';
 
 const TAXONOMY_JSON = 'src/legacyPrint/reviewPlans/snare-taxonomy-preview.json';
@@ -499,63 +501,39 @@ const topNodes = score =>
 
     .map(([key, value]) => ({ key, value }));
 
+const SECONDARY_CORE_DRIVER_PREFIXES = [
+
+  'shellLayup:',
+
+  'reinforcementRings:',
+
+  'plyCount:',
+
+  'finishTreatment:'
+
+];
+
+const secondaryCoreDrivers = scored =>
+
+  (scored.drivers?.strongestSources || [])
+
+    .filter(item => SECONDARY_CORE_DRIVER_PREFIXES.some(prefix => item.source.startsWith(prefix)))
+
+    .map(item => ({
+
+      source: item.source,
+
+      totalMovement: item.totalMovement
+
+    }));
+
 const scoreRecord = row => {
 
-  const score = emptyScore();
-
-  const shellMaterialRaw = first(row, ['shellMaterial1', 'shellMaterial', 'material']);
-
-  const shellConstructionRaw = first(row, ['shellConstruction', 'construction']);
-
-  const bearingEdgeRaw = first(row, ['bearingEdge', 'bearingEdgeType', 'bearingEdgeProfile', 'bearingEdgeDetail', 'bearingEdgeDescription']);
-
-  const hoopRaw = first(row, ['hoopType', 'hoops', 'rimType']);
+  const scored = scoreSnareVoice(row);
 
   const diameter = first(row, ['diameter', 'diameterInches']);
 
   const depth = first(row, ['depth', 'depthInches']);
-
-  const thickness = first(row, ['shellThicknessMm', 'shellThickness', 'thicknessMm']);
-
-  const lugCount = first(row, ['lugCount', 'lugs']);
-
-  const families = {
-
-    shellMaterial: groupMaterial(shellMaterialRaw),
-
-    shellConstruction: groupConstruction(shellConstructionRaw),
-
-    bearingEdge: groupBearingEdge(bearingEdgeRaw),
-
-    hoopType: groupHoop(hoopRaw)
-
-  };
-
-  const weights = contributionMap.componentWeights;
-
-  const familyContributions = contributionMap.familyContributions;
-
-  applyContribution(score, familyContributions.shellMaterial[families.shellMaterial], weights.shellMaterial);
-
-  applyContribution(score, familyContributions.shellConstruction[families.shellConstruction], weights.shellConstruction);
-
-  applyContribution(score, familyContributions.bearingEdge[families.bearingEdge], weights.bearingEdge);
-
-  applyContribution(score, familyContributions.hoopType[families.hoopType], weights.hoopType);
-
-  applyContribution(score, diameterContribution(diameter), weights.diameter);
-
-  applyContribution(score, depthContribution(depth), weights.depth);
-
-  applyContribution(score, thicknessContribution(thickness), weights.shellThickness);
-
-  applyContribution(score, lugContribution(lugCount), weights.lugCount);
-
-  const finalScore = Object.fromEntries(
-
-    NODE_KEYS.map(key => [key, clamp(score[key])])
-
-  );
 
   return {
 
@@ -569,29 +547,40 @@ const scoreRecord = row => {
 
     size: `${diameter || '?'}x${depth || '?'}`,
 
-    shellMaterialRaw: shellMaterialRaw || '',
+    shellMaterialRaw: scored.raw?.shellMaterial || '',
 
-    shellConstructionRaw: shellConstructionRaw || '',
+    shellConstructionRaw: scored.raw?.shellConstruction || '',
 
-    bearingEdgeRaw: bearingEdgeRaw || '',
+    shellLayupRaw: scored.raw?.shellLayup || '',
 
-    hoopRaw: hoopRaw || '',
+    reinforcementRingsRaw: scored.raw?.reinforcementRings || '',
 
-    shellThicknessMm: thickness || '',
+    finishTreatmentRaw: scored.raw?.finishTreatment || '',
 
-    lugCount: lugCount || '',
+    plyCountRaw: scored.raw?.plyCount || '',
 
-    families,
+    bearingEdgeRaw: scored.raw?.bearingEdge || '',
 
-    voiceProfile: finalScore,
+    hoopRaw: scored.raw?.hoopType || '',
 
-    topNodes: topNodes(finalScore),
+    shellThicknessMm: scored.numeric?.shellThicknessMm || '',
+
+    lugCount: scored.numeric?.lugCount || '',
+
+    families: scored.families,
+
+    secondaryCoreDrivers: secondaryCoreDrivers(scored),
+
+    voiceProfile: scored.voiceProfile,
+
+    topNodes: topNodes(scored.voiceProfile),
 
     readinessTier: row.legacyPrintEngineReadinessTier || ''
 
   };
 
 };
+
 
 async function main() {
 
@@ -667,7 +656,7 @@ async function main() {
 
   fs.writeFileSync(OUT_JSON, JSON.stringify(packet, null, 2));
 
-  const row = r => `| ${r.company} | ${r.model} | ${r.size} | ${r.families.shellMaterial} | ${r.families.shellConstruction} | ${r.voiceProfile.attack} | ${r.voiceProfile.brightness} | ${r.voiceProfile.projection} | ${r.voiceProfile.sustain} | ${r.voiceProfile.warmth} | ${r.voiceProfile.sensitivity} | ${r.voiceProfile.control} | ${r.topNodes.map(n => n.key).join(', ')} |`;
+  const row = r => `| ${r.company} | ${r.model} | ${r.size} | ${r.families.shellMaterial} | ${r.families.shellConstruction} | ${r.families.shellLayup || ''} | ${r.families.reinforcementRings || ''} | ${r.families.plyCount || ''} | ${r.families.finishTreatment || ''} | ${r.secondaryCoreDrivers.map(d => `${d.source} (${d.totalMovement})`).join(', ')} | ${r.voiceProfile.attack} | ${r.voiceProfile.brightness} | ${r.voiceProfile.projection} | ${r.voiceProfile.sustain} | ${r.voiceProfile.warmth} | ${r.voiceProfile.sensitivity} | ${r.voiceProfile.control} | ${r.topNodes.map(n => n.key).join(', ')} |`;
 
   const md = [
 
@@ -709,9 +698,9 @@ async function main() {
 
     '',
 
-    '| Company | Model | Size | Material Family | Construction Family | Attack | Brightness | Projection | Sustain | Warmth | Sensitivity | Control | Top Nodes |',
+    '| Company | Model | Size | Material Family | Construction Family | Shell Layup | Rings | Ply Count | Finish/Treatment | Secondary Core Drivers | Attack | Brightness | Projection | Sustain | Warmth | Sensitivity | Control | Top Nodes |',
 
-    '|---|---|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---|',
+    '|---|---|---:|---|---|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---|',
 
     ...records.slice(0, 80).map(row)
 
