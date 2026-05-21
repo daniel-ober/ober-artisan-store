@@ -1,0 +1,189 @@
+
+{
+
+  "status": "MAPLE_14X65_FIRST_SOURCE_ENRICHMENT_PACKET_NO_FIRESTORE_WRITES",
+
+  "purpose": "Prepare source-backed enrichment for two high-value Maple 14x6.5 records before changing scoring or UI.",
+
+  "writeSafety": {
+
+    "firestoreWrites": false,
+
+    "readyForWrite": false,
+
+    "requiresManualReview": true
+
+  },
+
+  "records": [
+
+    {
+
+      "companyName": "C&C Drums USA",
+
+      "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5",
+
+      "proposedFields": {
+
+        "plyCount": 5,
+
+        "shellLayup": "Maple/Poplar/Maple",
+
+        "shellMaterial1": "Maple",
+
+        "shellMaterial2": "Poplar",
+
+        "shellMaterial3": "Maple",
+
+        "reinforcementRings": "7-ply maple reinforcement rings",
+
+        "bearingEdgeDetail": "Los Angeles bearing edge",
+
+        "hoopType": "2.3mm triple-flanged",
+
+        "lugCount": 8,
+
+        "throwOffModel": "INDe SB1",
+
+        "stockHeadBrand": "Remo"
+
+      },
+
+      "sourceSupport": [
+
+        {
+
+          "sourceType": "manufacturer",
+
+          "sourceUrl": "https://www.candcdrumsusa.com/12th-and-vine",
+
+          "notes": "C&C states 12th & Vine uses 5-ply shells with poplar core, 7-ply maple reinforcement rings, Los Angeles bearing edge, and 2.3mm triple-flanged hoops."
+
+        },
+
+        {
+
+          "sourceType": "dealer/listing",
+
+          "sourceUrl": "https://timpano-percussion.com/products/caisse-claire-c-c-6-5x14-12th-vine-maple-poplar-maple-green-gold-painted-sparkle-gloss",
+
+          "notes": "Listing states 14x6.5, Maple/Poplar shell, 6mm 5-ply with reinforcement rings, Los Angeles edge, 8 lugs, 2.3mm triple-flanged hoops, INDe strainer."
+
+        },
+
+        {
+
+          "sourceType": "dealer/listing",
+
+          "sourceUrl": "https://reverb.com/item/71209590-snares-c-c-drum-co-6-5x14-12th-vine-maple-poplar-maple-sea-foam-green",
+
+          "notes": "Listing states Maple/Poplar/Maple shell, maple reinforcement rings, triple-flanged hoops, 8 lugs, INDe SB1 strainer, Remo heads."
+
+        }
+
+      ],
+
+      "confidence": {
+
+        "shellLayup": "high",
+
+        "plyCount": "high",
+
+        "reinforcementRings": "high",
+
+        "bearingEdgeDetail": "high",
+
+        "hoopType": "high",
+
+        "lugCount": "medium",
+
+        "throwOffModel": "medium",
+
+        "stockHeadBrand": "medium"
+
+      }
+
+    },
+
+    {
+
+      "companyName": "Ludwig",
+
+      "modelName": "Legacy Maple 6.5x14",
+
+      "proposedFields": {
+
+        "plyCount": 3,
+
+        "shellLayup": "Maple/Poplar/Maple",
+
+        "shellMaterial1": "Maple",
+
+        "shellMaterial2": "Poplar",
+
+        "shellMaterial3": "Maple",
+
+        "reinforcementRings": "1/4 inch solid maple reinforcement rings",
+
+        "bearingEdgeDetail": "30-degree inner cut with 1/4 inch radius roundover",
+
+        "shellTreatment": "cross-laminated 3-ply shell with reinforcement rings"
+
+      },
+
+      "sourceSupport": [
+
+        {
+
+          "sourceType": "manufacturer",
+
+          "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/legacy",
+
+          "notes": "Ludwig states Legacy uses a 3-ply Maple/Poplar shell."
+
+        },
+
+        {
+
+          "sourceType": "dealer/listing",
+
+          "sourceUrl": "https://www.2112percussion.com/ludwig-legacy-maple-65x14-snare-drum-silver-sparkl.html",
+
+          "notes": "Listing states 1/16 inch maple outer ply, 1/8 inch poplar core, 1/16 inch maple inner ply, 1/4 inch solid maple reinforcement rings, and 30-degree inner cut with 1/4 inch radius roundover."
+
+        },
+
+        {
+
+          "sourceType": "manufacturer/pdf",
+
+          "sourceUrl": "https://www.ludwig-drums.com/application/files/8014/6531/8324/AV8147_2013.pdf",
+
+          "notes": "Ludwig catalog source supports Maple/Poplar/Maple shell, maple reinforcement rings, and rounded bearing edge details."
+
+        }
+
+      ],
+
+      "confidence": {
+
+        "shellLayup": "high",
+
+        "plyCount": "high",
+
+        "reinforcementRings": "high",
+
+        "bearingEdgeDetail": "high",
+
+        "shellTreatment": "medium"
+
+      }
+
+    }
+
+  ],
+
+  "nextStep": "Review this packet, then generate a controlled Firestore write confirmation plan for only these two records."
+
+}
+
