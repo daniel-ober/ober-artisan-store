@@ -5221,3 +5221,79 @@
   }
 
 }
+
+
+/* =========================================================
+
+   REFERENCE RESULT CARD CLEANUP
+
+   ========================================================= */
+
+.vp-left-panel .vp-reference-stack {
+
+  min-height: 0 !important;
+
+  overflow-y: auto !important;
+
+  overflow-x: hidden !important;
+
+  padding-right: 4px !important;
+
+  margin-right: -4px !important;
+
+}
+
+.vp-left-panel .vp-reference-card {
+
+  display: grid !important;
+
+  gap: 4px !important;
+
+  align-content: center !important;
+
+  min-height: 50px !important;
+
+  max-height: 58px !important;
+
+  padding: 8px 10px !important;
+
+  overflow: hidden !important;
+
+}
+
+.vp-left-panel .vp-reference-card strong,
+
+.vp-left-panel .vp-reference-card span {
+
+  display: block !important;
+
+  min-width: 0 !important;
+
+  max-width: 100% !important;
+
+  overflow: hidden !important;
+
+  text-overflow: ellipsis !important;
+
+  white-space: nowrap !important;
+
+}
+
+.vp-left-panel .vp-reference-card strong {
+
+  font-size: 10px !important;
+
+  line-height: 1.15 !important;
+
+}
+
+.vp-left-panel .vp-reference-card span {
+
+  font-size: 8.5px !important;
+
+  line-height: 1.2 !important;
+
+  opacity: 0.72 !important;
+
+}
+

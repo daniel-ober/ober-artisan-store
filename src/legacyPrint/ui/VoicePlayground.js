@@ -918,7 +918,9 @@ function ReferencePanel({
 
   const [brandFilter, setBrandFilter] = useState('all');
 
-  const [lineFilter, setLineFilter] = useState('all');
+  const [materialFilter, setMaterialFilter] = useState('all');
+
+  const [constructionFilter, setConstructionFilter] = useState('all');
 
   const [modelFilter, setModelFilter] = useState('');
 
@@ -940,23 +942,27 @@ function ReferencePanel({
 
   }, [referenceOptions]);
 
-  const lineOptions = useMemo(() => {
+  const filteredByBrand = useMemo(() => {
+
+    return referenceOptions.filter((reference) => {
+
+      const company = reference.companyName || reference.company || '';
+
+      return brandFilter === 'all' || company === brandFilter;
+
+    });
+
+  }, [referenceOptions, brandFilter]);
+
+  const materialOptions = useMemo(() => {
 
     return Array.from(
 
       new Set(
 
-        referenceOptions
+        filteredByBrand
 
-          .filter((reference) => {
-
-            if (brandFilter === 'all') return true;
-
-            return (reference.companyName || reference.company || '') === brandFilter;
-
-          })
-
-          .map((reference) => reference.lineSeries || '')
+          .map((reference) => reference.shellMaterial || '')
 
           .filter(Boolean)
 
@@ -964,7 +970,33 @@ function ReferencePanel({
 
     ).sort((a, b) => a.localeCompare(b));
 
-  }, [referenceOptions, brandFilter]);
+  }, [filteredByBrand]);
+
+  const constructionOptions = useMemo(() => {
+
+    return Array.from(
+
+      new Set(
+
+        filteredByBrand
+
+          .filter((reference) => {
+
+            if (materialFilter === 'all') return true;
+
+            return (reference.shellMaterial || '') === materialFilter;
+
+          })
+
+          .map((reference) => reference.shellConstruction || '')
+
+          .filter(Boolean)
+
+      )
+
+    ).sort((a, b) => a.localeCompare(b));
+
+  }, [filteredByBrand, materialFilter]);
 
   const normalizedModelFilter = String(modelFilter || '').trim().toLowerCase();
 
@@ -974,11 +1006,15 @@ function ReferencePanel({
 
       const company = reference.companyName || reference.company || '';
 
-      const line = reference.lineSeries || '';
+      const material = reference.shellMaterial || '';
+
+      const construction = reference.shellConstruction || '';
 
       if (brandFilter !== 'all' && company !== brandFilter) return false;
 
-      if (lineFilter !== 'all' && line !== lineFilter) return false;
+      if (materialFilter !== 'all' && material !== materialFilter) return false;
+
+      if (constructionFilter !== 'all' && construction !== constructionFilter) return false;
 
       if (!normalizedModelFilter) return true;
 
@@ -991,8 +1027,6 @@ function ReferencePanel({
         reference.modelName,
 
         reference.model,
-
-        reference.lineSeries,
 
         reference.shellMaterial,
 
@@ -1020,7 +1054,9 @@ function ReferencePanel({
 
     setBrandFilter('all');
 
-    setLineFilter('all');
+    setMaterialFilter('all');
+
+    setConstructionFilter('all');
 
     setModelFilter('');
 
@@ -1040,7 +1076,9 @@ function ReferencePanel({
 
           setBrandFilter(event.target.value);
 
-          setLineFilter('all');
+          setMaterialFilter('all');
+
+          setConstructionFilter('all');
 
         }}
 
@@ -1064,19 +1102,49 @@ function ReferencePanel({
 
         className="vp-search-input"
 
-        value={lineFilter}
+        value={materialFilter}
 
-        onChange={(event) => setLineFilter(event.target.value)}
+        onChange={(event) => {
+
+          setMaterialFilter(event.target.value);
+
+          setConstructionFilter('all');
+
+        }}
 
       >
 
-        <option value="all">All lines</option>
+        <option value="all">All materials</option>
 
-        {lineOptions.map((line) => (
+        {materialOptions.map((material) => (
 
-          <option key={line} value={line}>
+          <option key={material} value={material}>
 
-            {line}
+            {material}
+
+          </option>
+
+        ))}
+
+      </select>
+
+      <select
+
+        className="vp-search-input"
+
+        value={constructionFilter}
+
+        onChange={(event) => setConstructionFilter(event.target.value)}
+
+      >
+
+        <option value="all">All constructions</option>
+
+        {constructionOptions.map((construction) => (
+
+          <option key={construction} value={construction}>
+
+            {construction}
 
           </option>
 
@@ -1092,7 +1160,7 @@ function ReferencePanel({
 
         onChange={(event) => setModelFilter(event.target.value)}
 
-        placeholder="Filter model, material, size..."
+        placeholder="Filter model, size, detail..."
 
       />
 
@@ -1161,7 +1229,6 @@ function ReferencePanel({
   );
 
 }
-
 
 export function VoicePlayground({ firestore }) {
 
