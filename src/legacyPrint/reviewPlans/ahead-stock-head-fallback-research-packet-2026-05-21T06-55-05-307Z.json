@@ -1,0 +1,16 @@
+{
+  "packetName": "AHEAD_STOCK_HEAD_FALLBACK_APPROVAL_RESEARCH_PACKET",
+  "generatedAt": "2026-05-21T06:55:05.307Z",
+  "ruleKey": "ahead-snares-stock-heads-draft",
+  "purpose": "Review AHEAD snare stock batter/reso head evidence before approving the stock-head fallback rule.",
+  "requiredBeforeApproval": [
+    "Confirm exact stock batter head model.",
+    "Confirm exact stock reso/snare-side head model.",
+    "Confirm whether the same stock head setup applies to all 33 AHEAD records.",
+    "Use source-backed evidence only.",
+    "Do not approve if only generic “Remo heads” is confirmed without batter/reso model detail."
+  ],
+  "candidateCount": 0,
+  "sourceUrls": [],
+  "records": []
+}
