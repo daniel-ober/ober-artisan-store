@@ -1,0 +1,195 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_TAMA_RESEARCH_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:51:03.448Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-tama-research-packet.json",
+  "companyName": "Tama",
+  "reviewScope": "Lane B Tama company/OEM stock-head fallback research decisions.",
+  "policyPosition": "conservative",
+  "noFirestoreWrites": true,
+  "summary": {
+    "candidateCount": 7,
+    "lineGroupCount": 3,
+    "approvedCompanyWideFallbackRuleCount": 0,
+    "approvedLineLevelFallbackRuleCount": 0,
+    "blockedLineGroupCount": 3,
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+    "firestoreWrites": 0,
+    "decision": "No Tama stock-head fallback rules are approved at this time."
+  },
+  "companyLevelDecision": {
+    "companyName": "Tama",
+    "approved": false,
+    "decision": "BLOCKED_FOR_COMPANY_WIDE_FALLBACK",
+    "approvedFallbackRule": null,
+    "reason": "Tama stock-head evidence is not strong enough to support a company-wide fallback. Remaining Lane B records require narrower line-level, catalog-era-level, or exact-model-level confirmation.",
+    "notes": [
+      "Third-party-only evidence is not enough under the conservative fallback policy.",
+      "Any future Tama approval should remain line-level, catalog-era-level, or exact-model-level unless official evidence proves a consistent company-wide OEM stock-head pattern."
+    ]
+  },
+  "lineLevelDecisions": [
+    {
+      "lineSeries": "Metalworks",
+      "candidateCount": 4,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Tama/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+          "modelName": "METALWORKS 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        },
+        {
+          "id": "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+          "modelName": "METALWORKS 13x4",
+          "diameter": "13",
+          "depth": "4",
+          "shellConstruction": "metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        },
+        {
+          "id": "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+          "modelName": "METALWORKS 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        },
+        {
+          "id": "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c",
+          "modelName": "METALWORKS 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Tama product page, catalog, manual, archived Tama page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    },
+    {
+      "lineSeries": "Mastercraft",
+      "candidateCount": 2,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Tama/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+          "modelName": "Mastercraft Bell Brass 1980s 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "cast metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        },
+        {
+          "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+          "modelName": "The Bell Brass 50th Anniversary Reissue BB-156",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "cast metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Tama product page, catalog, manual, archived Tama page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    },
+    {
+      "lineSeries": "Imperialstar",
+      "candidateCount": 1,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Tama/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "tama_imperialstar_imperialstar-chrome-steel-14x5-5_14x5-5_metal_steel_chrome_0e7e083b",
+          "modelName": "Imperialstar Chrome Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "metal",
+          "shellMaterial1": null,
+          "stockBatterHead": "unknown",
+          "stockResoHead": "unknown",
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Tama product page, catalog, manual, archived Tama page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    }
+  ],
+  "approvedFallbackRules": [],
+  "blockedFallbackRules": [
+    {
+      "scope": "Tama company-wide",
+      "decision": "blocked",
+      "reason": "No consistent official/OEM stock batter and resonant/snare-side head confirmation across all Tama Lane B candidates."
+    },
+    {
+      "scope": "Tama Metalworks",
+      "decision": "blocked",
+      "reason": "No sufficient official Tama/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    },
+    {
+      "scope": "Tama Mastercraft",
+      "decision": "blocked",
+      "reason": "No sufficient official Tama/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    },
+    {
+      "scope": "Tama Imperialstar",
+      "decision": "blocked",
+      "reason": "No sufficient official Tama/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    }
+  ],
+  "readinessImpact": {
+    "recordsPromotedToMeaningfulStockPass": 0,
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+    "recordsChanged": 0,
+    "firestoreWrites": 0,
+    "notes": [
+      "Fallback-head records must remain separate from source-confirmed full stock pass.",
+      "This decision file is review/planning only and does not mutate snareReferenceDrums."
+    ]
+  },
+  "nextRecommendedStep": {
+    "lane": "Lane B",
+    "task": "Move to the next remaining Lane B company priority group: Yamaha, then Gretsch, and SONOR.",
+    "constraint": "Do not write fallback metadata to Firestore until fallback rules are explicitly approved."
+  }
+}
