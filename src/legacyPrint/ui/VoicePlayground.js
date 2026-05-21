@@ -634,6 +634,64 @@ const getMatchPercent = (result) =>
 
   Math.round(clamp01(result?.similarityScore ?? result?.matchScore ?? 0.5) * 100);
 
+const normalizeDiscoveryScore = value => {
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) return 0.5;
+
+  return number > 1 ? number / 100 : number;
+
+};
+
+const discoveryMatchToResult = (match, section) => ({
+
+  id: match.id,
+
+  drumId: match.id,
+
+  companyName: match.company,
+
+  company: match.company,
+
+  modelName: match.model,
+
+  model: match.model,
+
+  modelDetail: match.size,
+
+  size: match.size,
+
+  voice: match.raw?.voiceProfile || {},
+
+  legacyPrintVoice: match.raw?.voiceProfile || {},
+
+  similarityScore: normalizeDiscoveryScore(match.similarity),
+
+  matchScore: normalizeDiscoveryScore(match.similarity),
+
+  summary:
+
+    match.summary?.text ||
+
+    match.summary?.title ||
+
+    match.why ||
+
+    section?.description ||
+
+    '',
+
+  explanation: match.why || section?.description || '',
+
+  discoverySectionKey: section?.key || null,
+
+  discoverySectionLabel: section?.label || null,
+
+  discoveryMatch: match,
+
+});
+
 const buildModeVoice = (baseVoice, mode, selectedReference) => {
 
   const sourceVoice = selectedReference?.voice || baseVoice || {};
@@ -894,6 +952,8 @@ export function VoicePlayground({ firestore }) {
 
   const [selectedReferenceId, setSelectedReferenceId] = useState('heritage');
 
+  const [selectedDiscoverySectionKey, setSelectedDiscoverySectionKey] = useState(null);
+
   const {
 
     query,
@@ -924,7 +984,55 @@ export function VoicePlayground({ firestore }) {
 
     REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
 
-  const rawResults = results.length ? results : discoveryResults.length ? discoveryResults : MOCK_MATCHES;
+  const discoverySections = useMemo(() => {
+
+    return (discoveryViewModel?.recommendedSections || []).filter(
+
+      section => section.matches?.length
+
+    );
+
+  }, [discoveryViewModel]);
+
+  const selectedDiscoverySection = useMemo(() => {
+
+    return (
+
+      discoverySections.find(section => section.key === selectedDiscoverySectionKey) ||
+
+      discoverySections.find(section => section.key === discoveryViewModel?.uiHints?.defaultSimilarSection) ||
+
+      discoverySections[0] ||
+
+      null
+
+    );
+
+  }, [discoverySections, discoveryViewModel, selectedDiscoverySectionKey]);
+
+  const selectedDiscoveryResults = useMemo(() => {
+
+    return (selectedDiscoverySection?.matches || []).map(match =>
+
+      discoveryMatchToResult(match, selectedDiscoverySection)
+
+    );
+
+  }, [selectedDiscoverySection]);
+
+  const rawResults = results.length
+
+    ? results
+
+    : selectedDiscoveryResults.length
+
+      ? selectedDiscoveryResults
+
+      : discoveryResults.length
+
+        ? discoveryResults
+
+        : MOCK_MATCHES;
 
   const modeVoice = useMemo(() => {
 
@@ -1007,6 +1115,8 @@ export function VoicePlayground({ firestore }) {
     setWorkflowMode('reference');
 
     setSelectedReferenceId('heritage');
+
+    setSelectedDiscoverySectionKey(null);
 
   };
 
@@ -1260,6 +1370,36 @@ export function VoicePlayground({ firestore }) {
             </div>
 
           </div>
+
+          {discoverySections.length > 0 && (
+
+            <div className="vp-discovery-section-tabs" aria-label="Discovery match sections">
+
+              {discoverySections.map((section) => (
+
+                <button
+
+                  key={section.key}
+
+                  type="button"
+
+                  className={selectedDiscoverySection?.key === section.key ? 'is-active' : ''}
+
+                  onClick={() => setSelectedDiscoverySectionKey(section.key)}
+
+                >
+
+                  <span>{section.label}</span>
+
+                  <em>{section.matches.length}</em>
+
+                </button>
+
+              ))}
+
+            </div>
+
+          )}
 
           <div className="vp-result-list">
 
