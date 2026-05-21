@@ -1,0 +1,2317 @@
+{
+  "status": "SNARE_ENGINE_EXPLANATION_PREVIEW_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:47:08.958Z",
+  "firestoreWrites": 0,
+  "examples": [
+    {
+      "targetId": "ludwig-acrolite",
+      "explanation": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5"
+        },
+        "voiceTitle": "Focused, controlled attack voice",
+        "voiceSummary": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response.",
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "firstListen": {
+          "title": "Focused, controlled attack voice",
+          "primaryNodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 6.61,
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.5704,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.4056,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.3024,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 6.42,
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.9384,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "control",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.216,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                },
+                {
+                  "node": "control",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.156,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 6.31,
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.506,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellThickness:1.6mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 1.6mm"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1624,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                }
+              ]
+            }
+          ],
+          "summary": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+        },
+        "playerAnalysis": {
+          "title": "Player Analysis",
+          "summary": "This read focuses on how the drum is likely to feel under the sticks: transient response, touch range, control, and body.",
+          "nodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 6.61,
+              "band": "mediumHigh",
+              "question": "How immediate and defined is the initial stick transient?",
+              "meaning": "The front edge of the note: stick definition, crack, articulation, and how quickly the drum speaks.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.5704,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.4056,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.3024,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 6.07,
+              "band": "medium",
+              "question": "How much upper-frequency snap, cut, and ring is emphasized?",
+              "meaning": "Treble energy, metallic snap, upper overtones, cut, and perceived high-frequency liveliness.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "brightness",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.216,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.2024,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 5.76,
+              "band": "medium",
+              "question": "How strongly does the drum carry through a room or mix?",
+              "meaning": "Carry, power, and mix penetration. Projection is not simply volume; it is acoustic carry and forwardness.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.23,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "projection",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.0864,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 5.67,
+              "band": "medium",
+              "question": "How long does tone, ring, and shell response remain audible?",
+              "meaning": "Ring length, open resonance, tonal tail, shell bloom, and decay behavior.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:aluminum",
+                  "delta": -0.414,
+                  "direction": "down",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.273,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellThickness:1.6mm",
+                  "delta": 0.2448,
+                  "direction": "up",
+                  "label": "shell thickness: 1.6mm"
+                }
+              ]
+            },
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 5.22,
+              "band": "mediumLow",
+              "question": "How much lower-mid body, roundness, and fullness is emphasized?",
+              "meaning": "Lower-mid body, woodiness, roundness, fullness, and perceived musical thickness.",
+              "read": "This sits in a medium low range for snare drums.",
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:metal",
+                  "delta": -0.1404,
+                  "direction": "down",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "warmth",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1044,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                },
+                {
+                  "node": "warmth",
+                  "source": "diameter:14",
+                  "delta": 0.0992,
+                  "direction": "up",
+                  "label": "diameter: 14"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 6.31,
+              "band": "mediumHigh",
+              "question": "How easily does the drum respond to light playing and ghost notes?",
+              "meaning": "Low-dynamic response, ghost-note clarity, wire-response potential, and touch range.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.506,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellThickness:1.6mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 1.6mm"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1624,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 6.42,
+              "band": "mediumHigh",
+              "question": "How focused, dry, stable, and contained is the response?",
+              "meaning": "Dryness, focus, overtone containment, tuning stability, and how contained the drum feels.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "shellMaterial:aluminum",
+                  "delta": 0.9384,
+                  "direction": "up",
+                  "label": "shell material: aluminum"
+                },
+                {
+                  "node": "control",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.216,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                },
+                {
+                  "node": "control",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.156,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                }
+              ]
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "title": "LegacyPrint Identity",
+          "summary": "This identity read combines the strongest physical drivers behind the voice profile without using price, prestige, rarity, collectibility, or brand hype.",
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:aluminum",
+              "totalMovement": 2.935,
+              "label": "shell material: aluminum"
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786,
+              "label": "shell construction: metal"
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238,
+              "label": "bearing edge: rolled Or Formed Metal"
+            },
+            {
+              "source": "shellThickness:1.6mm",
+              "totalMovement": 1.051,
+              "label": "shell thickness: 1.6mm"
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8,
+              "label": "hoop: triple Flanged"
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337,
+              "label": "depth: 5"
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236,
+              "label": "diameter: 14"
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129,
+              "label": "lug count: 10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ludwig-black-beauty",
+      "explanation": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+          "company": "Ludwig",
+          "model": "Black Beauty 3.5x14",
+          "size": "14x3.5"
+        },
+        "voiceTitle": "Fast, articulate cutting voice",
+        "voiceSummary": "This snare is led by quick, articulate stick definition, followed by balanced brightness and moderate ring and decay.",
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "firstListen": {
+          "title": "Fast, articulate cutting voice",
+          "primaryNodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 7.14,
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.874,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.4056,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.3024,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 6.66,
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.6256,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "brightness",
+                  "source": "depth:3.5",
+                  "delta": 0.2244,
+                  "direction": "up",
+                  "label": "depth: 3.5"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 6.61,
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.8188,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.273,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellThickness:1.2mm",
+                  "delta": 0.2448,
+                  "direction": "up",
+                  "label": "shell thickness: 1.2mm"
+                }
+              ]
+            }
+          ],
+          "summary": "This snare is led by quick, articulate stick definition, followed by balanced brightness and moderate ring and decay."
+        },
+        "playerAnalysis": {
+          "title": "Player Analysis",
+          "summary": "This read focuses on how the drum is likely to feel under the sticks: transient response, touch range, control, and body.",
+          "nodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 7.14,
+              "band": "mediumHigh",
+              "question": "How immediate and defined is the initial stick transient?",
+              "meaning": "The front edge of the note: stick definition, crack, articulation, and how quickly the drum speaks.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.874,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.4056,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.3024,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 6.66,
+              "band": "mediumHigh",
+              "question": "How much upper-frequency snap, cut, and ring is emphasized?",
+              "meaning": "Treble energy, metallic snap, upper overtones, cut, and perceived high-frequency liveliness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.6256,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "brightness",
+                  "source": "depth:3.5",
+                  "delta": 0.2244,
+                  "direction": "up",
+                  "label": "depth: 3.5"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 6.22,
+              "band": "mediumHigh",
+              "question": "How strongly does the drum carry through a room or mix?",
+              "meaning": "Carry, power, and mix penetration. Projection is not simply volume; it is acoustic carry and forwardness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.874,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "projection",
+                  "source": "depth:3.5",
+                  "delta": -0.1848,
+                  "direction": "down",
+                  "label": "depth: 3.5"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 6.61,
+              "band": "mediumHigh",
+              "question": "How long does tone, ring, and shell response remain audible?",
+              "meaning": "Ring length, open resonance, tonal tail, shell bloom, and decay behavior.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.8188,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.273,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellThickness:1.2mm",
+                  "delta": 0.2448,
+                  "direction": "up",
+                  "label": "shell thickness: 1.2mm"
+                }
+              ]
+            },
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 5.43,
+              "band": "mediumLow",
+              "question": "How much lower-mid body, roundness, and fullness is emphasized?",
+              "meaning": "Lower-mid body, woodiness, roundness, fullness, and perceived musical thickness.",
+              "read": "This sits in a medium low range for snare drums.",
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.5704,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "warmth",
+                  "source": "depth:3.5",
+                  "delta": -0.231,
+                  "direction": "down",
+                  "label": "depth: 3.5"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:metal",
+                  "delta": -0.1404,
+                  "direction": "down",
+                  "label": "shell construction: metal"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 5.98,
+              "band": "medium",
+              "question": "How easily does the drum respond to light playing and ghost notes?",
+              "meaning": "Low-dynamic response, ghost-note clarity, wire-response potential, and touch range.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellThickness:1.2mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 1.2mm"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "depth:3.5",
+                  "delta": 0.2244,
+                  "direction": "up",
+                  "label": "depth: 3.5"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1624,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 5.83,
+              "band": "medium",
+              "question": "How focused, dry, stable, and contained is the response?",
+              "meaning": "Dryness, focus, overtone containment, tuning stability, and how contained the drum feels.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "bearingEdge:rolledOrFormedMetal",
+                  "delta": 0.216,
+                  "direction": "up",
+                  "label": "bearing edge: rolled Or Formed Metal"
+                },
+                {
+                  "node": "control",
+                  "source": "shellMaterial:brass",
+                  "delta": 0.2024,
+                  "direction": "up",
+                  "label": "shell material: brass"
+                },
+                {
+                  "node": "control",
+                  "source": "depth:3.5",
+                  "delta": 0.1848,
+                  "direction": "up",
+                  "label": "depth: 3.5"
+                }
+              ]
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "title": "LegacyPrint Identity",
+          "summary": "This identity read combines the strongest physical drivers behind the voice profile without using price, prestige, rarity, collectibility, or brand hype.",
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:brass",
+              "totalMovement": 3.984,
+              "label": "shell material: brass"
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786,
+              "label": "shell construction: metal"
+            },
+            {
+              "source": "depth:3.5",
+              "totalMovement": 1.577,
+              "label": "depth: 3.5"
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238,
+              "label": "bearing edge: rolled Or Formed Metal"
+            },
+            {
+              "source": "shellThickness:1.2mm",
+              "totalMovement": 1.051,
+              "label": "shell thickness: 1.2mm"
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8,
+              "label": "hoop: triple Flanged"
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236,
+              "label": "diameter: 14"
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129,
+              "label": "lug count: 10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ludwig-legacy-mahogany",
+      "explanation": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5.5x14",
+          "size": "14x5.5"
+        },
+        "voiceTitle": "Warm, blooming snare voice",
+        "voiceSummary": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response.",
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "firstListen": {
+          "title": "Warm, blooming snare voice",
+          "primaryNodes": [
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 7.78,
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 1.196,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "warmth",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.5904,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.5616,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 6.84,
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 0.506,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.504,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.4056,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 6.13,
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 0.3496,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1624,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                }
+              ]
+            }
+          ],
+          "summary": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+        },
+        "playerAnalysis": {
+          "title": "Player Analysis",
+          "summary": "This read focuses on how the drum is likely to feel under the sticks: transient response, touch range, control, and body.",
+          "nodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 5.84,
+              "band": "medium",
+              "question": "How immediate and defined is the initial stick transient?",
+              "meaning": "The front edge of the note: stick definition, crack, articulation, and how quickly the drum speaks.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellThickness:6.35mm",
+                  "delta": 0.2592,
+                  "direction": "up",
+                  "label": "shell thickness: 6.35mm"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.1716,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                },
+                {
+                  "node": "attack",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1276,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 4.8,
+              "band": "low",
+              "question": "How much upper-frequency snap, cut, and ring is emphasized?",
+              "meaning": "Treble energy, metallic snap, upper overtones, cut, and perceived high-frequency liveliness.",
+              "read": "Darker, rounder, lower-pitched, and less cutting.",
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:mahogany",
+                  "delta": -0.2944,
+                  "direction": "down",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "brightness",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": -0.1584,
+                  "direction": "down",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellThickness:6.35mm",
+                  "delta": 0.1152,
+                  "direction": "up",
+                  "label": "shell thickness: 6.35mm"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 5.53,
+              "band": "mediumLow",
+              "question": "How strongly does the drum carry through a room or mix?",
+              "meaning": "Carry, power, and mix penetration. Projection is not simply volume; it is acoustic carry and forwardness.",
+              "read": "This sits in a medium low range for snare drums.",
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellThickness:6.35mm",
+                  "delta": 0.2304,
+                  "direction": "up",
+                  "label": "shell thickness: 6.35mm"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.1716,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 0.0736,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 6.84,
+              "band": "mediumHigh",
+              "question": "How long does tone, ring, and shell response remain audible?",
+              "meaning": "Ring length, open resonance, tonal tail, shell bloom, and decay behavior.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 0.506,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.504,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.4056,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                }
+              ]
+            },
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 7.78,
+              "band": "high",
+              "question": "How much lower-mid body, roundness, and fullness is emphasized?",
+              "meaning": "Lower-mid body, woodiness, roundness, fullness, and perceived musical thickness.",
+              "read": "Full, round, woody, thick, and body-forward.",
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 1.196,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "warmth",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.5904,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.5616,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 6.13,
+              "band": "medium",
+              "question": "How easily does the drum respond to light playing and ghost notes?",
+              "meaning": "Low-dynamic response, ghost-note clarity, wire-response potential, and touch range.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellMaterial:mahogany",
+                  "delta": 0.3496,
+                  "direction": "up",
+                  "label": "shell material: mahogany"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "hoopType:tripleFlanged",
+                  "delta": 0.1624,
+                  "direction": "up",
+                  "label": "hoop: triple Flanged"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 5.72,
+              "band": "medium",
+              "question": "How focused, dry, stable, and contained is the response?",
+              "meaning": "Dryness, focus, overtone containment, tuning stability, and how contained the drum feels.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "shellThickness:6.35mm",
+                  "delta": 0.3024,
+                  "direction": "up",
+                  "label": "shell thickness: 6.35mm"
+                },
+                {
+                  "node": "control",
+                  "source": "shellConstruction:plyWithReinforcementRings",
+                  "delta": 0.2496,
+                  "direction": "up",
+                  "label": "shell construction: ply With Reinforcement Rings"
+                },
+                {
+                  "node": "control",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.0576,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                }
+              ]
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "title": "LegacyPrint Identity",
+          "summary": "This identity read combines the strongest physical drivers behind the voice profile without using price, prestige, rarity, collectibility, or brand hype.",
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:mahogany",
+              "totalMovement": 2.576,
+              "label": "shell material: mahogany"
+            },
+            {
+              "source": "bearingEdge:rounder30Degree",
+              "totalMovement": 1.807,
+              "label": "bearing edge: rounder30Degree"
+            },
+            {
+              "source": "shellConstruction:plyWithReinforcementRings",
+              "totalMovement": 1.693,
+              "label": "shell construction: ply With Reinforcement Rings"
+            },
+            {
+              "source": "shellThickness:6.35mm",
+              "totalMovement": 1.181,
+              "label": "shell thickness: 6.35mm"
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8,
+              "label": "hoop: triple Flanged"
+            },
+            {
+              "source": "depth:5.5",
+              "totalMovement": 0.337,
+              "label": "depth: 5.5"
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236,
+              "label": "diameter: 14"
+            },
+            {
+              "source": "lugCount:8",
+              "totalMovement": 0.017,
+              "label": "lug count: 8"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ahead-bell-brass",
+      "explanation": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6"
+        },
+        "voiceTitle": "Carrying, open projection voice",
+        "voiceSummary": "This snare is led by open ring and longer tonal bloom, followed by quick, articulate stick definition and strong room and mix carry.",
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "firstListen": {
+          "title": "Carrying, open projection voice",
+          "primaryNodes": [
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 7.45,
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 1.15,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:solidShell",
+                  "delta": 0.6084,
+                  "direction": "up",
+                  "label": "shell construction: solid Shell"
+                },
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            },
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 7.26,
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 1.15,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.468,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "hoopType:inwardFlangedControlHoop",
+                  "delta": 0.2436,
+                  "direction": "up",
+                  "label": "hoop: inward Flanged Control Hoop"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 6.98,
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 1.242,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:solidShell",
+                  "delta": 0.195,
+                  "direction": "up",
+                  "label": "shell construction: solid Shell"
+                },
+                {
+                  "node": "projection",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.1584,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            }
+          ],
+          "summary": "This snare is led by open ring and longer tonal bloom, followed by quick, articulate stick definition and strong room and mix carry."
+        },
+        "playerAnalysis": {
+          "title": "Player Analysis",
+          "summary": "This read focuses on how the drum is likely to feel under the sticks: transient response, touch range, control, and body.",
+          "nodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 7.26,
+              "band": "high",
+              "question": "How immediate and defined is the initial stick transient?",
+              "meaning": "The front edge of the note: stick definition, crack, articulation, and how quickly the drum speaks.",
+              "read": "Fast, crisp, articulate, sharp, and front-loaded.",
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 1.15,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.468,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "hoopType:inwardFlangedControlHoop",
+                  "delta": 0.2436,
+                  "direction": "up",
+                  "label": "hoop: inward Flanged Control Hoop"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 6.4,
+              "band": "mediumHigh",
+              "question": "How much upper-frequency snap, cut, and ring is emphasized?",
+              "meaning": "Treble energy, metallic snap, upper overtones, cut, and perceived high-frequency liveliness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 0.966,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "brightness",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellThickness:3mm",
+                  "delta": 0.1296,
+                  "direction": "up",
+                  "label": "shell thickness: 3mm"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 6.98,
+              "band": "mediumHigh",
+              "question": "How strongly does the drum carry through a room or mix?",
+              "meaning": "Carry, power, and mix penetration. Projection is not simply volume; it is acoustic carry and forwardness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 1.242,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:solidShell",
+                  "delta": 0.195,
+                  "direction": "up",
+                  "label": "shell construction: solid Shell"
+                },
+                {
+                  "node": "projection",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.1584,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 7.45,
+              "band": "high",
+              "question": "How long does tone, ring, and shell response remain audible?",
+              "meaning": "Ring length, open resonance, tonal tail, shell bloom, and decay behavior.",
+              "read": "Open, ringing, blooming, and long-tailed.",
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 1.15,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:solidShell",
+                  "delta": 0.6084,
+                  "direction": "up",
+                  "label": "shell construction: solid Shell"
+                },
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            },
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 6.86,
+              "band": "mediumHigh",
+              "question": "How much lower-mid body, roundness, and fullness is emphasized?",
+              "meaning": "Lower-mid body, woodiness, roundness, fullness, and perceived musical thickness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:solidShell",
+                  "delta": 0.8424,
+                  "direction": "up",
+                  "label": "shell construction: solid Shell"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 0.598,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "warmth",
+                  "source": "depth:6",
+                  "delta": 0.2508,
+                  "direction": "up",
+                  "label": "depth: 6"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 5.73,
+              "band": "medium",
+              "question": "How easily does the drum respond to light playing and ghost notes?",
+              "meaning": "Low-dynamic response, ghost-note clarity, wire-response potential, and touch range.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellConstruction:solidShell",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: solid Shell"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellThickness:3mm",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "shell thickness: 3mm"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2304,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 6.42,
+              "band": "mediumHigh",
+              "question": "How focused, dry, stable, and contained is the response?",
+              "meaning": "Dryness, focus, overtone containment, tuning stability, and how contained the drum feels.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "hoopType:inwardFlangedControlHoop",
+                  "delta": 0.5336,
+                  "direction": "up",
+                  "label": "hoop: inward Flanged Control Hoop"
+                },
+                {
+                  "node": "control",
+                  "source": "shellMaterial:bellBrass",
+                  "delta": 0.414,
+                  "direction": "up",
+                  "label": "shell material: bell Brass"
+                },
+                {
+                  "node": "control",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "title": "LegacyPrint Identity",
+          "summary": "This identity read combines the strongest physical drivers behind the voice profile without using price, prestige, rarity, collectibility, or brand hype.",
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:bellBrass",
+              "totalMovement": 5.658,
+              "label": "shell material: bell Brass"
+            },
+            {
+              "source": "shellConstruction:solidShell",
+              "totalMovement": 2.27,
+              "label": "shell construction: solid Shell"
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735,
+              "label": "bearing edge: machined Metal"
+            },
+            {
+              "source": "shellThickness:3mm",
+              "totalMovement": 1.123,
+              "label": "shell thickness: 3mm"
+            },
+            {
+              "source": "hoopType:inwardFlangedControlHoop",
+              "totalMovement": 0.992,
+              "label": "hoop: inward Flanged Control Hoop"
+            },
+            {
+              "source": "depth:6",
+              "totalMovement": 0.68,
+              "label": "depth: 6"
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236,
+              "label": "diameter: 14"
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129,
+              "label": "lug count: 10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "dw-true-cast-bronze",
+      "explanation": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4"
+        },
+        "voiceTitle": "Focused, controlled attack voice",
+        "voiceSummary": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry.",
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "firstListen": {
+          "title": "Focused, controlled attack voice",
+          "primaryNodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 7.73,
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.7544,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.468,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellThickness:35mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 35mm"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 7.22,
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "hoopType:dieCast",
+                  "delta": 0.6844,
+                  "direction": "up",
+                  "label": "hoop: die Cast"
+                },
+                {
+                  "node": "control",
+                  "source": "shellThickness:35mm",
+                  "delta": 0.648,
+                  "direction": "up",
+                  "label": "shell thickness: 35mm"
+                },
+                {
+                  "node": "control",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 6.95,
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.8464,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellThickness:35mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 35mm"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                }
+              ]
+            }
+          ],
+          "summary": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry."
+        },
+        "playerAnalysis": {
+          "title": "Player Analysis",
+          "summary": "This read focuses on how the drum is likely to feel under the sticks: transient response, touch range, control, and body.",
+          "nodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 7.73,
+              "band": "high",
+              "question": "How immediate and defined is the initial stick transient?",
+              "meaning": "The front edge of the note: stick definition, crack, articulation, and how quickly the drum speaks.",
+              "read": "Fast, crisp, articulate, sharp, and front-loaded.",
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.7544,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "attack",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.468,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellThickness:35mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 35mm"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 6.4,
+              "band": "mediumHigh",
+              "question": "How much upper-frequency snap, cut, and ring is emphasized?",
+              "meaning": "Treble energy, metallic snap, upper overtones, cut, and perceived high-frequency liveliness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.3496,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "brightness",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 6.95,
+              "band": "mediumHigh",
+              "question": "How strongly does the drum carry through a room or mix?",
+              "meaning": "Carry, power, and mix penetration. Projection is not simply volume; it is acoustic carry and forwardness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.8464,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellThickness:35mm",
+                  "delta": 0.4464,
+                  "direction": "up",
+                  "label": "shell thickness: 35mm"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 5.96,
+              "band": "medium",
+              "question": "How long does tone, ring, and shell response remain audible?",
+              "meaning": "Ring length, open resonance, tonal tail, shell bloom, and decay behavior.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.874,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:metal",
+                  "delta": 0.273,
+                  "direction": "up",
+                  "label": "shell construction: metal"
+                }
+              ]
+            },
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 5.54,
+              "band": "mediumLow",
+              "question": "How much lower-mid body, roundness, and fullness is emphasized?",
+              "meaning": "Lower-mid body, woodiness, roundness, fullness, and perceived musical thickness.",
+              "read": "This sits in a medium low range for snare drums.",
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:bronze",
+                  "delta": 0.828,
+                  "direction": "up",
+                  "label": "shell material: bronze"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:metal",
+                  "delta": -0.1404,
+                  "direction": "down",
+                  "label": "shell construction: metal"
+                },
+                {
+                  "node": "warmth",
+                  "source": "hoopType:dieCast",
+                  "delta": -0.1276,
+                  "direction": "down",
+                  "label": "hoop: die Cast"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 4.96,
+              "band": "mediumLow",
+              "question": "How easily does the drum respond to light playing and ghost notes?",
+              "meaning": "Low-dynamic response, ghost-note clarity, wire-response potential, and touch range.",
+              "read": "This sits in a medium low range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellThickness:35mm",
+                  "delta": -0.2304,
+                  "direction": "down",
+                  "label": "shell thickness: 35mm"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2304,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "depth:4",
+                  "delta": 0.165,
+                  "direction": "up",
+                  "label": "depth: 4"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 7.22,
+              "band": "mediumHigh",
+              "question": "How focused, dry, stable, and contained is the response?",
+              "meaning": "Dryness, focus, overtone containment, tuning stability, and how contained the drum feels.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "hoopType:dieCast",
+                  "delta": 0.6844,
+                  "direction": "up",
+                  "label": "hoop: die Cast"
+                },
+                {
+                  "node": "control",
+                  "source": "shellThickness:35mm",
+                  "delta": 0.648,
+                  "direction": "up",
+                  "label": "shell thickness: 35mm"
+                },
+                {
+                  "node": "control",
+                  "source": "bearingEdge:machinedMetal",
+                  "delta": 0.2736,
+                  "direction": "up",
+                  "label": "bearing edge: machined Metal"
+                }
+              ]
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "title": "LegacyPrint Identity",
+          "summary": "This identity read combines the strongest physical drivers behind the voice profile without using price, prestige, rarity, collectibility, or brand hype.",
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:bronze",
+              "totalMovement": 3.938,
+              "label": "shell material: bronze"
+            },
+            {
+              "source": "shellThickness:35mm",
+              "totalMovement": 2.045,
+              "label": "shell thickness: 35mm"
+            },
+            {
+              "source": "hoopType:dieCast",
+              "totalMovement": 1.931,
+              "label": "hoop: die Cast"
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786,
+              "label": "shell construction: metal"
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735,
+              "label": "bearing edge: machined Metal"
+            },
+            {
+              "source": "depth:4",
+              "totalMovement": 0.97,
+              "label": "depth: 4"
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236,
+              "label": "diameter: 14"
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129,
+              "label": "lug count: 10"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "gretsch-brooklyn-maple",
+      "explanation": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "gretsch_brooklyn_brooklyn-snare_14x5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_3fecbb47",
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5"
+        },
+        "voiceTitle": "Warm, blooming snare voice",
+        "voiceSummary": "This snare is led by lower-mid body and roundness, followed by moderate ring and decay and usable dynamic response.",
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "firstListen": {
+          "title": "Warm, blooming snare voice",
+          "primaryNodes": [
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 7,
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.6624,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "warmth",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.5904,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.2964,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 6.39,
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.504,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.3496,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.2496,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 6.35,
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.4416,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.2964,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            }
+          ],
+          "summary": "This snare is led by lower-mid body and roundness, followed by moderate ring and decay and usable dynamic response."
+        },
+        "playerAnalysis": {
+          "title": "Player Analysis",
+          "summary": "This read focuses on how the drum is likely to feel under the sticks: transient response, touch range, control, and body.",
+          "nodes": [
+            {
+              "node": "attack",
+              "label": "Attack",
+              "value": 6.28,
+              "band": "mediumHigh",
+              "question": "How immediate and defined is the initial stick transient?",
+              "meaning": "The front edge of the note: stick definition, crack, articulation, and how quickly the drum speaks.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "attack",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.4416,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellThickness:5.6mm",
+                  "delta": 0.2592,
+                  "direction": "up",
+                  "label": "shell thickness: 5.6mm"
+                },
+                {
+                  "node": "attack",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.195,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "brightness",
+              "label": "Brightness",
+              "value": 5.33,
+              "band": "mediumLow",
+              "question": "How much upper-frequency snap, cut, and ring is emphasized?",
+              "meaning": "Treble energy, metallic snap, upper overtones, cut, and perceived high-frequency liveliness.",
+              "read": "This sits in a medium low range for snare drums.",
+              "drivers": [
+                {
+                  "node": "brightness",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.2024,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "brightness",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": -0.1584,
+                  "direction": "down",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "brightness",
+                  "source": "shellThickness:5.6mm",
+                  "delta": 0.1152,
+                  "direction": "up",
+                  "label": "shell thickness: 5.6mm"
+                }
+              ]
+            },
+            {
+              "node": "projection",
+              "label": "Projection",
+              "value": 5.73,
+              "band": "medium",
+              "question": "How strongly does the drum carry through a room or mix?",
+              "meaning": "Carry, power, and mix penetration. Projection is not simply volume; it is acoustic carry and forwardness.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "projection",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.2944,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellThickness:5.6mm",
+                  "delta": 0.2304,
+                  "direction": "up",
+                  "label": "shell thickness: 5.6mm"
+                },
+                {
+                  "node": "projection",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.1404,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "sustain",
+              "label": "Sustain",
+              "value": 6.39,
+              "band": "mediumHigh",
+              "question": "How long does tone, ring, and shell response remain audible?",
+              "meaning": "Ring length, open resonance, tonal tail, shell bloom, and decay behavior.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sustain",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.504,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.3496,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "sustain",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.2496,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "warmth",
+              "label": "Warmth",
+              "value": 7,
+              "band": "mediumHigh",
+              "question": "How much lower-mid body, roundness, and fullness is emphasized?",
+              "meaning": "Lower-mid body, woodiness, roundness, fullness, and perceived musical thickness.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "warmth",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.6624,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "warmth",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.5904,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "warmth",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.2964,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "sensitivity",
+              "label": "Sensitivity",
+              "value": 6.35,
+              "band": "mediumHigh",
+              "question": "How easily does the drum respond to light playing and ghost notes?",
+              "meaning": "Low-dynamic response, ghost-note clarity, wire-response potential, and touch range.",
+              "read": "This sits in a medium high range for snare drums.",
+              "drivers": [
+                {
+                  "node": "sensitivity",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.4416,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "bearingEdge:rounder30Degree",
+                  "delta": 0.3744,
+                  "direction": "up",
+                  "label": "bearing edge: rounder30Degree"
+                },
+                {
+                  "node": "sensitivity",
+                  "source": "shellConstruction:ply",
+                  "delta": 0.2964,
+                  "direction": "up",
+                  "label": "shell construction: ply"
+                }
+              ]
+            },
+            {
+              "node": "control",
+              "label": "Control",
+              "value": 6.06,
+              "band": "medium",
+              "question": "How focused, dry, stable, and contained is the response?",
+              "meaning": "Dryness, focus, overtone containment, tuning stability, and how contained the drum feels.",
+              "read": "This sits in a medium range for snare drums.",
+              "drivers": [
+                {
+                  "node": "control",
+                  "source": "shellThickness:5.6mm",
+                  "delta": 0.3024,
+                  "direction": "up",
+                  "label": "shell thickness: 5.6mm"
+                },
+                {
+                  "node": "control",
+                  "source": "hoopType:gretsch302",
+                  "delta": 0.29,
+                  "direction": "up",
+                  "label": "hoop: gretsch302"
+                },
+                {
+                  "node": "control",
+                  "source": "shellMaterial:maple",
+                  "delta": 0.1656,
+                  "direction": "up",
+                  "label": "shell material: maple"
+                }
+              ]
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "title": "LegacyPrint Identity",
+          "summary": "This identity read combines the strongest physical drivers behind the voice profile without using price, prestige, rarity, collectibility, or brand hype.",
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:maple",
+              "totalMovement": 2.558,
+              "label": "shell material: maple"
+            },
+            {
+              "source": "bearingEdge:rounder30Degree",
+              "totalMovement": 1.807,
+              "label": "bearing edge: rounder30Degree"
+            },
+            {
+              "source": "shellConstruction:ply",
+              "totalMovement": 1.381,
+              "label": "shell construction: ply"
+            },
+            {
+              "source": "shellThickness:5.6mm",
+              "totalMovement": 1.181,
+              "label": "shell thickness: 5.6mm"
+            },
+            {
+              "source": "hoopType:gretsch302",
+              "totalMovement": 0.922,
+              "label": "hoop: gretsch302"
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337,
+              "label": "depth: 5"
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236,
+              "label": "diameter: 14"
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129,
+              "label": "lug count: 10"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

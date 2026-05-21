@@ -1,6 +1,6 @@
 {
   "status": "SNARE_ENGINE_PREVIEW_V01_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T10:46:20.662Z",
+  "generatedAt": "2026-05-21T10:47:08.899Z",
   "firestoreWrites": 0,
   "engineVersion": "legacyprint-snare-engine-v0.1",
   "doctrine": {
