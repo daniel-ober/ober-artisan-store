@@ -1,0 +1,99 @@
+{
+  "generatedAt": "2026-05-21T08:45:27.980Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-pearl-line-level-review-packet.json",
+  "status": "STOCK_HEAD_FALLBACK_PEARL_LINE_LEVEL_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Pearl",
+    "candidateCount": 33,
+    "lineGroupCount": 6,
+    "reviewedLineGroupCount": 6,
+    "approvedLineFallbackRuleCount": 0,
+    "blockedLineFallbackRuleCount": 5,
+    "thirdPartyEvidenceOnlyCount": 1,
+    "noFirestoreWrites": true
+  },
+  "lineDecisions": [
+    {
+      "lineSeries": "Free Floating",
+      "candidateCount": 16,
+      "reviewed": true,
+      "approvedLineFallbackRule": false,
+      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [],
+      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Free Floating records. Do not approve fallback."
+    },
+    {
+      "lineSeries": "Sensitone Heritage Alloy",
+      "candidateCount": 6,
+      "reviewed": true,
+      "approvedLineFallbackRule": false,
+      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [],
+      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Sensitone Heritage Alloy records. Do not approve fallback."
+    },
+    {
+      "lineSeries": "Modern Utility",
+      "candidateCount": 4,
+      "reviewed": true,
+      "approvedLineFallbackRule": false,
+      "decisionStatus": "third_party_evidence_found_but_not_approved",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [
+        "https://drummersreview.com/gear-reviews/pearl-modern-utility-floor-snare-drummers-review/"
+      ],
+      "sourceEvidenceNotes": "Third-party review evidence lists REMO UT heads with coated batter and thin clear resonant side for a Pearl Modern Utility Floor Snare. Because this is third-party review evidence and not official Pearl stock/OEM documentation, do not approve fallback under the conservative policy yet."
+    },
+    {
+      "lineSeries": "Reference",
+      "candidateCount": 4,
+      "reviewed": true,
+      "approvedLineFallbackRule": false,
+      "decisionStatus": "blocked_insufficient_snare_specific_stock_head_evidence",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [],
+      "sourceEvidenceNotes": "Pearl catalog evidence may support Remo USA heads for some Reference/Masters drum sets, but current evidence does not safely identify snare-specific stock batter and resonant/snare-side heads for these Reference snare records. Do not approve fallback."
+    },
+    {
+      "lineSeries": "Ultracast",
+      "candidateCount": 2,
+      "reviewed": true,
+      "approvedLineFallbackRule": false,
+      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [],
+      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Ultracast records. Do not approve fallback."
+    },
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 1,
+      "reviewed": true,
+      "approvedLineFallbackRule": false,
+      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [],
+      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Signature record. Do not approve fallback."
+    }
+  ],
+  "conclusion": "No Pearl line-level stock-head fallback rule is approved under the conservative policy. Modern Utility has third-party evidence only and should remain blocked until official Pearl/OEM confirmation is found.",
+  "nextRecommendedStep": "Proceed to remaining Lane B companies: Mapex, Tama, Yamaha, Gretsch, and SONOR."
+}
