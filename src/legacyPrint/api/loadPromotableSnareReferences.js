@@ -239,17 +239,41 @@ const getCompany = record =>
 
   '';
 
+const cleanModelName = value =>
+
+  String(value || '')
+
+    .replace(/\b(private listing|sweetwater listing|dcp dealer listing|dealer listing|reverb listing|ebay listing|used listing)\b/gi, '')
+
+    .replace(/\b(open box|used|new old stock|nos)\b/gi, '')
+
+    .replace(/\b(snare drum|snare)\b/gi, '')
+
+    .replace(/\b\d{1,2}(\.\d+)?\s*[x×]\s*\d{1,2}(\.\d+)?\b/gi, '')
+
+    .replace(/\b\d{1,2}["”]\s*[x×]\s*\d{1,2}(\.\d+)?["”]?\b/gi, '')
+
+    .replace(/\s+[-–—]\s+$/g, '')
+
+    .replace(/\s{2,}/g, ' ')
+
+    .trim();
+
 const getModel = record =>
 
-  record.modelName ||
+  cleanModelName(
 
-  record.model ||
+    record.modelName ||
 
-  record.MODEL_NAME ||
+      record.model ||
 
-  record['MODEL NAME'] ||
+      record.MODEL_NAME ||
 
-  '';
+      record['MODEL NAME'] ||
+
+      ''
+
+  );
 
 const getDiameter = record =>
 
@@ -357,6 +381,22 @@ const buildReferenceLabel = record => {
 
 };
 
+const buildModelOptionLabel = record => {
+
+  const model = getModel(record) || 'Unknown Model';
+
+  const material = getShellMaterial(record) || 'Material unknown';
+
+  const diameter = getDiameter(record);
+
+  const depth = getDepth(record);
+
+  const size = diameter && depth ? `${diameter}x${depth}` : 'Size unknown';
+
+  return `${model} • ${material} • ${size}`;
+
+};
+
 const buildReferenceDetail = record => {
 
   const diameter = getDiameter(record);
@@ -404,6 +444,8 @@ const normalizeReference = input => {
     modelName,
 
     model: modelName,
+
+    modelOptionLabel: buildModelOptionLabel(data),
 
     lineSeries,
 

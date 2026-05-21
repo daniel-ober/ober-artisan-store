@@ -1042,7 +1042,7 @@ function ReferencePanel({
 
           <option key={reference.key} value={reference.key}>
 
-            {reference.label}
+            {reference.modelOptionLabel || `${reference.modelName || reference.label || 'Unknown Model'} • ${reference.shellMaterial || 'Material unknown'} • ${reference.diameter && reference.depth ? `${reference.diameter}x${reference.depth}` : 'Size unknown'}`}
 
           </option>
 
