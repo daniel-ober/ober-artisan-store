@@ -1,6 +1,6 @@
 {
   "status": "LEGACYPRINT_ENGINE_READINESS_INVENTORY_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T10:05:45.342Z",
+  "generatedAt": "2026-05-21T13:47:31.339Z",
   "collectionName": "snareReferenceDrums",
   "firestoreWrites": 0,
   "summary": {
@@ -25506,8 +25506,8 @@
       "shellThicknessMm": 5,
       "bearingEdgeReady": true,
       "bearingEdgeFallbackApplied": false,
-      "hoopType": "Maple wood hoop",
-      "snareWires": "20-strand Hi-Carbon Steel snare wires",
+      "hoopType": "100% maple wood hoops coated with urethane",
+      "snareWires": "20-strand Starclassic Carbon Steel Snappy snares",
       "stockBatterHead": "Tama Power Craft II / Tama by Evans coated batter head",
       "stockResoHead": "Tama Power Craft II snare side / Tama by Evans snare side head",
       "stockHeadsEngineReady": false
