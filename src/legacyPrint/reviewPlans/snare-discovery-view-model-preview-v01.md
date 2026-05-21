@@ -1,6 +1,6 @@
 # LegacyPrint Snare Discovery View Model Preview v0.1
 
-Generated: 2026-05-21T11:04:23.883Z
+Generated: 2026-05-21T11:08:15.236Z
 
 - Firestore writes: 0
 - Source preview: src/legacyPrint/reviewPlans/snare-discovery-packet-api-preview-v01.json
@@ -18,30 +18,30 @@ Generated: 2026-05-21T11:04:23.883Z
 
 ### ludwig-acrolite
 
-Section: Other Brand Alternatives
+Section: Explore a Different Flavor
 
-Match: none
+Match: Ludwig Legacy Mahogany 8x14 14x8
 
-Score: none
+Score: 68.2%
 
-Why: Similar voice behavior from a different brand.
+Why: This match creates contrast by reading more warmth, more sustain, less brightness than the target.
 
 ### ludwig-black-beauty
 
-Section: Same Shell Material Alternatives
+Section: Explore a Different Flavor
 
-Match: none
+Match: Ludwig Legacy Mahogany 8x14 14x8
 
-Score: none
+Score: 64.2%
 
-Why: Similar voice behavior using the same primary shell material family.
+Why: This match creates contrast by reading more warmth, less brightness, less attack than the target.
 
 ### dw-true-cast-bronze
 
-Section: Other Brand Alternatives
+Section: Explore a Different Flavor
 
-Match: none
+Match: Ludwig Legacy Mahogany 8x14 14x8
 
-Score: none
+Score: 76.2%
 
-Why: Similar voice behavior from a different brand.
+Why: This match creates contrast by reading more warmth, less attack, less brightness than the target.

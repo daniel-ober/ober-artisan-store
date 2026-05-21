@@ -41,47 +41,147 @@ const getSectionMatches = section => {
 
   if (Array.isArray(section.matches)) return section.matches;
 
+  if (Array.isArray(section.results)) return section.results;
+
   if (Array.isArray(section.items)) return section.items;
 
   if (Array.isArray(section.records)) return section.records;
 
-  if (Array.isArray(section.results)) return section.results;
+  if (Array.isArray(section.matches?.matches)) return section.matches.matches;
+
+  if (Array.isArray(section.results?.matches)) return section.results.matches;
+
+  if (Array.isArray(section.items?.matches)) return section.items.matches;
+
+  if (Array.isArray(section.group?.matches)) return section.group.matches;
+
+  if (Array.isArray(section.data?.matches)) return section.data.matches;
 
   return [];
 
 };
 
-const mapMatchForUi = match => ({
+const getSimilarSectionMatches = (packet, section) => {
 
-  id: match.id || match.referenceId || null,
+  const key = section?.key;
 
-  company: match.company || null,
+  const groups = packet?.discovery?.similar?.grouped?.groups || {};
 
-  model: match.model || match.name || null,
+  if (key === 'voiceContrast') {
 
-  size: match.size || null,
+    const defaultMode = packet?.uiHints?.defaultContrastMode || 'overallContrast';
 
-  title: [match.company, match.model || match.name, match.size].filter(Boolean).join(' '),
+    const contrastSections = packet?.discovery?.contrast?.sections || [];
 
-  similarity: match.similarityPercent ?? match.similarity ?? null,
+    const selectedSection =
 
-  similarityLabel: formatPercent(match.similarityPercent ?? match.similarity),
+      contrastSections.find(item => item.key === defaultMode || item.mode === defaultMode) ||
 
-  contrast: match.contrastPercent ?? match.contrast ?? null,
+      contrastSections[0];
 
-  contrastLabel: formatPercent(match.contrastPercent ?? match.contrast),
+    return getSectionMatches(selectedSection);
 
-  topNodes: formatNodeList(match.topNodes),
+  }
 
-  sharedTopNodes: match.sharedTopNodes || [],
+  return getSectionMatches(groups[key] || section);
 
-  why: match.why || match.groupReason || match.mainContrast || null,
+};
 
-  materialShift: match.materialShift || null,
+const getMatchDrum = match =>
 
-  raw: match
+  match?.drum ||
 
-});
+  match?.reference ||
+
+  match?.snare ||
+
+  match ||
+
+  {};
+
+const getSimilarityValue = match =>
+
+  match?.similarityPercent ??
+
+  match?.similarity?.similarityPercent ??
+
+  match?.similarity ??
+
+  null;
+
+const getContrastValue = match =>
+
+  match?.contrastPercent ??
+
+  match?.contrast?.contrastPercent ??
+
+  match?.contrastScore ??
+
+  match?.contrast?.contrastScore ??
+
+  match?.contrast ??
+
+  null;
+
+const mapMatchForUi = match => {
+
+  const drum = getMatchDrum(match);
+
+  const similarity = getSimilarityValue(match);
+
+  const contrast = getContrastValue(match);
+
+  const topNodes = match?.topNodes || drum?.topNodes || [];
+
+  return {
+
+    id: match?.id || match?.referenceId || drum?.id || null,
+
+    company: match?.company || drum?.company || null,
+
+    model: match?.model || match?.name || drum?.model || drum?.name || null,
+
+    size: match?.size || drum?.size || null,
+
+    title: [
+
+      match?.company || drum?.company,
+
+      match?.model || match?.name || drum?.model || drum?.name,
+
+      match?.size || drum?.size
+
+    ].filter(Boolean).join(' '),
+
+    similarity,
+
+    similarityLabel: formatPercent(similarity),
+
+    contrast,
+
+    contrastLabel: formatPercent(contrast),
+
+    topNodes: formatNodeList(topNodes),
+
+    why:
+
+      match?.why ||
+
+      match?.matchReason ||
+
+      match?.groupReason ||
+
+      match?.contrastReason ||
+
+      null,
+
+    summary: match?.summary || drum?.summary || null,
+
+    raw: match
+
+  };
+
+};
 
 const buildSnareDiscoveryViewModel = discoveryState => {
 
@@ -139,7 +239,7 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
     description: section.description,
 
-    matches: getSectionMatches(section).map(mapMatchForUi)
+    matches: getSimilarSectionMatches(packet, section).map(mapMatchForUi)
 
   }));
 
@@ -210,6 +310,8 @@ module.exports = {
   buildSnareDiscoveryViewModel,
 
   getSectionMatches,
+
+  getSimilarSectionMatches,
 
   mapMatchForUi,
 
