@@ -154,41 +154,29 @@ function getShellConstruction(doc) {
 
 function getShellThickness(doc) {
 
-  const shellConstruction =
+  const shellConstruction = parseMaybeJson(doc.shellConstruction) || {}
 
-    parseMaybeJson(doc.shellConstruction) ||
-
-    parseMaybeJson(doc.shellConstructionData) ||
-
-    {}
-
-  const shell =
-
-    parseMaybeJson(doc.shell) ||
-
-    parseMaybeJson(doc.shellData) ||
-
-    {}
+  const shell = parseMaybeJson(doc.shell) || {}
 
   const raw =
 
-    doc.shellThickness ??
+    doc.shellThickness ||
 
-    doc.shellThicknessMm ??
+    doc.shellThicknessMm ||
 
-    shellConstruction.shellThicknessMm ??
+    shellConstruction.shellThicknessMm ||
 
-    shellConstruction.thicknessMm ??
+    shell.shellThicknessMm ||
 
-    shell.shellThicknessMm ??
-
-    shell.thicknessMm ??
-
-    doc['SHELL THICKNESS (mm)'] ??
+    doc['SHELL THICKNESS (mm)'] ||
 
     ''
 
-  const num = Number(raw)
+  const normalized = String(raw || '').trim()
+
+  const match = normalized.match(/[\d.]+/)
+
+  const num = match ? Number(match[0]) : Number(raw)
 
   return {
 
