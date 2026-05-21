@@ -1,0 +1,3887 @@
+{
+  "status": "SNARE_ENGINE_BENCHMARK_SUITE_WITH_OVERLAY_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:54:27.800Z",
+  "firestoreWrites": 0,
+  "engineVersion": "legacyprint-snare-engine-v0.1",
+  "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+  "promotedRecordsScored": 366,
+  "overlayAppliedCount": 207,
+  "summary": {
+    "benchmarkCount": 8,
+    "passedBenchmarks": 8,
+    "failedBenchmarks": 0,
+    "totalAssertions": 197,
+    "passedAssertions": 197,
+    "failedAssertions": 0,
+    "assertionPassRate": 100
+  },
+  "results": [
+    {
+      "id": "ludwig-acrolite-aluminum-dry-control",
+      "label": "Ludwig Acrolite should read controlled, sensitive, and drier than brass",
+      "type": "record",
+      "matchedRecords": 2,
+      "passedAssertions": 10,
+      "totalAssertions": 10,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 6.61,
+            "brightness": 6.07,
+            "projection": 5.76,
+            "sustain": 5.62,
+            "warmth": 5.22,
+            "sensitivity": 6.33,
+            "control": 6.49
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 6.61
+            },
+            {
+              "key": "control",
+              "value": 6.49
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.33
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "aluminum",
+                "deltas": {
+                  "sustain": -0.02,
+                  "sensitivity": 0.02,
+                  "control": 0.03
+                }
+              },
+              {
+                "type": "knownDrumDeltas",
+                "id": "ludwig-acrolite-family-preview",
+                "deltas": {
+                  "sustain": -0.03,
+                  "control": 0.04
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "control",
+                "min": 6.25
+              },
+              "pass": true,
+              "actual": 6.49,
+              "expected": "control >= 6.25"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6
+              },
+              "pass": true,
+              "actual": 6.33,
+              "expected": "sensitivity >= 6"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "warmth",
+                "max": 5.7
+              },
+              "pass": true,
+              "actual": 5.22,
+              "expected": "warmth <= 5.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sustain",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.62,
+              "expected": "sustain <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "control",
+                  "sensitivity"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, control, sensitivity",
+              "expected": "top includes any of attack, control, sensitivity"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+          "company": "Ludwig",
+          "model": "Acrolite 6.5x14",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 6.54,
+            "brightness": 6,
+            "projection": 5.9,
+            "sustain": 5.79,
+            "warmth": 5.42,
+            "sensitivity": 6.23,
+            "control": 6.44
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 6.54
+            },
+            {
+              "key": "control",
+              "value": 6.44
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.23
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "aluminum",
+                "deltas": {
+                  "sustain": -0.02,
+                  "sensitivity": 0.02,
+                  "control": 0.03
+                }
+              },
+              {
+                "type": "knownDrumDeltas",
+                "id": "ludwig-acrolite-family-preview",
+                "deltas": {
+                  "sustain": -0.03,
+                  "control": 0.04
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "control",
+                "min": 6.25
+              },
+              "pass": true,
+              "actual": 6.44,
+              "expected": "control >= 6.25"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6
+              },
+              "pass": true,
+              "actual": 6.23,
+              "expected": "sensitivity >= 6"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "warmth",
+                "max": 5.7
+              },
+              "pass": true,
+              "actual": 5.42,
+              "expected": "warmth <= 5.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sustain",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.79,
+              "expected": "sustain <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "control",
+                  "sensitivity"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, control, sensitivity",
+              "expected": "top includes any of attack, control, sensitivity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ludwig-black-beauty-brass-body",
+      "label": "Ludwig Black Beauty should read attack/sustain/brightness without behaving like aluminum",
+      "type": "record",
+      "matchedRecords": 7,
+      "passedAssertions": 35,
+      "totalAssertions": 35,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+          "company": "Ludwig",
+          "model": "Black Beauty 5x14",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 7.07,
+            "brightness": 6.55,
+            "projection": 6.47,
+            "sustain": 6.98,
+            "warmth": 5.72,
+            "sensitivity": 5.87,
+            "control": 5.73
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.07
+            },
+            {
+              "key": "sustain",
+              "value": 6.98
+            },
+            {
+              "key": "brightness",
+              "value": 6.55
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 7.07,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.55,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.73,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, brightness",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+          "company": "Ludwig",
+          "model": "Black Beauty 3.5x14",
+          "size": "14x3.5",
+          "voiceProfile": {
+            "attack": 7.14,
+            "brightness": 6.66,
+            "projection": 6.22,
+            "sustain": 6.62,
+            "warmth": 5.43,
+            "sensitivity": 5.98,
+            "control": 5.83
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.14
+            },
+            {
+              "key": "brightness",
+              "value": 6.66
+            },
+            {
+              "key": "sustain",
+              "value": 6.62
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 7.14,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.62,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.66,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.83,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, brightness, sustain",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e",
+          "company": "Ludwig",
+          "model": "Black Beauty 5x14",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 6.92,
+            "brightness": 6.49,
+            "projection": 6.4,
+            "sustain": 6.91,
+            "warmth": 5.72,
+            "sensitivity": 5.82,
+            "control": 5.68
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 6.92
+            },
+            {
+              "key": "sustain",
+              "value": 6.91
+            },
+            {
+              "key": "brightness",
+              "value": 6.49
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.92,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.91,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.49,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.68,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, brightness",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb417_17e1d094",
+          "company": "Ludwig",
+          "model": "Black Beauty 6.5x14",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 6.84,
+            "brightness": 6.42,
+            "projection": 6.55,
+            "sustain": 7.08,
+            "warmth": 5.91,
+            "sensitivity": 5.72,
+            "control": 5.64
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.08
+            },
+            {
+              "key": "attack",
+              "value": 6.84
+            },
+            {
+              "key": "projection",
+              "value": 6.55
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.84,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 7.08,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.42,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.64,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-8x14_14x8_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb418_58e49a16",
+          "company": "Ludwig",
+          "model": "Black Beauty 8x14",
+          "size": "14x8",
+          "voiceProfile": {
+            "attack": 6.76,
+            "brightness": 6.38,
+            "projection": 6.61,
+            "sustain": 7.24,
+            "warmth": 6.11,
+            "sensitivity": 5.65,
+            "control": 5.6
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.24
+            },
+            {
+              "key": "attack",
+              "value": 6.76
+            },
+            {
+              "key": "projection",
+              "value": 6.61
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.76,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 7.24,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.38,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.6,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8",
+          "company": "Ludwig",
+          "model": "Hammered Black Beauty 5x14",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 6.92,
+            "brightness": 6.49,
+            "projection": 6.4,
+            "sustain": 6.91,
+            "warmth": 5.72,
+            "sensitivity": 5.82,
+            "control": 5.68
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 6.92
+            },
+            {
+              "key": "sustain",
+              "value": 6.91
+            },
+            {
+              "key": "brightness",
+              "value": 6.49
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.92,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.91,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.49,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.68,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, brightness",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_black-beauty_hammered-black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flang_53151aab",
+          "company": "Ludwig",
+          "model": "Hammered Black Beauty 6.5x14",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 6.84,
+            "brightness": 6.42,
+            "projection": 6.55,
+            "sustain": 7.08,
+            "warmth": 5.91,
+            "sensitivity": 5.72,
+            "control": 5.64
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.08
+            },
+            {
+              "key": "attack",
+              "value": 6.84
+            },
+            {
+              "key": "projection",
+              "value": 6.55
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "materialFamilyDeltas",
+                "family": "brass",
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 6.84,
+              "expected": "attack >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.6
+              },
+              "pass": true,
+              "actual": 7.08,
+              "expected": "sustain >= 6.6"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "brightness",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.42,
+              "expected": "brightness >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "control",
+                "max": 6.2
+              },
+              "pass": true,
+              "actual": 5.64,
+              "expected": "control <= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "brightness",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, brightness, projection"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ludwig-legacy-mahogany-warmth",
+      "label": "Ludwig Legacy Mahogany should be warmth/sustain dominant",
+      "type": "record",
+      "matchedRecords": 4,
+      "passedAssertions": 16,
+      "totalAssertions": 16,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5.5x14",
+          "size": "14x5.5",
+          "voiceProfile": {
+            "attack": 5.84,
+            "brightness": 4.8,
+            "projection": 5.53,
+            "sustain": 6.84,
+            "warmth": 7.78,
+            "sensitivity": 6.13,
+            "control": 5.72
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7.78
+            },
+            {
+              "key": "sustain",
+              "value": 6.84
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.13
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 4,
+          "total": 4,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 7.4
+              },
+              "pass": true,
+              "actual": 7.78,
+              "expected": "warmth >= 7.4"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.84,
+              "expected": "sustain >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.1
+              },
+              "pass": true,
+              "actual": 4.8,
+              "expected": "brightness <= 5.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "warmth",
+                  "sustain"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes all of warmth, sustain"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5x14",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 5.84,
+            "brightness": 4.8,
+            "projection": 5.53,
+            "sustain": 6.84,
+            "warmth": 7.78,
+            "sensitivity": 6.13,
+            "control": 5.72
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7.78
+            },
+            {
+              "key": "sustain",
+              "value": 6.84
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.13
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 4,
+          "total": 4,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 7.4
+              },
+              "pass": true,
+              "actual": 7.78,
+              "expected": "warmth >= 7.4"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.84,
+              "expected": "sustain >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.1
+              },
+              "pass": true,
+              "actual": 4.8,
+              "expected": "brightness <= 5.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "warmth",
+                  "sustain"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes all of warmth, sustain"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 6.5x14",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 5.78,
+            "brightness": 4.74,
+            "projection": 5.69,
+            "sustain": 6.99,
+            "warmth": 7.98,
+            "sensitivity": 6.04,
+            "control": 5.74
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7.98
+            },
+            {
+              "key": "sustain",
+              "value": 6.99
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.04
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 4,
+          "total": 4,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 7.4
+              },
+              "pass": true,
+              "actual": 7.98,
+              "expected": "warmth >= 7.4"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.99,
+              "expected": "sustain >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.1
+              },
+              "pass": true,
+              "actual": 4.74,
+              "expected": "brightness <= 5.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "warmth",
+                  "sustain"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes all of warmth, sustain"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 8x14",
+          "size": "14x8",
+          "voiceProfile": {
+            "attack": 5.7,
+            "brightness": 4.7,
+            "projection": 5.75,
+            "sustain": 7.15,
+            "warmth": 8.17,
+            "sensitivity": 5.97,
+            "control": 5.7
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 8.17
+            },
+            {
+              "key": "sustain",
+              "value": 7.15
+            },
+            {
+              "key": "sensitivity",
+              "value": 5.97
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 4,
+          "total": 4,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 7.4
+              },
+              "pass": true,
+              "actual": 8.17,
+              "expected": "warmth >= 7.4"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 7.15,
+              "expected": "sustain >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.1
+              },
+              "pass": true,
+              "actual": 4.7,
+              "expected": "brightness <= 5.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "warmth",
+                  "sustain"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes all of warmth, sustain"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ludwig-classic-maple-balanced-wood",
+      "label": "Ludwig Classic Maple should read balanced warm/sensitive wood, not metal-bright",
+      "type": "record",
+      "matchedRecords": 4,
+      "passedAssertions": 20,
+      "totalAssertions": 20,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+          "company": "Ludwig",
+          "model": "Classic Maple 5.5x14",
+          "size": "14x5.5",
+          "voiceProfile": {
+            "attack": 6.5,
+            "brightness": 5.7,
+            "projection": 5.76,
+            "sustain": 6.39,
+            "warmth": 6.52,
+            "sensitivity": 6.54,
+            "control": 5.76
+          },
+          "topNodes": [
+            {
+              "key": "sensitivity",
+              "value": 6.54
+            },
+            {
+              "key": "warmth",
+              "value": 6.52
+            },
+            {
+              "key": "attack",
+              "value": 6.5
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.3
+              },
+              "pass": true,
+              "actual": 6.52,
+              "expected": "warmth >= 6.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.54,
+              "expected": "sensitivity >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 6
+              },
+              "pass": true,
+              "actual": 5.7,
+              "expected": "brightness <= 6"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "projection",
+                "max": 6.25
+              },
+              "pass": true,
+              "actual": 5.76,
+              "expected": "projection <= 6.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sensitivity",
+                  "sustain",
+                  "attack"
+                ]
+              },
+              "pass": true,
+              "actual": "sensitivity, warmth, attack",
+              "expected": "top includes any of warmth, sensitivity, sustain, attack"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+          "company": "Ludwig",
+          "model": "Classic Maple 5x14",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 6.5,
+            "brightness": 5.7,
+            "projection": 5.76,
+            "sustain": 6.39,
+            "warmth": 6.52,
+            "sensitivity": 6.54,
+            "control": 5.76
+          },
+          "topNodes": [
+            {
+              "key": "sensitivity",
+              "value": 6.54
+            },
+            {
+              "key": "warmth",
+              "value": 6.52
+            },
+            {
+              "key": "attack",
+              "value": 6.5
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.3
+              },
+              "pass": true,
+              "actual": 6.52,
+              "expected": "warmth >= 6.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.54,
+              "expected": "sensitivity >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 6
+              },
+              "pass": true,
+              "actual": 5.7,
+              "expected": "brightness <= 6"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "projection",
+                "max": 6.25
+              },
+              "pass": true,
+              "actual": 5.76,
+              "expected": "projection <= 6.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sensitivity",
+                  "sustain",
+                  "attack"
+                ]
+              },
+              "pass": true,
+              "actual": "sensitivity, warmth, attack",
+              "expected": "top includes any of warmth, sensitivity, sustain, attack"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+          "company": "Ludwig",
+          "model": "Classic Maple 6.5x14",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 6.45,
+            "brightness": 5.63,
+            "projection": 5.91,
+            "sustain": 6.55,
+            "warmth": 6.72,
+            "sensitivity": 6.45,
+            "control": 5.78
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 6.72
+            },
+            {
+              "key": "sustain",
+              "value": 6.55
+            },
+            {
+              "key": "attack",
+              "value": 6.45
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.3
+              },
+              "pass": true,
+              "actual": 6.72,
+              "expected": "warmth >= 6.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.45,
+              "expected": "sensitivity >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 6
+              },
+              "pass": true,
+              "actual": 5.63,
+              "expected": "brightness <= 6"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "projection",
+                "max": 6.25
+              },
+              "pass": true,
+              "actual": 5.91,
+              "expected": "projection <= 6.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sensitivity",
+                  "sustain",
+                  "attack"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, attack",
+              "expected": "top includes any of warmth, sensitivity, sustain, attack"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17",
+          "company": "Ludwig",
+          "model": "Classic Maple 8x14",
+          "size": "14x8",
+          "voiceProfile": {
+            "attack": 6.37,
+            "brightness": 5.59,
+            "projection": 5.98,
+            "sustain": 6.71,
+            "warmth": 6.91,
+            "sensitivity": 6.38,
+            "control": 5.74
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 6.91
+            },
+            {
+              "key": "sustain",
+              "value": 6.71
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.38
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.3
+              },
+              "pass": true,
+              "actual": 6.91,
+              "expected": "warmth >= 6.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.38,
+              "expected": "sensitivity >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 6
+              },
+              "pass": true,
+              "actual": 5.59,
+              "expected": "brightness <= 6"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "projection",
+                "max": 6.25
+              },
+              "pass": true,
+              "actual": 5.98,
+              "expected": "projection <= 6.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sensitivity",
+                  "sustain",
+                  "attack"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes any of warmth, sensitivity, sustain, attack"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ahead-bell-brass-strong-metal",
+      "label": "AHEAD bell brass should read strong attack/sustain/projection with lower sensitivity than maple",
+      "type": "record",
+      "matchedRecords": 15,
+      "passedAssertions": 75,
+      "totalAssertions": 75,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.26,
+            "brightness": 6.4,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.73,
+            "control": 6.42
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.26
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.26,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.73,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.26,
+            "brightness": 6.4,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.73,
+            "control": 6.42
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.26
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.26,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.73,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+          "size": "13x6",
+          "voiceProfile": {
+            "attack": 7.38,
+            "brightness": 6.51,
+            "projection": 6.88,
+            "sustain": 7.39,
+            "warmth": 6.71,
+            "sensitivity": 5.87,
+            "control": 6.45
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.39
+            },
+            {
+              "key": "attack",
+              "value": 7.38
+            },
+            {
+              "key": "projection",
+              "value": 6.88
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.38,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.39,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.88,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.87,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.26,
+            "brightness": 6.4,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.73,
+            "control": 6.42
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.26
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.26,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.73,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.26,
+            "brightness": 6.4,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.73,
+            "control": 6.42
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.26
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.26,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.73,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.29,
+            "brightness": 6.41,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.68,
+            "control": 6.46
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.29
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.29,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.68,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "voiceProfile": {
+            "attack": 7.41,
+            "brightness": 6.52,
+            "projection": 6.88,
+            "sustain": 7.39,
+            "warmth": 6.71,
+            "sensitivity": 5.82,
+            "control": 6.49
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.41
+            },
+            {
+              "key": "sustain",
+              "value": 7.39
+            },
+            {
+              "key": "projection",
+              "value": 6.88
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.41,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.39,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.88,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.82,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.29,
+            "brightness": 6.41,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.68,
+            "control": 6.46
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.29
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.29,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.68,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+          "company": "AHEAD",
+          "model": "Bright Polished 3mm Bell Brass 13x6",
+          "size": "13x6",
+          "voiceProfile": {
+            "attack": 7.38,
+            "brightness": 6.51,
+            "projection": 6.88,
+            "sustain": 7.39,
+            "warmth": 6.71,
+            "sensitivity": 5.87,
+            "control": 6.45
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.39
+            },
+            {
+              "key": "attack",
+              "value": 7.38
+            },
+            {
+              "key": "projection",
+              "value": 6.88
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.38,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.39,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.88,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.87,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+          "company": "AHEAD",
+          "model": "Bright Polished 3mm Bell Brass 14x6",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.29,
+            "brightness": 6.41,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.68,
+            "control": 6.46
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.29
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.29,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.68,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+          "company": "AHEAD",
+          "model": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+          "size": "14x4",
+          "voiceProfile": {
+            "attack": 7.47,
+            "brightness": 6.56,
+            "projection": 6.76,
+            "sustain": 7.11,
+            "warmth": 6.49,
+            "sensitivity": 5.93,
+            "control": 6.57
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.47
+            },
+            {
+              "key": "sustain",
+              "value": 7.11
+            },
+            {
+              "key": "projection",
+              "value": 6.76
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.47,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.11,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.76,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.93,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+          "company": "AHEAD",
+          "model": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+          "size": "14x4",
+          "voiceProfile": {
+            "attack": 7.5,
+            "brightness": 6.57,
+            "projection": 6.76,
+            "sustain": 7.11,
+            "warmth": 6.49,
+            "sensitivity": 5.88,
+            "control": 6.6
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.5
+            },
+            {
+              "key": "sustain",
+              "value": 7.11
+            },
+            {
+              "key": "projection",
+              "value": 6.76
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.5,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.11,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.76,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.88,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+          "company": "AHEAD",
+          "model": "Bright Polished Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "voiceProfile": {
+            "attack": 7.41,
+            "brightness": 6.52,
+            "projection": 6.88,
+            "sustain": 7.39,
+            "warmth": 6.71,
+            "sensitivity": 5.82,
+            "control": 6.49
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.41
+            },
+            {
+              "key": "sustain",
+              "value": 7.39
+            },
+            {
+              "key": "projection",
+              "value": 6.88
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.41,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.39,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.88,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.82,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, sustain, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+          "company": "AHEAD",
+          "model": "Bright Polished Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.26,
+            "brightness": 6.4,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.73,
+            "control": 6.42
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.26
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.26,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.73,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        },
+        {
+          "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+          "company": "AHEAD",
+          "model": "Polished Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "voiceProfile": {
+            "attack": 7.29,
+            "brightness": 6.41,
+            "projection": 6.98,
+            "sustain": 7.45,
+            "warmth": 6.86,
+            "sensitivity": 5.68,
+            "control": 6.46
+          },
+          "topNodes": [
+            {
+              "key": "sustain",
+              "value": 7.45
+            },
+            {
+              "key": "attack",
+              "value": 7.29
+            },
+            {
+              "key": "projection",
+              "value": 6.98
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.1
+              },
+              "pass": true,
+              "actual": 7.29,
+              "expected": "attack >= 7.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 7
+              },
+              "pass": true,
+              "actual": 7.45,
+              "expected": "sustain >= 7"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.7
+              },
+              "pass": true,
+              "actual": 6.98,
+              "expected": "projection >= 6.7"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 6.1
+              },
+              "pass": true,
+              "actual": 5.68,
+              "expected": "sensitivity <= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "attack",
+                  "sustain",
+                  "projection"
+                ]
+              },
+              "pass": true,
+              "actual": "sustain, attack, projection",
+              "expected": "top includes any of attack, sustain, projection"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dw-true-cast-bronze-mass-control",
+      "label": "DW True-Cast Bell Bronze should read attack/projection/control, not soft/warm wood",
+      "type": "record",
+      "matchedRecords": 4,
+      "passedAssertions": 20,
+      "totalAssertions": 20,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4",
+          "voiceProfile": {
+            "attack": 7.73,
+            "brightness": 6.4,
+            "projection": 6.95,
+            "sustain": 5.94,
+            "warmth": 5.54,
+            "sensitivity": 4.96,
+            "control": 7.25
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.73
+            },
+            {
+              "key": "control",
+              "value": 7.25
+            },
+            {
+              "key": "projection",
+              "value": 6.95
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "hoopFamilyDeltas",
+                "family": "dieCast",
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.3
+              },
+              "pass": true,
+              "actual": 7.73,
+              "expected": "attack >= 7.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 6.95,
+              "expected": "projection >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "control",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.25,
+              "expected": "control >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 5.25
+              },
+              "pass": true,
+              "actual": 4.96,
+              "expected": "sensitivity <= 5.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "attack",
+                  "control"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, control, projection",
+              "expected": "top includes all of attack, control"
+            }
+          ]
+        },
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x5.5",
+          "size": "14x5.5",
+          "voiceProfile": {
+            "attack": 7.6,
+            "brightness": 6.31,
+            "projection": 7.03,
+            "sustain": 6.11,
+            "warmth": 5.71,
+            "sensitivity": 4.86,
+            "control": 7.15
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.6
+            },
+            {
+              "key": "control",
+              "value": 7.15
+            },
+            {
+              "key": "projection",
+              "value": 7.03
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "hoopFamilyDeltas",
+                "family": "dieCast",
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.3
+              },
+              "pass": true,
+              "actual": 7.6,
+              "expected": "attack >= 7.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.03,
+              "expected": "projection >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "control",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.15,
+              "expected": "control >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 5.25
+              },
+              "pass": true,
+              "actual": 4.86,
+              "expected": "sensitivity <= 5.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "attack",
+                  "control"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, control, projection",
+              "expected": "top includes all of attack, control"
+            }
+          ]
+        },
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x6.5",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 7.52,
+            "brightness": 6.24,
+            "projection": 7.17,
+            "sustain": 6.29,
+            "warmth": 5.91,
+            "sensitivity": 4.76,
+            "control": 7.1
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.52
+            },
+            {
+              "key": "projection",
+              "value": 7.17
+            },
+            {
+              "key": "control",
+              "value": 7.1
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "hoopFamilyDeltas",
+                "family": "dieCast",
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.3
+              },
+              "pass": true,
+              "actual": 7.52,
+              "expected": "attack >= 7.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.17,
+              "expected": "projection >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "control",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.1,
+              "expected": "control >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 5.25
+              },
+              "pass": true,
+              "actual": 4.76,
+              "expected": "sensitivity <= 5.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "attack",
+                  "control"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, projection, control",
+              "expected": "top includes all of attack, control"
+            }
+          ]
+        },
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x8",
+          "size": "14x8",
+          "voiceProfile": {
+            "attack": 7.44,
+            "brightness": 6.21,
+            "projection": 7.24,
+            "sustain": 6.44,
+            "warmth": 6.11,
+            "sensitivity": 4.69,
+            "control": 7.06
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.44
+            },
+            {
+              "key": "projection",
+              "value": 7.24
+            },
+            {
+              "key": "control",
+              "value": 7.06
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": true,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": [
+              {
+                "type": "hoopFamilyDeltas",
+                "family": "dieCast",
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            ]
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "attack",
+                "min": 7.3
+              },
+              "pass": true,
+              "actual": 7.44,
+              "expected": "attack >= 7.3"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "projection",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.24,
+              "expected": "projection >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "control",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.06,
+              "expected": "control >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "sensitivity",
+                "max": 5.25
+              },
+              "pass": true,
+              "actual": 4.69,
+              "expected": "sensitivity <= 5.25"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAll",
+                "nodes": [
+                  "attack",
+                  "control"
+                ]
+              },
+              "pass": true,
+              "actual": "attack, projection, control",
+              "expected": "top includes all of attack, control"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gretsch-brooklyn-maple-warmth",
+      "label": "Gretsch Brooklyn maple should read warm/sustain/sensitive, not steel-bright",
+      "type": "record",
+      "matchedRecords": 4,
+      "passedAssertions": 20,
+      "totalAssertions": 20,
+      "pass": true,
+      "itemResults": [
+        {
+          "id": "gretsch_brooklyn_brooklyn-snare_14x5-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_f5cb0d30",
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5.5",
+          "voiceProfile": {
+            "attack": 6.28,
+            "brightness": 5.33,
+            "projection": 5.73,
+            "sustain": 6.39,
+            "warmth": 7,
+            "sensitivity": 6.35,
+            "control": 6.06
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7
+            },
+            {
+              "key": "sustain",
+              "value": 6.39
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.35
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7,
+              "expected": "warmth >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.39,
+              "expected": "sustain >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.1
+              },
+              "pass": true,
+              "actual": 6.35,
+              "expected": "sensitivity >= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.6
+              },
+              "pass": true,
+              "actual": 5.33,
+              "expected": "brightness <= 5.6"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sustain",
+                  "sensitivity"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes any of warmth, sustain, sensitivity"
+            }
+          ]
+        },
+        {
+          "id": "gretsch_brooklyn_brooklyn-snare_14x5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_3fecbb47",
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5",
+          "voiceProfile": {
+            "attack": 6.28,
+            "brightness": 5.33,
+            "projection": 5.73,
+            "sustain": 6.39,
+            "warmth": 7,
+            "sensitivity": 6.35,
+            "control": 6.06
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7
+            },
+            {
+              "key": "sustain",
+              "value": 6.39
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.35
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7,
+              "expected": "warmth >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.39,
+              "expected": "sustain >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.1
+              },
+              "pass": true,
+              "actual": 6.35,
+              "expected": "sensitivity >= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.6
+              },
+              "pass": true,
+              "actual": 5.33,
+              "expected": "brightness <= 5.6"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sustain",
+                  "sensitivity"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes any of warmth, sustain, sensitivity"
+            }
+          ]
+        },
+        {
+          "id": "gretsch_brooklyn_brooklyn-snare_14x6-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_1c0dea43",
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x6.5",
+          "voiceProfile": {
+            "attack": 6.2,
+            "brightness": 5.27,
+            "projection": 5.88,
+            "sustain": 6.56,
+            "warmth": 7.2,
+            "sensitivity": 6.25,
+            "control": 6.01
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7.2
+            },
+            {
+              "key": "sustain",
+              "value": 6.56
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.25
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.2,
+              "expected": "warmth >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.56,
+              "expected": "sustain >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.1
+              },
+              "pass": true,
+              "actual": 6.25,
+              "expected": "sensitivity >= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.6
+              },
+              "pass": true,
+              "actual": 5.27,
+              "expected": "brightness <= 5.6"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sustain",
+                  "sensitivity"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes any of warmth, sustain, sensitivity"
+            }
+          ]
+        },
+        {
+          "id": "gretsch_brooklyn_brooklyn-snare_14x8_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_8060da8c",
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x8",
+          "voiceProfile": {
+            "attack": 6.12,
+            "brightness": 5.23,
+            "projection": 5.94,
+            "sustain": 6.72,
+            "warmth": 7.4,
+            "sensitivity": 6.18,
+            "control": 5.97
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7.4
+            },
+            {
+              "key": "sustain",
+              "value": 6.72
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.18
+            }
+          ],
+          "calibrationOverlay": {
+            "applied": false,
+            "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+            "appliedChanges": []
+          },
+          "passed": 5,
+          "total": 5,
+          "pass": true,
+          "expectationResults": [
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "warmth",
+                "min": 6.8
+              },
+              "pass": true,
+              "actual": 7.4,
+              "expected": "warmth >= 6.8"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sustain",
+                "min": 6.2
+              },
+              "pass": true,
+              "actual": 6.72,
+              "expected": "sustain >= 6.2"
+            },
+            {
+              "expectation": {
+                "type": "nodeAtLeast",
+                "node": "sensitivity",
+                "min": 6.1
+              },
+              "pass": true,
+              "actual": 6.18,
+              "expected": "sensitivity >= 6.1"
+            },
+            {
+              "expectation": {
+                "type": "nodeBelow",
+                "node": "brightness",
+                "max": 5.6
+              },
+              "pass": true,
+              "actual": 5.23,
+              "expected": "brightness <= 5.6"
+            },
+            {
+              "expectation": {
+                "type": "topIncludesAny",
+                "nodes": [
+                  "warmth",
+                  "sustain",
+                  "sensitivity"
+                ]
+              },
+              "pass": true,
+              "actual": "warmth, sustain, sensitivity",
+              "expected": "top includes any of warmth, sustain, sensitivity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projection-not-overdominant-after-overlay",
+      "label": "Projection should not become over-dominant after overlay",
+      "type": "aggregate",
+      "passedAssertions": 1,
+      "totalAssertions": 1,
+      "pass": true,
+      "expectationResults": [
+        {
+          "expectation": {
+            "type": "projectionTop3BelowRatio",
+            "maxRatio": 0.5
+          },
+          "pass": true,
+          "actual": "118/366 (32.24%)",
+          "expected": "projection top-3 ratio <= 0.5"
+        }
+      ]
+    }
+  ]
+}
