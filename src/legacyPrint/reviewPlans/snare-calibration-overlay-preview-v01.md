@@ -1,6 +1,6 @@
 # LegacyPrint Snare Calibration Overlay Preview v0.1
 
-Generated: 2026-05-21T10:52:36.440Z
+Generated: 2026-05-21T10:53:35.063Z
 
 - Firestore writes: 0
 - Overlay version: snare-calibration-overlay-v0.1-local-preview
