@@ -369,12 +369,12 @@
       "lineSeriesIncludes": [
         "Starclassic"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.tama.com/eu/products/snare_drums/starclassic_performer_wb_snare.html",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Tama Starclassic stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Tama Starclassic group contains 5 candidates across Bubinga, Bubinga Elite, and Walnut/Birch records. Sources confirm Starclassic model families/pages, but current evidence does not confirm exact stock batter and reso/snare-side head models consistently across all records. Keep DRAFT until exact stock heads are source-confirmed. Split by era/material if stock heads vary between Bubinga catalog-era records and Walnut/Birch records."
     },
     {
       "ruleKey": "tama-star-reserve-stock-heads-draft",
