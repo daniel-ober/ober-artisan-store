@@ -5297,3 +5297,52 @@
 
 }
 
+
+/* =========================================================
+
+   REFERENCE LIST VISIBILITY FIX
+
+   ========================================================= */
+
+.vp-shell.vp-mode-reference .vp-left-panel .vp-mode-content {
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  min-height: 0 !important;
+
+  overflow: hidden !important;
+
+}
+
+.vp-shell.vp-mode-reference .vp-left-panel .vp-reference-stack {
+
+  display: grid !important;
+
+  grid-auto-rows: minmax(50px, auto) !important;
+
+  gap: 7px !important;
+
+  flex: 1 1 auto !important;
+
+  min-height: 150px !important;
+
+  max-height: none !important;
+
+  overflow-y: auto !important;
+
+  overflow-x: hidden !important;
+
+  padding-right: 4px !important;
+
+  margin-right: -4px !important;
+
+}
+
+.vp-shell.vp-mode-reference .vp-left-panel .vp-helper-card {
+
+  flex: 0 0 auto !important;
+
+}
+
