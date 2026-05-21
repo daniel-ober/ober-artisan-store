@@ -131,6 +131,14 @@ const remainingHeadAndProduction = nearlyPassable.filter((row) => {
 
 });
 
+const stockHeadExactWriteCount =
+
+  readJson('src/legacyPrint/reviewPlans/stock-head-exact-source-backed-write-confirmation.json', {})?.summary?.actualWriteCount || 0;
+
+const ludwigHeadOnlyWriteCount =
+
+  readJson('src/legacyPrint/reviewPlans/ludwig-head-only-exact-head-write-confirmation.json', {})?.summary?.actualWriteCount || 0;
+
 const completedWrites = {
 
   metalEdgeFallbackWrites:
@@ -141,9 +149,19 @@ const completedWrites = {
 
     readJson('src/legacyPrint/reviewPlans/production-status-only-stock-readiness-write-confirmation.json', {})?.summary?.actualWriteCount || 0,
 
-  stockHeadExactWrites:
+  stockHeadExactWrites: stockHeadExactWriteCount,
 
-    readJson('src/legacyPrint/reviewPlans/stock-head-exact-source-backed-write-confirmation.json', {})?.summary?.actualWriteCount || 0
+  ludwigHeadOnlyExactWrites: ludwigHeadOnlyWriteCount,
+
+  totalControlledWrites:
+
+    (readJson('src/legacyPrint/reviewPlans/metal-edge-fallback-firestore-write-confirmation.json', {})?.summary?.actualWriteCount || 0) +
+
+    (readJson('src/legacyPrint/reviewPlans/production-status-only-stock-readiness-write-confirmation.json', {})?.summary?.actualWriteCount || 0) +
+
+    stockHeadExactWriteCount +
+
+    ludwigHeadOnlyWriteCount
 
 };
 
@@ -286,6 +304,8 @@ const lines = [
   `- Production-status writes: ${completedWrites.productionStatusWrites}`,
 
   `- Exact source-backed stock-head writes: ${completedWrites.stockHeadExactWrites}`,
+  `- Ludwig head-only exact writes: ${completedWrites.ludwigHeadOnlyExactWrites}`,
+  `- Total controlled writes: ${completedWrites.totalControlledWrites}`,
 
   '',
 

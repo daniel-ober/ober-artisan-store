@@ -1,0 +1,42 @@
+{
+  "status": "REMAINING_PRODUCTION_STATUS_ONLY_PATCH_PLAN_REQUIRES_APPROVAL",
+  "generatedAt": "2026-05-21T09:45:09.128Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/remaining-production-status-only-review-packet.json",
+  "collectionName": "snareReferenceDrums",
+  "approvedForFirestoreWrite": false,
+  "requiredEnvApproval": "LEGACYPRINT_APPROVE_FIRESTORE_WRITE=remaining-production-status-only-1",
+  "summary": {
+    "patchCount": 1,
+    "firestoreWritesIfApproved": 1,
+    "firestoreWritesPerformed": 0
+  },
+  "safetyRules": [
+    "No Firestore writes are performed by this plan.",
+    "Production status must be manually approved before write.",
+    "This plan does not modify stock heads, shell fields, hardware, or source fields."
+  ],
+  "patches": [
+    {
+      "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+      "label": "Mapex — BP Design Lab — Equinox — 14x5",
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "modelName": "Equinox",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+      "sourceConfidence": "High",
+      "proposedProductionStatus": "YES",
+      "reviewDecision": "PRODUCTION_STATUS_ONLY_REQUIRES_MANUAL_APPROVAL",
+      "approvedForFirestoreWrite": false,
+      "updates": {
+        "productionStatus": "YES",
+        "productionStatusConfidence": "Fallback / Source-page reviewed",
+        "productionStatusFallbackApplied": true,
+        "productionStatusFallbackKey": "REMAINING_PRODUCTION_STATUS_ONLY_REVIEW",
+        "productionStatusFallbackReason": "Production status was the only remaining stock-readiness blocker and requires source/manual approval before write.",
+        "productionStatusNeedsVerification": true,
+        "legacyPrintStockReadinessUpdateSource": "remaining-production-status-only-patch-plan.json",
+        "legacyPrintStockReadinessUpdateType": "REMAINING_PRODUCTION_STATUS_ONLY_PATCH"
+      }
+    }
+  ]
+}
