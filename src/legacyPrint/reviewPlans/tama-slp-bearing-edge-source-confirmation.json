@@ -1,0 +1,122 @@
+{
+  "generatedAt": "2026-05-21T07:27:42.093Z",
+  "sourceReviewPacket": "src/legacyPrint/reviewPlans/tama-slp-bearing-edge-review-packet.json",
+  "status": "TAMA_SLP_BEARING_EDGE_PARTIAL_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 9,
+    "officialSourceConfirmedCandidateCount": 0,
+    "dealerSourceConfirmedCandidateCount": 1,
+    "skippedCandidateCount": 9,
+    "groupCount": 5
+  },
+  "officialSourceReview": {
+    "sourceUrls": [
+      "https://www.tama.com/usa/products/search/snare_drums/list/"
+    ],
+    "result": "Official Tama S.L.P. pages confirm model identity and shell construction, but this pass did not find exact bearing-edge geometry language for the reviewed wood-shell S.L.P. candidates.",
+    "approvalReady": false
+  },
+  "dealerSourceNotes": [
+    {
+      "model": "S.L.P. G-Bubinga LGB146 14x6",
+      "sourceUrl": "https://memphisdrumshop.com/products/tama-14x6-slp-g-bubinga-snare-drum-with-black-nickel-hardware-lgb146nqb",
+      "confirmedBearingEdge": {
+        "batterSideProfile": "45-degree bearing edge",
+        "snareSideProfile": "45-degree bearing edge",
+        "roundover": "unknown",
+        "evidenceLevel": "dealerSourceConfirmed",
+        "confidence": "medium",
+        "notes": "Dealer listing states 45-degree bearing edges. Not promoted in this pass because official Tama/catalog confirmation was not captured."
+      }
+    }
+  ],
+  "blockedGroups": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "High",
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Maple LGM137 13x7",
+        "S.L.P. G-Maple LGM146 14x6",
+        "S.L.P. Classic Maple LMP1455 14x5.5",
+        "S.L.P. Studio Maple LMP1465F 14x6.5"
+      ],
+      "skipReason": "No official Tama/catalog bearing-edge geometry confirmation captured in this pass."
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Bubinga",
+      "count": 2,
+      "sourceConfidence": [
+        "High",
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Bubinga LGB146 14x6",
+        "S.L.P. Mod Bubinga LBU127 12x7"
+      ],
+      "skipReason": "No official Tama/catalog bearing-edge geometry confirmation captured in this pass."
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Walnut LGW1465 14x6.5"
+      ],
+      "skipReason": "No official Tama/catalog bearing-edge geometry confirmation captured in this pass."
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Birch",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. Duo Birch LBH1410L 14x10"
+      ],
+      "skipReason": "No official Tama/catalog bearing-edge geometry confirmation captured in this pass."
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Spruce",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. Fat Spruce LSP146 14x6"
+      ],
+      "skipReason": "No official Tama/catalog bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan for Tama S.L.P. wood-shell candidates until official Tama, catalog, manual, or approved dealer-source policy supports exact bearing-edge geometry."
+}
