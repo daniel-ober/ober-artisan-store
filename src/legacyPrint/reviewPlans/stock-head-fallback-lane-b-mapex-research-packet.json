@@ -1,0 +1,213 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_MAPEX_RESEARCH_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:50:09.562Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-remaining-company-priority-packet.json",
+  "companyName": "Mapex",
+  "reviewScope": "Lane B Mapex company/OEM stock-head fallback research packet.",
+  "noFirestoreWrites": true,
+  "policyPosition": "conservative",
+  "summary": {
+    "candidateCount": 21,
+    "lineGroupCount": 3,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 21,
+    "noFirestoreWrites": true
+  },
+  "companyGroup": {
+    "companyName": "Mapex",
+    "candidateCount": 21,
+    "lineGroupCount": 3,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 21,
+    "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+    "noFirestoreWrites": true,
+    "lineGroups": [
+      {
+        "lineSeries": "Black Panther Archive / Catalog Era",
+        "candidateCount": 18,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 18,
+        "sampleModels": [
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+            "modelName": "Brass Master 10x5.5",
+            "diameter": "10",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+            "modelName": "Brass Master 12x5.5",
+            "diameter": "12",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+            "modelName": "Brass Master 13x3.5",
+            "diameter": "13",
+            "depth": "3.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+            "modelName": "Brass Master 13x6",
+            "diameter": "13",
+            "depth": "6",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+            "modelName": "Brass Master 14x3.5",
+            "diameter": "14",
+            "depth": "3.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+            "modelName": "Brass Master 14x5",
+            "diameter": "14",
+            "depth": "5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+            "modelName": "Brass Master 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+            "modelName": "Brass Master 14x6",
+            "diameter": "14",
+            "depth": "6",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+            "modelName": "Stainless Steel 12x5.5",
+            "diameter": "12",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+            "modelName": "Stainless Steel 13x3.5",
+            "diameter": "13",
+            "depth": "3.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Black Panther Archive / Unresolved Variant",
+        "candidateCount": 2,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 2,
+        "sampleModels": [
+          {
+            "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+            "modelName": "Unresolved Brass Variant 5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+            "modelName": "Unresolved Steel Variant 4",
+            "diameter": "12",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Signature / Artist",
+        "candidateCount": 1,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 1,
+        "sampleModels": [
+          {
+            "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+            "modelName": "Matt Halpern Wraith",
+            "diameter": "14",
+            "depth": "6",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      }
+    ]
+  },
+  "researchRules": [
+    "Search for official Mapex product pages, archived Mapex pages, Mapex catalogs, Mapex manuals, or OEM-confirmed sources.",
+    "Do not approve a fallback rule from third-party retailer/spec pages alone.",
+    "A fallback rule requires both stock batter head and stock resonant/snare-side head confirmation.",
+    "If evidence only applies to one Mapex line or era, keep the decision line-level or model-level rather than company-wide."
+  ],
+  "decisionTemplate": {
+    "companyName": "Mapex",
+    "approvedCompanyWideFallback": false,
+    "approvedLineLevelFallbackRules": [],
+    "blockedLineGroups": [],
+    "sourceEvidenceUrls": [],
+    "decisionNotes": ""
+  },
+  "nextRecommendedStep": {
+    "task": "Review Mapex official/OEM evidence for each listed line group and create a conservative decision file.",
+    "expectedDecisionFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-mapex-research-decisions.json",
+    "constraint": "No Firestore writes. Keep fallback-head records separate from source-confirmed full stock pass."
+  }
+}
