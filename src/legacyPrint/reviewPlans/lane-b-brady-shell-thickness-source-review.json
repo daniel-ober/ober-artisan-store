@@ -1,0 +1,1065 @@
+{
+  "generatedAt": "2026-05-21T08:00:16.355Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-b-brady-shell-thickness-review-packet.json",
+  "status": "LANE_B_BRADY_SHELL_THICKNESS_SOURCE_REVIEW_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Brady Drum Company",
+    "reviewedCandidateCount": 50,
+    "reviewedGroupCount": 11,
+    "sourceConfirmedThicknessCandidateCount": 0,
+    "sourceConfirmedThicknessGroupCount": 0,
+    "blockedCandidateCount": 50,
+    "blockedGroupCount": 11,
+    "sourceUrlsReviewed": [
+      "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    ],
+    "reviewConclusion": "Brady Lane B records remain blocked until shell thickness is explicitly confirmed by source or a controlled Brady thickness fallback policy is approved."
+  },
+  "sourceConfirmedThicknessGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Marri",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 7,
+      "models": [
+        "Marri Ply Snare 10x5",
+        "Marri Ply Snare 12x5",
+        "Marri Ply Snare 13x5.5",
+        "Marri Ply Snare 14x5.5",
+        "Marri Ply Snare 14x6.5",
+        "Marri Ply Snare 14x8",
+        "Marri Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-10x5_10x5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_8836e84c",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 10x5 — 10x5",
+          "modelName": "Marri Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-12x5_12x5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_910cf005",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 12x5 — 12x5",
+          "modelName": "Marri Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-13x5-5_13x5-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_6d851fd6",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Marri Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-14x5-5_14x5-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_1b0af096",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Marri Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-14x6-5_14x6-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_9755e9c5",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Marri Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-14x8_14x8_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_9302fafc",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 14x8 — 14x8",
+          "modelName": "Marri Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_marri-ply-snare-16x6-5_16x6-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_c536b9fa",
+          "label": "Brady Drum Company — Ply Shell — Marri Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Marri Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Tasmanian Blackwood",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 7,
+      "models": [
+        "Tasmanian Blackwood Ply Snare 10x5",
+        "Tasmanian Blackwood Ply Snare 12x5",
+        "Tasmanian Blackwood Ply Snare 13x5.5",
+        "Tasmanian Blackwood Ply Snare 14x5.5",
+        "Tasmanian Blackwood Ply Snare 14x6.5",
+        "Tasmanian Blackwood Ply Snare 14x8",
+        "Tasmanian Blackwood Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-10x5_10x5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_75b335c9",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 10x5 — 10x5",
+          "modelName": "Tasmanian Blackwood Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-12x5_12x5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_75cb62d0",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 12x5 — 12x5",
+          "modelName": "Tasmanian Blackwood Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-13x5-5_13x5-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_cab2f5d0",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Tasmanian Blackwood Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-14x5-5_14x5-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_2bd4b854",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Tasmanian Blackwood Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-14x6-5_14x6-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_bf3a1224",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Tasmanian Blackwood Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-14x8_14x8_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_f977f322",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 14x8 — 14x8",
+          "modelName": "Tasmanian Blackwood Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-16x6-5_16x6-5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-_065bbcae",
+          "label": "Brady Drum Company — Ply Shell — Tasmanian Blackwood Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Tasmanian Blackwood Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Rose Gum",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Low",
+      "count": 7,
+      "models": [
+        "Australian Rose Gum Ply Snare 10x5",
+        "Australian Rose Gum Ply Snare 12x5",
+        "Australian Rose Gum Ply Snare 13x5.5",
+        "Australian Rose Gum Ply Snare 14x5.5",
+        "Australian Rose Gum Ply Snare 14x6.5",
+        "Australian Rose Gum Ply Snare 14x8",
+        "Australian Rose Gum Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-10x5_10x5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_fcdeb7d0",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 10x5 — 10x5",
+          "modelName": "Australian Rose Gum Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-12x5_12x5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_7576b11d",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 12x5 — 12x5",
+          "modelName": "Australian Rose Gum Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-13x5-5_13x5-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_ea5be61e",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Australian Rose Gum Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-14x5-5_14x5-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_1c671eca",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Australian Rose Gum Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-14x6-5_14x6-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_7da1e76d",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Australian Rose Gum Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-14x8_14x8_ply_rose-gum_45-bearing-edges_1-5mm-proper-snare-be_ab87aef6",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 14x8 — 14x8",
+          "modelName": "Australian Rose Gum Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_australian-rose-gum-ply-snare-16x6-5_16x6-5_ply_rose-gum_45-bearing-edges_1-5mm-proper-snar_f7be8ad8",
+          "label": "Brady Drum Company — Ply Shell — Australian Rose Gum Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Australian Rose Gum Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Rose Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Sassafras",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Low",
+      "count": 7,
+      "models": [
+        "Blackheart Sassafras Ply Snare 10x5",
+        "Blackheart Sassafras Ply Snare 12x5",
+        "Blackheart Sassafras Ply Snare 13x5.5",
+        "Blackheart Sassafras Ply Snare 14x5.5",
+        "Blackheart Sassafras Ply Snare 14x6.5",
+        "Blackheart Sassafras Ply Snare 14x8",
+        "Blackheart Sassafras Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-10x5_10x5_ply_sassafras_45-bearing-edges_1-5mm-proper-snare-_840ae20e",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 10x5 — 10x5",
+          "modelName": "Blackheart Sassafras Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-12x5_12x5_ply_sassafras_45-bearing-edges_1-5mm-proper-snare-_c2bf44a6",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 12x5 — 12x5",
+          "modelName": "Blackheart Sassafras Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-13x5-5_13x5-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_ae750c9c",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Blackheart Sassafras Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-14x5-5_14x5-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_4dada79d",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Blackheart Sassafras Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-14x6-5_14x6-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_71638253",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Blackheart Sassafras Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-14x8_14x8_ply_sassafras_45-bearing-edges_1-5mm-proper-snare-_77a2a0e7",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 14x8 — 14x8",
+          "modelName": "Blackheart Sassafras Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_blackheart-sassafras-ply-snare-16x6-5_16x6-5_ply_sassafras_45-bearing-edges_1-5mm-proper-sn_45d860c1",
+          "label": "Brady Drum Company — Ply Shell — Blackheart Sassafras Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Blackheart Sassafras Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Sassafras\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Gum",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Low",
+      "count": 7,
+      "models": [
+        "Spotted Gum Ply Snare 10x5",
+        "Spotted Gum Ply Snare 12x5",
+        "Spotted Gum Ply Snare 13x5.5",
+        "Spotted Gum Ply Snare 14x5.5",
+        "Spotted Gum Ply Snare 14x6.5",
+        "Spotted Gum Ply Snare 14x8",
+        "Spotted Gum Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-10x5_10x5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_ffd106bf",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 10x5 — 10x5",
+          "modelName": "Spotted Gum Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-12x5_12x5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_c599cd4a",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 12x5 — 12x5",
+          "modelName": "Spotted Gum Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-13x5-5_13x5-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_ea55849e",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Spotted Gum Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-14x5-5_14x5-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_82e834bd",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Spotted Gum Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-14x6-5_14x6-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_abdd69bd",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Spotted Gum Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-14x8_14x8_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_69003309",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 14x8 — 14x8",
+          "modelName": "Spotted Gum Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_spotted-gum-ply-snare-16x6-5_16x6-5_ply_gum_45-bearing-edges_1-5mm-proper-snare-bed_natural_58a1ff6a",
+          "label": "Brady Drum Company — Ply Shell — Spotted Gum Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Spotted Gum Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Wandoo",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Low",
+      "count": 7,
+      "models": [
+        "Wandoo Ply Snare 10x5",
+        "Wandoo Ply Snare 12x5",
+        "Wandoo Ply Snare 13x5.5",
+        "Wandoo Ply Snare 14x5.5",
+        "Wandoo Ply Snare 14x6.5",
+        "Wandoo Ply Snare 14x8",
+        "Wandoo Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-10x5_10x5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_75531621",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 10x5 — 10x5",
+          "modelName": "Wandoo Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-12x5_12x5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_a0f0a8b0",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 12x5 — 12x5",
+          "modelName": "Wandoo Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-13x5-5_13x5-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_b2a7af96",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Wandoo Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-14x5-5_14x5-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_9453d8ee",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Wandoo Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-14x6-5_14x6-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_7ad888a7",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Wandoo Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-14x8_14x8_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_ff859858",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 14x8 — 14x8",
+          "modelName": "Wandoo Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_wandoo-ply-snare-16x6-5_16x6-5_ply_wandoo_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_a807bc1e",
+          "label": "Brady Drum Company — Ply Shell — Wandoo Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Wandoo Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Low"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Jarrah",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 3,
+      "models": [
+        "Jarrah Ply Snare 10x5",
+        "Jarrah Ply Snare 12x5",
+        "Jarrah Ply Snare 13x5.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-10x5_10x5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_a9104789",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 10x5 — 10x5",
+          "modelName": "Jarrah Ply Snare 10x5",
+          "diameter": "10",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-12x5_12x5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_c574815f",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 12x5 — 12x5",
+          "modelName": "Jarrah Ply Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-13x5-5_13x5-5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_7bc792e4",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 13x5.5 — 13x5.5",
+          "modelName": "Jarrah Ply Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Handmade Exotic Australian Hardwood",
+      "shellMaterial": "Jarrah",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Jarrah Block shell 14x6.5",
+        "Jarrah Ply shell 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_handmade-exotic-australian-hardwood_jarrah-block-shell-14x6-5_14x6-5_block_jarrah_45-bearing-edges_1-_e1401ddf",
+          "label": "Brady Drum Company — Handmade Exotic Australian Hardwood — Jarrah Block shell 14x6.5 — 14x6.5",
+          "modelName": "Jarrah Block shell 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_handmade-exotic-australian-hardwood_jarrah-ply-shell-14x6-5_14x6-5_ply_jarrah_45-bearing-edges_1-5mm-_39cf6d3a",
+          "label": "Brady Drum Company — Handmade Exotic Australian Hardwood — Jarrah Ply shell 14x6.5 — 14x6.5",
+          "modelName": "Jarrah Ply shell 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply with brush box outer veneer\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Handmade Exotic Australian Hardwood",
+      "shellMaterial": "Marri",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Marri Ply shell 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_handmade-exotic-australian-hardwood_marri-ply-shell-14x6-5_14x6-5_ply_marri_45-bearing-edges_1-5mm-pr_60c0ce85",
+          "label": "Brady Drum Company — Handmade Exotic Australian Hardwood — Marri Ply shell 14x6.5 — 14x6.5",
+          "modelName": "Marri Ply shell 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / all Marri including face veneer\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Handmade Exotic Australian Hardwood",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Sheoak Block shell 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_handmade-exotic-australian-hardwood_sheoak-block-shell-14x6-5_14x6-5_block_oak_45-bearing-edges_1-5mm_f07e0eb3",
+          "label": "Brady Drum Company — Handmade Exotic Australian Hardwood — Sheoak Block shell 14x6.5 — 14x6.5",
+          "modelName": "Sheoak Block shell 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Handmade Exotic Australian Hardwood",
+      "shellMaterial": "Tasmanian Blackwood",
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Tasmanian Blackwood Block shell 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_handmade-exotic-australian-hardwood_tasmanian-blackwood-block-shell-14x6-5_14x6-5_block_tasmanian-bla_c6c5bfc8",
+          "label": "Brady Drum Company — Handmade Exotic Australian Hardwood — Tasmanian Blackwood Block shell 14x6.5 — 14x6.5",
+          "modelName": "Tasmanian Blackwood Block shell 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Tasmanian Blackwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "missingForCoreShell": [
+            "valid numeric shell thickness"
+          ],
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edges\",\"snareSideProfile\":\"45° bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "skipReason": "No source-confirmed shell thickness captured yet for this Brady group."
+    }
+  ],
+  "reviewInstruction": "No Firestore writes. Do not promote these records until source-confirmed numeric shell thickness is captured or an approved Brady fallback policy exists."
+}
