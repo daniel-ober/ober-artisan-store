@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:41:31.484Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "CANOPUS_ZELKOVA_GINRAN_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "shellMaterial": "Zelkova",
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Zelkova GINRAN"
+      ],
+      "recordIds": [
+        "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Canopus Zelkova GINRAN bearing-edge geometry before creating any promotion plan."
+}
