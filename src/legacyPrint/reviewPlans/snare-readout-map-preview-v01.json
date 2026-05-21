@@ -1,0 +1,2133 @@
+{
+  "status": "SNARE_READOUT_MAP_PREVIEW_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:47:42.660Z",
+  "firestoreWrites": 0,
+  "examples": [
+    {
+      "targetId": "ludwig-acrolite",
+      "maps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "firstListenScore": 0.7664
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 2,
+              "normalized": 0.6022,
+              "driverStrength": 0.9232,
+              "firstListenScore": 0.7139
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.31,
+              "rank": 3,
+              "normalized": 0.59,
+              "driverStrength": 0.8867,
+              "firstListenScore": 0.6821
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "firstListenScore": 0.7664
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 2,
+              "normalized": 0.6022,
+              "driverStrength": 0.9232,
+              "firstListenScore": 0.7139
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.31,
+              "rank": 3,
+              "normalized": 0.59,
+              "driverStrength": 0.8867,
+              "firstListenScore": 0.6821
+            },
+            {
+              "node": "sustain",
+              "value": 5.67,
+              "rank": 6,
+              "normalized": 0.5189,
+              "driverStrength": 0.9384,
+              "firstListenScore": 0.6025
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "firstListenScore": 0.5819
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "firstListenScore": 0.5037
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "firstListenScore": 0.4153
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "playerScore": 0.7715
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 2,
+              "normalized": 0.6022,
+              "driverStrength": 0.9232,
+              "playerScore": 0.7424
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.31,
+              "rank": 3,
+              "normalized": 0.59,
+              "driverStrength": 0.8867,
+              "playerScore": 0.7373
+            },
+            {
+              "node": "sustain",
+              "value": 5.67,
+              "rank": 6,
+              "normalized": 0.5189,
+              "driverStrength": 0.9384,
+              "playerScore": 0.6474
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "playerScore": 0.6158
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "playerScore": 0.5437
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "playerScore": 0.5197
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "playerScore": 0.7715
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 2,
+              "normalized": 0.6022,
+              "driverStrength": 0.9232,
+              "playerScore": 0.7424
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.31,
+              "rank": 3,
+              "normalized": 0.59,
+              "driverStrength": 0.8867,
+              "playerScore": 0.7373
+            },
+            {
+              "node": "sustain",
+              "value": 5.67,
+              "rank": 6,
+              "normalized": 0.5189,
+              "driverStrength": 0.9384,
+              "playerScore": 0.6474
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "playerScore": 0.6158
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "playerScore": 0.5437
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "playerScore": 0.5197
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "identityScore": 0.7877
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 2,
+              "normalized": 0.6022,
+              "driverStrength": 0.9232,
+              "identityScore": 0.7558
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.31,
+              "rank": 3,
+              "normalized": 0.59,
+              "driverStrength": 0.8867,
+              "identityScore": 0.7309
+            },
+            {
+              "node": "sustain",
+              "value": 5.67,
+              "rank": 6,
+              "normalized": 0.5189,
+              "driverStrength": 0.9384,
+              "identityScore": 0.7225
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 6.61,
+              "rank": 1,
+              "normalized": 0.6233,
+              "driverStrength": 1,
+              "identityScore": 0.7877
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 2,
+              "normalized": 0.6022,
+              "driverStrength": 0.9232,
+              "identityScore": 0.7558
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.31,
+              "rank": 3,
+              "normalized": 0.59,
+              "driverStrength": 0.8867,
+              "identityScore": 0.7309
+            },
+            {
+              "node": "sustain",
+              "value": 5.67,
+              "rank": 6,
+              "normalized": 0.5189,
+              "driverStrength": 0.9384,
+              "identityScore": 0.7225
+            },
+            {
+              "node": "brightness",
+              "value": 6.07,
+              "rank": 4,
+              "normalized": 0.5633,
+              "driverStrength": 0.6596,
+              "identityScore": 0.6275
+            },
+            {
+              "node": "projection",
+              "value": 5.76,
+              "rank": 5,
+              "normalized": 0.5289,
+              "driverStrength": 0.5134,
+              "identityScore": 0.5638
+            },
+            {
+              "node": "warmth",
+              "value": 5.22,
+              "rank": 7,
+              "normalized": 0.4689,
+              "driverStrength": 0.3805,
+              "identityScore": 0.5158
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:aluminum",
+              "totalMovement": 2.935
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.6mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ludwig-black-beauty",
+      "maps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+          "company": "Ludwig",
+          "model": "Black Beauty 3.5x14",
+          "size": "14x3.5"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "firstListenScore": 0.803
+            },
+            {
+              "node": "sustain",
+              "value": 6.61,
+              "rank": 3,
+              "normalized": 0.6233,
+              "driverStrength": 0.9823,
+              "firstListenScore": 0.7295
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "firstListenScore": 0.6895
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "firstListenScore": 0.803
+            },
+            {
+              "node": "sustain",
+              "value": 6.61,
+              "rank": 3,
+              "normalized": 0.6233,
+              "driverStrength": 0.9823,
+              "firstListenScore": 0.7295
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "firstListenScore": 0.6895
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "firstListenScore": 0.6249
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "firstListenScore": 0.5196
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "firstListenScore": 0.4922
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "firstListenScore": 0.4696
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "playerScore": 0.8057
+            },
+            {
+              "node": "sustain",
+              "value": 6.61,
+              "rank": 3,
+              "normalized": 0.6233,
+              "driverStrength": 0.9823,
+              "playerScore": 0.7176
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "playerScore": 0.6797
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "playerScore": 0.6345
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "playerScore": 0.6311
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "playerScore": 0.5947
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "playerScore": 0.5823
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "playerScore": 0.8057
+            },
+            {
+              "node": "sustain",
+              "value": 6.61,
+              "rank": 3,
+              "normalized": 0.6233,
+              "driverStrength": 0.9823,
+              "playerScore": 0.7176
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "playerScore": 0.6797
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "playerScore": 0.6345
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "playerScore": 0.6311
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "playerScore": 0.5947
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "playerScore": 0.5823
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "identityScore": 0.8171
+            },
+            {
+              "node": "sustain",
+              "value": 6.61,
+              "rank": 3,
+              "normalized": 0.6233,
+              "driverStrength": 0.9823,
+              "identityScore": 0.7896
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "identityScore": 0.7003
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "identityScore": 0.6787
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.14,
+              "rank": 1,
+              "normalized": 0.6822,
+              "driverStrength": 1,
+              "identityScore": 0.8171
+            },
+            {
+              "node": "sustain",
+              "value": 6.61,
+              "rank": 3,
+              "normalized": 0.6233,
+              "driverStrength": 0.9823,
+              "identityScore": 0.7896
+            },
+            {
+              "node": "brightness",
+              "value": 6.66,
+              "rank": 2,
+              "normalized": 0.6289,
+              "driverStrength": 0.7771,
+              "identityScore": 0.7003
+            },
+            {
+              "node": "projection",
+              "value": 6.22,
+              "rank": 4,
+              "normalized": 0.58,
+              "driverStrength": 0.7761,
+              "identityScore": 0.6787
+            },
+            {
+              "node": "warmth",
+              "value": 5.43,
+              "rank": 7,
+              "normalized": 0.4922,
+              "driverStrength": 0.6036,
+              "identityScore": 0.6033
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.98,
+              "rank": 5,
+              "normalized": 0.5533,
+              "driverStrength": 0.5162,
+              "identityScore": 0.5866
+            },
+            {
+              "node": "control",
+              "value": 5.83,
+              "rank": 6,
+              "normalized": 0.5367,
+              "driverStrength": 0.4244,
+              "identityScore": 0.5534
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:brass",
+              "totalMovement": 3.984
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "depth:3.5",
+              "totalMovement": 1.577
+            },
+            {
+              "source": "bearingEdge:rolledOrFormedMetal",
+              "totalMovement": 1.238
+            },
+            {
+              "source": "shellThickness:1.2mm",
+              "totalMovement": 1.051
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            },
+            {
+              "source": "snareBed:shallowSnareBed",
+              "totalMovement": 0.049
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ludwig-legacy-mahogany",
+      "maps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5.5x14",
+          "size": "14x5.5"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "warmth",
+              "value": 7.78,
+              "rank": 1,
+              "normalized": 0.7533,
+              "driverStrength": 1,
+              "firstListenScore": 0.847
+            },
+            {
+              "node": "sustain",
+              "value": 6.84,
+              "rank": 2,
+              "normalized": 0.6489,
+              "driverStrength": 0.6608,
+              "firstListenScore": 0.6693
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.13,
+              "rank": 3,
+              "normalized": 0.57,
+              "driverStrength": 0.4058,
+              "firstListenScore": 0.535
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "warmth",
+              "value": 7.78,
+              "rank": 1,
+              "normalized": 0.7533,
+              "driverStrength": 1,
+              "firstListenScore": 0.847
+            },
+            {
+              "node": "sustain",
+              "value": 6.84,
+              "rank": 2,
+              "normalized": 0.6489,
+              "driverStrength": 0.6608,
+              "firstListenScore": 0.6693
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.13,
+              "rank": 3,
+              "normalized": 0.57,
+              "driverStrength": 0.4058,
+              "firstListenScore": 0.535
+            },
+            {
+              "node": "attack",
+              "value": 5.84,
+              "rank": 4,
+              "normalized": 0.5378,
+              "driverStrength": 0.3025,
+              "firstListenScore": 0.4661
+            },
+            {
+              "node": "control",
+              "value": 5.72,
+              "rank": 5,
+              "normalized": 0.5244,
+              "driverStrength": 0.2604,
+              "firstListenScore": 0.43
+            },
+            {
+              "node": "projection",
+              "value": 5.53,
+              "rank": 6,
+              "normalized": 0.5033,
+              "driverStrength": 0.217,
+              "firstListenScore": 0.3908
+            },
+            {
+              "node": "brightness",
+              "value": 4.8,
+              "rank": 7,
+              "normalized": 0.4222,
+              "driverStrength": 0.2667,
+              "firstListenScore": 0.3544
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "warmth",
+              "value": 7.78,
+              "rank": 1,
+              "normalized": 0.7533,
+              "driverStrength": 1,
+              "playerScore": 0.8209
+            },
+            {
+              "node": "sustain",
+              "value": 6.84,
+              "rank": 2,
+              "normalized": 0.6489,
+              "driverStrength": 0.6608,
+              "playerScore": 0.6617
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.13,
+              "rank": 3,
+              "normalized": 0.57,
+              "driverStrength": 0.4058,
+              "playerScore": 0.6199
+            },
+            {
+              "node": "attack",
+              "value": 5.84,
+              "rank": 4,
+              "normalized": 0.5378,
+              "driverStrength": 0.3025,
+              "playerScore": 0.5685
+            },
+            {
+              "node": "control",
+              "value": 5.72,
+              "rank": 5,
+              "normalized": 0.5244,
+              "driverStrength": 0.2604,
+              "playerScore": 0.5514
+            },
+            {
+              "node": "projection",
+              "value": 5.53,
+              "rank": 6,
+              "normalized": 0.5033,
+              "driverStrength": 0.217,
+              "playerScore": 0.4637
+            },
+            {
+              "node": "brightness",
+              "value": 4.8,
+              "rank": 7,
+              "normalized": 0.4222,
+              "driverStrength": 0.2667,
+              "playerScore": 0.4476
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "warmth",
+              "value": 7.78,
+              "rank": 1,
+              "normalized": 0.7533,
+              "driverStrength": 1,
+              "playerScore": 0.8209
+            },
+            {
+              "node": "sustain",
+              "value": 6.84,
+              "rank": 2,
+              "normalized": 0.6489,
+              "driverStrength": 0.6608,
+              "playerScore": 0.6617
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.13,
+              "rank": 3,
+              "normalized": 0.57,
+              "driverStrength": 0.4058,
+              "playerScore": 0.6199
+            },
+            {
+              "node": "attack",
+              "value": 5.84,
+              "rank": 4,
+              "normalized": 0.5378,
+              "driverStrength": 0.3025,
+              "playerScore": 0.5685
+            },
+            {
+              "node": "control",
+              "value": 5.72,
+              "rank": 5,
+              "normalized": 0.5244,
+              "driverStrength": 0.2604,
+              "playerScore": 0.5514
+            },
+            {
+              "node": "projection",
+              "value": 5.53,
+              "rank": 6,
+              "normalized": 0.5033,
+              "driverStrength": 0.217,
+              "playerScore": 0.4637
+            },
+            {
+              "node": "brightness",
+              "value": 4.8,
+              "rank": 7,
+              "normalized": 0.4222,
+              "driverStrength": 0.2667,
+              "playerScore": 0.4476
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "warmth",
+              "value": 7.78,
+              "rank": 1,
+              "normalized": 0.7533,
+              "driverStrength": 1,
+              "identityScore": 0.8687
+            },
+            {
+              "node": "sustain",
+              "value": 6.84,
+              "rank": 2,
+              "normalized": 0.6489,
+              "driverStrength": 0.6608,
+              "identityScore": 0.6931
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.13,
+              "rank": 3,
+              "normalized": 0.57,
+              "driverStrength": 0.4058,
+              "identityScore": 0.5574
+            },
+            {
+              "node": "attack",
+              "value": 5.84,
+              "rank": 4,
+              "normalized": 0.5378,
+              "driverStrength": 0.3025,
+              "identityScore": 0.5077
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "warmth",
+              "value": 7.78,
+              "rank": 1,
+              "normalized": 0.7533,
+              "driverStrength": 1,
+              "identityScore": 0.8687
+            },
+            {
+              "node": "sustain",
+              "value": 6.84,
+              "rank": 2,
+              "normalized": 0.6489,
+              "driverStrength": 0.6608,
+              "identityScore": 0.6931
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.13,
+              "rank": 3,
+              "normalized": 0.57,
+              "driverStrength": 0.4058,
+              "identityScore": 0.5574
+            },
+            {
+              "node": "attack",
+              "value": 5.84,
+              "rank": 4,
+              "normalized": 0.5378,
+              "driverStrength": 0.3025,
+              "identityScore": 0.5077
+            },
+            {
+              "node": "control",
+              "value": 5.72,
+              "rank": 5,
+              "normalized": 0.5244,
+              "driverStrength": 0.2604,
+              "identityScore": 0.4915
+            },
+            {
+              "node": "projection",
+              "value": 5.53,
+              "rank": 6,
+              "normalized": 0.5033,
+              "driverStrength": 0.217,
+              "identityScore": 0.4502
+            },
+            {
+              "node": "brightness",
+              "value": 4.8,
+              "rank": 7,
+              "normalized": 0.4222,
+              "driverStrength": 0.2667,
+              "identityScore": 0.4234
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:mahogany",
+              "totalMovement": 2.576
+            },
+            {
+              "source": "bearingEdge:rounder30Degree",
+              "totalMovement": 1.807
+            },
+            {
+              "source": "shellConstruction:plyWithReinforcementRings",
+              "totalMovement": 1.693
+            },
+            {
+              "source": "shellThickness:6.35mm",
+              "totalMovement": 1.181
+            },
+            {
+              "source": "hoopType:tripleFlanged",
+              "totalMovement": 0.8
+            },
+            {
+              "source": "depth:5.5",
+              "totalMovement": 0.337
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:8",
+              "totalMovement": 0.017
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "ahead-bell-brass",
+      "maps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "firstListenScore": 0.8244
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "firstListenScore": 0.7638
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "firstListenScore": 0.6996
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "firstListenScore": 0.8244
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "firstListenScore": 0.7638
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "firstListenScore": 0.6996
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "firstListenScore": 0.6706
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "firstListenScore": 0.5655
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "firstListenScore": 0.5615
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "firstListenScore": 0.4626
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "playerScore": 0.7903
+            },
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "playerScore": 0.7757
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "playerScore": 0.7136
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "playerScore": 0.6819
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "playerScore": 0.6651
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "playerScore": 0.6268
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "playerScore": 0.5981
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "playerScore": 0.7903
+            },
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "playerScore": 0.7757
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "playerScore": 0.7136
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "playerScore": 0.6819
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "playerScore": 0.6651
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "playerScore": 0.6268
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "playerScore": 0.5981
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "identityScore": 0.8424
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "identityScore": 0.788
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "identityScore": 0.7434
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "identityScore": 0.7237
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "sustain",
+              "value": 7.45,
+              "rank": 1,
+              "normalized": 0.7167,
+              "driverStrength": 1,
+              "identityScore": 0.8424
+            },
+            {
+              "node": "attack",
+              "value": 7.26,
+              "rank": 2,
+              "normalized": 0.6956,
+              "driverStrength": 0.8946,
+              "identityScore": 0.788
+            },
+            {
+              "node": "warmth",
+              "value": 6.86,
+              "rank": 4,
+              "normalized": 0.6511,
+              "driverStrength": 0.7818,
+              "identityScore": 0.7434
+            },
+            {
+              "node": "projection",
+              "value": 6.98,
+              "rank": 3,
+              "normalized": 0.6644,
+              "driverStrength": 0.7845,
+              "identityScore": 0.7237
+            },
+            {
+              "node": "control",
+              "value": 6.42,
+              "rank": 5,
+              "normalized": 0.6022,
+              "driverStrength": 0.572,
+              "identityScore": 0.6364
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 6,
+              "normalized": 0.6,
+              "driverStrength": 0.6125,
+              "identityScore": 0.6299
+            },
+            {
+              "node": "sensitivity",
+              "value": 5.73,
+              "rank": 7,
+              "normalized": 0.5256,
+              "driverStrength": 0.4239,
+              "identityScore": 0.5413
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:bellBrass",
+              "totalMovement": 5.658
+            },
+            {
+              "source": "shellConstruction:solidShell",
+              "totalMovement": 2.27
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "shellThickness:3mm",
+              "totalMovement": 1.123
+            },
+            {
+              "source": "hoopType:inwardFlangedControlHoop",
+              "totalMovement": 0.992
+            },
+            {
+              "source": "depth:6",
+              "totalMovement": 0.68
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "dw-true-cast-bronze",
+      "maps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "firstListenScore": 0.8436
+            },
+            {
+              "node": "control",
+              "value": 7.22,
+              "rank": 2,
+              "normalized": 0.6911,
+              "driverStrength": 0.8124,
+              "firstListenScore": 0.738
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "firstListenScore": 0.6937
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "firstListenScore": 0.8436
+            },
+            {
+              "node": "control",
+              "value": 7.22,
+              "rank": 2,
+              "normalized": 0.6911,
+              "driverStrength": 0.8124,
+              "firstListenScore": 0.738
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "firstListenScore": 0.6937
+            },
+            {
+              "node": "sustain",
+              "value": 5.96,
+              "rank": 5,
+              "normalized": 0.5511,
+              "driverStrength": 0.7422,
+              "firstListenScore": 0.5815
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "firstListenScore": 0.5639
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "firstListenScore": 0.4773
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "firstListenScore": 0.3784
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "playerScore": 0.8437
+            },
+            {
+              "node": "control",
+              "value": 7.22,
+              "rank": 2,
+              "normalized": 0.6911,
+              "driverStrength": 0.8124,
+              "playerScore": 0.7696
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "playerScore": 0.677
+            },
+            {
+              "node": "sustain",
+              "value": 5.96,
+              "rank": 5,
+              "normalized": 0.5511,
+              "driverStrength": 0.7422,
+              "playerScore": 0.6229
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "playerScore": 0.605
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "playerScore": 0.5717
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "playerScore": 0.524
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "playerScore": 0.8437
+            },
+            {
+              "node": "control",
+              "value": 7.22,
+              "rank": 2,
+              "normalized": 0.6911,
+              "driverStrength": 0.8124,
+              "playerScore": 0.7696
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "playerScore": 0.677
+            },
+            {
+              "node": "sustain",
+              "value": 5.96,
+              "rank": 5,
+              "normalized": 0.5511,
+              "driverStrength": 0.7422,
+              "playerScore": 0.6229
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "playerScore": 0.605
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "playerScore": 0.5717
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "playerScore": 0.524
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "identityScore": 0.8499
+            },
+            {
+              "node": "control",
+              "value": 7.22,
+              "rank": 2,
+              "normalized": 0.6911,
+              "driverStrength": 0.8124,
+              "identityScore": 0.7626
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "identityScore": 0.7175
+            },
+            {
+              "node": "sustain",
+              "value": 5.96,
+              "rank": 5,
+              "normalized": 0.5511,
+              "driverStrength": 0.7422,
+              "identityScore": 0.6719
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "attack",
+              "value": 7.73,
+              "rank": 1,
+              "normalized": 0.7478,
+              "driverStrength": 1,
+              "identityScore": 0.8499
+            },
+            {
+              "node": "control",
+              "value": 7.22,
+              "rank": 2,
+              "normalized": 0.6911,
+              "driverStrength": 0.8124,
+              "identityScore": 0.7626
+            },
+            {
+              "node": "projection",
+              "value": 6.95,
+              "rank": 3,
+              "normalized": 0.6611,
+              "driverStrength": 0.7709,
+              "identityScore": 0.7175
+            },
+            {
+              "node": "sustain",
+              "value": 5.96,
+              "rank": 5,
+              "normalized": 0.5511,
+              "driverStrength": 0.7422,
+              "identityScore": 0.6719
+            },
+            {
+              "node": "brightness",
+              "value": 6.4,
+              "rank": 4,
+              "normalized": 0.6,
+              "driverStrength": 0.5138,
+              "identityScore": 0.5963
+            },
+            {
+              "node": "warmth",
+              "value": 5.54,
+              "rank": 6,
+              "normalized": 0.5044,
+              "driverStrength": 0.5233,
+              "identityScore": 0.5821
+            },
+            {
+              "node": "sensitivity",
+              "value": 4.96,
+              "rank": 7,
+              "normalized": 0.44,
+              "driverStrength": 0.3129,
+              "identityScore": 0.4608
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:bronze",
+              "totalMovement": 3.938
+            },
+            {
+              "source": "shellThickness:35mm",
+              "totalMovement": 2.045
+            },
+            {
+              "source": "hoopType:dieCast",
+              "totalMovement": 1.931
+            },
+            {
+              "source": "shellConstruction:metal",
+              "totalMovement": 1.786
+            },
+            {
+              "source": "bearingEdge:machinedMetal",
+              "totalMovement": 1.735
+            },
+            {
+              "source": "depth:4",
+              "totalMovement": 0.97
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        }
+      }
+    },
+    {
+      "targetId": "gretsch-brooklyn-maple",
+      "maps": {
+        "engineVersion": "legacyprint-snare-engine-v0.1",
+        "drum": {
+          "id": "gretsch_brooklyn_brooklyn-snare_14x5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_3fecbb47",
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5"
+        },
+        "firstListen": {
+          "readoutType": "firstListen",
+          "title": "First Listen",
+          "purpose": "Ranks the traits most likely to be noticed immediately when the snare is struck.",
+          "nodes": [
+            {
+              "node": "warmth",
+              "value": 7,
+              "rank": 1,
+              "normalized": 0.6667,
+              "driverStrength": 1,
+              "firstListenScore": 0.7934
+            },
+            {
+              "node": "sustain",
+              "value": 6.39,
+              "rank": 2,
+              "normalized": 0.5989,
+              "driverStrength": 0.7056,
+              "firstListenScore": 0.6509
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.35,
+              "rank": 3,
+              "normalized": 0.5944,
+              "driverStrength": 0.6753,
+              "firstListenScore": 0.6256
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "warmth",
+              "value": 7,
+              "rank": 1,
+              "normalized": 0.6667,
+              "driverStrength": 1,
+              "firstListenScore": 0.7934
+            },
+            {
+              "node": "sustain",
+              "value": 6.39,
+              "rank": 2,
+              "normalized": 0.5989,
+              "driverStrength": 0.7056,
+              "firstListenScore": 0.6509
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.35,
+              "rank": 3,
+              "normalized": 0.5944,
+              "driverStrength": 0.6753,
+              "firstListenScore": 0.6256
+            },
+            {
+              "node": "attack",
+              "value": 6.28,
+              "rank": 4,
+              "normalized": 0.5867,
+              "driverStrength": 0.637,
+              "firstListenScore": 0.5901
+            },
+            {
+              "node": "control",
+              "value": 6.06,
+              "rank": 5,
+              "normalized": 0.5622,
+              "driverStrength": 0.5277,
+              "firstListenScore": 0.5283
+            },
+            {
+              "node": "projection",
+              "value": 5.73,
+              "rank": 6,
+              "normalized": 0.5256,
+              "driverStrength": 0.4014,
+              "firstListenScore": 0.4563
+            },
+            {
+              "node": "brightness",
+              "value": 5.33,
+              "rank": 7,
+              "normalized": 0.4811,
+              "driverStrength": 0.3243,
+              "firstListenScore": 0.4071
+            }
+          ]
+        },
+        "playerAnalysis": {
+          "readoutType": "playerAnalysis",
+          "title": "Player Analysis",
+          "purpose": "Emphasizes how the snare is likely to feel under the sticks: response, control, body, and touch range.",
+          "nodes": [
+            {
+              "node": "warmth",
+              "value": 7,
+              "rank": 1,
+              "normalized": 0.6667,
+              "driverStrength": 1,
+              "playerScore": 0.7707
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.35,
+              "rank": 3,
+              "normalized": 0.5944,
+              "driverStrength": 0.6753,
+              "playerScore": 0.6933
+            },
+            {
+              "node": "attack",
+              "value": 6.28,
+              "rank": 4,
+              "normalized": 0.5867,
+              "driverStrength": 0.637,
+              "playerScore": 0.6704
+            },
+            {
+              "node": "sustain",
+              "value": 6.39,
+              "rank": 2,
+              "normalized": 0.5989,
+              "driverStrength": 0.7056,
+              "playerScore": 0.6426
+            },
+            {
+              "node": "control",
+              "value": 6.06,
+              "rank": 5,
+              "normalized": 0.5622,
+              "driverStrength": 0.5277,
+              "playerScore": 0.6322
+            },
+            {
+              "node": "projection",
+              "value": 5.73,
+              "rank": 6,
+              "normalized": 0.5256,
+              "driverStrength": 0.4014,
+              "playerScore": 0.5172
+            },
+            {
+              "node": "brightness",
+              "value": 5.33,
+              "rank": 7,
+              "normalized": 0.4811,
+              "driverStrength": 0.3243,
+              "playerScore": 0.4944
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "warmth",
+              "value": 7,
+              "rank": 1,
+              "normalized": 0.6667,
+              "driverStrength": 1,
+              "playerScore": 0.7707
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.35,
+              "rank": 3,
+              "normalized": 0.5944,
+              "driverStrength": 0.6753,
+              "playerScore": 0.6933
+            },
+            {
+              "node": "attack",
+              "value": 6.28,
+              "rank": 4,
+              "normalized": 0.5867,
+              "driverStrength": 0.637,
+              "playerScore": 0.6704
+            },
+            {
+              "node": "sustain",
+              "value": 6.39,
+              "rank": 2,
+              "normalized": 0.5989,
+              "driverStrength": 0.7056,
+              "playerScore": 0.6426
+            },
+            {
+              "node": "control",
+              "value": 6.06,
+              "rank": 5,
+              "normalized": 0.5622,
+              "driverStrength": 0.5277,
+              "playerScore": 0.6322
+            },
+            {
+              "node": "projection",
+              "value": 5.73,
+              "rank": 6,
+              "normalized": 0.5256,
+              "driverStrength": 0.4014,
+              "playerScore": 0.5172
+            },
+            {
+              "node": "brightness",
+              "value": 5.33,
+              "rank": 7,
+              "normalized": 0.4811,
+              "driverStrength": 0.3243,
+              "playerScore": 0.4944
+            }
+          ]
+        },
+        "legacyPrintIdentity": {
+          "readoutType": "legacyPrintIdentity",
+          "title": "LegacyPrint Identity",
+          "purpose": "Captures the snare’s most defining acoustic fingerprint using score strength and physical-driver strength.",
+          "nodes": [
+            {
+              "node": "warmth",
+              "value": 7,
+              "rank": 1,
+              "normalized": 0.6667,
+              "driverStrength": 1,
+              "identityScore": 0.8254
+            },
+            {
+              "node": "sustain",
+              "value": 6.39,
+              "rank": 2,
+              "normalized": 0.5989,
+              "driverStrength": 0.7056,
+              "identityScore": 0.6834
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.35,
+              "rank": 3,
+              "normalized": 0.5944,
+              "driverStrength": 0.6753,
+              "identityScore": 0.6612
+            },
+            {
+              "node": "attack",
+              "value": 6.28,
+              "rank": 4,
+              "normalized": 0.5867,
+              "driverStrength": 0.637,
+              "identityScore": 0.6459
+            }
+          ],
+          "allCandidates": [
+            {
+              "node": "warmth",
+              "value": 7,
+              "rank": 1,
+              "normalized": 0.6667,
+              "driverStrength": 1,
+              "identityScore": 0.8254
+            },
+            {
+              "node": "sustain",
+              "value": 6.39,
+              "rank": 2,
+              "normalized": 0.5989,
+              "driverStrength": 0.7056,
+              "identityScore": 0.6834
+            },
+            {
+              "node": "sensitivity",
+              "value": 6.35,
+              "rank": 3,
+              "normalized": 0.5944,
+              "driverStrength": 0.6753,
+              "identityScore": 0.6612
+            },
+            {
+              "node": "attack",
+              "value": 6.28,
+              "rank": 4,
+              "normalized": 0.5867,
+              "driverStrength": 0.637,
+              "identityScore": 0.6459
+            },
+            {
+              "node": "control",
+              "value": 6.06,
+              "rank": 5,
+              "normalized": 0.5622,
+              "driverStrength": 0.5277,
+              "identityScore": 0.6013
+            },
+            {
+              "node": "projection",
+              "value": 5.73,
+              "rank": 6,
+              "normalized": 0.5256,
+              "driverStrength": 0.4014,
+              "identityScore": 0.5241
+            },
+            {
+              "node": "brightness",
+              "value": 5.33,
+              "rank": 7,
+              "normalized": 0.4811,
+              "driverStrength": 0.3243,
+              "identityScore": 0.4724
+            }
+          ],
+          "strongestPhysicalDrivers": [
+            {
+              "source": "shellMaterial:maple",
+              "totalMovement": 2.558
+            },
+            {
+              "source": "bearingEdge:rounder30Degree",
+              "totalMovement": 1.807
+            },
+            {
+              "source": "shellConstruction:ply",
+              "totalMovement": 1.381
+            },
+            {
+              "source": "shellThickness:5.6mm",
+              "totalMovement": 1.181
+            },
+            {
+              "source": "hoopType:gretsch302",
+              "totalMovement": 0.922
+            },
+            {
+              "source": "depth:5",
+              "totalMovement": 0.337
+            },
+            {
+              "source": "diameter:14",
+              "totalMovement": 0.236
+            },
+            {
+              "source": "lugCount:10",
+              "totalMovement": 0.129
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
