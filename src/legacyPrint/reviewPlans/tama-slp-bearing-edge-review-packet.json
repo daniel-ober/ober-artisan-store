@@ -1,0 +1,96 @@
+{
+  "generatedAt": "2026-05-21T07:23:34.481Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups.json",
+  "status": "TAMA_SLP_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "groupCount": 5,
+    "candidateCount": 9,
+    "sourceUrls": [
+      "https://www.tama.com/usa/products/search/snare_drums/list/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "High",
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Maple LGM137 13x7",
+        "S.L.P. G-Maple LGM146 14x6",
+        "S.L.P. Classic Maple LMP1455 14x5.5",
+        "S.L.P. Studio Maple LMP1465F 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Bubinga",
+      "count": 2,
+      "sourceConfidence": [
+        "High",
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Bubinga LGB146 14x6",
+        "S.L.P. Mod Bubinga LBU127 12x7"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Walnut LGW1465 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Birch",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. Duo Birch LBH1410L 14x10"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Spruce",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. Fat Spruce LSP146 14x6"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review Tama source pages/catalogs for exact bearing edge language before creating any promotion/apply plan. Do not infer wood-shell bearing edges without source-backed model or line-family language."
+}
