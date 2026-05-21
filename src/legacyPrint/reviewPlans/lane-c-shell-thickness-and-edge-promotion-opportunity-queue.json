@@ -1,0 +1,311 @@
+{
+  "generatedAt": "2026-05-21T08:23:00.360Z",
+  "sourceFiles": [
+    "src/legacyPrint/reviewPlans/lane-c-missing-thickness-and-edge-review-queue.json",
+    "src/legacyPrint/reviewPlans/lane-c-shell-thickness-and-edge-source-review.json",
+    "src/legacyPrint/reviewPlans/lane-c-high-value-shell-thickness-and-edge-review-packet.json",
+    "src/legacyPrint/reviewPlans/lane-c-remaining-shell-thickness-and-edge-review-packet.json"
+  ],
+  "status": "LANE_C_SHELL_THICKNESS_AND_EDGE_PROMOTION_OPPORTUNITY_QUEUE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "lane": "Lane C",
+    "name": "MISSING_THICKNESS_AND_EDGE",
+    "candidateCount": 750,
+    "groupCount": 374,
+    "promotionTargetFields": [
+      "source-confirmed numeric shell thickness",
+      "meaningful/source-confirmed bearing edge geometry/profile"
+    ],
+    "sourceConfirmedBothFieldsCandidateCount": 0,
+    "sourceConfirmedBothFieldsGroupCount": 0,
+    "blockedCandidateCount": 750,
+    "blockedGroupCount": 374,
+    "candidateCountMatches": true,
+    "groupCountMatches": true,
+    "noFirestoreWrites": true,
+    "conclusion": "Lane C promotion opportunity review should only promote records where both numeric shell thickness and bearing edge geometry/profile are explicitly source-confirmed. Prior source review found no source-confirmed two-field promotions."
+  },
+  "topGroups": [
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Maple",
+      "count": 20,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Gum",
+      "count": 16,
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "count": 9,
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Signature",
+      "shellMaterial": "Maple",
+      "count": 9,
+      "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Marri",
+      "count": 8,
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Oak",
+      "count": 8,
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Neo-Vintage",
+      "shellMaterial": "Maple / Poplar",
+      "count": 8,
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Jarrah",
+      "count": 7,
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Wandoo",
+      "count": 7,
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Ss Stainless",
+      "shellMaterial": "Stainless Steel",
+      "count": 7,
+      "primarySourceUrl": "https://dunnett.com/drums.php"
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Ti Titanium",
+      "shellMaterial": "Titanium",
+      "count": 7,
+      "primarySourceUrl": "https://dunnett.com/drums.php"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "shellMaterial": "Maple",
+      "count": 7,
+      "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Beech",
+      "count": 7,
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Birch",
+      "count": 7,
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Walnut",
+      "count": 7,
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "count": 7,
+      "primarySourceUrl": "https://porkpiedrums.com/products/"
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "2N Model 2N",
+      "shellMaterial": "Brass",
+      "count": 6,
+      "primarySourceUrl": "https://dunnett.com/drums.php"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Series",
+      "shellMaterial": "Maple",
+      "count": 6,
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/PDSN0610BWCR--pdp-concept-black-wax-maple-snare-drum-6-inches-by-10-inches"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "shellMaterial": "Maple",
+      "count": 6,
+      "primarySourceUrl": "https://www.noblecooley.com/horizon-series"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "shellMaterial": "Walnut",
+      "count": 6,
+      "primarySourceUrl": "https://www.noblecooley.com/walnut-1"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Maple",
+      "count": 6,
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "2N Model 2N",
+      "shellMaterial": "Aluminum",
+      "count": 5,
+      "primarySourceUrl": "https://dunnett.com/drums.php"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "shellMaterial": "Maple",
+      "count": 5,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1950s Leedy & Ludwig",
+      "shellMaterial": "Maple / Poplar",
+      "count": 5,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Little Squealer",
+      "shellMaterial": "Maple",
+      "count": 5,
+      "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc"
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Catalog 1962",
+      "shellMaterial": "Maple / Poplar",
+      "count": 5,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Jarrah",
+      "count": 4,
+      "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/..."
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Sp Stereoply",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://dunnett.com/drums.php"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Birch",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Cherry",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Oak",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Purpleheart",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Aluminum",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "shellMaterial": "Walnut",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/collectors-series/"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://www.dwdrums.com/drums/snares/"
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "shellMaterial": "Birch",
+      "count": 4,
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility"
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "shellMaterial": "Mahogany",
+      "count": 4,
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility"
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility"
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Reference One",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf"
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Signature",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf"
+    }
+  ],
+  "reviewInstruction": "No Firestore writes. Create a promotion plan only where BOTH numeric shell thickness and bearing edge geometry/profile are explicitly source-confirmed for the affected company/line/material/configuration."
+}
