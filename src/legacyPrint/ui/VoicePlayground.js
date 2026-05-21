@@ -1178,6 +1178,166 @@ function ReferencePanel({
 
     null;
 
+  const getReferenceOptionId = (reference) => {
+
+    if (!reference) return '';
+
+    return (
+
+      reference.snareReferenceId ||
+
+      reference.id ||
+
+      reference.key ||
+
+      reference.value ||
+
+      reference.label ||
+
+      ''
+
+    );
+
+  };
+
+  const getReferenceOptionBrand = (reference) => {
+
+    if (!reference) return '';
+
+    return normalizeBrandValue(
+
+      reference.companyName ||
+
+        reference.company ||
+
+        reference.brand ||
+
+        reference.manufacturer ||
+
+        reference.raw?.companyName ||
+
+        reference.raw?.company ||
+
+        reference.raw?.COMPANY_NAME ||
+
+        reference.raw?.['COMPANY NAME'] ||
+
+        ''
+
+    );
+
+  };
+
+  const getReferenceOptionVoice = (reference) => {
+
+    if (!reference) return {};
+
+    return (
+
+      reference.voiceProfile ||
+
+      reference.legacyPrintVoice ||
+
+      reference.voice ||
+
+      reference.raw?.voiceProfile ||
+
+      reference.raw?.legacyPrintVoice ||
+
+      reference.raw?.voice ||
+
+      {}
+
+    );
+
+  };
+
+  const findNearestReferenceForBrand = (nextBrandValue) => {
+
+    const normalizedBrand = normalizeBrandValue(nextBrandValue);
+
+    if (!normalizedBrand || normalizedBrand === 'all') {
+
+      return null;
+
+    }
+
+    const anchorReference =
+
+      referenceOptions.find((reference) => getReferenceOptionId(reference) === selectedReferenceId) ||
+
+      referenceOptions.find((reference) => reference.key === selectedReferenceId) ||
+
+      referenceOptions.find((reference) => reference.snareReferenceId === selectedReferenceId) ||
+
+      selectedReference;
+
+    const anchorVoice = getReferenceOptionVoice(anchorReference);
+
+    const uniqueCandidates = new Map();
+
+    referenceOptions.forEach((reference) => {
+
+      const id = getReferenceOptionId(reference);
+
+      const brand = getReferenceOptionBrand(reference);
+
+      if (!id || brand !== normalizedBrand) return;
+
+      if (!uniqueCandidates.has(id)) {
+
+        uniqueCandidates.set(id, reference);
+
+      }
+
+    });
+
+    return Array.from(uniqueCandidates.values())
+
+      .map((reference) => ({
+
+        reference,
+
+        id: getReferenceOptionId(reference),
+
+        similarityScore: scoreVoiceSimilarity(anchorVoice, getReferenceOptionVoice(reference)),
+
+      }))
+
+      .sort((a, b) => b.similarityScore - a.similarityScore)[0] || null;
+
+  };
+
+  const handleBrandFilterChange = (nextBrandValue) => {
+
+    setBrandFilter(nextBrandValue);
+
+    if (!nextBrandValue || nextBrandValue === 'all') {
+
+      setModelFilter('all');
+
+      return;
+
+    }
+
+    const bestMatch = findNearestReferenceForBrand(nextBrandValue);
+
+    const bestMatchId = bestMatch?.id || '';
+
+    if (!bestMatchId) {
+
+      setModelFilter('all');
+
+      return;
+
+    }
+
+    setModelFilter(bestMatchId);
+
+    setSelectedReferenceId(bestMatchId);
+
+  };
+
   const resetReferenceFilters = () => {
 
     setBrandFilter('all');
@@ -1196,13 +1356,7 @@ function ReferencePanel({
 
         value={brandFilter}
 
-        onChange={(event) => {
-
-          setBrandFilter(event.target.value);
-
-          setModelFilter('all');
-
-        }}
+        onChange={(event) => handleBrandFilterChange(event.target.value)}
 
       >
 
