@@ -1,0 +1,43 @@
+{
+  "generatedAt": "2026-05-21T07:34:45.084Z",
+  "sourceReviewPacket": "src/legacyPrint/reviewPlans/pearl-modern-utility-bearing-edge-review-packet.json",
+  "status": "PEARL_MODERN_UTILITY_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 4,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 4,
+    "groupCount": 1
+  },
+  "sourceFindings": [
+    {
+      "sourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "finding": "Review packet captured the official Pearl Modern Utility product source. Exact bearing-edge geometry has not yet been confirmed in this pass.",
+      "evidenceLevel": "notConfirmed",
+      "confidence": "low"
+    }
+  ],
+  "blockedGroups": [
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Modern Utility Maple",
+        "Modern Utility Maple",
+        "Modern Utility Maple",
+        "Modern Utility Maple"
+      ],
+      "recordIds": [
+        "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+        "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+        "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+        "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc"
+      ],
+      "skipReason": "No exact official Pearl Modern Utility Maple bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Pearl source language confirms bearing-edge geometry for Modern Utility Maple."
+}
