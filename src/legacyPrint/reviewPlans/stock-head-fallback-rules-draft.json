@@ -179,12 +179,12 @@
       "lineSeriesIncludes": [
         "Ultracast"
       ],
-      "fallbackType": "historic-line-level-default-needs-source-confirmation",
+      "fallbackType": "catalog-era-reference-needs-exact-head-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
       "sourceConfidence": "needsVerification",
-      "notes": "Historic Pearl Ultracast records need stock batter/reso head confirmation before approval."
+      "notes": "Pearl Ultracast group contains 2 Ultracast Aluminum candidates. Current evidence is catalog/price-list based and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed from catalog/spec documentation."
     },
     {
       "ruleKey": "pearl-signature-stock-heads-draft",
@@ -193,12 +193,12 @@
       "lineSeriesIncludes": [
         "Signature"
       ],
-      "fallbackType": "model-or-signature-line-default-needs-source-confirmation",
+      "fallbackType": "artist-signature-catalog-era-needs-exact-head-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
       "sourceConfidence": "needsVerification",
-      "notes": "Signature model stock heads may vary by artist/model. Confirm exact stock batter/reso head before approval."
+      "notes": "Pearl Signature group contains 1 Chad Smith Signature candidate. Current evidence is catalog/price-list based and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "mapex-black-panther-archive-catalog-era-stock-heads-draft",
@@ -253,12 +253,12 @@
       "lineSeriesIncludes": [
         "Black Panther Archive / Unresolved Variant"
       ],
-      "fallbackType": "unresolved-variant-needs-model-source-confirmation",
+      "fallbackType": "archive-unresolved-variant-needs-exact-head-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
       "sourceConfidence": "needsVerification",
-      "notes": "Unresolved Mapex Black Panther variants must not be approved until exact model identity and stock batter/reso heads are source-confirmed.",
+      "notes": "Mapex Black Panther unresolved variant group contains 2 unresolved brass/steel archive candidates. Current evidence points to Mapex catalogue resources, but these records remain unresolved variants and do not have exact stock batter and reso/snare-side head confirmation. Keep DRAFT until model identity and exact stock heads are source-confirmed.",
       "lineSeriesMatchMode": "exact"
     },
     {
@@ -268,12 +268,12 @@
       "lineSeriesIncludes": [
         "Signature / Artist"
       ],
-      "fallbackType": "signature-model-default-needs-source-confirmation",
+      "fallbackType": "artist-signature-line-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
-      "sourceConfidence": "needsVerification",
-      "notes": "Mapex Signature / Artist stock heads may vary by model. Confirm exact stock batter/reso head for Matt Halpern Wraith before approval.",
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Mapex Signature / Artist group contains 1 Matt Halpern Wraith candidate. The Mapex source confirms the Black Panther family context, but current evidence does not confirm exact stock batter and reso/snare-side head models for this record. Keep DRAFT until exact stock heads are source-confirmed.",
       "lineSeriesMatchMode": "exact"
     },
     {
@@ -313,12 +313,12 @@
       "lineSeriesIncludes": [
         "Aluminum Alloy"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://canopusdrums.com/en/product/aluminum-alloy-snaredrum/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm stock batter/reso head models for Canopus Aluminum Alloy snares before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Canopus Aluminum Alloy group contains 1 Aluminum Alloy 14x6 candidate. The Canopus source confirms the model family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "canopus-manganese-steel-stock-heads-draft",
@@ -327,12 +327,12 @@
       "lineSeriesIncludes": [
         "Manganese Steel"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm stock batter/reso head models for Canopus Manganese Steel snares before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Canopus Manganese Steel group contains 2 candidates across 14x5.5 and 14x6.5. The Canopus source confirms the model family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "canopus-type-r-stock-heads-draft",
@@ -341,12 +341,12 @@
       "lineSeriesIncludes": [
         "Type-R"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm stock batter/reso head models for Canopus Type-R snares before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Canopus Type-R group contains 1 Type-R 3mm Brass Magnum 14x6.5 candidate. The Canopus source confirms snare product family context, but current evidence does not confirm exact stock batter and reso/snare-side head models for this record. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "tama-signature-stock-heads-draft",
@@ -383,12 +383,12 @@
       "lineSeriesIncludes": [
         "STAR Reserve"
       ],
-      "fallbackType": "line-or-model-level-default-needs-source-confirmation",
+      "fallbackType": "secondary-source-only-needs-official-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://equipboard.com/c/snare-drums/tama",
       "sourceConfidence": "needsVerification",
-      "notes": "Current source is not strong enough for approval. Replace with Tama or catalog source before approving."
+      "notes": "Tama STAR Reserve group contains 1 Hand Hammered Brass 14x5.5 candidate. Current evidence is secondary-source based and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are confirmed from Tama documentation or another approval-safe source."
     },
     {
       "ruleKey": "yamaha-tour-custom-stock-heads-draft",
@@ -397,12 +397,12 @@
       "lineSeriesIncludes": [
         "Tour Custom"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/tour-custom/specs.html",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Yamaha Tour Custom stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Yamaha Tour Custom group contains 2 Maple candidates across 14x5.5 and 14x6.5. The Yamaha source confirms the Tour Custom snare specs page, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "yamaha-absolute-hybrid-maple-stock-heads-draft",
@@ -411,12 +411,12 @@
       "lineSeriesIncludes": [
         "Absolute Hybrid Maple"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "secondary-source-only-needs-official-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://memphisdrumshop.com/products/yamaha-14x6-absolute-hybrid-maple-snare-drum-vintage-natural-ams1460vn",
       "sourceConfidence": "needsVerification",
-      "notes": "Dealer source needs confirmation against Yamaha source before approval."
+      "notes": "Yamaha Absolute Hybrid Maple group contains 1 Absolute Hybrid Maple 14x6 candidate. Current evidence is dealer-source based and does not confirm exact stock batter and reso/snare-side head models from an approval-safe Yamaha source. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "ludwig-1963-1970s-stock-heads-draft",
@@ -425,12 +425,12 @@
       "lineSeriesIncludes": [
         "1963-1970s Ludwig"
       ],
-      "fallbackType": "historic-era-default-needs-source-confirmation",
+      "fallbackType": "vintage-catalog-era-needs-exact-head-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
       "sourceConfidence": "needsVerification",
-      "notes": "Historic Ludwig era records need era-specific stock head confirmation before approval."
+      "notes": "Ludwig 1963-1970s group contains 2 Supraphonic candidates: LM400 5x14 and LM402 6.5x14. Current evidence is vintage catalog-reference based and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed for the relevant catalog era."
     },
     {
       "ruleKey": "ludwig-1977-stock-heads-draft",
@@ -439,12 +439,12 @@
       "lineSeriesIncludes": [
         "1977 Ludwig"
       ],
-      "fallbackType": "historic-era-default-needs-source-confirmation",
+      "fallbackType": "vintage-catalog-era-needs-exact-head-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
       "sourceConfidence": "needsVerification",
-      "notes": "Historic Ludwig 1977 records need era-specific stock head confirmation before approval."
+      "notes": "Ludwig 1977 group contains 2 Black Beauty candidates: standard and Super Sensitive 5x14. Current evidence is vintage catalog-reference based and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed for the 1977 catalog era."
     },
     {
       "ruleKey": "ludwig-artist-signature-stock-heads-draft",
@@ -453,12 +453,12 @@
       "lineSeriesIncludes": [
         "Artist / Signature"
       ],
-      "fallbackType": "signature-model-default-needs-source-confirmation",
+      "fallbackType": "artist-signature-line-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
-      "sourceConfidence": "needsVerification",
-      "notes": "Signature model stock heads may vary. Confirm exact stock batter/reso head before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Ludwig Artist / Signature group contains 1 Carl Palmer Venus 3.7x14 candidate. The Ludwig source confirms current snare product family context, but current evidence does not confirm exact stock batter and reso/snare-side head models for this record. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "premier-artist-stock-heads-draft",
@@ -495,12 +495,12 @@
       "lineSeriesIncludes": [
         "Centenary / Limited"
       ],
-      "fallbackType": "limited-model-default-needs-source-confirmation",
+      "fallbackType": "weak-secondary-source-needs-official-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://en.wikipedia.org/wiki/Premier_Percussion",
       "sourceConfidence": "needsVerification",
-      "notes": "Current source is not strong enough for approval. Replace with official Premier or reliable catalog source before approving."
+      "notes": "Premier Centenary / Limited group contains 1 Della-Porta 100 Walnut 14x6.5 candidate. Current evidence is not approval-safe and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are confirmed from Premier documentation or another approval-safe source."
     },
     {
       "ruleKey": "worldmax-black-dawg-stock-heads-draft",
@@ -537,12 +537,12 @@
       "lineSeriesIncludes": [
         "Signature"
       ],
-      "fallbackType": "signature-model-default-needs-source-confirmation",
+      "fallbackType": "dealer-source-only-needs-official-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.guitarcenter.com/Gretsch-Drums/Brooklyn-Standard-Snare-Drum-14-x-55-in-Satin-Black-Metallic-1500000305607.gc",
       "sourceConfidence": "needsVerification",
-      "notes": "Dealer source needs confirmation against Gretsch official source before approval."
+      "notes": "Gretsch Signature group contains 1 Keith Carlock Signature candidate. Current evidence is dealer-source based and does not confirm exact stock batter and reso/snare-side head models from an approval-safe Gretsch source. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "dw-pdp-true-cast-stock-heads-draft",
@@ -579,12 +579,12 @@
       "lineSeriesIncludes": [
         "Little Squealer / Metal"
       ],
-      "fallbackType": "line-or-model-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://porkpiedrums.com/prod/big-black-brass/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Pork Pie stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Pork Pie Little Squealer / Metal group contains 1 Big Black Brass / BOB candidate. The Pork Pie source confirms the Big Black Brass product context, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     }
   ]
 }
