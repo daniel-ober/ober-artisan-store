@@ -1,0 +1,206 @@
+{
+  "status": "PRODUCTION_STATUS_ONLY_STOCK_READINESS_WRITE_CONFIRMATION",
+  "generatedAt": "2026-05-21T09:26:13.597Z",
+  "sourcePatchPlanFile": "src/legacyPrint/reviewPlans/production-status-only-stock-readiness-patch-plan.json",
+  "collectionName": "snareReferenceDrums",
+  "firestoreWritesPerformed": true,
+  "approval": "production-status-only-27",
+  "summary": {
+    "intendedWriteCount": 27,
+    "actualWriteCount": 27,
+    "batchCount": 1,
+    "productionStatusApplied": "YES",
+    "productionStatusConfidenceApplied": "Medium"
+  },
+  "writeLog": [
+    {
+      "id": "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c",
+      "label": "Ludwig — Chrome-Over-Brass — Chrome-Over-Brass 5x14 — 14x5",
+      "companyName": "Ludwig",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "ludwig_chrome-over-brass_chrome-over-brass-6-5x14_14x6-5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb_9a7efd45",
+      "label": "Ludwig — Chrome-Over-Brass — Chrome-Over-Brass 6.5x14 — 14x6.5",
+      "companyName": "Ludwig",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91",
+      "label": "Ludwig — Copper Phonic — Copper Phonic 5x14 — 14x5",
+      "companyName": "Ludwig",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "ludwig_copper-phonic_copper-phonic-6-5x14_14x6-5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_86ad9b07",
+      "label": "Ludwig — Copper Phonic — Copper Phonic 6.5x14 — 14x6.5",
+      "companyName": "Ludwig",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "ludwig_copper-phonic_copper-phonic-8x14_14x8_metal_copper_copper-finish_2-3mm-steel-triple-flanged_6aaa8788",
+      "label": "Ludwig — Copper Phonic — Copper Phonic 8x14 — 14x8",
+      "companyName": "Ludwig",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-big-black-steel-lst148-14x8_14x8_metal_steel_black-nickel-plated_die-cast-hoops_lst148_43a64c86",
+      "label": "Tama — S.L.P. — S.L.P. Big Black Steel LST148 14x8 — 14x8",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-black-brass-lbr1465-14x6-5_14x6-5_metal_brass_black-nickel-plated_die-cast-hoops_lbr1465_6b9dfd73",
+      "label": "Tama — S.L.P. — S.L.P. Black Brass LBR1465 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-classic-dry-aluminum-lal1455-14x5-5_14x5-5_metal_aluminum_brushed-metal_triple-flange-sound-arc-style_l_00a356d6",
+      "label": "Tama — S.L.P. — S.L.P. Classic Dry Aluminum LAL1455 14x5.5 — 14x5.5",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-classic-maple-lmp1455-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-sound-arc-style_lmp1455_af82f7e3",
+      "label": "Tama — S.L.P. — S.L.P. Classic Maple LMP1455 14x5.5 — 14x5.5",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+      "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-expressive-hammered-steel-14x6_14x6_metal_steel_hammered-steel_steel-mighty-triple-flange-style_lst146h_7fb892f3",
+      "label": "Tama — S.L.P. — S.L.P. Expressive Hammered Steel 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-fat-spruce-lsp146-14x6_14x6_ply_spruce_lacquer_triple-flange-sound-arc-style_lsp146_549c297d",
+      "label": "Tama — S.L.P. — S.L.P. Fat Spruce LSP146 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-bubinga-lgb146-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_lgb146_4cde3272",
+      "label": "Tama — S.L.P. — S.L.P. G-Bubinga LGB146 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-maple-lgm137-13x7_13x7_ply_maple_10_lacquer_die-cast-hoops_lgm137_54229b8d",
+      "label": "Tama — S.L.P. — S.L.P. G-Maple LGM137 13x7 — 13x7",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-maple-lgm146-14x6_14x6_ply_maple_11_lacquer_die-cast-hoops_lgm146_91438c63",
+      "label": "Tama — S.L.P. — S.L.P. G-Maple LGM146 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-walnut-lgw1465-14x6-5_14x6-5_ply_walnut_9_lacquer_die-cast-hoops_lgw1465_59bc9d21",
+      "label": "Tama — S.L.P. — S.L.P. G-Walnut LGW1465 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-mod-bubinga-lbu127-12x7_12x7_ply_bubinga_lacquer_die-cast-hoops_lbu127_8ac6ded3",
+      "label": "Tama — S.L.P. — S.L.P. Mod Bubinga LBU127 12x7 — 12x7",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+      "label": "Tama — S.L.P. — S.L.P. Studio Maple LMP1465F 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-aluminum-14x6_14x6_metal_aluminum_lacquer-metal_grooved-hoop_pal1460_183b9d79",
+      "label": "Tama — STARPHONIC — STARPHONIC Aluminum 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-bell-brass-14x6_14x6_metal_bell-brass_3_lacquer-metal_grooved-hoop_pbe1460_2bd426e8",
+      "label": "Tama — STARPHONIC — STARPHONIC Bell Brass 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-brass-14x6_14x6_metal_brass_lacquer-metal_grooved-hoop_pbr1460_8af74600",
+      "label": "Tama — STARPHONIC — STARPHONIC Brass 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-bubinga-14x6_14x6_ply_bubinga_lacquer-metal_grooved-hoop_pbu1460_0439fe79",
+      "label": "Tama — STARPHONIC — STARPHONIC Bubinga 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-copper-14x7_14x7_metal_copper_lacquer-metal_grooved-hoop_pco1470_6cc1e266",
+      "label": "Tama — STARPHONIC — STARPHONIC Copper 14x7 — 14x7",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-maple-14x6_14x6_ply_maple_lacquer-metal_grooved-hoop_pma1460_b7d3d196",
+      "label": "Tama — STARPHONIC — STARPHONIC Maple 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-spruce-14x6_14x6_ply_spruce_lacquer-metal_grooved-hoop_psp1460_c4fbd3b5",
+      "label": "Tama — STARPHONIC — STARPHONIC Spruce 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-steel-14x6_14x6_metal_steel_lacquer-metal_grooved-hoop_pst1460_64f27fbb",
+      "label": "Tama — STARPHONIC — STARPHONIC Steel 14x6 — 14x6",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    },
+    {
+      "id": "tama_starphonic_starphonic-walnut-14x7_14x7_ply_walnut_lacquer-metal_grooved-hoop_pwa1470_62bb8678",
+      "label": "Tama — STARPHONIC — STARPHONIC Walnut 14x7 — 14x7",
+      "companyName": "Tama",
+      "productionStatus": "YES",
+      "productionStatusConfidence": "Medium"
+    }
+  ]
+}
