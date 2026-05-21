@@ -1,4 +1,6 @@
 
+import promotableAudit from '../reviewPlans/remaining-engine-promotable-audit-heads-wires-do-not-block.json';
+
 const COLLECTION = 'snareReferenceDrums';
 
 const normalizeText = value =>
@@ -155,35 +157,51 @@ export async function loadPromotableSnareReferences({
 
 } = {}) {
 
-  if (!firestore) {
+  const normalizedQuery = normalizeText(query);
 
-    return {
+  let source = 'localAudit';
 
-      success: false,
+  let rawReferences =
 
-      source: 'firestore',
+    promotableAudit.promotableRecords ||
 
-      message: 'Missing firestore instance.',
+    promotableAudit.records ||
 
-      references: [],
+    promotableAudit.candidates ||
 
-    };
+    [];
+
+  if (firestore) {
+
+    try {
+
+      const snapshot = await firestore
+
+        .collection(COLLECTION)
+
+        .where('legacyPrintEnginePromotable', '==', true)
+
+        .limit(500)
+
+        .get();
+
+      if (!snapshot.empty) {
+
+        source = 'firestore';
+
+        rawReferences = snapshot.docs;
+
+      }
+
+    } catch (error) {
+
+      console.warn('[LegacyPrint] Firestore promotable snare lookup failed; using local audit fallback.', error);
+
+    }
 
   }
 
-  const snapshot = await firestore
-
-    .collection(COLLECTION)
-
-    .where('legacyPrintEnginePromotable', '==', true)
-
-    .limit(500)
-
-    .get();
-
-  const normalizedQuery = normalizeText(query);
-
-  const references = snapshot.docs
+  const references = rawReferences
 
     .map(normalizeReference)
 
@@ -211,9 +229,9 @@ export async function loadPromotableSnareReferences({
 
     success: true,
 
-    source: 'firestore',
+    source,
 
-    totalFetched: snapshot.docs.length,
+    totalFetched: rawReferences.length,
 
     count: references.length,
 
