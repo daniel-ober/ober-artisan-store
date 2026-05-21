@@ -1,0 +1,60 @@
+{
+  "generatedAt": "2026-05-21T08:43:52.920Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-ludwig-pearl-research-packet.json",
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_LUDWIG_PEARL_RESEARCH_DECISIONS_NO_FIRESTORE_WRITES",
+  "summary": {
+    "targetCompanies": [
+      "Ludwig",
+      "Pearl"
+    ],
+    "candidateCount": 65,
+    "approvedCompanyWideFallbackCount": 0,
+    "blockedCompanyWideFallbackCount": 1,
+    "needsLineLevelSplitCount": 1,
+    "noFirestoreWrites": true
+  },
+  "companyDecisions": [
+    {
+      "companyName": "Ludwig",
+      "candidateCount": 32,
+      "reviewed": true,
+      "approvedCompanyWideFallbackRule": false,
+      "decisionStatus": "blocked_company_wide_fallback_insufficient_evidence",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "notApproved",
+      "sourceEvidenceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/classic-maple"
+      ],
+      "sourceEvidenceNotes": "Lane A and broader Ludwig review did not find source-backed company-wide stock batter and resonant/snare-side head values. Dealer listings may mention Ludwig WeatherMaster heads for individual snares, but dealer evidence alone is not enough for a conservative company-wide fallback rule.",
+      "nextAction": "Leave Ludwig Lane B blocked unless official Ludwig catalog/spec evidence is found for exact stock batter and snare-side heads by line/era."
+    },
+    {
+      "companyName": "Pearl",
+      "candidateCount": 33,
+      "reviewed": true,
+      "approvedCompanyWideFallbackRule": false,
+      "decisionStatus": "needs_line_level_split_before_approval",
+      "approvedFallbackKey": "",
+      "approvedBatterHeadFallback": "",
+      "approvedResoHeadFallback": "",
+      "fallbackConfidence": "pendingLineLevelReview",
+      "sourceEvidenceUrls": [
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/Pearl2023GeneralCatalog%28PMI%2920240126_rev.pdf",
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2023-Price-List-.pdf",
+        "https://pearldrum.com/sites/default/files/price-list-uploads/2021-pearl-price-list.pdf"
+      ],
+      "sourceEvidenceNotes": "Pearl catalog/price-list evidence supports Remo/Remo UT OEM head patterns in some Pearl lines, including broader references to Remo UT snare drum heads and Pearl Masters using Remo USA drum heads. This is not safe as a company-wide fallback because Pearl lines differ by tier and era.",
+      "nextAction": "Split Pearl Lane B records by line/series and approve only line-specific fallback rules where catalog evidence matches that line."
+    }
+  ],
+  "researchRulesApplied": [
+    "No dealer-only evidence accepted for company-wide fallback.",
+    "No company-wide fallback approved when head evidence varies by product tier or era.",
+    "Fallback-head records remain separate from source-confirmed full stock pass.",
+    "No Firestore writes."
+  ],
+  "nextRecommendedStep": "Split Pearl Lane B records by line/series for source-backed line-level stock-head fallback review."
+}
