@@ -111,6 +111,14 @@ const {
 
 } = require('./findContrastingSnareVoices');
 
+const {
+
+  buildSnareDiscoveryPacket,
+
+  DEFAULT_DISCOVERY_OPTIONS
+
+} = require('./buildSnareDiscoveryPacket');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -183,7 +191,11 @@ module.exports = {
 
   getDominantContrastNodes,
 
-  CONTRAST_MODES
+  CONTRAST_MODES,
+
+  buildSnareDiscoveryPacket,
+
+  DEFAULT_DISCOVERY_OPTIONS
 
 };
 
