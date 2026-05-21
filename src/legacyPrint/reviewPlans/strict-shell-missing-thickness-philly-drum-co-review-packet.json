@@ -1,0 +1,58 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_PHILLY_DRUM_CO_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.231Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Philly Drum Co.",
+  "reviewScope": "Philly Drum Co. records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 1,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Custom Stave",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "High": 1
+      },
+      "researchQuestion": "Can Philly Drum Co. Custom Stave snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Philly Drum Co. page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "philly-drum-co_custom-stave_tri-wood-stave-walnut-cherry-maple_14x6-5_solid-shell_walnut_cherry_maple_hand-carved-outer-_e51c5f30",
+          "label": "Philly Drum Co. — Custom Stave — Tri-Wood Stave Walnut/Cherry/Maple — 14x6.5",
+          "modelName": "Tri-Wood Stave Walnut/Cherry/Maple",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"Cherry\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Hand-carved outer rounded edge with 45-degree inner cut\",\"snareSideProfile\":\"Hand-carved outer rounded edge with 45-degree inner cut\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://phillydrumco.com/custom/p/customizable-tri-wood-stave-snare",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Philly Drum Co. line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

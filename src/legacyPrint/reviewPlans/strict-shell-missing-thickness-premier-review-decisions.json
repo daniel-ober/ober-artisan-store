@@ -1,0 +1,44 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_PREMIER_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.231Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-premier-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Premier",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Premier missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Premier",
+      "lineSeries": "Artist",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Premier page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "premier_artist_artist-brushed-aluminium-14x5-5-snare_14x5-5_metal_aluminum_formed-metal-bearing-edge_brushed-aluminium_1_d94806c8",
+        "premier_artist_artist-chrome-over-steel-14x5-5-snare_14x5-5_metal_steel_formed-metal-bearing-edge_chrome-over-steel_1-5m_bcb8f89d"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Premier shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_WORLDMAX_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.228Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-worldmax-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "WorldMax",
+  "summary": {
+    "candidateCount": 29,
+    "lineGroupCount": 4,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 4,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "WorldMax missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "candidateCount": 18,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official WorldMax page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-where-conf_e61d1279",
+        "worldmax_worldmax-metal-snares-retailer-documented_aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed-where-co_d3b659a7",
+        "worldmax_worldmax-metal-snares-retailer-documented_bronze-shell_14x5_metal_bronze_rolled-flange-45-listed-where-confirme_661f3978",
+        "worldmax_worldmax-metal-snares-retailer-documented_bronze-shell_14x6-5_metal_bronze_rolled-flange-45-listed-where-confir_63531491",
+        "worldmax_worldmax-metal-snares-retailer-documented_chrome-steel-shell_14x5-5_metal_steel_rolled-flange-45-listed-where-c_982c019f",
+        "worldmax_worldmax-metal-snares-retailer-documented_chrome-steel-shell_14x6-5_metal_steel_rolled-flange-45-listed-where-c_c91f51db",
+        "worldmax_worldmax-metal-snares-retailer-documented_copper-shell_14x5_metal_copper_rolled-flange-45-listed-where-confirme_3032f6b4",
+        "worldmax_worldmax-metal-snares-retailer-documented_copper-shell_14x6-5_metal_copper_rolled-flange-45-listed-where-confir_d8d25318",
+        "worldmax_worldmax-metal-snares-retailer-documented_hammered-aluminum-shell_14x5_metal_aluminum_rolled-flange-45-listed-w_20d1dfe0",
+        "worldmax_worldmax-metal-snares-retailer-documented_hammered-aluminum-shell_14x6-5_metal_aluminum_rolled-flange-45-listed_4f83dfec",
+        "worldmax_worldmax-metal-snares-retailer-documented_hammered-bronze-shell_14x5_metal_bronze_rolled-flange-45-listed-where_3dddbaf5",
+        "worldmax_worldmax-metal-snares-retailer-documented_hammered-bronze-shell_14x6-5_metal_bronze_rolled-flange-45-listed-whe_79cae2f5"
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "OEM Configurations",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official WorldMax page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_7e0ca6cf",
+        "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_cdb2254b",
+        "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_dfb3e115",
+        "worldmax_oem-configurations_worldmax-brass-shell-alternate-hoop-configuration_14x6-5_metal_brass_rolled-flange-45-listed_f67f5e38"
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "Wood Snare Drums",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official WorldMax page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x5-5_ply_maple_rolled-flange-45-listed-where-confirmed_mi_0a5c134b",
+        "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x5-5_ply_wood_rolled-flange-45-listed-where-confirmed_min_cd72aaa3",
+        "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x6-5_ply_maple_rolled-flange-45-listed-where-confirmed_mi_da70b06a",
+        "worldmax_wood-snare-drums_worldmax-wood-snare-representative_14x6-5_ply_wood_rolled-flange-45-listed-where-confirmed_min_0214d121"
+      ]
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Shells / OEM Reference",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official WorldMax page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_13x7_metal_brass_rolled-flange-45-lis_214343f1",
+        "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_14x5_metal_brass_rolled-flange-45-lis_d6db1985",
+        "worldmax_worldmax-shells-oem-reference_black-hawg-black-dawg-brass-undrilled-shell_14x6-5_metal_brass_rolled-flange-45-l_c4b19e1c"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No WorldMax shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

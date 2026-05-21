@@ -1,0 +1,74 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_PREMIER_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.231Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Premier",
+  "reviewScope": "Premier records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Artist",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestion": "Can Premier Artist snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Premier page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "premier_artist_artist-brushed-aluminium-14x5-5-snare_14x5-5_metal_aluminum_formed-metal-bearing-edge_brushed-aluminium_1_d94806c8",
+          "label": "Premier — Artist — Artist Brushed Aluminium 14x5.5 Snare — 14x5.5",
+          "modelName": "Artist Brushed Aluminium 14x5.5 Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamless/formed metal unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Formed metal bearing edge\",\"snareSideProfile\":\"Formed metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        },
+        {
+          "id": "premier_artist_artist-chrome-over-steel-14x5-5-snare_14x5-5_metal_steel_formed-metal-bearing-edge_chrome-over-steel_1-5m_bcb8f89d",
+          "label": "Premier — Artist — Artist Chrome over Steel 14x5.5 Snare — 14x5.5",
+          "modelName": "Artist Chrome over Steel 14x5.5 Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamed metal\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Formed metal bearing edge\",\"snareSideProfile\":\"Formed metal bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Premier line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

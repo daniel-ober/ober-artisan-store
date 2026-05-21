@@ -1,0 +1,558 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_SONOR_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.228Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "SONOR",
+  "reviewScope": "SONOR records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 21,
+    "lineGroupCount": 13,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Delite",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestion": "Can SONOR Delite snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_delite_delite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_dl-1405_7a8db104",
+          "label": "SONOR — Delite — Delite Maple 14x5 — 14x5",
+          "modelName": "Delite Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Thin maple + rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "sonor_delite_delite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_dl-14065_41388ded",
+          "label": "SONOR — Delite — Delite Maple 14x6.5 — 14x6.5",
+          "modelName": "Delite Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Thin maple + rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "sonor_delite_delite-maple-14x6_14x6_ply_maple_45-bearing-edge_die-cast-hoops_dl-1406_9c2c56db",
+          "label": "SONOR — Delite — Delite Maple 14x6 — 14x6",
+          "modelName": "Delite Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Thin maple + rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    },
+    {
+      "lineSeries": "Designer",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Low": 3
+      },
+      "researchQuestion": "Can SONOR Designer snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_designer_designer-maple-heavy-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-mh_b35252c4",
+          "label": "SONOR — Designer — Designer Maple Heavy 14x6.5 — 14x6.5",
+          "modelName": "Designer Maple Heavy 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Designer heavy shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        },
+        {
+          "id": "sonor_designer_designer-maple-light-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1405-ml_cd502414",
+          "label": "SONOR — Designer — Designer Maple Light 14x5 — 14x5",
+          "modelName": "Designer Maple Light 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Designer light shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        },
+        {
+          "id": "sonor_designer_designer-maple-light-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-ml_1a7a0f66",
+          "label": "SONOR — Designer — Designer Maple Light 14x6.5 — 14x6.5",
+          "modelName": "Designer Maple Light 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Designer light shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "HiLite",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can SONOR HiLite snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_hilite_hilite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_67b0ea10",
+          "label": "SONOR — HiLite — HiLite Maple 14x5 — 14x5",
+          "modelName": "HiLite Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        },
+        {
+          "id": "sonor_hilite_hilite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_63990c6e",
+          "label": "SONOR — HiLite — HiLite Maple 14x6.5 — 14x6.5",
+          "modelName": "HiLite Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "S Class Pro",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can SONOR S Class Pro snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_s-class-pro_s-class-pro-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_49cde88b",
+          "label": "SONOR — S Class Pro — S Class Pro Maple 14x5 — 14x5",
+          "modelName": "S Class Pro Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        },
+        {
+          "id": "sonor_s-class-pro_s-class-pro-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_d5ee0f37",
+          "label": "SONOR — S Class Pro — S Class Pro Maple 14x6.5 — 14x6.5",
+          "modelName": "S Class Pro Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "S-Classix",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can SONOR S-Classix snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_s-classix_s-classix-birch-14x5_14x5_ply_birch_45-bearing-edge_die-cast-hoops_b60f49d8",
+          "label": "SONOR — S-Classix — S-Classix Birch 14x5 — 14x5",
+          "modelName": "S-Classix Birch 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        },
+        {
+          "id": "sonor_s-classix_s-classix-birch-14x6-5_14x6-5_ply_birch_45-bearing-edge_die-cast-hoops_ce873095",
+          "label": "SONOR — S-Classix — S-Classix Birch 14x6.5 — 14x6.5",
+          "modelName": "S-Classix Birch 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Teardrop",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can SONOR Teardrop snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_teardrop_teardrop-beech-14x5_14x5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_4d70aa9d",
+          "label": "SONOR — Teardrop — Teardrop Beech 14x5 — 14x5",
+          "modelName": "Teardrop Beech 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Beech",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        },
+        {
+          "id": "sonor_teardrop_teardrop-beech-14x6-5_14x6-5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_c087e502",
+          "label": "SONOR — Teardrop — Teardrop Beech 14x6.5 — 14x6.5",
+          "modelName": "Teardrop Beech 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Beech",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage edge\",\"snareSideProfile\":\"Rounded vintage edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "AQ1",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can SONOR AQ1 snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_aq1_aq1-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_aq1-1405_537ef02e",
+          "label": "SONOR — AQ1 — AQ1 Birch 14x5.5 — 14x5.5",
+          "modelName": "AQ1 Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    },
+    {
+      "lineSeries": "Essential Force",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can SONOR Essential Force snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_essential-force_essential-force-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_455cf7ea",
+          "label": "SONOR — Essential Force — Essential Force Birch 14x5.5 — 14x5.5",
+          "modelName": "Essential Force Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Force 2005",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can SONOR Force 2005 snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_force-2005_force-2005-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_49d52773",
+          "label": "SONOR — Force 2005 — Force 2005 Birch 14x5.5 — 14x5.5",
+          "modelName": "Force 2005 Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Force 2007",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can SONOR Force 2007 snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_force-2007_force-2007-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_d558f0e8",
+          "label": "SONOR — Force 2007 — Force 2007 Birch 14x5.5 — 14x5.5",
+          "modelName": "Force 2007 Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Force 3005",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can SONOR Force 3005 snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_force-3005_force-3005-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_e6254a81",
+          "label": "SONOR — Force 3005 — Force 3005 Maple 14x5.5 — 14x5.5",
+          "modelName": "Force 3005 Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Force 3007",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can SONOR Force 3007 snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_force-3007_force-3007-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_3dccb9b3",
+          "label": "SONOR — Force 3007 — Force 3007 Maple 14x5.5 — 14x5.5",
+          "modelName": "Force 3007 Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Select Force",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can SONOR Select Force snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_select-force_select-force-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_c147c955",
+          "label": "SONOR — Select Force — Select Force Maple 14x5.5 — 14x5.5",
+          "modelName": "Select Force Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45° bearing edge\",\"snareSideProfile\":\"45° bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review SONOR line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

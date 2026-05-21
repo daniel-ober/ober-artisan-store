@@ -1,0 +1,90 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_MAPEX_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Mapex",
+  "reviewScope": "Mapex records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Armory",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestion": "Can Mapex Armory snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_armory_exterminator_14x6-5_ply_walnut_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_arbw4650_1b0cfe3e",
+          "label": "Mapex — Armory — Exterminator — 14x6.5",
+          "modelName": "Exterminator",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"SONIClear / modern Mapex edge\",\"snareSideProfile\":\"SONIClear / modern Mapex edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "mapex_armory_peacemaker_14x5-5_ply_maple-walnut_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_armw4550_d3bab458",
+          "label": "Mapex — Armory — Peacemaker — 14x5.5",
+          "modelName": "Peacemaker",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"SONIClear / modern Mapex edge\",\"snareSideProfile\":\"SONIClear / modern Mapex edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "mapex_armory_sabre_14x5-5_ply_maple_soniclear-modern-mapex-edge_lacquer_2-3mm-powerhoops_arml4551_2883e912",
+          "label": "Mapex — Armory — Sabre — 14x5.5",
+          "modelName": "Sabre",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"SONIClear / modern Mapex edge\",\"snareSideProfile\":\"SONIClear / modern Mapex edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Mapex line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

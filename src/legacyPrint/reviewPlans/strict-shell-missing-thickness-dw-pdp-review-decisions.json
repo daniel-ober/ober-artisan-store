@@ -1,0 +1,67 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_DW_PDP_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-dw-pdp-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "DW / PDP",
+  "summary": {
+    "candidateCount": 7,
+    "lineGroupCount": 2,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 2,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "DW / PDP missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Metal",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x5-5_14x5-5_metal_steel_flanged-45-degree-edge-estimated-from_8dbbee2f",
+        "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x6-5_14x6-5_metal_steel_flanged-45-degree-edge-estimated-from_30641c17",
+        "dw-pdp_pdp-concept-metal_concept-brass-14x6-5_14x6-5_metal_brass_flanged-45-degree-edge-estimated-from-review-listing_br_51c51e3f",
+        "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x5_14x5_metal_aluminum_flanged-45-degree-edge-estimated-from-review-_94509787",
+        "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_flanged-45-degree-edge-estimated-from-rev_104a3567",
+        "dw-pdp_pdp-concept-metal_concept-copper-14x6-5_14x6-5_metal_copper_flanged-45-degree-edge-estimated-from-review-listing__3716c84f"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "dw-pdp_dw-historical-discontinued_dw-jazz-series-maple-gum-14x5-5_14x5-5_ply_maple_roundover-vintage-style-estimated_lac_aa3ea5b8"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No DW / PDP shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

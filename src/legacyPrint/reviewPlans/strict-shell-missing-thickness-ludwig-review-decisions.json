@@ -1,0 +1,79 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_LUDWIG_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.228Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-ludwig-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Ludwig",
+  "summary": {
+    "candidateCount": 19,
+    "lineGroupCount": 2,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 2,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Ludwig missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1960 Ludwig",
+      "candidateCount": 11,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 11,
+      "sampleRecordIds": [
+        "ludwig_1960-ludwig_jazz-festival-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_db65937d",
+        "ludwig_1960-ludwig_auditorium-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_triple-flanged_67866f31",
+        "ludwig_1960-ludwig_downbeat-4x14_14x4_ply_maple-poplar_lacquer-pearl_triple-flanged_dd90647b",
+        "ludwig_1960-ludwig_jazz-combo-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_5ed15c1c",
+        "ludwig_1960-ludwig_las-vegas-5x14_14x5_ply_maple-poplar_lacquer-pearl_triple-flanged_f13dd39e",
+        "ludwig_1960-ludwig_pioneer-5-5x14_14x5-5_ply_mahogany-poplar_lacquer-or-pearl-wrap_triple-flanged_d987b16f",
+        "ludwig_1960-ludwig_porto-pak-3x13_13x3_ply_maple-poplar_lacquer-pearl_triple-flanged_c13c5e0d",
+        "ludwig_1960-ludwig_school-festival-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_triple-flanged_6511b6b9",
+        "ludwig_1960-ludwig_super-classic-snare-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl-wrap_triple-flanged_cb20063a",
+        "ludwig_1960-ludwig_super-ludwig-metal-5x14_14x5_metal_brass_chrome-over-metal_triple-flanged_5aef5292",
+        "ludwig_1960-ludwig_symphonic-snare-6-5x14_14x6-5_ply_maple-poplar_lacquer-pearl_concert-hoop_837e481d"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1980s Ludwig",
+      "candidateCount": 8,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 8,
+      "sampleRecordIds": [
+        "ludwig_1980s-ludwig_coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_44ab7d65",
+        "ludwig_1980s-ludwig_hammered-bronze-5x14_14x5_metal_bronze_hammered-bronze_triple-flanged_7732000e",
+        "ludwig_1980s-ludwig_hammered-bronze-6-5x14_14x6-5_metal_bronze_hammered-bronze_triple-flanged_00bb458c",
+        "ludwig_1980s-ludwig_hammered-chrome-5x14_14x5_metal_steel_hammered-chrome_triple-flanged_a0325acc",
+        "ludwig_1980s-ludwig_rock-concert-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_d30d06e3",
+        "ludwig_1980s-ludwig_s-l-snare-drum-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_d6f09d4a",
+        "ludwig_1980s-ludwig_slotted-coliseum-8x14_14x8_ply_maple_lacquer-wrap_triple-flanged_5f12b875",
+        "ludwig_1980s-ludwig_smooth-bronze-5x14_14x5_metal_bronze_smooth-bronze_triple-flanged_cc1d672c"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Ludwig shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

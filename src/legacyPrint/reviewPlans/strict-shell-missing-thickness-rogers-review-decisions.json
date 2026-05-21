@@ -1,0 +1,168 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_ROGERS_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.229Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-rogers-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Rogers",
+  "summary": {
+    "candidateCount": 18,
+    "lineGroupCount": 7,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 7,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Rogers missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Dyna-Sonic Reissue",
+      "candidateCount": 9,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 9,
+      "sampleRecordIds": [
+        "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x5_14x5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_dyn_73791f71",
+        "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x6-5_14x6-5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_697f4d0f",
+        "rogers_dyna-sonic-reissue_dyna-sonic-aluminum-a7-14x5_14x5_metal_aluminum_modern-edge-exact-geometry-not-listed_dyna-son_f895027d",
+        "rogers_dyna-sonic-reissue_dyna-sonic-aluminum-a7-14x6-5_14x6-5_metal_aluminum_modern-edge-exact-geometry-not-listed_dyna_562c750b",
+        "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-black-gloss-lacquer_14x5_ply_maple-poplar_rounded-modern-rogers-style-edg_08b77441",
+        "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-gold-sparkle-lacquer_14x5_ply_maple-poplar_rounded-modern-rogers-style-ed_d3b977f4",
+        "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-red-sparkle-lacquer_14x5_ply_maple-poplar_rounded-modern-rogers-style-edg_5488d3d5",
+        "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-white-marine-pearl_14x5_ply_maple-poplar_rounded-modern-rogers-style-edge_2f91dd4a",
+        "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x6-5_14x6-5_ply_maple-poplar_rounded-modern-rogers-style-edge-exact-geometry_e16a5a2b"
+      ]
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Dyna-Sonic Vintage",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "rogers_dyna-sonic-vintage_dyna-sonic-wood-bandb-14x5_14x5_ply_maple-poplar_rounded-rogers-edge-exact-geometry-era-depend_a022ce4c",
+        "rogers_dyna-sonic-vintage_dyna-sonic-wood-beavertail-14x5_14x5_ply_maple-poplar_rounded-rogers-edge-exact-geometry-era-d_f2ad391c"
+      ]
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Powertone",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "rogers_powertone_powertone-wood-14x5_14x5_ply_maple-poplar_sharper-powertone-mylar-era-rogers-edge_standard-powertone-be_11cc0fea",
+        "rogers_powertone_powertone-wood-14x6-5_14x6-5_ply_maple-poplar_sharper-powertone-mylar-era-rogers-edge_standard-powerton_1393e711"
+      ]
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "SuperTen Reissue",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "rogers_superten-reissue_superten-maple-poplar-14x5_14x5_ply_maple-poplar_modern-rogers-edge-exact-geometry-not-listed_st_f5b95ee0",
+        "rogers_superten-reissue_superten-maple-poplar-14x6-5_14x6-5_ply_maple-poplar_modern-rogers-edge-exact-geometry-not-liste_605c095a"
+      ]
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Holiday",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "rogers_holiday_holiday-wood-14x5_14x5_ply_maple-poplar_rounded-vintage-rogers-edge_deeper-vintage-bed_wrap-lacquer_tripl_448a2d49"
+      ]
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Luxor",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "rogers_luxor_luxor-wood-14x5_14x5_ply_maple-poplar_vintage-rogers-edge-exact-geometry-varies_vintage-bed_wrap-lacquer_tr_e6dc358b"
+      ]
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Tower",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "rogers_tower_tower-wood-14x5_14x5_ply_maple-poplar_vintage-rogers-edge-exact-geometry-varies_standard-vintage-bed_wrap-l_5d392df9"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Rogers shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

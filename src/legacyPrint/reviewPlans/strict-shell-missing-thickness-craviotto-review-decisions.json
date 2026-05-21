@@ -1,0 +1,141 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_CRAVIOTTO_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.227Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-craviotto-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Craviotto",
+  "summary": {
+    "candidateCount": 45,
+    "lineGroupCount": 5,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 5,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Craviotto missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "candidateCount": 30,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-la_f1d11cf6",
+        "craviotto_custom-shop-solid-shell_custom-shop-ash-solid-shell-6-5x14_14x6-5_steam-bent_ash_45-bearing-edges_satin-oil-la_b447c46a",
+        "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-5-5x14_14x5-5_steam-bent_birch_45-bearing-edges_satin-oi_7baa6ec9",
+        "craviotto_custom-shop-solid-shell_custom-shop-birch-solid-shell-6-5x14_14x6-5_steam-bent_birch_45-bearing-edges_satin-oi_db7b6f8b",
+        "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x13_13x5-5_steam-bent_cherry_45-bearing-edges_satin-_e214d01a",
+        "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-_9488cfa0",
+        "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-5x12_12x5_steam-bent_cherry_45-bearing-edges_satin-oil-_a4e4c673",
+        "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-6-5x14_14x6-5_steam-bent_cherry_45-bearing-edges_satin-_bed9f21c",
+        "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-7x14_14x7_steam-bent_cherry_45-bearing-edges_satin-oil-_d6db57ea",
+        "craviotto_custom-shop-solid-shell_custom-shop-cherry-solid-shell-8x14_14x8_steam-bent_cherry_45-bearing-edges_satin-oil-_00c24701",
+        "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x13_13x5-5_steam-bent_mahogany_45-bearing-edges_sa_a4ed5427",
+        "craviotto_custom-shop-solid-shell_custom-shop-mahogany-solid-shell-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_sa_b3aea877"
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "candidateCount": 7,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 7,
+      "sampleRecordIds": [
+        "craviotto_custom-shop-stacked-solid_stacked-solid-ash-maple-6-5x14_14x6-5_steam-bent_ash_maple_45-bearing-edges_satin-oi_7f9daee0",
+        "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-mahogany-6-5x14_14x6-5_steam-bent_cherry_mahogany_45-bearing-ed_006914d9",
+        "craviotto_custom-shop-stacked-solid_stacked-solid-cherry-walnut-6-5x14_14x6-5_steam-bent_cherry_walnut_45-bearing-edges__c29fd114",
+        "craviotto_custom-shop-stacked-solid_stacked-solid-mahogany-maple-6-5x14_14x6-5_steam-bent_mahogany_maple_45-bearing-edge_2f2dc60e",
+        "craviotto_custom-shop-stacked-solid_stacked-solid-maple-walnut-6-5x14_14x6-5_steam-bent_maple_walnut_45-bearing-edges_sa_f2bce3c9",
+        "craviotto_custom-shop-stacked-solid_stacked-solid-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearin_d23a87e4",
+        "craviotto_custom-shop-stacked-solid_stacked-solid-walnut-ash-walnut-6-5x14_14x6-5_steam-bent_walnut_ash_walnut_45-bearin_f47f02c6"
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Limited Edition",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "craviotto_limited-edition_diamond-tube-lug-ash-5-5x14_14x5-5_steam-bent_ash_45-bearing-edges_satin-oil-lacquer-options_t_b5be3c99",
+        "craviotto_limited-edition_diamond-tube-lug-birdseye-maple-5-5x14_14x5-5_steam-bent_maple_maple_45-bearing-edges_satin-oi_11a8ee68",
+        "craviotto_limited-edition_diamond-tube-lug-black-cherry-5-5x14_14x5-5_steam-bent_cherry_45-bearing-edges_satin-oil-lacqu_96e56440",
+        "craviotto_limited-edition_diamond-tube-lug-mahogany-5-5x14_14x5-5_steam-bent_mahogany_45-bearing-edges_satin-oil-lacquer_b1d3fcd1"
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "DW / Craviotto Era",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-5-5x14_14x5-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_0a38d6b4",
+        "craviotto_dw-craviotto-era_dw-craviotto-solid-maple-6-5x14_14x6-5_steam-bent_maple_45-bearing-edges_satin-oil-lacquer-op_602e146c"
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Private Reserve",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "craviotto_private-reserve_private-reserve-mappa-burl-walnut-6-5x14_14x6-5_steam-bent_walnut_mappa-burl-veneer_45-bearing_9011056d",
+        "craviotto_private-reserve_private-reserve-sycamore-mahogany-6-5x14_14x6-5_steam-bent_sycamore_mahogany_45-bearing-edges__e8c2552c"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Craviotto shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

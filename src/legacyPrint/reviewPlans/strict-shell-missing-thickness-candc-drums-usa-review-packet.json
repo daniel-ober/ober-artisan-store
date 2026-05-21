@@ -1,0 +1,138 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_CANDC_DRUMS_USA_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "C&C Drums USA",
+  "reviewScope": "C&C Drums USA records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 6,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Custom Drums",
+      "candidateCount": 6,
+      "sourceConfidenceCounts": {
+        "High": 6
+      },
+      "researchQuestion": "Can C&C Drums USA Custom Drums snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official C&C Drums USA page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "candc-drums-usa_custom-drums_custom-7-ply-mahogany-14x6-5_14x6-5_acrylic_mahogany_customer-selected-bearing-edge_861b3e9b",
+          "label": "C&C Drums USA — Custom Drums — Custom 7 Ply Mahogany 14x6.5 — 14x6.5",
+          "modelName": "Custom 7 Ply Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"7-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Customer-selected bearing edge\",\"snareSideProfile\":\"Customer-selected bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums",
+          "sourceConfidence": "High",
+          "priorityScore": 1085
+        },
+        {
+          "id": "candc-drums-usa_custom-drums_custom-7-ply-maple-14x6-5_14x6-5_acrylic_maple_customer-selected-bearing-edge_d88bc2ee",
+          "label": "C&C Drums USA — Custom Drums — Custom 7 Ply Maple 14x6.5 — 14x6.5",
+          "modelName": "Custom 7 Ply Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"7-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Customer-selected bearing edge\",\"snareSideProfile\":\"Customer-selected bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums",
+          "sourceConfidence": "High",
+          "priorityScore": 1085
+        },
+        {
+          "id": "candc-drums-usa_custom-drums_custom-acrylic-14x6-5_14x6-5_acrylic_acrylic_customer-selected-bearing-edge_f58e8692",
+          "label": "C&C Drums USA — Custom Drums — Custom Acrylic 14x6.5 — 14x6.5",
+          "modelName": "Custom Acrylic 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Acrylic",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamless/custom acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Customer-selected bearing edge\",\"snareSideProfile\":\"Customer-selected bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums",
+          "sourceConfidence": "High",
+          "priorityScore": 1085
+        },
+        {
+          "id": "candc-drums-usa_custom-drums_custom-luan-6-and-6-14x6-5_14x6-5_acrylic_luan_customer-selected-bearing-edge_ca8709ec",
+          "label": "C&C Drums USA — Custom Drums — Custom Luan 6 & 6 14x6.5 — 14x6.5",
+          "modelName": "Custom Luan 6 & 6 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Luan",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Luan\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6 & 6\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Customer-selected bearing edge\",\"snareSideProfile\":\"Customer-selected bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums",
+          "sourceConfidence": "High",
+          "priorityScore": 1085
+        },
+        {
+          "id": "candc-drums-usa_custom-drums_custom-maple-mahogany-maple-14x6-5_14x6-5_acrylic_maple_mahogany_maple_customer-selected-be_7c224be2",
+          "label": "C&C Drums USA — Custom Drums — Custom Maple/Mahogany/Maple 14x6.5 — 14x6.5",
+          "modelName": "Custom Maple/Mahogany/Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"7-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Customer-selected bearing edge\",\"snareSideProfile\":\"Customer-selected bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums",
+          "sourceConfidence": "High",
+          "priorityScore": 1085
+        },
+        {
+          "id": "candc-drums-usa_custom-drums_custom-maple-poplar-maple-14x6-5_14x6-5_acrylic_maple_poplar_maple_customer-selected-bearin_e339300b",
+          "label": "C&C Drums USA — Custom Drums — Custom Maple/Poplar/Maple 14x6.5 — 14x6.5",
+          "modelName": "Custom Maple/Poplar/Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"Custom ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Customer-selected bearing edge\",\"snareSideProfile\":\"Customer-selected bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums",
+          "sourceConfidence": "High",
+          "priorityScore": 1085
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review C&C Drums USA line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

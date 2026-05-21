@@ -1,0 +1,328 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_SLINGERLAND_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.226Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-slingerland-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Slingerland",
+  "summary": {
+    "candidateCount": 54,
+    "lineGroupCount": 14,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 14,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Slingerland missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Wood / Artist / Student",
+      "candidateCount": 14,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "slingerland_vintage-wood-artist-student_artist-model-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_cc2d4d5a",
+        "slingerland_vintage-wood-artist-student_artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wrap_3514218a",
+        "slingerland_vintage-wood-artist-student_buddy-rich-80n-concert-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-_2bc06d1e",
+        "slingerland_vintage-wood-artist-student_buddy-rich-artist-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_b9882c77",
+        "slingerland_vintage-wood-artist-student_club-date-style-slingerland-student-snare_14x5-5_ply_mahogany_poplar_mahogany_ro_10c521b6",
+        "slingerland_vintage-wood-artist-student_deluxe-student-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pe_b7fe6b7d",
+        "slingerland_vintage-wood-artist-student_festival-model_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wr_10342383",
+        "slingerland_vintage-wood-artist-student_gene-krupa-junior_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_1bd32339",
+        "slingerland_vintage-wood-artist-student_hollywood-ace-6-lug_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pea_b94ddf6b",
+        "slingerland_vintage-wood-artist-student_hollywood-ace_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl-wra_5551455b",
+        "slingerland_vintage-wood-artist-student_jam-session-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_pearl_0e646c53",
+        "slingerland_vintage-wood-artist-student_modern-jazz-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_3f4f440f"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Sound King",
+      "candidateCount": 12,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5-5_metal_chrome-over-brass_rolled-metal-bearing-edge__e8b0642b",
+        "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_06baa511",
+        "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge__c4317c68",
+        "slingerland_sound-king_gene-krupa-sound-king-chrome-over-brass_14x7_metal_chrome-over-brass_rolled-metal-bearing-edge_ch_78f35716",
+        "slingerland_sound-king_sound-king-aluminum_14x5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_stick_32cf90ac",
+        "slingerland_sound-king_sound-king-aluminum_14x6-5_metal_aluminum_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_8c3a24c1",
+        "slingerland_sound-king_sound-king-black-chrome-over-brass_14x5_metal_chrome-over-brass_rolled-metal-bearing-edge_plated-_3c8cd2c9",
+        "slingerland_sound-king_sound-king-black-chrome-over-brass_14x6-5_metal_chrome-over-brass_rolled-metal-bearing-edge_plate_890a4d18",
+        "slingerland_sound-king_sound-king-brass-lacquer_14x5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_sti_2344c2c4",
+        "slingerland_sound-king_sound-king-brass-lacquer_14x6-5_metal_brass_rolled-metal-bearing-edge_plated-or-lacquered-metal_s_5946d2a3",
+        "slingerland_sound-king_sound-king-chrome-steel_14x5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_stic_2808c033",
+        "slingerland_sound-king_sound-king-chrome-steel_14x6-5_metal_steel_rolled-metal-bearing-edge_plated-or-lacquered-metal_st_ac2e0277"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Radio King",
+      "candidateCount": 10,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 10,
+      "sampleRecordIds": [
+        "slingerland_vintage-radio-king_gene-krupa-deluxe-radio-king_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_0d523a94",
+        "slingerland_vintage-radio-king_gene-krupa-radio-king_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_9e9f4f19",
+        "slingerland_vintage-radio-king_radio-king-3-point-strainer_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-_7c5603e5",
+        "slingerland_vintage-radio-king_radio-king-5x14_14x5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pearl-w_5e6bc7dd",
+        "slingerland_vintage-radio-king_radio-king-7x14-concert-orchestra_14x7_steam-bent_maple_rounded-vintage-edge-often-30-deg_ff2cdc0c",
+        "slingerland_vintage-radio-king_radio-king-artist_14x5-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pea_2f67ab4f",
+        "slingerland_vintage-radio-king_radio-king-broadway-parallel_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree_8561aa6c",
+        "slingerland_vintage-radio-king_radio-king-clamshell-strainer_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degre_a3cf0f18",
+        "slingerland_vintage-radio-king_radio-king-professional_14x7_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_1af65b20",
+        "slingerland_vintage-radio-king_radio-king-super_14x6-5_steam-bent_maple_rounded-vintage-edge-often-30-degree-family_pear_3c634aac"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Radio King Limited",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5-5_steam-bent_maple_30-degree-rounded-bearing-e_df8146db",
+        "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x5_steam-bent_maple_30-degree-rounded-bearing-edg_8bcf2091",
+        "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x6-5_steam-bent_maple_30-degree-rounded-bearing-e_bd359ad0",
+        "slingerland_modern-radio-king-limited_radio-king-solid-maple-limited_14x7_steam-bent_maple_30-degree-rounded-bearing-edg_a73d5136"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Student Radio King",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "slingerland_vintage-student-radio-king_student-radio-king-5x14_14x5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_du_d0cc2625",
+        "slingerland_vintage-student-radio-king_student-radio-king-6-5x14_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edg_2b1bb0af",
+        "slingerland_vintage-student-radio-king_student-radio-king-de-luxe_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-ed_20943121",
+        "slingerland_vintage-student-radio-king_student-radio-king_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_duco-_4a41382a"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Radio King Outfit Snare",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x5-5_steam-bent_mahogany_po_75c87d18",
+        "slingerland_modern-radio-king-outfit-snare_radio-king-3-ply-mahogany-poplar-matching-snare_14x6-5_steam-bent_mahogany_po_de179c7e"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Avante",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_avante_avante-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-sa_22b43fce"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Conway Era",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_conway-era_conway-radio-king-reissue_14x5-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_stick-sav_6e627287"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Jet",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_jet_jet-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver-tr_9f4008ac"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Solo",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_modern-solo_modern-solo-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick_e091ae50"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Nashville Era",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_nashville-era_nashville-radio-king-reissue_14x6-5_solid-shell_maple_rounded-vintage-edge_wrap-or-lacquer_sti_7c0ca413"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "New Rock",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_new-rock_new-rock-snare_14x6-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-saver_ea3c5348"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Pop Outfit",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_pop-outfit_pop-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stick-s_f3032cc3"
+      ]
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "San Juan",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "slingerland_san-juan_san-juan-outfit-snare_14x5-5_ply_mahogany_poplar_mahogany_rounded-vintage-edge_wrap-or-lacquer_stic_a838ceb8"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Slingerland shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

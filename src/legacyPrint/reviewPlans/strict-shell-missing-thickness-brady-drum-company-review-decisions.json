@@ -1,0 +1,77 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_BRADY_DRUM_COMPANY_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.227Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-brady-drum-company-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Brady Drum Company",
+  "summary": {
+    "candidateCount": 50,
+    "lineGroupCount": 2,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 2,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Brady Drum Company missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "candidateCount": 45,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "brady-drum-company_ply-shell_jarrah-ply-snare-10x5_10x5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_a9104789",
+        "brady-drum-company_ply-shell_jarrah-ply-snare-12x5_12x5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin_c574815f",
+        "brady-drum-company_ply-shell_jarrah-ply-snare-13x5-5_13x5-5_ply_jarrah_45-bearing-edges_1-5mm-proper-snare-bed_natural-s_7bc792e4",
+        "brady-drum-company_ply-shell_marri-ply-snare-10x5_10x5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_8836e84c",
+        "brady-drum-company_ply-shell_marri-ply-snare-12x5_12x5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_910cf005",
+        "brady-drum-company_ply-shell_marri-ply-snare-13x5-5_13x5-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_6d851fd6",
+        "brady-drum-company_ply-shell_marri-ply-snare-14x5-5_14x5-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_1b0af096",
+        "brady-drum-company_ply-shell_marri-ply-snare-14x6-5_14x6-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_9755e9c5",
+        "brady-drum-company_ply-shell_marri-ply-snare-14x8_14x8_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-satin-g_9302fafc",
+        "brady-drum-company_ply-shell_marri-ply-snare-16x6-5_16x6-5_ply_marri_45-bearing-edges_1-5mm-proper-snare-bed_natural-sat_c536b9fa",
+        "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-10x5_10x5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_75b335c9",
+        "brady-drum-company_ply-shell_tasmanian-blackwood-ply-snare-12x5_12x5_ply_tasmanian-blackwood_45-bearing-edges_1-5mm-prop_75cb62d0"
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Handmade Exotic Australian Hardwood",
+      "candidateCount": 5,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 5,
+      "sampleRecordIds": [
+        "brady-drum-company_handmade-exotic-australian-hardwood_jarrah-block-shell-14x6-5_14x6-5_block_jarrah_45-bearing-edges_1-_e1401ddf",
+        "brady-drum-company_handmade-exotic-australian-hardwood_jarrah-ply-shell-14x6-5_14x6-5_ply_jarrah_45-bearing-edges_1-5mm-_39cf6d3a",
+        "brady-drum-company_handmade-exotic-australian-hardwood_marri-ply-shell-14x6-5_14x6-5_ply_marri_45-bearing-edges_1-5mm-pr_60c0ce85",
+        "brady-drum-company_handmade-exotic-australian-hardwood_sheoak-block-shell-14x6-5_14x6-5_block_oak_45-bearing-edges_1-5mm_f07e0eb3",
+        "brady-drum-company_handmade-exotic-australian-hardwood_tasmanian-blackwood-block-shell-14x6-5_14x6-5_block_tasmanian-bla_c6c5bfc8"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Brady Drum Company shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

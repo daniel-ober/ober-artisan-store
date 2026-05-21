@@ -1,0 +1,169 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_DW_PDP_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "DW / PDP",
+  "reviewScope": "DW / PDP records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 7,
+    "lineGroupCount": 2,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "PDP Concept Metal",
+      "candidateCount": 6,
+      "sourceConfidenceCounts": {
+        "Medium": 6
+      },
+      "researchQuestion": "Can DW / PDP PDP Concept Metal snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x5-5_14x5-5_metal_steel_flanged-45-degree-edge-estimated-from_8dbbee2f",
+          "label": "DW / PDP — PDP Concept Metal — Concept Black Nickel over Steel 14x5.5 — 14x5.5",
+          "modelName": "Concept Black Nickel over Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"snareSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "dw-pdp_pdp-concept-metal_concept-black-nickel-over-steel-14x6-5_14x6-5_metal_steel_flanged-45-degree-edge-estimated-from_30641c17",
+          "label": "DW / PDP — PDP Concept Metal — Concept Black Nickel over Steel 14x6.5 — 14x6.5",
+          "modelName": "Concept Black Nickel over Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"snareSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "dw-pdp_pdp-concept-metal_concept-brass-14x6-5_14x6-5_metal_brass_flanged-45-degree-edge-estimated-from-review-listing_br_51c51e3f",
+          "label": "DW / PDP — PDP Concept Metal — Concept Brass 14x6.5 — 14x6.5",
+          "modelName": "Concept Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"snareSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x5_14x5_metal_aluminum_flanged-45-degree-edge-estimated-from-review-_94509787",
+          "label": "DW / PDP — PDP Concept Metal — Concept Brushed Aluminum 14x5 — 14x5",
+          "modelName": "Concept Brushed Aluminum 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"snareSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "dw-pdp_pdp-concept-metal_concept-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_flanged-45-degree-edge-estimated-from-rev_104a3567",
+          "label": "DW / PDP — PDP Concept Metal — Concept Brushed Aluminum 14x6.5 — 14x6.5",
+          "modelName": "Concept Brushed Aluminum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"snareSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "dw-pdp_pdp-concept-metal_concept-copper-14x6-5_14x6-5_metal_copper_flanged-45-degree-edge-estimated-from-review-listing__3716c84f",
+          "label": "DW / PDP — PDP Concept Metal — Concept Copper 14x6.5 — 14x6.5",
+          "modelName": "Concept Copper 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"snareSideProfile\":\"Flanged 45-degree edge estimated from review/listing\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    },
+    {
+      "lineSeries": "DW Historical / Discontinued",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can DW / PDP DW Historical / Discontinued snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "dw-pdp_dw-historical-discontinued_dw-jazz-series-maple-gum-14x5-5_14x5-5_ply_maple_roundover-vintage-style-estimated_lac_aa3ea5b8",
+          "label": "DW / PDP — DW Historical / Discontinued — DW Jazz Series Maple/Gum 14x5.5 — 14x5.5",
+          "modelName": "DW Jazz Series Maple/Gum 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vintage-style gum/maple family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Roundover/vintage-style estimated\",\"snareSideProfile\":\"Roundover/vintage-style estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.dwdrums.com/drums/snares/",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review DW / PDP line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

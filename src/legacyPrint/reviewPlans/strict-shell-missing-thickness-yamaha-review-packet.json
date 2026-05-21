@@ -1,0 +1,231 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_YAMAHA_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.229Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Yamaha",
+  "reviewScope": "Yamaha records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 9,
+    "lineGroupCount": 4,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Maple Custom Absolute",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestion": "Can Yamaha Maple Custom Absolute snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x4_14x4_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-cast_74c940f3",
+          "label": "Yamaha — Maple Custom Absolute — Maple Custom Absolute 14x4 — 14x4",
+          "modelName": "Maple Custom Absolute 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45-degree / Yamaha Absolute family\",\"snareSideProfile\":\"45-degree / Yamaha Absolute family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x5-5_14x5-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_ace8201a",
+          "label": "Yamaha — Maple Custom Absolute — Maple Custom Absolute 14x5.5 — 14x5.5",
+          "modelName": "Maple Custom Absolute 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45-degree / Yamaha Absolute family\",\"snareSideProfile\":\"45-degree / Yamaha Absolute family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "yamaha_maple-custom-absolute_maple-custom-absolute-14x6-5_14x6-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_35898c18",
+          "label": "Yamaha — Maple Custom Absolute — Maple Custom Absolute 14x6.5 — 14x6.5",
+          "modelName": "Maple Custom Absolute 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45-degree / Yamaha Absolute family\",\"snareSideProfile\":\"45-degree / Yamaha Absolute family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    },
+    {
+      "lineSeries": "Birch Custom Absolute",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Yamaha Birch Custom Absolute snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_birch-custom-absolute_birch-custom-absolute-14x5-5_14x5-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_09b7376e",
+          "label": "Yamaha — Birch Custom Absolute — Birch Custom Absolute 14x5.5 — 14x5.5",
+          "modelName": "Birch Custom Absolute 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45-degree / Yamaha Absolute family\",\"snareSideProfile\":\"45-degree / Yamaha Absolute family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "yamaha_birch-custom-absolute_birch-custom-absolute-14x6-5_14x6-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_098b9023",
+          "label": "Yamaha — Birch Custom Absolute — Birch Custom Absolute 14x6.5 — 14x6.5",
+          "modelName": "Birch Custom Absolute 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45-degree / Yamaha Absolute family\",\"snareSideProfile\":\"45-degree / Yamaha Absolute family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    },
+    {
+      "lineSeries": "Recording Custom",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Yamaha Recording Custom snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_recording-custom_recording-custom-birch-14x5-5_14x5-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__92828120",
+          "label": "Yamaha — Recording Custom — Recording Custom Birch 14x5.5 — 14x5.5",
+          "modelName": "Recording Custom Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"North American birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree / modern Recording Custom family\",\"snareSideProfile\":\"30-degree / modern Recording Custom family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/index.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "yamaha_recording-custom_recording-custom-birch-14x6-5_14x6-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__eaec2e70",
+          "label": "Yamaha — Recording Custom — Recording Custom Birch 14x6.5 — 14x6.5",
+          "modelName": "Recording Custom Birch 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"North American birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree / modern Recording Custom family\",\"snareSideProfile\":\"30-degree / modern Recording Custom family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/index.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        }
+      ]
+    },
+    {
+      "lineSeries": "Sensitive Series",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Yamaha Sensitive Series snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_sensitive-series_maple-sensitive-14x5-5_14x5-5_ply_maple_45-degree-sensitive-family_lacquer_triple-flange-yamaha-_7f8ab87f",
+          "label": "Yamaha — Sensitive Series — Maple Sensitive 14x5.5 — 14x5.5",
+          "modelName": "Maple Sensitive 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45-degree / Sensitive family\",\"snareSideProfile\":\"45-degree / Sensitive family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        },
+        {
+          "id": "yamaha_sensitive-series_maple-vintage-14x5-5_14x5-5_ply_maple_vintage-rounded-estimated_lacquer_triple-flange-yamaha-hoo_76655cd4",
+          "label": "Yamaha — Sensitive Series — Maple Vintage 14x5.5 — 14x5.5",
+          "modelName": "Maple Vintage 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Vintage rounded / estimated\",\"snareSideProfile\":\"Vintage rounded / estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Yamaha line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}
