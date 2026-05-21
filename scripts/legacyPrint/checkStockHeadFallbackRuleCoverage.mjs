@@ -86,7 +86,7 @@ function main() {
 
   const rules = rulesDoc.rules || [];
 
-  const candidates = (audit.topPriorityCandidates || []);
+  const candidates = (audit.allCandidates || audit.topPriorityCandidates || []);
 
   const matched = [];
 
