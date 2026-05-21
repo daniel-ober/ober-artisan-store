@@ -467,12 +467,12 @@
       "lineSeriesIncludes": [
         "Artist"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.premier-percussion.com/product/artist-snare-drums/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Premier Artist stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Premier Artist group contains 6 Birch/Ash snare candidates across 10x5, 12x5, 13x6, 14x5.5, 14x6.5, and 14x8. The Premier source confirms the Artist snare family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "premier-genista-classic-stock-heads-draft",
