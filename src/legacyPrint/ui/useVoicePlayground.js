@@ -3,6 +3,8 @@ import { useEffect, useMemo, useState } from 'react';
 
 import { loadSnareDiscoveryPacket } from '../api/loadSnareDiscoveryPacket.js';
 
+import { loadPromotableSnareReferences } from '../api/loadPromotableSnareReferences.js';
+
 import { searchVoiceDrumsFromFirestore } from '../api/searchVoiceDrumsFromFirestore.js';
 
 import { compareVoices } from '../intelligence/compareVoices.js';
@@ -175,6 +177,12 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
 
   const [discoveryLoading, setDiscoveryLoading] = useState(false);
 
+  const [referenceLoading, setReferenceLoading] = useState(false);
+
+  const [referenceOptions, setReferenceOptions] = useState([]);
+
+  const [referenceError, setReferenceError] = useState(null);
+
   const [discoveryState, setDiscoveryState] = useState({
 
     status: 'idle',
@@ -196,6 +204,66 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
   const [compareA, setCompareA] = useState(null);
 
   const [compareB, setCompareB] = useState(null);
+
+  useEffect(() => {
+
+    let cancelled = false;
+
+    const loadReferences = async () => {
+
+      setReferenceLoading(true);
+
+      setReferenceError(null);
+
+      try {
+
+        const response = await loadPromotableSnareReferences({
+
+          firestore,
+
+          limit: 120,
+
+        });
+
+        if (!cancelled) {
+
+          setReferenceOptions(response.references || []);
+
+          setReferenceError(response.success ? null : response.message || 'Unable to load snare references.');
+
+        }
+
+      } catch (error) {
+
+        if (!cancelled) {
+
+          setReferenceOptions([]);
+
+          setReferenceError(error?.message || 'Unable to load snare references.');
+
+        }
+
+      } finally {
+
+        if (!cancelled) {
+
+          setReferenceLoading(false);
+
+        }
+
+      }
+
+    };
+
+    loadReferences();
+
+    return () => {
+
+      cancelled = true;
+
+    };
+
+  }, [firestore]);
 
   useEffect(() => {
 
@@ -374,6 +442,12 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
     discoveryState,
 
     discoveryLoading,
+
+    referenceOptions,
+
+    referenceLoading,
+
+    referenceError,
 
     loading: loading || discoveryLoading,
 

@@ -902,7 +902,19 @@ function ShapePanel({ voice, updateVoice }) {
 
 }
 
-function ReferencePanel({ selectedReferenceId, setSelectedReferenceId }) {
+function ReferencePanel({
+
+  selectedReferenceId,
+
+  setSelectedReferenceId,
+
+  referenceOptions = REFERENCE_OPTIONS,
+
+  referenceLoading = false,
+
+  referenceError = null,
+
+}) {
 
   return (
 
@@ -910,7 +922,7 @@ function ReferencePanel({ selectedReferenceId, setSelectedReferenceId }) {
 
       <div className="vp-reference-stack">
 
-        {REFERENCE_OPTIONS.map((reference) => (
+        {referenceOptions.map((reference) => (
 
           <button
 
@@ -946,7 +958,19 @@ function ReferencePanel({ selectedReferenceId, setSelectedReferenceId }) {
 
         <strong>Reference Mode</strong>
 
-        <p>Select a known voice to anchor the center map and re-rank similar drums around it.</p>
+        <p>
+
+          {referenceLoading
+
+            ? 'Loading passable LegacyPrint snare references...'
+
+            : referenceError
+
+              ? referenceError
+
+              : 'Select a known voice to anchor the center map and re-rank similar drums around it.'}
+
+        </p>
 
       </div>
 
@@ -972,10 +996,6 @@ export function VoicePlayground({ firestore }) {
 
   const [selectedDiscoverySectionKey, setSelectedDiscoverySectionKey] = useState(null);
 
-  const selectedReference =
-
-    REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
-
   const {
 
     query,
@@ -992,6 +1012,12 @@ export function VoicePlayground({ firestore }) {
 
     discoveryViewModel,
 
+    referenceOptions,
+
+    referenceLoading,
+
+    referenceError,
+
     loading,
 
     setAsAnchor
@@ -1000,9 +1026,23 @@ export function VoicePlayground({ firestore }) {
 
     firestore,
 
-    selectedReference?.snareReferenceId || selectedReferenceId
+    selectedReferenceId
 
   );
+
+  const visibleReferenceOptions =
+
+    referenceOptions?.length ? referenceOptions : REFERENCE_OPTIONS;
+
+  const selectedReference =
+
+    visibleReferenceOptions.find((item) => item.key === selectedReferenceId) ||
+
+    visibleReferenceOptions.find((item) => item.snareReferenceId === selectedReferenceId) ||
+
+    visibleReferenceOptions[0] ||
+
+    REFERENCE_OPTIONS[0];
 
   const selectedMode =
 
@@ -1235,6 +1275,12 @@ export function VoicePlayground({ firestore }) {
               selectedReferenceId={selectedReferenceId}
 
               setSelectedReferenceId={setSelectedReferenceId}
+
+              referenceOptions={visibleReferenceOptions}
+
+              referenceLoading={referenceLoading}
+
+              referenceError={referenceError}
 
             />
 
