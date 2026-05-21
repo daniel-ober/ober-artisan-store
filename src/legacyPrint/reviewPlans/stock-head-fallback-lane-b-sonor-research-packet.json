@@ -1,0 +1,71 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_SONOR_RESEARCH_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:52:16.352Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-remaining-company-priority-packet.json",
+  "companyName": "SONOR",
+  "reviewScope": "Lane B SONOR company/OEM stock-head fallback research packet.",
+  "noFirestoreWrites": true,
+  "policyPosition": "conservative",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 2,
+    "noFirestoreWrites": true
+  },
+  "companyGroup": {
+    "companyName": "SONOR",
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 2,
+    "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+    "noFirestoreWrites": true,
+    "lineGroups": [
+      {
+        "lineSeries": "Signature Series",
+        "candidateCount": 2,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 2,
+        "sampleModels": [
+          {
+            "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+            "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+            "diameter": "14",
+            "depth": "6.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+            "modelName": "Signature HLD 590 Cast Bronze 14x8",
+            "diameter": "14",
+            "depth": "8",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      }
+    ]
+  },
+  "researchRules": [
+    "Search for official SONOR product pages, archived SONOR pages, SONOR catalogs, SONOR manuals, or OEM-confirmed sources.",
+    "Do not approve a fallback rule from third-party retailer/spec pages alone.",
+    "A fallback rule requires both stock batter head and stock resonant/snare-side head confirmation.",
+    "If evidence only applies to one SONOR line or era, keep the decision line-level or model-level rather than company-wide."
+  ],
+  "decisionTemplate": {
+    "companyName": "SONOR",
+    "approvedCompanyWideFallback": false,
+    "approvedLineLevelFallbackRules": [],
+    "blockedLineGroups": [],
+    "sourceEvidenceUrls": [],
+    "decisionNotes": ""
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_GRETSCH_RESEARCH_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:52:16.347Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-remaining-company-priority-packet.json",
+  "companyName": "Gretsch",
+  "reviewScope": "Lane B Gretsch company/OEM stock-head fallback research packet.",
+  "noFirestoreWrites": true,
+  "policyPosition": "conservative",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 2,
+    "noFirestoreWrites": true
+  },
+  "companyGroup": {
+    "companyName": "Gretsch",
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 2,
+    "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+    "noFirestoreWrites": true,
+    "lineGroups": [
+      {
+        "lineSeries": "Brooklyn Metal",
+        "candidateCount": 2,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 2,
+        "sampleModels": [
+          {
+            "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x5-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_eb8daa4f",
+            "modelName": "Brooklyn Chrome-over-Steel",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x6-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_1397c712",
+            "modelName": "Brooklyn Chrome-over-Steel",
+            "diameter": "14",
+            "depth": "6.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      }
+    ]
+  },
+  "researchRules": [
+    "Search for official Gretsch product pages, archived Gretsch pages, Gretsch catalogs, Gretsch manuals, or OEM-confirmed sources.",
+    "Do not approve a fallback rule from third-party retailer/spec pages alone.",
+    "A fallback rule requires both stock batter head and stock resonant/snare-side head confirmation.",
+    "If evidence only applies to one Gretsch line or era, keep the decision line-level or model-level rather than company-wide."
+  ],
+  "decisionTemplate": {
+    "companyName": "Gretsch",
+    "approvedCompanyWideFallback": false,
+    "approvedLineLevelFallbackRules": [],
+    "blockedLineGroups": [],
+    "sourceEvidenceUrls": [],
+    "decisionNotes": ""
+  }
+}
