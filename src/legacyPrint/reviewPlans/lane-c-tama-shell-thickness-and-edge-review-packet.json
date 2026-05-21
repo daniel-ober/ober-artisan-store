@@ -1,0 +1,92 @@
+{
+  "generatedAt": "2026-05-21T08:10:45.611Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-c-high-value-shell-thickness-and-edge-review-packet.json",
+  "status": "LANE_C_TAMA_SHELL_THICKNESS_AND_EDGE_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Tama",
+    "candidateCount": 2,
+    "groupCount": 2,
+    "sourceUrls": [
+      "https://equipboard.com/c/snare-drums/tama"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "STAR Reserve",
+        "shellMaterial": "Aluminum",
+        "count": 1,
+        "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama"
+      },
+      {
+        "lineSeries": "STAR Reserve",
+        "shellMaterial": "Copper",
+        "count": 1,
+        "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "STAR Reserve Hand Hammered Aluminum 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-aluminum-14x6-5_14x6-5_metal_aluminum_hammered-aluminum_c8f32f02",
+          "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Aluminum 14x6.5 — 14x6.5",
+          "modelName": "STAR Reserve Hand Hammered Aluminum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "shellMaterial": "Copper",
+      "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "STAR Reserve Hand Hammered Copper 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-copper-14x6-5_14x6-5_metal_copper_hammered-copper_afc39ac0",
+          "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Copper 14x6.5 — 14x6.5",
+          "modelName": "STAR Reserve Hand Hammered Copper 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Tama shell thickness AND bearing edge by line/material/configuration. No Firestore writes."
+}
