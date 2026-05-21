@@ -1,0 +1,96 @@
+{
+  "status": "LUDWIG_HEAD_ONLY_EXACT_HEAD_WRITE_CONFIRMATION",
+  "generatedAt": "2026-05-21T09:44:05.854Z",
+  "sourcePatchPlanFile": "src/legacyPrint/reviewPlans/ludwig-head-only-exact-head-patch-plan.json",
+  "collectionName": "snareReferenceDrums",
+  "firestoreWritesPerformed": true,
+  "approval": "ludwig-head-only-exact-8",
+  "summary": {
+    "intendedWriteCount": 8,
+    "actualWriteCount": 8,
+    "batchCount": 1,
+    "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+  },
+  "writeLog": [
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Imperial Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Tube Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Tube Lugs",
+      "stockBatterHead": "Ludwig Weather Master Medium Coated",
+      "stockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+      "updateType": "LUDWIG_HEAD_ONLY_EXACT_SOURCE_BACKED_FALLBACK_PATCH"
+    }
+  ]
+}
