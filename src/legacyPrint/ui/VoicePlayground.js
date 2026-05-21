@@ -916,15 +916,71 @@ function ReferencePanel({
 
 }) {
 
-  const [referenceFilter, setReferenceFilter] = useState('');
+  const [brandFilter, setBrandFilter] = useState('all');
 
-  const normalizedQuery = String(referenceFilter || '').trim().toLowerCase();
+  const [lineFilter, setLineFilter] = useState('all');
+
+  const [modelFilter, setModelFilter] = useState('');
+
+  const brandOptions = useMemo(() => {
+
+    return Array.from(
+
+      new Set(
+
+        referenceOptions
+
+          .map((reference) => reference.companyName || reference.company || '')
+
+          .filter(Boolean)
+
+      )
+
+    ).sort((a, b) => a.localeCompare(b));
+
+  }, [referenceOptions]);
+
+  const lineOptions = useMemo(() => {
+
+    return Array.from(
+
+      new Set(
+
+        referenceOptions
+
+          .filter((reference) => {
+
+            if (brandFilter === 'all') return true;
+
+            return (reference.companyName || reference.company || '') === brandFilter;
+
+          })
+
+          .map((reference) => reference.lineSeries || '')
+
+          .filter(Boolean)
+
+      )
+
+    ).sort((a, b) => a.localeCompare(b));
+
+  }, [referenceOptions, brandFilter]);
+
+  const normalizedModelFilter = String(modelFilter || '').trim().toLowerCase();
 
   const filteredReferenceOptions = referenceOptions
 
     .filter((reference) => {
 
-      if (!normalizedQuery) return true;
+      const company = reference.companyName || reference.company || '';
+
+      const line = reference.lineSeries || '';
+
+      if (brandFilter !== 'all' && company !== brandFilter) return false;
+
+      if (lineFilter !== 'all' && line !== lineFilter) return false;
+
+      if (!normalizedModelFilter) return true;
 
       return [
 
@@ -932,9 +988,9 @@ function ReferencePanel({
 
         reference.detail,
 
-        reference.companyName,
-
         reference.modelName,
+
+        reference.model,
 
         reference.lineSeries,
 
@@ -954,25 +1010,89 @@ function ReferencePanel({
 
         .toLowerCase()
 
-        .includes(normalizedQuery);
+        .includes(normalizedModelFilter);
 
     })
 
-    .slice(0, 80);
+    .slice(0, 100);
+
+  const resetReferenceFilters = () => {
+
+    setBrandFilter('all');
+
+    setLineFilter('all');
+
+    setModelFilter('');
+
+  };
 
   return (
 
     <div className="vp-mode-content">
 
+      <select
+
+        className="vp-search-input"
+
+        value={brandFilter}
+
+        onChange={(event) => {
+
+          setBrandFilter(event.target.value);
+
+          setLineFilter('all');
+
+        }}
+
+      >
+
+        <option value="all">All brands</option>
+
+        {brandOptions.map((brand) => (
+
+          <option key={brand} value={brand}>
+
+            {brand}
+
+          </option>
+
+        ))}
+
+      </select>
+
+      <select
+
+        className="vp-search-input"
+
+        value={lineFilter}
+
+        onChange={(event) => setLineFilter(event.target.value)}
+
+      >
+
+        <option value="all">All lines</option>
+
+        {lineOptions.map((line) => (
+
+          <option key={line} value={line}>
+
+            {line}
+
+          </option>
+
+        ))}
+
+      </select>
+
       <input
 
         className="vp-search-input"
 
-        value={referenceFilter}
+        value={modelFilter}
 
-        onChange={(event) => setReferenceFilter(event.target.value)}
+        onChange={(event) => setModelFilter(event.target.value)}
 
-        placeholder="Filter references..."
+        placeholder="Filter model, material, size..."
 
       />
 
@@ -1024,13 +1144,15 @@ function ReferencePanel({
 
               ? referenceError
 
-              : normalizedQuery
-
-                ? `${filteredReferenceOptions.length} matching passable snares shown.`
-
-                : `${referenceOptions.length} passable snares loaded. Search by company, model, material, size, or construction.`}
+              : `${filteredReferenceOptions.length} of ${referenceOptions.length} passable snares shown.`}
 
         </p>
+
+        <button type="button" className="vp-reset-button" onClick={resetReferenceFilters}>
+
+          Reset Reference Filters
+
+        </button>
 
       </div>
 
@@ -1039,6 +1161,7 @@ function ReferencePanel({
   );
 
 }
+
 
 export function VoicePlayground({ firestore }) {
 
