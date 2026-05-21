@@ -1,0 +1,205 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_YAMAHA_RESEARCH_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:51:30.495Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-yamaha-research-packet.json",
+  "companyName": "Yamaha",
+  "reviewScope": "Lane B Yamaha company/OEM stock-head fallback research decisions.",
+  "policyPosition": "conservative",
+  "noFirestoreWrites": true,
+  "summary": {
+    "candidateCount": 6,
+    "lineGroupCount": 4,
+    "approvedCompanyWideFallbackRuleCount": 0,
+    "approvedLineLevelFallbackRuleCount": 0,
+    "blockedLineGroupCount": 4,
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+    "firestoreWrites": 0,
+    "decision": "No Yamaha stock-head fallback rules are approved at this time."
+  },
+  "companyLevelDecision": {
+    "companyName": "Yamaha",
+    "approved": false,
+    "decision": "BLOCKED_FOR_COMPANY_WIDE_FALLBACK",
+    "approvedFallbackRule": null,
+    "reason": "Yamaha stock-head evidence is not strong enough to support a company-wide fallback. Remaining Lane B records require narrower line-level, catalog-era-level, or exact-model-level confirmation.",
+    "notes": [
+      "Third-party-only evidence is not enough under the conservative fallback policy.",
+      "Any future Yamaha approval should remain line-level, catalog-era-level, or exact-model-level unless official evidence proves a consistent company-wide OEM stock-head pattern."
+    ]
+  },
+  "lineLevelDecisions": [
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 3,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+          "modelName": "Steve Gadd Recording Custom Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        },
+        {
+          "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+          "modelName": "Steve Gadd Recording Custom Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        },
+        {
+          "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+          "modelName": "Steve Gadd Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Yamaha product page, catalog, manual, archived Yamaha page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    },
+    {
+      "lineSeries": "Stage Custom Advantage",
+      "candidateCount": 1,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+          "modelName": "Stage Custom Advantage Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Yamaha product page, catalog, manual, archived Yamaha page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    },
+    {
+      "lineSeries": "Stage Custom Birch",
+      "candidateCount": 1,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+          "modelName": "Stage Custom Birch Steel Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Yamaha product page, catalog, manual, archived Yamaha page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    },
+    {
+      "lineSeries": "Stage Custom Standard",
+      "candidateCount": 1,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+          "modelName": "Stage Custom Standard Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official Yamaha product page, catalog, manual, archived Yamaha page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    }
+  ],
+  "approvedFallbackRules": [],
+  "blockedFallbackRules": [
+    {
+      "scope": "Yamaha company-wide",
+      "decision": "blocked",
+      "reason": "No consistent official/OEM stock batter and resonant/snare-side head confirmation across all Yamaha Lane B candidates."
+    },
+    {
+      "scope": "Yamaha Signature",
+      "decision": "blocked",
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    },
+    {
+      "scope": "Yamaha Stage Custom Advantage",
+      "decision": "blocked",
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    },
+    {
+      "scope": "Yamaha Stage Custom Birch",
+      "decision": "blocked",
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    },
+    {
+      "scope": "Yamaha Stage Custom Standard",
+      "decision": "blocked",
+      "reason": "No sufficient official Yamaha/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    }
+  ],
+  "readinessImpact": {
+    "recordsPromotedToMeaningfulStockPass": 0,
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+    "recordsChanged": 0,
+    "firestoreWrites": 0,
+    "notes": [
+      "Fallback-head records must remain separate from source-confirmed full stock pass.",
+      "This decision file is review/planning only and does not mutate snareReferenceDrums."
+    ]
+  },
+  "nextRecommendedStep": {
+    "lane": "Lane B",
+    "task": "Move to the next remaining Lane B company priority groups: Gretsch and SONOR.",
+    "constraint": "Do not write fallback metadata to Firestore until fallback rules are explicitly approved."
+  }
+}
