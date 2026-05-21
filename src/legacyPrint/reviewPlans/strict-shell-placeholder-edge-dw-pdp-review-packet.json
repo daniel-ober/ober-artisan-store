@@ -1,0 +1,147 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_DW_PDP_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.564Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "DW / PDP",
+  "reviewScope": "DW / PDP records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 7,
+    "lineGroupCount": 2,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "DW MFG / True-Cast",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "Medium": 4
+      },
+      "researchQuestion": "Can DW / PDP DW MFG / True-Cast snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+          "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x4 — 14x4",
+          "modelName": "MFG True-Cast Bell Bronze 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Bronze",
+          "shellThickness": "35",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+          "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x5.5 — 14x5.5",
+          "modelName": "MFG True-Cast Bell Bronze 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Bronze",
+          "shellThickness": "35",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+          "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x6.5 — 14x6.5",
+          "modelName": "MFG True-Cast Bell Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellThickness": "35",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+          "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x8 — 14x8",
+          "modelName": "MFG True-Cast Bell Bronze 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Bronze",
+          "shellThickness": "35",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Design Series",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "High": 3
+      },
+      "researchQuestion": "Can DW / PDP Design Series snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+          "label": "DW / PDP — Design Series — Design Series Maple 14x5.5 — 14x5.5",
+          "modelName": "Design Series Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "7.9",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High",
+          "priorityScore": 325
+        },
+        {
+          "id": "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+          "label": "DW / PDP — Design Series — Design Series Maple 14x6.5 — 14x6.5",
+          "modelName": "Design Series Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "7.9",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High",
+          "priorityScore": 325
+        },
+        {
+          "id": "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1",
+          "label": "DW / PDP — Design Series — Design Series Maple 14x8 — 14x8",
+          "modelName": "Design Series Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Maple",
+          "shellThickness": "7.9",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High",
+          "priorityScore": 325
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review DW / PDP line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

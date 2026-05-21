@@ -1,6 +1,6 @@
 {
   "status": "STRICT_SHELL_PLACEHOLDER_EDGE_AHEAD_REVIEW_PACKET_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T09:00:40.313Z",
+  "generatedAt": "2026-05-21T09:01:15.562Z",
   "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
   "noFirestoreWrites": true,
   "companyName": "AHEAD",
@@ -13,9 +13,9 @@
   "reviewRules": [
     "Do not write Firestore updates from this packet.",
     "Find source-backed bearing edge geometry only.",
-    "Do not infer edge geometry from bell brass, cast/solid metal, shell thickness, or S-Hoop usage alone.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
     "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
-    "If source confirms a shared AHEAD line-level bearing edge spec, prepare a separate reviewed decisions file before any patch plan."
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
   ],
   "lineGroups": [
     {
@@ -28,8 +28,8 @@
       },
       "researchQuestion": "Can AHEAD Ahead Snares snare records share a source-backed bearing edge profile?",
       "requiredEvidence": [
-        "Official AHEAD/Big Bang Distribution page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
-        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, or hoop type.",
+        "Official AHEAD page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
         "If applying line-level logic, source must clearly apply across the listed models/era."
       ],
       "sampleRecords": [
@@ -167,7 +167,7 @@
     }
   ],
   "nextRecommendedStep": {
-    "task": "Review AHEAD line groups for official/distributor bearing edge evidence and create a decisions file.",
-    "constraint": "Decisions file only. No Firestore writes."
+    "task": "Review AHEAD line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
   }
 }

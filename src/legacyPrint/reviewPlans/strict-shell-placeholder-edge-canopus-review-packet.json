@@ -1,0 +1,233 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_CANOPUS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.563Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Canopus",
+  "reviewScope": "Canopus records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 9,
+    "lineGroupCount": 6,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Manganese Steel",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestion": "Can Canopus Manganese Steel snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+          "label": "Canopus — Manganese Steel — Manganese Steel 14x5.5 — 14x5.5",
+          "modelName": "Manganese Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 925
+        },
+        {
+          "id": "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973",
+          "label": "Canopus — Manganese Steel — Manganese Steel 14x6.5 — 14x6.5",
+          "modelName": "Manganese Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 925
+        }
+      ]
+    },
+    {
+      "lineSeries": "MO",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Canopus MO snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+          "label": "Canopus — MO — MO Snare 14x5.5 — 14x5.5",
+          "modelName": "MO Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "8",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 875
+        },
+        {
+          "id": "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8",
+          "label": "Canopus — MO — MO Snare 14x6.5 — 14x6.5",
+          "modelName": "MO Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "8",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 875
+        }
+      ]
+    },
+    {
+      "lineSeries": "Session Superior",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestion": "Can Canopus Session Superior snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+          "label": "Canopus — Session Superior — Session Superior Maple 14x5.5 — 14x5.5",
+          "modelName": "Session Superior Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "8",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 925
+        },
+        {
+          "id": "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7",
+          "label": "Canopus — Session Superior — Session Superior Maple 14x6.5 — 14x6.5",
+          "modelName": "Session Superior Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "8",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 925
+        }
+      ]
+    },
+    {
+      "lineSeries": "Aluminum Alloy",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "High": 1
+      },
+      "researchQuestion": "Can Canopus Aluminum Alloy snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+          "label": "Canopus — Aluminum Alloy — Aluminum Alloy 14x6 — 14x6",
+          "modelName": "Aluminum Alloy 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/aluminum-alloy-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 925
+        }
+      ]
+    },
+    {
+      "lineSeries": "Type-R",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Canopus Type-R snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf",
+          "label": "Canopus — Type-R — Type-R 3mm Brass Magnum 14x6.5 — 14x6.5",
+          "modelName": "Type-R 3mm Brass Magnum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 875
+        }
+      ]
+    },
+    {
+      "lineSeries": "Zelkova GINRAN",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Canopus Zelkova GINRAN snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a",
+          "label": "Canopus — Zelkova GINRAN — Zelkova GINRAN — 14x6.5",
+          "modelName": "Zelkova GINRAN",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Zelkova",
+          "shellThickness": "14",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 875
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Canopus line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

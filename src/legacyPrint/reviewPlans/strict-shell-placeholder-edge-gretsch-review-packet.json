@@ -1,0 +1,67 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_GRETSCH_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.565Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Gretsch",
+  "reviewScope": "Gretsch records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Brooklyn Metal",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Gretsch Brooklyn Metal snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x5-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_eb8daa4f",
+          "label": "Gretsch — Brooklyn Metal — Brooklyn Chrome-over-Steel — 14x5.5",
+          "modelName": "Brooklyn Chrome-over-Steel",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x6-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_1397c712",
+          "label": "Gretsch — Brooklyn Metal — Brooklyn Chrome-over-Steel — 14x6.5",
+          "modelName": "Brooklyn Chrome-over-Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Gretsch line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

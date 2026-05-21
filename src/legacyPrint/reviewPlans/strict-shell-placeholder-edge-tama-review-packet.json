@@ -1,0 +1,96 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_TAMA_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.564Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Tama",
+  "reviewScope": "Tama records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 2,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "STAR Reserve",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 1,
+        "Low": 1
+      },
+      "researchQuestion": "Can Tama STAR Reserve snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Tama page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+          "label": "Tama — STAR Reserve — STAR Reserve G-Mahogany 14x6.5 — 14x6.5",
+          "modelName": "STAR Reserve G-Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "African Mahogany",
+          "shellThickness": "9",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceConfidence": "Medium",
+          "priorityScore": 285
+        },
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+          "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Brass 14x5.5 — 14x5.5",
+          "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceConfidence": "Low",
+          "priorityScore": 235
+        }
+      ]
+    },
+    {
+      "lineSeries": "S.L.P.",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Tama S.L.P. snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Tama page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+          "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+          "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+          "diameter": "14",
+          "depth": "10",
+          "shellMaterial": "Birch",
+          "shellThickness": "7",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 295
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Tama line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

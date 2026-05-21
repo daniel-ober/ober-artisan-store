@@ -1,0 +1,352 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_YAMAHA_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.563Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Yamaha",
+  "reviewScope": "Yamaha records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 17,
+    "lineGroupCount": 7,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Metal Snare",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "Low": 8
+      },
+      "researchQuestion": "Can Yamaha Metal Snare snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Brass Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x4 — 14x4",
+          "modelName": "Yamaha Brass Metal Snare 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Brass Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Brass Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Steel Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x4 — 14x4",
+          "modelName": "Yamaha Steel Metal Snare 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Steel Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Steel Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        }
+      ]
+    },
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestion": "Can Yamaha Signature snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+          "label": "Yamaha — Signature — Steve Gadd Recording Custom Brass 14x5.5 — 14x5.5",
+          "modelName": "Steve Gadd Recording Custom Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1035
+        },
+        {
+          "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+          "label": "Yamaha — Signature — Steve Gadd Recording Custom Brass 14x6.5 — 14x6.5",
+          "modelName": "Steve Gadd Recording Custom Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1035
+        },
+        {
+          "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+          "label": "Yamaha — Signature — Steve Gadd Steel 14x5.5 — 14x5.5",
+          "modelName": "Steve Gadd Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Rydeen / Gigmaker Kit Snare",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can Yamaha Rydeen / Gigmaker Kit Snare snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+          "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5 — 14x5.5",
+          "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002",
+          "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5 — 14x6.5",
+          "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        }
+      ]
+    },
+    {
+      "lineSeries": "Gigmaker / Entry Steel",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Yamaha Gigmaker / Entry Steel snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc",
+          "label": "Yamaha — Gigmaker / Entry Steel — Gigmaker / Entry Steel Steel Snare 14x5.5 — 14x5.5",
+          "modelName": "Gigmaker / Entry Steel Steel Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        }
+      ]
+    },
+    {
+      "lineSeries": "Stage Custom Advantage",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Yamaha Stage Custom Advantage snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+          "label": "Yamaha — Stage Custom Advantage — Stage Custom Advantage Steel 14x5.5 — 14x5.5",
+          "modelName": "Stage Custom Advantage Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Stage Custom Birch",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Yamaha Stage Custom Birch snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+          "label": "Yamaha — Stage Custom Birch — Stage Custom Birch Steel Snare 14x5.5 — 14x5.5",
+          "modelName": "Stage Custom Birch Steel Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Stage Custom Standard",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Yamaha Stage Custom Standard snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+          "label": "Yamaha — Stage Custom Standard — Stage Custom Standard Steel 14x5.5 — 14x5.5",
+          "modelName": "Stage Custom Standard Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Yamaha line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}
