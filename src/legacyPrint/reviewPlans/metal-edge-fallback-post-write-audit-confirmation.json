@@ -1,0 +1,69 @@
+{
+  "status": "METAL_EDGE_FALLBACK_POST_WRITE_AUDIT_CONFIRMATION",
+  "generatedAt": "2026-05-21T09:17:18.668Z",
+  "sourceFiles": [
+    "src/legacyPrint/reviewPlans/metal-edge-fallback-firestore-write-confirmation.json",
+    "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T09-17-05-291Z.json",
+    "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-17-10-214Z.json"
+  ],
+  "firestoreWritesPreviouslyPerformed": true,
+  "collectionName": "snareReferenceDrums",
+  "writeConfirmationSummary": {
+    "intendedWriteCount": 124,
+    "actualWriteCount": 124,
+    "batchCount": 1,
+    "coreShellTierApplied": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+    "bearingEdgeSourceConfirmed": false,
+    "bearingEdgeNeedsVerification": true
+  },
+  "latestStrictShellAuditSummary": {
+    "auditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T09-17-05-291Z.json",
+    "totalRecordsScanned": 1551,
+    "fieldQualityCounts": {
+      "MEANINGFUL_CORE_SHELL_PASS": 187,
+      "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK": 187,
+      "TOTAL_MEANINGFUL_CORE_SHELL_USABLE": 374,
+      "HAS_THICKNESS_BUT_EDGE_UNKNOWN": 92,
+      "HAS_EDGE_BUT_THICKNESS_MISSING": 330,
+      "MISSING_THICKNESS_AND_EDGE": 750,
+      "SHELL_IDENTITY_INCOMPLETE": 5,
+      "SHELL_FIELD_NOT_READY": 0
+    },
+    "stockTierCounts": {
+      "MEANINGFUL_STOCK_PASS": 12,
+      "NEARLY_MEANINGFUL_STOCK_PASS": 362,
+      "STOCK_BLOCKED_BY_CORE_SHELL": 1177,
+      "STOCK_NEEDS_RESEARCH": 0
+    },
+    "shellThicknessQualityCounts": {
+      "VALID_NUMERIC_SHELL_THICKNESS": 466,
+      "MISSING_SHELL_THICKNESS": 1085,
+      "NON_NUMERIC_SHELL_THICKNESS": 0,
+      "OUT_OF_RANGE_SHELL_THICKNESS": 0
+    },
+    "bearingEdgeQualityCounts": {
+      "MEANINGFUL_BEARING_EDGE": 580,
+      "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE": 971,
+      "MISSING_BEARING_EDGE": 0
+    },
+    "sourceQualityCounts": {
+      "SOURCE_PRESENT": 1529,
+      "SOURCE_URL_PRESENT_CONFIDENCE_MISSING": 0,
+      "SOURCE_CONFIDENCE_PRESENT_URL_MISSING": 22,
+      "SOURCE_MISSING": 0
+    }
+  },
+  "latestPassableReadinessSummary": {
+    "auditFile": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-17-10-214Z.json",
+    "totalRecordsScanned": 1551
+  },
+  "fallbackAuditCheck": {
+    "expectedWriteCount": 124,
+    "detectedFallbackTierRows": 0,
+    "note": "If detectedFallbackTierRows is 0, the audit script may not yet classify the new fallback tier from Firestore fields. The write confirmation remains authoritative for write count."
+  },
+  "nextRecommendedStep": {
+    "task": "Update strict audit/readiness scripts to explicitly recognize MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK if not already counted, then continue with next Firestore-ready patch lane.",
+    "constraint": "Do not source-confirm bearing edges from fallback metadata."
+  }
+}
