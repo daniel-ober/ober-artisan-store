@@ -31,6 +31,18 @@ const {
 
 } = require('./explainSnareVoice');
 
+const {
+
+  resolveSnareReadoutMaps,
+
+  resolveFirstListenMap,
+
+  resolvePlayerAnalysisMap,
+
+  resolveLegacyPrintIdentityMap
+
+} = require('./resolveSnareReadoutMaps');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -55,7 +67,15 @@ module.exports = {
 
   buildPlayerAnalysisPreview,
 
-  buildLegacyPrintIdentityPreview
+  buildLegacyPrintIdentityPreview,
+
+  resolveSnareReadoutMaps,
+
+  resolveFirstListenMap,
+
+  resolvePlayerAnalysisMap,
+
+  resolveLegacyPrintIdentityMap
 
 };
 
