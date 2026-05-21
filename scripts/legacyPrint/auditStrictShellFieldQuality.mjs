@@ -2602,7 +2602,7 @@ async function main() {
 
     );
 
-    const missingForCoreShell = findMissingCoreShellStrictFieldQuality(
+    let missingForCoreShell = findMissingCoreShellStrictFieldQuality(
 
       fields,
 
@@ -2614,13 +2614,33 @@ async function main() {
 
     );
 
-    const missingForStock = findMissingStockStrictFieldQuality(
+    if (hasAuditableMetalEdgeFallback(fields)) {
+
+      missingForCoreShell = missingForCoreShell.filter(
+
+        (field) => field !== 'meaningful bearing edge shape/detail'
+
+      );
+
+    }
+
+    let missingForStock = findMissingStockStrictFieldQuality(
 
       fields,
 
       missingForCoreShell
 
     );
+
+    if (hasAuditableMetalEdgeFallback(fields)) {
+
+      missingForStock = missingForStock.filter(
+
+        (field) => field !== 'meaningful bearing edge shape/detail'
+
+      );
+
+    }
 
     const stockClassification = classifyStockFromFieldQuality(
 
