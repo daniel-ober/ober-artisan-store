@@ -1,0 +1,133 @@
+{
+  "status": "TAMA_SLP_STUDIO_MAPLE_LMP1465F_CONTROLLED_WRITE_DRY_RUN_NO_WRITES",
+  "collectionName": "snareReferenceDrums",
+  "planPath": "src/legacyPrint/reviewPlans/tama-slp-studio-maple-lmp1465f-controlled-write-plan.json",
+  "generatedAt": "2026-05-21T13:28:03.255Z",
+  "summary": {
+    "targetCount": 1,
+    "exactExpectedDocMatches": 1,
+    "noMatches": 0,
+    "safeToWriteCount": 1
+  },
+  "resolved": [
+    {
+      "selector": {
+        "companyName": "Tama",
+        "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5"
+      },
+      "expectedDocId": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+      "matchCount": 1,
+      "status": "EXPECTED_DOC_ID_MATCH_DRY_RUN_ONLY",
+      "candidates": [
+        {
+          "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+          "selectorMatch": {
+            "companyMatch": true,
+            "modelMatch": true
+          },
+          "currentCoreFields": {
+            "companyName": "Tama",
+            "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5",
+            "plyCount": 6,
+            "shellLayup": "",
+            "shellMaterial1": "Maple",
+            "shellMaterial2": "Maple wood hoops",
+            "shellMaterial3": "Unknown",
+            "shellThicknessMm": 5,
+            "reinforcementRings": true,
+            "hoopType": "Maple wood hoop",
+            "lugCount": 8,
+            "lugType": "Starclassic lug",
+            "stockSnareWires": "20-strand Hi-Carbon Steel snare wires",
+            "finishType": "Lacquer",
+            "bearingEdgeDetail": "",
+            "shellTreatment": "",
+            "coreFieldEnrichmentStatus": "",
+            "coreFieldEnrichmentBatch": "",
+            "coreFieldEnrichmentNeedsReview": ""
+          },
+          "proposedDiff": {
+            "coreFieldEnrichmentBatch": {
+              "before": null,
+              "after": "tama_slp_studio_maple_lmp1465f_source_enrichment"
+            },
+            "coreFieldEnrichmentNeedsReview": {
+              "before": null,
+              "after": true
+            },
+            "coreFieldEnrichmentStatus": {
+              "before": null,
+              "after": "source_backed_partial_core_enrichment"
+            },
+            "finishType": {
+              "before": "Lacquer",
+              "after": "Sienna lacquer / urethane-coated finish"
+            },
+            "hoopType": {
+              "before": "Maple wood hoop",
+              "after": "100% maple wood hoops coated with urethane"
+            },
+            "reinforcementRings": {
+              "before": true,
+              "after": "Sound Focus Rings"
+            },
+            "shellLayup": {
+              "before": null,
+              "after": "6-ply all-maple"
+            },
+            "shellMaterial2": {
+              "before": "Maple wood hoops",
+              "after": "none"
+            },
+            "shellMaterial3": {
+              "before": "Unknown",
+              "after": "none"
+            },
+            "stockSnareWires": {
+              "before": "20-strand Hi-Carbon Steel snare wires",
+              "after": "20-strand Starclassic Carbon Steel Snappy snares"
+            }
+          }
+        }
+      ],
+      "proposedPatch": {
+        "plyCount": 6,
+        "shellLayup": "6-ply all-maple",
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "none",
+        "shellMaterial3": "none",
+        "shellThicknessMm": 5,
+        "reinforcementRings": "Sound Focus Rings",
+        "hoopType": "100% maple wood hoops coated with urethane",
+        "lugCount": 8,
+        "lugType": "Starclassic lug",
+        "stockSnareWires": "20-strand Starclassic Carbon Steel Snappy snares",
+        "finishType": "Sienna lacquer / urethane-coated finish",
+        "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+        "coreFieldEnrichmentBatch": "tama_slp_studio_maple_lmp1465f_source_enrichment",
+        "coreFieldEnrichmentNeedsReview": true
+      },
+      "confidence": {
+        "plyCount": "high",
+        "shellLayup": "high",
+        "shellMaterial1": "high",
+        "shellThicknessMm": "high",
+        "reinforcementRings": "medium",
+        "hoopType": "high",
+        "lugCount": "medium",
+        "lugType": "high",
+        "stockSnareWires": "high",
+        "finishType": "medium"
+      },
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/snare_drums/slp_studio_maple_snare_drum.html",
+        "https://www.tama.com/eu/products/snare_drums/slp_studio_maple_snare_drum.html",
+        "https://www.woodbrass.com/en-gb/wood-snares-tama-lmp1465f-sen-slp-sound-lab-project-studio-maple-14-x-6-5-sienna-p167839.html",
+        "https://www.guitarcenter.com/TAMA/SLP-Studio-Maple-14-x-65-in-1358786585201.gc",
+        "https://drumcenternh.com/products/tama-slp-studio-maple-wood-hoop-snare-drum-14x6-5-sienna",
+        "https://timpano-percussion.com/products/tama-slp-studio-maple-snare-drum-14x6-5in"
+      ]
+    }
+  ],
+  "nextStep": "Review proposed diff. Only after review, run a separate controlled apply script with explicit confirmation."
+}
