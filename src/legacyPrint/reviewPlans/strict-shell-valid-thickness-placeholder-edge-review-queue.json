@@ -1,0 +1,1925 @@
+{
+  "status": "STRICT_SHELL_VALID_THICKNESS_PLACEHOLDER_EDGE_REVIEW_QUEUE_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:58:49.506Z",
+  "sourceAuditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T08-57-00-608Z.json",
+  "noFirestoreWrites": true,
+  "queueScope": "Records with valid numeric shell thickness but placeholder/unknown bearing edge, blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 216,
+    "companyCount": 12,
+    "sourceAuditTotalRecordsScanned": 1551,
+    "expectedClosestCandidateCountFromReport": 103,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this queue.",
+    "Prioritize official manufacturer/catalog/manual/archived source confirmation of bearing edge geometry.",
+    "For metal-shell records, keep auditable metal-edge fallback separate from source-confirmed meaningful bearing edge.",
+    "Only promote to source-confirmed meaningful core-shell pass when bearing edge detail is source-backed and specific enough."
+  ],
+  "companyGroups": [
+    {
+      "companyName": "Mapex",
+      "candidateCount": 93,
+      "lineGroupCount": 4,
+      "lines": [
+        {
+          "lineSeries": "Black Panther Archive / Catalog Era",
+          "candidateCount": 84,
+          "sourceConfidenceCounts": {
+            "Medium": 63,
+            "Low": 21
+          },
+          "sampleRecords": [
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 10x5.5 — 10x5.5",
+              "modelName": "Birdseye Maple 10x5.5",
+              "diameter": "10",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 12x5.5 — 12x5.5",
+              "modelName": "Birdseye Maple 12x5.5",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 13x3.5 — 13x3.5",
+              "modelName": "Birdseye Maple 13x3.5",
+              "diameter": "13",
+              "depth": "3.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x3.5 — 14x3.5",
+              "modelName": "Birdseye Maple 14x3.5",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x5.5 — 14x5.5",
+              "modelName": "Birdseye Maple 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x5 — 14x5",
+              "modelName": "Birdseye Maple 14x5",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x6.5 — 14x6.5",
+              "modelName": "Birdseye Maple 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x7 — 14x7",
+              "modelName": "Birdseye Maple 14x7",
+              "diameter": "14",
+              "depth": "7",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x8 — 14x8",
+              "modelName": "Birdseye Maple 14x8",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+              "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 12x5.5 — 12x5.5",
+              "modelName": "Brass Master 12x5.5",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Black Panther Archive / Unresolved Variant",
+          "candidateCount": 5,
+          "sourceConfidenceCounts": {
+            "Low": 5
+          },
+          "sampleRecords": [
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+              "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Birch Variant 2 — 14x6.5",
+              "modelName": "Unresolved Birch Variant 2",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Birch",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+              "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Brass Variant 5 — 14x5.5",
+              "modelName": "Unresolved Brass Variant 5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+              "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Maple Variant 1 — 14x5.5",
+              "modelName": "Unresolved Maple Variant 1",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+              "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Steel Variant 4 — 12x5.5",
+              "modelName": "Unresolved Steel Variant 4",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159",
+              "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Walnut Variant 3 — 13x6",
+              "modelName": "Unresolved Walnut Variant 3",
+              "diameter": "13",
+              "depth": "6",
+              "shellMaterial": "Walnut",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            }
+          ]
+        },
+        {
+          "lineSeries": "Signature / Artist",
+          "candidateCount": 3,
+          "sourceConfidenceCounts": {
+            "Medium": 3
+          },
+          "sampleRecords": [
+            {
+              "id": "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+              "label": "Mapex — Signature / Artist — Chris Adler Original 12x5.5 — 12x5.5",
+              "modelName": "Chris Adler Original 12x5.5",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellMaterial": "Walnut",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+              "label": "Mapex — Signature / Artist — Chris Adler Warbird — 12x5.5",
+              "modelName": "Chris Adler Warbird",
+              "diameter": "12",
+              "depth": "5.5",
+              "shellMaterial": "Maple / Walnut",
+              "shellThickness": "5.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+              "label": "Mapex — Signature / Artist — Matt Halpern Wraith — 14x6",
+              "modelName": "Matt Halpern Wraith",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "BP Design Lab",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "High": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+              "label": "Mapex — BP Design Lab — Equinox — 14x5",
+              "modelName": "Equinox",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Maple",
+              "shellThickness": "6",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+              "sourceConfidence": "High",
+              "priorityScore": 325
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "candidateCount": 41,
+      "lineGroupCount": 8,
+      "lines": [
+        {
+          "lineSeries": "Free Floating",
+          "candidateCount": 16,
+          "sourceConfidenceCounts": {
+            "Medium": 16
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+              "label": "Pearl — Free Floating — Free Floating Aluminum — 14x3.5",
+              "modelName": "Free Floating Aluminum",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+              "label": "Pearl — Free Floating — Free Floating Aluminum — 14x5",
+              "modelName": "Free Floating Aluminum",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+              "label": "Pearl — Free Floating — Free Floating Aluminum — 14x6.5",
+              "modelName": "Free Floating Aluminum",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+              "label": "Pearl — Free Floating — Free Floating Aluminum — 14x8",
+              "modelName": "Free Floating Aluminum",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+              "label": "Pearl — Free Floating — Free Floating Brass — 14x3.5",
+              "modelName": "Free Floating Brass",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+              "label": "Pearl — Free Floating — Free Floating Brass — 14x5",
+              "modelName": "Free Floating Brass",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+              "label": "Pearl — Free Floating — Free Floating Brass — 14x6.5",
+              "modelName": "Free Floating Brass",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+              "label": "Pearl — Free Floating — Free Floating Brass — 14x8",
+              "modelName": "Free Floating Brass",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+              "label": "Pearl — Free Floating — Free Floating Copper — 14x3.5",
+              "modelName": "Free Floating Copper",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellMaterial": "Copper",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            },
+            {
+              "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+              "label": "Pearl — Free Floating — Free Floating Copper — 14x5",
+              "modelName": "Free Floating Copper",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Copper",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 975
+            }
+          ]
+        },
+        {
+          "lineSeries": "Modern Utility",
+          "candidateCount": 8,
+          "sourceConfidenceCounts": {
+            "Medium": 8
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 13x7",
+              "modelName": "Modern Utility Maple",
+              "diameter": "13",
+              "depth": "7",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 14x5.5",
+              "modelName": "Modern Utility Maple",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 14x6.5",
+              "modelName": "Modern Utility Maple",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+              "label": "Pearl — Modern Utility — Modern Utility Maple — 14x8",
+              "modelName": "Modern Utility Maple",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+              "label": "Pearl — Modern Utility — Modern Utility Steel — 13x7",
+              "modelName": "Modern Utility Steel",
+              "diameter": "13",
+              "depth": "7",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+              "label": "Pearl — Modern Utility — Modern Utility Steel — 14x5.5",
+              "modelName": "Modern Utility Steel",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+              "label": "Pearl — Modern Utility — Modern Utility Steel — 14x6.5",
+              "modelName": "Modern Utility Steel",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+              "label": "Pearl — Modern Utility — Modern Utility Steel — 14x8",
+              "modelName": "Modern Utility Steel",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Sensitone Heritage Alloy",
+          "candidateCount": 6,
+          "sourceConfidenceCounts": {
+            "Medium": 6
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+              "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x5",
+              "modelName": "Sensitone Heritage Aluminum Alloy",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+              "sourceConfidence": "Medium",
+              "priorityScore": 995
+            },
+            {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+              "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x6.5",
+              "modelName": "Sensitone Heritage Aluminum Alloy",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+              "sourceConfidence": "Medium",
+              "priorityScore": 995
+            },
+            {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+              "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x5",
+              "modelName": "Sensitone Heritage Brass Alloy",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+              "sourceConfidence": "Medium",
+              "priorityScore": 995
+            },
+            {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+              "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x6.5",
+              "modelName": "Sensitone Heritage Brass Alloy",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+              "sourceConfidence": "Medium",
+              "priorityScore": 995
+            },
+            {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+              "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x5",
+              "modelName": "Sensitone Heritage Steel Alloy",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+              "sourceConfidence": "Medium",
+              "priorityScore": 995
+            },
+            {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+              "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x6.5",
+              "modelName": "Sensitone Heritage Steel Alloy",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+              "sourceConfidence": "Medium",
+              "priorityScore": 995
+            }
+          ]
+        },
+        {
+          "lineSeries": "Reference",
+          "candidateCount": 4,
+          "sourceConfidenceCounts": {
+            "Medium": 4
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+              "label": "Pearl — Reference — Reference Brass — 14x5",
+              "modelName": "Reference Brass",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+              "label": "Pearl — Reference — Reference Brass — 14x6.5",
+              "modelName": "Reference Brass",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+              "label": "Pearl — Reference — Reference Cast Steel — 14x5",
+              "modelName": "Reference Cast Steel",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Steel",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+              "label": "Pearl — Reference — Reference Cast Steel — 14x6.5",
+              "modelName": "Reference Cast Steel",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Decade Maple",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+              "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x5.5",
+              "modelName": "Decade Maple Maple Snare",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+              "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x6.5",
+              "modelName": "Decade Maple Maple Snare",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Masters Maple Complete",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+              "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x5.5",
+              "modelName": "Masters Maple Complete Maple Snare",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+              "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x6.5",
+              "modelName": "Masters Maple Complete Maple Snare",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "5.4",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Ultracast",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+              "label": "Pearl — Ultracast — Ultracast Aluminum — 14x5",
+              "modelName": "Ultracast Aluminum",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+              "label": "Pearl — Ultracast — Ultracast Aluminum — 14x6.5",
+              "modelName": "Ultracast Aluminum",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Signature",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+              "label": "Pearl — Signature — Chad Smith Signature — 14x5",
+              "modelName": "Chad Smith Signature",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "AHEAD",
+      "candidateCount": 33,
+      "lineGroupCount": 1,
+      "lines": [
+        {
+          "lineSeries": "Ahead Snares",
+          "candidateCount": 33,
+          "sourceConfidenceCounts": {
+            "High": 22,
+            "Medium": 10,
+            "Low": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+              "label": "AHEAD — Ahead Snares — Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware — 14x6",
+              "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+              "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass 14x6 with Black Trick Throw Off — 14x6",
+              "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum-with-black-trick-throw-off/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+              "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass Snare Drum 13x6 — 13x6",
+              "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+              "diameter": "13",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+              "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass Snare Drum 14x6 — 14x6",
+              "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+              "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass 13x6 — 13x6",
+              "modelName": "Bright Polished 3mm Bell Brass 13x6",
+              "diameter": "13",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+              "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass Piccolo 14x4 — 14x4",
+              "modelName": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-piccolo-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+              "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Piccolo Snare Drum 14x4 — 14x4",
+              "modelName": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-piccolo-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+              "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Snare Drum 13x6 — 13x6",
+              "modelName": "Bright Polished Bell Brass Snare Drum 13x6",
+              "diameter": "13",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+              "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Snare Drum 14x6 — 14x6",
+              "modelName": "Bright Polished Bell Brass Snare Drum 14x6",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            },
+            {
+              "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+              "label": "AHEAD — Ahead Snares — Polished Bell Brass Snare Drum 14x6 — 14x6",
+              "modelName": "Polished Bell Brass Snare Drum 14x6",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Bell Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://bigbangdist.com/product/ahead-polished-bell-brass-snare-drum/",
+              "sourceConfidence": "High",
+              "priorityScore": 1705
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "candidateCount": 17,
+      "lineGroupCount": 7,
+      "lines": [
+        {
+          "lineSeries": "Metal Snare",
+          "candidateCount": 8,
+          "sourceConfidenceCounts": {
+            "Low": 8
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x3.5 — 14x3.5",
+              "modelName": "Yamaha Brass Metal Snare 14x3.5",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x4 — 14x4",
+              "modelName": "Yamaha Brass Metal Snare 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x5.5 — 14x5.5",
+              "modelName": "Yamaha Brass Metal Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+              "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x6.5 — 14x6.5",
+              "modelName": "Yamaha Brass Metal Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x3.5 — 14x3.5",
+              "modelName": "Yamaha Steel Metal Snare 14x3.5",
+              "diameter": "14",
+              "depth": "3.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x4 — 14x4",
+              "modelName": "Yamaha Steel Metal Snare 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x5.5 — 14x5.5",
+              "modelName": "Yamaha Steel Metal Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e",
+              "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x6.5 — 14x6.5",
+              "modelName": "Yamaha Steel Metal Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            }
+          ]
+        },
+        {
+          "lineSeries": "Signature",
+          "candidateCount": 3,
+          "sourceConfidenceCounts": {
+            "Medium": 3
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+              "label": "Yamaha — Signature — Steve Gadd Recording Custom Brass 14x5.5 — 14x5.5",
+              "modelName": "Steve Gadd Recording Custom Brass 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1035
+            },
+            {
+              "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+              "label": "Yamaha — Signature — Steve Gadd Recording Custom Brass 14x6.5 — 14x6.5",
+              "modelName": "Steve Gadd Recording Custom Brass 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1035
+            },
+            {
+              "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+              "label": "Yamaha — Signature — Steve Gadd Steel 14x5.5 — 14x5.5",
+              "modelName": "Steve Gadd Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Rydeen / Gigmaker Kit Snare",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Low": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+              "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5 — 14x5.5",
+              "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002",
+              "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5 — 14x6.5",
+              "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            }
+          ]
+        },
+        {
+          "lineSeries": "Gigmaker / Entry Steel",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Low": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc",
+              "label": "Yamaha — Gigmaker / Entry Steel — Gigmaker / Entry Steel Steel Snare 14x5.5 — 14x5.5",
+              "modelName": "Gigmaker / Entry Steel Steel Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            }
+          ]
+        },
+        {
+          "lineSeries": "Stage Custom Advantage",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+              "label": "Yamaha — Stage Custom Advantage — Stage Custom Advantage Steel 14x5.5 — 14x5.5",
+              "modelName": "Stage Custom Advantage Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Stage Custom Birch",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+              "label": "Yamaha — Stage Custom Birch — Stage Custom Birch Steel Snare 14x5.5 — 14x5.5",
+              "modelName": "Stage Custom Birch Steel Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Stage Custom Standard",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+              "label": "Yamaha — Stage Custom Standard — Stage Custom Standard Steel 14x5.5 — 14x5.5",
+              "modelName": "Stage Custom Standard Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "candidateCount": 9,
+      "lineGroupCount": 6,
+      "lines": [
+        {
+          "lineSeries": "Manganese Steel",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "High": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+              "label": "Canopus — Manganese Steel — Manganese Steel 14x5.5 — 14x5.5",
+              "modelName": "Manganese Steel 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+              "sourceConfidence": "High",
+              "priorityScore": 925
+            },
+            {
+              "id": "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973",
+              "label": "Canopus — Manganese Steel — Manganese Steel 14x6.5 — 14x6.5",
+              "modelName": "Manganese Steel 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/product/manganese-steel-snaredrum/",
+              "sourceConfidence": "High",
+              "priorityScore": 925
+            }
+          ]
+        },
+        {
+          "lineSeries": "MO",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+              "label": "Canopus — MO — MO Snare 14x5.5 — 14x5.5",
+              "modelName": "MO Snare 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "8",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium",
+              "priorityScore": 875
+            },
+            {
+              "id": "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8",
+              "label": "Canopus — MO — MO Snare 14x6.5 — 14x6.5",
+              "modelName": "MO Snare 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "8",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium",
+              "priorityScore": 875
+            }
+          ]
+        },
+        {
+          "lineSeries": "Session Superior",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "High": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+              "label": "Canopus — Session Superior — Session Superior Maple 14x5.5 — 14x5.5",
+              "modelName": "Session Superior Maple 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "8",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+              "sourceConfidence": "High",
+              "priorityScore": 925
+            },
+            {
+              "id": "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7",
+              "label": "Canopus — Session Superior — Session Superior Maple 14x6.5 — 14x6.5",
+              "modelName": "Session Superior Maple 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "8",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+              "sourceConfidence": "High",
+              "priorityScore": 925
+            }
+          ]
+        },
+        {
+          "lineSeries": "Aluminum Alloy",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "High": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+              "label": "Canopus — Aluminum Alloy — Aluminum Alloy 14x6 — 14x6",
+              "modelName": "Aluminum Alloy 14x6",
+              "diameter": "14",
+              "depth": "6",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/product/aluminum-alloy-snaredrum/",
+              "sourceConfidence": "High",
+              "priorityScore": 925
+            }
+          ]
+        },
+        {
+          "lineSeries": "Type-R",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf",
+              "label": "Canopus — Type-R — Type-R 3mm Brass Magnum 14x6.5 — 14x6.5",
+              "modelName": "Type-R 3mm Brass Magnum 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium",
+              "priorityScore": 875
+            }
+          ]
+        },
+        {
+          "lineSeries": "Zelkova GINRAN",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a",
+              "label": "Canopus — Zelkova GINRAN — Zelkova GINRAN — 14x6.5",
+              "modelName": "Zelkova GINRAN",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Zelkova",
+              "shellThickness": "14",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+              "sourceConfidence": "Medium",
+              "priorityScore": 875
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "candidateCount": 7,
+      "lineGroupCount": 2,
+      "lines": [
+        {
+          "lineSeries": "DW MFG / True-Cast",
+          "candidateCount": 4,
+          "sourceConfidenceCounts": {
+            "Medium": 4
+          },
+          "sampleRecords": [
+            {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+              "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x4 — 14x4",
+              "modelName": "MFG True-Cast Bell Bronze 14x4",
+              "diameter": "14",
+              "depth": "4",
+              "shellMaterial": "Bronze",
+              "shellThickness": "35",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+              "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x5.5 — 14x5.5",
+              "modelName": "MFG True-Cast Bell Bronze 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Bronze",
+              "shellThickness": "35",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+              "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x6.5 — 14x6.5",
+              "modelName": "MFG True-Cast Bell Bronze 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Bronze",
+              "shellThickness": "35",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+              "label": "DW / PDP — DW MFG / True-Cast — MFG True-Cast Bell Bronze 14x8 — 14x8",
+              "modelName": "MFG True-Cast Bell Bronze 14x8",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Bronze",
+              "shellThickness": "35",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Design Series",
+          "candidateCount": 3,
+          "sourceConfidenceCounts": {
+            "High": 3
+          },
+          "sampleRecords": [
+            {
+              "id": "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+              "label": "DW / PDP — Design Series — Design Series Maple 14x5.5 — 14x5.5",
+              "modelName": "Design Series Maple 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "7.9",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+              "sourceConfidence": "High",
+              "priorityScore": 325
+            },
+            {
+              "id": "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+              "label": "DW / PDP — Design Series — Design Series Maple 14x6.5 — 14x6.5",
+              "modelName": "Design Series Maple 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Maple",
+              "shellThickness": "7.9",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+              "sourceConfidence": "High",
+              "priorityScore": 325
+            },
+            {
+              "id": "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1",
+              "label": "DW / PDP — Design Series — Design Series Maple 14x8 — 14x8",
+              "modelName": "Design Series Maple 14x8",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Maple",
+              "shellThickness": "7.9",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+              "sourceConfidence": "High",
+              "priorityScore": 325
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "candidateCount": 6,
+      "lineGroupCount": 4,
+      "lines": [
+        {
+          "lineSeries": "1963-1970s Ludwig",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+              "label": "Ludwig — 1963-1970s Ludwig — Supraphonic LM400 5x14 — 14x5",
+              "modelName": "Supraphonic LM400 5x14",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.7",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1275
+            },
+            {
+              "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+              "label": "Ludwig — 1963-1970s Ludwig — Supraphonic LM402 6.5x14 — 14x6.5",
+              "modelName": "Supraphonic LM402 6.5x14",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Aluminum",
+              "shellThickness": "1.7",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1275
+            }
+          ]
+        },
+        {
+          "lineSeries": "1977 Ludwig",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+              "label": "Ludwig — 1977 Ludwig — Black Beauty 5x14 — 14x5",
+              "modelName": "Black Beauty 5x14",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1255
+            },
+            {
+              "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+              "label": "Ludwig — 1977 Ludwig — Black Beauty Super Sensitive 5x14 — 14x5",
+              "modelName": "Black Beauty Super Sensitive 5x14",
+              "diameter": "14",
+              "depth": "5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1255
+            }
+          ]
+        },
+        {
+          "lineSeries": "Artist / Signature",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2",
+              "label": "Ludwig — Artist / Signature — Carl Palmer Venus 3.7x14 — 14x3.7",
+              "modelName": "Carl Palmer Venus 3.7x14",
+              "diameter": "14",
+              "depth": "3.7",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.2",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        },
+        {
+          "lineSeries": "Jazz Fest Series",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+              "label": "Ludwig — Jazz Fest Series — Jazz Fest Series 5.5x14 — 14x5.5",
+              "modelName": "Jazz Fest Series 5.5x14",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Mahogany / Poplar",
+              "shellThickness": "6",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "candidateCount": 3,
+      "lineGroupCount": 2,
+      "lines": [
+        {
+          "lineSeries": "STAR Reserve",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 1,
+            "Low": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+              "label": "Tama — STAR Reserve — STAR Reserve G-Mahogany 14x6.5 — 14x6.5",
+              "modelName": "STAR Reserve G-Mahogany 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "African Mahogany",
+              "shellThickness": "9",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+              "sourceConfidence": "Medium",
+              "priorityScore": 285
+            },
+            {
+              "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+              "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Brass 14x5.5 — 14x5.5",
+              "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "1.5",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+              "sourceConfidence": "Low",
+              "priorityScore": 235
+            }
+          ]
+        },
+        {
+          "lineSeries": "S.L.P.",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+              "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+              "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+              "diameter": "14",
+              "depth": "10",
+              "shellMaterial": "Birch",
+              "shellThickness": "7",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+              "sourceConfidence": "Medium",
+              "priorityScore": 295
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Craviotto",
+      "candidateCount": 2,
+      "lineGroupCount": 1,
+      "lines": [
+        {
+          "lineSeries": "Diamond Series / AK Collaboration",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-5-5x14_14x5-5_solid-shell_brass_0-7_metal-bearing-edge-un_e55f06b6",
+              "label": "Craviotto — Diamond Series / AK Collaboration — Diamond Series Brass 5.5x14 — 14x5.5",
+              "modelName": "Diamond Series Brass 5.5x14",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "0.7",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.craviottodrums.com/craviotto-limited-editions",
+              "sourceConfidence": "Medium",
+              "priorityScore": 935
+            },
+            {
+              "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-6-5x14_14x6-5_solid-shell_brass_0-7_metal-bearing-edge-un_4fe1510c",
+              "label": "Craviotto — Diamond Series / AK Collaboration — Diamond Series Brass 6.5x14 — 14x6.5",
+              "modelName": "Diamond Series Brass 6.5x14",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Brass",
+              "shellThickness": "0.7",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.craviottodrums.com/craviotto-limited-editions",
+              "sourceConfidence": "Medium",
+              "priorityScore": 935
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "candidateCount": 2,
+      "lineGroupCount": 1,
+      "lines": [
+        {
+          "lineSeries": "Brooklyn Metal",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Medium": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x5-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_eb8daa4f",
+              "label": "Gretsch — Brooklyn Metal — Brooklyn Chrome-over-Steel — 14x5.5",
+              "modelName": "Brooklyn Chrome-over-Steel",
+              "diameter": "14",
+              "depth": "5.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            },
+            {
+              "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x6-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_1397c712",
+              "label": "Gretsch — Brooklyn Metal — Brooklyn Chrome-over-Steel — 14x6.5",
+              "modelName": "Brooklyn Chrome-over-Steel",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Steel",
+              "shellThickness": "1.1",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+              "sourceConfidence": "Medium",
+              "priorityScore": 275
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "candidateCount": 2,
+      "lineGroupCount": 1,
+      "lines": [
+        {
+          "lineSeries": "Signature Series",
+          "candidateCount": 2,
+          "sourceConfidenceCounts": {
+            "Low": 2
+          },
+          "sampleRecords": [
+            {
+              "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+              "label": "SONOR — Signature Series — Signature HLD 580 Cast Bronze 14x6.5 — 14x6.5",
+              "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+              "diameter": "14",
+              "depth": "6.5",
+              "shellMaterial": "Bronze",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.sonormuseum.com/",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            },
+            {
+              "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+              "label": "SONOR — Signature Series — Signature HLD 590 Cast Bronze 14x8 — 14x8",
+              "modelName": "Signature HLD 590 Cast Bronze 14x8",
+              "diameter": "14",
+              "depth": "8",
+              "shellMaterial": "Bronze",
+              "shellThickness": "3",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://www.sonormuseum.com/",
+              "sourceConfidence": "Low",
+              "priorityScore": 225
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "candidateCount": 1,
+      "lineGroupCount": 1,
+      "lines": [
+        {
+          "lineSeries": "USA Custom",
+          "candidateCount": 1,
+          "sourceConfidenceCounts": {
+            "Medium": 1
+          },
+          "sampleRecords": [
+            {
+              "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+              "label": "Pork Pie Percussion — USA Custom — Maple Max 7x14 — 14x7",
+              "modelName": "Maple Max 7x14",
+              "diameter": "14",
+              "depth": "7",
+              "shellMaterial": "Maple",
+              "shellThickness": "9",
+              "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+              "primarySourceUrl": "https://porkpiedrums.com/products/",
+              "sourceConfidence": "Medium",
+              "priorityScore": 1095
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Create a first focused review packet for the highest-count company/line groups in this queue.",
+    "constraint": "Review packet only. No Firestore writes."
+  }
+}
