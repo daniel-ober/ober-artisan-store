@@ -1,0 +1,60 @@
+{
+  "status": "TAMA_SLP_STUDIO_MAPLE_LMP1465F_SOURCE_REVIEW_PACKET_NO_WRITES",
+  "purpose": "Prepare source-backed enrichment review for Tama S.L.P. Studio Maple LMP1465F 14x6.5 before any controlled Firestore write plan.",
+  "writeSafety": {
+    "firestoreWrites": false,
+    "readyForWriteScript": false,
+    "requiresSourceReview": true,
+    "allowedCollection": "snareReferenceDrums",
+    "allowedRecordCount": 1
+  },
+  "target": {
+    "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+    "companyName": "Tama",
+    "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5"
+  },
+  "currentKnownFields": {
+    "plyCount": 6,
+    "shellLayup": "",
+    "reinforcementRings": true,
+    "bearingEdgeDetail": "",
+    "shellTreatment": "",
+    "voiceProfile": {
+      "attack": 6.48,
+      "brightness": 5.51,
+      "projection": 5.87,
+      "sustain": 6.62,
+      "warmth": 6.83,
+      "sensitivity": 6.73,
+      "control": 5.93
+    },
+    "firstListen": [
+      "warmth",
+      "sensitivity",
+      "sustain"
+    ],
+    "topDrivers": [
+      "shellMaterial:maple",
+      "bearingEdge:sharper45Degree",
+      "hoopType:woodHoop",
+      "shellConstruction:ply",
+      "shellThickness:5mm",
+      "depth:6.5",
+      "diameter:14",
+      "batterHead:defaultCoatedSinglePlyBatter"
+    ]
+  },
+  "missingOrNeedsReview": [
+    "shellLayup",
+    "bearingEdgeDetail",
+    "shellTreatment/finishTreatment"
+  ],
+  "researchQuestions": [
+    "Confirm exact shell layup / shell material stack.",
+    "Confirm whether reinforcement rings are source-backed and what type/material they are.",
+    "Confirm bearing edge detail/profile.",
+    "Confirm finish/treatment only if it materially affects resonance.",
+    "Confirm whether existing plyCount: 6 is source-backed or inferred."
+  ],
+  "nextStep": "Research/verify source URLs for this exact model, then create a controlled one-record write plan."
+}
