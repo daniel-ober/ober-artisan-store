@@ -277,19 +277,34 @@
       "lineSeriesMatchMode": "exact"
     },
     {
-      "ruleKey": "canopus-stock-heads-draft",
+      "ruleKey": "canopus-the-maple-stock-heads-draft",
       "status": "DRAFT",
       "companyName": "Canopus",
       "lineSeriesIncludes": [
-        "The Maple",
-        "Zelkova"
+        "The Maple"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "lineSeriesMatchMode": "exact",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
-      "sourceUrl": "https://canopusdrums.com/en/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Canopus source already supports snare wire models in records. Confirm stock batter/reso head models before approval."
+      "sourceUrl": "https://canopusdrums.com/en/product/themaple-snaredrum/",
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Canopus The Maple group contains 7 candidates. The Canopus source confirms the model family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
+    },
+    {
+      "ruleKey": "canopus-zelkova-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Canopus",
+      "lineSeriesIncludes": [
+        "Zelkova"
+      ],
+      "lineSeriesMatchMode": "exact",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://canopusdrums.com/en/product/zelkova-snaredrum/",
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Canopus Zelkova group contains 2 candidates. The Canopus source confirms the model family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "canopus-aluminum-alloy-stock-heads-draft",
