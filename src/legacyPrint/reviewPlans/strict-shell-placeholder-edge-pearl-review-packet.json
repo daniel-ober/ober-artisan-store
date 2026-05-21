@@ -1,0 +1,601 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_PEARL_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:59:55.737Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Pearl",
+  "reviewScope": "Pearl records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 41,
+    "lineGroupCount": 8,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell line, or shell thickness alone.",
+    "If evidence only supports a broad company pattern, keep records blocked unless the source clearly applies to these models/eras.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate reviewed decisions file before any patch plan."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Free Floating",
+      "candidateCount": 16,
+      "sourceConfidenceCounts": {
+        "Medium": 16
+      },
+      "researchQuestion": "Can Pearl Free Floating snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x3.5",
+          "modelName": "Free Floating Aluminum",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x5",
+          "modelName": "Free Floating Aluminum",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x6.5",
+          "modelName": "Free Floating Aluminum",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x8",
+          "modelName": "Free Floating Aluminum",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x3.5",
+          "modelName": "Free Floating Brass",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x5",
+          "modelName": "Free Floating Brass",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x6.5",
+          "modelName": "Free Floating Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x8",
+          "modelName": "Free Floating Brass",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+          "label": "Pearl — Free Floating — Free Floating Copper — 14x3.5",
+          "modelName": "Free Floating Copper",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Copper",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        },
+        {
+          "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+          "label": "Pearl — Free Floating — Free Floating Copper — 14x5",
+          "modelName": "Free Floating Copper",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Copper",
+          "shellThickness": "1.5",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 975
+        }
+      ]
+    },
+    {
+      "lineSeries": "Modern Utility",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "Medium": 8
+      },
+      "researchQuestion": "Can Pearl Modern Utility snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 13x7",
+          "modelName": "Modern Utility Maple",
+          "diameter": "13",
+          "depth": "7",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 14x5.5",
+          "modelName": "Modern Utility Maple",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 14x6.5",
+          "modelName": "Modern Utility Maple",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 14x8",
+          "modelName": "Modern Utility Maple",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 13x7",
+          "modelName": "Modern Utility Steel",
+          "diameter": "13",
+          "depth": "7",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 14x5.5",
+          "modelName": "Modern Utility Steel",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 14x6.5",
+          "modelName": "Modern Utility Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 14x8",
+          "modelName": "Modern Utility Steel",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Sensitone Heritage Alloy",
+      "candidateCount": 6,
+      "sourceConfidenceCounts": {
+        "Medium": 6
+      },
+      "researchQuestion": "Can Pearl Sensitone Heritage Alloy snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x5",
+          "modelName": "Sensitone Heritage Aluminum Alloy",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+          "sourceConfidence": "Medium",
+          "priorityScore": 995
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x6.5",
+          "modelName": "Sensitone Heritage Aluminum Alloy",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+          "sourceConfidence": "Medium",
+          "priorityScore": 995
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x5",
+          "modelName": "Sensitone Heritage Brass Alloy",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+          "sourceConfidence": "Medium",
+          "priorityScore": 995
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x6.5",
+          "modelName": "Sensitone Heritage Brass Alloy",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+          "sourceConfidence": "Medium",
+          "priorityScore": 995
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x5",
+          "modelName": "Sensitone Heritage Steel Alloy",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+          "sourceConfidence": "Medium",
+          "priorityScore": 995
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x6.5",
+          "modelName": "Sensitone Heritage Steel Alloy",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+          "sourceConfidence": "Medium",
+          "priorityScore": 995
+        }
+      ]
+    },
+    {
+      "lineSeries": "Reference",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "Medium": 4
+      },
+      "researchQuestion": "Can Pearl Reference snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+          "label": "Pearl — Reference — Reference Brass — 14x5",
+          "modelName": "Reference Brass",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+          "label": "Pearl — Reference — Reference Brass — 14x6.5",
+          "modelName": "Reference Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+          "label": "Pearl — Reference — Reference Cast Steel — 14x5",
+          "modelName": "Reference Cast Steel",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Steel",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+          "label": "Pearl — Reference — Reference Cast Steel — 14x6.5",
+          "modelName": "Reference Cast Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Decade Maple",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Pearl Decade Maple snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+          "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x5.5",
+          "modelName": "Decade Maple Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+          "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x6.5",
+          "modelName": "Decade Maple Maple Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Masters Maple Complete",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Pearl Masters Maple Complete snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+          "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x5.5",
+          "modelName": "Masters Maple Complete Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+          "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x6.5",
+          "modelName": "Masters Maple Complete Maple Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.4",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Ultracast",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Pearl Ultracast snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+          "label": "Pearl — Ultracast — Ultracast Aluminum — 14x5",
+          "modelName": "Ultracast Aluminum",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+          "label": "Pearl — Ultracast — Ultracast Aluminum — 14x6.5",
+          "modelName": "Ultracast Aluminum",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Pearl Signature snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, ply count, or shell thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+          "label": "Pearl — Signature — Chad Smith Signature — 14x5",
+          "modelName": "Chad Smith Signature",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Pearl line groups for official/catalog bearing edge evidence and create a decisions file.",
+    "constraint": "Decisions file only. No Firestore writes."
+  }
+}
