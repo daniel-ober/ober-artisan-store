@@ -1,0 +1,301 @@
+{
+  "status": "STOCK_HEAD_EXACT_SOURCE_BACKED_PATCH_PLAN_REQUIRES_APPROVAL",
+  "generatedAt": "2026-05-21T09:38:22.061Z",
+  "sourceExtractionPacketFile": "src/legacyPrint/reviewPlans/stock-head-exact-extraction-review-packet.json",
+  "collectionName": "snareReferenceDrums",
+  "approvedForFirestoreWrite": false,
+  "requiredEnvApproval": "LEGACYPRINT_APPROVE_FIRESTORE_WRITE=stock-head-exact-3",
+  "summary": {
+    "patchCount": 3,
+    "firestoreWritesIfApproved": 3,
+    "firestoreWritesPerformed": 0,
+    "byCompany": {
+      "Mapex": 1,
+      "Tama": 2
+    }
+  },
+  "safetyRules": [
+    "This patch plan updates only stock batter/reso head fields when exact single values were extracted.",
+    "This patch plan does not update shell, bearing edge, shell thickness, hoops, lugs, wires, throw-off, or source URL.",
+    "This patch plan marks stock heads as fallback/source-page extracted, not source-confirmed catalog data.",
+    "A separate exact env approval command is required before Firestore writes."
+  ],
+  "patches": [
+    {
+      "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+      "label": "Mapex — BP Design Lab — Equinox — 14x5",
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "modelName": "Equinox",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+      "sourceHost": "mapexdrums.com",
+      "sourceConfidence": "High",
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "extractedStockBatterHead": "Remo Clear Ambassador",
+      "extractedStockResoHead": "Remo Ambassador Snare Side",
+      "extractionMatchedKeys": [
+        "REMO_CLEAR_AMBASSADOR:batter",
+        "REMO_AMBASSADOR_SNARE_SIDE:reso"
+      ],
+      "evidenceSnippets": [
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "ingle-Screw Lugs (Staggered for Increased Tuning Range) Snare Wires: Puresound™ Custom Series 16-Strand Stainless Steel Coils with Copper End-Plates Drumheads: Remo® Fiberskyn 3 Diplomat, Remo® Clear Ambassador Snare Side Model No: BPML4500CFB Back to the top Follow Us Mapex Drums Facebook Instagram YouTube Mapex Marching Facebook Instagram YouTube Choose Your Region & Language Sel"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "for Increased Tuning Range) Snare Wires: Puresound™ Custom Series 16-Strand Stainless Steel Coils with Copper End-Plates Drumheads: Remo® Fiberskyn 3 Diplomat, Remo® Clear Ambassador Snare Side Model No: BPML4500CFB Back to the top Follow Us Mapex Drums Facebook Instagram YouTube Mapex Marching Facebook Instagram YouTube Choose Your Region & Language Select USA | English Global | E"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "d Tuning Range) Snare Wires: Puresound™ Custom Series 16-Strand Stainless Steel Coils with Copper End-Plates Drumheads: Remo® Fiberskyn 3 Diplomat, Remo® Clear Ambassador Snare Side Model No: BPML4500CFB Back to the top Follow Us Mapex Drums Facebook Instagram YouTube Mapex Marching Facebook Instagram YouTube Choose Your Region & Language Select USA | English Global | English United King"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "diplomat",
+          "snippet": "Staggered for Increased Tuning Range) Snare Wires: Puresound™ Custom Series 16-Strand Stainless Steel Coils with Copper End-Plates Drumheads: Remo® Fiberskyn 3 Diplomat, Remo® Clear Ambassador Snare Side Model No: BPML4500CFB Back to the top Follow Us Mapex Drums Facebook Instagram YouTube Mapex Marching Facebook Instagram YouTube Choose Your Region & Language Select USA | English Glob"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "clear",
+          "snippet": "eded to hear the most subtle ghost notes with a bright and open presence at full volume. Home PRODUCTS DRUMS SNARE DRUMS BP Design Lab Equinox Equinox SAS (SONIClear Attenuation System) Finish The Natural Satin SAS Finish brings out the beautiful character of the woods used in the drums but also allows the shell to vibrate fully due to its extremely low-mass application. Thicker fin"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "clear",
+          "snippet": "e the desired result. Maple Shell The harder all-Maple shell and edge reinforcement rings raise the frequency response in the 1-3 kHz range, giving this drum a clear and bright tone to cut through guitars, larger ensembles and horn bands. SONIClear™ Bearing Edge The SONIClear™ Bearing Edge is standard on all Black Panther Design Lab Shells and allows the drumhead to sit flatter and"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "clear",
+          "snippet": "rings raise the frequency response in the 1-3 kHz range, giving this drum a clear and bright tone to cut through guitars, larger ensembles and horn bands. SONIClear™ Bearing Edge The SONIClear™ Bearing Edge is standard on all Black Panther Design Lab Shells and allows the drumhead to sit flatter and make better contact with the shell. The result is a clearer fundamental pitch, effo"
+        },
+        {
+          "sourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceHost": "mapexdrums.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "clear",
+          "snippet": "esponse in the 1-3 kHz range, giving this drum a clear and bright tone to cut through guitars, larger ensembles and horn bands. SONIClear™ Bearing Edge The SONIClear™ Bearing Edge is standard on all Black Panther Design Lab Shells and allows the drumhead to sit flatter and make better contact with the shell. The result is a clearer fundamental pitch, effortless and consistent tuning"
+        }
+      ],
+      "updates": {
+        "stockHeadFallbackApplied": true,
+        "stockHeadFallbackKey": "SOURCE_PAGE_EXACT_HEAD_EXTRACTION_REVIEWED",
+        "stockHeadFallbackReason": "Exact single batter and resonant/snare-side head values were extracted from source-page evidence snippets and routed through the strict stock-head fallback review lane.",
+        "stockHeadNeedsVerification": true,
+        "stockHeadSourceConfirmed": false,
+        "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+        "legacyPrintStockReadinessUpdatedAt": "__SERVER_TIMESTAMP__",
+        "legacyPrintStockReadinessUpdateSource": "stock-head-exact-source-backed-patch-plan.json",
+        "legacyPrintStockReadinessUpdateType": "STOCK_HEAD_EXACT_SOURCE_BACKED_FALLBACK_PATCH",
+        "stockBatterHead": "Remo Clear Ambassador",
+        "stockBatterHeadConfidence": "Fallback / Source-page extracted",
+        "stockResoHead": "Remo Ambassador Snare Side",
+        "stockResoHeadConfidence": "Fallback / Source-page extracted"
+      }
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+      "label": "Tama — Mastercraft — Mastercraft Bell Brass 1980s 14x6.5 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Mastercraft",
+      "modelName": "Mastercraft Bell Brass 1980s 14x6.5",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+      "sourceHost": "tama.com",
+      "sourceConfidence": "Medium",
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "extractedStockBatterHead": "Remo Coated Ambassador",
+      "extractedStockResoHead": "Remo Ambassador Snare Side",
+      "extractionMatchedKeys": [
+        "REMO_COATED_AMBASSADOR:batter",
+        "REMO_AMBASSADOR_SNARE_SIDE:reso"
+      ],
+      "evidenceSnippets": [
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "rainer/Butt: Roller Action (6302N/6303N/6338N) Snare Wire: 18-strand Carbon Steel Long Snare Wires (6035N) Inside Muffler: One-Touch Tone Control (6552N) Head: REMO® Ambassador Coated TAMA 50th Anniversary version VIDEO FEATURES 355mm diameter, 3mm Cast Bell Brass Shell Utilizing a unique metal alloy predominantly comprised of copper & tin, the mixture is poured into a mold to form"
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "dvancement in design and function. Proving extremely useful even for drummers in the modern world, the One-Touch Tone Control is a timeless and elegant design. REMO® AMBASSADOR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador"
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "EMO® AMBASSADOR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "/Butt: Roller Action (6302N/6303N/6338N) Snare Wire: 18-strand Carbon Steel Long Snare Wires (6035N) Inside Muffler: One-Touch Tone Control (6552N) Head: REMO® Ambassador Coated TAMA 50th Anniversary version VIDEO FEATURES 355mm diameter, 3mm Cast Bell Brass Shell Utilizing a unique metal alloy predominantly comprised of copper & tin, the mixture is poured into a mold to form a 3mm thick"
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "ment in design and function. Proving extremely useful even for drummers in the modern world, the One-Touch Tone Control is a timeless and elegant design. REMO® AMBASSADOR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "OR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "craft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        }
+      ],
+      "updates": {
+        "stockHeadFallbackApplied": true,
+        "stockHeadFallbackKey": "SOURCE_PAGE_EXACT_HEAD_EXTRACTION_REVIEWED",
+        "stockHeadFallbackReason": "Exact single batter and resonant/snare-side head values were extracted from source-page evidence snippets and routed through the strict stock-head fallback review lane.",
+        "stockHeadNeedsVerification": true,
+        "stockHeadSourceConfirmed": false,
+        "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+        "legacyPrintStockReadinessUpdatedAt": "__SERVER_TIMESTAMP__",
+        "legacyPrintStockReadinessUpdateSource": "stock-head-exact-source-backed-patch-plan.json",
+        "legacyPrintStockReadinessUpdateType": "STOCK_HEAD_EXACT_SOURCE_BACKED_FALLBACK_PATCH",
+        "stockBatterHead": "Remo Coated Ambassador",
+        "stockBatterHeadConfidence": "Fallback / Source-page extracted",
+        "stockResoHead": "Remo Ambassador Snare Side",
+        "stockResoHeadConfidence": "Fallback / Source-page extracted"
+      }
+    },
+    {
+      "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+      "label": "Tama — Mastercraft — The Bell Brass 50th Anniversary Reissue BB-156 — 14x6.5",
+      "companyName": "Tama",
+      "lineSeries": "Mastercraft",
+      "modelName": "The Bell Brass 50th Anniversary Reissue BB-156",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+      "sourceHost": "tama.com",
+      "sourceConfidence": "High",
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "extractedStockBatterHead": "Remo Coated Ambassador",
+      "extractedStockResoHead": "Remo Ambassador Snare Side",
+      "extractionMatchedKeys": [
+        "REMO_COATED_AMBASSADOR:batter",
+        "REMO_AMBASSADOR_SNARE_SIDE:reso"
+      ],
+      "evidenceSnippets": [
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "rainer/Butt: Roller Action (6302N/6303N/6338N) Snare Wire: 18-strand Carbon Steel Long Snare Wires (6035N) Inside Muffler: One-Touch Tone Control (6552N) Head: REMO® Ambassador Coated TAMA 50th Anniversary version VIDEO FEATURES 355mm diameter, 3mm Cast Bell Brass Shell Utilizing a unique metal alloy predominantly comprised of copper & tin, the mixture is poured into a mold to form"
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "dvancement in design and function. Proving extremely useful even for drummers in the modern world, the One-Touch Tone Control is a timeless and elegant design. REMO® AMBASSADOR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador"
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "EMO® AMBASSADOR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "remo",
+          "snippet": "Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "/Butt: Roller Action (6302N/6303N/6338N) Snare Wire: 18-strand Carbon Steel Long Snare Wires (6035N) Inside Muffler: One-Touch Tone Control (6552N) Head: REMO® Ambassador Coated TAMA 50th Anniversary version VIDEO FEATURES 355mm diameter, 3mm Cast Bell Brass Shell Utilizing a unique metal alloy predominantly comprised of copper & tin, the mixture is poured into a mold to form a 3mm thick"
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "ment in design and function. Proving extremely useful even for drummers in the modern world, the One-Touch Tone Control is a timeless and elegant design. REMO® AMBASSADOR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "OR Drumheads Every detail of the Mastercraft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        },
+        {
+          "sourceUrl": "https://www.tama.com/eu/news/detail/20231113102101.html",
+          "sourceHost": "tama.com",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "term": "ambassador",
+          "snippet": "craft Snare Drum Reissue was considered, even down to the stock drumheads. The batter side is fitted with a REMO® Coated Ambassador and the bottom side a REMO® Ambassador Snare Side. PAGE TOP CHANGE YOUR REGION TERMS PRIVACY POLICY PROP65 ACCESSIBILITY SITE MAP Copyright © 2026 TAMA DRUMS All right reserved."
+        }
+      ],
+      "updates": {
+        "stockHeadFallbackApplied": true,
+        "stockHeadFallbackKey": "SOURCE_PAGE_EXACT_HEAD_EXTRACTION_REVIEWED",
+        "stockHeadFallbackReason": "Exact single batter and resonant/snare-side head values were extracted from source-page evidence snippets and routed through the strict stock-head fallback review lane.",
+        "stockHeadNeedsVerification": true,
+        "stockHeadSourceConfirmed": false,
+        "stockReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+        "legacyPrintStockReadinessUpdatedAt": "__SERVER_TIMESTAMP__",
+        "legacyPrintStockReadinessUpdateSource": "stock-head-exact-source-backed-patch-plan.json",
+        "legacyPrintStockReadinessUpdateType": "STOCK_HEAD_EXACT_SOURCE_BACKED_FALLBACK_PATCH",
+        "stockBatterHead": "Remo Coated Ambassador",
+        "stockBatterHeadConfidence": "Fallback / Source-page extracted",
+        "stockResoHead": "Remo Ambassador Snare Side",
+        "stockResoHeadConfidence": "Fallback / Source-page extracted"
+      }
+    }
+  ]
+}
