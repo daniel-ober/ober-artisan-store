@@ -1,0 +1,91 @@
+{
+  "ruleSetName": "OBER_LEGACYPRINT_STOCK_HEAD_FALLBACK_RULES_DRAFT",
+  "mode": "DRAFT_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T06:44:53.008Z",
+  "purpose": "Source-backed company/line-level stock head fallback rules for snareReferenceDrums stock readiness.",
+  "ruleRequirements": [
+    "Only stock batter/reso heads may use this fallback.",
+    "No shell, hoop, throw-off, lug, snare wire, bearing edge, or production status fields may be inferred by this rule set.",
+    "Each rule must have a source URL and source confidence.",
+    "Each rule must state whether it is exact model stock data, company-level default, distributor/OEM relationship, or conservative generic placeholder.",
+    "Rules with status=DRAFT are not applyable."
+  ],
+  "allowedWriteFieldsWhenApproved": [
+    "stockBatterHead",
+    "stockResoHead",
+    "engineAssumptions",
+    "notesOnMissingData",
+    "stockHeadNeedsVerification"
+  ],
+  "rules": [
+    {
+      "ruleKey": "sonor-kompressor-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "SONOR",
+      "lineSeriesIncludes": [
+        "Kompressor"
+      ],
+      "fallbackType": "line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
+      "sourceConfidence": "needsVerification",
+      "notes": "Candidate group is large. Confirm published stock head brand/model before approval."
+    },
+    {
+      "ruleKey": "ahead-snares-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "AHEAD",
+      "lineSeriesIncludes": [
+        "Ahead Snares"
+      ],
+      "fallbackType": "line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://bigbangdist.com/",
+      "sourceConfidence": "needsVerification",
+      "notes": "AHEAD listings often mention Remo heads in technical tables; exact batter/reso models must be confirmed before approval."
+    },
+    {
+      "ruleKey": "pearl-sensitone-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Pearl",
+      "lineSeriesIncludes": [
+        "Sensitone Heritage Alloy"
+      ],
+      "fallbackType": "line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://pearldrum.com/en/products/snares/sensitone",
+      "sourceConfidence": "needsVerification",
+      "notes": "Confirm Pearl stock head model before approval."
+    },
+    {
+      "ruleKey": "mapex-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Mapex",
+      "lineSeriesIncludes": [],
+      "fallbackType": "company-or-line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "",
+      "sourceConfidence": "needsVerification",
+      "notes": "Mapex has 30 candidates. Split by line before approval."
+    },
+    {
+      "ruleKey": "canopus-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Canopus",
+      "lineSeriesIncludes": [
+        "The Maple",
+        "Zelkova"
+      ],
+      "fallbackType": "line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://canopusdrums.com/en/",
+      "sourceConfidence": "needsVerification",
+      "notes": "Canopus source already supports snare wire models in records. Confirm stock batter/reso head models before approval."
+    }
+  ]
+}
