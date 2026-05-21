@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-05-21T08:32:09.234Z",
+  "sourceAuditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T08-16-58-657Z.json",
+  "status": "STOCK_HEAD_FALLBACK_OPPORTUNITY_QUEUE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 0,
+    "companyCount": 0,
+    "noFirestoreWrites": true,
+    "selectionRule": "Core-shell usable records missing stock batter and/or stock reso head."
+  },
+  "topCompanies": [],
+  "companyGroups": [],
+  "candidates": [],
+  "reviewInstruction": "Read-only. Do not write Firestore. Use this queue to identify company/era-level stock head fallback patterns only when source-backed."
+}
