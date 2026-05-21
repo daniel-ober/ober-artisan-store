@@ -1,0 +1,1771 @@
+{
+  "status": "HEAD_ONLY_COMPANY_SOURCE_EVIDENCE_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:42:46.408Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/head-only-stock-readiness-review-packet.json",
+  "companyName": "Ludwig",
+  "collectionName": "snareReferenceDrums",
+  "noFirestoreWrites": true,
+  "summary": {
+    "candidateCount": 47,
+    "uniqueSourceUrlCount": 3,
+    "fetchedSourceCount": 3,
+    "failedSourceCount": 0,
+    "byEvidenceTier": {
+      "NO_SOURCE_PAGE_HEAD_EVIDENCE": 27,
+      "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE": 8,
+      "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE": 12
+    },
+    "groupCount": 10,
+    "firestoreWrites": 0
+  },
+  "rules": [
+    "No Firestore writes are performed.",
+    "This packet mines source-page text for one company head-only records.",
+    "Exact stock head values must be approved before patch plans."
+  ],
+  "sourceResults": [
+    {
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+      "sourceHost": "ludwig-drums.com",
+      "fetchOk": true,
+      "httpStatus": 200,
+      "finalUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+      "title": "Ludwig Drums :: Snare Drums",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "matchedSnippetCount": 0,
+      "snippets": [],
+      "candidateCount": 27,
+      "candidates": [
+        {
+          "id": "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17",
+          "lineSeries": "Classic Maple",
+          "modelName": "Classic Maple 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8",
+          "lineSeries": "Classic Oak",
+          "modelName": "Classic Oak 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+          "lineSeries": "Hammered Brass",
+          "modelName": "Hammered Brass 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f",
+          "lineSeries": "Hammered Brass",
+          "modelName": "Hammered Brass 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+          "lineSeries": "Legacy Mahogany",
+          "modelName": "Legacy Mahogany 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7",
+          "lineSeries": "Legacy Maple",
+          "modelName": "Legacy Maple 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 3.5x14",
+          "diameter": "14",
+          "depth": "3.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 4x14",
+          "diameter": "14",
+          "depth": "4",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 6x13",
+          "diameter": "13",
+          "depth": "6",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        }
+      ]
+    },
+    {
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "sourceHost": "ludwig-drums.com",
+      "fetchOk": true,
+      "httpStatus": 200,
+      "finalUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "title": "Ludwig Drums :: Supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "matchedSnippetCount": 11,
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        },
+        {
+          "term": "weather master",
+          "snippet": "hells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "weather master",
+          "snippet": "you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        },
+        {
+          "term": "medium coated",
+          "snippet": "aphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        }
+      ],
+      "candidateCount": 8,
+      "candidates": [
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Imperial Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Tube Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Tube Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        }
+      ]
+    },
+    {
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+      "sourceHost": "ludwig-drums.com",
+      "fetchOk": true,
+      "httpStatus": 200,
+      "finalUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+      "title": "Ludwig Drums :: Universal Series Snare Drums",
+      "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+      "matchedSnippetCount": 5,
+      "snippets": [
+        {
+          "term": "clear",
+          "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+        },
+        {
+          "term": "clear",
+          "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+        },
+        {
+          "term": "clear",
+          "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+        },
+        {
+          "term": "clear",
+          "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+        },
+        {
+          "term": "head",
+          "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+        }
+      ],
+      "candidateCount": 12,
+      "candidates": [
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 5.5x14 Die-cast",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 5.5x14 Triple-flanged",
+          "diameter": "14",
+          "depth": "5.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 6.5x14 Die-cast",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 6.5x14 Triple-flanged",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 7x13 Die-cast",
+          "diameter": "13",
+          "depth": "7",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 7x13 Triple-flanged",
+          "diameter": "13",
+          "depth": "7",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 8x14 Die-cast",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 8x14 Triple-flanged",
+          "diameter": "14",
+          "depth": "8",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6",
+          "lineSeries": "Universal Wood",
+          "modelName": "Universal Beech 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7",
+          "lineSeries": "Universal Wood",
+          "modelName": "Universal Cherry 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d",
+          "lineSeries": "Universal Wood",
+          "modelName": "Universal Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad",
+          "lineSeries": "Universal Wood",
+          "modelName": "Universal Walnut 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "missingForStock": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "candidateCount": 8,
+      "sourceHosts": {
+        "ludwig-drums.com": 8
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+          "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+          "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+          "modelName": "Supraphonic 5x14 Imperial Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+          "modelName": "Supraphonic 5x14 Tube Lugs",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+          "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+          "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+          "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+          "modelName": "Supraphonic 6.5x14 Tube Lugs",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+          "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "coated",
+              "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+            },
+            {
+              "term": "clear",
+              "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+            },
+            {
+              "term": "snare side",
+              "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+            },
+            {
+              "term": "resonant",
+              "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+            },
+            {
+              "term": "head",
+              "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+            },
+            {
+              "term": "head",
+              "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+            },
+            {
+              "term": "ludwig weather master",
+              "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+            }
+          ]
+        }
+      ],
+      "candidateIds": [
+        "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+        "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+        "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+        "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+        "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+        "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+        "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+        "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Metal",
+      "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+      "candidateCount": 8,
+      "sourceHosts": {
+        "ludwig-drums.com": 8
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+          "modelName": "Universal Black Brass 5.5x14 Die-cast",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+          "modelName": "Universal Black Brass 5.5x14 Triple-flanged",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+          "modelName": "Universal Black Brass 6.5x14 Die-cast",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+          "modelName": "Universal Black Brass 6.5x14 Triple-flanged",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+          "modelName": "Universal Black Brass 7x13 Die-cast",
+          "diameter": "13",
+          "depth": "7",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+          "modelName": "Universal Black Brass 7x13 Triple-flanged",
+          "diameter": "13",
+          "depth": "7",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+          "modelName": "Universal Black Brass 8x14 Die-cast",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4",
+          "modelName": "Universal Black Brass 8x14 Triple-flanged",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        }
+      ],
+      "candidateIds": [
+        "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+        "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+        "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+        "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+        "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+        "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+        "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+        "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Supralite",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 5,
+      "sourceHosts": {
+        "ludwig-drums.com": 5
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+          "modelName": "Supralite 4x14",
+          "diameter": "14",
+          "depth": "4",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+          "modelName": "Supralite 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+          "modelName": "Supralite 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+          "modelName": "Supralite 6x13",
+          "diameter": "13",
+          "depth": "6",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3",
+          "modelName": "Supralite 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+        "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+        "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+        "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+        "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Maple",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 4,
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+          "modelName": "Classic Maple 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+          "modelName": "Classic Maple 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+          "modelName": "Classic Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17",
+          "modelName": "Classic Maple 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+        "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+        "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+        "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Oak",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 4,
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
+          "modelName": "Classic Oak 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
+          "modelName": "Classic Oak 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
+          "modelName": "Classic Oak 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8",
+          "modelName": "Classic Oak 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
+        "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
+        "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
+        "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Mahogany",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 4,
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+          "modelName": "Legacy Mahogany 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+          "modelName": "Legacy Mahogany 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+          "modelName": "Legacy Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+          "modelName": "Legacy Mahogany 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+        "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+        "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+        "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Maple",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 4,
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
+          "modelName": "Legacy Maple 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
+          "modelName": "Legacy Maple 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+          "modelName": "Legacy Maple 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7",
+          "modelName": "Legacy Maple 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
+        "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
+        "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+        "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Raw Brass Phonic",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 4,
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+          "modelName": "Raw Brass Phonic 3.5x14",
+          "diameter": "14",
+          "depth": "3.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+          "modelName": "Raw Brass Phonic 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+          "modelName": "Raw Brass Phonic 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb",
+          "modelName": "Raw Brass Phonic 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+        "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+        "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+        "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+      "candidateCount": 4,
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6",
+          "modelName": "Universal Beech 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7",
+          "modelName": "Universal Cherry 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d",
+          "modelName": "Universal Mahogany 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        },
+        {
+          "id": "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad",
+          "modelName": "Universal Walnut 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums",
+          "evidenceTier": "SOURCE_PAGE_HAS_PARTIAL_HEAD_EVIDENCE",
+          "snippets": [
+            {
+              "term": "clear",
+              "snippet": "off, P35 butt plate, 18 strand snare wires. CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND CLICK TO EXPAND UNIVERSAL BEECH SNARE DRUM - LU6514BE Beech has a distinct sound with a clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be"
+            },
+            {
+              "term": "clear",
+              "snippet": "clear musical voice. Ludwig's Universal Beech snare delivers pristine press rolls and an aggressive \"cut\" when played forcefully. Rimshots and cross-sticks are bright and crystal clear. Beech undoubtedly fits the bill if you're looking for a new sound that will be noticed on the bandstand or in the studio. Product specifications: 6.5 x14\" 6 ply 7.5 mm Beech shell with an outer ply of exotic Sapele. Triple flange hoops, tube lugs, P88i throw"
+            },
+            {
+              "term": "clear",
+              "snippet": "rings an entirely new and unexpected sound to the sonic library. The natural Cherry shell delivers a heavy \"punch in the gut\" sound with more tone and body than you can imagine! A clear winner when you are looking for a new sound that delivers a focused, throaty attack that will get everyone's attention. Rimshots and cross-sticks are uniquely noticeable due to Cherry's rich tonal characteristics. Product specifications: 6.5 x14\" 6 ply 7.5 mm"
+            },
+            {
+              "term": "clear",
+              "snippet": "RSAL WALNUT SNARE DRUM - LU6514WA Walnut has a history of delivering dark rich tone and attack. Ludwig's Universal Walnut snare brings this and more to the sonic table, delivering clear articulation when playing subtle grace notes. The sound of the Walnut shell really comes to life when played loudly. Rimshots and cross-stick sounds deliver a clean and warm tone. Product specifications: 6.5 x14\" 6 ply 7.5 mm Walnut shell with an outer ply of"
+            },
+            {
+              "term": "head",
+              "snippet": "Black Beauty, emphasizing optimal response, sensitivity, and dark warm tones. The Universal Metal Brass drum delivers a rich, dynamic range suitable for various tuning ranges and head combinations. Universal Metal drums are fitted with heavy-duty tube lugs, P88i throw-off, P35 butt plate, and 20-strand snare wires. Offered in our most popular sizes as well as two hoop options Quality and versatility to fit any budget! BLACK BRASS WITH CHRO"
+            }
+          ]
+        }
+      ],
+      "candidateIds": [
+        "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6",
+        "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7",
+        "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d",
+        "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Hammered Brass",
+      "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+      "candidateCount": 2,
+      "sourceHosts": {
+        "ludwig-drums.com": 2
+      },
+      "sampleCandidates": [
+        {
+          "id": "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+          "modelName": "Hammered Brass 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        },
+        {
+          "id": "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f",
+          "modelName": "Hammered Brass 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "evidenceTier": "NO_SOURCE_PAGE_HEAD_EVIDENCE",
+          "snippets": []
+        }
+      ],
+      "candidateIds": [
+        "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+        "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f"
+      ]
+    }
+  ]
+}
