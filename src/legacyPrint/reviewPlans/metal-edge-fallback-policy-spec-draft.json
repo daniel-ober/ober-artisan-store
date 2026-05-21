@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-05-21T08:24:59.917Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/controlled-fallback-policy-design-queue.json",
+  "status": "METAL_EDGE_FALLBACK_POLICY_SPEC_DRAFT_NO_FIRESTORE_WRITES",
+  "summary": {
+    "affectedUsableRecordCount": 176,
+    "purpose": "Keep metal-shell records usable for core-shell reads while preventing fallback bearing edges from being counted as source-confirmed meaningful bearing edges.",
+    "noFirestoreWrites": true
+  },
+  "policyName": "LegacyPrint Metal-Shell Bearing Edge Fallback Policy",
+  "allowedWhenAllTrue": [
+    "record is a metal-shell snare drum",
+    "shell material is a recognized metal or alloy",
+    "shell construction is metal, cast metal, spun metal, rolled metal, seamless metal, welded metal, or equivalent metal-shell construction",
+    "diameter and depth are present",
+    "valid numeric shell thickness is present",
+    "primary source URL is present",
+    "source confidence is present",
+    "exact bearing-edge geometry/profile is not source-confirmed"
+  ],
+  "blockedWhenAnyTrue": [
+    "shell is wood ply",
+    "shell is stave",
+    "shell is solid wood",
+    "shell is steam-bent",
+    "shell is acrylic",
+    "shell is carbon fiber/composite",
+    "shell is hybrid wood/metal unless separately approved",
+    "shell thickness is missing or invalid",
+    "source URL is missing",
+    "source confidence is missing"
+  ],
+  "requiredFallbackFields": {
+    "bearingEdge": {
+      "batterSideProfile": "machined metal bearing edge",
+      "snareSideProfile": "machined metal bearing edge",
+      "roundover": "unknown",
+      "confidence": "fallback",
+      "evidenceLevel": "metalShellFallback",
+      "needsVerification": true,
+      "notes": "Exact published bearing-edge geometry was not found. Generic machined metal bearing edge fallback applied under LegacyPrint metal-shell readiness rule."
+    },
+    "engineAssumptions": {
+      "bearingEdgeFallbackApplied": true,
+      "bearingEdgeFallbackKey": "metal-shell-machined-edge-fallback",
+      "bearingEdgeFallbackReason": "Metal shell has valid source-backed shell identity and numeric thickness, but exact bearing-edge geometry is unpublished.",
+      "bearingEdgeNeedsVerification": true
+    }
+  },
+  "readinessBehavior": {
+    "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+    "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+    "hasMeaningfulBearingEdge": false,
+    "countsAsSourceConfirmedBearingEdge": false,
+    "countsAsUsableCoreShell": true,
+    "countsAsMeaningfulCoreShellPass": false
+  },
+  "auditRequirements": [
+    "fallback edge must not inflate meaningful bearing edge count",
+    "fallback edge must remain separately counted from source-confirmed core shell pass",
+    "fallback records must be auditable by engineAssumptions.bearingEdgeFallbackApplied",
+    "fallback records must remain blocked from full source-confirmed stock pass unless other required stock fields are source-confirmed or separately fallback-approved"
+  ],
+  "recommendedNextStep": "Create a read-only validator that scans current metal-edge fallback records and reports whether every fallback record follows this policy."
+}
