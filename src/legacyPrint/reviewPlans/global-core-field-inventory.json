@@ -1,0 +1,56 @@
+{
+  "status": "GLOBAL_CORE_FIELD_INVENTORY_NO_WRITES",
+  "recordCount": 366,
+  "summary": {
+    "plyCount": {
+      "explicitCount": 0,
+      "textSignalCount": 0,
+      "keysUsed": {}
+    },
+    "shellLayup": {
+      "explicitCount": 0,
+      "textSignalCount": 3,
+      "keysUsed": {}
+    },
+    "shellMaterial2": {
+      "explicitCount": 0,
+      "textSignalCount": 3,
+      "keysUsed": {}
+    },
+    "shellMaterial3": {
+      "explicitCount": 0,
+      "textSignalCount": 1,
+      "keysUsed": {}
+    },
+    "reinforcementRings": {
+      "explicitCount": 0,
+      "textSignalCount": 8,
+      "keysUsed": {}
+    },
+    "bearingEdgeDetail": {
+      "explicitCount": 0,
+      "textSignalCount": 6,
+      "keysUsed": {}
+    },
+    "snareBedDetail": {
+      "explicitCount": 0,
+      "textSignalCount": 0,
+      "keysUsed": {}
+    },
+    "finishTreatment": {
+      "explicitCount": 0,
+      "textSignalCount": 42,
+      "keysUsed": {}
+    }
+  },
+  "examples": {
+    "plyCount": [],
+    "shellLayup": [],
+    "shellMaterial2": [],
+    "shellMaterial3": [],
+    "reinforcementRings": [],
+    "bearingEdgeDetail": [],
+    "snareBedDetail": [],
+    "finishTreatment": []
+  }
+}
