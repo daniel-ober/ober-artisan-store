@@ -886,6 +886,26 @@ function valueLooksPlaceholder(value) {
 
 }
 
+function isBearingEdgeFallbackObject(value) {
+
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+
+  const evidenceLevel = toLowerString(value.evidenceLevel);
+
+  const confidence = toLowerString(value.confidence);
+
+  return (
+
+    evidenceLevel.includes('fallback') ||
+
+    confidence === 'fallback' ||
+
+    value.needsVerification === true
+
+  );
+
+}
+
 function objectHasMeaningfulLeafValue(obj) {
 
   if (!obj || typeof obj !== 'object') return false;
@@ -1063,6 +1083,22 @@ function bearingEdgeQuality(fields) {
   }
 
   if (typeof raw === 'object') {
+
+    if (isBearingEdgeFallbackObject(raw)) {
+
+      return {
+
+        hasAnyBearingEdgeField: true,
+
+        hasMeaningfulBearingEdge: false,
+
+        bearingEdgeQualityTier: 'PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE',
+
+        reason: 'bearing edge object is an auditable fallback and still needs source-confirmed geometry',
+
+      };
+
+    }
 
     const hasMeaningful = objectHasMeaningfulLeafValue(raw);
 
