@@ -88,15 +88,45 @@ function ruleMatchesCandidate(rule, candidate) {
 
   }
 
-  if (!Array.isArray(rule.lineSeriesIncludes) || rule.lineSeriesIncludes.length === 0) {
+  const candidateLine = normalize(candidate.lineSeries);
+
+  const includes = Array.isArray(rule.lineSeriesIncludes) ? rule.lineSeriesIncludes : [];
+
+  const excludes = Array.isArray(rule.lineSeriesExcludes) ? rule.lineSeriesExcludes : [];
+
+  const matchMode = String(rule.lineSeriesMatchMode || 'includes').trim().toLowerCase();
+
+  const excluded = excludes.some((line) => {
+
+    const target = normalize(line);
+
+    if (!target) return false;
+
+    return matchMode === 'exact' ? candidateLine === target : candidateLine.includes(target);
+
+  });
+
+  if (excluded) {
+
+    return false;
+
+  }
+
+  if (!includes.length) {
 
     return true;
 
   }
 
-  const candidateLine = normalize(candidate.lineSeries);
+  return includes.some((line) => {
 
-  return rule.lineSeriesIncludes.some((line) => normalize(line) === candidateLine);
+    const target = normalize(line);
+
+    if (!target) return false;
+
+    return matchMode === 'exact' ? candidateLine === target : candidateLine.includes(target);
+
+  });
 
 }
 

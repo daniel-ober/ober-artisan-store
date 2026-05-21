@@ -201,16 +201,80 @@
       "notes": "Signature model stock heads may vary by artist/model. Confirm exact stock batter/reso head before approval."
     },
     {
-      "ruleKey": "mapex-stock-heads-draft",
+      "ruleKey": "mapex-black-panther-archive-catalog-era-stock-heads-draft",
       "status": "DRAFT",
       "companyName": "Mapex",
-      "lineSeriesIncludes": [],
-      "fallbackType": "company-or-line-level-default-needs-source-confirmation",
+      "lineSeriesIncludes": [
+        "Black Panther Archive / Catalog Era"
+      ],
+      "fallbackType": "historic-catalog-line-default-needs-source-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
-      "sourceUrl": "",
+      "sourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
       "sourceConfidence": "needsVerification",
-      "notes": "Mapex has 30 candidates. Split by line before approval."
+      "notes": "Large historic Mapex Black Panther archive group. Confirm exact stock batter/reso head models from the 2007 Black Panther catalogue before approval.",
+      "lineSeriesMatchMode": "exact"
+    },
+    {
+      "ruleKey": "mapex-black-panther-current-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Mapex",
+      "lineSeriesIncludes": [
+        "Black Panther"
+      ],
+      "fallbackType": "line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+      "sourceConfidence": "needsVerification",
+      "notes": "Current Mapex Black Panther group only. Excludes archive/catalog-era and unresolved archive variants. Confirm exact stock batter/reso head models for Persuader, Solidus, Atomizer, Cyrus, Hydro, and Metallion before approval. Split further by model if stock heads vary.",
+      "lineSeriesExcludes": [],
+      "lineSeriesMatchMode": "exact"
+    },
+    {
+      "ruleKey": "mapex-armory-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Mapex",
+      "lineSeriesIncludes": [
+        "Armory"
+      ],
+      "fallbackType": "line-level-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+      "sourceConfidence": "needsVerification",
+      "notes": "Mapex Armory group. Confirm exact stock batter/reso head models for Daisy Cutter, Dillinger, and Tomahawk before approval.",
+      "lineSeriesMatchMode": "exact"
+    },
+    {
+      "ruleKey": "mapex-black-panther-unresolved-variant-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Mapex",
+      "lineSeriesIncludes": [
+        "Black Panther Archive / Unresolved Variant"
+      ],
+      "fallbackType": "unresolved-variant-needs-model-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "needsVerification",
+      "notes": "Unresolved Mapex Black Panther variants must not be approved until exact model identity and stock batter/reso heads are source-confirmed.",
+      "lineSeriesMatchMode": "exact"
+    },
+    {
+      "ruleKey": "mapex-signature-artist-stock-heads-draft",
+      "status": "DRAFT",
+      "companyName": "Mapex",
+      "lineSeriesIncludes": [
+        "Signature / Artist"
+      ],
+      "fallbackType": "signature-model-default-needs-source-confirmation",
+      "stockBatterHead": "",
+      "stockResoHead": "",
+      "sourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+      "sourceConfidence": "needsVerification",
+      "notes": "Mapex Signature / Artist stock heads may vary by model. Confirm exact stock batter/reso head for Matt Halpern Wraith before approval.",
+      "lineSeriesMatchMode": "exact"
     },
     {
       "ruleKey": "canopus-stock-heads-draft",

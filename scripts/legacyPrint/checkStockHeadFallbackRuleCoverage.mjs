@@ -46,7 +46,39 @@ function ruleMatches(row, rule) {
 
   if ((row.companyName || '') !== rule.companyName) return false;
 
-  return includesAny(row.lineSeries || '', rule.lineSeriesIncludes || []);
+  const lineSeries = String(row.lineSeries || '').trim().toLowerCase();
+
+  const includes = Array.isArray(rule.lineSeriesIncludes) ? rule.lineSeriesIncludes : [];
+
+  const excludes = Array.isArray(rule.lineSeriesExcludes) ? rule.lineSeriesExcludes : [];
+
+  const matchMode = String(rule.lineSeriesMatchMode || 'includes').trim().toLowerCase();
+
+  const normalize = (value) => String(value || '').trim().toLowerCase();
+
+  const excluded = excludes.some((value) => {
+
+    const target = normalize(value);
+
+    if (!target) return false;
+
+    return matchMode === 'exact' ? lineSeries === target : lineSeries.includes(target);
+
+  });
+
+  if (excluded) return false;
+
+  if (!includes.length) return true;
+
+  return includes.some((value) => {
+
+    const target = normalize(value);
+
+    if (!target) return false;
+
+    return matchMode === 'exact' ? lineSeries === target : lineSeries.includes(target);
+
+  });
 
 }
 
