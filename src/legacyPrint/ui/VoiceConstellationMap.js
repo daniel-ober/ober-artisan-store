@@ -213,9 +213,15 @@ const buildActiveThread = ({ readMode, voice, firstListenKeys }) => {
 
   const nodeKeys = isFirstListen ? topNodes : VOICE_NODE_ORDER;
 
+  const voiceSignature = VOICE_NODE_ORDER.map((key) =>
+
+    Math.round(clampScore(voice?.[key], DEFAULT_VOICE[key]) * 10)
+
+  ).join('-');
+
   return {
 
-    id: `voice-playground-${readMode}`,
+    id: `voice-playground-${readMode}-${voiceSignature}`,
 
     title: READ_MODE_COPY[readMode]?.title || 'Voice Map',
 
