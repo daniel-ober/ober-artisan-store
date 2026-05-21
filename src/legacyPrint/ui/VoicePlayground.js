@@ -882,9 +882,27 @@ function ReferencePanel({ selectedReferenceId, setSelectedReferenceId }) {
 
 export function VoicePlayground({ firestore }) {
 
-  const { query, setQuery, voice, updateVoice, results, loading, setAsAnchor } =
+  const {
 
-    useVoicePlayground(firestore);
+    query,
+
+    setQuery,
+
+    voice,
+
+    updateVoice,
+
+    results,
+
+    discoveryResults,
+
+    discoveryViewModel,
+
+    loading,
+
+    setAsAnchor
+
+  } = useVoicePlayground(firestore);
 
   const [workflowMode, setWorkflowMode] = useState('reference');
 
@@ -906,7 +924,7 @@ export function VoicePlayground({ firestore }) {
 
     REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
 
-  const rawResults = results.length ? results : MOCK_MATCHES;
+  const rawResults = results.length ? results : discoveryResults.length ? discoveryResults : MOCK_MATCHES;
 
   const modeVoice = useMemo(() => {
 
@@ -941,6 +959,12 @@ export function VoicePlayground({ firestore }) {
     return rawResults
 
       .map((result) => {
+
+        if (result.discoveryMatch) {
+
+          return result;
+
+        }
 
         const resultVoice = getResultVoice(result);
 
@@ -1219,7 +1243,19 @@ export function VoicePlayground({ firestore }) {
 
               <h3>Similar Voice Matches</h3>
 
-              <p>{loading ? 'Reshaping sound space...' : 'Drums ranked by voice similarity'}</p>
+              <p>
+
+                {loading
+
+                  ? 'Reshaping sound space...'
+
+                  : discoveryViewModel?.target?.title
+
+                    ? `Previewing matches for ${discoveryViewModel.target.title}`
+
+                    : 'Drums ranked by voice similarity'}
+
+              </p>
 
             </div>
 
