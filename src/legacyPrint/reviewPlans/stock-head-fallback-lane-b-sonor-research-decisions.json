@@ -1,0 +1,98 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_SONOR_RESEARCH_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:52:24.500Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-sonor-research-packet.json",
+  "companyName": "SONOR",
+  "reviewScope": "Lane B SONOR company/OEM stock-head fallback research decisions.",
+  "policyPosition": "conservative",
+  "noFirestoreWrites": true,
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "approvedCompanyWideFallbackRuleCount": 0,
+    "approvedLineLevelFallbackRuleCount": 0,
+    "blockedLineGroupCount": 1,
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+    "firestoreWrites": 0,
+    "decision": "No SONOR stock-head fallback rules are approved at this time."
+  },
+  "companyLevelDecision": {
+    "companyName": "SONOR",
+    "approved": false,
+    "decision": "BLOCKED_FOR_COMPANY_WIDE_FALLBACK",
+    "approvedFallbackRule": null,
+    "reason": "SONOR stock-head evidence is not strong enough to support a company-wide fallback. Remaining Lane B records require narrower line-level, catalog-era-level, or exact-model-level confirmation.",
+    "notes": [
+      "Third-party-only evidence is not enough under the conservative fallback policy.",
+      "Any future SONOR approval should remain line-level, catalog-era-level, or exact-model-level unless official evidence proves a consistent company-wide OEM stock-head pattern."
+    ]
+  },
+  "lineLevelDecisions": [
+    {
+      "lineSeries": "Signature Series",
+      "candidateCount": 2,
+      "approved": false,
+      "decision": "BLOCKED_PENDING_LINE_LEVEL_OFFICIAL_OR_OEM_CONFIRMATION",
+      "approvedFallbackRule": null,
+      "reason": "No sufficient official SONOR/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group.",
+      "sampleModels": [
+        {
+          "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+          "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        },
+        {
+          "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+          "modelName": "Signature HLD 590 Cast Bronze 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "Metal",
+          "shellMaterial1": null,
+          "stockBatterHead": null,
+          "stockResoHead": null,
+          "sourceUrl": null
+        }
+      ],
+      "requiredEvidenceToApprove": [
+        "Official SONOR product page, catalog, manual, archived SONOR page, or OEM-confirmed source",
+        "Stock batter head model",
+        "Stock resonant/snare-side head model",
+        "Clear applicability to the exact model, line, or catalog-era records in this group"
+      ]
+    }
+  ],
+  "approvedFallbackRules": [],
+  "blockedFallbackRules": [
+    {
+      "scope": "SONOR company-wide",
+      "decision": "blocked",
+      "reason": "No consistent official/OEM stock batter and resonant/snare-side head confirmation across all SONOR Lane B candidates."
+    },
+    {
+      "scope": "SONOR Signature Series",
+      "decision": "blocked",
+      "reason": "No sufficient official SONOR/OEM evidence is currently attached confirming both stock batter and stock resonant/snare-side heads for this line group."
+    }
+  ],
+  "readinessImpact": {
+    "recordsPromotedToMeaningfulStockPass": 0,
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+    "recordsChanged": 0,
+    "firestoreWrites": 0,
+    "notes": [
+      "Fallback-head records must remain separate from source-confirmed full stock pass.",
+      "This decision file is review/planning only and does not mutate snareReferenceDrums."
+    ]
+  },
+  "nextRecommendedStep": {
+    "lane": "Lane B",
+    "task": "Create a Lane B completion summary across Ludwig, Pearl, Mapex, Tama, Yamaha, Gretsch, and SONOR.",
+    "constraint": "Do not write fallback metadata to Firestore until fallback rules are explicitly approved."
+  }
+}
