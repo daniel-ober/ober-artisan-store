@@ -99,6 +99,18 @@ const {
 
 } = require('./groupSimilarSnareVoiceMatches');
 
+const {
+
+  findContrastingSnareVoices,
+
+  scoreContrastCandidate,
+
+  getDominantContrastNodes,
+
+  CONTRAST_MODES
+
+} = require('./findContrastingSnareVoices');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -163,7 +175,15 @@ module.exports = {
 
   isSameMaterial,
 
-  isSameConstruction
+  isSameConstruction,
+
+  findContrastingSnareVoices,
+
+  scoreContrastCandidate,
+
+  getDominantContrastNodes,
+
+  CONTRAST_MODES
 
 };
 
