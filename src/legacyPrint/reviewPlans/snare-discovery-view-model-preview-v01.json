@@ -1,0 +1,3995 @@
+{
+  "status": "SNARE_DISCOVERY_VIEW_MODEL_PREVIEW_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T11:02:36.320Z",
+  "firestoreWrites": 0,
+  "sourcePreview": "src/legacyPrint/reviewPlans/snare-discovery-packet-api-preview-v01.json",
+  "examples": [
+    {
+      "targetId": "ludwig-acrolite",
+      "status": "ready",
+      "ready": true,
+      "target": {
+        "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+        "company": "Ludwig",
+        "model": "Acrolite 5x14",
+        "size": "14x5",
+        "title": "Ludwig Acrolite 5x14 14x5",
+        "summary": {
+          "title": "Focused, controlled attack voice",
+          "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+        },
+        "description": null,
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "label": "attack",
+            "value": 6.61,
+            "displayValue": "6.61"
+          },
+          {
+            "key": "control",
+            "label": "control",
+            "value": 6.49,
+            "displayValue": "6.49"
+          },
+          {
+            "key": "sensitivity",
+            "label": "sensitivity",
+            "value": 6.33,
+            "displayValue": "6.33"
+          }
+        ]
+      },
+      "readoutTabs": [
+        {
+          "key": "firstListen",
+          "label": "First Listen",
+          "nodes": []
+        },
+        {
+          "key": "playerAnalysis",
+          "label": "Player Analysis",
+          "nodes": []
+        },
+        {
+          "key": "legacyPrintIdentity",
+          "label": "LegacyPrint Identity",
+          "nodes": []
+        }
+      ],
+      "recommendedSections": [
+        {
+          "key": "differentBrandAlternatives",
+          "label": "Other Brand Alternatives",
+          "matchCount": 8,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.2514,
+              "similarity": 0.9282,
+              "similarityPercent": 92.8
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 6.49,
+                "displayValue": "6.49"
+              },
+              {
+                "key": "control",
+                "label": "control",
+                "value": 6.27,
+                "displayValue": "6.27"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.95,
+                "displayValue": "5.95"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "why": "Similar voice behavior from a different brand.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "tama_s-l-p_s-l-p-fat-spruce-lsp146-14x6_14x6_ply_spruce_lacquer_triple-flange-sound-arc-style_lsp146_549c297d",
+                "company": "Tama",
+                "model": "S.L.P. Fat Spruce LSP146 14x6",
+                "lineSeries": "S.L.P.",
+                "size": "14x6",
+                "families": {
+                  "shellMaterial": "spruce",
+                  "shellConstruction": "ply",
+                  "bearingEdge": "sharper45Degree",
+                  "hoopType": "dieCast",
+                  "snareBed": "mediumSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Focused, controlled attack voice",
+                "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 6.49,
+                "brightness": 5.67,
+                "projection": 5.74,
+                "sustain": 5.64,
+                "warmth": 5.51,
+                "sensitivity": 5.95,
+                "control": 6.27
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 6.49
+                },
+                {
+                  "key": "control",
+                  "value": 6.27
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.95
+                }
+              ],
+              "similarity": {
+                "distance": 0.2514,
+                "similarity": 0.9282,
+                "similarityPercent": 92.8
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "control",
+                "sensitivity"
+              ],
+              "matchReason": "Shares attack and control as defining voice traits.",
+              "contrastReason": "Compared with the target, this match reads less brightness.",
+              "groupReason": "Similar voice behavior from a different brand.",
+              "matchGroup": "differentBrandAlternative",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "hoopFamilyDeltas",
+                    "family": "dieCast",
+                    "deltas": {
+                      "sustain": -0.02,
+                      "control": 0.03
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain",
+                  "control"
+                ],
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "sameMaterialAlternatives",
+          "label": "Same Shell Material Alternatives",
+          "matchCount": 6,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.0423,
+              "similarity": 0.9879,
+              "similarityPercent": 98.8
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 6.59,
+                "displayValue": "6.59"
+              },
+              {
+                "key": "control",
+                "label": "control",
+                "value": 6.39,
+                "displayValue": "6.39"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 6.32,
+                "displayValue": "6.32"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "why": "Similar voice behavior using the same primary shell material family.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "tama_s-l-p_s-l-p-classic-dry-aluminum-lal1455-14x5-5_14x5-5_metal_aluminum_brushed-metal_triple-flange-sound-arc-style_l_00a356d6",
+                "company": "Tama",
+                "model": "S.L.P. Classic Dry Aluminum LAL1455 14x5.5",
+                "lineSeries": "S.L.P.",
+                "size": "14x5.5",
+                "families": {
+                  "shellMaterial": "aluminum",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "rolledOrFormedMetal",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "shallowSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Focused, controlled attack voice",
+                "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 6.59,
+                "brightness": 6.07,
+                "projection": 5.75,
+                "sustain": 5.66,
+                "warmth": 5.22,
+                "sensitivity": 6.32,
+                "control": 6.39
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 6.59
+                },
+                {
+                  "key": "control",
+                  "value": 6.39
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 6.32
+                }
+              ],
+              "similarity": {
+                "distance": 0.0423,
+                "similarity": 0.9879,
+                "similarityPercent": 98.8
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "control",
+                "sensitivity"
+              ],
+              "matchReason": "Shares attack and control as defining voice traits.",
+              "contrastReason": "Very little practical contrast across the main voice nodes.",
+              "groupReason": "Similar voice behavior using the same primary shell material family.",
+              "matchGroup": "sameMaterialAlternative",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "materialFamilyDeltas",
+                    "family": "aluminum",
+                    "deltas": {
+                      "sustain": -0.02,
+                      "sensitivity": 0.02,
+                      "control": 0.03
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain",
+                  "sensitivity",
+                  "control"
+                ],
+                "deltas": {
+                  "sustain": -0.02,
+                  "sensitivity": 0.02,
+                  "control": 0.03
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "nearDuplicates",
+          "label": "Closest Relatives",
+          "matchCount": 1,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.1275,
+              "similarity": 0.9636,
+              "similarityPercent": 96.4
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 6.54,
+                "displayValue": "6.54"
+              },
+              {
+                "key": "control",
+                "label": "control",
+                "value": 6.44,
+                "displayValue": "6.44"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 6.23,
+                "displayValue": "6.23"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "why": "Very close voice match from the same brand/model family.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+                "company": "Ludwig",
+                "model": "Acrolite 6.5x14",
+                "lineSeries": "Acrolite",
+                "size": "14x6.5",
+                "families": {
+                  "shellMaterial": "aluminum",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "rolledOrFormedMetal",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "shallowSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Focused, controlled attack voice",
+                "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 6.54,
+                "brightness": 6,
+                "projection": 5.9,
+                "sustain": 5.79,
+                "warmth": 5.42,
+                "sensitivity": 6.23,
+                "control": 6.44
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 6.54
+                },
+                {
+                  "key": "control",
+                  "value": 6.44
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 6.23
+                }
+              ],
+              "similarity": {
+                "distance": 0.1275,
+                "similarity": 0.9636,
+                "similarityPercent": 96.4
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "control",
+                "sensitivity"
+              ],
+              "matchReason": "Shares attack and control as defining voice traits.",
+              "contrastReason": "Very little practical contrast across the main voice nodes.",
+              "groupReason": "Very close voice match from the same brand/model family.",
+              "matchGroup": "nearDuplicate",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "materialFamilyDeltas",
+                    "family": "aluminum",
+                    "deltas": {
+                      "sustain": -0.02,
+                      "sensitivity": 0.02,
+                      "control": 0.03
+                    }
+                  },
+                  {
+                    "type": "knownDrumDeltas",
+                    "id": "ludwig-acrolite-family-preview",
+                    "deltas": {
+                      "sustain": -0.03,
+                      "control": 0.04
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain",
+                  "sensitivity",
+                  "control"
+                ],
+                "deltas": {
+                  "sustain": -0.05,
+                  "sensitivity": 0.02,
+                  "control": 0.07
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "voiceContrast",
+          "label": "Explore a Different Flavor",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.4394,
+              "contrastScore": 0.6816,
+              "contrastPercent": 68.2,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.95,
+                  "absDelta": 2.95,
+                  "direction": "more"
+                },
+                {
+                  "node": "sustain",
+                  "delta": 1.53,
+                  "absDelta": 1.53,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -0.91,
+                  "absDelta": 0.91,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "aluminum",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.4394,
+                "contrastScore": 0.6816,
+                "contrastPercent": 68.2,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.95,
+                    "absDelta": 2.95,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "sustain",
+                    "delta": 1.53,
+                    "absDelta": 1.53,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -0.91,
+                    "absDelta": 0.91,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "aluminum",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, more sustain, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        }
+      ],
+      "contrastModes": [
+        {
+          "key": "overallContrast",
+          "label": "Overall Contrast",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.4394,
+              "contrastScore": 0.6816,
+              "contrastPercent": 68.2,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.95,
+                  "absDelta": 2.95,
+                  "direction": "more"
+                },
+                {
+                  "node": "sustain",
+                  "delta": 1.53,
+                  "absDelta": 1.53,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -0.91,
+                  "absDelta": 0.91,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "aluminum",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.4394,
+                "contrastScore": 0.6816,
+                "contrastPercent": 68.2,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.95,
+                    "absDelta": 2.95,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "sustain",
+                    "delta": 1.53,
+                    "absDelta": 1.53,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -0.91,
+                    "absDelta": 0.91,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "aluminum",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, more sustain, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "dryToOpen",
+          "label": "Dry to Open",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.5038,
+              "contrastScore": 0.697,
+              "contrastPercent": 69.7,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.95,
+                  "absDelta": 2.95,
+                  "direction": "more"
+                },
+                {
+                  "node": "sustain",
+                  "delta": 1.53,
+                  "absDelta": 1.53,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -0.91,
+                  "absDelta": 0.91,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "aluminum",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.5038,
+                "contrastScore": 0.697,
+                "contrastPercent": 69.7,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.95,
+                    "absDelta": 2.95,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "sustain",
+                    "delta": 1.53,
+                    "absDelta": 1.53,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -0.91,
+                    "absDelta": 0.91,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "aluminum",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, more sustain, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "warmToBright",
+          "label": "Warm to Bright",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.6347,
+              "contrastScore": 0.7281,
+              "contrastPercent": 72.8,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.95,
+                  "absDelta": 2.95,
+                  "direction": "more"
+                },
+                {
+                  "node": "sustain",
+                  "delta": 1.53,
+                  "absDelta": 1.53,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -0.91,
+                  "absDelta": 0.91,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "aluminum",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.6347,
+                "contrastScore": 0.7281,
+                "contrastPercent": 72.8,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.95,
+                    "absDelta": 2.95,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "sustain",
+                    "delta": 1.53,
+                    "absDelta": 1.53,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -0.91,
+                    "absDelta": 0.91,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "aluminum",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, more sustain, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "controlledToExplosive",
+          "label": "Controlled to Explosive",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.301,
+              "contrastScore": 0.6487,
+              "contrastPercent": 64.9,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.95,
+                  "absDelta": 2.95,
+                  "direction": "more"
+                },
+                {
+                  "node": "sustain",
+                  "delta": 1.53,
+                  "absDelta": 1.53,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -0.91,
+                  "absDelta": 0.91,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "aluminum",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.301,
+                "contrastScore": 0.6487,
+                "contrastPercent": 64.9,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.95,
+                    "absDelta": 2.95,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "sustain",
+                    "delta": 1.53,
+                    "absDelta": 1.53,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -0.91,
+                    "absDelta": 0.91,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "aluminum",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, more sustain, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        }
+      ],
+      "uiHints": {
+        "defaultSimilarSection": "differentBrandAlternatives",
+        "defaultContrastMode": "overallContrast"
+      }
+    },
+    {
+      "targetId": "ludwig-black-beauty",
+      "status": "ready",
+      "ready": true,
+      "target": {
+        "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+        "company": "Ludwig",
+        "model": "Black Beauty 5x14",
+        "size": "14x5",
+        "title": "Ludwig Black Beauty 5x14 14x5",
+        "summary": {
+          "title": "Fast, articulate cutting voice",
+          "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+        },
+        "description": null,
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "label": "attack",
+            "value": 7.07,
+            "displayValue": "7.07"
+          },
+          {
+            "key": "sustain",
+            "label": "sustain",
+            "value": 6.98,
+            "displayValue": "6.98"
+          },
+          {
+            "key": "brightness",
+            "label": "brightness",
+            "value": 6.55,
+            "displayValue": "6.55"
+          }
+        ]
+      },
+      "readoutTabs": [
+        {
+          "key": "firstListen",
+          "label": "First Listen",
+          "nodes": []
+        },
+        {
+          "key": "playerAnalysis",
+          "label": "Player Analysis",
+          "nodes": []
+        },
+        {
+          "key": "legacyPrintIdentity",
+          "label": "LegacyPrint Identity",
+          "nodes": []
+        }
+      ],
+      "recommendedSections": [
+        {
+          "key": "sameMaterialAlternatives",
+          "label": "Same Shell Material Alternatives",
+          "matchCount": 6,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.0294,
+              "similarity": 0.9916,
+              "similarityPercent": 99.2
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 7.05,
+                "displayValue": "7.05"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7,
+                "displayValue": "7.00"
+              },
+              {
+                "key": "brightness",
+                "label": "brightness",
+                "value": 6.55,
+                "displayValue": "6.55"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "why": "Similar voice behavior using the same primary shell material family.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+                "company": "Tama",
+                "model": "STAR Reserve Hand Hammered Brass 14x5.5",
+                "lineSeries": "STAR Reserve",
+                "size": "14x5.5",
+                "families": {
+                  "shellMaterial": "brass",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "machinedMetal",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "unknownSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Fast, articulate cutting voice",
+                "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+              },
+              "voiceProfile": {
+                "attack": 7.05,
+                "brightness": 6.55,
+                "projection": 6.46,
+                "sustain": 7,
+                "warmth": 5.72,
+                "sensitivity": 5.86,
+                "control": 5.66
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 7.05
+                },
+                {
+                  "key": "sustain",
+                  "value": 7
+                },
+                {
+                  "key": "brightness",
+                  "value": 6.55
+                }
+              ],
+              "similarity": {
+                "distance": 0.0294,
+                "similarity": 0.9916,
+                "similarityPercent": 99.2
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "sustain",
+                "brightness"
+              ],
+              "matchReason": "Shares attack and sustain as defining voice traits.",
+              "contrastReason": "Very little practical contrast across the main voice nodes.",
+              "groupReason": "Similar voice behavior using the same primary shell material family.",
+              "matchGroup": "sameMaterialAlternative",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "materialFamilyDeltas",
+                    "family": "brass",
+                    "deltas": {
+                      "sustain": 0.01
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain"
+                ],
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "nearDuplicates",
+          "label": "Closest Relatives",
+          "matchCount": 4,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0,
+              "similarity": 1,
+              "similarityPercent": 100
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 7.07,
+                "displayValue": "7.07"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 6.98,
+                "displayValue": "6.98"
+              },
+              {
+                "key": "brightness",
+                "label": "brightness",
+                "value": 6.55,
+                "displayValue": "6.55"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "why": "Very close voice match from the same brand/model family.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+                "company": "Ludwig",
+                "model": "Black Beauty Super Sensitive 5x14",
+                "lineSeries": "1977 Ludwig",
+                "size": "14x5",
+                "families": {
+                  "shellMaterial": "brass",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "machinedMetal",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "unknownSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Fast, articulate cutting voice",
+                "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+              },
+              "voiceProfile": {
+                "attack": 7.07,
+                "brightness": 6.55,
+                "projection": 6.47,
+                "sustain": 6.98,
+                "warmth": 5.72,
+                "sensitivity": 5.87,
+                "control": 5.73
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 7.07
+                },
+                {
+                  "key": "sustain",
+                  "value": 6.98
+                },
+                {
+                  "key": "brightness",
+                  "value": 6.55
+                }
+              ],
+              "similarity": {
+                "distance": 0,
+                "similarity": 1,
+                "similarityPercent": 100
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "sustain",
+                "brightness"
+              ],
+              "matchReason": "Shares attack and sustain as defining voice traits.",
+              "contrastReason": "Very little practical contrast across the main voice nodes.",
+              "groupReason": "Very close voice match from the same brand/model family.",
+              "matchGroup": "nearDuplicate",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "materialFamilyDeltas",
+                    "family": "brass",
+                    "deltas": {
+                      "sustain": 0.01
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain"
+                ],
+                "deltas": {
+                  "sustain": 0.01
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "voiceContrast",
+          "label": "Explore a Different Flavor",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.3017,
+              "contrastScore": 0.6424,
+              "contrastPercent": 64.2,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.45,
+                  "absDelta": 2.45,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.85,
+                  "absDelta": 1.85,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "projection",
+                  "delta": -0.72,
+                  "absDelta": 0.72,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "brass",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.3017,
+                "contrastScore": 0.6424,
+                "contrastPercent": 64.2,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.45,
+                    "absDelta": 2.45,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.85,
+                    "absDelta": 1.85,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "projection",
+                    "delta": -0.72,
+                    "absDelta": 0.72,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "brass",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less brightness, less attack than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        }
+      ],
+      "contrastModes": [
+        {
+          "key": "overallContrast",
+          "label": "Overall Contrast",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.3017,
+              "contrastScore": 0.6424,
+              "contrastPercent": 64.2,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.45,
+                  "absDelta": 2.45,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.85,
+                  "absDelta": 1.85,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "projection",
+                  "delta": -0.72,
+                  "absDelta": 0.72,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "brass",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.3017,
+                "contrastScore": 0.6424,
+                "contrastPercent": 64.2,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.45,
+                    "absDelta": 2.45,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.85,
+                    "absDelta": 1.85,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "projection",
+                    "delta": -0.72,
+                    "absDelta": 0.72,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "brass",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less brightness, less attack than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "dryToOpen",
+          "label": "Dry to Open",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.2615,
+              "contrastScore": 0.6329,
+              "contrastPercent": 63.3,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.45,
+                  "absDelta": 2.45,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.85,
+                  "absDelta": 1.85,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "projection",
+                  "delta": -0.72,
+                  "absDelta": 0.72,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "brass",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.2615,
+                "contrastScore": 0.6329,
+                "contrastPercent": 63.3,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.45,
+                    "absDelta": 2.45,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.85,
+                    "absDelta": 1.85,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "projection",
+                    "delta": -0.72,
+                    "absDelta": 0.72,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "brass",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less brightness, less attack than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "warmToBright",
+          "label": "Warm to Bright",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.5001,
+              "contrastScore": 0.6897,
+              "contrastPercent": 69,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.45,
+                  "absDelta": 2.45,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.85,
+                  "absDelta": 1.85,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "projection",
+                  "delta": -0.72,
+                  "absDelta": 0.72,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "brass",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.5001,
+                "contrastScore": 0.6897,
+                "contrastPercent": 69,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.45,
+                    "absDelta": 2.45,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.85,
+                    "absDelta": 1.85,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "projection",
+                    "delta": -0.72,
+                    "absDelta": 0.72,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "brass",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less brightness, less attack than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "controlledToExplosive",
+          "label": "Controlled to Explosive",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.2009,
+              "contrastScore": 0.6184,
+              "contrastPercent": 61.8,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.45,
+                  "absDelta": 2.45,
+                  "direction": "more"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.85,
+                  "absDelta": 1.85,
+                  "direction": "less"
+                },
+                {
+                  "node": "attack",
+                  "delta": -1.37,
+                  "absDelta": 1.37,
+                  "direction": "less"
+                },
+                {
+                  "node": "projection",
+                  "delta": -0.72,
+                  "absDelta": 0.72,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "brass",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.2009,
+                "contrastScore": 0.6184,
+                "contrastPercent": 61.8,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.45,
+                    "absDelta": 2.45,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.85,
+                    "absDelta": 1.85,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -1.37,
+                    "absDelta": 1.37,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "projection",
+                    "delta": -0.72,
+                    "absDelta": 0.72,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "brass",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less brightness, less attack than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        }
+      ],
+      "uiHints": {
+        "defaultSimilarSection": "sameMaterialAlternatives",
+        "defaultContrastMode": "overallContrast"
+      }
+    },
+    {
+      "targetId": "dw-true-cast-bronze",
+      "status": "ready",
+      "ready": true,
+      "target": {
+        "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+        "company": "DW / PDP",
+        "model": "MFG True-Cast Bell Bronze 14x4",
+        "size": "14x4",
+        "title": "DW / PDP MFG True-Cast Bell Bronze 14x4 14x4",
+        "summary": {
+          "title": "Focused, controlled attack voice",
+          "text": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry."
+        },
+        "description": null,
+        "confidence": {
+          "score": 100,
+          "label": "high",
+          "reasons": []
+        },
+        "topNodes": [
+          {
+            "key": "attack",
+            "label": "attack",
+            "value": 7.73,
+            "displayValue": "7.73"
+          },
+          {
+            "key": "control",
+            "label": "control",
+            "value": 7.25,
+            "displayValue": "7.25"
+          },
+          {
+            "key": "projection",
+            "label": "projection",
+            "value": 6.95,
+            "displayValue": "6.95"
+          }
+        ]
+      },
+      "readoutTabs": [
+        {
+          "key": "firstListen",
+          "label": "First Listen",
+          "nodes": []
+        },
+        {
+          "key": "playerAnalysis",
+          "label": "Player Analysis",
+          "nodes": []
+        },
+        {
+          "key": "legacyPrintIdentity",
+          "label": "LegacyPrint Identity",
+          "nodes": []
+        }
+      ],
+      "recommendedSections": [
+        {
+          "key": "differentBrandAlternatives",
+          "label": "Other Brand Alternatives",
+          "matchCount": 8,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.4096,
+              "similarity": 0.883,
+              "similarityPercent": 88.3
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 7.45,
+                "displayValue": "7.45"
+              },
+              {
+                "key": "projection",
+                "label": "projection",
+                "value": 6.7,
+                "displayValue": "6.70"
+              },
+              {
+                "key": "brightness",
+                "label": "brightness",
+                "value": 6.66,
+                "displayValue": "6.66"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "projection"
+            ],
+            "why": "Similar voice behavior from a different brand.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+                "company": "Pearl",
+                "model": "Reference Brass",
+                "lineSeries": "Reference",
+                "size": "14x5",
+                "families": {
+                  "shellMaterial": "brass",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "machinedMetal",
+                  "hoopType": "dieCast",
+                  "snareBed": "unknownSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 96,
+                "label": "high",
+                "reasons": [
+                  "missing lug count"
+                ]
+              },
+              "summary": {
+                "title": "Fast, articulate cutting voice",
+                "text": "This snare is led by quick, articulate stick definition, followed by moderate acoustic carry and balanced brightness."
+              },
+              "voiceProfile": {
+                "attack": 7.45,
+                "brightness": 6.66,
+                "projection": 6.7,
+                "sustain": 6.4,
+                "warmth": 5.53,
+                "sensitivity": 5.4,
+                "control": 6.51
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 7.45
+                },
+                {
+                  "key": "projection",
+                  "value": 6.7
+                },
+                {
+                  "key": "brightness",
+                  "value": 6.66
+                }
+              ],
+              "similarity": {
+                "distance": 0.4096,
+                "similarity": 0.883,
+                "similarityPercent": 88.3
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "projection"
+              ],
+              "matchReason": "Shares attack and projection as defining voice traits.",
+              "contrastReason": "Compared with the target, this match reads less control.",
+              "groupReason": "Similar voice behavior from a different brand.",
+              "matchGroup": "differentBrandAlternative",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "materialFamilyDeltas",
+                    "family": "brass",
+                    "deltas": {
+                      "sustain": 0.01
+                    }
+                  },
+                  {
+                    "type": "hoopFamilyDeltas",
+                    "family": "dieCast",
+                    "deltas": {
+                      "sustain": -0.02,
+                      "control": 0.03
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain",
+                  "control"
+                ],
+                "deltas": {
+                  "sustain": -0.01,
+                  "control": 0.03
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "sameMaterialAlternatives",
+          "label": "Same Shell Material Alternatives",
+          "matchCount": 2,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.4453,
+              "similarity": 0.8728,
+              "similarityPercent": 87.3
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 7.29,
+                "displayValue": "7.29"
+              },
+              {
+                "key": "projection",
+                "label": "projection",
+                "value": 6.84,
+                "displayValue": "6.84"
+              },
+              {
+                "key": "control",
+                "label": "control",
+                "value": 6.61,
+                "displayValue": "6.61"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "projection",
+              "control"
+            ],
+            "why": "Similar voice behavior using the same primary shell material family.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+                "company": "SONOR",
+                "model": "Signature HLD 580 Cast Bronze 14x6.5",
+                "lineSeries": "Signature Series",
+                "size": "14x6.5",
+                "families": {
+                  "shellMaterial": "bronze",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "machinedMetal",
+                  "hoopType": "dieCast",
+                  "snareBed": "unknownSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Focused, controlled attack voice",
+                "text": "This snare is led by quick, articulate stick definition, followed by strong room and mix carry and moderate focus."
+              },
+              "voiceProfile": {
+                "attack": 7.29,
+                "brightness": 6.32,
+                "projection": 6.84,
+                "sustain": 6.59,
+                "warmth": 5.98,
+                "sensitivity": 5.27,
+                "control": 6.61
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 7.29
+                },
+                {
+                  "key": "projection",
+                  "value": 6.84
+                },
+                {
+                  "key": "control",
+                  "value": 6.61
+                }
+              ],
+              "similarity": {
+                "distance": 0.4453,
+                "similarity": 0.8728,
+                "similarityPercent": 87.3
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "projection",
+                "control"
+              ],
+              "matchReason": "Shares attack and projection as defining voice traits.",
+              "contrastReason": "Compared with the target, this match reads more sustain.",
+              "groupReason": "Similar voice behavior using the same primary shell material family.",
+              "matchGroup": "sameMaterialAlternative",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "hoopFamilyDeltas",
+                    "family": "dieCast",
+                    "deltas": {
+                      "sustain": -0.02,
+                      "control": 0.03
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain",
+                  "control"
+                ],
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "nearDuplicates",
+          "label": "Closest Relatives",
+          "matchCount": 1,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": {
+              "distance": 0.1268,
+              "similarity": 0.9638,
+              "similarityPercent": 96.4
+            },
+            "similarityLabel": null,
+            "contrast": null,
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "attack",
+                "label": "attack",
+                "value": 7.6,
+                "displayValue": "7.60"
+              },
+              {
+                "key": "control",
+                "label": "control",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "projection",
+                "label": "projection",
+                "value": 7.03,
+                "displayValue": "7.03"
+              }
+            ],
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "projection"
+            ],
+            "why": "Very close voice match from the same brand/model family.",
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+                "company": "DW / PDP",
+                "model": "MFG True-Cast Bell Bronze 14x5.5",
+                "lineSeries": "DW MFG / True-Cast",
+                "size": "14x5.5",
+                "families": {
+                  "shellMaterial": "bronze",
+                  "shellConstruction": "metal",
+                  "bearingEdge": "machinedMetal",
+                  "hoopType": "dieCast",
+                  "snareBed": "unknownSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Focused, controlled attack voice",
+                "text": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry."
+              },
+              "voiceProfile": {
+                "attack": 7.6,
+                "brightness": 6.31,
+                "projection": 7.03,
+                "sustain": 6.11,
+                "warmth": 5.71,
+                "sensitivity": 4.86,
+                "control": 7.15
+              },
+              "topNodes": [
+                {
+                  "key": "attack",
+                  "value": 7.6
+                },
+                {
+                  "key": "control",
+                  "value": 7.15
+                },
+                {
+                  "key": "projection",
+                  "value": 7.03
+                }
+              ],
+              "similarity": {
+                "distance": 0.1268,
+                "similarity": 0.9638,
+                "similarityPercent": 96.4
+              },
+              "contrast": null,
+              "sharedTopNodes": [
+                "attack",
+                "control",
+                "projection"
+              ],
+              "matchReason": "Shares attack and control as defining voice traits.",
+              "contrastReason": "Very little practical contrast across the main voice nodes.",
+              "groupReason": "Very close voice match from the same brand/model family.",
+              "matchGroup": "nearDuplicate",
+              "calibration": {
+                "applied": true,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [
+                  {
+                    "type": "hoopFamilyDeltas",
+                    "family": "dieCast",
+                    "deltas": {
+                      "sustain": -0.02,
+                      "control": 0.03
+                    }
+                  }
+                ],
+                "changedNodes": [
+                  "sustain",
+                  "control"
+                ],
+                "deltas": {
+                  "sustain": -0.02,
+                  "control": 0.03
+                }
+              }
+            }
+          }
+        },
+        {
+          "key": "voiceContrast",
+          "label": "Explore a Different Flavor",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.701,
+              "contrastScore": 0.7621,
+              "contrastPercent": 76.2,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.63,
+                  "absDelta": 2.63,
+                  "direction": "more"
+                },
+                {
+                  "node": "attack",
+                  "delta": -2.03,
+                  "absDelta": 2.03,
+                  "direction": "less"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.7,
+                  "absDelta": 1.7,
+                  "direction": "less"
+                },
+                {
+                  "node": "control",
+                  "delta": -1.55,
+                  "absDelta": 1.55,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "bronze",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.701,
+                "contrastScore": 0.7621,
+                "contrastPercent": 76.2,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.63,
+                    "absDelta": 2.63,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -2.03,
+                    "absDelta": 2.03,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.7,
+                    "absDelta": 1.7,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "control",
+                    "delta": -1.55,
+                    "absDelta": 1.55,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "bronze",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less attack, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        }
+      ],
+      "contrastModes": [
+        {
+          "key": "overallContrast",
+          "label": "Overall Contrast",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.701,
+              "contrastScore": 0.7621,
+              "contrastPercent": 76.2,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.63,
+                  "absDelta": 2.63,
+                  "direction": "more"
+                },
+                {
+                  "node": "attack",
+                  "delta": -2.03,
+                  "absDelta": 2.03,
+                  "direction": "less"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.7,
+                  "absDelta": 1.7,
+                  "direction": "less"
+                },
+                {
+                  "node": "control",
+                  "delta": -1.55,
+                  "absDelta": 1.55,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "bronze",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.701,
+                "contrastScore": 0.7621,
+                "contrastPercent": 76.2,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.63,
+                    "absDelta": 2.63,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -2.03,
+                    "absDelta": 2.03,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.7,
+                    "absDelta": 1.7,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "control",
+                    "delta": -1.55,
+                    "absDelta": 1.55,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "bronze",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less attack, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "dryToOpen",
+          "label": "Dry to Open",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.7051,
+              "contrastScore": 0.7631,
+              "contrastPercent": 76.3,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.63,
+                  "absDelta": 2.63,
+                  "direction": "more"
+                },
+                {
+                  "node": "attack",
+                  "delta": -2.03,
+                  "absDelta": 2.03,
+                  "direction": "less"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.7,
+                  "absDelta": 1.7,
+                  "direction": "less"
+                },
+                {
+                  "node": "control",
+                  "delta": -1.55,
+                  "absDelta": 1.55,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "bronze",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.7051,
+                "contrastScore": 0.7631,
+                "contrastPercent": 76.3,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.63,
+                    "absDelta": 2.63,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -2.03,
+                    "absDelta": 2.03,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.7,
+                    "absDelta": 1.7,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "control",
+                    "delta": -1.55,
+                    "absDelta": 1.55,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "bronze",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less attack, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "warmToBright",
+          "label": "Warm to Bright",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.8102,
+              "contrastScore": 0.7881,
+              "contrastPercent": 78.8,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.63,
+                  "absDelta": 2.63,
+                  "direction": "more"
+                },
+                {
+                  "node": "attack",
+                  "delta": -2.03,
+                  "absDelta": 2.03,
+                  "direction": "less"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.7,
+                  "absDelta": 1.7,
+                  "direction": "less"
+                },
+                {
+                  "node": "control",
+                  "delta": -1.55,
+                  "absDelta": 1.55,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "bronze",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.8102,
+                "contrastScore": 0.7881,
+                "contrastPercent": 78.8,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.63,
+                    "absDelta": 2.63,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -2.03,
+                    "absDelta": 2.03,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.7,
+                    "absDelta": 1.7,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "control",
+                    "delta": -1.55,
+                    "absDelta": 1.55,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "bronze",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less attack, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        },
+        {
+          "key": "controlledToExplosive",
+          "label": "Controlled to Explosive",
+          "matchCount": 5,
+          "firstMatch": {
+            "id": null,
+            "company": null,
+            "model": null,
+            "size": null,
+            "title": "",
+            "similarity": null,
+            "similarityLabel": null,
+            "contrast": {
+              "distance": 1.6643,
+              "contrastScore": 0.7534,
+              "contrastPercent": 75.3,
+              "contrastNodes": [
+                {
+                  "node": "warmth",
+                  "delta": 2.63,
+                  "absDelta": 2.63,
+                  "direction": "more"
+                },
+                {
+                  "node": "attack",
+                  "delta": -2.03,
+                  "absDelta": 2.03,
+                  "direction": "less"
+                },
+                {
+                  "node": "brightness",
+                  "delta": -1.7,
+                  "absDelta": 1.7,
+                  "direction": "less"
+                },
+                {
+                  "node": "control",
+                  "delta": -1.55,
+                  "absDelta": 1.55,
+                  "direction": "less"
+                }
+              ],
+              "materialContrast": {
+                "changed": true,
+                "targetMaterial": "bronze",
+                "candidateMaterial": "mahogany"
+              },
+              "constructionContrast": {
+                "changed": true,
+                "targetConstruction": "metal",
+                "candidateConstruction": "plyWithReinforcementRings"
+              }
+            },
+            "contrastLabel": null,
+            "topNodes": [
+              {
+                "key": "warmth",
+                "label": "warmth",
+                "value": 8.17,
+                "displayValue": "8.17"
+              },
+              {
+                "key": "sustain",
+                "label": "sustain",
+                "value": 7.15,
+                "displayValue": "7.15"
+              },
+              {
+                "key": "sensitivity",
+                "label": "sensitivity",
+                "value": 5.97,
+                "displayValue": "5.97"
+              }
+            ],
+            "sharedTopNodes": [],
+            "why": null,
+            "materialShift": null,
+            "raw": {
+              "drum": {
+                "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+                "company": "Ludwig",
+                "model": "Legacy Mahogany 8x14",
+                "lineSeries": "Legacy Mahogany",
+                "size": "14x8",
+                "families": {
+                  "shellMaterial": "mahogany",
+                  "shellConstruction": "plyWithReinforcementRings",
+                  "bearingEdge": "rounder30Degree",
+                  "hoopType": "tripleFlanged",
+                  "snareBed": "otherSnareBed"
+                }
+              },
+              "confidence": {
+                "score": 100,
+                "label": "high",
+                "reasons": []
+              },
+              "summary": {
+                "title": "Warm, blooming snare voice",
+                "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+              },
+              "voiceProfile": {
+                "attack": 5.7,
+                "brightness": 4.7,
+                "projection": 5.75,
+                "sustain": 7.15,
+                "warmth": 8.17,
+                "sensitivity": 5.97,
+                "control": 5.7
+              },
+              "topNodes": [
+                {
+                  "key": "warmth",
+                  "value": 8.17
+                },
+                {
+                  "key": "sustain",
+                  "value": 7.15
+                },
+                {
+                  "key": "sensitivity",
+                  "value": 5.97
+                }
+              ],
+              "similarity": null,
+              "contrast": {
+                "distance": 1.6643,
+                "contrastScore": 0.7534,
+                "contrastPercent": 75.3,
+                "contrastNodes": [
+                  {
+                    "node": "warmth",
+                    "delta": 2.63,
+                    "absDelta": 2.63,
+                    "direction": "more"
+                  },
+                  {
+                    "node": "attack",
+                    "delta": -2.03,
+                    "absDelta": 2.03,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "brightness",
+                    "delta": -1.7,
+                    "absDelta": 1.7,
+                    "direction": "less"
+                  },
+                  {
+                    "node": "control",
+                    "delta": -1.55,
+                    "absDelta": 1.55,
+                    "direction": "less"
+                  }
+                ],
+                "materialContrast": {
+                  "changed": true,
+                  "targetMaterial": "bronze",
+                  "candidateMaterial": "mahogany"
+                },
+                "constructionContrast": {
+                  "changed": true,
+                  "targetConstruction": "metal",
+                  "candidateConstruction": "plyWithReinforcementRings"
+                }
+              },
+              "sharedTopNodes": [],
+              "matchReason": null,
+              "contrastReason": "This match creates contrast by reading more warmth, less attack, less brightness than the target.",
+              "groupReason": null,
+              "matchGroup": null,
+              "calibration": {
+                "applied": false,
+                "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+                "appliedChanges": [],
+                "changedNodes": [],
+                "deltas": {}
+              }
+            }
+          }
+        }
+      ],
+      "uiHints": {
+        "defaultSimilarSection": "differentBrandAlternatives",
+        "defaultContrastMode": "overallContrast"
+      }
+    }
+  ]
+}
