@@ -9,11 +9,61 @@ const {
 
 } = require('./snareDiscoveryService');
 
+const unwrapPacket = discoveryState =>
+
+  discoveryState?.packet ||
+
+  discoveryState?.result?.packet ||
+
+  discoveryState?.result ||
+
+  discoveryState?.discoveryPacket ||
+
+  discoveryState?.response?.packet ||
+
+  discoveryState?.response ||
+
+  null;
+
+const normalizePercentValue = value => {
+
+  if (value === null || value === undefined) return null;
+
+  const numericValue =
+
+    typeof value === 'object'
+
+      ? value.similarityPercent ??
+
+        value.contrastPercent ??
+
+        value.scorePercent ??
+
+        value.percent ??
+
+        value.similarity ??
+
+        value.contrastScore ??
+
+        null
+
+      : value;
+
+  const number = Number(numericValue);
+
+  if (!Number.isFinite(number)) return null;
+
+  return number <= 1 ? number * 100 : number;
+
+};
+
 const formatPercent = value => {
 
-  if (value === null || value === undefined || Number.isNaN(Number(value))) return null;
+  const percent = normalizePercentValue(value);
 
-  return `${Number(value).toFixed(1)}%`;
+  if (percent === null) return null;
+
+  return `${percent.toFixed(1)}%`;
 
 };
 
@@ -39,6 +89,8 @@ const getSectionMatches = section => {
 
   if (!section) return [];
 
+  if (Array.isArray(section)) return section;
+
   if (Array.isArray(section.matches)) return section.matches;
 
   if (Array.isArray(section.results)) return section.results;
@@ -53,6 +105,8 @@ const getSectionMatches = section => {
 
   if (Array.isArray(section.items?.matches)) return section.items.matches;
 
+  if (Array.isArray(section.records?.matches)) return section.records.matches;
+
   if (Array.isArray(section.group?.matches)) return section.group.matches;
 
   if (Array.isArray(section.data?.matches)) return section.data.matches;
@@ -63,15 +117,17 @@ const getSectionMatches = section => {
 
 const getSimilarSectionMatches = (packet, section) => {
 
-  const key = section?.key;
+  if (!packet || !section) return [];
 
-  const groups = packet?.discovery?.similar?.grouped?.groups || {};
+  const key = section.key;
+
+  const groups = packet.discovery?.similar?.grouped?.groups || {};
 
   if (key === 'voiceContrast') {
 
-    const defaultMode = packet?.uiHints?.defaultContrastMode || 'overallContrast';
+    const defaultMode = packet.uiHints?.defaultContrastMode || 'overallContrast';
 
-    const contrastSections = packet?.discovery?.contrast?.sections || [];
+    const contrastSections = packet.discovery?.contrast?.sections || [];
 
     const selectedSection =
 
@@ -91,6 +147,8 @@ const getMatchDrum = match =>
 
   match?.drum ||
 
+  match?.target?.drum ||
+
   match?.reference ||
 
   match?.snare ||
@@ -105,6 +163,8 @@ const getSimilarityValue = match =>
 
   match?.similarity?.similarityPercent ??
 
+  match?.similarity?.similarity ??
+
   match?.similarity ??
 
   null;
@@ -113,7 +173,11 @@ const getContrastValue = match =>
 
   match?.contrastPercent ??
 
+  match?.contrastScorePercent ??
+
   match?.contrast?.contrastPercent ??
+
+  match?.contrast?.scorePercent ??
 
   match?.contrastScore ??
 
@@ -131,7 +195,7 @@ const mapMatchForUi = match => {
 
   const contrast = getContrastValue(match);
 
-  const topNodes = match?.topNodes || drum?.topNodes || [];
+  const topNodes = match?.topNodes || match?.nodes || drum?.topNodes || [];
 
   return {
 
@@ -153,11 +217,11 @@ const mapMatchForUi = match => {
 
     ].filter(Boolean).join(' '),
 
-    similarity,
+    similarity: normalizePercentValue(similarity),
 
     similarityLabel: formatPercent(similarity),
 
-    contrast,
+    contrast: normalizePercentValue(contrast),
 
     contrastLabel: formatPercent(contrast),
 
@@ -185,7 +249,7 @@ const mapMatchForUi = match => {
 
 const buildSnareDiscoveryViewModel = discoveryState => {
 
-  const packet = discoveryState?.packet;
+  const packet = unwrapPacket(discoveryState);
 
   if (!packet) {
 
@@ -237,7 +301,7 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
     label: section.label,
 
-    description: section.description,
+    description: section.description || section.reason || null,
 
     matches: getSimilarSectionMatches(packet, section).map(mapMatchForUi)
 
@@ -257,7 +321,7 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
   return {
 
-    status: discoveryState.status,
+    status: discoveryState?.status || 'ready',
 
     ready: true,
 
@@ -265,7 +329,7 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
     target: {
 
-      id: drum.id || discoveryState.snareReferenceId || null,
+      id: drum.id || discoveryState?.snareReferenceId || null,
 
       company: drum.company || null,
 
@@ -293,7 +357,15 @@ const buildSnareDiscoveryViewModel = discoveryState => {
 
     uiHints: {
 
-      defaultSimilarSection: packet.uiHints?.defaultSimilarSection || recommendedSections[0]?.key || null,
+      defaultSimilarSection:
+
+        packet.uiHints?.defaultSimilarSection ||
+
+        recommendedSections.find(section => section.key !== 'voiceContrast' && section.matches?.length)?.key ||
+
+        recommendedSections[0]?.key ||
+
+        null,
 
       defaultContrastMode: packet.uiHints?.defaultContrastMode || contrastModes[0]?.key || null
 

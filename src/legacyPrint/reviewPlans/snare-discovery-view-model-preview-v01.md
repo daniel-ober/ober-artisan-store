@@ -1,6 +1,6 @@
 # LegacyPrint Snare Discovery View Model Preview v0.1
 
-Generated: 2026-05-21T11:09:37.518Z
+Generated: 2026-05-21T11:10:29.794Z
 
 - Firestore writes: 0
 - Source preview: src/legacyPrint/reviewPlans/snare-discovery-packet-api-preview-v01.json
@@ -18,30 +18,30 @@ Generated: 2026-05-21T11:09:37.518Z
 
 ### ludwig-acrolite
 
-Section: Explore a Different Flavor
+Section: Other Brand Alternatives
 
-Match: Ludwig Legacy Mahogany 8x14 14x8
+Match: Tama S.L.P. Fat Spruce LSP146 14x6 14x6
 
-Score: 68.2%
+Score: 92.8%
 
-Why: This match creates contrast by reading more warmth, more sustain, less brightness than the target.
+Why: Shares attack and control as defining voice traits.
 
 ### ludwig-black-beauty
 
-Section: Explore a Different Flavor
+Section: Same Shell Material Alternatives
 
-Match: Ludwig Legacy Mahogany 8x14 14x8
+Match: Tama STAR Reserve Hand Hammered Brass 14x5.5 14x5.5
 
-Score: 64.2%
+Score: 99.2%
 
-Why: This match creates contrast by reading more warmth, less brightness, less attack than the target.
+Why: Shares attack and sustain as defining voice traits.
 
 ### dw-true-cast-bronze
 
-Section: Explore a Different Flavor
+Section: Other Brand Alternatives
 
-Match: Ludwig Legacy Mahogany 8x14 14x8
+Match: Pearl Reference Brass 14x5
 
-Score: 76.2%
+Score: 88.3%
 
-Why: This match creates contrast by reading more warmth, less attack, less brightness than the target.
+Why: Shares attack and projection as defining voice traits.
