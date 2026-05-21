@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:45:17.633Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "TAMA_STAR_RESERVE_G_MAHOGANY_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://www.guitarcenter.com/TAMA/snare-drums.gc"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "shellMaterial": "African Mahogany",
+      "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "STAR Reserve G-Mahogany 14x6.5"
+      ],
+      "recordIds": [
+        "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Tama STAR Reserve G-Mahogany bearing-edge geometry before creating any promotion plan."
+}
