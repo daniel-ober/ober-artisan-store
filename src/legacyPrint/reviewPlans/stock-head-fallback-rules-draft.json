@@ -494,12 +494,12 @@
       "lineSeriesIncludes": [
         "Black Dawg Series"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://worldmaxusa.com/product-category/snare-drum-black-dawg-series/",
-      "sourceConfidence": "needsVerification",
-      "notes": "WorldMax Black Dawg records have multiple dealer/manufacturer URLs. Confirm consistent stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "WorldMax Black Dawg Series group contains 10 candidates across brass/copper/brass-finish variants. Official WorldMax pages confirm the product family, but current evidence does not confirm exact stock batter and reso/snare-side head models across all Black Dawg records. Dealer pages are useful secondary references but are not enough for approval unless exact stock head models are confirmed. Keep DRAFT until exact stock batter head and exact stock reso/snare-side head are source-confirmed."
     },
     {
       "ruleKey": "gretsch-brooklyn-stock-heads-draft",
