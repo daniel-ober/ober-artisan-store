@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-05-21T08:23:54.248Z",
+  "sourceFiles": [
+    "src/legacyPrint/reviewPlans/strict-shell-field-audit-baseline-confirmed-after-lane-review.json",
+    "src/legacyPrint/reviewPlans/lane-a-edge-promotion-review-completion-summary.json",
+    "src/legacyPrint/reviewPlans/lane-b-shell-thickness-promotion-review-completion-summary.json",
+    "src/legacyPrint/reviewPlans/lane-c-shell-thickness-and-edge-promotion-review-completion-summary.json"
+  ],
+  "status": "STRICT_SHELL_FIELD_PROMOTION_REVIEW_COMPLETE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "totalRecords": 1551,
+    "currentMeaningfulCoreShellPass": 187,
+    "currentMetalEdgeFallbackCoreShellPass": 176,
+    "currentTotalMeaningfulCoreShellUsable": 363,
+    "laneA": {
+      "name": "HAS_THICKNESS_BUT_EDGE_UNKNOWN",
+      "candidateCount": 103,
+      "groupCount": 26,
+      "sourceConfirmedPromotionCount": 0,
+      "blockedCandidateCount": 103,
+      "status": "LANE_A_EDGE_PROMOTION_REVIEW_COMPLETE_NO_FIRESTORE_WRITES"
+    },
+    "laneB": {
+      "name": "HAS_EDGE_BUT_THICKNESS_MISSING",
+      "candidateCount": 330,
+      "groupCount": 150,
+      "sourceConfirmedPromotionCount": 0,
+      "blockedCandidateCount": 330,
+      "status": "LANE_B_SHELL_THICKNESS_PROMOTION_REVIEW_COMPLETE_NO_FIRESTORE_WRITES"
+    },
+    "laneC": {
+      "name": "MISSING_THICKNESS_AND_EDGE",
+      "candidateCount": 750,
+      "groupCount": 374,
+      "sourceConfirmedPromotionCount": 0,
+      "blockedCandidateCount": 750,
+      "status": "LANE_C_SHELL_THICKNESS_AND_EDGE_PROMOTION_REVIEW_COMPLETE_NO_FIRESTORE_WRITES"
+    },
+    "totalReviewedCandidateCount": 1183,
+    "totalBlockedCandidateCount": 1183,
+    "totalSourceConfirmedPromotionCount": 0,
+    "reviewedMatchesExpectedLaneTotal": true,
+    "noFirestoreWrites": true,
+    "conclusion": "Strict shell field promotion review is complete across Lanes A, B, and C. No new source-confirmed promotions were found. Core-shell readiness remains unchanged from the confirmed post-lane baseline."
+  },
+  "nextRecommendedStep": "Choose the next policy path: controlled metal-edge fallback tightening, controlled stock-head fallback design, or non-critical enrichment cleanup."
+}
