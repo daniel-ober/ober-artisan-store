@@ -687,7 +687,7 @@ const main = async () => {
 
       sameConstructionEdgeUnknownThicknessGroups: sameConstructionEdgeUnknownThickness.length,
 
-      notDifferentiationReadyToDistinguishCount: notDifferentiationReady.length,
+      corePassButNotDifferentiationReadyCount: notDifferentiationReady.length,
 
       uniqueEnoughToScoreDifferentlyCount: uniqueEnough.length,
 
@@ -783,7 +783,7 @@ const main = async () => {
 
     `- Same construction + same bearing edge + unknown thickness groups: ${report.summary.sameConstructionEdgeUnknownThicknessGroups}`,
 
-    `- Too generic to distinguish: ${report.summary.notDifferentiationReadyToDistinguishCount}`,
+    `- Too generic to distinguish: ${report.summary.corePassButNotDifferentiationReadyCount}`,
 
     `- Unique enough to score differently: ${report.summary.uniqueEnoughToScoreDifferentlyCount}`,
 
