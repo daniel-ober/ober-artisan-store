@@ -43,6 +43,18 @@ const {
 
 } = require('./resolveSnareReadoutMaps');
 
+const {
+
+  applySnareCalibrationOverlay
+
+} = require('./applySnareCalibrationOverlay');
+
+const {
+
+  DEFAULT_SNARE_CALIBRATION_OVERLAY
+
+} = require('./defaultSnareCalibrationOverlay');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -75,7 +87,11 @@ module.exports = {
 
   resolvePlayerAnalysisMap,
 
-  resolveLegacyPrintIdentityMap
+  resolveLegacyPrintIdentityMap,
+
+  applySnareCalibrationOverlay,
+
+  DEFAULT_SNARE_CALIBRATION_OVERLAY
 
 };
 
