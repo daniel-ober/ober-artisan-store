@@ -109,12 +109,12 @@
       "lineSeriesIncludes": [
         "Ahead Snares"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
-      "sourceUrl": "https://bigbangdist.com/",
-      "sourceConfidence": "needsVerification",
-      "notes": "AHEAD listings often mention Remo heads in technical tables; exact batter/reso models must be confirmed before approval."
+      "sourceUrl": "https://bigbangdist.com/product/ahead-polished-bell-brass-snare-drum/",
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Big Bang and dealer listings confirm AHEAD snares ship with “Remo USA Heads,” but current source evidence does not confirm exact batter and reso/snare-side models. Keep DRAFT until exact stock batter head and exact stock reso/snare-side head are source-confirmed. Do not approve from generic “Remo USA Heads” wording alone."
     },
     {
       "ruleKey": "pearl-sensitone-stock-heads-draft",

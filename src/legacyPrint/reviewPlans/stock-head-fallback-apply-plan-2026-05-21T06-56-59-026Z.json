@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T06:58:31.060Z",
+  "generatedAt": "2026-05-21T06:56:59.025Z",
   "mode": "PLAN_ONLY_NO_FIRESTORE_WRITES",
   "candidatePath": "tmp/legacyPrint-audits/stock-head-fallback-candidates-2026-05-21T06-45-46-788Z.json",
   "rulesPath": "src/legacyPrint/reviewPlans/stock-head-fallback-rules-draft.json",
