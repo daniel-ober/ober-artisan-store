@@ -1,0 +1,1333 @@
+{
+  "generatedAt": "2026-05-21T08:07:45.284Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-c-high-value-shell-thickness-and-edge-review-packet.json",
+  "status": "LANE_C_PORK_PIE_SHELL_THICKNESS_AND_EDGE_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Pork Pie Percussion",
+    "candidateCount": 47,
+    "groupCount": 23,
+    "sourceUrls": [
+      "https://porkpiedrums.com/history-of-pork-pie/",
+      "https://porkpiedrums.com/products/",
+      "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+      "https://drummagazine.com/pork-pie-snare-drums-tested/",
+      "https://porkpiedrums.com/products/drums/acrylic/",
+      "https://porkpiedrums.com/video/frankinpork/",
+      "https://www.musicarts.com/pork-pie-bubinga-gloss-snare-drum-main0539843",
+      "https://www.sweetwater.com/store/detail/PP6514-RZT--pork-pie-percussion-usa-maple-snare-drum-6.5-inch-by-14-inch-rosewood-zebrawood",
+      "https://www.notsomoderndrummer.com/not-so-modern-drummer/columns/bob-campbell-every-drum-tells-a-story/a-brief-history-of-pork-pie-percussion-my-limited-heavy-brass-porkster-6-5-x-13-snare-drum"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Maple",
+        "count": 9,
+        "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Maple",
+        "count": 7,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "Little Squealer",
+        "shellMaterial": "Maple",
+        "count": 5,
+        "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Mahogany",
+        "count": 2,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Cherry",
+        "count": 2,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Oak",
+        "count": 2,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Exotic Hardwood",
+        "count": 2,
+        "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+      },
+      {
+        "lineSeries": "Little Squealer",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/"
+      },
+      {
+        "lineSeries": "Piglite / Acrylic",
+        "shellMaterial": "Acrylic",
+        "count": 2,
+        "primarySourceUrl": "https://porkpiedrums.com/products/drums/acrylic/"
+      },
+      {
+        "lineSeries": "USA Custom / Hybrid Metal-Wood",
+        "shellMaterial": "Copper",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom / Hybrid Metal-Wood",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom / Metal",
+        "shellMaterial": "Brass",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom / Specialty",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/video/frankinpork/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Bubinga",
+        "count": 1,
+        "primarySourceUrl": "https://www.musicarts.com/pork-pie-bubinga-gloss-snare-drum-main0539843"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.sweetwater.com/store/detail/PP6514-RZT--pork-pie-percussion-usa-maple-snare-drum-6.5-inch-by-14-inch-rosewood-zebrawood"
+      },
+      {
+        "lineSeries": "USA Custom / Metal",
+        "shellMaterial": "Steel",
+        "count": 1,
+        "primarySourceUrl": "https://www.notsomoderndrummer.com/not-so-modern-drummer/columns/bob-campbell-every-drum-tells-a-story/a-brief-history-of-pork-pie-percussion-my-limited-heavy-brass-porkster-6-5-x-13-snare-drum"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Mahogany",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Cherry",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Oak",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Wood",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/"
+      },
+      {
+        "lineSeries": "USA Custom",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://porkpiedrums.com/products/"
+      },
+      {
+        "lineSeries": "Piglite / Acrylic",
+        "shellMaterial": "Acrylic",
+        "count": 1,
+        "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+      "sourceConfidence": "Low",
+      "count": 9,
+      "models": [
+        "Maple Deep 13x8",
+        "Maple Deep 14x8",
+        "Maple Piccolo 13x4",
+        "Maple Piccolo 14x4",
+        "Maple/Bubinga Hybrid 14x6.5",
+        "Maple/Mahogany Hybrid 14x6.5",
+        "Maple/Oak Hybrid 14x7",
+        "Maple/Rosewood Hybrid 14x7",
+        "Maple/Walnut Hybrid 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-deep-13x8_13x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_045802a5",
+          "label": "Pork Pie Percussion — USA Custom — Maple Deep 13x8 — 13x8",
+          "modelName": "Maple Deep 13x8",
+          "diameter": "13",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-deep-14x8_14x8_ply_maple_custom-finish-varies_2-3mm-triple-flanged_6065010f",
+          "label": "Pork Pie Percussion — USA Custom — Maple Deep 14x8 — 14x8",
+          "modelName": "Maple Deep 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-piccolo-13x4_13x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_142255e8",
+          "label": "Pork Pie Percussion — USA Custom — Maple Piccolo 13x4 — 13x4",
+          "modelName": "Maple Piccolo 13x4",
+          "diameter": "13",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-piccolo-14x4_14x4_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f719bf50",
+          "label": "Pork Pie Percussion — USA Custom — Maple Piccolo 14x4 — 14x4",
+          "modelName": "Maple Piccolo 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-bubinga-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_5b0fb099",
+          "label": "Pork Pie Percussion — USA Custom — Maple/Bubinga Hybrid 14x6.5 — 14x6.5",
+          "modelName": "Maple/Bubinga Hybrid 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Bubinga\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-mahogany-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_cccaf693",
+          "label": "Pork Pie Percussion — USA Custom — Maple/Mahogany Hybrid 14x6.5 — 14x6.5",
+          "modelName": "Maple/Mahogany Hybrid 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-oak-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f23c9592",
+          "label": "Pork Pie Percussion — USA Custom — Maple/Oak Hybrid 14x7 — 14x7",
+          "modelName": "Maple/Oak Hybrid 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-rosewood-hybrid-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_09f93217",
+          "label": "Pork Pie Percussion — USA Custom — Maple/Rosewood Hybrid 14x7 — 14x7",
+          "modelName": "Maple/Rosewood Hybrid 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Rosewood\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9adeb665",
+          "label": "Pork Pie Percussion — USA Custom — Maple/Walnut Hybrid 14x6.5 — 14x6.5",
+          "modelName": "Maple/Walnut Hybrid 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 7,
+      "models": [
+        "7x14 Blue Fade Dip Snare",
+        "8x14 Maple Oak Black Lacquer",
+        "Maple Custom 12x5",
+        "Maple Custom 13x7",
+        "Maple Custom 14x5.5",
+        "Maple Custom 14x6.5",
+        "Maple Custom 14x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_7x14-blue-fade-dip-snare_14x7_ply_maple_blue-fade-dip_2-3mm-triple-flanged_45ec3cad",
+          "label": "Pork Pie Percussion — USA Custom — 7x14 Blue Fade Dip Snare — 14x7",
+          "modelName": "7x14 Blue Fade Dip Snare",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_8x14-maple-oak-black-lacquer_14x8_ply_maple_black-lacquer_2-3mm-triple-flanged_430251a8",
+          "label": "Pork Pie Percussion — USA Custom — 8x14 Maple Oak Black Lacquer — 14x8",
+          "modelName": "8x14 Maple Oak Black Lacquer",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-custom-12x5_12x5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_f36046b6",
+          "label": "Pork Pie Percussion — USA Custom — Maple Custom 12x5 — 12x5",
+          "modelName": "Maple Custom 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply / custom maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-custom-13x7_13x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_c4888b7b",
+          "label": "Pork Pie Percussion — USA Custom — Maple Custom 13x7 — 13x7",
+          "modelName": "Maple Custom 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply / custom maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-custom-14x5-5_14x5-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_9d9e5ebf",
+          "label": "Pork Pie Percussion — USA Custom — Maple Custom 14x5.5 — 14x5.5",
+          "modelName": "Maple Custom 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply / custom maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-custom-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_491d55ac",
+          "label": "Pork Pie Percussion — USA Custom — Maple Custom 14x6.5 — 14x6.5",
+          "modelName": "Maple Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply / custom maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-custom-14x7_14x7_ply_maple_custom-finish-varies_2-3mm-triple-flanged_3e92fb6b",
+          "label": "Pork Pie Percussion — USA Custom — Maple Custom 14x7 — 14x7",
+          "modelName": "Maple Custom 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply / custom maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Little Squealer",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+      "sourceConfidence": "Low",
+      "count": 5,
+      "models": [
+        "Little Squealer Black 5.5x13",
+        "Little Squealer Maple 13x7 Black",
+        "Little Squealer Maple 14x5.5",
+        "Little Squealer Maple 14x6.5",
+        "Little Squealer Porcaro Blue 13x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-black-5-5x13_13x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_9af528a9",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Black 5.5x13 — 13x5.5",
+          "modelName": "Little Squealer Black 5.5x13",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-maple-13x7-black_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fla_7d8d09ed",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Maple 13x7 Black — 13x7",
+          "modelName": "Little Squealer Maple 13x7 Black",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x5-5_14x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_f91bca59",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Maple 14x5.5 — 14x5.5",
+          "modelName": "Little Squealer Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-maple-14x6-5_14x6-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_0f8071b2",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Maple 14x6.5 — 14x6.5",
+          "modelName": "Little Squealer Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-porcaro-blue-13x7_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fl_0bebb6eb",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Porcaro Blue 13x7 — 13x7",
+          "modelName": "Little Squealer Porcaro Blue 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.guitarcenter.com/Pork-Pie/Snare-Drums.gc",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "7x14 African Mahogany",
+        "Mahogany Custom 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_7x14-african-mahogany_14x7_ply_mahogany_custom-lacquer-wrap-oil-varies_2-3mm-triple-flang_15cf3630",
+          "label": "Pork Pie Percussion — USA Custom — 7x14 African Mahogany — 14x7",
+          "modelName": "7x14 African Mahogany",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_mahogany-custom-14x6-5_14x6-5_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_4351c38f",
+          "label": "Pork Pie Percussion — USA Custom — Mahogany Custom 14x6.5 — 14x6.5",
+          "modelName": "Mahogany Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "7x14 Cherry Bubinga Snare",
+        "Cherry Custom 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_7x14-cherry-bubinga-snare_14x7_ply_cherry_custom-finish_2-3mm-triple-flanged_5c07431f",
+          "label": "Pork Pie Percussion — USA Custom — 7x14 Cherry Bubinga Snare — 14x7",
+          "modelName": "7x14 Cherry Bubinga Snare",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Bubinga\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_cherry-custom-14x6-5_14x6-5_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_ab6cf87c",
+          "label": "Pork Pie Percussion — USA Custom — Cherry Custom 14x6.5 — 14x6.5",
+          "modelName": "Cherry Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "7x14 Red Oak",
+        "Red Oak Custom 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_7x14-red-oak_14x7_ply_oak_custom-finish_2-3mm-triple-flanged_d2374272",
+          "label": "Pork Pie Percussion — USA Custom — 7x14 Red Oak — 14x7",
+          "modelName": "7x14 Red Oak",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_red-oak-custom-14x6-5_14x6-5_ply_oak_custom-finish-varies_2-3mm-triple-flanged_57b9d3dc",
+          "label": "Pork Pie Percussion — USA Custom — Red Oak Custom 14x6.5 — 14x6.5",
+          "modelName": "Red Oak Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Exotic Hardwood",
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Solid One-Piece Exotic 14x6.5",
+        "Stave Exotic Wood 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_solid-one-piece-exotic-14x6-5_14x6-5_solid-shell_exotic-hardwood_custom-finish-varies_2-3_0b902361",
+          "label": "Pork Pie Percussion — USA Custom — Solid One-Piece Exotic 14x6.5 — 14x6.5",
+          "modelName": "Solid One-Piece Exotic 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Exotic Hardwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"One-piece\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_usa-custom_stave-exotic-wood-14x6-5_14x6-5_stave_exotic-hardwood_custom-finish-varies_2-3mm-triple-f_564d4d7b",
+          "label": "Pork Pie Percussion — USA Custom — Stave Exotic Wood 14x6.5 — 14x6.5",
+          "modelName": "Stave Exotic Wood 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Stave\",\"shellMaterialPrimary\":\"Exotic Hardwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Little Squealer",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Little Squealer Black 12x5",
+        "Little Squealer Maple 12x5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-black-12x5_12x5_ply_maple_satin-lacquer-wrap-varies_triple-flanged-h_c3df49fb",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Black 12x5 — 12x5",
+          "modelName": "Little Squealer Black 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "pork-pie-percussion_little-squealer_little-squealer-maple-12x5_12x5_ply_maple_ebony-satin_triple-flanged-hoops_8f26b2dc",
+          "label": "Pork Pie Percussion — Little Squealer — Little Squealer Maple 12x5 — 12x5",
+          "modelName": "Little Squealer Maple 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Piglite / Acrylic",
+      "shellMaterial": "Acrylic",
+      "primarySourceUrl": "https://porkpiedrums.com/products/drums/acrylic/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Clear Piglite Snare",
+        "Red Piglite Snare"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_piglite-acrylic_clear-piglite-snare_14x6-5_acrylic_acrylic_clear-acrylic_triple-flanged-hoops_bbc6de46",
+          "label": "Pork Pie Percussion — Piglite / Acrylic — Clear Piglite Snare — 14x6.5",
+          "modelName": "Clear Piglite Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-wall acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/drums/acrylic/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pork-pie-percussion_piglite-acrylic_red-piglite-snare_14x6-5_acrylic_acrylic_red-acrylic_triple-flanged-hoops_11685027",
+          "label": "Pork Pie Percussion — Piglite / Acrylic — Red Piglite Snare — 14x6.5",
+          "modelName": "Red Piglite Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-wall acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/drums/acrylic/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Hybrid Metal-Wood",
+      "shellMaterial": "Copper",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "7x14 Copper Hammered Brass Hybrid Snare"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-copper-hammered-brass-hybrid-snare_14x7_ply_copper_copper-hammered_dff4a3c5",
+          "label": "Pork Pie Percussion — USA Custom / Hybrid Metal-Wood — 7x14 Copper Hammered Brass Hybrid Snare — 14x7",
+          "modelName": "7x14 Copper Hammered Brass Hybrid Snare",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Hammered Brass\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Hybrid Metal-Wood",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "7x14 Maple Copper"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-maple-copper_14x7_ply_maple_maple-copper_2-3mm-triple-flanged_cd1c86e8",
+          "label": "Pork Pie Percussion — USA Custom / Hybrid Metal-Wood — 7x14 Maple Copper — 14x7",
+          "modelName": "7x14 Maple Copper",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Copper\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Metal",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "8x14 Patina Brass"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom-metal_8x14-patina-brass_14x8_metal_brass_patina-brass_2-3mm-triple-flanged_50e8424e",
+          "label": "Pork Pie Percussion — USA Custom / Metal — 8x14 Patina Brass — 14x8",
+          "modelName": "8x14 Patina Brass",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Specialty",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/video/frankinpork/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Frankinpork 7x14 16-ply Maple/Rosewood"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom-specialty_frankinpork-7x14-16-ply-maple-rosewood_14x7_ply_maple_satin-oil_ef16518c",
+          "label": "Pork Pie Percussion — USA Custom / Specialty — Frankinpork 7x14 16-ply Maple/Rosewood — 14x7",
+          "modelName": "Frankinpork 7x14 16-ply Maple/Rosewood",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Rosewood\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/video/frankinpork/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Bubinga",
+      "primarySourceUrl": "https://www.musicarts.com/pork-pie-bubinga-gloss-snare-drum-main0539843",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Bubinga Gloss 14x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_bubinga-gloss-14x7_14x7_ply_bubinga_custom-finish-varies_2-3mm-triple-flanged_2421929e",
+          "label": "Pork Pie Percussion — USA Custom — Bubinga Gloss 14x7 — 14x7",
+          "modelName": "Bubinga Gloss 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Bubinga\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply bubinga\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.musicarts.com/pork-pie-bubinga-gloss-snare-drum-main0539843",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/PP6514-RZT--pork-pie-percussion-usa-maple-snare-drum-6.5-inch-by-14-inch-rosewood-zebrawood",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Rosewood/Zebrawood Veneer Maple 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_rosewood-zebrawood-veneer-maple-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple_68f5f5a5",
+          "label": "Pork Pie Percussion — USA Custom — Rosewood/Zebrawood Veneer Maple 14x6.5 — 14x6.5",
+          "modelName": "Rosewood/Zebrawood Veneer Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply maple with veneer\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/store/detail/PP6514-RZT--pork-pie-percussion-usa-maple-snare-drum-6.5-inch-by-14-inch-rosewood-zebrawood",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Metal",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://www.notsomoderndrummer.com/not-so-modern-drummer/columns/bob-campbell-every-drum-tells-a-story/a-brief-history-of-pork-pie-percussion-my-limited-heavy-brass-porkster-6-5-x-13-snare-drum",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Pig Iron 6.5x14"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom-metal_pig-iron-6-5x14_14x6-5_metal_steel_no_folded-over-bearing-edge_rolled-in-snare-beds_f1c286c3",
+          "label": "Pork Pie Percussion — USA Custom / Metal — Pig Iron 6.5x14 — 14x6.5",
+          "modelName": "Pig Iron 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.notsomoderndrummer.com/not-so-modern-drummer/columns/bob-campbell-every-drum-tells-a-story/a-brief-history-of-pork-pie-percussion-my-limited-heavy-brass-porkster-6-5-x-13-snare-drum",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Mahogany",
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "African Mahogany 13x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_african-mahogany-13x7_13x7_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_54a2d636",
+          "label": "Pork Pie Percussion — USA Custom — African Mahogany 13x7 — 13x7",
+          "modelName": "African Mahogany 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Cherry/Bubinga Hybrid 13x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_cherry-bubinga-hybrid-13x7_13x7_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_9d2cf3d3",
+          "label": "Pork Pie Percussion — USA Custom — Cherry/Bubinga Hybrid 13x7 — 13x7",
+          "modelName": "Cherry/Bubinga Hybrid 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Bubinga\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Red Oak 13x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_red-oak-13x7_13x7_ply_oak_custom-finish-varies_2-3mm-triple-flanged_300b5cd4",
+          "label": "Pork Pie Percussion — USA Custom — Red Oak 13x7 — 13x7",
+          "modelName": "Red Oak 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Wood",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Rosewood Custom 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_rosewood-custom-14x6-5_14x6-5_ply_wood_custom-finish-varies_2-3mm-triple-flanged_a905d62e",
+          "label": "Pork Pie Percussion — USA Custom — Rosewood Custom 14x6.5 — 14x6.5",
+          "modelName": "Rosewood Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Walnut 13x7"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_walnut-13x7_13x7_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_9110ea17",
+          "label": "Pork Pie Percussion — USA Custom — Walnut 13x7 — 13x7",
+          "modelName": "Walnut 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/history-of-pork-pie/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Walnut Custom 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_walnut-custom-14x6-5_14x6-5_ply_walnut_custom-finish-varies_2-3mm-triple-flanged_a0634067",
+          "label": "Pork Pie Percussion — USA Custom — Walnut Custom 14x6.5 — 14x6.5",
+          "modelName": "Walnut Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Piglite / Acrylic",
+      "shellMaterial": "Acrylic",
+      "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Amber Piglite Snare"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_piglite-acrylic_amber-piglite-snare_13x7_acrylic_acrylic_amber-acrylic_triple-flanged-hoops_d98788be",
+          "label": "Pork Pie Percussion — Piglite / Acrylic — Amber Piglite Snare — 13x7",
+          "modelName": "Amber Piglite Snare",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-wall acrylic\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://drummagazine.com/pork-pie-snare-drums-tested/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Pork Pie shell thickness AND bearing edge by line/material/configuration. No Firestore writes."
+}
