@@ -21,6 +21,12 @@ const {
 
   HOOP_EFFECTS,
 
+  BATTER_HEAD_EFFECTS,
+
+  RESO_HEAD_EFFECTS,
+
+  SNARE_WIRE_EFFECTS,
+
   SNARE_BED_EFFECTS,
 
   makeProfile
@@ -743,6 +749,48 @@ const scoreSnareVoice = record => {
 
   });
 
+  addEffect({
+
+    score,
+
+    effect: BATTER_HEAD_EFFECTS[input.families.batterHead],
+
+    weight: COMPONENT_WEIGHTS.batterHead,
+
+    source: `batterHead:${input.families.batterHead}`,
+
+    drivers
+
+  });
+
+  addEffect({
+
+    score,
+
+    effect: RESO_HEAD_EFFECTS[input.families.resoHead],
+
+    weight: COMPONENT_WEIGHTS.resoHead,
+
+    source: `resoHead:${input.families.resoHead}`,
+
+    drivers
+
+  });
+
+  addEffect({
+
+    score,
+
+    effect: SNARE_WIRE_EFFECTS[input.families.snareWires],
+
+    weight: COMPONENT_WEIGHTS.stockSnareWires,
+
+    source: `snareWires:${input.families.snareWires}`,
+
+    drivers
+
+  });
+
   const voiceProfile = Object.fromEntries(
 
     SNARE_NODE_KEYS.map(key => [key, clampScore(score[key])])
@@ -766,6 +814,8 @@ const scoreSnareVoice = record => {
     numeric: input.numeric,
 
     families: input.families,
+
+    fallbackAssumptions: input.fallbackAssumptions || {},
 
     voiceProfile,
 

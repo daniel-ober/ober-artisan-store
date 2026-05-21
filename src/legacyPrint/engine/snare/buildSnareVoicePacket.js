@@ -175,6 +175,8 @@ const buildSnareVoicePacket = (rawRecord, options = {}) => {
 
     },
 
+    fallbackAssumptions: scoredRecordForReadouts.fallbackAssumptions || {},
+
     calibration,
 
     doctrine: calibratedScore.doctrine,
@@ -187,7 +189,9 @@ const buildSnareVoicePacket = (rawRecord, options = {}) => {
 
         topNodes: baseScore.topNodes,
 
-        confidence: baseScore.confidence
+        confidence: baseScore.confidence,
+
+        fallbackAssumptions: baseScore.fallbackAssumptions || {}
 
       }
 

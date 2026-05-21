@@ -355,6 +355,116 @@ const groupSnareBed = value => {
 
 };
 
+const getShellFamily = value => {
+
+  const family = groupShellMaterial(value);
+
+  return family;
+
+};
+
+const getDefaultBearingEdgeFamily = ({ shellMaterial, shellConstruction }) => {
+
+  const materialFamily = getShellFamily(shellMaterial);
+
+  const constructionFamily = groupShellConstruction(shellConstruction);
+
+  if (
+
+    ['bellBrass', 'brass', 'bronze', 'copper', 'steel', 'stainlessSteel', 'aluminum', 'titanium'].includes(materialFamily) ||
+
+    String(constructionFamily || '').includes('metal')
+
+  ) {
+
+    return 'rolledCollar';
+
+  }
+
+  return 'sharper45Degree';
+
+};
+
+const getDefaultHoopFamily = ({ company }) => {
+
+  const brand = normalizeText(company);
+
+  if (brand.includes('gretsch')) return 'gretsch302';
+
+  return 'tripleFlanged';
+
+};
+
+const getDefaultSnareBedFamily = ({ shellMaterial, shellConstruction }) => {
+
+  const materialFamily = getShellFamily(shellMaterial);
+
+  const constructionFamily = groupShellConstruction(shellConstruction);
+
+  if (
+
+    ['bellBrass', 'brass', 'bronze', 'copper', 'steel', 'stainlessSteel', 'aluminum', 'titanium'].includes(materialFamily) ||
+
+    String(constructionFamily || '').includes('metal')
+
+  ) {
+
+    return 'minimalSnareBed';
+
+  }
+
+  return 'mediumSnareBed';
+
+};
+
+const groupBatterHead = value => {
+
+  const text = normalizeText(value);
+
+  if (!text) return 'defaultCoatedSinglePlyBatter';
+
+  if (text.includes('controlled sound') || text.includes('cs ')) return 'controlledDotBatter';
+
+  if (text.includes('emperor') || text.includes('g2')) return 'coatedTwoPlyBatter';
+
+  if (text.includes('ambassador') || text.includes('g1') || text.includes('single')) return 'coatedSinglePlyBatter';
+
+  if (text.includes('clear')) return 'clearSinglePlyBatter';
+
+  return 'defaultCoatedSinglePlyBatter';
+
+};
+
+const groupResoHead = value => {
+
+  const text = normalizeText(value);
+
+  if (!text) return 'defaultClearSnareSideReso';
+
+  if (text.includes('hazy') || text.includes('snare side') || text.includes('ambassador')) return 'clearSnareSideReso';
+
+  return 'defaultClearSnareSideReso';
+
+};
+
+const groupSnareWires = value => {
+
+  const text = normalizeText(value);
+
+  if (!text) return 'defaultTwentyStrandSteelWires';
+
+  if (text.includes('42')) return 'wideFortyTwoStrandWires';
+
+  if (text.includes('30')) return 'wideThirtyStrandWires';
+
+  if (text.includes('20')) return 'twentyStrandSteelWires';
+
+  if (text.includes('brass')) return 'brassSnareWires';
+
+  return 'defaultTwentyStrandSteelWires';
+
+};
+
 const adaptSnareReferenceRecord = row => {
 
   const shellMaterial = firstValue(row, ['shellMaterial1', 'shellMaterial', 'material']);
@@ -379,6 +489,44 @@ const adaptSnareReferenceRecord = row => {
 
   const snareBed = firstValue(row, ['snareBed', 'snareBedType']);
 
+  const stockBatterHead = firstValue(row, [
+
+    'stockBatterHead',
+
+    'stockBatter',
+
+    'batterHead',
+
+    'batter',
+
+    'headBatter'
+
+  ]);
+
+  const stockResoHead = firstValue(row, [
+
+    'stockResoHead',
+
+    'stockResonantHead',
+
+    'resoHead',
+
+    'resonantHead',
+
+    'snareSideHead'
+
+  ]);
+
+  const stockSnareWires = firstValue(row, [
+
+    'stockSnareWires',
+
+    'snareWires',
+
+    'wires'
+
+  ]);
+
   const diameter = firstValue(row, ['diameter', 'diameterInches']);
 
   const depth = firstValue(row, ['depth', 'depthInches']);
@@ -386,6 +534,24 @@ const adaptSnareReferenceRecord = row => {
   const shellThickness = firstValue(row, ['shellThicknessMm', 'shellThickness', 'thicknessMm']);
 
   const lugCount = firstValue(row, ['lugCount', 'lugs']);
+
+  const bearingEdgeFamily = hasMeaningfulValue(bearingEdge)
+
+    ? groupBearingEdge(bearingEdge)
+
+    : getDefaultBearingEdgeFamily({ shellMaterial, shellConstruction });
+
+  const hoopFamily = hasMeaningfulValue(hoopType)
+
+    ? groupHoop(hoopType)
+
+    : getDefaultHoopFamily({ company: firstValue(row, ['companyName', 'company', 'brand']) });
+
+  const snareBedFamily = hasMeaningfulValue(snareBed)
+
+    ? groupSnareBed(snareBed)
+
+    : getDefaultSnareBedFamily({ shellMaterial, shellConstruction });
 
   return {
 
@@ -412,6 +578,12 @@ const adaptSnareReferenceRecord = row => {
       hoopType: hoopType || '',
 
       snareBed: snareBed || '',
+
+      stockBatterHead: stockBatterHead || '',
+
+      stockResoHead: stockResoHead || '',
+
+      stockSnareWires: stockSnareWires || '',
 
       diameter: diameter || '',
 
@@ -441,11 +613,51 @@ const adaptSnareReferenceRecord = row => {
 
       shellConstruction: groupShellConstruction(shellConstruction),
 
-      bearingEdge: groupBearingEdge(bearingEdge),
+      bearingEdge: bearingEdgeFamily,
 
-      hoopType: groupHoop(hoopType),
+      hoopType: hoopFamily,
 
-      snareBed: groupSnareBed(snareBed)
+      snareBed: snareBedFamily,
+
+      batterHead: groupBatterHead(stockBatterHead),
+
+      resoHead: groupResoHead(stockResoHead),
+
+      snareWires: groupSnareWires(stockSnareWires)
+
+    },
+
+    fallbackAssumptions: {
+
+      bearingEdgeFallbackApplied: !hasMeaningfulValue(bearingEdge),
+
+      bearingEdgeFallbackReason: !hasMeaningfulValue(bearingEdge)
+
+        ? 'No source-confirmed bearing edge was available for this reference record.'
+
+        : '',
+
+      hoopFallbackApplied: !hasMeaningfulValue(hoopType),
+
+      hoopFallbackReason: !hasMeaningfulValue(hoopType)
+
+        ? 'No source-confirmed hoop type was available for this reference record.'
+
+        : '',
+
+      snareBedFallbackApplied: !hasMeaningfulValue(snareBed),
+
+      snareBedFallbackReason: !hasMeaningfulValue(snareBed)
+
+        ? 'No source-confirmed snare bed was available for this reference record.'
+
+        : '',
+
+      batterHeadFallbackApplied: !hasMeaningfulValue(stockBatterHead),
+
+      resoHeadFallbackApplied: !hasMeaningfulValue(stockResoHead),
+
+      snareWireFallbackApplied: !hasMeaningfulValue(stockSnareWires)
 
     }
 
@@ -472,6 +684,12 @@ module.exports = {
   groupHoop,
 
   groupSnareBed,
+
+  groupBatterHead,
+
+  groupResoHead,
+
+  groupSnareWires,
 
   adaptSnareReferenceRecord
 
