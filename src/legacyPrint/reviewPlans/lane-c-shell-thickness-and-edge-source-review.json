@@ -1,5 +1,6 @@
 {
-  "generatedAt": "2026-05-21T08:14:21.614Z",
+  "generatedAt": "2026-05-21T08:15:48.986Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/lane-c-missing-thickness-and-edge-review-queue.json",
   "sourcePacketFiles": [
     "src/legacyPrint/reviewPlans/lane-c-dw-pdp-shell-thickness-and-edge-review-packet.json",
     "src/legacyPrint/reviewPlans/lane-c-brady-shell-thickness-and-edge-review-packet.json",
@@ -15,12 +16,18 @@
   ],
   "status": "LANE_C_SHELL_THICKNESS_AND_EDGE_SOURCE_REVIEW_NO_FIRESTORE_WRITES",
   "summary": {
+    "laneCCandidateCount": 750,
+    "laneCGroupCount": 374,
     "reviewedCandidateCount": 750,
     "reviewedGroupCount": 374,
     "sourceConfirmedBothFieldsCandidateCount": 0,
     "sourceConfirmedBothFieldsGroupCount": 0,
     "blockedCandidateCount": 750,
     "blockedGroupCount": 374,
+    "candidateCountMatchesLaneC": true,
+    "groupCountMatchesLaneC": true,
+    "allReviewedRecordsBlocked": true,
+    "allReviewedGroupsBlocked": true,
     "packetCount": 11,
     "reviewConclusion": "Lane C records remain blocked until shell thickness and bearing edge are both explicitly confirmed by source, or until a controlled company/material-specific fallback policy is approved."
   },
