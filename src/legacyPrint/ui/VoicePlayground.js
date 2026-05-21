@@ -920,8 +920,6 @@ function ReferencePanel({
 
   const [materialFilter, setMaterialFilter] = useState('all');
 
-  const [constructionFilter, setConstructionFilter] = useState('all');
-
   const [modelFilter, setModelFilter] = useState('');
 
   const brandOptions = useMemo(() => {
@@ -971,33 +969,6 @@ function ReferencePanel({
     ).sort((a, b) => a.localeCompare(b));
 
   }, [filteredByBrand]);
-
-  const constructionOptions = useMemo(() => {
-
-    return Array.from(
-
-      new Set(
-
-        filteredByBrand
-
-          .filter((reference) => {
-
-            if (materialFilter === 'all') return true;
-
-            return (reference.shellMaterial || '') === materialFilter;
-
-          })
-
-          .map((reference) => reference.shellConstruction || '')
-
-          .filter(Boolean)
-
-      )
-
-    ).sort((a, b) => a.localeCompare(b));
-
-  }, [filteredByBrand, materialFilter]);
-
   const normalizedModelFilter = String(modelFilter || '').trim().toLowerCase();
 
   const filteredReferenceOptions = referenceOptions
@@ -1008,13 +979,9 @@ function ReferencePanel({
 
       const material = reference.shellMaterial || '';
 
-      const construction = reference.shellConstruction || '';
-
       if (brandFilter !== 'all' && company !== brandFilter) return false;
 
       if (materialFilter !== 'all' && material !== materialFilter) return false;
-
-      if (constructionFilter !== 'all' && construction !== constructionFilter) return false;
 
       if (!normalizedModelFilter) return true;
 
@@ -1056,8 +1023,6 @@ function ReferencePanel({
 
     setMaterialFilter('all');
 
-    setConstructionFilter('all');
-
     setModelFilter('');
 
   };
@@ -1077,8 +1042,6 @@ function ReferencePanel({
           setBrandFilter(event.target.value);
 
           setMaterialFilter('all');
-
-          setConstructionFilter('all');
 
         }}
 
@@ -1104,13 +1067,7 @@ function ReferencePanel({
 
         value={materialFilter}
 
-        onChange={(event) => {
-
-          setMaterialFilter(event.target.value);
-
-          setConstructionFilter('all');
-
-        }}
+        onChange={(event) => setMaterialFilter(event.target.value)}
 
       >
 
@@ -1127,31 +1084,6 @@ function ReferencePanel({
         ))}
 
       </select>
-
-      <select
-
-        className="vp-search-input"
-
-        value={constructionFilter}
-
-        onChange={(event) => setConstructionFilter(event.target.value)}
-
-      >
-
-        <option value="all">All constructions</option>
-
-        {constructionOptions.map((construction) => (
-
-          <option key={construction} value={construction}>
-
-            {construction}
-
-          </option>
-
-        ))}
-
-      </select>
-
       <input
 
         className="vp-search-input"
