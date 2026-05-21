@@ -1,0 +1,28 @@
+{
+  "status": "YAMAHA_ABSOLUTE_HYBRID_MAPLE_EXACT_STOCK_HEADS_WRITE_COMPLETE",
+  "generatedAt": "2026-05-21T09:51:58.065Z",
+  "planFile": "src/legacyPrint/reviewPlans/yamaha-absolute-hybrid-maple-exact-stock-head-write-plan.json",
+  "collectionName": "snareReferenceDrums",
+  "approvalEnv": "LEGACYPRINT_APPROVE_FIRESTORE_WRITE=YAMAHA_ABSOLUTE_HYBRID_MAPLE_EXACT_STOCK_HEADS_1",
+  "actualWriteCount": 1,
+  "firestoreWrites": 1,
+  "records": [
+    {
+      "id": "yamaha_absolute-hybrid-maple_absolute-hybrid-maple-14x6_14x6_ply_maple_wenge_maple_6-2_45-degree-r1-5_vintage-natural-la_7d03d57c",
+      "label": "Yamaha — Absolute Hybrid Maple — Absolute Hybrid Maple 14x6 — 14x6",
+      "updateKeys": [
+        "stockBatterHead",
+        "stockResoHead",
+        "stockHeadSourceUrl",
+        "stockHeadSourceConfidence",
+        "stockHeadReviewStatus",
+        "stockHeadNeedsVerification",
+        "engineAssumptions",
+        "legacyPrintReviewUpdateType",
+        "legacyPrintReviewSourcePlan"
+      ],
+      "stockBatterHead": "Remo Coated Ambassador",
+      "stockResoHead": "Remo Hazy Ambassador snare side"
+    }
+  ]
+}
