@@ -1,6 +1,6 @@
 {
   "status": "SNARE_ENGINE_PREVIEW_V01_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T10:39:51.158Z",
+  "generatedAt": "2026-05-21T10:45:27.006Z",
   "firestoreWrites": 0,
   "engineVersion": "legacyprint-snare-engine-v0.1",
   "doctrine": {
@@ -17,7 +17,7 @@
     "firestoreScoringWritesAllowed": false
   },
   "promotedRecordsScored": 366,
-  "projectionTop3Count": 119,
+  "projectionTop3Count": 118,
   "nodeStats": {
     "attack": {
       "min": 5.69,
@@ -36,7 +36,7 @@
     },
     "sustain": {
       "min": 4.97,
-      "avg": 6.45,
+      "avg": 6.46,
       "max": 7.45
     },
     "warmth": {
@@ -57,9 +57,9 @@
   },
   "topNodeCounts": {
     "attack": 337,
-    "sustain": 216,
-    "brightness": 149,
-    "projection": 119,
+    "sustain": 218,
+    "brightness": 148,
+    "projection": 118,
     "control": 105,
     "sensitivity": 96,
     "warmth": 76
@@ -72,12 +72,12 @@
         "attack": 7.03,
         "brightness": 6.5,
         "projection": 6.46,
-        "sustain": 6.79,
+        "sustain": 6.86,
         "warmth": 5.75,
         "sensitivity": 5.78,
         "control": 5.87
       },
-      "topNodes": "attack 7.03, sustain 6.79, brightness 6.5"
+      "topNodes": "attack 7.03, sustain 6.86, brightness 6.5"
     },
     {
       "group": "steel",
@@ -340,12 +340,12 @@
         "attack": 7.05,
         "brightness": 6.64,
         "projection": 6.42,
-        "sustain": 6.54,
+        "sustain": 6.57,
         "warmth": 5.32,
         "sensitivity": 5.88,
         "control": 6.01
       },
-      "topNodes": "attack 7.05, brightness 6.64, sustain 6.54"
+      "topNodes": "attack 7.05, brightness 6.64, sustain 6.57"
     },
     {
       "group": "ply",
@@ -424,12 +424,12 @@
         "attack": 6.79,
         "brightness": 6.13,
         "projection": 6.31,
-        "sustain": 6.33,
+        "sustain": 6.37,
         "warmth": 5.71,
         "sensitivity": 5.88,
         "control": 6.45
       },
-      "topNodes": "attack 6.79, control 6.45, sustain 6.33"
+      "topNodes": "attack 6.79, control 6.45, sustain 6.37"
     }
   ],
   "byHoop": [
@@ -440,12 +440,12 @@
         "attack": 6.75,
         "brightness": 6.29,
         "projection": 6.2,
-        "sustain": 6.58,
+        "sustain": 6.6,
         "warmth": 5.77,
         "sensitivity": 6.11,
         "control": 5.81
       },
-      "topNodes": "attack 6.75, sustain 6.58, brightness 6.29"
+      "topNodes": "attack 6.75, sustain 6.6, brightness 6.29"
     },
     {
       "group": "dieCast",
@@ -454,7 +454,7 @@
         "attack": 7.11,
         "brightness": 6.24,
         "projection": 6.33,
-        "sustain": 6.1,
+        "sustain": 6.11,
         "warmth": 5.69,
         "sensitivity": 5.89,
         "control": 6.56
@@ -468,12 +468,12 @@
         "attack": 7.19,
         "brightness": 6.44,
         "projection": 6.61,
-        "sustain": 6.88,
+        "sustain": 6.91,
         "warmth": 6.06,
         "sensitivity": 5.9,
         "control": 6.32
       },
-      "topNodes": "attack 7.19, sustain 6.88, projection 6.61"
+      "topNodes": "attack 7.19, sustain 6.91, projection 6.61"
     },
     {
       "group": "otherHoop",
@@ -482,12 +482,12 @@
         "attack": 6.84,
         "brightness": 6.49,
         "projection": 6.25,
-        "sustain": 6.47,
+        "sustain": 6.49,
         "warmth": 5.35,
         "sensitivity": 6.01,
         "control": 5.73
       },
-      "topNodes": "attack 6.84, brightness 6.49, sustain 6.47"
+      "topNodes": "attack 6.84, brightness 6.49, sustain 6.49"
     },
     {
       "group": "tamaGroovedHoop",
@@ -524,12 +524,12 @@
         "attack": 6.33,
         "brightness": 5.79,
         "projection": 6.14,
-        "sustain": 7.05,
+        "sustain": 7.12,
         "warmth": 6.95,
         "sensitivity": 6.03,
         "control": 5.32
       },
-      "topNodes": "sustain 7.05, warmth 6.95, attack 6.33"
+      "topNodes": "sustain 7.12, warmth 6.95, attack 6.33"
     }
   ],
   "bySize": [
@@ -540,12 +540,12 @@
         "attack": 6.8,
         "brightness": 6.12,
         "projection": 6.3,
-        "sustain": 6.42,
+        "sustain": 6.44,
         "warmth": 5.91,
         "sensitivity": 5.94,
         "control": 6.11
       },
-      "topNodes": "attack 6.8, sustain 6.42, projection 6.3"
+      "topNodes": "attack 6.8, sustain 6.44, projection 6.3"
     },
     {
       "group": "14x5",
@@ -554,12 +554,12 @@
         "attack": 6.99,
         "brightness": 6.29,
         "projection": 6.19,
-        "sustain": 6.26,
+        "sustain": 6.28,
         "warmth": 5.59,
         "sensitivity": 6.05,
         "control": 6.2
       },
-      "topNodes": "attack 6.99, brightness 6.29, sustain 6.26"
+      "topNodes": "attack 6.99, brightness 6.29, sustain 6.28"
     },
     {
       "group": "14x5.5",
@@ -568,12 +568,12 @@
         "attack": 6.74,
         "brightness": 6.19,
         "projection": 6.11,
-        "sustain": 6.38,
+        "sustain": 6.39,
         "warmth": 5.79,
         "sensitivity": 6.13,
         "control": 5.95
       },
-      "topNodes": "attack 6.74, sustain 6.38, brightness 6.19"
+      "topNodes": "attack 6.74, sustain 6.39, brightness 6.19"
     },
     {
       "group": "14x6",
@@ -582,12 +582,12 @@
         "attack": 7.07,
         "brightness": 6.31,
         "projection": 6.6,
-        "sustain": 6.65,
+        "sustain": 6.67,
         "warmth": 5.99,
         "sensitivity": 5.81,
         "control": 6.38
       },
-      "topNodes": "attack 7.07, sustain 6.65, projection 6.6"
+      "topNodes": "attack 7.07, sustain 6.67, projection 6.6"
     },
     {
       "group": "14x8",
@@ -596,12 +596,12 @@
         "attack": 6.73,
         "brightness": 6.14,
         "projection": 6.41,
-        "sustain": 6.74,
+        "sustain": 6.76,
         "warmth": 6.14,
         "sensitivity": 5.86,
         "control": 5.98
       },
-      "topNodes": "sustain 6.74, attack 6.73, projection 6.41"
+      "topNodes": "sustain 6.76, attack 6.73, projection 6.41"
     },
     {
       "group": "13x6",
@@ -610,12 +610,12 @@
         "attack": 7.18,
         "brightness": 6.55,
         "projection": 6.54,
-        "sustain": 6.83,
+        "sustain": 6.86,
         "warmth": 5.88,
         "sensitivity": 5.93,
         "control": 6.18
       },
-      "topNodes": "attack 7.18, sustain 6.83, brightness 6.55"
+      "topNodes": "attack 7.18, sustain 6.86, brightness 6.55"
     },
     {
       "group": "13x7",
@@ -624,12 +624,12 @@
         "attack": 7.07,
         "brightness": 6.48,
         "projection": 6.36,
-        "sustain": 6.57,
+        "sustain": 6.59,
         "warmth": 5.63,
         "sensitivity": 6.13,
         "control": 6.09
       },
-      "topNodes": "attack 7.07, sustain 6.57, brightness 6.48"
+      "topNodes": "attack 7.07, sustain 6.59, brightness 6.48"
     },
     {
       "group": "14x3.5",
@@ -638,7 +638,7 @@
         "attack": 7.29,
         "brightness": 6.77,
         "projection": 6.2,
-        "sustain": 6.12,
+        "sustain": 6.15,
         "warmth": 5.02,
         "sensitivity": 5.96,
         "control": 6.27
@@ -652,12 +652,12 @@
         "attack": 7.24,
         "brightness": 6.59,
         "projection": 6.42,
-        "sustain": 6.51,
+        "sustain": 6.53,
         "warmth": 5.59,
         "sensitivity": 5.91,
         "control": 6.26
       },
-      "topNodes": "attack 7.24, brightness 6.59, sustain 6.51"
+      "topNodes": "attack 7.24, brightness 6.59, sustain 6.53"
     },
     {
       "group": "14x5.75",
@@ -666,12 +666,12 @@
         "attack": 6.88,
         "brightness": 6.22,
         "projection": 6.09,
-        "sustain": 6.42,
+        "sustain": 6.43,
         "warmth": 5.63,
         "sensitivity": 6.46,
         "control": 5.87
       },
-      "topNodes": "attack 6.88, sensitivity 6.46, sustain 6.42"
+      "topNodes": "attack 6.88, sensitivity 6.46, sustain 6.43"
     },
     {
       "group": "14x7",
@@ -694,12 +694,12 @@
         "attack": 7.26,
         "brightness": 7.09,
         "projection": 6.11,
-        "sustain": 6.39,
+        "sustain": 6.41,
         "warmth": 4.72,
         "sensitivity": 6.26,
         "control": 5.93
       },
-      "topNodes": "attack 7.26, brightness 7.09, sustain 6.39"
+      "topNodes": "attack 7.26, brightness 7.09, sustain 6.41"
     },
     {
       "group": "12x5",
@@ -722,12 +722,12 @@
         "attack": 7.3,
         "brightness": 7.01,
         "projection": 6.25,
-        "sustain": 6.3,
+        "sustain": 6.33,
         "warmth": 4.7,
         "sensitivity": 6.09,
         "control": 6.02
       },
-      "topNodes": "attack 7.3, brightness 7.01, sustain 6.3"
+      "topNodes": "attack 7.3, brightness 7.01, sustain 6.33"
     },
     {
       "group": "13x3.5",
@@ -736,7 +736,7 @@
         "attack": 7.47,
         "brightness": 7.04,
         "projection": 6.16,
-        "sustain": 6.08,
+        "sustain": 6.12,
         "warmth": 4.65,
         "sensitivity": 6.1,
         "control": 6.2
@@ -4243,7 +4243,7 @@
         "attack": 7.2,
         "brightness": 6.58,
         "projection": 6.46,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.69,
         "sensitivity": 5.83,
         "control": 6.16
@@ -4255,7 +4255,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "brightness",
@@ -4417,7 +4417,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -4605,7 +4605,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -4697,7 +4697,7 @@
         "attack": 7.17,
         "brightness": 6.56,
         "projection": 6.46,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.69,
         "sensitivity": 5.88,
         "control": 6.12
@@ -4709,7 +4709,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "brightness",
@@ -4859,7 +4859,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -5035,7 +5035,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -5123,7 +5123,7 @@
         "attack": 7.27,
         "brightness": 6.61,
         "projection": 6.34,
-        "sustain": 6.52,
+        "sustain": 6.58,
         "warmth": 5.47,
         "sensitivity": 5.94,
         "control": 6.24
@@ -5139,7 +5139,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.52
+          "value": 6.58
         }
       ],
       "confidence": {
@@ -5285,7 +5285,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -5461,7 +5461,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -5549,7 +5549,7 @@
         "attack": 7.09,
         "brightness": 6.47,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.69,
         "control": 6.13
@@ -5561,7 +5561,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -5717,7 +5717,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -5905,7 +5905,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -5997,7 +5997,7 @@
         "attack": 7.06,
         "brightness": 6.45,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.74,
         "control": 6.09
@@ -6009,7 +6009,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -6153,7 +6153,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -6329,7 +6329,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -6417,7 +6417,7 @@
         "attack": 7.3,
         "brightness": 6.62,
         "projection": 6.34,
-        "sustain": 6.52,
+        "sustain": 6.58,
         "warmth": 5.47,
         "sensitivity": 5.89,
         "control": 6.27
@@ -6433,7 +6433,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.52
+          "value": 6.58
         }
       ],
       "confidence": {
@@ -6591,7 +6591,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -6779,7 +6779,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -6871,7 +6871,7 @@
         "attack": 7.2,
         "brightness": 6.58,
         "projection": 6.46,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.69,
         "sensitivity": 5.83,
         "control": 6.16
@@ -6883,7 +6883,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "brightness",
@@ -7045,7 +7045,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -7233,7 +7233,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -7325,7 +7325,7 @@
         "attack": 7.09,
         "brightness": 6.47,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.69,
         "control": 6.13
@@ -7337,7 +7337,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -7493,7 +7493,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -7681,7 +7681,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -7773,7 +7773,7 @@
         "attack": 7.17,
         "brightness": 6.56,
         "projection": 6.46,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.69,
         "sensitivity": 5.88,
         "control": 6.12
@@ -7785,7 +7785,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "brightness",
@@ -7935,7 +7935,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -8111,7 +8111,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -8199,7 +8199,7 @@
         "attack": 7.06,
         "brightness": 6.45,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.74,
         "control": 6.09
@@ -8211,7 +8211,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -8355,7 +8355,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -8531,7 +8531,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -8619,7 +8619,7 @@
         "attack": 7.06,
         "brightness": 6.45,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.74,
         "control": 6.09
@@ -8631,7 +8631,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -8775,7 +8775,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -8951,7 +8951,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -11667,7 +11667,7 @@
         "attack": 7.17,
         "brightness": 6.56,
         "projection": 6.46,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.69,
         "sensitivity": 5.88,
         "control": 6.12
@@ -11679,7 +11679,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "brightness",
@@ -11829,7 +11829,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -12005,7 +12005,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -12093,7 +12093,7 @@
         "attack": 7.06,
         "brightness": 6.45,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.74,
         "control": 6.09
@@ -12105,7 +12105,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -12249,7 +12249,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -12425,7 +12425,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -12513,7 +12513,7 @@
         "attack": 7.2,
         "brightness": 6.58,
         "projection": 6.46,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.69,
         "sensitivity": 5.83,
         "control": 6.16
@@ -12525,7 +12525,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "brightness",
@@ -12687,7 +12687,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -12875,7 +12875,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -12967,7 +12967,7 @@
         "attack": 7.06,
         "brightness": 6.45,
         "projection": 6.57,
-        "sustain": 6.86,
+        "sustain": 6.93,
         "warmth": 5.84,
         "sensitivity": 5.74,
         "control": 6.09
@@ -12979,7 +12979,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.86
+          "value": 6.93
         },
         {
           "key": "projection",
@@ -13123,7 +13123,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -13299,7 +13299,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -20185,7 +20185,7 @@
         "attack": 6.95,
         "brightness": 6.39,
         "projection": 6.71,
-        "sustain": 6.76,
+        "sustain": 6.82,
         "warmth": 5.85,
         "sensitivity": 5.43,
         "control": 5.75
@@ -20197,7 +20197,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.76
+          "value": 6.82
         },
         {
           "key": "projection",
@@ -20314,7 +20314,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -20454,7 +20454,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -21234,7 +21234,7 @@
         "attack": 6.37,
         "brightness": 5.83,
         "projection": 6.07,
-        "sustain": 6.97,
+        "sustain": 7.03,
         "warmth": 6.85,
         "sensitivity": 6.08,
         "control": 5.35
@@ -21242,7 +21242,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 6.97
+          "value": 7.03
         },
         {
           "key": "warmth",
@@ -21372,7 +21372,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -21530,7 +21530,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:solidShell",
@@ -21606,7 +21606,7 @@
         "attack": 6.3,
         "brightness": 5.76,
         "projection": 6.22,
-        "sustain": 7.14,
+        "sustain": 7.2,
         "warmth": 7.05,
         "sensitivity": 5.98,
         "control": 5.3
@@ -21614,7 +21614,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.14
+          "value": 7.2
         },
         {
           "key": "warmth",
@@ -21744,7 +21744,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -21902,7 +21902,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:solidShell",
@@ -27494,7 +27494,7 @@
         "attack": 7.14,
         "brightness": 6.66,
         "projection": 6.22,
-        "sustain": 6.55,
+        "sustain": 6.61,
         "warmth": 5.43,
         "sensitivity": 5.98,
         "control": 5.83
@@ -27510,7 +27510,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.55
+          "value": 6.61
         }
       ],
       "confidence": {
@@ -27662,7 +27662,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -27856,7 +27856,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -27948,7 +27948,7 @@
         "attack": 7.07,
         "brightness": 6.55,
         "projection": 6.47,
-        "sustain": 6.91,
+        "sustain": 6.97,
         "warmth": 5.72,
         "sensitivity": 5.87,
         "control": 5.73
@@ -27960,7 +27960,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.91
+          "value": 6.97
         },
         {
           "key": "brightness",
@@ -28104,7 +28104,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -28286,7 +28286,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -28366,7 +28366,7 @@
         "attack": 6.92,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.82,
         "control": 5.68
@@ -28378,7 +28378,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -28528,7 +28528,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -28722,7 +28722,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -28806,7 +28806,7 @@
         "attack": 6.84,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.72,
         "control": 5.64
@@ -28814,7 +28814,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -28968,7 +28968,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -29162,7 +29162,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -29246,7 +29246,7 @@
         "attack": 6.76,
         "brightness": 6.38,
         "projection": 6.61,
-        "sustain": 7.16,
+        "sustain": 7.23,
         "warmth": 6.11,
         "sensitivity": 5.65,
         "control": 5.6
@@ -29254,7 +29254,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.16
+          "value": 7.23
         },
         {
           "key": "attack",
@@ -29414,7 +29414,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -29608,7 +29608,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -29700,7 +29700,7 @@
         "attack": 7.07,
         "brightness": 6.55,
         "projection": 6.47,
-        "sustain": 6.91,
+        "sustain": 6.97,
         "warmth": 5.72,
         "sensitivity": 5.87,
         "control": 5.73
@@ -29712,7 +29712,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.91
+          "value": 6.97
         },
         {
           "key": "brightness",
@@ -29856,7 +29856,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -30038,7 +30038,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -31452,7 +31452,7 @@
         "attack": 7.58,
         "brightness": 6.82,
         "projection": 6.39,
-        "sustain": 6.13,
+        "sustain": 6.2,
         "warmth": 5.2,
         "sensitivity": 5.74,
         "control": 6.53
@@ -31614,7 +31614,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -31796,7 +31796,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -31876,7 +31876,7 @@
         "attack": 6.92,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.82,
         "control": 5.68
@@ -31888,7 +31888,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -32038,7 +32038,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -32232,7 +32232,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -32316,7 +32316,7 @@
         "attack": 6.84,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.72,
         "control": 5.64
@@ -32324,7 +32324,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -32478,7 +32478,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -32672,7 +32672,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -37398,7 +37398,7 @@
         "attack": 6.92,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.82,
         "control": 5.68
@@ -37410,7 +37410,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -37560,7 +37560,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -37754,7 +37754,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -37838,7 +37838,7 @@
         "attack": 6.84,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.72,
         "control": 5.64
@@ -37846,7 +37846,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -38000,7 +38000,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -38194,7 +38194,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -38278,7 +38278,7 @@
         "attack": 6.9,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.8,
         "control": 5.67
@@ -38290,7 +38290,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -38434,7 +38434,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -38616,7 +38616,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -38696,7 +38696,7 @@
         "attack": 6.82,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.7,
         "control": 5.62
@@ -38704,7 +38704,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -38852,7 +38852,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -39034,7 +39034,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -42872,7 +42872,7 @@
         "attack": 7.12,
         "brightness": 6.66,
         "projection": 6.22,
-        "sustain": 6.55,
+        "sustain": 6.61,
         "warmth": 5.43,
         "sensitivity": 5.96,
         "control": 5.82
@@ -42888,7 +42888,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.55
+          "value": 6.61
         }
       ],
       "confidence": {
@@ -43034,7 +43034,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -43216,7 +43216,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -43296,7 +43296,7 @@
         "attack": 6.9,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.8,
         "control": 5.67
@@ -43308,7 +43308,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -43452,7 +43452,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -43634,7 +43634,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -43714,7 +43714,7 @@
         "attack": 6.82,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.7,
         "control": 5.62
@@ -43722,7 +43722,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -43870,7 +43870,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -44052,7 +44052,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -44132,7 +44132,7 @@
         "attack": 6.74,
         "brightness": 6.38,
         "projection": 6.61,
-        "sustain": 7.16,
+        "sustain": 7.23,
         "warmth": 6.11,
         "sensitivity": 5.63,
         "control": 5.58
@@ -44140,7 +44140,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.16
+          "value": 7.23
         },
         {
           "key": "attack",
@@ -44294,7 +44294,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -44476,7 +44476,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -47856,7 +47856,7 @@
         "attack": 7.11,
         "brightness": 6.56,
         "projection": 6.39,
-        "sustain": 6.42,
+        "sustain": 6.48,
         "warmth": 5.51,
         "sensitivity": 5.61,
         "control": 6.16
@@ -47872,7 +47872,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.42
+          "value": 6.48
         }
       ],
       "confidence": {
@@ -48002,7 +48002,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -48166,7 +48166,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -48242,7 +48242,7 @@
         "attack": 6.82,
         "brightness": 6.46,
         "projection": 6.3,
-        "sustain": 6.9,
+        "sustain": 6.97,
         "warmth": 5.74,
         "sensitivity": 5.9,
         "control": 5.51
@@ -48250,7 +48250,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 6.9
+          "value": 6.97
         },
         {
           "key": "attack",
@@ -48388,7 +48388,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -48552,7 +48552,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -48628,7 +48628,7 @@
         "attack": 7.04,
         "brightness": 6.49,
         "projection": 6.54,
-        "sustain": 6.59,
+        "sustain": 6.65,
         "warmth": 5.71,
         "sensitivity": 5.52,
         "control": 6.12
@@ -48640,7 +48640,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.59
+          "value": 6.65
         },
         {
           "key": "projection",
@@ -48774,7 +48774,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -48938,7 +48938,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -49014,7 +49014,7 @@
         "attack": 6.75,
         "brightness": 6.39,
         "projection": 6.44,
-        "sustain": 7.07,
+        "sustain": 7.14,
         "warmth": 5.94,
         "sensitivity": 5.81,
         "control": 5.46
@@ -49022,7 +49022,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.07
+          "value": 7.14
         },
         {
           "key": "attack",
@@ -49160,7 +49160,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -49324,7 +49324,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -49400,7 +49400,7 @@
         "attack": 7.09,
         "brightness": 6.56,
         "projection": 6.51,
-        "sustain": 6.67,
+        "sustain": 6.73,
         "warmth": 5.76,
         "sensitivity": 5.59,
         "control": 6.17
@@ -49412,7 +49412,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.67
+          "value": 6.73
         },
         {
           "key": "brightness",
@@ -49564,7 +49564,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -49734,7 +49734,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -49810,7 +49810,7 @@
         "attack": 6.8,
         "brightness": 6.47,
         "projection": 6.41,
-        "sustain": 7.16,
+        "sustain": 7.22,
         "warmth": 5.99,
         "sensitivity": 5.88,
         "control": 5.51
@@ -49818,7 +49818,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.16
+          "value": 7.22
         },
         {
           "key": "attack",
@@ -49974,7 +49974,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -50144,7 +50144,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -50220,7 +50220,7 @@
         "attack": 6.96,
         "brightness": 6.45,
         "projection": 6.61,
-        "sustain": 6.74,
+        "sustain": 6.81,
         "warmth": 5.91,
         "sensitivity": 5.44,
         "control": 6.08
@@ -50232,7 +50232,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.74
+          "value": 6.81
         },
         {
           "key": "projection",
@@ -50372,7 +50372,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -50536,7 +50536,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -50612,7 +50612,7 @@
         "attack": 6.67,
         "brightness": 6.35,
         "projection": 6.51,
-        "sustain": 7.23,
+        "sustain": 7.3,
         "warmth": 6.14,
         "sensitivity": 5.73,
         "control": 5.42
@@ -50620,7 +50620,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.23
+          "value": 7.3
         },
         {
           "key": "attack",
@@ -50764,7 +50764,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -50928,7 +50928,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -52444,7 +52444,7 @@
         "attack": 7.21,
         "brightness": 6.71,
         "projection": 6.04,
-        "sustain": 6.53,
+        "sustain": 6.59,
         "warmth": 5.32,
         "sensitivity": 6.17,
         "control": 5.78
@@ -52460,7 +52460,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.53
+          "value": 6.59
         }
       ],
       "confidence": {
@@ -52588,7 +52588,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -52752,7 +52752,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "diameter:10",
@@ -52836,7 +52836,7 @@
         "attack": 7.1,
         "brightness": 6.61,
         "projection": 6.17,
-        "sustain": 6.61,
+        "sustain": 6.68,
         "warmth": 5.4,
         "sensitivity": 6.07,
         "control": 5.7
@@ -52847,11 +52847,11 @@
           "value": 7.1
         },
         {
-          "key": "brightness",
-          "value": 6.61
+          "key": "sustain",
+          "value": 6.68
         },
         {
-          "key": "sustain",
+          "key": "brightness",
           "value": 6.61
         }
       ],
@@ -52980,7 +52980,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -53144,7 +53144,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -53228,7 +53228,7 @@
         "attack": 7.64,
         "brightness": 6.9,
         "projection": 6.19,
-        "sustain": 6.13,
+        "sustain": 6.2,
         "warmth": 5.08,
         "sensitivity": 5.99,
         "control": 6.47
@@ -53396,7 +53396,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -53578,7 +53578,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -53666,7 +53666,7 @@
         "attack": 6.93,
         "brightness": 6.46,
         "projection": 6.39,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.69,
         "sensitivity": 5.86,
         "control": 5.59
@@ -53678,7 +53678,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -53810,7 +53810,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -53968,7 +53968,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -54052,7 +54052,7 @@
         "attack": 7.11,
         "brightness": 6.58,
         "projection": 6.17,
-        "sustain": 6.44,
+        "sustain": 6.5,
         "warmth": 5.36,
         "sensitivity": 5.98,
         "control": 5.75
@@ -54068,7 +54068,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.44
+          "value": 6.5
         }
       ],
       "confidence": {
@@ -54196,7 +54196,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -54354,7 +54354,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -54438,7 +54438,7 @@
         "attack": 7.31,
         "brightness": 6.62,
         "projection": 6.48,
-        "sustain": 6.48,
+        "sustain": 6.54,
         "warmth": 5.51,
         "sensitivity": 5.7,
         "control": 6.29
@@ -54453,8 +54453,8 @@
           "value": 6.62
         },
         {
-          "key": "projection",
-          "value": 6.48
+          "key": "sustain",
+          "value": 6.54
         }
       ],
       "confidence": {
@@ -54594,7 +54594,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -54776,7 +54776,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -54864,7 +54864,7 @@
         "attack": 6.89,
         "brightness": 6.41,
         "projection": 6.35,
-        "sustain": 6.72,
+        "sustain": 6.78,
         "warmth": 5.64,
         "sensitivity": 5.83,
         "control": 5.6
@@ -54876,7 +54876,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.72
+          "value": 6.78
         },
         {
           "key": "brightness",
@@ -55002,7 +55002,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -55160,7 +55160,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -55244,7 +55244,7 @@
         "attack": 6.81,
         "brightness": 6.35,
         "projection": 6.5,
-        "sustain": 6.89,
+        "sustain": 6.96,
         "warmth": 5.84,
         "sensitivity": 5.73,
         "control": 5.56
@@ -55252,7 +55252,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 6.89
+          "value": 6.96
         },
         {
           "key": "attack",
@@ -55382,7 +55382,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -55540,7 +55540,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -57204,7 +57204,7 @@
         "attack": 7.11,
         "brightness": 6.48,
         "projection": 6.66,
-        "sustain": 6.8,
+        "sustain": 6.87,
         "warmth": 5.81,
         "sensitivity": 5.62,
         "control": 6.18
@@ -57216,7 +57216,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.8
+          "value": 6.87
         },
         {
           "key": "projection",
@@ -57360,7 +57360,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -57536,7 +57536,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -57616,7 +57616,7 @@
         "attack": 7.33,
         "brightness": 6.57,
         "projection": 6.39,
-        "sustain": 6.66,
+        "sustain": 6.73,
         "warmth": 5.49,
         "sensitivity": 6.18,
         "control": 6.04
@@ -57628,7 +57628,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.66
+          "value": 6.73
         },
         {
           "key": "brightness",
@@ -57772,7 +57772,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -57948,7 +57948,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "bearingEdge:sharper45Degree",
@@ -58028,7 +58028,7 @@
         "attack": 7.25,
         "brightness": 6.51,
         "projection": 6.54,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.69,
         "sensitivity": 6.08,
         "control": 6
@@ -58040,7 +58040,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "projection",
@@ -58184,7 +58184,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -58360,7 +58360,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "bearingEdge:sharper45Degree",
@@ -63280,7 +63280,7 @@
         "attack": 6.86,
         "brightness": 6.41,
         "projection": 6.34,
-        "sustain": 6.73,
+        "sustain": 6.79,
         "warmth": 5.64,
         "sensitivity": 5.81,
         "control": 5.54
@@ -63292,7 +63292,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.73
+          "value": 6.79
         },
         {
           "key": "brightness",
@@ -63408,7 +63408,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -63548,7 +63548,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -66142,7 +66142,7 @@
         "attack": 7.58,
         "brightness": 6.82,
         "projection": 6.39,
-        "sustain": 6.13,
+        "sustain": 6.2,
         "warmth": 5.2,
         "sensitivity": 5.74,
         "control": 6.53
@@ -66304,7 +66304,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -66486,7 +66486,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -66574,7 +66574,7 @@
         "attack": 7.36,
         "brightness": 6.64,
         "projection": 6.57,
-        "sustain": 6.42,
+        "sustain": 6.48,
         "warmth": 5.48,
         "sensitivity": 5.58,
         "control": 6.38
@@ -66730,7 +66730,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -66912,7 +66912,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -67000,7 +67000,7 @@
         "attack": 7.28,
         "brightness": 6.58,
         "projection": 6.72,
-        "sustain": 6.59,
+        "sustain": 6.65,
         "warmth": 5.68,
         "sensitivity": 5.48,
         "control": 6.33
@@ -67016,7 +67016,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.59
+          "value": 6.65
         }
       ],
       "confidence": {
@@ -67156,7 +67156,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -67338,7 +67338,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -67426,7 +67426,7 @@
         "attack": 7.2,
         "brightness": 6.54,
         "projection": 6.78,
-        "sustain": 6.75,
+        "sustain": 6.81,
         "warmth": 5.88,
         "sensitivity": 5.41,
         "control": 6.29
@@ -67437,12 +67437,12 @@
           "value": 7.2
         },
         {
-          "key": "projection",
-          "value": 6.78
+          "key": "sustain",
+          "value": 6.81
         },
         {
-          "key": "sustain",
-          "value": 6.75
+          "key": "projection",
+          "value": 6.78
         }
       ],
       "confidence": {
@@ -67588,7 +67588,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -67770,7 +67770,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -73012,7 +73012,7 @@
         "attack": 7.45,
         "brightness": 6.66,
         "projection": 6.7,
-        "sustain": 6.34,
+        "sustain": 6.41,
         "warmth": 5.53,
         "sensitivity": 5.4,
         "control": 6.48
@@ -73158,7 +73158,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -73322,7 +73322,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -73406,7 +73406,7 @@
         "attack": 7.37,
         "brightness": 6.59,
         "projection": 6.84,
-        "sustain": 6.51,
+        "sustain": 6.58,
         "warmth": 5.72,
         "sensitivity": 5.3,
         "control": 6.43
@@ -73552,7 +73552,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -73716,7 +73716,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -75440,19 +75440,19 @@
         "attack": 7.02,
         "brightness": 6.52,
         "projection": 6.38,
-        "sustain": 6.96,
+        "sustain": 7.03,
         "warmth": 5.74,
         "sensitivity": 5.99,
         "control": 5.63
       },
       "topNodes": [
         {
-          "key": "attack",
-          "value": 7.02
+          "key": "sustain",
+          "value": 7.03
         },
         {
-          "key": "sustain",
-          "value": 6.96
+          "key": "attack",
+          "value": 7.02
         },
         {
           "key": "brightness",
@@ -75596,7 +75596,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -75778,7 +75778,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -75866,7 +75866,7 @@
         "attack": 6.94,
         "brightness": 6.45,
         "projection": 6.52,
-        "sustain": 7.13,
+        "sustain": 7.2,
         "warmth": 5.94,
         "sensitivity": 5.89,
         "control": 5.59
@@ -75874,7 +75874,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.13
+          "value": 7.2
         },
         {
           "key": "attack",
@@ -76022,7 +76022,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -76204,7 +76204,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -77924,7 +77924,7 @@
         "attack": 6.65,
         "brightness": 6.29,
         "projection": 6.42,
-        "sustain": 6.82,
+        "sustain": 6.88,
         "warmth": 5.84,
         "sensitivity": 5.65,
         "control": 5.5
@@ -77932,7 +77932,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 6.82
+          "value": 6.88
         },
         {
           "key": "attack",
@@ -78062,7 +78062,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -78220,7 +78220,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -86518,18 +86518,18 @@
         "attack": 7.19,
         "brightness": 6.58,
         "projection": 6.47,
-        "sustain": 7.19,
+        "sustain": 7.25,
         "warmth": 5.84,
         "sensitivity": 6.3,
         "control": 5.55
       },
       "topNodes": [
         {
-          "key": "attack",
-          "value": 7.19
+          "key": "sustain",
+          "value": 7.25
         },
         {
-          "key": "sustain",
+          "key": "attack",
           "value": 7.19
         },
         {
@@ -86692,7 +86692,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -86880,7 +86880,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "bearingEdge:sharper45Degree",
@@ -86960,7 +86960,7 @@
         "attack": 7.21,
         "brightness": 6.57,
         "projection": 6.35,
-        "sustain": 6.93,
+        "sustain": 7,
         "warmth": 5.59,
         "sensitivity": 6.33,
         "control": 5.54
@@ -86972,7 +86972,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.93
+          "value": 7
         },
         {
           "key": "brightness",
@@ -87116,7 +87116,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -87298,7 +87298,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "bearingEdge:sharper45Degree",
@@ -87378,19 +87378,19 @@
         "attack": 7.13,
         "brightness": 6.51,
         "projection": 6.5,
-        "sustain": 7.11,
+        "sustain": 7.17,
         "warmth": 5.79,
         "sensitivity": 6.23,
         "control": 5.49
       },
       "topNodes": [
         {
-          "key": "attack",
-          "value": 7.13
+          "key": "sustain",
+          "value": 7.17
         },
         {
-          "key": "sustain",
-          "value": 7.11
+          "key": "attack",
+          "value": 7.13
         },
         {
           "key": "brightness",
@@ -87534,7 +87534,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -87716,7 +87716,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "bearingEdge:sharper45Degree",
@@ -87796,7 +87796,7 @@
         "attack": 7.05,
         "brightness": 6.47,
         "projection": 6.56,
-        "sustain": 7.26,
+        "sustain": 7.33,
         "warmth": 5.99,
         "sensitivity": 6.15,
         "control": 5.45
@@ -87804,7 +87804,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7.26
+          "value": 7.33
         },
         {
           "key": "attack",
@@ -87958,7 +87958,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -88140,7 +88140,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "bearingEdge:sharper45Degree",
@@ -120598,7 +120598,7 @@
         "attack": 6.84,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.72,
         "control": 5.64
@@ -120606,7 +120606,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -120760,7 +120760,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -120954,7 +120954,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -126250,7 +126250,7 @@
         "attack": 7.05,
         "brightness": 6.55,
         "projection": 6.46,
-        "sustain": 6.92,
+        "sustain": 6.99,
         "warmth": 5.72,
         "sensitivity": 5.86,
         "control": 5.66
@@ -126262,7 +126262,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.92
+          "value": 6.99
         },
         {
           "key": "brightness",
@@ -126400,7 +126400,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -126576,7 +126576,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -133118,19 +133118,19 @@
         "attack": 6.94,
         "brightness": 6.34,
         "projection": 6.63,
-        "sustain": 6.92,
+        "sustain": 6.98,
         "warmth": 5.96,
         "sensitivity": 5.64,
         "control": 6.08
       },
       "topNodes": [
         {
-          "key": "attack",
-          "value": 6.94
+          "key": "sustain",
+          "value": 6.98
         },
         {
-          "key": "sustain",
-          "value": 6.92
+          "key": "attack",
+          "value": 6.94
         },
         {
           "key": "projection",
@@ -133274,7 +133274,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -133444,7 +133444,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:seamlessMetal",
@@ -135902,7 +135902,7 @@
         "attack": 7.19,
         "brightness": 6.59,
         "projection": 6.5,
-        "sustain": 6.35,
+        "sustain": 6.41,
         "warmth": 5.48,
         "sensitivity": 5.58,
         "control": 6.36
@@ -136058,7 +136058,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -136252,7 +136252,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -141924,7 +141924,7 @@
         "attack": 7.18,
         "brightness": 6.61,
         "projection": 6.61,
-        "sustain": 6.62,
+        "sustain": 6.68,
         "warmth": 5.73,
         "sensitivity": 5.43,
         "control": 6.31
@@ -141936,7 +141936,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.62
+          "value": 6.68
         },
         {
           "key": "brightness",
@@ -142104,7 +142104,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -142298,7 +142298,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -142382,7 +142382,7 @@
         "attack": 7.07,
         "brightness": 6.6,
         "projection": 6.32,
-        "sustain": 6.66,
+        "sustain": 6.73,
         "warmth": 5.54,
         "sensitivity": 5.85,
         "control": 5.8
@@ -142394,7 +142394,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.66
+          "value": 6.73
         },
         {
           "key": "brightness",
@@ -142556,7 +142556,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -142750,7 +142750,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -142834,7 +142834,7 @@
         "attack": 6.93,
         "brightness": 6.5,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.75,
         "control": 5.71
@@ -142846,7 +142846,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -143002,7 +143002,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -143196,7 +143196,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -143280,7 +143280,7 @@
         "attack": 6.85,
         "brightness": 6.44,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.66,
         "control": 5.66
@@ -143288,7 +143288,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -143448,7 +143448,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -143642,7 +143642,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -143726,7 +143726,7 @@
         "attack": 6.93,
         "brightness": 6.5,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.75,
         "control": 5.71
@@ -143738,7 +143738,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -143894,7 +143894,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -144088,7 +144088,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -144172,7 +144172,7 @@
         "attack": 6.85,
         "brightness": 6.44,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.66,
         "control": 5.66
@@ -144180,7 +144180,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -144340,7 +144340,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -144534,7 +144534,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -144618,7 +144618,7 @@
         "attack": 7.22,
         "brightness": 6.6,
         "projection": 6.5,
-        "sustain": 6.35,
+        "sustain": 6.41,
         "warmth": 5.48,
         "sensitivity": 5.46,
         "control": 6.36
@@ -144786,7 +144786,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -144980,7 +144980,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -145064,7 +145064,7 @@
         "attack": 7.14,
         "brightness": 6.54,
         "projection": 6.64,
-        "sustain": 6.52,
+        "sustain": 6.58,
         "warmth": 5.68,
         "sensitivity": 5.37,
         "control": 6.31
@@ -145079,8 +145079,8 @@
           "value": 6.64
         },
         {
-          "key": "brightness",
-          "value": 6.54
+          "key": "sustain",
+          "value": 6.58
         }
       ],
       "confidence": {
@@ -145232,7 +145232,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -145426,7 +145426,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "hoopType:dieCast",
@@ -145510,7 +145510,7 @@
         "attack": 6.93,
         "brightness": 6.5,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.75,
         "control": 5.71
@@ -145522,7 +145522,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -145678,7 +145678,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -145872,7 +145872,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -145956,7 +145956,7 @@
         "attack": 6.85,
         "brightness": 6.44,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.66,
         "control": 5.66
@@ -145964,7 +145964,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -146124,7 +146124,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -146318,7 +146318,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -148910,7 +148910,7 @@
         "attack": 6.9,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.8,
         "control": 5.67
@@ -148922,7 +148922,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -149066,7 +149066,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -149248,7 +149248,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -149328,7 +149328,7 @@
         "attack": 6.82,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.7,
         "control": 5.62
@@ -149336,7 +149336,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -149484,7 +149484,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -149666,7 +149666,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -150940,7 +150940,7 @@
         "attack": 7.12,
         "brightness": 6.66,
         "projection": 6.22,
-        "sustain": 6.55,
+        "sustain": 6.61,
         "warmth": 5.43,
         "sensitivity": 5.96,
         "control": 5.82
@@ -150956,7 +150956,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.55
+          "value": 6.61
         }
       ],
       "confidence": {
@@ -151102,7 +151102,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -151284,7 +151284,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -151364,7 +151364,7 @@
         "attack": 7.04,
         "brightness": 6.58,
         "projection": 6.32,
-        "sustain": 6.66,
+        "sustain": 6.73,
         "warmth": 5.54,
         "sensitivity": 5.9,
         "control": 5.77
@@ -151376,7 +151376,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.66
+          "value": 6.73
         },
         {
           "key": "brightness",
@@ -151526,7 +151526,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -151708,7 +151708,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -151788,7 +151788,7 @@
         "attack": 6.9,
         "brightness": 6.49,
         "projection": 6.4,
-        "sustain": 6.83,
+        "sustain": 6.9,
         "warmth": 5.72,
         "sensitivity": 5.8,
         "control": 5.67
@@ -151800,7 +151800,7 @@
         },
         {
           "key": "sustain",
-          "value": 6.83
+          "value": 6.9
         },
         {
           "key": "brightness",
@@ -151944,7 +151944,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -152126,7 +152126,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",
@@ -152206,7 +152206,7 @@
         "attack": 6.82,
         "brightness": 6.42,
         "projection": 6.55,
-        "sustain": 7,
+        "sustain": 7.07,
         "warmth": 5.91,
         "sensitivity": 5.7,
         "control": 5.62
@@ -152214,7 +152214,7 @@
       "topNodes": [
         {
           "key": "sustain",
-          "value": 7
+          "value": 7.07
         },
         {
           "key": "attack",
@@ -152362,7 +152362,7 @@
             {
               "node": "sustain",
               "source": "shellMaterial:brass",
-              "delta": 0.7544,
+              "delta": 0.8188,
               "direction": "up"
             },
             {
@@ -152544,7 +152544,7 @@
         "strongestSources": [
           {
             "source": "shellMaterial:brass",
-            "totalMovement": 3.919
+            "totalMovement": 3.984
           },
           {
             "source": "shellConstruction:metal",

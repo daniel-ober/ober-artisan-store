@@ -63,7 +63,7 @@ const SHELL_MATERIAL_EFFECTS = {
 
     projection: 0.95,
 
-    sustain: 0.82,
+    sustain: 0.89,
 
     warmth: 0.62,
 

@@ -1,22 +1,22 @@
 # LegacyPrint Snare Engine Benchmark Suite v0.1
 
-Generated: 2026-05-21T10:44:19.295Z
+Generated: 2026-05-21T10:45:29.180Z
 
 ## Summary
 
 - Engine version: legacyprint-snare-engine-v0.1
 - Promoted records scored: 366
 - Firestore writes: 0
-- Benchmarks: 10/11 passed
-- Assertions: 205/206 passed
-- Assertion pass rate: 99.51%
+- Benchmarks: 11/11 passed
+- Assertions: 206/206 passed
+- Assertion pass rate: 100%
 
 ## Benchmark Results
 
 | Result | Benchmark | Scope | Assertions | Purpose |
 |---|---|---:|---:|---|
 | PASS | ludwig-acrolite-aluminum-dry-control | 2 records | 10/10 | Ludwig Acrolite should read controlled, sensitive, and drier than brass |
-| FAIL | ludwig-black-beauty-brass-body | 7 records | 34/35 | Ludwig Black Beauty should read attack/sustain/brightness without behaving like aluminum |
+| PASS | ludwig-black-beauty-brass-body | 7 records | 35/35 | Ludwig Black Beauty should read attack/sustain/brightness without behaving like aluminum |
 | PASS | ludwig-legacy-mahogany-warmth | 4 records | 16/16 | Ludwig Legacy Mahogany should be warmth/sustain dominant |
 | PASS | ludwig-classic-maple-balanced-wood | 4 records | 20/20 | Ludwig Classic Maple should read balanced warm/sensitive wood, not metal-bright |
 | PASS | ahead-bell-brass-strong-metal | 15 records | 75/75 | AHEAD bell brass should read strong attack/sustain/projection with lower sensitivity than maple |
@@ -29,15 +29,4 @@ Generated: 2026-05-21T10:44:19.295Z
 
 # Failure Details
 
-## ludwig-black-beauty-brass-body
-
-Ludwig Black Beauty should read attack/sustain/brightness without behaving like aluminum
-
-### Ludwig Black Beauty 3.5x14 14x3.5
-
-Profile: {"attack":7.14,"brightness":6.66,"projection":6.22,"sustain":6.55,"warmth":5.43,"sensitivity":5.98,"control":5.83}
-Top nodes: attack, brightness, sustain
-
-| Pass | Expected | Actual |
-|---|---|---|
-| no | sustain >= 6.6 | 6.55 |
+No failures.
