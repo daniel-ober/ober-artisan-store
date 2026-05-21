@@ -300,6 +300,9 @@ const hasMeaningfulBearingEdge = record => {
     text.includes('needs verification') ||
 
     text.includes('placeholder') ||
+    text.includes('missing') ||
+
+    text.includes('missing') ||
 
     text === 'n/a' ||
 
