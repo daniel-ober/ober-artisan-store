@@ -19,7 +19,9 @@ const UNKNOWN_VALUES = new Set([
 
   'null',
 
-  'undefined'
+  'undefined',
+
+  'none'
 
 ]);
 
@@ -68,6 +70,16 @@ const normalizeText = value => {
     .replace(/\s+/g, ' ');
 
 };
+
+const combineTexts = (...values) =>
+
+  values
+
+    .filter(hasMeaningfulValue)
+
+    .map(normalizeText)
+
+    .join(' ');
 
 const firstValue = (row, keys) => {
 
@@ -355,6 +367,92 @@ const groupSnareBed = value => {
 
 };
 
+const groupShellLayup = value => {
+
+  const text = normalizeText(value);
+
+  if (!text) return 'unknownLayup';
+
+  if (text.includes('maple/poplar/maple') || (text.includes('maple') && text.includes('poplar'))) return 'maplePoplarMapleLayup';
+
+  if (text.includes('mahogany/poplar/mahogany') || (text.includes('mahogany') && text.includes('poplar'))) return 'mahoganyPoplarMahoganyLayup';
+
+  if (text.includes('all-maple') || text.includes('all maple') || text.includes('maple')) return 'allMapleLayup';
+
+  if (text.includes('hybrid')) return 'hybridLayup';
+
+  return 'otherLayup';
+
+};
+
+const groupReinforcementRings = value => {
+
+  const text = normalizeText(value);
+
+  if (!text) return 'noReinforcementRings';
+
+  if (text === 'true') return 'reinforcementRings';
+
+  if (text.includes('sound focus')) return 'soundFocusRings';
+
+  if (text.includes('reinforcement') || text.includes('re-ring') || text.includes('rerings') || text.includes('ring')) return 'reinforcementRings';
+
+  return 'otherRings';
+
+};
+
+const groupFinishTreatment = value => {
+
+  const text = normalizeText(value);
+
+  if (!text) return 'unknownFinishTreatment';
+
+  if (text.includes('lacquer') || text.includes('urethane')) return 'lacquerOrUrethaneFinish';
+
+  if (text.includes('oil') || text.includes('wax')) return 'oilWaxFinish';
+
+  if (text.includes('paint') || text.includes('wrap') || text.includes('sparkle')) return 'sealedDecorativeFinish';
+
+  if (text.includes('raw') || text.includes('natural')) return 'lightNaturalFinish';
+
+  return 'otherFinishTreatment';
+
+};
+
+const groupPlyCount = value => {
+
+  const count = toNumber(value);
+
+  if (!count) return 'unknownPlyCount';
+
+  if (count <= 3) return 'threePlyOrLess';
+
+  if (count <= 5) return 'fourToFivePly';
+
+  if (count <= 7) return 'sixToSevenPly';
+
+  if (count <= 10) return 'eightToTenPly';
+
+  return 'elevenPlusPly';
+
+};
+
+const resolveShellConstructionFamily = ({ shellConstruction, reinforcementRings }) => {
+
+  const constructionFamily = groupShellConstruction(shellConstruction);
+
+  const ringFamily = groupReinforcementRings(reinforcementRings);
+
+  if (constructionFamily === 'ply' && ['reinforcementRings', 'soundFocusRings', 'otherRings'].includes(ringFamily)) {
+
+    return 'plyWithReinforcementRings';
+
+  }
+
+  return constructionFamily;
+
+};
+
 const getShellFamily = value => {
 
   const family = groupShellMaterial(value);
@@ -467,9 +565,23 @@ const groupSnareWires = value => {
 
 const adaptSnareReferenceRecord = row => {
 
-  const shellMaterial = firstValue(row, ['shellMaterial1', 'shellMaterial', 'material']);
+  const shellMaterial1 = firstValue(row, ['shellMaterial1', 'shellMaterial', 'material']);
+
+  const shellMaterial2 = firstValue(row, ['shellMaterial2', 'secondaryShellMaterial', 'material2']);
+
+  const shellMaterial3 = firstValue(row, ['shellMaterial3', 'tertiaryShellMaterial', 'material3']);
+
+  const shellLayup = firstValue(row, ['shellLayup', 'plyLayup', 'layup']);
+
+  const shellMaterial = combineTexts(shellMaterial1, shellMaterial2, shellMaterial3, shellLayup) || shellMaterial1;
 
   const shellConstruction = firstValue(row, ['shellConstruction', 'construction']);
+
+  const reinforcementRings = firstValue(row, ['reinforcementRings', 'reRings', 'rerings']);
+
+  const finishTreatment = firstValue(row, ['finishTreatment', 'shellTreatment', 'finishType', 'finish']);
+
+  const plyCount = firstValue(row, ['plyCount', 'plies']);
 
   const bearingEdge = firstValue(row, [
 
@@ -571,7 +683,21 @@ const adaptSnareReferenceRecord = row => {
 
       shellMaterial: shellMaterial || '',
 
+      shellMaterial1: shellMaterial1 || '',
+
+      shellMaterial2: shellMaterial2 || '',
+
+      shellMaterial3: shellMaterial3 || '',
+
+      shellLayup: shellLayup || '',
+
       shellConstruction: shellConstruction || '',
+
+      reinforcementRings: reinforcementRings || '',
+
+      finishTreatment: finishTreatment || '',
+
+      plyCount: plyCount || '',
 
       bearingEdge: bearingEdge || '',
 
@@ -603,7 +729,9 @@ const adaptSnareReferenceRecord = row => {
 
       shellThicknessMm: toNumber(shellThickness),
 
-      lugCount: toNumber(lugCount)
+      lugCount: toNumber(lugCount),
+
+      plyCount: toNumber(plyCount)
 
     },
 
@@ -611,7 +739,15 @@ const adaptSnareReferenceRecord = row => {
 
       shellMaterial: groupShellMaterial(shellMaterial),
 
-      shellConstruction: groupShellConstruction(shellConstruction),
+      shellLayup: groupShellLayup(shellLayup || shellMaterial),
+
+      shellConstruction: resolveShellConstructionFamily({ shellConstruction, reinforcementRings }),
+
+      reinforcementRings: groupReinforcementRings(reinforcementRings),
+
+      finishTreatment: groupFinishTreatment(finishTreatment),
+
+      plyCount: groupPlyCount(plyCount),
 
       bearingEdge: bearingEdgeFamily,
 
@@ -678,6 +814,14 @@ module.exports = {
   groupShellMaterial,
 
   groupShellConstruction,
+
+  groupShellLayup,
+
+  groupReinforcementRings,
+
+  groupFinishTreatment,
+
+  groupPlyCount,
 
   groupBearingEdge,
 
