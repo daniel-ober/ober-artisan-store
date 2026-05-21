@@ -1,11 +1,11 @@
 
-import { useState, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { loadSnareDiscoveryPacket } from '../api/loadSnareDiscoveryPacket.js';
 
 import { searchVoiceDrumsFromFirestore } from '../api/searchVoiceDrumsFromFirestore.js';
 
 import { compareVoices } from '../intelligence/compareVoices.js';
-
-const discoveryPreviewPacket = require('../reviewPlans/snare-discovery-packet-api-preview-v01.json');
 
 const {
 
@@ -36,64 +36,6 @@ const DEFAULT_VOICE = {
   sensitivity: 0.5,
 
   control: 0.5,
-
-};
-
-const REFERENCE_TO_PREVIEW_MATCH = {
-
-  heritage: 'acrolite',
-
-  'black-beauty': 'black-beauty',
-
-  brooklyn: 'true-cast',
-
-};
-
-const normalizeReferenceSearchTerm = selectedReferenceId =>
-
-  REFERENCE_TO_PREVIEW_MATCH[selectedReferenceId] || selectedReferenceId || 'acrolite';
-
-const getPreviewExamplePacket = (previewPacket, selectedReferenceId) => {
-
-  const examples = previewPacket?.examples || [];
-
-  const searchTerm = normalizeReferenceSearchTerm(selectedReferenceId);
-
-  const found =
-
-    examples.find(example => {
-
-      const packet = example.packet || example.result?.packet;
-
-      const drum = packet?.target?.drum || {};
-
-      const haystack = [
-
-        example.key,
-
-        example.snareReferenceId,
-
-        drum.id,
-
-        drum.company,
-
-        drum.model,
-
-        drum.size
-
-      ]
-
-        .filter(Boolean)
-
-        .join(' ')
-
-        .toLowerCase();
-
-      return haystack.includes(searchTerm.toLowerCase());
-
-    }) || examples[0];
-
-  return found?.packet || found?.result?.packet || null;
 
 };
 
@@ -155,19 +97,17 @@ const discoveryMatchToVoiceResult = (match, section) => ({
 
 });
 
-const buildLocalDiscoveryViewModel = selectedReferenceId => {
+const buildDiscoveryViewModelFromLoaderState = discoveryState => {
 
-  const packet = getPreviewExamplePacket(discoveryPreviewPacket, selectedReferenceId);
-
-  if (!packet) {
+  if (!discoveryState?.packet) {
 
     return buildSnareDiscoveryViewModel({
 
-      status: 'idle',
+      status: discoveryState?.status || 'idle',
 
       packet: null,
 
-      error: 'No local preview packet found.',
+      error: discoveryState?.error || null,
 
     });
 
@@ -175,13 +115,21 @@ const buildLocalDiscoveryViewModel = selectedReferenceId => {
 
   return buildSnareDiscoveryViewModel({
 
-    status: 'ready',
+    status: discoveryState.status || 'ready',
 
-    snareReferenceId: packet.target?.drum?.id || null,
+    snareReferenceId:
 
-    packet,
+      discoveryState.snareReferenceId ||
 
-    error: null,
+      discoveryState.packet?.target?.drum?.id ||
+
+      null,
+
+    packet: discoveryState.packet,
+
+    metadata: discoveryState.metadata || null,
+
+    error: discoveryState.error || null,
 
   });
 
@@ -225,17 +173,73 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
 
   const [loading, setLoading] = useState(false);
 
+  const [discoveryLoading, setDiscoveryLoading] = useState(false);
+
+  const [discoveryState, setDiscoveryState] = useState({
+
+    status: 'idle',
+
+    source: 'preview',
+
+    snareReferenceId: null,
+
+    packet: null,
+
+    metadata: null,
+
+    error: null,
+
+  });
+
   const [anchorDrum, setAnchorDrum] = useState(null);
 
   const [compareA, setCompareA] = useState(null);
 
   const [compareB, setCompareB] = useState(null);
 
+  useEffect(() => {
+
+    let cancelled = false;
+
+    const loadDiscovery = async () => {
+
+      setDiscoveryLoading(true);
+
+      const loadedState = await loadSnareDiscoveryPacket({
+
+        firestore,
+
+        selectedReferenceId,
+
+        source: 'preview',
+
+      });
+
+      if (!cancelled) {
+
+        setDiscoveryState(loadedState);
+
+        setDiscoveryLoading(false);
+
+      }
+
+    };
+
+    loadDiscovery();
+
+    return () => {
+
+      cancelled = true;
+
+    };
+
+  }, [firestore, selectedReferenceId]);
+
   const discoveryViewModel = useMemo(
 
-    () => buildLocalDiscoveryViewModel(selectedReferenceId),
+    () => buildDiscoveryViewModelFromLoaderState(discoveryState),
 
-    [selectedReferenceId]
+    [discoveryState]
 
   );
 
@@ -367,7 +371,11 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
 
     discoveryViewModel,
 
-    loading,
+    discoveryState,
+
+    discoveryLoading,
+
+    loading: loading || discoveryLoading,
 
     anchorDrum,
 
