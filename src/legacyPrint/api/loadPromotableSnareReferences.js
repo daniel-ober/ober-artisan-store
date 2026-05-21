@@ -161,15 +161,19 @@ export async function loadPromotableSnareReferences({
 
   let source = 'localAudit';
 
-  let rawReferences =
+  let rawReferences = [
 
-    promotableAudit.promotableRecords ||
+    ...(promotableAudit.alreadyPromoted || []),
 
-    promotableAudit.records ||
+    ...(promotableAudit.additionalPromotableRecords || []),
 
-    promotableAudit.candidates ||
+    ...(promotableAudit.promotableRecords || []),
 
-    [];
+    ...(promotableAudit.records || []),
+
+    ...(promotableAudit.candidates || []),
+
+  ];
 
   if (firestore) {
 
