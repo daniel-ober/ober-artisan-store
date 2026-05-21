@@ -1,99 +1,327 @@
+
 {
-  "generatedAt": "2026-05-21T08:45:27.980Z",
-  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-pearl-line-level-review-packet.json",
+
   "status": "STOCK_HEAD_FALLBACK_PEARL_LINE_LEVEL_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+
+  "companyName": "Pearl",
+
+  "reviewScope": "Lane B Pearl line-level stock-head fallback review",
+
+  "sourcePacket": "src/legacyPrint/reviewPlans/stock-head-fallback-pearl-line-level-review-packet.json",
+
+  "policyPosition": "conservative",
+
+  "noFirestoreWrites": true,
+
   "summary": {
-    "companyName": "Pearl",
+
+    "approvedLineLevelFallbackRuleCount": 0,
+
+    "blockedLineGroupCount": 6,
+
     "candidateCount": 33,
-    "lineGroupCount": 6,
-    "reviewedLineGroupCount": 6,
-    "approvedLineFallbackRuleCount": 0,
-    "blockedLineFallbackRuleCount": 5,
-    "thirdPartyEvidenceOnlyCount": 1,
-    "noFirestoreWrites": true
+
+    "decision": "No Pearl line-level stock-head fallback rules are approved at this time.",
+
+    "reason": "Available evidence does not sufficiently confirm both stock batter and stock resonant/snare-side head models at the official Pearl/OEM level for these line groups."
+
   },
-  "lineDecisions": [
+
+  "companyLevelDecision": {
+
+    "companyName": "Pearl",
+
+    "approved": false,
+
+    "decision": "BLOCKED_FOR_COMPANY_WIDE_FALLBACK",
+
+    "reason": "Pearl does not have enough consistent official/OEM stock-head evidence across the candidate set to justify a company-wide fallback rule.",
+
+    "notes": [
+
+      "Prior Lane B Ludwig/Pearl decision already blocked Pearl for company-wide fallback.",
+
+      "Pearl requires line-level or model-level source confirmation before fallback rules can be considered."
+
+    ]
+
+  },
+
+  "lineLevelDecisions": [
+
     {
+
       "lineSeries": "Free Floating",
+
       "candidateCount": 16,
-      "reviewed": true,
-      "approvedLineFallbackRule": false,
-      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
-      "approvedFallbackKey": "",
-      "approvedBatterHeadFallback": "",
-      "approvedResoHeadFallback": "",
-      "fallbackConfidence": "notApproved",
-      "sourceEvidenceUrls": [],
-      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Free Floating records. Do not approve fallback."
+
+      "approved": false,
+
+      "decision": "BLOCKED_PENDING_OFFICIAL_OR_OEM_CONFIRMATION",
+
+      "approvedFallbackRule": null,
+
+      "reason": "No sufficient official Pearl/OEM evidence confirming both stock batter and stock resonant/snare-side head models for the line group.",
+
+      "requiredEvidenceToApprove": [
+
+        "Official Pearl specification page, catalog, manual, archived product page, or OEM-confirmed source",
+
+        "Stock batter head model",
+
+        "Stock resonant/snare-side head model",
+
+        "Evidence that the stock-head pairing applies to the relevant Free Floating records in the queue"
+
+      ]
+
     },
+
     {
+
       "lineSeries": "Sensitone Heritage Alloy",
+
       "candidateCount": 6,
-      "reviewed": true,
-      "approvedLineFallbackRule": false,
-      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
-      "approvedFallbackKey": "",
-      "approvedBatterHeadFallback": "",
-      "approvedResoHeadFallback": "",
-      "fallbackConfidence": "notApproved",
-      "sourceEvidenceUrls": [],
-      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Sensitone Heritage Alloy records. Do not approve fallback."
+
+      "approved": false,
+
+      "decision": "BLOCKED_PENDING_OFFICIAL_OR_OEM_CONFIRMATION",
+
+      "approvedFallbackRule": null,
+
+      "reason": "No sufficient official Pearl/OEM evidence confirming both stock batter and stock resonant/snare-side head models for the line group.",
+
+      "requiredEvidenceToApprove": [
+
+        "Official Pearl specification page, catalog, manual, archived product page, or OEM-confirmed source",
+
+        "Stock batter head model",
+
+        "Stock resonant/snare-side head model",
+
+        "Evidence that the stock-head pairing applies to the relevant Sensitone Heritage Alloy records in the queue"
+
+      ]
+
     },
+
     {
+
       "lineSeries": "Modern Utility",
+
       "candidateCount": 4,
-      "reviewed": true,
-      "approvedLineFallbackRule": false,
-      "decisionStatus": "third_party_evidence_found_but_not_approved",
-      "approvedFallbackKey": "",
-      "approvedBatterHeadFallback": "",
-      "approvedResoHeadFallback": "",
-      "fallbackConfidence": "notApproved",
-      "sourceEvidenceUrls": [
-        "https://drummersreview.com/gear-reviews/pearl-modern-utility-floor-snare-drummers-review/"
-      ],
-      "sourceEvidenceNotes": "Third-party review evidence lists REMO UT heads with coated batter and thin clear resonant side for a Pearl Modern Utility Floor Snare. Because this is third-party review evidence and not official Pearl stock/OEM documentation, do not approve fallback under the conservative policy yet."
+
+      "approved": false,
+
+      "decision": "BLOCKED_THIRD_PARTY_EVIDENCE_ONLY",
+
+      "approvedFallbackRule": null,
+
+      "reason": "Modern Utility has third-party stock-head evidence, but the evidence is not strong enough under the conservative policy because official Pearl/OEM stock batter plus resonant/snare-side confirmation is still missing.",
+
+      "requiredEvidenceToApprove": [
+
+        "Official Pearl specification page, catalog, manual, archived product page, or OEM-confirmed source",
+
+        "Stock batter head model",
+
+        "Stock resonant/snare-side head model",
+
+        "Confirmation that the stock-head pairing applies to the relevant Modern Utility snare records"
+
+      ]
+
     },
+
     {
+
       "lineSeries": "Reference",
+
       "candidateCount": 4,
-      "reviewed": true,
-      "approvedLineFallbackRule": false,
-      "decisionStatus": "blocked_insufficient_snare_specific_stock_head_evidence",
-      "approvedFallbackKey": "",
-      "approvedBatterHeadFallback": "",
-      "approvedResoHeadFallback": "",
-      "fallbackConfidence": "notApproved",
-      "sourceEvidenceUrls": [],
-      "sourceEvidenceNotes": "Pearl catalog evidence may support Remo USA heads for some Reference/Masters drum sets, but current evidence does not safely identify snare-specific stock batter and resonant/snare-side heads for these Reference snare records. Do not approve fallback."
+
+      "approved": false,
+
+      "decision": "BLOCKED_PENDING_OFFICIAL_OR_OEM_CONFIRMATION",
+
+      "approvedFallbackRule": null,
+
+      "reason": "No sufficient official Pearl/OEM evidence confirming both stock batter and stock resonant/snare-side head models for the line group.",
+
+      "requiredEvidenceToApprove": [
+
+        "Official Pearl specification page, catalog, manual, archived product page, or OEM-confirmed source",
+
+        "Stock batter head model",
+
+        "Stock resonant/snare-side head model",
+
+        "Evidence that the stock-head pairing applies to the relevant Reference records in the queue"
+
+      ]
+
     },
+
     {
+
       "lineSeries": "Ultracast",
+
       "candidateCount": 2,
-      "reviewed": true,
-      "approvedLineFallbackRule": false,
-      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
-      "approvedFallbackKey": "",
-      "approvedBatterHeadFallback": "",
-      "approvedResoHeadFallback": "",
-      "fallbackConfidence": "notApproved",
-      "sourceEvidenceUrls": [],
-      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Ultracast records. Do not approve fallback."
+
+      "approved": false,
+
+      "decision": "BLOCKED_PENDING_OFFICIAL_OR_OEM_CONFIRMATION",
+
+      "approvedFallbackRule": null,
+
+      "reason": "No sufficient official Pearl/OEM evidence confirming both stock batter and stock resonant/snare-side head models for the line group.",
+
+      "requiredEvidenceToApprove": [
+
+        "Official Pearl specification page, catalog, manual, archived product page, or OEM-confirmed source",
+
+        "Stock batter head model",
+
+        "Stock resonant/snare-side head model",
+
+        "Evidence that the stock-head pairing applies to the relevant Ultracast records in the queue"
+
+      ]
+
     },
+
     {
+
       "lineSeries": "Signature",
+
       "candidateCount": 1,
-      "reviewed": true,
-      "approvedLineFallbackRule": false,
-      "decisionStatus": "blocked_insufficient_line_specific_stock_head_evidence",
-      "approvedFallbackKey": "",
-      "approvedBatterHeadFallback": "",
-      "approvedResoHeadFallback": "",
-      "fallbackConfidence": "notApproved",
-      "sourceEvidenceUrls": [],
-      "sourceEvidenceNotes": "No conservative source-backed line-specific stock batter and resonant/snare-side head evidence found for Pearl Signature record. Do not approve fallback."
+
+      "approved": false,
+
+      "decision": "BLOCKED_PENDING_MODEL_LEVEL_CONFIRMATION",
+
+      "approvedFallbackRule": null,
+
+      "reason": "Single-record signature-line evidence should not be generalized without model-level official Pearl/OEM confirmation of both stock batter and stock resonant/snare-side head models.",
+
+      "requiredEvidenceToApprove": [
+
+        "Official Pearl specification page, catalog, manual, archived product page, or OEM-confirmed source for the exact signature model",
+
+        "Stock batter head model",
+
+        "Stock resonant/snare-side head model"
+
+      ]
+
     }
+
   ],
-  "conclusion": "No Pearl line-level stock-head fallback rule is approved under the conservative policy. Modern Utility has third-party evidence only and should remain blocked until official Pearl/OEM confirmation is found.",
-  "nextRecommendedStep": "Proceed to remaining Lane B companies: Mapex, Tama, Yamaha, Gretsch, and SONOR."
+
+  "approvedFallbackRules": [],
+
+  "blockedFallbackRules": [
+
+    {
+
+      "scope": "Pearl company-wide",
+
+      "decision": "blocked",
+
+      "reason": "No consistent company-wide official/OEM stock batter and resonant/snare-side head confirmation."
+
+    },
+
+    {
+
+      "scope": "Pearl Free Floating line-level",
+
+      "decision": "blocked",
+
+      "reason": "Insufficient official/OEM stock-head evidence."
+
+    },
+
+    {
+
+      "scope": "Pearl Sensitone Heritage Alloy line-level",
+
+      "decision": "blocked",
+
+      "reason": "Insufficient official/OEM stock-head evidence."
+
+    },
+
+    {
+
+      "scope": "Pearl Modern Utility line-level",
+
+      "decision": "blocked",
+
+      "reason": "Third-party evidence only; insufficient under conservative fallback policy."
+
+    },
+
+    {
+
+      "scope": "Pearl Reference line-level",
+
+      "decision": "blocked",
+
+      "reason": "Insufficient official/OEM stock-head evidence."
+
+    },
+
+    {
+
+      "scope": "Pearl Ultracast line-level",
+
+      "decision": "blocked",
+
+      "reason": "Insufficient official/OEM stock-head evidence."
+
+    },
+
+    {
+
+      "scope": "Pearl Signature line-level",
+
+      "decision": "blocked",
+
+      "reason": "Requires exact model-level official/OEM confirmation."
+
+    }
+
+  ],
+
+  "readinessImpact": {
+
+    "recordsPromotedToMeaningfulStockPass": 0,
+
+    "recordsPromotedToStockPassWithHeadFallback": 0,
+
+    "recordsChanged": 0,
+
+    "firestoreWrites": 0,
+
+    "notes": [
+
+      "Fallback-head records must remain separate from source-confirmed full stock pass.",
+
+      "This decision file is review/planning only and does not mutate snareReferenceDrums."
+
+    ]
+
+  },
+
+  "nextRecommendedStep": {
+
+    "lane": "Lane B",
+
+    "task": "Continue company/OEM pattern review for remaining Lane B candidate groups outside Ludwig/Pearl, or create a broader Lane B company-priority review packet.",
+
+    "constraint": "Do not write fallback metadata to Firestore until fallback rules are explicitly approved."
+
+  }
+
 }
+
