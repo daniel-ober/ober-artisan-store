@@ -137,12 +137,12 @@
       "lineSeriesIncludes": [
         "Free Floating"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-needs-correct-source-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
-      "sourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceUrl": "https://pearldrum.com/en/products/snares/free-floating",
       "sourceConfidence": "needsVerification",
-      "notes": "Large unmatched Pearl group. Confirm whether these Free Floating records share the same published stock batter/reso head setup before approval."
+      "notes": "Pearl Free Floating group contains 16 candidates across aluminum, brass, copper, and steel. Current apply-plan source appears to point to Pearl Modern Utility, so do not approve until a correct Pearl Free Floating source confirms exact stock batter and reso/snare-side head models. Split by shell material or era if stock heads vary."
     },
     {
       "ruleKey": "pearl-modern-utility-stock-heads-draft",
