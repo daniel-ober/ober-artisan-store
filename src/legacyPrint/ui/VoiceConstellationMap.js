@@ -7,19 +7,19 @@ import './VoiceConstellationMap.css';
 
 const DEFAULT_VOICE = {
 
-  attack: 0.5,
+  attack: 5,
 
-  brightness: 0.5,
+  brightness: 5,
 
-  projection: 0.5,
+  projection: 5,
 
-  sustain: 0.5,
+  sustain: 5,
 
-  warmth: 0.5,
+  warmth: 5,
 
-  sensitivity: 0.5,
+  sensitivity: 5,
 
-  control: 0.5,
+  control: 5,
 
 };
 
@@ -127,11 +127,21 @@ const clamp01 = (value, fallback = 0.5) => {
 
 };
 
+const clampScore = (value, fallback = 5) => {
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) return fallback;
+
+  return number > 1 ? Math.max(0, Math.min(10, number)) : clamp01(number, 0.5) * 10;
+
+};
+
 const normalizeVoice = (voice = {}) =>
 
   VOICE_NODE_ORDER.reduce((acc, key) => {
 
-    acc[key] = clamp01(voice?.[key] ?? DEFAULT_VOICE[key], DEFAULT_VOICE[key]);
+    acc[key] = clampScore(voice?.[key] ?? DEFAULT_VOICE[key], DEFAULT_VOICE[key]);
 
     return acc;
 
@@ -141,7 +151,7 @@ const voiceToLegacyProfile = (voice = {}) =>
 
   VOICE_NODE_ORDER.reduce((acc, key) => {
 
-    acc[key] = Math.round(clamp01(voice[key]) * 100) / 10;
+    acc[key] = Math.round(clampScore(voice[key], DEFAULT_VOICE[key]) * 10) / 10;
 
     return acc;
 
@@ -173,9 +183,9 @@ const getTopNodes = (voice, count = 3) =>
 
     key,
 
-    value: clamp01(voice[key]),
+    value: clampScore(voice[key], DEFAULT_VOICE[key]),
 
-    movement: Math.abs(clamp01(voice[key]) - 0.5),
+    movement: Math.abs(clampScore(voice[key], DEFAULT_VOICE[key]) - 5),
 
   }))
 
