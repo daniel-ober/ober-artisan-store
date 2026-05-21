@@ -2119,6 +2119,12 @@ export function VoicePlayground({ firestore }) {
 
   }, [workflowMode, selectedReferenceEnginePacket, topNodes]);
 
+  const handleShapeNodeDrag = (key, nextValue) => {
+
+    updateVoice(key, nextValue);
+
+  };
+
   const handleAudition = (result) => {
 
     setAsAnchor(result);
@@ -2292,7 +2298,11 @@ export function VoicePlayground({ firestore }) {
 
             firstListenKeys={firstListenKeys}
 
+            shapeMode={workflowMode === 'shape'}
+
             onNodeClick={(key) => updateVoice(key, Math.min(1, getVoiceValue(voice, key) + 0.08))}
+
+            onNodeDrag={handleShapeNodeDrag}
 
           />
 

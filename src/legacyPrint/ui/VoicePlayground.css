@@ -5346,3 +5346,26 @@
 
 }
 
+
+/* Shape mode drag affordance for VoiceConstellationMap node spokes */
+
+.vp-mode-shape .vcm-node-click-layer.is-draggable {
+
+  pointer-events: auto;
+
+}
+
+.vp-mode-shape .vcm-node-click-layer.is-draggable .vcm-node-click-target {
+
+  cursor: grab;
+
+  touch-action: none;
+
+}
+
+.vp-mode-shape .vcm-node-click-layer.is-draggable .vcm-node-click-target:active {
+
+  cursor: grabbing;
+
+}
+

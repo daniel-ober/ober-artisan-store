@@ -1,5 +1,5 @@
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 
 import VoiceThreadMap from '../../components/VoiceThreadMap.js';
 
@@ -253,7 +253,11 @@ export default function VoiceConstellationMap({
 
   showFieldDots = false,
 
+  shapeMode = false,
+
   onNodeClick,
+
+  onNodeDrag,
 
   className = '',
 
@@ -323,6 +327,92 @@ export default function VoiceConstellationMap({
 
   );
 
+  const mapFrameRef = useRef(null);
+
+  const isPlayerShapeDragEnabled = shapeMode && safeReadMode === 'playerAnalysis';
+
+  const getPointerValueForNode = (event, nodeKey) => {
+
+    const frame = mapFrameRef.current;
+
+    if (!frame) return null;
+
+    const rect = frame.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width / 2;
+
+    const centerY = rect.top + rect.height / 2;
+
+    const pointerX = event.clientX;
+
+    const pointerY = event.clientY;
+
+    const nodeIndex = VOICE_NODE_ORDER.indexOf(nodeKey);
+
+    if (nodeIndex < 0) return null;
+
+    const angle = -Math.PI / 2 + (nodeIndex / VOICE_NODE_ORDER.length) * Math.PI * 2;
+
+    const axisX = Math.cos(angle);
+
+    const axisY = Math.sin(angle);
+
+    const pointerVectorX = pointerX - centerX;
+
+    const pointerVectorY = pointerY - centerY;
+
+    const projectedDistance = pointerVectorX * axisX + pointerVectorY * axisY;
+
+    const radius = Math.min(rect.width, rect.height) * 0.38;
+
+    const nextValue = Math.max(0, Math.min(1, projectedDistance / radius));
+
+    return nextValue;
+
+  };
+
+  const handleNodePointerDown = (event, nodeKey) => {
+
+    if (!isPlayerShapeDragEnabled) {
+
+      onNodeClick?.(nodeKey);
+
+      return;
+
+    }
+
+    event.preventDefault();
+
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+
+    const nextValue = getPointerValueForNode(event, nodeKey);
+
+    if (nextValue !== null) {
+
+      onNodeDrag?.(nodeKey, nextValue);
+
+    }
+
+  };
+
+  const handleNodePointerMove = (event, nodeKey) => {
+
+    if (!isPlayerShapeDragEnabled) return;
+
+    if (event.buttons !== 1) return;
+
+    event.preventDefault();
+
+    const nextValue = getPointerValueForNode(event, nodeKey);
+
+    if (nextValue !== null) {
+
+      onNodeDrag?.(nodeKey, nextValue);
+
+    }
+
+  };
+
   const readVariant = getReadVariant(safeReadMode);
 
   const modeCopy = READ_MODE_COPY[safeReadMode];
@@ -363,7 +453,7 @@ export default function VoiceConstellationMap({
 
       </div>
 
-      <div className="vcm-map-frame">
+      <div className="vcm-map-frame" ref={mapFrameRef}>
 
         <VoiceThreadMap
 
@@ -391,7 +481,13 @@ export default function VoiceConstellationMap({
 
         />
 
-        <div className="vcm-node-click-layer" aria-hidden="true">
+        <div
+
+          className={`vcm-node-click-layer ${isPlayerShapeDragEnabled ? 'is-draggable' : ''}`}
+
+          aria-hidden="true"
+
+        >
 
           {VOICE_NODE_ORDER.map((nodeKey) => (
 
@@ -403,9 +499,19 @@ export default function VoiceConstellationMap({
 
               className="vcm-node-click-target"
 
-              onClick={() => onNodeClick?.(nodeKey)}
+              onPointerDown={(event) => handleNodePointerDown(event, nodeKey)}
 
-              title={`${NODE_LABELS[nodeKey]} / ${NODE_SHORT_LABELS[nodeKey]}`}
+              onPointerMove={(event) => handleNodePointerMove(event, nodeKey)}
+
+              title={
+
+                isPlayerShapeDragEnabled
+
+                  ? `Drag ${NODE_LABELS[nodeKey]} along its spoke`
+
+                  : `${NODE_LABELS[nodeKey]} / ${NODE_SHORT_LABELS[nodeKey]}`
+
+              }
 
             />
 
