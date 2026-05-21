@@ -355,12 +355,12 @@
       "lineSeriesIncludes": [
         "Signature"
       ],
-      "fallbackType": "signature-model-default-needs-source-confirmation",
+      "fallbackType": "artist-signature-line-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
-      "sourceUrl": "https://www.tama.com/usa/products/snare_drums/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Signature model stock heads may vary by artist/model. Confirm exact model-level stock batter/reso head before approval."
+      "sourceUrl": "https://www.tama.com/jp/products/snare_drums/signature_snare/",
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Tama Signature group contains 6 candidates across Bill Platt, Lars Ulrich, Mike Portnoy, and Stewart Copeland signature models. The sources confirm signature model families/pages, but current evidence does not confirm exact stock batter and reso/snare-side head models consistently across all records. Keep DRAFT until exact stock heads are source-confirmed per model. Split by artist/model if stock heads vary across signature records."
     },
     {
       "ruleKey": "tama-starclassic-stock-heads-draft",
