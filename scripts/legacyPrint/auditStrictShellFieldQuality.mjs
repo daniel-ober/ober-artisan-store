@@ -446,6 +446,14 @@ function getCanonicalFields(doc) {
 
     id: doc.__id,
 
+    fieldQualityTier: doc.fieldQualityTier,
+
+    coreShellTier: doc.coreShellTier,
+
+    engineAssumptions: doc.engineAssumptions || {},
+
+    bearingEdgeNeedsVerification: doc.bearingEdgeNeedsVerification,
+
     companyName: firstNonEmpty(doc.companyName, doc['COMPANY NAME']),
 
     companyType: firstNonEmpty(doc.companyType, doc['COMPANY TYPE']),
@@ -1448,6 +1456,14 @@ function classifyShellFieldQuality(fields, thicknessCheck, edgeCheck, sourceChec
 
     isPresent(fields.shellConstruction);
 
+  const hasMetalEdgeFallback =
+
+    fields.fieldQualityTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    fields.coreShellTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    fields.engineAssumptions?.bearingEdgeFallbackApplied === true;
+
   if (criticalIssues.length > 0 || isTrueish(fields.duplicateConflict)) {
 
     return {
@@ -1461,6 +1477,32 @@ function classifyShellFieldQuality(fields, thicknessCheck, edgeCheck, sourceChec
         ? criticalIssues.join('; ')
 
         : 'unresolved duplicate conflict or critical issue flag',
+
+    };
+
+  }
+
+  if (
+
+    hasCoreIdentity &&
+
+    hasMetalEdgeFallback &&
+
+    thicknessCheck.hasValidNumericShellThickness &&
+
+    sourceCheck.hasSourceUrl &&
+
+    sourceCheck.hasSourceConfidence
+
+  ) {
+
+    return {
+
+      fieldQualityTier: 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK',
+
+      coreShellPassable: true,
+
+      reason: 'has identity, size, material, construction, valid numeric thickness, source URL, source confidence, and auditable metal-shell bearing-edge fallback',
 
     };
 
@@ -2126,6 +2168,10 @@ function buildReport(rows) {
 
         'Requires identity, size, shell material, shell construction, valid numeric shell thickness, meaningful bearing edge shape/detail, primary source URL, and source confidence. Placeholder edge objects with unknown/notVerified values do not pass.',
 
+      meaningfulCoreShellPassWithMetalEdgeFallback:
+
+        'Metal-shell exception only: requires identity, size, shell material/construction, valid numeric shell thickness, source URL, source confidence, and auditable engineAssumptions.bearingEdgeFallbackApplied metadata. This is counted separately from source-confirmed bearing-edge passes.',
+
       meaningfulStockPass:
 
         'Requires meaningful core shell pass plus hoop type, stock batter head, stock reso head, stock snare wires, and production status.',
@@ -2135,6 +2181,14 @@ function buildReport(rows) {
     fieldQualityCounts: {
 
       MEANINGFUL_CORE_SHELL_PASS: fieldQualityCounts.MEANINGFUL_CORE_SHELL_PASS || 0,
+
+      MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK: fieldQualityCounts.MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK || 0,
+
+      TOTAL_MEANINGFUL_CORE_SHELL_USABLE:
+
+        (fieldQualityCounts.MEANINGFUL_CORE_SHELL_PASS || 0) +
+
+        (fieldQualityCounts.MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK || 0),
 
       HAS_THICKNESS_BUT_EDGE_UNKNOWN: fieldQualityCounts.HAS_THICKNESS_BUT_EDGE_UNKNOWN || 0,
 
@@ -2338,6 +2392,10 @@ function buildMasterReportBackText(
 
   const corePass = fieldQualityCounts.MEANINGFUL_CORE_SHELL_PASS || 0;
 
+  const metalEdgeFallbackPass = fieldQualityCounts.MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK || 0;
+
+  const totalCoreUsable = corePass + metalEdgeFallbackPass;
+
   const thicknessButEdgeUnknown = fieldQualityCounts.HAS_THICKNESS_BUT_EDGE_UNKNOWN || 0;
 
   const edgeButThicknessMissing = fieldQualityCounts.HAS_EDGE_BUT_THICKNESS_MISSING || 0;
@@ -2382,7 +2440,11 @@ function buildMasterReportBackText(
 
     `Read-only scan of ${total} snareReferenceDrums records.`,
 
-    `Meaningful core shell pass count is ${corePass}.`,
+    `Source-confirmed meaningful core shell pass count is ${corePass}.`,
+
+    `Metal-edge fallback core shell pass count is ${metalEdgeFallbackPass}.`,
+
+    `Total meaningful core-shell usable records: ${totalCoreUsable}.`,
 
     `Closest core-shell candidates: ${thicknessButEdgeUnknown} have valid thickness but unknown/placeholder bearing edge; ${edgeButThicknessMissing} have meaningful edge but missing/invalid thickness; ${missingBoth} are missing both thickness and meaningful edge; ${identityIncomplete} have incomplete shell identity.`,
 
@@ -2396,7 +2458,7 @@ function buildMasterReportBackText(
 
     `Top meaningful stock blockers: ${stockBlockers || 'none detected'}.`,
 
-    `Recommended next step: fix placeholder/unknown bearing edge records first where shell thickness already exists, then add thickness for records with meaningful edge, then resolve records missing both fields before stock-head cleanup.`,
+    `Recommended next step: continue resolving the remaining placeholder/unknown bearing edge records where shell thickness already exists, then add thickness for records with meaningful edge, then resolve records missing both fields before stock-head cleanup.`,
 
   ].join(' ');
 
