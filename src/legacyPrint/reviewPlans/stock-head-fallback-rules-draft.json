@@ -53,12 +53,12 @@
       "lineSeriesIncludes": [
         "ProLite"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.sonor.com/drums/instruments/prolite-series",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm published stock batter/reso head models for ProLite snares before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "SONOR ProLite group contains 3 Maple candidates across 14x5, 14x6, and 14x6.5. The SONOR source confirms the ProLite series, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "sonor-vintage-series-stock-heads-draft",
@@ -151,12 +151,12 @@
       "lineSeriesIncludes": [
         "Modern Utility"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Pearl Modern Utility stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Pearl Modern Utility group contains 4 Modern Utility Steel candidates. The Pearl source confirms the Modern Utility snare family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "pearl-reference-stock-heads-draft",
@@ -165,12 +165,12 @@
       "lineSeriesIncludes": [
         "Reference"
       ],
-      "fallbackType": "historic-line-level-default-needs-source-confirmation",
+      "fallbackType": "catalog-era-reference-needs-exact-head-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2008-price-list.pdf",
       "sourceConfidence": "needsVerification",
-      "notes": "Historic Pearl Reference records need source-backed stock head confirmation before approval."
+      "notes": "Pearl Reference group contains 4 candidates across Reference Brass and Reference Cast Steel records. Current evidence is catalog/price-list based and does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed from catalog/spec documentation. Split by material if brass and cast steel stock heads vary."
     },
     {
       "ruleKey": "pearl-ultracast-stock-heads-draft",
@@ -481,12 +481,12 @@
       "lineSeriesIncludes": [
         "Genista Classic"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.premier-percussion.com/product/genista-classic-snares/",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Premier Genista Classic stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Premier Genista Classic group contains 3 Birch candidates including 100SE and standard Genista Classic snare records. The Premier source confirms the Genista Classic snare family, but current evidence does not confirm exact stock batter and reso/snare-side head models consistently across all records. Keep DRAFT until exact stock heads are source-confirmed. Split 100SE from standard Genista Classic if stock heads vary."
     },
     {
       "ruleKey": "premier-centenary-limited-stock-heads-draft",
@@ -523,12 +523,12 @@
       "lineSeriesIncludes": [
         "Brooklyn"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://gretschdrums.com/drums/brooklyn",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm Gretsch Brooklyn stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "Gretsch Brooklyn group contains 4 Brooklyn Snare candidates. The Gretsch source confirms the Brooklyn snare family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed."
     },
     {
       "ruleKey": "gretsch-signature-stock-heads-draft",
@@ -551,12 +551,12 @@
       "lineSeriesIncludes": [
         "DW MFG / True-Cast"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "secondary-source-only-needs-official-confirmation",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.musicradar.com/drums/dw-mfg-true-cast-14x4-bell-bronze-snare",
       "sourceConfidence": "needsVerification",
-      "notes": "Confirm DW True-Cast stock batter/reso head models from DW or reliable product documentation before approval."
+      "notes": "DW MFG / True-Cast group contains 4 Bell Bronze candidates across 14x4, 14x5.5, 14x6.5, and 14x8. Current evidence is a secondary source and does not confirm exact stock batter and reso/snare-side head models across all records. Keep DRAFT until exact stock heads are confirmed from DW/PDP documentation or another approval-safe source."
     },
     {
       "ruleKey": "candc-12th-and-vine-stock-heads-draft",
@@ -565,12 +565,12 @@
       "lineSeriesIncludes": [
         "12th & Vine"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.candcdrumsusa.com/12th-and-vine",
-      "sourceConfidence": "needsVerification",
-      "notes": "Confirm C&C 12th & Vine stock batter/reso head models before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "C&C 12th & Vine group contains 3 candidates across Mahogany/Poplar/Mahogany, Maple/Poplar/Maple, and Walnut/Poplar/Walnut records. The C&C source confirms the 12th & Vine family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock heads are source-confirmed. Split by shell recipe only if stock heads vary across variants."
     },
     {
       "ruleKey": "pork-pie-little-squealer-metal-stock-heads-draft",
