@@ -222,11 +222,17 @@ function main() {
 
           .filter((row) => (row.companyName || 'UNKNOWN') === companyName)
 
-          .slice(0, 25)
+          .sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0))
 
           .map(compact)
 
       })),
+
+    allCandidates: stockHeadMissing
+
+      .sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0))
+
+      .map(compact),
 
     topPriorityCandidates: stockHeadMissing
 
