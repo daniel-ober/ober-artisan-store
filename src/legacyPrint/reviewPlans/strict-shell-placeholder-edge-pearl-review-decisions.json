@@ -1,0 +1,207 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_PEARL_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:00:14.036Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-pearl-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Pearl",
+  "summary": {
+    "candidateCount": 41,
+    "lineGroupCount": 8,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 8,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Pearl placeholder-edge records remain blocked pending official/catalog bearing-edge source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "candidateCount": 16,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 10,
+      "sampleRecordIds": [
+        "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+        "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+        "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+        "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+        "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+        "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+        "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+        "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+        "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+        "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "candidateCount": 8,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 8,
+      "sampleRecordIds": [
+        "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+        "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+        "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+        "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+        "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+        "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+        "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+        "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Reference",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+        "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+        "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+        "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Decade Maple",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+        "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Masters Maple Complete",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+        "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Ultracast",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+        "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Signature",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Pearl page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material, ply count, shell line, or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Pearl bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell material, shell line, ply count, or shell thickness as bearing-edge confirmation.",
+    "Do not promote placeholder/unknown bearing edges to source-confirmed meaningful edge without reviewed source evidence."
+  ],
+  "nextRecommendedStep": {
+    "task": "Move to the next highest-count company in the placeholder-edge queue: AHEAD.",
+    "constraint": "Create review packet only. No Firestore writes."
+  }
+}
