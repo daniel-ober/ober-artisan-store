@@ -17,6 +17,14 @@ const {
 
   SHELL_CONSTRUCTION_EFFECTS,
 
+  SHELL_LAYUP_EFFECTS,
+
+  REINFORCEMENT_RING_EFFECTS,
+
+  PLY_COUNT_EFFECTS,
+
+  FINISH_TREATMENT_EFFECTS,
+
   BEARING_EDGE_EFFECTS,
 
   HOOP_EFFECTS,
@@ -646,6 +654,62 @@ const scoreSnareVoice = record => {
     weight: COMPONENT_WEIGHTS.shellConstruction,
 
     source: `shellConstruction:${input.families.shellConstruction}`,
+
+    drivers
+
+  });
+
+  addEffect({
+
+    score,
+
+    effect: SHELL_LAYUP_EFFECTS[input.families.shellLayup],
+
+    weight: COMPONENT_WEIGHTS.shellLayup,
+
+    source: `shellLayup:${input.families.shellLayup}`,
+
+    drivers
+
+  });
+
+  addEffect({
+
+    score,
+
+    effect: REINFORCEMENT_RING_EFFECTS[input.families.reinforcementRings],
+
+    weight: COMPONENT_WEIGHTS.reinforcementRings,
+
+    source: `reinforcementRings:${input.families.reinforcementRings}`,
+
+    drivers
+
+  });
+
+  addEffect({
+
+    score,
+
+    effect: PLY_COUNT_EFFECTS[input.families.plyCount],
+
+    weight: COMPONENT_WEIGHTS.plyCount,
+
+    source: `plyCount:${input.numeric.plyCount || input.families.plyCount || 'unknown'}`,
+
+    drivers
+
+  });
+
+  addEffect({
+
+    score,
+
+    effect: FINISH_TREATMENT_EFFECTS[input.families.finishTreatment],
+
+    weight: COMPONENT_WEIGHTS.finishTreatment,
+
+    source: `finishTreatment:${input.families.finishTreatment}`,
 
     drivers
 

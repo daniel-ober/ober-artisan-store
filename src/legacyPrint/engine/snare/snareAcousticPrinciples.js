@@ -11,6 +11,14 @@ const COMPONENT_WEIGHTS = {
 
   shellConstruction: 0.78,
 
+  shellLayup: 0.24,
+
+  reinforcementRings: 0.26,
+
+  plyCount: 0.18,
+
+  finishTreatment: 0.12,
+
   diameter: 0.62,
 
   depth: 0.66,
@@ -680,6 +688,278 @@ const SHELL_CONSTRUCTION_EFFECTS = {
   otherConstruction: makeProfile({}),
 
   unknownConstruction: makeProfile({})
+
+};
+
+const SHELL_LAYUP_EFFECTS = {
+
+  maplePoplarMapleLayup: makeProfile({
+
+    attack: -0.08,
+
+    brightness: -0.12,
+
+    sustain: 0.18,
+
+    warmth: 0.32,
+
+    sensitivity: 0.04,
+
+    control: 0.04
+
+  }),
+
+  mahoganyPoplarMahoganyLayup: makeProfile({
+
+    attack: -0.12,
+
+    brightness: -0.22,
+
+    sustain: 0.22,
+
+    warmth: 0.42,
+
+    sensitivity: 0.02,
+
+    control: 0.02
+
+  }),
+
+  allMapleLayup: makeProfile({
+
+    attack: 0.08,
+
+    brightness: 0.04,
+
+    projection: 0.04,
+
+    sustain: 0.06,
+
+    warmth: 0.08,
+
+    sensitivity: 0.06,
+
+    control: 0.02
+
+  }),
+
+  hybridLayup: makeProfile({
+
+    attack: 0.05,
+
+    brightness: 0.02,
+
+    projection: 0.06,
+
+    sustain: 0.06,
+
+    warmth: 0.08,
+
+    sensitivity: 0.02,
+
+    control: 0.04
+
+  }),
+
+  otherLayup: makeProfile({}),
+
+  unknownLayup: makeProfile({})
+
+};
+
+const REINFORCEMENT_RING_EFFECTS = {
+
+  reinforcementRings: makeProfile({
+
+    attack: -0.04,
+
+    brightness: -0.08,
+
+    projection: 0.06,
+
+    sustain: 0.24,
+
+    warmth: 0.32,
+
+    sensitivity: -0.04,
+
+    control: 0.18
+
+  }),
+
+  soundFocusRings: makeProfile({
+
+    attack: 0.02,
+
+    brightness: -0.04,
+
+    projection: 0.08,
+
+    sustain: 0.18,
+
+    warmth: 0.22,
+
+    sensitivity: 0,
+
+    control: 0.22
+
+  }),
+
+  otherRings: makeProfile({
+
+    sustain: 0.12,
+
+    warmth: 0.14,
+
+    control: 0.1
+
+  }),
+
+  noReinforcementRings: makeProfile({}),
+
+  unknownRings: makeProfile({})
+
+};
+
+const PLY_COUNT_EFFECTS = {
+
+  threePlyOrLess: makeProfile({
+
+    attack: -0.08,
+
+    brightness: -0.1,
+
+    sustain: 0.28,
+
+    warmth: 0.38,
+
+    sensitivity: 0.1,
+
+    control: -0.04
+
+  }),
+
+  fourToFivePly: makeProfile({
+
+    brightness: -0.04,
+
+    sustain: 0.16,
+
+    warmth: 0.22,
+
+    sensitivity: 0.08,
+
+    control: 0.02
+
+  }),
+
+  sixToSevenPly: makeProfile({
+
+    attack: 0.08,
+
+    brightness: 0.04,
+
+    projection: 0.06,
+
+    sustain: 0.02,
+
+    warmth: 0.04,
+
+    sensitivity: 0.02,
+
+    control: 0.1
+
+  }),
+
+  eightToTenPly: makeProfile({
+
+    attack: 0.14,
+
+    brightness: 0.06,
+
+    projection: 0.12,
+
+    sustain: -0.08,
+
+    warmth: -0.04,
+
+    sensitivity: -0.04,
+
+    control: 0.18
+
+  }),
+
+  elevenPlusPly: makeProfile({
+
+    attack: 0.18,
+
+    brightness: 0.08,
+
+    projection: 0.18,
+
+    sustain: -0.14,
+
+    warmth: -0.08,
+
+    sensitivity: -0.08,
+
+    control: 0.24
+
+  }),
+
+  unknownPlyCount: makeProfile({})
+
+};
+
+const FINISH_TREATMENT_EFFECTS = {
+
+  lacquerOrUrethaneFinish: makeProfile({
+
+    attack: 0.02,
+
+    brightness: 0.02,
+
+    sustain: -0.04,
+
+    warmth: -0.02,
+
+    control: 0.04
+
+  }),
+
+  oilWaxFinish: makeProfile({
+
+    sustain: 0.04,
+
+    warmth: 0.04,
+
+    sensitivity: 0.02
+
+  }),
+
+  sealedDecorativeFinish: makeProfile({
+
+    attack: 0.02,
+
+    sustain: -0.06,
+
+    control: 0.04
+
+  }),
+
+  lightNaturalFinish: makeProfile({
+
+    sustain: 0.04,
+
+    warmth: 0.03,
+
+    sensitivity: 0.02
+
+  }),
+
+  otherFinishTreatment: makeProfile({}),
+
+  unknownFinishTreatment: makeProfile({})
 
 };
 
@@ -1394,6 +1674,14 @@ module.exports = {
   SHELL_MATERIAL_EFFECTS,
 
   SHELL_CONSTRUCTION_EFFECTS,
+
+  SHELL_LAYUP_EFFECTS,
+
+  REINFORCEMENT_RING_EFFECTS,
+
+  PLY_COUNT_EFFECTS,
+
+  FINISH_TREATMENT_EFFECTS,
 
   BEARING_EDGE_EFFECTS,
 
