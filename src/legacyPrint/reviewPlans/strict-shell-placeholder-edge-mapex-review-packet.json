@@ -1,0 +1,334 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_MAPEX_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:59:11.234Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Mapex",
+  "reviewScope": "Mapex records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 93,
+    "lineGroupCount": 4,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate reviewed decision file before any patch plan."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "candidateCount": 84,
+      "sourceConfidenceCounts": {
+        "Medium": 63,
+        "Low": 21
+      },
+      "researchQuestion": "Can Mapex Black Panther Archive / Catalog Era snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material or thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 10x5.5 — 10x5.5",
+          "modelName": "Birdseye Maple 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 12x5.5 — 12x5.5",
+          "modelName": "Birdseye Maple 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 13x3.5 — 13x3.5",
+          "modelName": "Birdseye Maple 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x3.5 — 14x3.5",
+          "modelName": "Birdseye Maple 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x5.5 — 14x5.5",
+          "modelName": "Birdseye Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x5 — 14x5",
+          "modelName": "Birdseye Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x6.5 — 14x6.5",
+          "modelName": "Birdseye Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x7 — 14x7",
+          "modelName": "Birdseye Maple 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x8 — 14x8",
+          "modelName": "Birdseye Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Brass Master 12x5.5 — 12x5.5",
+          "modelName": "Brass Master 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "candidateCount": 5,
+      "sourceConfidenceCounts": {
+        "Low": 5
+      },
+      "researchQuestion": "Can Mapex Black Panther Archive / Unresolved Variant snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material or thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Birch Variant 2 — 14x6.5",
+          "modelName": "Unresolved Birch Variant 2",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Brass Variant 5 — 14x5.5",
+          "modelName": "Unresolved Brass Variant 5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Maple Variant 1 — 14x5.5",
+          "modelName": "Unresolved Maple Variant 1",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Steel Variant 4 — 12x5.5",
+          "modelName": "Unresolved Steel Variant 4",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellThickness": "1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Walnut Variant 3 — 13x6",
+          "modelName": "Unresolved Walnut Variant 3",
+          "diameter": "13",
+          "depth": "6",
+          "shellMaterial": "Walnut",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        }
+      ]
+    },
+    {
+      "lineSeries": "Signature / Artist",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestion": "Can Mapex Signature / Artist snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material or thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+          "label": "Mapex — Signature / Artist — Chris Adler Original 12x5.5 — 12x5.5",
+          "modelName": "Chris Adler Original 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellMaterial": "Walnut",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+          "label": "Mapex — Signature / Artist — Chris Adler Warbird — 12x5.5",
+          "modelName": "Chris Adler Warbird",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Walnut",
+          "shellThickness": "5.1",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        },
+        {
+          "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+          "label": "Mapex — Signature / Artist — Matt Halpern Wraith — 14x6",
+          "modelName": "Matt Halpern Wraith",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Brass",
+          "shellThickness": "1.2",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+          "sourceConfidence": "Medium",
+          "priorityScore": 275
+        }
+      ]
+    },
+    {
+      "lineSeries": "BP Design Lab",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "High": 1
+      },
+      "researchQuestion": "Can Mapex BP Design Lab snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material or thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+          "label": "Mapex — BP Design Lab — Equinox — 14x5",
+          "modelName": "Equinox",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellThickness": "6",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceConfidence": "High",
+          "priorityScore": 325
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Mapex line groups for official/catalog bearing edge evidence and create a decisions file.",
+    "constraint": "Decisions file only. No Firestore writes."
+  }
+}
