@@ -1,0 +1,173 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_AHEAD_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:00:40.313Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "AHEAD",
+  "reviewScope": "AHEAD records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 33,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from bell brass, cast/solid metal, shell thickness, or S-Hoop usage alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared AHEAD line-level bearing edge spec, prepare a separate reviewed decisions file before any patch plan."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Ahead Snares",
+      "candidateCount": 33,
+      "sourceConfidenceCounts": {
+        "High": 22,
+        "Medium": 10,
+        "Low": 1
+      },
+      "researchQuestion": "Can AHEAD Ahead Snares snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official AHEAD/Big Bang Distribution page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, or hoop type.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+          "label": "AHEAD — Ahead Snares — Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware — 14x6",
+          "modelName": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+          "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass 14x6 with Black Trick Throw Off — 14x6",
+          "modelName": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum-with-black-trick-throw-off/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+          "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass Snare Drum 13x6 — 13x6",
+          "modelName": "Black Chrome on Bell Brass Snare Drum 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+          "label": "AHEAD — Ahead Snares — Black Chrome on Bell Brass Snare Drum 14x6 — 14x6",
+          "modelName": "Black Chrome on Bell Brass Snare Drum 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-black-chrome-on-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+          "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass 13x6 — 13x6",
+          "modelName": "Bright Polished 3mm Bell Brass 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+          "label": "AHEAD — Ahead Snares — Bright Polished 3mm Bell Brass Piccolo 14x4 — 14x4",
+          "modelName": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-piccolo-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+          "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Piccolo Snare Drum 14x4 — 14x4",
+          "modelName": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-piccolo-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+          "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Snare Drum 13x6 — 13x6",
+          "modelName": "Bright Polished Bell Brass Snare Drum 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+          "label": "AHEAD — Ahead Snares — Bright Polished Bell Brass Snare Drum 14x6 — 14x6",
+          "modelName": "Bright Polished Bell Brass Snare Drum 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-bright-polished-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        },
+        {
+          "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+          "label": "AHEAD — Ahead Snares — Polished Bell Brass Snare Drum 14x6 — 14x6",
+          "modelName": "Polished Bell Brass Snare Drum 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Bell Brass",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/ahead-polished-bell-brass-snare-drum/",
+          "sourceConfidence": "High",
+          "priorityScore": 1705
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review AHEAD line groups for official/distributor bearing edge evidence and create a decisions file.",
+    "constraint": "Decisions file only. No Firestore writes."
+  }
+}
