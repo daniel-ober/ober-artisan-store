@@ -10,9 +10,29 @@ const PLAN_PATH =
 
   'src/legacyPrint/reviewPlans/snare-reference-notes-only-apply-plan-latest.json';
 
+const SERVICE_ACCOUNT_PATH =
+
+  process.argv.find((arg) => arg.startsWith('--serviceAccount='))?.replace('--serviceAccount=', '') ||
+
+  '';
+
 const APPLY = process.argv.includes('--apply');
 
+const VERIFY_FIRESTORE = process.argv.includes('--verifyFirestore') || APPLY;
+
+const CONFIRM =
+
+  process.argv.find((arg) => arg.startsWith('--confirm='))?.replace('--confirm=', '') ||
+
+  '';
+
+const LIMIT_ARG = process.argv.find((arg) => arg.startsWith('--limit='))?.replace('--limit=', '');
+
+const LIMIT = LIMIT_ARG ? Number(LIMIT_ARG) : null;
+
 const COLLECTION = 'snareReferenceDrums';
+
+const REQUIRED_CONFIRM = 'APPLY_NOTES_ONLY';
 
 function fail(message) {
 
@@ -31,6 +51,20 @@ function readJson(filePath) {
   }
 
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+
+}
+
+function chunkArray(items, size) {
+
+  const chunks = [];
+
+  for (let i = 0; i < items.length; i += size) {
+
+    chunks.push(items.slice(i, i + size));
+
+  }
+
+  return chunks;
 
 }
 
@@ -80,6 +114,18 @@ function assertPlanShape(plan) {
 
     }
 
+    if (!update.id) {
+
+      fail(`Update is missing id: ${JSON.stringify(update).slice(0, 300)}`);
+
+    }
+
+    if (!update.set.notesOnMissingData || typeof update.set.notesOnMissingData !== 'string') {
+
+      fail(`Update has missing/invalid notesOnMissingData: ${update.id}`);
+
+    }
+
   }
 
 }
@@ -120,43 +166,269 @@ function summarize(updates) {
 
 }
 
-const plan = readJson(path.resolve(PLAN_PATH));
+function initFirebaseAdmin() {
 
-assertPlanShape(plan);
+  if (!SERVICE_ACCOUNT_PATH) {
 
-const updates = plan.groups.notesOnly;
+    fail('Missing --serviceAccount=<path>. Refusing to initialize Firebase Admin without an explicit service account.');
 
-const summary = summarize(updates);
+  }
 
-console.log('\nLEGACYPRINT SNARE REFERENCE NOTES-ONLY APPLY');
+  const absoluteServiceAccountPath = path.resolve(SERVICE_ACCOUNT_PATH);
 
-console.log('==================================================');
+  const serviceAccount = readJson(absoluteServiceAccountPath);
 
-console.log('Plan:', PLAN_PATH);
+  if (!serviceAccount.project_id || !serviceAccount.client_email || !serviceAccount.private_key) {
 
-console.log('Collection:', COLLECTION);
+    fail(`Invalid service account file: ${absoluteServiceAccountPath}`);
 
-console.log('Apply flag:', APPLY);
+  }
 
-console.log('\nSummary:');
+  const admin = require('firebase-admin');
 
-console.log(JSON.stringify(summary, null, 2));
+  if (!admin.apps.length) {
 
-if (summary.emptyNotes.length) {
+    admin.initializeApp({
 
-  fail(`Found ${summary.emptyNotes.length} updates with missing/invalid notesOnMissingData.`);
+      credential: admin.credential.cert(serviceAccount),
+
+      projectId: serviceAccount.project_id
+
+    });
+
+  }
+
+  console.log('\nFirebase Admin initialized:');
+
+  console.log(JSON.stringify({
+
+    projectId: serviceAccount.project_id,
+
+    clientEmail: serviceAccount.client_email,
+
+    serviceAccountPath: SERVICE_ACCOUNT_PATH
+
+  }, null, 2));
+
+  return admin;
 
 }
 
-if (!APPLY) {
+async function verifyFirestoreDocs({ db, updates }) {
 
-  console.log('\n✅ Dry run only. No Firestore writes were attempted.');
+  const refs = updates.map((update) => db.collection(COLLECTION).doc(update.id));
 
-  console.log('\nTo apply later, this script still needs Firebase Admin wiring.');
+  const snapshots = [];
 
-  process.exit(0);
+  for (const refChunk of chunkArray(refs, 300)) {
+
+    const docs = await db.getAll(...refChunk);
+
+    snapshots.push(...docs);
+
+  }
+
+  const missing = [];
+
+  const existing = [];
+
+  snapshots.forEach((snapshot, index) => {
+
+    const update = updates[index];
+
+    if (!snapshot.exists) {
+
+      missing.push({
+
+        id: update.id,
+
+        label: update.label,
+
+        companyName: update.companyName
+
+      });
+
+    } else {
+
+      existing.push(update.id);
+
+    }
+
+  });
+
+  return {
+
+    expected: updates.length,
+
+    existing: existing.length,
+
+    missing: missing.length,
+
+    missingRecords: missing
+
+  };
 
 }
 
-fail('Apply mode is intentionally blocked until Firebase Admin wiring and credentials path are added.');
+async function applyNotesOnly({ db, updates }) {
+
+  let written = 0;
+
+  for (const updateChunk of chunkArray(updates, 450)) {
+
+    const batch = db.batch();
+
+    for (const update of updateChunk) {
+
+      const ref = db.collection(COLLECTION).doc(update.id);
+
+      batch.update(ref, {
+
+        notesOnMissingData: update.set.notesOnMissingData
+
+      });
+
+    }
+
+    await batch.commit();
+
+    written += updateChunk.length;
+
+    console.log(`Committed batch. Total written: ${written}/${updates.length}`);
+
+  }
+
+  return written;
+
+}
+
+async function main() {
+
+  const plan = readJson(path.resolve(PLAN_PATH));
+
+  assertPlanShape(plan);
+
+  let updates = plan.groups.notesOnly;
+
+  if (LIMIT != null) {
+
+    if (!Number.isFinite(LIMIT) || LIMIT <= 0) {
+
+      fail(`Invalid --limit value: ${LIMIT_ARG}`);
+
+    }
+
+    updates = updates.slice(0, LIMIT);
+
+  }
+
+  const summary = summarize(updates);
+
+  console.log('\nLEGACYPRINT SNARE REFERENCE NOTES-ONLY APPLY');
+
+  console.log('==================================================');
+
+  console.log('Plan:', PLAN_PATH);
+
+  console.log('Collection:', COLLECTION);
+
+  console.log('Apply flag:', APPLY);
+
+  console.log('Verify Firestore:', VERIFY_FIRESTORE);
+
+  console.log('Limit:', LIMIT ?? 'none');
+
+  console.log('\nSummary:');
+
+  console.log(JSON.stringify(summary, null, 2));
+
+  if (summary.emptyNotes.length) {
+
+    fail(`Found ${summary.emptyNotes.length} updates with missing/invalid notesOnMissingData.`);
+
+  }
+
+  if (!VERIFY_FIRESTORE) {
+
+    console.log('\n✅ Local dry run only. No Firebase Admin initialization. No Firestore reads/writes attempted.');
+
+    console.log('\nTo verify records exist without writing:');
+
+    console.log(`node ${process.argv[1]} --verifyFirestore --serviceAccount=backend/serviceAccountKey-stg.json`);
+
+    process.exit(0);
+
+  }
+
+  const admin = initFirebaseAdmin();
+
+  const db = admin.firestore();
+
+  console.log('\nVerifying Firestore document existence...');
+
+  const verification = await verifyFirestoreDocs({ db, updates });
+
+  console.log('\nFirestore verification:');
+
+  console.log(JSON.stringify({
+
+    expected: verification.expected,
+
+    existing: verification.existing,
+
+    missing: verification.missing,
+
+    missingSample: verification.missingRecords.slice(0, 20)
+
+  }, null, 2));
+
+  if (verification.missing > 0) {
+
+    fail(`Firestore verification failed. Missing records: ${verification.missing}`);
+
+  }
+
+  if (!APPLY) {
+
+    console.log('\n✅ Firestore verification dry run passed. No Firestore writes were attempted.');
+
+    console.log('\nTo apply notes only:');
+
+    console.log(`node ${process.argv[1]} --apply --serviceAccount=backend/serviceAccountKey-stg.json --confirm=${REQUIRED_CONFIRM}`);
+
+    process.exit(0);
+
+  }
+
+  if (CONFIRM !== REQUIRED_CONFIRM) {
+
+    fail(`Apply requested, but confirmation is missing. Required: --confirm=${REQUIRED_CONFIRM}`);
+
+  }
+
+  console.log('\nApplying notesOnMissingData only...');
+
+  const written = await applyNotesOnly({ db, updates });
+
+  console.log('\n✅ Notes-only Firestore apply complete.');
+
+  console.log(JSON.stringify({
+
+    collection: COLLECTION,
+
+    written,
+
+    fieldUpdated: 'notesOnMissingData'
+
+  }, null, 2));
+
+}
+
+main().catch((error) => {
+
+  console.error(error);
+
+  process.exit(1);
+
+});
 
