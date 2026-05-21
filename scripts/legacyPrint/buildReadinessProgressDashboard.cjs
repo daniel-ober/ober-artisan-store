@@ -139,15 +139,29 @@ const ludwigHeadOnlyWriteCount =
 
   readJson('src/legacyPrint/reviewPlans/ludwig-head-only-exact-head-write-confirmation.json', {})?.summary?.actualWriteCount || 0;
 
+const productionStatusInitialWriteCount =
+
+  readJson('src/legacyPrint/reviewPlans/production-status-only-stock-readiness-write-confirmation.json', {})?.summary?.actualWriteCount || 0;
+
+const remainingProductionStatusWriteCount =
+
+  readJson('src/legacyPrint/reviewPlans/remaining-production-status-only-write-confirmation.json', {})?.summary?.actualWriteCount || 0;
+
+const productionStatusTotalWriteCount =
+
+  productionStatusInitialWriteCount + remainingProductionStatusWriteCount;
+
 const completedWrites = {
 
   metalEdgeFallbackWrites:
 
     readJson('src/legacyPrint/reviewPlans/metal-edge-fallback-firestore-write-confirmation.json', {})?.summary?.actualWriteCount || 0,
 
-  productionStatusWrites:
+  productionStatusWrites: productionStatusTotalWriteCount,
 
-    readJson('src/legacyPrint/reviewPlans/production-status-only-stock-readiness-write-confirmation.json', {})?.summary?.actualWriteCount || 0,
+  productionStatusInitialWrites: productionStatusInitialWriteCount,
+
+  remainingProductionStatusWrites: remainingProductionStatusWriteCount,
 
   stockHeadExactWrites: stockHeadExactWriteCount,
 
@@ -157,7 +171,7 @@ const completedWrites = {
 
     (readJson('src/legacyPrint/reviewPlans/metal-edge-fallback-firestore-write-confirmation.json', {})?.summary?.actualWriteCount || 0) +
 
-    (readJson('src/legacyPrint/reviewPlans/production-status-only-stock-readiness-write-confirmation.json', {})?.summary?.actualWriteCount || 0) +
+    productionStatusTotalWriteCount +
 
     stockHeadExactWriteCount +
 

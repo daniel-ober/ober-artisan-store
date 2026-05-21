@@ -1,6 +1,6 @@
 {
   "status": "LEGACYPRINT_READINESS_PROGRESS_DASHBOARD_AND_NEXT_BATCHES_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T09:45:40.490Z",
+  "generatedAt": "2026-05-21T09:46:18.130Z",
   "collectionName": "snareReferenceDrums",
   "noFirestoreWrites": true,
   "latestAudits": {
@@ -11,10 +11,12 @@
     "totalRecordsScanned": 1551,
     "completedWrites": {
       "metalEdgeFallbackWrites": 124,
-      "productionStatusWrites": 27,
+      "productionStatusWrites": 28,
+      "productionStatusInitialWrites": 27,
+      "remainingProductionStatusWrites": 1,
       "stockHeadExactWrites": 3,
       "ludwigHeadOnlyExactWrites": 8,
-      "totalControlledWrites": 162
+      "totalControlledWrites": 163
     },
     "fallbackTierAuditCheck": {
       "passableCoreShellWithMetalEdgeFallback": 187,
