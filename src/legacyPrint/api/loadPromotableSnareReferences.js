@@ -23,6 +23,140 @@ const titleCase = value =>
 
     .replace(/\b\w/g, char => char.toUpperCase());
 
+const normalizeMaterialLabel = value => {
+
+  const raw = String(value || '').trim();
+
+  const key = raw
+
+    .toLowerCase()
+
+    .replace(/[\/,_-]+/g, ' ')
+
+    .replace(/\s+/g, ' ')
+
+    .trim();
+
+  const materialMap = {
+
+    acrylic: 'Acrylic',
+
+    aluminum: 'Aluminum',
+
+    aluminium: 'Aluminum',
+
+    ash: 'Ash',
+
+    beech: 'Beech',
+
+    birch: 'Birch',
+
+    brass: 'Brass',
+
+    'bell brass': 'Bell Brass',
+
+    bronze: 'Bronze',
+
+    bubinga: 'Bubinga',
+
+    cherry: 'Cherry',
+
+    copper: 'Copper',
+
+    mahogany: 'Mahogany',
+
+    maple: 'Maple',
+
+    'maple poplar': 'Maple/Poplar',
+
+    'mahogany poplar': 'Mahogany/Poplar',
+
+    'solid maple': 'Maple',
+
+    cordia: 'Cordia',
+
+    oak: 'Oak',
+
+    'phosphor bronze': 'Phosphor Bronze',
+
+    poplar: 'Poplar',
+
+    rosewood: 'Rosewood',
+
+    'stainless steel': 'Stainless Steel',
+
+    steel: 'Steel',
+
+    walnut: 'Walnut',
+
+    wood: 'Wood',
+
+  };
+
+  return materialMap[key] || titleCase(raw);
+
+};
+
+const normalizeConstructionLabel = value => {
+
+  const raw = String(value || '').trim();
+
+  const key = raw
+
+    .toLowerCase()
+
+    .replace(/[\/,_-]+/g, ' ')
+
+    .replace(/\s+/g, ' ')
+
+    .trim();
+
+  const constructionMap = {
+
+    cast: 'Cast',
+
+    metal: 'Metal',
+
+    'cast metal': 'Cast Metal',
+
+    'cast metal shell': 'Cast Metal',
+
+    'seamless metal shell': 'Seamless Metal',
+
+    'beaded metal shell': 'Beaded Metal',
+
+    ply: 'Ply',
+
+    'ply shell': 'Ply',
+
+    'ply with reinforcement rings': 'Ply w/ Reinforcement Rings',
+
+    acrylic: 'Acrylic',
+
+    hybrid: 'Hybrid',
+
+    seamless: 'Seamless',
+
+    segmented: 'Segmented',
+
+    'solid shell': 'Solid Shell',
+
+    solid: 'Solid Shell',
+
+    stave: 'Stave',
+
+    'steam bent': 'Steam-Bent',
+
+    steambent: 'Steam-Bent',
+
+    'single ply': 'Single-Ply',
+
+  };
+
+  return constructionMap[key] || titleCase(raw);
+
+};
+
 const getAuditRecords = () => [
 
   ...(promotableAudit.alreadyPromoted || []),
@@ -143,31 +277,39 @@ const getDepth = record =>
 
 const getShellMaterial = record =>
 
-  record.shellMaterial1 ||
+  normalizeMaterialLabel(
 
-  record.shellMaterial ||
+    record.shellMaterial1 ||
 
-  record.primaryShellMaterial ||
+      record.shellMaterial ||
 
-  record.SHELL_MATERIAL ||
+      record.primaryShellMaterial ||
 
-  record['SHELL MATERIAL 1'] ||
+      record.SHELL_MATERIAL ||
 
-  record['SHELL MATERIAL'] ||
+      record['SHELL MATERIAL 1'] ||
 
-  '';
+      record['SHELL MATERIAL'] ||
+
+      ''
+
+  );
 
 const getShellConstruction = record =>
 
-  record.shellConstruction ||
+  normalizeConstructionLabel(
 
-  record.construction ||
+    record.shellConstruction ||
 
-  record.SHELL_CONSTRUCTION ||
+      record.construction ||
 
-  record['SHELL CONSTRUCTION'] ||
+      record.SHELL_CONSTRUCTION ||
 
-  '';
+      record['SHELL CONSTRUCTION'] ||
+
+      ''
+
+  );
 
 const getSearchHaystack = record =>
 
