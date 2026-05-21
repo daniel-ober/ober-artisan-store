@@ -1,0 +1,949 @@
+{
+  "status": "LUDWIG_HEAD_ONLY_EXACT_EXTRACTION_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:43:40.730Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/head-only-ludwig-source-evidence-packet.json",
+  "collectionName": "snareReferenceDrums",
+  "noFirestoreWrites": true,
+  "summary": {
+    "candidateCount": 8,
+    "patchableCount": 8,
+    "ambiguousCount": 0,
+    "byExtractionDecision": {
+      "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO": 8
+    },
+    "firestoreWrites": 0
+  },
+  "patchable": [
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Imperial Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Tube Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Tube Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    }
+  ],
+  "ambiguous": [],
+  "decisions": [
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Imperial Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 5x14 Tube Lugs",
+      "diameter": "14",
+      "depth": "5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "modelName": "Supraphonic 6.5x14 Tube Lugs",
+      "diameter": "14",
+      "depth": "6.5",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/supraphonic",
+      "evidenceTier": "SOURCE_PAGE_HAS_BATTER_AND_RESO_HEAD_EVIDENCE",
+      "extractedStockBatterHead": "Ludwig Weather Master Medium Coated",
+      "extractedStockResoHead": "Ludwig Weather Master X-Thin Snare Side",
+      "extractedBatterCandidates": [
+        "Ludwig Weather Master Medium Coated"
+      ],
+      "extractedResoCandidates": [
+        "Ludwig Weather Master X-Thin Snare Side"
+      ],
+      "extractionMatchedKeys": [
+        "Ludwig Weather Master Medium Coated:batter",
+        "Ludwig Weather Master X-Thin Snare Side:reso"
+      ],
+      "extractionDecision": "AUTO_PATCHABLE_EXACT_BATTER_AND_RESO",
+      "snippets": [
+        {
+          "term": "coated",
+          "snippet": "will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM"
+        },
+        {
+          "term": "clear",
+          "snippet": "you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic"
+        },
+        {
+          "term": "snare side",
+          "snippet": "ed it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6"
+        },
+        {
+          "term": "resonant",
+          "snippet": "y, Ludwig Supraphonic is the snare choice of the pros. The USA-made chrome-plated, seamless, beaded aluminum shell produces a bright, crisp attack with the perfect balance of full resonant tone and snare crack. From Jazz to Metal, Ludwig's Supraphonic 400s provide the perfect sound in the studio or on the stage.With your choice of Imperial or Tube Lugs, Smooth or Hammered Shells, the Supraphonic will give you what you need when you need it. Fea"
+        },
+        {
+          "term": "head",
+          "snippet": "ive you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402)"
+        },
+        {
+          "term": "head",
+          "snippet": "ures 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supraphonic (LM402K) 6.5x14"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "mered Shells, the Supraphonic will give you what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" S"
+        },
+        {
+          "term": "ludwig weather master",
+          "snippet": "ou what you need when you need it. Features 1.7mm Seamless Aluminum Shell 2.3mm Steel Triple Flanged Hoops P88AC Throw Off P35P Butt Plate Ludwig Weather Master Medium Coated Head Ludwig Weather Master Clear Snare Side Head 10 lugs Supraphonic Finishes Gallery 5x14\" Supraphonic (LM400) 5x14\" Hammered Supraphonic (LM400K) 5x14\" Hammered Supraphonic w/Tube Lugs (LM400KT) 5x14\" Supraphonic w/Tube Lugs (LM400T) 6.5x14\" Supraphonic (LM402) 6.5x14\" Hammered Supra"
+        }
+      ],
+      "approvedForFirestoreWrite": false
+    }
+  ]
+}
