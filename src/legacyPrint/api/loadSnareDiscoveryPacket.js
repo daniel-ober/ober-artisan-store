@@ -1,25 +1,29 @@
 
 import discoveryPreviewPacket from '../reviewPlans/snare-discovery-packet-api-preview-v01.json';
 
-const REFERENCE_TO_PREVIEW_MATCH = {
+const PREVIEW_TARGET_ALIASES = {
 
-  heritage: 'acrolite',
+  heritage: 'ludwig-acrolite',
 
-  'black-beauty': 'black-beauty',
+  acrolite: 'ludwig-acrolite',
 
-  brooklyn: 'true-cast',
+  'black-beauty': 'ludwig-black-beauty',
+
+  brooklyn: 'dw-true-cast-bronze',
+
+  'true-cast': 'dw-true-cast-bronze',
 
 };
 
-const normalizeReferenceSearchTerm = selectedReferenceId =>
+const normalizePreviewLookupId = lookupId =>
 
-  REFERENCE_TO_PREVIEW_MATCH[selectedReferenceId] || selectedReferenceId || 'acrolite';
+  PREVIEW_TARGET_ALIASES[lookupId] || lookupId || 'ludwig-acrolite';
 
-const getPreviewExamplePacket = (previewPacket, selectedReferenceId) => {
+const getPreviewExamplePacket = (previewPacket, lookupId) => {
 
   const examples = previewPacket?.examples || [];
 
-  const searchTerm = normalizeReferenceSearchTerm(selectedReferenceId);
+  const normalizedLookupId = normalizePreviewLookupId(lookupId);
 
   const found =
 
@@ -29,7 +33,33 @@ const getPreviewExamplePacket = (previewPacket, selectedReferenceId) => {
 
       const drum = packet?.target?.drum || {};
 
+      return [
+
+        example.targetId,
+
+        example.key,
+
+        example.snareReferenceId,
+
+        drum.id,
+
+      ]
+
+        .filter(Boolean)
+
+        .includes(normalizedLookupId);
+
+    }) ||
+
+    examples.find(example => {
+
+      const packet = example.packet || example.result?.packet;
+
+      const drum = packet?.target?.drum || {};
+
       const haystack = [
+
+        example.targetId,
 
         example.key,
 
@@ -51,9 +81,11 @@ const getPreviewExamplePacket = (previewPacket, selectedReferenceId) => {
 
         .toLowerCase();
 
-      return haystack.includes(searchTerm.toLowerCase());
+      return haystack.includes(String(normalizedLookupId).toLowerCase());
 
-    }) || examples[0];
+    }) ||
+
+    examples[0];
 
   return found?.packet || found?.result?.packet || null;
 
@@ -97,7 +129,7 @@ export async function loadSnareDiscoveryPacket({
 
 } = {}) {
 
-  const lookupId = snareReferenceId || selectedReferenceId || 'heritage';
+  const lookupId = snareReferenceId || selectedReferenceId || 'ludwig-acrolite';
 
   if (source === 'cachedFirestore' && firestore && snareReferenceId) {
 
@@ -177,7 +209,9 @@ export async function loadSnareDiscoveryPacket({
 
       fallback: true,
 
-      selectedReferenceId: lookupId,
+      selectedReferenceId: selectedReferenceId || null,
+
+      lookupId,
 
     },
 
