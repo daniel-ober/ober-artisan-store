@@ -1,0 +1,21 @@
+{
+  "generatedAt": "2026-05-21T08:31:11.523Z",
+  "status": "METAL_EDGE_FALLBACK_POLICY_VALIDATION_PASS_CONFIRMED_NO_FIRESTORE_WRITES",
+  "summary": {
+    "fallbackRecordCount": 176,
+    "validFallbackRecordCount": 176,
+    "invalidFallbackRecordCount": 0,
+    "allFallbackRecordsValid": true,
+    "noFirestoreWrites": true,
+    "conclusion": "All current metal-edge fallback records pass the controlled fallback policy validator. Metal fallback records remain usable for core-shell reads while staying separated from source-confirmed meaningful bearing-edge records."
+  },
+  "validatedPolicy": {
+    "fallbackTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+    "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+    "requiresValidNumericShellThickness": true,
+    "allowsMmThicknessStringParsing": true,
+    "requiresSourceUrlOrSourceUrls": true,
+    "requiresAuditableFallbackMetadata": true
+  },
+  "nextRecommendedStep": "Move to controlled stock-head fallback policy design, but keep it separate from source-confirmed full stock pass."
+}
