@@ -1,0 +1,31 @@
+{
+  "generatedAt": "2026-05-21T07:35:56.769Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "CANOPUS_SESSION_SUPERIOR_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "groupCount": 1,
+    "candidateCount": 2,
+    "sourceUrls": [
+      "https://canopusdrums.com/en/product/session-superior-snaredrum/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+      "sourceConfidence": "High",
+      "count": 2,
+      "models": [
+        "Session Superior Maple 14x5.5",
+        "Session Superior Maple 14x6.5"
+      ],
+      "recordIds": [
+        "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+        "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Canopus Session Superior Maple bearing-edge geometry before creating any promotion plan."
+}
