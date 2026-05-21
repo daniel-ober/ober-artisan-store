@@ -1,0 +1,175 @@
+
+{
+
+  "status": "MAPLE_14X65_FIRST_CONTROLLED_WRITE_PLAN_NO_FIRESTORE_WRITES",
+
+  "purpose": "Confirm exact source-backed field updates for the first two Maple 14x6.5 records before any Firestore write script is created.",
+
+  "writeSafety": {
+
+    "firestoreWrites": false,
+
+    "readyForWriteScript": false,
+
+    "requiresExactDocumentResolution": true,
+
+    "requiresManualReview": true,
+
+    "allowedCollection": "snareReferenceDrums",
+
+    "allowedRecordCount": 2
+
+  },
+
+  "records": [
+
+    {
+
+      "recordSelector": {
+
+        "companyName": "C&C Drums USA",
+
+        "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5"
+
+      },
+
+      "writeIntent": {
+
+        "plyCount": 5,
+
+        "shellLayup": "Maple/Poplar/Maple",
+
+        "shellMaterial1": "Maple",
+
+        "shellMaterial2": "Poplar",
+
+        "shellMaterial3": "Maple",
+
+        "reinforcementRings": "7-ply maple reinforcement rings",
+
+        "bearingEdgeDetail": "Los Angeles bearing edge",
+
+        "hoopType": "2.3mm triple-flanged",
+
+        "lugCount": 8,
+
+        "throwOffModel": "INDe SB1",
+
+        "stockHeadBrand": "Remo",
+
+        "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+
+        "coreFieldEnrichmentBatch": "maple_14x65_first_source_enrichment",
+
+        "coreFieldEnrichmentNeedsReview": true
+
+      },
+
+      "confidence": {
+
+        "plyCount": "high",
+
+        "shellLayup": "high",
+
+        "shellMaterial2": "high",
+
+        "shellMaterial3": "high",
+
+        "reinforcementRings": "high",
+
+        "bearingEdgeDetail": "high",
+
+        "hoopType": "high",
+
+        "lugCount": "medium",
+
+        "throwOffModel": "medium",
+
+        "stockHeadBrand": "medium"
+
+      },
+
+      "sourceUrls": [
+
+        "https://www.candcdrumsusa.com/12th-and-vine",
+
+        "https://timpano-percussion.com/products/caisse-claire-c-c-6-5x14-12th-vine-maple-poplar-maple-green-gold-painted-sparkle-gloss",
+
+        "https://reverb.com/item/71209590-snares-c-c-drum-co-6-5x14-12th-vine-maple-poplar-maple-sea-foam-green"
+
+      ]
+
+    },
+
+    {
+
+      "recordSelector": {
+
+        "companyName": "Ludwig",
+
+        "modelName": "Legacy Maple 6.5x14"
+
+      },
+
+      "writeIntent": {
+
+        "plyCount": 3,
+
+        "shellLayup": "Maple/Poplar/Maple",
+
+        "shellMaterial1": "Maple",
+
+        "shellMaterial2": "Poplar",
+
+        "shellMaterial3": "Maple",
+
+        "reinforcementRings": "1/4 inch solid maple reinforcement rings",
+
+        "bearingEdgeDetail": "30-degree inner cut with 1/4 inch radius roundover",
+
+        "shellTreatment": "cross-laminated 3-ply shell with reinforcement rings",
+
+        "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+
+        "coreFieldEnrichmentBatch": "maple_14x65_first_source_enrichment",
+
+        "coreFieldEnrichmentNeedsReview": true
+
+      },
+
+      "confidence": {
+
+        "plyCount": "high",
+
+        "shellLayup": "high",
+
+        "shellMaterial2": "high",
+
+        "shellMaterial3": "high",
+
+        "reinforcementRings": "high",
+
+        "bearingEdgeDetail": "high",
+
+        "shellTreatment": "medium"
+
+      },
+
+      "sourceUrls": [
+
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/legacy",
+
+        "https://www.2112percussion.com/ludwig-legacy-maple-65x14-snare-drum-silver-sparkl.html",
+
+        "https://www.ludwig-drums.com/application/files/8014/6531/8324/AV8147_2013.pdf"
+
+      ]
+
+    }
+
+  ],
+
+  "nextStep": "Create a dry-run resolver that finds exact Firestore document IDs for these two records and prints proposed before/after diffs without writing."
+
+}
+
