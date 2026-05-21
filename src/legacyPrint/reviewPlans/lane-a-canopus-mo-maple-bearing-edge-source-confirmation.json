@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.079Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-a-canopus-mo-maple-bearing-edge-review-packet.json",
+  "status": "CANOPUS_MO_MAPLE_LANE_A_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 2,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 2,
+    "companyName": "Canopus",
+    "lineSeries": "MO",
+    "shellMaterial": "Maple"
+  },
+  "officialSourceConfirmedRecords": [],
+  "blockedGroup": {
+    "companyName": "Canopus",
+    "lineSeries": "MO",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+    "sourceConfidence": "Medium",
+    "count": 2,
+    "models": [
+      "MO Snare 14x5.5",
+      "MO Snare 14x6.5"
+    ],
+    "records": [
+      {
+        "id": "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+        "label": "Canopus — MO — MO Snare 14x5.5 — 14x5.5",
+        "modelName": "MO Snare 14x5.5",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"12-ply Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "8",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+        "sourceConfidence": "Medium"
+      },
+      {
+        "id": "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8",
+        "label": "Canopus — MO — MO Snare 14x6.5 — 14x6.5",
+        "modelName": "MO Snare 14x6.5",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"12-ply Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "8",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+        "sourceConfidence": "Medium"
+      }
+    ],
+    "skipReason": "No exact official Canopus MO bearing-edge geometry confirmation captured in this pass."
+  },
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official source language confirms bearing-edge geometry for these Canopus MO records."
+}

@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.078Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "DW_PDP_DESIGN_SERIES_MAPLE_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 3,
+    "companyName": "DW / PDP",
+    "lineSeries": "Design Series",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+    "sourceConfidence": "High"
+  },
+  "group": {
+    "companyName": "DW / PDP",
+    "lineSeries": "Design Series",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+    "sourceConfidence": "High",
+    "count": 3,
+    "models": [
+      "Design Series Maple 14x5.5",
+      "Design Series Maple 14x6.5",
+      "Design Series Maple 14x8"
+    ],
+    "records": [
+      {
+        "id": "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+        "label": "DW / PDP — Design Series — Design Series Maple 14x5.5 — 14x5.5",
+        "modelName": "Design Series Maple 14x5.5",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "7.9",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "60-degree snare edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+        "sourceConfidence": "High"
+      },
+      {
+        "id": "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+        "label": "DW / PDP — Design Series — Design Series Maple 14x6.5 — 14x6.5",
+        "modelName": "Design Series Maple 14x6.5",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "7.9",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "60-degree snare edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+        "sourceConfidence": "High"
+      },
+      {
+        "id": "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1",
+        "label": "DW / PDP — Design Series — Design Series Maple 14x8 — 14x8",
+        "modelName": "Design Series Maple 14x8",
+        "diameter": "14",
+        "depth": "8",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "7.9",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "60-degree snare edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+        "sourceConfidence": "High"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact DW / PDP Design Series bearing-edge geometry before creating any promotion plan."
+}

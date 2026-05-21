@@ -1,0 +1,95 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.076Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "PEARL_MODERN_UTILITY_MAPLE_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 4,
+    "companyName": "Pearl",
+    "lineSeries": "Modern Utility",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Pearl",
+    "lineSeries": "Modern Utility",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+    "sourceConfidence": "Medium",
+    "count": 4,
+    "models": [
+      "Modern Utility Maple"
+    ],
+    "records": [
+      {
+        "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+        "label": "Pearl — Modern Utility — Modern Utility Maple — 13x7",
+        "modelName": "Modern Utility Maple",
+        "diameter": "13",
+        "depth": "7",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "5.4",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+        "sourceConfidence": "Medium"
+      },
+      {
+        "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+        "label": "Pearl — Modern Utility — Modern Utility Maple — 14x5.5",
+        "modelName": "Modern Utility Maple",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "5.4",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+        "sourceConfidence": "Medium"
+      },
+      {
+        "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+        "label": "Pearl — Modern Utility — Modern Utility Maple — 14x6.5",
+        "modelName": "Modern Utility Maple",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "5.4",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+        "sourceConfidence": "Medium"
+      },
+      {
+        "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+        "label": "Pearl — Modern Utility — Modern Utility Maple — 14x8",
+        "modelName": "Modern Utility Maple",
+        "diameter": "14",
+        "depth": "8",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "5.4",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Pearl Modern Utility bearing-edge geometry before creating any promotion plan."
+}

@@ -1,0 +1,100 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.078Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-a-yamaha-metal-snare-brass-bearing-edge-review-packet.json",
+  "status": "YAMAHA_METAL_SNARE_BRASS_LANE_A_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 4,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 4,
+    "companyName": "Yamaha",
+    "lineSeries": "Metal Snare",
+    "shellMaterial": "Brass"
+  },
+  "officialSourceConfirmedRecords": [],
+  "blockedGroup": {
+    "companyName": "Yamaha",
+    "lineSeries": "Metal Snare",
+    "shellMaterial": "Brass",
+    "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+    "sourceConfidence": "Low",
+    "count": 4,
+    "models": [
+      "Yamaha Brass Metal Snare 14x3.5",
+      "Yamaha Brass Metal Snare 14x4",
+      "Yamaha Brass Metal Snare 14x5.5",
+      "Yamaha Brass Metal Snare 14x6.5"
+    ],
+    "records": [
+      {
+        "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+        "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x3.5 — 14x3.5",
+        "modelName": "Yamaha Brass Metal Snare 14x3.5",
+        "diameter": "14",
+        "depth": "3.5",
+        "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "1.2",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Rolled metal edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+        "sourceConfidence": "Low"
+      },
+      {
+        "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+        "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x4 — 14x4",
+        "modelName": "Yamaha Brass Metal Snare 14x4",
+        "diameter": "14",
+        "depth": "4",
+        "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "1.2",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Rolled metal edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+        "sourceConfidence": "Low"
+      },
+      {
+        "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+        "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x5.5 — 14x5.5",
+        "modelName": "Yamaha Brass Metal Snare 14x5.5",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "1.2",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Rolled metal edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+        "sourceConfidence": "Low"
+      },
+      {
+        "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+        "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x6.5 — 14x6.5",
+        "modelName": "Yamaha Brass Metal Snare 14x6.5",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "1.2",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Rolled metal edge",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+        "sourceConfidence": "Low"
+      }
+    ],
+    "skipReason": "No exact official Yamaha Metal Snare bearing-edge geometry confirmation captured in this pass."
+  },
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official source language confirms bearing-edge geometry for these Yamaha Metal Snare records."
+}

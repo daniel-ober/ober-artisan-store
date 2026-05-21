@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.080Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "LUDWIG_JAZZ_FEST_SERIES_MAHOGANY_POPLAR_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "companyName": "Ludwig",
+    "lineSeries": "Jazz Fest Series",
+    "shellMaterial": "Mahogany / Poplar",
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Ludwig",
+    "lineSeries": "Jazz Fest Series",
+    "shellMaterial": "Mahogany / Poplar",
+    "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+    "sourceConfidence": "Medium",
+    "count": 1,
+    "models": [
+      "Jazz Fest Series 5.5x14"
+    ],
+    "records": [
+      {
+        "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+        "label": "Ludwig — Jazz Fest Series — Jazz Fest Series 5.5x14 — 14x5.5",
+        "modelName": "Jazz Fest Series 5.5x14",
+        "diameter": "14",
+        "depth": "5.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Legacy Mahogany shell\",\"shellThicknessMm\":6,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "6",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "Ludwig USA bearing edge / not specified",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Ludwig Jazz Fest Series bearing-edge geometry before creating any promotion plan."
+}

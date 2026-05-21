@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.080Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "TAMA_S_L_P_BIRCH_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "companyName": "Tama",
+    "lineSeries": "S.L.P.",
+    "shellMaterial": "Birch",
+    "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Tama",
+    "lineSeries": "S.L.P.",
+    "shellMaterial": "Birch",
+    "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+    "sourceConfidence": "Medium",
+    "count": 1,
+    "models": [
+      "S.L.P. Duo Birch LBH1410L 14x10"
+    ],
+    "records": [
+      {
+        "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+        "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+        "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+        "diameter": "14",
+        "depth": "10",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "7",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Tama S.L.P. bearing-edge geometry before creating any promotion plan."
+}

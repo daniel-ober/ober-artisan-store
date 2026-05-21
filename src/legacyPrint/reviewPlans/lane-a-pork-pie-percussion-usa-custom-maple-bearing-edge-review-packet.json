@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.080Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "PORK_PIE_PERCUSSION_USA_CUSTOM_MAPLE_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "companyName": "Pork Pie Percussion",
+    "lineSeries": "USA Custom",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://porkpiedrums.com/products/",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Pork Pie Percussion",
+    "lineSeries": "USA Custom",
+    "shellMaterial": "Maple",
+    "primarySourceUrl": "https://porkpiedrums.com/products/",
+    "sourceConfidence": "Medium",
+    "count": 1,
+    "models": [
+      "Maple Max 7x14"
+    ],
+    "records": [
+      {
+        "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+        "label": "Pork Pie Percussion — USA Custom — Maple Max 7x14 — 14x7",
+        "modelName": "Maple Max 7x14",
+        "diameter": "14",
+        "depth": "7",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple Max shell\",\"shellThicknessMm\":9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "9",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://porkpiedrums.com/products/",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Pork Pie Percussion USA Custom bearing-edge geometry before creating any promotion plan."
+}

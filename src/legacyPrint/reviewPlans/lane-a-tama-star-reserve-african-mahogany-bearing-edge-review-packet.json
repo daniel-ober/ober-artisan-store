@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-05-21T07:53:25.081Z",
+  "sourceReviewQueueFile": "src/legacyPrint/reviewPlans/lane-a-valid-thickness-unknown-edge-review-queue.json",
+  "status": "TAMA_STAR_RESERVE_AFRICAN_MAHOGANY_LANE_A_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "companyName": "Tama",
+    "lineSeries": "STAR Reserve",
+    "shellMaterial": "African Mahogany",
+    "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+    "sourceConfidence": "Medium"
+  },
+  "group": {
+    "companyName": "Tama",
+    "lineSeries": "STAR Reserve",
+    "shellMaterial": "African Mahogany",
+    "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+    "sourceConfidence": "Medium",
+    "count": 1,
+    "models": [
+      "STAR Reserve G-Mahogany 14x6.5"
+    ],
+    "records": [
+      {
+        "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+        "label": "Tama — STAR Reserve — STAR Reserve G-Mahogany 14x6.5 — 14x6.5",
+        "modelName": "STAR Reserve G-Mahogany 14x6.5",
+        "diameter": "14",
+        "depth": "6.5",
+        "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+        "shellThickness": "9",
+        "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+        "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+        "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+        "missingForCoreShell": [
+          "meaningful bearing edge shape/detail"
+        ],
+        "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+        "sourceConfidence": "Medium"
+      }
+    ]
+  },
+  "reviewInstruction": "Review-only. Confirm exact Tama STAR Reserve bearing-edge geometry before creating any promotion plan."
+}
