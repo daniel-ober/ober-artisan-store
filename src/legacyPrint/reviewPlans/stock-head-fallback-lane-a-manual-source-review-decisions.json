@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-05-21T08:35:00.981Z",
   "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-a-usable-url-source-review-packet.json",
-  "status": "STOCK_HEAD_FALLBACK_LANE_A_MANUAL_SOURCE_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "status": "STOCK_HEAD_FALLBACK_LANE_A_MANUAL_SOURCE_REVIEW_COMPLETE_NO_FIRESTORE_WRITES",
   "summary": {
     "sourceGroupCount": 12,
     "recordCount": 28,
@@ -12,7 +12,11 @@
     "noFirestoreWrites": true,
     "uniqueRecordCount": 22,
     "sourceReviewInstanceCount": 28,
-    "recordCountNote": "recordCount counts source-review instances; uniqueRecordCount dedupes records that appear under multiple source URLs."
+    "recordCountNote": "recordCount counts source-review instances; uniqueRecordCount dedupes records that appear under multiple source URLs.",
+    "reviewedSourceGroupCount": 12,
+    "approvedSourceGroupCount": 0,
+    "blockedSourceGroupCount": 12,
+    "laneAReviewConclusion": "Lane A source review complete. No source group currently supports explicit stock batter/reso head values or a conservative company/line-level stock-head fallback rule."
   },
   "reviewRules": [
     "Approve explicit stock head values only when the source page lists the stock batter and/or reso head.",
@@ -99,15 +103,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Ludwig Classic Maple source. Source supports shell construction, bearing edge, and component sizing, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -187,15 +192,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Ludwig 2024 New Product source. Source supports Classic Oak / Classic Maple / Vistalite shell and component information, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -275,15 +281,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Ludwig Legacy Mahogany source. Source supports shell construction and product/component information, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -363,15 +370,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Ludwig Legacy Maple source. Source supports shell/product information, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -437,15 +445,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed official TAMA Metalworks Effect source. Source supports steel shell, half snare wire, Mod-Tone system, and included clamp, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -511,15 +520,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Thomann TAMA Metalworks dealer listing. Source supports steel shell/spec information. Remo Ambassador appears only as an accessories/matching item, not as included stock equipment. Dealer listing does not prove factory stock heads. No stock-head fallback approved."
       }
     },
     {
@@ -549,15 +559,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed official TAMA Mike Portnoy MP125 source. Source supports signature snare/strainer feature information, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -587,15 +598,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Attempted review of archived Mike Portnoy source. Source was not reliable/accessible enough for stock-head fallback approval. No stock-head fallback approved."
       }
     },
     {
@@ -625,15 +637,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed official TAMA Mike Portnoy MP1455ST source. Source supports signature snare/strainer feature information, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -663,15 +676,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Thomann TAMA MP1455ST dealer listing. Source supports shell/material/hardware specs, but does not identify factory stock batter or resonant/snare-side heads. Dealer listing does not prove factory stock heads. No stock-head fallback approved."
       }
     },
     {
@@ -700,15 +714,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed official TAMA STAR Reserve Hand Hammered Brass source. Source supports shell, hoops, and snare wire information, but does not list stock batter or resonant/snare-side heads. No stock-head fallback approved."
       }
     },
     {
@@ -737,15 +752,16 @@
         }
       ],
       "reviewDecision": {
-        "reviewed": false,
+        "reviewed": true,
         "sourceExplicitlyListsStockBatterHead": false,
         "sourceExplicitlyListsStockResoHead": false,
         "sourceSupportsCompanyOrLineFallback": false,
         "approvedFallbackKey": "",
         "approvedBatterHeadFallback": "",
         "approvedResoHeadFallback": "",
-        "fallbackConfidence": "",
-        "reviewerNotes": ""
+        "fallbackConfidence": "notApproved",
+        "decisionStatus": "blocked_insufficient_stock_head_evidence",
+        "reviewerNotes": "Reviewed Memphis Drum Shop TAMA STAR Reserve dealer listing. Source does not provide source-backed factory stock batter or resonant/snare-side head values. Dealer listing does not prove factory stock heads. No stock-head fallback approved."
       }
     }
   ]
