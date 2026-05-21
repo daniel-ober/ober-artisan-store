@@ -1,0 +1,119 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_MAPEX_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:59:35.498Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-placeholder-edge-mapex-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Mapex",
+  "summary": {
+    "candidateCount": 93,
+    "lineGroupCount": 4,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 4,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Mapex placeholder-edge records remain blocked pending official/catalog bearing-edge source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "candidateCount": 84,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 10,
+      "sampleRecordIds": [
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+        "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "candidateCount": 5,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 5,
+      "sampleRecordIds": [
+        "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+        "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+        "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog bearing-edge evidence has been attached yet. Keep blocked until source-backed edge profile is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec confirming bearing edge geometry.",
+        "Evidence must describe edge shape/profile/detail, not only shell material or shell thickness.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Mapex bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell material or shell thickness as bearing-edge confirmation.",
+    "Do not promote placeholder/unknown bearing edges to source-confirmed meaningful edge without reviewed source evidence."
+  ],
+  "nextRecommendedStep": {
+    "task": "Move to the next highest-count company in the placeholder-edge queue: Pearl.",
+    "constraint": "Create review packet only. No Firestore writes."
+  }
+}
