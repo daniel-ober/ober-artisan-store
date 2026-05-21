@@ -1,0 +1,3966 @@
+{
+  "status": "SNARE_SIMILAR_VOICE_PREVIEW_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:56:17.668Z",
+  "firestoreWrites": 0,
+  "corpusSize": 366,
+  "examples": [
+    {
+      "targetId": "ludwig-acrolite",
+      "result": {
+        "target": {
+          "drum": {
+            "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+            "company": "Ludwig",
+            "model": "Acrolite 5x14",
+            "lineSeries": "Acrolite",
+            "size": "14x5",
+            "families": {
+              "shellMaterial": "aluminum",
+              "shellConstruction": "metal",
+              "bearingEdge": "rolledOrFormedMetal",
+              "hoopType": "tripleFlanged",
+              "snareBed": "shallowSnareBed"
+            }
+          },
+          "summary": {
+            "title": "Focused, controlled attack voice",
+            "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+          },
+          "voiceProfile": {
+            "attack": 6.61,
+            "brightness": 6.07,
+            "projection": 5.76,
+            "sustain": 5.62,
+            "warmth": 5.22,
+            "sensitivity": 6.33,
+            "control": 6.49
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 6.61
+            },
+            {
+              "key": "control",
+              "value": 6.49
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.33
+            }
+          ],
+          "confidence": {
+            "score": 100,
+            "label": "high",
+            "reasons": []
+          }
+        },
+        "mode": "legacyPrintIdentity",
+        "limit": 8,
+        "minSimilarity": 0.55,
+        "matches": [
+          {
+            "drum": {
+              "id": "tama_s-l-p_s-l-p-classic-dry-aluminum-lal1455-14x5-5_14x5-5_metal_aluminum_brushed-metal_triple-flange-sound-arc-style_l_00a356d6",
+              "company": "Tama",
+              "model": "S.L.P. Classic Dry Aluminum LAL1455 14x5.5",
+              "lineSeries": "S.L.P.",
+              "size": "14x5.5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "shallowSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.59,
+              "brightness": 6.07,
+              "projection": 5.75,
+              "sustain": 5.66,
+              "warmth": 5.22,
+              "sensitivity": 6.32,
+              "control": 6.39
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.59
+              },
+              {
+                "key": "control",
+                "value": 6.39
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.32
+              }
+            ],
+            "similarity": {
+              "distance": 0.0423,
+              "similarity": 0.9879,
+              "similarityPercent": 98.8
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "sustain",
+                "delta": 0.04,
+                "absDelta": 0.04
+              },
+              {
+                "node": "attack",
+                "delta": -0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "projection",
+                "delta": -0.01,
+                "absDelta": 0.01
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.01,
+                "absDelta": 0.01
+              },
+              {
+                "node": "brightness",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+              "company": "Ludwig",
+              "model": "Supraphonic LM400 5x14",
+              "lineSeries": "1963-1970s Ludwig",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.77,
+              "brightness": 6.12,
+              "projection": 5.83,
+              "sustain": 5.72,
+              "warmth": 5.22,
+              "sensitivity": 6.38,
+              "control": 6.49
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.77
+              },
+              {
+                "key": "control",
+                "value": 6.49
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.38
+              }
+            ],
+            "similarity": {
+              "distance": 0.0812,
+              "similarity": 0.9768,
+              "similarityPercent": 97.7
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": 0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "sustain",
+                "delta": 0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "projection",
+                "delta": 0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": 0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "control",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+              "company": "Pearl",
+              "model": "Sensitone Heritage Aluminum Alloy",
+              "lineSeries": "Sensitone Heritage Alloy",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.77,
+              "brightness": 6.12,
+              "projection": 5.83,
+              "sustain": 5.72,
+              "warmth": 5.22,
+              "sensitivity": 6.38,
+              "control": 6.49
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.77
+              },
+              {
+                "key": "control",
+                "value": 6.49
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.38
+              }
+            ],
+            "similarity": {
+              "distance": 0.0812,
+              "similarity": 0.9768,
+              "similarityPercent": 97.7
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": 0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "sustain",
+                "delta": 0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "projection",
+                "delta": 0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": 0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "control",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+              "company": "Canopus",
+              "model": "Aluminum Alloy 14x6",
+              "lineSeries": "Aluminum Alloy",
+              "size": "14x6",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "otherHoop",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.51,
+              "brightness": 5.92,
+              "projection": 5.85,
+              "sustain": 5.7,
+              "warmth": 5.34,
+              "sensitivity": 6.23,
+              "control": 6.32
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.51
+              },
+              {
+                "key": "control",
+                "value": 6.32
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.23
+              }
+            ],
+            "similarity": {
+              "distance": 0.1195,
+              "similarity": 0.9659,
+              "similarityPercent": 96.6
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.17,
+                "absDelta": 0.17
+              },
+              {
+                "node": "brightness",
+                "delta": -0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "warmth",
+                "delta": 0.12,
+                "absDelta": 0.12
+              },
+              {
+                "node": "attack",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "projection",
+                "delta": 0.09,
+                "absDelta": 0.09
+              },
+              {
+                "node": "sustain",
+                "delta": 0.08,
+                "absDelta": 0.08
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+              "company": "Ludwig",
+              "model": "Acrolite 6.5x14",
+              "lineSeries": "Acrolite",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "shallowSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.54,
+              "brightness": 6,
+              "projection": 5.9,
+              "sustain": 5.79,
+              "warmth": 5.42,
+              "sensitivity": 6.23,
+              "control": 6.44
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.54
+              },
+              {
+                "key": "control",
+                "value": 6.44
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.23
+              }
+            ],
+            "similarity": {
+              "distance": 0.1275,
+              "similarity": 0.9636,
+              "similarityPercent": 96.4
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "sustain",
+                "delta": 0.17,
+                "absDelta": 0.17
+              },
+              {
+                "node": "projection",
+                "delta": 0.14,
+                "absDelta": 0.14
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "attack",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "control",
+                "delta": -0.05,
+                "absDelta": 0.05
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                },
+                {
+                  "type": "knownDrumDeltas",
+                  "id": "ludwig-acrolite-family-preview",
+                  "deltas": {
+                    "sustain": -0.03,
+                    "control": 0.04
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.05,
+                "sensitivity": 0.02,
+                "control": 0.07
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+              "company": "Ludwig",
+              "model": "Supraphonic LM402 6.5x14",
+              "lineSeries": "1963-1970s Ludwig",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.69,
+              "brightness": 6.06,
+              "projection": 5.97,
+              "sustain": 5.89,
+              "warmth": 5.42,
+              "sensitivity": 6.28,
+              "control": 6.44
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.69
+              },
+              {
+                "key": "control",
+                "value": 6.44
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.28
+              }
+            ],
+            "similarity": {
+              "distance": 0.1574,
+              "similarity": 0.955,
+              "similarityPercent": 95.5
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "sustain",
+                "delta": 0.27,
+                "absDelta": 0.27
+              },
+              {
+                "node": "projection",
+                "delta": 0.21,
+                "absDelta": 0.21
+              },
+              {
+                "node": "warmth",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "attack",
+                "delta": 0.08,
+                "absDelta": 0.08
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "brightness",
+                "delta": -0.01,
+                "absDelta": 0.01
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more sustain.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+              "company": "Pearl",
+              "model": "Sensitone Heritage Aluminum Alloy",
+              "lineSeries": "Sensitone Heritage Alloy",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.69,
+              "brightness": 6.06,
+              "projection": 5.97,
+              "sustain": 5.89,
+              "warmth": 5.42,
+              "sensitivity": 6.28,
+              "control": 6.44
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.69
+              },
+              {
+                "key": "control",
+                "value": 6.44
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.28
+              }
+            ],
+            "similarity": {
+              "distance": 0.1574,
+              "similarity": 0.955,
+              "similarityPercent": 95.5
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "sustain",
+                "delta": 0.27,
+                "absDelta": 0.27
+              },
+              {
+                "node": "projection",
+                "delta": 0.21,
+                "absDelta": 0.21
+              },
+              {
+                "node": "warmth",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "attack",
+                "delta": 0.08,
+                "absDelta": 0.08
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "brightness",
+                "delta": -0.01,
+                "absDelta": 0.01
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more sustain.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "mapex_black-panther_atomizer_14x6-5_metal_aluminum_2_45-modern-metal-edge_sonic-saver-hoops_bpnal4651cn_1353eb45",
+              "company": "Mapex",
+              "model": "Atomizer",
+              "lineSeries": "Black Panther",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "aluminum",
+                "shellConstruction": "metal",
+                "bearingEdge": "sharper45Degree",
+                "hoopType": "inwardFlangedControlHoop",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by focused, contained response and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.95,
+              "brightness": 6.09,
+              "projection": 5.89,
+              "sustain": 5.64,
+              "warmth": 5.19,
+              "sensitivity": 6.58,
+              "control": 6.76
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.95
+              },
+              {
+                "key": "control",
+                "value": 6.76
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.58
+              }
+            ],
+            "similarity": {
+              "distance": 0.1966,
+              "similarity": 0.9438,
+              "similarityPercent": 94.4
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": 0.34,
+                "absDelta": 0.34
+              },
+              {
+                "node": "control",
+                "delta": 0.27,
+                "absDelta": 0.27
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.25,
+                "absDelta": 0.25
+              },
+              {
+                "node": "projection",
+                "delta": 0.13,
+                "absDelta": 0.13
+              },
+              {
+                "node": "warmth",
+                "delta": -0.03,
+                "absDelta": 0.03
+              },
+              {
+                "node": "brightness",
+                "delta": 0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "sustain",
+                "delta": 0.02,
+                "absDelta": 0.02
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more attack.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "aluminum",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "sensitivity": 0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "sensitivity",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "sensitivity": 0.02,
+                "control": 0.03
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "targetId": "ludwig-black-beauty",
+      "result": {
+        "target": {
+          "drum": {
+            "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+            "company": "Ludwig",
+            "model": "Black Beauty 5x14",
+            "lineSeries": "1977 Ludwig",
+            "size": "14x5",
+            "families": {
+              "shellMaterial": "brass",
+              "shellConstruction": "metal",
+              "bearingEdge": "machinedMetal",
+              "hoopType": "tripleFlanged",
+              "snareBed": "unknownSnareBed"
+            }
+          },
+          "summary": {
+            "title": "Fast, articulate cutting voice",
+            "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+          },
+          "voiceProfile": {
+            "attack": 7.07,
+            "brightness": 6.55,
+            "projection": 6.47,
+            "sustain": 6.98,
+            "warmth": 5.72,
+            "sensitivity": 5.87,
+            "control": 5.73
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.07
+            },
+            {
+              "key": "sustain",
+              "value": 6.98
+            },
+            {
+              "key": "brightness",
+              "value": 6.55
+            }
+          ],
+          "confidence": {
+            "score": 100,
+            "label": "high",
+            "reasons": []
+          }
+        },
+        "mode": "legacyPrintIdentity",
+        "limit": 8,
+        "minSimilarity": 0.55,
+        "matches": [
+          {
+            "drum": {
+              "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+              "company": "Ludwig",
+              "model": "Black Beauty Super Sensitive 5x14",
+              "lineSeries": "1977 Ludwig",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 7.07,
+              "brightness": 6.55,
+              "projection": 6.47,
+              "sustain": 6.98,
+              "warmth": 5.72,
+              "sensitivity": 5.87,
+              "control": 5.73
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.07
+              },
+              {
+                "key": "sustain",
+                "value": 6.98
+              },
+              {
+                "key": "brightness",
+                "value": 6.55
+              }
+            ],
+            "similarity": {
+              "distance": 0,
+              "similarity": 1,
+              "similarityPercent": 100
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "brightness",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "projection",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "sustain",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "control",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+              "company": "Tama",
+              "model": "STAR Reserve Hand Hammered Brass 14x5.5",
+              "lineSeries": "STAR Reserve",
+              "size": "14x5.5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 7.05,
+              "brightness": 6.55,
+              "projection": 6.46,
+              "sustain": 7,
+              "warmth": 5.72,
+              "sensitivity": 5.86,
+              "control": 5.66
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.05
+              },
+              {
+                "key": "sustain",
+                "value": 7
+              },
+              {
+                "key": "brightness",
+                "value": 6.55
+              }
+            ],
+            "similarity": {
+              "distance": 0.0294,
+              "similarity": 0.9916,
+              "similarityPercent": 99.2
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "attack",
+                "delta": -0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "sustain",
+                "delta": 0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "projection",
+                "delta": -0.01,
+                "absDelta": 0.01
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.01,
+                "absDelta": 0.01
+              },
+              {
+                "node": "brightness",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+              "company": "Pearl",
+              "model": "Sensitone Heritage Brass Alloy",
+              "lineSeries": "Sensitone Heritage Alloy",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by open ring and longer tonal bloom, followed by quick, articulate stick definition and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 7.02,
+              "brightness": 6.52,
+              "projection": 6.38,
+              "sustain": 7.04,
+              "warmth": 5.74,
+              "sensitivity": 5.99,
+              "control": 5.63
+            },
+            "topNodes": [
+              {
+                "key": "sustain",
+                "value": 7.04
+              },
+              {
+                "key": "attack",
+                "value": 7.02
+              },
+              {
+                "key": "brightness",
+                "value": 6.52
+              }
+            ],
+            "similarity": {
+              "distance": 0.075,
+              "similarity": 0.9786,
+              "similarityPercent": 97.9
+            },
+            "sharedTopNodes": [
+              "sustain",
+              "attack",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "sensitivity",
+                "delta": 0.12,
+                "absDelta": 0.12
+              },
+              {
+                "node": "control",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "projection",
+                "delta": -0.09,
+                "absDelta": 0.09
+              },
+              {
+                "node": "sustain",
+                "delta": 0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "attack",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "brightness",
+                "delta": -0.03,
+                "absDelta": 0.03
+              },
+              {
+                "node": "warmth",
+                "delta": 0.02,
+                "absDelta": 0.02
+              }
+            ],
+            "matchReason": "Shares sustain and attack as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e",
+              "company": "Ludwig",
+              "model": "Black Beauty 5x14",
+              "lineSeries": "Black Beauty",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "shallowSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 6.92,
+              "brightness": 6.49,
+              "projection": 6.4,
+              "sustain": 6.91,
+              "warmth": 5.72,
+              "sensitivity": 5.82,
+              "control": 5.68
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.92
+              },
+              {
+                "key": "sustain",
+                "value": 6.91
+              },
+              {
+                "key": "brightness",
+                "value": 6.49
+              }
+            ],
+            "similarity": {
+              "distance": 0.0766,
+              "similarity": 0.9781,
+              "similarityPercent": 97.8
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": -0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "projection",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "sustain",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": -0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8",
+              "company": "Ludwig",
+              "model": "Hammered Black Beauty 5x14",
+              "lineSeries": "Black Beauty",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "shallowSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 6.92,
+              "brightness": 6.49,
+              "projection": 6.4,
+              "sustain": 6.91,
+              "warmth": 5.72,
+              "sensitivity": 5.82,
+              "control": 5.68
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.92
+              },
+              {
+                "key": "sustain",
+                "value": 6.91
+              },
+              {
+                "key": "brightness",
+                "value": 6.49
+              }
+            ],
+            "similarity": {
+              "distance": 0.0766,
+              "similarity": 0.9781,
+              "similarityPercent": 97.8
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": -0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "projection",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "sustain",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": -0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c",
+              "company": "Ludwig",
+              "model": "Chrome-Over-Brass 5x14",
+              "lineSeries": "Chrome-Over-Brass",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "shallowSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 6.92,
+              "brightness": 6.49,
+              "projection": 6.4,
+              "sustain": 6.91,
+              "warmth": 5.72,
+              "sensitivity": 5.82,
+              "control": 5.68
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.92
+              },
+              {
+                "key": "sustain",
+                "value": 6.91
+              },
+              {
+                "key": "brightness",
+                "value": 6.49
+              }
+            ],
+            "similarity": {
+              "distance": 0.0766,
+              "similarity": 0.9781,
+              "similarityPercent": 97.8
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": -0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "projection",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "sustain",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": -0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-_51c45960",
+              "company": "WorldMax",
+              "model": "Black Nickel Over Brass",
+              "lineSeries": "Black Dawg Series",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "minimalSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 6.93,
+              "brightness": 6.5,
+              "projection": 6.4,
+              "sustain": 6.91,
+              "warmth": 5.72,
+              "sensitivity": 5.75,
+              "control": 5.71
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.93
+              },
+              {
+                "key": "sustain",
+                "value": 6.91
+              },
+              {
+                "key": "brightness",
+                "value": 6.5
+              }
+            ],
+            "similarity": {
+              "distance": 0.0815,
+              "similarity": 0.9767,
+              "similarityPercent": 97.7
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": -0.14,
+                "absDelta": 0.14
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.12,
+                "absDelta": 0.12
+              },
+              {
+                "node": "projection",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "sustain",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "worldmax_black-dawg-series_brushed-red-copper-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal_40af6209",
+              "company": "WorldMax",
+              "model": "Brushed Red Copper Brass",
+              "lineSeries": "Black Dawg Series",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "tripleFlanged",
+                "snareBed": "minimalSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 6.93,
+              "brightness": 6.5,
+              "projection": 6.4,
+              "sustain": 6.91,
+              "warmth": 5.72,
+              "sensitivity": 5.75,
+              "control": 5.71
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 6.93
+              },
+              {
+                "key": "sustain",
+                "value": 6.91
+              },
+              {
+                "key": "brightness",
+                "value": 6.5
+              }
+            ],
+            "similarity": {
+              "distance": 0.0815,
+              "similarity": 0.9767,
+              "similarityPercent": 97.7
+            },
+            "sharedTopNodes": [
+              "attack",
+              "sustain",
+              "brightness"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": -0.14,
+                "absDelta": 0.14
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.12,
+                "absDelta": 0.12
+              },
+              {
+                "node": "projection",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "sustain",
+                "delta": -0.07,
+                "absDelta": 0.07
+              },
+              {
+                "node": "brightness",
+                "delta": -0.05,
+                "absDelta": 0.05
+              },
+              {
+                "node": "control",
+                "delta": -0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares attack and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain"
+              ],
+              "deltas": {
+                "sustain": 0.01
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "targetId": "ludwig-legacy-mahogany",
+      "result": {
+        "target": {
+          "drum": {
+            "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+            "company": "Ludwig",
+            "model": "Legacy Mahogany 5.5x14",
+            "lineSeries": "Legacy Mahogany",
+            "size": "14x5.5",
+            "families": {
+              "shellMaterial": "mahogany",
+              "shellConstruction": "plyWithReinforcementRings",
+              "bearingEdge": "rounder30Degree",
+              "hoopType": "tripleFlanged",
+              "snareBed": "otherSnareBed"
+            }
+          },
+          "summary": {
+            "title": "Warm, blooming snare voice",
+            "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+          },
+          "voiceProfile": {
+            "attack": 5.84,
+            "brightness": 4.8,
+            "projection": 5.53,
+            "sustain": 6.84,
+            "warmth": 7.78,
+            "sensitivity": 6.13,
+            "control": 5.72
+          },
+          "topNodes": [
+            {
+              "key": "warmth",
+              "value": 7.78
+            },
+            {
+              "key": "sustain",
+              "value": 6.84
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.13
+            }
+          ],
+          "confidence": {
+            "score": 100,
+            "label": "high",
+            "reasons": []
+          }
+        },
+        "mode": "legacyPrintIdentity",
+        "limit": 8,
+        "minSimilarity": 0.55,
+        "matches": [
+          {
+            "drum": {
+              "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+              "company": "Ludwig",
+              "model": "Legacy Mahogany 5x14",
+              "lineSeries": "Legacy Mahogany",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "mahogany",
+                "shellConstruction": "plyWithReinforcementRings",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "tripleFlanged",
+                "snareBed": "otherSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 5.84,
+              "brightness": 4.8,
+              "projection": 5.53,
+              "sustain": 6.84,
+              "warmth": 7.78,
+              "sensitivity": 6.13,
+              "control": 5.72
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.78
+              },
+              {
+                "key": "sustain",
+                "value": 6.84
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.13
+              }
+            ],
+            "similarity": {
+              "distance": 0,
+              "similarity": 1,
+              "similarityPercent": 100
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "attack",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "brightness",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "projection",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "sustain",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "warmth",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0,
+                "absDelta": 0
+              },
+              {
+                "node": "control",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+              "company": "Ludwig",
+              "model": "Legacy Mahogany 6.5x14",
+              "lineSeries": "Legacy Mahogany",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "mahogany",
+                "shellConstruction": "plyWithReinforcementRings",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "tripleFlanged",
+                "snareBed": "otherSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 5.78,
+              "brightness": 4.74,
+              "projection": 5.69,
+              "sustain": 6.99,
+              "warmth": 7.98,
+              "sensitivity": 6.04,
+              "control": 5.74
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.98
+              },
+              {
+                "key": "sustain",
+                "value": 6.99
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.04
+              }
+            ],
+            "similarity": {
+              "distance": 0.123,
+              "similarity": 0.9649,
+              "similarityPercent": 96.5
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "projection",
+                "delta": 0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "sustain",
+                "delta": 0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.09,
+                "absDelta": 0.09
+              },
+              {
+                "node": "attack",
+                "delta": -0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "brightness",
+                "delta": -0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "control",
+                "delta": 0.02,
+                "absDelta": 0.02
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+              "company": "Ludwig",
+              "model": "Jazz Fest Series 5.5x14",
+              "lineSeries": "Jazz Fest Series",
+              "size": "14x5.5",
+              "families": {
+                "shellMaterial": "mahoganyPoplar",
+                "shellConstruction": "ply",
+                "bearingEdge": "ludwigFamilyEdge",
+                "hoopType": "tripleFlanged",
+                "snareBed": "otherSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by moderate ring and decay and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 5.9,
+              "brightness": 5,
+              "projection": 5.51,
+              "sustain": 6.66,
+              "warmth": 7.46,
+              "sensitivity": 6.29,
+              "control": 5.57
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.46
+              },
+              {
+                "key": "sustain",
+                "value": 6.66
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.29
+              }
+            ],
+            "similarity": {
+              "distance": 0.1826,
+              "similarity": 0.9478,
+              "similarityPercent": 94.8
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": -0.32,
+                "absDelta": 0.32
+              },
+              {
+                "node": "brightness",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "sustain",
+                "delta": -0.18,
+                "absDelta": 0.18
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "control",
+                "delta": -0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "attack",
+                "delta": 0.06,
+                "absDelta": 0.06
+              },
+              {
+                "node": "projection",
+                "delta": -0.02,
+                "absDelta": 0.02
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads less warmth.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "premier_centenary-limited_della-porta-100-walnut-14x6-5-snare_14x6-5_ply_walnut_beech_5_30-degree-round-over_centenary-f_cb595ab7",
+              "company": "Premier",
+              "model": "Della-Porta 100 Walnut 14x6.5 Snare",
+              "lineSeries": "Centenary / Limited",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "walnut",
+                "shellConstruction": "ply",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "otherHoop",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 96,
+              "label": "high",
+              "reasons": [
+                "missing lug count"
+              ]
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by moderate ring and decay and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 5.82,
+              "brightness": 4.96,
+              "projection": 5.77,
+              "sustain": 6.63,
+              "warmth": 7.4,
+              "sensitivity": 5.95,
+              "control": 5.74
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.4
+              },
+              {
+                "key": "sustain",
+                "value": 6.63
+              },
+              {
+                "key": "sensitivity",
+                "value": 5.95
+              }
+            ],
+            "similarity": {
+              "distance": 0.2108,
+              "similarity": 0.9398,
+              "similarityPercent": 94
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": -0.38,
+                "absDelta": 0.38
+              },
+              {
+                "node": "projection",
+                "delta": 0.24,
+                "absDelta": 0.24
+              },
+              {
+                "node": "sustain",
+                "delta": -0.21,
+                "absDelta": 0.21
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.18,
+                "absDelta": 0.18
+              },
+              {
+                "node": "brightness",
+                "delta": 0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "attack",
+                "delta": -0.02,
+                "absDelta": 0.02
+              },
+              {
+                "node": "control",
+                "delta": 0.02,
+                "absDelta": 0.02
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads less warmth.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+              "company": "Ludwig",
+              "model": "Legacy Mahogany 8x14",
+              "lineSeries": "Legacy Mahogany",
+              "size": "14x8",
+              "families": {
+                "shellMaterial": "mahogany",
+                "shellConstruction": "plyWithReinforcementRings",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "tripleFlanged",
+                "snareBed": "otherSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 5.7,
+              "brightness": 4.7,
+              "projection": 5.75,
+              "sustain": 7.15,
+              "warmth": 8.17,
+              "sensitivity": 5.97,
+              "control": 5.7
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 8.17
+              },
+              {
+                "key": "sustain",
+                "value": 7.15
+              },
+              {
+                "key": "sensitivity",
+                "value": 5.97
+              }
+            ],
+            "similarity": {
+              "distance": 0.2284,
+              "similarity": 0.9347,
+              "similarityPercent": 93.5
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": 0.39,
+                "absDelta": 0.39
+              },
+              {
+                "node": "sustain",
+                "delta": 0.31,
+                "absDelta": 0.31
+              },
+              {
+                "node": "projection",
+                "delta": 0.22,
+                "absDelta": 0.22
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "attack",
+                "delta": -0.14,
+                "absDelta": 0.14
+              },
+              {
+                "node": "brightness",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "control",
+                "delta": -0.02,
+                "absDelta": 0.02
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more warmth.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7",
+              "company": "Ludwig",
+              "model": "Legacy Maple 8x14",
+              "lineSeries": "Legacy Maple",
+              "size": "14x8",
+              "families": {
+                "shellMaterial": "maple",
+                "shellConstruction": "plyWithReinforcementRings",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "tripleFlanged",
+                "snareBed": "otherSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.04,
+              "brightness": 5.2,
+              "projection": 5.97,
+              "sustain": 6.99,
+              "warmth": 7.64,
+              "sensitivity": 6.06,
+              "control": 5.82
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.64
+              },
+              {
+                "key": "sustain",
+                "value": 6.99
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.06
+              }
+            ],
+            "similarity": {
+              "distance": 0.2468,
+              "similarity": 0.9295,
+              "similarityPercent": 93
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "projection",
+                "delta": 0.44,
+                "absDelta": 0.44
+              },
+              {
+                "node": "brightness",
+                "delta": 0.4,
+                "absDelta": 0.4
+              },
+              {
+                "node": "attack",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "sustain",
+                "delta": 0.15,
+                "absDelta": 0.15
+              },
+              {
+                "node": "warmth",
+                "delta": -0.14,
+                "absDelta": 0.14
+              },
+              {
+                "node": "control",
+                "delta": 0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.07,
+                "absDelta": 0.07
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more projection.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+              "company": "Ludwig",
+              "model": "Legacy Maple 6.5x14",
+              "lineSeries": "Legacy Maple",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "maple",
+                "shellConstruction": "plyWithReinforcementRings",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "tripleFlanged",
+                "snareBed": "otherSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by open ring and longer tonal bloom and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.11,
+              "brightness": 5.23,
+              "projection": 5.91,
+              "sustain": 6.83,
+              "warmth": 7.44,
+              "sensitivity": 6.13,
+              "control": 5.86
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.44
+              },
+              {
+                "key": "sustain",
+                "value": 6.83
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.13
+              }
+            ],
+            "similarity": {
+              "distance": 0.273,
+              "similarity": 0.922,
+              "similarityPercent": 92.2
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "brightness",
+                "delta": 0.43,
+                "absDelta": 0.43
+              },
+              {
+                "node": "projection",
+                "delta": 0.38,
+                "absDelta": 0.38
+              },
+              {
+                "node": "warmth",
+                "delta": -0.34,
+                "absDelta": 0.34
+              },
+              {
+                "node": "attack",
+                "delta": 0.27,
+                "absDelta": 0.27
+              },
+              {
+                "node": "control",
+                "delta": 0.14,
+                "absDelta": 0.14
+              },
+              {
+                "node": "sustain",
+                "delta": -0.01,
+                "absDelta": 0.01
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0,
+                "absDelta": 0
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more brightness.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          },
+          {
+            "drum": {
+              "id": "gretsch_brooklyn_brooklyn-snare_14x8_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_8060da8c",
+              "company": "Gretsch",
+              "model": "Brooklyn Snare",
+              "lineSeries": "Brooklyn",
+              "size": "14x8",
+              "families": {
+                "shellMaterial": "maple",
+                "shellConstruction": "ply",
+                "bearingEdge": "rounder30Degree",
+                "hoopType": "gretsch302",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Warm, blooming snare voice",
+              "text": "This snare is led by lower-mid body and roundness, followed by moderate ring and decay and usable dynamic response."
+            },
+            "voiceProfile": {
+              "attack": 6.12,
+              "brightness": 5.23,
+              "projection": 5.94,
+              "sustain": 6.72,
+              "warmth": 7.4,
+              "sensitivity": 6.18,
+              "control": 5.97
+            },
+            "topNodes": [
+              {
+                "key": "warmth",
+                "value": 7.4
+              },
+              {
+                "key": "sustain",
+                "value": 6.72
+              },
+              {
+                "key": "sensitivity",
+                "value": 6.18
+              }
+            ],
+            "similarity": {
+              "distance": 0.3027,
+              "similarity": 0.9135,
+              "similarityPercent": 91.3
+            },
+            "sharedTopNodes": [
+              "warmth",
+              "sustain",
+              "sensitivity"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "brightness",
+                "delta": 0.43,
+                "absDelta": 0.43
+              },
+              {
+                "node": "projection",
+                "delta": 0.41,
+                "absDelta": 0.41
+              },
+              {
+                "node": "warmth",
+                "delta": -0.38,
+                "absDelta": 0.38
+              },
+              {
+                "node": "attack",
+                "delta": 0.28,
+                "absDelta": 0.28
+              },
+              {
+                "node": "control",
+                "delta": 0.25,
+                "absDelta": 0.25
+              },
+              {
+                "node": "sustain",
+                "delta": -0.12,
+                "absDelta": 0.12
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.05,
+                "absDelta": 0.05
+              }
+            ],
+            "matchReason": "Shares warmth and sustain as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more brightness.",
+            "calibration": {
+              "applied": false,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [],
+              "changedNodes": [],
+              "deltas": {}
+            }
+          }
+        ]
+      }
+    },
+    {
+      "targetId": "dw-true-cast-bronze",
+      "result": {
+        "target": {
+          "drum": {
+            "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+            "company": "DW / PDP",
+            "model": "MFG True-Cast Bell Bronze 14x4",
+            "lineSeries": "DW MFG / True-Cast",
+            "size": "14x4",
+            "families": {
+              "shellMaterial": "bronze",
+              "shellConstruction": "metal",
+              "bearingEdge": "machinedMetal",
+              "hoopType": "dieCast",
+              "snareBed": "unknownSnareBed"
+            }
+          },
+          "summary": {
+            "title": "Focused, controlled attack voice",
+            "text": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry."
+          },
+          "voiceProfile": {
+            "attack": 7.73,
+            "brightness": 6.4,
+            "projection": 6.95,
+            "sustain": 5.94,
+            "warmth": 5.54,
+            "sensitivity": 4.96,
+            "control": 7.25
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.73
+            },
+            {
+              "key": "control",
+              "value": 7.25
+            },
+            {
+              "key": "projection",
+              "value": 6.95
+            }
+          ],
+          "confidence": {
+            "score": 100,
+            "label": "high",
+            "reasons": []
+          }
+        },
+        "mode": "legacyPrintIdentity",
+        "limit": 8,
+        "minSimilarity": 0.55,
+        "matches": [
+          {
+            "drum": {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+              "company": "DW / PDP",
+              "model": "MFG True-Cast Bell Bronze 14x5.5",
+              "lineSeries": "DW MFG / True-Cast",
+              "size": "14x5.5",
+              "families": {
+                "shellMaterial": "bronze",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry."
+            },
+            "voiceProfile": {
+              "attack": 7.6,
+              "brightness": 6.31,
+              "projection": 7.03,
+              "sustain": 6.11,
+              "warmth": 5.71,
+              "sensitivity": 4.86,
+              "control": 7.15
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.6
+              },
+              {
+                "key": "control",
+                "value": 7.15
+              },
+              {
+                "key": "projection",
+                "value": 7.03
+              }
+            ],
+            "similarity": {
+              "distance": 0.1268,
+              "similarity": 0.9638,
+              "similarityPercent": 96.4
+            },
+            "sharedTopNodes": [
+              "attack",
+              "control",
+              "projection"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "sustain",
+                "delta": 0.17,
+                "absDelta": 0.17
+              },
+              {
+                "node": "warmth",
+                "delta": 0.17,
+                "absDelta": 0.17
+              },
+              {
+                "node": "attack",
+                "delta": -0.13,
+                "absDelta": 0.13
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "control",
+                "delta": -0.1,
+                "absDelta": 0.1
+              },
+              {
+                "node": "brightness",
+                "delta": -0.09,
+                "absDelta": 0.09
+              },
+              {
+                "node": "projection",
+                "delta": 0.08,
+                "absDelta": 0.08
+              }
+            ],
+            "matchReason": "Shares attack and control as defining voice traits.",
+            "contrastReason": "Very little practical contrast across the main voice nodes.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+              "company": "DW / PDP",
+              "model": "MFG True-Cast Bell Bronze 14x6.5",
+              "lineSeries": "DW MFG / True-Cast",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "bronze",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by strong room and mix carry and focused, contained response."
+            },
+            "voiceProfile": {
+              "attack": 7.52,
+              "brightness": 6.24,
+              "projection": 7.17,
+              "sustain": 6.29,
+              "warmth": 5.91,
+              "sensitivity": 4.76,
+              "control": 7.1
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.52
+              },
+              {
+                "key": "projection",
+                "value": 7.17
+              },
+              {
+                "key": "control",
+                "value": 7.1
+              }
+            ],
+            "similarity": {
+              "distance": 0.2545,
+              "similarity": 0.9273,
+              "similarityPercent": 92.7
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection",
+              "control"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": 0.37,
+                "absDelta": 0.37
+              },
+              {
+                "node": "sustain",
+                "delta": 0.35,
+                "absDelta": 0.35
+              },
+              {
+                "node": "projection",
+                "delta": 0.22,
+                "absDelta": 0.22
+              },
+              {
+                "node": "attack",
+                "delta": -0.21,
+                "absDelta": 0.21
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "brightness",
+                "delta": -0.16,
+                "absDelta": 0.16
+              },
+              {
+                "node": "control",
+                "delta": -0.15,
+                "absDelta": 0.15
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more warmth.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+              "company": "DW / PDP",
+              "model": "MFG True-Cast Bell Bronze 14x8",
+              "lineSeries": "DW MFG / True-Cast",
+              "size": "14x8",
+              "families": {
+                "shellMaterial": "bronze",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by strong room and mix carry and focused, contained response."
+            },
+            "voiceProfile": {
+              "attack": 7.44,
+              "brightness": 6.21,
+              "projection": 7.24,
+              "sustain": 6.44,
+              "warmth": 6.11,
+              "sensitivity": 4.69,
+              "control": 7.06
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.44
+              },
+              {
+                "key": "projection",
+                "value": 7.24
+              },
+              {
+                "key": "control",
+                "value": 7.06
+              }
+            ],
+            "similarity": {
+              "distance": 0.3627,
+              "similarity": 0.8964,
+              "similarityPercent": 89.6
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection",
+              "control"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "warmth",
+                "delta": 0.57,
+                "absDelta": 0.57
+              },
+              {
+                "node": "sustain",
+                "delta": 0.5,
+                "absDelta": 0.5
+              },
+              {
+                "node": "attack",
+                "delta": -0.29,
+                "absDelta": 0.29
+              },
+              {
+                "node": "projection",
+                "delta": 0.29,
+                "absDelta": 0.29
+              },
+              {
+                "node": "sensitivity",
+                "delta": -0.27,
+                "absDelta": 0.27
+              },
+              {
+                "node": "brightness",
+                "delta": -0.19,
+                "absDelta": 0.19
+              },
+              {
+                "node": "control",
+                "delta": -0.19,
+                "absDelta": 0.19
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more warmth.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+              "company": "Pearl",
+              "model": "Reference Brass",
+              "lineSeries": "Reference",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 96,
+              "label": "high",
+              "reasons": [
+                "missing lug count"
+              ]
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by moderate acoustic carry and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 7.45,
+              "brightness": 6.66,
+              "projection": 6.7,
+              "sustain": 6.4,
+              "warmth": 5.53,
+              "sensitivity": 5.4,
+              "control": 6.51
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.45
+              },
+              {
+                "key": "projection",
+                "value": 6.7
+              },
+              {
+                "key": "brightness",
+                "value": 6.66
+              }
+            ],
+            "similarity": {
+              "distance": 0.4096,
+              "similarity": 0.883,
+              "similarityPercent": 88.3
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.74,
+                "absDelta": 0.74
+              },
+              {
+                "node": "sustain",
+                "delta": 0.46,
+                "absDelta": 0.46
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.44,
+                "absDelta": 0.44
+              },
+              {
+                "node": "attack",
+                "delta": -0.28,
+                "absDelta": 0.28
+              },
+              {
+                "node": "brightness",
+                "delta": 0.26,
+                "absDelta": 0.26
+              },
+              {
+                "node": "projection",
+                "delta": -0.25,
+                "absDelta": 0.25
+              },
+              {
+                "node": "warmth",
+                "delta": -0.01,
+                "absDelta": 0.01
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads less control.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                },
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.01,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+              "company": "SONOR",
+              "model": "Signature HLD 580 Cast Bronze 14x6.5",
+              "lineSeries": "Signature Series",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "bronze",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Focused, controlled attack voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by strong room and mix carry and moderate focus."
+            },
+            "voiceProfile": {
+              "attack": 7.29,
+              "brightness": 6.32,
+              "projection": 6.84,
+              "sustain": 6.59,
+              "warmth": 5.98,
+              "sensitivity": 5.27,
+              "control": 6.61
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.29
+              },
+              {
+                "key": "projection",
+                "value": 6.84
+              },
+              {
+                "key": "control",
+                "value": 6.61
+              }
+            ],
+            "similarity": {
+              "distance": 0.4453,
+              "similarity": 0.8728,
+              "similarityPercent": 87.3
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection",
+              "control"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "sustain",
+                "delta": 0.65,
+                "absDelta": 0.65
+              },
+              {
+                "node": "control",
+                "delta": -0.64,
+                "absDelta": 0.64
+              },
+              {
+                "node": "attack",
+                "delta": -0.44,
+                "absDelta": 0.44
+              },
+              {
+                "node": "warmth",
+                "delta": 0.44,
+                "absDelta": 0.44
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.31,
+                "absDelta": 0.31
+              },
+              {
+                "node": "projection",
+                "delta": -0.11,
+                "absDelta": 0.11
+              },
+              {
+                "node": "brightness",
+                "delta": -0.08,
+                "absDelta": 0.08
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads more sustain.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.02,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+              "company": "Pearl",
+              "model": "Reference Brass",
+              "lineSeries": "Reference",
+              "size": "14x6.5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 96,
+              "label": "high",
+              "reasons": [
+                "missing lug count"
+              ]
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by strong room and mix carry and balanced brightness."
+            },
+            "voiceProfile": {
+              "attack": 7.37,
+              "brightness": 6.59,
+              "projection": 6.84,
+              "sustain": 6.57,
+              "warmth": 5.72,
+              "sensitivity": 5.3,
+              "control": 6.46
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.37
+              },
+              {
+                "key": "projection",
+                "value": 6.84
+              },
+              {
+                "key": "brightness",
+                "value": 6.59
+              }
+            ],
+            "similarity": {
+              "distance": 0.4452,
+              "similarity": 0.8728,
+              "similarityPercent": 87.3
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.79,
+                "absDelta": 0.79
+              },
+              {
+                "node": "sustain",
+                "delta": 0.63,
+                "absDelta": 0.63
+              },
+              {
+                "node": "attack",
+                "delta": -0.36,
+                "absDelta": 0.36
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.34,
+                "absDelta": 0.34
+              },
+              {
+                "node": "brightness",
+                "delta": 0.19,
+                "absDelta": 0.19
+              },
+              {
+                "node": "warmth",
+                "delta": 0.18,
+                "absDelta": 0.18
+              },
+              {
+                "node": "projection",
+                "delta": -0.11,
+                "absDelta": 0.11
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads less control.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                },
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.01,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "worldmax_black-dawg-series_hammered-black-plated-brass-with-reddish-tint_14x5_metal_brass_1-3_rolled-flange-45-listed-wh_49f6dbe5",
+              "company": "WorldMax",
+              "model": "Hammered Black Plated Brass with Reddish Tint",
+              "lineSeries": "Black Dawg Series",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "rolledOrFormedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "minimalSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by balanced brightness and moderate acoustic carry."
+            },
+            "voiceProfile": {
+              "attack": 7.22,
+              "brightness": 6.6,
+              "projection": 6.5,
+              "sustain": 6.4,
+              "warmth": 5.48,
+              "sensitivity": 5.46,
+              "control": 6.39
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.22
+              },
+              {
+                "key": "brightness",
+                "value": 6.6
+              },
+              {
+                "key": "projection",
+                "value": 6.5
+              }
+            ],
+            "similarity": {
+              "distance": 0.4954,
+              "similarity": 0.8585,
+              "similarityPercent": 85.9
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.86,
+                "absDelta": 0.86
+              },
+              {
+                "node": "attack",
+                "delta": -0.51,
+                "absDelta": 0.51
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.5,
+                "absDelta": 0.5
+              },
+              {
+                "node": "sustain",
+                "delta": 0.46,
+                "absDelta": 0.46
+              },
+              {
+                "node": "projection",
+                "delta": -0.45,
+                "absDelta": 0.45
+              },
+              {
+                "node": "brightness",
+                "delta": 0.2,
+                "absDelta": 0.2
+              },
+              {
+                "node": "warmth",
+                "delta": -0.06,
+                "absDelta": 0.06
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads less control.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                },
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.01,
+                "control": 0.03
+              }
+            }
+          },
+          {
+            "drum": {
+              "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+              "company": "Pearl",
+              "model": "Free Floating Brass",
+              "lineSeries": "Free Floating",
+              "size": "14x5",
+              "families": {
+                "shellMaterial": "brass",
+                "shellConstruction": "metal",
+                "bearingEdge": "machinedMetal",
+                "hoopType": "dieCast",
+                "snareBed": "unknownSnareBed"
+              }
+            },
+            "confidence": {
+              "score": 100,
+              "label": "high",
+              "reasons": []
+            },
+            "summary": {
+              "title": "Fast, articulate cutting voice",
+              "text": "This snare is led by quick, articulate stick definition, followed by balanced brightness and moderate acoustic carry."
+            },
+            "voiceProfile": {
+              "attack": 7.36,
+              "brightness": 6.64,
+              "projection": 6.57,
+              "sustain": 6.47,
+              "warmth": 5.48,
+              "sensitivity": 5.58,
+              "control": 6.41
+            },
+            "topNodes": [
+              {
+                "key": "attack",
+                "value": 7.36
+              },
+              {
+                "key": "brightness",
+                "value": 6.64
+              },
+              {
+                "key": "projection",
+                "value": 6.57
+              }
+            ],
+            "similarity": {
+              "distance": 0.4964,
+              "similarity": 0.8582,
+              "similarityPercent": 85.8
+            },
+            "sharedTopNodes": [
+              "attack",
+              "projection"
+            ],
+            "nodeDeltas": [
+              {
+                "node": "control",
+                "delta": -0.84,
+                "absDelta": 0.84
+              },
+              {
+                "node": "sensitivity",
+                "delta": 0.62,
+                "absDelta": 0.62
+              },
+              {
+                "node": "sustain",
+                "delta": 0.53,
+                "absDelta": 0.53
+              },
+              {
+                "node": "projection",
+                "delta": -0.38,
+                "absDelta": 0.38
+              },
+              {
+                "node": "attack",
+                "delta": -0.37,
+                "absDelta": 0.37
+              },
+              {
+                "node": "brightness",
+                "delta": 0.24,
+                "absDelta": 0.24
+              },
+              {
+                "node": "warmth",
+                "delta": -0.06,
+                "absDelta": 0.06
+              }
+            ],
+            "matchReason": "Shares attack and projection as defining voice traits.",
+            "contrastReason": "Compared with the target, this match reads less control.",
+            "calibration": {
+              "applied": true,
+              "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+              "appliedChanges": [
+                {
+                  "type": "materialFamilyDeltas",
+                  "family": "brass",
+                  "deltas": {
+                    "sustain": 0.01
+                  }
+                },
+                {
+                  "type": "hoopFamilyDeltas",
+                  "family": "dieCast",
+                  "deltas": {
+                    "sustain": -0.02,
+                    "control": 0.03
+                  }
+                }
+              ],
+              "changedNodes": [
+                "sustain",
+                "control"
+              ],
+              "deltas": {
+                "sustain": -0.01,
+                "control": 0.03
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
