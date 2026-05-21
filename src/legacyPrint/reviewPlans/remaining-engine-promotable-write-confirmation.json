@@ -1,0 +1,106 @@
+{
+  "status": "REMAINING_ENGINE_PROMOTABLE_RECORDS_WRITE_COMPLETE",
+  "generatedAt": "2026-05-21T10:13:20.452Z",
+  "approvalEnv": "LEGACYPRINT_APPROVE_FIRESTORE_WRITE=PROMOTE_REMAINING_HEADS_WIRES_DO_NOT_BLOCK_16",
+  "actualWriteCount": 16,
+  "firestoreWrites": 16,
+  "sourceAudit": "src/legacyPrint/reviewPlans/remaining-engine-promotable-audit-heads-wires-do-not-block.json",
+  "records": [
+    {
+      "id": "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+      "company": "Ludwig",
+      "model": "Classic Maple 5.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+      "company": "Ludwig",
+      "model": "Classic Maple 5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+      "company": "Ludwig",
+      "model": "Classic Maple 6.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17",
+      "company": "Ludwig",
+      "model": "Classic Maple 8x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
+      "company": "Ludwig",
+      "model": "Classic Oak 5.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
+      "company": "Ludwig",
+      "model": "Classic Oak 5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
+      "company": "Ludwig",
+      "model": "Classic Oak 6.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8",
+      "company": "Ludwig",
+      "model": "Classic Oak 8x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+      "company": "Ludwig",
+      "model": "Legacy Mahogany 5.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+      "company": "Ludwig",
+      "model": "Legacy Mahogany 5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+      "company": "Ludwig",
+      "model": "Legacy Mahogany 6.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0",
+      "company": "Ludwig",
+      "model": "Legacy Mahogany 8x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
+      "company": "Ludwig",
+      "model": "Legacy Maple 5.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
+      "company": "Ludwig",
+      "model": "Legacy Maple 5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+      "company": "Ludwig",
+      "model": "Legacy Maple 6.5x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    },
+    {
+      "id": "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7",
+      "company": "Ludwig",
+      "model": "Legacy Maple 8x14",
+      "classification": "PROMOTE_NOW_ONLY_NON_BLOCKING_ENRICHMENT_MISSING"
+    }
+  ]
+}
