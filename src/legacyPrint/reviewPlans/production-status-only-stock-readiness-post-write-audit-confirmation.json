@@ -1,0 +1,18 @@
+{
+  "status": "PRODUCTION_STATUS_ONLY_STOCK_READINESS_POST_WRITE_AUDIT_CONFIRMATION",
+  "generatedAt": "2026-05-21T09:26:19.625Z",
+  "sourceWriteConfirmationFile": "src/legacyPrint/reviewPlans/production-status-only-stock-readiness-write-confirmation.json",
+  "latestPassableAuditFile": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-26-13-674Z.json",
+  "firestoreWriteCheck": {
+    "expectedWriteCount": 27,
+    "detectedWriteCount": 27
+  },
+  "latestPassableSummary": {
+    "totalRecordsScanned": 1551,
+    "fallbackTierAuditCheck": {
+      "passableCoreShellWithMetalEdgeFallback": 187,
+      "passableStockWithMetalEdgeFallback": 24,
+      "rowsWithAuditableMetalEdgeFallbackWarning": 187
+    }
+  }
+}
