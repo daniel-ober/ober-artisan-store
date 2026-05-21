@@ -1,0 +1,2703 @@
+{
+  "status": "SNARE_VOICE_ENGINE_CALIBRATION_AUDIT_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:30:46.144Z",
+  "firestoreWrites": 0,
+  "promotedRecordsAudited": 366,
+  "nodeStats": {
+    "attack": {
+      "min": 6.13,
+      "max": 8.43,
+      "avg": 7.33
+    },
+    "brightness": {
+      "min": 5.16,
+      "max": 7.77,
+      "avg": 6.6
+    },
+    "projection": {
+      "min": 6.56,
+      "max": 9.25,
+      "avg": 7.55
+    },
+    "sustain": {
+      "min": 5.44,
+      "max": 8.22,
+      "avg": 6.98
+    },
+    "warmth": {
+      "min": 4.53,
+      "max": 8.11,
+      "avg": 6.27
+    },
+    "sensitivity": {
+      "min": 4.83,
+      "max": 6.88,
+      "avg": 6.12
+    },
+    "control": {
+      "min": 5.51,
+      "max": 7.11,
+      "avg": 6.18
+    }
+  },
+  "projectionTop3Count": 366,
+  "dominanceFlags": [
+    "attack average is high at 7.33",
+    "projection average is high at 7.55",
+    "projection appears in top 3 for every promoted record"
+  ],
+  "byMaterial": [
+    {
+      "label": "material",
+      "group": "brass",
+      "count": 88,
+      "averageProfile": {
+        "attack": 7.38,
+        "brightness": 6.76,
+        "projection": 7.66,
+        "sustain": 7.36,
+        "warmth": 6.23,
+        "sensitivity": 5.96,
+        "control": 5.9
+      },
+      "topNodes": "projection 7.66, attack 7.38, sustain 7.36",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x4 Piccolo",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Snare Drum 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "steel",
+      "count": 74,
+      "averageProfile": {
+        "attack": 7.59,
+        "brightness": 7.38,
+        "projection": 7.74,
+        "sustain": 7.02,
+        "warmth": 5.13,
+        "sensitivity": 6.08,
+        "control": 6.02
+      },
+      "topNodes": "projection 7.74, attack 7.59, brightness 7.38",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "Manganese Steel 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Canopus",
+          "model": "Manganese Steel 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Chrome-over-Steel",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Chrome-over-Steel",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supralite 4x14",
+          "size": "14x4",
+          "topNodes": "attack, brightness, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supralite 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supralite 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supralite 6x13",
+          "size": "13x6",
+          "topNodes": "attack, brightness, projection"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "maple",
+      "count": 52,
+      "averageProfile": {
+        "attack": 7.13,
+        "brightness": 6.07,
+        "projection": 7.23,
+        "sustain": 6.69,
+        "warmth": 6.97,
+        "sensitivity": 6.43,
+        "control": 6.31
+      },
+      "topNodes": "projection 7.23, attack 7.13, warmth 6.97",
+      "sampleRecords": [
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Maple/Poplar/Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 10x6",
+          "size": "10x6",
+          "topNodes": "attack, sensitivity, projection"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 12x6.5",
+          "size": "12x6.5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 13x6.5",
+          "size": "13x6.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x8",
+          "size": "14x8",
+          "topNodes": "projection, warmth, attack"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "birch",
+      "count": 22,
+      "averageProfile": {
+        "attack": 7.57,
+        "brightness": 6.65,
+        "projection": 7.43,
+        "sustain": 6.44,
+        "warmth": 6.26,
+        "sensitivity": 6.51,
+        "control": 6.51
+      },
+      "topNodes": "attack 7.57, projection 7.43, brightness 6.65",
+      "sampleRecords": [
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 10x5 Snare",
+          "size": "10x5",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 12x5 Snare",
+          "size": "12x5",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 13x6 Snare",
+          "size": "13x6",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 14x5.5 Snare",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 14x6.5 Snare",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 14x8 Snare",
+          "size": "14x8",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Premier",
+          "model": "Genista Classic 100SE Birch 14x5.5 Snare",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Premier",
+          "model": "Genista Classic Birch 5.5x14 Snare",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, brightness"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "bellBrass",
+      "count": 21,
+      "averageProfile": {
+        "attack": 7.8,
+        "brightness": 6.89,
+        "projection": 8.2,
+        "sustain": 7.76,
+        "warmth": 7.08,
+        "sensitivity": 5.82,
+        "control": 6.44
+      },
+      "topNodes": "projection 8.2, attack 7.8, sustain 7.76",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "aluminum",
+      "count": 20,
+      "averageProfile": {
+        "attack": 7.13,
+        "brightness": 6.37,
+        "projection": 7.08,
+        "sustain": 6.15,
+        "warmth": 5.77,
+        "sensitivity": 6.37,
+        "control": 6.46
+      },
+      "topNodes": "attack 7.13, projection 7.08, control 6.46",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "Aluminum Alloy 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sensitivity"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Acrolite 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supraphonic LM400 5x14",
+          "size": "14x5",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supraphonic LM402 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Atomizer",
+          "size": "14x6.5",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Aluminum",
+          "size": "14x3.5",
+          "topNodes": "attack, control, projection"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Aluminum",
+          "size": "14x5",
+          "topNodes": "attack, projection, control"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "beech",
+      "count": 16,
+      "averageProfile": {
+        "attack": 7.29,
+        "brightness": 6.25,
+        "projection": 7.52,
+        "sustain": 6.74,
+        "warmth": 6.67,
+        "sensitivity": 6.39,
+        "control": 6.43
+      },
+      "topNodes": "projection 7.52, attack 7.29, sustain 6.74",
+      "sampleRecords": [
+        {
+          "company": "Ludwig",
+          "model": "Universal Beech 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 13x7",
+          "size": "13x7",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 14x5.75",
+          "size": "14x5.75",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 14x8",
+          "size": "14x8",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Beech Heavy ply SQ2 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Beech Heavy ply SQ2 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, control"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "acrylic",
+      "count": 9,
+      "averageProfile": {
+        "attack": 7.7,
+        "brightness": 6.65,
+        "projection": 7.77,
+        "sustain": 7.27,
+        "warmth": 5.57,
+        "sensitivity": 6.15,
+        "control": 6.37
+      },
+      "topNodes": "projection 7.77, attack 7.7, sustain 7.27",
+      "sampleRecords": [
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Heavy ply SQ2 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Heavy ply SQ2 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Medium ply SQ2 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Medium ply SQ2 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Thin ply SQ2 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Thin ply SQ2 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Vintage ply SQ2 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "SQ2 Acrylic Vintage ply SQ2 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "bronze",
+      "count": 9,
+      "averageProfile": {
+        "attack": 7.51,
+        "brightness": 6.43,
+        "projection": 8.16,
+        "sustain": 7.29,
+        "warmth": 6.66,
+        "sensitivity": 5.39,
+        "control": 6.46
+      },
+      "topNodes": "projection 8.16, attack 7.51, sustain 7.29",
+      "sampleRecords": [
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, control"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x8",
+          "size": "14x8",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Bronze Phonic 5x14",
+          "size": "14x5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Bronze Phonic 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "sustain, projection, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Bronze Phonic 8x14",
+          "size": "14x8",
+          "topNodes": "sustain, projection, attack"
+        },
+        {
+          "company": "SONOR",
+          "model": "Signature HLD 580 Cast Bronze 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "bubinga",
+      "count": 9,
+      "averageProfile": {
+        "attack": 7.47,
+        "brightness": 6.24,
+        "projection": 7.75,
+        "sustain": 6.57,
+        "warmth": 6.77,
+        "sensitivity": 6.04,
+        "control": 6.77
+      },
+      "topNodes": "projection 7.75, attack 7.47, warmth 6.77",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "Mike Portnoy Melody Master MP1455BU 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, control"
+        },
+        {
+          "company": "Tama",
+          "model": "S.L.P. G-Bubinga LGB146 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "S.L.P. Mod Bubinga LBU127 12x7",
+          "size": "12x7",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic Bubinga 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, control"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic Bubinga 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic Bubinga Elite 13x6",
+          "size": "13x6",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic G-Bubinga 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, control"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Bubinga 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, warmth"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "walnut",
+      "count": 9,
+      "averageProfile": {
+        "attack": 6.68,
+        "brightness": 5.58,
+        "projection": 7.24,
+        "sustain": 6.97,
+        "warmth": 7.67,
+        "sensitivity": 6,
+        "control": 6.32
+      },
+      "topNodes": "warmth 7.67, projection 7.24, sustain 6.97",
+      "sampleRecords": [
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Universal Walnut 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Premier",
+          "model": "Della-Porta 100 Walnut 14x6.5 Snare",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Ronald Bruner Jr. RB1455 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Tama",
+          "model": "S.L.P. G-Walnut LGW1465 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic G-Walnut/Birch 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic Walnut/Birch 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Starclassic Walnut/Birch 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "copper",
+      "count": 8,
+      "averageProfile": {
+        "attack": 6.96,
+        "brightness": 6.16,
+        "projection": 7.4,
+        "sustain": 7.32,
+        "warmth": 6.92,
+        "sensitivity": 5.91,
+        "control": 5.96
+      },
+      "topNodes": "projection 7.4, sustain 7.32, attack 6.96",
+      "sampleRecords": [
+        {
+          "company": "Ludwig",
+          "model": "Copper Phonic 5x14",
+          "size": "14x5",
+          "topNodes": "sustain, projection, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Copper Phonic 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "sustain, projection, warmth"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Copper Phonic 8x14",
+          "size": "14x8",
+          "topNodes": "sustain, projection, warmth"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Copper",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Copper",
+          "size": "14x5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Copper",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, warmth"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Copper",
+          "size": "14x8",
+          "topNodes": "projection, sustain, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Copper 14x7",
+          "size": "14x7",
+          "topNodes": "projection, sustain, warmth"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "poplar",
+      "count": 7,
+      "averageProfile": {
+        "attack": 6.62,
+        "brightness": 5.59,
+        "projection": 6.82,
+        "sustain": 6.75,
+        "warmth": 7.07,
+        "sensitivity": 6.24,
+        "control": 6.06
+      },
+      "topNodes": "warmth 7.07, projection 6.82, sustain 6.75",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "Imperialstar Wood 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Rockstar Wood 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Royalstar Wood 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Swingstar Wood 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Woodworks 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Tama",
+          "model": "Woodworks 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Woodworks 14x8",
+          "size": "14x8",
+          "topNodes": "warmth, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "mahogany",
+      "count": 6,
+      "averageProfile": {
+        "attack": 6.28,
+        "brightness": 5.27,
+        "projection": 6.87,
+        "sustain": 7,
+        "warmth": 7.83,
+        "sensitivity": 6,
+        "control": 5.9
+      },
+      "topNodes": "warmth 7.83, sustain 7, projection 6.87",
+      "sampleRecords": [
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5x14",
+          "size": "14x5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 8x14",
+          "size": "14x8",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Universal Mahogany 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "oak",
+      "count": 4,
+      "averageProfile": {
+        "attack": 6.9,
+        "brightness": 6.01,
+        "projection": 7.49,
+        "sustain": 6.68,
+        "warmth": 6.88,
+        "sensitivity": 5.98,
+        "control": 6.24
+      },
+      "topNodes": "projection 7.49, attack 6.9, warmth 6.88",
+      "sampleRecords": [
+        {
+          "company": "Ludwig",
+          "model": "Classic Oak 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Classic Oak 5x14",
+          "size": "14x5",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Classic Oak 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Classic Oak 8x14",
+          "size": "14x8",
+          "topNodes": "projection, warmth, sustain"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "titanium",
+      "count": 3,
+      "averageProfile": {
+        "attack": 7.31,
+        "brightness": 6.75,
+        "projection": 7.66,
+        "sustain": 6.61,
+        "warmth": 5.33,
+        "sensitivity": 6.06,
+        "control": 6.27
+      },
+      "topNodes": "projection 7.66, attack 7.31, brightness 6.75",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Titanium 14x6 Engraved Shell",
+          "size": "14x6",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Titanium 14x6 Studio Dry Variant",
+          "size": "14x6",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Titanium Snare Drum 14x6 with Chrome Trick Throw Off",
+          "size": "14x6",
+          "topNodes": "projection, attack, brightness"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "cordia",
+      "count": 2,
+      "averageProfile": {
+        "attack": 6.56,
+        "brightness": 5.79,
+        "projection": 6.99,
+        "sustain": 6.31,
+        "warmth": 6.49,
+        "sensitivity": 5.87,
+        "control": 6.2
+      },
+      "topNodes": "projection 6.99, attack 6.56, warmth 6.49",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "Artstar Cordia 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "Cordia 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, warmth"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "spruce",
+      "count": 2,
+      "averageProfile": {
+        "attack": 6.64,
+        "brightness": 5.79,
+        "projection": 6.67,
+        "sustain": 5.92,
+        "warmth": 5.85,
+        "sensitivity": 5.87,
+        "control": 6.2
+      },
+      "topNodes": "projection 6.67, attack 6.64, control 6.2",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "S.L.P. Fat Spruce LSP146 14x6",
+          "size": "14x6",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Spruce 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, control"
+        }
+      ]
+    },
+    {
+      "label": "material",
+      "group": "zelkova",
+      "count": 2,
+      "averageProfile": {
+        "attack": 6.91,
+        "brightness": 5.63,
+        "projection": 7.2,
+        "sustain": 6.31,
+        "warmth": 6.83,
+        "sensitivity": 5.87,
+        "control": 6.5
+      },
+      "topNodes": "projection 7.2, attack 6.91, warmth 6.83",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "Zelkova 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "Zelkova 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, attack"
+        }
+      ]
+    }
+  ],
+  "byConstruction": [
+    {
+      "label": "construction",
+      "group": "metal",
+      "count": 196,
+      "averageProfile": {
+        "attack": 7.43,
+        "brightness": 6.92,
+        "projection": 7.65,
+        "sustain": 7.09,
+        "warmth": 5.79,
+        "sensitivity": 6.02,
+        "control": 6.04
+      },
+      "topNodes": "projection 7.65, attack 7.43, sustain 7.09",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x4 Piccolo",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Snare Drum 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        }
+      ]
+    },
+    {
+      "label": "construction",
+      "group": "ply",
+      "count": 130,
+      "averageProfile": {
+        "attack": 7.18,
+        "brightness": 6.15,
+        "projection": 7.32,
+        "sustain": 6.68,
+        "warmth": 6.74,
+        "sensitivity": 6.33,
+        "control": 6.36
+      },
+      "topNodes": "projection 7.32, attack 7.18, warmth 6.74",
+      "sampleRecords": [
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Maple/Poplar/Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 10x6",
+          "size": "10x6",
+          "topNodes": "attack, sensitivity, projection"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 12x6.5",
+          "size": "12x6.5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 13x6.5",
+          "size": "13x6.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, warmth"
+        }
+      ]
+    },
+    {
+      "label": "construction",
+      "group": "solidShell",
+      "count": 20,
+      "averageProfile": {
+        "attack": 7.41,
+        "brightness": 6.47,
+        "projection": 7.72,
+        "sustain": 7.47,
+        "warmth": 7.27,
+        "sensitivity": 6.02,
+        "control": 6.26
+      },
+      "topNodes": "projection 7.72, sustain 7.47, attack 7.41",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    },
+    {
+      "label": "construction",
+      "group": "plyWithReinforcementRings",
+      "count": 8,
+      "averageProfile": {
+        "attack": 6.55,
+        "brightness": 5.54,
+        "projection": 7.05,
+        "sustain": 6.97,
+        "warmth": 7.6,
+        "sensitivity": 6.05,
+        "control": 6.06
+      },
+      "topNodes": "warmth 7.6, projection 7.05, sustain 6.97",
+      "sampleRecords": [
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 5x14",
+          "size": "14x5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Mahogany 8x14",
+          "size": "14x8",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Maple 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Maple 5x14",
+          "size": "14x5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Maple 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Legacy Maple 8x14",
+          "size": "14x8",
+          "topNodes": "warmth, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "construction",
+      "group": "castMetal",
+      "count": 6,
+      "averageProfile": {
+        "attack": 8.41,
+        "brightness": 7.45,
+        "projection": 9.04,
+        "sustain": 8.02,
+        "warmth": 6.56,
+        "sensitivity": 5.39,
+        "control": 6.77
+      },
+      "topNodes": "projection 9.04, attack 8.41, sustain 8.02",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "Bill Platt BP146 Signature Bell Brass 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Mastercraft Bell Brass 1980s 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Bell Brass 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "The Bell Brass 50th Anniversary Reissue BB-156",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "Warlord Praetorian Cast Bell Brass 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        }
+      ]
+    },
+    {
+      "label": "construction",
+      "group": "beadedMetal",
+      "count": 2,
+      "averageProfile": {
+        "attack": 7.28,
+        "brightness": 6.72,
+        "projection": 7.71,
+        "sustain": 7.16,
+        "warmth": 6.13,
+        "sensitivity": 5.92,
+        "control": 6.21
+      },
+      "topNodes": "projection 7.71, attack 7.28, sustain 7.16",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Copper 14x7",
+          "size": "14x7",
+          "topNodes": "projection, sustain, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Steel 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, brightness"
+        }
+      ]
+    },
+    {
+      "label": "construction",
+      "group": "seamlessMetal",
+      "count": 2,
+      "averageProfile": {
+        "attack": 7.25,
+        "brightness": 6.47,
+        "projection": 7.38,
+        "sustain": 6.77,
+        "warmth": 5.94,
+        "sensitivity": 6.15,
+        "control": 6.28
+      },
+      "topNodes": "projection 7.38, attack 7.25, sustain 6.77",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Aluminum 14x6",
+          "size": "14x6",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Brass 14x6",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    }
+  ],
+  "byHoop": [
+    {
+      "label": "hoop",
+      "group": "tripleFlanged",
+      "count": 157,
+      "averageProfile": {
+        "attack": 7.24,
+        "brightness": 6.63,
+        "projection": 7.49,
+        "sustain": 7.09,
+        "warmth": 6.2,
+        "sensitivity": 6.17,
+        "control": 6.01
+      },
+      "topNodes": "projection 7.49, attack 7.24, sustain 7.09",
+      "sampleRecords": [
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Maple/Poplar/Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 10x6",
+          "size": "10x6",
+          "topNodes": "attack, sensitivity, projection"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 12x6.5",
+          "size": "12x6.5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Acrolite 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Black Beauty 3.5x14",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "hoop",
+      "group": "dieCast",
+      "count": 122,
+      "averageProfile": {
+        "attack": 7.5,
+        "brightness": 6.56,
+        "projection": 7.63,
+        "sustain": 6.76,
+        "warmth": 6.3,
+        "sensitivity": 6.08,
+        "control": 6.48
+      },
+      "topNodes": "projection 7.63, attack 7.5, sustain 6.76",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "The Maple 13x6.5",
+          "size": "13x6.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x8",
+          "size": "14x8",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "Zelkova 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Canopus",
+          "model": "Zelkova 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, control"
+        }
+      ]
+    },
+    {
+      "label": "hoop",
+      "group": "inwardFlangedControlHoop",
+      "count": 43,
+      "averageProfile": {
+        "attack": 7.45,
+        "brightness": 6.67,
+        "projection": 7.63,
+        "sustain": 7.23,
+        "warmth": 6.45,
+        "sensitivity": 6.05,
+        "control": 6.18
+      },
+      "topNodes": "projection 7.63, attack 7.45, sustain 7.23",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    },
+    {
+      "label": "hoop",
+      "group": "otherHoop",
+      "count": 24,
+      "averageProfile": {
+        "attack": 7.1,
+        "brightness": 6.71,
+        "projection": 7.35,
+        "sustain": 6.91,
+        "warmth": 5.81,
+        "sensitivity": 6.05,
+        "control": 5.78
+      },
+      "topNodes": "projection 7.35, attack 7.1, sustain 6.91",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "Aluminum Alloy 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sensitivity"
+        },
+        {
+          "company": "Canopus",
+          "model": "Manganese Steel 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Canopus",
+          "model": "Manganese Steel 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Mapex",
+          "model": "Brass Master 10x5.5",
+          "size": "10x5.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Brass Master 12x5.5",
+          "size": "12x5.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Brass Master 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Brass Master 14x3.5",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Brass Master 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, sustain, attack"
+        }
+      ]
+    },
+    {
+      "label": "hoop",
+      "group": "tamaGroovedHoop",
+      "count": 9,
+      "averageProfile": {
+        "attack": 7.17,
+        "brightness": 6.34,
+        "projection": 7.5,
+        "sustain": 6.86,
+        "warmth": 6.41,
+        "sensitivity": 5.95,
+        "control": 6.32
+      },
+      "topNodes": "projection 7.5, attack 7.17, sustain 6.86",
+      "sampleRecords": [
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Aluminum 14x6",
+          "size": "14x6",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Bell Brass 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Brass 14x6",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Bubinga 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Copper 14x7",
+          "size": "14x7",
+          "topNodes": "projection, sustain, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Maple 14x6",
+          "size": "14x6",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Spruce 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, control"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Steel 14x6",
+          "size": "14x6",
+          "topNodes": "projection, attack, brightness"
+        }
+      ]
+    },
+    {
+      "label": "hoop",
+      "group": "gretsch302",
+      "count": 7,
+      "averageProfile": {
+        "attack": 7.06,
+        "brightness": 6.24,
+        "projection": 7.37,
+        "sustain": 6.96,
+        "warmth": 6.77,
+        "sensitivity": 6.31,
+        "control": 6.16
+      },
+      "topNodes": "projection 7.37, attack 7.06, sustain 6.96",
+      "sampleRecords": [
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Chrome-over-Steel",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Chrome-over-Steel",
+          "size": "14x6.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5",
+          "topNodes": "warmth, attack, projection"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5.5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x8",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Keith Carlock Signature",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, warmth"
+        }
+      ]
+    },
+    {
+      "label": "hoop",
+      "group": "brassHoop",
+      "count": 2,
+      "averageProfile": {
+        "attack": 6.73,
+        "brightness": 6.06,
+        "projection": 7.38,
+        "sustain": 7.61,
+        "warmth": 7.54,
+        "sensitivity": 6.15,
+        "control": 5.51
+      },
+      "topNodes": "sustain 7.61, warmth 7.54, projection 7.38",
+      "sampleRecords": [
+        {
+          "company": "Craviotto",
+          "model": "Diamond Series Brass 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "sustain, warmth, projection"
+        },
+        {
+          "company": "Craviotto",
+          "model": "Diamond Series Brass 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "sustain, warmth, projection"
+        }
+      ]
+    }
+  ],
+  "bySize": [
+    {
+      "label": "size",
+      "group": "14x6.5",
+      "count": 107,
+      "averageProfile": {
+        "attack": 7.22,
+        "brightness": 6.45,
+        "projection": 7.74,
+        "sustain": 7.19,
+        "warmth": 6.65,
+        "sensitivity": 6.08,
+        "control": 6.17
+      },
+      "topNodes": "projection 7.74, attack 7.22, sustain 7.19",
+      "sampleRecords": [
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, sustain, projection"
+        },
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Maple/Poplar/Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "C&C Drums USA",
+          "model": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Canopus",
+          "model": "Manganese Steel 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "Type-R 3mm Brass Magnum 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Canopus",
+          "model": "Zelkova 14x6.5",
+          "size": "14x6.5",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "Craviotto",
+          "model": "Diamond Series Brass 6.5x14",
+          "size": "14x6.5",
+          "topNodes": "sustain, warmth, projection"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x5",
+      "count": 57,
+      "averageProfile": {
+        "attack": 7.52,
+        "brightness": 6.7,
+        "projection": 7.39,
+        "sustain": 6.73,
+        "warmth": 6.02,
+        "sensitivity": 6.28,
+        "control": 6.33
+      },
+      "topNodes": "attack 7.52, projection 7.39, sustain 6.73",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "Zelkova 14x5",
+          "size": "14x5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5",
+          "topNodes": "warmth, attack, projection"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Acrolite 5x14",
+          "size": "14x5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Black Beauty 5x14",
+          "size": "14x5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Black Beauty 5x14",
+          "size": "14x5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Black Beauty Super Sensitive 5x14",
+          "size": "14x5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Bronze Phonic 5x14",
+          "size": "14x5",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Chrome-Over-Brass 5x14",
+          "size": "14x5",
+          "topNodes": "projection, attack, sustain"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x5.5",
+      "count": 55,
+      "averageProfile": {
+        "attack": 7.15,
+        "brightness": 6.49,
+        "projection": 7.33,
+        "sustain": 6.8,
+        "warmth": 6.16,
+        "sensitivity": 6.13,
+        "control": 6.05
+      },
+      "topNodes": "projection 7.33, attack 7.15, sustain 6.8",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "Manganese Steel 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Craviotto",
+          "model": "Diamond Series Brass 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "sustain, warmth, projection"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x5.5",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, control"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Chrome-over-Steel",
+          "size": "14x5.5",
+          "topNodes": "projection, attack, brightness"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x5.5",
+          "topNodes": "warmth, projection, attack"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Keith Carlock Signature",
+          "size": "14x5.5",
+          "topNodes": "attack, projection, warmth"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Classic Maple 5.5x14",
+          "size": "14x5.5",
+          "topNodes": "projection, warmth, attack"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x6",
+      "count": 43,
+      "averageProfile": {
+        "attack": 7.4,
+        "brightness": 6.58,
+        "projection": 7.67,
+        "sustain": 6.97,
+        "warmth": 6.31,
+        "sensitivity": 5.96,
+        "control": 6.28
+      },
+      "topNodes": "projection 7.67, attack 7.4, sustain 6.97",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 14x6",
+          "size": "14x6",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+          "size": "14x6",
+          "topNodes": "projection, attack, sustain"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x8",
+      "count": 28,
+      "averageProfile": {
+        "attack": 7.12,
+        "brightness": 6.42,
+        "projection": 7.8,
+        "sustain": 7.3,
+        "warmth": 6.63,
+        "sensitivity": 5.91,
+        "control": 6.05
+      },
+      "topNodes": "projection 7.8, sustain 7.3, attack 7.12",
+      "sampleRecords": [
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x8",
+          "size": "14x8",
+          "topNodes": "projection, warmth, attack"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x8",
+          "size": "14x8",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Gretsch",
+          "model": "Brooklyn Snare",
+          "size": "14x8",
+          "topNodes": "warmth, projection, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Black Beauty 8x14",
+          "size": "14x8",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Bronze Phonic 8x14",
+          "size": "14x8",
+          "topNodes": "sustain, projection, attack"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Classic Maple 8x14",
+          "size": "14x8",
+          "topNodes": "projection, warmth, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Classic Oak 8x14",
+          "size": "14x8",
+          "topNodes": "projection, warmth, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Copper Phonic 8x14",
+          "size": "14x8",
+          "topNodes": "sustain, projection, warmth"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "13x6",
+      "count": 15,
+      "averageProfile": {
+        "attack": 7.46,
+        "brightness": 6.8,
+        "projection": 7.4,
+        "sustain": 7.04,
+        "warmth": 6.1,
+        "sensitivity": 6.12,
+        "control": 6.13
+      },
+      "topNodes": "attack 7.46, projection 7.4, sustain 7.04",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black on Brass 13x6 Brunson Lug Prototype/Planned Variant",
+          "size": "13x6",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Bright Polished 3mm Bell Brass 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Bright Polished Bell Brass Snare Drum 13x6",
+          "size": "13x6",
+          "topNodes": "projection, attack, sustain"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "13x7",
+      "count": 11,
+      "averageProfile": {
+        "attack": 7.6,
+        "brightness": 6.85,
+        "projection": 7.69,
+        "sustain": 7.14,
+        "warmth": 6.05,
+        "sensitivity": 6.22,
+        "control": 6.21
+      },
+      "topNodes": "projection 7.69, attack 7.6, sustain 7.14",
+      "sampleRecords": [
+        {
+          "company": "Ludwig",
+          "model": "Universal Black Brass 7x13 Die-cast",
+          "size": "13x7",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Universal Black Brass 7x13 Triple-flanged",
+          "size": "13x7",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Mapex",
+          "model": "Hydro",
+          "size": "13x7",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Pearl",
+          "model": "Modern Utility Steel",
+          "size": "13x7",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Aluminum 13x7",
+          "size": "13x7",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 13x7",
+          "size": "13x7",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Brass 13x7",
+          "size": "13x7",
+          "topNodes": "sustain, projection, attack"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Steel 13x7",
+          "size": "13x7",
+          "topNodes": "attack, projection, brightness"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x3.5",
+      "count": 10,
+      "averageProfile": {
+        "attack": 7.53,
+        "brightness": 6.95,
+        "projection": 7.2,
+        "sustain": 6.66,
+        "warmth": 5.51,
+        "sensitivity": 6.08,
+        "control": 6.16
+      },
+      "topNodes": "attack 7.53, projection 7.2, brightness 6.95",
+      "sampleRecords": [
+        {
+          "company": "Ludwig",
+          "model": "Black Beauty 3.5x14",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Raw Brass Phonic 3.5x14",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Brass Master 14x3.5",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Stainless Steel 14x3.5",
+          "size": "14x3.5",
+          "topNodes": "attack, brightness, projection"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Aluminum",
+          "size": "14x3.5",
+          "topNodes": "attack, control, projection"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Brass",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Copper",
+          "size": "14x3.5",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Pearl",
+          "model": "Free Floating Steel",
+          "size": "14x3.5",
+          "topNodes": "attack, brightness, projection"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x4",
+      "count": 10,
+      "averageProfile": {
+        "attack": 7.65,
+        "brightness": 6.88,
+        "projection": 7.38,
+        "sustain": 6.91,
+        "warmth": 5.99,
+        "sensitivity": 6.07,
+        "control": 6.28
+      },
+      "topNodes": "attack 7.65, projection 7.38, sustain 6.91",
+      "sampleRecords": [
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass 14x4 Piccolo",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "AHEAD",
+          "model": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        },
+        {
+          "company": "Canopus",
+          "model": "The Maple 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "DW / PDP",
+          "model": "MFG True-Cast Bell Bronze 14x4",
+          "size": "14x4",
+          "topNodes": "attack, projection, control"
+        },
+        {
+          "company": "Ludwig",
+          "model": "Supralite 4x14",
+          "size": "14x4",
+          "topNodes": "attack, brightness, projection"
+        },
+        {
+          "company": "WorldMax",
+          "model": "Black Nickel Over Brass",
+          "size": "14x4",
+          "topNodes": "attack, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x5.75",
+      "count": 5,
+      "averageProfile": {
+        "attack": 7.31,
+        "brightness": 6.56,
+        "projection": 7.34,
+        "sustain": 6.82,
+        "warmth": 5.98,
+        "sensitivity": 6.39,
+        "control": 6.05
+      },
+      "topNodes": "projection 7.34, attack 7.31, sustain 6.82",
+      "sampleRecords": [
+        {
+          "company": "SONOR",
+          "model": "Kompressor Aluminum 14x5.75",
+          "size": "14x5.75",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Beech 14x5.75",
+          "size": "14x5.75",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Brass 14x5.75",
+          "size": "14x5.75",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "SONOR",
+          "model": "Kompressor Steel 14x5.75",
+          "size": "14x5.75",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "SONOR",
+          "model": "Vintage Series Beech 14x5.75",
+          "size": "14x5.75",
+          "topNodes": "warmth, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "14x7",
+      "count": 4,
+      "averageProfile": {
+        "attack": 7.04,
+        "brightness": 6.2,
+        "projection": 7.64,
+        "sustain": 7.17,
+        "warmth": 6.85,
+        "sensitivity": 5.98,
+        "control": 6.17
+      },
+      "topNodes": "projection 7.64, sustain 7.17, attack 7.04",
+      "sampleRecords": [
+        {
+          "company": "Mapex",
+          "model": "Solidus",
+          "size": "14x7",
+          "topNodes": "projection, attack, warmth"
+        },
+        {
+          "company": "Mapex",
+          "model": "Stainless Steel 14x7",
+          "size": "14x7",
+          "topNodes": "projection, sustain, attack"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Copper 14x7",
+          "size": "14x7",
+          "topNodes": "projection, sustain, warmth"
+        },
+        {
+          "company": "Tama",
+          "model": "STARPHONIC Walnut 14x7",
+          "size": "14x7",
+          "topNodes": "warmth, projection, sustain"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "10x5.5",
+      "count": 3,
+      "averageProfile": {
+        "attack": 7.49,
+        "brightness": 7.22,
+        "projection": 7.38,
+        "sustain": 6.93,
+        "warmth": 5.14,
+        "sensitivity": 6.13,
+        "control": 5.9
+      },
+      "topNodes": "attack 7.49, projection 7.38, brightness 7.22",
+      "sampleRecords": [
+        {
+          "company": "Mapex",
+          "model": "Brass Master 10x5.5",
+          "size": "10x5.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Tama",
+          "model": "METALWORKS 10x5.5",
+          "size": "10x5.5",
+          "topNodes": "attack, brightness, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Soundworks Steel DST1055M 10x5.5",
+          "size": "10x5.5",
+          "topNodes": "attack, brightness, projection"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "12x5",
+      "count": 3,
+      "averageProfile": {
+        "attack": 8.03,
+        "brightness": 7.47,
+        "projection": 7.4,
+        "sustain": 6.48,
+        "warmth": 5.06,
+        "sensitivity": 6.43,
+        "control": 6.53
+      },
+      "topNodes": "attack 8.03, brightness 7.47, projection 7.4",
+      "sampleRecords": [
+        {
+          "company": "Premier",
+          "model": "Artist Birch/Ash 12x5 Snare",
+          "size": "12x5",
+          "topNodes": "attack, projection, sensitivity"
+        },
+        {
+          "company": "Tama",
+          "model": "Mike Portnoy Melody Master 12x5",
+          "size": "12x5",
+          "topNodes": "attack, brightness, projection"
+        },
+        {
+          "company": "Tama",
+          "model": "Mike Portnoy Melody Master MP125ST 12x5",
+          "size": "12x5",
+          "topNodes": "attack, brightness, projection"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "12x5.5",
+      "count": 3,
+      "averageProfile": {
+        "attack": 7.38,
+        "brightness": 7.11,
+        "projection": 7.3,
+        "sustain": 6.71,
+        "warmth": 5.14,
+        "sensitivity": 6.03,
+        "control": 5.9
+      },
+      "topNodes": "attack 7.38, projection 7.3, brightness 7.11",
+      "sampleRecords": [
+        {
+          "company": "Mapex",
+          "model": "Brass Master 12x5.5",
+          "size": "12x5.5",
+          "topNodes": "projection, attack, sustain"
+        },
+        {
+          "company": "Mapex",
+          "model": "Stainless Steel 12x5.5",
+          "size": "12x5.5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Mapex",
+          "model": "Unresolved Steel Variant 4",
+          "size": "12x5.5",
+          "topNodes": "attack, projection, brightness"
+        }
+      ]
+    },
+    {
+      "label": "size",
+      "group": "13x3.5",
+      "count": 2,
+      "averageProfile": {
+        "attack": 7.67,
+        "brightness": 7.21,
+        "projection": 6.98,
+        "sustain": 6.5,
+        "warmth": 5.05,
+        "sensitivity": 6.18,
+        "control": 6.12
+      },
+      "topNodes": "attack 7.67, brightness 7.21, projection 6.98",
+      "sampleRecords": [
+        {
+          "company": "Mapex",
+          "model": "Brass Master 13x3.5",
+          "size": "13x3.5",
+          "topNodes": "attack, projection, brightness"
+        },
+        {
+          "company": "Mapex",
+          "model": "Stainless Steel 13x3.5",
+          "size": "13x3.5",
+          "topNodes": "attack, brightness, projection"
+        }
+      ]
+    }
+  ]
+}
