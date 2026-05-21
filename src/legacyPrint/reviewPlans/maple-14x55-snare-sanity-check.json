@@ -1,0 +1,706 @@
+{
+  "status": "MAPLE_14X55_SNARE_SANITY_CHECK_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T13:55:45.953Z",
+  "firestoreWrites": 0,
+  "summary": {
+    "audit": "MAPLE_14X55_SNARE_SANITY_CHECK_NO_FIRESTORE_WRITES",
+    "generatedAt": "2026-05-21T13:55:45.953Z",
+    "firestoreWrites": 0,
+    "sourcePreviewRecords": 359,
+    "maple14x55Count": 14,
+    "okCount": 0,
+    "reviewCount": 14,
+    "issueCounts": {
+      "unknown ply count": 13,
+      "generic reinforcement ring classification": 14,
+      "unknown finish/treatment": 6
+    }
+  },
+  "records": [
+    {
+      "id": "canopus_the-maple_the-maple-14x5-5_14x5-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_8ad3dcc0",
+      "company": "Canopus",
+      "model": "The Maple 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "unknownFinishTreatment",
+      "bearingEdge": "canopusPrecisionEdge",
+      "hoopType": "dieCast",
+      "shellThicknessMm": 5,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Delicate/precise Canopus bearing edge",
+      "rawHoop": "Diecast Hoop / 8",
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        },
+        {
+          "source": "shellLayup:allMapleLayup",
+          "totalMovement": 0.091
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.77,
+        "brightness": 5.76,
+        "projection": 5.9,
+        "sustain": 6.19,
+        "warmth": 6.71,
+        "sensitivity": 6.48,
+        "control": 6.62
+      },
+      "topNodes": [
+        "attack",
+        "warmth",
+        "control"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification",
+        "unknown finish/treatment"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x5-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_f5cb0d30",
+      "company": "Gretsch",
+      "model": "Brooklyn Snare",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "unknownFinishTreatment",
+      "bearingEdge": "rounder30Degree",
+      "hoopType": "gretsch302",
+      "shellThicknessMm": 5.6,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "30-degree bearing edge",
+      "rawHoop": "Gretsch 302 3mm double-flanged steel hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.16,
+        "brightness": 5.13,
+        "projection": 5.66,
+        "sustain": 6.78,
+        "warmth": 7.56,
+        "sensitivity": 6.31,
+        "control": 6.25
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification",
+        "unknown finish/treatment"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "gretsch_signature_keith-carlock-signature_14x5-5_ply_maple_poplar_5-6_45-degree-bearing-edge_satin-black-metallic_gretsc_c2f28098",
+      "company": "Gretsch",
+      "model": "Keith Carlock Signature",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "unknownFinishTreatment",
+      "bearingEdge": "sharper45Degree",
+      "hoopType": "gretsch302",
+      "shellThicknessMm": 5.6,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "45-degree bearing edge",
+      "rawHoop": "Gretsch 302 double-flanged hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        },
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.66,
+        "brightness": 5.59,
+        "projection": 5.72,
+        "sustain": 6.6,
+        "warmth": 6.79,
+        "sensitivity": 6.61,
+        "control": 6.22
+      },
+      "topNodes": [
+        "warmth",
+        "attack",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification",
+        "unknown finish/treatment"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "mapex_armory_dillinger_14x5-5_ply_maple_7-2_soniclear-modern-mapex-edge_natural-transparent-varies_2-3mm-powerhoops_arml_f6c00f32",
+      "company": "Mapex",
+      "model": "Dillinger",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "unknownFinishTreatment",
+      "bearingEdge": "mapexSonicClear",
+      "hoopType": "otherHoop",
+      "shellThicknessMm": 7.2,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "SONIClear / modern Mapex edge",
+      "rawHoop": "2.3mm Powerhoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        },
+        {
+          "source": "shellLayup:allMapleLayup",
+          "totalMovement": 0.091
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.37,
+        "brightness": 5.56,
+        "projection": 5.8,
+        "sustain": 6.41,
+        "warmth": 6.84,
+        "sensitivity": 6.38,
+        "control": 6.07
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification",
+        "unknown finish/treatment"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "sonor_aq2_aq2-maple-14x5-5_14x5-5_ply_maple_7-2_45-bearing-edge_triple-flanged-hoops_aq2-1405_b10c6d2d",
+      "company": "SONOR",
+      "model": "AQ2 Maple 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "unknownFinishTreatment",
+      "bearingEdge": "sharper45Degree",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 7.2,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "45° bearing edge",
+      "rawHoop": "Triple-flanged hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.81,
+        "brightness": 5.84,
+        "projection": 5.85,
+        "sustain": 6.54,
+        "warmth": 6.56,
+        "sensitivity": 6.74,
+        "control": 6.04
+      },
+      "topNodes": [
+        "attack",
+        "sensitivity",
+        "warmth"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification",
+        "unknown finish/treatment"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_imperialstar_imperialstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap-lacquer_10dfcbc5",
+      "company": "Tama",
+      "model": "Imperialstar Wood 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "lacquerOrUrethaneFinish",
+      "bearingEdge": "tamaWoodEdge",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 7.5,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Tama wood bearing edge",
+      "rawHoop": "triple-flange hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        },
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.39,
+        "brightness": 5.54,
+        "projection": 5.74,
+        "sustain": 6.64,
+        "warmth": 7.03,
+        "sensitivity": 6.4,
+        "control": 6.03
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_rockstar_rockstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_3d4698f7",
+      "company": "Tama",
+      "model": "Rockstar Wood 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_ONLY_BLOCKER",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "sealedDecorativeFinish",
+      "bearingEdge": "tamaWoodEdge",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 7.5,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Tama wood bearing edge",
+      "rawHoop": "triple-flange hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        },
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.39,
+        "brightness": 5.54,
+        "projection": 5.74,
+        "sustain": 6.64,
+        "warmth": 7.03,
+        "sensitivity": 6.4,
+        "control": 6.03
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_royalstar_royalstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_49eeb53b",
+      "company": "Tama",
+      "model": "Royalstar Wood 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_ONLY_BLOCKER",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "sealedDecorativeFinish",
+      "bearingEdge": "tamaWoodEdge",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 7.5,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Tama wood bearing edge",
+      "rawHoop": "triple-flange hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        },
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.39,
+        "brightness": 5.54,
+        "projection": 5.74,
+        "sustain": 6.64,
+        "warmth": 7.03,
+        "sensitivity": 6.4,
+        "control": 6.03
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-classic-maple-lmp1455-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-sound-arc-style_lmp1455_af82f7e3",
+      "company": "Tama",
+      "model": "S.L.P. Classic Maple LMP1455 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_FULL_REFERENCE_READY",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "eightToTenPly",
+      "finishTreatment": "lacquerOrUrethaneFinish",
+      "bearingEdge": "sharper45Degree",
+      "hoopType": "inwardFlangedControlHoop",
+      "shellThicknessMm": 7,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "45-degree",
+      "rawHoop": "Sound Arc Hoop",
+      "secondaryCoreDrivers": [
+        {
+          "source": "plyCount:8",
+          "totalMovement": 0.119
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.95,
+        "brightness": 5.85,
+        "projection": 5.91,
+        "sustain": 6.25,
+        "warmth": 6.45,
+        "sensitivity": 6.58,
+        "control": 6.58
+      },
+      "topNodes": [
+        "attack",
+        "sensitivity",
+        "control"
+      ],
+      "issues": [
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b",
+      "company": "Tama",
+      "model": "Starclassic Maple 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_ONLY_BLOCKER",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "lacquerOrUrethaneFinish",
+      "bearingEdge": "roundedVintage",
+      "hoopType": "dieCast",
+      "shellThicknessMm": 5,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Starclassic rounded bearing edge profile; edge positioned 2.5mm inward from outer shell surface",
+      "rawHoop": "zinc die-cast hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.43,
+        "brightness": 5.4,
+        "projection": 5.86,
+        "sustain": 6.31,
+        "warmth": 7.19,
+        "sensitivity": 6.04,
+        "control": 6.6
+      },
+      "topNodes": [
+        "warmth",
+        "control",
+        "attack"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_superstar_superstar-maple-14x5-5_14x5-5_ply_maple_lacquer_322c4317",
+      "company": "Tama",
+      "model": "Superstar Maple 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "lacquerOrUrethaneFinish",
+      "bearingEdge": "tamaWoodEdge",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 7,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Tama wood bearing edge",
+      "rawHoop": "triple-flange hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.6,
+        "brightness": 5.74,
+        "projection": 5.87,
+        "sustain": 6.46,
+        "warmth": 6.82,
+        "sensitivity": 6.47,
+        "control": 6.12
+      },
+      "topNodes": [
+        "warmth",
+        "attack",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_swingstar_swingstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_8c6726b1",
+      "company": "Tama",
+      "model": "Swingstar Wood 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_ONLY_BLOCKER",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "sealedDecorativeFinish",
+      "bearingEdge": "tamaWoodEdge",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 7.5,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Tama wood bearing edge",
+      "rawHoop": "triple-flange hoops",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        },
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.39,
+        "brightness": 5.54,
+        "projection": 5.74,
+        "sustain": 6.64,
+        "warmth": 7.03,
+        "sensitivity": 6.4,
+        "control": 6.03
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "sensitivity"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "tama_woodworks_woodworks-14x5-5_14x5-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f0fdc50b",
+      "company": "Tama",
+      "model": "Woodworks 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_ONLY_BLOCKER",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maplePoplar",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "maplePoplarMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "sealedDecorativeFinish",
+      "bearingEdge": "tamaWoodEdge",
+      "hoopType": "tripleFlanged",
+      "shellThicknessMm": 8,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "Tama wood bearing edge",
+      "rawHoop": "triple-flange / Mighty Hoop",
+      "secondaryCoreDrivers": [
+        {
+          "source": "shellLayup:maplePoplarMapleLayup",
+          "totalMovement": 0.187
+        },
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.48,
+        "brightness": 5.51,
+        "projection": 5.87,
+        "sustain": 6.51,
+        "warmth": 6.95,
+        "sensitivity": 6.21,
+        "control": 6.23
+      },
+      "topNodes": [
+        "warmth",
+        "sustain",
+        "attack"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification"
+      ],
+      "sanityStatus": "REVIEW"
+    },
+    {
+      "id": "yamaha_tour-custom_tour-custom-maple-14x5-5_14x5-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_b3bf7f1d",
+      "company": "Yamaha",
+      "model": "Tour Custom Maple 14x5.5",
+      "size": "14x5.5",
+      "readinessTier": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT",
+      "inventoryTier": "CORE_PLUS_PARTIAL_STOCK_READY",
+      "shellMaterialFamily": "maple",
+      "shellConstructionFamily": "plyWithReinforcementRings",
+      "shellLayup": "allMapleLayup",
+      "reinforcementRings": "otherRings",
+      "plyCount": "unknownPlyCount",
+      "finishTreatment": "unknownFinishTreatment",
+      "bearingEdge": "sharper45Degree",
+      "hoopType": "otherHoop",
+      "shellThicknessMm": 5.6,
+      "bearingEdgeReady": true,
+      "bearingEdgeFallbackApplied": false,
+      "rawBearingEdge": "45-degree",
+      "rawHoop": "2.3mm Inverse DynaHoop (10 hole)",
+      "secondaryCoreDrivers": [
+        {
+          "source": "reinforcementRings:otherRings",
+          "totalMovement": 0.094
+        },
+        {
+          "source": "shellLayup:allMapleLayup",
+          "totalMovement": 0.091
+        }
+      ],
+      "voiceProfile": {
+        "attack": 6.68,
+        "brightness": 5.73,
+        "projection": 5.82,
+        "sustain": 6.3,
+        "warmth": 6.46,
+        "sensitivity": 6.59,
+        "control": 6.02
+      },
+      "topNodes": [
+        "attack",
+        "sensitivity",
+        "warmth"
+      ],
+      "issues": [
+        "unknown ply count",
+        "generic reinforcement ring classification",
+        "unknown finish/treatment"
+      ],
+      "sanityStatus": "REVIEW"
+    }
+  ]
+}
