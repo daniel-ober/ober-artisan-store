@@ -221,11 +221,27 @@ export function useVoicePlayground(firestore, selectedReferenceId = 'heritage') 
 
           firestore,
 
-          limit: 500,
+          limit: 2000,
 
         });
 
         if (!cancelled) {
+
+          console.info('[LegacyPrint Reference Loader]', {
+
+            source: response.source,
+
+            totalFetched: response.totalFetched,
+
+            firestoreFetched: response.firestoreFetched,
+
+            localFetched: response.localFetched,
+
+            count: response.count,
+
+            companies: Array.from(new Set((response.references || []).map(reference => reference.companyName))).sort()
+
+          });
 
           setReferenceOptions(response.references || []);
 

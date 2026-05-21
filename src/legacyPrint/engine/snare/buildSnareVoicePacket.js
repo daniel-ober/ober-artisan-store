@@ -21,7 +21,7 @@ const diffVoiceProfiles = (baseProfile = {}, calibratedProfile = {}) => {
 
     const calibrated = Number(calibratedProfile[node] || 0);
 
-    const delta = Number((calibrated - base).toFixed(2));
+    const delta = Number((calibrated - base).toFixed(3));
 
     if (delta !== 0) {
 

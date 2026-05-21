@@ -283,6 +283,48 @@ const groupBearingEdge = value => {
 
 };
 
+const getBearingEdgeHintFromRecord = row => {
+
+  const text = normalizeText(row);
+
+  if (!text) return undefined;
+
+  if (
+
+    text.includes('30-degree-bearing-edge') ||
+
+    text.includes('30-degree') ||
+
+    text.includes('30 degree') ||
+
+    text.includes('30°')
+
+  ) {
+
+    return '30-degree bearing edge';
+
+  }
+
+  if (
+
+    text.includes('45-degree-bearing-edge') ||
+
+    text.includes('45-degree') ||
+
+    text.includes('45 degree') ||
+
+    text.includes('45°')
+
+  ) {
+
+    return '45-degree bearing edge';
+
+  }
+
+  return undefined;
+
+};
+
 const groupHoop = value => {
 
   const text = normalizeText(value);
@@ -344,6 +386,70 @@ const groupHoop = value => {
   if (text.includes('configurable')) return 'configurableHoop';
 
   return 'otherHoop';
+
+};
+
+const getHoopHintFromRecord = row => {
+
+  const text = normalizeText(row);
+
+  if (!text) return undefined;
+
+  if (
+
+    text.includes('die-cast') ||
+
+    text.includes('die cast') ||
+
+    text.includes('diecast') ||
+
+    text.includes('zinc-die-cast') ||
+
+    text.includes('zinc die cast')
+
+  ) {
+
+    return 'die-cast hoops';
+
+  }
+
+  if (
+
+    text.includes('sound-arc') ||
+
+    text.includes('sound arc') ||
+
+    text.includes('triple-flange-sound-arc') ||
+
+    text.includes('triple flange sound arc')
+
+  ) {
+
+    return 'sound arc hoop';
+
+  }
+
+  if (
+
+    text.includes('triple-flange') ||
+
+    text.includes('triple flanged') ||
+
+    text.includes('triple flange')
+
+  ) {
+
+    return 'triple flanged hoop';
+
+  }
+
+  if (text.includes('302')) {
+
+    return '302 hoop';
+
+  }
+
+  return undefined;
 
 };
 
@@ -583,7 +689,7 @@ const adaptSnareReferenceRecord = row => {
 
   const plyCount = firstValue(row, ['plyCount', 'plies']);
 
-  const bearingEdge = firstValue(row, [
+  const explicitBearingEdge = firstValue(row, [
 
     'bearingEdge',
 
@@ -596,6 +702,20 @@ const adaptSnareReferenceRecord = row => {
     'bearingEdgeDescription'
 
   ]);
+
+  const identifierBearingEdge = getBearingEdgeHintFromRecord(row);
+
+  const bearingEdge = hasMeaningfulValue(explicitBearingEdge)
+
+    ? explicitBearingEdge
+
+    : identifierBearingEdge;
+
+  const bearingEdgeFamily = hasMeaningfulValue(bearingEdge)
+
+    ? groupBearingEdge(bearingEdge)
+
+    : getDefaultBearingEdgeFamily({ shellMaterial, shellConstruction });
 
   const hoopType = firstValue(row, ['hoopType', 'hoops', 'rimType']);
 
@@ -647,15 +767,17 @@ const adaptSnareReferenceRecord = row => {
 
   const lugCount = firstValue(row, ['lugCount', 'lugs']);
 
-  const bearingEdgeFamily = hasMeaningfulValue(bearingEdge)
+  const identifierHoopType = getHoopHintFromRecord(row);
 
-    ? groupBearingEdge(bearingEdge)
+  const resolvedHoopType = hasMeaningfulValue(hoopType)
 
-    : getDefaultBearingEdgeFamily({ shellMaterial, shellConstruction });
+    ? hoopType
 
-  const hoopFamily = hasMeaningfulValue(hoopType)
+    : identifierHoopType;
 
-    ? groupHoop(hoopType)
+  const hoopFamily = hasMeaningfulValue(resolvedHoopType)
+
+    ? groupHoop(resolvedHoopType)
 
     : getDefaultHoopFamily({ company: firstValue(row, ['companyName', 'company', 'brand']) });
 

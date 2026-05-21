@@ -151,7 +151,7 @@ const voiceToLegacyProfile = (voice = {}) =>
 
   VOICE_NODE_ORDER.reduce((acc, key) => {
 
-    acc[key] = Math.round(clampScore(voice[key], DEFAULT_VOICE[key]) * 10) / 10;
+    acc[key] = Math.round(clampScore(voice[key], DEFAULT_VOICE[key]) * 1000) / 1000;
 
     return acc;
 
