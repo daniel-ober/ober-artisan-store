@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-05-21T07:39:55.639Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/pork-pie-usa-custom-bearing-edge-review-packet.json",
+  "status": "PORK_PIE_USA_CUSTOM_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 1,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 1,
+    "groupCount": 1
+  },
+  "officialSourceConfirmedGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Maple Max 7x14"
+      ],
+      "recordIds": [
+        "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150"
+      ],
+      "skipReason": "No exact official Pork Pie USA Custom Maple bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Pork Pie source language confirms bearing-edge geometry for USA Custom / Maple Max snare drums."
+}
