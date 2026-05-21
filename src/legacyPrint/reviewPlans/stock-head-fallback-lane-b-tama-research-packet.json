@@ -1,0 +1,147 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_TAMA_RESEARCH_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:50:50.004Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-remaining-company-priority-packet.json",
+  "companyName": "Tama",
+  "reviewScope": "Lane B Tama company/OEM stock-head fallback research packet.",
+  "noFirestoreWrites": true,
+  "policyPosition": "conservative",
+  "summary": {
+    "candidateCount": 7,
+    "lineGroupCount": 3,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 7,
+    "noFirestoreWrites": true
+  },
+  "companyGroup": {
+    "companyName": "Tama",
+    "candidateCount": 7,
+    "lineGroupCount": 3,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 7,
+    "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+    "noFirestoreWrites": true,
+    "lineGroups": [
+      {
+        "lineSeries": "Metalworks",
+        "candidateCount": 4,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 4,
+        "sampleModels": [
+          {
+            "id": "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+            "modelName": "METALWORKS 10x5.5",
+            "diameter": "10",
+            "depth": "5.5",
+            "shellConstruction": "metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          },
+          {
+            "id": "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+            "modelName": "METALWORKS 13x4",
+            "diameter": "13",
+            "depth": "4",
+            "shellConstruction": "metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          },
+          {
+            "id": "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+            "modelName": "METALWORKS 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          },
+          {
+            "id": "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c",
+            "modelName": "METALWORKS 14x6.5",
+            "diameter": "14",
+            "depth": "6.5",
+            "shellConstruction": "metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Mastercraft",
+        "candidateCount": 2,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 2,
+        "sampleModels": [
+          {
+            "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+            "modelName": "Mastercraft Bell Brass 1980s 14x6.5",
+            "diameter": "14",
+            "depth": "6.5",
+            "shellConstruction": "cast metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          },
+          {
+            "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+            "modelName": "The Bell Brass 50th Anniversary Reissue BB-156",
+            "diameter": "14",
+            "depth": "6.5",
+            "shellConstruction": "cast metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Imperialstar",
+        "candidateCount": 1,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 1,
+        "sampleModels": [
+          {
+            "id": "tama_imperialstar_imperialstar-chrome-steel-14x5-5_14x5-5_metal_steel_chrome_0e7e083b",
+            "modelName": "Imperialstar Chrome Steel 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "metal",
+            "shellMaterial1": null,
+            "stockBatterHead": "unknown",
+            "stockResoHead": "unknown",
+            "sourceUrl": null
+          }
+        ]
+      }
+    ]
+  },
+  "researchRules": [
+    "Search for official Tama product pages, archived Tama pages, Tama catalogs, Tama manuals, or OEM-confirmed sources.",
+    "Do not approve a fallback rule from third-party retailer/spec pages alone.",
+    "A fallback rule requires both stock batter head and stock resonant/snare-side head confirmation.",
+    "If evidence only applies to one Tama line or era, keep the decision line-level or model-level rather than company-wide."
+  ],
+  "decisionTemplate": {
+    "companyName": "Tama",
+    "approvedCompanyWideFallback": false,
+    "approvedLineLevelFallbackRules": [],
+    "blockedLineGroups": [],
+    "sourceEvidenceUrls": [],
+    "decisionNotes": ""
+  },
+  "nextRecommendedStep": {
+    "task": "Review Tama official/OEM evidence for each listed line group and create a conservative decision file.",
+    "expectedDecisionFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-tama-research-decisions.json",
+    "constraint": "No Firestore writes. Keep fallback-head records separate from source-confirmed full stock pass."
+  }
+}
