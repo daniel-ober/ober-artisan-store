@@ -918,9 +918,7 @@ function ReferencePanel({
 
   const [brandFilter, setBrandFilter] = useState('all');
 
-  const [materialFilter, setMaterialFilter] = useState('all');
-
-  const [modelFilter, setModelFilter] = useState('');
+  const [modelFilter, setModelFilter] = useState('all');
 
   const brandOptions = useMemo(() => {
 
@@ -940,90 +938,45 @@ function ReferencePanel({
 
   }, [referenceOptions]);
 
-  const filteredByBrand = useMemo(() => {
+  const modelOptions = useMemo(() => {
 
-    return referenceOptions.filter((reference) => {
+    return referenceOptions
 
-      const company = reference.companyName || reference.company || '';
+      .filter((reference) => {
 
-      return brandFilter === 'all' || company === brandFilter;
+        const company = reference.companyName || reference.company || '';
 
-    });
+        return brandFilter === 'all' || company === brandFilter;
+
+      })
+
+      .slice()
+
+      .sort((a, b) => {
+
+        const aLabel = a.label || a.modelName || '';
+
+        const bLabel = b.label || b.modelName || '';
+
+        return aLabel.localeCompare(bLabel);
+
+      });
 
   }, [referenceOptions, brandFilter]);
 
-  const materialOptions = useMemo(() => {
+  const selectedReference =
 
-    return Array.from(
+    referenceOptions.find((reference) => reference.key === selectedReferenceId) ||
 
-      new Set(
+    referenceOptions.find((reference) => reference.snareReferenceId === selectedReferenceId) ||
 
-        filteredByBrand
-
-          .map((reference) => reference.shellMaterial || '')
-
-          .filter(Boolean)
-
-      )
-
-    ).sort((a, b) => a.localeCompare(b));
-
-  }, [filteredByBrand]);
-  const normalizedModelFilter = String(modelFilter || '').trim().toLowerCase();
-
-  const filteredReferenceOptions = referenceOptions
-
-    .filter((reference) => {
-
-      const company = reference.companyName || reference.company || '';
-
-      const material = reference.shellMaterial || '';
-
-      if (brandFilter !== 'all' && company !== brandFilter) return false;
-
-      if (materialFilter !== 'all' && material !== materialFilter) return false;
-
-      if (!normalizedModelFilter) return true;
-
-      return [
-
-        reference.label,
-
-        reference.detail,
-
-        reference.modelName,
-
-        reference.model,
-
-        reference.shellMaterial,
-
-        reference.shellConstruction,
-
-        reference.readinessTier,
-
-        reference.snareReferenceId,
-
-      ]
-
-        .filter(Boolean)
-
-        .join(' ')
-
-        .toLowerCase()
-
-        .includes(normalizedModelFilter);
-
-    })
-
-    .slice(0, 100);
+    null;
 
   const resetReferenceFilters = () => {
 
     setBrandFilter('all');
 
-    setMaterialFilter('all');
-
-    setModelFilter('');
+    setModelFilter('all');
 
   };
 
@@ -1041,7 +994,7 @@ function ReferencePanel({
 
           setBrandFilter(event.target.value);
 
-          setMaterialFilter('all');
+          setModelFilter('all');
 
         }}
 
@@ -1065,70 +1018,37 @@ function ReferencePanel({
 
         className="vp-search-input"
 
-        value={materialFilter}
+        value={modelFilter}
 
-        onChange={(event) => setMaterialFilter(event.target.value)}
+        onChange={(event) => {
+
+          const nextValue = event.target.value;
+
+          setModelFilter(nextValue);
+
+          if (nextValue !== 'all') {
+
+            setSelectedReferenceId(nextValue);
+
+          }
+
+        }}
 
       >
 
-        <option value="all">All materials</option>
+        <option value="all">Choose model</option>
 
-        {materialOptions.map((material) => (
+        {modelOptions.map((reference) => (
 
-          <option key={material} value={material}>
+          <option key={reference.key} value={reference.key}>
 
-            {material}
+            {reference.label}
 
           </option>
 
         ))}
 
       </select>
-      <input
-
-        className="vp-search-input"
-
-        value={modelFilter}
-
-        onChange={(event) => setModelFilter(event.target.value)}
-
-        placeholder="Filter model, size, detail..."
-
-      />
-
-      <div className="vp-reference-stack">
-
-        {filteredReferenceOptions.map((reference) => (
-
-          <button
-
-            key={reference.key}
-
-            type="button"
-
-            className={
-
-              selectedReferenceId === reference.key
-
-                ? 'vp-reference-card is-active'
-
-                : 'vp-reference-card'
-
-            }
-
-            onClick={() => setSelectedReferenceId(reference.key)}
-
-          >
-
-            <strong>{reference.label}</strong>
-
-            <span>{reference.detail}</span>
-
-          </button>
-
-        ))}
-
-      </div>
 
       <div className="vp-helper-card">
 
@@ -1144,9 +1064,19 @@ function ReferencePanel({
 
               ? referenceError
 
-              : `${filteredReferenceOptions.length} of ${referenceOptions.length} passable snares shown.`}
+              : `${modelOptions.length} model options available.`}
 
         </p>
+
+        {selectedReference && (
+
+          <p>
+
+            Selected: {selectedReference.label} — {selectedReference.detail}
+
+          </p>
+
+        )}
 
         <button type="button" className="vp-reset-button" onClick={resetReferenceFilters}>
 
@@ -1161,6 +1091,7 @@ function ReferencePanel({
   );
 
 }
+
 
 export function VoicePlayground({ firestore }) {
 
