@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:46:05.715Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "LUDWIG_JAZZ_FEST_SERIES_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Jazz Fest Series",
+      "shellMaterial": "Mahogany / Poplar",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Jazz Fest Series 5.5x14"
+      ],
+      "recordIds": [
+        "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Ludwig Jazz Fest Series bearing-edge geometry before creating any promotion plan."
+}
