@@ -11,37 +11,191 @@ const normalizeText = value =>
 
     .toLowerCase();
 
+const titleCase = value =>
+
+  String(value || '')
+
+    .replace(/[-_]+/g, ' ')
+
+    .replace(/\s+/g, ' ')
+
+    .trim()
+
+    .replace(/\b\w/g, char => char.toUpperCase());
+
+const getAuditRecords = () => [
+
+  ...(promotableAudit.alreadyPromoted || []),
+
+  ...(promotableAudit.additionalPromotableRecords || []),
+
+  ...(promotableAudit.promotableRecords || []),
+
+  ...(promotableAudit.records || []),
+
+  ...(promotableAudit.candidates || []),
+
+];
+
+const unwrapRecord = doc => {
+
+  if (doc?.data) {
+
+    return {
+
+      id: doc.id,
+
+      ...doc.data(),
+
+    };
+
+  }
+
+  return doc?.record || doc?.patch || doc?.data || doc || {};
+
+};
+
+const deriveLineSeries = record => {
+
+  if (record.lineSeries || record.line || record.series) {
+
+    return record.lineSeries || record.line || record.series;
+
+  }
+
+  const id = String(record.id || '');
+
+  const parts = id.split('_').filter(Boolean);
+
+  if (parts.length >= 2) {
+
+    return titleCase(parts[1]);
+
+  }
+
+  const model = String(record.modelName || record.model || '');
+
+  const firstModelChunk = model
+
+    .replace(/\b\d+(\.\d+)?x\d+(\.\d+)?\b/gi, '')
+
+    .replace(/\b\d+["”]?\b/g, '')
+
+    .split(/\s+/)
+
+    .slice(0, 3)
+
+    .join(' ')
+
+    .trim();
+
+  return firstModelChunk || '';
+
+};
+
+const getCompany = record =>
+
+  record.companyName ||
+
+  record.company ||
+
+  record.COMPANY_NAME ||
+
+  record['COMPANY NAME'] ||
+
+  '';
+
+const getModel = record =>
+
+  record.modelName ||
+
+  record.model ||
+
+  record.MODEL_NAME ||
+
+  record['MODEL NAME'] ||
+
+  '';
+
+const getDiameter = record =>
+
+  record.diameter ||
+
+  record.diameterInches ||
+
+  record.DIAMETER ||
+
+  record['DIAMETER'] ||
+
+  null;
+
+const getDepth = record =>
+
+  record.depth ||
+
+  record.depthInches ||
+
+  record.DEPTH ||
+
+  record['DEPTH'] ||
+
+  null;
+
+const getShellMaterial = record =>
+
+  record.shellMaterial1 ||
+
+  record.shellMaterial ||
+
+  record.primaryShellMaterial ||
+
+  record.SHELL_MATERIAL ||
+
+  record['SHELL MATERIAL 1'] ||
+
+  record['SHELL MATERIAL'] ||
+
+  '';
+
+const getShellConstruction = record =>
+
+  record.shellConstruction ||
+
+  record.construction ||
+
+  record.SHELL_CONSTRUCTION ||
+
+  record['SHELL CONSTRUCTION'] ||
+
+  '';
+
 const getSearchHaystack = record =>
 
   [
 
     record.id,
 
-    record.companyName,
+    getCompany(record),
 
-    record.company,
+    deriveLineSeries(record),
 
-    record.lineSeries,
-
-    record.modelName,
-
-    record.model,
+    getModel(record),
 
     record.drumType,
 
-    record.diameter,
+    getDiameter(record),
 
-    record.depth,
+    getDepth(record),
 
-    record.shellConstruction,
+    getShellConstruction(record),
 
-    record.shellMaterial1,
-
-    record.shellMaterial,
+    getShellMaterial(record),
 
     record.hoopType,
 
     record.legacyPrintReadinessTier,
+
+    record.promotionRule,
 
   ]
 
@@ -53,9 +207,9 @@ const getSearchHaystack = record =>
 
 const buildReferenceLabel = record => {
 
-  const company = record.companyName || record.company || 'Unknown Company';
+  const company = getCompany(record) || 'Unknown Company';
 
-  const model = record.modelName || record.model || 'Unknown Model';
+  const model = getModel(record) || 'Unknown Model';
 
   return `${company} ${model}`.trim();
 
@@ -63,87 +217,105 @@ const buildReferenceLabel = record => {
 
 const buildReferenceDetail = record => {
 
-  const diameter = record.diameter || record.diameterInches || null;
+  const diameter = getDiameter(record);
 
-  const depth = record.depth || record.depthInches || null;
+  const depth = getDepth(record);
 
   const size = diameter && depth ? `${diameter}x${depth}` : record.size || 'Size unknown';
 
-  const material =
+  const material = getShellMaterial(record) || 'Material unknown';
 
-    record.shellMaterial1 ||
-
-    record.shellMaterial ||
-
-    record.primaryShellMaterial ||
-
-    'Material unknown';
-
-  const construction =
-
-    record.shellConstruction ||
-
-    record.construction ||
-
-    'Construction unknown';
+  const construction = getShellConstruction(record) || 'Construction unknown';
 
   return `${size} · ${material} · ${construction}`;
 
 };
 
-const normalizeReference = doc => {
+const normalizeReference = input => {
 
-  const data = doc.data ? doc.data() : doc;
+  const data = unwrapRecord(input);
+
+  const id = data.id || input?.id || input?.snareReferenceId || '';
+
+  const companyName = getCompany(data);
+
+  const modelName = getModel(data);
+
+  const lineSeries = deriveLineSeries({ id, ...data });
 
   return {
 
-    id: doc.id || data.id,
+    id,
 
-    key: doc.id || data.id,
+    key: id,
 
-    snareReferenceId: doc.id || data.id,
+    snareReferenceId: id,
 
     label: buildReferenceLabel(data),
 
     detail: buildReferenceDetail(data),
 
-    companyName: data.companyName || data.company || '',
+    companyName,
 
-    modelName: data.modelName || data.model || '',
+    company: companyName,
 
-    lineSeries: data.lineSeries || '',
+    modelName,
 
-    diameter: data.diameter || data.diameterInches || null,
+    model: modelName,
 
-    depth: data.depth || data.depthInches || null,
+    lineSeries,
 
-    shellMaterial:
+    diameter: getDiameter(data),
 
-      data.shellMaterial1 ||
+    depth: getDepth(data),
 
-      data.shellMaterial ||
+    shellMaterial: getShellMaterial(data),
 
-      data.primaryShellMaterial ||
-
-      '',
-
-    shellConstruction: data.shellConstruction || data.construction || '',
+    shellConstruction: getShellConstruction(data),
 
     readinessTier: data.legacyPrintReadinessTier || '',
 
-    promotionRule: data.legacyPrintPromotionRule || '',
+    promotionRule: data.legacyPrintPromotionRule || data.promotionRule || '',
 
     sourceConfidence: data.sourceConfidence || null,
 
-    searchHaystack: getSearchHaystack({
-
-      id: doc.id || data.id,
-
-      ...data,
-
-    }),
+    searchHaystack: getSearchHaystack({ id, ...data, lineSeries }),
 
   };
+
+};
+
+const dedupeById = records => {
+
+  const map = new Map();
+
+  records.forEach(record => {
+
+    const normalized = normalizeReference(record);
+
+    if (!normalized.id) return;
+
+    const existing = map.get(normalized.id);
+
+    map.set(normalized.id, {
+
+      ...normalized,
+
+      ...(existing || {}),
+
+      ...normalized,
+
+      lineSeries: normalized.lineSeries || existing?.lineSeries || '',
+
+      companyName: normalized.companyName || existing?.companyName || '',
+
+      modelName: normalized.modelName || existing?.modelName || '',
+
+    });
+
+  });
+
+  return Array.from(map.values());
 
 };
 
@@ -153,27 +325,15 @@ export async function loadPromotableSnareReferences({
 
   query = '',
 
-  limit = 80,
+  limit = 500,
 
 } = {}) {
 
   const normalizedQuery = normalizeText(query);
 
-  let source = 'localAudit';
+  const localRecords = getAuditRecords();
 
-  let rawReferences = [
-
-    ...(promotableAudit.alreadyPromoted || []),
-
-    ...(promotableAudit.additionalPromotableRecords || []),
-
-    ...(promotableAudit.promotableRecords || []),
-
-    ...(promotableAudit.records || []),
-
-    ...(promotableAudit.candidates || []),
-
-  ];
+  let firestoreRecords = [];
 
   if (firestore) {
 
@@ -189,25 +349,23 @@ export async function loadPromotableSnareReferences({
 
         .get();
 
-      if (!snapshot.empty) {
-
-        source = 'firestore';
-
-        rawReferences = snapshot.docs;
-
-      }
+      firestoreRecords = snapshot.docs || [];
 
     } catch (error) {
 
-      console.warn('[LegacyPrint] Firestore promotable snare lookup failed; using local audit fallback.', error);
+      console.warn(
+
+        '[LegacyPrint] Firestore promotable snare lookup failed; using local audit fallback.',
+
+        error
+
+      );
 
     }
 
   }
 
-  const references = rawReferences
-
-    .map(normalizeReference)
+  const references = dedupeById([...localRecords, ...firestoreRecords])
 
     .filter(reference => {
 
@@ -223,6 +381,10 @@ export async function loadPromotableSnareReferences({
 
       if (companyCompare !== 0) return companyCompare;
 
+      const lineCompare = a.lineSeries.localeCompare(b.lineSeries);
+
+      if (lineCompare !== 0) return lineCompare;
+
       return a.modelName.localeCompare(b.modelName);
 
     })
@@ -233,9 +395,13 @@ export async function loadPromotableSnareReferences({
 
     success: true,
 
-    source,
+    source: firestoreRecords.length ? 'firestore+localAudit' : 'localAudit',
 
-    totalFetched: rawReferences.length,
+    totalFetched: localRecords.length + firestoreRecords.length,
+
+    firestoreFetched: firestoreRecords.length,
+
+    localFetched: localRecords.length,
 
     count: references.length,
 
