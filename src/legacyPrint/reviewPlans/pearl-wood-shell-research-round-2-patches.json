@@ -1,3 +1,4 @@
+
 {
 
   "generatedAt": "2026-05-21",
@@ -6,7 +7,7 @@
 
   "researchSession": "pearl-wood-shell-research-round-2",
 
-  "purpose": "Update source-backed shell thickness and bearing edge data for Pearl wood-shell snare records.",
+  "purpose": "Update source-backed shell thickness and bearing edge data for Pearl wood-shell snare records from missing-from-UI report.",
 
   "writeMode": "reviewOnly",
 
@@ -14,17 +15,327 @@
 
     {
 
-      "id": "PASTE_FIRESTORE_DOC_ID_HERE",
+      "id": "pearl_reference_reference-20-ply-maple-birch_13x6-5_ply_maple_birch_die-cast-mastercast_8d0319c0",
 
-      "match": {
+      "updates": {
 
-        "companyName": "Pearl",
+        "shellThickness": "25mm",
 
-        "lineSeries": "Masters Custom",
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
 
-        "modelName": "MMX Maple"
+        "bearingEdge": "45-degree bearing edge",
 
-      },
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference / Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x5_ply_maple_birch_die-cast-mastercast_675e9060",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference / Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_reference_reference-20-ply-maple-birch_14x6-5_ply_maple_birch_die-cast-mastercast_61a547e9",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference / Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_13x6-5_ply_maple_birch_mastercast-die-cast_a8eee25c",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x5_ply_maple_birch_mastercast-die-cast_b9f8afd6",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x6-5_ply_maple_birch_mastercast-die-cast_8a092209",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_reference-one_reference-one-maple-birch-20-ply_14x8_ply_maple_birch_mastercast-die-cast_05cb933d",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "plyCountLayup": "20-ply Maple/Birch shell; 14 outer plies maple, 6 inner plies birch",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://www.drumcenternh.com/pearl-reference-one-20-ply-maple-birch-snare-drum-natural-maple",
+
+          "https://pearldrum.com/products/snares/reference-one/reference-one-snare-drums"
+
+        ],
+
+        "legacyPrintResearchNotes": "Reference One 20-ply Maple/Birch shell confirmed as 25mm with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_signature_omar-hakim-signature_13x5_ply_mahogany_superhoop-ii_oh-1350_1df97299",
+
+      "updates": {
+
+        "shellThickness": "7.5mm",
+
+        "plyCountLayup": "6-ply African Mahogany",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "sourceUrls": [
+
+          "https://www.ringomusic.net/products/pearl-omar-hakim-signature-snare-drum-oh1350"
+
+        ],
+
+        "bearingEdge": "MISSING",
+
+        "legacyPrintResearchNotes": "Omar Hakim Signature shell confirmed as 6-ply African Mahogany, 7.5mm thick. Bearing edge still needs source confirmation."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_stave-craft_stave-craft-ash_14x6-5_stave_ash_6c64a560",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "shellConstruction": "Stave",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://drummersreview.com/gear-reviews/pearl-stavecraft-snare-drums-drummers-review/"
+
+        ],
+
+        "legacyPrintResearchNotes": "Pearl StaveCraft shell confirmed as 25mm stave shell with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_stave-craft_stave-craft-maple_14x6-5_stave_maple_2c452b4e",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "shellConstruction": "Stave",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://drummersreview.com/gear-reviews/pearl-stavecraft-snare-drums-drummers-review/"
+
+        ],
+
+        "legacyPrintResearchNotes": "Pearl StaveCraft shell confirmed as 25mm stave shell with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_stave-craft_stave-craft-walnut_14x6-5_stave_walnut_c1b8c1fd",
+
+      "updates": {
+
+        "shellThickness": "25mm",
+
+        "shellConstruction": "Stave",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://drummersreview.com/gear-reviews/pearl-stavecraft-snare-drums-drummers-review/"
+
+        ],
+
+        "legacyPrintResearchNotes": "Pearl StaveCraft shell confirmed as 25mm stave shell with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_hybrid-exotic_hybrid-exotic-kapoor-fiberglass_14x6-5_ply_kapoor_fiberglass_b959114e",
+
+      "updates": {
+
+        "shellThickness": "7.5mm",
+
+        "plyCountLayup": "6-ply Kapur/Fiberglass hybrid shell",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "legacyPrintResearchNotes": "Hybrid Exotic Kapur/Fiberglass shell confirmed from dealer specs as 7.5mm 6-ply hybrid shell with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x5-5_ply_maple_die-cast-mastercast_a8374171",
 
       "updates": {
 
@@ -34,15 +345,7 @@
 
         "reinforcementRings": "4-ply maple reinforcement rings",
 
-        "bearingEdge": {
-
-          "angle": "45° in / 45° out",
-
-          "profile": "Slightly inset with rounded apex",
-
-          "sourceStatus": "sourceConfirmed"
-
-        },
+        "bearingEdge": "45-degree inner / 45-degree outer, slightly inset with rounded apex",
 
         "sourceConfidence": "high",
 
@@ -54,9 +357,281 @@
 
         ],
 
-        "notesOnMissingData": "",
+        "legacyPrintResearchNotes": "Masters Custom MMX-era maple shell confirmed as 4-ply 5mm maple with reinforcement rings. Masters Series edge confirmed as 45-degree in / 45-degree out, inset slightly, rounded at direct point."
 
-        "legacyPrintResearchNotes": "Pearl Masters catalog confirms 4-ply 5mm maple shell with 4-ply maple reinforcement rings. Same catalog confirms Masters Series 45° in / 45° out bearing edge, slightly inset and rounded at the direct point."
+      }
+
+    },
+
+    {
+
+      "id": "pearl_masters-custom_masters-custom-maple-snare_14x6-5_ply_maple_die-cast-mastercast_639005e7",
+
+      "updates": {
+
+        "shellThickness": "5mm",
+
+        "plyCountLayup": "4-ply maple with 4-ply maple reinforcement rings",
+
+        "reinforcementRings": "4-ply maple reinforcement rings",
+
+        "bearingEdge": "45-degree inner / 45-degree outer, slightly inset with rounded apex",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/1998-masters-series.pdf",
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/2001-snare-drum-catalog.pdf"
+
+        ],
+
+        "legacyPrintResearchNotes": "Masters Custom MMX-era maple shell confirmed as 4-ply 5mm maple with reinforcement rings. Masters Series edge confirmed as 45-degree in / 45-degree out, inset slightly, rounded at direct point."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x5-5_ply_mahogany_die-cast-mastercast_3014c555",
+
+      "updates": {
+
+        "shellThickness": "5mm",
+
+        "plyCountLayup": "4-ply mahogany with reinforcement rings",
+
+        "bearingEdge": "45-degree inner / 45-degree outer, slightly inset with rounded apex",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/1998-masters-series.pdf",
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/2001-snare-drum-catalog.pdf"
+
+        ],
+
+        "legacyPrintResearchNotes": "Masters Mahogany Classic / MHX-era shell confirmed as 4-ply 5mm mahogany. Masters Series edge confirmed as 45-degree in / 45-degree out, inset slightly, rounded at direct point."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_masters-custom_masters-custom-mahogany-snare_14x6-5_ply_mahogany_die-cast-mastercast_714abe0a",
+
+      "updates": {
+
+        "shellThickness": "5mm",
+
+        "plyCountLayup": "4-ply mahogany with reinforcement rings",
+
+        "bearingEdge": "45-degree inner / 45-degree outer, slightly inset with rounded apex",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/1998-masters-series.pdf",
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/2001-snare-drum-catalog.pdf"
+
+        ],
+
+        "legacyPrintResearchNotes": "Masters Mahogany Classic / MHX-era shell confirmed as 4-ply 5mm mahogany. Masters Series edge confirmed as 45-degree in / 45-degree out, inset slightly, rounded at direct point."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "EvenPly Six 6-ply maple shell",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/products/snares/professional-maple/professional-maple-snare-drums",
+
+          "https://pearldrum.com/eu/products/drum-sets/masters-maple/masters-maple"
+
+        ],
+
+        "legacyPrintResearchNotes": "Modern Masters Maple / Professional Maple family confirmed as 5.4mm 6-ply maple shell with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "EvenPly Six 6-ply maple shell",
+
+        "bearingEdge": "45-degree bearing edge",
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/products/snares/professional-maple/professional-maple-snare-drums",
+
+          "https://pearldrum.com/eu/products/drum-sets/masters-maple/masters-maple"
+
+        ],
+
+        "legacyPrintResearchNotes": "Modern Masters Maple / Professional Maple family confirmed as 5.4mm 6-ply maple shell with 45-degree bearing edge."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "EvenPly Six all-maple shell",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/en/products/drum-sets/decade-maple/decade-maple"
+
+        ],
+
+        "bearingEdge": "MISSING",
+
+        "legacyPrintResearchNotes": "Decade Maple official shell spec confirmed as EvenPly Six 5.4mm all-maple shell. Bearing edge still needs source confirmation."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "EvenPly Six all-maple shell",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/en/products/drum-sets/decade-maple/decade-maple"
+
+        ],
+
+        "bearingEdge": "MISSING",
+
+        "legacyPrintResearchNotes": "Decade Maple official shell spec confirmed as EvenPly Six 5.4mm all-maple shell. Bearing edge still needs source confirmation."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "6-ply all-maple SST shell",
+
+        "bearingEdge": "MISSING",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "legacyPrintResearchNotes": "Modern Utility shell thickness confirmed as 5.4mm 6-ply maple. Bearing edge has source conflict between 45-degree dealer specs and 60-degree Pearl social copy; hold edge until confirmed."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "6-ply all-maple SST shell",
+
+        "bearingEdge": "MISSING",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "legacyPrintResearchNotes": "Modern Utility shell thickness confirmed as 5.4mm 6-ply maple. Bearing edge has source conflict between 45-degree dealer specs and 60-degree Pearl social copy; hold edge until confirmed."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "6-ply all-maple SST shell",
+
+        "bearingEdge": "MISSING",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "legacyPrintResearchNotes": "Modern Utility shell thickness confirmed as 5.4mm 6-ply maple. Bearing edge has source conflict between 45-degree dealer specs and 60-degree Pearl social copy; hold edge until confirmed."
+
+      }
+
+    },
+
+    {
+
+      "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+
+      "updates": {
+
+        "shellThickness": "5.4mm",
+
+        "plyCountLayup": "6-ply all-maple SST shell",
+
+        "bearingEdge": "MISSING",
+
+        "sourceConfidence": "high-for-thickness-only",
+
+        "legacyPrintResearchNotes": "Modern Utility shell thickness confirmed as 5.4mm 6-ply maple. Bearing edge has source conflict between 45-degree dealer specs and 60-degree Pearl social copy; hold edge until confirmed."
 
       }
 
@@ -65,3 +640,4 @@
   ]
 
 }
+
