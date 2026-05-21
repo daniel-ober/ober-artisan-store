@@ -1,0 +1,1164 @@
+{
+  "generatedAt": "2026-05-21T07:19:37.914Z",
+  "sourceAuditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T07-18-20-943Z.json",
+  "status": "REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "candidateCount": 173,
+  "groupCount": 70,
+  "groups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Maple",
+      "count": 22,
+      "sourceConfidence": [
+        "Medium",
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      ],
+      "models": [
+        "Birdseye Maple 10x5.5",
+        "Birdseye Maple 12x5.5",
+        "Birdseye Maple 13x3.5",
+        "Birdseye Maple 14x3.5",
+        "Birdseye Maple 14x5.5",
+        "Birdseye Maple 14x5",
+        "Birdseye Maple 14x6.5",
+        "Birdseye Maple 14x7",
+        "Birdseye Maple 14x8",
+        "Traditional Maple 12x5.5",
+        "Traditional Maple 13x3.5",
+        "Traditional Maple 13x6",
+        "Traditional Maple 14x5.5",
+        "Traditional Maple 14x5",
+        "Traditional Maple 14x6",
+        "Traditional Maple 14x7",
+        "Traditional Maple 14x8",
+        "Birdseye Maple 13x6",
+        "Birdseye Maple 14x6",
+        "Traditional Maple 10x5.5",
+        "Traditional Maple 14x3.5",
+        "Traditional Maple 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Cherry",
+      "count": 11,
+      "sourceConfidence": [
+        "Medium",
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      ],
+      "models": [
+        "Cherry Maple 12x5.5",
+        "Cherry Maple 13x3.5",
+        "Cherry Maple 13x6",
+        "Cherry Maple 14x5.5",
+        "Cherry Maple 14x5",
+        "Cherry Maple 14x6",
+        "Cherry Maple 14x7",
+        "Cherry Maple 14x8",
+        "Cherry Maple 10x5.5",
+        "Cherry Maple 14x3.5",
+        "Cherry Maple 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Maple / Walnut",
+      "count": 11,
+      "sourceConfidence": [
+        "Medium",
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      ],
+      "models": [
+        "Maple/Walnut Hybrid 10x5.5",
+        "Maple/Walnut Hybrid 13x3.5",
+        "Maple/Walnut Hybrid 13x6",
+        "Maple/Walnut Hybrid 14x3.5",
+        "Maple/Walnut Hybrid 14x5.5",
+        "Maple/Walnut Hybrid 14x6.5",
+        "Maple/Walnut Hybrid 14x6",
+        "Maple/Walnut Hybrid 14x8",
+        "Maple/Walnut Hybrid 12x5.5",
+        "Maple/Walnut Hybrid 14x5",
+        "Maple/Walnut Hybrid 14x7"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Birch",
+      "count": 11,
+      "sourceConfidence": [
+        "Medium",
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      ],
+      "models": [
+        "Traditional Birch 10x5.5",
+        "Traditional Birch 13x3.5",
+        "Traditional Birch 13x6",
+        "Traditional Birch 14x3.5",
+        "Traditional Birch 14x5.5",
+        "Traditional Birch 14x6.5",
+        "Traditional Birch 14x6",
+        "Traditional Birch 14x8",
+        "Traditional Birch 12x5.5",
+        "Traditional Birch 14x5",
+        "Traditional Birch 14x7"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Walnut",
+      "count": 11,
+      "sourceConfidence": [
+        "Medium",
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      ],
+      "models": [
+        "Traditional Walnut 10x5.5",
+        "Traditional Walnut 12x5.5",
+        "Traditional Walnut 13x6",
+        "Traditional Walnut 14x3.5",
+        "Traditional Walnut 14x5",
+        "Traditional Walnut 14x6.5",
+        "Traditional Walnut 14x6",
+        "Traditional Walnut 14x7",
+        "Traditional Walnut 13x3.5",
+        "Traditional Walnut 14x5.5",
+        "Traditional Walnut 14x8"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "High",
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Maple LGM137 13x7",
+        "S.L.P. G-Maple LGM146 14x6",
+        "S.L.P. Classic Maple LMP1455 14x5.5",
+        "S.L.P. Studio Maple LMP1465F 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Maple",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Classic Maple 5.5x14",
+        "Classic Maple 5x14",
+        "Classic Maple 6.5x14",
+        "Classic Maple 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Oak",
+      "shellMaterial": "Oak",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Classic Oak 5.5x14",
+        "Classic Oak 5x14",
+        "Classic Oak 6.5x14",
+        "Classic Oak 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Mahogany",
+      "shellMaterial": "Mahogany",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Legacy Mahogany 5.5x14",
+        "Legacy Mahogany 5x14",
+        "Legacy Mahogany 6.5x14",
+        "Legacy Mahogany 8x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Maple",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Legacy Maple 5.5x14",
+        "Legacy Maple 5x14",
+        "Legacy Maple 6.5x14",
+        "Legacy Maple 8x14"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://pearldrum.com/en/products/snares/modern-utility"
+      ],
+      "models": [
+        "Modern Utility Maple"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Metal Snare",
+      "shellMaterial": "Brass",
+      "count": 4,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://faq.yamaha.com/usa/s/article/U0007660"
+      ],
+      "models": [
+        "Yamaha Brass Metal Snare 14x3.5",
+        "Yamaha Brass Metal Snare 14x4",
+        "Yamaha Brass Metal Snare 14x5.5",
+        "Yamaha Brass Metal Snare 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Metal Snare",
+      "shellMaterial": "Steel",
+      "count": 4,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://faq.yamaha.com/usa/s/article/U0007660"
+      ],
+      "models": [
+        "Yamaha Steel Metal Snare 14x3.5",
+        "Yamaha Steel Metal Snare 14x4",
+        "Yamaha Steel Metal Snare 14x5.5",
+        "Yamaha Steel Metal Snare 14x6.5"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Maple",
+      "count": 3,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.dwdrums.com/drums/design-series/"
+      ],
+      "models": [
+        "Design Series Maple 14x5.5",
+        "Design Series Maple 14x6.5",
+        "Design Series Maple 14x8"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "shellMaterial": "maple",
+      "count": 3,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf"
+      ],
+      "models": [
+        "Starclassic Exotix Maple 14x6.5",
+        "Starclassic G-Maple 13x7",
+        "Starclassic G-Maple 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Woodworks",
+      "shellMaterial": "poplar",
+      "count": 3,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "Woodworks 14x5.5",
+        "Woodworks 14x6.5",
+        "Woodworks 14x8"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Imperialstar",
+      "shellMaterial": "steel",
+      "count": 2,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Imperialstar King Beat 8005 Steel 14x5",
+        "Imperialstar Mastercraft Steel 8056 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "shellMaterial": "Maple",
+      "count": 2,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://canopusdrums.com/en/product/session-superior-snaredrum/"
+      ],
+      "models": [
+        "Session Superior Maple 14x5.5",
+        "Session Superior Maple 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "shellMaterial": "Maple",
+      "count": 2,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+      ],
+      "models": [
+        "MO Snare 14x5.5",
+        "MO Snare 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Bubinga",
+      "count": 2,
+      "sourceConfidence": [
+        "High",
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Bubinga LGB146 14x6",
+        "S.L.P. Mod Bubinga LBU127 12x7"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "shellMaterial": "maple",
+      "count": 2,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/snare_drums/starclassic_maple_snare.html"
+      ],
+      "models": [
+        "Starclassic Maple 14x5.5",
+        "Starclassic Maple 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "shellMaterial": "birch",
+      "count": 2,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.guitarcenter.com/TAMA/snare-drums.gc"
+      ],
+      "models": [
+        "50th Limited Mastercraft Artwood 14x6.5",
+        "50th Limited Mastercraft Artwood 14x5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Superstar",
+      "shellMaterial": "birch",
+      "count": 2,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf"
+      ],
+      "models": [
+        "Superstar Birch 14x5.5",
+        "Superstar Birch 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Superstar",
+      "shellMaterial": "maple",
+      "count": 2,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf"
+      ],
+      "models": [
+        "Superstar Maple 14x5.5",
+        "Superstar Maple 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Decade Maple",
+      "shellMaterial": "Maple",
+      "count": 2,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf"
+      ],
+      "models": [
+        "Decade Maple Maple Snare"
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Masters Maple Complete",
+      "shellMaterial": "Maple",
+      "count": 2,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf"
+      ],
+      "models": [
+        "Masters Maple Complete Maple Snare"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Soundworks",
+      "shellMaterial": "steel",
+      "count": 2,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Soundworks Steel DST1055M 10x5.5",
+        "Soundworks Steel DST1465 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Rydeen / Gigmaker Kit Snare",
+      "shellMaterial": "Steel",
+      "count": 2,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf"
+      ],
+      "models": [
+        "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+        "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://porkpiedrums.com/products/"
+      ],
+      "models": [
+        "Maple Max 7x14"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Warlord",
+      "shellMaterial": "bell brass",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Warlord Praetorian Cast Bell Brass 14x6"
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "shellMaterial": "Zelkova",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+      ],
+      "models": [
+        "Zelkova GINRAN"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. G-Walnut LGW1465 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STARPHONIC",
+      "shellMaterial": "Bubinga with Cordia outer ply",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/eu/products/snare_drums/starphonic_bubinga.html"
+      ],
+      "models": [
+        "STARPHONIC Bubinga 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STARPHONIC",
+      "shellMaterial": "Maple",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/eu/products/snare_drums/starphonic/"
+      ],
+      "models": [
+        "STARPHONIC Maple 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STARPHONIC",
+      "shellMaterial": "Spruce",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/eu/products/snare_drums/starphonic_spruce.html"
+      ],
+      "models": [
+        "STARPHONIC Spruce 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STARPHONIC",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/eu/products/snare_drums/starphonic_walnut.html"
+      ],
+      "models": [
+        "STARPHONIC Walnut 14x7"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Beech",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Beech 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Cherry",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Cherry 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Mahogany",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Mahogany 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/blog/universal-series-snare-drums"
+      ],
+      "models": [
+        "Universal Walnut 6.5x14"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "shellMaterial": "Maple",
+      "count": 1,
+      "sourceConfidence": [
+        "High"
+      ],
+      "sourceUrls": [
+        "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox"
+      ],
+      "models": [
+        "Equinox"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Birch",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. Duo Birch LBH1410L 14x10"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Spruce",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.tama.com/usa/products/search/snare_drums/list/"
+      ],
+      "models": [
+        "S.L.P. Fat Spruce LSP146 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Imperialstar",
+      "shellMaterial": "poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf"
+      ],
+      "models": [
+        "Imperialstar Wood 14x5.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "shellMaterial": "walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.forksdrumcloset.com/products/tama-ronald-bruner-jr-walnut-steel-14-x5-5-sig"
+      ],
+      "models": [
+        "Ronald Bruner Jr. RB1455 14x5.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "shellMaterial": "African Mahogany",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.guitarcenter.com/TAMA/snare-drums.gc"
+      ],
+      "models": [
+        "STAR Reserve G-Mahogany 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "shellMaterial": "bubinga",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.hoshinogakki.co.jp/pdf/tama/catalog/2007Snare_Drums.pdf"
+      ],
+      "models": [
+        "Starclassic G-Bubinga 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "shellMaterial": "walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.guitarcenter.com/TAMA/snare-drums.gc"
+      ],
+      "models": [
+        "Starclassic G-Walnut/Birch 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Warlord",
+      "shellMaterial": "maple",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://drummagazine.com/tama-warlord-collection-snares/"
+      ],
+      "models": [
+        "Warlord Masai Maple 14x6"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Warlord",
+      "shellMaterial": "bubinga",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://drummagazine.com/tama-warlord-collection-snares/"
+      ],
+      "models": [
+        "Warlord Spartan Bubinga 14x6"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Jazz Fest Series",
+      "shellMaterial": "Mahogany / Poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      ],
+      "models": [
+        "Jazz Fest Series 5.5x14"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052"
+      ],
+      "models": [
+        "Chris Adler Original 12x5.5"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Maple / Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "Medium"
+      ],
+      "sourceUrls": [
+        "https://mapexdrums.com/mapex-international/products/drums/snare-drums"
+      ],
+      "models": [
+        "Chris Adler Warbird"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Acrylic",
+      "shellMaterial": "acrylic",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Mirage / Acrylic 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Artstar",
+      "shellMaterial": "cordia",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Artstar Cordia 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Artstar",
+      "shellMaterial": "maple",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Artstar Maple 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Granstar",
+      "shellMaterial": "birch",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Granstar Birch 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Rockstar",
+      "shellMaterial": "steel",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Rockstar Steel 14x5.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Rockstar",
+      "shellMaterial": "poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Rockstar Wood 14x5.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Rosewood/Cordia",
+      "shellMaterial": "cordia",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Cordia 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Rosewood/Cordia",
+      "shellMaterial": "rosewood",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Rosewood 14x6.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Royalstar",
+      "shellMaterial": "steel",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Royalstar Steel 14x5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Royalstar",
+      "shellMaterial": "poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Royalstar Wood 14x5.5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "shellMaterial": "Maple",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Swingstar",
+      "shellMaterial": "steel",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Swingstar Steel 14x5"
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Swingstar",
+      "shellMaterial": "poplar",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://equipboard.com/c/snare-drums/tama"
+      ],
+      "models": [
+        "Swingstar Wood 14x5.5"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Birch",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://www.mapexblackpanther.com/resources/mapex-catalogues"
+      ],
+      "models": [
+        "Unresolved Birch Variant 2"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Maple",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://www.mapexblackpanther.com/resources/mapex-catalogues"
+      ],
+      "models": [
+        "Unresolved Maple Variant 1"
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Walnut",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://www.mapexblackpanther.com/resources/mapex-catalogues"
+      ],
+      "models": [
+        "Unresolved Walnut Variant 3"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Gigmaker / Entry Steel",
+      "shellMaterial": "Steel",
+      "count": 1,
+      "sourceConfidence": [
+        "Low"
+      ],
+      "sourceUrls": [
+        "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf"
+      ],
+      "models": [
+        "Gigmaker / Entry Steel Steel Snare 14x5.5"
+      ]
+    }
+  ]
+}
