@@ -5347,25 +5347,1628 @@
 }
 
 
-/* Shape mode drag affordance for VoiceConstellationMap node spokes */
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE DRAG LAYER FIX
+
+   ========================================================= */
+
+.vp-stage .vcm-map-frame {
+
+  position: relative !important;
+
+}
+
+.vp-stage .vcm-node-click-layer {
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 80 !important;
+
+  pointer-events: none;
+
+}
+
+.vp-stage .vcm-node-click-target {
+
+  position: absolute !important;
+
+  width: 76px !important;
+
+  height: 76px !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  background: transparent !important;
+
+  appearance: none !important;
+
+  pointer-events: auto;
+
+  transform: translate(-50%, -50%);
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(1) {
+
+  left: 50%;
+
+  top: 12%;
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(2) {
+
+  left: 80%;
+
+  top: 26%;
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(3) {
+
+  left: 87%;
+
+  top: 58%;
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(4) {
+
+  left: 66%;
+
+  top: 84%;
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(5) {
+
+  left: 34%;
+
+  top: 84%;
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(6) {
+
+  left: 13%;
+
+  top: 58%;
+
+}
+
+.vp-stage .vcm-node-click-target:nth-child(7) {
+
+  left: 20%;
+
+  top: 26%;
+
+}
 
 .vp-mode-shape .vcm-node-click-layer.is-draggable {
 
-  pointer-events: auto;
+  pointer-events: auto !important;
 
 }
 
 .vp-mode-shape .vcm-node-click-layer.is-draggable .vcm-node-click-target {
 
-  cursor: grab;
+  cursor: grab !important;
 
-  touch-action: none;
+  touch-action: none !important;
 
 }
 
 .vp-mode-shape .vcm-node-click-layer.is-draggable .vcm-node-click-target:active {
 
-  cursor: grabbing;
+  cursor: grabbing !important;
+
+}
+
+.vp-mode-shape .vcm-node-click-layer.is-draggable .vcm-node-click-target::after {
+
+  content: '';
+
+  position: absolute;
+
+  inset: 20px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(190, 160, 255, 0.22);
+
+  background: rgba(140, 90, 255, 0.06);
+
+  opacity: 0;
+
+  transition: opacity 140ms ease;
+
+}
+
+.vp-mode-shape .vcm-node-click-layer.is-draggable .vcm-node-click-target:hover::after {
+
+  opacity: 1;
+
+}
+
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE DRAG LAYER FINAL OVERRIDE
+
+   Must stay at bottom because older CSS intentionally hides
+
+   .vcm-node-click-layer globally.
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable {
+
+  display: block !important;
+
+  visibility: visible !important;
+
+  opacity: 1 !important;
+
+  pointer-events: auto !important;
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 999 !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable * {
+
+  display: block !important;
+
+  visibility: visible !important;
+
+  opacity: 1 !important;
+
+  pointer-events: auto !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target {
+
+  display: block !important;
+
+  visibility: visible !important;
+
+  opacity: 1 !important;
+
+  pointer-events: auto !important;
+
+  position: absolute !important;
+
+  width: 92px !important;
+
+  height: 92px !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  background: transparent !important;
+
+  appearance: none !important;
+
+  cursor: grab !important;
+
+  touch-action: none !important;
+
+  transform: translate(-50%, -50%) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:active {
+
+  cursor: grabbing !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(1) {
+
+  left: 50% !important;
+
+  top: 12% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(2) {
+
+  left: 80% !important;
+
+  top: 26% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(3) {
+
+  left: 87% !important;
+
+  top: 58% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(4) {
+
+  left: 66% !important;
+
+  top: 84% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(5) {
+
+  left: 34% !important;
+
+  top: 84% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(6) {
+
+  left: 13% !important;
+
+  top: 58% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(7) {
+
+  left: 20% !important;
+
+  top: 26% !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::after {
+
+  content: '' !important;
+
+  display: block !important;
+
+  position: absolute !important;
+
+  inset: 18px !important;
+
+  border-radius: 999px !important;
+
+  border: 1px solid rgba(190, 160, 255, 0.28) !important;
+
+  background: rgba(140, 90, 255, 0.08) !important;
+
+  opacity: 0 !important;
+
+  pointer-events: none !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:hover::after {
+
+  opacity: 1 !important;
+
+}
+
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE SPOKE DRAGGING
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-map-frame {
+
+  position: relative !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable {
+
+  display: block !important;
+
+  visibility: visible !important;
+
+  opacity: 1 !important;
+
+  pointer-events: auto !important;
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 999 !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable * {
+
+  visibility: visible !important;
+
+  pointer-events: auto !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  width: 190px !important;
+
+  height: 54px !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  background: transparent !important;
+
+  appearance: none !important;
+
+  opacity: 1 !important;
+
+  cursor: crosshair !important;
+
+  touch-action: none !important;
+
+  pointer-events: auto !important;
+
+  transform-origin: center center !important;
+
+}
+
+/* Broad invisible spoke zones: center-to-outer-ring control surface. */
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(1) {
+
+  left: 50% !important;
+
+  top: 28% !important;
+
+  transform: translate(-50%, -50%) rotate(90deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(2) {
+
+  left: 67% !important;
+
+  top: 36% !important;
+
+  transform: translate(-50%, -50%) rotate(141deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(3) {
+
+  left: 72% !important;
+
+  top: 54% !important;
+
+  transform: translate(-50%, -50%) rotate(193deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(4) {
+
+  left: 60% !important;
+
+  top: 70% !important;
+
+  transform: translate(-50%, -50%) rotate(244deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(5) {
+
+  left: 40% !important;
+
+  top: 70% !important;
+
+  transform: translate(-50%, -50%) rotate(296deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(6) {
+
+  left: 28% !important;
+
+  top: 54% !important;
+
+  transform: translate(-50%, -50%) rotate(347deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(7) {
+
+  left: 33% !important;
+
+  top: 36% !important;
+
+  transform: translate(-50%, -50%) rotate(39deg) !important;
+
+}
+
+/* Keep hit zones invisible. */
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::before,
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::after {
+
+  display: none !important;
+
+  content: none !important;
+
+}
+
+/* Shape mode icon behavior: unplayed nodes feel like dim/off LEDs. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node {
+
+  transition:
+
+    opacity 120ms ease,
+
+    filter 120ms ease,
+
+    transform 120ms ease !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--node-strength, 0.35) * 0.72)) !important;
+
+  filter:
+
+    grayscale(calc((1 - var(--node-strength, 0.35)) * 1))
+
+    brightness(calc(0.45 + (var(--node-strength, 0.35) * 1.05)))
+
+    drop-shadow(0 0 calc(1px + (var(--node-strength, 0.35) * 8px)) currentColor) !important;
+
+  transition:
+
+    opacity 120ms ease,
+
+    filter 120ms ease,
+
+    transform 120ms ease !important;
+
+}
+
+/* Active node: subtle alive pulse, not purple UI chrome. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-attack .heritage-voice-thread-node:nth-child(1),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-brightness .heritage-voice-thread-node:nth-child(2),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-projection .heritage-voice-thread-node:nth-child(3),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sustain .heritage-voice-thread-node:nth-child(4),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-warmth .heritage-voice-thread-node:nth-child(5),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sensitivity .heritage-voice-thread-node:nth-child(6),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-control .heritage-voice-thread-node:nth-child(7) {
+
+  animation: vpShapeNodePulse 260ms ease-in-out infinite alternate !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-attack .heritage-voice-thread-node:nth-child(1) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-brightness .heritage-voice-thread-node:nth-child(2) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-projection .heritage-voice-thread-node:nth-child(3) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sustain .heritage-voice-thread-node:nth-child(4) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-warmth .heritage-voice-thread-node:nth-child(5) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sensitivity .heritage-voice-thread-node:nth-child(6) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-control .heritage-voice-thread-node:nth-child(7) .heritage-voice-thread-node-icon {
+
+  opacity: 1 !important;
+
+  filter:
+
+    grayscale(0)
+
+    brightness(1.55)
+
+    drop-shadow(0 0 7px currentColor)
+
+    drop-shadow(0 0 15px currentColor) !important;
+
+}
+
+@keyframes vpShapeNodePulse {
+
+  0% {
+
+    transform: scale(1);
+
+  }
+
+  100% {
+
+    transform: scale(1.045);
+
+  }
+
+}
+
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE RESPONSIVENESS OVERRIDE
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target {
+
+  width: 220px !important;
+
+  height: 72px !important;
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  opacity: 1 !important;
+
+  cursor: crosshair !important;
+
+  touch-action: none !important;
+
+  -webkit-tap-highlight-color: transparent !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::after {
+
+  display: none !important;
+
+  content: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  transition:
+
+    opacity 70ms linear,
+
+    filter 70ms linear,
+
+    transform 70ms linear !important;
+
+}
+
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE/BUILD COMBINED TOOL
+
+   ========================================================= */
+
+.vp-shape-map-hint {
+
+  margin-top: 10px !important;
+
+  padding: 12px !important;
+
+  border: 1px solid rgba(170, 143, 255, 0.14) !important;
+
+  border-radius: 12px !important;
+
+  background: rgba(255, 255, 255, 0.025) !important;
+
+  color: rgba(245, 239, 255, 0.72) !important;
+
+}
+
+.vp-shape-map-hint strong {
+
+  display: block !important;
+
+  margin-bottom: 5px !important;
+
+  color: rgba(250, 246, 255, 0.92) !important;
+
+  font-size: 10px !important;
+
+  letter-spacing: 0.16em !important;
+
+  text-transform: uppercase !important;
+
+}
+
+.vp-shape-map-hint p {
+
+  margin: 0 !important;
+
+  font-size: 11px !important;
+
+  line-height: 1.45 !important;
+
+}
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE CLICK/TOUCH/DRAG ONLY
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-map-frame {
+
+  position: relative !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable {
+
+  display: block !important;
+
+  visibility: visible !important;
+
+  opacity: 1 !important;
+
+  pointer-events: auto !important;
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 999 !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable * {
+
+  visibility: visible !important;
+
+  pointer-events: auto !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  width: 230px !important;
+
+  height: 76px !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  background: transparent !important;
+
+  appearance: none !important;
+
+  opacity: 1 !important;
+
+  cursor: crosshair !important;
+
+  touch-action: none !important;
+
+  pointer-events: auto !important;
+
+  transform-origin: center center !important;
+
+  -webkit-tap-highlight-color: transparent !important;
+
+}
+
+/* Hit lanes follow the 7 spokes. They are invisible and only respond to press/drag. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(1) {
+
+  left: 50% !important;
+
+  top: 28% !important;
+
+  transform: translate(-50%, -50%) rotate(90deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(2) {
+
+  left: 67% !important;
+
+  top: 36% !important;
+
+  transform: translate(-50%, -50%) rotate(141deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(3) {
+
+  left: 72% !important;
+
+  top: 54% !important;
+
+  transform: translate(-50%, -50%) rotate(193deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(4) {
+
+  left: 60% !important;
+
+  top: 70% !important;
+
+  transform: translate(-50%, -50%) rotate(244deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(5) {
+
+  left: 40% !important;
+
+  top: 70% !important;
+
+  transform: translate(-50%, -50%) rotate(296deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(6) {
+
+  left: 28% !important;
+
+  top: 54% !important;
+
+  transform: translate(-50%, -50%) rotate(347deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(7) {
+
+  left: 33% !important;
+
+  top: 36% !important;
+
+  transform: translate(-50%, -50%) rotate(39deg) !important;
+
+}
+
+/* No hover UI chrome. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::after,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:hover::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:hover::after {
+
+  display: none !important;
+
+  content: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* Shape-only icon brightness: dim grey/off at low values, bright at high values. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.16 + (var(--node-strength, 0.35) * 0.84)) !important;
+
+  filter:
+
+    grayscale(calc((1 - var(--node-strength, 0.35)) * 1))
+
+    saturate(calc(0.25 + (var(--node-strength, 0.35) * 1.15)))
+
+    brightness(calc(0.42 + (var(--node-strength, 0.35) * 1.18)))
+
+    drop-shadow(0 0 calc(1px + (var(--node-strength, 0.35) * 8px)) currentColor) !important;
+
+  transition:
+
+    opacity 65ms linear,
+
+    filter 65ms linear,
+
+    transform 65ms linear !important;
+
+}
+
+/* Active node pulse while pressed/dragged. vcm-is-dragging-node-* lives on .vcm-shell. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-attack .heritage-voice-thread-node:nth-child(1),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-brightness .heritage-voice-thread-node:nth-child(2),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-projection .heritage-voice-thread-node:nth-child(3),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sustain .heritage-voice-thread-node:nth-child(4),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-warmth .heritage-voice-thread-node:nth-child(5),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sensitivity .heritage-voice-thread-node:nth-child(6),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-control .heritage-voice-thread-node:nth-child(7) {
+
+  animation: vpShapeNodePulse 260ms ease-in-out infinite alternate !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-attack .heritage-voice-thread-node:nth-child(1) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-brightness .heritage-voice-thread-node:nth-child(2) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-projection .heritage-voice-thread-node:nth-child(3) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sustain .heritage-voice-thread-node:nth-child(4) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-warmth .heritage-voice-thread-node:nth-child(5) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sensitivity .heritage-voice-thread-node:nth-child(6) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-control .heritage-voice-thread-node:nth-child(7) .heritage-voice-thread-node-icon {
+
+  opacity: 1 !important;
+
+  filter:
+
+    grayscale(0)
+
+    saturate(1.2)
+
+    brightness(1.58)
+
+    drop-shadow(0 0 7px currentColor)
+
+    drop-shadow(0 0 15px currentColor) !important;
+
+}
+
+@keyframes vpShapeNodePulse {
+
+  0% {
+
+    transform: scale(1);
+
+  }
+
+  100% {
+
+    transform: scale(1.045);
+
+  }
+
+}
+
+
+
+/* Shape mode: hover must never change or move values */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:hover,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:focus,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:focus-visible {
+
+  background: transparent !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+
+  outline: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:hover::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:hover::after,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:focus::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:focus::after {
+
+  display: none !important;
+
+  content: none !important;
+
+}
+
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE/BUILD COMBINED TOOL
+
+   ========================================================= */
+
+.vp-shape-map-hint {
+
+  margin-top: 10px !important;
+
+  padding: 12px !important;
+
+  border: 1px solid rgba(170, 143, 255, 0.14) !important;
+
+  border-radius: 12px !important;
+
+  background: rgba(255, 255, 255, 0.025) !important;
+
+  color: rgba(245, 239, 255, 0.72) !important;
+
+}
+
+.vp-shape-map-hint strong {
+
+  display: block !important;
+
+  margin-bottom: 5px !important;
+
+  color: rgba(250, 246, 255, 0.92) !important;
+
+  font-size: 10px !important;
+
+  letter-spacing: 0.16em !important;
+
+  text-transform: uppercase !important;
+
+}
+
+.vp-shape-map-hint p {
+
+  margin: 0 !important;
+
+  font-size: 11px !important;
+
+  line-height: 1.45 !important;
+
+}
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE MODE CLICK/TOUCH/DRAG ONLY
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape .vp-stage .vcm-map-frame {
+
+  position: relative !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable {
+
+  display: block !important;
+
+  visibility: visible !important;
+
+  opacity: 1 !important;
+
+  pointer-events: auto !important;
+
+  position: absolute !important;
+
+  inset: 0 !important;
+
+  z-index: 999 !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable * {
+
+  visibility: visible !important;
+
+  pointer-events: auto !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target {
+
+  display: block !important;
+
+  position: absolute !important;
+
+  width: 230px !important;
+
+  height: 76px !important;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+
+  border-radius: 999px !important;
+
+  background: transparent !important;
+
+  appearance: none !important;
+
+  opacity: 1 !important;
+
+  cursor: crosshair !important;
+
+  touch-action: none !important;
+
+  pointer-events: auto !important;
+
+  transform-origin: center center !important;
+
+  -webkit-tap-highlight-color: transparent !important;
+
+}
+
+/* Hit lanes follow the 7 spokes. They are invisible and only respond to press/drag. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(1) {
+
+  left: 50% !important;
+
+  top: 28% !important;
+
+  transform: translate(-50%, -50%) rotate(90deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(2) {
+
+  left: 67% !important;
+
+  top: 36% !important;
+
+  transform: translate(-50%, -50%) rotate(141deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(3) {
+
+  left: 72% !important;
+
+  top: 54% !important;
+
+  transform: translate(-50%, -50%) rotate(193deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(4) {
+
+  left: 60% !important;
+
+  top: 70% !important;
+
+  transform: translate(-50%, -50%) rotate(244deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(5) {
+
+  left: 40% !important;
+
+  top: 70% !important;
+
+  transform: translate(-50%, -50%) rotate(296deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(6) {
+
+  left: 28% !important;
+
+  top: 54% !important;
+
+  transform: translate(-50%, -50%) rotate(347deg) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:nth-child(7) {
+
+  left: 33% !important;
+
+  top: 36% !important;
+
+  transform: translate(-50%, -50%) rotate(39deg) !important;
+
+}
+
+/* No hover UI chrome. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target::after,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:hover::before,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable .vcm-node-click-target:hover::after {
+
+  display: none !important;
+
+  content: none !important;
+
+  opacity: 0 !important;
+
+}
+
+/* Shape-only icon brightness: dim grey/off at low values, bright at high values. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.16 + (var(--node-strength, 0.35) * 0.84)) !important;
+
+  filter:
+
+    grayscale(calc((1 - var(--node-strength, 0.35)) * 1))
+
+    saturate(calc(0.25 + (var(--node-strength, 0.35) * 1.15)))
+
+    brightness(calc(0.42 + (var(--node-strength, 0.35) * 1.18)))
+
+    drop-shadow(0 0 calc(1px + (var(--node-strength, 0.35) * 8px)) currentColor) !important;
+
+  transition:
+
+    opacity 65ms linear,
+
+    filter 65ms linear,
+
+    transform 65ms linear !important;
+
+}
+
+/* Active node pulse while pressed/dragged. vcm-is-dragging-node-* lives on .vcm-shell. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-attack .heritage-voice-thread-node:nth-child(1),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-brightness .heritage-voice-thread-node:nth-child(2),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-projection .heritage-voice-thread-node:nth-child(3),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sustain .heritage-voice-thread-node:nth-child(4),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-warmth .heritage-voice-thread-node:nth-child(5),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sensitivity .heritage-voice-thread-node:nth-child(6),
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-control .heritage-voice-thread-node:nth-child(7) {
+
+  animation: vpShapeNodePulse 260ms ease-in-out infinite alternate !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-attack .heritage-voice-thread-node:nth-child(1) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-brightness .heritage-voice-thread-node:nth-child(2) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-projection .heritage-voice-thread-node:nth-child(3) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sustain .heritage-voice-thread-node:nth-child(4) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-warmth .heritage-voice-thread-node:nth-child(5) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-sensitivity .heritage-voice-thread-node:nth-child(6) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shell.vcm-is-dragging-node-control .heritage-voice-thread-node:nth-child(7) .heritage-voice-thread-node-icon {
+
+  opacity: 1 !important;
+
+  filter:
+
+    grayscale(0)
+
+    saturate(1.2)
+
+    brightness(1.58)
+
+    drop-shadow(0 0 7px currentColor)
+
+    drop-shadow(0 0 15px currentColor) !important;
+
+}
+
+@keyframes vpShapeNodePulse {
+
+  0% {
+
+    transform: scale(1);
+
+  }
+
+  100% {
+
+    transform: scale(1.045);
+
+  }
+
+}
+
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE NODE DIMMER OVERRIDE
+
+   Shape mode only. Reference mode remains untouched.
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  transition: none !important;
+
+}
+
+/* Default off-state: grey/dim unless a node-specific value overrides it. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.28 !important;
+
+  filter:
+
+    grayscale(1)
+
+    saturate(0.24)
+
+    brightness(0.52)
+
+    drop-shadow(0 0 1px currentColor) !important;
+
+}
+
+/* Attack */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(1) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(1) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-attack-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-attack-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-attack-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-attack-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-attack-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+/* Brightness */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(2) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(2) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-brightness-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-brightness-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-brightness-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-brightness-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-brightness-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+/* Projection */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(3) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(3) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-projection-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-projection-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-projection-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-projection-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-projection-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+/* Sustain */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(4) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(4) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-sustain-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-sustain-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-sustain-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-sustain-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-sustain-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+/* Warmth */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(5) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(5) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-warmth-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-warmth-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-warmth-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-warmth-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-warmth-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+/* Sensitivity */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(6) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(6) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-sensitivity-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-sensitivity-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-sensitivity-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-sensitivity-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-sensitivity-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+/* Control */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(7) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-child(7) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.2 + (var(--shape-control-strength, 0.35) * 0.8)) !important;
+
+  filter:
+
+    grayscale(calc(1 - var(--shape-control-strength, 0.35)))
+
+    saturate(calc(0.25 + (var(--shape-control-strength, 0.35) * 1.25)))
+
+    brightness(calc(0.45 + (var(--shape-control-strength, 0.35) * 1.35)))
+
+    drop-shadow(0 0 calc(1px + (var(--shape-control-strength, 0.35) * 10px)) currentColor) !important;
+
+}
+
+
+/* =========================================================
+
+   VOICE PLAYGROUND — SHAPE DRAG FINAL RESPONSE OVERRIDE
+
+   Shape mode only. Removes drag latency caused by SVG/CSS transitions.
+
+   ========================================================= */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target {
+
+  touch-action: none !important;
+
+  -webkit-user-select: none !important;
+
+  user-select: none !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-svg *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-node,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-node *,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-profile,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-shape-enabled[class*="vcm-is-dragging-node"] .heritage-voice-thread-profile * {
+
+  transition: none !important;
+
+  animation-duration: 0.001ms !important;
+
+  animation-delay: 0ms !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-layer.is-draggable {
+
+  pointer-events: auto !important;
+
+  touch-action: none !important;
+
+  z-index: 12 !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target {
+
+  pointer-events: auto !important;
+
+  touch-action: none !important;
+
+  cursor: grab !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .vcm-node-click-target:active {
+
+  cursor: grabbing !important;
+
+}
+
+/* Dimmer baseline: low values drift toward grey. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  opacity: 0.28 !important;
+
+  filter:
+
+    grayscale(1)
+
+    saturate(0.18)
+
+    brightness(0.5)
+
+    drop-shadow(0 0 1px currentColor) !important;
+
+}
+
+/* High values should feel like the vibrant/neon screenshots. */
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-anchor-dot {
+
+  transition:
+
+    opacity 20ms linear,
+
+    filter 20ms linear,
+
+    transform 20ms linear !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(1) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(1) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-attack-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-attack-strength, 0.5))) saturate(calc(0.2 + (var(--shape-attack-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-attack-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-attack-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-attack-strength, 0.5) * 28px)) currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(2) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(2) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-brightness-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-brightness-strength, 0.5))) saturate(calc(0.2 + (var(--shape-brightness-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-brightness-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-brightness-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-brightness-strength, 0.5) * 28px)) currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(3) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(3) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-projection-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-projection-strength, 0.5))) saturate(calc(0.2 + (var(--shape-projection-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-projection-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-projection-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-projection-strength, 0.5) * 28px)) currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(4) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(4) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-sustain-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-sustain-strength, 0.5))) saturate(calc(0.2 + (var(--shape-sustain-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-sustain-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-sustain-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-sustain-strength, 0.5) * 28px)) currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(5) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(5) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-warmth-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-warmth-strength, 0.5))) saturate(calc(0.2 + (var(--shape-warmth-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-warmth-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-warmth-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-warmth-strength, 0.5) * 28px)) currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(6) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(6) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-sensitivity-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-sensitivity-strength, 0.5))) saturate(calc(0.2 + (var(--shape-sensitivity-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-sensitivity-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-sensitivity-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-sensitivity-strength, 0.5) * 28px)) currentColor) !important;
+
+}
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(7) .heritage-voice-thread-node-icon,
+
+.vp-shell.vp-mode-shape.vp-read-playerAnalysis .vp-stage .heritage-voice-thread-node:nth-of-type(7) .heritage-voice-thread-anchor-dot {
+
+  opacity: calc(0.22 + (var(--shape-control-strength, 0.5) * 0.78)) !important;
+
+  filter: grayscale(calc(1 - var(--shape-control-strength, 0.5))) saturate(calc(0.2 + (var(--shape-control-strength, 0.5) * 2.8))) brightness(calc(0.45 + (var(--shape-control-strength, 0.5) * 2.15))) drop-shadow(0 0 calc(1px + (var(--shape-control-strength, 0.5) * 18px)) currentColor) drop-shadow(0 0 calc(1px + (var(--shape-control-strength, 0.5) * 28px)) currentColor) !important;
 
 }
 

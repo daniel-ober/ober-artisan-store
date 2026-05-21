@@ -1,5 +1,5 @@
 
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import VoiceThreadMap from '../../components/VoiceThreadMap.js';
 
@@ -275,11 +275,33 @@ export default function VoiceConstellationMap({
 
   );
 
+  const mapFrameRef = useRef(null);
+
+  const draggingNodeKeyRef = useRef(null);
+
+  const localShapeVoiceRef = useRef(null);
+
+  const [draggingNodeKey, setDraggingNodeKey] = useState(null);
+
+  const [localShapeVoice, setLocalShapeVoice] = useState(normalizedVoice);
+
+  useEffect(() => {
+
+    if (!shapeMode || draggingNodeKeyRef.current) return;
+
+    localShapeVoiceRef.current = normalizedVoice;
+
+    setLocalShapeVoice(normalizedVoice);
+
+  }, [shapeMode, normalizedVoice]);
+
+  const visualVoice = shapeMode ? localShapeVoice || normalizedVoice : normalizedVoice;
+
   const profile = useMemo(
 
-    () => voiceToLegacyProfile(normalizedVoice),
+    () => voiceToLegacyProfile(visualVoice),
 
-    [normalizedVoice]
+    [visualVoice]
 
   );
 
@@ -305,9 +327,9 @@ export default function VoiceConstellationMap({
 
     }
 
-    return getTopNodes(normalizedVoice, 3);
+    return getTopNodes(visualVoice, 3);
 
-  }, [firstListenKeys, normalizedVoice]);
+  }, [firstListenKeys, visualVoice]);
 
   const activeThread = useMemo(
 
@@ -317,17 +339,15 @@ export default function VoiceConstellationMap({
 
         readMode: safeReadMode,
 
-        voice: normalizedVoice,
+        voice: visualVoice,
 
         firstListenKeys: resolvedFirstListenKeys,
 
       }),
 
-    [safeReadMode, normalizedVoice, resolvedFirstListenKeys]
+    [safeReadMode, visualVoice, resolvedFirstListenKeys]
 
   );
-
-  const mapFrameRef = useRef(null);
 
   const isPlayerShapeDragEnabled = shapeMode && safeReadMode === 'playerAnalysis';
 
@@ -363,11 +383,57 @@ export default function VoiceConstellationMap({
 
     const projectedDistance = pointerVectorX * axisX + pointerVectorY * axisY;
 
-    const radius = Math.min(rect.width, rect.height) * 0.38;
+    const radius = Math.min(rect.width, rect.height) * 0.34;
 
-    const nextValue = Math.max(0, Math.min(1, projectedDistance / radius));
+    const rawValue = projectedDistance / radius;
 
-    return nextValue;
+    return Math.max(0.035, Math.min(1, rawValue));
+
+  };
+
+  const updateLocalNodeValue = (nodeKey, nextValue) => {
+
+    const baseVoice = localShapeVoiceRef.current || visualVoice || normalizedVoice;
+
+    const updatedVoice = {
+
+      ...baseVoice,
+
+      [nodeKey]: nextValue,
+
+    };
+
+    localShapeVoiceRef.current = updatedVoice;
+
+    setLocalShapeVoice(updatedVoice);
+
+  };
+
+  const getShapeNodeStrength = (nodeKey) => {
+
+    const rawValue = Number(visualVoice?.[nodeKey]);
+
+    if (!Number.isFinite(rawValue)) return 0.35;
+
+    return Math.max(0, Math.min(1, rawValue));
+
+  };
+
+  const shapeNodeStyleVars = {
+
+    '--shape-attack-strength': getShapeNodeStrength('attack'),
+
+    '--shape-brightness-strength': getShapeNodeStrength('brightness'),
+
+    '--shape-projection-strength': getShapeNodeStrength('projection'),
+
+    '--shape-sustain-strength': getShapeNodeStrength('sustain'),
+
+    '--shape-warmth-strength': getShapeNodeStrength('warmth'),
+
+    '--shape-sensitivity-strength': getShapeNodeStrength('sensitivity'),
+
+    '--shape-control-strength': getShapeNodeStrength('control'),
 
   };
 
@@ -383,13 +449,19 @@ export default function VoiceConstellationMap({
 
     event.preventDefault();
 
+    event.stopPropagation();
+
+    draggingNodeKeyRef.current = nodeKey;
+
+    setDraggingNodeKey(nodeKey);
+
     event.currentTarget.setPointerCapture?.(event.pointerId);
 
     const nextValue = getPointerValueForNode(event, nodeKey);
 
     if (nextValue !== null) {
 
-      onNodeDrag?.(nodeKey, nextValue);
+      updateLocalNodeValue(nodeKey, nextValue);
 
     }
 
@@ -399,15 +471,43 @@ export default function VoiceConstellationMap({
 
     if (!isPlayerShapeDragEnabled) return;
 
-    if (event.buttons !== 1) return;
+    if (draggingNodeKeyRef.current !== nodeKey) return;
+
+    if (event.pointerType === 'mouse' && event.buttons !== 1) return;
 
     event.preventDefault();
+
+    event.stopPropagation();
 
     const nextValue = getPointerValueForNode(event, nodeKey);
 
     if (nextValue !== null) {
 
-      onNodeDrag?.(nodeKey, nextValue);
+      updateLocalNodeValue(nodeKey, nextValue);
+
+    }
+
+  };
+
+  const handleNodePointerEnd = (event) => {
+
+    if (!isPlayerShapeDragEnabled) return;
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+    const committedNodeKey = draggingNodeKeyRef.current;
+
+    const committedVoice = localShapeVoiceRef.current;
+
+    draggingNodeKeyRef.current = null;
+
+    setDraggingNodeKey(null);
+
+    if (committedNodeKey && committedVoice?.[committedNodeKey] !== undefined) {
+
+      onNodeDrag?.(committedNodeKey, committedVoice[committedNodeKey]);
 
     }
 
@@ -425,6 +525,10 @@ export default function VoiceConstellationMap({
 
     `vcm-mode-${safeReadMode}`,
 
+    shapeMode ? 'vcm-shape-enabled' : '',
+
+    draggingNodeKey ? `vcm-is-dragging-node-${draggingNodeKey}` : '',
+
     className,
 
   ]
@@ -435,7 +539,15 @@ export default function VoiceConstellationMap({
 
   return (
 
-    <section className={mapClassName} aria-label={`${modeCopy.label} voice map`}>
+    <section
+
+      className={mapClassName}
+
+      aria-label={`${modeCopy.label} voice map`}
+
+      style={shapeMode ? shapeNodeStyleVars : undefined}
+
+    >
 
       <div className="vcm-ambient vcm-ambient-purple" />
 
@@ -502,6 +614,12 @@ export default function VoiceConstellationMap({
               onPointerDown={(event) => handleNodePointerDown(event, nodeKey)}
 
               onPointerMove={(event) => handleNodePointerMove(event, nodeKey)}
+
+              onPointerUp={handleNodePointerEnd}
+
+              onPointerCancel={handleNodePointerEnd}
+
+              onLostPointerCapture={handleNodePointerEnd}
 
               title={
 
