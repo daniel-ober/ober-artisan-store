@@ -1,0 +1,301 @@
+{
+  "generatedAt": "2026-05-21T08:21:53.574Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/lane-b-meaningful-edge-missing-thickness-review-queue.json",
+  "status": "LANE_B_SHELL_THICKNESS_PROMOTION_OPPORTUNITY_QUEUE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "lane": "Lane B",
+    "name": "HAS_EDGE_BUT_THICKNESS_MISSING",
+    "candidateCount": 330,
+    "groupCount": 150,
+    "promotionTargetField": "shell thickness",
+    "sourceConfirmedThicknessCandidateCount": 0,
+    "sourceConfirmedThicknessGroupCount": 0,
+    "blockedCandidateCount": 330,
+    "blockedGroupCount": 150,
+    "noFirestoreWrites": true,
+    "conclusion": "Lane B promotion opportunity review should only promote records where numeric shell thickness is explicitly source-confirmed. Prior source reviews found no source-confirmed thickness promotions."
+  },
+  "topGroups": [
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Wood / Artist / Student",
+      "shellMaterial": "Mahogany",
+      "count": 14,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Radio King",
+      "shellMaterial": "Maple",
+      "count": 10,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html"
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1960 Ludwig",
+      "shellMaterial": "Maple",
+      "count": 8,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Marri",
+      "count": 7,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Tasmanian Blackwood",
+      "count": 7,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Rose Gum",
+      "count": 7,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Sassafras",
+      "count": 7,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Gum",
+      "count": 7,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Wandoo",
+      "count": 7,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Cherry",
+      "count": 6,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Mahogany",
+      "count": 6,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Maple",
+      "count": 6,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Walnut",
+      "count": 6,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Sound King",
+      "shellMaterial": "Chrome over Brass",
+      "count": 6,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html"
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Steel",
+      "count": 6,
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+    },
+    {
+      "companyName": "Rogers",
+      "lineSeries": "Dyna-Sonic Reissue",
+      "shellMaterial": "Maple / Poplar",
+      "count": 5,
+      "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums"
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Broadkaster",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://gretschdrums.com/drums/broadkaster"
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://gretschdrums.com/drums/usa-custom"
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1980s Ludwig",
+      "shellMaterial": "Maple",
+      "count": 4,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Vintage Student Radio King",
+      "shellMaterial": "Mahogany",
+      "count": 4,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/radio_king_history.html"
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "OEM Configurations",
+      "shellMaterial": "Brass",
+      "count": 4,
+      "primarySourceUrl": "https://worldmaxusa.com/prices-and-specs/"
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Aluminum",
+      "count": 4,
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Bronze",
+      "count": 4,
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Metal Snares / Retailer-Documented",
+      "shellMaterial": "Copper",
+      "count": 4,
+      "primarySourceUrl": "https://www.gear4music.com/us/en/Drums/WorldMax-Snares"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Jarrah",
+      "count": 3,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "C&C Drums USA",
+      "lineSeries": "Custom Drums",
+      "shellMaterial": "Maple",
+      "count": 3,
+      "primarySourceUrl": "https://www.candcdrumsusa.com/custom-drums"
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1980s Ludwig",
+      "shellMaterial": "Bronze",
+      "count": 3,
+      "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html"
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "shellMaterial": "Aluminum",
+      "count": 3,
+      "primarySourceUrl": "https://www.noblecooley.com/alloy"
+    },
+    {
+      "companyName": "Slingerland",
+      "lineSeries": "Modern Radio King Limited",
+      "shellMaterial": "Maple",
+      "count": 3,
+      "primarySourceUrl": "https://www.sweetwater.com/store/detail/RKSM714WMP--slingerland-radio-king-so..."
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Delite",
+      "shellMaterial": "Maple",
+      "count": 3,
+      "primarySourceUrl": "https://www.sonormuseum.com/"
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Designer",
+      "shellMaterial": "Maple",
+      "count": 3,
+      "primarySourceUrl": "https://www.sonormuseum.com/"
+    },
+    {
+      "companyName": "WorldMax",
+      "lineSeries": "WorldMax Shells / OEM Reference",
+      "shellMaterial": "Brass",
+      "count": 3,
+      "primarySourceUrl": "https://www.drumfactorydirect.com/index.php?cPath=4_0_2_21&main_page=index"
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Maple Custom Absolute",
+      "shellMaterial": "Maple",
+      "count": 3,
+      "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660"
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Handmade Exotic Australian Hardwood",
+      "shellMaterial": "Jarrah",
+      "count": 2,
+      "primarySourceUrl": "https://www.yumpu.com/en/document/view/52327678/read-the-pdf-online-brady-drums"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Ash",
+      "count": 2,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Birch",
+      "count": 2,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Solid Shell",
+      "shellMaterial": "Poplar",
+      "count": 2,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "Custom Shop Stacked Solid",
+      "shellMaterial": "Cherry",
+      "count": 2,
+      "primarySourceUrl": "https://www.craviottodrums.com/"
+    },
+    {
+      "companyName": "Craviotto",
+      "lineSeries": "DW / Craviotto Era",
+      "shellMaterial": "Maple",
+      "count": 2,
+      "primarySourceUrl": "https://www.ebay.com/itm/276886050902"
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Metal",
+      "shellMaterial": "Steel",
+      "count": 2,
+      "primarySourceUrl": "https://www.thedwstore.com/collections/pdp-snares"
+    }
+  ],
+  "reviewInstruction": "No Firestore writes. Create a promotion plan only where numeric shell thickness is explicitly source-confirmed for the affected company/line/material/configuration."
+}
