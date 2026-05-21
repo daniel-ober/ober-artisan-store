@@ -9,7 +9,10 @@
       "Ludwig",
       "Tama"
     ],
-    "noFirestoreWrites": true
+    "noFirestoreWrites": true,
+    "uniqueRecordCount": 22,
+    "sourceReviewInstanceCount": 28,
+    "recordCountNote": "recordCount counts source-review instances; uniqueRecordCount dedupes records that appear under multiple source URLs."
   },
   "reviewRules": [
     "Approve explicit stock head values only when the source page lists the stock batter and/or reso head.",
