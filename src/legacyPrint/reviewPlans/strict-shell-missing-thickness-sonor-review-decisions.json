@@ -1,0 +1,279 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_SONOR_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.228Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-sonor-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "SONOR",
+  "summary": {
+    "candidateCount": 21,
+    "lineGroupCount": 13,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 13,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "SONOR missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Delite",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "sonor_delite_delite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_dl-1405_7a8db104",
+        "sonor_delite_delite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_dl-14065_41388ded",
+        "sonor_delite_delite-maple-14x6_14x6_ply_maple_45-bearing-edge_die-cast-hoops_dl-1406_9c2c56db"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Designer",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "sonor_designer_designer-maple-heavy-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-mh_b35252c4",
+        "sonor_designer_designer-maple-light-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1405-ml_cd502414",
+        "sonor_designer_designer-maple-light-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_ds-1406-ml_1a7a0f66"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "HiLite",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "sonor_hilite_hilite-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_67b0ea10",
+        "sonor_hilite_hilite-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_63990c6e"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "S Class Pro",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "sonor_s-class-pro_s-class-pro-maple-14x5_14x5_ply_maple_45-bearing-edge_die-cast-hoops_49cde88b",
+        "sonor_s-class-pro_s-class-pro-maple-14x6-5_14x6-5_ply_maple_45-bearing-edge_die-cast-hoops_d5ee0f37"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "S-Classix",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "sonor_s-classix_s-classix-birch-14x5_14x5_ply_birch_45-bearing-edge_die-cast-hoops_b60f49d8",
+        "sonor_s-classix_s-classix-birch-14x6-5_14x6-5_ply_birch_45-bearing-edge_die-cast-hoops_ce873095"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Teardrop",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "sonor_teardrop_teardrop-beech-14x5_14x5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_4d70aa9d",
+        "sonor_teardrop_teardrop-beech-14x6-5_14x6-5_ply_beech_rounded-vintage-edge_triple-flanged-hoops_c087e502"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "AQ1",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_aq1_aq1-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_aq1-1405_537ef02e"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Essential Force",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_essential-force_essential-force-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_455cf7ea"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Force 2005",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_force-2005_force-2005-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_49d52773"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Force 2007",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_force-2007_force-2007-birch-14x5-5_14x5-5_ply_birch_45-bearing-edge_triple-flanged-hoops_d558f0e8"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Force 3005",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_force-3005_force-3005-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_e6254a81"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Force 3007",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_force-3007_force-3007-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_3dccb9b3"
+      ]
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Select Force",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "sonor_select-force_select-force-maple-14x5-5_14x5-5_ply_maple_45-bearing-edge_triple-flanged-hoops_c147c955"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No SONOR shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

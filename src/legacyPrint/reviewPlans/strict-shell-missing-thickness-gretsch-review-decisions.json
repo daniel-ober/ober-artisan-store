@@ -1,0 +1,222 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_GRETSCH_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.229Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-gretsch-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Gretsch",
+  "summary": {
+    "candidateCount": 18,
+    "lineGroupCount": 10,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 10,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Gretsch missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Broadkaster",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "gretsch_broadkaster_broadkaster-snare_14x5-5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-la_2cedbed7",
+        "gretsch_broadkaster_broadkaster-snare_14x5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-lacq_95e4fa0e",
+        "gretsch_broadkaster_broadkaster-snare_14x6-5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-la_85fd566d",
+        "gretsch_broadkaster_broadkaster-snare_14x8_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-lacq_e24be4f9"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "USA Custom",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "gretsch_usa-custom_usa-custom-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-c_7a6d341a",
+        "gretsch_usa-custom_usa-custom-snare_14x5_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-cas_b7b6bae8",
+        "gretsch_usa-custom_usa-custom-snare_14x6-5_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-c_3c6c37d4",
+        "gretsch_usa-custom_usa-custom-snare_14x8_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-cas_6f9fdfb0"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Full Range",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "gretsch_full-range_full-range-birch_14x5-5_ply_birch_30-degree-bearing-edge_lacquer-plating-natural-metal_2-5mm-triple-f_d281ba2e",
+        "gretsch_full-range_full-range-birch_14x6-5_ply_birch_30-degree-bearing-edge_lacquer-plating-natural-metal_2-5mm-triple-f_9c929400"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Renown",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "gretsch_renown_renown-maple-snare_14x5-5_ply_maple_30-degree-bearing-edge_gloss-lacquer-wrap_gretsch-302-double-flanged-_ea147c9f",
+        "gretsch_renown_renown-maple-snare_14x6-5_ply_maple_30-degree-bearing-edge_gloss-lacquer-wrap_gretsch-302-double-flanged-_429d3566"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Broadkaster Vintage",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_broadkaster-vintage_broadkaster-name-band-snare_14x5-5_ply_maple_poplar_maple_roundover-vintage-edge-estimated_p_874a429a"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Catalina Club",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_catalina-club_catalina-club-snare_14x5-5_ply_mahogany-poplar_30-degree-rounded-family-estimated_wrap_triple-flan_ad22a65d"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Catalina Maple",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_catalina-maple_catalina-maple-snare_14x5-5_ply_maple_30-degree-bearing-edge-estimated_lacquer-wrap_triple-flange_4ce38e41"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Round Badge",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_round-badge_round-badge-progressive-jazz-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_nitr_4f605177"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Square Badge",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_square-badge_square-badge-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_lacquer-wrap_die-ca_979b7848"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Stop Sign Badge",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_stop-sign-badge_stop-sign-badge-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_nitron-wrap-l_669a2eca"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Gretsch shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

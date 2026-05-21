@@ -1,0 +1,465 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_GRETSCH_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.228Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Gretsch",
+  "reviewScope": "Gretsch records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 18,
+    "lineGroupCount": 10,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Broadkaster",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "High": 4
+      },
+      "researchQuestion": "Can Gretsch Broadkaster snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_broadkaster_broadkaster-snare_14x5-5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-la_2cedbed7",
+          "label": "Gretsch — Broadkaster — Broadkaster Snare — 14x5.5",
+          "modelName": "Broadkaster Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"3-ply maple/poplar/maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Reverse roundover / 30-degree family\",\"snareSideProfile\":\"Reverse roundover / 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/broadkaster",
+          "sourceConfidence": "High",
+          "priorityScore": 1105
+        },
+        {
+          "id": "gretsch_broadkaster_broadkaster-snare_14x5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-lacq_95e4fa0e",
+          "label": "Gretsch — Broadkaster — Broadkaster Snare — 14x5",
+          "modelName": "Broadkaster Snare",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"3-ply maple/poplar/maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Reverse roundover / 30-degree family\",\"snareSideProfile\":\"Reverse roundover / 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/broadkaster",
+          "sourceConfidence": "High",
+          "priorityScore": 1105
+        },
+        {
+          "id": "gretsch_broadkaster_broadkaster-snare_14x6-5_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-la_85fd566d",
+          "label": "Gretsch — Broadkaster — Broadkaster Snare — 14x6.5",
+          "modelName": "Broadkaster Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"3-ply maple/poplar/maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Reverse roundover / 30-degree family\",\"snareSideProfile\":\"Reverse roundover / 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/broadkaster",
+          "sourceConfidence": "High",
+          "priorityScore": 1105
+        },
+        {
+          "id": "gretsch_broadkaster_broadkaster-snare_14x8_ply_maple_poplar_maple_reverse-roundover-30-degree-family_nitron-wrap-or-lacq_e24be4f9",
+          "label": "Gretsch — Broadkaster — Broadkaster Snare — 14x8",
+          "modelName": "Broadkaster Snare",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"3-ply maple/poplar/maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Reverse roundover / 30-degree family\",\"snareSideProfile\":\"Reverse roundover / 30-degree family\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/broadkaster",
+          "sourceConfidence": "High",
+          "priorityScore": 1105
+        }
+      ]
+    },
+    {
+      "lineSeries": "USA Custom",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "Medium": 4
+      },
+      "researchQuestion": "Can Gretsch USA Custom snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_usa-custom_usa-custom-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-c_7a6d341a",
+          "label": "Gretsch — USA Custom — USA Custom Snare — 14x5.5",
+          "modelName": "USA Custom Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"Gretsch 6-ply maple/gum/poplar family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/usa-custom",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1035
+        },
+        {
+          "id": "gretsch_usa-custom_usa-custom-snare_14x5_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-cas_b7b6bae8",
+          "label": "Gretsch — USA Custom — USA Custom Snare — 14x5",
+          "modelName": "USA Custom Snare",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"Gretsch 6-ply maple/gum/poplar family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/usa-custom",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1035
+        },
+        {
+          "id": "gretsch_usa-custom_usa-custom-snare_14x6-5_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-c_3c6c37d4",
+          "label": "Gretsch — USA Custom — USA Custom Snare — 14x6.5",
+          "modelName": "USA Custom Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"Gretsch 6-ply maple/gum/poplar family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/usa-custom",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1035
+        },
+        {
+          "id": "gretsch_usa-custom_usa-custom-snare_14x8_ply_maple_gum_poplar_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_die-cas_6f9fdfb0",
+          "label": "Gretsch — USA Custom — USA Custom Snare — 14x8",
+          "modelName": "USA Custom Snare",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"Gretsch 6-ply maple/gum/poplar family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/usa-custom",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1035
+        }
+      ]
+    },
+    {
+      "lineSeries": "Full Range",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestion": "Can Gretsch Full Range snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_full-range_full-range-birch_14x5-5_ply_birch_30-degree-bearing-edge_lacquer-plating-natural-metal_2-5mm-triple-f_d281ba2e",
+          "label": "Gretsch — Full Range — Full Range Birch — 14x5.5",
+          "modelName": "Full Range Birch",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply birch\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        },
+        {
+          "id": "gretsch_full-range_full-range-birch_14x6-5_ply_birch_30-degree-bearing-edge_lacquer-plating-natural-metal_2-5mm-triple-f_9c929400",
+          "label": "Gretsch — Full Range — Full Range Birch — 14x6.5",
+          "modelName": "Full Range Birch",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"8-ply birch\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        }
+      ]
+    },
+    {
+      "lineSeries": "Renown",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestion": "Can Gretsch Renown snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_renown_renown-maple-snare_14x5-5_ply_maple_30-degree-bearing-edge_gloss-lacquer-wrap_gretsch-302-double-flanged-_ea147c9f",
+          "label": "Gretsch — Renown — Renown Maple Snare — 14x5.5",
+          "modelName": "Renown Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"7-ply Gretsch Formula maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/renown",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        },
+        {
+          "id": "gretsch_renown_renown-maple-snare_14x6-5_ply_maple_30-degree-bearing-edge_gloss-lacquer-wrap_gretsch-302-double-flanged-_429d3566",
+          "label": "Gretsch — Renown — Renown Maple Snare — 14x6.5",
+          "modelName": "Renown Maple Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"7-ply Gretsch Formula maple\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge\",\"snareSideProfile\":\"30-degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/renown",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        }
+      ]
+    },
+    {
+      "lineSeries": "Broadkaster Vintage",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Gretsch Broadkaster Vintage snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_broadkaster-vintage_broadkaster-name-band-snare_14x5-5_ply_maple_poplar_maple_roundover-vintage-edge-estimated_p_874a429a",
+          "label": "Gretsch — Broadkaster Vintage — Broadkaster Name Band Snare — 14x5.5",
+          "modelName": "Broadkaster Name Band Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Maple\",\"plyCount\":null,\"layupDescription\":\"3-ply estimated\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Roundover / vintage edge estimated\",\"snareSideProfile\":\"Roundover / vintage edge estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.scribd.com/document/461032310/Gretsch-50-pdf",
+          "sourceConfidence": "Low",
+          "priorityScore": 1005
+        }
+      ]
+    },
+    {
+      "lineSeries": "Catalina Club",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Gretsch Catalina Club snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_catalina-club_catalina-club-snare_14x5-5_ply_mahogany-poplar_30-degree-rounded-family-estimated_wrap_triple-flan_ad22a65d",
+          "label": "Gretsch — Catalina Club — Catalina Club Snare — 14x5.5",
+          "modelName": "Catalina Club Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Mahogany / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"estimated Catalina Club layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree / rounded family estimated\",\"snareSideProfile\":\"30-degree / rounded family estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": 120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Catalina Maple",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestion": "Can Gretsch Catalina Maple snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_catalina-maple_catalina-maple-snare_14x5-5_ply_maple_30-degree-bearing-edge-estimated_lacquer-wrap_triple-flange_4ce38e41",
+          "label": "Gretsch — Catalina Maple — Catalina Maple Snare — 14x5.5",
+          "modelName": "Catalina Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"7-ply maple estimated\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge estimated\",\"snareSideProfile\":\"30-degree bearing edge estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/renown",
+          "sourceConfidence": "Medium",
+          "priorityScore": 215
+        }
+      ]
+    },
+    {
+      "lineSeries": "Round Badge",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Gretsch Round Badge snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_round-badge_round-badge-progressive-jazz-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_nitr_4f605177",
+          "label": "Gretsch — Round Badge — Round Badge Progressive Jazz Snare — 14x5.5",
+          "modelName": "Round Badge Progressive Jazz Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"6-ply Gretsch formula estimated\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge estimated\",\"snareSideProfile\":\"30-degree bearing edge estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/usa-custom",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Square Badge",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Gretsch Square Badge snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_square-badge_square-badge-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_lacquer-wrap_die-ca_979b7848",
+          "label": "Gretsch — Square Badge — Square Badge Snare — 14x5.5",
+          "modelName": "Square Badge Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"6-ply Gretsch formula estimated\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge estimated\",\"snareSideProfile\":\"30-degree bearing edge estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": 120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Stop Sign Badge",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Gretsch Stop Sign Badge snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_stop-sign-badge_stop-sign-badge-snare_14x5-5_ply_maple_gum_poplar_30-degree-bearing-edge-estimated_nitron-wrap-l_669a2eca",
+          "label": "Gretsch — Stop Sign Badge — Stop Sign Badge Snare — 14x5.5",
+          "modelName": "Stop Sign Badge Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"Poplar\",\"plyCount\":null,\"layupDescription\":\"6-ply Gretsch formula estimated\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"30-degree bearing edge estimated\",\"snareSideProfile\":\"30-degree bearing edge estimated\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": 120
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Gretsch line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

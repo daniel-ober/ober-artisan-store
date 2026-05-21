@@ -1,0 +1,48 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_CANDC_DRUMS_USA_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-candc-drums-usa-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "C&C Drums USA",
+  "summary": {
+    "candidateCount": 6,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "C&C Drums USA missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "C&C Drums USA",
+      "lineSeries": "Custom Drums",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official C&C Drums USA page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "candc-drums-usa_custom-drums_custom-7-ply-mahogany-14x6-5_14x6-5_acrylic_mahogany_customer-selected-bearing-edge_861b3e9b",
+        "candc-drums-usa_custom-drums_custom-7-ply-maple-14x6-5_14x6-5_acrylic_maple_customer-selected-bearing-edge_d88bc2ee",
+        "candc-drums-usa_custom-drums_custom-acrylic-14x6-5_14x6-5_acrylic_acrylic_customer-selected-bearing-edge_f58e8692",
+        "candc-drums-usa_custom-drums_custom-luan-6-and-6-14x6-5_14x6-5_acrylic_luan_customer-selected-bearing-edge_ca8709ec",
+        "candc-drums-usa_custom-drums_custom-maple-mahogany-maple-14x6-5_14x6-5_acrylic_maple_mahogany_maple_customer-selected-be_7c224be2",
+        "candc-drums-usa_custom-drums_custom-maple-poplar-maple-14x6-5_14x6-5_acrylic_maple_poplar_maple_customer-selected-bearin_e339300b"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No C&C Drums USA shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

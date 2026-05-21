@@ -1,0 +1,105 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_YAMAHA_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-yamaha-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Yamaha",
+  "summary": {
+    "candidateCount": 9,
+    "lineGroupCount": 4,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 4,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Yamaha missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Maple Custom Absolute",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "yamaha_maple-custom-absolute_maple-custom-absolute-14x4_14x4_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-cast_74c940f3",
+        "yamaha_maple-custom-absolute_maple-custom-absolute-14x5-5_14x5-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_ace8201a",
+        "yamaha_maple-custom-absolute_maple-custom-absolute-14x6-5_14x6-5_ply_maple_45-degree-yamaha-absolute-family_lacquer_die-_35898c18"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Birch Custom Absolute",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_birch-custom-absolute_birch-custom-absolute-14x5-5_14x5-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_09b7376e",
+        "yamaha_birch-custom-absolute_birch-custom-absolute-14x6-5_14x6-5_ply_birch_45-degree-yamaha-absolute-family_lacquer_die-_098b9023"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Recording Custom",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_recording-custom_recording-custom-birch-14x5-5_14x5-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__92828120",
+        "yamaha_recording-custom_recording-custom-birch-14x6-5_14x6-5_ply_birch_30-degree-modern-recording-custom-family_lacquer__eaec2e70"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Sensitive Series",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_sensitive-series_maple-sensitive-14x5-5_14x5-5_ply_maple_45-degree-sensitive-family_lacquer_triple-flange-yamaha-_7f8ab87f",
+        "yamaha_sensitive-series_maple-vintage-14x5-5_14x5-5_ply_maple_vintage-rounded-estimated_lacquer_triple-flange-yamaha-hoo_76655cd4"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Yamaha shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

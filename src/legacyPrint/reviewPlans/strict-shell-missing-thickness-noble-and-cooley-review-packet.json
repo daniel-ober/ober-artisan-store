@@ -1,0 +1,152 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_NOBLE_AND_COOLEY_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Noble & Cooley",
+  "reviewScope": "Noble & Cooley records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 5,
+    "lineGroupCount": 3,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Alloy Classic",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "High": 3
+      },
+      "researchQuestion": "Can Noble & Cooley Alloy Classic snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+          "label": "Noble & Cooley — Alloy Classic — Alloy Classic Aluminum 14x4.75 — 14x4.75",
+          "modelName": "Alloy Classic Aluminum 14x4.75",
+          "diameter": "14",
+          "depth": "4.75",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cast aluminum shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Machined bearing edge / tight tolerance\",\"snareSideProfile\":\"Machined bearing edge / tight tolerance\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.noblecooley.com/alloy",
+          "sourceConfidence": "High",
+          "priorityScore": 885
+        },
+        {
+          "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+          "label": "Noble & Cooley — Alloy Classic — Alloy Classic Aluminum 14x6.5 — 14x6.5",
+          "modelName": "Alloy Classic Aluminum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cast aluminum shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Machined bearing edge / tight tolerance\",\"snareSideProfile\":\"Machined bearing edge / tight tolerance\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.noblecooley.com/alloy",
+          "sourceConfidence": "High",
+          "priorityScore": 885
+        },
+        {
+          "id": "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db",
+          "label": "Noble & Cooley — Alloy Classic — Alloy Classic Aluminum 14x6 — 14x6",
+          "modelName": "Alloy Classic Aluminum 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Cast aluminum shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Machined bearing edge / tight tolerance\",\"snareSideProfile\":\"Machined bearing edge / tight tolerance\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.noblecooley.com/alloy",
+          "sourceConfidence": "High",
+          "priorityScore": 885
+        }
+      ]
+    },
+    {
+      "lineSeries": "CD Maple Series",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "High": 1
+      },
+      "researchQuestion": "Can Noble & Cooley CD Maple Series snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-14x5_14x5_ply_maple_45-degree-bearing-edge_standard-custom-finish-options_trip_a1aebcc5",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 14x5 — 14x5",
+          "modelName": "CD Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45 degree bearing edge\",\"snareSideProfile\":\"45 degree bearing edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "High",
+          "priorityScore": 885
+        }
+      ]
+    },
+    {
+      "lineSeries": "Solid Shell Classics Series",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "High": 1
+      },
+      "researchQuestion": "Can Noble & Cooley Solid Shell Classics Series snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x5_14x5_steam-bent_maple_45-degree-bearing-edges_oil-lac_797b88a9",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 14x5 — 14x5",
+          "modelName": "SS Classic Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"45 degree bearing edges\",\"snareSideProfile\":\"45 degree bearing edges\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "High",
+          "priorityScore": 885
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Noble & Cooley line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

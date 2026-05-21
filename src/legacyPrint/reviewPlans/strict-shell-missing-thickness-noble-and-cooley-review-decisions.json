@@ -1,0 +1,83 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_NOBLE_AND_COOLEY_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.230Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-noble-and-cooley-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Noble & Cooley",
+  "summary": {
+    "candidateCount": 5,
+    "lineGroupCount": 3,
+    "approvedLineGroupCount": 0,
+    "blockedLineGroupCount": 3,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Noble & Cooley missing-thickness records remain blocked pending official/catalog numeric shell-thickness source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Alloy Classic",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x4-75_14x4-75_metal_aluminum_machined-bearing-edge-tight-toleran_8bafbacf",
+        "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6-5_14x6-5_metal_aluminum_machined-bearing-edge-tight-tolerance_e6fc9602",
+        "noble-and-cooley_alloy-classic_alloy-classic-aluminum-14x6_14x6_metal_aluminum_machined-bearing-edge-tight-tolerance_raw_25a462db"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "noble-and-cooley_cd-maple-series_cd-maple-14x5_14x5_ply_maple_45-degree-bearing-edge_standard-custom-finish-options_trip_a1aebcc5"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog numeric shell-thickness evidence has been attached yet. Keep blocked until source-backed shell thickness is confirmed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness.",
+        "Evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x5_14x5_steam-bent_maple_45-degree-bearing-edges_oil-lac_797b88a9"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Noble & Cooley shell-thickness promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness confirmation.",
+    "Do not promote missing/invalid shell thickness to valid numeric shell thickness without reviewed source evidence."
+  ]
+}

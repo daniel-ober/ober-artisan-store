@@ -1,0 +1,420 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_ROGERS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:03:49.229Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-meaningful-edge-missing-thickness-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Rogers",
+  "reviewScope": "Rogers records with meaningful bearing edge but missing/invalid shell thickness, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 18,
+    "lineGroupCount": 7,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed shell thickness only.",
+    "Shell thickness must be numeric in millimeters.",
+    "Do not use shell thickness confidence as a substitute for actual shell thickness.",
+    "Do not infer thickness from shell construction, shell material, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Dyna-Sonic Reissue",
+      "candidateCount": 9,
+      "sourceConfidenceCounts": {
+        "Medium": 9
+      },
+      "researchQuestion": "Can Rogers Dyna-Sonic Reissue snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x5_14x5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_dyn_73791f71",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic 7-Line Brass 14x5 — 14x5",
+          "modelName": "Dyna-Sonic 7-Line Brass 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamless/rolled metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"snareSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-7-line-brass-14x6-5_14x6-5_metal_brass_modern-rogers-edge-exact-geometry-not-listed_697f4d0f",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic 7-Line Brass 14x6.5 — 14x6.5",
+          "modelName": "Dyna-Sonic 7-Line Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamless/rolled metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"snareSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-aluminum-a7-14x5_14x5_metal_aluminum_modern-edge-exact-geometry-not-listed_dyna-son_f895027d",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Aluminum A7 14x5 — 14x5",
+          "modelName": "Dyna-Sonic Aluminum A7 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Modern edge; exact geometry not listed\",\"snareSideProfile\":\"Modern edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/rogers-drums-dyna-sonic-aluminum-shell-snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-aluminum-a7-14x6-5_14x6-5_metal_aluminum_modern-edge-exact-geometry-not-listed_dyna_562c750b",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Aluminum A7 14x6.5 — 14x6.5",
+          "modelName": "Dyna-Sonic Aluminum A7 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Modern edge; exact geometry not listed\",\"snareSideProfile\":\"Modern edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://bigbangdist.com/product/rogers-drums-dyna-sonic-aluminum-shell-snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-black-gloss-lacquer_14x5_ply_maple-poplar_rounded-modern-rogers-style-edg_08b77441",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Wood 14x5 Black Gloss Lacquer — 14x5",
+          "modelName": "Dyna-Sonic Wood 14x5 Black Gloss Lacquer",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"snareSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-gold-sparkle-lacquer_14x5_ply_maple-poplar_rounded-modern-rogers-style-ed_d3b977f4",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Wood 14x5 Gold Sparkle Lacquer — 14x5",
+          "modelName": "Dyna-Sonic Wood 14x5 Gold Sparkle Lacquer",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"snareSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-red-sparkle-lacquer_14x5_ply_maple-poplar_rounded-modern-rogers-style-edg_5488d3d5",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Wood 14x5 Red Sparkle Lacquer — 14x5",
+          "modelName": "Dyna-Sonic Wood 14x5 Red Sparkle Lacquer",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"snareSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x5-white-marine-pearl_14x5_ply_maple-poplar_rounded-modern-rogers-style-edge_2f91dd4a",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Wood 14x5 White Marine Pearl — 14x5",
+          "modelName": "Dyna-Sonic Wood 14x5 White Marine Pearl",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"snareSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        },
+        {
+          "id": "rogers_dyna-sonic-reissue_dyna-sonic-wood-14x6-5_14x6-5_ply_maple-poplar_rounded-modern-rogers-style-edge-exact-geometry_e16a5a2b",
+          "label": "Rogers — Dyna-Sonic Reissue — Dyna-Sonic Wood 14x6.5 — 14x6.5",
+          "modelName": "Dyna-Sonic Wood 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"snareSideProfile\":\"Rounded/modern Rogers-style edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://memphisdrumshop.com/collections/rogers-snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1135
+        }
+      ]
+    },
+    {
+      "lineSeries": "Dyna-Sonic Vintage",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can Rogers Dyna-Sonic Vintage snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_dyna-sonic-vintage_dyna-sonic-wood-bandb-14x5_14x5_ply_maple-poplar_rounded-rogers-edge-exact-geometry-era-depend_a022ce4c",
+          "label": "Rogers — Dyna-Sonic Vintage — Dyna-Sonic Wood B&B 14x5 — 14x5",
+          "modelName": "Dyna-Sonic Wood B&B 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply/5-ply era wood family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded Rogers edge; exact geometry era-dependent\",\"snareSideProfile\":\"Rounded Rogers edge; exact geometry era-dependent\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 1085
+        },
+        {
+          "id": "rogers_dyna-sonic-vintage_dyna-sonic-wood-beavertail-14x5_14x5_ply_maple-poplar_rounded-rogers-edge-exact-geometry-era-d_f2ad391c",
+          "label": "Rogers — Dyna-Sonic Vintage — Dyna-Sonic Wood Beavertail 14x5 — 14x5",
+          "modelName": "Dyna-Sonic Wood Beavertail 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply/5-ply era wood family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded Rogers edge; exact geometry era-dependent\",\"snareSideProfile\":\"Rounded Rogers edge; exact geometry era-dependent\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 1085
+        }
+      ]
+    },
+    {
+      "lineSeries": "Powertone",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can Rogers Powertone snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_powertone_powertone-wood-14x5_14x5_ply_maple-poplar_sharper-powertone-mylar-era-rogers-edge_standard-powertone-be_11cc0fea",
+          "label": "Rogers — Powertone — Powertone Wood 14x5 — 14x5",
+          "modelName": "Powertone Wood 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Rogers wood shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Sharper Powertone/Mylar-era Rogers edge\",\"snareSideProfile\":\"Sharper Powertone/Mylar-era Rogers edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 1045
+        },
+        {
+          "id": "rogers_powertone_powertone-wood-14x6-5_14x6-5_ply_maple-poplar_sharper-powertone-mylar-era-rogers-edge_standard-powerton_1393e711",
+          "label": "Rogers — Powertone — Powertone Wood 14x6.5 — 14x6.5",
+          "modelName": "Powertone Wood 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Rogers wood shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Sharper Powertone/Mylar-era Rogers edge\",\"snareSideProfile\":\"Sharper Powertone/Mylar-era Rogers edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 1045
+        }
+      ]
+    },
+    {
+      "lineSeries": "SuperTen Reissue",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestion": "Can Rogers SuperTen Reissue snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_superten-reissue_superten-maple-poplar-14x5_14x5_ply_maple-poplar_modern-rogers-edge-exact-geometry-not-listed_st_f5b95ee0",
+          "label": "Rogers — SuperTen Reissue — SuperTen Maple/Poplar 14x5 — 14x5",
+          "modelName": "SuperTen Maple/Poplar 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"snareSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://rogersdrumsusa.com/introducing-super-ten-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        },
+        {
+          "id": "rogers_superten-reissue_superten-maple-poplar-14x6-5_14x6-5_ply_maple-poplar_modern-rogers-edge-exact-geometry-not-liste_605c095a",
+          "label": "Rogers — SuperTen Reissue — SuperTen Maple/Poplar 14x6.5 — 14x6.5",
+          "modelName": "SuperTen Maple/Poplar 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply proprietary formula\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"snareSideProfile\":\"Modern Rogers edge; exact geometry not listed\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://rogersdrumsusa.com/introducing-super-ten-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": 265
+        }
+      ]
+    },
+    {
+      "lineSeries": "Holiday",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Rogers Holiday snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_holiday_holiday-wood-14x5_14x5_ply_maple-poplar_rounded-vintage-rogers-edge_deeper-vintage-bed_wrap-lacquer_tripl_448a2d49",
+          "label": "Rogers — Holiday — Holiday Wood 14x5 — 14x5",
+          "modelName": "Holiday Wood 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Rogers wood shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Rounded vintage Rogers edge\",\"snareSideProfile\":\"Rounded vintage Rogers edge\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Luxor",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Rogers Luxor snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_luxor_luxor-wood-14x5_14x5_ply_maple-poplar_vintage-rogers-edge-exact-geometry-varies_vintage-bed_wrap-lacquer_tr_e6dc358b",
+          "label": "Rogers — Luxor — Luxor Wood 14x5 — 14x5",
+          "modelName": "Luxor Wood 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Rogers wood shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Vintage Rogers edge; exact geometry varies\",\"snareSideProfile\":\"Vintage Rogers edge; exact geometry varies\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Tower",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestion": "Can Rogers Tower snare records share a source-backed numeric shell thickness?",
+      "requiredEvidence": [
+        "Official Rogers page, catalog, archived catalog, manual, or distributor spec with shell thickness language.",
+        "Evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "rogers_tower_tower-wood-14x5_14x5_ply_maple-poplar_vintage-rogers-edge-exact-geometry-varies_standard-vintage-bed_wrap-l_5d392df9",
+          "label": "Rogers — Tower — Tower Wood 14x5 — 14x5",
+          "modelName": "Tower Wood 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Rogers wood shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"Vintage Rogers edge; exact geometry varies\",\"snareSideProfile\":\"Vintage Rogers edge; exact geometry varies\",\"roundover\":\"unknown\",\"evidenceLevel\":\"legacyFieldMigrated\",\"confidence\":\"medium\",\"notes\":\"Migrated from legacy shell.bearingEdge field; side-specific edge profile needs review.\"}",
+          "bearingEdgeQualityTier": "MEANINGFUL_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/rogers_snare_drums_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": 165
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Rogers line groups for official/catalog numeric shell thickness evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}
