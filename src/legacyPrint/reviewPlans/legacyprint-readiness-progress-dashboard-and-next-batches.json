@@ -1,0 +1,202 @@
+{
+  "status": "LEGACYPRINT_READINESS_PROGRESS_DASHBOARD_AND_NEXT_BATCHES_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:40:42.807Z",
+  "collectionName": "snareReferenceDrums",
+  "noFirestoreWrites": true,
+  "latestAudits": {
+    "strictShellAudit": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T09-23-47-685Z.json",
+    "strictPassableAudit": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-38-48-914Z.json"
+  },
+  "summary": {
+    "totalRecordsScanned": 1551,
+    "completedWrites": {
+      "metalEdgeFallbackWrites": 124,
+      "productionStatusWrites": 27,
+      "stockHeadExactWrites": 3
+    },
+    "fallbackTierAuditCheck": {
+      "passableCoreShellWithMetalEdgeFallback": 187,
+      "passableStockWithMetalEdgeFallback": 26,
+      "rowsWithAuditableMetalEdgeFallbackWarning": 187
+    },
+    "strictShellSummary": null,
+    "coreUsableCount": 466,
+    "nearlyPassableStockCount": 425,
+    "nearlyPassableMissingCombos": {
+      "stock batter head + stock reso head + production status": 317,
+      "stock batter head + stock reso head": 104,
+      "production status": 1,
+      "stock reso head": 1,
+      "stock reso head + production status": 2
+    },
+    "nearlyPassableByCompany": {
+      "AHEAD": 33,
+      "Ludwig": 53,
+      "Pork Pie Percussion": 2,
+      "Tama": 60,
+      "Yamaha": 20,
+      "Pearl": 41,
+      "SONOR": 57,
+      "Craviotto": 2,
+      "Canopus": 18,
+      "Mapex": 102,
+      "C&C Drums USA": 3,
+      "DW / PDP": 7,
+      "Gretsch": 7,
+      "Premier": 10,
+      "WorldMax": 10
+    },
+    "remainingFastLaneProductionOnlyCount": 1,
+    "remainingHeadOnlyCount": 105,
+    "remainingHeadAndProductionCount": 319,
+    "manualReviewCandidateCount": 51,
+    "manualReviewGroupCount": 6,
+    "firestoreWrites": 0
+  },
+  "nextBatchRecommendations": [
+    {
+      "rank": 1,
+      "lane": "Manual source-backed stock-head review",
+      "targetCount": 51,
+      "artifact": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md",
+      "topGroups": [
+        {
+          "companyName": "AHEAD",
+          "lineSeries": "Ahead Snares",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 28,
+          "sourceHosts": {
+            "drumcenternh.com": 1,
+            "bigbangdist.com": 27
+          },
+          "snippetTerms": {
+            "remo": 56,
+            "evans": 28,
+            "aquarian": 56,
+            "drum head": 1,
+            "head": 2,
+            "clear": 50,
+            "drumhead": 31
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "SONOR",
+          "lineSeries": "Kompressor",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 17,
+          "sourceHosts": {
+            "sonor.com": 17
+          },
+          "snippetTerms": {
+            "remo": 34,
+            "drumhead": 17,
+            "head": 68,
+            "heads": 17
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Canopus",
+          "lineSeries": "Zelkova",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 2,
+          "sourceHosts": {
+            "canopusdrums.com": 2
+          },
+          "snippetTerms": {
+            "remo": 2,
+            "clear": 4,
+            "resonance": 10
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Tama",
+          "lineSeries": "Warlord",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 2,
+          "sourceHosts": {
+            "drummagazine.com": 2
+          },
+          "snippetTerms": {
+            "evans": 4,
+            "resonant": 6,
+            "head": 4,
+            "heads": 2
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Canopus",
+          "lineSeries": "Aluminum Alloy",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 1,
+          "sourceHosts": {
+            "canopusdrums.com": 1
+          },
+          "snippetTerms": {
+            "remo": 1,
+            "coated": 3,
+            "hazy": 1,
+            "head": 3
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Yamaha",
+          "lineSeries": "Absolute Hybrid Maple",
+          "extractionDecision": "PARTIAL_OR_AMBIGUOUS_HEAD_MATCH",
+          "candidateCount": 1,
+          "sourceHosts": {
+            "memphisdrumshop.com": 1
+          },
+          "snippetTerms": {
+            "remo": 6,
+            "evans": 2
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "lane": "Remaining production-status-only cleanup",
+      "targetCount": 1,
+      "byCompany": {
+        "Mapex": 1
+      }
+    },
+    {
+      "rank": 3,
+      "lane": "Head-only records with no production blocker",
+      "targetCount": 105,
+      "byCompany": {
+        "Ludwig": 47,
+        "Tama": 58
+      }
+    },
+    {
+      "rank": 4,
+      "lane": "Mixed head + production records",
+      "targetCount": 319,
+      "byCompany": {
+        "AHEAD": 33,
+        "Ludwig": 6,
+        "Pork Pie Percussion": 2,
+        "Yamaha": 20,
+        "Pearl": 41,
+        "SONOR": 57,
+        "Craviotto": 2,
+        "Canopus": 18,
+        "Tama": 2,
+        "C&C Drums USA": 3,
+        "DW / PDP": 7,
+        "Gretsch": 7,
+        "Mapex": 101,
+        "Premier": 10,
+        "WorldMax": 10
+      }
+    }
+  ]
+}
