@@ -1,0 +1,1024 @@
+{
+  "generatedAt": "2026-05-21T08:43:08.782Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-review-lanes-usable-urls-only.json",
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_LUDWIG_PEARL_RESEARCH_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "targetCompanies": [
+      "Ludwig",
+      "Pearl"
+    ],
+    "candidateCount": 65,
+    "companyCount": 2,
+    "noFirestoreWrites": true
+  },
+  "companyGroups": [
+    {
+      "companyName": "Pearl",
+      "candidateCount": 33,
+      "missingBatterCount": 33,
+      "missingResoCount": 33,
+      "records": [
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x3.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Aluminum",
+          "diameter": 14,
+          "depth": 3.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Aluminum",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x6.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Aluminum",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+          "label": "Pearl — Free Floating — Free Floating Aluminum — 14x8",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Aluminum",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x3.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Brass",
+          "diameter": 14,
+          "depth": 3.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Brass",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x6.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Brass",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+          "label": "Pearl — Free Floating — Free Floating Brass — 14x8",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Brass",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+          "label": "Pearl — Free Floating — Free Floating Copper — 14x3.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Copper",
+          "diameter": 14,
+          "depth": 3.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+          "label": "Pearl — Free Floating — Free Floating Copper — 14x5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Copper",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-copper_14x6-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_2eb75db4",
+          "label": "Pearl — Free Floating — Free Floating Copper — 14x6.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Copper",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-copper_14x8_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_3cea84d6",
+          "label": "Pearl — Free Floating — Free Floating Copper — 14x8",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Copper",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-steel_14x3-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_f9aae6e5",
+          "label": "Pearl — Free Floating — Free Floating Steel — 14x3.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Steel",
+          "diameter": 14,
+          "depth": 3.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-steel_14x5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_6af96288",
+          "label": "Pearl — Free Floating — Free Floating Steel — 14x5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Steel",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-steel_14x6-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bc4caad",
+          "label": "Pearl — Free Floating — Free Floating Steel — 14x6.5",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Steel",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_free-floating_free-floating-steel_14x8_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bed3a7f",
+          "label": "Pearl — Free Floating — Free Floating Steel — 14x8",
+          "lineSeries": "Free Floating",
+          "modelName": "Free Floating Steel",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 13x7",
+          "lineSeries": "Modern Utility",
+          "modelName": "Modern Utility Steel",
+          "diameter": 13,
+          "depth": 7,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 14x5.5",
+          "lineSeries": "Modern Utility",
+          "modelName": "Modern Utility Steel",
+          "diameter": 14,
+          "depth": 5.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 14x6.5",
+          "lineSeries": "Modern Utility",
+          "modelName": "Modern Utility Steel",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+          "label": "Pearl — Modern Utility — Modern Utility Steel — 14x8",
+          "lineSeries": "Modern Utility",
+          "modelName": "Modern Utility Steel",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+          "label": "Pearl — Reference — Reference Brass — 14x5",
+          "lineSeries": "Reference",
+          "modelName": "Reference Brass",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+          "label": "Pearl — Reference — Reference Brass — 14x6.5",
+          "lineSeries": "Reference",
+          "modelName": "Reference Brass",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+          "label": "Pearl — Reference — Reference Cast Steel — 14x5",
+          "lineSeries": "Reference",
+          "modelName": "Reference Cast Steel",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+          "label": "Pearl — Reference — Reference Cast Steel — 14x6.5",
+          "lineSeries": "Reference",
+          "modelName": "Reference Cast Steel",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x5",
+          "lineSeries": "Sensitone Heritage Alloy",
+          "modelName": "Sensitone Heritage Aluminum Alloy",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Aluminum Alloy — 14x6.5",
+          "lineSeries": "Sensitone Heritage Alloy",
+          "modelName": "Sensitone Heritage Aluminum Alloy",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x5",
+          "lineSeries": "Sensitone Heritage Alloy",
+          "modelName": "Sensitone Heritage Brass Alloy",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Brass Alloy — 14x6.5",
+          "lineSeries": "Sensitone Heritage Alloy",
+          "modelName": "Sensitone Heritage Brass Alloy",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x5",
+          "lineSeries": "Sensitone Heritage Alloy",
+          "modelName": "Sensitone Heritage Steel Alloy",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+          "label": "Pearl — Sensitone Heritage Alloy — Sensitone Heritage Steel Alloy — 14x6.5",
+          "lineSeries": "Sensitone Heritage Alloy",
+          "modelName": "Sensitone Heritage Steel Alloy",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+          "label": "Pearl — Signature — Chad Smith Signature — 14x5",
+          "lineSeries": "Signature",
+          "modelName": "Chad Smith Signature",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+          "label": "Pearl — Ultracast — Ultracast Aluminum — 14x5",
+          "lineSeries": "Ultracast",
+          "modelName": "Ultracast Aluminum",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+          "label": "Pearl — Ultracast — Ultracast Aluminum — 14x6.5",
+          "lineSeries": "Ultracast",
+          "modelName": "Ultracast Aluminum",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "candidateCount": 32,
+      "missingBatterCount": 32,
+      "missingResoCount": 32,
+      "records": [
+        {
+          "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+          "label": "Ludwig — 1963-1970s Ludwig — Supraphonic LM400 5x14 — 14x5",
+          "lineSeries": "1963-1970s Ludwig",
+          "modelName": "Supraphonic LM400 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+          "label": "Ludwig — 1963-1970s Ludwig — Supraphonic LM402 6.5x14 — 14x6.5",
+          "lineSeries": "1963-1970s Ludwig",
+          "modelName": "Supraphonic LM402 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+          "label": "Ludwig — 1977 Ludwig — Black Beauty 5x14 — 14x5",
+          "lineSeries": "1977 Ludwig",
+          "modelName": "Black Beauty 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+          "label": "Ludwig — 1977 Ludwig — Black Beauty Super Sensitive 5x14 — 14x5",
+          "lineSeries": "1977 Ludwig",
+          "modelName": "Black Beauty Super Sensitive 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2",
+          "label": "Ludwig — Artist / Signature — Carl Palmer Venus 3.7x14 — 14x3.7",
+          "lineSeries": "Artist / Signature",
+          "modelName": "Carl Palmer Venus 3.7x14",
+          "diameter": 14,
+          "depth": 3.7,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+          "label": "Ludwig — Hammered Brass — Hammered Brass 5x14 — 14x5",
+          "lineSeries": "Hammered Brass",
+          "modelName": "Hammered Brass 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f",
+          "label": "Ludwig — Hammered Brass — Hammered Brass 6.5x14 — 14x6.5",
+          "lineSeries": "Hammered Brass",
+          "modelName": "Hammered Brass 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+          "label": "Ludwig — Raw Brass Phonic — Raw Brass Phonic 3.5x14 — 14x3.5",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 3.5x14",
+          "diameter": 14,
+          "depth": 3.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+          "label": "Ludwig — Raw Brass Phonic — Raw Brass Phonic 5x14 — 14x5",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 5x14",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+          "label": "Ludwig — Raw Brass Phonic — Raw Brass Phonic 6.5x14 — 14x6.5",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb",
+          "label": "Ludwig — Raw Brass Phonic — Raw Brass Phonic 8x14 — 14x8",
+          "lineSeries": "Raw Brass Phonic",
+          "modelName": "Raw Brass Phonic 8x14",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+          "label": "Ludwig — Supralite — Supralite 4x14 — 14x4",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 4x14",
+          "diameter": 14,
+          "depth": 4,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+          "label": "Ludwig — Supralite — Supralite 5.5x14 — 14x5.5",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 5.5x14",
+          "diameter": 14,
+          "depth": 5.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+          "label": "Ludwig — Supralite — Supralite 6.5x14 — 14x6.5",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 6.5x14",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+          "label": "Ludwig — Supralite — Supralite 6x13 — 13x6",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 6x13",
+          "diameter": 13,
+          "depth": 6,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3",
+          "label": "Ludwig — Supralite — Supralite 8x14 — 14x8",
+          "lineSeries": "Supralite",
+          "modelName": "Supralite 8x14",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+          "label": "Ludwig — Supraphonic — Supraphonic 5x14 Hammered Imperial Lugs — 14x5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Hammered Imperial Lugs",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+          "label": "Ludwig — Supraphonic — Supraphonic 5x14 Hammered Tube Lugs — 14x5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Hammered Tube Lugs",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+          "label": "Ludwig — Supraphonic — Supraphonic 5x14 Imperial Lugs — 14x5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Imperial Lugs",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+          "label": "Ludwig — Supraphonic — Supraphonic 5x14 Tube Lugs — 14x5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 5x14 Tube Lugs",
+          "diameter": 14,
+          "depth": 5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+          "label": "Ludwig — Supraphonic — Supraphonic 6.5x14 Hammered Imperial Lugs — 14x6.5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Hammered Imperial Lugs",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+          "label": "Ludwig — Supraphonic — Supraphonic 6.5x14 Hammered Tube Lugs — 14x6.5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Hammered Tube Lugs",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+          "label": "Ludwig — Supraphonic — Supraphonic 6.5x14 Imperial Lugs — 14x6.5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Imperial Lugs",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee",
+          "label": "Ludwig — Supraphonic — Supraphonic 6.5x14 Tube Lugs — 14x6.5",
+          "lineSeries": "Supraphonic",
+          "modelName": "Supraphonic 6.5x14 Tube Lugs",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 5.5x14 Die-cast — 14x5.5",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 5.5x14 Die-cast",
+          "diameter": 14,
+          "depth": 5.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 5.5x14 Triple-flanged — 14x5.5",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 5.5x14 Triple-flanged",
+          "diameter": 14,
+          "depth": 5.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 6.5x14 Die-cast — 14x6.5",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 6.5x14 Die-cast",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 6.5x14 Triple-flanged — 14x6.5",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 6.5x14 Triple-flanged",
+          "diameter": 14,
+          "depth": 6.5,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 7x13 Die-cast — 13x7",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 7x13 Die-cast",
+          "diameter": 13,
+          "depth": 7,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 7x13 Triple-flanged — 13x7",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 7x13 Triple-flanged",
+          "diameter": 13,
+          "depth": 7,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 8x14 Die-cast — 14x8",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 8x14 Die-cast",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        },
+        {
+          "id": "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4",
+          "label": "Ludwig — Universal Metal — Universal Black Brass 8x14 Triple-flanged — 14x8",
+          "lineSeries": "Universal Metal",
+          "modelName": "Universal Black Brass 8x14 Triple-flanged",
+          "diameter": 14,
+          "depth": 8,
+          "fieldQualityTier": "MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK",
+          "stockBatterHead": "",
+          "stockResoHead": "",
+          "missingStockHeadFields": [
+            "stock batter head",
+            "stock reso head"
+          ]
+        }
+      ]
+    }
+  ],
+  "researchRules": [
+    "Only approve a fallback when there is source-backed company, era, or line-level OEM head evidence.",
+    "Do not infer from dealer listings unless they clearly describe original/factory/stock heads.",
+    "Do not write Firestore from this packet.",
+    "Fallback-head records must remain separate from source-confirmed full stock pass."
+  ],
+  "decisionTemplate": {
+    "reviewed": false,
+    "approvedFallbackRule": false,
+    "approvedFallbackKey": "",
+    "approvedBatterHeadFallback": "",
+    "approvedResoHeadFallback": "",
+    "sourceEvidenceUrls": [],
+    "sourceEvidenceNotes": "",
+    "fallbackConfidence": "",
+    "decisionStatus": ""
+  }
+}
