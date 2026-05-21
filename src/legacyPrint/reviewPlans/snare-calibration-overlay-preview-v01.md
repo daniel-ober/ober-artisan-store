@@ -1,6 +1,6 @@
 # LegacyPrint Snare Calibration Overlay Preview v0.1
 
-Generated: 2026-05-21T10:49:09.793Z
+Generated: 2026-05-21T10:52:36.440Z
 
 - Firestore writes: 0
 - Overlay version: snare-calibration-overlay-v0.1-local-preview
@@ -61,7 +61,7 @@ After: attack 7.26, brightness 6.4, projection 6.98, sustain 7.45, warmth 6.86, 
 
 Deltas: none
 
-Applied: yes
+Applied: no
 
 | Overlay Type | Detail |
 |---|---|

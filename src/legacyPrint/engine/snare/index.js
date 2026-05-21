@@ -55,6 +55,12 @@ const {
 
 } = require('./defaultSnareCalibrationOverlay');
 
+const {
+
+  validateSnareCalibrationOverlay
+
+} = require('./validateSnareCalibrationOverlay');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -91,7 +97,9 @@ module.exports = {
 
   applySnareCalibrationOverlay,
 
-  DEFAULT_SNARE_CALIBRATION_OVERLAY
+  DEFAULT_SNARE_CALIBRATION_OVERLAY,
+
+  validateSnareCalibrationOverlay
 
 };
 

@@ -1,0 +1,32 @@
+{
+  "status": "SNARE_CALIBRATION_OVERLAY_AUDIT_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T10:52:36.475Z",
+  "firestoreWrites": 0,
+  "overlayVersion": "snare-calibration-overlay-v0.1-local-preview",
+  "audit": {
+    "valid": true,
+    "errorCount": 0,
+    "warningCount": 3,
+    "infoCount": 0,
+    "issues": [
+      {
+        "severity": "warning",
+        "code": "MISSING_CONFIDENCE",
+        "message": "Family calibration should include confidence.",
+        "path": "materialFamilyDeltas.aluminum.confidence"
+      },
+      {
+        "severity": "warning",
+        "code": "MISSING_CONFIDENCE",
+        "message": "Family calibration should include confidence.",
+        "path": "materialFamilyDeltas.brass.confidence"
+      },
+      {
+        "severity": "warning",
+        "code": "MISSING_CONFIDENCE",
+        "message": "Family calibration should include confidence.",
+        "path": "hoopFamilyDeltas.dieCast.confidence"
+      }
+    ]
+  }
+}
