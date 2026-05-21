@@ -168,9 +168,9 @@ function main() {
 
     byRule,
 
-    unmatched: unmatched.slice(0, 100),
+    unmatched,
 
-    matched: matched.slice(0, 100)
+    matched
 
   };
 
