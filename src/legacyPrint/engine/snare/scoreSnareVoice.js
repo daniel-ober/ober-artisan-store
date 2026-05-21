@@ -47,7 +47,7 @@ const cloneBaseline = () =>
 
   Object.fromEntries(SNARE_NODE_KEYS.map(key => [key, SNARE_BASELINE_PROFILE[key]]));
 
-const clampScore = value => Math.max(1, Math.min(10, Number(value.toFixed(2))));
+const clampScore = value => Math.max(1, Math.min(10, Number(value.toFixed(3))));
 
 const addEffect = ({ score, effect, weight, source, drivers }) => {
 
@@ -185,127 +185,49 @@ const depthEffect = depth => {
 
   if (!depth) return makeProfile({});
 
-  if (depth <= 3.75) {
+  /*
 
-    return makeProfile({
+   * Continuous depth model:
 
-      attack: 0.45,
+   * Depth must not collapse into broad buckets. A 14x5, 14x5.5,
 
-      brightness: 0.34,
+   * 14x6.5, and 14x8 should each create measurable movement.
 
-      projection: -0.28,
+   *
 
-      sustain: -0.35,
+   * Acoustic intent:
 
-      warmth: -0.35,
+   * - shallower shells: quicker attack, brighter first hit, tighter control,
 
-      sensitivity: 0.34,
+   *   less bloom/body
 
-      control: 0.28
+   * - deeper shells: more projection, sustain, warmth/body,
 
-    });
+   *   slightly softer immediate sensitivity/control
 
-  }
+   */
 
-  if (depth <= 4.75) {
+  const normalized = Math.max(-1, Math.min(1, (Number(depth) - 5.5) / 2.5));
 
-    return makeProfile({
+  const shallow = normalized < 0 ? Math.abs(normalized) : 0;
 
-      attack: 0.32,
-
-      brightness: 0.22,
-
-      projection: -0.12,
-
-      sustain: -0.18,
-
-      warmth: -0.18,
-
-      sensitivity: 0.25,
-
-      control: 0.2
-
-    });
-
-  }
-
-  if (depth <= 5.75) {
-
-    return makeProfile({
-
-      attack: 0.12,
-
-      brightness: 0.08,
-
-      sustain: 0.08,
-
-      warmth: 0.08,
-
-      sensitivity: 0.1,
-
-      control: 0.05
-
-    });
-
-  }
-
-  if (depth <= 6.75) {
-
-    return makeProfile({
-
-      brightness: -0.02,
-
-      projection: 0.22,
-
-      sustain: 0.34,
-
-      warmth: 0.38,
-
-      sensitivity: -0.05,
-
-      control: -0.02
-
-    });
-
-  }
-
-  if (depth <= 8.25) {
-
-    return makeProfile({
-
-      attack: -0.12,
-
-      brightness: -0.08,
-
-      projection: 0.32,
-
-      sustain: 0.58,
-
-      warmth: 0.68,
-
-      sensitivity: -0.16,
-
-      control: -0.08
-
-    });
-
-  }
+  const deep = normalized > 0 ? normalized : 0;
 
   return makeProfile({
 
-    attack: -0.2,
+    attack: Number((shallow * 0.28 - deep * 0.18).toFixed(4)),
 
-    brightness: -0.12,
+    brightness: Number((shallow * 0.22 - deep * 0.1).toFixed(4)),
 
-    projection: 0.24,
+    projection: Number((-shallow * 0.12 + deep * 0.34).toFixed(4)),
 
-    sustain: 0.65,
+    sustain: Number((-shallow * 0.2 + deep * 0.58).toFixed(4)),
 
-    warmth: 0.78,
+    warmth: Number((-shallow * 0.18 + deep * 0.68).toFixed(4)),
 
-    sensitivity: -0.22,
+    sensitivity: Number((shallow * 0.2 - deep * 0.18).toFixed(4)),
 
-    control: -0.12
+    control: Number((shallow * 0.16 - deep * 0.1).toFixed(4))
 
   });
 

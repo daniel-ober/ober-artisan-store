@@ -1,0 +1,67 @@
+{
+
+  "generatedAt": "2026-05-21",
+
+  "manufacturer": "Pearl",
+
+  "researchSession": "pearl-wood-shell-research-round-2",
+
+  "purpose": "Update source-backed shell thickness and bearing edge data for Pearl wood-shell snare records.",
+
+  "writeMode": "reviewOnly",
+
+  "patches": [
+
+    {
+
+      "id": "PASTE_FIRESTORE_DOC_ID_HERE",
+
+      "match": {
+
+        "companyName": "Pearl",
+
+        "lineSeries": "Masters Custom",
+
+        "modelName": "MMX Maple"
+
+      },
+
+      "updates": {
+
+        "shellThickness": "5mm",
+
+        "plyCountLayup": "4-ply maple with 4-ply maple reinforcement rings",
+
+        "reinforcementRings": "4-ply maple reinforcement rings",
+
+        "bearingEdge": {
+
+          "angle": "45° in / 45° out",
+
+          "profile": "Slightly inset with rounded apex",
+
+          "sourceStatus": "sourceConfirmed"
+
+        },
+
+        "sourceConfidence": "high",
+
+        "sourceUrls": [
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/1998-masters-series.pdf",
+
+          "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/PRODUCT%20CATALOG/GENERAL%20DRUM%20SET/2001-snare-drum-catalog.pdf"
+
+        ],
+
+        "notesOnMissingData": "",
+
+        "legacyPrintResearchNotes": "Pearl Masters catalog confirms 4-ply 5mm maple shell with 4-ply maple reinforcement rings. Same catalog confirms Masters Series 45° in / 45° out bearing edge, slightly inset and rounded at the direct point."
+
+      }
+
+    }
+
+  ]
+
+}

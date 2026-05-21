@@ -1,6 +1,8 @@
 
 import promotableAudit from '../reviewPlans/remaining-engine-promotable-audit-heads-wires-do-not-block.json';
 
+import generatedSnareReferences from '../data/snareReferenceDrums.generated.json';
+
 const COLLECTION = 'snareReferenceDrums';
 
 const normalizeText = value =>
@@ -11,237 +13,17 @@ const normalizeText = value =>
 
     .toLowerCase();
 
-const titleCase = value =>
+const cleanText = value =>
 
   String(value || '')
 
-    .replace(/[-_]+/g, ' ')
-
-    .replace(/\s+/g, ' ')
-
-    .trim()
-
-    .replace(/\b\w/g, char => char.toUpperCase());
-
-const normalizeMaterialLabel = value => {
-
-  const raw = String(value || '').trim();
-
-  const key = raw
-
-    .toLowerCase()
-
-    .replace(/[\/,_-]+/g, ' ')
-
     .replace(/\s+/g, ' ')
 
     .trim();
-
-  const materialMap = {
-
-    acrylic: 'Acrylic',
-
-    aluminum: 'Aluminum',
-
-    aluminium: 'Aluminum',
-
-    ash: 'Ash',
-
-    beech: 'Beech',
-
-    birch: 'Birch',
-
-    brass: 'Brass',
-
-    'bell brass': 'Bell Brass',
-
-    bronze: 'Bronze',
-
-    bubinga: 'Bubinga',
-
-    cherry: 'Cherry',
-
-    copper: 'Copper',
-
-    mahogany: 'Mahogany',
-
-    maple: 'Maple',
-
-    'maple poplar': 'Maple/Poplar',
-
-    'mahogany poplar': 'Mahogany/Poplar',
-
-    'solid maple': 'Maple',
-
-    cordia: 'Cordia',
-
-    oak: 'Oak',
-
-    'phosphor bronze': 'Phosphor Bronze',
-
-    poplar: 'Poplar',
-
-    rosewood: 'Rosewood',
-
-    'stainless steel': 'Stainless Steel',
-
-    steel: 'Steel',
-
-    walnut: 'Walnut',
-
-    wood: 'Wood',
-
-  };
-
-  return materialMap[key] || titleCase(raw);
-
-};
-
-const normalizeConstructionLabel = value => {
-
-  const raw = String(value || '').trim();
-
-  const key = raw
-
-    .toLowerCase()
-
-    .replace(/[\/,_-]+/g, ' ')
-
-    .replace(/\s+/g, ' ')
-
-    .trim();
-
-  const constructionMap = {
-
-    cast: 'Cast',
-
-    metal: 'Metal',
-
-    'cast metal': 'Cast Metal',
-
-    'cast metal shell': 'Cast Metal',
-
-    'seamless metal shell': 'Seamless Metal',
-
-    'beaded metal shell': 'Beaded Metal',
-
-    ply: 'Ply',
-
-    'ply shell': 'Ply',
-
-    'ply with reinforcement rings': 'Ply w/ Reinforcement Rings',
-
-    acrylic: 'Acrylic',
-
-    hybrid: 'Hybrid',
-
-    seamless: 'Seamless',
-
-    segmented: 'Segmented',
-
-    'solid shell': 'Solid Shell',
-
-    solid: 'Solid Shell',
-
-    stave: 'Stave',
-
-    'steam bent': 'Steam-Bent',
-
-    steambent: 'Steam-Bent',
-
-    'single ply': 'Single-Ply',
-
-  };
-
-  return constructionMap[key] || titleCase(raw);
-
-};
-
-const getAuditRecords = () => [
-
-  ...(promotableAudit.alreadyPromoted || []),
-
-  ...(promotableAudit.additionalPromotableRecords || []),
-
-  ...(promotableAudit.promotableRecords || []),
-
-  ...(promotableAudit.records || []),
-
-  ...(promotableAudit.candidates || []),
-
-];
-
-const unwrapRecord = doc => {
-
-  if (doc?.data) {
-
-    return {
-
-      id: doc.id,
-
-      ...doc.data(),
-
-    };
-
-  }
-
-  return doc?.record || doc?.patch || doc?.data || doc || {};
-
-};
-
-const deriveLineSeries = record => {
-
-  if (record.lineSeries || record.line || record.series) {
-
-    return record.lineSeries || record.line || record.series;
-
-  }
-
-  const id = String(record.id || '');
-
-  const parts = id.split('_').filter(Boolean);
-
-  if (parts.length >= 2) {
-
-    return titleCase(parts[1]);
-
-  }
-
-  const model = String(record.modelName || record.model || '');
-
-  const firstModelChunk = model
-
-    .replace(/\b\d+(\.\d+)?x\d+(\.\d+)?\b/gi, '')
-
-    .replace(/\b\d+["”]?\b/g, '')
-
-    .split(/\s+/)
-
-    .slice(0, 3)
-
-    .join(' ')
-
-    .trim();
-
-  return firstModelChunk || '';
-
-};
-
-const getCompany = record =>
-
-  record.companyName ||
-
-  record.company ||
-
-  record.COMPANY_NAME ||
-
-  record['COMPANY NAME'] ||
-
-  '';
 
 const cleanModelName = value =>
 
-  String(value || '')
+  cleanText(value)
 
     .replace(/\b(private listing|sweetwater listing|dcp dealer listing|dealer listing|reverb listing|ebay listing|used listing)\b/gi, '')
 
@@ -259,81 +41,415 @@ const cleanModelName = value =>
 
     .trim();
 
+const toNumber = value => {
+
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+
+  const match = String(value || '').match(/-?\d+(\.\d+)?/);
+
+  if (!match) return null;
+
+  const parsed = Number(match[0]);
+
+  return Number.isFinite(parsed) ? parsed : null;
+
+};
+
+const firstValue = (record, keys) => {
+
+  for (const key of keys) {
+
+    const value = record?.[key];
+
+    if (value !== undefined && value !== null && String(value).trim() !== '') {
+
+      return value;
+
+    }
+
+  }
+
+  return '';
+
+};
+
+const getCompany = record =>
+
+  cleanText(
+
+    firstValue(record, [
+
+      'companyName',
+
+      'company',
+
+      'brand',
+
+      'COMPANY_NAME',
+
+      'COMPANY NAME',
+
+    ])
+
+  );
+
 const getModel = record =>
 
   cleanModelName(
 
-    record.modelName ||
+    firstValue(record, [
 
-      record.model ||
+      'modelName',
 
-      record.MODEL_NAME ||
+      'model',
 
-      record['MODEL NAME'] ||
+      'MODEL_NAME',
 
-      ''
+      'MODEL NAME',
+
+    ])
+
+  );
+
+const getLineSeries = record =>
+
+  cleanText(
+
+    firstValue(record, [
+
+      'lineSeries',
+
+      'line',
+
+      'series',
+
+      'LINE_SERIES',
+
+      'LINE/SERIES',
+
+    ])
 
   );
 
 const getDiameter = record =>
 
-  record.diameter ||
+  toNumber(
 
-  record.diameterInches ||
+    firstValue(record, [
 
-  record.DIAMETER ||
+      'diameter',
 
-  record['DIAMETER'] ||
+      'diameterInches',
 
-  null;
+      'DIAMETER',
+
+      'DIAMETER_INCHES',
+
+    ])
+
+  );
 
 const getDepth = record =>
 
-  record.depth ||
+  toNumber(
 
-  record.depthInches ||
+    firstValue(record, [
 
-  record.DEPTH ||
+      'depth',
 
-  record['DEPTH'] ||
+      'depthInches',
 
-  null;
+      'DEPTH',
+
+      'DEPTH_INCHES',
+
+    ])
+
+  );
 
 const getShellMaterial = record =>
 
-  normalizeMaterialLabel(
+  cleanText(
 
-    record.shellMaterial1 ||
+    firstValue(record, [
 
-      record.shellMaterial ||
+      'shellMaterial1',
 
-      record.primaryShellMaterial ||
+      'shellMaterial',
 
-      record.SHELL_MATERIAL ||
+      'primaryShellMaterial',
 
-      record['SHELL MATERIAL 1'] ||
+      'material',
 
-      record['SHELL MATERIAL'] ||
+      'SHELL_MATERIAL_1',
 
-      ''
+      'SHELL MATERIAL 1',
+
+      'SHELL MATERIAL',
+
+    ])
 
   );
 
 const getShellConstruction = record =>
 
-  normalizeConstructionLabel(
+  cleanText(
 
-    record.shellConstruction ||
+    firstValue(record, [
 
-      record.construction ||
+      'shellConstruction',
 
-      record.SHELL_CONSTRUCTION ||
+      'construction',
 
-      record['SHELL CONSTRUCTION'] ||
+      'SHELL_CONSTRUCTION',
 
-      ''
+      'SHELL CONSTRUCTION',
+
+    ])
 
   );
+
+const getShellThickness = record =>
+
+  toNumber(
+
+    firstValue(record, [
+
+      'shellThicknessMm',
+
+      'shellThicknessMM',
+
+      'shellThickness',
+
+      'thicknessMm',
+
+      'thickness',
+
+      'SHELL_THICKNESS_MM',
+
+      'SHELL THICKNESS (mm)',
+
+      'SHELL THICKNESS',
+
+    ])
+
+  );
+
+const getBearingEdge = record =>
+
+  cleanText(
+
+    firstValue(record, [
+
+      'bearingEdge',
+
+      'bearingEdgeType',
+
+      'bearingEdgeProfile',
+
+      'bearingEdgeDetail',
+
+      'bearingEdgeDescription',
+
+      'BEARING_EDGE',
+
+      'BEARING EDGE',
+
+    ])
+
+  );
+
+const getHoopType = record =>
+
+  cleanText(
+
+    firstValue(record, [
+
+      'hoopType',
+
+      'hoops',
+
+      'rimType',
+
+      'HOOP_TYPE',
+
+      'HOOP/RIM TYPE',
+
+    ])
+
+  );
+
+const hasMeaningfulBearingEdge = record => {
+
+  const text = normalizeText(getBearingEdge(record));
+
+  if (!text) return false;
+
+  return !(
+
+    text.includes('unknown') ||
+
+    text.includes('not specified') ||
+
+    text.includes('not-spec') ||
+
+    text.includes('not verified') ||
+
+    text.includes('notverified') ||
+
+    text.includes('needs verification') ||
+
+    text.includes('placeholder') ||
+
+    text === 'n/a' ||
+
+    text === 'na'
+
+  );
+
+};
+
+const hasApprovedBearingEdgeFallback = record =>
+
+  record?.engineAssumptions?.bearingEdgeFallbackApplied === true ||
+
+  record?.bearingEdgeFallbackApplied === true ||
+
+  Boolean(record?.engineAssumptions?.bearingEdgeFallbackKey) ||
+
+  Boolean(record?.bearingEdgeFallbackKey);
+
+const isShellUsableReference = record => {
+
+  const hasCoreFields = Boolean(
+
+    getCompany(record) &&
+
+      getModel(record) &&
+
+      getDiameter(record) &&
+
+      getDepth(record) &&
+
+      getShellMaterial(record) &&
+
+      getShellConstruction(record)
+
+  );
+
+  if (!hasCoreFields) return false;
+
+  const hasThickness = Boolean(getShellThickness(record));
+
+  const hasEdge = hasMeaningfulBearingEdge(record) || hasApprovedBearingEdgeFallback(record);
+
+  return Boolean(hasThickness && hasEdge);
+
+};
+
+const normalizeBrandValue = value => {
+
+  const text = cleanText(value);
+
+  const lower = text.toLowerCase();
+
+  if (lower === 'dw' || lower === 'pdp' || lower === 'dw / pdp' || lower === 'dw/pdp') {
+
+    return 'DW / PDP';
+
+  }
+
+  return text;
+
+};
+
+const getAuditRecords = () => {
+
+  if (Array.isArray(promotableAudit)) return promotableAudit;
+
+  if (Array.isArray(promotableAudit?.records)) return promotableAudit.records;
+
+  if (Array.isArray(promotableAudit?.promotableRecords)) return promotableAudit.promotableRecords;
+
+  if (Array.isArray(promotableAudit?.items)) return promotableAudit.items;
+
+  return [];
+
+};
+
+const normalizeReference = record => {
+
+  const diameter = getDiameter(record);
+
+  const depth = getDepth(record);
+
+  const companyName = normalizeBrandValue(getCompany(record));
+
+  const modelName = getModel(record);
+
+  const lineSeries = getLineSeries(record);
+
+  const shellMaterial = getShellMaterial(record);
+
+  const shellConstruction = getShellConstruction(record);
+
+  const shellThicknessMm = getShellThickness(record);
+
+  const bearingEdge = getBearingEdge(record);
+
+  const hoopType = getHoopType(record);
+
+  return {
+
+    ...record,
+
+    id: record.id || record.docId || record.referenceId,
+
+    referenceId: record.id || record.docId || record.referenceId,
+
+    companyName,
+
+    company: companyName,
+
+    brand: companyName,
+
+    modelName,
+
+    model: modelName,
+
+    lineSeries,
+
+    diameter,
+
+    diameterInches: diameter,
+
+    depth,
+
+    depthInches: depth,
+
+    shellMaterial,
+
+    shellMaterial1: shellMaterial,
+
+    shellConstruction,
+
+    shellThicknessMm,
+
+    bearingEdge,
+
+    hoopType,
+
+    label: [companyName, lineSeries, modelName, diameter && depth ? `${diameter}x${depth}` : '']
+
+      .filter(Boolean)
+
+      .join(' · '),
+
+    raw: record,
+
+  };
+
+};
 
 const getSearchHaystack = record =>
 
@@ -341,21 +457,35 @@ const getSearchHaystack = record =>
 
     record.id,
 
-    getCompany(record),
+    record.referenceId,
 
-    deriveLineSeries(record),
+    record.companyName,
 
-    getModel(record),
+    record.company,
+
+    record.brand,
+
+    record.lineSeries,
+
+    record.modelName,
+
+    record.model,
 
     record.drumType,
 
-    getDiameter(record),
+    record.diameter,
 
-    getDepth(record),
+    record.depth,
 
-    getShellConstruction(record),
+    record.shellMaterial,
 
-    getShellMaterial(record),
+    record.shellMaterial1,
+
+    record.shellConstruction,
+
+    record.shellThicknessMm,
+
+    record.bearingEdge,
 
     record.hoopType,
 
@@ -371,135 +501,71 @@ const getSearchHaystack = record =>
 
     .toLowerCase();
 
-const buildReferenceLabel = record => {
-
-  const company = getCompany(record) || 'Unknown Company';
-
-  const model = getModel(record) || 'Unknown Model';
-
-  return `${company} ${model}`.trim();
-
-};
-
-const buildModelOptionLabel = record => {
-
-  const model = getModel(record) || 'Unknown Model';
-
-  const material = getShellMaterial(record) || 'Material unknown';
-
-  const diameter = getDiameter(record);
-
-  const depth = getDepth(record);
-
-  const size = diameter && depth ? `${diameter}x${depth}` : 'Size unknown';
-
-  return `${model} • ${material} • ${size}`;
-
-};
-
-const buildReferenceDetail = record => {
-
-  const diameter = getDiameter(record);
-
-  const depth = getDepth(record);
-
-  const size = diameter && depth ? `${diameter}x${depth}` : record.size || 'Size unknown';
-
-  const material = getShellMaterial(record) || 'Material unknown';
-
-  const construction = getShellConstruction(record) || 'Construction unknown';
-
-  return `${size} · ${material} · ${construction}`;
-
-};
-
-const normalizeReference = input => {
-
-  const data = unwrapRecord(input);
-
-  const id = data.id || input?.id || input?.snareReferenceId || '';
-
-  const companyName = getCompany(data);
-
-  const modelName = getModel(data);
-
-  const lineSeries = deriveLineSeries({ id, ...data });
-
-  return {
-
-    id,
-
-    key: id,
-
-    snareReferenceId: id,
-
-    label: buildReferenceLabel(data),
-
-    detail: buildReferenceDetail(data),
-
-    companyName,
-
-    company: companyName,
-
-    modelName,
-
-    model: modelName,
-
-    modelOptionLabel: buildModelOptionLabel(data),
-
-    lineSeries,
-
-    diameter: getDiameter(data),
-
-    depth: getDepth(data),
-
-    shellMaterial: getShellMaterial(data),
-
-    shellConstruction: getShellConstruction(data),
-
-    readinessTier: data.legacyPrintReadinessTier || '',
-
-    promotionRule: data.legacyPrintPromotionRule || data.promotionRule || '',
-
-    sourceConfidence: data.sourceConfidence || null,
-
-    searchHaystack: getSearchHaystack({ id, ...data, lineSeries }),
-
-  };
-
-};
-
 const dedupeById = records => {
 
-  const map = new Map();
+  const seen = new Set();
+
+  const out = [];
 
   records.forEach(record => {
 
-    const normalized = normalizeReference(record);
+    const key = record.referenceId || record.id || `${record.companyName}-${record.modelName}-${record.diameter}-${record.depth}`;
 
-    if (!normalized.id) return;
+    if (!key || seen.has(key)) return;
 
-    const existing = map.get(normalized.id);
+    seen.add(key);
 
-    map.set(normalized.id, {
-
-      ...normalized,
-
-      ...(existing || {}),
-
-      ...normalized,
-
-      lineSeries: normalized.lineSeries || existing?.lineSeries || '',
-
-      companyName: normalized.companyName || existing?.companyName || '',
-
-      modelName: normalized.modelName || existing?.modelName || '',
-
-    });
+    out.push(record);
 
   });
 
-  return Array.from(map.values());
+  return out;
+
+};
+
+const sortReferences = (a, b) => {
+
+  const companyCompare = String(a.companyName || '').localeCompare(String(b.companyName || ''));
+
+  if (companyCompare !== 0) return companyCompare;
+
+  const lineCompare = String(a.lineSeries || '').localeCompare(String(b.lineSeries || ''));
+
+  if (lineCompare !== 0) return lineCompare;
+
+  return String(a.modelName || '').localeCompare(String(b.modelName || ''));
+
+};
+
+const fetchFirestoreRecords = async ({ firestore, limit }) => {
+
+  if (!firestore) return [];
+
+  try {
+
+    const snapshot = await firestore
+
+      .collection(COLLECTION)
+
+      .limit(limit)
+
+      .get();
+
+    return snapshot.docs.map(doc => ({
+
+      id: doc.id,
+
+      ...doc.data(),
+
+    }));
+
+  } catch (error) {
+
+    console.warn('[LegacyPrint] Firestore snare reference lookup failed; using local generated reference index.', error);
+
+    return [];
+
+  }
 
 };
 
@@ -509,89 +575,67 @@ export async function loadPromotableSnareReferences({
 
   query = '',
 
-  limit = 500,
+  limit = 2000,
 
 } = {}) {
 
-  const normalizedQuery = normalizeText(query);
+  const firestoreRecords = await fetchFirestoreRecords({ firestore, limit });
 
-  const localRecords = getAuditRecords();
+  const rawLocalRecords = [
 
-  let firestoreRecords = [];
+    ...generatedSnareReferences,
 
-  if (firestore) {
+    ...getAuditRecords(),
 
-    try {
+  ];
 
-      const snapshot = await firestore
+  const rawRecords = firestoreRecords.length
 
-        .collection(COLLECTION)
+    ? [...rawLocalRecords, ...firestoreRecords]
 
-        .where('legacyPrintEnginePromotable', '==', true)
+    : rawLocalRecords;
 
-        .limit(500)
+  const normalizedShellUsable = rawRecords
 
-        .get();
+    .filter(isShellUsableReference)
 
-      firestoreRecords = snapshot.docs || [];
+    .map(normalizeReference);
 
-    } catch (error) {
+  const search = normalizeText(query);
 
-      console.warn(
-
-        '[LegacyPrint] Firestore promotable snare lookup failed; using local audit fallback.',
-
-        error
-
-      );
-
-    }
-
-  }
-
-  const references = dedupeById([...localRecords, ...firestoreRecords])
+  const references = dedupeById(normalizedShellUsable)
 
     .filter(reference => {
 
-      if (!normalizedQuery) return true;
+      if (!search) return true;
 
-      return reference.searchHaystack.includes(normalizedQuery);
-
-    })
-
-    .sort((a, b) => {
-
-      const companyCompare = a.companyName.localeCompare(b.companyName);
-
-      if (companyCompare !== 0) return companyCompare;
-
-      const lineCompare = a.lineSeries.localeCompare(b.lineSeries);
-
-      if (lineCompare !== 0) return lineCompare;
-
-      return a.modelName.localeCompare(b.modelName);
+      return getSearchHaystack(reference).includes(search);
 
     })
 
-    .slice(0, limit);
+    .sort(sortReferences);
 
   return {
 
     success: true,
 
-    source: firestoreRecords.length ? 'firestore+localAudit' : 'localAudit',
+    source: firestoreRecords.length ? 'firestore+generatedShellUsableIndex' : 'generatedShellUsableIndex',
 
-    totalFetched: localRecords.length + firestoreRecords.length,
+    count: references.length,
+
+    totalFetched: rawRecords.length,
 
     firestoreFetched: firestoreRecords.length,
 
-    localFetched: localRecords.length,
+    localFetched: rawLocalRecords.length,
 
-    count: references.length,
+    shellUsableCount: normalizedShellUsable.length,
 
     references,
 
   };
 
 }
+
+export default loadPromotableSnareReferences;
 

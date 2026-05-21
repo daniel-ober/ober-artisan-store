@@ -11,7 +11,7 @@ const toNumber = value => {
 
 };
 
-const clampScore = value => Math.max(1, Math.min(10, Number(value.toFixed(2))));
+const clampScore = value => Math.max(1, Math.min(10, Number(value.toFixed(3))));
 
 const normalizeNodeDeltaMap = deltas => {
 

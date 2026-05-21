@@ -1004,6 +1004,34 @@ function ReferencePanel({
 
   const [modelFilter, setModelFilter] = useState('all');
 
+  const normalizeBrandValue = (value) => {
+
+    const text = String(value || '').trim();
+
+    const lower = text.toLowerCase();
+
+    if (lower === 'dw' || lower === 'pdp' || lower === 'dw / pdp' || lower === 'dw/pdp') {
+
+      return 'DW / PDP';
+
+    }
+
+    return text;
+
+  };
+
+  const referenceCompanyMatchesBrand = (reference, selectedBrand) => {
+
+    if (selectedBrand === 'all') return true;
+
+    const company = normalizeBrandValue(reference.companyName || reference.company || '');
+
+    const brand = normalizeBrandValue(selectedBrand);
+
+    return company === brand;
+
+  };
+
   const brandOptions = useMemo(() => {
 
     return Array.from(
@@ -1012,7 +1040,7 @@ function ReferencePanel({
 
         referenceOptions
 
-          .map((reference) => reference.companyName || reference.company || '')
+          .map((reference) => normalizeBrandValue(reference.companyName || reference.company || ''))
 
           .filter(Boolean)
 
@@ -1026,13 +1054,7 @@ function ReferencePanel({
 
     return referenceOptions
 
-      .filter((reference) => {
-
-        const company = reference.companyName || reference.company || '';
-
-        return brandFilter === 'all' || company === brandFilter;
-
-      })
+      .filter((reference) => referenceCompanyMatchesBrand(reference, brandFilter))
 
       .slice()
 
@@ -1605,6 +1627,114 @@ export function VoicePlayground({ firestore }) {
             onNodeClick={(key) => updateVoice(key, Math.min(1, getVoiceValue(voice, key) + 0.08))}
 
           />
+
+          {workflowMode === 'reference' && (
+
+            <details
+
+              open
+
+              style={{
+
+                marginTop: '12px',
+
+                padding: '12px',
+
+                border: '1px solid rgba(255,255,255,0.16)',
+
+                borderRadius: '10px',
+
+                background: 'rgba(0,0,0,0.42)',
+
+                color: '#f7f1ff',
+
+                fontSize: '11px'
+
+              }}
+
+            >
+
+              <summary style={{ cursor: 'pointer', fontWeight: 700 }}>
+
+                Reference Debug
+
+              </summary>
+
+              <pre style={{ whiteSpace: 'pre-wrap', marginTop: '10px' }}>
+
+                {JSON.stringify({
+
+                  selectedReferenceId,
+
+                  selectedReferenceKey: selectedReference?.key,
+
+                  selectedReferenceSnareId: selectedReference?.snareReferenceId,
+
+                  label: selectedReference?.label,
+
+                  modelName: selectedReference?.modelName,
+
+                  companyName: selectedReference?.companyName,
+
+                  diameter: selectedReference?.diameter,
+
+                  depth: selectedReference?.depth,
+
+                  shellConstruction: selectedReference?.shellConstruction,
+
+                  shellMaterial: selectedReference?.shellMaterial,
+
+                  bearingEdge: selectedReference?.bearingEdge,
+
+                  bearingEdgeType: selectedReference?.bearingEdgeType,
+
+                  bearingEdgeDetail: selectedReference?.bearingEdgeDetail,
+
+                  bearingEdgeProfile: selectedReference?.bearingEdgeProfile,
+
+                  bearingEdgeDescription: selectedReference?.bearingEdgeDescription,
+
+                  shellThicknessMm: selectedReference?.shellThicknessMm,
+
+                  plyCount: selectedReference?.plyCount,
+
+                  hoopType: selectedReference?.hoopType,
+
+                  rawBearingEdge: selectedReference?.raw?.bearingEdge,
+
+                  rawBearingEdgeType: selectedReference?.raw?.bearingEdgeType,
+
+                  rawBearingEdgeDetail: selectedReference?.raw?.bearingEdgeDetail,
+
+                  rawBearingEdgeProfile: selectedReference?.raw?.bearingEdgeProfile,
+
+                  rawBearingEdgeDescription: selectedReference?.raw?.bearingEdgeDescription,
+
+                  activeVoice,
+
+                  selectedReferenceVoice,
+
+                  firstListenKeys,
+
+                  selectedReferenceReadout,
+
+                  enginePacketVoiceProfile: selectedReferenceEnginePacket?.voiceProfile,
+
+                  enginePacketFirstListen: selectedReferenceEnginePacket?.readouts?.firstListen,
+
+                  enginePacketPhysicalDrivers: selectedReferenceEnginePacket?.physicalDrivers,
+
+                  enginePacketDrum: selectedReferenceEnginePacket?.drum,
+
+                  enginePacketFallbackAssumptions: selectedReferenceEnginePacket?.fallbackAssumptions
+
+                }, null, 2)}
+
+              </pre>
+
+            </details>
+
+          )}
 
           <div className="vp-readout-summary">
 
