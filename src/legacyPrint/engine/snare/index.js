@@ -17,6 +17,20 @@ const { SNARE_NODE_DEFINITIONS } = require('./snareNodeDefinitions');
 
 const { adaptSnareReferenceRecord } = require('./snareInputAdapter');
 
+const {
+
+  explainSnareVoice,
+
+  explainNode,
+
+  buildFirstListenPreview,
+
+  buildPlayerAnalysisPreview,
+
+  buildLegacyPrintIdentityPreview
+
+} = require('./explainSnareVoice');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -31,7 +45,17 @@ module.exports = {
 
   SNARE_ENGINE_DOCTRINE,
 
-  SNARE_NODE_DEFINITIONS
+  SNARE_NODE_DEFINITIONS,
+
+  explainSnareVoice,
+
+  explainNode,
+
+  buildFirstListenPreview,
+
+  buildPlayerAnalysisPreview,
+
+  buildLegacyPrintIdentityPreview
 
 };
 
