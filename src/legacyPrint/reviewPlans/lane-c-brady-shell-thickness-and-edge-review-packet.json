@@ -1,0 +1,1380 @@
+{
+  "generatedAt": "2026-05-21T08:05:50.727Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-c-high-value-shell-thickness-and-edge-review-packet.json",
+  "status": "LANE_C_BRADY_SHELL_THICKNESS_AND_EDGE_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Brady Drum Company",
+    "candidateCount": 60,
+    "groupCount": 12,
+    "sourceUrls": [
+      "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+      "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/...",
+      "https://equipboard.com/brands/brady-brand",
+      "https://www.soundpure.com/p/brady-6-5x14-jarrah-block-snare-drum-satin-finish...",
+      "https://www.mothersmusiccompany.com/snare-drums/brady-drums-wandoo-block-snar...",
+      "https://www.notsomoderndrummer.com/not-so-modern-drummer/2024/5/30/1984-brady-7-x14sheoak-blocksnaredrumwith-dwhardware",
+      "https://nowakdrums.com.au/products/wandoo-sheoak-and-marri-block-stave-snare-..."
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Gum",
+        "count": 16,
+        "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+      },
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Marri",
+        "count": 8,
+        "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+      },
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Oak",
+        "count": 8,
+        "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+      },
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Jarrah",
+        "count": 7,
+        "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+      },
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Wandoo",
+        "count": 7,
+        "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099"
+      },
+      {
+        "lineSeries": "Ply Shell",
+        "shellMaterial": "Jarrah",
+        "count": 4,
+        "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/..."
+      },
+      {
+        "lineSeries": "Early Solid / Hollow Log",
+        "shellMaterial": "Jarrah",
+        "count": 3,
+        "primarySourceUrl": "https://equipboard.com/brands/brady-brand"
+      },
+      {
+        "lineSeries": "Early Solid / Hollow Log",
+        "shellMaterial": "Oak",
+        "count": 3,
+        "primarySourceUrl": "https://equipboard.com/brands/brady-brand"
+      },
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Jarrah",
+        "count": 1,
+        "primarySourceUrl": "https://www.soundpure.com/p/brady-6-5x14-jarrah-block-snare-drum-satin-finish..."
+      },
+      {
+        "lineSeries": "Block Shell / Stave-Style",
+        "shellMaterial": "Wandoo",
+        "count": 1,
+        "primarySourceUrl": "https://www.mothersmusiccompany.com/snare-drums/brady-drums-wandoo-block-snar..."
+      },
+      {
+        "lineSeries": "Historical / Early Experimental",
+        "shellMaterial": "Oak",
+        "count": 1,
+        "primarySourceUrl": "https://www.notsomoderndrummer.com/not-so-modern-drummer/2024/5/30/1984-brady-7-x14sheoak-blocksnaredrumwith-dwhardware"
+      },
+      {
+        "lineSeries": "Walkabout / Multi-Wood",
+        "shellMaterial": "Wandoo",
+        "count": 1,
+        "primarySourceUrl": "https://nowakdrums.com.au/products/wandoo-sheoak-and-marri-block-stave-snare-..."
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Gum",
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+      "sourceConfidence": "Low",
+      "count": 16,
+      "models": [
+        "Lemon Scented Gum Block Snare 12x5",
+        "Lemon Scented Gum Block Snare 12x7",
+        "Lemon Scented Gum Block Snare 13x5.5",
+        "Lemon Scented Gum Block Snare 13x7",
+        "Lemon Scented Gum Block Snare 14x5.5",
+        "Lemon Scented Gum Block Snare 14x6.5",
+        "Lemon Scented Gum Block Snare 14x7",
+        "Lemon Scented Gum Block Snare 14x8",
+        "Spotted Gum Block Snare 12x5",
+        "Spotted Gum Block Snare 12x7",
+        "Spotted Gum Block Snare 13x5.5",
+        "Spotted Gum Block Snare 13x7",
+        "Spotted Gum Block Snare 14x5.5",
+        "Spotted Gum Block Snare 14x6.5",
+        "Spotted Gum Block Snare 14x7",
+        "Spotted Gum Block Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-_1a0e46be",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 12x5 — 12x5",
+          "modelName": "Lemon Scented Gum Block Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-_39ddbd88",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 12x7 — 12x7",
+          "modelName": "Lemon Scented Gum Block Snare 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-st_9cfb5eaa",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 13x5.5 — 13x5.5",
+          "modelName": "Lemon Scented Gum Block Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x7_13x7_block_gum_unknown-likely-brady-style-_0b4d5bc8",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 13x7 — 13x7",
+          "modelName": "Lemon Scented Gum Block Snare 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x5-5_14x5-5_block_gum_unknown-likely-brady-st_42af2ffd",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 14x5.5 — 14x5.5",
+          "modelName": "Lemon Scented Gum Block Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x6-5_14x6-5_block_gum_unknown-likely-brady-st_8bba8f08",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 14x6.5 — 14x6.5",
+          "modelName": "Lemon Scented Gum Block Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x7_14x7_block_gum_unknown-likely-brady-style-_5f0f4c97",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 14x7 — 14x7",
+          "modelName": "Lemon Scented Gum Block Snare 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-14x8_14x8_block_gum_unknown-likely-brady-style-_8689bcf5",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Lemon Scented Gum Block Snare 14x8 — 14x8",
+          "modelName": "Lemon Scented Gum Block Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-45-fam_b8c26664",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 12x5 — 12x5",
+          "modelName": "Spotted Gum Block Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-45-fam_083bd2ab",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 12x7 — 12x7",
+          "modelName": "Spotted Gum Block Snare 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-style-45_2194deb4",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 13x5.5 — 13x5.5",
+          "modelName": "Spotted Gum Block Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-13x7_13x7_block_gum_unknown-likely-brady-style-45-fam_e4b2fd4c",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 13x7 — 13x7",
+          "modelName": "Spotted Gum Block Snare 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x5-5_14x5-5_block_gum_unknown-likely-brady-style-45_03a00cd3",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 14x5.5 — 14x5.5",
+          "modelName": "Spotted Gum Block Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x6-5_14x6-5_block_gum_unknown-likely-brady-style-45_f441162c",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 14x6.5 — 14x6.5",
+          "modelName": "Spotted Gum Block Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x7_14x7_block_gum_unknown-likely-brady-style-45-fam_b0011b94",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 14x7 — 14x7",
+          "modelName": "Spotted Gum Block Snare 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_spotted-gum-block-snare-14x8_14x8_block_gum_unknown-likely-brady-style-45-fam_4dde0f09",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Spotted Gum Block Snare 14x8 — 14x8",
+          "modelName": "Spotted Gum Block Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Gum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Marri",
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+      "sourceConfidence": "Low",
+      "count": 8,
+      "models": [
+        "Marri Block Snare 12x5",
+        "Marri Block Snare 12x7",
+        "Marri Block Snare 13x5.5",
+        "Marri Block Snare 13x7",
+        "Marri Block Snare 14x5.5",
+        "Marri Block Snare 14x6.5",
+        "Marri Block Snare 14x7",
+        "Marri Block Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-12x5_12x5_block_marri_unknown-likely-brady-style-45-family-_27fdfe33",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 12x5 — 12x5",
+          "modelName": "Marri Block Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-12x7_12x7_block_marri_unknown-likely-brady-style-45-family-_c48583d7",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 12x7 — 12x7",
+          "modelName": "Marri Block Snare 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-13x5-5_13x5-5_block_marri_unknown-likely-brady-style-45-fam_4873cf09",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 13x5.5 — 13x5.5",
+          "modelName": "Marri Block Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-13x7_13x7_block_marri_unknown-likely-brady-style-45-family-_057e68d9",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 13x7 — 13x7",
+          "modelName": "Marri Block Snare 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x5-5_14x5-5_block_marri_unknown-likely-brady-style-45-fam_4375965f",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 14x5.5 — 14x5.5",
+          "modelName": "Marri Block Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x6-5_14x6-5_block_marri_unknown-likely-brady-style-45-fam_78757ea7",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 14x6.5 — 14x6.5",
+          "modelName": "Marri Block Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x7_14x7_block_marri_unknown-likely-brady-style-45-family-_43617380",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 14x7 — 14x7",
+          "modelName": "Marri Block Snare 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_marri-block-snare-14x8_14x8_block_marri_unknown-likely-brady-style-45-family-_47da69ef",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Marri Block Snare 14x8 — 14x8",
+          "modelName": "Marri Block Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Marri\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+      "sourceConfidence": "Low",
+      "count": 8,
+      "models": [
+        "Sheoak Block Snare 12x5",
+        "Sheoak Block Snare 12x7",
+        "Sheoak Block Snare 13x5.5",
+        "Sheoak Block Snare 13x7",
+        "Sheoak Block Snare 14x5.5",
+        "Sheoak Block Snare 14x6.5",
+        "Sheoak Block Snare 14x7",
+        "Sheoak Block Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-12x5_12x5_block_oak_unknown-likely-brady-style-45-family-e_66bfebff",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 12x5 — 12x5",
+          "modelName": "Sheoak Block Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-12x7_12x7_block_oak_unknown-likely-brady-style-45-family-e_fad5897f",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 12x7 — 12x7",
+          "modelName": "Sheoak Block Snare 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-13x5-5_13x5-5_block_oak_unknown-likely-brady-style-45-fami_173170ee",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 13x5.5 — 13x5.5",
+          "modelName": "Sheoak Block Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-13x7_13x7_block_oak_unknown-likely-brady-style-45-family-e_2934404e",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 13x7 — 13x7",
+          "modelName": "Sheoak Block Snare 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x5-5_14x5-5_block_oak_unknown-likely-brady-style-45-fami_fa307476",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 14x5.5 — 14x5.5",
+          "modelName": "Sheoak Block Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x6-5_14x6-5_block_oak_unknown-likely-brady-style-45-fami_8cd45326",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 14x6.5 — 14x6.5",
+          "modelName": "Sheoak Block Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x7_14x7_block_oak_unknown-likely-brady-style-45-family-e_ad801c01",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 14x7 — 14x7",
+          "modelName": "Sheoak Block Snare 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_sheoak-block-snare-14x8_14x8_block_oak_unknown-likely-brady-style-45-family-e_82e38cf7",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Sheoak Block Snare 14x8 — 14x8",
+          "modelName": "Sheoak Block Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Jarrah",
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+      "sourceConfidence": "Low",
+      "count": 7,
+      "models": [
+        "Jarrah Block Snare 12x5",
+        "Jarrah Block Snare 12x7",
+        "Jarrah Block Snare 13x5.5",
+        "Jarrah Block Snare 13x7",
+        "Jarrah Block Snare 14x5.5",
+        "Jarrah Block Snare 14x7",
+        "Jarrah Block Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x5_12x5_block_jarrah_unknown-likely-brady-style-45-famil_8267b6f6",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 12x5 — 12x5",
+          "modelName": "Jarrah Block Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x7_12x7_block_jarrah_unknown-likely-brady-style-45-famil_03553a4e",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 12x7 — 12x7",
+          "modelName": "Jarrah Block Snare 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x5-5_13x5-5_block_jarrah_unknown-likely-brady-style-45-f_e8fbd6dc",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 13x5.5 — 13x5.5",
+          "modelName": "Jarrah Block Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x7_13x7_block_jarrah_unknown-likely-brady-style-45-famil_fb297460",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 13x7 — 13x7",
+          "modelName": "Jarrah Block Snare 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x5-5_14x5-5_block_jarrah_unknown-likely-brady-style-45-f_575a3776",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 14x5.5 — 14x5.5",
+          "modelName": "Jarrah Block Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x7_14x7_block_jarrah_unknown-likely-brady-style-45-famil_44f82325",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 14x7 — 14x7",
+          "modelName": "Jarrah Block Snare 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x8_14x8_block_jarrah_unknown-likely-brady-style-45-famil_d1232fc2",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 14x8 — 14x8",
+          "modelName": "Jarrah Block Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Wandoo",
+      "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+      "sourceConfidence": "Low",
+      "count": 7,
+      "models": [
+        "Wandoo Block Snare 12x5",
+        "Wandoo Block Snare 12x7",
+        "Wandoo Block Snare 13x5.5",
+        "Wandoo Block Snare 13x7",
+        "Wandoo Block Snare 14x5.5",
+        "Wandoo Block Snare 14x7",
+        "Wandoo Block Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-12x5_12x5_block_wandoo_unknown-likely-brady-style-45-famil_65fa3a16",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 12x5 — 12x5",
+          "modelName": "Wandoo Block Snare 12x5",
+          "diameter": "12",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-12x7_12x7_block_wandoo_unknown-likely-brady-style-45-famil_76ba5313",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 12x7 — 12x7",
+          "modelName": "Wandoo Block Snare 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-13x5-5_13x5-5_block_wandoo_unknown-likely-brady-style-45-f_b39424bb",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 13x5.5 — 13x5.5",
+          "modelName": "Wandoo Block Snare 13x5.5",
+          "diameter": "13",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-13x7_13x7_block_wandoo_unknown-likely-brady-style-45-famil_9f920af1",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 13x7 — 13x7",
+          "modelName": "Wandoo Block Snare 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x5-5_14x5-5_block_wandoo_unknown-likely-brady-style-45-f_159bd148",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 14x5.5 — 14x5.5",
+          "modelName": "Wandoo Block Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x7_14x7_block_wandoo_unknown-likely-brady-style-45-famil_2de6450c",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 14x7 — 14x7",
+          "modelName": "Wandoo Block Snare 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x8_14x8_block_wandoo_unknown-likely-brady-style-45-famil_bbd1df09",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 14x8 — 14x8",
+          "modelName": "Wandoo Block Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ebay.com/b/Brady-Drum/181227/bn_7023275099",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "shellMaterial": "Jarrah",
+      "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/...",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Jarrah Ply Snare 14x5.5",
+        "Jarrah Ply Snare 14x6.5",
+        "Jarrah Ply Snare 14x8",
+        "Jarrah Ply Snare 16x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-14x5-5_14x5-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_83bfb2e5",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 14x5.5 — 14x5.5",
+          "modelName": "Jarrah Ply Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/...",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-14x6-5_14x6-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_7ecec5b5",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 14x6.5 — 14x6.5",
+          "modelName": "Jarrah Ply Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/...",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-14x8_14x8_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown-mod_9ef39f45",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 14x8 — 14x8",
+          "modelName": "Jarrah Ply Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/...",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "brady-drum-company_ply-shell_jarrah-ply-snare-16x6-5_16x6-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_d9aa9874",
+          "label": "Brady Drum Company — Ply Shell — Jarrah Ply Snare 16x6.5 — 16x6.5",
+          "modelName": "Jarrah Ply Snare 16x6.5",
+          "diameter": "16",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply / Brady thin-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.r-sons.com/en/percussion-instruments/skin-percussion-instruments/...",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Early Solid / Hollow Log",
+      "shellMaterial": "Jarrah",
+      "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+      "sourceConfidence": "Estimated",
+      "count": 3,
+      "models": [
+        "Jarrah Hollow Log / Solid-Shell Snare 14x5.5",
+        "Jarrah Hollow Log / Solid-Shell Snare 14x6.5",
+        "Jarrah Hollow Log / Solid-Shell Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x5-5_14x5-5_solid-shell_jarrah_unknown-l_dec3eeb4",
+          "label": "Brady Drum Company — Early Solid / Hollow Log — Jarrah Hollow Log / Solid-Shell Snare 14x5.5 — 14x5.5",
+          "modelName": "Jarrah Hollow Log / Solid-Shell Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-piece hollowed timber concept\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+          "sourceConfidence": "Estimated"
+        },
+        {
+          "id": "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x6-5_14x6-5_solid-shell_jarrah_unknown-l_a9157580",
+          "label": "Brady Drum Company — Early Solid / Hollow Log — Jarrah Hollow Log / Solid-Shell Snare 14x6.5 — 14x6.5",
+          "modelName": "Jarrah Hollow Log / Solid-Shell Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-piece hollowed timber concept\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+          "sourceConfidence": "Estimated"
+        },
+        {
+          "id": "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x8_14x8_solid-shell_jarrah_unknown-likel_9e8e654a",
+          "label": "Brady Drum Company — Early Solid / Hollow Log — Jarrah Hollow Log / Solid-Shell Snare 14x8 — 14x8",
+          "modelName": "Jarrah Hollow Log / Solid-Shell Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-piece hollowed timber concept\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+          "sourceConfidence": "Estimated"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Early Solid / Hollow Log",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+      "sourceConfidence": "Estimated",
+      "count": 3,
+      "models": [
+        "Sheoak Hollow Log / Solid-Shell Snare 14x5.5",
+        "Sheoak Hollow Log / Solid-Shell Snare 14x6.5",
+        "Sheoak Hollow Log / Solid-Shell Snare 14x8"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x5-5_14x5-5_solid-shell_oak_unknown-like_46ec8f8f",
+          "label": "Brady Drum Company — Early Solid / Hollow Log — Sheoak Hollow Log / Solid-Shell Snare 14x5.5 — 14x5.5",
+          "modelName": "Sheoak Hollow Log / Solid-Shell Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-piece hollowed timber concept\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+          "sourceConfidence": "Estimated"
+        },
+        {
+          "id": "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x6-5_14x6-5_solid-shell_oak_unknown-like_c43a6b80",
+          "label": "Brady Drum Company — Early Solid / Hollow Log — Sheoak Hollow Log / Solid-Shell Snare 14x6.5 — 14x6.5",
+          "modelName": "Sheoak Hollow Log / Solid-Shell Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-piece hollowed timber concept\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+          "sourceConfidence": "Estimated"
+        },
+        {
+          "id": "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x8_14x8_solid-shell_oak_unknown-likely-b_7775c5ed",
+          "label": "Brady Drum Company — Early Solid / Hollow Log — Sheoak Hollow Log / Solid-Shell Snare 14x8 — 14x8",
+          "modelName": "Sheoak Hollow Log / Solid-Shell Snare 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-piece hollowed timber concept\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://equipboard.com/brands/brady-brand",
+          "sourceConfidence": "Estimated"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Jarrah",
+      "primarySourceUrl": "https://www.soundpure.com/p/brady-6-5x14-jarrah-block-snare-drum-satin-finish...",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Jarrah Block Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x6-5_14x6-5_block_jarrah_unknown-likely-brady-style-45-f_90e38a75",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Jarrah Block Snare 14x6.5 — 14x6.5",
+          "modelName": "Jarrah Block Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Jarrah\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.soundpure.com/p/brady-6-5x14-jarrah-block-snare-drum-satin-finish...",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "shellMaterial": "Wandoo",
+      "primarySourceUrl": "https://www.mothersmusiccompany.com/snare-drums/brady-drums-wandoo-block-snar...",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Wandoo Block Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x6-5_14x6-5_block_wandoo_unknown-likely-brady-style-45-f_ee114bb0",
+          "label": "Brady Drum Company — Block Shell / Stave-Style — Wandoo Block Snare 14x6.5 — 14x6.5",
+          "modelName": "Wandoo Block Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.mothersmusiccompany.com/snare-drums/brady-drums-wandoo-block-snar...",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Historical / Early Experimental",
+      "shellMaterial": "Oak",
+      "primarySourceUrl": "https://www.notsomoderndrummer.com/not-so-modern-drummer/2024/5/30/1984-brady-7-x14sheoak-blocksnaredrumwith-dwhardware",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "1984 Sheoak Block Snare 14x7 with DW Hardware"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_historical-early-experimental_1984-sheoak-block-snare-14x7-with-dw-hardware_14x7_block_oak_unknown-li_da921be8",
+          "label": "Brady Drum Company — Historical / Early Experimental — 1984 Sheoak Block Snare 14x7 with DW Hardware — 14x7",
+          "modelName": "1984 Sheoak Block Snare 14x7 with DW Hardware",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Vertical block construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.notsomoderndrummer.com/not-so-modern-drummer/2024/5/30/1984-brady-7-x14sheoak-blocksnaredrumwith-dwhardware",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Walkabout / Multi-Wood",
+      "shellMaterial": "Wandoo",
+      "primarySourceUrl": "https://nowakdrums.com.au/products/wandoo-sheoak-and-marri-block-stave-snare-...",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Wandoo / Sheoak / Marri Block Stave Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "brady-drum-company_walkabout-multi-wood_wandoo-sheoak-marri-block-stave-snare-14x6-5_14x6-5_block_wandoo_oak_marri_unkno_235fa8a3",
+          "label": "Brady Drum Company — Walkabout / Multi-Wood — Wandoo / Sheoak / Marri Block Stave Snare 14x6.5 — 14x6.5",
+          "modelName": "Wandoo / Sheoak / Marri Block Stave Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Block\",\"shellMaterialPrimary\":\"Wandoo\",\"shellMaterialSecondary\":\"Oak\",\"shellMaterialTertiary\":\"Marri\",\"plyCount\":null,\"layupDescription\":\"Mixed Australian hardwood block/stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / likely Brady-style 45° family edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://nowakdrums.com.au/products/wandoo-sheoak-and-marri-block-stave-snare-...",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Brady shell thickness AND bearing edge by line/material/configuration. No Firestore writes."
+}
