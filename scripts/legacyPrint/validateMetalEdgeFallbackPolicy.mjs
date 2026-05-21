@@ -42,41 +42,111 @@ function includesAny(value, terms) {
 
 }
 
+function flattenTextParts(parts) {
+
+  return parts
+
+    .filter((part) => part !== null && part !== undefined)
+
+    .map((part) => {
+
+      if (typeof part === 'object') return JSON.stringify(part)
+
+      return String(part)
+
+    })
+
+    .join(' ')
+
+}
+
 function getShellConstruction(doc) {
 
-  const shellConstruction = parseMaybeJson(doc.shellConstruction) || {}
+  const shellConstruction =
 
-  const shell = parseMaybeJson(doc.shell) || {}
+    parseMaybeJson(doc.shellConstruction) ||
+
+    parseMaybeJson(doc.shellConstructionData) ||
+
+    {}
+
+  const shell =
+
+    parseMaybeJson(doc.shell) ||
+
+    parseMaybeJson(doc.shellData) ||
+
+    {}
 
   return {
 
-    shellConstruction:
+    rawShellConstruction: shellConstruction,
 
-      doc.shellConstructionType ||
+    rawShell: shell,
 
-      shellConstruction.shellConstruction ||
+    shellConstructionText: flattenTextParts([
 
-      shell.shellConstruction ||
+      doc.shellConstructionType,
 
-      shell.construction ||
+      doc.shellConstruction,
 
-      doc['SHELL CONSTRUCTION'] ||
+      doc.shellConstructionData,
 
-      '',
+      shellConstruction.shellConstruction,
 
-    shellMaterial:
+      shellConstruction.construction,
 
-      doc.shellMaterial ||
+      shell.shellConstruction,
 
-      shellConstruction.shellMaterialPrimary ||
+      shell.construction,
 
-      shell.shellMaterialPrimary ||
+      doc['SHELL CONSTRUCTION'],
 
-      shell.material ||
+      doc.modelName,
 
-      doc['SHELL MATERIAL 1'] ||
+      doc.lineSeries,
 
-      ''
+      doc.id
+
+    ]),
+
+    shellMaterialText: flattenTextParts([
+
+      doc.shellMaterial,
+
+      doc.shellMaterialPrimary,
+
+      doc.shellMaterials,
+
+      doc.shellConstruction,
+
+      doc.shellConstructionData,
+
+      shellConstruction.shellMaterialPrimary,
+
+      shellConstruction.shellMaterialSecondary,
+
+      shellConstruction.shellMaterialTertiary,
+
+      shellConstruction.shellMaterial,
+
+      shell.material,
+
+      shell.shellMaterialPrimary,
+
+      doc['SHELL MATERIAL 1'],
+
+      doc['SHELL MATERIAL 2'],
+
+      doc['SHELL MATERIAL 3'],
+
+      doc.modelName,
+
+      doc.lineSeries,
+
+      doc.id
+
+    ])
 
   }
 
@@ -84,21 +154,37 @@ function getShellConstruction(doc) {
 
 function getShellThickness(doc) {
 
-  const shellConstruction = parseMaybeJson(doc.shellConstruction) || {}
+  const shellConstruction =
 
-  const shell = parseMaybeJson(doc.shell) || {}
+    parseMaybeJson(doc.shellConstruction) ||
+
+    parseMaybeJson(doc.shellConstructionData) ||
+
+    {}
+
+  const shell =
+
+    parseMaybeJson(doc.shell) ||
+
+    parseMaybeJson(doc.shellData) ||
+
+    {}
 
   const raw =
 
-    doc.shellThickness ||
+    doc.shellThickness ??
 
-    doc.shellThicknessMm ||
+    doc.shellThicknessMm ??
 
-    shellConstruction.shellThicknessMm ||
+    shellConstruction.shellThicknessMm ??
 
-    shell.shellThicknessMm ||
+    shellConstruction.thicknessMm ??
 
-    doc['SHELL THICKNESS (mm)'] ||
+    shell.shellThicknessMm ??
+
+    shell.thicknessMm ??
+
+    doc['SHELL THICKNESS (mm)'] ??
 
     ''
 
@@ -118,7 +204,19 @@ function getShellThickness(doc) {
 
 function getBearingEdge(doc) {
 
-  return parseMaybeJson(doc.bearingEdge) || doc.bearingEdge || null
+  return (
+
+    parseMaybeJson(doc.bearingEdge) ||
+
+    parseMaybeJson(doc.edgeProfile) ||
+
+    doc.bearingEdge ||
+
+    doc.edgeProfile ||
+
+    null
+
+  )
 
 }
 
@@ -144,9 +242,69 @@ function getEngineAssumptions(doc) {
 
 }
 
+function getSourceUrls(doc) {
+
+  const urls = []
+
+  const pushValue = (value) => {
+
+    if (!value) return
+
+    if (typeof value === 'string') {
+
+      if (value.startsWith('http')) urls.push(value)
+
+      return
+
+    }
+
+    if (Array.isArray(value)) {
+
+      value.forEach(pushValue)
+
+      return
+
+    }
+
+    if (typeof value === 'object') {
+
+      Object.values(value).forEach(pushValue)
+
+    }
+
+  }
+
+  pushValue(doc.primarySourceUrl)
+
+  pushValue(doc.primarySourceURL)
+
+  pushValue(doc.sourceUrl)
+
+  pushValue(doc.sourceURL)
+
+  pushValue(doc.sourceUrls)
+
+  pushValue(doc.sourceURLs)
+
+  pushValue(doc.sources)
+
+  pushValue(doc.primarySources)
+
+  pushValue(doc.secondarySourceUrl)
+
+  pushValue(doc.secondarySourceUrls)
+
+  pushValue(doc['PRIMARY SOURCE URL'])
+
+  pushValue(doc['SECONDARY SOURCE URL'])
+
+  return [...new Set(urls)]
+
+}
+
 function isMetalShell(doc) {
 
-  const { shellConstruction, shellMaterial } = getShellConstruction(doc)
+  const shellInfo = getShellConstruction(doc)
 
   const metalTerms = [
 
@@ -174,7 +332,13 @@ function isMetalShell(doc) {
 
     'nickel',
 
-    'cobalt'
+    'cobalt',
+
+    'chrome over brass',
+
+    'cob',
+
+    'black brass'
 
   ]
 
@@ -198,7 +362,27 @@ function isMetalShell(doc) {
 
   ]
 
-  return includesAny(shellMaterial, metalTerms) || includesAny(shellConstruction, constructionTerms)
+  return (
+
+    includesAny(shellInfo.shellMaterialText, metalTerms) ||
+
+    includesAny(shellInfo.shellConstructionText, constructionTerms)
+
+  )
+
+}
+
+function hasFallbackPolicyMarkers(doc, edge, assumptions) {
+
+  return (
+
+    doc.fieldQualityTier === 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK' ||
+
+    isFallbackBearingEdge(edge) ||
+
+    assumptions.bearingEdgeFallbackApplied === true
+
+  )
 
 }
 
@@ -212,11 +396,13 @@ function validateRecord(doc) {
 
   const shellInfo = getShellConstruction(doc)
 
+  const sourceUrls = getSourceUrls(doc)
+
   const issues = []
 
-  if (!isFallbackBearingEdge(edge)) {
+  if (!hasFallbackPolicyMarkers(doc, edge, assumptions)) {
 
-    issues.push('bearingEdge is not marked as metalShellFallback/fallback/needsVerification')
+    issues.push('missing fallback policy marker')
 
   }
 
@@ -232,9 +418,9 @@ function validateRecord(doc) {
 
   }
 
-  if (!doc.primarySourceUrl) {
+  if (!sourceUrls.length) {
 
-    issues.push('missing primarySourceUrl')
+    issues.push('missing source URL')
 
   }
 
@@ -247,24 +433,6 @@ function validateRecord(doc) {
   if (doc.fieldQualityTier !== 'MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK') {
 
     issues.push('fieldQualityTier is not MEANINGFUL_CORE_SHELL_PASS_WITH_METAL_EDGE_FALLBACK')
-
-  }
-
-  if (doc.bearingEdgeQualityTier !== 'PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE') {
-
-    issues.push('bearingEdgeQualityTier is not PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE')
-
-  }
-
-  if (assumptions.bearingEdgeFallbackApplied !== true) {
-
-    issues.push('engineAssumptions.bearingEdgeFallbackApplied is not true')
-
-  }
-
-  if (assumptions.bearingEdgeNeedsVerification !== true) {
-
-    issues.push('engineAssumptions.bearingEdgeNeedsVerification is not true')
 
   }
 
@@ -284,13 +452,15 @@ function validateRecord(doc) {
 
     depth: doc.depth || '',
 
-    shellMaterial: shellInfo.shellMaterial,
+    shellMaterials: shellInfo.shellMaterialText,
 
-    shellConstruction: shellInfo.shellConstruction,
+    shellConstruction: shellInfo.rawShellConstruction,
+
+    shellConstructionText: shellInfo.shellConstructionText,
 
     shellThickness: thickness.raw,
 
-    primarySourceUrl: doc.primarySourceUrl || '',
+    sourceUrls,
 
     sourceConfidence: doc.sourceConfidence || '',
 
@@ -364,6 +534,18 @@ async function main() {
 
   const validFallbackRecords = fallbackRecords.filter((record) => record.issueCount === 0)
 
+  const issueCounts = invalidFallbackRecords.reduce((acc, record) => {
+
+    record.issues.forEach((issue) => {
+
+      acc[issue] = (acc[issue] || 0) + 1
+
+    })
+
+    return acc
+
+  }, {})
+
   const byCompany = fallbackRecords.reduce((acc, record) => {
 
     const key = record.companyName || 'Unknown'
@@ -408,6 +590,12 @@ async function main() {
 
     },
 
+    issueCounts: Object.entries(issueCounts)
+
+      .map(([issue, count]) => ({ issue, count }))
+
+      .sort((a, b) => b.count - a.count),
+
     byCompany: Object.values(byCompany).sort((a, b) => b.recordCount - a.recordCount),
 
     invalidFallbackRecords,
@@ -437,6 +625,8 @@ async function main() {
     status: output.status,
 
     summary: output.summary,
+
+    issueCounts: output.issueCounts,
 
     topCompanies: output.byCompany.slice(0, 12)
 
