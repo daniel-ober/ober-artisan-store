@@ -1,0 +1,1432 @@
+{
+  "generatedAt": "2026-05-21T08:06:12.469Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/lane-c-high-value-shell-thickness-and-edge-review-packet.json",
+  "status": "LANE_C_NOBLE_COOLEY_SHELL_THICKNESS_AND_EDGE_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "summary": {
+    "companyName": "Noble & Cooley",
+    "candidateCount": 59,
+    "groupCount": 16,
+    "sourceUrls": [
+      "https://www.noblecooley.com/custom-design-maple",
+      "https://www.noblecooley.com/solid-shell-classics",
+      "https://www.noblecooley.com/horizon-series",
+      "https://www.noblecooley.com/walnut-1",
+      "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+      "https://www.noblecooley.com/special-edition"
+    ],
+    "topGroups": [
+      {
+        "lineSeries": "CD Maple Series",
+        "shellMaterial": "Maple",
+        "count": 7,
+        "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple"
+      },
+      {
+        "lineSeries": "Solid Shell Classics Series",
+        "shellMaterial": "Beech",
+        "count": 7,
+        "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+      },
+      {
+        "lineSeries": "Solid Shell Classics Series",
+        "shellMaterial": "Birch",
+        "count": 7,
+        "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+      },
+      {
+        "lineSeries": "Solid Shell Classics Series",
+        "shellMaterial": "Walnut",
+        "count": 7,
+        "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+      },
+      {
+        "lineSeries": "Horizon Series",
+        "shellMaterial": "Maple",
+        "count": 6,
+        "primarySourceUrl": "https://www.noblecooley.com/horizon-series"
+      },
+      {
+        "lineSeries": "Walnut Series",
+        "shellMaterial": "Walnut",
+        "count": 6,
+        "primarySourceUrl": "https://www.noblecooley.com/walnut-1"
+      },
+      {
+        "lineSeries": "Solid Shell Classics Series",
+        "shellMaterial": "Maple",
+        "count": 6,
+        "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+      },
+      {
+        "lineSeries": "Historical / Archive",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics"
+      },
+      {
+        "lineSeries": "Metal / Archive Specialty",
+        "shellMaterial": "Brass",
+        "count": 2,
+        "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums"
+      },
+      {
+        "lineSeries": "Metal / Archive Specialty",
+        "shellMaterial": "Bronze",
+        "count": 2,
+        "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums"
+      },
+      {
+        "lineSeries": "Metal / Archive Specialty",
+        "shellMaterial": "Copper",
+        "count": 2,
+        "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums"
+      },
+      {
+        "lineSeries": "Special Edition",
+        "shellMaterial": "Mappa Burl",
+        "count": 1,
+        "primarySourceUrl": "https://www.noblecooley.com/special-edition"
+      },
+      {
+        "lineSeries": "Historical / Archive",
+        "shellMaterial": "Aluminum",
+        "count": 1,
+        "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple"
+      },
+      {
+        "lineSeries": "Historical / Archive",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple"
+      },
+      {
+        "lineSeries": "Historical / Archive",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://www.noblecooley.com/horizon-series"
+      },
+      {
+        "lineSeries": "Historical / Archive",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+      "sourceConfidence": "High",
+      "count": 7,
+      "models": [
+        "CD Maple 13x3.875",
+        "CD Maple 13x5",
+        "CD Maple 13x6.5",
+        "CD Maple 13x7",
+        "CD Maple 14x3.875",
+        "CD Maple 14x6.5",
+        "CD Maple 14x7"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-13x3-875_13x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_1069e80d",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 13x3.875 — 13x3.875",
+          "modelName": "CD Maple 13x3.875",
+          "diameter": "13",
+          "depth": "3.875",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-13x5_13x5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_7a3a8ce9",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 13x5 — 13x5",
+          "modelName": "CD Maple 13x5",
+          "diameter": "13",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-13x6-5_13x6-5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_e8867aaa",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 13x6.5 — 13x6.5",
+          "modelName": "CD Maple 13x6.5",
+          "diameter": "13",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-13x7_13x7_ply_maple_standard-custom-finish-options_triple-flanged-hoops_f3032d10",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 13x7 — 13x7",
+          "modelName": "CD Maple 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-14x3-875_14x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_420638da",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 14x3.875 — 14x3.875",
+          "modelName": "CD Maple 14x3.875",
+          "diameter": "14",
+          "depth": "3.875",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-14x6-5_14x6-5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_84f18e4e",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 14x6.5 — 14x6.5",
+          "modelName": "CD Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_cd-maple-series_cd-maple-14x7_14x7_ply_maple_standard-custom-finish-options_triple-flanged-hoops_2409b7de",
+          "label": "Noble & Cooley — CD Maple Series — CD Maple 14x7 — 14x7",
+          "modelName": "CD Maple 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Beech",
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+      "sourceConfidence": "Medium",
+      "count": 7,
+      "models": [
+        "SS Classic Beech 13x5",
+        "SS Classic Beech 13x6",
+        "SS Classic Beech 13x7",
+        "SS Classic Beech 14x4",
+        "SS Classic Beech 14x5",
+        "SS Classic Beech 14x6",
+        "SS Classic Beech 14x7"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x5_13x5_steam-bent_beech_unknown-family-likely-45-degree_19018f02",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 13x5 — 13x5",
+          "modelName": "SS Classic Beech 13x5",
+          "diameter": "13",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x6_13x6_steam-bent_beech_unknown-family-likely-45-degree_b4126b19",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 13x6 — 13x6",
+          "modelName": "SS Classic Beech 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x7_13x7_steam-bent_beech_unknown-family-likely-45-degree_b44604ea",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 13x7 — 13x7",
+          "modelName": "SS Classic Beech 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x4_14x4_steam-bent_beech_unknown-family-likely-45-degree_937eee62",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 14x4 — 14x4",
+          "modelName": "SS Classic Beech 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x5_14x5_steam-bent_beech_unknown-family-likely-45-degree_a887b2ce",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 14x5 — 14x5",
+          "modelName": "SS Classic Beech 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x6_14x6_steam-bent_beech_unknown-family-likely-45-degree_18ac2f96",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 14x6 — 14x6",
+          "modelName": "SS Classic Beech 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x7_14x7_steam-bent_beech_unknown-family-likely-45-degree_f0be8fe9",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Beech 14x7 — 14x7",
+          "modelName": "SS Classic Beech 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+      "sourceConfidence": "Medium",
+      "count": 7,
+      "models": [
+        "SS Classic Birch 13x5",
+        "SS Classic Birch 13x6",
+        "SS Classic Birch 13x7",
+        "SS Classic Birch 14x4",
+        "SS Classic Birch 14x5",
+        "SS Classic Birch 14x6",
+        "SS Classic Birch 14x7"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x5_13x5_steam-bent_birch_unknown-family-likely-45-degree_928e3b5c",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 13x5 — 13x5",
+          "modelName": "SS Classic Birch 13x5",
+          "diameter": "13",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x6_13x6_steam-bent_birch_unknown-family-likely-45-degree_d7c418ac",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 13x6 — 13x6",
+          "modelName": "SS Classic Birch 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x7_13x7_steam-bent_birch_unknown-family-likely-45-degree_47ce40d4",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 13x7 — 13x7",
+          "modelName": "SS Classic Birch 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x4_14x4_steam-bent_birch_unknown-family-likely-45-degree_bff34e84",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 14x4 — 14x4",
+          "modelName": "SS Classic Birch 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x5_14x5_steam-bent_birch_unknown-family-likely-45-degree_dd430ec1",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 14x5 — 14x5",
+          "modelName": "SS Classic Birch 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x6_14x6_steam-bent_birch_unknown-family-likely-45-degree_73d8ec3c",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 14x6 — 14x6",
+          "modelName": "SS Classic Birch 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x7_14x7_steam-bent_birch_unknown-family-likely-45-degree_ca45f137",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Birch 14x7 — 14x7",
+          "modelName": "SS Classic Birch 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+      "sourceConfidence": "Medium",
+      "count": 7,
+      "models": [
+        "SS Classic Walnut 13x5",
+        "SS Classic Walnut 13x6",
+        "SS Classic Walnut 13x7",
+        "SS Classic Walnut 14x4",
+        "SS Classic Walnut 14x5",
+        "SS Classic Walnut 14x6",
+        "SS Classic Walnut 14x7"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-13x5_13x5_steam-bent_walnut_unknown-family-likely-45-degr_184f73b8",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 13x5 — 13x5",
+          "modelName": "SS Classic Walnut 13x5",
+          "diameter": "13",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-13x6_13x6_steam-bent_walnut_unknown-family-likely-45-degr_93ba01e4",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 13x6 — 13x6",
+          "modelName": "SS Classic Walnut 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-13x7_13x7_steam-bent_walnut_unknown-family-likely-45-degr_165dcb34",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 13x7 — 13x7",
+          "modelName": "SS Classic Walnut 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x4_14x4_steam-bent_walnut_unknown-family-likely-45-degr_e1c93b0a",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 14x4 — 14x4",
+          "modelName": "SS Classic Walnut 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x5_14x5_steam-bent_walnut_unknown-family-likely-45-degr_804cf167",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 14x5 — 14x5",
+          "modelName": "SS Classic Walnut 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x6_14x6_steam-bent_walnut_unknown-family-likely-45-degr_88f673c6",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 14x6 — 14x6",
+          "modelName": "SS Classic Walnut 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-walnut-14x7_14x7_steam-bent_walnut_unknown-family-likely-45-degr_854a9693",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Walnut 14x7 — 14x7",
+          "modelName": "SS Classic Walnut 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+      "sourceConfidence": "High",
+      "count": 6,
+      "models": [
+        "Horizon Hybrid 13x5",
+        "Horizon Hybrid 13x6.5",
+        "Horizon Hybrid 13x7",
+        "Horizon Hybrid 14x5",
+        "Horizon Hybrid 14x6.5",
+        "Horizon Hybrid 14x7"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_horizon-series_horizon-hybrid-13x5_13x5_ply_maple_mahogany_standard-custom-finish-options_triple-flange_9bc48f59",
+          "label": "Noble & Cooley — Horizon Series — Horizon Hybrid 13x5 — 13x5",
+          "modelName": "Horizon Hybrid 13x5",
+          "diameter": "13",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_horizon-series_horizon-hybrid-13x6-5_13x6-5_ply_maple_mahogany_standard-custom-finish-options_triple-fl_5a85a8ff",
+          "label": "Noble & Cooley — Horizon Series — Horizon Hybrid 13x6.5 — 13x6.5",
+          "modelName": "Horizon Hybrid 13x6.5",
+          "diameter": "13",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_horizon-series_horizon-hybrid-13x7_13x7_ply_maple_mahogany_standard-custom-finish-options_triple-flange_29d0747a",
+          "label": "Noble & Cooley — Horizon Series — Horizon Hybrid 13x7 — 13x7",
+          "modelName": "Horizon Hybrid 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_horizon-series_horizon-hybrid-14x5_14x5_ply_maple_mahogany_standard-custom-finish-options_triple-flange_7281797b",
+          "label": "Noble & Cooley — Horizon Series — Horizon Hybrid 14x5 — 14x5",
+          "modelName": "Horizon Hybrid 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_horizon-series_horizon-hybrid-14x6-5_14x6-5_ply_maple_mahogany_standard-custom-finish-options_triple-fl_04f36b78",
+          "label": "Noble & Cooley — Horizon Series — Horizon Hybrid 14x6.5 — 14x6.5",
+          "modelName": "Horizon Hybrid 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_horizon-series_horizon-hybrid-14x7_14x7_ply_maple_mahogany_standard-custom-finish-options_triple-flange_7a12039f",
+          "label": "Noble & Cooley — Horizon Series — Horizon Hybrid 14x7 — 14x7",
+          "modelName": "Horizon Hybrid 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Horizontal ply hybrid layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+      "sourceConfidence": "High",
+      "count": 6,
+      "models": [
+        "Walnut Ply 13x4.75",
+        "Walnut Ply 13x6.5",
+        "Walnut Ply 13x8",
+        "Walnut Ply 14x4.75",
+        "Walnut Ply 14x6.5",
+        "Walnut Ply 14x8"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_walnut-series_walnut-ply-13x4-75_13x4-75_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_a930efef",
+          "label": "Noble & Cooley — Walnut Series — Walnut Ply 13x4.75 — 13x4.75",
+          "modelName": "Walnut Ply 13x4.75",
+          "diameter": "13",
+          "depth": "4.75",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_walnut-series_walnut-ply-13x6-5_13x6-5_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_3e4a8798",
+          "label": "Noble & Cooley — Walnut Series — Walnut Ply 13x6.5 — 13x6.5",
+          "modelName": "Walnut Ply 13x6.5",
+          "diameter": "13",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_walnut-series_walnut-ply-13x8_13x8_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_8dd1001a",
+          "label": "Noble & Cooley — Walnut Series — Walnut Ply 13x8 — 13x8",
+          "modelName": "Walnut Ply 13x8",
+          "diameter": "13",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_walnut-series_walnut-ply-14x4-75_14x4-75_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_03634594",
+          "label": "Noble & Cooley — Walnut Series — Walnut Ply 14x4.75 — 14x4.75",
+          "modelName": "Walnut Ply 14x4.75",
+          "diameter": "14",
+          "depth": "4.75",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_walnut-series_walnut-ply-14x6-5_14x6-5_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_d0250f19",
+          "label": "Noble & Cooley — Walnut Series — Walnut Ply 14x6.5 — 14x6.5",
+          "modelName": "Walnut Ply 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "noble-and-cooley_walnut-series_walnut-ply-14x8_14x8_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_bad14ac5",
+          "label": "Noble & Cooley — Walnut Series — Walnut Ply 14x8 — 14x8",
+          "modelName": "Walnut Ply 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Walnut ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/walnut-1",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+      "sourceConfidence": "Medium",
+      "count": 6,
+      "models": [
+        "SS Classic Maple 13x5",
+        "SS Classic Maple 13x6",
+        "SS Classic Maple 13x7",
+        "SS Classic Maple 14x4",
+        "SS Classic Maple 14x6",
+        "SS Classic Maple 14x7"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-13x5_13x5_steam-bent_maple_unknown-family-likely-45-degree_a6faa703",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 13x5 — 13x5",
+          "modelName": "SS Classic Maple 13x5",
+          "diameter": "13",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-13x6_13x6_steam-bent_maple_unknown-family-likely-45-degree_4a5f90df",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 13x6 — 13x6",
+          "modelName": "SS Classic Maple 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-13x7_13x7_steam-bent_maple_unknown-family-likely-45-degree_a6820194",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 13x7 — 13x7",
+          "modelName": "SS Classic Maple 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x4_14x4_steam-bent_maple_unknown-family-likely-45-degree_305492aa",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 14x4 — 14x4",
+          "modelName": "SS Classic Maple 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x6_14x6_steam-bent_maple_unknown-family-likely-45-degree_171e9b3f",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 14x6 — 14x6",
+          "modelName": "SS Classic Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "noble-and-cooley_solid-shell-classics-series_ss-classic-maple-14x7_14x7_steam-bent_maple_unknown-family-likely-45-degree_785e5474",
+          "label": "Noble & Cooley — Solid Shell Classics Series — SS Classic Maple 14x7 — 14x7",
+          "modelName": "SS Classic Maple 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Single-ply solid shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / family likely 45 degree",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Historical SS Classic 1980s Maple 14x5",
+        "Historical SS Classic 1980s Maple 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_historical-archive_historical-ss-classic-1980s-maple-14x5_14x5_steam-bent_maple_triple-flanged-hoops_b0c14a05",
+          "label": "Noble & Cooley — Historical / Archive — Historical SS Classic 1980s Maple 14x5 — 14x5",
+          "modelName": "Historical SS Classic 1980s Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "noble-and-cooley_historical-archive_historical-ss-classic-1980s-maple-14x6-5_14x6-5_steam-bent_maple_triple-flanged-hoop_30c73d94",
+          "label": "Noble & Cooley — Historical / Archive — Historical SS Classic 1980s Maple 14x6.5 — 14x6.5",
+          "modelName": "Historical SS Classic 1980s Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/solid-shell-classics",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Brass Specialty 14x5",
+        "Brass Specialty 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x5_14x5_metal_brass_raw-lacquered-metal-finish_triple-flanged_10069628",
+          "label": "Noble & Cooley — Metal / Archive Specialty — Brass Specialty 14x5 — 14x5",
+          "modelName": "Brass Specialty 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown metal shell construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "noble-and-cooley_metal-archive-specialty_brass-specialty-14x6-5_14x6-5_metal_brass_raw-lacquered-metal-finish_triple-fla_d72eb297",
+          "label": "Noble & Cooley — Metal / Archive Specialty — Brass Specialty 14x6.5 — 14x6.5",
+          "modelName": "Brass Specialty 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown metal shell construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "shellMaterial": "Bronze",
+      "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Bronze Specialty 14x5",
+        "Bronze Specialty 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x5_14x5_metal_bronze_raw-lacquered-metal-finish_triple-flang_678cfd56",
+          "label": "Noble & Cooley — Metal / Archive Specialty — Bronze Specialty 14x5 — 14x5",
+          "modelName": "Bronze Specialty 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown metal shell construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x6-5_14x6-5_metal_bronze_raw-lacquered-metal-finish_triple-f_d006de9a",
+          "label": "Noble & Cooley — Metal / Archive Specialty — Bronze Specialty 14x6.5 — 14x6.5",
+          "modelName": "Bronze Specialty 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown metal shell construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "shellMaterial": "Copper",
+      "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Copper Specialty 14x5",
+        "Copper Specialty 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_metal-archive-specialty_copper-specialty-14x5_14x5_metal_copper_raw-lacquered-metal-finish_triple-flang_6b40c42f",
+          "label": "Noble & Cooley — Metal / Archive Specialty — Copper Specialty 14x5 — 14x5",
+          "modelName": "Copper Specialty 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown metal shell construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "noble-and-cooley_metal-archive-specialty_copper-specialty-14x6-5_14x6-5_metal_copper_raw-lacquered-metal-finish_triple-f_00bf4e25",
+          "label": "Noble & Cooley — Metal / Archive Specialty — Copper Specialty 14x6.5 — 14x6.5",
+          "modelName": "Copper Specialty 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown metal shell construction\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.sweetwater.com/c1017--Noble__and__Cooley--Snare_Drums",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Special Edition",
+      "shellMaterial": "Mappa Burl",
+      "primarySourceUrl": "https://www.noblecooley.com/special-edition",
+      "sourceConfidence": "High",
+      "count": 1,
+      "models": [
+        "Mappa Burl Limited Edition 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_special-edition_mappa-burl-limited-edition-14x6-5_14x6-5_ply_mappa-burl_walnut_aqua-marine-fade_die-cas_76fb2ffc",
+          "label": "Noble & Cooley — Special Edition — Mappa Burl Limited Edition 14x6.5 — 14x6.5",
+          "modelName": "Mappa Burl Limited Edition 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mappa Burl\",\"shellMaterialSecondary\":\"Walnut\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple/Mappa burl with walnut reinforcement rings\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/special-edition",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "shellMaterial": "Aluminum",
+      "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Historical Alloy Classic Early Production 14x6"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_historical-archive_historical-alloy-classic-early-production-14x6_14x6_metal_aluminum_triple-flanged-ho_f725fb73",
+          "label": "Noble & Cooley — Historical / Archive — Historical Alloy Classic Early Production 14x6 — 14x6",
+          "modelName": "Historical Alloy Classic Early Production 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Historical CD Maple Early Production 14x5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_historical-archive_historical-cd-maple-early-production-14x5_14x5_ply_maple_triple-flanged-hoops_d19fdf81",
+          "label": "Noble & Cooley — Historical / Archive — Historical CD Maple Early Production 14x5 — 14x5",
+          "modelName": "Historical CD Maple Early Production 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Historical Horizon 1980s 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_historical-archive_historical-horizon-1980s-14x6-5_14x6-5_ply_maple_mahogany_triple-flanged-hoops_7651c730",
+          "label": "Noble & Cooley — Historical / Archive — Historical Horizon 1980s 14x6.5 — 14x6.5",
+          "modelName": "Historical Horizon 1980s 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/horizon-series",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Historical Walnut Classic 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "noble-and-cooley_historical-archive_historical-walnut-classic-14x6-5_14x6-5_ply_walnut_triple-flanged-hoops_105720a2",
+          "label": "Noble & Cooley — Historical / Archive — Historical Walnut Classic 14x6.5 — 14x6.5",
+          "modelName": "Historical Walnut Classic 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "valid numeric shell thickness",
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.noblecooley.com/custom-design-maple",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Research source-confirmed Noble & Cooley shell thickness AND bearing edge by line/material/configuration. No Firestore writes."
+}
