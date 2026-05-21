@@ -1,0 +1,67 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_CRAVIOTTO_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.564Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Craviotto",
+  "reviewScope": "Craviotto records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Diamond Series / AK Collaboration",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestion": "Can Craviotto Diamond Series / AK Collaboration snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-5-5x14_14x5-5_solid-shell_brass_0-7_metal-bearing-edge-un_e55f06b6",
+          "label": "Craviotto — Diamond Series / AK Collaboration — Diamond Series Brass 5.5x14 — 14x5.5",
+          "modelName": "Diamond Series Brass 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "0.7",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/craviotto-limited-editions",
+          "sourceConfidence": "Medium",
+          "priorityScore": 935
+        },
+        {
+          "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-6-5x14_14x6-5_solid-shell_brass_0-7_metal-bearing-edge-un_4fe1510c",
+          "label": "Craviotto — Diamond Series / AK Collaboration — Diamond Series Brass 6.5x14 — 14x6.5",
+          "modelName": "Diamond Series Brass 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellThickness": "0.7",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/craviotto-limited-editions",
+          "sourceConfidence": "Medium",
+          "priorityScore": 935
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Craviotto line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

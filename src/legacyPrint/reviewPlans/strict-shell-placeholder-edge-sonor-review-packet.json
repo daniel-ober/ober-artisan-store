@@ -1,0 +1,67 @@
+{
+  "status": "STRICT_SHELL_PLACEHOLDER_EDGE_SONOR_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:01:15.568Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-valid-thickness-placeholder-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "SONOR",
+  "reviewScope": "SONOR records with valid shell thickness but placeholder/unknown bearing edge blocking source-confirmed meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed bearing edge geometry only.",
+    "Do not infer edge geometry from shell material, shell construction, line name, shell thickness, hoop type, or era alone.",
+    "If evidence only supports generic metal-shell construction, keep records in metal-edge fallback rather than source-confirmed meaningful edge.",
+    "If source confirms a shared line-level bearing edge spec, prepare a separate patch plan only after reviewed decisions are approved."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Signature Series",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestion": "Can SONOR Signature Series snare records share a source-backed bearing edge profile?",
+      "requiredEvidence": [
+        "Official SONOR page, catalog, archived catalog, manual, or distributor spec with bearing edge language.",
+        "Evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+          "label": "SONOR — Signature Series — Signature HLD 580 Cast Bronze 14x6.5 — 14x6.5",
+          "modelName": "Signature HLD 580 Cast Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        },
+        {
+          "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+          "label": "SONOR — Signature Series — Signature HLD 590 Cast Bronze 14x8 — 14x8",
+          "modelName": "Signature HLD 590 Cast Bronze 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Bronze",
+          "shellThickness": "3",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.sonormuseum.com/",
+          "sourceConfidence": "Low",
+          "priorityScore": 225
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review SONOR line groups for official/catalog bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}
