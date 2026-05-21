@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-05-21T07:35:04.977Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "DW_PDP_DESIGN_SERIES_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "groupCount": 1,
+    "candidateCount": 3,
+    "sourceUrls": [
+      "https://www.dwdrums.com/drums/design-series/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+      "sourceConfidence": "High",
+      "count": 3,
+      "models": [
+        "Design Series Maple 14x5.5",
+        "Design Series Maple 14x6.5",
+        "Design Series Maple 14x8"
+      ],
+      "recordIds": [
+        "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+        "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+        "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact DW / PDP Design Series Maple bearing-edge geometry before creating any promotion plan."
+}
