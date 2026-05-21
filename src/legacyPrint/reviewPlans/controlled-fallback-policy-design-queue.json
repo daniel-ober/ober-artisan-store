@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-05-21T08:24:21.207Z",
+  "sourceFiles": [
+    "src/legacyPrint/reviewPlans/strict-shell-field-audit-baseline-confirmed-after-lane-review.json",
+    "src/legacyPrint/reviewPlans/strict-shell-field-promotion-review-completion-summary.json"
+  ],
+  "status": "STRICT_SHELL_FIELD_CONTROLLED_FALLBACK_POLICY_DESIGN_QUEUE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "totalRecords": 1551,
+    "currentMeaningfulCoreShellPass": 187,
+    "currentMetalEdgeFallbackCoreShellPass": 176,
+    "currentTotalMeaningfulCoreShellUsable": 363,
+    "sourceConfirmedPromotionsAvailable": 0,
+    "unresolvedCoreShellBlockers": {
+      "validThicknessButUnknownEdge": 103,
+      "meaningfulEdgeButMissingThickness": 330,
+      "missingThicknessAndEdge": 750
+    },
+    "noFirestoreWrites": true
+  },
+  "policyTracks": [
+    {
+      "track": "metal-edge fallback tightening",
+      "priority": 1,
+      "currentUsableRecordCount": 176,
+      "goal": "Keep metal-shell records usable while making fallback metadata stricter, auditable, and visually separated from source-confirmed bearing edges.",
+      "allowedScope": [
+        "metal shells only",
+        "records with valid numeric shell thickness",
+        "records with source URL and source confidence",
+        "fallback must never count as source-confirmed bearing edge"
+      ],
+      "blockedScope": [
+        "wood ply shells",
+        "solid shells",
+        "stave shells",
+        "steam-bent shells",
+        "acrylic shells",
+        "hybrid/composite shells unless separately approved"
+      ],
+      "recommendedNextAction": "Create metal-edge fallback policy spec and validation tests."
+    },
+    {
+      "track": "stock-head fallback design",
+      "priority": 2,
+      "currentStockBlockers": {
+        "stockBatterHead": 1509,
+        "stockResoHead": 1512
+      },
+      "goal": "Allow controlled stock-head fallback only when source-backed brand/model-family OEM head patterns exist.",
+      "allowedScope": [
+        "stock batter head fallback",
+        "stock reso head fallback",
+        "company/model-family fallback only",
+        "auditable fallback metadata required"
+      ],
+      "blockedScope": [
+        "hardware",
+        "hoops",
+        "throw-offs",
+        "snare wires",
+        "shell material",
+        "shell construction",
+        "shell thickness",
+        "bearing edge",
+        "snare beds"
+      ],
+      "recommendedNextAction": "Create stock-head fallback policy spec, but do not apply until core-shell fallback policy is finalized."
+    },
+    {
+      "track": "non-critical enrichment cleanup",
+      "priority": 3,
+      "goal": "Improve dataset completeness without changing core-shell readiness.",
+      "fields": [
+        "country of origin",
+        "throw-off make/model",
+        "model number",
+        "year introduced",
+        "hardware finish",
+        "lug count",
+        "lug type",
+        "snare bed type/detail"
+      ],
+      "recommendedNextAction": "Create enrichment queue after fallback policies are decided."
+    }
+  ],
+  "recommendedNextStep": "Start with metal-edge fallback tightening because it already affects 176 usable core-shell records and must remain cleanly separated from source-confirmed bearing edges."
+}
