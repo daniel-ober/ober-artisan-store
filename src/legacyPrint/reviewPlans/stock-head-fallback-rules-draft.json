@@ -25,12 +25,12 @@
       "lineSeriesIncludes": [
         "Kompressor"
       ],
-      "fallbackType": "line-level-default-needs-source-confirmation",
+      "fallbackType": "line-level-default-partial-source-confirmation-not-approval-ready",
       "stockBatterHead": "",
       "stockResoHead": "",
       "sourceUrl": "https://www.sonor.com/drums/instruments/kompressor-snare-series",
-      "sourceConfidence": "needsVerification",
-      "notes": "Candidate group is large. Confirm published stock head brand/model before approval."
+      "sourceConfidence": "partialSourceConfirmed",
+      "notes": "SONOR Kompressor group contains 17 candidates across aluminum, beech, brass, and steel. The SONOR Kompressor source confirms the series/model family, but current evidence does not confirm exact stock batter and reso/snare-side head models. Keep DRAFT until exact stock batter head and exact stock reso/snare-side head are source-confirmed. Split by shell material only if stock heads vary across aluminum, beech, brass, and steel variants."
     },
     {
       "ruleKey": "sonor-sq2-stock-heads-draft",
