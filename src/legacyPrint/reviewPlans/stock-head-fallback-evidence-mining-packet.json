@@ -1,0 +1,2674 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_EVIDENCE_MINING_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:28:08.639Z",
+  "sourceAuditFile": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-26-13-674Z.json",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/stock-head-fallback-multi-company-line-review-packet.json",
+  "collectionName": "snareReferenceDrums",
+  "noFirestoreWrites": true,
+  "summary": {
+    "candidateCount": 386,
+    "lineGroupCount": 71,
+    "companyCount": 8,
+    "decisionCounts": {
+      "REVIEWABLE_LINE_LEVEL_HEAD_FALLBACK": 1,
+      "REVIEWABLE_PARTIAL_LINE_LEVEL_HEAD_FALLBACK": 1,
+      "BLOCKED_NO_LINE_HEAD_EVIDENCE": 69
+    },
+    "candidateCountsByDecision": {
+      "REVIEWABLE_LINE_LEVEL_HEAD_FALLBACK": 1,
+      "REVIEWABLE_PARTIAL_LINE_LEVEL_HEAD_FALLBACK": 3,
+      "BLOCKED_NO_LINE_HEAD_EVIDENCE": 382
+    },
+    "firestoreWrites": 0
+  },
+  "rules": [
+    "This packet mines existing dataset evidence only.",
+    "It does not approve or write fallback values.",
+    "Line-level evidence is stronger than company-level evidence.",
+    "Company-level evidence can inform review, but should not be written as source-confirmed stock data.",
+    "Any future fallback write must add auditable fallback metadata and a distinct stock-readiness tier."
+  ],
+  "nextRecommendedAction": "Use REVIEWABLE_LINE_LEVEL_HEAD_FALLBACK groups first, then partial groups, then blocked groups.",
+  "companyEvidenceSummary": [
+    {
+      "companyName": "Tama",
+      "topBatterHeads": [
+        {
+          "value": "Tama by Evans coated batter head",
+          "count": 17
+        },
+        {
+          "value": "Evans G1 coated / Tama by Evans coated batter head",
+          "count": 3
+        },
+        {
+          "value": "Remo Ambassador Coated Tama 50th Anniversary version",
+          "count": 2
+        },
+        {
+          "value": "Evans Power Center Reverse Dot",
+          "count": 1
+        },
+        {
+          "value": "Tama by Remo USA",
+          "count": 1
+        },
+        {
+          "value": "Tama logo coated Ambassador",
+          "count": 1
+        },
+        {
+          "value": "Tama Power Craft II / Tama by Evans coated batter head",
+          "count": 1
+        }
+      ],
+      "topResoHeads": [
+        {
+          "value": "Tama by Evans snare side head",
+          "count": 18
+        },
+        {
+          "value": "Evans Hazy 300 / Tama by Evans snare side head",
+          "count": 2
+        },
+        {
+          "value": "Evans snare side",
+          "count": 1
+        },
+        {
+          "value": "Remo Ambassador Hazy Tama 50th Anniversary version",
+          "count": 1
+        },
+        {
+          "value": "Tama Power Craft II snare side / Tama by Evans snare side head",
+          "count": 1
+        }
+      ],
+      "evidenceRowCount": 26,
+      "sampleEvidenceRows": [
+        {
+          "id": "tama_starphonic_starphonic-bell-brass-14x6_14x6_metal_bell-brass_3_lacquer-metal_grooved-hoop_pbe1460_2bd426e8",
+          "label": "Tama — STARPHONIC — STARPHONIC Bell Brass 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "STARPHONIC",
+          "modelName": "STARPHONIC Bell Brass 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"Super Sensitive Hi-Carbon Snare Wire\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"Super Sensitive Hi-Carbon Snare Wire\"}",
+          "hoopType": "{\"resonantHoopType\":\"Grooved Hoop\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Grooved Hoop\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_bell_brass.html",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_artwood_50th-limited-mastercraft-artwood-14x6-5_14x6-5_ply_maple_lacquer_ff5b9c40",
+          "label": "Tama — Artwood — 50th Limited Mastercraft Artwood 14x6.5 — 14x6.5",
+          "companyName": "Tama",
+          "lineSeries": "Artwood",
+          "modelName": "50th Limited Mastercraft Artwood 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Remo Ambassador Coated Tama 50th Anniversary version",
+          "stockResoHead": "Remo Ambassador Hazy Tama 50th Anniversary version",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "NO",
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceHost": "guitarcenter.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-big-black-steel-lst148-14x8_14x8_metal_steel_black-nickel-plated_die-cast-hoops_lst148_43a64c86",
+          "label": "Tama — S.L.P. — S.L.P. Big Black Steel LST148 14x8 — 14x8",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Big Black Steel LST148 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"MS20SN14S 20-strand Starclassic carbon steel snare wires\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"MS20SN14S 20-strand Starclassic carbon steel snare wires\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-classic-maple-lmp1455-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-sound-arc-style_lmp1455_af82f7e3",
+          "label": "Tama — S.L.P. — S.L.P. Classic Maple LMP1455 14x5.5 — 14x5.5",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Classic Maple LMP1455 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "stockBatterHead": "Evans G1 coated / Tama by Evans coated batter head",
+          "stockResoHead": "Evans Hazy 300 / Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"Super Sensitive Hi-Carbon Snare Wire\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"Super Sensitive Hi-Carbon Snare Wire\"}",
+          "hoopType": "{\"resonantHoopType\":\"Triple-flange / Sound Arc style\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Triple-flange / Sound Arc style\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+          "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+          "diameter": "14",
+          "depth": "10",
+          "stockBatterHead": "Evans Power Center Reverse Dot",
+          "stockResoHead": "Evans snare side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Triple-flange / Sound Arc style\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Triple-flange / Sound Arc style\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-fat-spruce-lsp146-14x6_14x6_ply_spruce_lacquer_triple-flange-sound-arc-style_lsp146_549c297d",
+          "label": "Tama — S.L.P. — S.L.P. Fat Spruce LSP146 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Fat Spruce LSP146 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Evans G1 coated / Tama by Evans coated batter head",
+          "stockResoHead": "Evans Hazy 300 / Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"High carbon snare wires\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"High carbon snare wires\"}",
+          "hoopType": "{\"resonantHoopType\":\"Triple-flange / Sound Arc style\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Triple-flange / Sound Arc style\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-g-bubinga-lgb146-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_lgb146_4cde3272",
+          "label": "Tama — S.L.P. — S.L.P. G-Bubinga LGB146 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. G-Bubinga LGB146 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-g-maple-lgm137-13x7_13x7_ply_maple_10_lacquer_die-cast-hoops_lgm137_54229b8d",
+          "label": "Tama — S.L.P. — S.L.P. G-Maple LGM137 13x7 — 13x7",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. G-Maple LGM137 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":13,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-g-maple-lgm146-14x6_14x6_ply_maple_11_lacquer_die-cast-hoops_lgm146_91438c63",
+          "label": "Tama — S.L.P. — S.L.P. G-Maple LGM146 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. G-Maple LGM146 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-g-walnut-lgw1465-14x6-5_14x6-5_ply_walnut_9_lacquer_die-cast-hoops_lgw1465_59bc9d21",
+          "label": "Tama — S.L.P. — S.L.P. G-Walnut LGW1465 14x6.5 — 14x6.5",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. G-Walnut LGW1465 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-mod-bubinga-lbu127-12x7_12x7_ply_bubinga_lacquer_die-cast-hoops_lbu127_8ac6ded3",
+          "label": "Tama — S.L.P. — S.L.P. Mod Bubinga LBU127 12x7 — 12x7",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Mod Bubinga LBU127 12x7",
+          "diameter": "12",
+          "depth": "7",
+          "stockBatterHead": "Evans G1 coated / Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":12,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+          "label": "Tama — S.L.P. — S.L.P. Studio Maple LMP1465F 14x6.5 — 14x6.5",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Studio Maple LMP1465F 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Tama Power Craft II / Tama by Evans coated batter head",
+          "stockResoHead": "Tama Power Craft II snare side / Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Wood hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Wood hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_starphonic_starphonic-bubinga-14x6_14x6_ply_bubinga_lacquer-metal_grooved-hoop_pbu1460_0439fe79",
+          "label": "Tama — STARPHONIC — STARPHONIC Bubinga 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "STARPHONIC",
+          "modelName": "STARPHONIC Bubinga 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"20-strand Super Sensitive Hi-Carbon Snare Wires\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"20-strand Super Sensitive Hi-Carbon Snare Wires\"}",
+          "hoopType": "{\"resonantHoopType\":\"Grooved Hoop\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Grooved Hoop\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_bubinga.html",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_starphonic_starphonic-maple-14x6_14x6_ply_maple_lacquer-metal_grooved-hoop_pma1460_b7d3d196",
+          "label": "Tama — STARPHONIC — STARPHONIC Maple 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "STARPHONIC",
+          "modelName": "STARPHONIC Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"20-strand Super Sensitive Hi-Carbon Snare Wires\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"20-strand Super Sensitive Hi-Carbon Snare Wires\"}",
+          "hoopType": "{\"resonantHoopType\":\"Grooved Hoop\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Grooved Hoop\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_starphonic_starphonic-spruce-14x6_14x6_ply_spruce_lacquer-metal_grooved-hoop_psp1460_c4fbd3b5",
+          "label": "Tama — STARPHONIC — STARPHONIC Spruce 14x6 — 14x6",
+          "companyName": "Tama",
+          "lineSeries": "STARPHONIC",
+          "modelName": "STARPHONIC Spruce 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"20-strand Super Sensitive Hi-Carbon Snare Wires\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"20-strand Super Sensitive Hi-Carbon Snare Wires\"}",
+          "hoopType": "{\"resonantHoopType\":\"Grooved Hoop\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Grooved Hoop\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_spruce.html",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_starphonic_starphonic-walnut-14x7_14x7_ply_walnut_lacquer-metal_grooved-hoop_pwa1470_62bb8678",
+          "label": "Tama — STARPHONIC — STARPHONIC Walnut 14x7 — 14x7",
+          "companyName": "Tama",
+          "lineSeries": "STARPHONIC",
+          "modelName": "STARPHONIC Walnut 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"Super Sensitive Hi-Carbon Snare Wire\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"Super Sensitive Hi-Carbon Snare Wire\"}",
+          "hoopType": "{\"resonantHoopType\":\"Grooved Hoop\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Grooved Hoop\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/eu/products/snare_drums/starphonic_walnut.html",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "tama_artwood_50th-limited-mastercraft-artwood-14x5_14x5_ply_maple_lacquer_87db5728",
+          "label": "Tama — Artwood — 50th Limited Mastercraft Artwood 14x5 — 14x5",
+          "companyName": "Tama",
+          "lineSeries": "Artwood",
+          "modelName": "50th Limited Mastercraft Artwood 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Remo Ambassador Coated Tama 50th Anniversary version",
+          "stockResoHead": "",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "NO",
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceHost": "guitarcenter.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae",
+          "label": "Tama — STAR Reserve — STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5 — 14x5",
+          "companyName": "Tama",
+          "lineSeries": "STAR Reserve",
+          "modelName": "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Tama by Remo USA",
+          "stockResoHead": "",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceHost": "equipboard.com",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+          "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Brass 14x5.5 — 14x5.5",
+          "companyName": "Tama",
+          "lineSeries": "STAR Reserve",
+          "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "stockBatterHead": "Tama logo coated Ambassador",
+          "stockResoHead": "",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceHost": "equipboard.com",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "tama_s-l-p_s-l-p-black-brass-lbr1465-14x6-5_14x6-5_metal_brass_black-nickel-plated_die-cast-hoops_lbr1465_6b9dfd73",
+          "label": "Tama — S.L.P. — S.L.P. Black Brass LBR1465 14x6.5 — 14x6.5",
+          "companyName": "Tama",
+          "lineSeries": "S.L.P.",
+          "modelName": "S.L.P. Black Brass LBR1465 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Tama by Evans coated batter head",
+          "stockResoHead": "Tama by Evans snare side head",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Die-cast hoops\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"Die-cast hoops\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceHost": "tama.com",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "topBatterHeads": [
+        {
+          "value": "Ludwig Weather Master Medium Coated",
+          "count": 16
+        }
+      ],
+      "topResoHeads": [
+        {
+          "value": "Ludwig Weather Master Clear Snare Side",
+          "count": 16
+        }
+      ],
+      "evidenceRowCount": 16,
+      "sampleEvidenceRows": [
+        {
+          "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+          "label": "Ludwig — Black Beauty — Black Beauty 3.5x14 — 14x3.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Black Beauty",
+          "modelName": "Black Beauty 3.5x14",
+          "diameter": "14",
+          "depth": "3.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e",
+          "label": "Ludwig — Black Beauty — Black Beauty 5x14 — 14x5",
+          "companyName": "Ludwig",
+          "lineSeries": "Black Beauty",
+          "modelName": "Black Beauty 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb417_17e1d094",
+          "label": "Ludwig — Black Beauty — Black Beauty 6.5x14 — 14x6.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Black Beauty",
+          "modelName": "Black Beauty 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_black-beauty_black-beauty-8x14_14x8_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb418_58e49a16",
+          "label": "Ludwig — Black Beauty — Black Beauty 8x14 — 14x8",
+          "companyName": "Ludwig",
+          "lineSeries": "Black Beauty",
+          "modelName": "Black Beauty 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8",
+          "label": "Ludwig — Black Beauty — Hammered Black Beauty 5x14 — 14x5",
+          "companyName": "Ludwig",
+          "lineSeries": "Black Beauty",
+          "modelName": "Hammered Black Beauty 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_black-beauty_hammered-black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flang_53151aab",
+          "label": "Ludwig — Black Beauty — Hammered Black Beauty 6.5x14 — 14x6.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Black Beauty",
+          "modelName": "Hammered Black Beauty 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/black-beauty",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+          "label": "Ludwig — Acrolite — Acrolite 5x14 — 14x5",
+          "companyName": "Ludwig",
+          "lineSeries": "Acrolite",
+          "modelName": "Acrolite 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Triple-flanged steel\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"Triple-flanged steel\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/acrolite",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+          "label": "Ludwig — Acrolite — Acrolite 6.5x14 — 14x6.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Acrolite",
+          "modelName": "Acrolite 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"Triple-flanged steel\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"Triple-flanged steel\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/acrolite",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "ludwig_bronze-phonic_bronze-phonic-5x14_14x5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_bd46a8a2",
+          "label": "Ludwig — Bronze Phonic — Bronze Phonic 5x14 — 14x5",
+          "companyName": "Ludwig",
+          "lineSeries": "Bronze Phonic",
+          "modelName": "Bronze Phonic 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_bronze-phonic_bronze-phonic-6-5x14_14x6-5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a871a9a6",
+          "label": "Ludwig — Bronze Phonic — Bronze Phonic 6.5x14 — 14x6.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Bronze Phonic",
+          "modelName": "Bronze Phonic 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_bronze-phonic_bronze-phonic-8x14_14x8_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a6213f26",
+          "label": "Ludwig — Bronze Phonic — Bronze Phonic 8x14 — 14x8",
+          "companyName": "Ludwig",
+          "lineSeries": "Bronze Phonic",
+          "modelName": "Bronze Phonic 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c",
+          "label": "Ludwig — Chrome-Over-Brass — Chrome-Over-Brass 5x14 — 14x5",
+          "companyName": "Ludwig",
+          "lineSeries": "Chrome-Over-Brass",
+          "modelName": "Chrome-Over-Brass 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_chrome-over-brass_chrome-over-brass-6-5x14_14x6-5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb_9a7efd45",
+          "label": "Ludwig — Chrome-Over-Brass — Chrome-Over-Brass 6.5x14 — 14x6.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Chrome-Over-Brass",
+          "modelName": "Chrome-Over-Brass 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome or brass/gold depending model\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91",
+          "label": "Ludwig — Copper Phonic — Copper Phonic 5x14 — 14x5",
+          "companyName": "Ludwig",
+          "lineSeries": "Copper Phonic",
+          "modelName": "Copper Phonic 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_copper-phonic_copper-phonic-6-5x14_14x6-5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_86ad9b07",
+          "label": "Ludwig — Copper Phonic — Copper Phonic 6.5x14 — 14x6.5",
+          "companyName": "Ludwig",
+          "lineSeries": "Copper Phonic",
+          "modelName": "Copper Phonic 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "ludwig_copper-phonic_copper-phonic-8x14_14x8_metal_copper_copper-finish_2-3mm-steel-triple-flanged_6aaa8788",
+          "label": "Ludwig — Copper Phonic — Copper Phonic 8x14 — 14x8",
+          "companyName": "Ludwig",
+          "lineSeries": "Copper Phonic",
+          "modelName": "Copper Phonic 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "stockBatterHead": "Ludwig Weather Master Medium Coated",
+          "stockResoHead": "Ludwig Weather Master Clear Snare Side",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"2.3mm steel triple-flanged\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"Chrome\",\"batterHoopType\":\"2.3mm steel triple-flanged\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "YES",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceHost": "ludwig-drums.com",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "AHEAD",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "sampleEvidenceRows": []
+    },
+    {
+      "companyName": "Canopus",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "sampleEvidenceRows": []
+    },
+    {
+      "companyName": "Mapex",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "sampleEvidenceRows": []
+    },
+    {
+      "companyName": "Pearl",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "sampleEvidenceRows": []
+    },
+    {
+      "companyName": "SONOR",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "sampleEvidenceRows": []
+    },
+    {
+      "companyName": "Yamaha",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "sampleEvidenceRows": []
+    }
+  ],
+  "lineEvidenceGroups": [
+    {
+      "companyName": "Tama",
+      "lineSeries": "Artwood",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock reso head": 1
+      },
+      "sourceHosts": {
+        "guitarcenter.com": 1
+      },
+      "evidenceStrength": "LINE_LEVEL_BATTER_AND_RESO_EVIDENCE",
+      "recommendedDecision": "REVIEWABLE_LINE_LEVEL_HEAD_FALLBACK",
+      "topBatterHeads": [
+        {
+          "value": "Remo Ambassador Coated Tama 50th Anniversary version",
+          "count": 2
+        }
+      ],
+      "topResoHeads": [
+        {
+          "value": "Remo Ambassador Hazy Tama 50th Anniversary version",
+          "count": 1
+        }
+      ],
+      "evidenceRowCount": 2,
+      "evidenceRows": [
+        {
+          "id": "tama_artwood_50th-limited-mastercraft-artwood-14x6-5_14x6-5_ply_maple_lacquer_ff5b9c40",
+          "label": "Tama — Artwood — 50th Limited Mastercraft Artwood 14x6.5 — 14x6.5",
+          "companyName": "Tama",
+          "lineSeries": "Artwood",
+          "modelName": "50th Limited Mastercraft Artwood 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "stockBatterHead": "Remo Ambassador Coated Tama 50th Anniversary version",
+          "stockResoHead": "Remo Ambassador Hazy Tama 50th Anniversary version",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "NO",
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceHost": "guitarcenter.com",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "tama_artwood_50th-limited-mastercraft-artwood-14x5_14x5_ply_maple_lacquer_87db5728",
+          "label": "Tama — Artwood — 50th Limited Mastercraft Artwood 14x5 — 14x5",
+          "companyName": "Tama",
+          "lineSeries": "Artwood",
+          "modelName": "50th Limited Mastercraft Artwood 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Remo Ambassador Coated Tama 50th Anniversary version",
+          "stockResoHead": "",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "NO",
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceHost": "guitarcenter.com",
+          "sourceConfidence": "Medium"
+        }
+      ],
+      "candidateIds": [
+        "tama_artwood_50th-limited-mastercraft-artwood-14x5_14x5_ply_maple_lacquer_87db5728"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head": 1,
+        "stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "guitarcenter.com": 1,
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "PARTIAL_LINE_LEVEL_HEAD_EVIDENCE",
+      "recommendedDecision": "REVIEWABLE_PARTIAL_LINE_LEVEL_HEAD_FALLBACK",
+      "topBatterHeads": [
+        {
+          "value": "Tama by Remo USA",
+          "count": 1
+        },
+        {
+          "value": "Tama logo coated Ambassador",
+          "count": 1
+        }
+      ],
+      "topResoHeads": [],
+      "evidenceRowCount": 2,
+      "evidenceRows": [
+        {
+          "id": "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae",
+          "label": "Tama — STAR Reserve — STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5 — 14x5",
+          "companyName": "Tama",
+          "lineSeries": "STAR Reserve",
+          "modelName": "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "stockBatterHead": "Tama by Remo USA",
+          "stockResoHead": "",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceHost": "equipboard.com",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+          "label": "Tama — STAR Reserve — STAR Reserve Hand Hammered Brass 14x5.5 — 14x5.5",
+          "companyName": "Tama",
+          "lineSeries": "STAR Reserve",
+          "modelName": "STAR Reserve Hand Hammered Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "stockBatterHead": "Tama logo coated Ambassador",
+          "stockResoHead": "",
+          "stockSnareWires": "{\"material\":\"unknown\",\"model\":\"unknown\",\"lengthInches\":14,\"stock\":\"unknown\",\"strandCount\":null,\"make\":\"unknown\"}",
+          "hoopType": "{\"resonantHoopType\":\"unknown\",\"hoopMaterial\":\"unknown\",\"hoopFinish\":\"unknown\",\"batterHoopType\":\"unknown\",\"hoopMassClass\":\"unknown\",\"hoopThicknessMm\":null}",
+          "productionStatus": "",
+          "primarySourceUrl": "https://equipboard.com/c/snare-drums/tama",
+          "sourceHost": "equipboard.com",
+          "sourceConfidence": "Low"
+        }
+      ],
+      "candidateIds": [
+        "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+        "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+        "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "candidateCount": 84,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 84
+      },
+      "sourceHosts": {
+        "mapexblackpanther.com": 84
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_8a3037b8",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_e90417d8",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+        "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+        "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+        "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+        "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+        "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+        "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+        "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+        "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+        "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-10x5-5_10x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_50190efd",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-12x5-5_12x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c3ab9bb8",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-13x3-5_13x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_8aadacfb",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-13x6_13x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__b61143bf",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x3-5_14x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_5245cedf",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x5_14x5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__28937416",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x5-5_14x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_06608ee6",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x6_14x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__6f90c3f3",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x6-5_14x6-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c000021b",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x7_14x7_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__880e2c2b",
+        "mapex_black-panther-archive-catalog-era_cherry-maple-14x8_14x8_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__ceae8b7f",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-10x5-5_10x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_7bf51930",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-12x5-5_12x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_046f0252",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x3-5_13x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_ac6f2d45",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x6_13x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_6d456c8f",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x3-5_14x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_3b4ef804",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5_14x5_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_183813ef",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5-5_14x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_4a6c51c4",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6_14x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_20791d4c",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_fb67a806",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x7_14x7_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_a9d7b96a",
+        "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x8_14x8_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_b02c0f59",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-13x6_13x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_9dd37cfb",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x3-5_14x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_e7b9154b",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x5_14x5_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_54bc5d97",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x5-5_14x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_a8efeeab",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x6_14x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_a99c24ac",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x6-5_14x6-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_7759db9e",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x7_14x7_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_04e1dd37",
+        "mapex_black-panther-archive-catalog-era_stainless-steel-14x8_14x8_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_787f6de6",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-10x5-5_10x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_f8d6787f",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-12x5-5_12x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_144cf130",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-13x3-5_13x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_b7c3bf1b",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-13x6_13x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_0855714e",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x3-5_14x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_a7697e14",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x5_14x5_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_d8bf5a00",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x5-5_14x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_362d3ef6",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x6_14x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_cab119f9",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x6-5_14x6-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_22b9d27c",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x7_14x7_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_b522c843",
+        "mapex_black-panther-archive-catalog-era_traditional-birch-14x8_14x8_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_9bd3e00c",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_930c6624",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_2c40e1f9",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_5383317a",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_5db1a4e3",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_31e5a92e",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_76a906a9",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_fb6c5486",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_df9bbe52",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_286c4353",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_d6f2947b",
+        "mapex_black-panther-archive-catalog-era_traditional-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_0acc3d56",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-10x5-5_10x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0ba7807b",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-12x5-5_12x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_a3b9d1ed",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-13x3-5_13x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0a4b58a0",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-13x6_13x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_3af34747",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x3-5_14x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_4304f419",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5_14x5_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_ce744bcc",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5-5_14x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_8cfdfe29",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6_14x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_a7826012",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6-5_14x6-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_36f2a461",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x7_14x7_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_6931a70f",
+        "mapex_black-panther-archive-catalog-era_traditional-walnut-14x8_14x8_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_cdbbbcaa"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "AHEAD",
+      "lineSeries": "Ahead Snares",
+      "candidateCount": 33,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 33
+      },
+      "sourceHosts": {
+        "drumcenternh.com": 1,
+        "sweetwater.com": 2,
+        "bigbangdist.com": 27,
+        "bentleysdrumshop.com": 1,
+        "musicradar.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+        "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+        "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+        "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+        "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+        "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+        "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+        "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+        "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+        "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+        "ahead_ahead-snares_black-chrome-on-brass-14x4-piccolo_14x4_metal_brass_1_smoke-chrome_sh1410-s-hoop-counter-hoops_as414_07617ee1",
+        "ahead_ahead-snares_black-chrome-on-brass-14x6-dunnett-throw-off-option_14x6_metal_brass_1_minimal-shallow-snare-beds_smo_f95fc0e2",
+        "ahead_ahead-snares_black-chrome-on-brass-14x6-trick-throw-off-option_14x6_metal_brass_1_smoke-chrome-black-chrome_sh1410_8581ca8f",
+        "ahead_ahead-snares_black-chrome-on-brass-piccolo-snare-drum-14x4_14x4_metal_brass_1_minimal-shallow-snare-beds_smoke-chr_2b056559",
+        "ahead_ahead-snares_black-chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_03f82188",
+        "ahead_ahead-snares_black-chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_65f4f28c",
+        "ahead_ahead-snares_black-on-brass-13x6-brunson-lug-prototype-planned-variant_13x6_metal_brass_1_black-chrome_sh138-s-hoo_6f6b2e23",
+        "ahead_ahead-snares_black-on-brass-14x6-brunson-lug-edition_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_a_da443290",
+        "ahead_ahead-snares_black-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_as6_f42b5819",
+        "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+        "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+        "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+        "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+        "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+        "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+        "ahead_ahead-snares_chrome-on-brass-13x6-tube-lug-original_13x6_metal_brass_1_chrome_sh138-s-hoop-counter-hoops_asc613_7dac1d72",
+        "ahead_ahead-snares_chrome-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614_bcd52f08",
+        "ahead_ahead-snares_chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_chrome_sh138-s-hoop-cou_2d68cd61",
+        "ahead_ahead-snares_chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614-inferred_0adcb07a",
+        "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+        "ahead_ahead-snares_titanium-14x6-engraved-shell_14x6_metal_titanium_1_engraved-titanium_sh1410-s-hoop-counter-hoops_tita_3a7640dd",
+        "ahead_ahead-snares_titanium-14x6-studio-dry-variant_14x6_metal_titanium_1_minimal-shallow-snare-beds_engraved-titanium_s_e5a32ae7",
+        "ahead_ahead-snares_titanium-snare-drum-14x6-with-chrome-trick-throw-off_14x6_metal_titanium_1_minimal-shallow-snare-beds_bc64363e"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "SQ2 Drum System",
+      "candidateCount": 32,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 32
+      },
+      "sourceHosts": {
+        "sonor.com": 32
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x5_14x5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cast-or_0b97bd0d",
+        "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x6-5_14x6-5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cas_21ad5efa",
+        "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x5_14x5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-cast-o_4db16066",
+        "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x6-5_14x6-5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-ca_4d9e09bd",
+        "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-or-_452968ae",
+        "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast_95092478",
+        "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-_7f1959d6",
+        "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-c_d1668db1",
+        "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x5_14x5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or-tri_31511fb0",
+        "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or_edb76d98",
+        "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x5_14x5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-or-tr_baa918a0",
+        "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x6-5_14x6-5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-o_70a9a905",
+        "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-trip_30806671",
+        "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-_a9885d3a",
+        "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-t_f791587a",
+        "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-_5140185b",
+        "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x5_14x5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or-tri_5921b78e",
+        "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x6-5_14x6-5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or_1a9169e2",
+        "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x5_14x5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-or-tr_9e471931",
+        "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x6-5_14x6-5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-o_1dd66c37",
+        "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-trip_4e0636ca",
+        "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-_df3d98db",
+        "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-t_f52dcc8d",
+        "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-_8e2aee88",
+        "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x5_14x5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or-tri_03d79bb2",
+        "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x6-5_14x6-5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or_d1b32daa",
+        "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x5_14x5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-or-tr_3b0fc99a",
+        "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x6-5_14x6-5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-o_af3f3e9a",
+        "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-trip_59f4810f",
+        "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-_c6584fef",
+        "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-t_faf56e68",
+        "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-_803b9ab2"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Kompressor",
+      "candidateCount": 17,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 17
+      },
+      "sourceHosts": {
+        "sonor.com": 17
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "sonor_kompressor_kompressor-aluminum-13x7_13x7_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_f7714692",
+        "sonor_kompressor_kompressor-aluminum-14x5-75_14x5-75_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-fla_28cafbb5",
+        "sonor_kompressor_kompressor-aluminum-14x6-5_14x6-5_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flang_2d7ba40c",
+        "sonor_kompressor_kompressor-aluminum-14x8_14x8_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_38fe8f02",
+        "sonor_kompressor_kompressor-beech-13x7_13x7_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_d51a0981",
+        "sonor_kompressor_kompressor-beech-14x5-75_14x5-75_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-_62ac1b7f",
+        "sonor_kompressor_kompressor-beech-14x6_14x6_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_671ce638",
+        "sonor_kompressor_kompressor-beech-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-se_0fef9e59",
+        "sonor_kompressor_kompressor-beech-14x8_14x8_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_eb25e3d0",
+        "sonor_kompressor_kompressor-brass-13x7_13x7_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_552bc64f",
+        "sonor_kompressor_kompressor-brass-14x5-75_14x5-75_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_d11788c6",
+        "sonor_kompressor_kompressor-brass-14x6-5_14x6-5_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_0c11b4b7",
+        "sonor_kompressor_kompressor-brass-14x8_14x8_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_a0aff72c",
+        "sonor_kompressor_kompressor-steel-13x7_13x7_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_22a027d3",
+        "sonor_kompressor_kompressor-steel-14x5-75_14x5-75_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_2a7b4cc7",
+        "sonor_kompressor_kompressor-steel-14x6-5_14x6-5_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel_2e90fd2c",
+        "sonor_kompressor_kompressor-steel-14x8_14x8_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_3d48d2d8"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Free Floating",
+      "candidateCount": 16,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 16
+      },
+      "sourceHosts": {
+        "pearldrum.com": 16
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+        "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+        "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+        "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+        "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+        "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+        "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+        "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+        "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+        "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+        "pearl_free-floating_free-floating-copper_14x6-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_2eb75db4",
+        "pearl_free-floating_free-floating-copper_14x8_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_3cea84d6",
+        "pearl_free-floating_free-floating-steel_14x3-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_f9aae6e5",
+        "pearl_free-floating_free-floating-steel_14x5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_6af96288",
+        "pearl_free-floating_free-floating-steel_14x6-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bc4caad",
+        "pearl_free-floating_free-floating-steel_14x8_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bed3a7f"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Starclassic",
+      "candidateCount": 12,
+      "missingCombos": {
+        "stock batter head + stock reso head": 12
+      },
+      "sourceHosts": {
+        "hoshinogakki.co.jp": 5,
+        "tama.com": 6,
+        "guitarcenter.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_starclassic_starclassic-bubinga-14x5-5_14x5-5_ply_bubinga_lacquer_die-cast-hoops_d3450b86",
+        "tama_starclassic_starclassic-bubinga-14x6-5_14x6-5_ply_bubinga_lacquer_die-cast-hoops_95ab812f",
+        "tama_starclassic_starclassic-bubinga-elite-13x6_13x6_ply_bubinga_lacquer_die-cast-hoops_1880d8e1",
+        "tama_starclassic_starclassic-exotix-maple-14x6-5_14x6-5_ply_maple_exotic-lacquer_die-cast-hoops_22bc3876",
+        "tama_starclassic_starclassic-g-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_1ea5f819",
+        "tama_starclassic_starclassic-g-maple-13x7_13x7_ply_maple_10_lacquer_die-cast-hoops_a76acd11",
+        "tama_starclassic_starclassic-g-maple-14x6_14x6_ply_maple_10_lacquer_die-cast-hoops_1da41220",
+        "tama_starclassic_starclassic-g-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer_die-cast-hoops_5407a2a4",
+        "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b",
+        "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c",
+        "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf",
+        "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Signature",
+      "candidateCount": 9,
+      "missingCombos": {
+        "stock batter head + stock reso head": 9
+      },
+      "sourceHosts": {
+        "tama.com": 5,
+        "hoshinogakki.co.jp": 3,
+        "forksdrumcloset.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass",
+        "tama_signature_lars-ulrich-lu1465-14x6-5_14x6-5_metal_steel_3_diamond-plate-steel_die-cast-hoops_lu1465_ae41107f",
+        "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass",
+        "tama_signature_mike-portnoy-melody-master-12x5_12x5_metal_steel_steel_die-cast-hoops_mp125_d0e2a83b",
+        "tama_signature_mike-portnoy-melody-master-14x5-5_14x5-5_metal_steel_hammered-steel_die-cast-hoops_mp1455_d425fdc5",
+        "tama_signature_mike-portnoy-melody-master-mp125st-12x5_12x5_metal_steel",
+        "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga",
+        "tama_signature_ronald-bruner-jr-rb1455-14x5-5_14x5-5_hybrid_walnut_6_walnut-steel-hybrid_die-cast-hoops_rb1455_f8f35fdb",
+        "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Supraphonic",
+      "candidateCount": 8,
+      "missingCombos": {
+        "stock batter head + stock reso head": 8
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 8
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_supraphonic_supraphonic-5x14-hammered-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_7bf54b07",
+        "ludwig_supraphonic_supraphonic-5x14-hammered-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple_467ff72f",
+        "ludwig_supraphonic_supraphonic-5x14-imperial-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_47cc337f",
+        "ludwig_supraphonic_supraphonic-5x14-tube-lugs_14x5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flanged__0523d8b3",
+        "ludwig_supraphonic_supraphonic-6-5x14-hammered-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-stee_473711ee",
+        "ludwig_supraphonic_supraphonic-6-5x14-hammered-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-tr_058c3964",
+        "ludwig_supraphonic_supraphonic-6-5x14-imperial-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-_779175c5",
+        "ludwig_supraphonic_supraphonic-6-5x14-tube-lugs_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_2-3mm-steel-triple-flan_c403efee"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Metal",
+      "candidateCount": 8,
+      "missingCombos": {
+        "stock batter head + stock reso head": 8
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 8
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+        "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+        "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+        "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+        "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+        "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+        "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+        "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "candidateCount": 8,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 8
+      },
+      "sourceHosts": {
+        "pearldrum.com": 8
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+        "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+        "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+        "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+        "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+        "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+        "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+        "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Metal Snare",
+      "candidateCount": 8,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 8
+      },
+      "sourceHosts": {
+        "faq.yamaha.com": 8
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+        "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+        "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+        "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+        "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+        "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+        "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+        "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "The Maple",
+      "candidateCount": 7,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 7
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 7
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_the-maple_the-maple-10x6_10x6_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-hoop-_ca646a7e",
+        "canopus_the-maple_the-maple-12x6-5_12x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-h_625807fe",
+        "canopus_the-maple_the-maple-13x6-5_13x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_c5d6734d",
+        "canopus_the-maple_the-maple-14x4_14x4_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_264edc8c",
+        "canopus_the-maple_the-maple-14x5-5_14x5-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_8ad3dcc0",
+        "canopus_the-maple_the-maple-14x6-5_14x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_a60ce85c",
+        "canopus_the-maple_the-maple-14x8_14x8_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_e7f518b8"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther",
+      "candidateCount": 6,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 6
+      },
+      "sourceHosts": {
+        "mapexdrums.com": 6
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "mapex_black-panther_atomizer_14x6-5_metal_aluminum_2_45-modern-metal-edge_sonic-saver-hoops_bpnal4651cn_1353eb45",
+        "mapex_black-panther_cyrus_14x6_metal_steel_1_45-modern-metal-edge_sonic-saver-hoops_bpnst4601cn_6ee04120",
+        "mapex_black-panther_hydro_13x7_metal_steel_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnst3701cn_b8ac4dd2",
+        "mapex_black-panther_metallion_14x5-5_metal_brass_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnbr4551cn_ad3e6526",
+        "mapex_black-panther_persuader_14x6-5_metal_brass_1-2_45-modern-metal-edge_hammered-brass_sonic-saver-hoops_bpnbr465hcn_ed80426a",
+        "mapex_black-panther_solidus_14x7_ply_maple_11_rounded-45-batter-edge-with-3-8-counter-cut_2-7mm-snare-bed-5-5-width_soni_b8a7cb6b"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Sensitone Heritage Alloy",
+      "candidateCount": 6,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 6
+      },
+      "sourceHosts": {
+        "pearldrum.com": 6
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+        "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Supralite",
+      "candidateCount": 5,
+      "missingCombos": {
+        "stock batter head + stock reso head": 5
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 5
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+        "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+        "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+        "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+        "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "candidateCount": 5,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 5
+      },
+      "sourceHosts": {
+        "mapexblackpanther.com": 5
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+        "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Maple",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_classic-maple_classic-maple-5-5x14_14x5-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_e874a352",
+        "ludwig_classic-maple_classic-maple-5x14_14x5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_98e8d5fa",
+        "ludwig_classic-maple_classic-maple-6-5x14_14x6-5_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-_c6cef20c",
+        "ludwig_classic-maple_classic-maple-8x14_14x8_ply_maple_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-spec_5859ce17"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Classic Oak",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_classic-oak_classic-oak-5-5x14_14x5-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_c02c2837",
+        "ludwig_classic-oak_classic-oak-5x14_14x5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__c6e3547f",
+        "ludwig_classic-oak_classic-oak-6-5x14_14x6-5_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specif_1ac0b079",
+        "ludwig_classic-oak_classic-oak-8x14_14x8_ply_maple_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not-specified__e8b627e8"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Mahogany",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_legacy-mahogany_legacy-mahogany-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_c777529c",
+        "ludwig_legacy-mahogany_legacy-mahogany-5x14_14x5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_c644828a",
+        "ludwig_legacy-mahogany_legacy-mahogany-6-5x14_14x6-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-_0f2ef368",
+        "ludwig_legacy-mahogany_legacy-mahogany-8x14_14x8_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snar_aec3c7b0"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Legacy Maple",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_legacy-maple_legacy-maple-5-5x14_14x5-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_76770500",
+        "ludwig_legacy-maple_legacy-maple-5x14_14x5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_870c8d5a",
+        "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+        "ludwig_legacy-maple_legacy-maple-8x14_14x8_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed-not_3b91b4e7"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Raw Brass Phonic",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+        "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+        "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+        "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Universal Wood",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6",
+        "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7",
+        "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d",
+        "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Reference",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 4
+      },
+      "sourceHosts": {
+        "pearldrum.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+        "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+        "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+        "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Imperialstar",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "hoshinogakki.co.jp": 2,
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_imperialstar_imperialstar-chrome-steel-14x5-5_14x5-5_metal_steel_chrome_0e7e083b",
+        "tama_imperialstar_imperialstar-king-beat-8005-steel-14x5_14x5_metal_steel_chrome_8005_385f28df",
+        "tama_imperialstar_imperialstar-mastercraft-steel-8056-14x6-5_14x6-5_metal_steel_chrome_8056_ce649d31",
+        "tama_imperialstar_imperialstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap-lacquer_10dfcbc5"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Metalworks",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "tama.com": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+        "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+        "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+        "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Superstar",
+      "candidateCount": 4,
+      "missingCombos": {
+        "stock batter head + stock reso head": 4
+      },
+      "sourceHosts": {
+        "hoshinogakki.co.jp": 4
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_superstar_superstar-birch-14x5-5_14x5-5_ply_birch_lacquer_c330473e",
+        "tama_superstar_superstar-birch-14x6-5_14x6-5_ply_birch_lacquer_a0d96da4",
+        "tama_superstar_superstar-maple-14x5-5_14x5-5_ply_maple_lacquer_322c4317",
+        "tama_superstar_superstar-maple-14x6-5_14x6-5_ply_maple_lacquer_410ef47d"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Armory",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 3
+      },
+      "sourceHosts": {
+        "mapexdrums.com": 3
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "mapex_armory_daisy-cutter_14x6-5_metal_steel_1_soniclear-modern-mapex-edge_black_2-3mm-powerhoops_arst4651ceb_f2fcc234",
+        "mapex_armory_dillinger_14x5-5_ply_maple_7-2_soniclear-modern-mapex-edge_natural-transparent-varies_2-3mm-powerhoops_arml_f6c00f32",
+        "mapex_armory_tomahawk_14x5-5_metal_steel_1_soniclear-modern-mapex-edge_chrome_2-3mm-powerhoops_bpnst4551cn_e2634617"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 3
+      },
+      "sourceHosts": {
+        "musicradar.com": 1,
+        "mapexdrums.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+        "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+        "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "ProLite",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 3
+      },
+      "sourceHosts": {
+        "sonor.com": 3
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "sonor_prolite_prolite-maple-14x5_14x5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_2f773d8f",
+        "sonor_prolite_prolite-maple-14x6_14x6_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_1d204c34",
+        "sonor_prolite_prolite-maple-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_3b479737"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Metalworks Effect",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head": 3
+      },
+      "sourceHosts": {
+        "tama.com": 3
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4",
+        "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9",
+        "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Warlord",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head": 3
+      },
+      "sourceHosts": {
+        "drummagazine.com": 2,
+        "equipboard.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_warlord_warlord-masai-maple-14x6_14x6_ply_maple_13_lacquer_die-cast-hoops_c2e2ae03",
+        "tama_warlord_warlord-praetorian-cast-bell-brass-14x6_14x6_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_fa7a2480",
+        "tama_warlord_warlord-spartan-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_26a14500"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Woodworks",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head": 3
+      },
+      "sourceHosts": {
+        "tama.com": 3
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_woodworks_woodworks-14x5-5_14x5-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f0fdc50b",
+        "tama_woodworks_woodworks-14x6-5_14x6-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f936ccca",
+        "tama_woodworks_woodworks-14x8_14x8_ply_maple-poplar_wrap_triple-flange-mighty-hoop_0430278f"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Signature",
+      "candidateCount": 3,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 3
+      },
+      "sourceHosts": {
+        "faq.yamaha.com": 3
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+        "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+        "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Manganese Steel",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+        "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+        "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+        "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_zelkova_zelkova-14x5_14x5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1450_edd9ca5c",
+        "canopus_zelkova_zelkova-14x6-5_14x6-5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1465_b4533a82"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1963-1970s Ludwig",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "vintagedrumguide.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+        "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1977 Ludwig",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "vintagedrumguide.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+        "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Hammered Brass",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+        "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Decade Maple",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "pearldrum.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+        "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Masters Maple Complete",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "pearldrum.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+        "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Ultracast",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "pearldrum.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+        "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Signature Series",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "sonormuseum.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+        "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "Vintage Series",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "sonor.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "sonor_vintage-series_vintage-series-beech-14x5-75_14x5-75_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-_491ef3e1",
+        "sonor_vintage-series_vintage-series-beech-14x6-5_14x6-5_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-ho_996270a5"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Artstar",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_artstar_artstar-cordia-14x6-5_14x6-5_ply_cordia_lacquer_die-cast-hoops_559e6b64",
+        "tama_artstar_artstar-maple-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_389d297f"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Mastercraft",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "tama.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+        "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Rockstar",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_rockstar_rockstar-steel-14x5-5_14x5-5_metal_steel_chrome-black_730c2843",
+        "tama_rockstar_rockstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_3d4698f7"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Rosewood/Cordia",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_rosewood-cordia_cordia-14x6-5_14x6-5_ply_cordia_lacquer_72022529",
+        "tama_rosewood-cordia_rosewood-14x6-5_14x6-5_ply_wood_lacquer_b8d9f654"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Royalstar",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_royalstar_royalstar-steel-14x5_14x5_metal_steel_chrome_1aa8ca86",
+        "tama_royalstar_royalstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_49eeb53b"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Soundworks",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_soundworks_soundworks-steel-dst1055m-10x5-5_10x5-5_metal_steel_steel_dst1055m_bb8c165c",
+        "tama_soundworks_soundworks-steel-dst1465-14x6-5_14x6-5_metal_steel_steel_dst1465_0556bb30"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Swingstar",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head": 2
+      },
+      "sourceHosts": {
+        "equipboard.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_swingstar_swingstar-steel-14x5_14x5_metal_steel_chrome_5a0d5668",
+        "tama_swingstar_swingstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_8c6726b1"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Rydeen / Gigmaker Kit Snare",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "jedistar.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+        "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Tour Custom",
+      "candidateCount": 2,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 2
+      },
+      "sourceHosts": {
+        "usa.yamaha.com": 2
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_tour-custom_tour-custom-maple-14x5-5_14x5-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_b3bf7f1d",
+        "yamaha_tour-custom_tour-custom-maple-14x6-5_14x6-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_eac794a7"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Aluminum Alloy",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Type-R",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "canopusdrums.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Artist / Signature",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Jazz Fest Series",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "ludwig-drums.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "mapexdrums.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Signature",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "pearldrum.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "SONOR",
+      "lineSeries": "AQ2",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "sonormuseum.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "sonor_aq2_aq2-maple-14x5-5_14x5-5_ply_maple_7-2_45-bearing-edge_triple-flanged-hoops_aq2-1405_b10c6d2d"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Acrylic",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head": 1
+      },
+      "sourceHosts": {
+        "equipboard.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_acrylic_mirage-acrylic-14x6-5_14x6-5_acrylic_acrylic_acrylic_42919b23"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "Granstar",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head": 1
+      },
+      "sourceHosts": {
+        "equipboard.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "tama_granstar_granstar-birch-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_9536e2bd"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Absolute Hybrid Maple",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "memphisdrumshop.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_absolute-hybrid-maple_absolute-hybrid-maple-14x6_14x6_ply_maple_wenge_maple_6-2_45-degree-r1-5_vintage-natural-la_7d03d57c"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Gigmaker / Entry Steel",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "jedistar.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Stage Custom Advantage",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "jedistar.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Stage Custom Birch",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "jedistar.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad"
+      ],
+      "approvedForFirestoreWrite": false
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Stage Custom Standard",
+      "candidateCount": 1,
+      "missingCombos": {
+        "stock batter head + stock reso head + production status": 1
+      },
+      "sourceHosts": {
+        "jedistar.com": 1
+      },
+      "evidenceStrength": "NONE",
+      "recommendedDecision": "BLOCKED_NO_LINE_HEAD_EVIDENCE",
+      "topBatterHeads": [],
+      "topResoHeads": [],
+      "evidenceRowCount": 0,
+      "evidenceRows": [],
+      "candidateIds": [
+        "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751"
+      ],
+      "approvedForFirestoreWrite": false
+    }
+  ]
+}
