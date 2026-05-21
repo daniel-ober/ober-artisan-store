@@ -25,9 +25,11 @@ const COMPONENT_WEIGHTS = {
 
   snareBed: 0.38,
 
-  stockHeads: 0,
+  batterHead: 0.32,
 
-  stockSnareWires: 0,
+  resoHead: 0.22,
+
+  stockSnareWires: 0.26,
 
   productionStatus: 0,
 
@@ -1131,6 +1133,202 @@ const HOOP_EFFECTS = {
 
 };
 
+const BATTER_HEAD_EFFECTS = {
+
+  defaultCoatedSinglePlyBatter: makeProfile({
+
+    attack: 0.12,
+
+    brightness: 0.08,
+
+    projection: 0.02,
+
+    sustain: 0.08,
+
+    warmth: 0.1,
+
+    sensitivity: 0.1,
+
+    control: 0.04
+
+  }),
+
+  coatedSinglePlyBatter: makeProfile({
+
+    attack: 0.12,
+
+    brightness: 0.08,
+
+    projection: 0.02,
+
+    sustain: 0.08,
+
+    warmth: 0.1,
+
+    sensitivity: 0.1,
+
+    control: 0.04
+
+  }),
+
+  clearSinglePlyBatter: makeProfile({
+
+    attack: 0.16,
+
+    brightness: 0.18,
+
+    projection: 0.05,
+
+    sustain: 0.12,
+
+    warmth: -0.06,
+
+    sensitivity: 0.08,
+
+    control: -0.02
+
+  }),
+
+  coatedTwoPlyBatter: makeProfile({
+
+    attack: -0.02,
+
+    brightness: -0.08,
+
+    projection: 0.04,
+
+    sustain: -0.1,
+
+    warmth: 0.2,
+
+    sensitivity: -0.08,
+
+    control: 0.22
+
+  }),
+
+  controlledDotBatter: makeProfile({
+
+    attack: 0.18,
+
+    brightness: 0.04,
+
+    projection: 0.08,
+
+    sustain: -0.18,
+
+    warmth: 0.04,
+
+    sensitivity: -0.08,
+
+    control: 0.28
+
+  })
+
+};
+
+const RESO_HEAD_EFFECTS = {
+
+  defaultClearSnareSideReso: makeProfile({
+
+    attack: 0.06,
+
+    brightness: 0.08,
+
+    sustain: 0.04,
+
+    sensitivity: 0.18,
+
+    control: 0.02
+
+  }),
+
+  clearSnareSideReso: makeProfile({
+
+    attack: 0.06,
+
+    brightness: 0.08,
+
+    sustain: 0.04,
+
+    sensitivity: 0.18,
+
+    control: 0.02
+
+  })
+
+};
+
+const SNARE_WIRE_EFFECTS = {
+
+  defaultTwentyStrandSteelWires: makeProfile({
+
+    attack: 0.08,
+
+    brightness: 0.08,
+
+    sensitivity: 0.16,
+
+    control: 0.08
+
+  }),
+
+  twentyStrandSteelWires: makeProfile({
+
+    attack: 0.08,
+
+    brightness: 0.08,
+
+    sensitivity: 0.16,
+
+    control: 0.08
+
+  }),
+
+  wideThirtyStrandWires: makeProfile({
+
+    attack: 0.04,
+
+    brightness: 0.1,
+
+    sustain: -0.04,
+
+    sensitivity: 0.22,
+
+    control: 0.16
+
+  }),
+
+  wideFortyTwoStrandWires: makeProfile({
+
+    attack: 0,
+
+    brightness: 0.12,
+
+    sustain: -0.1,
+
+    sensitivity: 0.28,
+
+    control: 0.24
+
+  }),
+
+  brassSnareWires: makeProfile({
+
+    attack: -0.02,
+
+    brightness: -0.06,
+
+    warmth: 0.08,
+
+    sensitivity: 0.12,
+
+    control: 0.04
+
+  })
+
+};
+
 const SNARE_BED_EFFECTS = {
 
   minimalSnareBed: makeProfile({
@@ -1200,6 +1398,12 @@ module.exports = {
   BEARING_EDGE_EFFECTS,
 
   HOOP_EFFECTS,
+
+  BATTER_HEAD_EFFECTS,
+
+  RESO_HEAD_EFFECTS,
+
+  SNARE_WIRE_EFFECTS,
 
   SNARE_BED_EFFECTS
 

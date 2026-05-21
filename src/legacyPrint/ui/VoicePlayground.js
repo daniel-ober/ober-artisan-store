@@ -6,6 +6,8 @@ import { Zap, SunMedium, Volume2, Waves, Flame, Feather, Crosshair } from 'lucid
 
 import { useVoicePlayground } from './useVoicePlayground.js';
 
+import { buildSnareVoicePacket } from '../engine/snare';
+
 import { VoiceMorphPanel } from './VoiceMorphPanel.js';
 
 import { morphVoice } from '../morph/morphVoice.js';
@@ -762,6 +764,78 @@ const getTopNodes = (voice, count = 3) =>
 
     .slice(0, count);
 
+const normalizeEngineVoiceScoreForUi = value => {
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) return 0.5;
+
+  if (number > 1) {
+
+    return clamp01((number - 1) / 9, 0.5);
+
+  }
+
+  return clamp01(number, 0.5);
+
+};
+
+const normalizeEngineVoiceProfileForUi = profile => {
+
+  return VOICE_NODES.reduce((acc, node) => {
+
+    acc[node.key] = normalizeEngineVoiceScoreForUi(profile?.[node.key]);
+
+    return acc;
+
+  }, {});
+
+};
+
+const getReferenceRawRecord = reference => {
+
+  return reference?.rawRecord || reference?.raw || reference?.record || reference || null;
+
+};
+
+const buildReferenceEnginePacket = reference => {
+
+  const rawRecord = getReferenceRawRecord(reference);
+
+  if (!rawRecord) return null;
+
+  try {
+
+    return buildSnareVoicePacket(rawRecord, {
+
+      includeRawRecord: true,
+
+      includeBaseScore: true,
+
+      mode: 'voicePlaygroundReference',
+
+    });
+
+  } catch (error) {
+
+    console.warn('Unable to build LegacyPrint snare voice packet for reference.', error);
+
+    return null;
+
+  }
+
+};
+
+const getReadoutNodeKeys = readout => {
+
+  return (readout?.nodes || [])
+
+    .map(item => item.node || item.key)
+
+    .filter(Boolean);
+
+};
+
 function WorkflowRail({ workflowMode, setWorkflowMode }) {
 
   return (
@@ -1215,11 +1289,63 @@ export function VoicePlayground({ firestore }) {
 
         : MOCK_MATCHES;
 
+  const selectedReferenceEnginePacket = useMemo(() => {
+
+    if (workflowMode !== 'reference') return null;
+
+    return buildReferenceEnginePacket(selectedReference);
+
+  }, [workflowMode, selectedReference]);
+
+  const selectedReferenceVoice = useMemo(() => {
+
+    return normalizeEngineVoiceProfileForUi(
+
+      selectedReferenceEnginePacket?.voiceProfile ||
+
+        selectedReference?.voiceProfile ||
+
+        selectedReference?.legacyPrintVoice ||
+
+        selectedReference?.voice ||
+
+        {}
+
+    );
+
+  }, [selectedReferenceEnginePacket, selectedReference]);
+
+  const selectedReferenceReadout = useMemo(() => {
+
+    if (!selectedReferenceEnginePacket?.readouts) return null;
+
+    if (readMode === 'playerAnalysis') {
+
+      return selectedReferenceEnginePacket.readouts.playerAnalysis;
+
+    }
+
+    if (readMode === 'legacyprintIdentity') {
+
+      return selectedReferenceEnginePacket.readouts.legacyPrintIdentity;
+
+    }
+
+    return selectedReferenceEnginePacket.readouts.firstListen;
+
+  }, [selectedReferenceEnginePacket, readMode]);
+
   const modeVoice = useMemo(() => {
+
+    if (workflowMode === 'reference') {
+
+      return selectedReferenceVoice;
+
+    }
 
     return buildModeVoice(voice || {}, workflowMode, selectedReference);
 
-  }, [voice, workflowMode, selectedReference]);
+  }, [voice, workflowMode, selectedReference, selectedReferenceVoice]);
 
   const activeVoice = useMemo(() => {
 
@@ -1275,7 +1401,23 @@ export function VoicePlayground({ firestore }) {
 
   const topNodes = useMemo(() => getTopNodes(activeVoice, 3), [activeVoice]);
 
-  const firstListenKeys = useMemo(() => topNodes.map((node) => node.key), [topNodes]);
+  const firstListenKeys = useMemo(() => {
+
+    if (workflowMode === 'reference') {
+
+      const readoutKeys = getReadoutNodeKeys(
+
+        selectedReferenceEnginePacket?.readouts?.firstListen
+
+      );
+
+      if (readoutKeys.length) return readoutKeys;
+
+    }
+
+    return topNodes.map((node) => node.key);
+
+  }, [workflowMode, selectedReferenceEnginePacket, topNodes]);
 
   const handleAudition = (result) => {
 
@@ -1460,7 +1602,7 @@ export function VoicePlayground({ firestore }) {
 
             <strong>{selectedReadMode.label}</strong>
 
-            <p>{selectedReadMode.description}</p>
+            <p>{selectedReferenceReadout?.purpose || selectedReferenceReadout?.explanation || selectedReadMode.description}</p>
 
           </div>
 
