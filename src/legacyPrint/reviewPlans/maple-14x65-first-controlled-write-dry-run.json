@@ -1,0 +1,227 @@
+{
+  "status": "MAPLE_14X65_FIRST_CONTROLLED_WRITE_DRY_RUN_NO_WRITES",
+  "collectionName": "snareReferenceDrums",
+  "planPath": "/Users/danober/Code/ober-artisan-store/src/legacyPrint/reviewPlans/maple-14x65-first-controlled-write-plan.json",
+  "summary": {
+    "targetCount": 2,
+    "exactSingleMatches": 2,
+    "noMatches": 0,
+    "multipleMatches": 0,
+    "safeToWriteCount": 2
+  },
+  "resolved": [
+    {
+      "status": "EXACT_SINGLE_MATCH_DRY_RUN_ONLY",
+      "matchCount": 1,
+      "selector": {
+        "companyName": "C&C Drums USA",
+        "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5"
+      },
+      "writeIntent": {
+        "plyCount": 5,
+        "shellLayup": "Maple/Poplar/Maple",
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "Poplar",
+        "shellMaterial3": "Maple",
+        "reinforcementRings": "7-ply maple reinforcement rings",
+        "bearingEdgeDetail": "Los Angeles bearing edge",
+        "hoopType": "2.3mm triple-flanged",
+        "lugCount": 8,
+        "throwOffModel": "INDe SB1",
+        "stockHeadBrand": "Remo",
+        "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+        "coreFieldEnrichmentBatch": "maple_14x65_first_source_enrichment",
+        "coreFieldEnrichmentNeedsReview": true
+      },
+      "confidence": {
+        "plyCount": "high",
+        "shellLayup": "high",
+        "shellMaterial2": "high",
+        "shellMaterial3": "high",
+        "reinforcementRings": "high",
+        "bearingEdgeDetail": "high",
+        "hoopType": "high",
+        "lugCount": "medium",
+        "throwOffModel": "medium",
+        "stockHeadBrand": "medium"
+      },
+      "sourceUrls": [
+        "https://www.candcdrumsusa.com/12th-and-vine",
+        "https://timpano-percussion.com/products/caisse-claire-c-c-6-5x14-12th-vine-maple-poplar-maple-green-gold-painted-sparkle-gloss",
+        "https://reverb.com/item/71209590-snares-c-c-drum-co-6-5x14-12th-vine-maple-poplar-maple-sea-foam-green"
+      ],
+      "candidates": [
+        {
+          "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+          "identity": {
+            "companyName": "C&C Drums USA",
+            "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5",
+            "diameter": 14,
+            "depth": 6.5,
+            "shellMaterial1": "Maple",
+            "shellConstruction": "Ply",
+            "shellThicknessMm": 6
+          },
+          "proposedDiff": {
+            "plyCount": {
+              "before": null,
+              "after": 5
+            },
+            "shellLayup": {
+              "before": null,
+              "after": "Maple/Poplar/Maple"
+            },
+            "reinforcementRings": {
+              "before": false,
+              "after": "7-ply maple reinforcement rings"
+            },
+            "bearingEdgeDetail": {
+              "before": null,
+              "after": "Los Angeles bearing edge"
+            },
+            "throwOffModel": {
+              "before": null,
+              "after": "INDe SB1"
+            },
+            "stockHeadBrand": {
+              "before": null,
+              "after": "Remo"
+            },
+            "coreFieldEnrichmentStatus": {
+              "before": null,
+              "after": "source_backed_partial_core_enrichment"
+            },
+            "coreFieldEnrichmentBatch": {
+              "before": null,
+              "after": "maple_14x65_first_source_enrichment"
+            },
+            "coreFieldEnrichmentNeedsReview": {
+              "before": null,
+              "after": true
+            }
+          },
+          "currentCoreFields": {
+            "plyCount": "",
+            "shellLayup": "",
+            "shellMaterial1": "Maple",
+            "shellMaterial2": "Poplar",
+            "shellMaterial3": "Maple",
+            "reinforcementRings": "",
+            "bearingEdgeDetail": "",
+            "hoopType": "2.3mm triple-flanged",
+            "lugCount": 8,
+            "throwOffModel": "",
+            "stockHeadBrand": "",
+            "coreFieldEnrichmentStatus": "",
+            "coreFieldEnrichmentBatch": "",
+            "coreFieldEnrichmentNeedsReview": ""
+          }
+        }
+      ]
+    },
+    {
+      "status": "EXACT_SINGLE_MATCH_DRY_RUN_ONLY",
+      "matchCount": 1,
+      "selector": {
+        "companyName": "Ludwig",
+        "modelName": "Legacy Maple 6.5x14"
+      },
+      "writeIntent": {
+        "plyCount": 3,
+        "shellLayup": "Maple/Poplar/Maple",
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "Poplar",
+        "shellMaterial3": "Maple",
+        "reinforcementRings": "1/4 inch solid maple reinforcement rings",
+        "bearingEdgeDetail": "30-degree inner cut with 1/4 inch radius roundover",
+        "shellTreatment": "cross-laminated 3-ply shell with reinforcement rings",
+        "coreFieldEnrichmentStatus": "source_backed_partial_core_enrichment",
+        "coreFieldEnrichmentBatch": "maple_14x65_first_source_enrichment",
+        "coreFieldEnrichmentNeedsReview": true
+      },
+      "confidence": {
+        "plyCount": "high",
+        "shellLayup": "high",
+        "shellMaterial2": "high",
+        "shellMaterial3": "high",
+        "reinforcementRings": "high",
+        "bearingEdgeDetail": "high",
+        "shellTreatment": "medium"
+      },
+      "sourceUrls": [
+        "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums/legacy",
+        "https://www.2112percussion.com/ludwig-legacy-maple-65x14-snare-drum-silver-sparkl.html",
+        "https://www.ludwig-drums.com/application/files/8014/6531/8324/AV8147_2013.pdf"
+      ],
+      "candidates": [
+        {
+          "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+          "identity": {
+            "companyName": "Ludwig",
+            "modelName": "Legacy Maple 6.5x14",
+            "diameter": 14,
+            "depth": 6.5,
+            "shellMaterial1": "Maple",
+            "shellConstruction": "ply with reinforcement rings",
+            "shellThicknessMm": 6.35
+          },
+          "proposedDiff": {
+            "plyCount": {
+              "before": null,
+              "after": 3
+            },
+            "shellLayup": {
+              "before": null,
+              "after": "Maple/Poplar/Maple"
+            },
+            "shellMaterial3": {
+              "before": "none",
+              "after": "Maple"
+            },
+            "reinforcementRings": {
+              "before": true,
+              "after": "1/4 inch solid maple reinforcement rings"
+            },
+            "bearingEdgeDetail": {
+              "before": null,
+              "after": "30-degree inner cut with 1/4 inch radius roundover"
+            },
+            "shellTreatment": {
+              "before": null,
+              "after": "cross-laminated 3-ply shell with reinforcement rings"
+            },
+            "coreFieldEnrichmentStatus": {
+              "before": null,
+              "after": "source_backed_partial_core_enrichment"
+            },
+            "coreFieldEnrichmentBatch": {
+              "before": null,
+              "after": "maple_14x65_first_source_enrichment"
+            },
+            "coreFieldEnrichmentNeedsReview": {
+              "before": null,
+              "after": true
+            }
+          },
+          "currentCoreFields": {
+            "plyCount": "",
+            "shellLayup": "",
+            "shellMaterial1": "Maple",
+            "shellMaterial2": "Poplar",
+            "shellMaterial3": "none",
+            "reinforcementRings": true,
+            "bearingEdgeDetail": "",
+            "hoopType": "triple-flanged steel",
+            "lugCount": 10,
+            "throwOffModel": "",
+            "stockHeadBrand": "",
+            "coreFieldEnrichmentStatus": "",
+            "coreFieldEnrichmentBatch": "",
+            "coreFieldEnrichmentNeedsReview": ""
+          }
+        }
+      ]
+    }
+  ],
+  "nextStep": "Review proposed diffs, then create an apply script with an explicit confirmation gate."
+}
