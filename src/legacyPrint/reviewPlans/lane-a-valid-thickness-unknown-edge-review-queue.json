@@ -1,0 +1,2317 @@
+{
+  "generatedAt": "2026-05-21T07:52:08.451Z",
+  "sourceAuditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T07-48-47-433Z.json",
+  "status": "LANE_A_VALID_THICKNESS_UNKNOWN_EDGE_REVIEW_QUEUE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "rawCandidateHits": 155,
+    "dedupedCandidateCount": 103,
+    "expectedCandidateCount": 103,
+    "candidateCountMatchesAudit": true,
+    "groupCount": 26,
+    "topGroups": [
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Black Panther Archive / Catalog Era",
+        "shellMaterial": "Maple",
+        "count": 22,
+        "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Black Panther Archive / Catalog Era",
+        "shellMaterial": "Cherry",
+        "count": 11,
+        "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Black Panther Archive / Catalog Era",
+        "shellMaterial": "Maple / Walnut",
+        "count": 11,
+        "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Black Panther Archive / Catalog Era",
+        "shellMaterial": "Birch",
+        "count": 11,
+        "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Black Panther Archive / Catalog Era",
+        "shellMaterial": "Walnut",
+        "count": 11,
+        "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf"
+      },
+      {
+        "companyName": "Pearl",
+        "lineSeries": "Modern Utility",
+        "shellMaterial": "Maple",
+        "count": 4,
+        "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility"
+      },
+      {
+        "companyName": "Yamaha",
+        "lineSeries": "Metal Snare",
+        "shellMaterial": "Brass",
+        "count": 4,
+        "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660"
+      },
+      {
+        "companyName": "Yamaha",
+        "lineSeries": "Metal Snare",
+        "shellMaterial": "Steel",
+        "count": 4,
+        "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660"
+      },
+      {
+        "companyName": "DW / PDP",
+        "lineSeries": "Design Series",
+        "shellMaterial": "Maple",
+        "count": 3,
+        "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/"
+      },
+      {
+        "companyName": "Canopus",
+        "lineSeries": "Session Superior",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/"
+      },
+      {
+        "companyName": "Canopus",
+        "lineSeries": "MO",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+      },
+      {
+        "companyName": "Pearl",
+        "lineSeries": "Decade Maple",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf"
+      },
+      {
+        "companyName": "Pearl",
+        "lineSeries": "Masters Maple Complete",
+        "shellMaterial": "Maple",
+        "count": 2,
+        "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf"
+      },
+      {
+        "companyName": "Yamaha",
+        "lineSeries": "Rydeen / Gigmaker Kit Snare",
+        "shellMaterial": "Steel",
+        "count": 2,
+        "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf"
+      },
+      {
+        "companyName": "Canopus",
+        "lineSeries": "Zelkova GINRAN",
+        "shellMaterial": "Zelkova",
+        "count": 1,
+        "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/"
+      },
+      {
+        "companyName": "Ludwig",
+        "lineSeries": "Jazz Fest Series",
+        "shellMaterial": "Mahogany / Poplar",
+        "count": 1,
+        "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "BP Design Lab",
+        "shellMaterial": "Maple",
+        "count": 1,
+        "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Signature / Artist",
+        "shellMaterial": "Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Signature / Artist",
+        "shellMaterial": "Maple / Walnut",
+        "count": 1,
+        "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums"
+      },
+      {
+        "companyName": "Mapex",
+        "lineSeries": "Black Panther Archive / Unresolved Variant",
+        "shellMaterial": "Birch",
+        "count": 1,
+        "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues"
+      }
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "count": 22,
+      "models": [
+        "Birdseye Maple 10x5.5",
+        "Birdseye Maple 12x5.5",
+        "Birdseye Maple 13x3.5",
+        "Birdseye Maple 13x6",
+        "Birdseye Maple 14x3.5",
+        "Birdseye Maple 14x5",
+        "Birdseye Maple 14x5.5",
+        "Birdseye Maple 14x6",
+        "Birdseye Maple 14x6.5",
+        "Birdseye Maple 14x7",
+        "Birdseye Maple 14x8",
+        "Traditional Maple 10x5.5",
+        "Traditional Maple 12x5.5",
+        "Traditional Maple 13x3.5",
+        "Traditional Maple 13x6",
+        "Traditional Maple 14x3.5",
+        "Traditional Maple 14x5",
+        "Traditional Maple 14x5.5",
+        "Traditional Maple 14x6",
+        "Traditional Maple 14x6.5",
+        "Traditional Maple 14x7",
+        "Traditional Maple 14x8"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_1afd6637",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 10x5.5 — 10x5.5",
+          "modelName": "Birdseye Maple 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_32834c16",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 12x5.5 — 12x5.5",
+          "modelName": "Birdseye Maple 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_660d6a7a",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 13x3.5 — 13x3.5",
+          "modelName": "Birdseye Maple 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_8a3037b8",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 13x6 — 13x6",
+          "modelName": "Birdseye Maple 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_651fd6a6",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x3.5 — 14x3.5",
+          "modelName": "Birdseye Maple 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_84920af3",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x5 — 14x5",
+          "modelName": "Birdseye Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_0510b806",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x5.5 — 14x5.5",
+          "modelName": "Birdseye Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_e90417d8",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x6 — 14x6",
+          "modelName": "Birdseye Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-m_6360a353",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x6.5 — 14x6.5",
+          "modelName": "Birdseye Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_275b5b6f",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x7 — 14x7",
+          "modelName": "Birdseye Maple 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_birdseye-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-model_1d3f3ab0",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Birdseye Maple 14x8 — 14x8",
+          "modelName": "Birdseye Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-10x5-5_10x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_930c6624",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 10x5.5 — 10x5.5",
+          "modelName": "Traditional Maple 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-12x5-5_12x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_2c40e1f9",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 12x5.5 — 12x5.5",
+          "modelName": "Traditional Maple 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-13x3-5_13x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_5383317a",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 13x3.5 — 13x3.5",
+          "modelName": "Traditional Maple 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-13x6_13x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_5db1a4e3",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 13x6 — 13x6",
+          "modelName": "Traditional Maple 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x3-5_14x3-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_31e5a92e",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x3.5 — 14x3.5",
+          "modelName": "Traditional Maple 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x5_14x5_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_76a906a9",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x5 — 14x5",
+          "modelName": "Traditional Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x5-5_14x5-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_fb6c5486",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x5.5 — 14x5.5",
+          "modelName": "Traditional Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x6_14x6_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_df9bbe52",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x6 — 14x6",
+          "modelName": "Traditional Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x6-5_14x6-5_ply_maple_5-1_wax-lacquer-plated-finish-varies-b_286c4353",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x6.5 — 14x6.5",
+          "modelName": "Traditional Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x7_14x7_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_d6f2947b",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x7 — 14x7",
+          "modelName": "Traditional Maple 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-maple-14x8_14x8_ply_maple_5-1_wax-lacquer-plated-finish-varies-by-mo_0acc3d56",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Maple 14x8 — 14x8",
+          "modelName": "Traditional Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Cherry",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "count": 11,
+      "models": [
+        "Cherry Maple 10x5.5",
+        "Cherry Maple 12x5.5",
+        "Cherry Maple 13x3.5",
+        "Cherry Maple 13x6",
+        "Cherry Maple 14x3.5",
+        "Cherry Maple 14x5",
+        "Cherry Maple 14x5.5",
+        "Cherry Maple 14x6",
+        "Cherry Maple 14x6.5",
+        "Cherry Maple 14x7",
+        "Cherry Maple 14x8"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-10x5-5_10x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_50190efd",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 10x5.5 — 10x5.5",
+          "modelName": "Cherry Maple 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-12x5-5_12x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c3ab9bb8",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 12x5.5 — 12x5.5",
+          "modelName": "Cherry Maple 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-13x3-5_13x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_8aadacfb",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 13x3.5 — 13x3.5",
+          "modelName": "Cherry Maple 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-13x6_13x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__b61143bf",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 13x6 — 13x6",
+          "modelName": "Cherry Maple 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x3-5_14x3-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_5245cedf",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x3.5 — 14x3.5",
+          "modelName": "Cherry Maple 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x5_14x5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__28937416",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x5 — 14x5",
+          "modelName": "Cherry Maple 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x5-5_14x5-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_06608ee6",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x5.5 — 14x5.5",
+          "modelName": "Cherry Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x6_14x6_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__6f90c3f3",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x6 — 14x6",
+          "modelName": "Cherry Maple 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x6-5_14x6-5_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-mo_c000021b",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x6.5 — 14x6.5",
+          "modelName": "Cherry Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x7_14x7_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__880e2c2b",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x7 — 14x7",
+          "modelName": "Cherry Maple 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_cherry-maple-14x8_14x8_ply_cherry_5-1_wax-lacquer-plated-finish-varies-by-model__ceae8b7f",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Cherry Maple 14x8 — 14x8",
+          "modelName": "Cherry Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Maple / Walnut",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "count": 11,
+      "models": [
+        "Maple/Walnut Hybrid 10x5.5",
+        "Maple/Walnut Hybrid 12x5.5",
+        "Maple/Walnut Hybrid 13x3.5",
+        "Maple/Walnut Hybrid 13x6",
+        "Maple/Walnut Hybrid 14x3.5",
+        "Maple/Walnut Hybrid 14x5",
+        "Maple/Walnut Hybrid 14x5.5",
+        "Maple/Walnut Hybrid 14x6",
+        "Maple/Walnut Hybrid 14x6.5",
+        "Maple/Walnut Hybrid 14x7",
+        "Maple/Walnut Hybrid 14x8"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-10x5-5_10x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_7bf51930",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 10x5.5 — 10x5.5",
+          "modelName": "Maple/Walnut Hybrid 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-12x5-5_12x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_046f0252",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 12x5.5 — 12x5.5",
+          "modelName": "Maple/Walnut Hybrid 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x3-5_13x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_ac6f2d45",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 13x3.5 — 13x3.5",
+          "modelName": "Maple/Walnut Hybrid 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-13x6_13x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_6d456c8f",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 13x6 — 13x6",
+          "modelName": "Maple/Walnut Hybrid 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x3-5_14x3-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_3b4ef804",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x3.5 — 14x3.5",
+          "modelName": "Maple/Walnut Hybrid 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5_14x5_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_183813ef",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x5 — 14x5",
+          "modelName": "Maple/Walnut Hybrid 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x5-5_14x5-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_4a6c51c4",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x5.5 — 14x5.5",
+          "modelName": "Maple/Walnut Hybrid 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6_14x6_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_20791d4c",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x6 — 14x6",
+          "modelName": "Maple/Walnut Hybrid 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x6-5_14x6-5_ply_maple-walnut_5-1_wax-lacquer-plated-finish_fb67a806",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x6.5 — 14x6.5",
+          "modelName": "Maple/Walnut Hybrid 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x7_14x7_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_a9d7b96a",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x7 — 14x7",
+          "modelName": "Maple/Walnut Hybrid 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_maple-walnut-hybrid-14x8_14x8_ply_maple-walnut_5-1_wax-lacquer-plated-finish-var_b02c0f59",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Maple/Walnut Hybrid 14x8 — 14x8",
+          "modelName": "Maple/Walnut Hybrid 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "count": 11,
+      "models": [
+        "Traditional Birch 10x5.5",
+        "Traditional Birch 12x5.5",
+        "Traditional Birch 13x3.5",
+        "Traditional Birch 13x6",
+        "Traditional Birch 14x3.5",
+        "Traditional Birch 14x5",
+        "Traditional Birch 14x5.5",
+        "Traditional Birch 14x6",
+        "Traditional Birch 14x6.5",
+        "Traditional Birch 14x7",
+        "Traditional Birch 14x8"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-10x5-5_10x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_f8d6787f",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 10x5.5 — 10x5.5",
+          "modelName": "Traditional Birch 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-12x5-5_12x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_144cf130",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 12x5.5 — 12x5.5",
+          "modelName": "Traditional Birch 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-13x3-5_13x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_b7c3bf1b",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 13x3.5 — 13x3.5",
+          "modelName": "Traditional Birch 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-13x6_13x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_0855714e",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 13x6 — 13x6",
+          "modelName": "Traditional Birch 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x3-5_14x3-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_a7697e14",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x3.5 — 14x3.5",
+          "modelName": "Traditional Birch 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x5_14x5_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_d8bf5a00",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x5 — 14x5",
+          "modelName": "Traditional Birch 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x5-5_14x5-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_362d3ef6",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x5.5 — 14x5.5",
+          "modelName": "Traditional Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x6_14x6_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_cab119f9",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x6 — 14x6",
+          "modelName": "Traditional Birch 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x6-5_14x6-5_ply_birch_5-1_wax-lacquer-plated-finish-varies-b_22b9d27c",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x6.5 — 14x6.5",
+          "modelName": "Traditional Birch 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x7_14x7_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_b522c843",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x7 — 14x7",
+          "modelName": "Traditional Birch 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-birch-14x8_14x8_ply_birch_5-1_wax-lacquer-plated-finish-varies-by-mo_9bd3e00c",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Birch 14x8 — 14x8",
+          "modelName": "Traditional Birch 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Catalog Era",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+      "sourceConfidence": "Medium",
+      "count": 11,
+      "models": [
+        "Traditional Walnut 10x5.5",
+        "Traditional Walnut 12x5.5",
+        "Traditional Walnut 13x3.5",
+        "Traditional Walnut 13x6",
+        "Traditional Walnut 14x3.5",
+        "Traditional Walnut 14x5",
+        "Traditional Walnut 14x5.5",
+        "Traditional Walnut 14x6",
+        "Traditional Walnut 14x6.5",
+        "Traditional Walnut 14x7",
+        "Traditional Walnut 14x8"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-10x5-5_10x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0ba7807b",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 10x5.5 — 10x5.5",
+          "modelName": "Traditional Walnut 10x5.5",
+          "diameter": "10",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-12x5-5_12x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_a3b9d1ed",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 12x5.5 — 12x5.5",
+          "modelName": "Traditional Walnut 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-13x3-5_13x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_0a4b58a0",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 13x3.5 — 13x3.5",
+          "modelName": "Traditional Walnut 13x3.5",
+          "diameter": "13",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-13x6_13x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_3af34747",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 13x6 — 13x6",
+          "modelName": "Traditional Walnut 13x6",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x3-5_14x3-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_4304f419",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x3.5 — 14x3.5",
+          "modelName": "Traditional Walnut 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5_14x5_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_ce744bcc",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x5 — 14x5",
+          "modelName": "Traditional Walnut 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x5-5_14x5-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_8cfdfe29",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x5.5 — 14x5.5",
+          "modelName": "Traditional Walnut 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6_14x6_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_a7826012",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x6 — 14x6",
+          "modelName": "Traditional Walnut 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x6-5_14x6-5_ply_walnut_5-1_wax-lacquer-plated-finish-varies_36f2a461",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x6.5 — 14x6.5",
+          "modelName": "Traditional Walnut 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x7_14x7_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_6931a70f",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x7 — 14x7",
+          "modelName": "Traditional Walnut 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "mapex_black-panther-archive-catalog-era_traditional-walnut-14x8_14x8_ply_walnut_5-1_wax-lacquer-plated-finish-varies-by-_cdbbbcaa",
+          "label": "Mapex — Black Panther Archive / Catalog Era — Traditional Walnut 14x8 — 14x8",
+          "modelName": "Traditional Walnut 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexblackpanther.com/images/catalogues/2007_Mapex_Black_Panther_Catalogue.pdf",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Modern Utility",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+      "sourceConfidence": "Medium",
+      "count": 4,
+      "models": [
+        "Modern Utility Maple"
+      ],
+      "records": [
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_13x7_ply_maple_5-4_triple-flanged-superhoop-style_3a6dee18",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 13x7",
+          "modelName": "Modern Utility Maple",
+          "diameter": "13",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_14x5-5_ply_maple_5-4_triple-flanged-superhoop-style_8a8b4eb5",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 14x5.5",
+          "modelName": "Modern Utility Maple",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_14x6-5_ply_maple_5-4_triple-flanged-superhoop-style_459e9ea5",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 14x6.5",
+          "modelName": "Modern Utility Maple",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pearl_modern-utility_modern-utility-maple_14x8_ply_maple_5-4_triple-flanged-superhoop-style_ed273ddc",
+          "label": "Pearl — Modern Utility — Modern Utility Maple — 14x8",
+          "modelName": "Modern Utility Maple",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/en/products/snares/modern-utility",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Metal Snare",
+      "shellMaterial": "Brass",
+      "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+      "sourceConfidence": "Low",
+      "count": 4,
+      "models": [
+        "Yamaha Brass Metal Snare 14x3.5",
+        "Yamaha Brass Metal Snare 14x4",
+        "Yamaha Brass Metal Snare 14x5.5",
+        "Yamaha Brass Metal Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Brass Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1.2",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x4 — 14x4",
+          "modelName": "Yamaha Brass Metal Snare 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1.2",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Brass Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1.2",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+          "label": "Yamaha — Metal Snare — Yamaha Brass Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Brass Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1.2,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1.2",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Metal Snare",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+      "sourceConfidence": "Low",
+      "count": 4,
+      "models": [
+        "Yamaha Steel Metal Snare 14x3.5",
+        "Yamaha Steel Metal Snare 14x4",
+        "Yamaha Steel Metal Snare 14x5.5",
+        "Yamaha Steel Metal Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Steel Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x4 — 14x4",
+          "modelName": "Yamaha Steel Metal Snare 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Steel Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e",
+          "label": "Yamaha — Metal Snare — Yamaha Steel Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Steel Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+      "sourceConfidence": "High",
+      "count": 3,
+      "models": [
+        "Design Series Maple 14x5.5",
+        "Design Series Maple 14x6.5",
+        "Design Series Maple 14x8"
+      ],
+      "records": [
+        {
+          "id": "dw-pdp_design-series_design-series-maple-14x5-5_14x5-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_d1952e59",
+          "label": "DW / PDP — Design Series — Design Series Maple 14x5.5 — 14x5.5",
+          "modelName": "Design Series Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "7.9",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "60-degree snare edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "dw-pdp_design-series_design-series-maple-14x6-5_14x6-5_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flang_0c459b55",
+          "label": "DW / PDP — Design Series — Design Series Maple 14x6.5 — 14x6.5",
+          "modelName": "Design Series Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "7.9",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "60-degree snare edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "dw-pdp_design-series_design-series-maple-14x8_14x8_ply_maple_7-9_60-degree-snare-edge_lacquer_true-hoop-triple-flanged_41f1bca1",
+          "label": "DW / PDP — Design Series — Design Series Maple 14x8 — 14x8",
+          "modelName": "Design Series Maple 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply HVLT / 1/32 inch plies\",\"shellThicknessMm\":7.9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "7.9",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "60-degree snare edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.dwdrums.com/drums/design-series/",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Session Superior",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+      "sourceConfidence": "High",
+      "count": 2,
+      "models": [
+        "Session Superior Maple 14x5.5",
+        "Session Superior Maple 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "canopus_session-superior_session-superior-maple-14x5-5_14x5-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1455_0c997611",
+          "label": "Canopus — Session Superior — Session Superior Maple 14x5.5 — 14x5.5",
+          "modelName": "Session Superior Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply Asian Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "8",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+          "sourceConfidence": "High"
+        },
+        {
+          "id": "canopus_session-superior_session-superior-maple-14x6-5_14x6-5_ply_maple_8_acrylic-uv-lacquer_steel-2mm-8h_sm-1465_dde28ac7",
+          "label": "Canopus — Session Superior — Session Superior Maple 14x6.5 — 14x6.5",
+          "modelName": "Session Superior Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"10-ply Asian Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "8",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://canopusdrums.com/en/product/session-superior-snaredrum/",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "MO",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "MO Snare 14x5.5",
+        "MO Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "canopus_mo_mo-snare-14x5-5_14x5-5_ply_maple_8_a67de129",
+          "label": "Canopus — MO — MO Snare 14x5.5 — 14x5.5",
+          "modelName": "MO Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"12-ply Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "8",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "canopus_mo_mo-snare-14x6-5_14x6-5_ply_maple_8_202689c8",
+          "label": "Canopus — MO — MO Snare 14x6.5 — 14x6.5",
+          "modelName": "MO Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"12-ply Maple\",\"shellThicknessMm\":8,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "8",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Decade Maple",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Decade Maple Maple Snare"
+      ],
+      "records": [
+        {
+          "id": "pearl_decade-maple_decade-maple-maple-snare_14x5-5_ply_maple_5-4_triple-flanged_93606d23",
+          "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x5.5",
+          "modelName": "Decade Maple Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pearl_decade-maple_decade-maple-maple-snare_14x6-5_ply_maple_5-4_triple-flanged_c40247fa",
+          "label": "Pearl — Decade Maple — Decade Maple Maple Snare — 14x6.5",
+          "modelName": "Decade Maple Maple Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/GENERAL%26SPARE%20PARTS%20CATALOG/Pearl2025GeneralCatalog%28PMI%29%20%281%29.pdf",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Pearl",
+      "lineSeries": "Masters Maple Complete",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+      "sourceConfidence": "Medium",
+      "count": 2,
+      "models": [
+        "Masters Maple Complete Maple Snare"
+      ],
+      "records": [
+        {
+          "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x5-5_ply_maple_5-4_mastercast-die-cast_b6c83fa7",
+          "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x5.5",
+          "modelName": "Masters Maple Complete Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+          "sourceConfidence": "Medium"
+        },
+        {
+          "id": "pearl_masters-maple-complete_masters-maple-complete-maple-snare_14x6-5_ply_maple_5-4_mastercast-die-cast_cd61ffe8",
+          "label": "Pearl — Masters Maple Complete — Masters Maple Complete Maple Snare — 14x6.5",
+          "modelName": "Masters Maple Complete Maple Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":5.4,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.4",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://pearldrum.com/sites/default/files/image_folder/SUPPORT/PRICE%20LIST/2010-price-list.pdf",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Rydeen / Gigmaker Kit Snare",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+      "sourceConfidence": "Low",
+      "count": 2,
+      "models": [
+        "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+        "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+          "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5 — 14x5.5",
+          "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Low"
+        },
+        {
+          "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002",
+          "label": "Yamaha — Rydeen / Gigmaker Kit Snare — Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5 — 14x6.5",
+          "modelName": "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "shellMaterial": "Zelkova",
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Zelkova GINRAN"
+      ],
+      "records": [
+        {
+          "id": "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a",
+          "label": "Canopus — Zelkova GINRAN — Zelkova GINRAN — 14x6.5",
+          "modelName": "Zelkova GINRAN",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Zelkova\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"One-piece hollowed\",\"shellThicknessMm\":14,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "14",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Jazz Fest Series",
+      "shellMaterial": "Mahogany / Poplar",
+      "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Jazz Fest Series 5.5x14"
+      ],
+      "records": [
+        {
+          "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+          "label": "Ludwig — Jazz Fest Series — Jazz Fest Series 5.5x14 — 14x5.5",
+          "modelName": "Jazz Fest Series 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply Legacy Mahogany shell\",\"shellThicknessMm\":6,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "6",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Ludwig USA bearing edge / not specified",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+      "sourceConfidence": "High",
+      "count": 1,
+      "models": [
+        "Equinox"
+      ],
+      "records": [
+        {
+          "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+          "label": "Mapex — BP Design Lab — Equinox — 14x5",
+          "modelName": "Equinox",
+          "diameter": "14",
+          "depth": "5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":6,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "6",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Unknown / classic-style edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+          "sourceConfidence": "High"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Chris Adler Original 12x5.5"
+      ],
+      "records": [
+        {
+          "id": "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6",
+          "label": "Mapex — Signature / Artist — Chris Adler Original 12x5.5 — 12x5.5",
+          "modelName": "Chris Adler Original 12x5.5",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Maple / Walnut",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Chris Adler Warbird"
+      ],
+      "records": [
+        {
+          "id": "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a",
+          "label": "Mapex — Signature / Artist — Chris Adler Warbird — 12x5.5",
+          "modelName": "Chris Adler Warbird",
+          "diameter": "12",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Unresolved Birch Variant 2"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Birch Variant 2 — 14x6.5",
+          "modelName": "Unresolved Birch Variant 2",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Unresolved Maple Variant 1"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Maple Variant 1 — 14x5.5",
+          "modelName": "Unresolved Maple Variant 1",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Unresolved Walnut Variant 3"
+      ],
+      "records": [
+        {
+          "id": "mapex_black-panther-archive-unresolved-variant_unresolved-walnut-variant-3_13x6_ply_walnut_5-1_2-3mm-powerhoops_bp-unr-0_234e5159",
+          "label": "Mapex — Black Panther Archive / Unresolved Variant — Unresolved Walnut Variant 3 — 13x6",
+          "modelName": "Unresolved Walnut Variant 3",
+          "diameter": "13",
+          "depth": "6",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":5.1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "5.1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low"
+        }
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Maple Max 7x14"
+      ],
+      "records": [
+        {
+          "id": "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150",
+          "label": "Pork Pie Percussion — USA Custom — Maple Max 7x14 — 14x7",
+          "modelName": "Maple Max 7x14",
+          "diameter": "14",
+          "depth": "7",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple Max shell\",\"shellThicknessMm\":9,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "9",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://porkpiedrums.com/products/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "S.L.P.",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "S.L.P. Duo Birch LBH1410L 14x10"
+      ],
+      "records": [
+        {
+          "id": "tama_s-l-p_s-l-p-duo-birch-lbh1410l-14x10_14x10_ply_birch_lacquer_triple-flange-sound-arc-style_lbh1410l_38db7013",
+          "label": "Tama — S.L.P. — S.L.P. Duo Birch LBH1410L 14x10 — 14x10",
+          "modelName": "S.L.P. Duo Birch LBH1410L 14x10",
+          "diameter": "14",
+          "depth": "10",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "7",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.tama.com/usa/products/search/snare_drums/list/",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Tama",
+      "lineSeries": "STAR Reserve",
+      "shellMaterial": "African Mahogany",
+      "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "STAR Reserve G-Mahogany 14x6.5"
+      ],
+      "records": [
+        {
+          "id": "tama_star-reserve_star-reserve-g-mahogany-14x6-5_14x6-5_ply_mahogany_lacquer_a6294219",
+          "label": "Tama — STAR Reserve — STAR Reserve G-Mahogany 14x6.5 — 14x6.5",
+          "modelName": "STAR Reserve G-Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "9",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"notes\":\"unknown\",\"confidence\":\"Low\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://www.guitarcenter.com/TAMA/snare-drums.gc",
+          "sourceConfidence": "Medium"
+        }
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Gigmaker / Entry Steel",
+      "shellMaterial": "Steel",
+      "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Gigmaker / Entry Steel Steel Snare 14x5.5"
+      ],
+      "records": [
+        {
+          "id": "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc",
+          "label": "Yamaha — Gigmaker / Entry Steel — Gigmaker / Entry Steel Steel Snare 14x5.5 — 14x5.5",
+          "modelName": "Gigmaker / Entry Steel Steel Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":1,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "1",
+          "shellThicknessQualityTier": "VALID_NUMERIC_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "missingForCoreShell": [
+            "meaningful bearing edge shape/detail"
+          ],
+          "primarySourceUrl": "https://jedistar.com/pdf/yamaha/yamaha_drum_catalog_2013.pdf",
+          "sourceConfidence": "Low"
+        }
+      ]
+    }
+  ]
+}
