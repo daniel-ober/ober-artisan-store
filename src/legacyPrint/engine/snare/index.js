@@ -83,6 +83,22 @@ const {
 
 } = require('./findSimilarSnareVoices');
 
+const {
+
+  groupSimilarSnareVoiceMatches,
+
+  getModelSimilarity,
+
+  isSameFamily,
+
+  isNearDuplicate,
+
+  isSameMaterial,
+
+  isSameConstruction
+
+} = require('./groupSimilarSnareVoiceMatches');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -135,7 +151,19 @@ module.exports = {
 
   getNodeDeltaSummary,
 
-  getSharedTopNodes
+  getSharedTopNodes,
+
+  groupSimilarSnareVoiceMatches,
+
+  getModelSimilarity,
+
+  isSameFamily,
+
+  isNearDuplicate,
+
+  isSameMaterial,
+
+  isSameConstruction
 
 };
 
