@@ -1,0 +1,240 @@
+{
+  "status": "LEGACYPRINT_FIRESTORE_CLOSEOUT_QUICK_AUDIT_NO_WRITES",
+  "generatedAt": "2026-05-21T09:54:52.525Z",
+  "firestoreWrites": 0,
+  "dashboardNextLanes": [
+    {
+      "rank": 1,
+      "lane": "Manual source-backed stock-head review",
+      "targetCount": 51,
+      "artifact": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md",
+      "topGroups": [
+        {
+          "companyName": "AHEAD",
+          "lineSeries": "Ahead Snares",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 28,
+          "sourceHosts": {
+            "drumcenternh.com": 1,
+            "bigbangdist.com": 27
+          },
+          "snippetTerms": {
+            "remo": 56,
+            "evans": 28,
+            "aquarian": 56,
+            "drum head": 1,
+            "head": 2,
+            "clear": 50,
+            "drumhead": 31
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "SONOR",
+          "lineSeries": "Kompressor",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 17,
+          "sourceHosts": {
+            "sonor.com": 17
+          },
+          "snippetTerms": {
+            "remo": 34,
+            "drumhead": 17,
+            "head": 68,
+            "heads": 17
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Canopus",
+          "lineSeries": "Zelkova",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 2,
+          "sourceHosts": {
+            "canopusdrums.com": 2
+          },
+          "snippetTerms": {
+            "remo": 2,
+            "clear": 4,
+            "resonance": 10
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Tama",
+          "lineSeries": "Warlord",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 2,
+          "sourceHosts": {
+            "drummagazine.com": 2
+          },
+          "snippetTerms": {
+            "evans": 4,
+            "resonant": 6,
+            "head": 4,
+            "heads": 2
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Canopus",
+          "lineSeries": "Aluminum Alloy",
+          "extractionDecision": "NEEDS_MANUAL_EXACT_HEAD_REVIEW",
+          "candidateCount": 1,
+          "sourceHosts": {
+            "canopusdrums.com": 1
+          },
+          "snippetTerms": {
+            "remo": 1,
+            "coated": 3,
+            "hazy": 1,
+            "head": 3
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        },
+        {
+          "companyName": "Yamaha",
+          "lineSeries": "Absolute Hybrid Maple",
+          "extractionDecision": "PARTIAL_OR_AMBIGUOUS_HEAD_MATCH",
+          "candidateCount": 1,
+          "sourceHosts": {
+            "memphisdrumshop.com": 1
+          },
+          "snippetTerms": {
+            "remo": 6,
+            "evans": 2
+          },
+          "reviewFile": "src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "lane": "Remaining production-status-only cleanup",
+      "targetCount": 0,
+      "byCompany": {}
+    },
+    {
+      "rank": 3,
+      "lane": "Head-only records with no production blocker",
+      "targetCount": 97,
+      "byCompany": {
+        "Tama": 58,
+        "Ludwig": 39
+      }
+    },
+    {
+      "rank": 4,
+      "lane": "Mixed head + production records",
+      "targetCount": 319,
+      "byCompany": {
+        "AHEAD": 33,
+        "Ludwig": 6,
+        "Pork Pie Percussion": 2,
+        "Yamaha": 20,
+        "Pearl": 41,
+        "SONOR": 57,
+        "Craviotto": 2,
+        "Canopus": 18,
+        "Tama": 2,
+        "C&C Drums USA": 3,
+        "DW / PDP": 7,
+        "Gretsch": 7,
+        "Mapex": 101,
+        "Premier": 10,
+        "WorldMax": 10
+      }
+    }
+  ],
+  "engineSummary": {
+    "totalRecords": 1551,
+    "coreShellEngineReady": 0,
+    "stockEngineReady": 0,
+    "corePlusPartialStockReady": 359,
+    "notEngineReady": 1192,
+    "metalEdgeFallbackReady": 187,
+    "exactOrFallbackStockHeadsReady": 1,
+    "withHoopType": 1551,
+    "withSnareWires": 137,
+    "withValidThickness": 466,
+    "withMeaningfulBearingEdge": 723,
+    "totalEngineReady": 359
+  },
+  "confirmedWriteTotalFromFiles": 164,
+  "writeConfirmations": [
+    {
+      "file": "ludwig-head-only-exact-head-write-confirmation.json",
+      "status": "LUDWIG_HEAD_ONLY_EXACT_HEAD_WRITE_CONFIRMATION",
+      "writes": 8
+    },
+    {
+      "file": "metal-edge-fallback-firestore-write-confirmation.json",
+      "status": "METAL_EDGE_FALLBACK_FIRESTORE_WRITE_CONFIRMATION",
+      "writes": 124
+    },
+    {
+      "file": "production-status-only-stock-readiness-write-confirmation.json",
+      "status": "PRODUCTION_STATUS_ONLY_STOCK_READINESS_WRITE_CONFIRMATION",
+      "writes": 27
+    },
+    {
+      "file": "remaining-production-status-only-write-confirmation.json",
+      "status": "REMAINING_PRODUCTION_STATUS_ONLY_WRITE_CONFIRMATION",
+      "writes": 1
+    },
+    {
+      "file": "stock-head-exact-source-backed-write-confirmation.json",
+      "status": "STOCK_HEAD_EXACT_SOURCE_BACKED_WRITE_CONFIRMATION",
+      "writes": 3
+    },
+    {
+      "file": "yamaha-absolute-hybrid-maple-exact-stock-head-write-confirmation.json",
+      "status": "YAMAHA_ABSOLUTE_HYBRID_MAPLE_EXACT_STOCK_HEADS_WRITE_COMPLETE",
+      "writes": 1
+    }
+  ],
+  "pending": [
+    {
+      "file": "stock-head-manual-review-workbench.json",
+      "exists": true,
+      "status": "STOCK_HEAD_MANUAL_REVIEW_WORKBENCH_NO_FIRESTORE_WRITES",
+      "count": 51
+    },
+    {
+      "file": "head-only-stock-readiness-review-packet.json",
+      "exists": true,
+      "status": "HEAD_ONLY_STOCK_READINESS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+      "count": 105
+    },
+    {
+      "file": "head-only-ludwig-source-evidence-packet.json",
+      "exists": true,
+      "status": "HEAD_ONLY_COMPANY_SOURCE_EVIDENCE_PACKET_NO_FIRESTORE_WRITES",
+      "count": 47
+    },
+    {
+      "file": "head-only-tama-source-evidence-packet.json",
+      "exists": true,
+      "status": "HEAD_ONLY_COMPANY_SOURCE_EVIDENCE_PACKET_NO_FIRESTORE_WRITES",
+      "count": 58
+    },
+    {
+      "file": "stock-head-fallback-opportunity-queue-from-firestore.json",
+      "exists": true,
+      "status": "STOCK_HEAD_FALLBACK_OPPORTUNITY_QUEUE_FROM_FIRESTORE_READ_ONLY",
+      "count": 168
+    },
+    {
+      "file": "stock-head-fallback-review-lanes.json",
+      "exists": true,
+      "status": "STOCK_HEAD_FALLBACK_REVIEW_LANES_NO_FIRESTORE_WRITES",
+      "count": 0
+    },
+    {
+      "file": "stock-head-fallback-review-lanes-usable-urls-only.json",
+      "exists": true,
+      "status": "STOCK_HEAD_FALLBACK_REVIEW_LANES_USABLE_URLS_ONLY_NO_FIRESTORE_WRITES",
+      "count": 0
+    }
+  ]
+}

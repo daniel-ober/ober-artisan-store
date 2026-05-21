@@ -1,0 +1,2110 @@
+{
+  "status": "ENGINE_PROMOTABLE_RECORDS_WRITE_COMPLETE",
+  "generatedAt": "2026-05-21T10:05:40.685Z",
+  "approvalEnv": "LEGACYPRINT_APPROVE_FIRESTORE_WRITE=PROMOTE_HEADS_DO_NOT_BLOCK_350",
+  "actualWriteCount": 350,
+  "firestoreWrites": 350,
+  "sourceAudit": "src/legacyPrint/reviewPlans/legacyprint-promotion-audit-heads-do-not-block.json",
+  "records": [
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-dcp-dealer-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_ee3af664",
+      "company": "AHEAD",
+      "model": "Black Chrome Bell Brass 14x6 DCP Dealer Listing",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-bell-brass-14x6-sweetwater-listing_14x6_solid-shell_bell-brass_3_smoke-chrome-black-chro_96b7f44f",
+      "company": "AHEAD",
+      "model": "Black Chrome Bell Brass 14x6 Sweetwater Listing",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-13x6-chrome-hardware_13x6_solid-shell_bell-brass_3_smoke-chrome-black-_3bcc02e1",
+      "company": "AHEAD",
+      "model": "Black Chrome on 3mm Bell Brass 13x6 Chrome Hardware",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-brass-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-c_0e829c16",
+      "company": "AHEAD",
+      "model": "Black Chrome on 3mm Bell Brass 14x6 Brass Hardware",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-3mm-bell-brass-14x6-chrome-hardware_14x6_solid-shell_bell-brass_3_smoke-chrome-black-_c9c366c7",
+      "company": "AHEAD",
+      "model": "Black Chrome on 3mm Bell Brass 14x6 Chrome Hardware",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-14x6-with-black-trick-throw-off_14x6_solid-shell_bell-brass_3_minimal-shal_977be28f",
+      "company": "AHEAD",
+      "model": "Black Chrome on Bell Brass 14x6 with Black Trick Throw Off",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_27b6e2fb",
+      "company": "AHEAD",
+      "model": "Black Chrome on Bell Brass Snare Drum 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_s_1c02f79e",
+      "company": "AHEAD",
+      "model": "Black Chrome on Bell Brass Snare Drum 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-dunnett-throw-off-option_13x6_metal_brass_1_minimal-shallow-snare-beds_smo_aa1358ef",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass 13x6 Dunnett Throw-Off Option",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-13x6-trick-throw-off-option_13x6_metal_brass_1_smoke-chrome-black-chrome_sh138-_ec009377",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass 13x6 Trick Throw-Off Option",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x4-piccolo_14x4_metal_brass_1_smoke-chrome_sh1410-s-hoop-counter-hoops_as414_07617ee1",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass 14x4 Piccolo",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-dunnett-throw-off-option_14x6_metal_brass_1_minimal-shallow-snare-beds_smo_f95fc0e2",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass 14x6 Dunnett Throw-Off Option",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-14x6-trick-throw-off-option_14x6_metal_brass_1_smoke-chrome-black-chrome_sh1410_8581ca8f",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass 14x6 Trick Throw-Off Option",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-piccolo-snare-drum-14x4_14x4_metal_brass_1_minimal-shallow-snare-beds_smoke-chr_2b056559",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass Piccolo Snare Drum 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_03f82188",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass Snare Drum 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_minimal-shallow-snare-beds_smoke-chrome-blac_65f4f28c",
+      "company": "AHEAD",
+      "model": "Black Chrome on Brass Snare Drum 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-13x6-brunson-lug-prototype-planned-variant_13x6_metal_brass_1_black-chrome_sh138-s-hoo_6f6b2e23",
+      "company": "AHEAD",
+      "model": "Black on Brass 13x6 Brunson Lug Prototype/Planned Variant",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-brunson-lug-edition_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_a_da443290",
+      "company": "AHEAD",
+      "model": "Black on Brass 14x6 Brunson Lug Edition",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_black-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_black-chrome_sh1410-s-hoop-counter-hoops_as6_f42b5819",
+      "company": "AHEAD",
+      "model": "Black on Brass 14x6 Tube Lug Original",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-13x6_13x6_solid-shell_bell-brass_3_polished-bell-brass_sh138-s-hoop-co_c8242771",
+      "company": "AHEAD",
+      "model": "Bright Polished 3mm Bell Brass 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_abdf72f8",
+      "company": "AHEAD",
+      "model": "Bright Polished 3mm Bell Brass 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-3mm-bell-brass-piccolo-14x4_14x4_solid-shell_bell-brass_3_polished-bell-brass_sh1410-_afc06b76",
+      "company": "AHEAD",
+      "model": "Bright Polished 3mm Bell Brass Piccolo 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-piccolo-snare-drum-14x4_14x4_solid-shell_bell-brass_3_minimal-shallow-snar_1f582253",
+      "company": "AHEAD",
+      "model": "Bright Polished Bell Brass Piccolo Snare Drum 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-13x6_13x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_p_995d2ac8",
+      "company": "AHEAD",
+      "model": "Bright Polished Bell Brass Snare Drum 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_bright-polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_polished-bell-brass_sh1410-s_421e6cf0",
+      "company": "AHEAD",
+      "model": "Bright Polished Bell Brass Snare Drum 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-13x6-tube-lug-original_13x6_metal_brass_1_chrome_sh138-s-hoop-counter-hoops_asc613_7dac1d72",
+      "company": "AHEAD",
+      "model": "Chrome on Brass 13x6 Tube Lug Original",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-14x6-tube-lug-original_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614_bcd52f08",
+      "company": "AHEAD",
+      "model": "Chrome on Brass 14x6 Tube Lug Original",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-13x6_13x6_metal_brass_1_minimal-shallow-snare-beds_chrome_sh138-s-hoop-cou_2d68cd61",
+      "company": "AHEAD",
+      "model": "Chrome on Brass Snare Drum 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_chrome-on-brass-snare-drum-14x6_14x6_metal_brass_1_chrome_sh1410-s-hoop-counter-hoops_asc614-inferred_0adcb07a",
+      "company": "AHEAD",
+      "model": "Chrome on Brass Snare Drum 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_polished-bell-brass-snare-drum-14x6_14x6_solid-shell_bell-brass_3_minimal-shallow-snare-beds_polished_d1466c71",
+      "company": "AHEAD",
+      "model": "Polished Bell Brass Snare Drum 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-engraved-shell_14x6_metal_titanium_1_engraved-titanium_sh1410-s-hoop-counter-hoops_tita_3a7640dd",
+      "company": "AHEAD",
+      "model": "Titanium 14x6 Engraved Shell",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-14x6-studio-dry-variant_14x6_metal_titanium_1_minimal-shallow-snare-beds_engraved-titanium_s_e5a32ae7",
+      "company": "AHEAD",
+      "model": "Titanium 14x6 Studio Dry Variant",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ahead_ahead-snares_titanium-snare-drum-14x6-with-chrome-trick-throw-off_14x6_metal_titanium_1_minimal-shallow-snare-beds_bc64363e",
+      "company": "AHEAD",
+      "model": "Titanium Snare Drum 14x6 with Chrome Trick Throw Off",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-mahogany-poplar-mahogany-14x6-5_14x6-5_ply_mahogany_poplar_mahogany_6_los-an_b47d879c",
+      "company": "C&C Drums USA",
+      "model": "12th & Vine Mahogany/Poplar/Mahogany 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+      "company": "C&C Drums USA",
+      "model": "12th & Vine Maple/Poplar/Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-walnut-poplar-walnut-14x6-5_14x6-5_ply_walnut_poplar_walnut_6_los-angeles-be_e6594653",
+      "company": "C&C Drums USA",
+      "model": "12th & Vine Walnut/Poplar/Walnut 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_aluminum-alloy_aluminum-alloy-14x6_14x6_metal_aluminum_1_matte-black-coat_steel-1-6mm-10h_aa-1460_3fc0bd87",
+      "company": "Canopus",
+      "model": "Aluminum Alloy 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_manganese-steel_manganese-steel-14x5-5_14x5-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_4ab0877d",
+      "company": "Canopus",
+      "model": "Manganese Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_manganese-steel_manganese-steel-14x6-5_14x6-5_metal_steel_1-2_pearl-nickel-electroplating-with-clear-coat_steel-_00029973",
+      "company": "Canopus",
+      "model": "Manganese Steel 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-10x6_10x6_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-hoop-_ca646a7e",
+      "company": "Canopus",
+      "model": "The Maple 10x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-12x6-5_12x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_power-h_625807fe",
+      "company": "Canopus",
+      "model": "The Maple 12x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-13x6-5_13x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_c5d6734d",
+      "company": "Canopus",
+      "model": "The Maple 13x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x4_14x4_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_264edc8c",
+      "company": "Canopus",
+      "model": "The Maple 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x5-5_14x5-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_8ad3dcc0",
+      "company": "Canopus",
+      "model": "The Maple 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x6-5_14x6-5_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast_a60ce85c",
+      "company": "Canopus",
+      "model": "The Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_the-maple_the-maple-14x8_14x8_ply_maple_5_delicate-precise-canopus-bearing-edge_oil-wrapping-lacquer_diecast-hoo_e7f518b8",
+      "company": "Canopus",
+      "model": "The Maple 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_type-r_type-r-3mm-brass-magnum-14x6-5_14x6-5_metal_brass_3_55dc05bf",
+      "company": "Canopus",
+      "model": "Type-R 3mm Brass Magnum 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_zelkova_zelkova-14x5_14x5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1450_edd9ca5c",
+      "company": "Canopus",
+      "model": "Zelkova 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "canopus_zelkova_zelkova-14x6-5_14x6-5_solid-shell_zelkova_14_custom-sharp-canopus-zelkova-edge_die-cast-8_hs-1465_b4533a82",
+      "company": "Canopus",
+      "model": "Zelkova 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-5-5x14_14x5-5_solid-shell_brass_0-7_metal-bearing-edge-un_e55f06b6",
+      "company": "Craviotto",
+      "model": "Diamond Series Brass 5.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "craviotto_diamond-series-ak-collaboration_diamond-series-brass-6-5x14_14x6-5_solid-shell_brass_0-7_metal-bearing-edge-un_4fe1510c",
+      "company": "Craviotto",
+      "model": "Diamond Series Brass 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+      "company": "DW / PDP",
+      "model": "MFG True-Cast Bell Bronze 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x5-5_14x5-5_metal_bronze_35_machined-bronze_true-cast-hoops_728a797b",
+      "company": "DW / PDP",
+      "model": "MFG True-Cast Bell Bronze 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x6-5_14x6-5_metal_bronze_35_machined-bronze_true-cast-hoops_e7f2b412",
+      "company": "DW / PDP",
+      "model": "MFG True-Cast Bell Bronze 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x8_14x8_metal_bronze_35_machined-bronze_true-cast-hoops_d3a79ae9",
+      "company": "DW / PDP",
+      "model": "MFG True-Cast Bell Bronze 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x5-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_eb8daa4f",
+      "company": "Gretsch",
+      "model": "Brooklyn Chrome-over-Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-steel_14x6-5_metal_steel_1-1_rolled-metal-edge_chrome-over-metal_gretsch-302_1397c712",
+      "company": "Gretsch",
+      "model": "Brooklyn Chrome-over-Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x5-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_f5cb0d30",
+      "company": "Gretsch",
+      "model": "Brooklyn Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_3fecbb47",
+      "company": "Gretsch",
+      "model": "Brooklyn Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x6-5_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-3_1c0dea43",
+      "company": "Gretsch",
+      "model": "Brooklyn Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_brooklyn_brooklyn-snare_14x8_ply_maple_poplar_5-6_30-degree-bearing-edge_nitrocellulose-lacquer-wrap_gretsch-302_8060da8c",
+      "company": "Gretsch",
+      "model": "Brooklyn Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "gretsch_signature_keith-carlock-signature_14x5-5_ply_maple_poplar_5-6_45-degree-bearing-edge_satin-black-metallic_gretsc_c2f28098",
+      "company": "Gretsch",
+      "model": "Keith Carlock Signature",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm400-5x14_14x5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm400_5b6b39de",
+      "company": "Ludwig",
+      "model": "Supraphonic LM400 5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_1963-1970s-ludwig_supraphonic-lm402-6-5x14_14x6-5_metal_aluminum_1-7_chrome-plated-aluminum_triple-flanged_lm402_9ea37a2b",
+      "company": "Ludwig",
+      "model": "Supraphonic LM402 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+      "company": "Ludwig",
+      "model": "Black Beauty 5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_1977-ludwig_black-beauty-super-sensitive-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_31596a99",
+      "company": "Ludwig",
+      "model": "Black Beauty Super Sensitive 5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+      "company": "Ludwig",
+      "model": "Acrolite 5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_acrolite_acrolite-6-5x14_14x6-5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm405_d433e197",
+      "company": "Ludwig",
+      "model": "Acrolite 6.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_artist-signature_carl-palmer-venus-3-7x14_14x3-7_metal_brass_1-2_brass-engraved-or-lacquer_die-cast-or-model-spec_fed485a2",
+      "company": "Ludwig",
+      "model": "Carl Palmer Venus 3.7x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_black-beauty_black-beauty-3-5x14_14x3-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb405_15117f51",
+      "company": "Ludwig",
+      "model": "Black Beauty 3.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_black-beauty_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb416_12ce156e",
+      "company": "Ludwig",
+      "model": "Black Beauty 5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_black-beauty_black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb417_17e1d094",
+      "company": "Ludwig",
+      "model": "Black Beauty 6.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_black-beauty_black-beauty-8x14_14x8_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_lb418_58e49a16",
+      "company": "Ludwig",
+      "model": "Black Beauty 8x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_black-beauty_hammered-black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flanged_l_0de817d8",
+      "company": "Ludwig",
+      "model": "Hammered Black Beauty 5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_black-beauty_hammered-black-beauty-6-5x14_14x6-5_metal_brass_1-2_black-nickel-over-brass_2-3mm-steel-triple-flang_53151aab",
+      "company": "Ludwig",
+      "model": "Hammered Black Beauty 6.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_bronze-phonic_bronze-phonic-5x14_14x5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_bd46a8a2",
+      "company": "Ludwig",
+      "model": "Bronze Phonic 5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_bronze-phonic_bronze-phonic-6-5x14_14x6-5_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a871a9a6",
+      "company": "Ludwig",
+      "model": "Bronze Phonic 6.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_bronze-phonic_bronze-phonic-8x14_14x8_metal_bronze_bronze-finish_2-3mm-steel-triple-flanged_a6213f26",
+      "company": "Ludwig",
+      "model": "Bronze Phonic 8x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_chrome-over-brass_chrome-over-brass-5x14_14x5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb416_1562240c",
+      "company": "Ludwig",
+      "model": "Chrome-Over-Brass 5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_chrome-over-brass_chrome-over-brass-6-5x14_14x6-5_metal_brass_1-2_chrome-over-brass_2-3mm-steel-triple-flanged_lb_9a7efd45",
+      "company": "Ludwig",
+      "model": "Chrome-Over-Brass 6.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_copper-phonic_copper-phonic-5x14_14x5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_ad274a91",
+      "company": "Ludwig",
+      "model": "Copper Phonic 5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_copper-phonic_copper-phonic-6-5x14_14x6-5_metal_copper_copper-finish_2-3mm-steel-triple-flanged_86ad9b07",
+      "company": "Ludwig",
+      "model": "Copper Phonic 6.5x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_copper-phonic_copper-phonic-8x14_14x8_metal_copper_copper-finish_2-3mm-steel-triple-flanged_6aaa8788",
+      "company": "Ludwig",
+      "model": "Copper Phonic 8x14",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "ludwig_hammered-brass_hammered-hammered-brass-5x14_14x5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-triple-f_f8394b69",
+      "company": "Ludwig",
+      "model": "Hammered Brass 5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_hammered-brass_hammered-hammered-brass-6-5x14_14x6-5_metal_brass_1-2_black-nickel-hammered-brass_2-3mm-steel-trip_f29e687f",
+      "company": "Ludwig",
+      "model": "Hammered Brass 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_jazz-fest-series_jazz-fest-series-5-5x14_14x5-5_ply_mahogany-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwi_7eeb3f23",
+      "company": "Ludwig",
+      "model": "Jazz Fest Series 5.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-3-5x14_14x3-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb405_abcf0aca",
+      "company": "Ludwig",
+      "model": "Raw Brass Phonic 3.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-5x14_14x5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb416_0ce69ea8",
+      "company": "Ludwig",
+      "model": "Raw Brass Phonic 5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-6-5x14_14x6-5_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb417_5ff0e776",
+      "company": "Ludwig",
+      "model": "Raw Brass Phonic 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_raw-brass-phonic_raw-brass-phonic-8x14_14x8_metal_brass_1-2_raw-brass_2-3mm-steel-triple-flanged_lb418_94c165bb",
+      "company": "Ludwig",
+      "model": "Raw Brass Phonic 8x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_supralite_supralite-4x14_14x4_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_68bf3402",
+      "company": "Ludwig",
+      "model": "Supralite 4x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_supralite_supralite-5-5x14_14x5-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_b227b9fa",
+      "company": "Ludwig",
+      "model": "Supralite 5.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_supralite_supralite-6-5x14_14x6-5_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-depende_55845dbb",
+      "company": "Ludwig",
+      "model": "Supralite 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_supralite_supralite-6x13_13x6_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_2d2b14fd",
+      "company": "Ludwig",
+      "model": "Supralite 6x13",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_supralite_supralite-8x14_14x8_metal_steel_1_chrome-plated-steel_triple-flanged_ludwig-supralite-model-dependent_f031a7a3",
+      "company": "Ludwig",
+      "model": "Supralite 8x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-5-5x14-die-cast_14x5-5_metal_brass_black-brass_die-cast_lu5514_dcfb34b7",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 5.5x14 Die-cast",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-5-5x14-triple-flanged_14x5-5_metal_brass_black-brass_triple-flanged_lu5514c_5f50f42e",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 5.5x14 Triple-flanged",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-6-5x14-die-cast_14x6-5_metal_brass_black-brass_die-cast_lu6514_35d1cc2c",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 6.5x14 Die-cast",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-6-5x14-triple-flanged_14x6-5_metal_brass_black-brass_triple-flanged_lu6514c_8dfa4ad9",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 6.5x14 Triple-flanged",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-7x13-die-cast_13x7_metal_brass_black-brass_die-cast_lu0713_a5865f03",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 7x13 Die-cast",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-7x13-triple-flanged_13x7_metal_brass_black-brass_triple-flanged_lu0713c_26d61cfc",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 7x13 Triple-flanged",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-8x14-die-cast_14x8_metal_brass_black-brass_die-cast_lu0814_4bc47ec2",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 8x14 Die-cast",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-metal_universal-black-brass-8x14-triple-flanged_14x8_metal_brass_black-brass_triple-flanged_lu0814c_e671dac4",
+      "company": "Ludwig",
+      "model": "Universal Black Brass 8x14 Triple-flanged",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-wood_universal-beech-6-5x14_14x6-5_ply_beech_sapele_7-5_exotic-natural-lacquer_triple-flanged_lu6514be_deb9e9a6",
+      "company": "Ludwig",
+      "model": "Universal Beech 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-wood_universal-cherry-6-5x14_14x6-5_ply_cherry_7-5_exotic-natural-lacquer_triple-flanged_lu6514ch_dd40e5a7",
+      "company": "Ludwig",
+      "model": "Universal Cherry 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-wood_universal-mahogany-6-5x14_14x6-5_ply_mahogany_maple_7-5_exotic-natural-lacquer_triple-flanged_lu65_a04ebf7d",
+      "company": "Ludwig",
+      "model": "Universal Mahogany 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "ludwig_universal-wood_universal-walnut-6-5x14_14x6-5_ply_walnut_walnut_7-5_exotic-natural-lacquer_triple-flanged_lu6514w_461e36ad",
+      "company": "Ludwig",
+      "model": "Universal Walnut 6.5x14",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_armory_daisy-cutter_14x6-5_metal_steel_1_soniclear-modern-mapex-edge_black_2-3mm-powerhoops_arst4651ceb_f2fcc234",
+      "company": "Mapex",
+      "model": "Daisy Cutter",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_armory_dillinger_14x5-5_ply_maple_7-2_soniclear-modern-mapex-edge_natural-transparent-varies_2-3mm-powerhoops_arml_f6c00f32",
+      "company": "Mapex",
+      "model": "Dillinger",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_armory_tomahawk_14x5-5_metal_steel_1_soniclear-modern-mapex-edge_chrome_2-3mm-powerhoops_bpnst4551cn_e2634617",
+      "company": "Mapex",
+      "model": "Tomahawk",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-10x5-5_10x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_c4c9f2e4",
+      "company": "Mapex",
+      "model": "Brass Master 10x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-12x5-5_12x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_4fd36b7d",
+      "company": "Mapex",
+      "model": "Brass Master 12x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x3-5_13x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_55f8500b",
+      "company": "Mapex",
+      "model": "Brass Master 13x3.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-13x6_13x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_25be76a9",
+      "company": "Mapex",
+      "model": "Brass Master 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x3-5_14x3-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_68805fbb",
+      "company": "Mapex",
+      "model": "Brass Master 14x3.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5-5_14x5-5_metal_brass_1_wax-lacquer-plated-finish-varies-by-mod_287e4cd8",
+      "company": "Mapex",
+      "model": "Brass Master 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x5_14x5_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_d_6fcb5ac6",
+      "company": "Mapex",
+      "model": "Brass Master 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_brass-master-14x6_14x6_metal_brass_1_wax-lacquer-plated-finish-varies-by-model_2_81bde09f",
+      "company": "Mapex",
+      "model": "Brass Master 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-12x5-5_12x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_fc270451",
+      "company": "Mapex",
+      "model": "Stainless Steel 12x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x3-5_13x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_1e0accdb",
+      "company": "Mapex",
+      "model": "Stainless Steel 13x3.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-13x6_13x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_9dd37cfb",
+      "company": "Mapex",
+      "model": "Stainless Steel 13x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x3-5_14x3-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_e7b9154b",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x3.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5-5_14x5-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_a8efeeab",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x5_14x5_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_54bc5d97",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6-5_14x6-5_metal_steel_1_wax-lacquer-plated-finish-varies-by-_7759db9e",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x6_14x6_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_a99c24ac",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x7_14x7_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_04e1dd37",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x7",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-catalog-era_stainless-steel-14x8_14x8_metal_steel_1_wax-lacquer-plated-finish-varies-by-mode_787f6de6",
+      "company": "Mapex",
+      "model": "Stainless Steel 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-brass-variant-5_14x5-5_metal_brass_1_2-3mm-powerhoops_bp-unr-0_19c52944",
+      "company": "Mapex",
+      "model": "Unresolved Brass Variant 5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther-archive-unresolved-variant_unresolved-steel-variant-4_12x5-5_metal_steel_1_2-3mm-powerhoops_bp-unr-0_040fa532",
+      "company": "Mapex",
+      "model": "Unresolved Steel Variant 4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther_atomizer_14x6-5_metal_aluminum_2_45-modern-metal-edge_sonic-saver-hoops_bpnal4651cn_1353eb45",
+      "company": "Mapex",
+      "model": "Atomizer",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther_cyrus_14x6_metal_steel_1_45-modern-metal-edge_sonic-saver-hoops_bpnst4601cn_6ee04120",
+      "company": "Mapex",
+      "model": "Cyrus",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther_hydro_13x7_metal_steel_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnst3701cn_b8ac4dd2",
+      "company": "Mapex",
+      "model": "Hydro",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther_metallion_14x5-5_metal_brass_1-2_45-modern-metal-edge_sonic-saver-hoops_bpnbr4551cn_ad3e6526",
+      "company": "Mapex",
+      "model": "Metallion",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther_persuader_14x6-5_metal_brass_1-2_45-modern-metal-edge_hammered-brass_sonic-saver-hoops_bpnbr465hcn_ed80426a",
+      "company": "Mapex",
+      "model": "Persuader",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_black-panther_solidus_14x7_ply_maple_11_rounded-45-batter-edge-with-3-8-counter-cut_2-7mm-snare-bed-5-5-width_soni_b8a7cb6b",
+      "company": "Mapex",
+      "model": "Solidus",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "mapex_signature-artist_matt-halpern-wraith_14x6_metal_brass_1-2_black-plated_sonic-saver-hoops_bpnbr4600_0e4d26b8",
+      "company": "Mapex",
+      "model": "Matt Halpern Wraith",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x3-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_e14bbcb4",
+      "company": "Pearl",
+      "model": "Free Floating Aluminum",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fbff2278",
+      "company": "Pearl",
+      "model": "Free Floating Aluminum",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x6-5_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_96662e41",
+      "company": "Pearl",
+      "model": "Free Floating Aluminum",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-aluminum_14x8_metal_aluminum_1-5_die-cast-mastercast-on-many-catalog-versions_fcbf4eb6",
+      "company": "Pearl",
+      "model": "Free Floating Aluminum",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x3-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_328937bb",
+      "company": "Pearl",
+      "model": "Free Floating Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_73db9b4f",
+      "company": "Pearl",
+      "model": "Free Floating Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x6-5_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_5842c612",
+      "company": "Pearl",
+      "model": "Free Floating Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-brass_14x8_metal_brass_1-5_die-cast-mastercast-on-many-catalog-versions_d1bd7427",
+      "company": "Pearl",
+      "model": "Free Floating Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x3-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_143fccf6",
+      "company": "Pearl",
+      "model": "Free Floating Copper",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_7da5ec02",
+      "company": "Pearl",
+      "model": "Free Floating Copper",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x6-5_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_2eb75db4",
+      "company": "Pearl",
+      "model": "Free Floating Copper",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-copper_14x8_metal_copper_1-5_die-cast-mastercast-on-many-catalog-versions_3cea84d6",
+      "company": "Pearl",
+      "model": "Free Floating Copper",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x3-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_f9aae6e5",
+      "company": "Pearl",
+      "model": "Free Floating Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_6af96288",
+      "company": "Pearl",
+      "model": "Free Floating Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x6-5_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bc4caad",
+      "company": "Pearl",
+      "model": "Free Floating Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_free-floating_free-floating-steel_14x8_metal_steel_1-5_die-cast-mastercast-on-many-catalog-versions_0bed3a7f",
+      "company": "Pearl",
+      "model": "Free Floating Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_13x7_metal_steel_1_triple-flanged-superhoop-style_6535a6f5",
+      "company": "Pearl",
+      "model": "Modern Utility Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x5-5_metal_steel_1_triple-flanged-superhoop-style_a47f01a0",
+      "company": "Pearl",
+      "model": "Modern Utility Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x6-5_metal_steel_1_triple-flanged-superhoop-style_2ca59843",
+      "company": "Pearl",
+      "model": "Modern Utility Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_modern-utility_modern-utility-steel_14x8_metal_steel_1_triple-flanged-superhoop-style_f1bfa454",
+      "company": "Pearl",
+      "model": "Modern Utility Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x5_metal_brass_3_die-cast-mastercast_59872abf",
+      "company": "Pearl",
+      "model": "Reference Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_reference_reference-brass_14x6-5_metal_brass_3_die-cast-mastercast_d3370a8a",
+      "company": "Pearl",
+      "model": "Reference Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x5_metal_steel_3_die-cast-mastercast_006d93b9",
+      "company": "Pearl",
+      "model": "Reference Cast Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_reference_reference-cast-steel_14x6-5_metal_steel_3_die-cast-mastercast_c0d3afb1",
+      "company": "Pearl",
+      "model": "Reference Cast Steel",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoop-_853f9919",
+      "company": "Pearl",
+      "model": "Sensitone Heritage Aluminum Alloy",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-aluminum-alloy_14x6-5_metal_aluminum_1-2_2-3mm-triple-flanged-superhoo_edbb8960",
+      "company": "Pearl",
+      "model": "Sensitone Heritage Aluminum Alloy",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_1352635c",
+      "company": "Pearl",
+      "model": "Sensitone Heritage Brass Alloy",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-brass-alloy_14x6-5_metal_brass_1_2-3mm-triple-flanged-superhoop-style_518b8f5e",
+      "company": "Pearl",
+      "model": "Sensitone Heritage Brass Alloy",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_2cf85c14",
+      "company": "Pearl",
+      "model": "Sensitone Heritage Steel Alloy",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_sensitone-heritage-alloy_sensitone-heritage-steel-alloy_14x6-5_metal_steel_1_2-3mm-triple-flanged-superhoop-style_53227698",
+      "company": "Pearl",
+      "model": "Sensitone Heritage Steel Alloy",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_signature_chad-smith-signature_14x5_metal_steel_1_superhoop-ii_cs-1450_0545e185",
+      "company": "Pearl",
+      "model": "Chad Smith Signature",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x5_metal_aluminum_3_die-cast-mastercast_2d4e2e3d",
+      "company": "Pearl",
+      "model": "Ultracast Aluminum",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pearl_ultracast_ultracast-aluminum_14x6-5_metal_aluminum_3_die-cast-mastercast_bdd1bad9",
+      "company": "Pearl",
+      "model": "Ultracast Aluminum",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "pork-pie-percussion_little-squealer-metal_big-black-brass-bob_14x6-5_metal_brass_1_folded-metal-bearing-edge-not-fully-s_5e641a76",
+      "company": "Pork Pie Percussion",
+      "model": "Big Black Brass / BOB",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-10x5-snare_10x5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_eaf4e752",
+      "company": "Premier",
+      "model": "Artist Birch/Ash 10x5 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-12x5-snare_12x5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_fef7b125",
+      "company": "Premier",
+      "model": "Artist Birch/Ash 12x5 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-13x6-snare_13x6_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_f142840d",
+      "company": "Premier",
+      "model": "Artist Birch/Ash 13x6 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x5-5-snare_14x5-5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_cafd8e48",
+      "company": "Premier",
+      "model": "Artist Birch/Ash 14x5.5 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x6-5-snare_14x6-5_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_3c97fcf8",
+      "company": "Premier",
+      "model": "Artist Birch/Ash 14x6.5 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_artist_artist-birch-ash-14x8-snare_14x8_ply_birch_ash_7-5_45-degree_lacquer-stain_1-5mm-triple-flange-steel_19bc5d91",
+      "company": "Premier",
+      "model": "Artist Birch/Ash 14x8 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_centenary-limited_della-porta-100-walnut-14x6-5-snare_14x6-5_ply_walnut_beech_5_30-degree-round-over_centenary-f_cb595ab7",
+      "company": "Premier",
+      "model": "Della-Porta 100 Walnut 14x6.5 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-100se-birch-14x5-5-snare_14x5-5_ply_birch_5-6_45-degree-precision-cut_tri-band-l_53591100",
+      "company": "Premier",
+      "model": "Genista Classic 100SE Birch 14x5.5 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-birch-5-5x14-snare_14x5-5_ply_birch_5-6_45-degree-precision-cut_lacquer-sparkle-_4f6da1e7",
+      "company": "Premier",
+      "model": "Genista Classic Birch 5.5x14 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "premier_genista-classic_genista-classic-birch-6-5x14-snare_14x6-5_ply_birch_5-6_45-degree-precision-cut_lacquer-sparkle-_0d12aecb",
+      "company": "Premier",
+      "model": "Genista Classic Birch 6.5x14 Snare",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_aq2_aq2-maple-14x5-5_14x5-5_ply_maple_7-2_45-bearing-edge_triple-flanged-hoops_aq2-1405_b10c6d2d",
+      "company": "SONOR",
+      "model": "AQ2 Maple 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-13x7_13x7_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_f7714692",
+      "company": "SONOR",
+      "model": "Kompressor Aluminum 13x7",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x5-75_14x5-75_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-fla_28cafbb5",
+      "company": "SONOR",
+      "model": "Kompressor Aluminum 14x5.75",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x6-5_14x6-5_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flang_2d7ba40c",
+      "company": "SONOR",
+      "model": "Kompressor Aluminum 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-aluminum-14x8_14x8_metal_aluminum_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_38fe8f02",
+      "company": "SONOR",
+      "model": "Kompressor Aluminum 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-13x7_13x7_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_d51a0981",
+      "company": "SONOR",
+      "model": "Kompressor Beech 13x7",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x5-75_14x5-75_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-_62ac1b7f",
+      "company": "SONOR",
+      "model": "Kompressor Beech 14x5.75",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-se_0fef9e59",
+      "company": "SONOR",
+      "model": "Kompressor Beech 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x6_14x6_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_671ce638",
+      "company": "SONOR",
+      "model": "Kompressor Beech 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-beech-14x8_14x8_ply_beech_8_45-bearing-edge_2-3mm-triple-flanged-steel-power-hoops_ks-series_eb25e3d0",
+      "company": "SONOR",
+      "model": "Kompressor Beech 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-13x7_13x7_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_552bc64f",
+      "company": "SONOR",
+      "model": "Kompressor Brass 13x7",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x5-75_14x5-75_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-s_d11788c6",
+      "company": "SONOR",
+      "model": "Kompressor Brass 14x5.75",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x6-5_14x6-5_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_0c11b4b7",
+      "company": "SONOR",
+      "model": "Kompressor Brass 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-brass-14x8_14x8_metal_brass_1-2_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-p_a0aff72c",
+      "company": "SONOR",
+      "model": "Kompressor Brass 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-13x7_13x7_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_22a027d3",
+      "company": "SONOR",
+      "model": "Kompressor Steel 13x7",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x5-75_14x5-75_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-ste_2a7b4cc7",
+      "company": "SONOR",
+      "model": "Kompressor Steel 14x5.75",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x6-5_14x6-5_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel_2e90fd2c",
+      "company": "SONOR",
+      "model": "Kompressor Steel 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_kompressor_kompressor-steel-14x8_14x8_metal_steel_1_45-bearing-edge-osm-series-edge_2-3mm-triple-flanged-steel-pow_3d48d2d8",
+      "company": "SONOR",
+      "model": "Kompressor Steel 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x5_14x5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_2f773d8f",
+      "company": "SONOR",
+      "model": "ProLite Maple 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_3b479737",
+      "company": "SONOR",
+      "model": "ProLite Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_prolite_prolite-maple-14x6_14x6_ply_maple_4_45-bearing-edge_die-cast-hoops_pl-series_1d204c34",
+      "company": "SONOR",
+      "model": "ProLite Maple 14x6",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-580-cast-bronze-14x6-5_14x6-5_metal_bronze_3_die-cast-hoops_hld-580_be9ddf14",
+      "company": "SONOR",
+      "model": "Signature HLD 580 Cast Bronze 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_signature-series_signature-hld-590-cast-bronze-14x8_14x8_metal_bronze_3_die-cast-hoops_hld-590_6444e211",
+      "company": "SONOR",
+      "model": "Signature HLD 590 Cast Bronze 14x8",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x5_14x5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cast-or_0b97bd0d",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Heavy ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-heavy-ply-sq2-14x6-5_14x6-5_ply_acrylic_8_45-bearing-edge_configurable-usually-die-cas_21ad5efa",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Heavy ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x5_14x5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-cast-o_4db16066",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Medium ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-medium-ply-sq2-14x6-5_14x6-5_ply_acrylic_6_45-bearing-edge_configurable-usually-die-ca_4d9e09bd",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Medium ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-or-_452968ae",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Thin ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-thin-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast_95092478",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Thin ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x5_14x5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-cast-_7f1959d6",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Vintage ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-acrylic-vintage-ply-sq2-14x6-5_14x6-5_ply_acrylic_4_45-bearing-edge_configurable-usually-die-c_d1668db1",
+      "company": "SONOR",
+      "model": "SQ2 Acrylic Vintage ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x5_14x5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or-tri_31511fb0",
+      "company": "SONOR",
+      "model": "SQ2 Beech Heavy ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-heavy-ply-sq2-14x6-5_14x6-5_ply_beech_8_45-bearing-edge_configurable-usually-die-cast-or_edb76d98",
+      "company": "SONOR",
+      "model": "SQ2 Beech Heavy ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x5_14x5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-or-tr_baa918a0",
+      "company": "SONOR",
+      "model": "SQ2 Beech Medium ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-medium-ply-sq2-14x6-5_14x6-5_ply_beech_6_45-bearing-edge_configurable-usually-die-cast-o_70a9a905",
+      "company": "SONOR",
+      "model": "SQ2 Beech Medium ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-trip_30806671",
+      "company": "SONOR",
+      "model": "SQ2 Beech Thin ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-thin-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-_a9885d3a",
+      "company": "SONOR",
+      "model": "SQ2 Beech Thin ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x5_14x5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-or-t_f791587a",
+      "company": "SONOR",
+      "model": "SQ2 Beech Vintage ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-beech-vintage-ply-sq2-14x6-5_14x6-5_ply_beech_4_45-bearing-edge_configurable-usually-die-cast-_5140185b",
+      "company": "SONOR",
+      "model": "SQ2 Beech Vintage ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x5_14x5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or-tri_5921b78e",
+      "company": "SONOR",
+      "model": "SQ2 Birch Heavy ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-heavy-ply-sq2-14x6-5_14x6-5_ply_birch_8_45-bearing-edge_configurable-usually-die-cast-or_1a9169e2",
+      "company": "SONOR",
+      "model": "SQ2 Birch Heavy ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x5_14x5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-or-tr_9e471931",
+      "company": "SONOR",
+      "model": "SQ2 Birch Medium ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-medium-ply-sq2-14x6-5_14x6-5_ply_birch_6_45-bearing-edge_configurable-usually-die-cast-o_1dd66c37",
+      "company": "SONOR",
+      "model": "SQ2 Birch Medium ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-trip_4e0636ca",
+      "company": "SONOR",
+      "model": "SQ2 Birch Thin ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-thin-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-_df3d98db",
+      "company": "SONOR",
+      "model": "SQ2 Birch Thin ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x5_14x5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-or-t_f52dcc8d",
+      "company": "SONOR",
+      "model": "SQ2 Birch Vintage ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-birch-vintage-ply-sq2-14x6-5_14x6-5_ply_birch_4_45-bearing-edge_configurable-usually-die-cast-_8e2aee88",
+      "company": "SONOR",
+      "model": "SQ2 Birch Vintage ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x5_14x5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or-tri_03d79bb2",
+      "company": "SONOR",
+      "model": "SQ2 Maple Heavy ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-heavy-ply-sq2-14x6-5_14x6-5_ply_maple_8_45-bearing-edge_configurable-usually-die-cast-or_d1b32daa",
+      "company": "SONOR",
+      "model": "SQ2 Maple Heavy ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x5_14x5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-or-tr_3b0fc99a",
+      "company": "SONOR",
+      "model": "SQ2 Maple Medium ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-medium-ply-sq2-14x6-5_14x6-5_ply_maple_6_45-bearing-edge_configurable-usually-die-cast-o_af3f3e9a",
+      "company": "SONOR",
+      "model": "SQ2 Maple Medium ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-trip_59f4810f",
+      "company": "SONOR",
+      "model": "SQ2 Maple Thin ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-thin-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-_c6584fef",
+      "company": "SONOR",
+      "model": "SQ2 Maple Thin ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x5_14x5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-or-t_faf56e68",
+      "company": "SONOR",
+      "model": "SQ2 Maple Vintage ply SQ2 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_sq2-drum-system_sq2-maple-vintage-ply-sq2-14x6-5_14x6-5_ply_maple_4_45-bearing-edge_configurable-usually-die-cast-_803b9ab2",
+      "company": "SONOR",
+      "model": "SQ2 Maple Vintage ply SQ2 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_vintage-series_vintage-series-beech-14x5-75_14x5-75_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-_491ef3e1",
+      "company": "SONOR",
+      "model": "Vintage Series Beech 14x5.75",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "sonor_vintage-series_vintage-series-beech-14x6-5_14x6-5_ply_beech_6_rounded-vintage-bearing-edge_2-3mm-triple-flanged-ho_996270a5",
+      "company": "SONOR",
+      "model": "Vintage Series Beech 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_acrylic_mirage-acrylic-14x6-5_14x6-5_acrylic_acrylic_acrylic_42919b23",
+      "company": "Tama",
+      "model": "Mirage / Acrylic 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_artstar_artstar-cordia-14x6-5_14x6-5_ply_cordia_lacquer_die-cast-hoops_559e6b64",
+      "company": "Tama",
+      "model": "Artstar Cordia 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_artstar_artstar-maple-14x6-5_14x6-5_ply_maple_lacquer_die-cast-hoops_389d297f",
+      "company": "Tama",
+      "model": "Artstar Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_artwood_50th-limited-mastercraft-artwood-14x5_14x5_ply_maple_lacquer_87db5728",
+      "company": "Tama",
+      "model": "50th Limited Mastercraft Artwood 14x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_artwood_50th-limited-mastercraft-artwood-14x6-5_14x6-5_ply_maple_lacquer_ff5b9c40",
+      "company": "Tama",
+      "model": "50th Limited Mastercraft Artwood 14x6.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_granstar_granstar-birch-14x6-5_14x6-5_ply_birch_lacquer_die-cast-hoops_9536e2bd",
+      "company": "Tama",
+      "model": "Granstar Birch 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_imperialstar_imperialstar-chrome-steel-14x5-5_14x5-5_metal_steel_chrome_0e7e083b",
+      "company": "Tama",
+      "model": "Imperialstar Chrome Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_imperialstar_imperialstar-king-beat-8005-steel-14x5_14x5_metal_steel_chrome_8005_385f28df",
+      "company": "Tama",
+      "model": "Imperialstar King Beat 8005 Steel 14x5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_imperialstar_imperialstar-mastercraft-steel-8056-14x6-5_14x6-5_metal_steel_chrome_8056_ce649d31",
+      "company": "Tama",
+      "model": "Imperialstar Mastercraft Steel 8056 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_imperialstar_imperialstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap-lacquer_10dfcbc5",
+      "company": "Tama",
+      "model": "Imperialstar Wood 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_mastercraft_mastercraft-bell-brass-1980s-14x6-5_14x6-5_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_pl565n-bb1_98a03ef5",
+      "company": "Tama",
+      "model": "Mastercraft Bell Brass 1980s 14x6.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_mastercraft_the-bell-brass-50th-anniversary-reissue-bb-156_14x6-5_metal_bell-brass_3_natural-brass-patina_die-cast-_0a8de4cc",
+      "company": "Tama",
+      "model": "The Bell Brass 50th Anniversary Reissue BB-156",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_metalworks-effect_metalworks-effect-series-10x3_10x3_metal_steel_black-steel_triple-flange-mighty-hoop_056915c4",
+      "company": "Tama",
+      "model": "Metalworks \"Effect\" Series 10x3",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_metalworks-effect_metalworks-effect-series-6x3_6x3_metal_steel_black-steel_triple-flange-mighty-hoop_e28d57a9",
+      "company": "Tama",
+      "model": "Metalworks \"Effect\" Series 6x3",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_metalworks-effect_metalworks-effect-series-8x3_8x3_metal_steel_black-steel_triple-flange-mighty-hoop_d705b64a",
+      "company": "Tama",
+      "model": "Metalworks \"Effect\" Series 8x3",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_metalworks_metalworks-10x5-5_10x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_e6b67538",
+      "company": "Tama",
+      "model": "METALWORKS 10x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_metalworks_metalworks-13x4_13x4_metal_steel_black-steel_triple-flange-mighty-hoop_7d8773f3",
+      "company": "Tama",
+      "model": "METALWORKS 13x4",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_metalworks_metalworks-14x5-5_14x5-5_metal_steel_black-steel_triple-flange-mighty-hoop_f02c2ec2",
+      "company": "Tama",
+      "model": "METALWORKS 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_metalworks_metalworks-14x6-5_14x6-5_metal_steel_black-steel_triple-flange-mighty-hoop_6714e26c",
+      "company": "Tama",
+      "model": "METALWORKS 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_rockstar_rockstar-steel-14x5-5_14x5-5_metal_steel_chrome-black_730c2843",
+      "company": "Tama",
+      "model": "Rockstar Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_rockstar_rockstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_3d4698f7",
+      "company": "Tama",
+      "model": "Rockstar Wood 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_rosewood-cordia_cordia-14x6-5_14x6-5_ply_cordia_lacquer_72022529",
+      "company": "Tama",
+      "model": "Cordia 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_rosewood-cordia_rosewood-14x6-5_14x6-5_ply_wood_lacquer_b8d9f654",
+      "company": "Tama",
+      "model": "Rosewood 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_royalstar_royalstar-steel-14x5_14x5_metal_steel_chrome_1aa8ca86",
+      "company": "Tama",
+      "model": "Royalstar Steel 14x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_royalstar_royalstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_49eeb53b",
+      "company": "Tama",
+      "model": "Royalstar Wood 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-big-black-steel-lst148-14x8_14x8_metal_steel_black-nickel-plated_die-cast-hoops_lst148_43a64c86",
+      "company": "Tama",
+      "model": "S.L.P. Big Black Steel LST148 14x8",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-black-brass-lbr1465-14x6-5_14x6-5_metal_brass_black-nickel-plated_die-cast-hoops_lbr1465_6b9dfd73",
+      "company": "Tama",
+      "model": "S.L.P. Black Brass LBR1465 14x6.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-classic-dry-aluminum-lal1455-14x5-5_14x5-5_metal_aluminum_brushed-metal_triple-flange-sound-arc-style_l_00a356d6",
+      "company": "Tama",
+      "model": "S.L.P. Classic Dry Aluminum LAL1455 14x5.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-classic-maple-lmp1455-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-sound-arc-style_lmp1455_af82f7e3",
+      "company": "Tama",
+      "model": "S.L.P. Classic Maple LMP1455 14x5.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-expressive-hammered-steel-14x6_14x6_metal_steel_hammered-steel_steel-mighty-triple-flange-style_lst146h_7fb892f3",
+      "company": "Tama",
+      "model": "S.L.P. Expressive Hammered Steel 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-fat-spruce-lsp146-14x6_14x6_ply_spruce_lacquer_triple-flange-sound-arc-style_lsp146_549c297d",
+      "company": "Tama",
+      "model": "S.L.P. Fat Spruce LSP146 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-bubinga-lgb146-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_lgb146_4cde3272",
+      "company": "Tama",
+      "model": "S.L.P. G-Bubinga LGB146 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-maple-lgm137-13x7_13x7_ply_maple_10_lacquer_die-cast-hoops_lgm137_54229b8d",
+      "company": "Tama",
+      "model": "S.L.P. G-Maple LGM137 13x7",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-maple-lgm146-14x6_14x6_ply_maple_11_lacquer_die-cast-hoops_lgm146_91438c63",
+      "company": "Tama",
+      "model": "S.L.P. G-Maple LGM146 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-g-walnut-lgw1465-14x6-5_14x6-5_ply_walnut_9_lacquer_die-cast-hoops_lgw1465_59bc9d21",
+      "company": "Tama",
+      "model": "S.L.P. G-Walnut LGW1465 14x6.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-mod-bubinga-lbu127-12x7_12x7_ply_bubinga_lacquer_die-cast-hoops_lbu127_8ac6ded3",
+      "company": "Tama",
+      "model": "S.L.P. Mod Bubinga LBU127 12x7",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_s-l-p_s-l-p-studio-maple-lmp1465f-14x6-5_14x6-5_ply_maple_lacquer_wood-hoops_lmp1465f_6cb7788e",
+      "company": "Tama",
+      "model": "S.L.P. Studio Maple LMP1465F 14x6.5",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_signature_bill-platt-bp146-signature-bell-brass-14x6_14x6_cast-metal_bell-brass",
+      "company": "Tama",
+      "model": "Bill Platt BP146 Signature Bell Brass 14x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_lars-ulrich-lu1465-14x6-5_14x6-5_metal_steel_3_diamond-plate-steel_die-cast-hoops_lu1465_ae41107f",
+      "company": "Tama",
+      "model": "Lars Ulrich LU1465 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_lars-ulrich-lu1465bb-bell-brass-14x6-5_14x6-5_cast-metal_bell-brass",
+      "company": "Tama",
+      "model": "Lars Ulrich LU1465BB Bell Brass 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-12x5_12x5_metal_steel_steel_die-cast-hoops_mp125_d0e2a83b",
+      "company": "Tama",
+      "model": "Mike Portnoy Melody Master 12x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-14x5-5_14x5-5_metal_steel_hammered-steel_die-cast-hoops_mp1455_d425fdc5",
+      "company": "Tama",
+      "model": "Mike Portnoy Melody Master 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-mp125st-12x5_12x5_metal_steel",
+      "company": "Tama",
+      "model": "Mike Portnoy Melody Master MP125ST 12x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_mike-portnoy-melody-master-mp1455bu-14x5-5_14x5-5_ply_bubinga",
+      "company": "Tama",
+      "model": "Mike Portnoy Melody Master MP1455BU 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_ronald-bruner-jr-rb1455-14x5-5_14x5-5_hybrid_walnut_6_walnut-steel-hybrid_die-cast-hoops_rb1455_f8f35fdb",
+      "company": "Tama",
+      "model": "Ronald Bruner Jr. RB1455 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_signature_stewart-copeland-sc145-14x5_14x5_metal_brass_1-5_die-cast-batter-steel-mighty-snare-side_sc145_fd5ad2c0",
+      "company": "Tama",
+      "model": "Stewart Copeland SC145 14x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_soundworks_soundworks-steel-dst1055m-10x5-5_10x5-5_metal_steel_steel_dst1055m_bb8c165c",
+      "company": "Tama",
+      "model": "Soundworks Steel DST1055M 10x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_soundworks_soundworks-steel-dst1465-14x6-5_14x6-5_metal_steel_steel_dst1465_0556bb30",
+      "company": "Tama",
+      "model": "Soundworks Steel DST1465 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-hand-hammered-brass-14x5-5_14x5-5_metal_brass_hammered-brass_fc93df68",
+      "company": "Tama",
+      "model": "STAR Reserve Hand Hammered Brass 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_star-reserve_star-reserve-vol-1-solid-maple-tlm145somp-14x5_14x5_solid-shell_maple_tlm145somp_33795eae",
+      "company": "Tama",
+      "model": "STAR Reserve Vol. 1 Solid Maple TLM145SOMP 14x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-bubinga-14x5-5_14x5-5_ply_bubinga_lacquer_die-cast-hoops_d3450b86",
+      "company": "Tama",
+      "model": "Starclassic Bubinga 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-bubinga-14x6-5_14x6-5_ply_bubinga_lacquer_die-cast-hoops_95ab812f",
+      "company": "Tama",
+      "model": "Starclassic Bubinga 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-bubinga-elite-13x6_13x6_ply_bubinga_lacquer_die-cast-hoops_1880d8e1",
+      "company": "Tama",
+      "model": "Starclassic Bubinga Elite 13x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-exotix-maple-14x6-5_14x6-5_ply_maple_exotic-lacquer_die-cast-hoops_22bc3876",
+      "company": "Tama",
+      "model": "Starclassic Exotix Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-g-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_1ea5f819",
+      "company": "Tama",
+      "model": "Starclassic G-Bubinga 14x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-g-maple-13x7_13x7_ply_maple_10_lacquer_die-cast-hoops_a76acd11",
+      "company": "Tama",
+      "model": "Starclassic G-Maple 13x7",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-g-maple-14x6_14x6_ply_maple_10_lacquer_die-cast-hoops_1da41220",
+      "company": "Tama",
+      "model": "Starclassic G-Maple 14x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-g-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer_die-cast-hoops_5407a2a4",
+      "company": "Tama",
+      "model": "Starclassic G-Walnut/Birch 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-maple-14x5-5_14x5-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_afd1c95b",
+      "company": "Tama",
+      "model": "Starclassic Maple 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-maple-14x6-5_14x6-5_ply_maple_5_lacquer-wrap_zinc-die-cast-hoops_a61aed4c",
+      "company": "Tama",
+      "model": "Starclassic Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-walnut-birch-14x5-5_14x5-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_a1c89ccf",
+      "company": "Tama",
+      "model": "Starclassic Walnut/Birch 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starclassic_starclassic-walnut-birch-14x6-5_14x6-5_ply_walnut-birch_lacquer-wrap_die-cast-hoops_c21b41c3",
+      "company": "Tama",
+      "model": "Starclassic Walnut/Birch 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_starphonic_starphonic-aluminum-14x6_14x6_metal_aluminum_lacquer-metal_grooved-hoop_pal1460_183b9d79",
+      "company": "Tama",
+      "model": "STARPHONIC Aluminum 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-bell-brass-14x6_14x6_metal_bell-brass_3_lacquer-metal_grooved-hoop_pbe1460_2bd426e8",
+      "company": "Tama",
+      "model": "STARPHONIC Bell Brass 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-brass-14x6_14x6_metal_brass_lacquer-metal_grooved-hoop_pbr1460_8af74600",
+      "company": "Tama",
+      "model": "STARPHONIC Brass 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-bubinga-14x6_14x6_ply_bubinga_lacquer-metal_grooved-hoop_pbu1460_0439fe79",
+      "company": "Tama",
+      "model": "STARPHONIC Bubinga 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-copper-14x7_14x7_metal_copper_lacquer-metal_grooved-hoop_pco1470_6cc1e266",
+      "company": "Tama",
+      "model": "STARPHONIC Copper 14x7",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-maple-14x6_14x6_ply_maple_lacquer-metal_grooved-hoop_pma1460_b7d3d196",
+      "company": "Tama",
+      "model": "STARPHONIC Maple 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-spruce-14x6_14x6_ply_spruce_lacquer-metal_grooved-hoop_psp1460_c4fbd3b5",
+      "company": "Tama",
+      "model": "STARPHONIC Spruce 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-steel-14x6_14x6_metal_steel_lacquer-metal_grooved-hoop_pst1460_64f27fbb",
+      "company": "Tama",
+      "model": "STARPHONIC Steel 14x6",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_starphonic_starphonic-walnut-14x7_14x7_ply_walnut_lacquer-metal_grooved-hoop_pwa1470_62bb8678",
+      "company": "Tama",
+      "model": "STARPHONIC Walnut 14x7",
+      "classification": "PROMOTE_NOW_FULL_REFERENCE_READY"
+    },
+    {
+      "id": "tama_superstar_superstar-birch-14x5-5_14x5-5_ply_birch_lacquer_c330473e",
+      "company": "Tama",
+      "model": "Superstar Birch 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_superstar_superstar-birch-14x6-5_14x6-5_ply_birch_lacquer_a0d96da4",
+      "company": "Tama",
+      "model": "Superstar Birch 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_superstar_superstar-maple-14x5-5_14x5-5_ply_maple_lacquer_322c4317",
+      "company": "Tama",
+      "model": "Superstar Maple 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_superstar_superstar-maple-14x6-5_14x6-5_ply_maple_lacquer_410ef47d",
+      "company": "Tama",
+      "model": "Superstar Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "tama_swingstar_swingstar-steel-14x5_14x5_metal_steel_chrome_5a0d5668",
+      "company": "Tama",
+      "model": "Swingstar Steel 14x5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_swingstar_swingstar-wood-14x5-5_14x5-5_ply_maple-poplar_wrap_8c6726b1",
+      "company": "Tama",
+      "model": "Swingstar Wood 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_warlord_warlord-masai-maple-14x6_14x6_ply_maple_13_lacquer_die-cast-hoops_c2e2ae03",
+      "company": "Tama",
+      "model": "Warlord Masai Maple 14x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_warlord_warlord-praetorian-cast-bell-brass-14x6_14x6_metal_bell-brass_3_cast-bell-brass_die-cast-hoops_fa7a2480",
+      "company": "Tama",
+      "model": "Warlord Praetorian Cast Bell Brass 14x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_warlord_warlord-spartan-bubinga-14x6_14x6_ply_bubinga_10_lacquer_die-cast-hoops_26a14500",
+      "company": "Tama",
+      "model": "Warlord Spartan Bubinga 14x6",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_woodworks_woodworks-14x5-5_14x5-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f0fdc50b",
+      "company": "Tama",
+      "model": "Woodworks 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_woodworks_woodworks-14x6-5_14x6-5_ply_maple-poplar_wrap_triple-flange-mighty-hoop_f936ccca",
+      "company": "Tama",
+      "model": "Woodworks 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "tama_woodworks_woodworks-14x8_14x8_ply_maple-poplar_wrap_triple-flange-mighty-hoop_0430278f",
+      "company": "Tama",
+      "model": "Woodworks 14x8",
+      "classification": "PROMOTE_NOW_HEADS_ONLY_BLOCKER"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-deep-guppi-black-plated-brass_13x7_metal_brass_1-3_rolled-flange-45-listed-where-confir_b84199f5",
+      "company": "WorldMax",
+      "model": "Black Deep Guppi Black Plated Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x4_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-_f80fd0d3",
+      "company": "WorldMax",
+      "model": "Black Nickel Over Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-_51c45960",
+      "company": "WorldMax",
+      "model": "Black Nickel Over Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_black-nickel-over-brass_14x6-5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minima_2aa506f4",
+      "company": "WorldMax",
+      "model": "Black Nickel Over Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_brushed-red-copper-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal_40af6209",
+      "company": "WorldMax",
+      "model": "Brushed Red Copper Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_brushed-red-copper-brass_14x6-5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minim_966c8f32",
+      "company": "WorldMax",
+      "model": "Brushed Red Copper Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-black-plated-brass-with-reddish-tint_14x5_metal_brass_1-3_rolled-flange-45-listed-wh_49f6dbe5",
+      "company": "WorldMax",
+      "model": "Hammered Black Plated Brass with Reddish Tint",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-black-plated-brass-with-reddish-tint_14x6-5_metal_brass_1-3_rolled-flange-45-listed-_1bd479fe",
+      "company": "WorldMax",
+      "model": "Hammered Black Plated Brass with Reddish Tint",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-brass_14x5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-shallow-u_f16a9137",
+      "company": "WorldMax",
+      "model": "Hammered Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "worldmax_black-dawg-series_hammered-brass_14x6-5_metal_brass_1-3_rolled-flange-45-listed-where-confirmed_minimal-shallow_16214d6d",
+      "company": "WorldMax",
+      "model": "Hammered Brass",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_gigmaker-entry-steel_gigmaker-entry-steel-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lacquer-wrap-_3c18c1fc",
+      "company": "Yamaha",
+      "model": "Gigmaker / Entry Steel Steel Snare 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x3-5_14x3-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__f2668ed4",
+      "company": "Yamaha",
+      "model": "Yamaha Brass Metal Snare 14x3.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x4_14x4_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish_trip_9749049f",
+      "company": "Yamaha",
+      "model": "Yamaha Brass Metal Snare 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__b9ae1032",
+      "company": "Yamaha",
+      "model": "Yamaha Brass Metal Snare 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-brass-metal-snare-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_chrome-lacquer-metal-finish__7212d9c2",
+      "company": "Yamaha",
+      "model": "Yamaha Brass Metal Snare 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x3-5_14x3-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_c5451b90",
+      "company": "Yamaha",
+      "model": "Yamaha Steel Metal Snare 14x3.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x4_14x4_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_triple_773278d1",
+      "company": "Yamaha",
+      "model": "Yamaha Steel Metal Snare 14x4",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_6c732eca",
+      "company": "Yamaha",
+      "model": "Yamaha Steel Metal Snare 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_metal-snare_yamaha-steel-metal-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_chrome-lacquer-metal-finish_tr_f855177e",
+      "company": "Yamaha",
+      "model": "Yamaha Steel Metal Snare 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_lac_ef1b2a27",
+      "company": "Yamaha",
+      "model": "Rydeen / Gigmaker Kit Snare Steel Snare 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_rydeen-gigmaker-kit-snare_rydeen-gigmaker-kit-snare-steel-snare-14x6-5_14x6-5_metal_steel_1_rolled-metal-edge_lac_7cefe002",
+      "company": "Yamaha",
+      "model": "Rydeen / Gigmaker Kit Snare Steel Snare 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+      "company": "Yamaha",
+      "model": "Steve Gadd Recording Custom Brass 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+      "company": "Yamaha",
+      "model": "Steve Gadd Recording Custom Brass 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+      "company": "Yamaha",
+      "model": "Steve Gadd Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+      "company": "Yamaha",
+      "model": "Stage Custom Advantage Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+      "company": "Yamaha",
+      "model": "Stage Custom Birch Steel Snare 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+      "company": "Yamaha",
+      "model": "Stage Custom Standard Steel 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_tour-custom_tour-custom-maple-14x5-5_14x5-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_b3bf7f1d",
+      "company": "Yamaha",
+      "model": "Tour Custom Maple 14x5.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    },
+    {
+      "id": "yamaha_tour-custom_tour-custom-maple-14x6-5_14x6-5_ply_maple_5-6_45-degree_2-7-mm_satin-lacquer_2-3mm-inverse-dynahoop-1_eac794a7",
+      "company": "Yamaha",
+      "model": "Tour Custom Maple 14x6.5",
+      "classification": "PROMOTE_NOW_HEADS_PLUS_NON_BLOCKING_ENRICHMENT"
+    }
+  ]
+}
