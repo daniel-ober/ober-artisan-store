@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-05-21T08:31:37.846Z",
+  "status": "STOCK_HEAD_FALLBACK_POLICY_DESIGN_DRAFT_NO_FIRESTORE_WRITES",
+  "summary": {
+    "purpose": "Define controlled stock batter/reso head fallback rules without counting fallback-head records as source-confirmed full stock passes.",
+    "currentMeaningfulStockPass": 12,
+    "currentNearlyMeaningfulStockPass": 351,
+    "stockBlockedByCoreShell": 1188,
+    "knownStockHeadBlockers": {
+      "stockResoHead": 1512,
+      "stockBatterHead": 1509
+    },
+    "noFirestoreWrites": true
+  },
+  "policyPrinciples": [
+    "Stock head fallback may only apply after core shell readiness is already meaningful or metal-edge-fallback usable.",
+    "Fallback must be company-level or era/line-level, not random generic head assignment.",
+    "Fallback must be based on documented OEM relationships, catalog patterns, or repeated source evidence.",
+    "Fallback records must remain separate from source-confirmed full stock pass.",
+    "Fallback metadata must be auditable through engineAssumptions.",
+    "Fallback applies only to batter/reso heads, not shell, thickness, bearing edge, hoops, wires, throw-off, lugs, or production status."
+  ],
+  "recommendedFallbackMetadata": {
+    "stockHeadFallbackApplied": true,
+    "stockHeadFallbackKey": "company-or-era-specific-key",
+    "stockHeadFallbackReason": "Explain source-backed OEM/default head relationship.",
+    "stockHeadNeedsVerification": true,
+    "stockBatterHeadFallbackApplied": true,
+    "stockResoHeadFallbackApplied": true
+  },
+  "proposedReadinessTier": "MEANINGFUL_STOCK_PASS_WITH_HEAD_FALLBACK",
+  "nextRecommendedStep": "Create a read-only stock-head fallback opportunity queue from core-shell usable records that are blocked only or mostly by missing stock batter/reso heads."
+}
