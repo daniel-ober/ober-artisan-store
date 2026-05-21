@@ -203,13 +203,15 @@ const getTopNodes = (voice, count = 3) =>
 
 const buildActiveThread = ({ readMode, voice, firstListenKeys }) => {
 
-  const topNodes =
+  const isFirstListen = readMode === 'firstListen';
 
-    Array.isArray(firstListenKeys) && firstListenKeys.length
+  const topNodes = isFirstListen && Array.isArray(firstListenKeys) && firstListenKeys.length
 
-      ? firstListenKeys.slice(0, 3)
+    ? firstListenKeys.slice(0, 3)
 
-      : getTopNodes(voice, 3);
+    : getTopNodes(voice, 3);
+
+  const nodeKeys = isFirstListen ? topNodes : VOICE_NODE_ORDER;
 
   return {
 
@@ -219,11 +221,11 @@ const buildActiveThread = ({ readMode, voice, firstListenKeys }) => {
 
     summary: READ_MODE_COPY[readMode]?.description || '',
 
-    nodes: topNodes,
+    nodes: nodeKeys,
 
-    nodeKeys: topNodes,
+    nodeKeys,
 
-    firstTellKeys: topNodes,
+    firstTellKeys: isFirstListen ? topNodes : [],
 
     dominantNodes: topNodes,
 
@@ -375,7 +377,7 @@ export default function VoiceConstellationMap({
 
           readVariant={readVariant}
 
-          firstTellKeys={resolvedFirstListenKeys}
+          firstTellKeys={safeReadMode === 'firstListen' ? resolvedFirstListenKeys : []}
 
           compareProfile={compareProfile}
 
