@@ -69,6 +69,20 @@ const {
 
 } = require('./buildSnareVoicePacket');
 
+const {
+
+  findSimilarSnareVoices,
+
+  calculateVoiceDistance,
+
+  calculateVoiceSimilarity,
+
+  getNodeDeltaSummary,
+
+  getSharedTopNodes
+
+} = require('./findSimilarSnareVoices');
+
 module.exports = {
 
   scoreSnareVoice,
@@ -111,7 +125,17 @@ module.exports = {
 
   buildSnareVoicePacket,
 
-  diffVoiceProfiles
+  diffVoiceProfiles,
+
+  findSimilarSnareVoices,
+
+  calculateVoiceDistance,
+
+  calculateVoiceSimilarity,
+
+  getNodeDeltaSummary,
+
+  getSharedTopNodes
 
 };
 
