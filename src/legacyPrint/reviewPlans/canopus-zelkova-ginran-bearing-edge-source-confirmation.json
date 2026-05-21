@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-05-21T07:43:29.440Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/canopus-zelkova-ginran-bearing-edge-review-packet.json",
+  "status": "CANOPUS_ZELKOVA_GINRAN_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 1,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 1,
+    "groupCount": 1
+  },
+  "officialSourceConfirmedGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Canopus",
+      "lineSeries": "Zelkova GINRAN",
+      "shellMaterial": "Zelkova",
+      "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Zelkova GINRAN"
+      ],
+      "recordIds": [
+        "canopus_zelkova-ginran_zelkova-ginran_14x6-5_solid-shell_zelkova_14_die-cast-8_02ef799a"
+      ],
+      "skipReason": "No exact official Canopus Zelkova GINRAN bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Canopus source language confirms bearing-edge geometry for Zelkova GINRAN snare drums."
+}
