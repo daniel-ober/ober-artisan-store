@@ -1,0 +1,175 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_JOYFUL_NOISE_DRUM_COMPANY_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.254Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Joyful Noise Drum Company",
+  "reviewScope": "Joyful Noise Drum Company records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 8,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Custom / Reserve",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "Medium": 8
+      },
+      "researchQuestions": [
+        "Can Joyful Noise Drum Company Custom / Reserve snare records share a source-backed numeric shell thickness?",
+        "Can Joyful Noise Drum Company Custom / Reserve snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Joyful Noise Drum Company page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_aluminum-14x6-5_14x6-5_metal_aluminum_ec1790e0",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Aluminum 14x6.5 — 14x6.5",
+          "modelName": "Aluminum 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_beacon-bronze-14x6-5_14x6-5_metal_bronze_b21d31a4",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Beacon Bronze 14x6.5 — 14x6.5",
+          "modelName": "Beacon Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_conquered-copper-14x6-5_14x6-5_metal_copper_d6278474",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Conquered Copper 14x6.5 — 14x6.5",
+          "modelName": "Conquered Copper 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_core-model-brass-14x6-5_14x6-5_metal_brass_95fcecfc",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Core Model Brass 14x6.5 — 14x6.5",
+          "modelName": "Core Model Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_knight-hawk-ferromanganese-steel-14x6-5_14x6-5_metal_steel_b99a6c28",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Knight Hawk Ferromanganese Steel 14x6.5 — 14x6.5",
+          "modelName": "Knight Hawk Ferromanganese Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_legacy-mahogany-14x6-5_14x6-5_ply_mahogany_787bf0db",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Legacy Mahogany 14x6.5 — 14x6.5",
+          "modelName": "Legacy Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_personal-reserve-exotic-wood-14x6-5_14x6-5_ply_exotic-hardwood_7710c3d1",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — Personal Reserve Exotic Wood 14x6.5 — 14x6.5",
+          "modelName": "Personal Reserve Exotic Wood 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Exotic Hardwood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Exotic Hardwood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "joyful-noise-drum-company_custom-reserve_tko-brass-14x6-5_14x6-5_metal_brass_20583d5f",
+          "label": "Joyful Noise Drum Company — Custom / Reserve — TKO Brass 14x6.5 — 14x6.5",
+          "modelName": "TKO Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.joyfulnoisedrumcompany.com/",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Joyful Noise Drum Company line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

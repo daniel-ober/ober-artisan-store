@@ -1,0 +1,79 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_CRAVIOTTO_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.256Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Craviotto",
+  "reviewScope": "Craviotto records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Diamond Series / AK Collaboration",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Craviotto Diamond Series / AK Collaboration snare records share a source-backed numeric shell thickness?",
+        "Can Craviotto Diamond Series / AK Collaboration snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Craviotto page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "craviotto_diamond-series-ak-collaboration_diamond-series-copper-5-5x14_14x5-5_solid-shell_copper_metal-bearing-edge-unkn_7896ed5b",
+          "label": "Craviotto — Diamond Series / AK Collaboration — Diamond Series Copper 5.5x14 — 14x5.5",
+          "modelName": "Diamond Series Copper 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamless / one-piece copper shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Metal bearing edge / unknown exact profile",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/craviotto-limited-editions",
+          "sourceConfidence": "Medium",
+          "priorityScore": 590
+        },
+        {
+          "id": "craviotto_diamond-series-ak-collaboration_diamond-series-copper-6-5x14_14x6-5_solid-shell_copper_metal-bearing-edge-unkn_32d26cdf",
+          "label": "Craviotto — Diamond Series / AK Collaboration — Diamond Series Copper 6.5x14 — 14x6.5",
+          "modelName": "Diamond Series Copper 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Seamless / one-piece copper shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Metal bearing edge / unknown exact profile",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.craviottodrums.com/craviotto-limited-editions",
+          "sourceConfidence": "Medium",
+          "priorityScore": 590
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Craviotto line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

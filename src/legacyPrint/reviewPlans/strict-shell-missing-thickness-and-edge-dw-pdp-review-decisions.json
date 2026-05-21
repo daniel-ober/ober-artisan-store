@@ -1,0 +1,266 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_DW_PDP_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.248Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-dw-pdp-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "DW / PDP",
+  "summary": {
+    "candidateCount": 93,
+    "lineGroupCount": 9,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 9,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "DW / PDP missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Series",
+      "candidateCount": 44,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "dw-pdp_collector-s-series_collector-s-birch-13x5-5_13x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_6cdafd5b",
+        "dw-pdp_collector-s-series_collector-s-birch-14x5-5_14x5-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_dd12f9a9",
+        "dw-pdp_collector-s-series_collector-s-birch-14x6-5_14x6-5_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-fl_57e64c81",
+        "dw-pdp_collector-s-series_collector-s-birch-14x8_14x8_ply_birch_lacquer-oil-natural-configurable_true-hoop-triple-flange_ceb97f2e",
+        "dw-pdp_collector-s-series_collector-s-cherry-13x5-5_13x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_fb0b24a8",
+        "dw-pdp_collector-s-series_collector-s-cherry-14x5-5_14x5-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_0ccae8d5",
+        "dw-pdp_collector-s-series_collector-s-cherry-14x6-5_14x6-5_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-_23f2053c",
+        "dw-pdp_collector-s-series_collector-s-cherry-14x8_14x8_ply_cherry_lacquer-oil-natural-configurable_true-hoop-triple-flan_5f96d676",
+        "dw-pdp_collector-s-series_collector-s-classics-13x5-5_13x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_19065de4",
+        "dw-pdp_collector-s-series_collector-s-classics-14x5-5_14x5-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_7fe4d7ae",
+        "dw-pdp_collector-s-series_collector-s-classics-14x6-5_14x6-5_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple_35d43bfc",
+        "dw-pdp_collector-s-series_collector-s-classics-14x8_14x8_ply_maple_lacquer-oil-natural-configurable_true-hoop-triple-fla_8c54ad7e"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Collector's Specialty / Metal",
+      "candidateCount": 14,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "dw-pdp_collector-s-specialty-metal_dw-aluminum-14x6-5_14x6-5_metal_aluminum_varies_true-hoop-triple-flanged_609a0827",
+        "dw-pdp_collector-s-specialty-metal_dw-brass-14x5-5_14x5-5_metal_brass_varies_true-hoop-triple-flanged_1e9dde9b",
+        "dw-pdp_collector-s-specialty-metal_dw-brass-14x6-5_14x6-5_metal_brass_varies_true-hoop-triple-flanged_b770c9bb",
+        "dw-pdp_collector-s-specialty-metal_dw-bronze-14x6-5_14x6-5_metal_bronze_varies_true-hoop-triple-flanged_9fb017b1",
+        "dw-pdp_collector-s-specialty-metal_dw-copper-14x6-5_14x6-5_metal_copper_varies_true-hoop-triple-flanged_4b211db1",
+        "dw-pdp_collector-s-specialty-metal_dw-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-triple-flange_7c064417",
+        "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x5-5_14x5-5_solid-shell_maple_varies_true-hoop-triple-flanged_021e6484",
+        "dw-pdp_collector-s-specialty-metal_dw-super-solid-maple-14x6-5_14x6-5_solid-shell_maple_varies_true-hoop-triple-flanged_8cda9d93",
+        "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x5_14x5_metal_stainless-steel_varies_true-hoop-triple_a1ae903f",
+        "dw-pdp_collector-s-specialty-metal_dw-true-sonic-stainless-steel-14x6-5_14x6-5_metal_stainless-steel_varies_true-hoop-tr_a925b00a",
+        "dw-pdp_collector-s-specialty-metal_dw-concrete-14x6-5_14x6-5_composite_concrete-composite_varies_true-hoop-triple-flange_eed680e3",
+        "dw-pdp_collector-s-specialty-metal_dw-edge-maple-metal-14x6_14x6_hybrid_maple_varies_true-hoop-triple-flanged_375984f2"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "DW Historical / Discontinued",
+      "candidateCount": 9,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 9,
+      "sampleRecordIds": [
+        "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x5-5_14x5-5_solid-shell_maple_lacquer-natural-varies_tri_2023d543",
+        "dw-pdp_dw-historical-discontinued_craviotto-solid-maple-by-dw-14x6-5_14x6-5_solid-shell_maple_lacquer-natural-varies_tri_a282f4ef",
+        "dw-pdp_dw-historical-discontinued_dw-craviotto-solid-cherry-14x6-5_14x6-5_solid-shell_cherry_lacquer-natural-varies_trip_3d7e1442",
+        "dw-pdp_dw-historical-discontinued_dw-carbon-fiber-14x6-5_14x6-5_composite_carbon-fiber_lacquer-natural-varies_triple-fla_152a2abd",
+        "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x5-5_14x5-5_ply_bamboo_lacquer-natural-varies_triple-flanged_afc92df0",
+        "dw-pdp_dw-historical-discontinued_dw-eco-x-bamboo-birch-14x6-5_14x6-5_ply_bamboo_lacquer-natural-varies_triple-flanged_6a8057b4",
+        "dw-pdp_dw-historical-discontinued_dw-maple-10-6-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_31bca584",
+        "dw-pdp_dw-historical-discontinued_dw-neil-peart-r40-icon-snare-14x6-5_14x6-5_ply_maple_lacquer-natural-varies_triple-fla_caab5483",
+        "dw-pdp_dw-historical-discontinued_dw-workshop-series-maple-14x6_14x6_ply_maple_lacquer-natural-varies_triple-flanged_9c1dcfb5"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Series",
+      "candidateCount": 7,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 7,
+      "sampleRecordIds": [
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-10x6_10x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_68441786",
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x5-5_14x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_9b008a0c",
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-12x6_12x6_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_aa986b89",
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x5-5_13x5-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_2f6ee285",
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-13x7_13x7_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_1e1a026b",
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x6-5_14x6-5_ply_maple_black-wax-hand-applied-wax-based-sealer_triple_185f847d",
+        "dw-pdp_pdp-concept-series_concept-black-wax-maple-14x8_14x8_ply_maple_black-wax-hand-applied-wax-based-sealer_triple-fla_0cdf5cd6"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Design Series",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "dw-pdp_design-series_design-series-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_24bdf5bb",
+        "dw-pdp_design-series_design-series-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_d2ed25f9",
+        "dw-pdp_design-series_design-series-acrylic-14x8_14x8_acrylic_acrylic_clear-smoke-acrylic_true-hoop-triple-flanged_c1a3471b",
+        "dw-pdp_design-series_design-series-black-nickel-over-brass-14x6-5_14x6-5_metal_brass_black-nickel-over-brass_true-hoop-t_ecf624f0",
+        "dw-pdp_design-series_design-series-brushed-aluminum-14x6-5_14x6-5_metal_aluminum_brushed-aluminum_true-hoop-triple-flang_823f1ea9",
+        "dw-pdp_design-series_design-series-steel-14x6-5_14x6-5_metal_steel_steel_true-hoop-triple-flanged_5d6bf97f"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Limited",
+      "candidateCount": 5,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 5,
+      "sampleRecordIds": [
+        "dw-pdp_pdp-limited_pdp-ace-13x6-5_13x6-5_ply_maple_triple-flanged_f52c9b71",
+        "dw-pdp_pdp-limited_pdp-concept-limited-bubinga-14x6-5_14x6-5_ply_bubinga_triple-flanged_b0f83cc0",
+        "dw-pdp_pdp-limited_pdp-concept-limited-maple-walnut-14x6-5_14x6-5_ply_maple_walnut_triple-flanged_f850de7b",
+        "dw-pdp_pdp-limited_pdp-concept-limited-walnut-14x6-5_14x6-5_ply_walnut_walnut_triple-flanged_5691be79",
+        "dw-pdp_pdp-limited_pdp-woody-13x7_13x7_ply_maple_triple-flanged_3845357d"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Concept Acrylic",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x5-5_14x5-5_acrylic_acrylic_clear-colored-acrylic_triple-flanged_dca3397f",
+        "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x6-5_14x6-5_acrylic_acrylic_clear-colored-acrylic_acrylic-hoops_ab2304e9",
+        "dw-pdp_pdp-concept-acrylic_concept-acrylic-14x8_14x8_acrylic_acrylic_clear-colored-acrylic_triple-flanged_cf275f56"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "Performance Series",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "dw-pdp_performance-series_performance-series-hvx-maple-14x5-5_14x5-5_ply_maple_lacquer_true-hoop-triple-flanged_ee472298",
+        "dw-pdp_performance-series_performance-series-hvx-maple-14x6-5_14x6-5_ply_maple_lacquer_true-hoop-triple-flanged_7b3b34bc",
+        "dw-pdp_performance-series_performance-series-hvx-maple-14x8_14x8_ply_maple_lacquer_true-hoop-triple-flanged_33783f76"
+      ]
+    },
+    {
+      "companyName": "DW / PDP",
+      "lineSeries": "PDP Signature",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official DW / PDP page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "dw-pdp_pdp-signature_chad-smith-signature-14x5_14x5_metal_steel_triple-flanged_0d314dee",
+        "dw-pdp_pdp-signature_eric-hernandez-signature-concept-maple-14x4_14x4_ply_maple_triple-flanged_e301abd5"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No DW / PDP shell-thickness promotion is approved from this decisions file.",
+    "No DW / PDP bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

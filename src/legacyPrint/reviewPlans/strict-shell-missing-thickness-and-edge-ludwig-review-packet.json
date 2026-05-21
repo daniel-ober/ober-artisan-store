@@ -1,0 +1,918 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_LUDWIG_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.252Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Ludwig",
+  "reviewScope": "Ludwig records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 39,
+    "lineGroupCount": 14,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "1950s Leedy & Ludwig",
+      "candidateCount": 5,
+      "sourceConfidenceCounts": {
+        "Medium": 5
+      },
+      "researchQuestions": [
+        "Can Ludwig 1950s Leedy & Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1950s Leedy & Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1950s-leedy-and-ludwig_broadway-floating-head-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_bada608b",
+          "label": "Ludwig — 1950s Leedy & Ludwig — Broadway Floating Head 5.5x14 — 14x5.5",
+          "modelName": "Broadway Floating Head 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
+          "label": "Ludwig — 1950s Leedy & Ludwig — Broadway New Era 5.5x14 — 14x5.5",
+          "modelName": "Broadway New Era 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
+          "label": "Ludwig — 1950s Leedy & Ludwig — The Nifty 5x14 — 14x5",
+          "modelName": "The Nifty 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
+          "label": "Ludwig — 1950s Leedy & Ludwig — The Reliance 5x14 — 14x5",
+          "modelName": "The Reliance 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0",
+          "label": "Ludwig — 1950s Leedy & Ludwig — The Utility 5x14 — 14x5",
+          "modelName": "The Utility 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1989-1994 Ludwig",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "Medium": 4
+      },
+      "researchQuestions": [
+        "Can Ludwig 1989-1994 Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1989-1994 Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1989-1994-ludwig_bronze-series-5x14_14x5_metal_bronze_bronze_triple-flanged_c6bc1a0c",
+          "label": "Ludwig — 1989-1994 Ludwig — Bronze Series 5x14 — 14x5",
+          "modelName": "Bronze Series 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
+          "label": "Ludwig — 1989-1994 Ludwig — Classic Series 5.5x14 — 14x5.5",
+          "modelName": "Classic Series 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b",
+          "label": "Ludwig — 1989-1994 Ludwig — Metal Series 5x14 — 14x5",
+          "modelName": "Metal Series 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"Aluminum\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a",
+          "label": "Ludwig — 1989-1994 Ludwig — Rocker Series 5.5x14 — 14x5.5",
+          "modelName": "Rocker Series 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "2000s Ludwig",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "Medium": 4
+      },
+      "researchQuestions": [
+        "Can Ludwig 2000s Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 2000s Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_2000s-ludwig_centennial-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_ad95bbc1",
+          "label": "Ludwig — 2000s Ludwig — Centennial Snare 6.5x14 — 14x6.5",
+          "modelName": "Centennial Snare 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
+          "label": "Ludwig — 2000s Ludwig — Element Snare 5.5x14 — 14x5.5",
+          "modelName": "Element Snare 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
+          "label": "Ludwig — 2000s Ludwig — Epic Snare 6.5x14 — 14x6.5",
+          "modelName": "Epic Snare 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_2000s-ludwig_keystone-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_89955984",
+          "label": "Ludwig — 2000s Ludwig — Keystone Snare 6.5x14 — 14x6.5",
+          "modelName": "Keystone Snare 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1920s Ludwig & Ludwig",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Ludwig 1920s Ludwig & Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1920s Ludwig & Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-5x14_14x5_metal_brass_black-nickel-engraved-brass_single-flanged-or-_98489677",
+          "label": "Ludwig — 1920s Ludwig & Ludwig — Black Beauty De Luxe 5x14 — 14x5",
+          "modelName": "Black Beauty De Luxe 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": 910
+        },
+        {
+          "id": "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-6-5x14_14x6-5_metal_brass_black-nickel-engraved-brass_single-flanged_5ae3d434",
+          "label": "Ludwig — 1920s Ludwig & Ludwig — Black Beauty De Luxe 6.5x14 — 14x6.5",
+          "modelName": "Black Beauty De Luxe 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": 910
+        },
+        {
+          "id": "ludwig_1920s-ludwig-and-ludwig_super-ludwig-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_c718211b",
+          "label": "Ludwig — 1920s Ludwig & Ludwig — Super Ludwig 5x14 NOB — 14x5",
+          "modelName": "Super Ludwig 5x14 NOB",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1940s WFL",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Ludwig 1940s WFL snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1940s WFL snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6",
+          "label": "Ludwig — 1940s WFL — Buddy Rich Super Classic 5.5x14 — 14x5.5",
+          "modelName": "Buddy Rich Super Classic 5.5x14",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+          "label": "Ludwig — 1940s WFL — Compacto Snare Drum — 14x3.5",
+          "modelName": "Compacto Snare Drum",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1",
+          "label": "Ludwig — 1940s WFL — Ray McKinley Snare Drum 6.5x14 — 14x6.5",
+          "modelName": "Ray McKinley Snare Drum 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"3-ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1963-1970s Ludwig",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Ludwig 1963-1970s Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1963-1970s Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1963-1970s-ludwig_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged_lm404_914e4560",
+          "label": "Ludwig — 1963-1970s Ludwig — Acrolite 5x14 — 14x5",
+          "modelName": "Acrolite 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": 890
+        },
+        {
+          "id": "ludwig_1963-1970s-ludwig_super-sensitive-5x14_14x5_metal_aluminum_brass_chrome-plated_triple-flanged_f05317dd",
+          "label": "Ludwig — 1963-1970s Ludwig — Super Sensitive 5x14 — 14x5",
+          "modelName": "Super Sensitive 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"Brass\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1963-1970s-ludwig_super-sensitive-6-5x14_14x6-5_metal_aluminum_brass_chrome-plated_triple-flanged_305016ee",
+          "label": "Ludwig — 1963-1970s Ludwig — Super Sensitive 6.5x14 — 14x6.5",
+          "modelName": "Super Sensitive 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"Brass\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1970s Ludwig",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Ludwig 1970s Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1970s Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
+          "label": "Ludwig — 1970s Ludwig — Piccolo Snare 3x13 — 13x3",
+          "modelName": "Piccolo Snare 3x13",
+          "diameter": "13",
+          "depth": "3",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1970s-ludwig_vistalite-snare-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_cd29803d",
+          "label": "Ludwig — 1970s Ludwig — Vistalite Snare 5x14 — 14x5",
+          "modelName": "Vistalite Snare 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Acrylic",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1970s-ludwig_vistalite-snare-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_786fcc62",
+          "label": "Ludwig — 1970s Ludwig — Vistalite Snare 6.5x14 — 14x6.5",
+          "modelName": "Vistalite Snare 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Acrylic",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Artist / Signature",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Ludwig Artist / Signature snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig Artist / Signature snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_metal_brass_raw-aged-brass_triple-flanged_99c1f0ff",
+          "label": "Ludwig — Artist / Signature — Jon Theodore Signature 6.5x14 — 14x6.5",
+          "modelName": "Jon Theodore Signature 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_metal_brass_nickel-over-brass_triple-flanged_0d88b7c9",
+          "label": "Ludwig — Artist / Signature — Nate Smith Signature 4.75x14 — 14x4.75",
+          "modelName": "Nate Smith Signature 4.75x14",
+          "diameter": "14",
+          "depth": "4.75",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f",
+          "label": "Ludwig — Artist / Signature — Questlove Breakbeats Snare 5x14 — 14x5",
+          "modelName": "Questlove Breakbeats Snare 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Vistalite",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Ludwig Vistalite snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig Vistalite snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_vistalite_vistalite-acrylic-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_353a101d",
+          "label": "Ludwig — Vistalite — Vistalite Acrylic 5x14 — 14x5",
+          "modelName": "Vistalite Acrylic 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Acrylic",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_vistalite_vistalite-acrylic-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_429e1234",
+          "label": "Ludwig — Vistalite — Vistalite Acrylic 6.5x14 — 14x6.5",
+          "modelName": "Vistalite Acrylic 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Acrylic",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_vistalite_vistalite-acrylic-8x14_14x8_acrylic_acrylic_transparent-acrylic_triple-flanged_4328eeda",
+          "label": "Ludwig — Vistalite — Vistalite Acrylic 8x14 — 14x8",
+          "modelName": "Vistalite Acrylic 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Acrylic",
+          "shellConstruction": "{\"shellConstruction\":\"Acrylic\",\"shellMaterialPrimary\":\"Acrylic\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1911-1930s Ludwig & Ludwig",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Ludwig 1911-1930s Ludwig & Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1911-1930s Ludwig & Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-5x14_14x5_metal_brass_nob-lacquer-pearl_single-flanged-or-era-hoo_27297878",
+          "label": "Ludwig — 1911-1930s Ludwig & Ludwig — Professional Model 5x14 — 14x5",
+          "modelName": "Professional Model 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-6-5x14_14x6-5_metal_brass_nob-lacquer-pearl_single-flanged-or-era_8939a4c5",
+          "label": "Ludwig — 1911-1930s Ludwig & Ludwig — Professional Model 6.5x14 — 14x6.5",
+          "modelName": "Professional Model 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1990s-2000s Ludwig",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Ludwig 1990s-2000s Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1990s-2000s Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3",
+          "label": "Ludwig — 1990s-2000s Ludwig — Black Magic 5x14 — 14x5",
+          "modelName": "Black Magic 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_1990s-2000s-ludwig_black-magic-6-5x14_14x6-5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depen_7e603045",
+          "label": "Ludwig — 1990s-2000s Ludwig — Black Magic 6.5x14 — 14x6.5",
+          "modelName": "Black Magic 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Modern Ludwig",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Ludwig Modern Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig Modern Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a",
+          "label": "Ludwig — Modern Ludwig — Club Date Reissue 5x14 — 14x5",
+          "modelName": "Club Date Reissue 5x14",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c",
+          "label": "Ludwig — Modern Ludwig — Club Date Reissue 6.5x14 — 14x6.5",
+          "modelName": "Club Date Reissue 6.5x14",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "1930s Ludwig & Ludwig",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestions": [
+        "Can Ludwig 1930s Ludwig & Ludwig snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig 1930s Ludwig & Ludwig snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_1930s-ludwig-and-ludwig_super-sensitive-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_552351e1",
+          "label": "Ludwig — 1930s Ludwig & Ludwig — Super Sensitive 5x14 NOB — 14x5",
+          "modelName": "Super Sensitive 5x14 NOB",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/ludwig_snare_drum_catalog_pages.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Coliseum",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestions": [
+        "Can Ludwig Coliseum snare records share a source-backed numeric shell thickness?",
+        "Can Ludwig Coliseum snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb",
+          "label": "Ludwig — Coliseum — Slotted Coliseum 8x14 — 14x8",
+          "modelName": "Slotted Coliseum 8x14",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.ludwig-drums.com/en-us/ludwig/products/snare-drums",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Ludwig line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_MAPEX_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.255Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Mapex",
+  "reviewScope": "Mapex records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 7,
+    "lineGroupCount": 4,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Mars",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 1,
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Mapex Mars snare records share a source-backed numeric shell thickness?",
+        "Can Mapex Mars snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_mars_mars-maple-snare-14x5-5_14x5-5_ply_maple_soniclear-edge_lacquer-wrap-varies_2-3mm-hoops_ma4650_36c155a8",
+          "label": "Mapex — Mars — Mars Maple Snare 14x5.5 — 14x5.5",
+          "modelName": "Mars Maple Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "SONIClear edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/files/file_pool/1/0p091736501336663737/mpx_pm_armory_2025_brochure_us_read.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "mapex_mars_mars-birch-snare-14x5-5_14x5-5_ply_birch_soniclear-edge_wrap-varies_2-3mm-hoops_mb4550_89a19cd8",
+          "label": "Mapex — Mars — Mars Birch Snare 14x5.5 — 14x5.5",
+          "modelName": "Mars Birch Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "SONIClear edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "MPX",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Mapex MPX snare records share a source-backed numeric shell thickness?",
+        "Can Mapex MPX snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_mpx_mpx-maple-14x5-5_14x5-5_ply_maple_lacquer_triple-flange-hoops_mpml4550_834bddb1",
+          "label": "Mapex — MPX — MPX Maple 14x5.5 — 14x5.5",
+          "modelName": "MPX Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "mapex_mpx_mpx-steel-14x5-5_14x5-5_metal_steel_chrome-plated_triple-flange-hoops_mpst4550_e61683e0",
+          "label": "Mapex — MPX — MPX Steel 14x5.5 — 14x5.5",
+          "modelName": "MPX Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Signature / Artist",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 1,
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Mapex Signature / Artist snare records share a source-backed numeric shell thickness?",
+        "Can Mapex Signature / Artist snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_signature-artist_russ-miller-versatus_14x4-625_ply_maple-mahogany_signature-finish_sonic-saver-hoops_bpml4600_303725ee",
+          "label": "Mapex — Signature / Artist — Russ Miller Versatus — 14x4.625",
+          "modelName": "Russ Miller Versatus",
+          "diameter": "14",
+          "depth": "4.625",
+          "shellMaterial": "Maple / Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":true,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "mapex_signature-artist_the-raven-artist-black-panther_14x5-5_ply_maple_signature-finish_2-3mm-powerhoops_bpraven_e368d14a",
+          "label": "Mapex — Signature / Artist — The Raven / Artist Black Panther — 14x5.5",
+          "modelName": "The Raven / Artist Black Panther",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Black Panther",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestions": [
+        "Can Mapex Black Panther snare records share a source-backed numeric shell thickness?",
+        "Can Mapex Black Panther snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Mapex page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "mapex_black-panther_shadow_14x6-5_ply_walnut_dark-lacquer_sonic-saver-hoops_bpnbw4650cxn_d4b3336e",
+          "label": "Mapex — Black Panther — Shadow — 14x6.5",
+          "modelName": "Shadow",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.mapexdrums.com/us/products/drums/snare-drums/black-panther/shadow",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Mapex line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

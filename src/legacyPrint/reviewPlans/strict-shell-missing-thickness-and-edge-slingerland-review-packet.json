@@ -1,0 +1,385 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_SLINGERLAND_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.254Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Slingerland",
+  "reviewScope": "Slingerland records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 14,
+    "lineGroupCount": 7,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Concert / Marching / Educational",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "Low": 8
+      },
+      "researchQuestions": [
+        "Can Slingerland Concert / Marching / Educational snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland Concert / Marching / Educational snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_concert-marching-educational_concert-king-metal-snare_14x6-5_metal_chrome-over-brass_wrap-lacquer-or-metal-p_9092a990",
+          "label": "Slingerland — Concert / Marching / Educational — Concert King Metal Snare — 14x6.5",
+          "modelName": "Concert King Metal Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Chrome over Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Chrome over Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_concert-king-wood-snare_14x6-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-met_4fd878a2",
+          "label": "Slingerland — Concert / Marching / Educational — Concert King Wood Snare — 14x6.5",
+          "modelName": "Concert King Wood Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Unknown ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_field-snare-10x14_14x10_ply_wood_wrap-lacquer-or-metal-plating_marching-concert_239642ca",
+          "label": "Slingerland — Concert / Marching / Educational — Field Snare 10x14 — 14x10",
+          "modelName": "Field Snare 10x14",
+          "diameter": "14",
+          "depth": "10",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_marching-snare-12x15_15x12_ply_wood_wrap-lacquer-or-metal-plating_marching-conc_1907af6f",
+          "label": "Slingerland — Concert / Marching / Educational — Marching Snare 12x15 — 15x12",
+          "modelName": "Marching Snare 12x15",
+          "diameter": "15",
+          "depth": "12",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_school-festival-metal-snare_14x5-5_metal_steel_wrap-lacquer-or-metal-plating_ma_9aad9862",
+          "label": "Slingerland — Concert / Marching / Educational — School Festival Metal Snare — 14x5.5",
+          "modelName": "School Festival Metal Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_school-festival-wood-snare_14x5-5_ply_mahogany_poplar_mahogany_wrap-lacquer-or-_49785e7d",
+          "label": "Slingerland — Concert / Marching / Educational — School Festival Wood Snare — 14x5.5",
+          "modelName": "School Festival Wood Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"Mahogany\",\"plyCount\":null,\"layupDescription\":\"Unknown ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_spitfire-marching-snare_14x12_ply_wood_wrap-lacquer-or-metal-plating_marching-c_ab337714",
+          "label": "Slingerland — Concert / Marching / Educational — Spitfire Marching Snare — 14x12",
+          "modelName": "Spitfire Marching Snare",
+          "diameter": "14",
+          "depth": "12",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "slingerland_concert-marching-educational_tdr-marching-snare_14x12_ply_wood_composite_wrap-lacquer-or-metal-plating_march_9db092db",
+          "label": "Slingerland — Concert / Marching / Educational — TDR Marching Snare — 14x12",
+          "modelName": "TDR Marching Snare",
+          "diameter": "14",
+          "depth": "12",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"Composite\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Cut-A-Way",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Slingerland Cut-A-Way snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland Cut-A-Way snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_cut-a-way_cut-a-way-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-era-specific_7a661fbc",
+          "label": "Slingerland — Cut-A-Way — Cut-A-Way Snare — 14x5.5",
+          "modelName": "Cut-A-Way Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown late-era ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Lite",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Slingerland Lite snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland Lite snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_lite_slingerland-lite-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_f4a6a6bc",
+          "label": "Slingerland — Lite — Slingerland Lite Snare — 14x5.5",
+          "modelName": "Slingerland Lite Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Magnum",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Slingerland Magnum snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland Magnum snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_magnum_magnum-snare_14x6-5_ply_maple_poplar_modern-rounded-45-hybrid-unknown_wrap-or-lacquer_stick-saver-tri_84a93c23",
+          "label": "Slingerland — Magnum — Magnum Snare — 14x6.5",
+          "modelName": "Magnum Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"5-ply or late-era layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Modern rounded/45 hybrid unknown",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Nashville Era",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Slingerland Nashville Era snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland Nashville Era snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_nashville-era_nashville-studio-king-snare_14x5-5_ply_maple_poplar_wrap-or-lacquer_stick-saver-triple-flange-_67a56475",
+          "label": "Slingerland — Nashville Era — Nashville Studio King Snare — 14x5.5",
+          "modelName": "Nashville Studio King Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Poplar\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Studio King-family layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Spirit",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Slingerland Spirit snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland Spirit snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_spirit_spirit-series-snare_14x5-5_ply_wood_wrap-or-lacquer_stick-saver-triple-flange-era-specific_ebfd696a",
+          "label": "Slingerland — Spirit — Spirit Series Snare — 14x5.5",
+          "modelName": "Spirit Series Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "USA Maple",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Slingerland USA Maple snare records share a source-backed numeric shell thickness?",
+        "Can Slingerland USA Maple snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Slingerland page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "slingerland_usa-maple_usa-maple-snare_14x5-5_ply_maple_wrap-or-lacquer_stick-saver-triple-flange-era-specific_1c5ac547",
+          "label": "Slingerland — USA Maple — USA Maple Snare — 14x5.5",
+          "modelName": "USA Maple Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.vintagedrumguide.com/slingerland_catalog_pages.html",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Slingerland line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_SEVEN_SIX_DRUM_COMPANY_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.256Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-seven-six-drum-company-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Seven Six Drum Company",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Seven Six Drum Company missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Seven Six Drum Company",
+      "lineSeries": "Custom",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Seven Six Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "seven-six-drum-company_custom_bolivian-rosewood-morado-vii-solid-stave_14x6-5_solid-shell_wood_37e99be6",
+        "seven-six-drum-company_custom_purpleheart-solid-stave_14x6-5_solid-shell_purpleheart_7c755fdc",
+        "seven-six-drum-company_custom_steam-bent-solid-shell-walnut_14x6-5_steam-bent_walnut_a5b46dd4"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Seven Six Drum Company shell-thickness promotion is approved from this decisions file.",
+    "No Seven Six Drum Company bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

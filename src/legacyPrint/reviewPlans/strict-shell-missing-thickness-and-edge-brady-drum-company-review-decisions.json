@@ -1,0 +1,151 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_BRADY_DRUM_COMPANY_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.250Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-brady-drum-company-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Brady Drum Company",
+  "summary": {
+    "candidateCount": 60,
+    "lineGroupCount": 5,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 5,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Brady Drum Company missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Block Shell / Stave-Style",
+      "candidateCount": 48,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x6-5_14x6-5_block_jarrah_unknown-likely-brady-style-45-f_90e38a75",
+        "brady-drum-company_block-shell-stave-style_wandoo-block-snare-14x6-5_14x6-5_block_wandoo_unknown-likely-brady-style-45-f_ee114bb0",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x5_12x5_block_jarrah_unknown-likely-brady-style-45-famil_8267b6f6",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-12x7_12x7_block_jarrah_unknown-likely-brady-style-45-famil_03553a4e",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x5-5_13x5-5_block_jarrah_unknown-likely-brady-style-45-f_e8fbd6dc",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-13x7_13x7_block_jarrah_unknown-likely-brady-style-45-famil_fb297460",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x5-5_14x5-5_block_jarrah_unknown-likely-brady-style-45-f_575a3776",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x7_14x7_block_jarrah_unknown-likely-brady-style-45-famil_44f82325",
+        "brady-drum-company_block-shell-stave-style_jarrah-block-snare-14x8_14x8_block_jarrah_unknown-likely-brady-style-45-famil_d1232fc2",
+        "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x5_12x5_block_gum_unknown-likely-brady-style-_1a0e46be",
+        "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-12x7_12x7_block_gum_unknown-likely-brady-style-_39ddbd88",
+        "brady-drum-company_block-shell-stave-style_lemon-scented-gum-block-snare-13x5-5_13x5-5_block_gum_unknown-likely-brady-st_9cfb5eaa"
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Early Solid / Hollow Log",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x5-5_14x5-5_solid-shell_jarrah_unknown-l_dec3eeb4",
+        "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x6-5_14x6-5_solid-shell_jarrah_unknown-l_a9157580",
+        "brady-drum-company_early-solid-hollow-log_jarrah-hollow-log-solid-shell-snare-14x8_14x8_solid-shell_jarrah_unknown-likel_9e8e654a",
+        "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x5-5_14x5-5_solid-shell_oak_unknown-like_46ec8f8f",
+        "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x6-5_14x6-5_solid-shell_oak_unknown-like_c43a6b80",
+        "brady-drum-company_early-solid-hollow-log_sheoak-hollow-log-solid-shell-snare-14x8_14x8_solid-shell_oak_unknown-likely-b_7775c5ed"
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Ply Shell",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "brady-drum-company_ply-shell_jarrah-ply-snare-14x5-5_14x5-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_83bfb2e5",
+        "brady-drum-company_ply-shell_jarrah-ply-snare-14x6-5_14x6-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_7ecec5b5",
+        "brady-drum-company_ply-shell_jarrah-ply-snare-14x8_14x8_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown-mod_9ef39f45",
+        "brady-drum-company_ply-shell_jarrah-ply-snare-16x6-5_16x6-5_ply_jarrah_unknown-likely-brady-style-45-family-edge_unknown_d9aa9874"
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Historical / Early Experimental",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "brady-drum-company_historical-early-experimental_1984-sheoak-block-snare-14x7-with-dw-hardware_14x7_block_oak_unknown-li_da921be8"
+      ]
+    },
+    {
+      "companyName": "Brady Drum Company",
+      "lineSeries": "Walkabout / Multi-Wood",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Brady Drum Company page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "brady-drum-company_walkabout-multi-wood_wandoo-sheoak-marri-block-stave-snare-14x6-5_14x6-5_block_wandoo_oak_marri_unkno_235fa8a3"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Brady Drum Company shell-thickness promotion is approved from this decisions file.",
+    "No Brady Drum Company bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

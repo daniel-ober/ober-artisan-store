@@ -1,0 +1,55 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_HENDRIX_DRUMS_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.254Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-hendrix-drums-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Hendrix Drums",
+  "summary": {
+    "candidateCount": 8,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Hendrix Drums missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Hendrix Drums",
+      "lineSeries": "Archetype Stave Series",
+      "candidateCount": 8,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Hendrix Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 8,
+      "sampleRecordIds": [
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_4f56ee15",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_78d01a71",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_42afb1b7",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-maple-14x6-5_14x6-5_solid-shell_maple_bd6aefc7",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-oak-14x6-5_14x6-5_solid-shell_oak_e4f07e87",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-padauk-14x6-5_14x6-5_solid-shell_padauk_bd9924d1",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-purpleheart-14x6-5_14x6-5_solid-shell_purpleheart_c71d02b0",
+        "hendrix-drums_archetype-stave-series_archetype-solid-stave-walnut-14x6-5_14x6-5_solid-shell_walnut_01988229"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Hendrix Drums shell-thickness promotion is approved from this decisions file.",
+    "No Hendrix Drums bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

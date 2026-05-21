@@ -1,0 +1,1238 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_YAMAHA_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.250Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Yamaha",
+  "reviewScope": "Yamaha records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 55,
+    "lineGroupCount": 19,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 14,
+      "sourceConfidenceCounts": {
+        "Medium": 14
+      },
+      "researchQuestions": [
+        "Can Yamaha Signature snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Signature snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_signature_akira-jimbo-signature-13x7_13x7_ply_maple_lacquer-signature-finish_triple-flange-yamaha-hoop_akira-jimb_3bc8b032",
+          "label": "Yamaha — Signature — Akira Jimbo Signature 13x7 — 13x7",
+          "modelName": "Akira Jimbo Signature 13x7",
+          "diameter": "13",
+          "depth": "7",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_andre-ceccarelli-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_msd1455ac_07b379cc",
+          "label": "Yamaha — Signature — Andre Ceccarelli Signature 14x5.5 — 14x5.5",
+          "modelName": "Andre Ceccarelli Signature 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_anton-fig-signature-14x6_14x6_ply_maple_solid-black_19-ply-vintage-wood-hoop_msd14af_57e9e5fb",
+          "label": "Yamaha — Signature — Anton Fig Signature 14x6 — 14x6",
+          "modelName": "Anton Fig Signature 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"7-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_billy-cobham-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_billy-cobham-_1f58e7fb",
+          "label": "Yamaha — Signature — Billy Cobham Signature 14x5.5 — 14x5.5",
+          "modelName": "Billy Cobham Signature 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_dave-weckl-signature-aluminum-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_signature-finish_triple-fl_fd0141b3",
+          "label": "Yamaha — Signature — Dave Weckl Signature Aluminum 14x5.5 — 14x5.5",
+          "modelName": "Dave Weckl Signature Aluminum 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_dave-weckl-signature-maple-14x5-5_14x5-5_ply_maple_signature-lacquer_triple-flange-yamaha-hoop_msd1455d_7daae3e7",
+          "label": "Yamaha — Signature — Dave Weckl Signature Maple 14x5.5 — 14x5.5",
+          "modelName": "Dave Weckl Signature Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_david-garibaldi-signature-14x3-5-brass-piccolo_14x3-5_metal_brass_rolled-metal-edge_black-brass-finish__4fac3007",
+          "label": "Yamaha — Signature — David Garibaldi Signature 14x3.5 Brass Piccolo — 14x3.5",
+          "modelName": "David Garibaldi Signature 14x3.5 Brass Piccolo",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_elvin-jones-signature-14x7_14x7_ply_maple_natural-signature-finish_wood-hoop-vintage-hoop_elvin-jones-s_81963be9",
+          "label": "Yamaha — Signature — Elvin Jones Signature 14x7 — 14x7",
+          "modelName": "Elvin Jones Signature 14x7",
+          "diameter": "14",
+          "depth": "7",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_jimmy-chamberlin-signature-14x5-5-steel_14x5-5_metal_steel_rolled-metal-edge_chrome-signature-finish_tr_7be59974",
+          "label": "Yamaha — Signature — Jimmy Chamberlin Signature 14x5.5 Steel — 14x5.5",
+          "modelName": "Jimmy Chamberlin Signature 14x5.5 Steel",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_manu-katch-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_manu-katch-sign_dad25ca9",
+          "label": "Yamaha — Signature — Manu Katché Signature 14x5.5 — 14x5.5",
+          "modelName": "Manu Katché Signature 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_peter-erskine-signature-10x4_10x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-10_31693f36",
+          "label": "Yamaha — Signature — Peter Erskine Signature 10x4 — 10x4",
+          "modelName": "Peter Erskine Signature 10x4",
+          "diameter": "10",
+          "depth": "4",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_signature_peter-erskine-signature-12x4_12x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-12_845f020f",
+          "label": "Yamaha — Signature — Peter Erskine Signature 12x4 — 12x4",
+          "modelName": "Peter Erskine Signature 12x4",
+          "diameter": "12",
+          "depth": "4",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007659",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Metal Snare",
+      "candidateCount": 10,
+      "sourceConfidenceCounts": {
+        "Low": 10
+      },
+      "researchQuestions": [
+        "Can Yamaha Metal Snare snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Metal Snare snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x3-5_14x3-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_61f12875",
+          "label": "Yamaha — Metal Snare — Yamaha Aluminum Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Aluminum Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x4_14x4_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finish_tr_bf0360ec",
+          "label": "Yamaha — Metal Snare — Yamaha Aluminum Metal Snare 14x4 — 14x4",
+          "modelName": "Yamaha Aluminum Metal Snare 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_f67b6b69",
+          "label": "Yamaha — Metal Snare — Yamaha Aluminum Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Aluminum Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x6-5_14x6-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_46e4e453",
+          "label": "Yamaha — Metal Snare — Yamaha Aluminum Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Aluminum Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x3-5_14x3-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_e064b0a6",
+          "label": "Yamaha — Metal Snare — Yamaha Bronze Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Bronze Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x5-5_14x5-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_4c7fa2c3",
+          "label": "Yamaha — Metal Snare — Yamaha Bronze Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Bronze Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-bronze-metal-snare-14x6-5_14x6-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_1b177f3e",
+          "label": "Yamaha — Metal Snare — Yamaha Bronze Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Bronze Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x3-5_14x3-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_d16df9c1",
+          "label": "Yamaha — Metal Snare — Yamaha Copper Metal Snare 14x3.5 — 14x3.5",
+          "modelName": "Yamaha Copper Metal Snare 14x3.5",
+          "diameter": "14",
+          "depth": "3.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x5-5_14x5-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_84e5e7b4",
+          "label": "Yamaha — Metal Snare — Yamaha Copper Metal Snare 14x5.5 — 14x5.5",
+          "modelName": "Yamaha Copper Metal Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_metal-snare_yamaha-copper-metal-snare-14x6-5_14x6-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_76ff6b36",
+          "label": "Yamaha — Metal Snare — Yamaha Copper Metal Snare 14x6.5 — 14x6.5",
+          "modelName": "Yamaha Copper Metal Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Concert / Orchestral",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "High": 2,
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Concert / Orchestral snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Concert / Orchestral snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x5-5_14x5-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1455_1d0b5502",
+          "label": "Yamaha — Concert / Orchestral — OSM Series Maple Concert 14x5.5 — 14x5.5",
+          "modelName": "OSM Series Maple Concert 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/percussion/snare_drums/osm/index.html",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "yamaha_concert-orchestral_osm-series-maple-concert-14x6-5_14x6-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1465_38a8b72a",
+          "label": "Yamaha — Concert / Orchestral — OSM Series Maple Concert 14x6.5 — 14x6.5",
+          "modelName": "OSM Series Maple Concert 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/percussion/snare_drums/osm/index.html",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x5-5_14x5-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x5-5_377a1aa0",
+          "label": "Yamaha — Concert / Orchestral — CSM-A II Concert Snare 14x5.5 — 14x5.5",
+          "modelName": "CSM-A II Concert Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/percussion/snare_drums/index.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x6-5_14x6-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x6-5_f7bfeacc",
+          "label": "Yamaha — Concert / Orchestral — CSM-A II Concert Snare 14x6.5 — 14x6.5",
+          "modelName": "CSM-A II Concert Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/percussion/snare_drums/index.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Musashi",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Medium": 3
+      },
+      "researchQuestions": [
+        "Can Yamaha Musashi snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Musashi snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_musashi_musashi-oak-12x6_12x6_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1260-musashi_dbd140fe",
+          "label": "Yamaha — Musashi — Musashi Oak 12x6 — 12x6",
+          "modelName": "Musashi Oak 12x6",
+          "diameter": "12",
+          "depth": "6",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_musashi_musashi-oak-13x6-5_13x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1365-musashi_3414cf8f",
+          "label": "Yamaha — Musashi — Musashi Oak 13x6.5 — 13x6.5",
+          "modelName": "Musashi Oak 13x6.5",
+          "diameter": "13",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_musashi_musashi-oak-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1465-musashi_d4a70025",
+          "label": "Yamaha — Musashi — Musashi Oak 14x6.5 — 14x6.5",
+          "modelName": "Musashi Oak 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "9000 / Recording Series",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha 9000 / Recording Series snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha 9000 / Recording Series snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x5-5_14x5-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0bf7d6d1",
+          "label": "Yamaha — 9000 / Recording Series — Recording Series Birch Snare 14x5.5 — 14x5.5",
+          "modelName": "Recording Series Birch Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Hokkaido birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_9000-recording-series_recording-series-birch-snare-14x6-5_14x6-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0ff83600",
+          "label": "Yamaha — 9000 / Recording Series — Recording Series Birch Snare 14x6.5 — 14x6.5",
+          "modelName": "Recording Series Birch Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Hokkaido birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Beech Custom",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Beech Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Beech Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_beech-custom_beech-custom-beech-snare-14x5-5_14x5-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_7efb5e42",
+          "label": "Yamaha — Beech Custom — Beech Custom Beech Snare 14x5.5 — 14x5.5",
+          "modelName": "Beech Custom Beech Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Beech",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Beech ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_beech-custom_beech-custom-beech-snare-14x6-5_14x6-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_40e6aec4",
+          "label": "Yamaha — Beech Custom — Beech Custom Beech Snare 14x6.5 — 14x6.5",
+          "modelName": "Beech Custom Beech Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Beech",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Beech\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Beech ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Birch Custom",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Birch Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Birch Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_birch-custom_birch-custom-birch-snare-14x5-5_14x5-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_f2ebec1c",
+          "label": "Yamaha — Birch Custom — Birch Custom Birch Snare 14x5.5 — 14x5.5",
+          "modelName": "Birch Custom Birch Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Birch ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_birch-custom_birch-custom-birch-snare-14x6-5_14x6-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_35a7d45e",
+          "label": "Yamaha — Birch Custom — Birch Custom Birch Snare 14x6.5 — 14x6.5",
+          "modelName": "Birch Custom Birch Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Birch ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Club Custom",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Club Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Club Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_club-custom_club-custom-kapur-snare-14x5-5_14x5-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_85502a35",
+          "label": "Yamaha — Club Custom — Club Custom Kapur Snare 14x5.5 — 14x5.5",
+          "modelName": "Club Custom Kapur Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Kapur",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Kapur\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Kapur ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_club-custom_club-custom-kapur-snare-14x6-5_14x6-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_b1bb8e06",
+          "label": "Yamaha — Club Custom — Club Custom Kapur Snare 14x6.5 — 14x6.5",
+          "modelName": "Club Custom Kapur Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Kapur",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Kapur\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Kapur ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Live Custom Hybrid Oak",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Live Custom Hybrid Oak snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Live Custom Hybrid Oak snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x5-5_14x5-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_6ad06c17",
+          "label": "Yamaha — Live Custom Hybrid Oak — Live Custom Hybrid Oak Snare 14x5.5 — 14x5.5",
+          "modelName": "Live Custom Hybrid Oak Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"Phenolic\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak/phenolic hybrid\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/index.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x6-5_14x6-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_90128483",
+          "label": "Yamaha — Live Custom Hybrid Oak — Live Custom Hybrid Oak Snare 14x6.5 — 14x6.5",
+          "modelName": "Live Custom Hybrid Oak Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"Phenolic\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak/phenolic hybrid\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/musical_instruments/drums/ac_drums/snare_drums/index.html",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Maple Custom",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Maple Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Maple Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_maple-custom_maple-custom-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_9289f705",
+          "label": "Yamaha — Maple Custom — Maple Custom Maple Snare 14x5.5 — 14x5.5",
+          "modelName": "Maple Custom Maple Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_maple-custom_maple-custom-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_d9fb315a",
+          "label": "Yamaha — Maple Custom — Maple Custom Maple Snare 14x6.5 — 14x6.5",
+          "modelName": "Maple Custom Maple Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Maple ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Oak Custom",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha Oak Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Oak Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_oak-custom_oak-custom-14x5-5_14x5-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1455_0ad0dea3",
+          "label": "Yamaha — Oak Custom — Oak Custom 14x5.5 — 14x5.5",
+          "modelName": "Oak Custom 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "yamaha_oak-custom_oak-custom-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1465_3f6130ae",
+          "label": "Yamaha — Oak Custom — Oak Custom 14x6.5 — 14x6.5",
+          "modelName": "Oak Custom 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Oak ply family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://faq.yamaha.com/usa/s/article/U0007660",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "PHX Phoenix",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha PHX Phoenix snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha PHX Phoenix snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_7b7f661a",
+          "label": "Yamaha — PHX Phoenix — PHX Phoenix Maple Snare 14x5.5 — 14x5.5",
+          "modelName": "PHX Phoenix Maple Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Jatoba/Kapur/Maple hybrid family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/contents/drums/downloads/brochures/index.html?c=drums&k=",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_5de26838",
+          "label": "Yamaha — PHX Phoenix — PHX Phoenix Maple Snare 14x6.5 — 14x6.5",
+          "modelName": "PHX Phoenix Maple Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Jatoba/Kapur/Maple hybrid family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/products/contents/drums/downloads/brochures/index.html?c=drums&k=",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "YD / Early Yamaha",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Yamaha YD / Early Yamaha snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha YD / Early Yamaha snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_yd-early-yamaha_early-yamaha-steel-snare-14x5_14x5_metal_steel_rolled-metal-edge_chrome_triple-flange-vintage-hoo_60c52d00",
+          "label": "Yamaha — YD / Early Yamaha — Early Yamaha Steel Snare 14x5 — 14x5",
+          "modelName": "Early Yamaha Steel Snare 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "yamaha_yd-early-yamaha_early-yamaha-wood-snare-14x5_14x5_ply_mahogany_wrap-lacquer_triple-flange-vintage-hoop_early-yd-w_19cc75aa",
+          "label": "Yamaha — YD / Early Yamaha — Early Yamaha Wood Snare 14x5 — 14x5",
+          "modelName": "Early Yamaha Wood Snare 14x5",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "5000 Series",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Yamaha 5000 Series snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha 5000 Series snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_5000-series_5000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_5000-s_ceef7d3b",
+          "label": "Yamaha — 5000 Series — 5000 Series Steel 14x5.5 — 14x5.5",
+          "modelName": "5000 Series Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "7000 Series",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Yamaha 7000 Series snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha 7000 Series snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_7000-series_7000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_7000-s_5c0a7d93",
+          "label": "Yamaha — 7000 Series — 7000 Series Steel 14x5.5 — 14x5.5",
+          "modelName": "7000 Series Steel 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "8000 Tour Custom",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Yamaha 8000 Tour Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha 8000 Tour Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_8000-tour-custom_tour-custom-birch-mahogany-14x5-5_14x5-5_ply_birch_mahogany_lacquer_triple-flange-yamaha-hoop_80_a960452d",
+          "label": "Yamaha — 8000 Tour Custom — Tour Custom Birch/Mahogany 14x5.5 — 14x5.5",
+          "modelName": "Tour Custom Birch/Mahogany 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"Mahogany\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Mixed layup family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": 620
+        }
+      ]
+    },
+    {
+      "lineSeries": "Power Recording / 9000",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Yamaha Power Recording / 9000 snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Power Recording / 9000 snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_power-recording-9000_power-recording-birch-14x8_14x8_ply_birch_lacquer_triple-flange-yamaha-hoop_power-recording-_216a2436",
+          "label": "Yamaha — Power Recording / 9000 — Power Recording Birch 14x8 — 14x8",
+          "modelName": "Power Recording Birch 14x8",
+          "diameter": "14",
+          "depth": "8",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Hokkaido birch family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        }
+      ]
+    },
+    {
+      "lineSeries": "Power V / Rock Tour Custom",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Yamaha Power V / Rock Tour Custom snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Power V / Rock Tour Custom snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_power-v-rock-tour-custom_power-v-steel-snare-14x6-5_14x6-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yam_d547f526",
+          "label": "Yamaha — Power V / Rock Tour Custom — Power V Steel Snare 14x6.5 — 14x6.5",
+          "modelName": "Power V Steel Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumarchive.com/Yamaha/",
+          "sourceConfidence": "Low",
+          "priorityScore": 620
+        }
+      ]
+    },
+    {
+      "lineSeries": "Rock Tour",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestions": [
+        "Can Yamaha Rock Tour snare records share a source-backed numeric shell thickness?",
+        "Can Yamaha Rock Tour snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "yamaha_rock-tour_rock-tour-ash-14x6_14x6_ply_ash_textured-ash-matte-finish_triple-flange-yamaha-hoop_rts1460_fc332589",
+          "label": "Yamaha — Rock Tour — Rock Tour Ash 14x6 — 14x6",
+          "modelName": "Rock Tour Ash 14x6",
+          "diameter": "14",
+          "depth": "6",
+          "shellMaterial": "Ash",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Rock Tour shell family\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://usa.yamaha.com/files/download/brochure/1/322031/rock_tour.pdf",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Yamaha line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

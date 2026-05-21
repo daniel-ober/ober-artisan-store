@@ -1,0 +1,283 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_DUNNETT_CLASSIC_DRUMS_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.250Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-dunnett-classic-drums-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Dunnett Classic Drums",
+  "summary": {
+    "candidateCount": 56,
+    "lineGroupCount": 10,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 10,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Dunnett Classic Drums missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "2N Model 2N",
+      "candidateCount": 11,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 11,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_13x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_c1198bb3",
+        "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x5-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_1ddde8a3",
+        "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x6-5_metal_brass_chrome-over-brass_triple-flange-cold-rol_b8711a5f",
+        "dunnett-classic-drums_2n-model-2n_model-2n-chrome-over-brass_14x7_metal_brass_chrome-over-brass_triple-flange-cold-rolle_2dbb8879",
+        "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x5-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_3960dc4b",
+        "dunnett-classic-drums_2n-model-2n_aluminum-hammered_14x6-5_metal_aluminum_natural-raw-custom_triple-flange-cold-rolled-v_0827ecdc",
+        "dunnett-classic-drums_2n-model-2n_brass-hammered_14x5-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__eebbfcdf",
+        "dunnett-classic-drums_2n-model-2n_brass-hammered_14x6-5_metal_brass_natural-raw-custom_triple-flange-cold-rolled-varies__8d852c1e",
+        "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_13x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_92eab1ce",
+        "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x5-5_metal_aluminum_brushed-polished-aluminum_triple-fla_21da78c0",
+        "dunnett-classic-drums_2n-model-2n_model-2n-modelling-aluminum_14x6-5_metal_aluminum_brushed-polished-aluminum_triple-fla_4b7ab74a"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Mp Monoply",
+      "candidateCount": 11,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 11,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x5-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_5514mp-c_69e93de6",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-cherry_14x6-5_solid-shell_cherry_oil-satin_cold-rolled-hoops_6514mp-c_5e2cac1b",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x5-5_solid-shell_maple_oil-satin_cold-rolled-hoops_5514mp-m_d040bdc0",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-maple_14x6-5_solid-shell_maple_oil-satin_cold-rolled-hoops_6514mp-m_50b232a5",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_13x7_solid-shell_walnut_oil-satin_cold-rolled-hoops_713mp-w_12e1f800",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x5-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_5514mp-w_5757e2ad",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-walnut_14x6-5_solid-shell_walnut_oil-satin_cold-rolled-hoops_6514mp-w_e5de85a5",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x5-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_551_ca12ba24",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-bamboo_14x6-5_solid-shell_bamboo_natural-raw-custom_cold-rolled-hoops_651_1f50a067",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x5-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_6acff45d",
+        "dunnett-classic-drums_mp-monoply_monoply-solid-mahogany_14x6-5_solid-shell_mahogany_natural-raw-custom_cold-rolled-hoops_be23411c"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Sp Stereoply",
+      "candidateCount": 8,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 8,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x5-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_dfd9b072",
+        "dunnett-classic-drums_sp-stereoply_stereoply-mahogany-maple_14x6-5_ply_mahogany_maple_satin-lacquer_triple-flange-cold-r_3abf2f3b",
+        "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x5-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_9445ad1c",
+        "dunnett-classic-drums_sp-stereoply_stereoply-maple-walnut_14x6-5_ply_maple_walnut_satin-lacquer_triple-flange-cold-rolle_09612fed",
+        "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x5-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_8a4d7133",
+        "dunnett-classic-drums_sp-stereoply_stereoply-maple-bamboo_14x6-5_ply_maple_bamboo_natural-raw-custom_triple-flange-cold-_220f99b5",
+        "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_13x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_e62de174",
+        "dunnett-classic-drums_sp-stereoply_stereoply-walnut-maple_14x7_ply_walnut_maple_natural-raw-custom_triple-flange-cold-ro_c50f30b8"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Ss Stainless",
+      "candidateCount": 7,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 7,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_ss-stainless_stainless-steel_13x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_a83f1d2a",
+        "dunnett-classic-drums_ss-stainless_stainless-steel_14x4_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_b6720126",
+        "dunnett-classic-drums_ss-stainless_stainless-steel_14x5-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_bb4adfeb",
+        "dunnett-classic-drums_ss-stainless_stainless-steel_14x6-5_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-_a0c4f6ae",
+        "dunnett-classic-drums_ss-stainless_stainless-steel_14x7_metal_stainless-steel_polished-raw-brushed_triple-flange-cold-ro_8040ae7a",
+        "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x5-5_metal_stainless-steel_natural-raw-custom_triple-flang_ade2dc82",
+        "dunnett-classic-drums_ss-stainless_stainless-steel-hammered_14x6-5_metal_stainless-steel_natural-raw-custom_triple-flang_6b7e9e82"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Ti Titanium",
+      "candidateCount": 7,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 7,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_ti-titanium_titanium_12x5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_51_11b0a56e",
+        "dunnett-classic-drums_ti-titanium_titanium_13x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_e6e58a5f",
+        "dunnett-classic-drums_ti-titanium_titanium_14x5-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__6eed2604",
+        "dunnett-classic-drums_ti-titanium_titanium_14x6-5_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies__262af3a0",
+        "dunnett-classic-drums_ti-titanium_titanium_14x7_metal_titanium_raw-polished-anodized_triple-flange-cold-rolled-varies_71_633fedaa",
+        "dunnett-classic-drums_ti-titanium_titanium-hammered_14x5-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_ecf3c5e5",
+        "dunnett-classic-drums_ti-titanium_titanium-hammered_14x6-5_metal_titanium_natural-raw-custom_triple-flange-cold-rolled-v_48df1dc0"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Components / Custom",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_components-custom_dunnett-components-custom-brass_14x6-5_metal_brass_custom_varies_co-custom-brass_570ea014",
+        "dunnett-classic-drums_components-custom_dunnett-components-custom-copper_14x6-5_metal_copper_custom_varies_co-custom-cop_172eba68",
+        "dunnett-classic-drums_components-custom_dunnett-components-custom-maple_14x6-5_ply_maple_custom_varies_co-custom-maple_6a1b222f"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "K Model K",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_k-model-k_model-k_14x5-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_5514k_c961e22f",
+        "dunnett-classic-drums_k-model-k_model-k_14x6-5_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_6514k_f790b353",
+        "dunnett-classic-drums_k-model-k_model-k_14x7_metal_bronze_raw-patina-polished_triple-flange-cold-rolled-varies_714k_e0c9d550"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Mg Magnesium",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_mg-magnesium_magnesium_13x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6513mg_54cb06bc",
+        "dunnett-classic-drums_mg-magnesium_magnesium_14x5-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_5514mg_99802b50",
+        "dunnett-classic-drums_mg-magnesium_magnesium_14x6-5_metal_magnesium_raw-brushed_triple-flange-cold-rolled-varies_6514mg_6a37e040"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "Dreamtime",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_dreamtime_dreamtime-stainless_14x6-5_metal_stainless-steel_artist-engraved-specialty-finish_varies_c73f16a9",
+        "dunnett-classic-drums_dreamtime_dreamtime-titanium_14x6-5_metal_titanium_artist-engraved-specialty-finish_varies_dream-t_3a021c25"
+      ]
+    },
+    {
+      "companyName": "Dunnett Classic Drums",
+      "lineSeries": "James Trussart Rust-O-Matic",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Dunnett Classic Drums page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "dunnett-classic-drums_james-trussart-rust-o-matic_james-trussart-rust-o-matic-full-paisley-steel_14x6-5_metal_steel_rust_65b9dbbe"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Dunnett Classic Drums shell-thickness promotion is approved from this decisions file.",
+    "No Dunnett Classic Drums bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

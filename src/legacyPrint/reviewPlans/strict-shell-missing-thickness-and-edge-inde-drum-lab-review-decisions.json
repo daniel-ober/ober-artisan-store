@@ -1,0 +1,50 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_INDE_DRUM_LAB_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.256Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-inde-drum-lab-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "INDe Drum Lab",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "INDe Drum Lab missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "INDe Drum Lab",
+      "lineSeries": "Kalamazoo / Custom Metal-Wood",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official INDe Drum Lab page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-aluminum_14x6-5_metal_aluminum_5432eb51",
+        "inde-drum-lab_kalamazoo-custom-metal-wood_kalamazoo-brass_14x6-5_metal_brass_b5ced32d",
+        "inde-drum-lab_kalamazoo-custom-metal-wood_maple-custom_14x6-5_ply_maple_dbeee215"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No INDe Drum Lab shell-thickness promotion is approved from this decisions file.",
+    "No INDe Drum Lab bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

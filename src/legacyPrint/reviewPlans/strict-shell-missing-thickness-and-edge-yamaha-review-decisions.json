@@ -1,0 +1,460 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_YAMAHA_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.251Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-yamaha-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Yamaha",
+  "summary": {
+    "candidateCount": 55,
+    "lineGroupCount": 19,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 19,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Yamaha missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Signature",
+      "candidateCount": 14,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "yamaha_signature_akira-jimbo-signature-13x7_13x7_ply_maple_lacquer-signature-finish_triple-flange-yamaha-hoop_akira-jimb_3bc8b032",
+        "yamaha_signature_andre-ceccarelli-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_msd1455ac_07b379cc",
+        "yamaha_signature_anton-fig-signature-14x6_14x6_ply_maple_solid-black_19-ply-vintage-wood-hoop_msd14af_57e9e5fb",
+        "yamaha_signature_billy-cobham-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_billy-cobham-_1f58e7fb",
+        "yamaha_signature_dave-weckl-signature-aluminum-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_signature-finish_triple-fl_fd0141b3",
+        "yamaha_signature_dave-weckl-signature-maple-14x5-5_14x5-5_ply_maple_signature-lacquer_triple-flange-yamaha-hoop_msd1455d_7daae3e7",
+        "yamaha_signature_david-garibaldi-signature-14x3-5-brass-piccolo_14x3-5_metal_brass_rolled-metal-edge_black-brass-finish__4fac3007",
+        "yamaha_signature_elvin-jones-signature-14x7_14x7_ply_maple_natural-signature-finish_wood-hoop-vintage-hoop_elvin-jones-s_81963be9",
+        "yamaha_signature_jimmy-chamberlin-signature-14x5-5-steel_14x5-5_metal_steel_rolled-metal-edge_chrome-signature-finish_tr_7be59974",
+        "yamaha_signature_manu-katch-signature-14x5-5_14x5-5_ply_maple_signature-finish_triple-flange-yamaha-hoop_manu-katch-sign_dad25ca9",
+        "yamaha_signature_peter-erskine-signature-10x4_10x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-10_31693f36",
+        "yamaha_signature_peter-erskine-signature-12x4_12x4_ply_maple_signature-finish_triple-flange-yamaha-hoop_peter-erskine-12_845f020f"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Metal Snare",
+      "candidateCount": 10,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 10,
+      "sampleRecordIds": [
+        "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x3-5_14x3-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_61f12875",
+        "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x4_14x4_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finish_tr_bf0360ec",
+        "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x5-5_14x5-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_f67b6b69",
+        "yamaha_metal-snare_yamaha-aluminum-metal-snare-14x6-5_14x6-5_metal_aluminum_rolled-metal-edge_chrome-lacquer-metal-finis_46e4e453",
+        "yamaha_metal-snare_yamaha-bronze-metal-snare-14x3-5_14x3-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_e064b0a6",
+        "yamaha_metal-snare_yamaha-bronze-metal-snare-14x5-5_14x5-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_4c7fa2c3",
+        "yamaha_metal-snare_yamaha-bronze-metal-snare-14x6-5_14x6-5_metal_bronze_rolled-metal-edge_chrome-lacquer-metal-finish_tr_1b177f3e",
+        "yamaha_metal-snare_yamaha-copper-metal-snare-14x3-5_14x3-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_d16df9c1",
+        "yamaha_metal-snare_yamaha-copper-metal-snare-14x5-5_14x5-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_84e5e7b4",
+        "yamaha_metal-snare_yamaha-copper-metal-snare-14x6-5_14x6-5_metal_copper_rolled-metal-edge_chrome-lacquer-metal-finish_tr_76ff6b36"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Concert / Orchestral",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "yamaha_concert-orchestral_osm-series-maple-concert-14x5-5_14x5-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1455_1d0b5502",
+        "yamaha_concert-orchestral_osm-series-maple-concert-14x6-5_14x6-5_ply_maple_concert-lacquer_die-cast-concert-hoop_osm1465_38a8b72a",
+        "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x5-5_14x5-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x5-5_377a1aa0",
+        "yamaha_concert-orchestral_csm-a-ii-concert-snare-14x6-5_14x6-5_ply_maple_concert-finish_concert-hoop_csm-a-ii-14x6-5_f7bfeacc"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Musashi",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "yamaha_musashi_musashi-oak-12x6_12x6_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1260-musashi_dbd140fe",
+        "yamaha_musashi_musashi-oak-13x6-5_13x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1365-musashi_3414cf8f",
+        "yamaha_musashi_musashi-oak-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_nsd1465-musashi_d4a70025"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "9000 / Recording Series",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_9000-recording-series_recording-series-birch-snare-14x5-5_14x5-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0bf7d6d1",
+        "yamaha_9000-recording-series_recording-series-birch-snare-14x6-5_14x6-5_ply_birch_lacquer_triple-flange-yamaha-hoop_sd-9_0ff83600"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Beech Custom",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_beech-custom_beech-custom-beech-snare-14x5-5_14x5-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_7efb5e42",
+        "yamaha_beech-custom_beech-custom-beech-snare-14x6-5_14x6-5_ply_beech_lacquer-wrap-chrome-depending-model_triple-flange-y_40e6aec4"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Birch Custom",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_birch-custom_birch-custom-birch-snare-14x5-5_14x5-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_f2ebec1c",
+        "yamaha_birch-custom_birch-custom-birch-snare-14x6-5_14x6-5_ply_birch_lacquer-wrap-chrome-depending-model_triple-flange-y_35a7d45e"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Club Custom",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_club-custom_club-custom-kapur-snare-14x5-5_14x5-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_85502a35",
+        "yamaha_club-custom_club-custom-kapur-snare-14x6-5_14x6-5_ply_kapur_lacquer-wrap-chrome-depending-model_triple-flange-yam_b1bb8e06"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Live Custom Hybrid Oak",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x5-5_14x5-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_6ad06c17",
+        "yamaha_live-custom-hybrid-oak_live-custom-hybrid-oak-snare-14x6-5_14x6-5_ply_oak_phenolic_uzu-natural-lacquer-variants_d_90128483"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Maple Custom",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_maple-custom_maple-custom-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_9289f705",
+        "yamaha_maple-custom_maple-custom-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_triple-flange-y_d9fb315a"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Oak Custom",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_oak-custom_oak-custom-14x5-5_14x5-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1455_0ad0dea3",
+        "yamaha_oak-custom_oak-custom-14x6-5_14x6-5_ply_oak_lacquer_triple-flange-yamaha-hoop_osd1465_3f6130ae"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "PHX Phoenix",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x5-5_14x5-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_7b7f661a",
+        "yamaha_phx-phoenix_phx-phoenix-maple-snare-14x6-5_14x6-5_ply_maple_lacquer-wrap-chrome-depending-model_die-cast-aluminum_5de26838"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "YD / Early Yamaha",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "yamaha_yd-early-yamaha_early-yamaha-steel-snare-14x5_14x5_metal_steel_rolled-metal-edge_chrome_triple-flange-vintage-hoo_60c52d00",
+        "yamaha_yd-early-yamaha_early-yamaha-wood-snare-14x5_14x5_ply_mahogany_wrap-lacquer_triple-flange-vintage-hoop_early-yd-w_19cc75aa"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "5000 Series",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "yamaha_5000-series_5000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_5000-s_ceef7d3b"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "7000 Series",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "yamaha_7000-series_7000-series-steel-14x5-5_14x5-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yamaha-hoop_7000-s_5c0a7d93"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "8000 Tour Custom",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "yamaha_8000-tour-custom_tour-custom-birch-mahogany-14x5-5_14x5-5_ply_birch_mahogany_lacquer_triple-flange-yamaha-hoop_80_a960452d"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Power Recording / 9000",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "yamaha_power-recording-9000_power-recording-birch-14x8_14x8_ply_birch_lacquer_triple-flange-yamaha-hoop_power-recording-_216a2436"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Power V / Rock Tour Custom",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "yamaha_power-v-rock-tour-custom_power-v-steel-snare-14x6-5_14x6-5_metal_steel_rolled-metal-edge_chrome_triple-flange-yam_d547f526"
+      ]
+    },
+    {
+      "companyName": "Yamaha",
+      "lineSeries": "Rock Tour",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Yamaha page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "yamaha_rock-tour_rock-tour-ash-14x6_14x6_ply_ash_textured-ash-matte-finish_triple-flange-yamaha-hoop_rts1460_fc332589"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Yamaha shell-thickness promotion is approved from this decisions file.",
+    "No Yamaha bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}
