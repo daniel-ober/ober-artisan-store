@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:43:57.607Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "MAPEX_BP_DESIGN_LAB_EQUINOX_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums/bp-design-lab/equinox",
+      "sourceConfidence": "High",
+      "count": 1,
+      "models": [
+        "Equinox"
+      ],
+      "recordIds": [
+        "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Mapex BP Design Lab Equinox bearing-edge geometry before creating any promotion plan."
+}
