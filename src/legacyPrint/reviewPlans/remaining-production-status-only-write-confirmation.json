@@ -1,0 +1,24 @@
+{
+  "status": "REMAINING_PRODUCTION_STATUS_ONLY_WRITE_CONFIRMATION",
+  "generatedAt": "2026-05-21T09:45:35.455Z",
+  "sourcePatchPlanFile": "src/legacyPrint/reviewPlans/remaining-production-status-only-patch-plan.json",
+  "collectionName": "snareReferenceDrums",
+  "firestoreWritesPerformed": true,
+  "approval": "remaining-production-status-only-1",
+  "summary": {
+    "intendedWriteCount": 1,
+    "actualWriteCount": 1,
+    "batchCount": 1,
+    "updateType": "REMAINING_PRODUCTION_STATUS_ONLY_PATCH"
+  },
+  "writeLog": [
+    {
+      "id": "mapex_bp-design-lab_equinox_14x5_ply_maple_6_unknown-classic-style-edge_single-flanged-hoops_bpml4500c-fb_5624c195",
+      "companyName": "Mapex",
+      "lineSeries": "BP Design Lab",
+      "modelName": "Equinox",
+      "productionStatus": "YES",
+      "updateType": "REMAINING_PRODUCTION_STATUS_ONLY_PATCH"
+    }
+  ]
+}

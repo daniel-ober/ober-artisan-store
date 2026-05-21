@@ -1,6 +1,6 @@
 # LegacyPrint Readiness Progress Dashboard
 
-Generated: 2026-05-21T09:45:09.079Z
+Generated: 2026-05-21T09:45:40.490Z
 
 ## Completed Writes
 
@@ -14,7 +14,7 @@ Generated: 2026-05-21T09:45:09.079Z
 
 - Total records scanned: 1551
 - Core usable rows: 466
-- Nearly passable stock rows: 417
+- Nearly passable stock rows: 416
 - Manual review stock-head candidates: 51
 
 ## Next Batch Recommendations
@@ -27,7 +27,7 @@ Artifact: `src/legacyPrint/reviewPlans/stock-head-manual-review-workbench.md`
 
 ### 2. Remaining production-status-only cleanup
 
-Target count: 1
+Target count: 0
 
 
 

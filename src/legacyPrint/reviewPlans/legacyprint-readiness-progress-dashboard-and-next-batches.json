@@ -1,11 +1,11 @@
 {
   "status": "LEGACYPRINT_READINESS_PROGRESS_DASHBOARD_AND_NEXT_BATCHES_NO_FIRESTORE_WRITES",
-  "generatedAt": "2026-05-21T09:45:09.079Z",
+  "generatedAt": "2026-05-21T09:45:40.490Z",
   "collectionName": "snareReferenceDrums",
   "noFirestoreWrites": true,
   "latestAudits": {
     "strictShellAudit": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T09-23-47-685Z.json",
-    "strictPassableAudit": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-44-05-928Z.json"
+    "strictPassableAudit": "tmp/legacyPrint-audits/strict-passable-readiness-2026-05-21T09-45-35-522Z.json"
   },
   "summary": {
     "totalRecordsScanned": 1551,
@@ -23,11 +23,10 @@
     },
     "strictShellSummary": null,
     "coreUsableCount": 466,
-    "nearlyPassableStockCount": 417,
+    "nearlyPassableStockCount": 416,
     "nearlyPassableMissingCombos": {
       "stock batter head + stock reso head + production status": 317,
       "stock batter head + stock reso head": 96,
-      "production status": 1,
       "stock reso head": 1,
       "stock reso head + production status": 2
     },
@@ -41,14 +40,14 @@
       "SONOR": 57,
       "Craviotto": 2,
       "Canopus": 18,
-      "Mapex": 102,
       "C&C Drums USA": 3,
       "DW / PDP": 7,
       "Gretsch": 7,
+      "Mapex": 101,
       "Premier": 10,
       "WorldMax": 10
     },
-    "remainingFastLaneProductionOnlyCount": 1,
+    "remainingFastLaneProductionOnlyCount": 0,
     "remainingHeadOnlyCount": 97,
     "remainingHeadAndProductionCount": 319,
     "manualReviewCandidateCount": 51,
@@ -164,10 +163,8 @@
     {
       "rank": 2,
       "lane": "Remaining production-status-only cleanup",
-      "targetCount": 1,
-      "byCompany": {
-        "Mapex": 1
-      }
+      "targetCount": 0,
+      "byCompany": {}
     },
     {
       "rank": 3,
