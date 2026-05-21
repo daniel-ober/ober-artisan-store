@@ -278,7 +278,9 @@ const REFERENCE_OPTIONS = [
 
   {
 
-    key: 'heritage',
+    key: 'ludwig-acrolite',
+
+    snareReferenceId: 'ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46',
 
     label: 'Ludwig Acrolite',
 
@@ -306,7 +308,9 @@ const REFERENCE_OPTIONS = [
 
   {
 
-    key: 'black-beauty',
+    key: 'ludwig-black-beauty',
+
+    snareReferenceId: 'ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b',
 
     label: 'Ludwig Black Beauty',
 
@@ -334,7 +338,9 @@ const REFERENCE_OPTIONS = [
 
   {
 
-    key: 'brooklyn',
+    key: 'dw-true-cast-bronze',
+
+    snareReferenceId: 'dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51',
 
     label: 'DW True-Cast Bronze',
 
@@ -962,9 +968,13 @@ export function VoicePlayground({ firestore }) {
 
   const [morphAmount, setMorphAmount] = useState(0.5);
 
-  const [selectedReferenceId, setSelectedReferenceId] = useState('heritage');
+  const [selectedReferenceId, setSelectedReferenceId] = useState('ludwig-acrolite');
 
   const [selectedDiscoverySectionKey, setSelectedDiscoverySectionKey] = useState(null);
+
+  const selectedReference =
+
+    REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
 
   const {
 
@@ -986,15 +996,17 @@ export function VoicePlayground({ firestore }) {
 
     setAsAnchor
 
-  } = useVoicePlayground(firestore, selectedReferenceId);
+  } = useVoicePlayground(
+
+    firestore,
+
+    selectedReference?.snareReferenceId || selectedReferenceId
+
+  );
 
   const selectedMode =
 
     WORKFLOW_MODES.find((item) => item.key === workflowMode) || WORKFLOW_MODES[0];
-
-  const selectedReference =
-
-    REFERENCE_OPTIONS.find((item) => item.key === selectedReferenceId) || REFERENCE_OPTIONS[0];
 
   const selectedReadMode =
 
@@ -1130,7 +1142,7 @@ export function VoicePlayground({ firestore }) {
 
     setWorkflowMode('reference');
 
-    setSelectedReferenceId('heritage');
+    setSelectedReferenceId('ludwig-acrolite');
 
     setSelectedDiscoverySectionKey(null);
 
