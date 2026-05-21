@@ -1,0 +1,144 @@
+{
+  "status": "STOCK_HEAD_FALLBACK_LANE_B_YAMAHA_RESEARCH_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T08:51:23.173Z",
+  "sourceFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-remaining-company-priority-packet.json",
+  "companyName": "Yamaha",
+  "reviewScope": "Lane B Yamaha company/OEM stock-head fallback research packet.",
+  "noFirestoreWrites": true,
+  "policyPosition": "conservative",
+  "summary": {
+    "candidateCount": 6,
+    "lineGroupCount": 4,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 6,
+    "noFirestoreWrites": true
+  },
+  "companyGroup": {
+    "companyName": "Yamaha",
+    "candidateCount": 6,
+    "lineGroupCount": 4,
+    "candidatesWithUsableUrl": 0,
+    "candidatesWithoutUsableUrl": 6,
+    "recommendedReviewDecision": "NEEDS_COMPANY_OR_OEM_PATTERN_RESEARCH",
+    "noFirestoreWrites": true,
+    "lineGroups": [
+      {
+        "lineSeries": "Signature",
+        "candidateCount": 3,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 3,
+        "sampleModels": [
+          {
+            "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x5-5_14x5-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_d1832ca5",
+            "modelName": "Steve Gadd Recording Custom Brass 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "yamaha_signature_steve-gadd-recording-custom-brass-14x6-5_14x6-5_metal_brass_1-2_rolled-metal-edge_black-nickel-brass-va_b3eea7f5",
+            "modelName": "Steve Gadd Recording Custom Brass 14x6.5",
+            "diameter": "14",
+            "depth": "6.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          },
+          {
+            "id": "yamaha_signature_steve-gadd-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_black-nickel-chrome-variants_triple-flan_99bc3401",
+            "modelName": "Steve Gadd Steel 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Stage Custom Advantage",
+        "candidateCount": 1,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 1,
+        "sampleModels": [
+          {
+            "id": "yamaha_stage-custom-advantage_stage-custom-advantage-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-f_63ce43ce",
+            "modelName": "Stage Custom Advantage Steel 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Stage Custom Birch",
+        "candidateCount": 1,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 1,
+        "sampleModels": [
+          {
+            "id": "yamaha_stage-custom-birch_stage-custom-birch-steel-snare-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_9ad707ad",
+            "modelName": "Stage Custom Birch Steel Snare 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      },
+      {
+        "lineSeries": "Stage Custom Standard",
+        "candidateCount": 1,
+        "candidatesWithUsableUrl": 0,
+        "candidatesWithoutUsableUrl": 1,
+        "sampleModels": [
+          {
+            "id": "yamaha_stage-custom-standard_stage-custom-standard-steel-14x5-5_14x5-5_metal_steel_1_rolled-metal-edge_chrome_triple-fla_b7a04751",
+            "modelName": "Stage Custom Standard Steel 14x5.5",
+            "diameter": "14",
+            "depth": "5.5",
+            "shellConstruction": "Metal",
+            "shellMaterial1": null,
+            "stockBatterHead": null,
+            "stockResoHead": null,
+            "sourceUrl": null
+          }
+        ]
+      }
+    ]
+  },
+  "researchRules": [
+    "Search for official Yamaha product pages, archived Yamaha pages, Yamaha catalogs, Yamaha manuals, or OEM-confirmed sources.",
+    "Do not approve a fallback rule from third-party retailer/spec pages alone.",
+    "A fallback rule requires both stock batter head and stock resonant/snare-side head confirmation.",
+    "If evidence only applies to one Yamaha line or era, keep the decision line-level or model-level rather than company-wide."
+  ],
+  "decisionTemplate": {
+    "companyName": "Yamaha",
+    "approvedCompanyWideFallback": false,
+    "approvedLineLevelFallbackRules": [],
+    "blockedLineGroups": [],
+    "sourceEvidenceUrls": [],
+    "decisionNotes": ""
+  },
+  "nextRecommendedStep": {
+    "task": "Review Yamaha official/OEM evidence for each listed line group and create a conservative decision file.",
+    "expectedDecisionFile": "src/legacyPrint/reviewPlans/stock-head-fallback-lane-b-yamaha-research-decisions.json",
+    "constraint": "No Firestore writes. Keep fallback-head records separate from source-confirmed full stock pass."
+  }
+}
