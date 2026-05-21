@@ -1,0 +1,175 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_HENDRIX_DRUMS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.254Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Hendrix Drums",
+  "reviewScope": "Hendrix Drums records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 8,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Archetype Stave Series",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "High": 8
+      },
+      "researchQuestions": [
+        "Can Hendrix Drums Archetype Stave Series snare records share a source-backed numeric shell thickness?",
+        "Can Hendrix Drums Archetype Stave Series snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Hendrix Drums page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_4f56ee15",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Ash 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Ash 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Ash",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_78d01a71",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Cherry 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Cherry 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Cherry",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_42afb1b7",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Mahogany 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-maple-14x6-5_14x6-5_solid-shell_maple_bd6aefc7",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Maple 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-oak-14x6-5_14x6-5_solid-shell_oak_e4f07e87",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Oak 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Oak 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-padauk-14x6-5_14x6-5_solid-shell_padauk_bd9924d1",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Padauk 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Padauk 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Padauk",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Padauk\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-purpleheart-14x6-5_14x6-5_solid-shell_purpleheart_c71d02b0",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Purpleheart 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Purpleheart 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Purpleheart",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Purpleheart\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "hendrix-drums_archetype-stave-series_archetype-solid-stave-walnut-14x6-5_14x6-5_solid-shell_walnut_01988229",
+          "label": "Hendrix Drums — Archetype Stave Series — Archetype Solid Stave Walnut 14x6.5 — 14x6.5",
+          "modelName": "Archetype Solid Stave Walnut 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://www.hendrixdrums.com/custom-snare-drums/",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Hendrix Drums line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

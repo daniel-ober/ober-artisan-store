@@ -1,0 +1,50 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_AANDF_DRUM_CO_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.255Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-aandf-drum-co-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "A&F Drum Co.",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "A&F Drum Co. missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "A&F Drum Co.",
+      "lineSeries": "Raw Brass / Raw Steel / Wood",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official A&F Drum Co. page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+        "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+        "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No A&F Drum Co. shell-thickness promotion is approved from this decisions file.",
+    "No A&F Drum Co. bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

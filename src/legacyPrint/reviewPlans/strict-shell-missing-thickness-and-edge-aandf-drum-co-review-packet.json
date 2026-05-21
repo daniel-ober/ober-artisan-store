@@ -1,0 +1,95 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_AANDF_DRUM_CO_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.255Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "A&F Drum Co.",
+  "reviewScope": "A&F Drum Co. records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 3,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Raw Brass / Raw Steel / Wood",
+      "candidateCount": 3,
+      "sourceConfidenceCounts": {
+        "Low": 3
+      },
+      "researchQuestions": [
+        "Can A&F Drum Co. Raw Brass / Raw Steel / Wood snare records share a source-backed numeric shell thickness?",
+        "Can A&F Drum Co. Raw Brass / Raw Steel / Wood snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official A&F Drum Co. page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "aandf-drum-co_raw-brass-raw-steel-wood_maple-club-snare_14x6-5_ply_maple_ed5ed165",
+          "label": "A&F Drum Co. — Raw Brass / Raw Steel / Wood — Maple Club Snare — 14x6.5",
+          "modelName": "Maple Club Snare",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": -165
+        },
+        {
+          "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-brass-14x6-5_14x6-5_metal_brass_de54835c",
+          "label": "A&F Drum Co. — Raw Brass / Raw Steel / Wood — Raw Brass 14x6.5 — 14x6.5",
+          "modelName": "Raw Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": -165
+        },
+        {
+          "id": "aandf-drum-co_raw-brass-raw-steel-wood_raw-steel-14x6-5_14x6-5_metal_steel_3463c569",
+          "label": "A&F Drum Co. — Raw Brass / Raw Steel / Wood — Raw Steel 14x6.5 — 14x6.5",
+          "modelName": "Raw Steel 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": -165
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review A&F Drum Co. line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

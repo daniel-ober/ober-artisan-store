@@ -1,0 +1,49 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_KEPLINGER_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.257Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-keplinger-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Keplinger",
+  "summary": {
+    "candidateCount": 2,
+    "lineGroupCount": 1,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 1,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Keplinger missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Keplinger",
+      "lineSeries": "Black Iron / Stainless",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Keplinger page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "keplinger_black-iron-stainless_black-iron-14x6-5_14x6-5_metal_steel_0fae9ad0",
+        "keplinger_black-iron-stainless_stainless-steel-14x6-5_14x6-5_metal_stainless-steel_27a10cc6"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Keplinger shell-thickness promotion is approved from this decisions file.",
+    "No Keplinger bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

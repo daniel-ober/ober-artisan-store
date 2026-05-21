@@ -1,0 +1,427 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_GRETSCH_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.253Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Gretsch",
+  "reviewScope": "Gretsch records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 19,
+    "lineGroupCount": 5,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Full Range",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "Medium": 8
+      },
+      "researchQuestions": [
+        "Can Gretsch Full Range snare records share a source-backed numeric shell thickness?",
+        "Can Gretsch Full Range snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_full-range_full-range-aluminum_14x5-5_metal_aluminum_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_fu_9c601cfb",
+          "label": "Gretsch — Full Range — Full Range Aluminum — 14x5.5",
+          "modelName": "Full Range Aluminum",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-brass_14x5-5_metal_brass_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_full-ran_cb55cb6a",
+          "label": "Gretsch — Full Range — Full Range Brass — 14x5.5",
+          "modelName": "Full Range Brass",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-hammered-steel_14x6-5_metal_steel_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_2191e92d",
+          "label": "Gretsch — Full Range — Full Range Hammered Steel — 14x6.5",
+          "modelName": "Full Range Hammered Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-maple_14x5-5_ply_maple_lacquer-plating-natural-metal_full-range-maple_9dd6a5e4",
+          "label": "Gretsch — Full Range — Full Range Maple — 14x5.5",
+          "modelName": "Full Range Maple",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-maple_14x6-5_ply_maple_lacquer-plating-natural-metal_full-range-maple_209d7f57",
+          "label": "Gretsch — Full Range — Full Range Maple — 14x6.5",
+          "modelName": "Full Range Maple",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown maple layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-steel_14x5-5_metal_steel_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_full-ran_482ef917",
+          "label": "Gretsch — Full Range — Full Range Steel — 14x5.5",
+          "modelName": "Full Range Steel",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-walnut_14x5-5_ply_walnut_lacquer-plating-natural-metal_full-range-walnut_fd8b3405",
+          "label": "Gretsch — Full Range — Full Range Walnut — 14x5.5",
+          "modelName": "Full Range Walnut",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown walnut layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_full-range_full-range-walnut_14x6-5_ply_walnut_lacquer-plating-natural-metal_full-range-walnut_5525d9ff",
+          "label": "Gretsch — Full Range — Full Range Walnut — 14x6.5",
+          "modelName": "Full Range Walnut",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown walnut layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/full-range",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "USA Custom Metal",
+      "candidateCount": 6,
+      "sourceConfidenceCounts": {
+        "Medium": 6
+      },
+      "researchQuestions": [
+        "Can Gretsch USA Custom Metal snare records share a source-backed numeric shell thickness?",
+        "Can Gretsch USA Custom Metal snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_usa-custom-metal_usa-bell-brass_14x6-5_metal_bell-brass_black-nickel-plated-natural-metal_die-cast-hoops_usa-bel_dfb213c8",
+          "label": "Gretsch — USA Custom Metal — USA Bell Brass — 14x6.5",
+          "modelName": "USA Bell Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bell Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bell Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/usa-custom-metal",
+          "sourceConfidence": "Medium",
+          "priorityScore": 1550
+        },
+        {
+          "id": "gretsch_usa-custom-metal_usa-aluminum_14x6-5_metal_aluminum_black-nickel-plated-natural-metal_die-cast-hoops_usa-aluminu_806ff632",
+          "label": "Gretsch — USA Custom Metal — USA Aluminum — 14x6.5",
+          "modelName": "USA Aluminum",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Aluminum",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Aluminum\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/usa-custom-metal",
+          "sourceConfidence": "Medium",
+          "priorityScore": 750
+        },
+        {
+          "id": "gretsch_usa-custom-metal_usa-brass_14x6-5_metal_brass_black-nickel-plated-natural-metal_die-cast-hoops_usa-brass_f0613960",
+          "label": "Gretsch — USA Custom Metal — USA Brass — 14x6.5",
+          "modelName": "USA Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/usa-custom-metal",
+          "sourceConfidence": "Medium",
+          "priorityScore": 750
+        },
+        {
+          "id": "gretsch_usa-custom-metal_usa-bronze_14x6-5_metal_bronze_black-nickel-plated-natural-metal_die-cast-hoops_usa-bronze_93eb64cc",
+          "label": "Gretsch — USA Custom Metal — USA Bronze — 14x6.5",
+          "modelName": "USA Bronze",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/usa-custom-metal",
+          "sourceConfidence": "Medium",
+          "priorityScore": 750
+        },
+        {
+          "id": "gretsch_usa-custom-metal_usa-copper_14x6-5_metal_copper_black-nickel-plated-natural-metal_die-cast-hoops_usa-copper_823b497a",
+          "label": "Gretsch — USA Custom Metal — USA Copper — 14x6.5",
+          "modelName": "USA Copper",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Copper",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Copper\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/usa-custom-metal",
+          "sourceConfidence": "Medium",
+          "priorityScore": 750
+        },
+        {
+          "id": "gretsch_usa-custom-metal_usa-solid-steel_14x6-5_solid-shell_steel_black-nickel-plated-natural-metal_die-cast-hoops_usa-s_e2ff27f8",
+          "label": "Gretsch — USA Custom Metal — USA Solid Steel — 14x6.5",
+          "modelName": "USA Solid Steel",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Steel",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Steel\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/snares/usa-custom-metal",
+          "sourceConfidence": "Medium",
+          "priorityScore": 750
+        }
+      ]
+    },
+    {
+      "lineSeries": "Brooklyn Metal",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Gretsch Brooklyn Metal snare records share a source-backed numeric shell thickness?",
+        "Can Gretsch Brooklyn Metal snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-brass_14x5-5_metal_brass_rolled-metal-edge_chrome-over-metal_gretsch-302-3mm_dec6311c",
+          "label": "Gretsch — Brooklyn Metal — Brooklyn Chrome-over-Brass — 14x5.5",
+          "modelName": "Brooklyn Chrome-over-Brass",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"rolled chrome-over-brass\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        },
+        {
+          "id": "gretsch_brooklyn-metal_brooklyn-chrome-over-brass_14x6-5_metal_brass_rolled-metal-edge_chrome-over-metal_gretsch-302-3mm_e70207cd",
+          "label": "Gretsch — Brooklyn Metal — Brooklyn Chrome-over-Brass — 14x6.5",
+          "modelName": "Brooklyn Chrome-over-Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"rolled chrome-over-brass\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "Rolled metal edge",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://gretschdrums.com/drums/brooklyn",
+          "sourceConfidence": "Medium",
+          "priorityScore": -70
+        }
+      ]
+    },
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Low": 2
+      },
+      "researchQuestions": [
+        "Can Gretsch Signature snare records share a source-backed numeric shell thickness?",
+        "Can Gretsch Signature snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_signature_steve-ferrone-signature-brass_14x6-5_metal_brass_black-nickel-brass_die-cast-hoops_04b2cfe6",
+          "label": "Gretsch — Signature — Steve Ferrone Signature Brass — 14x6.5",
+          "modelName": "Steve Ferrone Signature Brass",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://drumcenternh.com/blogs/news/best-gretsch-snare-drums-review",
+          "sourceConfidence": "Low",
+          "priorityScore": -120
+        },
+        {
+          "id": "gretsch_signature_vinnie-colaiuta-signature_14x5_ply_maple_gum_lacquer_die-cast-hoops_af23d41d",
+          "label": "Gretsch — Signature — Vinnie Colaiuta Signature — 14x5",
+          "modelName": "Vinnie Colaiuta Signature",
+          "diameter": "14",
+          "depth": "5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"Gum\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Gretsch USA family estimated\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": -165
+        }
+      ]
+    },
+    {
+      "lineSeries": "Energy",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Gretsch Energy snare records share a source-backed numeric shell thickness?",
+        "Can Gretsch Energy snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "gretsch_energy_energy-snare_14x5-5_ply_poplar_wrap_triple-flanged-hoops_49c332c4",
+          "label": "Gretsch — Energy — Energy Snare — 14x5.5",
+          "modelName": "Energy Snare",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"estimated poplar\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "",
+          "sourceConfidence": "Low",
+          "priorityScore": -165
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Gretsch line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

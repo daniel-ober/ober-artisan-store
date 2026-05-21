@@ -1,0 +1,174 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_PORK_PIE_PERCUSSION_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.251Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-pork-pie-percussion-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Pork Pie Percussion",
+  "summary": {
+    "candidateCount": 47,
+    "lineGroupCount": 6,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 6,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Pork Pie Percussion missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "candidateCount": 32,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "pork-pie-percussion_usa-custom_7x14-african-mahogany_14x7_ply_mahogany_custom-lacquer-wrap-oil-varies_2-3mm-triple-flang_15cf3630",
+        "pork-pie-percussion_usa-custom_7x14-blue-fade-dip-snare_14x7_ply_maple_blue-fade-dip_2-3mm-triple-flanged_45ec3cad",
+        "pork-pie-percussion_usa-custom_7x14-cherry-bubinga-snare_14x7_ply_cherry_custom-finish_2-3mm-triple-flanged_5c07431f",
+        "pork-pie-percussion_usa-custom_7x14-red-oak_14x7_ply_oak_custom-finish_2-3mm-triple-flanged_d2374272",
+        "pork-pie-percussion_usa-custom_8x14-maple-oak-black-lacquer_14x8_ply_maple_black-lacquer_2-3mm-triple-flanged_430251a8",
+        "pork-pie-percussion_usa-custom_bubinga-gloss-14x7_14x7_ply_bubinga_custom-finish-varies_2-3mm-triple-flanged_2421929e",
+        "pork-pie-percussion_usa-custom_rosewood-zebrawood-veneer-maple-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple_68f5f5a5",
+        "pork-pie-percussion_usa-custom_african-mahogany-13x7_13x7_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_54a2d636",
+        "pork-pie-percussion_usa-custom_cherry-bubinga-hybrid-13x7_13x7_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_9d2cf3d3",
+        "pork-pie-percussion_usa-custom_cherry-custom-14x6-5_14x6-5_ply_cherry_custom-finish-varies_2-3mm-triple-flanged_ab6cf87c",
+        "pork-pie-percussion_usa-custom_mahogany-custom-14x6-5_14x6-5_ply_mahogany_custom-finish-varies_2-3mm-triple-flanged_4351c38f",
+        "pork-pie-percussion_usa-custom_maple-bubinga-hybrid-14x6-5_14x6-5_ply_maple_custom-finish-varies_2-3mm-triple-flanged_5b0fb099"
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Little Squealer",
+      "candidateCount": 7,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 7,
+      "sampleRecordIds": [
+        "pork-pie-percussion_little-squealer_little-squealer-maple-12x5_12x5_ply_maple_ebony-satin_triple-flanged-hoops_8f26b2dc",
+        "pork-pie-percussion_little-squealer_little-squealer-black-12x5_12x5_ply_maple_satin-lacquer-wrap-varies_triple-flanged-h_c3df49fb",
+        "pork-pie-percussion_little-squealer_little-squealer-black-5-5x13_13x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_9af528a9",
+        "pork-pie-percussion_little-squealer_little-squealer-maple-13x7-black_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fla_7d8d09ed",
+        "pork-pie-percussion_little-squealer_little-squealer-maple-14x5-5_14x5-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_f91bca59",
+        "pork-pie-percussion_little-squealer_little-squealer-maple-14x6-5_14x6-5_ply_maple_satin-lacquer-wrap-varies_triple-flang_0f8071b2",
+        "pork-pie-percussion_little-squealer_little-squealer-porcaro-blue-13x7_13x7_ply_maple_satin-lacquer-wrap-varies_triple-fl_0bebb6eb"
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "Piglite / Acrylic",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "pork-pie-percussion_piglite-acrylic_amber-piglite-snare_13x7_acrylic_acrylic_amber-acrylic_triple-flanged-hoops_d98788be",
+        "pork-pie-percussion_piglite-acrylic_clear-piglite-snare_14x6-5_acrylic_acrylic_clear-acrylic_triple-flanged-hoops_bbc6de46",
+        "pork-pie-percussion_piglite-acrylic_red-piglite-snare_14x6-5_acrylic_acrylic_red-acrylic_triple-flanged-hoops_11685027"
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Hybrid Metal-Wood",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-copper-hammered-brass-hybrid-snare_14x7_ply_copper_copper-hammered_dff4a3c5",
+        "pork-pie-percussion_usa-custom-hybrid-metal-wood_7x14-maple-copper_14x7_ply_maple_maple-copper_2-3mm-triple-flanged_cd1c86e8"
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Metal",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "pork-pie-percussion_usa-custom-metal_8x14-patina-brass_14x8_metal_brass_patina-brass_2-3mm-triple-flanged_50e8424e",
+        "pork-pie-percussion_usa-custom-metal_pig-iron-6-5x14_14x6-5_metal_steel_no_folded-over-bearing-edge_rolled-in-snare-beds_f1c286c3"
+      ]
+    },
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom / Specialty",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Pork Pie Percussion page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "pork-pie-percussion_usa-custom-specialty_frankinpork-7x14-16-ply-maple-rosewood_14x7_ply_maple_satin-oil_ef16518c"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Pork Pie Percussion shell-thickness promotion is approved from this decisions file.",
+    "No Pork Pie Percussion bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

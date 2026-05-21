@@ -1,0 +1,1129 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_CANOPUS_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.252Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Canopus",
+  "reviewScope": "Canopus records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 45,
+    "lineGroupCount": 20,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Neo-Vintage",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "Medium": 8
+      },
+      "researchQuestions": [
+        "Can Canopus Neo-Vintage snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Neo-Vintage snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_neo-vintage_nv50-m1-14x5-5_14x5-5_ply_maple-poplar_nv50-m1_6e21ff45",
+          "label": "Canopus — Neo-Vintage — NV50-M1 14x5.5 — 14x5.5",
+          "modelName": "NV50-M1 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv50-m1-14x6-5_14x6-5_ply_maple-poplar_nv50-m1_c010d5d8",
+          "label": "Canopus — Neo-Vintage — NV50-M1 14x6.5 — 14x6.5",
+          "modelName": "NV50-M1 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv60-m1-14x5-5_14x5-5_ply_maple-poplar_nv60-m1_3a47e2f0",
+          "label": "Canopus — Neo-Vintage — NV60-M1 14x5.5 — 14x5.5",
+          "modelName": "NV60-M1 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv60-m1-14x6-5_14x6-5_ply_maple-poplar_nv60-m1_c63d4e1c",
+          "label": "Canopus — Neo-Vintage — NV60-M1 14x6.5 — 14x6.5",
+          "modelName": "NV60-M1 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv60-m2-14x5-5_14x5-5_ply_maple-poplar_nv60-m2_c11658ef",
+          "label": "Canopus — Neo-Vintage — NV60-M2 14x5.5 — 14x5.5",
+          "modelName": "NV60-M2 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv60-m2-14x6-5_14x6-5_ply_maple-poplar_nv60-m2_389e834e",
+          "label": "Canopus — Neo-Vintage — NV60-M2 14x6.5 — 14x6.5",
+          "modelName": "NV60-M2 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv60-m5-14x5-5_14x5-5_ply_maple-poplar_nv60-m5_d0279b86",
+          "label": "Canopus — Neo-Vintage — NV60-M5 14x5.5 — 14x5.5",
+          "modelName": "NV60-M5 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_neo-vintage_nv60-m5-14x6-5_14x6-5_ply_maple-poplar_nv60-m5_a2eb0c7c",
+          "label": "Canopus — Neo-Vintage — NV60-M5 14x6.5 — 14x6.5",
+          "modelName": "NV60-M5 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple / Poplar",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple / Poplar\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown Neo-Vintage layup\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Signature",
+      "candidateCount": 4,
+      "sourceConfidenceCounts": {
+        "Medium": 3,
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Canopus Signature snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Signature snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_signature_harvey-mason-signature-snare-drum_14x5-5_ply_maple_a6caf1da",
+          "label": "Canopus — Signature — Harvey Mason Signature Snare Drum — 14x5.5",
+          "modelName": "Harvey Mason Signature Snare Drum",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_signature_jonathan-pinson-signature-snare-drum_14x6-5_ply_maple_8f7c0ea1",
+          "label": "Canopus — Signature — Jonathan Pinson Signature Snare Drum — 14x6.5",
+          "modelName": "Jonathan Pinson Signature Snare Drum",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_signature_mel-taylor-snare-drum_14x5-5_ply_maple_3c0d763d",
+          "label": "Canopus — Signature — Mel Taylor Snare Drum — 14x5.5",
+          "modelName": "Mel Taylor Snare Drum",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_signature_takashi-kashikura-toe-25th-anniversary-model_14x6-5_other-needs-research_ash_4fda59d5",
+          "label": "Canopus — Signature — Takashi Kashikura toe 25th Anniversary Model — 14x6.5",
+          "modelName": "Takashi Kashikura toe 25th Anniversary Model",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Ash",
+          "shellConstruction": "{\"shellConstruction\":\"Other / Needs Research\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Low",
+          "priorityScore": 480
+        }
+      ]
+    },
+    {
+      "lineSeries": "1ply Oak",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus 1ply Oak snare records share a source-backed numeric shell thickness?",
+        "Can Canopus 1ply Oak snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_1ply-oak_1ply-oak-14x5-5_14x5-5_steam-bent_oak_e41cb5d7",
+          "label": "Canopus — 1ply Oak — 1ply Oak 14x5.5 — 14x5.5",
+          "modelName": "1ply Oak 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_1ply-oak_1ply-oak-14x6-5_14x6-5_steam-bent_oak_457d6606",
+          "label": "Canopus — 1ply Oak — 1ply Oak 14x6.5 — 14x6.5",
+          "modelName": "1ply Oak 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "1ply Soft Maple",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus 1ply Soft Maple snare records share a source-backed numeric shell thickness?",
+        "Can Canopus 1ply Soft Maple snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x5-5_14x5-5_steam-bent_maple_cd277bcc",
+          "label": "Canopus — 1ply Soft Maple — 1ply Soft Maple 14x5.5 — 14x5.5",
+          "modelName": "1ply Soft Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_1ply-soft-maple_1ply-soft-maple-14x6-5_14x6-5_steam-bent_maple_172ecd37",
+          "label": "Canopus — 1ply Soft Maple — 1ply Soft Maple 14x6.5 — 14x6.5",
+          "modelName": "1ply Soft Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Steam Bent\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"1-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Ash",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Ash snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Ash snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_ash_ash-snare-14x5-5_14x5-5_ply_ash_6063989f",
+          "label": "Canopus — Ash — Ash Snare 14x5.5 — 14x5.5",
+          "modelName": "Ash Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Ash",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply ash\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_ash_ash-snare-14x6-5_14x6-5_ply_ash_9873ec99",
+          "label": "Canopus — Ash — Ash Snare 14x6.5 — 14x6.5",
+          "modelName": "Ash Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Ash",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply ash\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Birch",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Birch snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Birch snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_birch_birch-snare-14x5-5_14x5-5_ply_birch_a4ab4332",
+          "label": "Canopus — Birch — Birch Snare 14x5.5 — 14x5.5",
+          "modelName": "Birch Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply birch\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_birch_birch-snare-14x6-5_14x6-5_ply_birch_cf57c977",
+          "label": "Canopus — Birch — Birch Snare 14x6.5 — 14x6.5",
+          "modelName": "Birch Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply birch\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Black Nickel Brass II",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Black Nickel Brass II snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Black Nickel Brass II snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_black-nickel-brass-ii_black-nickel-brass-ii-14x5-5_14x5-5_metal_brass_a81d3d2e",
+          "label": "Canopus — Black Nickel Brass II — Black Nickel Brass II 14x5.5 — 14x5.5",
+          "modelName": "Black Nickel Brass II 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_black-nickel-brass-ii_black-nickel-brass-ii-14x6-5_14x6-5_metal_brass_8191fdcd",
+          "label": "Canopus — Black Nickel Brass II — Black Nickel Brass II 14x6.5 — 14x6.5",
+          "modelName": "Black Nickel Brass II 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Hammered Bronze",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Hammered Bronze snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Hammered Bronze snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_hammered-bronze_hammered-bronze-14x5-5_14x5-5_metal_bronze_dc26ad3e",
+          "label": "Canopus — Hammered Bronze — Hammered Bronze 14x5.5 — 14x5.5",
+          "modelName": "Hammered Bronze 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_hammered-bronze_hammered-bronze-14x6-5_14x6-5_metal_bronze_6125d9a7",
+          "label": "Canopus — Hammered Bronze — Hammered Bronze 14x6.5 — 14x6.5",
+          "modelName": "Hammered Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Mahogany",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Mahogany snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Mahogany snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_mahogany_mahogany-snare-14x5-5_14x5-5_ply_mahogany_5110ce16",
+          "label": "Canopus — Mahogany — Mahogany Snare 14x5.5 — 14x5.5",
+          "modelName": "Mahogany Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_mahogany_mahogany-snare-14x6-5_14x6-5_ply_mahogany_f72beece",
+          "label": "Canopus — Mahogany — Mahogany Snare 14x6.5 — 14x6.5",
+          "modelName": "Mahogany Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply mahogany\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Maize Yellow Birch",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Maize Yellow Birch snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Maize Yellow Birch snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_maize-yellow-birch_maize-yellow-birch-snare-14x5-5_14x5-5_ply_birch_d3439fff",
+          "label": "Canopus — Maize Yellow Birch — Maize Yellow Birch Snare 14x5.5 — 14x5.5",
+          "modelName": "Maize Yellow Birch Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply birch\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_maize-yellow-birch_maize-yellow-birch-snare-14x6-5_14x6-5_ply_birch_069826d6",
+          "label": "Canopus — Maize Yellow Birch — Maize Yellow Birch Snare 14x6.5 — 14x6.5",
+          "modelName": "Maize Yellow Birch Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Unknown ply birch\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Patina Solid Brass",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Patina Solid Brass snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Patina Solid Brass snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_patina-solid-brass_patina-solid-brass-14x5-5_14x5-5_metal_brass_3022a08c",
+          "label": "Canopus — Patina Solid Brass — Patina Solid Brass 14x5.5 — 14x5.5",
+          "modelName": "Patina Solid Brass 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_patina-solid-brass_patina-solid-brass-14x6-5_14x6-5_metal_brass_1a7cfa6c",
+          "label": "Canopus — Patina Solid Brass — Patina Solid Brass 14x6.5 — 14x6.5",
+          "modelName": "Patina Solid Brass 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Brass",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Brass\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Solid Bronze",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Solid Bronze snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Solid Bronze snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_solid-bronze_solid-bronze-14x5-5_14x5-5_metal_bronze_21c94d73",
+          "label": "Canopus — Solid Bronze — Solid Bronze 14x5.5 — 14x5.5",
+          "modelName": "Solid Bronze 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_solid-bronze_solid-bronze-14x6-5_14x6-5_metal_bronze_ab4e7546",
+          "label": "Canopus — Solid Bronze — Solid Bronze 14x6.5 — 14x6.5",
+          "modelName": "Solid Bronze 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Stabilized Wood",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Stabilized Wood snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Stabilized Wood snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_stabilized-wood_stabilized-wood-snare-14x5-5_14x5-5_ply_wood_adbd59b0",
+          "label": "Canopus — Stabilized Wood — Stabilized Wood Snare 14x5.5 — 14x5.5",
+          "modelName": "Stabilized Wood Snare 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_stabilized-wood_stabilized-wood-snare-14x6-5_14x6-5_ply_wood_f0cc67f8",
+          "label": "Canopus — Stabilized Wood — Stabilized Wood Snare 14x6.5 — 14x6.5",
+          "modelName": "Stabilized Wood Snare 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Wood",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Wood\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Stave Bubinga",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Stave Bubinga snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Stave Bubinga snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_stave-bubinga_stave-bubinga-14x5-5_14x5-5_stave_bubinga_e06f32e4",
+          "label": "Canopus — Stave Bubinga — Stave Bubinga 14x5.5 — 14x5.5",
+          "modelName": "Stave Bubinga 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Bubinga",
+          "shellConstruction": "{\"shellConstruction\":\"Stave\",\"shellMaterialPrimary\":\"Bubinga\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_stave-bubinga_stave-bubinga-14x6-5_14x6-5_stave_bubinga_6965d978",
+          "label": "Canopus — Stave Bubinga — Stave Bubinga 14x6.5 — 14x6.5",
+          "modelName": "Stave Bubinga 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bubinga",
+          "shellConstruction": "{\"shellConstruction\":\"Stave\",\"shellMaterialPrimary\":\"Bubinga\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "Type-R",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "Medium": 2
+      },
+      "researchQuestions": [
+        "Can Canopus Type-R snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Type-R snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_type-r_type-r-maple-14x5-5_14x5-5_ply_maple_1f9bcdc4",
+          "label": "Canopus — Type-R — Type-R Maple 14x5.5 — 14x5.5",
+          "modelName": "Type-R Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        },
+        {
+          "id": "canopus_type-r_type-r-maple-14x6-5_14x6-5_ply_maple_74141835",
+          "label": "Canopus — Type-R — Type-R Maple 14x6.5 — 14x6.5",
+          "modelName": "Type-R Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "YAIBA II Birch",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestions": [
+        "Can Canopus YAIBA II Birch snare records share a source-backed numeric shell thickness?",
+        "Can Canopus YAIBA II Birch snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_yaiba-ii-birch_yaiba-ii-birch-14x5-5_14x5-5_ply_birch_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsb-1455_ea39a253",
+          "label": "Canopus — YAIBA II Birch — YAIBA II Birch 14x5.5 — 14x5.5",
+          "modelName": "YAIBA II Birch 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/yaiba-ii-birch-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 580
+        },
+        {
+          "id": "canopus_yaiba-ii-birch_yaiba-ii-birch-14x6-5_14x6-5_ply_birch_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsb-1465_74386dba",
+          "label": "Canopus — YAIBA II Birch — YAIBA II Birch 14x6.5 — 14x6.5",
+          "modelName": "YAIBA II Birch 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Birch",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Birch\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/yaiba-ii-birch-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 580
+        }
+      ]
+    },
+    {
+      "lineSeries": "YAIBA II Maple",
+      "candidateCount": 2,
+      "sourceConfidenceCounts": {
+        "High": 2
+      },
+      "researchQuestions": [
+        "Can Canopus YAIBA II Maple snare records share a source-backed numeric shell thickness?",
+        "Can Canopus YAIBA II Maple snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_yaiba-ii-maple_yaiba-ii-maple-14x5-5_14x5-5_ply_maple_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsm-1455_19d8ea83",
+          "label": "Canopus — YAIBA II Maple — YAIBA II Maple 14x5.5 — 14x5.5",
+          "modelName": "YAIBA II Maple 14x5.5",
+          "diameter": "14",
+          "depth": "5.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/yaiba-ii-maple-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 580
+        },
+        {
+          "id": "canopus_yaiba-ii-maple_yaiba-ii-maple-14x6-5_14x6-5_ply_maple_forced-hardening-lacquer_2-3mm-power-hoop-8h_jsm-1465_a9c3478f",
+          "label": "Canopus — YAIBA II Maple — YAIBA II Maple 14x6.5 — 14x6.5",
+          "modelName": "YAIBA II Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Ply\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"6-ply\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/product/yaiba-ii-maple-snaredrum/",
+          "sourceConfidence": "High",
+          "priorityScore": 580
+        }
+      ]
+    },
+    {
+      "lineSeries": "Others",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Canopus Others snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Others snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_others_12top-6bottom-lugs-piccolo-snare-drum_14x4_other-needs-research_17efbea2",
+          "label": "Canopus — Others — 12Top / 6Bottom Lugs Piccolo Snare Drum — 14x4",
+          "modelName": "12Top / 6Bottom Lugs Piccolo Snare Drum",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "",
+          "shellConstruction": "{\"shellConstruction\":\"Other / Needs Research\",\"shellMaterialPrimary\":\"unknown\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Low",
+          "priorityScore": 435
+        }
+      ]
+    },
+    {
+      "lineSeries": "Piccolo Bronze",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Medium": 1
+      },
+      "researchQuestions": [
+        "Can Canopus Piccolo Bronze snare records share a source-backed numeric shell thickness?",
+        "Can Canopus Piccolo Bronze snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_piccolo-bronze_piccolo-bronze-14x4_14x4_metal_bronze_08f088c9",
+          "label": "Canopus — Piccolo Bronze — Piccolo Bronze 14x4 — 14x4",
+          "modelName": "Piccolo Bronze 14x4",
+          "diameter": "14",
+          "depth": "4",
+          "shellMaterial": "Bronze",
+          "shellConstruction": "{\"shellConstruction\":\"Metal\",\"shellMaterialPrimary\":\"Bronze\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Metal shell\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Medium",
+          "priorityScore": 530
+        }
+      ]
+    },
+    {
+      "lineSeries": "R.O.F PROJECT",
+      "candidateCount": 1,
+      "sourceConfidenceCounts": {
+        "Low": 1
+      },
+      "researchQuestions": [
+        "Can Canopus R.O.F PROJECT snare records share a source-backed numeric shell thickness?",
+        "Can Canopus R.O.F PROJECT snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Canopus page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "canopus_r-o-f-project_r-o-f-project-snare-drum_14x6-5_other-needs-research_0c72185e",
+          "label": "Canopus — R.O.F PROJECT — R.O.F Project Snare Drum — 14x6.5",
+          "modelName": "R.O.F Project Snare Drum",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "",
+          "shellConstruction": "{\"shellConstruction\":\"Other / Needs Research\",\"shellMaterialPrimary\":\"unknown\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"unknown\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":\"unknown\",\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://canopusdrums.com/en/products/drum-products/snare-drum/",
+          "sourceConfidence": "Low",
+          "priorityScore": 435
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Canopus line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

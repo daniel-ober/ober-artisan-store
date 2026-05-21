@@ -1,0 +1,233 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_NOBLE_AND_COOLEY_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.249Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-noble-and-cooley-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Noble & Cooley",
+  "summary": {
+    "candidateCount": 61,
+    "lineGroupCount": 8,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 8,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Noble & Cooley missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Solid Shell Classics Series",
+      "candidateCount": 27,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 12,
+      "sampleRecordIds": [
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x5_13x5_steam-bent_beech_unknown-family-likely-45-degree_19018f02",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x6_13x6_steam-bent_beech_unknown-family-likely-45-degree_b4126b19",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-13x7_13x7_steam-bent_beech_unknown-family-likely-45-degree_b44604ea",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x4_14x4_steam-bent_beech_unknown-family-likely-45-degree_937eee62",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x5_14x5_steam-bent_beech_unknown-family-likely-45-degree_a887b2ce",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x6_14x6_steam-bent_beech_unknown-family-likely-45-degree_18ac2f96",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-beech-14x7_14x7_steam-bent_beech_unknown-family-likely-45-degree_f0be8fe9",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x5_13x5_steam-bent_birch_unknown-family-likely-45-degree_928e3b5c",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x6_13x6_steam-bent_birch_unknown-family-likely-45-degree_d7c418ac",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-13x7_13x7_steam-bent_birch_unknown-family-likely-45-degree_47ce40d4",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x4_14x4_steam-bent_birch_unknown-family-likely-45-degree_bff34e84",
+        "noble-and-cooley_solid-shell-classics-series_ss-classic-birch-14x5_14x5_steam-bent_birch_unknown-family-likely-45-degree_dd430ec1"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "CD Maple Series",
+      "candidateCount": 7,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 7,
+      "sampleRecordIds": [
+        "noble-and-cooley_cd-maple-series_cd-maple-13x5_13x5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_7a3a8ce9",
+        "noble-and-cooley_cd-maple-series_cd-maple-13x6-5_13x6-5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_e8867aaa",
+        "noble-and-cooley_cd-maple-series_cd-maple-14x6-5_14x6-5_ply_maple_standard-custom-finish-options_triple-flanged-hoops_84f18e4e",
+        "noble-and-cooley_cd-maple-series_cd-maple-13x3-875_13x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_1069e80d",
+        "noble-and-cooley_cd-maple-series_cd-maple-13x7_13x7_ply_maple_standard-custom-finish-options_triple-flanged-hoops_f3032d10",
+        "noble-and-cooley_cd-maple-series_cd-maple-14x3-875_14x3-875_ply_maple_standard-custom-finish-options_triple-flanged-hoop_420638da",
+        "noble-and-cooley_cd-maple-series_cd-maple-14x7_14x7_ply_maple_standard-custom-finish-options_triple-flanged-hoops_2409b7de"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Historical / Archive",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "noble-and-cooley_historical-archive_historical-alloy-classic-early-production-14x6_14x6_metal_aluminum_triple-flanged-ho_f725fb73",
+        "noble-and-cooley_historical-archive_historical-cd-maple-early-production-14x5_14x5_ply_maple_triple-flanged-hoops_d19fdf81",
+        "noble-and-cooley_historical-archive_historical-horizon-1980s-14x6-5_14x6-5_ply_maple_mahogany_triple-flanged-hoops_7651c730",
+        "noble-and-cooley_historical-archive_historical-ss-classic-1980s-maple-14x5_14x5_steam-bent_maple_triple-flanged-hoops_b0c14a05",
+        "noble-and-cooley_historical-archive_historical-ss-classic-1980s-maple-14x6-5_14x6-5_steam-bent_maple_triple-flanged-hoop_30c73d94",
+        "noble-and-cooley_historical-archive_historical-walnut-classic-14x6-5_14x6-5_ply_walnut_triple-flanged-hoops_105720a2"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Horizon Series",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "noble-and-cooley_horizon-series_horizon-hybrid-13x5_13x5_ply_maple_mahogany_standard-custom-finish-options_triple-flange_9bc48f59",
+        "noble-and-cooley_horizon-series_horizon-hybrid-13x6-5_13x6-5_ply_maple_mahogany_standard-custom-finish-options_triple-fl_5a85a8ff",
+        "noble-and-cooley_horizon-series_horizon-hybrid-13x7_13x7_ply_maple_mahogany_standard-custom-finish-options_triple-flange_29d0747a",
+        "noble-and-cooley_horizon-series_horizon-hybrid-14x5_14x5_ply_maple_mahogany_standard-custom-finish-options_triple-flange_7281797b",
+        "noble-and-cooley_horizon-series_horizon-hybrid-14x6-5_14x6-5_ply_maple_mahogany_standard-custom-finish-options_triple-fl_04f36b78",
+        "noble-and-cooley_horizon-series_horizon-hybrid-14x7_14x7_ply_maple_mahogany_standard-custom-finish-options_triple-flange_7a12039f"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Metal / Archive Specialty",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "noble-and-cooley_metal-archive-specialty_brass-specialty-14x5_14x5_metal_brass_raw-lacquered-metal-finish_triple-flanged_10069628",
+        "noble-and-cooley_metal-archive-specialty_brass-specialty-14x6-5_14x6-5_metal_brass_raw-lacquered-metal-finish_triple-fla_d72eb297",
+        "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x5_14x5_metal_bronze_raw-lacquered-metal-finish_triple-flang_678cfd56",
+        "noble-and-cooley_metal-archive-specialty_bronze-specialty-14x6-5_14x6-5_metal_bronze_raw-lacquered-metal-finish_triple-f_d006de9a",
+        "noble-and-cooley_metal-archive-specialty_copper-specialty-14x5_14x5_metal_copper_raw-lacquered-metal-finish_triple-flang_6b40c42f",
+        "noble-and-cooley_metal-archive-specialty_copper-specialty-14x6-5_14x6-5_metal_copper_raw-lacquered-metal-finish_triple-f_00bf4e25"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Walnut Series",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "noble-and-cooley_walnut-series_walnut-ply-13x4-75_13x4-75_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_a930efef",
+        "noble-and-cooley_walnut-series_walnut-ply-13x6-5_13x6-5_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_3e4a8798",
+        "noble-and-cooley_walnut-series_walnut-ply-13x8_13x8_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_8dd1001a",
+        "noble-and-cooley_walnut-series_walnut-ply-14x4-75_14x4-75_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_03634594",
+        "noble-and-cooley_walnut-series_walnut-ply-14x6-5_14x6-5_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_d0250f19",
+        "noble-and-cooley_walnut-series_walnut-ply-14x8_14x8_ply_walnut_standard-custom-finish-options_triple-flanged-hoops_bad14ac5"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Artist / Endorser Reference",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "noble-and-cooley_artist-endorser-reference_craig-pilo-reference-snare_14x6-5_other-needs-research_e9ea30de",
+        "noble-and-cooley_artist-endorser-reference_malcolm-travis-reference-snare_14x6-5_other-needs-research_03455e0b"
+      ]
+    },
+    {
+      "companyName": "Noble & Cooley",
+      "lineSeries": "Special Edition",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Noble & Cooley page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "noble-and-cooley_special-edition_mappa-burl-limited-edition-14x6-5_14x6-5_ply_mappa-burl_walnut_aqua-marine-fade_die-cas_76fb2ffc"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Noble & Cooley shell-thickness promotion is approved from this decisions file.",
+    "No Noble & Cooley bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

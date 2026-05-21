@@ -1,0 +1,146 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_GRETSCH_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.253Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-gretsch-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Gretsch",
+  "summary": {
+    "candidateCount": 19,
+    "lineGroupCount": 5,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 5,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Gretsch missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Full Range",
+      "candidateCount": 8,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 8,
+      "sampleRecordIds": [
+        "gretsch_full-range_full-range-aluminum_14x5-5_metal_aluminum_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_fu_9c601cfb",
+        "gretsch_full-range_full-range-brass_14x5-5_metal_brass_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_full-ran_cb55cb6a",
+        "gretsch_full-range_full-range-hammered-steel_14x6-5_metal_steel_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_2191e92d",
+        "gretsch_full-range_full-range-maple_14x5-5_ply_maple_lacquer-plating-natural-metal_full-range-maple_9dd6a5e4",
+        "gretsch_full-range_full-range-maple_14x6-5_ply_maple_lacquer-plating-natural-metal_full-range-maple_209d7f57",
+        "gretsch_full-range_full-range-steel_14x5-5_metal_steel_lacquer-plating-natural-metal_2-5mm-triple-flanged-hoops_full-ran_482ef917",
+        "gretsch_full-range_full-range-walnut_14x5-5_ply_walnut_lacquer-plating-natural-metal_full-range-walnut_fd8b3405",
+        "gretsch_full-range_full-range-walnut_14x6-5_ply_walnut_lacquer-plating-natural-metal_full-range-walnut_5525d9ff"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "USA Custom Metal",
+      "candidateCount": 6,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 6,
+      "sampleRecordIds": [
+        "gretsch_usa-custom-metal_usa-bell-brass_14x6-5_metal_bell-brass_black-nickel-plated-natural-metal_die-cast-hoops_usa-bel_dfb213c8",
+        "gretsch_usa-custom-metal_usa-aluminum_14x6-5_metal_aluminum_black-nickel-plated-natural-metal_die-cast-hoops_usa-aluminu_806ff632",
+        "gretsch_usa-custom-metal_usa-brass_14x6-5_metal_brass_black-nickel-plated-natural-metal_die-cast-hoops_usa-brass_f0613960",
+        "gretsch_usa-custom-metal_usa-bronze_14x6-5_metal_bronze_black-nickel-plated-natural-metal_die-cast-hoops_usa-bronze_93eb64cc",
+        "gretsch_usa-custom-metal_usa-copper_14x6-5_metal_copper_black-nickel-plated-natural-metal_die-cast-hoops_usa-copper_823b497a",
+        "gretsch_usa-custom-metal_usa-solid-steel_14x6-5_solid-shell_steel_black-nickel-plated-natural-metal_die-cast-hoops_usa-s_e2ff27f8"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Brooklyn Metal",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "gretsch_brooklyn-metal_brooklyn-chrome-over-brass_14x5-5_metal_brass_rolled-metal-edge_chrome-over-metal_gretsch-302-3mm_dec6311c",
+        "gretsch_brooklyn-metal_brooklyn-chrome-over-brass_14x6-5_metal_brass_rolled-metal-edge_chrome-over-metal_gretsch-302-3mm_e70207cd"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Signature",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "gretsch_signature_steve-ferrone-signature-brass_14x6-5_metal_brass_black-nickel-brass_die-cast-hoops_04b2cfe6",
+        "gretsch_signature_vinnie-colaiuta-signature_14x5_ply_maple_gum_lacquer_die-cast-hoops_af23d41d"
+      ]
+    },
+    {
+      "companyName": "Gretsch",
+      "lineSeries": "Energy",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Gretsch page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "gretsch_energy_energy-snare_14x5-5_ply_poplar_wrap_triple-flanged-hoops_49c332c4"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Gretsch shell-thickness promotion is approved from this decisions file.",
+    "No Gretsch bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_SPAUN_DRUM_COMPANY_REVIEW_PACKET_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.255Z",
+  "sourceQueueFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-review-queue.json",
+  "noFirestoreWrites": true,
+  "companyName": "Spaun Drum Company",
+  "reviewScope": "Spaun Drum Company records missing both valid numeric shell thickness and meaningful bearing edge, blocking meaningful core-shell pass.",
+  "summary": {
+    "candidateCount": 8,
+    "lineGroupCount": 1,
+    "noFirestoreWrites": true
+  },
+  "reviewRules": [
+    "Do not write Firestore updates from this packet.",
+    "Find source-backed numeric shell thickness and source-backed bearing edge geometry.",
+    "Shell thickness must be numeric in millimeters, or a clearly convertible numeric measurement.",
+    "Bearing edge must be source-backed and specific enough to be meaningful.",
+    "Do not use confidence fields as substitutes for actual physical shell data.",
+    "Do not infer thickness or bearing edge from shell material, construction, line name, hoop type, or era alone.",
+    "Line-level promotion requires source evidence that clearly applies across the listed models/era."
+  ],
+  "lineGroups": [
+    {
+      "lineSeries": "Solid Stave",
+      "candidateCount": 8,
+      "sourceConfidenceCounts": {
+        "High": 8
+      },
+      "researchQuestions": [
+        "Can Spaun Drum Company Solid Stave snare records share a source-backed numeric shell thickness?",
+        "Can Spaun Drum Company Solid Stave snare records share a source-backed bearing edge profile?"
+      ],
+      "requiredEvidence": [
+        "Official Spaun Drum Company page, catalog, archived catalog, manual, or distributor spec with shell thickness and/or bearing edge language.",
+        "Thickness evidence must identify a numeric shell thickness in millimeters, or a convertible numeric thickness.",
+        "Bearing-edge evidence must identify edge shape/profile/detail, not just shell material, shell thickness, finish, hoop type, or marketing copy.",
+        "If applying line-level logic, source must clearly apply across the listed models/era."
+      ],
+      "sampleRecords": [
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-ash-14x6-5_14x6-5_solid-shell_ash_1168a4b3",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Ash 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Ash 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Ash",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Ash\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-bubinga-14x6-5_14x6-5_solid-shell_bubinga_bbf339c4",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Bubinga 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Bubinga 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Bubinga",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Bubinga\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-cherry-14x6-5_14x6-5_solid-shell_cherry_72766798",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Cherry 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Cherry 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Cherry",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Cherry\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-mahogany-14x6-5_14x6-5_solid-shell_mahogany_814fe7d2",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Mahogany 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Mahogany 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Mahogany",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Mahogany\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-maple-14x6-5_14x6-5_solid-shell_maple_f97d20af",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Maple 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Maple 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Maple",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Maple\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-oak-14x6-5_14x6-5_solid-shell_oak_2b07f074",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Oak 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Oak 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Oak",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Oak\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-purpleheart-14x6-5_14x6-5_solid-shell_purpleheart_bfa1861a",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Purpleheart 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Purpleheart 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Purpleheart",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Purpleheart\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        },
+        {
+          "id": "spaun-drum-company_solid-stave_solid-stave-walnut-14x6-5_14x6-5_solid-shell_walnut_ff44119f",
+          "label": "Spaun Drum Company — Solid Stave — Solid Stave Walnut 14x6.5 — 14x6.5",
+          "modelName": "Solid Stave Walnut 14x6.5",
+          "diameter": "14",
+          "depth": "6.5",
+          "shellMaterial": "Walnut",
+          "shellConstruction": "{\"shellConstruction\":\"Solid Shell\",\"shellMaterialPrimary\":\"Walnut\",\"shellMaterialSecondary\":\"none\",\"shellMaterialTertiary\":\"none\",\"plyCount\":null,\"layupDescription\":\"Stave\",\"shellThicknessMm\":null,\"thicknessClass\":\"unknown\",\"reinforcementRings\":false,\"reinforcementRingMaterial\":\"unknown\",\"reinforcementRingThicknessMm\":null}",
+          "shellThickness": "",
+          "shellThicknessQualityTier": "MISSING_SHELL_THICKNESS",
+          "bearingEdge": "{\"batterSideProfile\":\"unknown\",\"snareSideProfile\":\"unknown\",\"roundover\":\"unknown\",\"evidenceLevel\":\"notVerified\",\"confidence\":\"low\",\"notes\":\"unknown\"}",
+          "bearingEdgeQualityTier": "PLACEHOLDER_OR_UNKNOWN_BEARING_EDGE",
+          "primarySourceUrl": "https://spaundrums.com/collections/solid-stave",
+          "sourceConfidence": "High",
+          "priorityScore": -20
+        }
+      ]
+    }
+  ],
+  "nextRecommendedStep": {
+    "task": "Review Spaun Drum Company line groups for official/catalog shell thickness and bearing edge evidence before any promotion plan.",
+    "constraint": "Review/decisions only. No Firestore writes."
+  }
+}

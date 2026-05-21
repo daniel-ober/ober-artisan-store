@@ -1,0 +1,346 @@
+{
+  "status": "STRICT_SHELL_MISSING_THICKNESS_AND_EDGE_LUDWIG_REVIEW_DECISIONS_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T09:05:03.253Z",
+  "sourcePacketFile": "src/legacyPrint/reviewPlans/strict-shell-missing-thickness-and-edge-ludwig-review-packet.json",
+  "noFirestoreWrites": true,
+  "companyName": "Ludwig",
+  "summary": {
+    "candidateCount": 39,
+    "lineGroupCount": 14,
+    "approvedLineGroupCount": 0,
+    "approvedShellThicknessPromotionCount": 0,
+    "approvedBearingEdgePromotionCount": 0,
+    "blockedLineGroupCount": 14,
+    "approvedFirestorePatchPlanCount": 0,
+    "firestoreWrites": 0,
+    "decision": "Ludwig missing-thickness-and-edge records remain blocked pending official/catalog physical shell data source review."
+  },
+  "decisions": [
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1950s Leedy & Ludwig",
+      "candidateCount": 5,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 5,
+      "sampleRecordIds": [
+        "ludwig_1950s-leedy-and-ludwig_broadway-floating-head-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_bada608b",
+        "ludwig_1950s-leedy-and-ludwig_broadway-new-era-5-5x14_14x5-5_ply_maple-poplar_lacquer-pearl_era-hoop_adb97a56",
+        "ludwig_1950s-leedy-and-ludwig_the-nifty-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_47a48998",
+        "ludwig_1950s-leedy-and-ludwig_the-reliance-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_c7c59a10",
+        "ludwig_1950s-leedy-and-ludwig_the-utility-5x14_14x5_ply_maple-poplar_lacquer-pearl_era-hoop_72c2aed0"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1989-1994 Ludwig",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "ludwig_1989-1994-ludwig_bronze-series-5x14_14x5_metal_bronze_bronze_triple-flanged_c6bc1a0c",
+        "ludwig_1989-1994-ludwig_classic-series-5-5x14_14x5-5_ply_maple-poplar_lacquer-wrap_triple-flanged_ef9a63a1",
+        "ludwig_1989-1994-ludwig_metal-series-5x14_14x5_metal_steel_aluminum_chrome-or-metal-finish_triple-flanged_e6548e4b",
+        "ludwig_1989-1994-ludwig_rocker-series-5-5x14_14x5-5_ply_maple_wrap_triple-flanged_916f630a"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "2000s Ludwig",
+      "candidateCount": 4,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 4,
+      "sampleRecordIds": [
+        "ludwig_2000s-ludwig_centennial-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_ad95bbc1",
+        "ludwig_2000s-ludwig_element-snare-5-5x14_14x5-5_ply_poplar_wrap_triple-flanged_99e4d5fa",
+        "ludwig_2000s-ludwig_epic-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_be2517ef",
+        "ludwig_2000s-ludwig_keystone-snare-6-5x14_14x6-5_ply_maple_lacquer-wrap_triple-flanged_89955984"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1920s Ludwig & Ludwig",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-5x14_14x5_metal_brass_black-nickel-engraved-brass_single-flanged-or-_98489677",
+        "ludwig_1920s-ludwig-and-ludwig_black-beauty-de-luxe-6-5x14_14x6-5_metal_brass_black-nickel-engraved-brass_single-flanged_5ae3d434",
+        "ludwig_1920s-ludwig-and-ludwig_super-ludwig-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_c718211b"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1940s WFL",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "ludwig_1940s-wfl_buddy-rich-super-classic-5-5x14_14x5-5_ply_maple-poplar_lacquer-or-pearl_triple-flanged-or-era-hoop_b6a601f6",
+        "ludwig_1940s-wfl_compacto-snare-drum_14x3-5_metal_maple-poplar_lacquer-pearl_era-hoop_17c1c3a5",
+        "ludwig_1940s-wfl_ray-mckinley-snare-drum-6-5x14_14x6-5_ply_maple-poplar_lacquer-or-pearl_era-hoop_636f52e1"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1963-1970s Ludwig",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "ludwig_1963-1970s-ludwig_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged_lm404_914e4560",
+        "ludwig_1963-1970s-ludwig_super-sensitive-5x14_14x5_metal_aluminum_brass_chrome-plated_triple-flanged_f05317dd",
+        "ludwig_1963-1970s-ludwig_super-sensitive-6-5x14_14x6-5_metal_aluminum_brass_chrome-plated_triple-flanged_305016ee"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1970s Ludwig",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "ludwig_1970s-ludwig_piccolo-snare-3x13_13x3_ply_steel_chrome-lacquer_triple-flanged_7abeac09",
+        "ludwig_1970s-ludwig_vistalite-snare-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_cd29803d",
+        "ludwig_1970s-ludwig_vistalite-snare-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_786fcc62"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Artist / Signature",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "ludwig_artist-signature_jon-theodore-signature-6-5x14_14x6-5_metal_brass_raw-aged-brass_triple-flanged_99c1f0ff",
+        "ludwig_artist-signature_nate-smith-signature-4-75x14_14x4-75_metal_brass_nickel-over-brass_triple-flanged_0d88b7c9",
+        "ludwig_artist-signature_questlove-breakbeats-snare-5x14_14x5_ply_poplar_wrap_triple-flanged_0c880d4f"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Vistalite",
+      "candidateCount": 3,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 3,
+      "sampleRecordIds": [
+        "ludwig_vistalite_vistalite-acrylic-5x14_14x5_acrylic_acrylic_transparent-acrylic_triple-flanged_353a101d",
+        "ludwig_vistalite_vistalite-acrylic-6-5x14_14x6-5_acrylic_acrylic_transparent-acrylic_triple-flanged_429e1234",
+        "ludwig_vistalite_vistalite-acrylic-8x14_14x8_acrylic_acrylic_transparent-acrylic_triple-flanged_4328eeda"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1911-1930s Ludwig & Ludwig",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-5x14_14x5_metal_brass_nob-lacquer-pearl_single-flanged-or-era-hoo_27297878",
+        "ludwig_1911-1930s-ludwig-and-ludwig_professional-model-6-5x14_14x6-5_metal_brass_nob-lacquer-pearl_single-flanged-or-era_8939a4c5"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1990s-2000s Ludwig",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "ludwig_1990s-2000s-ludwig_black-magic-5x14_14x5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depending_0cf67ab3",
+        "ludwig_1990s-2000s-ludwig_black-magic-6-5x14_14x6-5_metal_brass_black-nickel-over-brass_die-cast-or-triple-flanged-depen_7e603045"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Modern Ludwig",
+      "candidateCount": 2,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 2,
+      "sampleRecordIds": [
+        "ludwig_modern-ludwig_club-date-reissue-5x14_14x5_ply_maple-poplar_lacquer-wrap_triple-flanged_f5a2209a",
+        "ludwig_modern-ludwig_club-date-reissue-6-5x14_14x6-5_ply_maple-poplar_lacquer-wrap_triple-flanged_a26abc6c"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "1930s Ludwig & Ludwig",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "ludwig_1930s-ludwig-and-ludwig_super-sensitive-5x14-nob_14x5_metal_brass_nickel-over-brass_single-flanged-or-era-hoop_552351e1"
+      ]
+    },
+    {
+      "companyName": "Ludwig",
+      "lineSeries": "Coliseum",
+      "candidateCount": 1,
+      "decision": "BLOCKED_PENDING_SOURCE_REVIEW",
+      "approvedForSourceConfirmedShellThicknessPromotion": false,
+      "approvedForSourceConfirmedBearingEdgePromotion": false,
+      "approvedForFirestorePatchPlan": false,
+      "firestoreWrites": 0,
+      "reason": "Packet identifies candidates, but no reviewed official/catalog shell-thickness and bearing-edge evidence has been attached yet. Keep blocked until both physical fields are source-backed or separately reviewed.",
+      "requiredBeforePromotion": [
+        "Official Ludwig page, catalog, archived catalog, manual, or distributor spec confirming numeric shell thickness and/or bearing edge geometry.",
+        "Thickness evidence must describe actual shell thickness, not only shell construction, shell material, ply count, line name, hoop type, or era.",
+        "Bearing-edge evidence must describe edge shape/profile/detail, not only shell material, shell construction, shell thickness, hoop type, or era.",
+        "Line-level promotion requires evidence that clearly applies across the candidate records/era."
+      ],
+      "sampleRecordCount": 1,
+      "sampleRecordIds": [
+        "ludwig_coliseum_slotted-coliseum-8x14_14x8_ply_maple_lacquer-or-wrap_triple-flanged_c133b5cb"
+      ]
+    }
+  ],
+  "lockedRules": [
+    "No Ludwig shell-thickness promotion is approved from this decisions file.",
+    "No Ludwig bearing-edge promotion is approved from this decisions file.",
+    "No Firestore writes are authorized.",
+    "Do not treat shell construction, shell material, ply count, line name, hoop type, or era as shell-thickness or bearing-edge confirmation.",
+    "Do not promote missing/invalid physical shell fields without reviewed source evidence."
+  ]
+}
