@@ -916,13 +916,69 @@ function ReferencePanel({
 
 }) {
 
+  const [referenceFilter, setReferenceFilter] = useState('');
+
+  const normalizedQuery = String(referenceFilter || '').trim().toLowerCase();
+
+  const filteredReferenceOptions = referenceOptions
+
+    .filter((reference) => {
+
+      if (!normalizedQuery) return true;
+
+      return [
+
+        reference.label,
+
+        reference.detail,
+
+        reference.companyName,
+
+        reference.modelName,
+
+        reference.lineSeries,
+
+        reference.shellMaterial,
+
+        reference.shellConstruction,
+
+        reference.readinessTier,
+
+        reference.snareReferenceId,
+
+      ]
+
+        .filter(Boolean)
+
+        .join(' ')
+
+        .toLowerCase()
+
+        .includes(normalizedQuery);
+
+    })
+
+    .slice(0, 80);
+
   return (
 
     <div className="vp-mode-content">
 
+      <input
+
+        className="vp-search-input"
+
+        value={referenceFilter}
+
+        onChange={(event) => setReferenceFilter(event.target.value)}
+
+        placeholder="Filter references..."
+
+      />
+
       <div className="vp-reference-stack">
 
-        {referenceOptions.map((reference) => (
+        {filteredReferenceOptions.map((reference) => (
 
           <button
 
@@ -968,7 +1024,11 @@ function ReferencePanel({
 
               ? referenceError
 
-              : 'Select a known voice to anchor the center map and re-rank similar drums around it.'}
+              : normalizedQuery
+
+                ? `${filteredReferenceOptions.length} matching passable snares shown.`
+
+                : `${referenceOptions.length} passable snares loaded. Search by company, model, material, size, or construction.`}
 
         </p>
 
