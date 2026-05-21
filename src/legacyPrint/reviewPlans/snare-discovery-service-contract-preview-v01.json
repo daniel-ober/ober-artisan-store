@@ -1,0 +1,194 @@
+{
+  "status": "SNARE_DISCOVERY_SERVICE_CONTRACT_PREVIEW_V01_NO_FIRESTORE_WRITES",
+  "generatedAt": "2026-05-21T11:02:03.772Z",
+  "firestoreWrites": 0,
+  "sourcePreview": "src/legacyPrint/reviewPlans/snare-discovery-packet-api-preview-v01.json",
+  "examples": [
+    {
+      "targetId": "ludwig-acrolite",
+      "summary": {
+        "status": "ready",
+        "snareReferenceId": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+        "target": {
+          "drum": {
+            "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+            "company": "Ludwig",
+            "model": "Acrolite 5x14",
+            "lineSeries": "Acrolite",
+            "size": "14x5",
+            "families": {
+              "shellMaterial": "aluminum",
+              "shellConstruction": "metal",
+              "bearingEdge": "rolledOrFormedMetal",
+              "hoopType": "tripleFlanged",
+              "snareBed": "shallowSnareBed"
+            }
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 6.61
+            },
+            {
+              "key": "control",
+              "value": 6.49
+            },
+            {
+              "key": "sensitivity",
+              "value": 6.33
+            }
+          ],
+          "summary": {
+            "title": "Focused, controlled attack voice",
+            "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+          }
+        },
+        "tabCount": 3,
+        "recommendedSectionCount": 4,
+        "contrastModeCount": 4,
+        "defaultSimilarSection": "differentBrandAlternatives",
+        "defaultContrastMode": "overallContrast"
+      }
+    },
+    {
+      "targetId": "ludwig-black-beauty",
+      "summary": {
+        "status": "ready",
+        "snareReferenceId": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+        "target": {
+          "drum": {
+            "id": "ludwig_1977-ludwig_black-beauty-5x14_14x5_metal_brass_1-2_black-nickel-over-brass_triple-flanged_lb416-era_19292b4b",
+            "company": "Ludwig",
+            "model": "Black Beauty 5x14",
+            "lineSeries": "1977 Ludwig",
+            "size": "14x5",
+            "families": {
+              "shellMaterial": "brass",
+              "shellConstruction": "metal",
+              "bearingEdge": "machinedMetal",
+              "hoopType": "tripleFlanged",
+              "snareBed": "unknownSnareBed"
+            }
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.07
+            },
+            {
+              "key": "sustain",
+              "value": 6.98
+            },
+            {
+              "key": "brightness",
+              "value": 6.55
+            }
+          ],
+          "summary": {
+            "title": "Fast, articulate cutting voice",
+            "text": "This snare is led by quick, articulate stick definition, followed by open ring and longer tonal bloom and balanced brightness."
+          }
+        },
+        "tabCount": 3,
+        "recommendedSectionCount": 3,
+        "contrastModeCount": 4,
+        "defaultSimilarSection": "sameMaterialAlternatives",
+        "defaultContrastMode": "overallContrast"
+      }
+    },
+    {
+      "targetId": "dw-true-cast-bronze",
+      "summary": {
+        "status": "ready",
+        "snareReferenceId": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+        "target": {
+          "drum": {
+            "id": "dw-pdp_dw-mfg-true-cast_mfg-true-cast-bell-bronze-14x4_14x4_metal_bronze_35_machined-bronze_true-cast-hoops_8a293c51",
+            "company": "DW / PDP",
+            "model": "MFG True-Cast Bell Bronze 14x4",
+            "lineSeries": "DW MFG / True-Cast",
+            "size": "14x4",
+            "families": {
+              "shellMaterial": "bronze",
+              "shellConstruction": "metal",
+              "bearingEdge": "machinedMetal",
+              "hoopType": "dieCast",
+              "snareBed": "unknownSnareBed"
+            }
+          },
+          "topNodes": [
+            {
+              "key": "attack",
+              "value": 7.73
+            },
+            {
+              "key": "control",
+              "value": 7.25
+            },
+            {
+              "key": "projection",
+              "value": 6.95
+            }
+          ],
+          "summary": {
+            "title": "Focused, controlled attack voice",
+            "text": "This snare is led by quick, articulate stick definition, followed by focused, contained response and strong room and mix carry."
+          }
+        },
+        "tabCount": 3,
+        "recommendedSectionCount": 4,
+        "contrastModeCount": 4,
+        "defaultSimilarSection": "differentBrandAlternatives",
+        "defaultContrastMode": "overallContrast"
+      }
+    }
+  ],
+  "localLoaderCheck": {
+    "status": "ready",
+    "snareReferenceId": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+    "target": {
+      "drum": {
+        "id": "ludwig_acrolite_acrolite-5x14_14x5_metal_aluminum_brushed-aluminum_triple-flanged-steel_lm404_f8e66e46",
+        "company": "Ludwig",
+        "model": "Acrolite 5x14",
+        "lineSeries": "Acrolite",
+        "size": "14x5",
+        "families": {
+          "shellMaterial": "aluminum",
+          "shellConstruction": "metal",
+          "bearingEdge": "rolledOrFormedMetal",
+          "hoopType": "tripleFlanged",
+          "snareBed": "shallowSnareBed"
+        }
+      },
+      "topNodes": [
+        {
+          "key": "attack",
+          "value": 6.61
+        },
+        {
+          "key": "control",
+          "value": 6.49
+        },
+        {
+          "key": "sensitivity",
+          "value": 6.33
+        }
+      ],
+      "summary": {
+        "title": "Focused, controlled attack voice",
+        "text": "This snare is led by balanced stick definition, followed by moderate focus and usable dynamic response."
+      }
+    },
+    "tabCount": 3,
+    "recommendedSectionCount": 4,
+    "contrastModeCount": 4,
+    "defaultSimilarSection": "differentBrandAlternatives",
+    "defaultContrastMode": "overallContrast"
+  },
+  "missingCheck": {
+    "status": "notFound",
+    "snareReferenceId": "missing-test-reference-id",
+    "error": "LOCAL_PREVIEW_PACKET_NOT_FOUND"
+  }
+}
