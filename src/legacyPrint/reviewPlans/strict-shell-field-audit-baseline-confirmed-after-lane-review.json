@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-05-21T08:17:36.471Z",
+  "status": "STRICT_SHELL_FIELD_AUDIT_BASELINE_CONFIRMED_AFTER_LANES_A_B_C_REVIEW",
+  "latestAuditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T08-16-58-657Z.json",
+  "summary": {
+    "totalRecords": 1551,
+    "meaningfulCoreShellPass": 187,
+    "metalEdgeFallbackCoreShellPass": 176,
+    "totalMeaningfulCoreShellUsable": 363,
+    "meaningfulStockPass": 12,
+    "nearlyMeaningfulStockPass": 351,
+    "stockBlockedByCoreShell": 1188,
+    "validNumericShellThickness": 466,
+    "meaningfulBearingEdge": 580,
+    "placeholderOrUnknownBearingEdge": 971,
+    "missingBearingEdge": 0,
+    "sourcePresent": 1529,
+    "laneA": {
+      "name": "HAS_THICKNESS_BUT_EDGE_UNKNOWN",
+      "candidateCount": 103,
+      "status": "REVIEW_COMPLETE"
+    },
+    "laneB": {
+      "name": "HAS_EDGE_BUT_THICKNESS_MISSING",
+      "candidateCount": 330,
+      "status": "REVIEW_COMPLETE_BLOCKED"
+    },
+    "laneC": {
+      "name": "MISSING_THICKNESS_AND_EDGE",
+      "candidateCount": 750,
+      "status": "REVIEW_COMPLETE_BLOCKED"
+    },
+    "noFirestoreWritesDuringLaneReview": true
+  },
+  "nextRecommendedStep": "Begin targeted source-confirmed promotions only where both blocked fields can be verified, starting with highest-confidence official sources."
+}
