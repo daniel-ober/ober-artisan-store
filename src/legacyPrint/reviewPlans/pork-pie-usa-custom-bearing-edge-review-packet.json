@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:39:01.359Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "PORK_PIE_USA_CUSTOM_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://porkpiedrums.com/products/"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Pork Pie Percussion",
+      "lineSeries": "USA Custom",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://porkpiedrums.com/products/",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Maple Max 7x14"
+      ],
+      "recordIds": [
+        "pork-pie-percussion_usa-custom_maple-max-7x14_14x7_ply_maple_9_custom-finish-varies_2-3mm-triple-flanged_2b58b150"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Pork Pie USA Custom Maple bearing-edge geometry before creating any promotion plan."
+}
