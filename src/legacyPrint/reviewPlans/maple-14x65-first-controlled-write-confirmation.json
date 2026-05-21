@@ -1,0 +1,162 @@
+{
+  "status": "MAPLE_14X65_FIRST_CORE_ENRICHMENT_WRITE_CONFIRMATION",
+  "collectionName": "snareReferenceDrums",
+  "planPath": "src/legacyPrint/reviewPlans/maple-14x65-first-controlled-write-plan.json",
+  "dryRunPath": "src/legacyPrint/reviewPlans/maple-14x65-first-controlled-write-dry-run.json",
+  "actualWriteCount": 2,
+  "skipped": [],
+  "written": [
+    {
+      "id": "candc-drums-usa_12th-and-vine_12th-and-vine-maple-poplar-maple-14x6-5_14x6-5_ply_maple_poplar_maple_6_los-angeles-bearin_2b0ac625",
+      "selector": {
+        "companyName": "C&C Drums USA",
+        "modelName": "12th & Vine Maple/Poplar/Maple 14x6.5"
+      },
+      "writtenFields": [
+        "bearingEdgeDetail",
+        "coreFieldEnrichmentBatch",
+        "coreFieldEnrichmentConfidence",
+        "coreFieldEnrichmentNeedsReview",
+        "coreFieldEnrichmentSourceUrls",
+        "coreFieldEnrichmentStatus",
+        "hoopType",
+        "lugCount",
+        "plyCount",
+        "reinforcementRings",
+        "shellLayup",
+        "shellMaterial1",
+        "shellMaterial2",
+        "shellMaterial3",
+        "stockHeadBrand",
+        "throwOffModel"
+      ],
+      "proposedDiff": {
+        "plyCount": {
+          "before": null,
+          "after": 5
+        },
+        "shellLayup": {
+          "before": null,
+          "after": "Maple/Poplar/Maple"
+        },
+        "reinforcementRings": {
+          "before": false,
+          "after": "7-ply maple reinforcement rings"
+        },
+        "bearingEdgeDetail": {
+          "before": null,
+          "after": "Los Angeles bearing edge"
+        },
+        "throwOffModel": {
+          "before": null,
+          "after": "INDe SB1"
+        },
+        "stockHeadBrand": {
+          "before": null,
+          "after": "Remo"
+        },
+        "coreFieldEnrichmentStatus": {
+          "before": null,
+          "after": "source_backed_partial_core_enrichment"
+        },
+        "coreFieldEnrichmentBatch": {
+          "before": null,
+          "after": "maple_14x65_first_source_enrichment"
+        },
+        "coreFieldEnrichmentNeedsReview": {
+          "before": null,
+          "after": true
+        }
+      },
+      "beforeCoreFields": {
+        "plyCount": "",
+        "shellLayup": "",
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "Poplar",
+        "shellMaterial3": "Maple",
+        "reinforcementRings": false,
+        "bearingEdgeDetail": "",
+        "shellTreatment": "",
+        "hoopType": "2.3mm triple-flanged",
+        "lugCount": 8,
+        "throwOffModel": "",
+        "stockHeadBrand": ""
+      }
+    },
+    {
+      "id": "ludwig_legacy-maple_legacy-maple-6-5x14_14x6-5_ply_maple-poplar_6_ludwig-usa-bearing-edge-not-specified_ludwig-snare-bed_dd2df442",
+      "selector": {
+        "companyName": "Ludwig",
+        "modelName": "Legacy Maple 6.5x14"
+      },
+      "writtenFields": [
+        "bearingEdgeDetail",
+        "coreFieldEnrichmentBatch",
+        "coreFieldEnrichmentConfidence",
+        "coreFieldEnrichmentNeedsReview",
+        "coreFieldEnrichmentSourceUrls",
+        "coreFieldEnrichmentStatus",
+        "plyCount",
+        "reinforcementRings",
+        "shellLayup",
+        "shellMaterial1",
+        "shellMaterial2",
+        "shellMaterial3",
+        "shellTreatment"
+      ],
+      "proposedDiff": {
+        "plyCount": {
+          "before": null,
+          "after": 3
+        },
+        "shellLayup": {
+          "before": null,
+          "after": "Maple/Poplar/Maple"
+        },
+        "shellMaterial3": {
+          "before": "none",
+          "after": "Maple"
+        },
+        "reinforcementRings": {
+          "before": true,
+          "after": "1/4 inch solid maple reinforcement rings"
+        },
+        "bearingEdgeDetail": {
+          "before": null,
+          "after": "30-degree inner cut with 1/4 inch radius roundover"
+        },
+        "shellTreatment": {
+          "before": null,
+          "after": "cross-laminated 3-ply shell with reinforcement rings"
+        },
+        "coreFieldEnrichmentStatus": {
+          "before": null,
+          "after": "source_backed_partial_core_enrichment"
+        },
+        "coreFieldEnrichmentBatch": {
+          "before": null,
+          "after": "maple_14x65_first_source_enrichment"
+        },
+        "coreFieldEnrichmentNeedsReview": {
+          "before": null,
+          "after": true
+        }
+      },
+      "beforeCoreFields": {
+        "plyCount": "",
+        "shellLayup": "",
+        "shellMaterial1": "Maple",
+        "shellMaterial2": "Poplar",
+        "shellMaterial3": "none",
+        "reinforcementRings": true,
+        "bearingEdgeDetail": "",
+        "shellTreatment": "",
+        "hoopType": "triple-flanged steel",
+        "lugCount": 10,
+        "throwOffModel": "",
+        "stockHeadBrand": ""
+      }
+    }
+  ],
+  "createdAt": "2026-05-21T13:23:52.516Z"
+}
