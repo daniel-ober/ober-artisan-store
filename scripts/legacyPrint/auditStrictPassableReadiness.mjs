@@ -1746,6 +1746,32 @@ function buildReport(rows) {
 
     ),
 
+    fallbackTierAuditCheck: {
+
+      passableCoreShellWithMetalEdgeFallback: sortedRows.filter(
+
+        (row) => row.coreShellTier === 'PASSABLE_CORE_SHELL_WITH_METAL_EDGE_FALLBACK'
+
+      ).length,
+
+      passableStockWithMetalEdgeFallback: sortedRows.filter(
+
+        (row) => row.stockTier === 'PASSABLE_STOCK_WITH_METAL_EDGE_FALLBACK'
+
+      ).length,
+
+      rowsWithAuditableMetalEdgeFallbackWarning: sortedRows.filter((row) =>
+
+        (row.coreShellConfidenceWarnings || []).includes(
+
+          'bearing edge uses auditable metal-shell fallback and still needs verification'
+
+        )
+
+      ).length,
+
+    },
+
     allRows: sortedRows,
 
   };
