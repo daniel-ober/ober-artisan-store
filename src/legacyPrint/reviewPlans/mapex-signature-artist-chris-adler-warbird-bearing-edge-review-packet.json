@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:47:30.704Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "MAPEX_SIGNATURE_ARTIST_CHRIS_ADLER_WARBIRD_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://mapexdrums.com/mapex-international/products/drums/snare-drums"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Maple / Walnut",
+      "primarySourceUrl": "https://mapexdrums.com/mapex-international/products/drums/snare-drums",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Chris Adler Warbird"
+      ],
+      "recordIds": [
+        "mapex_signature-artist_chris-adler-warbird_12x5-5_ply_maple-walnut_5-1_graphic-finish_2-3mm-powerhoops_bpdlmw2550lwh_7b0c9c9a"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Mapex Chris Adler Warbird bearing-edge geometry before creating any promotion plan."
+}

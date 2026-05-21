@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:47:30.704Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "MAPEX_BLACK_PANTHER_UNRESOLVED_MAPLE_VARIANT_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://www.mapexblackpanther.com/resources/mapex-catalogues"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Maple",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Unresolved Maple Variant 1"
+      ],
+      "recordIds": [
+        "mapex_black-panther-archive-unresolved-variant_unresolved-maple-variant-1_14x5-5_ply_maple_5-1_2-3mm-powerhoops_bp-unr-0_b68dd200"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Mapex unresolved Maple variant bearing-edge geometry before creating any promotion plan."
+}

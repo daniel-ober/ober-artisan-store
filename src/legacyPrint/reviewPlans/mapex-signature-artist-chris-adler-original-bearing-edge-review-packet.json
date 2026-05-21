@@ -1,0 +1,29 @@
+{
+  "generatedAt": "2026-05-21T07:47:30.704Z",
+  "sourceReviewGroupsFile": "src/legacyPrint/reviewPlans/non-metal-bearing-edge-enrichment-review-groups-post-audit-fix.json",
+  "status": "MAPEX_SIGNATURE_ARTIST_CHRIS_ADLER_ORIGINAL_BEARING_EDGE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "candidateCount": 1,
+    "groupCount": 1,
+    "sourceUrls": [
+      "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052"
+    ]
+  },
+  "groups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Signature / Artist",
+      "shellMaterial": "Walnut",
+      "primarySourceUrl": "https://www.musicradar.com/news/drums/mapex-debuts-new-black-panther-snares-190052",
+      "sourceConfidence": "Medium",
+      "count": 1,
+      "models": [
+        "Chris Adler Original 12x5.5"
+      ],
+      "recordIds": [
+        "mapex_signature-artist_chris-adler-original-12x5-5_12x5-5_ply_walnut_5-1_signature-graphic_2-3mm-powerhoops_bpad2550_402d5de6"
+      ]
+    }
+  ],
+  "reviewInstruction": "Review-only. Confirm exact Mapex Chris Adler Original bearing-edge geometry before creating any promotion plan."
+}

@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-05-21T07:47:30.704Z",
+  "sourceReviewPacketFile": "src/legacyPrint/reviewPlans/mapex-black-panther-unresolved-birch-variant-bearing-edge-review-packet.json",
+  "status": "MAPEX_BLACK_PANTHER_UNRESOLVED_BIRCH_VARIANT_BEARING_EDGE_SOURCE_REVIEW_ONLY_NO_FIRESTORE_WRITES",
+  "summary": {
+    "reviewedCandidateCount": 1,
+    "officialSourceConfirmedCandidateCount": 0,
+    "skippedCandidateCount": 1,
+    "groupCount": 1
+  },
+  "officialSourceConfirmedGroups": [],
+  "blockedGroups": [
+    {
+      "companyName": "Mapex",
+      "lineSeries": "Black Panther Archive / Unresolved Variant",
+      "shellMaterial": "Birch",
+      "primarySourceUrl": "https://www.mapexblackpanther.com/resources/mapex-catalogues",
+      "sourceConfidence": "Low",
+      "count": 1,
+      "models": [
+        "Unresolved Birch Variant 2"
+      ],
+      "recordIds": [
+        "mapex_black-panther-archive-unresolved-variant_unresolved-birch-variant-2_14x6-5_ply_birch_5-1_2-3mm-powerhoops_bp-unr-0_1521a0ec"
+      ],
+      "skipReason": "No exact official Mapex unresolved Birch variant bearing-edge geometry confirmation captured in this pass."
+    }
+  ],
+  "reviewInstruction": "Review-only. Do not create a promotion/apply plan until exact official Mapex source language confirms bearing-edge geometry for the unresolved Birch variant."
+}
