@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-05-21T08:18:24.411Z",
+  "sourceAuditFile": "tmp/legacyPrint-audits/strict-shell-field-quality-2026-05-21T08-16-58-657Z.json",
+  "status": "STRICT_SHELL_FIELD_PROMOTION_OPPORTUNITY_QUEUE_NO_FIRESTORE_WRITES",
+  "summary": {
+    "totalRecords": 1551,
+    "currentMeaningfulCoreShellPass": 187,
+    "currentMetalEdgeFallbackCoreShellPass": 176,
+    "currentTotalUsableCoreShell": 363,
+    "validThicknessButUnknownEdge": 103,
+    "meaningfulEdgeButMissingThickness": 330,
+    "missingThicknessAndEdge": 750,
+    "shellIdentityIncomplete": 5,
+    "priorityOrder": [
+      "Lane A: valid thickness but unknown edge",
+      "Lane B: meaningful edge but missing thickness",
+      "Lane C: missing both thickness and edge",
+      "Stock head cleanup only after core shell improves"
+    ],
+    "noFirestoreWrites": true
+  },
+  "promotionStrategy": {
+    "laneA": {
+      "target": "Promote only records where bearing edge can be source-confirmed.",
+      "expectedImpact": "Each successful source-confirmed edge promotion can move one record from HAS_THICKNESS_BUT_EDGE_UNKNOWN to MEANINGFUL_CORE_SHELL_PASS.",
+      "blocker": "Source-confirmed bearing edge geometry/profile."
+    },
+    "laneB": {
+      "target": "Promote only records where numeric shell thickness can be source-confirmed.",
+      "expectedImpact": "Each successful thickness promotion can move one record from HAS_EDGE_BUT_THICKNESS_MISSING to MEANINGFUL_CORE_SHELL_PASS.",
+      "blocker": "Source-confirmed numeric shell thickness."
+    },
+    "laneC": {
+      "target": "Promote only records where both numeric shell thickness and bearing edge can be source-confirmed.",
+      "expectedImpact": "Each successful dual-field promotion can move one record from MISSING_THICKNESS_AND_EDGE to MEANINGFUL_CORE_SHELL_PASS.",
+      "blocker": "Both source-confirmed numeric shell thickness and source-confirmed bearing edge."
+    }
+  },
+  "recommendedNextBatch": {
+    "lane": "Lane A",
+    "reason": "Smallest blocker surface: thickness already exists, only bearing edge needs source confirmation.",
+    "candidateCount": 103,
+    "nextAction": "Start with Lane A official/high-confidence groups and create a promotion plan only for source-confirmed bearing edges."
+  }
+}
